@@ -69,7 +69,7 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "babel-loader": "^8.2.5",
     "jest-mock": "^28.1.0",
-    "lerna": "^8.2.1",
+    "lerna": "^8.1.9",
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.79.4",
     "storybook": "^8.4.7",
