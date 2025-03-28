@@ -112,3 +112,68 @@ jobs:
       - name: Cleanup temporary files
         if: always()
         run: rm -f .npmrc
+
+  deploy-github-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GBP_PACKAGE_TOKEN: ${{ secrets.GBP_PACKAGE_TOKEN }}
+      FONT_AWESOME_TOKEN: ${{ secrets.FONT_AWESOME_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack and Install Yarn 4.7.0
+        run: |
+          corepack enable
+          corepack prepare yarn@4.7.0 --activate
+      
+      - name: Verify environment variables
+        run: |
+          if [ -z "$GBP_PACKAGE_TOKEN" ]; then 
+            echo "::error::GBP_PACKAGE_TOKEN no está configurado"
+            exit 1
+          fi
+          if [ -z "$FONT_AWESOME_TOKEN" ]; then 
+            echo "::error::FONT_AWESOME_TOKEN no está configurado"
+            exit 1
+          fi
+          echo "✅ Variables de entorno configuradas correctamente"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build Storybook
+        id: build
+        run: yarn build-storybook
+        
+      - name: Check build output
+        run: |
+          if [ ! -d "./storybook-static" ]; then
+            echo "::error::La carpeta de build no existe"
+            exit 1
+          fi
+
+      - name: Create .nojekyll file
+        run: touch ./storybook-static/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+          force_orphan: true
+          publish_branch: gh-pages
+
+      - name: Notify success
+        if: success()
+        run: echo "✅ Storybook desplegado exitosamente en https://flash-global66.github.io/global66-design-system/"
+
+      - name: Notify failure
+        if: failure()
+        run: echo "❌ Falló el despliegue de Storybook"
