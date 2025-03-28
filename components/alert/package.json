@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-alert",
   "author": "Global66",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
