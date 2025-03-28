@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-alert@0.0.8...@flash-global66/g-alert@0.0.9) (2025-03-28)
+
+
+### Bug Fixes
+
+* update changes ([ab3c1e1](https://github.com/Flash-Global66/global-design-system/commit/ab3c1e18e62df167e925c906294ea1ab495e497f))
+
+
+
+
+
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-alert@0.0.7...@flash-global66/g-alert@0.0.8) (2025-03-28)
 
 
