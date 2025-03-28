@@ -1,0 +1,37 @@
+@use "element-plus/theme-chalk/src/pagination.scss" as *;
+
+.gui-pagination {
+  .btn-prev,
+  .btn-next {
+    @apply text-blue-1 flex justify-center items-center leading-none text-6 bg-transparent;
+    .gui-icon {
+      font-size: inherit;
+    }
+    &:disabled {
+      @apply bg-transparent text-gray-7;
+    }
+  }
+
+  .gui-pager {
+    @apply gap-4;
+    li {
+      @apply rounded-sm border-gray-7 border-solid bg-transparent text-gray-7;
+      &.is-active {
+        @apply border-blue-1 text-blue-1;
+      }
+    }
+  }
+  &.is-background {
+    .btn-next {
+      @apply bg-transparent;
+    }
+    .gui-pager {
+      li {
+        @apply rounded-sm border-gray-7 border-solid bg-white text-gray-7;
+        &.is-active {
+          @apply border-blue-1 bg-blue-1;
+        }
+      }
+    }
+  }
+}

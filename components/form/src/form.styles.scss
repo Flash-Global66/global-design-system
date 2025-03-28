@@ -1,0 +1,16 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b("form-item") {
+  @include e("content-error") {
+    min-height: 18px;
+  }
+
+  @include e("error") {
+    @apply flex text-error-txt font-medium text-2 px-xs;
+  }
+}

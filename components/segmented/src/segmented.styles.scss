@@ -1,0 +1,71 @@
+@use "element-plus/theme-chalk/src/segmented.scss" as *;
+
+.prueba {
+  display: flex;
+  flex-direction: column;
+}
+
+.gui-segmented {
+  @apply bg-blue-50 p-2 rounded-lg;
+
+  &__item {
+    @apply text-nightBlue-900 p-4 font-normal transition-all duration-200 rounded-md cursor-pointer;
+
+    &:not(.is-disabled):not(.is-selected):hover {
+      @apply bg-transparent;
+      .gui-segmented__item-label {
+        @apply font-medium;
+      }
+    }
+    
+    &.is-selected {
+      .gui-segmented__item-label {
+        @apply font-medium text-everBlue-900;
+      }
+      &.is-disabled {
+        .gui-segmented__item-label {
+          @apply text-grey-200;
+        }
+      }
+    }
+
+    &.is-disabled {
+      @apply text-grey-200 cursor-not-allowed;
+    }
+
+    &-selected {
+      &.is-disabled {
+        @apply bg-grey-50 border-grey-50;
+      }
+    }
+
+    &-label {
+      @apply text-4 font-normal;
+    }
+  }
+
+  &__item-selected {
+    @apply bg-white border-everBlue-100 border rounded-md;
+  }
+
+  &--large {
+    .gui-segmented {
+      &__item {
+        @apply px-4 py-5;
+      }
+      &__item-selected {
+        @apply rounded-md;
+      }
+    }
+  }
+  &--small {
+    .gui-segmented {
+      &__item {
+        @apply px-4 py-2;
+      }
+      &__item-selected {
+        @apply rounded-md;
+      }
+    }
+  }
+}

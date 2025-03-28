@@ -1,0 +1,99 @@
+@use 'element-plus/theme-chalk/src/tag.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b('tag') {
+  @apply rounded-full flex items-center justify-center text-primary-txt w-min;
+
+  @include e('xs') {
+    @apply h-4 p-xxs text-1 font-medium gap-xxs;
+
+    @each $typeIcon in ('prefix-icon', 'suffix-icon') {
+      @include m($typeIcon) {
+        @apply w-[10px] h-[10px] flex justify-center items-center;
+        & svg {
+          @apply text-1 align-super;
+        }
+      }
+    }
+  }
+
+  @include e('sm') {
+    @apply h-[22px] py-xxs px-xs text-2 font-medium gap-xxs;
+
+    @each $typeIcon in ('prefix-icon', 'suffix-icon') {
+      @include m($typeIcon) {
+        @apply w-3 h-3 flex justify-center items-center;
+        & svg {
+          @apply text-1 align-super;
+        }
+      }
+    }
+  }
+
+  @include e('md') {
+    @apply h-[30px] py-xxs px-xs text-2 font-medium gap-xxs;
+
+    @each $typeIcon in ('prefix-icon', 'suffix-icon') {
+      @include m($typeIcon) {
+        @apply w-[14px] h-[14px] flex justify-center items-center;
+        & svg {
+          @apply text-2 align-super;
+        }
+      }
+    }
+  }
+
+  @include e(light) {
+    @include m('success') {
+      @apply border-success-bd bg-success-bg;
+    }
+
+    @include m('info') {
+      @apply border-info-bd bg-info-bg;
+    }
+
+    @include m('warning') {
+      @apply border-warning-bd bg-warning-bg;
+    }
+
+    @include m('error') {
+      @apply border-error-bd bg-error-bg;
+    }
+
+    @include m('grey') {
+      @apply border-disabled-bd bg-grey-50;
+    }
+  }
+
+  @include e(dark) {
+    @include m('success') {
+      @apply border-success-bd bg-success-def text-inverse-txt;
+    }
+
+    @include m('info') {
+      @apply border-info-bd bg-info-def text-inverse-txt;
+    }
+
+    @include m('warning') {
+      @apply border-warning-bd bg-warning-def text-inverse-txt;
+    }
+
+    @include m('error') {
+      @apply border-error-bd bg-error-def text-inverse-txt;
+    }
+
+    @include m('grey') {
+      @apply border-grey-500 bg-grey-500 text-inverse-txt;
+    }
+  }
+
+  @include e('close') {
+    @apply m-0 ml-0 cursor-pointer !important;
+    &:hover {
+      @apply bg-inherit text-inherit !important;
+    }
+  }
+}

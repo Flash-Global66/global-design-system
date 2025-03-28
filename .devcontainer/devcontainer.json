@@ -1,0 +1,28 @@
+{
+  "name": "Design system",
+  "dockerComposeFile": "../docker-compose.dev.yml",
+  "service": "storybook", // Nombre del servicio en docker-compose.yml
+  "workspaceFolder": "/app", // Carpeta del proyecto dentro del contenedor
+  "forwardPorts": [6006],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "usernamehw.errorlens",
+        "oderwat.indent-rainbow",
+        "visualstudioexptteam.vscodeintellicode",
+        "christian-kohler.path-intellisense",
+        "csstools.postcss",
+        "bradlc.vscode-tailwindcss",
+        "pmneo.tsimporter",
+        "pmneo.tsimporter",
+        "vue.volar",
+        "hollowtree.vue-snippets"
+      ]
+    }
+  }
+}

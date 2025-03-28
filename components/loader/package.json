@@ -1,0 +1,15 @@
+{
+  "name": "@flash-global66/g-loader",
+  "author": "Global66",
+  "version": "0.0.1",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "exports": {
+    "default": "./index.ts"
+  }
+}

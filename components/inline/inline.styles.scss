@@ -1,0 +1,87 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b("inline") {
+  $transition-bezier: cubic-bezier(0.42, 0, 0.58, 1);
+
+  @apply border rounded-md p-sm flex gap-xs items-center relative;
+
+  @include e("title") {
+    @apply text-3 font-semibold line-clamp-2 text-primary-txt mb-xxs;
+  }
+
+  @include e("description") {
+    @apply text-2 text-secondary-txt font-medium;
+  }
+
+  @include e("links") {
+    @apply flex items-center gap-xs mt-xs;
+  }
+
+  @include e("link") {
+    @apply text-2 underline text-grey-700 font-medium;
+  }
+
+  @include e("icon") {
+    @apply text-6;
+  }
+
+  @include e("close") {
+    @apply absolute right-xs top-xs cursor-pointer text-4 text-secondary-txt;
+  }
+
+  @include m("fade-enter-active") {
+    transition: all 0.4s $transition-bezier;
+  }
+
+  @include m("fade-leave-active") {
+    transition: all 0.4s $transition-bezier;
+  }
+
+  @include m("fade-enter-from") {
+    @apply opacity-0 -translate-y-5;
+  }
+
+  @include m("fade-leave-to") {
+    @apply opacity-0 -translate-y-5;
+  }
+
+  @include m("md") {
+    @include e("title") {
+      @apply text-4;
+    }
+
+    @include e("description") {
+      @apply text-3;
+    }
+  }
+
+  @include m("success") {
+    @apply border-success-bd bg-success-bg;
+    @include e("icon") {
+      @apply text-success-txt;
+    }
+  }
+  @include m("info") {
+    @apply border-info-bd bg-info-bg;
+    @include e("icon") {
+      @apply text-info-txt;
+    }
+  }
+  @include m("warning") {
+    @apply border-warning-bd bg-warning-bg;
+    @include e("icon") {
+      @apply text-warning-txt;
+    }
+  }
+  @include m("error") {
+    @apply border-error-bd bg-error-bg;
+    @include e("icon") {
+      @apply text-error-txt;
+    }
+  }
+}

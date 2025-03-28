@@ -1,0 +1,203 @@
+.gui-button {
+  $root: &;
+  @apply px-5
+        py-2
+        rounded-md
+        leading-none
+        duration-200
+        text-4
+        border
+        border-solid
+        inline-flex
+        items-center
+        justify-center
+        font-medium;
+
+  &--full {
+    @apply w-full;
+  }
+
+  &#{$root}--info {
+    @apply text-gray-2 border-white bg-white;
+    &:hover {
+      @apply opacity-75;
+    }
+    @at-root &#{$root}--disabled {
+      @apply opacity-70 cursor-not-allowed;
+    }
+
+    @at-root &#{$root}--outlined {
+      @apply border-gray-2 text-gray-2 bg-transparent;
+      &:hover {
+        @apply opacity-75;
+      }
+      @at-root &#{$root}--disabled {
+        @apply text-gray-2/80 cursor-not-allowed;
+      }
+    }
+
+    @at-root &#{$root}--ghost {
+      @apply border-transparent text-gray-2 bg-transparent;
+      &:hover {
+        @apply bg-white;
+      }
+      @at-root &#{$root}--disabled {
+        @apply text-gray-2/80 cursor-not-allowed;
+      }
+    }
+  }
+
+  &#{$root}--primary {
+    @apply bg-blue-1 border-blue-1 text-white active:bg-cyan-400;
+    &:hover {
+      @apply bg-blue-1/80;
+    }
+    @at-root &#{$root}--disabled {
+      @apply bg-blue-10 border-blue-10 cursor-not-allowed;
+    }
+
+    @at-root &#{$root}--outlined {
+      @apply border-blue-1 text-blue-1 bg-transparent;
+      &:hover {
+        @apply opacity-75;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+
+    @at-root &#{$root}--ghost {
+      @apply border-transparent text-blue-1 bg-transparent;
+      &:hover {
+        @apply bg-blue-1 text-white;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+  }
+
+  &#{$root}--secondary {
+    @apply bg-green-2 border-green-2 text-white;
+    &:hover {
+      @apply bg-green-3;
+    }
+    @at-root &#{$root}--disabled {
+      @apply bg-green-4 border-green-4 cursor-not-allowed;
+    }
+
+    @at-root &#{$root}--outlined {
+      @apply border-green-2 text-green-2 bg-transparent;
+      &:hover {
+        @apply opacity-75;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+
+    @at-root &#{$root}--ghost {
+      @apply border-transparent text-green-2 bg-transparent;
+      &:hover {
+        @apply bg-green-2 text-white;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+  }
+
+  &#{$root}--danger {
+    @apply bg-red-1 border-red-1 text-white;
+    &:hover {
+      @apply opacity-75;
+    }
+    @at-root &#{$root}--disabled {
+      @apply bg-red-1/60 border-red-1/60 cursor-not-allowed;
+    }
+
+    @at-root &#{$root}--outlined {
+      @apply border-red-1 text-red-1 bg-transparent;
+      &:hover {
+        @apply border-red-6 text-red-6;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+
+    @at-root &#{$root}--ghost {
+      @apply border-transparent text-red-1 bg-transparent;
+      &:hover {
+        @apply bg-red-1 text-white;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+  }
+
+  &#{$root}--warning {
+    @apply bg-yellow-8 border-yellow-8 text-white;
+    &:hover {
+      @apply opacity-75;
+    }
+    @at-root &#{$root}--disabled {
+      @apply bg-yellow-8/60 border-yellow-8/60 cursor-not-allowed;
+    }
+
+    @at-root &#{$root}--outlined {
+      @apply border-yellow-8 text-yellow-8 bg-transparent;
+      &:hover {
+        @apply border-y-yellow-7 text-yellow-7;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+
+    @at-root &#{$root}--ghost {
+      @apply border-transparent text-yellow-8 bg-transparent;
+      &:hover {
+        @apply bg-yellow-8 text-white;
+      }
+      @at-root &#{$root}--disabled {
+        @apply opacity-50 cursor-not-allowed;
+      }
+    }
+  }
+
+  &#{$root}--icon {
+    @apply rounded-full p-0;
+  }
+
+  &--tiny {
+    @apply h-10;
+    @at-root &#{$root}--icon {
+      @apply w-10 text-4;
+    }
+  }
+  &--small {
+    @apply h-12;
+    @at-root &#{$root}--icon {
+      @apply w-12 text-6;
+    }
+  }
+  &--medium {
+    @apply h-14;
+    @at-root &#{$root}--icon {
+      @apply w-14  text-8;
+    }
+  }
+  &--large {
+    @apply h-16;
+    @at-root &#{$root}--icon {
+      @apply w-16 text-9;
+    }
+  }
+}
+
+// XS = 'h-8',
+// S = 'h-10',
+// M = 'h-12',
+// L = 'h-16',

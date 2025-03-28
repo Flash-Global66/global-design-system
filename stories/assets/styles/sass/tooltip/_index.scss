@@ -1,0 +1,105 @@
+[id^="tippy-"] {
+  pointer-events: initial !important;
+}
+
+.tippy-box {
+  --gui-color-tooltip: theme('colors.gray.2');
+
+  &[data-theme~='error'] {
+    --gui-color-tooltip: theme('colors.red.1');
+  }
+
+  &[data-theme~='success'] {
+    --gui-color-tooltip: theme('colors.green.1');
+  }
+
+  &[data-theme~='warning'] {
+    --gui-color-tooltip: theme('colors.yellow.1');
+  }
+
+  &[data-theme~='disabled'] {
+    --gui-color-tooltip: theme('colors.gray.15');
+  }
+
+  @apply relative text-white rounded-md text-3 outline-none;
+
+  background-color: var(--gui-color-tooltip);
+  transition-property: transform, visibility, opacity;
+
+  &[data-tippy-root] {
+    max-width: calc(100vw - 10px);
+  }
+
+  &[data-animation="fade"][data-state="hidden"] {
+    opacity: 0;
+  }
+
+  &[data-placement^="top"] > {
+    & .tippy-arrow {
+      @apply bottom-0;
+      &:before {
+        @apply border-8 border-b-0 left-0;
+        bottom: -7px;
+        border-top-color: initial;
+        transform-origin: center top;
+      }
+    }
+  }
+
+  &[data-placement^="bottom"] > {
+    & .tippy-arrow {
+      top: 0;
+      &:before {
+        @apply border-8 border-t-0 left-0;
+        top: -7px;
+        border-bottom-color: initial;
+        transform-origin: center bottom;
+      }
+    }
+  }
+
+
+  &[data-placement^="left"] > {
+    & .tippy-arrow {
+      right: 0;
+      &:before {
+        @apply border-8 border-r-0;
+        border-left-color: initial;
+        right: -7px;
+        transform-origin: center left;
+      }
+    }
+  }
+
+  &[data-placement^="right"] > {
+    & .tippy-arrow {
+      left: 0;
+      &:before {
+        @apply border-8 border-l-0;
+        left: -7px;
+        border-right-color: initial;
+        transform-origin: center right;
+      }
+    }
+  }
+
+  &[data-inertia][data-state="visible"] {
+    transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
+  }
+
+
+  .tippy-content {
+    @apply relative py-4 px-4 z-10;
+  }
+  
+  .tippy-arrow {
+    @apply w-4 h-4;
+    color: var(--gui-color-tooltip);
+    &:before {
+      content: "";
+      @apply absolute border-transparent border-solid;
+    }
+  }
+
+}
+

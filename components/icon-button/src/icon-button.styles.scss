@@ -1,0 +1,153 @@
+@use "sass:map";
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@mixin ripple-animation(
+  $duration: 0.6s,
+  $ease: ease-out,
+  $fill-mode: forwards
+) {
+  animation: ripple-effect $duration $ease $fill-mode;
+}
+
+@include b("icon-button") {
+  @apply rounded-full h-8 w-8 duration-200 relative;
+
+  @include when(disabled) {
+    @apply cursor-not-allowed;
+  }
+
+  // Variantes actualizadas para usar Tailwind en todo:
+  @include m("variant-grey") {
+    @apply bg-transparent text-grey-500;
+
+    &:hover:not(.is-disabled) .hover-effect {
+      @apply bg-grey-100;
+    }
+
+    &:active:not(.is-disabled) .hover-effect {
+      @apply bg-grey-400;
+    }
+
+    &.is-disabled {
+      @apply bg-transparent;
+    }
+
+    &.gui-icon-button--border {
+      --color-border: theme(colors.grey.500);
+      border-color: var(--color-border);
+    }
+  }
+
+  @include m("variant-black") {
+    @apply bg-transparent text-grey-700;
+
+    &:hover:not(.is-disabled) .hover-effect {
+      @apply bg-grey-100;
+    }
+
+    &:active:not(.is-disabled) .hover-effect {
+      @apply bg-grey-400;
+    }
+
+    &.is-disabled {
+      @apply bg-transparent;
+    }
+
+    &.gui-icon-button--border {
+      --color-border: theme(colors.grey.700);
+      border-color: var(--color-border);
+    }
+  }
+
+  @include m("variant-blue") {
+    @apply bg-transparent text-primary-def;
+
+    &:hover:not(.is-disabled) .hover-effect {
+      @apply bg-nightBlue-400;
+    }
+
+    &:active:not(.is-disabled) .hover-effect {
+      @apply bg-nightBlue-700;
+    }
+
+    &.is-disabled {
+      @apply bg-transparent;
+    }
+
+    &.gui-icon-button--border {
+      --color-border: theme(colors.primary-def);
+      border-color: var(--color-border);
+    }
+  }
+
+  @include m("border") {
+    @apply rounded-sm border-1;
+
+    &.is-disabled {
+      --color-border-disabled: theme(colors.grey.300);
+      border-color: var(--color-border-disabled);
+    }
+
+    & .hover-effect {
+      @apply rounded-sm;
+    }
+  }
+
+  @include m("small") {
+    .gui-icon-button__icon {
+      height: 1em;
+      vertical-align: -0.2em;
+    }
+  }
+
+  @include m("medium") {
+    .gui-icon-button__icon {
+      height: 1.25em;
+      vertical-align: -0.3em;
+    }
+  }
+
+  // Animation
+  &:active .hover-effect {
+    @apply bg-primary-def-press;
+  }
+
+  &:hover .hover-effect {
+    @apply w-full h-full;
+  }
+}
+
+.hover-effect {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-center bg-opacity-20 opacity-20 ease-out -z-10;
+  transition: background 0.8s, width 0.4s, height 0.4s;
+
+  // Ripple effect
+  @include e(ripple) {
+    @apply absolute rounded-full pointer-events-none z-10 bg-white;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    transform-origin: center;
+  }
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0);
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.ripple-enter-active,
+.ripple-leave-active {
+  @include ripple-animation;
+}

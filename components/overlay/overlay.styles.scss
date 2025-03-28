@@ -1,0 +1,11 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *; 
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b(overlay) {
+  @apply fixed inset-0 overflow-auto bg-grey-800/80;
+  pointer-events: auto;
+}

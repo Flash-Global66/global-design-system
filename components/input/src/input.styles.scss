@@ -1,0 +1,134 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b("input") {
+  @apply flex flex-col gap-xxs;
+  @include e("wrapper") {
+    @apply relative flex bg-white gap-xs py-sm px-xs border border-disabled-bd rounded-md h-12;
+  }
+
+  @include e("label") {
+    @apply absolute text-terciary-txt text-4 transition-all duration-200 ease-in font-medium;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @each $status in (focus, complete) {
+    @include when($status) {
+      @include e('label') {
+        @apply text-2 left-xs bg-white font-medium;
+        top: 0;
+        transform: translateY(-50%);
+        padding: 0 2px;
+      }
+      @include e("inner") {
+        &::placeholder {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
+
+  @include when(focus) {
+    @include e('label') {
+      // PREGUNTAR: por el semantic token
+      @apply text-everBlue-500;
+    }
+    @include e('wrapper') {
+      @apply border-everBlue-500;
+    }
+    @include e("inner") {
+      @apply caret-everBlue-500;
+    }
+  }
+
+  @include when(complete) {
+    @include e('label') {
+      @apply text-secondary-txt;
+    }
+    @include e('wrapper') {
+      @apply border-secondary-bd;
+    }
+  }
+
+  @include when(disabled) {
+    @include e('label') {
+      @apply text-disabled-txt;
+    }
+    @include e('wrapper') {
+      // PREGUNTAR: por el semantic token
+      @apply bg-primary-def-disabled border-grey-400;
+    }
+  }
+
+  @include when(error) {
+    @include e('label') {
+      @apply text-error-txt;
+    }
+    @include e('wrapper') {
+      @apply border-error-bd;
+    }
+    @include e("help") {
+      @apply text-error-txt;
+    }
+  }
+
+  @include when(exceed) {
+    @include e('help-count') {
+      @apply text-error-txt;
+    }
+  }
+
+  @include when(event) {
+    @apply cursor-pointer;
+    @include e("inner") {
+      @apply cursor-pointer;
+    }
+  }
+
+  &:not(.is-focus):not(.is-complete) {
+    @include e("inner") {
+      &::placeholder {
+        @apply opacity-0;
+      }
+    }
+  }
+
+  @include e("inner") {
+    @apply w-full text-primary-txt font-medium text-4 appearance-none outline-none relative;
+    &:focus {
+      @apply outline-none;
+    }
+    // override edge default style
+    &[type='password']::-ms-reveal {
+      @apply hidden;
+    }
+
+    &::placeholder {
+      @apply transition-all duration-200 ease-in text-terciary-txt;
+    }
+  }
+
+  @include e("icon") {
+    @apply text-6 text-grey-500 select-none w-5;
+  }
+
+  @include e("icon-password") {
+    @apply cursor-pointer;
+  }
+
+  @include e(help) {
+    @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
+    min-height: 18px;
+  }
+
+
+
+  @include e("help-text") {
+    @apply line-clamp-2;
+  }
+}

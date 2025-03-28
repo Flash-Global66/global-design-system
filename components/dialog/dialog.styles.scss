@@ -1,0 +1,230 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+@use "element-plus/theme-chalk/src/common/popup" as *;
+
+
+@include b('dialog') {
+  @apply relative bg-sec-def-bg rounded-lg shadow-lg box-border p-8 break-words mt-14 mb-12 mx-auto;
+
+  @include when('fullscreen') {
+    @apply w-full h-full m-0 rounded-none overflow-auto;
+  }
+  
+  @include when('default') {
+    @apply w-4/12 max-w-md;
+  }
+
+  @include when('fixed') {
+    width: var(--#{$namespace}-dialog-width);
+    max-width: none;
+  }
+
+  @include when('adaptive') {
+    width: fit-content;
+    min-width: min(theme('maxWidth.sm'), calc(100vw - 32px));
+    max-width: min(theme('maxWidth.4xl'), calc(100vw - 32px));
+  }
+
+  @media (max-width: theme('screens.sm')) {
+    @apply mt-4 mb-4 mx-4 p-6 rounded-lg;
+    
+    @include when('default') {
+      width: calc(100% - 2rem);
+      max-width: none;
+      min-width: 0;
+    }
+    
+    @include when('fixed') {
+      width: calc(100% - 2rem);
+      max-width: none;
+      min-width: 0;
+    }
+    
+    @include when('adaptive') {
+      width: calc(100% - 2rem);
+      max-width: none;
+      min-width: 0;
+    }
+  }
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  @include when('align-center') {
+    @apply m-auto;
+  }
+
+  @include e('wrapper') {
+    @apply fixed inset-0 overflow-auto m-0;
+  }
+
+  @include when('draggable') {
+    @apply cursor-move relative;
+    
+    @include e('header') {
+      @apply select-none;
+    }
+  }
+
+  &.is-dragging {
+    @apply cursor-move m-0;
+    transform: none;
+  }
+
+  @include e('header') {
+    @apply relative;
+
+    &.show-close {
+      @apply pr-0;
+    }
+  }
+
+  @include e('headerbtn') {
+    @apply absolute top-0 right-0 p-0 w-lg h-lg bg-transparent border-none outline-none 
+      cursor-pointer flex items-center justify-center translate-x-4 -translate-y-4;
+
+    .#{$namespace}-dialog__close {
+      @apply text-terciary-txt text-6;
+    }
+
+    &:focus,
+    &:hover {
+      @apply text-grey-100
+    }
+  }
+
+  @include e('body') {
+    @apply w-full mx-auto text-center;
+
+    .content-wrapper {
+      @apply max-w-sm mx-auto;
+    }
+  }
+  
+  @include e('footer') {
+    @apply w-full mx-auto;
+
+    &-buttons {
+      @apply w-full;
+      
+      &.layout-dual-row {
+        @apply grid gap-xs grid-cols-2;
+        
+        > button:nth-child(3) {
+        @apply mt-xs mx-auto col-span-2 col-start-1;
+        max-width: 50%;
+        }
+        
+        @media (max-width: theme('screens.sm')) {
+          @apply flex flex-col;
+          
+          > button:nth-child(3) {
+            @apply max-w-full mx-0 mt-xxs;
+          }
+        }
+      }
+      
+      &.layout-single-column {
+        @apply flex flex-col gap-xs;
+      }
+    }
+  }
+
+  
+  @include e('title') {
+    @apply font-semibold text-8 text-primary-txt block mb-md;
+  }
+
+  @include e('image') {
+    @apply mx-auto mb-lg flex flex-col items-center;
+    
+    .is-adaptive & img {
+      @apply max-w-full h-auto w-auto;
+    }
+  }
+
+  @include m('center') {
+    text-align: center;
+
+    @include e('body') {
+      text-align: center;
+    }
+
+    @include e('footer') {
+      text-align: center;
+    }
+  }
+
+  @include e('content') {
+    @apply w-full text-center mb-lg text-secondary-txt;
+  }
+}
+
+.#{$namespace}-overlay-dialog {
+  @apply fixed inset-0 overflow-auto;
+}
+
+.dialog-fade-enter-active {
+  animation: modal-fade-in getCssVar('transition-duration');
+
+  .#{$namespace}-overlay-dialog {
+    animation: dialog-fade-in getCssVar('transition-duration');
+  }
+}
+
+.dialog-fade-leave-active {
+  animation: modal-fade-out getCssVar('transition-duration');
+
+  .#{$namespace}-overlay-dialog {
+    animation: dialog-fade-out getCssVar('transition-duration');
+  }
+}
+
+@keyframes dialog-fade-in {
+  0% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-fade-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

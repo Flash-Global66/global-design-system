@@ -1,0 +1,17 @@
+*.log
+.DS_Store
+node_modules
+dist
+**/dist
+.codegpt
+.yarn/
+remote_versions.txt
+registry_versions.txt
+
+.npmrc
+.env
+
+backups-temporal/
+
+# Build output
+storybook-static/

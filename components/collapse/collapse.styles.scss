@@ -1,0 +1,66 @@
+@use "element-plus/theme-chalk/src/select.scss" as *;
+
+.gui-select-wrapper {
+  @apply relative font-montserrat w-full;
+
+  .gui-input-label {
+    @apply absolute z-10 duration-200 transition-all text-gray-4 px-3 text-ellipsis overflow-hidden whitespace-nowrap select-none leading-none;
+  }
+
+  .label--active {
+    top: 16%;
+    @apply text-2 translate-y-0;
+  }
+
+  .label--no-active {
+    @apply top-1/2 -translate-y-1/2 text-4;
+  }
+
+  .gui-select {
+    @apply w-full;
+    .gui-input__wrapper {
+      @apply rounded-sm shadow-sm border-none px-3;
+      &:hover {
+        @apply shadow-none;
+      }
+    }
+    
+    &:hover {
+      .gui-input__wrapper {
+        @apply border-none;
+      }
+      &:not(.gui-select-disabled) {
+        .gui-input__wrapper {
+          @apply shadow-sm;
+        }
+      }
+    }
+    
+    
+    .gui-input {
+      @apply h-14;
+      .gui-input__inner {
+        @apply h-auto relative duration-200 transition-all text-gray-2 leading-none;
+      }
+    
+      &.gui-input--large {
+        .gui-input__inner {
+          --gui-input-inner-height: 80px;
+        }
+      }
+      &.is-disabled {
+        .gui-input__wrapper {
+          @apply bg-gray-11 cursor-not-allowed shadow-sm;
+        }
+      }
+    }
+  }
+
+  &.gui-select-border-bg {
+    .gui-select {
+      .gui-input__wrapper {
+        @apply shadow-sm;
+      }
+    }
+  }
+}

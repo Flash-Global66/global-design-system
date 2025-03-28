@@ -1,0 +1,1 @@
+export { tGlobalPlugins, tGlobalTheme, tGlobalVariants } from './theme'

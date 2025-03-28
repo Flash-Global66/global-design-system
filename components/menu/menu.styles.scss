@@ -1,0 +1,115 @@
+@use "element-plus/theme-chalk/src/menu.scss" as *;
+@use "element-plus/theme-chalk/src/menu-item-group.scss" as *;
+@use "element-plus/theme-chalk/src/menu-item.scss" as *;
+@use "element-plus/theme-chalk/src/sub-menu.scss" as *;
+
+
+.gui-menu-wrapper {
+  & > .gui-menu {
+    @apply px-0 py-0;
+    &:not(.gui-menu--collapse) {
+    }
+  }
+
+  .gui-menu {
+    @apply flex flex-col gap-5 border-none bg-inherit;
+  
+    &:not(.gui-menu--collapse) {
+  
+      .gui-menu-item,
+      .gui-sub-menu__title {
+        &.is-active {
+          @apply text-blue-1;
+          &::before {
+            content: '';
+            @apply absolute right-5 w-2 h-2 rounded-full bg-gray-1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.gui-menu-item-group__title {
+  @apply text-3;
+}
+
+.gui-menu-item-group {
+  & > ul {
+    @apply flex flex-col gap-4;
+  }
+}
+
+.gui-menu--collapse {
+  --gui-menu-width-collapse: 44px;
+  width: var(--gui-menu-width-collapse);
+  .gui-menu-item {
+    @apply p-0;
+  }
+
+  .gui-menu-tooltip__trigger,
+  .gui-sub-menu__title {
+    &.gui-tooltip__trigger {
+      @apply w-11 flex justify-center items-center rounded-full p-0;
+      
+    }
+  }
+
+  & > .gui-sub-menu {
+    &.is-active {
+      @apply bg-gray-4/10 rounded-full;
+    }
+  }
+
+  & .gui-menu-item > span, 
+  & > .gui-sub-menu > .gui-sub-menu__title > span {
+    @apply hidden;
+  }
+
+}
+
+.gui-menu--popup-container {
+  .gui-menu--popup {
+    @apply shadow-sm;
+  }
+  .gui-menu {
+    @apply p-3 grid grid-cols-1 gap-3;
+  }
+  .gui-sub-menu {
+    @apply pt-3;
+  }
+
+  .gui-sub-menu__title {
+    @apply flex items-center;
+  }
+
+  .gui-sub-menu__icon-arrow {
+    @apply hidden;
+  }
+}
+
+.gui-menu-item,
+.gui-sub-menu__title {
+  @apply h-11 rounded-xl text-4 text-blue-20 font-medium pr-12;
+  &.is-active,
+  &:hover {
+    @apply bg-gray-4/10;
+  }
+}
+
+.gui-sub-menu {
+  .gui-menu {
+    @apply py-3;
+  }
+  .gui-menu-item {
+    @apply h-11;
+  }
+  .gui-sub-menu__icon-arrow {
+    @apply text-6 -mt-2 right-3;
+  }
+  &.is-active {
+    & > .gui-sub-menu__title {
+      @apply text-blue-4;
+    }
+  }
+}

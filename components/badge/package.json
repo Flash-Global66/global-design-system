@@ -1,0 +1,16 @@
+{
+  "name": "@flash-global66/g-badge",
+  "author": "Global66",
+  "version": "0.0.12",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.ts",
+    "./badge.styles.scss": "./badge.styles.scss"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  }
+}

@@ -1,0 +1,31 @@
+services:
+  storybook:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        GBP_PACKAGE_TOKEN: ${GBP_PACKAGE_TOKEN}
+        FONT_AWESOME_TOKEN: ${FONT_AWESOME_TOKEN}
+    container_name: design-system-dev
+    ports:
+      - "6006:6006"
+    volumes:
+      - ./assets:/app/assets
+      - ./libs:/app/libs
+      - ./components:/app/components
+      - ./.storybook:/app/.storybook
+      - ./stories:/app/stories
+      - /app/node_modules
+    networks:
+      - design-system-net
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6006"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  design-system-net:
+    driver: bridge
+    attachable: true

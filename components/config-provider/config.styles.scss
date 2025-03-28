@@ -1,0 +1,28 @@
+@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: 'gui'
+);
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #203478,
+    ),
+    'success': (
+      'base': #00C48C,
+    ),
+    'warning': (
+      'base': #FFD153,
+    ),
+    'danger': (
+      'base': #FF647C,
+    ),
+    'error': (
+      'base': #FF647C,
+    ),
+    'info': (
+      'base': #D7DCF0,
+    ),
+  )
+);
+
+@use "element-plus/theme-chalk/src/base.scss";

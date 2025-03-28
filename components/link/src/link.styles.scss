@@ -1,0 +1,149 @@
+@use 'sass:map';
+
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b(link) {
+    @apply inline-flex flex-row items-center justify-center;
+    @apply relative no-underline outline-none;
+    @apply cursor-pointer p-0;
+    @apply font-semibold;
+
+    /* Size variations */
+    &.#{$namespace}-link--sm {
+        @apply text-2;
+        
+        @include e(icon-left); @include e(icon-right) {
+            @apply text-3;
+        }
+    }
+
+    &.#{$namespace}-link--md {
+        @apply text-3;
+        
+        @include e(icon-left); @include e(icon-right) {
+            @apply text-3;
+        }
+    }
+
+    &.#{$namespace}-link--lg {
+        @apply text-4;
+        
+        @include e(icon-left); @include e(icon-right) {
+            @apply text-7;
+        }
+    }
+
+    @include e('icon-left') {
+        @apply flex items-center justify-center mr-xxs;
+    }
+
+    @include e('icon-right') {
+        @apply flex items-center justify-center ml-xxs;
+    }
+
+    @include e('inner') {
+        @apply inline-flex justify-center items-center;
+        @apply relative;
+    }
+
+    @include when(disabled) {
+        @apply text-disabled-txt cursor-not-allowed;
+        
+        .#{$namespace}-link__inner:after {
+            @apply border-disabled-bd;
+        }
+    }
+
+    /* Primary link - everBlue color palette */
+    &.#{$namespace}-link--primary {
+        @apply text-everBlue-500;
+        
+        &:hover {
+            @apply text-everBlue-700;
+        }
+        
+        &:active {
+            @apply text-everBlue-400;
+        }
+        
+        /* Underline styles for primary links */
+        @include when(underline) {
+            .#{$namespace}-link__inner:after {
+                content: '';
+                @apply absolute left-0 right-0 h-0 bottom-0;
+                @apply border-b border-everBlue-500;
+            }
+            
+            &:hover .#{$namespace}-link__inner:after {
+                @apply border-everBlue-700;
+            }
+            
+            &:active .#{$namespace}-link__inner:after {
+                @apply border-everBlue-400;
+            }
+        }
+    }
+    
+    /* Secondary link - grey color palette */
+    &.#{$namespace}-link--secondary {
+        @apply text-grey-700;
+        
+        &:hover {
+            @apply text-grey-900;
+        }
+        
+        &:active {
+            @apply text-grey-500;
+        }
+        
+        /* Underline styles for secondary links */
+        @include when(underline) {
+            .#{$namespace}-link__inner:after {
+                content: '';
+                @apply absolute left-0 right-0 h-0 bottom-0;
+                @apply border-b border-grey-700;
+            }
+            
+            &:hover .#{$namespace}-link__inner:after {
+                @apply border-grey-900;
+            }
+            
+            &:active .#{$namespace}-link__inner:after {
+                @apply border-grey-500;
+            }
+        }
+    }
+    
+    /* Inline status - For links within text */
+    &.#{$namespace}-link--inline {
+        @apply text-secondary-txt;
+        
+        &:hover {
+            @apply text-grey-400;
+        }
+        
+        &:active {
+            @apply text-grey-600;
+        }
+        
+        /* Underline styles for inline links */
+        @include when(underline) {
+            .#{$namespace}-link__inner:after {
+                content: '';
+                @apply absolute left-0 right-0 h-0 bottom-0;
+                @apply border-b border-grey-700;
+            }
+            
+            &:hover .#{$namespace}-link__inner:after {
+                @apply border-grey-400;
+            }
+            
+            &:active .#{$namespace}-link__inner:after {
+                @apply border-grey-600;
+            }
+        }
+    }
+}

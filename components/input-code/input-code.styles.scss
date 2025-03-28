@@ -1,0 +1,96 @@
+.gui-input-code-wrapper {
+  @apply inline-flex flex-col items-center;
+  .gui-input-content {
+    @apply flex gap-3 md:gap-5;
+  }
+
+  .gui-input-item {
+    @apply relative flex justify-center items-center;
+    &.password {
+      &:after {
+        content: '';
+        @apply absolute w-5 h-5 md:w-7 md:h-7 rounded-full;
+      }
+    }
+  
+    &.point {
+      &:after {
+        @apply bg-blue-1;
+      }
+      .gui-input {
+        @apply text-transparent;
+      }
+    }
+    &.circle {
+      &:after {
+        @apply border-blue-1 border-4 border-solid;
+      }
+    }
+  
+    &.success {
+      &.circle {
+        &:after {
+          @apply border-green-3;
+        }
+      }
+      &.point {
+        &:after {
+          @apply bg-green-3;
+        }
+      }
+    }
+  
+    &.error {
+      &.circle {
+        &:after {
+          @apply border-red-1;
+        }
+      }
+      &.point {
+        &:after {
+          @apply bg-red-1;
+        }
+      }
+    }
+    &.disabled {
+      &.circle {
+        &:after {
+          @apply border-gray-7;
+        }
+      }
+      &.point {
+        &:after {
+          @apply bg-gray-7;
+        }
+      }
+    }
+  }
+
+  .gui-input-code-container {
+    @apply flex flex-col md:flex-row items-center;
+  }
+
+  .gui-input-code-password {
+    @apply flex items-center text-8 md:text-9 text-gray-3 cursor-pointer select-none mt-4 md:mt-0 md:ml-6;
+  }
+
+  .gui-input-code-icon {
+    @apply ml-3 text-4 md:hidden;
+  }
+
+  .gui-input-code-error {
+    @apply mt-4 text-center text-red-1 text-4;
+  }
+
+  .gui-input {
+    @apply border-2 border-solid border-white h-14 w-14 md:w-16 md:h-16 rounded-lg text-center shadow-sm text-8 md:text-10 font-semibold appearance-none;
+  }
+
+  .gui-input-code-text-error {
+    @apply text-red-1;
+  }
+
+  .gui-input-code-text-success {
+    @apply text-green-3;
+  }
+}

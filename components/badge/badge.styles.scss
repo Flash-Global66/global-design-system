@@ -1,0 +1,6 @@
+@use "element-plus/theme-chalk/src/badge.scss" as *;
+
+.gui-badge__content {
+  font-size: 10px;
+  @apply font-semibold;
+}

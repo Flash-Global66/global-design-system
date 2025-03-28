@@ -1,0 +1,105 @@
+@use 'element-plus/theme-chalk/src/checkbox.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b('checkbox') {
+  @apply text-3 gap-xxs m-0 h-fit items-center;
+
+  @include when(checked) {
+    &:not(.is-disabled) {
+      @include e(label) {
+        @apply text-secondary-txt;
+      }
+      @include e(inner) {
+        @apply border-primary-bd bg-primary-def;
+      }
+    }
+    &.is-disabled {
+      @include e(inner) {
+        @apply border-disab-lt-bd bg-disab-lt-bg;
+        &:after {
+          @apply border-white;
+        }
+      }
+    }
+  }
+
+  @include when(disabled) {
+    @apply cursor-not-allowed;
+    @include e(label) {
+      @apply text-disab-lt-txt !important;
+    }
+  }
+
+  @include e(label) {
+    @apply p-0 text-secondary-txt text-pretty;
+  }
+
+  @include e(input) {
+    @apply self-start;
+
+    @include when(indeterminate) {
+      @include e(inner) {
+        @apply border-primary-bd;
+      }
+      &.is-disabled {
+        @include e(inner) {
+          @apply border-disab-lt-bd bg-disab-lt-bg;
+          &:before {
+            @apply bg-white top-[7px];
+          }
+        }
+      }
+    }
+
+    @include when(disabled) {
+      @apply cursor-not-allowed;
+      @include e(inner) {
+        @apply bg-transparent border-disab-lt-bd;
+        & .hover-effect {
+          @apply invisible;
+        }
+      }
+    }
+
+    &:not(.is-error):not(.is-disabled) {
+      @include e(inner) {
+        &::before {
+          @apply top-[7px];
+        }
+      }
+    }
+  }
+
+  @include e(inner) {
+    @apply w-[18px] h-[18px] border-disabled-bd border rounded mr-[7px] bg-transparent;
+
+    &::after {
+      @apply w-[3px] h-2 top-0.5 left-1.5 absolute;
+    }
+
+    &:active .hover-effect {
+      @apply bg-primary-def-press;
+    }
+
+    & .hover-effect {
+      @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-primary-def-hover bg-center bg-opacity-20 opacity-20 ease-out -z-10;
+      transition: background 0.8s, width 0.4s, height 0.4s;
+
+      & .ripple {
+        @apply absolute w-full h-full bg-white/80 rounded-full scale-0 opacity-100 pointer-events-none;
+        &.expand {
+          @apply animate-ripple-expand;
+        }
+        &.contract {
+          @apply animate-ripple-contract;
+        }
+      }
+    }
+    &:hover .hover-effect {
+      @apply w-8 h-8;
+    }
+  }
+}

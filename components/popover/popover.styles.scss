@@ -1,0 +1,16 @@
+@use "element-plus/theme-chalk/src/popover.scss" as *;
+
+// .gui-popover-wrapper {
+// }
+.gui-popper.is-light {
+ &.is-light {
+   @apply bg-white rounded-md border-none shadow-sm;
+  .gui-popper__arrow {
+    @apply shadow-sm border-none;
+  }
+ }
+}
+
+.gui-popover__title {
+  @apply mb-2 font-semibold font-montserrat;
+}
