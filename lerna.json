@@ -2,6 +2,7 @@
   "packages": ["components/*", "config/*", "common/*"],
   "version": "independent",
   "npmClient": "yarn",
+  "tagVersionPrefix": "v",
   "command": {
     "publish": {
       "ignoreChanges": ["*.md", "*.test.js", "*.spec.js"],
@@ -10,7 +11,7 @@
     },
     "version": {
       "conventionalCommits": true,
-      "tagVersionPrefix": ""
+      "tagVersionPrefix": "v"
     }
   }
 }
