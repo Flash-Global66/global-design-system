@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-drawer",
   "author": "Global66",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
