@@ -22,5 +22,6 @@
     "@fortawesome/pro-regular-svg-icons": "^6.7.2",
     "@fortawesome/pro-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.0.8"
-  }
+  },
+  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }

@@ -13,5 +13,6 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
-  "description": "A focus trap component for accessibility"
+  "description": "A focus trap component for accessibility",
+  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }

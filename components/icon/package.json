@@ -15,5 +15,6 @@
   },
   "dependencies": {
     "vue-icomoon": "^0.6.1"
-  }
+  },
+  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }
