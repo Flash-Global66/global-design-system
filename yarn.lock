@@ -898,7 +898,7 @@ __metadata:
     cleave-zen: "npm:^0.0.17"
     element-plus: "npm:^2.9.7"
     jest-mock: "npm:^28.1.0"
-    lerna: "npm:^8.2.1"
+    lerna: "npm:^8.1.9"
     lodash-unified: "npm:^1.0.3"
     rollup-plugin-copy: "npm:^3.5.0"
     sass: "npm:^1.79.4"
@@ -6337,7 +6337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerna@npm:^8.2.1":
+"lerna@npm:^8.1.9":
   version: 8.2.1
   resolution: "lerna@npm:8.2.1"
   dependencies:

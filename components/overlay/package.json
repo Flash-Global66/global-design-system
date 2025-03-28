@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-overlay",
   "author": "Global66",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
