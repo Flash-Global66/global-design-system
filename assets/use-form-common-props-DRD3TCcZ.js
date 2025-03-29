@@ -1,0 +1,1 @@
+import{c as r,h as a,u as t}from"./vue.esm-bundler-ENg2wqJc.js";import{f as m}from"./index-7iQn0g8-.js";import{u as d}from"./index-BirDoDwW.js";const n=o=>{const s=d("disabled"),e=a(m,void 0);return r(()=>s.value||t(o)||e?.disabled||!1)};export{n as u};
