@@ -1,0 +1,16 @@
+services:
+  storybook-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        GBP_PACKAGE_TOKEN: ${GBP_PACKAGE_TOKEN}
+        FONT_AWESOME_TOKEN: ${FONT_AWESOME_TOKEN}
+    ports:
+      - "8080:80"
+    networks:
+      - storybook-net
+
+networks:
+  storybook-net:
+    driver: bridge
