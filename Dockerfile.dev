@@ -35,11 +35,12 @@ COPY .yarnrc.yml ./
 # Copiar dependencias primero para cache eficiente
 COPY package.json ./
 
+# Copiar carpetas necesarias para generar los workspaces de yarn
+COPY components/ components/
+COPY common/ common/
+
 # Instalar dependencias
 RUN corepack use yarn@latest
-
-# Instalar dependencias para habilitar workspaces
-RUN yarn install
 
 # ---------------------------
 # Etapa final de desarrollo
