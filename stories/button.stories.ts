@@ -206,7 +206,7 @@ const Template: StoryFn<typeof GButton> = (args) => ({
 export const Primary = Template.bind({})
 Primary.args = {
   variant: 'primary',
-  title: 'Primary Button'
+  title: 'Primary Button prueba'
 }
 
 export const Secondary = Template.bind({})
