@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-radio@0.0.8...@flash-global66/g-radio@0.1.0) (2025-03-31)
+
+
+### Features
+
+* **radio:** Update radio component tsconfig ([5f56e27](https://github.com/Flash-Global66/global-design-system/commit/5f56e276a0c19a1ac8ef02c4cc24e232c292f549))
+
+
+
+
+
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-radio@0.0.7...@flash-global66/g-radio@0.0.8) (2025-03-31)
 
 **Note:** Version bump only for package @flash-global66/g-radio
