@@ -6,7 +6,7 @@ export default mergeConfig(baseConfig, defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'index.ts'),
-      name: 'B2BButton'
+      name: 'GButton'
     }
   }
 }));
