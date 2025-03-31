@@ -9,11 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  setup-and-build:
-    strategy:
-      matrix:
-        task: ['publish', 'deploy']
-      fail-fast: false
+  publish:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -27,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: ${{ matrix.task == 'publish' && '0' || '1' }}
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js 20
@@ -55,40 +51,85 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Create building of components
+      - name: Detect changed packages
+        id: detect-changes
         run: |
-          echo "Building packages in specific order"
-
+          # Componentes prioritarios
           ORDERED_COMPONENTS=("form" "icon-font" "button")
+          echo "PRIORITY_COMPONENTS=${ORDERED_COMPONENTS[*]}" >> $GITHUB_OUTPUT
+          
+          # Detectar componentes con cambios usando lerna
+          CHANGED_OUTPUT=$(yarn lerna changed --json 2>/dev/null || echo "[]")
+          
+          # Extraer solo los nombres de los paquetes cambiados
+          CHANGED_PACKAGES=$(echo "$CHANGED_OUTPUT" | jq -r 'if type == "array" then map(.name | split("/") | last) | join(" ") else "" end')
+          
+          # Verificar si hay cambios
+          if [ -z "$CHANGED_PACKAGES" ]; then
+            echo "NO_CHANGES=true" >> $GITHUB_OUTPUT
+            echo "No se detectaron cambios en ningún componente."
+          else
+            echo "NO_CHANGES=false" >> $GITHUB_OUTPUT
+            echo "CHANGED_PACKAGES=$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
+            echo "Componentes con cambios detectados: $CHANGED_PACKAGES"
+          fi
 
-          for component in "${ORDERED_COMPONENTS[@]}"; do
-            echo "Building @flash-global66/$component"
-            yarn build $component
+      - name: Build components
+        if: steps.detect-changes.outputs.NO_CHANGES != 'true'
+        run: |
+          echo "Iniciando proceso de construcción de componentes"
+          
+          # Obtener los componentes prioritarios
+          IFS=' ' read -r -a PRIORITY_COMPONENTS <<< "${{ steps.detect-changes.outputs.PRIORITY_COMPONENTS }}"
+          
+          # Obtener los componentes con cambios
+          IFS=' ' read -r -a CHANGED_COMPONENTS <<< "${{ steps.detect-changes.outputs.CHANGED_PACKAGES }}"
+          
+          # Crear un array para los componentes a construir
+          COMPONENTS_TO_BUILD=()
+          
+          # Verificar si hay componentes con cambios
+          if [ ${#CHANGED_COMPONENTS[@]} -gt 0 ]; then
+            echo "Se detectaron cambios en componentes. Construyendo componentes prioritarios primero."
             
-            # Verificar si la construcción fue exitosa
-            if [ $? -ne 0 ]; then
-              echo "Error building $component"
-              exit 1
-            fi
-          done
+            # Añadir todos los componentes prioritarios al inicio
+            for component in "${PRIORITY_COMPONENTS[@]}"; do
+              COMPONENTS_TO_BUILD+=("$component")
+            done
+            
+            # Añadir componentes con cambios que no son prioritarios
+            for component in "${CHANGED_COMPONENTS[@]}"; do
+              # Verificar si el componente ya está en la lista (es prioritario)
+              if [[ ! " ${PRIORITY_COMPONENTS[*]} " =~ " $component " ]]; then
+                COMPONENTS_TO_BUILD+=("$component")
+              fi
+            done
+            
+            echo "Componentes a construir: ${COMPONENTS_TO_BUILD[*]}"
+            
+            # Construir los componentes
+            for component in "${COMPONENTS_TO_BUILD[@]}"; do
+              if [ -d "components/$component" ]; then
+                echo "Building @flash-global66/$component"
+                yarn build $component
+                
+                # Verificar si la construcción fue exitosa
+                if [ $? -ne 0 ]; then
+                  echo "Error building $component"
+                  exit 1
+                fi
+              else
+                echo "Advertencia: El componente $component no existe en el directorio components/"
+              fi
+            done
+            
+            echo "Todos los componentes necesarios fueron construidos exitosamente"
+          else
+            echo "No se detectaron cambios en componentes. No se realizará ninguna construcción."
+          fi
 
-          echo "Build remaining packages"
-
-          ALL_COMPONENTS=$(find components -maxdepth 1 -mindepth 1 -type d -exec basename {} \;)
-
-          for component in $ALL_COMPONENTS; do
-            # Verificar si el componente ya fue construido
-            if [[ ! " ${ORDERED_COMPONENTS[@]} " =~ " $component " ]] && [[ ! " ${ORDERED_COMPONENTS[@]} " =~ " g-$component " ]]; then
-              echo "Building @flash-global66/$component"
-              yarn build $component
-            fi
-          done
-
-          echo "All components built successfully"
-
-      # Pasos específicos para publicación
       - name: Check existing tags
-        if: matrix.task == 'publish'
+        if: steps.detect-changes.outputs.NO_CHANGES != 'true'
         id: check-tags
         run: |
           git fetch --tags
@@ -96,7 +137,7 @@ jobs:
           echo "✅ Tags existentes verificados"
 
       - name: Version packages with Lerna
-        if: matrix.task == 'publish'
+        if: steps.detect-changes.outputs.NO_CHANGES != 'true'
         id: version
         env:
           GIT_AUTHOR_NAME: GitHub Actions
@@ -104,19 +145,6 @@ jobs:
           GIT_COMMITTER_NAME: GitHub Actions
           GIT_COMMITTER_EMAIL: actions@github.com
         run: |
-          # Forzar detección de cambios (sin arrojar error si no hay cambios)
-          CHANGED_PACKAGES=$(yarn lerna changed -a 2>&1) || true
-          
-          # Verificar si hay paquetes cambiados
-          if echo "$CHANGED_PACKAGES" | grep -q "No changed packages"; then
-            echo "no_changes=true" >> $GITHUB_OUTPUT
-            echo "ℹ️ No hay cambios para publicar"
-            exit 0
-          fi
-          
-          echo "Paquetes con cambios detectados:"
-          echo "$CHANGED_PACKAGES"
-
           # Ejecutar Lerna con formato de etiqueta simplificado
           yarn lerna version --conventional-commits \
             --no-granular-pathspec \
@@ -132,12 +160,11 @@ jobs:
             echo "::error::Falló el proceso de versionado con código $EXIT_CODE"
             exit $EXIT_CODE
           else
-            echo "no_changes=false" >> $GITHUB_OUTPUT
             echo "✅ Versionado completado, hay cambios para publicar"
           fi
 
       - name: Setup authentication for publishing
-        if: matrix.task == 'publish' && steps.version.outputs.no_changes != 'true'
+        if: steps.detect-changes.outputs.NO_CHANGES != 'true'
         run: |
           echo "//npm.pkg.github.com/:_authToken=${GBP_PACKAGE_TOKEN}" > .npmrc
           echo "@flash-global66:registry=https://npm.pkg.github.com/" >> .npmrc
@@ -145,21 +172,53 @@ jobs:
           echo "@fortawesome:registry=https://npm.fontawesome.com/" >> .npmrc
 
       - name: Publish packages with Lerna
-        if: matrix.task == 'publish' && steps.version.outputs.no_changes != 'true'
+        if: steps.detect-changes.outputs.NO_CHANGES != 'true'
         run: npx lerna publish from-package --yes --tag-version-prefix=""
 
       - name: Cleanup temporary files
-        if: matrix.task == 'publish' && always()
+        if: always()
         run: rm -f .npmrc
 
-      # Pasos específicos para despliegue
+  deploy-github-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GBP_PACKAGE_TOKEN: ${{ secrets.GBP_PACKAGE_TOKEN }}
+      FONT_AWESOME_TOKEN: ${{ secrets.FONT_AWESOME_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack and Install Yarn 4.7.0
+        run: |
+          corepack enable
+          corepack prepare yarn@4.7.0 --activate
+      
+      - name: Verify environment variables
+        run: |
+          if [ -z "$GBP_PACKAGE_TOKEN" ]; then 
+            echo "::error::GBP_PACKAGE_TOKEN no está configurado"
+            exit 1
+          fi
+          if [ -z "$FONT_AWESOME_TOKEN" ]; then 
+            echo "::error::FONT_AWESOME_TOKEN no está configurado"
+            exit 1
+          fi
+          echo "✅ Variables de entorno configuradas correctamente"
+
+      - name: Install dependencies
+        run: yarn install
+
       - name: Build Storybook
-        if: matrix.task == 'deploy'
-        id: build-storybook
+        id: build
         run: yarn build-storybook
         
       - name: Check build output
-        if: matrix.task == 'deploy'
         run: |
           if [ ! -d "./storybook-static" ]; then
             echo "::error::La carpeta de build no existe"
@@ -167,11 +226,9 @@ jobs:
           fi
 
       - name: Create .nojekyll file
-        if: matrix.task == 'deploy'
         run: touch ./storybook-static/.nojekyll
 
       - name: Deploy to GitHub Pages
-        if: matrix.task == 'deploy'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -180,9 +237,9 @@ jobs:
           publish_branch: gh-pages
 
       - name: Notify success
-        if: matrix.task == 'deploy' && success()
+        if: success()
         run: echo "✅ Storybook desplegado exitosamente en https://flash-global66.github.io/global66-design-system/"
 
       - name: Notify failure
-        if: matrix.task == 'deploy' && failure()
+        if: failure()
         run: echo "❌ Falló el despliegue de Storybook"
