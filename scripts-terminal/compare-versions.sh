@@ -16,7 +16,7 @@ for dir in components/*; do
   component=$(basename "$dir")
   # Convertir el nombre a kebab-case para que coincida con el formato del paquete
   component_kebab=$(to_kebab "$component")
-  pkg="@flash-global66/b2b-ui-${component_kebab}"
+  pkg="@flash-global66/g-${component_kebab}"
 
   echo "📦 $pkg:"
   

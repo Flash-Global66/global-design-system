@@ -157,16 +157,16 @@ El componente Dialog proporciona una ventana modal configurable para mostrar inf
 ## Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-dialog
+yarn add @flash-global66/g-dialog
 \`\`\`
 
 ## Dependencias
 Este componente requiere:
-- @flash-global66/b2b-ui-button
-- @flash-global66/b2b-ui-icon-font
-- @flash-global66/b2b-ui-focus-trap
-- @flash-global66/b2b-ui-teleport
-- @flash-global66/b2b-ui-overlay
+- @flash-global66/g-button
+- @flash-global66/g-icon-font
+- @flash-global66/g-focus-trap
+- @flash-global66/g-teleport
+- @flash-global66/g-overlay
 
 Nota: Asegúrate de tener instaladas estas dependencias para que el componente funcione correctamente y sus archivos sass respectivos importados.
 
@@ -174,7 +174,7 @@ Nota: Asegúrate de tener instaladas estas dependencias para que el componente f
 Para que el componente funcione correctamente, es necesario importar los estilos SASS:
 
 \`\`\`scss
-@use "@flash-global66/b2b-ui-dialog/dialog.styles.scss" as *;
+@use "@flash-global66/g-dialog/dialog.styles.scss" as *;
 \`\`\`
 
 ## Uso básico
@@ -195,8 +195,8 @@ Para que el componente funcione correctamente, es necesario importar los estilos
 
 <script setup>
 import { ref } from 'vue';
-import { GDialog } from '@flash-global66/b2b-ui-dialog';
-import { GButton } from '@flash-global66/b2b-ui-button';
+import { GDialog } from '@flash-global66/g-dialog';
+import { GButton } from '@flash-global66/g-button';
 
 const dialogVisible = ref(false);
 const closeDialog = () => {

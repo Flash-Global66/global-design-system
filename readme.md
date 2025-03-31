@@ -58,9 +58,9 @@ Consulta los [docs de Storybook](https://storybook.js.org/docs/vue/writing-stori
 
 **1. Clona este repositorio:**
 ```sh
-1 opción -> https://github.com/Flash-Global66/b2b-ui-framework.git
-2 opción -> gh repo clone Flash-Global66/b2b-ui-framework
-cd b2b-ui-framework/
+1 opción -> https://github.com/Flash-Global66/global-design-system.git
+2 opción -> gh repo clone Flash-Global66/global-design-system
+cd global-design-system/
 ```
 
 **2. Instala las dependencias:**

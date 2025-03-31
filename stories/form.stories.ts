@@ -37,14 +37,14 @@ Una característica importante es que el validador es lo suficientemente intelig
 ### Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-form
+yarn add @flash-global66/g-form
 \`\`\`
 
 ### Importación
 
 \`\`\`typescript
-import { GForm } from '@flash-global66/b2b-ui-form'
-import '@flash-global66/b2b-ui-form/form.styles.scss'
+import { GForm } from '@flash-global66/g-form'
+import '@flash-global66/g-form/form.styles.scss'
 \`\`\`
 
 ### Dependencias

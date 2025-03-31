@@ -32,7 +32,7 @@ for dir in components/*; do
     ((total_components++))
     component=$(basename "$dir")
     component_kebab=$(to_kebab "$component")
-    pkg="@flash-global66/b2b-ui-${component_kebab}"
+    pkg="@flash-global66/g-${component_kebab}"
     
     # Hacer un respaldo del package.json original
     cp "$dir/package.json" "${BACKUP_DIR}/${component}_package.json"
@@ -57,7 +57,7 @@ for dir in components/*; do
   if [ -f "$dir/package.json" ]; then
     component=$(basename "$dir")
     component_kebab=$(to_kebab "$component")
-    pkg="@flash-global66/b2b-ui-${component_kebab}"
+    pkg="@flash-global66/g-${component_kebab}"
     
     version_registry=$(grep "^$pkg:" registry_versions.txt | cut -d':' -f2 | tr -d '[:space:]')
     if [[ "$version_registry" == "N/A" ]]; then
@@ -92,7 +92,7 @@ for dir in components/*; do
         ((components_updated++))
         
         if [[ "$create_tags" == "s" ]]; then
-          tag_name="@flash-global66/b2b-ui-${component_kebab}@${version_registry}"
+          tag_name="@flash-global66/g-${component_kebab}@${version_registry}"
           git tag -a "$tag_name" -m "Versión $version_registry de $pkg" 2>/dev/null
           if [ $? -ne 0 ]; then
             echo -e "${YELLOW}⚠️ Tag '$tag_name' ya existe o error al crearlo${NC}"

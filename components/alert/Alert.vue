@@ -1,6 +1,6 @@
 <!-- 
 
-  NO FUNCIONA. TOCA REVISAR. El provider y el inject no funcionan bien. en el proyecto que instalo tengo que importarlo de la siguiente manera '../node_modules/@flash-global66/b2b-ui-alert' y no como '@flash-global66/b2b-ui-alert' como deberia ser. Tambien tengo error con las imagenes. No las encuentra.
+  NO FUNCIONA. TOCA REVISAR. El provider y el inject no funcionan bien. en el proyecto que instalo tengo que importarlo de la siguiente manera '../node_modules/@flash-global66/g-alert' y no como '@flash-global66/g-alert' como deberia ser. Tambien tengo error con las imagenes. No las encuentra.
 
 -->
 
@@ -69,8 +69,8 @@ import { onUnmounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 // COMPONENTS
-import { GDialog } from '@flash-global66/b2b-ui-dialog';
-import { GButton } from '@flash-global66/b2b-ui-button';
+import { GDialog } from '@flash-global66/g-dialog';
+import { GButton } from '@flash-global66/g-button';
 
 // COMPOSABLE
 import { useAlertInject } from './useProviderAlert';

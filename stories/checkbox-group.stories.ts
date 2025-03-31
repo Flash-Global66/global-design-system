@@ -15,14 +15,14 @@ de construir el grupo: mediante la propiedad \`options\` o con los slots predete
 
 ### Instalación
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-checkbox
+yarn add @flash-global66/g-checkbox
 \`\`\`
 
 ### Importación
 
 \`\`\`typescript
-import { GCheckboxGroup } from '@flash-global66/b2b-ui-checkbox'
-import '@flash-global66/b2b-ui-checkbox/checkbox.styles.scss'
+import { GCheckboxGroup } from '@flash-global66/g-checkbox'
+import '@flash-global66/g-checkbox/checkbox.styles.scss'
 \`\`\`
 
 ### Ejemplo con slots personalizados:

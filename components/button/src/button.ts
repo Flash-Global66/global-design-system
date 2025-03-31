@@ -7,7 +7,7 @@ import type {
   ButtonVariant,
   ButtonNativeType,
 } from "./button.type";
-import { IconString } from "@flash-global66/b2b-ui-icon-font";
+import { IconString } from "@flash-global66/g-icon-font";
 
 export const buttonProps = buildProps({
   /**

@@ -35,25 +35,25 @@ Un campo de selección moderno con funcionalidades avanzadas para formularios di
 🚀 **Instalación**
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-select
+yarn add @flash-global66/g-select
 \`\`\`
 
 🪝 **Dependencias**
 
 Este componente requiere:
 
-> - @flash-global66/b2b-ui-tag
-> - @flash-global66/b2b-ui-icon-font
-> - element-plus/es/components/tooltip/index <span style="color: rgb(227 83 83);font-size: 13px;">(se necesita crear @flash-global66/b2b-ui-tooltip)</span>
+> - @flash-global66/g-tag
+> - @flash-global66/g-icon-font
+> - element-plus/es/components/tooltip/index <span style="color: rgb(227 83 83);font-size: 13px;">(se necesita crear @flash-global66/g-tooltip)</span>
 
 📥 **Importación básica**
 
 \`\`\`typescript
-import { GSelect } from '@flash-global66/b2b-ui-select'
-import '@flash-global66/b2b-ui-input/select.style.scss'
+import { GSelect } from '@flash-global66/g-select'
+import '@flash-global66/g-input/select.style.scss'
 
 // tipos si son necesarios
-import type { OptionType } from '@flash-global66/b2b-ui-select'
+import type { OptionType } from '@flash-global66/g-select'
 \`\`\`
 `
       }

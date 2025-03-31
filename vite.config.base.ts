@@ -29,7 +29,7 @@ export default defineConfig({
         'dayjs',
         'dayjs/plugin/localeData',
         // Componentes propios
-        /^@flash-global66\/b2b-ui-/
+        /^@flash-global66\/g-/
       ],
       output: {
         globals: {

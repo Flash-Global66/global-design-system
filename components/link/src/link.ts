@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import { buildProps } from "element-plus/es/utils/index";
-import type { IconString } from "@flash-global66/b2b-ui-icon-font";
+import type { IconString } from "@flash-global66/g-icon-font";
 import type Link from './Link.vue'
 
 export const linkProps = buildProps({

@@ -7,7 +7,7 @@ import {
 import { UPDATE_MODEL_EVENT } from 'element-plus'
 import { useAriaProps, useSizeProp } from 'element-plus'
 import type { ExtractPropTypes, StyleValue } from 'vue'
-import { IconString } from "@flash-global66/b2b-ui-icon-font";
+import { IconString } from "@flash-global66/g-icon-font";
 
 export type InputAutoSize = { minRows?: number; maxRows?: number } | boolean
 

@@ -27,14 +27,14 @@ El componente \`GFormItem\` es un contenedor para elementos de formulario que co
 ### Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-form
+yarn add @flash-global66/g-form
 \`\`\`
 
 ### Importación
 
 \`\`\`typescript
-import { GFormItem } from '@flash-global66/b2b-ui-form'
-import '@flash-global66/b2b-ui-form/form.styles.scss'
+import { GFormItem } from '@flash-global66/g-form'
+import '@flash-global66/g-form/form.styles.scss'
 \`\`\`
 
 ### Dependencias

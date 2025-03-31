@@ -18,14 +18,14 @@ El componente \`GCheckbox\` es un elemento de selección que permite activar o d
 
 ### Instalación
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-checkbox
+yarn add @flash-global66/g-checkbox
 \`\`\`
 
 ### Importación
 
 \`\`\`typescript
-import { GCheckbox } from '@flash-global66/b2b-ui-checkbox'
-import '@flash-global66/b2b-ui-checkbox/checkbox.styles.scss'
+import { GCheckbox } from '@flash-global66/g-checkbox'
+import '@flash-global66/g-checkbox/checkbox.styles.scss'
 \`\`\`
 
 ### Ejemplo básico:

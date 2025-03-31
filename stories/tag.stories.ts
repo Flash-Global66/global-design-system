@@ -30,20 +30,20 @@ const meta = {
 🚀 **Instalación**
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-tag
+yarn add @flash-global66/g-tag
 \`\`\`
 
 🪝 **Dependencias**
 
 Este componente requiere:
 
-> - @flash-global66/b2b-ui-icon-font
+> - @flash-global66/g-icon-font
 
 📥 **Importación básica**
 
 \`\`\`typescript
-import { GTag } from '@flash-global66/b2b-ui-tag'
-import '@flash-global66/b2b-ui-tag/tag.style.scss'
+import { GTag } from '@flash-global66/g-tag'
+import '@flash-global66/g-tag/tag.style.scss'
 \`\`\`
 `
       }
