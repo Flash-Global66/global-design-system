@@ -3,11 +3,11 @@ import { useFormDisabled } from 'element-plus/es/components/form/index.mjs'
 import { isUndefined } from 'element-plus/es/utils/index.mjs'
 import { checkboxGroupContextKey } from '../constants'
 
-import type { CheckboxModel, CheckboxStatus } from '.'
+import type { CheckboxModel, CheckboxStatus } from './index'
 
 export const useCheckboxDisabled = ({
   model,
-  isChecked
+  isChecked,
 }: Pick<CheckboxModel, 'model'> & Pick<CheckboxStatus, 'isChecked'>) => {
   const checkboxGroup = inject(checkboxGroupContextKey, undefined)
 
@@ -26,7 +26,7 @@ export const useCheckboxDisabled = ({
 
   return {
     isDisabled,
-    isLimitDisabled
+    isLimitDisabled,
   }
 }
 

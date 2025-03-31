@@ -4,7 +4,11 @@ import { debugWarn } from 'element-plus/es/utils/index.mjs'
 import { checkboxGroupContextKey } from '../constants'
 
 import type { CheckboxProps } from '../checkbox'
-import type { CheckboxDisabled, CheckboxModel, CheckboxStatus } from '.'
+import type {
+  CheckboxDisabled,
+  CheckboxModel,
+  CheckboxStatus,
+} from './index'
 
 export const useCheckboxEvent = (
   props: CheckboxProps,
@@ -13,7 +17,7 @@ export const useCheckboxEvent = (
     isLimitExceeded,
     hasOwnLabel,
     isDisabled,
-    isLabeledByFormItem
+    isLabeledByFormItem,
   }: Pick<CheckboxModel, 'model' | 'isLimitExceeded'> &
     Pick<CheckboxStatus, 'hasOwnLabel'> &
     Pick<CheckboxDisabled, 'isDisabled'> &
@@ -29,7 +33,10 @@ export const useCheckboxEvent = (
       : props.falseValue ?? false
   }
 
-  function emitChangeEvent(checked: string | number | boolean, e: InputEvent | MouseEvent) {
+  function emitChangeEvent(
+    checked: string | number | boolean,
+    e: InputEvent | MouseEvent
+  ) {
     emit('change', getLabeledValue(checked), e)
   }
 
@@ -46,16 +53,22 @@ export const useCheckboxEvent = (
     if (!hasOwnLabel.value && !isDisabled.value && isLabeledByFormItem.value) {
       // fix: https://github.com/element-plus/element-plus/issues/9981
       const eventTargets: EventTarget[] = e.composedPath()
-      const hasLabel = eventTargets.some((item) => (item as HTMLElement).tagName === 'LABEL')
+      const hasLabel = eventTargets.some(
+        (item) => (item as HTMLElement).tagName === 'LABEL'
+      )
       if (!hasLabel) {
-        model.value = getLabeledValue([false, props.falseValue].includes(model.value))
+        model.value = getLabeledValue(
+          [false, props.falseValue].includes(model.value)
+        )
         await nextTick()
         emitChangeEvent(model.value, e)
       }
     }
   }
 
-  const validateEvent = computed(() => checkboxGroup?.validateEvent || props.validateEvent)
+  const validateEvent = computed(
+    () => checkboxGroup?.validateEvent || props.validateEvent
+  )
 
   watch(
     () => props.modelValue,
@@ -68,6 +81,6 @@ export const useCheckboxEvent = (
 
   return {
     handleChange,
-    onClickRoot
+    onClickRoot,
   }
 }
