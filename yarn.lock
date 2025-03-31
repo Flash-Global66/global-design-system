@@ -855,6 +855,9 @@ __metadata:
 "@flash-global66/g-tag@workspace:components/tag":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-tag@workspace:components/tag"
+  peerDependencies:
+    element-plus: ^2.9.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
