@@ -18,7 +18,7 @@ import {
   useNamespace
 } from 'element-plus'
 import { CHANGE_EVENT, EVENT_CODE, UPDATE_MODEL_EVENT } from 'element-plus/es/constants/index.mjs'
-import { useFormItem, useFormItemInputId } from '@flash-global66/g-form/index.js';
+import { useFormItem, useFormItemInputId } from '@flash-global66/g-form'
 
 import { useAllowCreate } from './useAllowCreate'
 import { useProps } from './useProps'

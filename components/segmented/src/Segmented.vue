@@ -42,7 +42,7 @@ import {
   useId,
   useNamespace,
 } from "element-plus";
-import { useFormItemInputId, useFormItem, useFormDisabled } from '@flash-global66/g-form/index.js';
+import { useFormItemInputId, useFormItem, useFormDisabled } from '@flash-global66/g-form';
 import { computed, reactive, ref, watch } from "vue";
 import { OptionSegmented } from "./segmented.type";
 import { useActiveElement, useResizeObserver } from "@vueuse/core";

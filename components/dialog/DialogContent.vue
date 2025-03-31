@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { computed, inject } from "vue";
 import { GIconFont } from "@flash-global66/g-icon-font";
-import { GButton } from "@flash-global66/g-button/index.js";
+import { GButton } from "@flash-global66/g-button";
 import { FOCUS_TRAP_INJECTION_KEY } from "@flash-global66/g-focus-trap";
 import { composeRefs } from "element-plus/es/utils/index";
 import { useDraggable } from "element-plus/es/hooks/index";

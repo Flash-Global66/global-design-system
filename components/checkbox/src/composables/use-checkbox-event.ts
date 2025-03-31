@@ -1,5 +1,5 @@
 import { computed, getCurrentInstance, inject, nextTick, watch } from 'vue'
-import { useFormItem, useFormItemInputId } from '@flash-global66/g-form/index.js'
+import { useFormItem, useFormItemInputId } from '@flash-global66/g-form'
 import { debugWarn } from 'element-plus/es/utils/index.mjs'
 import { checkboxGroupContextKey } from '../constants'
 
