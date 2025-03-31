@@ -55,6 +55,17 @@ jobs:
             */*/node_modules
           key: ${{ steps.cache-key.outputs.key }}
 
+      - name: Verify cache integrity
+        if: steps.cache-modules.outputs.cache-hit == 'true'
+        run: |
+          if [ ! -d "node_modules" ] || [ ! -f "node_modules/.yarn-integrity" ]; then
+            echo "::warning::Cache parece estar corrupto, reinstalando..."
+            rm -rf node_modules .yarn/cache
+            yarn install
+          else
+            echo "✅ Cache verificado correctamente"
+          fi
+
       - name: Verify environment variables
         run: |
           if [ -z "$GBP_PACKAGE_TOKEN" ]; then 
