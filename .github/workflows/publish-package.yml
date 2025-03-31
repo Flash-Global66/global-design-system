@@ -9,7 +9,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  publish:
+  setup-and-build:
+    strategy:
+      matrix:
+        task: ['publish', 'deploy']
+      fail-fast: false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -23,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: ${{ matrix.task == 'publish' && '0' || '1' }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js 20
@@ -82,7 +86,9 @@ jobs:
 
           echo "All components built successfully"
 
+      # Pasos específicos para publicación
       - name: Check existing tags
+        if: matrix.task == 'publish'
         id: check-tags
         run: |
           git fetch --tags
@@ -90,6 +96,7 @@ jobs:
           echo "✅ Tags existentes verificados"
 
       - name: Version packages with Lerna
+        if: matrix.task == 'publish'
         id: version
         env:
           GIT_AUTHOR_NAME: GitHub Actions
@@ -130,6 +137,7 @@ jobs:
           fi
 
       - name: Setup authentication for publishing
+        if: matrix.task == 'publish' && steps.version.outputs.no_changes != 'true'
         run: |
           echo "//npm.pkg.github.com/:_authToken=${GBP_PACKAGE_TOKEN}" > .npmrc
           echo "@flash-global66:registry=https://npm.pkg.github.com/" >> .npmrc
@@ -137,84 +145,21 @@ jobs:
           echo "@fortawesome:registry=https://npm.fontawesome.com/" >> .npmrc
 
       - name: Publish packages with Lerna
-        if: steps.version.outputs.no_changes == 'false'
+        if: matrix.task == 'publish' && steps.version.outputs.no_changes != 'true'
         run: npx lerna publish from-package --yes --tag-version-prefix=""
 
       - name: Cleanup temporary files
-        if: always()
+        if: matrix.task == 'publish' && always()
         run: rm -f .npmrc
 
-  deploy-github-pages:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      GBP_PACKAGE_TOKEN: ${{ secrets.GBP_PACKAGE_TOKEN }}
-      FONT_AWESOME_TOKEN: ${{ secrets.FONT_AWESOME_TOKEN }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Enable Corepack and Install Yarn 4.7.0
-        run: |
-          corepack enable
-          corepack prepare yarn@4.7.0 --activate
-      
-      - name: Verify environment variables
-        run: |
-          if [ -z "$GBP_PACKAGE_TOKEN" ]; then 
-            echo "::error::GBP_PACKAGE_TOKEN no está configurado"
-            exit 1
-          fi
-          if [ -z "$FONT_AWESOME_TOKEN" ]; then 
-            echo "::error::FONT_AWESOME_TOKEN no está configurado"
-            exit 1
-          fi
-          echo "✅ Variables de entorno configuradas correctamente"
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Create building of components
-        run: |
-          echo "Building packages in specific order"
-
-          ORDERED_COMPONENTS=("form" "icon-font" "button")
-
-          for component in "${ORDERED_COMPONENTS[@]}"; do
-            echo "Building @flash-global66/$component"
-            yarn build $component
-            
-            # Verificar si la construcción fue exitosa
-            if [ $? -ne 0 ]; then
-              echo "Error building $component"
-              exit 1
-            fi
-          done
-
-          echo "Build remaining packages"
-
-          ALL_COMPONENTS=$(find components -maxdepth 1 -mindepth 1 -type d -exec basename {} \;)
-
-          for component in $ALL_COMPONENTS; do
-            # Verificar si el componente ya fue construido
-            if [[ ! " ${ORDERED_COMPONENTS[@]} " =~ " $component " ]] && [[ ! " ${ORDERED_COMPONENTS[@]} " =~ " g-$component " ]]; then
-              echo "Building @flash-global66/$component"
-              yarn build $component
-            fi
-          done
-
-          echo "All components built successfully"
-
+      # Pasos específicos para despliegue
       - name: Build Storybook
-        id: build
+        if: matrix.task == 'deploy'
+        id: build-storybook
         run: yarn build-storybook
         
       - name: Check build output
+        if: matrix.task == 'deploy'
         run: |
           if [ ! -d "./storybook-static" ]; then
             echo "::error::La carpeta de build no existe"
@@ -222,9 +167,11 @@ jobs:
           fi
 
       - name: Create .nojekyll file
+        if: matrix.task == 'deploy'
         run: touch ./storybook-static/.nojekyll
 
       - name: Deploy to GitHub Pages
+        if: matrix.task == 'deploy'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -233,9 +180,9 @@ jobs:
           publish_branch: gh-pages
 
       - name: Notify success
-        if: success()
+        if: matrix.task == 'deploy' && success()
         run: echo "✅ Storybook desplegado exitosamente en https://flash-global66.github.io/global66-design-system/"
 
       - name: Notify failure
-        if: failure()
+        if: matrix.task == 'deploy' && failure()
         run: echo "❌ Falló el despliegue de Storybook"
