@@ -23,8 +23,6 @@
   "scripts": {
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
-    "dev": "npx lerna run dev --parallel",
-    "clean": "npx lerna clean",
     "diff": "npx lerna diff",
     "compare-versions": "bash ./scripts-terminal/generate-versions-local.sh && bash ./scripts-terminal/compare-versions.sh",
     "sync-versions": "bash ./scripts-terminal/sync-versions.sh",
