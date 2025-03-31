@@ -28,7 +28,7 @@
     "sync-versions": "bash ./scripts-terminal/sync-versions.sh",
     "reset-tags": "bash ./scripts-terminal/reset-tags.sh",
     "build": "node scripts/build-components.js",
-    "build:types": "npx lerna run build:types --scope \"@flash-global66/ui-*\"",
+    "build:types": "npx lerna run build:types --scope \"@flash-global66/g-*\"",
     "publish": "npx lerna publish",
     "build:publish": "yarn build && yarn publish"
   },
@@ -67,7 +67,7 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "babel-loader": "^8.2.5",
     "jest-mock": "^28.1.0",
-    "lerna": "^8.1.9",
+    "lerna": "^8.2.1",
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.79.4",
     "storybook": "^8.4.7",
