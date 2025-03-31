@@ -3,7 +3,7 @@ import {
   withNoopInstall,
   SFCWithInstall,
 } from "element-plus/es/utils/index.mjs";
-import Input from './src/Input.vue'
+import Input from "./src/input.vue";
 export const GInput: SFCWithInstall<typeof Input> & {
   Input: typeof Input;
 } = withInstall(Input, {
