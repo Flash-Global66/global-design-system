@@ -136,6 +136,9 @@ jobs:
           echo "LOCAL_TAGS=$(git tag --list | jq -R -s -c 'split("\n")')" >> $GITHUB_OUTPUT
           echo "✅ Tags existentes verificados"
 
+      - name: discard yarn.lock
+        run: git checkout -- yarn.lock
+
       - name: Version packages with Lerna
         if: steps.detect-changes.outputs.NO_CHANGES != 'true'
         id: version
