@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref, reactive, computed, watch } from "vue";
-import { FormInstance, GForm, GFormItem } from "@flash-global66/g-form/index.ts";
-import { GInput } from "@flash-global66/g-input/index.ts";
-import { GConfigProvider } from "../components/config-provider";
-import { GButton } from "@flash-global66/g-button/index.ts";
-import { GSelect } from "@flash-global66/g-select/index.ts";
-import { GRadio } from "@flash-global66/g-radio/index.ts";
-import { GCheckbox } from "@flash-global66/g-checkbox/index.ts";
+import { FormInstance, GForm, GFormItem } from "@flash-global66/g-form";
+import { GInput } from "@flash-global66/g-input";
+import { GConfigProvider } from "@flash-global66/g-config-provider";
+import { GButton } from "@flash-global66/g-button";
+import { GSelect } from "@flash-global66/g-select";
+import { GRadio } from "@flash-global66/g-radio";
+import { GCheckbox } from "@flash-global66/g-checkbox";
 
 const meta: Meta<FormInstance> = {
   title: "Form/Form",
