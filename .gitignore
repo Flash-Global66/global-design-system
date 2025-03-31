@@ -10,7 +10,6 @@ registry_versions.txt
 
 .npmrc
 .env
-yarn.lock
 
 backups-temporal/
 
