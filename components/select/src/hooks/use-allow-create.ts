@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import { useProps } from './useProps'
+import { useProps } from './use-props'
 import type { ISelectProps } from '../types/token'
 import type { Option, SelectStates } from '../types/select.types'
 

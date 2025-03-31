@@ -34,8 +34,8 @@
 <script lang="ts">
 import { defineComponent, inject } from 'vue'
 import { useNamespace } from 'element-plus'
-import { useOption } from './hooks/useOption'
-import { useProps } from './hooks/useProps'
+import { useOption } from './hooks/use-option'
+import { useProps } from './hooks/use-props'
 import { OptionProps, optionEmits } from './defaults'
 import { selectV2InjectionKey } from './types/token'
 import { GIconFont } from '@flash-global66/g-icon-font'

@@ -7,7 +7,7 @@ import { useNamespace } from 'element-plus'
 import { EVENT_CODE } from 'element-plus/es/constants/index.mjs'
 import GroupItem from './group-item.vue'
 import OptionItem from './option-item.vue'
-import { useProps } from './hooks/useProps'
+import { useProps } from './hooks/use-props'
 
 import { selectV2InjectionKey } from './types/token'
 

@@ -9,10 +9,10 @@ import {
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from 'element-plus/es/constants/index.mjs'
 import { useTooltipContentProps } from 'element-plus'
 import { tagProps } from '@flash-global66/g-tag'
-import { defaultProps } from './hooks/useProps'
+import { defaultProps } from './hooks/use-props'
 
 import type { Option, OptionType } from './types/select.types'
-import type { Props } from './hooks/useProps'
+import type { Props } from './hooks/use-props'
 import type { EmitFn } from 'element-plus/es/utils/vue/typescript'
 import type { ExtractPropTypes } from 'vue'
 import type { Options, Placement, PopperEffect } from 'element-plus/es/components/popper'
