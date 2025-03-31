@@ -1,35 +1,40 @@
 <template>
-  <div
-    v-if="options.length"
-    :class="segmentedCls"
-    :id="inputId"
-    ref="segmentedRef"
-    role="radiogroup"
-    :aria-label="!isLabeledByFormItem ? ariaLabel || 'segmented' : undefined"
-    :aria-labelledby="isLabeledByFormItem ? formItem!.labelId : undefined"
-  >
-    <div :class="[ns.e('group')]">
-      <div
-        :style="selectedStyle"
-        :class="selectedCls"
-      />
-      <label
-        v-for="(item, index) in options"
-        :key="index"
-        :class="getItemCls(item)"
-      >
-        <input
-          :class="ns.e('item-input')"
-          type="radio"
-          :name="name"
-          :disabled="getDisabled(item)"
-          :checked="getSelected(item)"
-          @change="handleChange(item)"
+  <div class="flex flex-col gap-xs">
+    <div
+      v-if="options.length"
+      :class="segmentedCls"
+      :id="inputId"
+      ref="segmentedRef"
+      role="radiogroup"
+      :aria-label="!isLabeledByFormItem ? ariaLabel || 'segmented' : undefined"
+      :aria-labelledby="isLabeledByFormItem ? formItem!.labelId : undefined"
+    >
+      <div :class="[ns.e('group')]">
+        <div
+          :style="selectedStyle"
+          :class="selectedCls"
         />
-        <div :class="ns.e('item-label')">
-          <slot :item="item">{{ getLabel(item) }}</slot>
-        </div>
-      </label>
+        <label
+          v-for="(item, index) in options"
+          :key="index"
+          :class="getItemCls(item)"
+        >
+          <input
+            :class="ns.e('item-input')"
+            type="radio"
+            :name="name"
+            :disabled="getDisabled(item)"
+            :checked="getSelected(item)"
+            @change="handleChange(item)"
+          />
+          <div :class="ns.e('item-label')">
+            <slot :item="item">{{ getLabel(item) }}</slot>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div v-if="hasHelpInfo" :class="helpTextKls">
+      <p v-if="isError">{{ error }}</p>
     </div>
   </div>
 </template>
@@ -72,6 +77,24 @@ const state = reactive({
   translateX: 0,
   translateY: 0,
   focusVisible: false,
+})
+
+const isError = computed(() => formItem?.shouldShowErrorChild || Boolean(props?.messageError))
+
+const helpTextKls = computed(() => [
+  ns.e('help'),
+  {
+    [ns.e('help-error')]: isError.value
+  }
+])
+
+const error = computed(() => {
+  if (props?.messageError) return props.messageError
+  return formItem?.validateMessage
+})
+
+const hasHelpInfo = computed(() => {
+  return error.value || formItem?.$el
 })
 
 const handleChange = (item: OptionSegmented) => {

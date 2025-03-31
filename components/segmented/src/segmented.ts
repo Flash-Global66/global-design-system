@@ -25,7 +25,7 @@ export const segmentedProps = buildProps({
    * @description binding value
    */
   modelValue: {
-    type: [String, Number, Boolean],
+    type: [String, Number, Boolean, null],
     default: undefined,
   },
   /**
@@ -46,6 +46,10 @@ export const segmentedProps = buildProps({
   validateEvent: {
     type: Boolean,
     default: true,
+  },
+  messageError: {
+    type: String,
+    default: ""
   },
   /**
    * @description native input id

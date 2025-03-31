@@ -8,6 +8,15 @@
 .gui-segmented {
   @apply bg-blue-50 p-2 rounded-lg;
 
+  &__help {
+    @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
+    min-height: 18px;
+  }
+
+  &__help-error {
+    @apply text-error-txt;
+  }
+
   &__item {
     @apply text-nightBlue-900 p-4 font-normal transition-all duration-200 rounded-md cursor-pointer;
 
