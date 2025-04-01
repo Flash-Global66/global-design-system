@@ -33,7 +33,7 @@
     }
   }
 
-  @include e('md') {
+  @include e(md) {
     @apply h-[30px] py-xxs px-xs text-2 font-medium gap-xxs;
 
     @each $typeIcon in ('prefix-icon', 'suffix-icon') {
