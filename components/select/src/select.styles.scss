@@ -181,7 +181,7 @@
     }
   }
 
-  @include e('empty') {
+  @include e(empty) {
     @apply flex items-center justify-center flex-col py-md px-sm gap-xxs;
     @include m('title') {
       @apply text-4 text-secondary-txt font-semibold;
