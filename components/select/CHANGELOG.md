@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.0.9...@flash-global66/g-select@0.0.10) (2025-04-01)
+
+
+### Bug Fixes
+
+* **select:** Fix empty state style selector ([112e961](https://github.com/Flash-Global66/global-design-system/commit/112e961536a96c1ac830439e475dcc15e7b406ba))
+
+
+
+
+
 ## [0.0.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.0.8...@flash-global66/g-select@0.0.9) (2025-03-31)
 
 **Note:** Version bump only for package @flash-global66/g-select
