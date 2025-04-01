@@ -115,33 +115,57 @@ function sortComponentsByDependencies(components) {
   const visited = new Set();
   const temp = new Set();  // Para detectar ciclos
   const order = [];
+  let hasCycle = false;
+  let cycleComponents = [];
   
-  function visit(node) {
+  function visit(node, path = []) {
+    // Si ya visitamos este nodo y está en el resultado final, no hay problema
+    if (visited.has(node)) return true;
+    
+    // Si encontramos el nodo en el camino actual, tenemos un ciclo
     if (temp.has(node)) {
-      console.warn(`⚠️ Ciclo de dependencias detectado con ${node}`);
-      return;
+      hasCycle = true;
+      // Encontrar el ciclo para reportarlo
+      const cycleStart = path.indexOf(node);
+      cycleComponents = path.slice(cycleStart).concat(node);
+      return false;
     }
     
-    if (visited.has(node)) return;
-    
+    // Marcar como visitado temporalmente
     temp.add(node);
+    const currentPath = [...path, node];
     
     // Visitar primero todas las dependencias
-    (dependencyMap[node] || []).forEach(dep => {
-      visit(dep);
-    });
+    for (const dep of (dependencyMap[node] || [])) {
+      if (!visit(dep, currentPath)) {
+        return false; // Propagar el error de ciclo
+      }
+    }
     
+    // Quitar del camino actual
     temp.delete(node);
+    
+    // Marcar como completamente visitado y agregar al resultado
     visited.add(node);
     order.push(node);
+    return true;
   }
   
   // Visitar todos los nodos
-  components.forEach(component => {
-    if (!visited.has(component)) {
-      visit(component);
+  for (const component of components) {
+    if (!visited.has(component) && !hasCycle) {
+      if (!visit(component)) {
+        break; // Detener si encontramos un ciclo
+      }
     }
-  });
+  }
+  
+  // Si hay un ciclo, reportar error
+  if (hasCycle) {
+    const cycleStr = cycleComponents.join(" → ") + " → " + cycleComponents[0];
+    console.error(`❌ Error: Ciclo de dependencias detectado: ${cycleStr}`);
+    throw new Error(`Ciclo de dependencias detectado entre componentes: ${cycleStr}`);
+  }
   
   return order;
 }
