@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.0.10...@flash-global66/g-select@0.0.11) (2025-04-01)
+
+
+### Bug Fixes
+
+* **select:** Update select styles to use element modifier syntax ([e657fca](https://github.com/Flash-Global66/global-design-system/commit/e657fca9d4f53d17df780d8c9583bec8fb0591af))
+
+
+
+
+
 ## [0.0.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.0.9...@flash-global66/g-select@0.0.10) (2025-04-01)
 
 
