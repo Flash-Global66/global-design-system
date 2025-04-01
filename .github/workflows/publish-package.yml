@@ -59,7 +59,7 @@ jobs:
         run: |
           echo "Building packages in specific order"
 
-          ORDERED_COMPONENTS=("form" "icon-font" "button")
+          ORDERED_COMPONENTS=("form" "icon-font" "button" "tag")
 
           for component in "${ORDERED_COMPONENTS[@]}"; do
             echo "Building @flash-global66/$component"
