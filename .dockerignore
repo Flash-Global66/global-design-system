@@ -22,9 +22,11 @@
 !tailwind.config.ts
 !vite.config.ts
 !tsconfig.json
+!vite.config.base.ts
 !lerna.json
 !.eslintrc.cjs
 !nginx.conf
+!scripts/
 
 # Excluir elementos sensibles/no necesarios (redundante pero claro)
 yarn.lock

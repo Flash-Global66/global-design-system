@@ -7,14 +7,6 @@
 # ---------------------------
 FROM node:23.6.1-alpine3.21 AS dev-builder
 
-# 1. Instalar herramientas como root
-RUN apk add --no-cache \
-    curl \
-    git \
-    bash \
-    openssh-client \
-    && rm -rf /var/cache/apk/*
-
 # 2. Configurar Corepack primero como root
 RUN corepack enable && corepack prepare yarn@latest --activate
 
@@ -29,28 +21,44 @@ ARG FONT_AWESOME_TOKEN
 ENV GBP_PACKAGE_TOKEN=$GBP_PACKAGE_TOKEN
 ENV FONT_AWESOME_TOKEN=$FONT_AWESOME_TOKEN
 
-# Configurar Yarn
-COPY .yarnrc.yml ./
-
-# Copiar dependencias primero para cache eficiente
-COPY package.json ./
+# Copiar archivos de configuración
+COPY .yarnrc.yml package.json lerna.json tsconfig.json vite.config.base.ts ./
 
 # Copiar carpetas necesarias para generar los workspaces de yarn
 COPY components/ components/
 COPY common/ common/
+COPY scripts/ scripts/
 
 # Instalar dependencias
 RUN corepack use yarn@latest
+
+# Crear el building de los componentes
+RUN yarn build
+
+# CMD [ "sleep", "infinity" ]
 
 # ---------------------------
 # Etapa final de desarrollo
 # ---------------------------
 FROM dev-builder AS development
 
-COPY --from=dev-builder /app/node_modules ./node_modules
-
 # Copiar código fuente
 COPY . .
+
+COPY --from=dev-builder /app/node_modules ./node_modules
+COPY --from=dev-builder /app/components ./components
+COPY --from=dev-builder /app/common ./common
+
+# Instalar herramientas como root
+RUN apk add --no-cache \
+    curl \
+    git \
+    bash \
+    openssh-client \
+    && rm -rf /var/cache/apk/*
+
+# Crear el building de los componentes
+RUN yarn build
 
 # Puertos y salud
 EXPOSE 6006
