@@ -1,4 +1,12 @@
-import GDatePicker from "./DatePicker.vue";
+import { withInstall } from "element-plus/es/utils/index";
+import DatePicker from "./src/DatePicker.vue";
 
+import type { SFCWithInstall } from "element-plus/es/utils/index";
 
-export { GDatePicker };
+export const GDatePicker: SFCWithInstall<typeof DatePicker> =
+  withInstall(DatePicker);
+
+export default GDatePicker;
+export * from "./src/constants";
+export * from "./src/props/date-picker";
+export type { DatePickerInstance } from "./src/instance";
