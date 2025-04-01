@@ -55,36 +55,18 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Create building of components
+      - name: Build all components
         run: |
-          echo "Building packages in specific order"
-
-          ORDERED_COMPONENTS=("form" "icon-font" "button" "tag")
-
-          for component in "${ORDERED_COMPONENTS[@]}"; do
-            echo "Building @flash-global66/$component"
-            yarn build $component
-            
-            # Verificar si la construcción fue exitosa
-            if [ $? -ne 0 ]; then
-              echo "Error building $component"
-              exit 1
-            fi
-          done
-
-          echo "Build remaining packages"
-
-          ALL_COMPONENTS=$(find components -maxdepth 1 -mindepth 1 -type d -exec basename {} \;)
-
-          for component in $ALL_COMPONENTS; do
-            # Verificar si el componente ya fue construido
-            if [[ ! " ${ORDERED_COMPONENTS[@]} " =~ " $component " ]] && [[ ! " ${ORDERED_COMPONENTS[@]} " =~ " g-$component " ]]; then
-              echo "Building @flash-global66/$component"
-              yarn build $component
-            fi
-          done
-
-          echo "All components built successfully"
+          echo "Building all components"
+          yarn build
+          
+          # Verificar si la construcción fue exitosa
+          if [ $? -ne 0 ]; then
+            echo "::error::Error building components"
+            exit 1
+          fi
+          
+          echo "✅ All components built successfully"
 
       # Pasos específicos para publicación
       - name: Check existing tags
