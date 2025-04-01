@@ -31,7 +31,8 @@
   "peerDependencies": {
     "@vueuse/core": "^12.4.0",
     "element-plus": "^2.9.0",
-    "vue": "^3.2.0"
+    "vue": "^3.2.0",
+    "@flash-global66/g-form": "^0.1.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }
