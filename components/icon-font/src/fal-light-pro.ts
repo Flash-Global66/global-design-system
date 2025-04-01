@@ -19,4 +19,9 @@ export {
   faComment,
   faStore,
   faPencil,
+  faTruckFast,
+  faWarehouseFull,
+  faBriefcase,
+  faChartSimple,
+  faDownToLine,
 } from '@fortawesome/pro-light-svg-icons';
