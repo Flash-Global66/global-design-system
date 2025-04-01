@@ -189,6 +189,11 @@ export const ICON_SETS = {
     'comment',
     'store',
     'pencil',
+    'truck-fast',
+    'warehouse-full',
+    'briefcase',
+    'chart-simple',
+    'down-to-line',
   ] as const,
 
   brands: [
