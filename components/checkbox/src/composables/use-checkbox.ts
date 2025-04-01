@@ -1,4 +1,4 @@
-import { useFormItem, useFormItemInputId } from '@flash-global66/b2b-ui-form'
+import { useFormItem, useFormItemInputId } from '@flash-global66/g-form'
 import { isArray } from 'element-plus/es/utils/index.mjs'
 import { useCheckboxDisabled } from './use-checkbox-disabled'
 import { useCheckboxEvent } from './use-checkbox-event'
