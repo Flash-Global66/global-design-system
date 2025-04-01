@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-tag@0.1.1...@flash-global66/g-tag@0.1.2) (2025-04-01)
+
+
+### Bug Fixes
+
+* **tag:** Update tag styles to use element modifier syntax ([b9c7c1d](https://github.com/Flash-Global66/global-design-system/commit/b9c7c1de97bb5757cbb8c6a933972b5f678ae094))
+
+
+
+
+
 ## [0.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-tag@0.1.0...@flash-global66/g-tag@0.1.1) (2025-04-01)
 
 **Note:** Version bump only for package @flash-global66/g-tag
