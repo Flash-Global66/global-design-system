@@ -2,7 +2,7 @@ import { StoryObj } from '@storybook/vue3'
 import { reactive } from 'vue'
 
 // COMPONENTS
-import { GTag, TagInstance } from '../components/tag'
+import { GTag, TagInstance } from '@flash-global66/g-tag'
 
 // CONFIG
 import { GConfigProvider } from '../components/config-provider'
@@ -199,6 +199,7 @@ export const Basic: Story = {
       <g-config-provider>
         <div class="flex flex-col gap-4">
           <g-tag v-bind="args" />
+          <span class="prueba33">Texto de prueba</span>
         </div>
       </g-config-provider>
     `

@@ -56,10 +56,11 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useNamespace } from 'element-plus/es/hooks/index'
+import type { VNode } from 'vue'
+
+import { useNamespace } from 'element-plus'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { tagEmits, tagProps } from './tag'
-import type { VNode } from 'vue'
 
 defineOptions({
   name: 'GTag'
@@ -68,6 +69,7 @@ const props = defineProps(tagProps)
 const emit = defineEmits(tagEmits)
 
 const ns = useNamespace('tag')
+
 const containerKls = computed(() => {
   const { type, effect, closable, size } = props
   return [

@@ -289,7 +289,7 @@ import { SelectProps, selectEmits } from './defaults'
 import { selectV2InjectionKey } from './types/token'
 
 export default defineComponent({
-  name: 'GuiSelect',
+  name: 'GSelect',
   components: {
     ElSelectMenu,
     GTag,

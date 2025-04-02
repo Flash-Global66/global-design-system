@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref, reactive } from 'vue'
-import { GFormItem, GForm, FormItemInstance } from '@flash-global66/g-form/index.ts'
-import { GInput } from '@flash-global66/g-input/index.ts'
-import { GSelect } from '@flash-global66/g-select/index.ts'
-import { GButton } from '@flash-global66/g-button/index.ts'
+import { GFormItem, GForm, FormItemInstance } from '@flash-global66/g-form'
+import { GInput } from '@flash-global66/g-input'
+import { GSelect } from '@flash-global66/g-select'
+import { GButton } from '@flash-global66/g-button'
 import { GConfigProvider } from '../components/config-provider'
 
 const meta: Meta<FormItemInstance> = {
