@@ -17,10 +17,6 @@ RUN corepack enable && \
 
 WORKDIR /app
 
-# Copiar archivos necesarios para instalación de dependencias
-COPY .yarnrc.yml .
-COPY package.json .
-
 # Variables de entorno (usadas en build-time)
 ARG GBP_PACKAGE_TOKEN
 ARG FONT_AWESOME_TOKEN
@@ -33,6 +29,9 @@ COPY . .
 
 # Instalar dependencias con cache
 RUN yarn install
+
+# Crear el building de los componentes
+RUN yarn build
 
 # Construir Storybook
 RUN yarn build-storybook

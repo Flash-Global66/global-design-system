@@ -7,7 +7,7 @@ services:
         GBP_PACKAGE_TOKEN: ${GBP_PACKAGE_TOKEN}
         FONT_AWESOME_TOKEN: ${FONT_AWESOME_TOKEN}
     ports:
-      - "8080:80"
+      - "80:80"
     networks:
       - storybook-net
 

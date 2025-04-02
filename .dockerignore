@@ -27,11 +27,11 @@
 !.eslintrc.cjs
 !nginx.conf
 !scripts/
+!.git
+!.gitignore
 
 # Excluir elementos sensibles/no necesarios (redundante pero claro)
 yarn.lock
-.git
-.gitignore
 .env*
 *.md
 LICENSE

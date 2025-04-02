@@ -35,8 +35,6 @@ RUN corepack use yarn@latest
 # Crear el building de los componentes
 RUN yarn build
 
-# CMD [ "sleep", "infinity" ]
-
 # ---------------------------
 # Etapa final de desarrollo
 # ---------------------------
