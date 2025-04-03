@@ -457,3 +457,79 @@ import { GImage } from '@flash-global66/g-image';
     `
   })
 };
+
+export const ErrorHandling: Story = {
+  name: 'Manejo de errores',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demostración de cómo el componente maneja los errores cuando una imagen no puede cargarse.'
+      },
+      source: {
+        code: `
+<!-- Ejemplo de manejo de errores -->
+<template>
+  <!-- Esta imagen no existe y mostrará el estado de error -->
+  <g-image name="non-existent-image" size="md" />
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+</script>
+`,
+        language: 'html'
+      }
+    }
+  },
+  render: () => ({
+    components: { GImage, GConfigProvider },
+    setup() {
+      
+      return {
+        IMAGE_SIZES
+      };
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-8">
+          <h3 class="text-lg font-medium mb-4">Manejo de errores de carga de imágenes</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Ejemplo 1: Imagen que no existe -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <g-image name="non-existent-image" size="md" />
+              <p class="mt-3 text-sm text-gray-600">Imagen inexistente</p>
+            </div>
+            
+            <!-- Ejemplo 2: Imagen con nombre incorrecto -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <g-image name="broken-image" size="md" />
+              <p class="mt-3 text-sm text-gray-600">Nombre incorrecto</p>
+            </div>
+            
+            <!-- Ejemplo 3: Diferentes tamaños con error -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <div class="grid grid-cols-3 gap-4">
+                <g-image name="missing-file" size="xs" />
+                <g-image name="missing-file" size="sm" />
+                <g-image name="missing-file" size="md" />
+              </div>
+              <p class="mt-3 text-sm text-gray-600">Diferentes tamaños</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 p-4 rounded-md mt-6">
+            <h4 class="font-medium mb-2">¿Cómo funciona?</h4>
+            <p class="text-sm text-gray-700">
+              Cuando una imagen no puede cargarse, el componente muestra automáticamente un estado de error con el código "404".
+              Este comportamiento se activa en dos casos:
+            </p>
+            <ul class="list-disc list-inside mt-2 text-sm text-gray-700">
+              <li>La URL de la imagen no puede construirse (nombre inválido)</li>
+              <li>La imagen existe pero no puede cargarse (error de red, archivo corrupto, etc.)</li>
+            </ul>
+          </div>
+        </div>
+      </g-config-provider>
+    `
+  })
+};
