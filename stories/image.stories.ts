@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref, computed, onMounted } from 'vue';
-import { GImage } from '@flash-global66/b2b-ui-image';
+import { GImage, IMAGE_NAMES, SIZE_MAP } from '@flash-global66/g-image/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
 import { GInput } from '@flash-global66/g-input';
 import { GButton } from '@flash-global66/g-button';
 import { GIconFont } from "@flash-global66/g-icon-font";
 import { GConfigProvider } from "../components/config-provider";
-import { SIZE_MAP, IMAGE_NAMES } from '@flash-global66/b2b-ui-image/src/constants/image.constants.ts';
 
 const meta: Meta<typeof GImage> = {
   title: 'Basic/Image',
