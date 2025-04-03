@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b(image) {
+  @apply block object-contain w-full h-full max-w-full max-h-full;
+  
+  @include e(container) {
+    @apply flex items-center justify-center box-border overflow-hidden;
+  }
+  
+  @include e(placeholder) {
+    @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full;
+  }
+}

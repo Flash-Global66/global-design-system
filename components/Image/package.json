@@ -1,0 +1,38 @@
+{
+  "name": "@flash-global66/b2b-ui-image",
+  "version": "0.0.1",
+  "description": "Componente de imágenes predefinidas con diferentes tamaños",
+  "author": "Global66",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/image.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts",
+    "assets"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}
