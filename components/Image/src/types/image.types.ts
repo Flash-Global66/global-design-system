@@ -9,7 +9,9 @@ export type ImageLazyLoad = boolean;
 
 export interface ImageState {
   isLoaded: Ref<boolean>;
+  hasError: Ref<boolean>;
   sizeValue: ComputedRef<string>;
   imageSrc: ComputedRef<string>;
   imageContainer: Ref<HTMLElement | null>;
+  handleImageError: () => void;
 }

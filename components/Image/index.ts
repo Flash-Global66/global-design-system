@@ -2,8 +2,8 @@ import GImage from "./src/Image.vue";
 import { useImage } from "./src/hooks/useImage";
 import { SIZE_MAP, IMAGE_NAMES } from './src/constants/image.constants';
 import type { ImageName, ImageSize, ImageState } from './src/types/image.types';
-import { imageProps, validateImageProps } from './src/utils/image.props';
-import type { ImageProps } from './src/utils/image.props';
+import { imageProps, validateImageProps } from './src/image.props';
+import type { ImageProps } from './src/image.props';
 
 export { 
   GImage,

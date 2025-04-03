@@ -1,6 +1,6 @@
 import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
-import { ImageProps } from '../utils/image.props';
+import { ImageProps } from '../image.props';
 import { SIZE_MAP } from '../constants/image.constants';
 import { ImageState } from '../types/image.types';
 
@@ -11,12 +11,24 @@ import { ImageState } from '../types/image.types';
  */
 export const useImage = (props: ImageProps): ImageState => {
   const isLoaded = ref<boolean>(false);
+  const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
   let stopObserver: Function | null = null;
   
   const sizeValue = computed<string>(() => SIZE_MAP[props.size as keyof typeof SIZE_MAP]);
   
-  const imageSrc = computed<string>(() => new URL(`../../assets/illustrations/${props.name}.webp`, import.meta.url).href);
+  const imageSrc = computed<string>(() => {
+    try {
+      return new URL(`../../assets/illustrations/${props.name}.webp`, import.meta.url).href;
+    } catch (error) {
+      hasError.value = true;
+      return '';
+    }
+  });
+
+  const handleImageError = (): void => {
+    hasError.value = true;
+  };
 
   const loadImage = (): void => {
     isLoaded.value = true;
@@ -70,10 +82,9 @@ export const useImage = (props: ImageProps): ImageState => {
   return {
     sizeValue,
     isLoaded,
+    hasError,
     imageSrc,
-    imageContainer
+    imageContainer,
+    handleImageError
   };
-
-
-
 };
