@@ -738,9 +738,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-image@workspace:components/Image":
+"@flash-global66/g-image@workspace:components/image":
   version: 0.0.0-use.local
-  resolution: "@flash-global66/g-image@workspace:components/Image"
+  resolution: "@flash-global66/g-image@workspace:components/image"
   peerDependencies:
     vue: ^3.2.0
   languageName: unknown
