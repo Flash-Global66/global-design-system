@@ -42,7 +42,7 @@ export const IMAGE_NAMES = [
   'wrench'
 ] as const;
 
-export const SIZE_MAP = {
+export const IMAGE_SIZES = {
   'xs': '44px',
   'sm': '64px',
   'md': '80px',

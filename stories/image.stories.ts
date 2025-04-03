@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref, computed, onMounted } from 'vue';
-import { GImage, IMAGE_NAMES, SIZE_MAP } from '@flash-global66/g-image/index.ts';
+import { GImage, IMAGE_NAMES, IMAGE_SIZES } from '@flash-global66/g-image/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
 import { GInput } from '@flash-global66/g-input';
 import { GButton } from '@flash-global66/g-button';
@@ -80,7 +80,7 @@ Para añadir nuevas imágenes al componente:
    - Ejemplo: Añade 'new-illustration' al array \`IMAGE_NAMES\`
 
 3. **Construir el componente**
-   - Ejecuta \`yarn build-image-component\` para actualizar el componente
+   - Ejecuta \`yarn build image\` para actualizar el componente
 
 ## Tipado estricto y autocompletado
 El componente utiliza TypeScript para proporcionar tipado estricto, lo que permite:
@@ -104,7 +104,7 @@ El componente utiliza TypeScript para proporcionar tipado estricto, lo que permi
     size: {
       description: 'Tamaño de la ilustración',
       control: 'select',
-      options: Object.keys(SIZE_MAP),
+      options: Object.keys(IMAGE_SIZES),
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'md' },
@@ -168,11 +168,11 @@ export const Sizes: Story = {
   render: (args) => ({
     components: { GImage, GConfigProvider },
     setup() {
-      const sizes = Object.keys(SIZE_MAP);
+      const sizes = Object.keys(IMAGE_SIZES);
       return { 
         args, 
         sizes,
-        SIZE_MAP
+        IMAGE_SIZES
       };
     },
     template: `
@@ -181,10 +181,10 @@ export const Sizes: Story = {
           <div v-for="size in sizes" :key="size" class="flex flex-col items-center">
             <!-- Contenedor con altura y anchura fijas basadas en el tamaño -->
             <div class="flex items-center justify-center" 
-                 :style="{ width: SIZE_MAP[size], height: SIZE_MAP[size], minHeight: SIZE_MAP[size], minWidth: SIZE_MAP[size] }">
+                 :style="{ width: IMAGE_SIZES[size], height: IMAGE_SIZES[size], minHeight: IMAGE_SIZES[size], minWidth: IMAGE_SIZES[size] }">
               <g-image v-bind="args" :size="size" />
             </div>
-            <span class="mt-2 text-sm text-gray-500">{{ size }} ({{ SIZE_MAP[size] }})</span>
+            <span class="mt-2 text-sm text-gray-500">{{ size }} ({{ IMAGE_SIZES[size] }})</span>
           </div>
         </div>
       </g-config-provider>
@@ -290,7 +290,7 @@ import { GImage } from '@flash-global66/g-image';
       const searchTerm = ref('');
       const copiedImage = ref<string | null>(null);
       
-      const sizeOptions = Object.keys(SIZE_MAP).map(size => ({
+      const sizeOptions = Object.keys(IMAGE_SIZES).map(size => ({
         label: size.toUpperCase(),
         value: size
       }));
@@ -380,7 +380,7 @@ import { GImage } from '@flash-global66/g-image';
 
       return {
         IMAGE_NAMES,
-        SIZE_MAP,
+        IMAGE_SIZES,
         selectedSize,
         sizeOptions,
         searchTerm,
@@ -434,10 +434,10 @@ import { GImage } from '@flash-global66/g-image';
               <!-- Contenedor mejorado con dimensiones fijas para que no se corten las imágenes -->
               <div class="flex items-center justify-center mb-2 overflow-visible" 
                    :style="{ 
-                     width: SIZE_MAP[selectedSize], 
-                     height: SIZE_MAP[selectedSize], 
-                     minHeight: SIZE_MAP[selectedSize],
-                     minWidth: SIZE_MAP[selectedSize]
+                     width: IMAGE_SIZES[selectedSize], 
+                     height: IMAGE_SIZES[selectedSize], 
+                     minHeight: IMAGE_SIZES[selectedSize],
+                     minWidth: IMAGE_SIZES[selectedSize]
                    }">
                 <g-image :name="name" :size="selectedSize" />
               </div>

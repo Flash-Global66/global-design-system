@@ -1,7 +1,7 @@
 import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { ImageProps } from '../image.props';
-import { SIZE_MAP } from '../constants/image.constants';
+import { IMAGE_SIZES } from '../constants/image.constants';
 import { ImageState } from '../types/image.types';
 
 /**
@@ -15,7 +15,7 @@ export const useImage = (props: ImageProps): ImageState => {
   const imageContainer = ref<HTMLElement | null>(null);
   let stopObserver: Function | null = null;
   
-  const sizeValue = computed<string>(() => SIZE_MAP[props.size as keyof typeof SIZE_MAP]);
+  const sizeValue = computed<string>(() => IMAGE_SIZES[props.size as keyof typeof IMAGE_SIZES]);
   
   const imageSrc = computed<string>(() => {
     try {

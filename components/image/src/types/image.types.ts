@@ -1,9 +1,9 @@
 import { Ref, ComputedRef } from 'vue';
-import { IMAGE_NAMES, SIZE_MAP } from '../constants/image.constants';
+import { IMAGE_NAMES, IMAGE_SIZES } from '../constants/image.constants';
 
 export type ImageName = typeof IMAGE_NAMES[number];
 
-export type ImageSize = keyof typeof SIZE_MAP;
+export type ImageSize = keyof typeof IMAGE_SIZES;
 
 export type ImageLazyLoad = boolean;
 
