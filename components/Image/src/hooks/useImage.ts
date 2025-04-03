@@ -19,7 +19,7 @@ export const useImage = (props: ImageProps): ImageState => {
   
   const imageSrc = computed<string>(() => {
     try {
-      return new URL(`../../assets/illustrations/${props.name}.webp`, import.meta.url).href;
+      return new URL(`../assets/illustrations/${props.name}.webp`, import.meta.url).href;
     } catch (error) {
       hasError.value = true;
       return '';

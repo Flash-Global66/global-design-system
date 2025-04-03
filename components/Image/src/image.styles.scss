@@ -12,6 +12,25 @@
   }
   
   @include e(placeholder) {
-    @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full;
+    @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full text-center p-2 text-terciary-txt;
+
+    &.text-size-xs,
+    &.text-size-sm {
+      @apply text-2;
+    }
+    
+    &.text-size-md {
+      @apply text-3;
+    }
+    
+    &.text-size-lg,
+    &.text-size-xl {
+      @apply text-4;
+    }
+    
+    &.text-size-xxl,
+    &.text-size-xxxl {
+      @apply text-10;
+    }
   }
-}
+};

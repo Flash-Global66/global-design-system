@@ -19,8 +19,7 @@
   "files": [
     "dist",
     "src",
-    "index.ts",
-    "assets"
+    "index.ts"
   ],
   "scripts": {
     "build": "vite build",

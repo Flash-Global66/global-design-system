@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <figure 
     :class="ns.b('container')" 
     ref="imageContainer"
     :style="{
@@ -10,21 +10,33 @@
     }"
   >
     <img 
-      v-if="isLoaded"
+      v-if="isLoaded && !hasError"
       :src="imageSrc" 
       :alt="name" 
       :class="ns.b()"
+      @error="handleImageError"
+    />
+    <div 
+      v-else-if="!hasError"
+      :class="ns.e('placeholder')"
+      role="img"
+      :aria-label="`Cargando imagen: ${name}`"
     />
     <div 
       v-else
-      :class="ns.e('placeholder')"
-    ></div>
-  </div>
+      :class="[ns.e('placeholder'), `text-size-${size}`]"
+      role="img"
+      aria-label="Error al cargar la imagen"
+    >
+      404
+    </div>
+  </figure>
 </template>
+
 
 <script setup lang="ts">
 import { useNamespace } from "element-plus";
-import { imageProps, validateImageProps } from './utils/image.props';
+import { imageProps, validateImageProps } from './image.props';
 import { useImage } from './hooks/useImage';
 
 const props = defineProps(imageProps);
@@ -37,6 +49,8 @@ const {
   sizeValue,
   isLoaded,
   imageSrc,
-  imageContainer
+  imageContainer,
+  handleImageError,
+  hasError
 } = useImage(props);
 </script>
