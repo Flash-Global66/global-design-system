@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { useNamespace } from "element-plus";
 import { imageProps, validateImageProps } from './image.props';
-import { useImage } from './hooks/useImage';
+import { useImage } from './hooks/use-image';
 
 const props = defineProps(imageProps);
 
