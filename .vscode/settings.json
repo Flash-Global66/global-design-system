@@ -10,6 +10,5 @@
     "tailwindcss",
     "vitejs",
     "xsmall"
-  ],
-  "postman.settings.dotenv-detection-notification-visibility": false
+  ]
 }
