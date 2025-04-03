@@ -48,6 +48,6 @@ export const SIZE_MAP = {
   'md': '80px',
   'lg': '112px',
   'xl': '160px',
-  'xxl': '208px',
-  'xxxl': '260px',
+  '2xl': '208px',
+  '3xl': '260px',
 } as const;

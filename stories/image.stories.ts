@@ -27,7 +27,7 @@ El componente Image proporciona una manera sencilla y optimizada de mostrar ilus
 ## Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-image
+yarn add @flash-global66/g-image
 \`\`\`
 
 ## Dependencias
@@ -38,7 +38,7 @@ Este componente requiere:
 Para que el componente funcione correctamente, es necesario importar los estilos SASS:
 
 \`\`\`scss
-@use "@flash-global66/b2b-ui-image/image.styles.scss";
+@use "@flash-global66/g-image/styles.scss";
 \`\`\`
 
 ## Uso básico
@@ -49,7 +49,7 @@ Para que el componente funcione correctamente, es necesario importar los estilos
 </template>
 
 <script setup>
-import { GImage } from '@flash-global66/b2b-ui-image';
+import { GImage } from '@flash-global66/g-image';
 </script>
 \`\`\`
 
@@ -59,8 +59,8 @@ import { GImage } from '@flash-global66/b2b-ui-image';
 - **md**: 80x80 px (predeterminado)
 - **lg**: 112x112 px
 - **xl**: 160x160 px
-- **xxl**: 208x208 px
-- **xxxl**: 260x260 px
+- **2xl**: 208x208 px
+- **3xl**: 260x260 px
 
 ## Optimizaciones de rendimiento
 ### Lazy Loading
@@ -154,7 +154,7 @@ export const Primary: Story = {
 </template>
 
 <script setup>
-import { GImage } from '@flash-global66/b2b-ui-image';
+import { GImage } from '@flash-global66/g-image';
 </script>
 `,
         language: 'html'
@@ -219,7 +219,7 @@ export const Sizes: Story = {
 </template>
 
 <script setup>
-import { GImage } from '@flash-global66/b2b-ui-image';
+import { GImage } from '@flash-global66/g-image';
 </script>
 `,
         language: 'html'
@@ -249,11 +249,11 @@ export const Gallery: Story = {
 </template>
 
 <script setup>
-import { GImage } from '@flash-global66/b2b-ui-image';
+import { GImage } from '@flash-global66/g-image';
 
 // Todos los nombres de imágenes disponibles
 // Puedes importar la constante IMAGE_NAMES desde el paquete
-// import { IMAGE_NAMES } from '@flash-global66/b2b-ui-image';
+// import { IMAGE_NAMES } from '@flash-global66/g-image';
 </script>
 
 <style scoped>
