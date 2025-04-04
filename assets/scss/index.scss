@@ -11,6 +11,7 @@
 @use "@flash-global66/g-form/styles.scss" as *;
 @use "@flash-global66/g-button/styles.scss" as *;
 @use "@flash-global66/g-tag/styles.scss" as *;
+/* @use "@flash-global66/g-tooltip/styles.scss" as *; */
 
 @use "../../components/dialog/dialog.styles.scss" as *;
 @use "../../components/pagination/pagination.styles.scss" as *;
@@ -29,6 +30,7 @@
 @use "../../components/inline/inline.styles.scss" as *;
 @use "../../components/link/src/link.styles.scss" as *;
 @use "../../components/switch/switch.styles.scss" as *;
+@use "../../components/tooltip/src/tooltip.styles.scss" as *;
 
 @use "@flash-global66/g-segmented/styles.scss" as *;
 

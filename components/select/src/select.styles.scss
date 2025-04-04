@@ -5,7 +5,7 @@
 @use 'element-plus/theme-chalk/src/virtual-list.scss' as *;
 @use 'element-plus/theme-chalk/src/option.scss' as *;
 @use 'element-plus/theme-chalk/src/tooltip-v2.scss' as *;
-@use "element-plus/theme-chalk/src/popper.scss" as *;
+@use 'element-plus/theme-chalk/src/popper.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/mixins' as *;
 @use 'element-plus/theme-chalk/src/mixins/utils' as *;
 @use 'element-plus/theme-chalk/src/mixins/var' as *;
@@ -122,9 +122,18 @@
     }
   }
 
+  @include e('popper') {
+    & .gui-popper__arrow {
+      @apply left-5 shadow-none !important;
+      &::before {
+        @apply bg-white !important;
+      }
+    }
+  }
+
   &__input-wrapper:not(.withIcon) {
     @apply relative right-[7px];
-    @include when(withIcon){
+    @include when(withIcon) {
       @apply right-0;
     }
   }
@@ -189,12 +198,5 @@
     @include m('description') {
       @apply text-3 text-terciary-txt font-medium text-pretty;
     }
-  }
-}
-
-@include b('popper') {
-  background-color: #000;
-  @include e('arrow') {
-    @apply left-5 shadow-none !important;
   }
 }

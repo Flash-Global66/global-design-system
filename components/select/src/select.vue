@@ -7,7 +7,7 @@
       @mouseenter="states.inputHovering = true"
       @mouseleave="states.inputHovering = false"
     >
-      <el-tooltip
+      <g-tooltip
         ref="tooltipRef"
         :visible="dropdownMenuVisible"
         :teleported="teleported"
@@ -265,7 +265,7 @@
             </template>
           </el-select-menu>
         </template>
-      </el-tooltip>
+      </g-tooltip>
     </div>
     <div v-if="hasHelpInfo" :class="[nsSelect.e('help')]">
       <p :key="selectError ? 'error' : 'help'" :class="helpTextKls">
@@ -279,7 +279,7 @@
 import { computed, defineComponent, provide, reactive, toRefs, useSlots } from 'vue'
 import { isArray } from 'element-plus/es/utils/index.mjs'
 import { ClickOutside } from 'element-plus'
-import { ElTooltip } from 'element-plus'
+import { GTooltip } from '@flash-global66/g-tooltip'
 import { GTag } from '@flash-global66/g-tag'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { useCalcInputWidth } from 'element-plus'
@@ -293,7 +293,7 @@ export default defineComponent({
   components: {
     ElSelectMenu,
     GTag,
-    ElTooltip,
+    GTooltip,
     GIconFont
   },
   directives: { ClickOutside },
