@@ -853,6 +853,7 @@ __metadata:
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.0.8
     "@flash-global66/g-tag": ^0.1.2
+    "@flash-global66/g-tooltip": ^0.0.1
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
@@ -889,6 +890,16 @@ __metadata:
 "@flash-global66/g-teleport@workspace:components/teleport":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-teleport@workspace:components/teleport"
+  languageName: unknown
+  linkType: soft
+
+"@flash-global66/g-tooltip@workspace:components/tooltip":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-tooltip@workspace:components/tooltip"
+  peerDependencies:
+    "@flash-global66/g-icon-button": ^0.0.7
+    element-plus: ^2.9.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 

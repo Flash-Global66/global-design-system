@@ -32,6 +32,7 @@
     "@flash-global66/g-form": "^0.1.0",
     "@flash-global66/g-icon-font": "^0.0.8",
     "@flash-global66/g-tag": "^0.1.2",
+    "@flash-global66/g-tooltip": "^0.0.1",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },

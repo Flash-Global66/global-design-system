@@ -44,7 +44,7 @@ Este componente requiere:
 
 > - @flash-global66/g-tag
 > - @flash-global66/g-icon-font
-> - element-plus/es/components/tooltip/index <span style="color: rgb(227 83 83);font-size: 13px;">(se necesita crear @flash-global66/g-tooltip)</span>
+> - @flash-global66/g-tooltip
 
 📥 **Importación básica**
 

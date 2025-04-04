@@ -3,9 +3,9 @@ import { buildProps, debugWarn, isBoolean, isString } from "element-plus/es/util
 import type {
   IconButtonSize,
   IconButtonVariant,
-  IconButtonName,
   IconBorder
 } from "./icon-button.type";
+import { IconString } from '@flash-global66/g-icon-font'
 
 export const iconButtonProps = buildProps({
   /**
@@ -68,7 +68,7 @@ export const iconButtonProps = buildProps({
    * @example 'solid check', 'regular user'
    */
   icon: {
-    type: String as PropType<IconButtonName>,
+    type: String as PropType<IconString>,
     default: "solid check",
   },
   /**
