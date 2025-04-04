@@ -105,7 +105,7 @@ import {
 import { useResizeObserver } from "@vueuse/core";
 import { GIconFont } from "@flash-global66/g-icon-font";
 import { isNil } from "lodash-unified";
-import { useFormItem, useFormItemInputId, useFormDisabled } from '@flash-global66/g-form/index.js';
+import { useFormItem, useFormItemInputId, useFormDisabled } from '@flash-global66/g-form';
 
 import {
   useAttrs,

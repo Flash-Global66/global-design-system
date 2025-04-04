@@ -1,4 +1,4 @@
-import { ButtonSize } from '@flash-global66/b2b-ui-button';
+import { ButtonSize } from '@flash-global66/g-button';
 
 type AlertType = 'success' | 'warning' | 'error' | 'info' | 'important' | 'custom' | undefined;
 

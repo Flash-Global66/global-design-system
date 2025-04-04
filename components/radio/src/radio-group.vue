@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, provide, reactive, ref, toRefs, watch } from 'vue'
-import { useFormItem, useFormItemInputId } from '@flash-global66/g-form/index.js'
+import { useFormItem, useFormItemInputId } from '@flash-global66/g-form'
 import { UPDATE_MODEL_EVENT, useId, useNamespace } from 'element-plus'
 import { debugWarn } from 'element-plus/es/utils/index.mjs'
 import { radioGroupEmits, radioGroupProps } from './radio-group'

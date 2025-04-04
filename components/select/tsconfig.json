@@ -1,19 +1,19 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declarationDir": "dist/types",
-    "outDir": "dist",
-    "rootDir": "",
+    "declarationDir": "./dist/types",
+    "outDir": "./dist",
+    "rootDir": "./",
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "types": ["vue", "node"]
   },
   "include": [
-    "**/*.ts",
-    "**/*.d.ts",
-    "**/*.tsx",
-    "**/*.vue"
+    "./**/*.ts",
+    "./**/*.d.ts",
+    "./**/*.tsx",
+    "./**/*.vue"
   ],
   "exclude": ["dist", "vite.config.ts"]
 }

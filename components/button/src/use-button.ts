@@ -1,6 +1,6 @@
 import { computed, ref } from "vue";
 import type { SetupContext } from "vue";
-import { useFormItem } from '@flash-global66/g-form/index.js';
+import { useFormItem } from '@flash-global66/g-form';
 import { ButtonEmits, ButtonProps } from "./button";
 import { useRipple } from "./use-ripple";
 

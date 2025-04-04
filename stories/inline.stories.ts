@@ -24,14 +24,14 @@ const meta: Meta<typeof GInline> = {
 ### Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-inline
+yarn add @flash-global66/g-inline
 \`\`\`
 
 ### Importación
 
 \`\`\`typescript
-import { GInline } from '@flash-global66/b2b-ui-framework'
-import '@flash-global66/b2b-ui-inline/inline.styles.scss'
+import { GInline } from '@flash-global66/g-framework'
+import '@flash-global66/g-inline/inline.styles.scss'
 \`\`\`
 `
       }

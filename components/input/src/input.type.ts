@@ -1,5 +1,5 @@
-export type sizeInput = '' | 'default' | 'small' | 'large' | 'custom';
+import type Input from './input.vue'
 
-import type Input from './Input.vue'
+export type sizeInput = '' | 'default' | 'small' | 'large' | 'custom';
 
 export type InputInstance = InstanceType<typeof Input>

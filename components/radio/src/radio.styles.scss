@@ -12,7 +12,7 @@
     @apply p-0 text-secondary-txt text-pretty relative -top-0.5;
   }
 
-  @include when(checked) {
+  @include when('checked') {
     &:not(.is-disabled) {
       @include e(label) {
         @apply text-secondary-txt;

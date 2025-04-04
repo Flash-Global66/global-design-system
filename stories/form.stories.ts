@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref, reactive, computed, watch } from "vue";
 import { FormInstance, GForm, GFormItem } from "@flash-global66/g-form/index.ts";
 import { GInput } from "@flash-global66/g-input/index.ts";
-import { GConfigProvider } from "../components/config-provider";
+import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 import { GButton } from "@flash-global66/g-button/index.ts";
 import { GSelect } from "@flash-global66/g-select/index.ts";
 import { GRadio } from "@flash-global66/g-radio/index.ts";
@@ -37,14 +37,14 @@ Una característica importante es que el validador es lo suficientemente intelig
 ### Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-form
+yarn add @flash-global66/g-form
 \`\`\`
 
 ### Importación
 
 \`\`\`typescript
-import { GForm } from '@flash-global66/b2b-ui-form'
-import '@flash-global66/b2b-ui-form/form.styles.scss'
+import { GForm } from '@flash-global66/g-form'
+import '@flash-global66/g-form/form.styles.scss'
 \`\`\`
 
 ### Dependencias

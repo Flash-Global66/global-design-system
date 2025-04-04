@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from 'element-plus/es/utils/index'
 import type Tag from './tag.vue'
-import { IconString } from '@flash-global66/b2b-ui-icon-font'
+import { IconString } from '@flash-global66/g-icon-font'
 import type { ExtractPropTypes } from 'vue'
 
 export const tagProps = buildProps({

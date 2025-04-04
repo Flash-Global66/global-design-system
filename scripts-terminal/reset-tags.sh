@@ -73,7 +73,7 @@ for dir in components/*; do
   if [ -f "$dir/package.json" ]; then
     component=$(basename "$dir")
     component_kebab=$(to_kebab "$component")
-    pkg="@flash-global66/b2b-ui-${component_kebab}"
+    pkg="@flash-global66/g-${component_kebab}"
     
     # Obtener solamente la última versión publicada
     latest_version=$(npm view "$pkg" version --registry=https://npm.pkg.github.com 2>/dev/null || echo "N/A")

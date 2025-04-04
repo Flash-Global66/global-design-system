@@ -16,7 +16,7 @@ for dir in components/*; do
     component=$(basename "$dir")
     # Convertir el nombre del componente a kebab-case
     component_kebab=$(to_kebab "$component")
-    pkg="@flash-global66/b2b-ui-${component_kebab}"
+    pkg="@flash-global66/g-${component_kebab}"
     
     # Obtener la versión local desde package.json y eliminar espacios
     version_local=$(node -p "require('./$dir/package.json').version" 2>/dev/null | tr -d '[:space:]')

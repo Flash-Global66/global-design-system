@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.8 (2025-03-31)
+
+
+### Bug Fixes
+
+* change name config provider ([e58e32c](https://github.com/Flash-Global66/global-design-system/commit/e58e32c585522cabb96588fe88adffa1bea7ed80))
+* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
+
+
+
+
+
 ## 0.0.7 (2025-03-28)
 
 

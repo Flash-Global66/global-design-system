@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-input",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.3.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,6 +29,8 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "peerDependencies": {
+    "@flash-global66/g-form": "^0.1.0",
+    "@flash-global66/g-icon-font": "^0.0.8",
     "@vueuse/core": "^12.4.0",
     "element-plus": "^2.9.0",
     "lodash-unified": "^1.0.3",

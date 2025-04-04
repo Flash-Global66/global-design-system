@@ -19,4 +19,10 @@ export {
   faCoins,
   faReceipt,
   faHandHoldingUsd,
+  faStore,
+  faTruckFast,
+  faWarehouseFull,
+  faBriefcase,
+  faChartSimple,
+  faDownToLine,
 } from '@fortawesome/pro-light-svg-icons';

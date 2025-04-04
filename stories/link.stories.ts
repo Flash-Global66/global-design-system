@@ -104,18 +104,18 @@ El componente Link proporciona un link versátil y personalizable para la navega
 ## Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-link
+yarn add @flash-global66/g-link
 \`\`\`
 
 ## Dependencias
 Este componente requiere:
-- @flash-global66/b2b-ui-icon-font
+- @flash-global66/g-icon-font
 
 ## Importación de estilos SASS
 Para que el componente funcione correctamente, es necesario importar los estilos SASS:
 
 \`\`\`scss
-@use "@flash-global66/b2b-ui-link/link.styles.scss" as *;
+@use "@flash-global66/g-link/link.styles.scss" as *;
 \`\`\`
 
 ## Uso básico
@@ -142,7 +142,7 @@ Para que el componente funcione correctamente, es necesario importar los estilos
 </template>
 
 <script setup>
-import { GLink } from '@flash-global66/b2b-ui-link';
+import { GLink } from '@flash-global66/g-link';
 </script>
 \`\`\`
 `

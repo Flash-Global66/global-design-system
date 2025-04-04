@@ -26,14 +26,14 @@ const meta: Meta<InputInstance> = {
 ### Instalación
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-input
+yarn add @flash-global66/g-input
 \`\`\`
 
 ### Importación
 
 \`\`\`typescript
-import { GInput } from '@flash-global66/b2b-ui-input'
-import '@flash-global66/b2b-ui-input/input.styles.scss'
+import { GInput } from '@flash-global66/g-input'
+import '@flash-global66/g-input/input.styles.scss'
 \`\`\`
 `
       }

@@ -2,7 +2,7 @@ import { StoryObj } from '@storybook/vue3'
 import { reactive } from 'vue'
 
 // COMPONENTS
-import { GTag, TagInstance } from '../components/tag'
+import { GTag, TagInstance } from '@flash-global66/g-tag'
 
 // CONFIG
 import { GConfigProvider } from '../components/config-provider'
@@ -30,20 +30,20 @@ const meta = {
 🚀 **Instalación**
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-tag
+yarn add @flash-global66/g-tag
 \`\`\`
 
 🪝 **Dependencias**
 
 Este componente requiere:
 
-> - @flash-global66/b2b-ui-icon-font
+> - @flash-global66/g-icon-font
 
 📥 **Importación básica**
 
 \`\`\`typescript
-import { GTag } from '@flash-global66/b2b-ui-tag'
-import '@flash-global66/b2b-ui-tag/tag.style.scss'
+import { GTag } from '@flash-global66/g-tag'
+import '@flash-global66/g-tag/tag.style.scss'
 \`\`\`
 `
       }
@@ -199,6 +199,7 @@ export const Basic: Story = {
       <g-config-provider>
         <div class="flex flex-col gap-4">
           <g-tag v-bind="args" />
+          <span class="prueba33">Texto de prueba</span>
         </div>
       </g-config-provider>
     `

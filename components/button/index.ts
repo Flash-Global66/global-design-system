@@ -1,10 +1,16 @@
-import GButton from "./src/Button.vue";
-export type {
-  ButtonSize,
-  ButtonColor,
-  ButtonType,
-  ButtonNativeType,
-  ButtonVariant,
-} from "./src/button.type";
+import {
+  withInstall,
+  withNoopInstall,
+  SFCWithInstall,
+} from "element-plus/es/utils/index.mjs";
+import Button from "./src/button.vue";
+export const GButton: SFCWithInstall<typeof Button> & {
+  Button: typeof Button;
+} = withInstall(Button, {
+  Button,
+});
+export default GButton;
 
-export { GButton };
+export * from "./src/button.type";
+
+export type ButtonInstance = InstanceType<typeof Button>;

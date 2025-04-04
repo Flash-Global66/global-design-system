@@ -1,6 +1,5 @@
 @use "../../components/config-provider/config.styles.scss" as *;
 @use "../../components/popper/popper.styles.scss" as *;
-@use "../../components/tag/tag.styles.scss" as *;
 @use "../../components/radio-group/radio-group.styles.scss" as *;
 @use "../../components/badge/badge.styles.scss" as *;
 @use "../../components/icon-button/src/icon-button.styles.scss" as *;
@@ -11,6 +10,8 @@
 @use "@flash-global66/g-select/styles.scss" as *;
 @use "@flash-global66/g-form/styles.scss" as *;
 @use "@flash-global66/g-button/styles.scss" as *;
+@use "@flash-global66/g-tag/styles.scss" as *;
+@use "@flash-global66/g-image/styles.scss" as *;
 
 @use "../../components/dialog/dialog.styles.scss" as *;
 @use "../../components/pagination/pagination.styles.scss" as *;

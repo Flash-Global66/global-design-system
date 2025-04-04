@@ -5,7 +5,7 @@ import { buildProps, definePropType, isBoolean, isNumber, isString } from "eleme
 
 import { InlineEnum, InlineLinks, InlineSize } from "./inline.type";
 import { de } from "element-plus/es/locales.mjs";
-import { IconString } from "@flash-global66/b2b-ui-icon-font";
+import { IconString } from "@flash-global66/g-icon-font";
 
 export const inlineProps = buildProps({
   /**

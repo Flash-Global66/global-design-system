@@ -96,6 +96,14 @@
         @apply opacity-0;
       }
     }
+
+    &:not(.is-label) {
+      @include e("inner") {
+        &::placeholder {
+          @apply opacity-100;
+        }
+      }
+    }
   }
 
   @include e("inner") {

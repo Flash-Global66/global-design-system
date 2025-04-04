@@ -21,7 +21,8 @@
         "pmneo.tsimporter",
         "pmneo.tsimporter",
         "vue.volar",
-        "hollowtree.vue-snippets"
+        "hollowtree.vue-snippets",
+        "eamodio.gitlens"
       ]
     }
   }

@@ -37,6 +37,26 @@ function getPackageName(componentDir) {
   return packageJson?.name;
 }
 
+// Función para obtener las dependencias internas de un componente
+function getInternalDependencies(componentDir) {
+  const packageJson = readPackageJson(componentDir);
+  if (!packageJson) return [];
+  
+  // Combinar peerDependencies, dependencies y devDependencies
+  const allDeps = {
+    ...(packageJson.peerDependencies || {}),
+    ...(packageJson.dependencies || {}),
+    ...(packageJson.devDependencies || {})
+  };
+  
+  // Filtrar solo las dependencias que son componentes propios (@flash-global66/g-)
+  const internalDeps = Object.keys(allDeps).filter(dep => 
+    dep.startsWith('@flash-global66/g-')
+  );
+  
+  return internalDeps;
+}
+
 // Función para construir un componente
 function buildComponent(component) {
   console.log(`Building component: ${component}`);
@@ -46,7 +66,7 @@ function buildComponent(component) {
     
     if (!packageName) {
       console.error(`No se pudo determinar el nombre del paquete para ${component}`);
-      return;
+      return false;
     }
     
     // Ejecutar el script de build del componente usando el nombre completo del paquete
@@ -60,9 +80,94 @@ function buildComponent(component) {
     });
     
     console.log(`✅ Component ${component} built successfully`);
+    return true;
   } catch (error) {
     console.error(`❌ Failed to build component ${component}:`, error.message);
+    return false;
   }
+}
+
+// Función para ordenar componentes basado en sus dependencias (ordenación topológica)
+function sortComponentsByDependencies(components) {
+  // Crear un mapa de componentes a sus dependencias internas
+  const dependencyMap = {};
+  const nameToDir = {};
+  
+  // Primero, mapear nombres de paquetes a directorios
+  components.forEach(dir => {
+    const name = getPackageName(dir);
+    if (name) {
+      nameToDir[name] = dir;
+    }
+  });
+  
+  // Luego, construir el mapa de dependencias
+  components.forEach(dir => {
+    const deps = getInternalDependencies(dir).map(dep => {
+      // Convertir el nombre de la dependencia a su directorio correspondiente
+      return nameToDir[dep] || null;
+    }).filter(Boolean);
+    
+    dependencyMap[dir] = deps;
+  });
+  
+  // Algoritmo de ordenación topológica
+  const visited = new Set();
+  const temp = new Set();  // Para detectar ciclos
+  const order = [];
+  let hasCycle = false;
+  let cycleComponents = [];
+  
+  function visit(node, path = []) {
+    // Si ya visitamos este nodo y está en el resultado final, no hay problema
+    if (visited.has(node)) return true;
+    
+    // Si encontramos el nodo en el camino actual, tenemos un ciclo
+    if (temp.has(node)) {
+      hasCycle = true;
+      // Encontrar el ciclo para reportarlo
+      const cycleStart = path.indexOf(node);
+      cycleComponents = path.slice(cycleStart).concat(node);
+      return false;
+    }
+    
+    // Marcar como visitado temporalmente
+    temp.add(node);
+    const currentPath = [...path, node];
+    
+    // Visitar primero todas las dependencias
+    for (const dep of (dependencyMap[node] || [])) {
+      if (!visit(dep, currentPath)) {
+        return false; // Propagar el error de ciclo
+      }
+    }
+    
+    // Quitar del camino actual
+    temp.delete(node);
+    
+    // Marcar como completamente visitado y agregar al resultado
+    visited.add(node);
+    order.push(node);
+    return true;
+  }
+  
+  // Visitar todos los nodos
+  for (const component of components) {
+    if (!visited.has(component) && !hasCycle) {
+      if (!visit(component)) {
+        break; // Detener si encontramos un ciclo
+      }
+    }
+  }
+  
+  // Si hay un ciclo, reportar error
+  if (hasCycle) {
+    const cycleStr = cycleComponents.join(" → ") + " → " + cycleComponents[0];
+    console.error(`❌ Error: Ciclo de dependencias detectado: ${cycleStr}`);
+    throw new Error(`Ciclo de dependencias detectado entre componentes: ${cycleStr}`);
+  }
+  
+  return order;
 }
 
 // Función principal
@@ -70,22 +175,43 @@ function main() {
   if (targetComponent) {
     // Si se especificó un componente, verificar si es buildable
     if (isBuildable(targetComponent)) {
-      buildComponent(targetComponent);
+      const success = buildComponent(targetComponent);
+      process.exit(success ? 0 : 1);
     } else {
       console.log(`Component ${targetComponent} is not marked as buildable or doesn't exist.`);
+      process.exit(1);
     }
   } else {
-    // Construir todos los componentes buildables
-    const components = fs.readdirSync(componentsDir, { withFileTypes: true })
+    // Obtener todos los componentes buildables
+    const buildableComponents = fs.readdirSync(componentsDir, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
-      .map(dirent => dirent.name);
+      .map(dirent => dirent.name)
+      .filter(isBuildable);
     
-    const buildableComponents = components.filter(isBuildable);
+    console.log(`Found ${buildableComponents.length} buildable components.`);
     
-    console.log(`Found ${buildableComponents.length} buildable components out of ${components.length} total.`);
+    // Ordenar componentes basado en sus dependencias
+    const orderedComponents = sortComponentsByDependencies(buildableComponents);
     
-    for (const component of buildableComponents) {
-      buildComponent(component);
+    console.log("Building components in dependency order:");
+    console.log(orderedComponents.join(" → "));
+    
+    // Construir componentes en el orden determinado
+    let buildFailed = false;
+    for (const component of orderedComponents) {
+      const success = buildComponent(component);
+      if (!success) {
+        buildFailed = true;
+        break;
+      }
+    }
+    
+    if (buildFailed) {
+      console.error("❌ Build process failed");
+      process.exit(1);
+    } else {
+      console.log("✅ All components built successfully");
+      process.exit(0);
     }
   }
 }

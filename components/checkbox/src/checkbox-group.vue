@@ -26,7 +26,7 @@ import { pick } from 'lodash-unified'
 import { GCheckbox } from '../index'
 import { UPDATE_MODEL_EVENT, useNamespace } from 'element-plus'
 import { debugWarn } from 'element-plus/es/utils/index.mjs'
-import { useFormItem, useFormItemInputId } from '@flash-global66/g-form/index.js'
+import { useFormItem, useFormItemInputId } from '@flash-global66/g-form'
 
 import { checkboxGroupEmits, checkboxGroupProps } from './checkbox-group'
 import { checkboxGroupContextKey } from './constants'

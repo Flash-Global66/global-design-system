@@ -284,12 +284,12 @@ import { GTag } from '@flash-global66/g-tag'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { useCalcInputWidth } from 'element-plus'
 import ElSelectMenu from './select-dropdown'
-import useSelect from './hooks/useSelect'
+import useSelect from './hooks/use-select'
 import { SelectProps, selectEmits } from './defaults'
 import { selectV2InjectionKey } from './types/token'
 
 export default defineComponent({
-  name: 'GuiSelect',
+  name: 'GSelect',
   components: {
     ElSelectMenu,
     GTag,

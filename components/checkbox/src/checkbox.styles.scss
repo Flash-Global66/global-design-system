@@ -17,7 +17,7 @@
       }
     }
     &.is-disabled {
-      @include e(inner) {
+      @include e('inner') {
         @apply border-disab-lt-bd bg-disab-lt-bg;
         &:after {
           @apply border-white;

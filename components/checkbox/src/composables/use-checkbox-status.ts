@@ -4,7 +4,7 @@ import { isArray, isBoolean, isObject, isPropAbsent } from 'element-plus/es/util
 
 import type { ComponentInternalInstance } from 'vue'
 import type { CheckboxProps } from '../checkbox'
-import type { CheckboxModel } from '.'
+import type { CheckboxModel } from './index'
 
 export const useCheckboxStatus = (
   props: CheckboxProps,
