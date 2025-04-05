@@ -76,6 +76,13 @@ export const useTooltipContentProps = buildProps({
    * @description whether Tooltip is disabled
    */
   disabled: Boolean,
+  /**
+   * @description add class customization
+   */
+  isComponent: {
+    type: Boolean,
+    default: false,
+  },
   ...useAriaProps(['ariaLabel']),
 } as const)
 

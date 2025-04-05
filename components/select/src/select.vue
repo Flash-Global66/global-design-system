@@ -11,6 +11,7 @@
         ref="tooltipRef"
         :visible="dropdownMenuVisible"
         :teleported="teleported"
+        is-component
         :popper-class="[nsSelect.e('popper'), popperClass]"
         :gpu-acceleration="false"
         :stop-popper-mouse-event="false"

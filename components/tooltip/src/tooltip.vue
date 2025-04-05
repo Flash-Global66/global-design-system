@@ -22,7 +22,7 @@
       :gpu-acceleration="gpuAcceleration"
       :offset="offset"
       :persistent="persistent"
-      :popper-class="[popperClass ? popperClass : ns.e('tooltip')]"
+      :popper-class="[isComponent ? `${popperClass}` : `${ns.e('tooltip')} ${popperClass}`]"
       :popper-style="popperStyle"
       :placement="placement"
       :popper-options="popperOptions"
@@ -77,6 +77,7 @@ const props = defineProps(useTooltipProps)
 const emit = defineEmits(tooltipEmits)
 
 usePopperContainer()
+console.log('isComponent', props)
 
 const id = useId()
 const ns = useNamespace('popper')
