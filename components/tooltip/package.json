@@ -1,7 +1,7 @@
 {
-  "name": "@flash-global66/g-popper",
+  "name": "@flash-global66/g-tooltip",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.0.1",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -10,7 +10,7 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/popper.styles.scss",
+    "./styles.scss": "./src/tooltip.styles.scss",
     "./*": "./*"
   },
   "files": [
@@ -29,12 +29,8 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "peerDependencies": {
-    "@flash-global66/g-focus-trap": "^0.0.7",
-    "@flash-global66/g-form": "^0.1.0",
-    "@flash-global66/g-slot": "^0.0.1",
-    "@popperjs/core": "^2.11.6",
+    "@flash-global66/g-icon-button": "^0.0.7",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
-  },
-  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
+  }
 }

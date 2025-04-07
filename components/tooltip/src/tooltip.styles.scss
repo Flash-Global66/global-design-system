@@ -1,0 +1,37 @@
+@use 'sass:map';
+
+@use 'element-plus/theme-chalk/src/tooltip-v2.scss' as *;
+@use "element-plus/theme-chalk/src/popper.scss" as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b('popper') {
+  &.gui-popper__tooltip {
+    @apply p-md bg-everBlue-50 border-none rounded-md max-w-56 pt-sm !important;
+
+    @include e('container') {
+      @apply flex flex-col gap-xxs;
+    }
+  
+    @include e('header') {
+      @apply flex items-center justify-between;
+  
+      & h6 {
+        @apply text-2 font-semibold text-primary-txt line-clamp-2;
+      }
+    }
+  
+    @include e('description') {
+      @apply text-2 font-medium text-secondary-txt text-pretty;
+    }
+  
+    @include e('arrow') {
+      &::before {
+        @apply bg-everBlue-50 border-none !important;
+      }
+    }
+  }
+  
+}

@@ -199,7 +199,6 @@ export const Basic: Story = {
       <g-config-provider>
         <div class="flex flex-col gap-4">
           <g-tag v-bind="args" />
-          <span class="prueba33">Texto de prueba</span>
         </div>
       </g-config-provider>
     `

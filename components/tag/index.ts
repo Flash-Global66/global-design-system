@@ -1,5 +1,4 @@
 import { withInstall, SFCWithInstall } from 'element-plus/es/utils/index'
-
 import Tag from './src/tag.vue'
 
 export const GTag: SFCWithInstall<typeof Tag> = withInstall(Tag)

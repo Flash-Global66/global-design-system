@@ -2,8 +2,6 @@ type IconButtonVariant = "grey" | "black" | "blue";
 
 type IconButtonState = "default" | "disabled";
 
-type IconButtonName = string;
-
 type Ripple = {
   id: number;
   x: number;
@@ -15,5 +13,5 @@ type IconButtonSize = "medium" | "small";
 type IconBorder = boolean;
 
 
-export { IconButtonSize, IconButtonVariant, IconButtonName, IconButtonState, Ripple, IconBorder };
+export { IconButtonSize, IconButtonVariant, IconButtonState, Ripple, IconBorder };
 
