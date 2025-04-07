@@ -4,8 +4,8 @@
   "version": "0.0.7",
   "license": "MIT",
   "exports": {
-    ".": "./index.ts",
-    "./*": "./*"
+    ".": "./src/index.ts",
+    "./drawer.styles.scss": "./src/drawer.styles.scss"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
