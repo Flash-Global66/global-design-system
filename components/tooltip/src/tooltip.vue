@@ -1,5 +1,5 @@
 <template>
-  <el-popper ref="popperRef" :role="role">
+  <g-popper ref="popperRef" :role="role">
     <g-tooltip-trigger
       :disabled="disabled"
       :trigger="trigger"
@@ -22,7 +22,7 @@
       :gpu-acceleration="gpuAcceleration"
       :offset="offset"
       :persistent="persistent"
-      :popper-class="[isComponent ? `${popperClass}` : `${ns.e('tooltip')} ${popperClass}`]"
+      :popper-class="[isComponent ? `${popperClass ?? ''}` : `${ns.e('tooltip')} ${popperClass ?? ''}`]"
       :popper-style="popperStyle"
       :placement="placement"
       :popper-options="popperOptions"
@@ -50,14 +50,14 @@
           </p>
         </div>
       </slot>
-      <el-popper-arrow v-if="showArrow" :arrow-offset="arrowOffset" />
+      <g-popper-arrow v-if="showArrow" :arrow-offset="arrowOffset" />
     </g-tooltip-content>
-  </el-popper>
+  </g-popper>
 </template>
 
 <script lang="ts" setup>
 import { computed, onDeactivated, provide, readonly, ref, toRef, unref, watch } from 'vue'
-import { ElPopper, ElPopperArrow } from 'element-plus/es/components/popper/index'
+import { GPopper, GPopperArrow } from '@flash-global66/g-popper'
 
 import { isBoolean } from 'element-plus/es/utils/index'
 import { useDelayedToggle, useId, usePopperContainer, useNamespace } from 'element-plus'
@@ -66,8 +66,9 @@ import { tooltipEmits, useTooltipModelToggle, useTooltipProps } from './tooltip'
 import GTooltipTrigger from './trigger.vue'
 import GTooltipContent from './content.vue'
 import { GIconButton } from '@flash-global66/g-icon-button'
+
 import type { TooltipContentInstance } from './content'
-import type { PopperInstance } from 'element-plus/es/components/popper/index'
+import type { PopperInstance } from '@flash-global66/g-popper'
 
 defineOptions({
   name: 'GTooltip'
@@ -77,7 +78,6 @@ const props = defineProps(useTooltipProps)
 const emit = defineEmits(tooltipEmits)
 
 usePopperContainer()
-console.log('isComponent', props)
 
 const id = useId()
 const ns = useNamespace('popper')
@@ -162,11 +162,11 @@ defineExpose({
    */
   popperRef,
   /**
-   * @description el-tooltip-content component instance
+   * @description g-tooltip-content component instance
    */
   contentRef,
   /**
-   * @description validate current focus event is trigger inside el-tooltip-content
+   * @description validate current focus event is trigger inside g-tooltip-content
    */
   isFocusInsideContent,
   /**
@@ -174,11 +174,11 @@ defineExpose({
    */
   updatePopper,
   /**
-   * @description expose onOpen function to mange el-tooltip open state
+   * @description expose onOpen function to mange g-tooltip open state
    */
   onOpen,
   /**
-   * @description expose onOpen function to mange el-tooltip open state
+   * @description expose onOpen function to mange g-tooltip open state
    */
   onClose,
   /**

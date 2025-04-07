@@ -2,7 +2,7 @@ import { StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
 
 // COMPONENTS
-import GDrawer, { DrawerInstance } from '../components/drawer/src'
+import GDrawer, { DrawerInstance } from '@flash-global66/g-drawer'
 import { GButton } from '@flash-global66/g-button'
 
 // CONFIG

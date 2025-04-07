@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from 'element-plus/es/utils/index'
-import { popperContentProps } from 'element-plus/es/components/popper/index'
+import { popperContentProps } from '@flash-global66/g-popper'
 import { useAriaProps, useDelayedToggleProps } from 'element-plus'
 
 import type TooltipContent from './content.vue'

@@ -1,5 +1,5 @@
 {
-  "name": "@flash-global66/g-tooltip",
+  "name": "@flash-global66/g-slot",
   "author": "Global66",
   "version": "0.0.1",
   "license": "MIT",
@@ -10,7 +10,6 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/tooltip.styles.scss",
     "./*": "./*"
   },
   "files": [
@@ -29,7 +28,6 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "peerDependencies": {
-    "@flash-global66/g-icon-button": "^0.0.7",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   }

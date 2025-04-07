@@ -1,5 +1,5 @@
 import { buildProps, definePropType } from 'element-plus/es/utils/index'
-import { popperTriggerProps } from 'element-plus/es/components/popper/index'
+import { popperTriggerProps } from '@flash-global66/g-popper'
 import { EVENT_CODE } from 'element-plus'
 import type { Arrayable } from 'element-plus/es/utils/index'
 import type { ExtractPropTypes } from 'vue'

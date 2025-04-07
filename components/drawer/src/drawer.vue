@@ -102,12 +102,11 @@ import { computed, ref } from 'vue'
 import { GOverlay } from '@flash-global66/g-overlay'
 import { GFocusTrap } from '@flash-global66/g-focus-trap'
 import { GTeleport } from '@flash-global66/g-teleport'
-// import { useDialog } from 'element-plus/es/components/dialog/index'
 import { useDialog } from '@flash-global66/g-dialog'
 import { addUnit } from 'element-plus/es/utils/index'
 import { GButton } from '@flash-global66/g-button'
 import { GIconButton } from '@flash-global66/g-icon-button'
-import { useNamespace } from 'element-plus/es/hooks/index'
+import { useNamespace } from 'element-plus'
 import { drawerEmits, drawerProps } from './drawer'
 
 defineOptions({

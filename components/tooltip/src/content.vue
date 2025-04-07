@@ -7,7 +7,7 @@
       @after-enter="onAfterShow"
       @before-leave="onBeforeLeave"
     >
-      <el-popper-content
+      <g-popper-content
         v-if="shouldRender"
         v-show="shouldShow"
         :id="id"
@@ -37,7 +37,7 @@
         @close="onClose"
       >
         <slot />
-      </el-popper-content>
+      </g-popper-content>
     </transition>
   </g-teleport>
 </template>
@@ -47,12 +47,12 @@ import { computed, inject, onBeforeUnmount, ref, unref, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { useNamespace, usePopperContainerId } from 'element-plus'
 import { composeEventHandlers } from 'element-plus/es/utils/index'
-import { ElPopperContent } from 'element-plus/es/components/popper/index'
+import { GPopperContent } from '@flash-global66/g-popper'
 import GTeleport from '@flash-global66/g-teleport'
 import { tryFocus } from '@flash-global66/g-focus-trap'
 import { TOOLTIP_INJECTION_KEY } from './constants'
 import { useTooltipContentProps } from './content'
-import type { PopperContentInstance } from 'element-plus/es/components/popper/index'
+import type { PopperContentInstance } from '@flash-global66/g-popper'
 
 defineOptions({
   name: 'GTooltipContent',
@@ -84,9 +84,6 @@ const transitionClass = computed(() => {
 const persistentRef = computed(() => {
   // For testing, we would always want the content to be rendered
   // to the DOM, so we need to return true here.
-  if (process.env.NODE_ENV === 'test') {
-    return true
-  }
   return props.persistent
 })
 

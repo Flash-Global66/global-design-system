@@ -3,7 +3,8 @@ import { ref } from 'vue'
 import { StoryObj } from '@storybook/vue3'
 
 // components
-import { GTooltip, TooltipInstance } from '../components/tooltip/index.ts'
+import { GTooltip, TooltipInstance } from '@flash-global66/g-tooltip'
+// import { GTooltip, TooltipInstance } from '../components/tooltip/index'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { GButton } from '@flash-global66/g-button'
 import { GRadioGroup } from '@flash-global66/g-radio'
@@ -466,6 +467,7 @@ export const allPostions: Story = {
               name="tooltip-position-select"
               id="custom-select"
               placeholder="Selecciona una posición"
+              label="Posición"
             />
             <g-select
               v-model="trigger"
@@ -473,6 +475,7 @@ export const allPostions: Story = {
               name="tooltip-trigger-select"
               id="custom-select"
               placeholder="Selecciona un disparador"
+              label="Disparador"
             />
           </div>
           <div class="flex items-center justify-center w-full h-72">

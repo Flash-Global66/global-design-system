@@ -12,7 +12,7 @@
         :visible="dropdownMenuVisible"
         :teleported="teleported"
         is-component
-        :popper-class="[nsSelect.e('popper'), popperClass]"
+        :popper-class="`${nsSelect.e('popper')} ${popperClass ?? ''}`"
         :gpu-acceleration="false"
         :stop-popper-mouse-event="false"
         :popper-options="popperOptions"
@@ -81,7 +81,7 @@
                   </g-tag>
                 </div>
 
-                <el-tooltip
+                <g-tooltip
                   v-if="collapseTags && modelValue.length > maxCollapseTags"
                   ref="tagTooltipRef"
                   :disabled="dropdownMenuVisible || !collapseTagsTooltip"
@@ -133,7 +133,7 @@
                       </div>
                     </div>
                   </template>
-                </el-tooltip>
+                </g-tooltip>
               </slot>
               <div
                 :class="[
@@ -181,11 +181,7 @@
                   v-text="states.inputValue"
                 />
               </div>
-              <div
-                v-if="label"
-                :class="[nsSelect.e('label')]"
-                :style="labelStyle"
-              >{{ label }}</div>
+              <div v-if="label" :class="[nsSelect.e('label')]" :style="labelStyle">{{ label }}</div>
               <div
                 v-if="shouldShowPlaceholder"
                 :class="[

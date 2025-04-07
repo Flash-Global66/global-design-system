@@ -1,6 +1,6 @@
 import { buildProps } from 'element-plus/es/utils/index'
 import { createModelToggleComposable } from 'element-plus/es/hooks/index'
-import { popperArrowProps, popperProps } from 'element-plus/es/components/popper/index'
+import { popperArrowProps, popperProps } from '@flash-global66/g-popper'
 import { useTooltipContentProps } from './content'
 import { useTooltipTriggerProps } from './trigger'
 import type Tooltip from './tooltip.vue'
