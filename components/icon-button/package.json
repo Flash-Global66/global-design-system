@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-icon-button",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "MIT",
   "exports": {
     ".": "./src/index.ts",
@@ -12,6 +12,11 @@
   },
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-icon-font": "^0.0.8",
+    "element-plus": "^2.9.0",
+    "vue": "^3.2.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }
