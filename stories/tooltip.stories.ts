@@ -50,13 +50,14 @@ Este componente requiere:
 > - @flash-global66/g-icon-button
 > - @flash-global66/g-teleport
 > - @flash-global66/g-focus-trap
-> - element-plus/es/components/popper/index <span style="color: rgb(227 83 83);font-size: 13px;">(se necesita crear @flash-global66/g-tooltip)</span>
+> - @flash-global66/g-popper
+> - @flash-global66/g-slot
 
 📥 **Importación básica**
 
 \`\`\`typescript
 import { GTooltip } from '@flash-global66/g-tooltip'
-import '@flash-global66/g-tooltip/tooltip.style.scss'
+import '@flash-global66/g-tooltip/styles.scss'
 \`\`\`
 `
       }

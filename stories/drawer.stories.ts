@@ -36,25 +36,25 @@ Un elemento de diálogo que se desliza desde el borde de la ventana para revelar
 🚀 **Instalación**
 
 \`\`\`bash
-yarn add @flash-global66/b2b-ui-drawer
+yarn add @flash-global66/g-drawer
 \`\`\`
 
 🪝 **Dependencias**
 
 Este componente requiere:
 
-> - @flash-global66/b2b-ui-overlay
-> - @flash-global66/b2b-ui-focus-trap
-> - @flash-global66/b2b-ui-teleport
-> - @flash-global66/b2b-ui-dialog
-> - @flash-global66/b2b-ui-button
-> - @flash-global66/b2b-ui-icon-button
+> - @flash-global66/g-overlay
+> - @flash-global66/g-focus-trap
+> - @flash-global66/g-teleport
+> - @flash-global66/g-dialog
+> - @flash-global66/g-button
+> - @flash-global66/g-icon-button
 
 📥 **Importación básica**
 
 \`\`\`typescript
-import { GDrawer } from '@flash-global66/b2b-ui-drawer'
-import '@flash-global66/b2b-ui-drawer/drawer.styles.scss'
+import { GDrawer } from '@flash-global66/g-drawer'
+import '@flash-global66/g-drawer/styles.scss'
 \`\`\`
 `
       }

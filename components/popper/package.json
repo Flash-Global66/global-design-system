@@ -31,7 +31,7 @@
   "peerDependencies": {
     "@flash-global66/g-focus-trap": "^0.0.7",
     "@flash-global66/g-form": "^0.1.0",
-    "@flash-global66/g-slot": "^0.0.1",
+    "@flash-global66/g-slot": "^0.0.2",
     "@popperjs/core": "^2.11.6",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
