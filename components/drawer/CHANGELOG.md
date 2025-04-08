@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.0.7...@flash-global66/g-drawer@0.0.8) (2025-04-07)
+
+
+### Bug Fixes
+
+* add improvements in components tooltip and dropdown ([b2a19da](https://github.com/Flash-Global66/global-design-system/commit/b2a19dae828782f9dc4d1a56fbb02888d1354d85))
+* update component drawer ([3f1aecf](https://github.com/Flash-Global66/global-design-system/commit/3f1aecf6420e3ad00dc3e471730d3fedc49b912d))
+
+
+
+
+
 ## 0.0.7 (2025-03-28)
 
 
