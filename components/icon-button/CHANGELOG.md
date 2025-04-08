@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-button@0.0.8...@flash-global66/g-icon-button@0.0.9) (2025-04-08)
+
+
+### Bug Fixes
+
+* update peerDependencies of tooltip and icon button ([3cf5e2a](https://github.com/Flash-Global66/global-design-system/commit/3cf5e2aecb498daea18bceeddc059186a972a4f5))
+
+
+
+
+
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-button@0.0.7...@flash-global66/g-icon-button@0.0.8) (2025-04-07)
 
 
