@@ -29,8 +29,8 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "peerDependencies": {
-    "@flash-global66/g-icon-button": "^0.0.9",
     "@flash-global66/g-focus-trap": "^0.0.7",
+    "@flash-global66/g-icon-button": "^0.0.9",
     "@flash-global66/g-popper": "^0.0.8",
     "@flash-global66/g-slot": "^0.0.2",
     "@flash-global66/g-teleport": "^0.0.6",

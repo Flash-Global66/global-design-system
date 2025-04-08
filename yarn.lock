@@ -721,6 +721,10 @@ __metadata:
 "@flash-global66/g-icon-button@workspace:components/icon-button":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-button@workspace:components/icon-button"
+  peerDependencies:
+    "@flash-global66/g-icon-font": ^0.0.8
+    element-plus: ^2.9.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
@@ -923,7 +927,7 @@ __metadata:
   resolution: "@flash-global66/g-tooltip@workspace:components/tooltip"
   peerDependencies:
     "@flash-global66/g-focus-trap": ^0.0.7
-    "@flash-global66/g-icon-button": ^0.0.7
+    "@flash-global66/g-icon-button": ^0.0.9
     "@flash-global66/g-popper": ^0.0.8
     "@flash-global66/g-slot": ^0.0.2
     "@flash-global66/g-teleport": ^0.0.6
