@@ -13,35 +13,16 @@
 }
 
 @include b('button') {
-  @apply inline-flex items-center justify-center gap-xs rounded-md leading-none duration-200 border border-solid font-semibold relative overflow-hidden whitespace-nowrap w-fit;
+  @apply inline-flex items-center justify-center gap-xs rounded-md leading-none duration-200 text-4 border border-solid font-semibold relative overflow-hidden whitespace-nowrap w-fit;
   transition: all 0.2s ease-in-out;
 
+  // Size
   @include m('sm') {
-    @apply px-md py-md text-2 h-xl;
-  }
-
-  @include m('sm') {
-    @include e('icon-left') {
-      @apply text-3;
-    }
-    
-    @include e('icon-right') {
-      @apply text-3;
-    }
+    @apply px-xl py-sm h-2xl;
   }
 
   @include m('md') {
-    @apply px-2xl py-md h-3xl text-4;
-  }
-  
-  @include m('md') {
-    @include e('icon-left') {
-      @apply text-5;
-    }
-    
-    @include e('icon-right') {
-      @apply text-5;
-    }
+    @apply px-2xl py-md h-3xl;
   }
 
   @include when(full) {
