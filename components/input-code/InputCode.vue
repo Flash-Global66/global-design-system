@@ -236,7 +236,6 @@ const setInputs = (el, index) => {
 
 const clearValues = () => {
   values.value = values.value.map(() => "");
-  inputs.value[1].focus();
 };
 
 initVals();
