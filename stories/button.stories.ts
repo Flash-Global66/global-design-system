@@ -35,6 +35,16 @@ Ejemplo de uso básico:
         category: 'Principales'
       }
     },
+    size: {
+      control: 'select',
+      options: ['sm', 'md'],
+      description: 'Tamaño del botón',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'md' },
+        category: 'Principales'
+      }
+    },
     title: {
       control: 'text',
       description: 'Texto del botón (preferencia sobre el slot)',
@@ -283,5 +293,28 @@ export const WithIcons = () => ({
           />
         </div>
       </div>
+  `
+})
+
+export const Sizes = () => ({
+  components: { GButton },
+  template: `
+    <div class="space-y-8">
+      <div class="space-y-2">
+        <h3 class="text-lg font-bold">Button Sizes</h3>
+        <div class="flex gap-4 items-center">
+          <g-button 
+            variant="primary" 
+            size="sm" 
+            title="Small Button"
+          />
+          <g-button 
+            variant="primary" 
+            size="md" 
+            title="Medium Button"
+          />
+        </div>
+      </div>
+    </div>
   `
 })

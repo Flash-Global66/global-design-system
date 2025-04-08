@@ -13,8 +13,17 @@
 }
 
 @include b('button') {
-  @apply inline-flex items-center justify-center px-xl py-sm gap-xs rounded-md leading-none h-3xl duration-200 text-4 border border-solid font-semibold relative overflow-hidden whitespace-nowrap w-fit;
+  @apply inline-flex items-center justify-center gap-xs rounded-md leading-none duration-200 text-4 border border-solid font-semibold relative overflow-hidden whitespace-nowrap w-fit;
   transition: all 0.2s ease-in-out;
+
+  // Size
+  @include m('sm') {
+    @apply px-xl py-sm h-2xl;
+  }
+
+  @include m('md') {
+    @apply px-2xl py-md h-3xl;
+  }
 
   @include when(full) {
     @apply w-full;
@@ -28,7 +37,6 @@
     @apply cursor-wait;
   }
 
-  // Variantes actualizadas para usar Tailwind en todo:
   @include m('variant-primary') {
     @apply bg-primary-def border border-primary-bd text-inverse-txt;
     @include hover-animation;
@@ -125,224 +133,6 @@
     margin-left: -50px;
     margin-top: -50px;
     transform-origin: center;
-  }
-
-  // sizes deprecated
-  @include m('tiny') {
-    @apply h-10;
-
-    &.gui-button--icon {
-      @apply w-10 text-4;
-    }
-  }
-
-  @include m('medium') {
-    @apply h-14;
-
-    &.gui-button--icon {
-      @apply w-14 text-8;
-    }
-  }
-
-  @include m('large') {
-    @apply h-16;
-
-    &.gui-button--icon {
-      @apply w-16 text-9;
-    }
-  }
-
-  // deprecated
-  @include m('info') {
-    @apply text-nightBlue-500 border-white bg-white;
-
-    &:hover {
-      @apply opacity-75;
-    }
-
-    &.is-disabled {
-      @apply opacity-70 cursor-not-allowed;
-    }
-  }
-
-  // deprecated
-  @include m('warning') {
-    @apply bg-yellow-700 border-yellow-700 text-white;
-
-    &:hover {
-      @apply opacity-75;
-    }
-
-    &.is-disabled {
-      @apply bg-yellow-700/60 border-yellow-700/60 cursor-not-allowed;
-    }
-  }
-
-  // deprecated
-  @include m('danger') {
-    @apply bg-red-700 border-red-700 text-white;
-
-    &:hover {
-      @apply opacity-75;
-    }
-
-    &.is-disabled {
-      @apply bg-grey-50 border-gray-50 cursor-not-allowed text-grey-500;
-    }
-  }
-
-  // deprecated
-  @include m('icon') {
-    @apply rounded-full p-0;
-  }
-
-  // deprecated
-  @include m('primary') {
-    @apply bg-nightBlue-500 border-nightBlue-500 text-white;
-
-    &:hover {
-      @apply bg-nightBlue-600;
-    }
-
-    &.is-disabled {
-      @apply bg-grey-50 border-gray-50 cursor-not-allowed text-grey-500;
-    }
-  }
-
-  // Legacy support for secondary (sin outlined/ghost)
-  @include m('secondary') {
-    @apply bg-green-700 border-green-700 text-white;
-
-    &:hover {
-      @apply bg-green-800;
-    }
-
-    &.is-disabled {
-      @apply bg-grey-50 border-gray-50 cursor-not-allowed text-grey-500;
-    }
-  }
-}
-
-// deprecrated
-@at-root {
-  .gui-button--primary.gui-button--outlined {
-    @apply border-nightBlue-500 text-nightBlue-500 bg-transparent;
-
-    &:hover {
-      @apply border-nightBlue-600;
-    }
-
-    &.is-disabled {
-      @apply border-gray-200 cursor-not-allowed text-disab-lt-txt;
-    }
-  }
-
-  .gui-button--primary.gui-button--ghost {
-    @apply border-transparent text-nightBlue-500 bg-transparent;
-
-    &:hover {
-      @apply text-nightBlue-600;
-    }
-
-    &.is-disabled {
-      @apply cursor-not-allowed text-disab-lt-txt;
-    }
-  }
-
-  // info
-  .gui-button--info.gui-button--outlined {
-    @apply border-white bg-transparent;
-
-    &:hover {
-      @apply opacity-75;
-    }
-
-    &.is-disabled {
-      @apply text-nightBlue-500/80 cursor-not-allowed;
-    }
-  }
-
-  .gui-button--info.gui-button--ghost {
-    @apply border-transparent bg-transparent;
-
-    &.is-disabled {
-      @apply text-nightBlue-500/80 cursor-not-allowed;
-    }
-  }
-
-  // warning deprecrated
-  .gui-button--warning.gui-button--outlined {
-    @apply border-yellow-700 text-yellow-700 bg-transparent;
-
-    &:hover {
-      @apply border-yellow-800 text-yellow-800;
-    }
-
-    &.is-disabled {
-      @apply opacity-50 cursor-not-allowed;
-    }
-  }
-
-  .gui-button--warning.gui-button--ghost {
-    @apply border-transparent text-yellow-700 bg-transparent;
-
-    &:hover {
-      @apply text-yellow-800;
-    }
-
-    &.is-disabled {
-      @apply opacity-50 cursor-not-allowed;
-    }
-  }
-
-  // danger deprecrated
-  .gui-button--danger.gui-button--outlined {
-    @apply border-red-700 text-red-700 bg-transparent;
-
-    &:hover {
-      @apply border-red-800 text-red-800;
-    }
-
-    &.is-disabled {
-      @apply opacity-50 cursor-not-allowed text-red-100;
-    }
-  }
-
-  .gui-button--danger.gui-button--ghost {
-    @apply border-transparent text-red-700 bg-transparent;
-
-    &:hover {
-      @apply text-red-800;
-    }
-
-    &.is-disabled {
-      @apply opacity-50 cursor-not-allowed text-red-100;
-    }
-  }
-
-  // secondary
-  .gui-button--secondary.gui-button--outlined {
-    @apply border-green-2 text-green-2 bg-transparent;
-
-    &:hover {
-      @apply opacity-75;
-    }
-
-    &.is-disabled {
-      @apply opacity-50 cursor-not-allowed text-green-100;
-    }
-  }
-
-  .gui-button--secondary.gui-button--ghost {
-    @apply border-transparent text-green-2 bg-transparent;
-
-    &:hover {
-      @apply text-green-4;
-    }
-
-    &.is-disabled {
-      @apply opacity-50 cursor-not-allowed text-green-100;
-    }
   }
 }
 
