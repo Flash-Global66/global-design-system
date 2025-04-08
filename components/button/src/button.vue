@@ -1,7 +1,7 @@
 <template>
   <component :is="componentId" ref="_ref" v-bind="allAttrs" :class="classes">
     <div :class="ns.e('content')">
-      <div :class="{ invisible: loading }">
+      <div :class="{ 'opacity-0': loading }">
         <g-icon-font v-if="shouldShowLeftIcon" :name="iconLeft" :class="ns.e('icon-left')" />
         <span :class="ns.e('title')">
           <slot>{{ title }}</slot>
@@ -57,38 +57,16 @@ const {
 
 const ns = useNamespace('button', ref('gui'))
 
-const isStandard = computed(
-  () => props.type === 'default' && props.color === 'primary' && props.size === 'small'
-)
-
-const deprecatedClasses = computed(() => {
-  if (!isStandard.value) {
-    return [
-      props.size && ns.m(props.size),
-      props.type !== 'default' ? [ns.m(props.color), ns.m(props.type)] : ns.m(props.color)
-    ]
-  }
-  return []
-})
-
-const standardClasses = computed(() => {
-  if (isStandard.value) {
-    return [props.variant && ns.m(`variant-${props.variant}`)]
-  }
-  return []
-})
 
 const classes = computed(() => {
   return [
     ns.b(),
-    ...deprecatedClasses.value,
-    ...standardClasses.value,
+    ns.m(`variant-${props.variant}`),
+    ns.m(props.size),
     ns.is('disabled', props.disabled || props.loading),
     ns.is('href', Boolean(props.href)),
     ns.is('loading', props.loading),
     ns.is('full', props.full)
-  ]
-    .flat()
-    .filter(Boolean)
+  ].filter(Boolean)
 })
 </script>
