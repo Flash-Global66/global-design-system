@@ -61,7 +61,8 @@ export const paginationProps = buildProps({
         (value as number) < 22 &&
         (value as number) % 2 === 1
       )
-    },    default: 7,
+    },
+    default: 7,
   },
   /**
    * @description current page number
@@ -72,32 +73,18 @@ export const paginationProps = buildProps({
    */
   defaultCurrentPage: Number,
   /**
-   * @description custom class name for the page size Select's dropdown
-   */
-  popperClass: {
-    type: String,
-    default: '',
-  },
-  /**
-   * @description icon for the prev button, higher priority of `prev-text`
+   * @description icon for the prev button
    */
   prevIcon: {
     type: String as PropType<IconString>,
     default: 'regular angle-left'
   },
   /**
-   * @description icon for the next button, higher priority of `next-text`
+   * @description icon for the next button
    */
   nextIcon: {
     type: String as PropType<IconString>,
     default: 'regular angle-right'
-  },
-  /**
-   * @description whether Pagination size is teleported to body
-   */
-  teleported: {
-    type: Boolean,
-    default: true,
   },
   /**
    * @description whether Pagination is disabled
@@ -106,27 +93,24 @@ export const paginationProps = buildProps({
   /**
    * @description whether to hide when there's only one page
    */
-  hideOnSinglePage: Boolean,
-  /**
-   * @description which element the size dropdown appends to.
-   */
-  appendSizeTo: String,
+  hideOnSinglePage: {
+    type: Boolean,
+    default: true,
+  },
 } as const)
 export type PaginationProps = ExtractPropTypes<typeof paginationProps>
 
 export const paginationEmits = {
   'update:current-page': (val: number) => isNumber(val),
   'update:page-size': (val: number) => isNumber(val),
-  'size-change': (val: number) => isNumber(val),
   change: (currentPage: number, pageSize: number) =>
     isNumber(currentPage) && isNumber(pageSize),
-  'current-change': (val: number) => isNumber(val),
   'prev-click': (val: number) => isNumber(val),
   'next-click': (val: number) => isNumber(val),
 }
 export type PaginationEmits = typeof paginationEmits
 
-const componentName = 'ElPagination'
+const componentName = 'GPagination'
 export default defineComponent({
   name: componentName,
 
@@ -174,7 +158,6 @@ export default defineComponent({
         }
         if (hasPageSizeListener) {
           emit('update:page-size', v)
-          emit('size-change', v)
         }
       },
     })
@@ -207,7 +190,6 @@ export default defineComponent({
         }
         if (hasCurrentPageListener) {
           emit('update:current-page', newCurrentPage)
-          emit('current-change', newCurrentPage)
         }
       },
     })
