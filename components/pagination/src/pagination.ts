@@ -14,7 +14,6 @@ import {
 } from 'element-plus/es/utils/index.mjs'
 import {
   useGlobalSize,
-  useLocale,
   useNamespace,
 } from 'element-plus/es/hooks/index.mjs'
 import { CHANGE_EVENT } from 'element-plus/es/constants/index.mjs'
@@ -151,7 +150,6 @@ export default defineComponent({
   emits: paginationEmits,
 
   setup(props, { emit, slots }) {
-    const { t } = useLocale()
     const ns = useNamespace('pagination')
     const vnodeProps = getCurrentInstance()!.vnode.props || {}
     const _globalSize = useGlobalSize()
@@ -309,7 +307,7 @@ export default defineComponent({
 
     return () => {
       if (!assertValidUsage.value) {
-        debugWarn(componentName, t('el.pagination.deprecationWarning'))
+        debugWarn(componentName, 'Deprecated usages detected, please refer to the el-pagination documentation for more details')
         return null
       }
       if (!props.layout) return null
