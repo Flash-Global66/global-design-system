@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 // COMPONENTS
-import { GPagination } from '../components/pagination';
+import { GPagination } from '@flash-global66/g-pagination/index.ts';
 import { GButton } from '@flash-global66/g-button/index.ts';
 
 // CONFIG
@@ -20,7 +20,7 @@ export default {
     },
   },
   args: {
-    total: 100,
+    total: 1000,
   },
 } as Meta<typeof GPagination>;
 
