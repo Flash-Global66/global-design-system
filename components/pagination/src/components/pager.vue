@@ -72,8 +72,7 @@
 <script lang="ts" setup>
 import { computed, ref, watchEffect } from 'vue'
 import { GIconFont } from '@flash-global66/g-icon-font'
-import { useNamespace } from 'element-plus'
-import { CHANGE_EVENT } from 'element-plus'
+import { useNamespace, CHANGE_EVENT } from 'element-plus'
 import { paginationPagerProps } from './pager'
 
 defineOptions({
