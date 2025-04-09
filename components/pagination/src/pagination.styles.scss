@@ -1,0 +1,76 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+
+@mixin pagination-button {
+  @apply flex justify-center items-center text-2 font-medium leading-none border-none rounded-md cursor-pointer text-center box-border text-primary-txt p-1;
+  min-width: 32px;
+  height: 32px;
+
+  * {
+    @apply pointer-events-none;
+  }
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &:hover {
+    @apply text-primary-def-hover;
+  }
+
+  &.is-active {
+    @apply text-primary-def-hover underline cursor-default font-semibold;
+
+    &.is-disabled {
+      @apply text-disabled-txt font-bold;
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    @apply text-disabled-txt;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    @apply outline-primary-def outline;
+    outline-offset: -1px;
+  }
+}
+
+@include b(pagination) {
+  @apply flex items-center gap-xxs text-primary-txt whitespace-nowrap text-2 font-medium;
+
+  @include e('btn-prev') {
+    @include pagination-button;
+    @apply text-5;
+  }
+
+  @include e('btn-next') {
+    @include pagination-button;
+    @apply text-5;
+  }
+
+  @include m('right') {
+    @apply justify-end;
+  }
+
+  @include m('center') {
+    @apply justify-center;
+  }
+}
+
+@include b(pager) {
+  @apply select-none list-none p-0 m-0 flex items-center gap-xxs;
+  list-style: none;
+  font-size: 0;
+
+  li {
+    @include pagination-button;
+  }
+}

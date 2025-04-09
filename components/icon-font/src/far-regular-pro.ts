@@ -66,4 +66,7 @@ export {
   faUserShield,
   faTrashXmark,
   faTrash,
+  faAnglesLeft,
+  faAnglesRight,
+  faEllipsis,
 } from '@fortawesome/pro-regular-svg-icons';
