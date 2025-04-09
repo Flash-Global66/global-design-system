@@ -73,20 +73,6 @@ export const paginationProps = buildProps({
    */
   defaultCurrentPage: Number,
   /**
-   * @description icon for the prev button
-   */
-  prevIcon: {
-    type: String as PropType<IconString>,
-    default: 'regular angle-left'
-  },
-  /**
-   * @description icon for the next button
-   */
-  nextIcon: {
-    type: String as PropType<IconString>,
-    default: 'regular angle-right'
-  },
-  /**
    * @description whether Pagination is disabled
    */
   disabled: Boolean,
@@ -257,7 +243,6 @@ export default defineComponent({
       const prevComponent = h(Prev, {
         disabled: props.disabled,
         currentPage: currentPageBridge.value,
-        prevIcon: props.prevIcon,
         onClick: prev,
       })
       
@@ -273,7 +258,6 @@ export default defineComponent({
         disabled: props.disabled,
         currentPage: currentPageBridge.value,
         pageCount: pageCountBridge.value,
-        nextIcon: props.nextIcon,
         onClick: next,
       })
       

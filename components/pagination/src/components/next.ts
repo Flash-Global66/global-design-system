@@ -12,10 +12,7 @@ export const paginationNextProps = buildProps({
   pageCount: {
     type: Number,
     default: 50,
-  },
-  nextIcon: {
-    type: String as PropType<IconString>,
-  },
+  }
 } as const)
 
 export type PaginationNextProps = ExtractPropTypes<typeof paginationNextProps>

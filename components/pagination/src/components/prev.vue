@@ -7,7 +7,7 @@
     :aria-disabled="internalDisabled"
     @click="$emit('click', $event)"
   >
-    <g-icon-font :name="prevIcon" />
+    <g-icon-font name="regular angle-left" />
   </button>
 </template>
 

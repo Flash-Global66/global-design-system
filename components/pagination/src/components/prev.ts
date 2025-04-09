@@ -8,10 +8,7 @@ export const paginationPrevProps = buildProps({
   currentPage: {
     type: Number,
     default: 1,
-  },
-  prevIcon: {
-    type: String as PropType<IconString>,
-  },
+  }
 } as const)
 
 export const paginationPrevEmits = {
