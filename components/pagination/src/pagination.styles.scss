@@ -55,6 +55,14 @@
     @include pagination-button;
     @apply text-5;
   }
+
+  @include m('right') {
+    @apply justify-end;
+  }
+
+  @include m('center') {
+    @apply justify-center;
+  }
 }
 
 @include b(pager) {

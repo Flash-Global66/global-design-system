@@ -32,6 +32,11 @@ import { IconString } from '@flash-global66/g-icon-font';
 const isAbsent = (v: unknown): v is undefined => typeof v !== 'number'
 
 export const paginationProps = buildProps({
+  align: {
+    type: String,
+    values: ['left', 'center', 'right'],
+    default: 'left',
+  },
   /**
    * @description options of item count per page
    */
@@ -253,7 +258,7 @@ export default defineComponent({
       
       return h(
         'div',
-        { class: [ns.b()] },
+        { class: [ns.b(), ns.m(props.align)] },
         [prevComponent, pagerComponent, nextComponent]
       )
     }
