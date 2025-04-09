@@ -26,7 +26,7 @@ import type { ExtractPropTypes, PropType, VNode } from 'vue'
 import { IconString } from '@flash-global66/g-icon-font';
 /**
  * It it user's responsibility to guarantee that the value of props.total... is number
- * (same as pageSize, defaultPageSize, currentPage, defaultCurrentPage, pageCount)
+ * (same as pageSize, currentPage, pageCount)
  * Otherwise we can reasonable infer that the corresponding field is absent
  */
 const isAbsent = (v: unknown): v is undefined => typeof v !== 'number'
@@ -36,10 +36,6 @@ export const paginationProps = buildProps({
    * @description options of item count per page
    */
   pageSize: Number,
-  /**
-   * @description default initial value of page size, not setting is the same as setting 10
-   */
-  defaultPageSize: Number,
   /**
    * @description total item count
    */
@@ -68,10 +64,6 @@ export const paginationProps = buildProps({
    * @description current page number
    */
   currentPage: Number,
-  /**
-   * @description default initial value of current-page, not setting is the same as setting 1
-   */
-  defaultCurrentPage: Number,
   /**
    * @description whether Pagination is disabled
    */
@@ -121,18 +113,13 @@ export default defineComponent({
       if (isAbsent(props.total) && isAbsent(props.pageCount)) return false
       // <el-pagination ...otherProps :current-page="xxx" /> without corresponding listener is forbidden now
       // Users have to use two way binding of `currentPage`
-      // If users just want to provide a default value, `defaultCurrentPage` is here for you
       if (!isAbsent(props.currentPage) && !hasCurrentPageListener) return false
       
       return true
     })
 
-    const innerPageSize = ref(
-      isAbsent(props.defaultPageSize) ? 10 : props.defaultPageSize
-    )
-    const innerCurrentPage = ref(
-      isAbsent(props.defaultCurrentPage) ? 1 : props.defaultCurrentPage
-    )
+    const innerPageSize = ref(10)
+    const innerCurrentPage = ref(1)
 
     const pageSizeBridge = computed({
       get() {
