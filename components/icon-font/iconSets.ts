@@ -99,6 +99,9 @@ export const ICON_SETS = {
     'triangle',
     'lightbulb',
     'spinner',
+    'ellipsis',
+    'angles-right',
+    'angles-left',
   ] as const,
 
   regular: [

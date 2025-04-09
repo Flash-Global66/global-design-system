@@ -1,5 +1,5 @@
 /** @jsx h */
-import { computed, defineComponent, inject, ref, toRaw, unref, watch, h, watchEffect } from 'vue'
+import { computed, defineComponent, inject, ref, toRaw, unref, watch, h } from 'vue'
 import { get } from 'lodash-unified'
 import { isObject, isUndefined } from 'element-plus/es/utils/index.mjs'
 import { DynamicSizeList, FixedSizeList } from 'element-plus'

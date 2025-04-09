@@ -1,18 +1,7 @@
 @use "../../components/config-provider/config.styles.scss" as *;
-@use "../../components/popper/popper.styles.scss" as *;
 @use "../../components/radio-group/radio-group.styles.scss" as *;
 @use "../../components/badge/badge.styles.scss" as *;
 @use "../../components/icon-button/src/icon-button.styles.scss" as *;
-
-@use "@flash-global66/g-checkbox/styles.scss" as *;
-@use "@flash-global66/g-radio/styles.scss" as *;
-@use "@flash-global66/g-input/styles.scss" as *;
-@use "@flash-global66/g-select/styles.scss" as *;
-@use "@flash-global66/g-form/styles.scss" as *;
-@use "@flash-global66/g-button/styles.scss" as *;
-@use "@flash-global66/g-tag/styles.scss" as *;
-@use "@flash-global66/g-image/styles.scss" as *;
-
 @use "../../components/dialog/dialog.styles.scss" as *;
 @use "../../components/pagination/pagination.styles.scss" as *;
 @use "../../components/popover/popover.styles.scss" as *;
@@ -22,7 +11,6 @@
 @use "../../components/skeleton/skeleton.styles.scss" as *;
 @use "../../components/skeleton/skeleton-item.styles.scss" as *;
 @use "../../components/input-code/input-code.styles.scss" as *;
-@use "../../components/drawer/drawer.styles.scss" as *;
 @use "../../components/dialog/dialog.styles.scss" as *;
 @use "../../components/overlay/overlay.styles.scss" as *;
 @use "../../components/table/table.styles.scss" as *;
@@ -31,8 +19,19 @@
 @use "../../components/link/src/link.styles.scss" as *;
 @use "../../components/switch/switch.styles.scss" as *;
 
+// new imports
+@use "@flash-global66/g-checkbox/styles.scss" as *;
+@use "@flash-global66/g-radio/styles.scss" as *;
+@use "@flash-global66/g-input/styles.scss" as *;
+@use "@flash-global66/g-select/styles.scss" as *;
+@use "@flash-global66/g-form/styles.scss" as *;
+@use "@flash-global66/g-button/styles.scss" as *;
+@use "@flash-global66/g-tag/styles.scss" as *;
+@use "@flash-global66/g-image/styles.scss" as *;
 @use "@flash-global66/g-segmented/styles.scss" as *;
-
+@use '@flash-global66/g-tooltip/styles.scss' as *;
+@use '@flash-global66/g-drawer/styles.scss' as *;
+@use '@flash-global66/g-popper/styles.scss' as *;
 
 * {
   @apply font-montserrat;

@@ -1,0 +1,40 @@
+{
+  "name": "@flash-global66/g-tooltip",
+  "author": "Global66",
+  "version": "0.0.5",
+  "license": "MIT",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/tooltip.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-focus-trap": "^0.0.7",
+    "@flash-global66/g-icon-button": "^0.0.9",
+    "@flash-global66/g-popper": "^0.0.10",
+    "@flash-global66/g-slot": "^0.0.2",
+    "@flash-global66/g-teleport": "^0.0.6",
+    "element-plus": "^2.9.0",
+    "vue": "^3.2.0"
+  }
+}

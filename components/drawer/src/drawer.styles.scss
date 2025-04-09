@@ -1,0 +1,71 @@
+@use 'element-plus/theme-chalk/src/drawer.scss' as *;
+@use 'element-plus/theme-chalk/src/overlay.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b('drawer') {
+  @include e('header') {
+    @apply flex flex-col items-start px-lg pt-lg gap-4 mb-4;
+    @include m('container-close') {
+      @apply self-end;
+    }
+    @include m('container-title') {
+      @apply flex flex-col gap-md w-full;
+    }
+    @include m('title-description') {
+      @apply flex flex-col gap-xxs;
+    }
+  }
+  @include e('title') {
+    @apply text-8 font-bold text-primary-txt line-clamp-3;
+  }
+  @include e('description') {
+    @apply text-3 font-medium text-secondary-txt whitespace-pre-line;
+  }
+  @include e('body') {
+    @apply px-lg py-0;
+  }
+
+  @include e('footer') {
+    @apply w-full mx-auto p-lg;
+
+    @include m('buttons') {
+      @apply w-full;
+
+      &.layout-dual-row {
+        @apply grid gap-xs grid-cols-2;
+
+        > button:nth-child(1) {
+          @apply order-2;
+        }
+        > button:nth-child(2) {
+          @apply order-1;
+        }
+
+        > button:nth-child(3) {
+          @apply mt-xs mx-auto col-span-2 col-start-1 order-3;
+          max-width: 50%;
+        }
+
+        @media (max-width: theme('screens.sm')) {
+          @apply flex flex-col;
+
+          > button:nth-child(1),
+          > button:nth-child(2) {
+            @apply order-none;
+          }
+
+          > button:nth-child(3) {
+            @apply max-w-full mx-0 mt-xxs;
+          }
+        }
+      }
+
+      &.layout-single-column {
+        @apply flex flex-row-reverse gap-xs;
+      }
+    }
+  }
+}
