@@ -71,9 +71,9 @@
 import { computed, inject, ref, unref } from "vue";
 import dayjs from "dayjs";
 import { union } from "lodash-unified";
-import { useLocale, useNamespace } from "@element-plus";
-import { isArray } from "@element-plus";
-import { EVENT_CODE } from "@element-plus/constants";
+import { useLocale, useNamespace } from "element-plus";
+import { isArray } from "element-plus/es/utils/index.mjs";
+import { EVENT_CODE } from "element-plus/es/constants/index.mjs";
 import { panelTimeRangeProps } from "../props/panel-time-range";
 import { useTimePanel } from "../composables/use-time-panel";
 import {

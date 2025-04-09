@@ -1,5 +1,5 @@
 <template>
-  <el-tooltip
+  <g-tooltip
     ref="refPopper"
     :visible="pickerVisible"
     effect="light"
@@ -151,7 +151,7 @@
         @mousedown.stop
       />
     </template>
-  </el-tooltip>
+  </g-tooltip>
 </template>
 <script lang="ts" setup>
 import {
@@ -172,18 +172,19 @@ import {
   useFocusController,
   useLocale,
   useNamespace,
-} from "@element-plus";
-import { useFormItem, useFormSize } from "@element-plus/components/form";
-import ElInput from "@element-plus/components/input";
+  useFormSize,
+} from "element-plus";
+import { useFormItem } from "@flash-global66/g-form";
+import ElInput from "@flash-global66/g-input";
 import ElIcon from "@element-plus/components/icon";
-import ElTooltip from "@element-plus/components/tooltip";
-import { NOOP, debugWarn, isArray } from "@element-plus";
-import { EVENT_CODE } from "@element-plus/constants";
+import GTooltip from "@flash-global66/g-tooltip";
+import { NOOP, debugWarn, isArray } from "element-plus/es/utils/index";
+import { EVENT_CODE } from "element-plus/es/constants/index.mjs";
 import { Calendar, Clock } from "@element-plus/icons-vue";
 import { dayOrDaysToDate, formatter, parseDate, valueEquals } from "../utils";
 import { timePickerDefaultProps } from "./props";
 import PickerRangeTrigger from "./picker-range-trigger.vue";
-import type { InputInstance } from "@element-plus/components/input";
+import type { InputInstance } from "@flash-global66/g-input";
 
 import type { Dayjs } from "dayjs";
 import type { ComponentPublicInstance, Ref } from "vue";
@@ -196,7 +197,7 @@ import type {
   TimePickerDefaultProps,
   UserInput,
 } from "./props";
-import type { TooltipInstance } from "@element-plus/components/tooltip";
+import type { TooltipInstance } from "@flash-global66/g-tooltip";
 
 defineOptions({
   name: "Picker",

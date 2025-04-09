@@ -80,12 +80,12 @@
 <script lang="ts" setup>
 import { computed, inject, nextTick, onMounted, ref, unref, watch } from "vue";
 import { debounce } from "lodash-unified";
-import { vRepeatClick } from "@element-plus/directives";
+import { vRepeatClick } from "element-plus";
 import ElScrollbar from "@element-plus/components/scrollbar";
 import ElIcon from "@element-plus/components/icon";
 import { ArrowDown, ArrowUp } from "@element-plus/icons-vue";
-import { useNamespace } from "@element-plus";
-import { getStyle, isNumber } from "@element-plus";
+import { useNamespace } from "element-plus";
+import { getStyle, isNumber } from "element-plus/es/utils/index.mjs";
 import { timeUnits } from "../constants";
 import { buildTimeList } from "../utils";
 import { basicTimeSpinnerProps } from "../props/basic-time-spinner";

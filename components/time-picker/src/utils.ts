@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { isArray, isDate, isEmpty } from "@element-plus";
+import { isArray, isDate, isEmpty } from "element-plus/es/utils/index.mjs";
 
 import type { Dayjs } from "dayjs";
 import type { DateOrDates, DayOrDays } from "./common/props";

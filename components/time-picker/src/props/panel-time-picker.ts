@@ -1,4 +1,4 @@
-import { buildProps, definePropType } from "@element-plus";
+import { buildProps, definePropType } from "element-plus/es/utils/index";
 import { timePanelSharedProps } from "./shared";
 
 import type { ExtractPropTypes } from "vue";

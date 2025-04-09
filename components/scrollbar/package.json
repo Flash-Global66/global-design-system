@@ -1,7 +1,7 @@
 {
-  "name": "@flash-global66/g-date-picker",
+  "name": "@flash-global66/g-scrollbar",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.0.1",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -10,7 +10,7 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/date-picker.styles.scss",
+    "./styles.scss": "./src/scrollbar.styles.scss",
     "./*": "./*"
   },
   "files": [
@@ -29,7 +29,7 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "peerDependencies": {
-    "dayjs": "^1.11.13",
+    "@vueuse/core": "^12.4.0",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },

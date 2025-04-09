@@ -1,13 +1,13 @@
 import { placements } from "@popperjs/core";
-import { buildProps, definePropType } from "@element-plus";
-import { useAriaProps, useEmptyValuesProps, useSizeProp } from "@element-plus";
+import { buildProps, definePropType } from "element-plus/es/utils/index";
+import { useAriaProps, useEmptyValuesProps, useSizeProp } from "element-plus";
 import { CircleClose } from "@element-plus/icons-vue";
 import { disabledTimeListsProps } from "../props/shared";
 
 import type { Component, ExtractPropTypes } from "vue";
 import type { Options } from "@popperjs/core";
 import type { Dayjs } from "dayjs";
-import type { Placement } from "@element-plus/components/popper";
+import type { Placement } from "@flash-global66/g-popper";
 
 export type SingleOrRange<T> = T | [T, T];
 export type DateModelType = number | string | Date;
