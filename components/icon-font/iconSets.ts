@@ -99,9 +99,6 @@ export const ICON_SETS = {
     'triangle',
     'lightbulb',
     'spinner',
-    'ellipsis',
-    'angles-right',
-    'angles-left',
   ] as const,
 
   regular: [
@@ -169,7 +166,10 @@ export const ICON_SETS = {
     'shield-xmark',
     'shield',
     'trash-xmark',
-    'trash'
+    'trash',
+    'ellipsis',
+    'angles-right',
+    'angles-left',
   ] as const,
 
   light: [
