@@ -31,13 +31,6 @@ import { IconString } from '@flash-global66/g-icon-font';
  */
 const isAbsent = (v: unknown): v is undefined => typeof v !== 'number'
 
-type LayoutKey =
-  | 'prev'
-  | 'pager'
-  | 'next'
-  | '->'
-  | 'slot'
-
 export const paginationProps = buildProps({
   /**
    * @description options of item count per page
@@ -78,15 +71,6 @@ export const paginationProps = buildProps({
    * @description default initial value of current-page, not setting is the same as setting 1
    */
   defaultCurrentPage: Number,
-  /**
-   * @description layout of Pagination, elements separated with a comma
-   */
-  layout: {
-    type: String,
-    default: (
-      ['prev', 'pager', 'next', '->'] as LayoutKey[]
-    ).join(', '),
-  },
   /**
    * @description custom class name for the page size Select's dropdown
    */
@@ -169,31 +153,7 @@ export default defineComponent({
       // Users have to use two way binding of `currentPage`
       // If users just want to provide a default value, `defaultCurrentPage` is here for you
       if (!isAbsent(props.currentPage) && !hasCurrentPageListener) return false
-      // When you want to change sizes, things get more complex, detailed below
-      // Basically the most important value we need is page count
-      // either directly from props.pageCount
-      // or calculated from props.total
-      // we will take props.pageCount precedence over props.total
-      if (props.layout.includes('sizes')) {
-        if (!isAbsent(props.pageCount)) {
-          // if props.pageCount is assign by user, then user have to watch pageSize change
-          // and recalculate pageCount
-          if (!hasPageSizeListener) return false
-        } else if (!isAbsent(props.total)) {
-          // Otherwise, we will see if user have props.pageSize defined
-          // If so, meaning user want to have pageSize controlled himself/herself from component
-          // Thus page size listener is required
-          // users are account for page size change
-          if (!isAbsent(props.pageSize)) {
-            if (!hasPageSizeListener) {
-              return false
-            }
-          } else {
-            // (else block just for explaination)
-            // else page size is controlled by el-pagination internally
-          }
-        }
-      }
+      
       return true
     })
 
@@ -310,79 +270,38 @@ export default defineComponent({
         debugWarn(componentName, 'Deprecated usages detected, please refer to the el-pagination documentation for more details')
         return null
       }
-      if (!props.layout) return null
       if (props.hideOnSinglePage && pageCountBridge.value <= 1) return null
-      const rootChildren: Array<VNode | VNode[] | null> = []
-      const rightWrapperChildren: Array<VNode | VNode[] | null> = []
-      const rightWrapperRoot = h(
-        'div',
-        { class: ns.e('rightwrapper') },
-        rightWrapperChildren
-      )
-      const TEMPLATE_MAP: Record<
-        Exclude<LayoutKey, '->'>,
-        VNode | VNode[] | null
-      > = {
-        prev: h(Prev, {
-          disabled: props.disabled,
-          currentPage: currentPageBridge.value,
-          prevIcon: props.prevIcon,
-          onClick: prev,
-        }),
-        pager: h(Pager, {
-          currentPage: currentPageBridge.value,
-          pageCount: pageCountBridge.value,
-          pagerCount: props.pagerCount,
-          onChange: handleCurrentChange,
-          disabled: props.disabled,
-        }),
-        next: h(Next, {
-          disabled: props.disabled,
-          currentPage: currentPageBridge.value,
-          pageCount: pageCountBridge.value,
-          nextIcon: props.nextIcon,
-          onClick: next,
-        }),
-        slot: slots?.default?.() ?? null,
-      }
 
-      const components = props.layout
-        .split(',')
-        .map((item: string) => item.trim()) as LayoutKey[]
-
-      let haveRightWrapper = false
-
-      components.forEach((c) => {
-        if (c === '->') {
-          haveRightWrapper = true
-          return
-        }
-        if (!haveRightWrapper) {
-          rootChildren.push(TEMPLATE_MAP[c])
-        } else {
-          rightWrapperChildren.push(TEMPLATE_MAP[c])
-        }
+      const prevComponent = h(Prev, {
+        disabled: props.disabled,
+        currentPage: currentPageBridge.value,
+        prevIcon: props.prevIcon,
+        onClick: prev,
       })
-
-      addClass(rootChildren[0], ns.is('first'))
-      addClass(rootChildren[rootChildren.length - 1], ns.is('last'))
-
-      if (haveRightWrapper && rightWrapperChildren.length > 0) {
-        addClass(rightWrapperChildren[0], ns.is('first'))
-        addClass(
-          rightWrapperChildren[rightWrapperChildren.length - 1],
-          ns.is('last')
-        )
-        rootChildren.push(rightWrapperRoot)
-      }
+      
+      const pagerComponent = h(Pager, {
+        currentPage: currentPageBridge.value,
+        pageCount: pageCountBridge.value,
+        pagerCount: props.pagerCount,
+        onChange: handleCurrentChange,
+        disabled: props.disabled,
+      })
+      
+      const nextComponent = h(Next, {
+        disabled: props.disabled,
+        currentPage: currentPageBridge.value,
+        pageCount: pageCountBridge.value,
+        nextIcon: props.nextIcon,
+        onClick: next,
+      })
+      
+      addClass(prevComponent, ns.is('first'))
+      addClass(nextComponent, ns.is('last'))
+      
       return h(
         'div',
-        {
-          class: [
-            ns.b(),
-          ],
-        },
-        rootChildren
+        { class: [ns.b()] },
+        [prevComponent, pagerComponent, nextComponent]
       )
     }
   },
