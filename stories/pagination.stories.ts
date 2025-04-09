@@ -61,6 +61,16 @@ import '@flash-global66/g-pagination/styles.scss'
         defaultValue: { summary: 'undefined' }
       }
     },
+    align: {
+      description: 'Alineación del componente',
+      control: 'select',
+      options: ['left', 'center', 'right'],
+      table: {
+        category: 'Estado y Control',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'left' }
+      }
+    },
     pageSize: {
       name: 'page-size / v-model:page-size',
       description: 'Número de elementos por página. requiere listener (update:current-size) para cambios',
@@ -165,6 +175,7 @@ import '@flash-global66/g-pagination/styles.scss'
   },
   args: {
     total: 1000,
+    align: 'left',
     pagerCount: 7,
     disabled: false,
     hideOnSinglePage: true,
@@ -191,9 +202,7 @@ export const Basic: Story = {
     },
     template: `
       <g-config-provider>
-        <div class="flex flex-col items-center gap-4">
-          <g-pagination v-bind="args" />
-        </div>
+        <g-pagination v-bind="args" />
       </g-config-provider>
     `
   })
