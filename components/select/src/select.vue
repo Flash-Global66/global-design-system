@@ -265,7 +265,7 @@
       </g-tooltip>
     </div>
     <div v-if="hasHelpInfo" :class="[nsSelect.e('help')]">
-      <slot name="helpText" :error="error" :selectError="selectError">
+      <slot name="helpText" :selectError="selectError">
         <p :key="selectError ? 'error' : 'help'" :class="helpTextKls">
           {{ selectError ? descriptionError : helpText }}
         </p>
