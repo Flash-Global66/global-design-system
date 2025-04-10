@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.2...@flash-global66/g-select@0.1.3) (2025-04-10)
+
+
+### Bug Fixes
+
+* **input/select:** updating label background of both components ([1b8348d](https://github.com/Flash-Global66/global-design-system/commit/1b8348db7ccca1dd7ada03e9da61c31c60e7a84a))
+
+
+
+
+
 ## [0.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.1...@flash-global66/g-select@0.1.2) (2025-04-07)
 
 
