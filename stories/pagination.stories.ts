@@ -7,7 +7,7 @@ import { GPagination } from '@flash-global66/g-pagination/index.ts'
 import { GButton } from '@flash-global66/g-button/index.ts'
 
 // config provider
-import { GConfigProvider } from '../components/config-provider'
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts'
 
 const meta = {
   title: 'Data/Pagination',
@@ -329,7 +329,7 @@ export const CardPagination: Story = {
               </div>
               
               <div class="bg-gray-50 p-4 border-t border-grey-200 flex justify-end">
-                <g-button size="small">Ver detalles</g-button>
+                <g-button>Ver detalles</g-button>
               </div>
             </div>
           </div>
