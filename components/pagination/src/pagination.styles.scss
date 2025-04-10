@@ -20,11 +20,11 @@
   }
 
   &:hover {
-    @apply text-primary-def-hover;
+    @apply text-everBlue-400;
   }
 
   &.is-active {
-    @apply text-primary-def-hover underline cursor-default font-semibold;
+    @apply text-everBlue-500 underline cursor-default font-semibold;
 
     &.is-disabled {
       @apply text-disabled-txt font-bold;
