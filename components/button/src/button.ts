@@ -2,8 +2,6 @@ import type { ExtractPropTypes, PropType } from "vue";
 import { buildProps, debugWarn, isBoolean, isString } from "element-plus/es/utils/index";
 import type {
   ButtonSize,
-  ButtonColor,
-  ButtonType,
   ButtonVariant,
   ButtonNativeType,
 } from "./button.type";
@@ -76,6 +74,13 @@ export const buttonProps = buildProps({
     default: "primary",
   },
   /**
+   * button size `sm / md`
+   */
+  size: {
+    type: String as PropType<ButtonSize>,
+    default: "md",
+  },
+  /**
    * loading state for the button
    */
   loading: {
@@ -118,28 +123,6 @@ export const buttonProps = buildProps({
     default: "",
   },
   /**
-   * @deprecated use `variant` instead
-   * button type `default / outlined / ghost / icon`
-   */
-  type: {
-    type: String as PropType<ButtonType>,
-    default: "default",
-  },
-  /**
-   * @deprecated Use `variant` prop instead
-   */
-  color: {
-    type: String as PropType<ButtonColor>,
-    default: "primary",
-  },
-  /**
-   * @deprecated The button now has a single standard size
-   */
-  size: {
-    type: String as PropType<ButtonSize>,
-    default: "small",
-  },
-  /**
    * Accessible label for the button when the visual text is not descriptive enough
    */
   ariaLabel: {
@@ -157,10 +140,19 @@ export type ButtonEmits = typeof buttonEmits;
 
 export function validateButtonProps(props: ButtonProps) {
   const allowedVariants = ["primary", "secondary", "tertiary"];
+  const allowedSizes = ["sm", "md"];
+
   if (!isString(props.variant) || !allowedVariants.includes(props.variant)) {
     debugWarn(
       "Button",
       `Invalid prop "variant": expected one of ${allowedVariants.join(", ")}, but received "${props.variant}".`
+    );
+  }
+
+  if (!allowedSizes.includes(props.size)) {
+    debugWarn(
+      "Button",
+      `Invalid prop "size": expected one of ${allowedSizes.join(", ")}, but received "${props.size}".`
     );
   }
 
