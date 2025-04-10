@@ -75,16 +75,16 @@
         </span>
       </slot>
     </div>
-    <slot name="helpText">
-      <div v-if="hasHelpInfo" :class="[ns.e('help')]">
+    <div v-if="hasHelpInfo" :class="[ns.e('help')]">
+      <slot name="helpText">
         <p :key="isError ? 'error' : 'help'" :class="helpTextKls">
           {{ isError ? error : helpText }}
         </p>
-        <span v-if="isWordLimitVisible" :class="ns.e('help-count')">
-          {{ textLength }}/{{ maxlength }}
-        </span>
-      </div>
-    </slot>
+      </slot>
+      <span v-if="isWordLimitVisible" :class="ns.e('help-count')">
+        {{ textLength }}/{{ maxlength }}
+      </span>
+    </div>
   </div>
 </template>
 
