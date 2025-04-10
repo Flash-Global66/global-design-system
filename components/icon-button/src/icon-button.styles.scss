@@ -121,7 +121,7 @@
 }
 
 .hover-effect {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-center bg-opacity-20 opacity-20 ease-out -z-10;
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-center bg-opacity-20 opacity-20 ease-out;
   transition: background 0.8s, width 0.4s, height 0.4s;
 
   // Ripple effect

@@ -19,8 +19,9 @@
 
   @each $status in (focus, complete) {
     @include when($status) {
-      @include e('label') {
-        @apply text-2 left-xs bg-white font-medium;
+      @include e("label") {
+        @apply text-2 left-xs font-medium;
+        background: linear-gradient(180deg, transparent 40%, white 0);
         top: 0;
         transform: translateY(-50%);
         padding: 0 2px;
@@ -34,11 +35,11 @@
   }
 
   @include when(focus) {
-    @include e('label') {
+    @include e("label") {
       // PREGUNTAR: por el semantic token
       @apply text-everBlue-500;
     }
-    @include e('wrapper') {
+    @include e("wrapper") {
       @apply border-everBlue-500;
     }
     @include e("inner") {
@@ -47,29 +48,29 @@
   }
 
   @include when(complete) {
-    @include e('label') {
+    @include e("label") {
       @apply text-secondary-txt;
     }
-    @include e('wrapper') {
+    @include e("wrapper") {
       @apply border-secondary-bd;
     }
   }
 
   @include when(disabled) {
-    @include e('label') {
+    @include e("label") {
       @apply text-disabled-txt;
     }
-    @include e('wrapper') {
+    @include e("wrapper") {
       // PREGUNTAR: por el semantic token
       @apply bg-primary-def-disabled border-grey-400;
     }
   }
 
   @include when(error) {
-    @include e('label') {
+    @include e("label") {
       @apply text-error-txt;
     }
-    @include e('wrapper') {
+    @include e("wrapper") {
       @apply border-error-bd;
     }
     @include e("help") {
@@ -78,7 +79,7 @@
   }
 
   @include when(exceed) {
-    @include e('help-count') {
+    @include e("help-count") {
       @apply text-error-txt;
     }
   }
@@ -112,7 +113,7 @@
       @apply outline-none;
     }
     // override edge default style
-    &[type='password']::-ms-reveal {
+    &[type="password"]::-ms-reveal {
       @apply hidden;
     }
 
@@ -133,8 +134,6 @@
     @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
     min-height: 18px;
   }
-
-
 
   @include e("help-text") {
     @apply line-clamp-2;
