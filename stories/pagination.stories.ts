@@ -4,7 +4,7 @@ import { StoryObj } from '@storybook/vue3'
 
 // components
 import { GPagination } from '@flash-global66/g-pagination/index.ts'
-import { GButton } from '@flash-global66/g-button'
+import { GButton } from '@flash-global66/g-button/index.ts'
 
 // config provider
 import { GConfigProvider } from '../components/config-provider'
