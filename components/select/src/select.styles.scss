@@ -1,31 +1,31 @@
-@use 'sass:map';
+@use "sass:map";
 
-@use 'element-plus/theme-chalk/src/select-v2.scss' as *;
-@use 'element-plus/theme-chalk/src/scrollbar.scss' as *;
-@use 'element-plus/theme-chalk/src/virtual-list.scss' as *;
-@use 'element-plus/theme-chalk/src/option.scss' as *;
-@use 'element-plus/theme-chalk/src/tooltip-v2.scss' as *;
-@use 'element-plus/theme-chalk/src/popper.scss' as *;
-@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
-@use 'element-plus/theme-chalk/src/mixins/utils' as *;
-@use 'element-plus/theme-chalk/src/mixins/var' as *;
-@use 'element-plus/theme-chalk/src/common/var' as *;
+@use "element-plus/theme-chalk/src/select-v2.scss" as *;
+@use "element-plus/theme-chalk/src/scrollbar.scss" as *;
+@use "element-plus/theme-chalk/src/virtual-list.scss" as *;
+@use "element-plus/theme-chalk/src/option.scss" as *;
+@use "element-plus/theme-chalk/src/tooltip-v2.scss" as *;
+@use "element-plus/theme-chalk/src/popper.scss" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
 
 .selectContainer {
   @apply flex flex-col gap-xxs;
 }
 
-@include b('select') {
-  @include e('wrapper') {
+@include b("select") {
+  @include e("wrapper") {
     @apply h-12 p-sm rounded-md gap-xs border-disabled-bd border relative shadow-none;
 
-    @include e('label') {
+    @include e("label") {
       @apply absolute text-terciary-txt text-4 transition-all duration-200 ease-in font-medium;
       top: 50%;
       transform: translateY(-50%);
     }
 
-    @include e('input') {
+    @include e("input") {
       @apply text-secondary-txt text-4 font-medium caret-everBlue-500;
     }
 
@@ -42,20 +42,21 @@
     @include when(focused) {
       @apply shadow-none border-everBlue-500;
 
-      @include e('label') {
+      @include e("label") {
         @apply text-everBlue-500 !important;
       }
     }
 
     @each $status in (focused, complete) {
       @include when($status) {
-        @include e('label') {
-          @apply text-2 left-xs bg-white font-medium text-secondary-txt;
+        @include e("label") {
+          @apply text-2 left-xs font-medium text-secondary-txt;
+          background: linear-gradient(180deg, transparent 40%, white 0);
           top: 0;
           transform: translateY(-50%);
           padding: 0 2px;
         }
-        @include e('selected-item') {
+        @include e("selected-item") {
           @include when(transparent) {
             @apply opacity-100;
           }
@@ -70,51 +71,51 @@
         @apply shadow-none;
       }
 
-      @include e('label') {
+      @include e("label") {
         @apply text-disabled-txt;
       }
     }
   }
 
   @include when(error) {
-    @include e('label') {
+    @include e("label") {
       @apply text-error-txt !important;
     }
-    @include e('wrapper') {
+    @include e("wrapper") {
       @apply border-error-bd;
     }
   }
 
-  @include e('selection') {
+  @include e("selection") {
     @apply static;
   }
 
-  @include e('prefix') {
+  @include e("prefix") {
     & svg {
       @apply text-7 text-gray-500 w-5;
     }
   }
 
-  @include e('suffix') {
+  @include e("suffix") {
     & svg {
       @apply text-7 text-gray-500;
     }
   }
 
-  @include e('help') {
+  @include e("help") {
     @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
     min-height: 18px;
   }
 
-  @include e('help-text') {
+  @include e("help-text") {
     @apply line-clamp-2;
   }
 
-  @include e('help-error') {
+  @include e("help-error") {
     @apply text-error-txt;
   }
 
-  @include e('selected-item') {
+  @include e("selected-item") {
     @apply w-9/12 text-4 text-primary-txt font-medium transition-all duration-200 ease-in;
 
     @include when(transparent) {
@@ -122,7 +123,7 @@
     }
   }
 
-  @include e('popper') {
+  @include e("popper") {
     & .gui-popper__arrow {
       @apply left-5 shadow-none !important;
       &::before {
@@ -139,21 +140,21 @@
   }
 }
 
-@include b('select-dropdown') {
+@include b("select-dropdown") {
   @apply my-xs;
-  @include e('item') {
+  @include e("item") {
     @apply min-h-12 p-md flex items-center justify-start transition-all duration-200 ease-in !important;
 
-    @include m('content') {
+    @include m("content") {
       @apply flex items-start justify-center flex-col overflow-hidden;
     }
-    @include m('icon') {
+    @include m("icon") {
       @apply text-7 text-secondary-txt mr-md;
     }
-    @include m('title') {
+    @include m("title") {
       @apply text-4 text-secondary-txt font-medium overflow-hidden text-ellipsis w-full;
     }
-    @include m('description') {
+    @include m("description") {
       @apply text-2 text-terciary-txt font-medium text-pretty line-clamp-2 overflow-hidden text-ellipsis;
     }
 
@@ -184,18 +185,18 @@
     }
   }
 
-  @include e('loading') {
+  @include e("loading") {
     & svg {
       @apply text-7 text-gray-500;
     }
   }
 
-  @include e('empty') {
+  @include e("empty") {
     @apply flex items-center justify-center flex-col py-md px-sm gap-xxs;
-    @include m('title') {
+    @include m("title") {
       @apply text-4 text-secondary-txt font-semibold;
     }
-    @include m('description') {
+    @include m("description") {
       @apply text-3 text-terciary-txt font-medium text-pretty;
     }
   }
