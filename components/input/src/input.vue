@@ -76,7 +76,7 @@
       </slot>
     </div>
     <div v-if="hasHelpInfo" :class="[ns.e('help')]">
-      <slot name="helpText" :error="error" :helpText="helpText">
+      <slot name="helpText" :error="error" :isError="isError">
         <p :key="isError ? 'error' : 'help'" :class="helpTextKls">
           {{ isError ? error : helpText }}
         </p>
