@@ -2,10 +2,9 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 
 import { GScrollbar } from "../components/scrollbar/index.ts";
 import { GConfigProvider } from "../components/config-provider";
-import { ref } from "vue";
 
 const meta: Meta<typeof GScrollbar> = {
-  title: "Navigation/Scrollbar",
+  title: "Basic/Scrollbar",
   component: GScrollbar,
   parameters: {
     docs: {

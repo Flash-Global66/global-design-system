@@ -67,8 +67,8 @@ let stopResizeListener: (() => void) | undefined = undefined;
 let wrapScrollTop = 0;
 let wrapScrollLeft = 0;
 
-const scrollbarRef = ref<HTMLDivElement>();
-const wrapRef = ref<HTMLDivElement>();
+const scrollbarRef = ref<HTMLDivElement | any>();
+const wrapRef = ref<HTMLDivElement | any>();
 const resizeRef = ref<HTMLElement>();
 const barRef = ref<BarInstance>();
 

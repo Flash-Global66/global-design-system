@@ -1,18 +1,18 @@
-@use 'element-plus/theme-chalk/src/radio.scss' as *;
-@use "element-plus/theme-chalk/src/radio-group.scss" as * ;
-@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
-@use 'element-plus/theme-chalk/src/mixins/utils' as *;
-@use 'element-plus/theme-chalk/src/mixins/var' as *;
-@use 'element-plus/theme-chalk/src/common/var' as *;
+@use "element-plus/theme-chalk/src/radio.scss" as *;
+@use "element-plus/theme-chalk/src/radio-group.scss" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
 
-@include b('radio') {
+@include b("radio") {
   @apply text-3 gap-xxs m-0 h-fit items-center;
 
   @include e(label) {
     @apply p-0 text-secondary-txt text-pretty relative -top-0.5;
   }
 
-  @include when('checked') {
+  @include when("checked") {
     &:not(.is-disabled) {
       @include e(label) {
         @apply text-secondary-txt;
@@ -74,7 +74,7 @@
     }
 
     & .hover-effect {
-      @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-primary-def-hover bg-center bg-opacity-20 opacity-20 ease-out -z-10;
+      @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-primary-def-hover bg-center bg-opacity-20 opacity-20 ease-out;
       transition: background 0.8s, width 0.4s, height 0.4s;
 
       & .ripple {

@@ -105,8 +105,6 @@ const startDrag = (e: MouseEvent) => {
   document.addEventListener("mouseup", mouseUpDocumentHandler);
   originalOnSelectStart = document.onselectstart;
   document.onselectstart = () => false;
-
-  console.log("Hola");
 };
 
 const mouseMoveDocumentHandler = (e: MouseEvent) => {
