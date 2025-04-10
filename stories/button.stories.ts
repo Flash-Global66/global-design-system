@@ -35,6 +35,16 @@ Ejemplo de uso básico:
         category: 'Principales'
       }
     },
+    size: {
+      control: 'select',
+      options: ['sm', 'md'],
+      description: 'Tamaño del botón',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'md' },
+        category: 'Principales'
+      }
+    },
     title: {
       control: 'text',
       description: 'Texto del botón (preferencia sobre el slot)',
@@ -176,16 +186,6 @@ Ejemplo de uso básico:
         type: { summary: 'string | Component' }
       }
     },
-    // Se añade información de deprecated al final de la tabla:
-    'Deprecated Info': {
-      table: {
-        category: 'Deprecated',
-        // El order mayor coloca la fila al final
-        order: 999
-      },
-      description:
-        "⚠️ Las props 'size', 'type' y 'color' estan deprecadas . Utilizar prop 'variant'."
-    }
   }
 } as Meta<typeof GButton>
 
@@ -283,5 +283,85 @@ export const WithIcons = () => ({
           />
         </div>
       </div>
+  `
+})
+
+export const Sizes = () => ({
+  components: { GButton },
+  template: `
+    <div class="space-y-8">
+      <div class="space-y-2">
+        <h3 class="text-lg font-bold">Button Sizes</h3>
+        <div class="flex gap-4 items-center">
+          <g-button 
+            variant="primary" 
+            size="sm" 
+            title="Small Button"
+          />
+          <g-button 
+            variant="primary" 
+            size="md" 
+            title="Medium Button"
+          />
+        </div>
+      </div>
+    </div>
+  `
+})
+
+export const IconSizes = () => ({
+  components: { GButton },
+  template: `
+    <div class="space-y-8">
+      <div class="space-y-2">
+        <h3 class="text-lg font-bold">Botones pequeños con iconos</h3>
+        <div class="flex gap-4 items-center">
+          <g-button 
+            variant="primary" 
+            size="sm" 
+            title="Icon Left"
+            icon-left="solid arrow-left"
+          />
+          <g-button 
+            variant="secondary" 
+            size="sm" 
+            title="Icon Right"
+            icon-right="solid arrow-right"
+          />
+          <g-button 
+            variant="tertiary" 
+            size="sm" 
+            title="Both Icons"
+            icon-left="solid check"
+            icon-right="solid arrow-right"
+          />
+        </div>
+      </div>
+      
+      <div class="space-y-2 mt-8">
+        <h3 class="text-lg font-bold">Botones medianos con iconos</h3>
+        <div class="flex gap-4 items-center">
+          <g-button 
+            variant="primary" 
+            size="md" 
+            title="Icon Left"
+            icon-left="solid arrow-left"
+          />
+          <g-button 
+            variant="secondary" 
+            size="md" 
+            title="Icon Right"
+            icon-right="solid arrow-right"
+          />
+          <g-button 
+            variant="tertiary" 
+            size="md" 
+            title="Both Icons"
+            icon-left="solid check"
+            icon-right="solid arrow-right"
+          />
+        </div>
+      </div>
+    </div>
   `
 })
