@@ -57,24 +57,24 @@
         @click.stop
       >
         <template #prefix>
-          <el-icon
+          <g-icon-font
+            style="height: 1rem"
             v-if="triggerIcon"
             :class="nsInput.e('icon')"
             @mousedown.prevent="onMouseDownInput"
             @touchstart.passive="onTouchStartInput"
-          >
-            <component :is="triggerIcon" />
-          </el-icon>
+            :name="isTimeLikePicker ? 'regular clock' : 'regular calendar'"
+          />
         </template>
         <template #suffix>
-          <el-icon
+          <g-icon-font
+            style="height: 1rem"
             v-if="showClose && clearIcon"
             :class="`${nsInput.e('icon')} clear-icon`"
             @mousedown.prevent="NOOP"
             @click="onClearIconClick"
-          >
-            <component :is="clearIcon" />
-          </el-icon>
+            name="regular times"
+          />
         </template>
       </el-input>
       <picker-range-trigger
@@ -107,12 +107,12 @@
         @keydown="handleKeydownInput"
       >
         <template #prefix>
-          <el-icon
+          <g-icon-font
+            style="height: 1rem"
             v-if="triggerIcon"
             :class="[nsInput.e('icon'), nsRange.e('icon')]"
-          >
-            <component :is="triggerIcon" />
-          </el-icon>
+            :name="isTimeLikePicker ? 'regular clock' : 'regular calendar'"
+          />
         </template>
         <template #range-separator>
           <slot name="range-separator">
@@ -120,14 +120,14 @@
           </slot>
         </template>
         <template #suffix>
-          <el-icon
+          <g-icon-font
+            style="height: 1rem"
             v-if="clearIcon"
             :class="clearIconKls"
             @mousedown.prevent="NOOP"
             @click="onClearIconClick"
-          >
-            <component :is="clearIcon" />
-          </el-icon>
+            name="regular times"
+          />
         </template>
       </picker-range-trigger>
     </template>
@@ -153,6 +153,7 @@
     </template>
   </g-tooltip>
 </template>
+
 <script lang="ts" setup>
 import {
   computed,
@@ -176,7 +177,7 @@ import {
 } from "element-plus";
 import { useFormItem } from "@flash-global66/g-form";
 import ElInput from "@flash-global66/g-input";
-import ElIcon from "@element-plus/components/icon";
+import { GIconFont } from "@flash-global66/g-icon-font";
 import GTooltip from "@flash-global66/g-tooltip";
 import { NOOP, debugWarn, isArray } from "element-plus/es/utils/index";
 import { EVENT_CODE } from "element-plus/es/constants/index.mjs";
@@ -442,7 +443,9 @@ const isMonthsPicker = computed(() => props.type === "months");
 const isYearsPicker = computed(() => props.type === "years");
 
 const triggerIcon = computed(
-  () => props.prefixIcon || (isTimeLikePicker.value ? Clock : Calendar)
+  () =>
+    props.prefixIcon ||
+    (isTimeLikePicker.value ? "regular clock" : "regular calendar")
 );
 
 const showClose = ref(false);
