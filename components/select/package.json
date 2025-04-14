@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-select",
   "author": "Global66",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "license": "MIT",
   "buildable": true,
   "exports": {

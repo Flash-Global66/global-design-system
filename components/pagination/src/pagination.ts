@@ -15,7 +15,7 @@ import {
 import {
   useGlobalSize,
   useNamespace,
-} from 'element-plus/es/hooks/index.mjs'
+} from 'element-plus'
 import { CHANGE_EVENT } from 'element-plus/es/constants/index.mjs'
 import { elPaginationKey } from './constants'
 
