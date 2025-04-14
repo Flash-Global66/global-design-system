@@ -1,0 +1,38 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b(search-input) {
+  @apply w-full;
+
+  @include e(input) {
+    .gui-input__icon {
+      @apply cursor-pointer;
+    }
+  }
+
+  @include e(icon-container) {
+    @apply flex items-center justify-center w-5 h-5 cursor-pointer;
+  }
+
+  @include e(icon) {
+    @apply text-grey-500;
+  }
+
+  @include when(preloading) {
+    @apply pointer-events-none;
+  }
+
+  @include when(disabled) {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  @include when(loading) {
+    .gui-input__inner {
+      @apply cursor-wait;
+    }
+  }
+}
