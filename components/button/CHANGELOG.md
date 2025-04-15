@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.2.0...@flash-global66/g-button@0.3.0) (2025-04-15)
+
+
+### Bug Fixes
+
+* adjust icon text size for small button variant ([d8f51b5](https://github.com/Flash-Global66/global-design-system/commit/d8f51b5de099456090729c37a99822c28a2348f3))
+
+
+### Features
+
+* **button:** update button styles and add icon size examples in stories ([3b6cdba](https://github.com/Flash-Global66/global-design-system/commit/3b6cdbaa1f1df8b13c899f1cee399050a414cc61))
+* update button component to support new size options and remove deprecated properties ([db6f050](https://github.com/Flash-Global66/global-design-system/commit/db6f050b17b4ae65c942749a72d77cfd5022993d))
+
+
+
+
+
 # [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.1.0...@flash-global66/g-button@0.2.0) (2025-04-10)
 
 
