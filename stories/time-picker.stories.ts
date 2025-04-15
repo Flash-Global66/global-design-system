@@ -199,41 +199,13 @@ dayjs.extend(customParseFormat)
     },
 
     // 5. Etiquetas y Texto
-    placeholder: {
-      description: "Placeholder en modo simple",
+    label: {
+      description: "Label en modo simple",
       control: "text",
       table: {
         category: "Etiquetas y Texto",
         type: { summary: "string" },
         defaultValue: { summary: "" },
-      },
-    },
-    startPlaceholder: {
-      name: "start-placeholder",
-      description: "Placeholder para hora inicial en modo rango",
-      control: "text",
-      table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-      },
-    },
-    endPlaceholder: {
-      name: "end-placeholder",
-      description: "Placeholder para hora final en modo rango",
-      control: "text",
-      table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-      },
-    },
-    rangeSeparator: {
-      name: "range-separator",
-      description: "Separador entre horas en modo rango",
-      control: "text",
-      table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-        defaultValue: { summary: "-" },
       },
     },
 
@@ -386,8 +358,10 @@ dayjs.extend(customParseFormat)
     },
   },
   args: {
-    placeholder: "Seleccione hora",
+    label: "Seleccione hora",
     format: "HH:mm:ss",
+    startPlaceholder: "Hora inicio",
+    endPlaceholder: "Hora fin",
     clearable: true,
   },
 };
@@ -442,8 +416,9 @@ export const Range: Story = {
             is-range
             start-placeholder="Hora inicio"
             end-placeholder="Hora fin"
-            range-separator="a"
-            format="HH:mm"
+            label="Seleccione rango"
+            range-separator="|"
+            format="HH:mm:ss"
           />
           <div>Rango seleccionado: {{ value }}</div>
         </div>
@@ -502,7 +477,7 @@ export const DisabledTimes: Story = {
         <div class="flex flex-col gap-4">
           <g-time-picker
             v-model="value"
-            placeholder="Seleccione hora"
+            label="Seleccione hora"
             :disabled-hours="disabledHours"
             :disabled-minutes="disabledMinutes"
             :disabled-seconds="disabledSeconds"
@@ -527,7 +502,7 @@ export const CustomFormat: Story = {
 
 - Formato de 12 horas con AM/PM
 - Valor en formato ISO8601
-- Placeholder que coincide con el formato`,
+- Label que coincide con el formato`,
       },
     },
   },
@@ -547,11 +522,10 @@ export const CustomFormat: Story = {
             v-model="value"
             :format="format"
             :value-format="valueFormat"
-            placeholder="Ej: 02:30 PM"
+            label="Ej: 02:30 PM"
           />
           <div>
             <p>Valor mostrado: {{ value }}</p>
-            <p>Valor real (ISO8601): {{ new Date(value).toISOString() }}</p>
           </div>
         </div>
       </g-config-provider>
@@ -599,36 +573,36 @@ export const States: Story = {
           <div class="grid grid-cols-2 gap-4">
             <g-time-picker
               v-model="time"
-              placeholder="Normal"
+              label="Normal"
             />
             
             <g-time-picker
               v-model="timeDisabled"
-              placeholder="Deshabilitado"
+              label="Deshabilitado"
               disabled
             />
             
             <g-time-picker
               v-model="timeReadonly"
-              placeholder="Solo lectura"
+              label="Solo lectura"
               readonly
             />
             
             <g-time-picker
               v-model="timeError"
-              placeholder="Con error"
+              label="Con error"
               :validate-event="false"
             />
             
             <g-time-picker
               v-model="timeSmall"
-              placeholder="Pequeño"
+              label="Pequeño"
               size="small"
             />
             
             <g-time-picker
               v-model="timeLarge"
-              placeholder="Grande"
+              label="Grande"
               size="large"
             />
           </div>
@@ -662,7 +636,7 @@ export const WithPrefixIcon: Story = {
         <div class="flex flex-col gap-4">
           <g-time-picker
             v-model="value"
-            placeholder="Seleccione hora"
+            label="Seleccione hora"
             prefix-icon="regular clock"
             clearable
           />

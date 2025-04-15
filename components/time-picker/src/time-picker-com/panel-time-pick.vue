@@ -23,14 +23,14 @@
           :class="[ns.be('panel', 'btn'), 'cancel']"
           @click="handleCancel"
         >
-          {{ t("el.datepicker.cancel") }}
+          Cancelar
         </button>
         <button
           type="button"
           :class="[ns.be('panel', 'btn'), 'confirm']"
           @click="handleConfirm()"
         >
-          {{ t("el.datepicker.confirm") }}
+          Ok
         </button>
       </div>
     </div>

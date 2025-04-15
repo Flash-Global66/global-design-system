@@ -2,7 +2,6 @@
   <g-tooltip
     ref="refPopper"
     :visible="pickerVisible"
-    effect="light"
     pure
     trigger="click"
     v-bind="$attrs"
@@ -22,7 +21,7 @@
     @hide="onHide"
   >
     <template #default>
-      <el-input
+      <g-input
         v-if="!isRangeInput"
         :id="(id as string | undefined)"
         ref="inputRef"
@@ -31,7 +30,7 @@
         :name="name"
         :size="pickerSize"
         :disabled="pickerDisabled"
-        :placeholder="placeholder"
+        :label="label"
         :class="[nsDate.b('editor'), nsDate.bm('editor', type), $attrs.class]"
         :style="$attrs.style"
         :readonly="
@@ -58,7 +57,6 @@
       >
         <template #prefix>
           <g-icon-font
-            style="height: 1rem"
             v-if="triggerIcon"
             :class="nsInput.e('icon')"
             @mousedown.prevent="onMouseDownInput"
@@ -66,9 +64,11 @@
             :name="isTimeLikePicker ? 'regular clock' : 'regular calendar'"
           />
         </template>
+        <div v-if="label" :class="[nsInput.e('label')]" :style="labelStyle">
+          {{ label }}
+        </div>
         <template #suffix>
           <g-icon-font
-            style="height: 1rem"
             v-if="showClose && clearIcon"
             :class="`${nsInput.e('icon')} clear-icon`"
             @mousedown.prevent="NOOP"
@@ -76,7 +76,7 @@
             name="regular times"
           />
         </template>
-      </el-input>
+      </g-input>
       <picker-range-trigger
         v-else
         :id="(id as string[] | undefined)"
@@ -85,6 +85,7 @@
         :name="(name as string[] | undefined)"
         :disabled="pickerDisabled"
         :readonly="!editable || readonly"
+        :label="label"
         :start-placeholder="startPlaceholder"
         :end-placeholder="endPlaceholder"
         :class="rangeInputKls"
@@ -108,7 +109,6 @@
       >
         <template #prefix>
           <g-icon-font
-            style="height: 1rem"
             v-if="triggerIcon"
             :class="[nsInput.e('icon'), nsRange.e('icon')]"
             :name="isTimeLikePicker ? 'regular clock' : 'regular calendar'"
@@ -121,7 +121,6 @@
         </template>
         <template #suffix>
           <g-icon-font
-            style="height: 1rem"
             v-if="clearIcon"
             :class="clearIconKls"
             @mousedown.prevent="NOOP"
@@ -176,12 +175,12 @@ import {
   useFormSize,
 } from "element-plus";
 import { useFormItem } from "@flash-global66/g-form";
-import ElInput from "@flash-global66/g-input";
+import GInput from "@flash-global66/g-input";
 import { GIconFont } from "@flash-global66/g-icon-font";
 import GTooltip from "@flash-global66/g-tooltip";
 import { NOOP, debugWarn, isArray } from "element-plus/es/utils/index";
 import { EVENT_CODE } from "element-plus/es/constants/index.mjs";
-import { Calendar, Clock } from "@element-plus/icons-vue";
+import { isNil } from "lodash-unified";
 import { dayOrDaysToDate, formatter, parseDate, valueEquals } from "../utils";
 import { timePickerDefaultProps } from "./props";
 import PickerRangeTrigger from "./picker-range-trigger.vue";
@@ -189,6 +188,7 @@ import type { InputInstance } from "@flash-global66/g-input";
 
 import type { Dayjs } from "dayjs";
 import type { ComponentPublicInstance, Ref } from "vue";
+import { useResizeObserver } from "@vueuse/core";
 import type { Options } from "@popperjs/core";
 import type {
   DateModelType,
@@ -223,6 +223,8 @@ const { lang } = useLocale();
 const nsDate = useNamespace("date");
 const nsInput = useNamespace("input");
 const nsRange = useNamespace("range");
+const leftPrefix = ref<string | undefined>(undefined);
+const prefixRef = ref<HTMLElement | null>(null);
 
 const { form, formItem } = useFormItem();
 const elPopperOptions = inject("ElPopperOptions", {} as Options);
@@ -255,6 +257,30 @@ const { isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
       formItem?.validate("blur").catch((err) => debugWarn(err));
   },
 });
+
+const labelStyle = computed(() => {
+  const shouldMoveLabel = Boolean(nativeInputValue.value) || isFocused.value;
+  return {
+    left: !shouldMoveLabel ? `calc(${leftPrefix.value} + 16px)` : undefined,
+    zIndex: !shouldMoveLabel ? 10 : undefined,
+  };
+});
+
+const nativeInputValue = computed(() =>
+  isNil(props.modelValue) ? "" : String(props.modelValue)
+);
+
+const updatePrefixPosition = () => {
+  if (!props.prefixIcon) {
+    leftPrefix.value = "0";
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    const leftRef = prefixRef.value?.getBoundingClientRect().width;
+    leftPrefix.value = `${leftRef}px`;
+  });
+};
 
 const rangeInputKls = computed(() => [
   nsDate.b("editor"),
@@ -531,6 +557,8 @@ onBeforeUnmount(() => {
 });
 
 const userInput = ref<UserInput>(null);
+
+useResizeObserver(prefixRef, updatePrefixPosition);
 
 const handleChange = () => {
   if (userInput.value) {

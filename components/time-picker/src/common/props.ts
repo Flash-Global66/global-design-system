@@ -115,9 +115,9 @@ export const timePickerDefaultProps = buildProps({
    */
   disabled: Boolean,
   /**
-   * @description placeholder in non-range mode
+   * @description label in non-range mode
    */
-  placeholder: {
+  label: {
     type: String,
     default: "",
   },
@@ -262,6 +262,7 @@ export const timePickerRangeTriggerProps = buildProps({
   },
   startPlaceholder: String,
   endPlaceholder: String,
+  label: String,
 } as const);
 
 /**
