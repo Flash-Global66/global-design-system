@@ -22,11 +22,11 @@
 
   @include m('sm') {
     @include e('icon-left') {
-      @apply text-3;
+      @apply text-2;
     }
     
     @include e('icon-right') {
-      @apply text-3;
+      @apply text-2;
     }
   }
 
