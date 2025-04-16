@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: ${{ matrix.task == 'publish' && '0' || '1' }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GBP_PACKAGE_TOKEN }}
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v4

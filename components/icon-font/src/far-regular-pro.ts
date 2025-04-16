@@ -1,6 +1,7 @@
 // prefijo far
 export {
   faChevronDown,
+  faChevronUp,
   faExclamationCircle,
   faCheckCircle,
   faMars,
@@ -69,4 +70,4 @@ export {
   faAnglesLeft,
   faAnglesRight,
   faEllipsis,
-} from '@fortawesome/pro-regular-svg-icons';
+} from "@fortawesome/pro-regular-svg-icons";

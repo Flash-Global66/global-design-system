@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.3...@flash-global66/g-select@0.1.4) (2025-04-10)
+
+
+### Bug Fixes
+
+* add error and helpText to slot ([02cb55b](https://github.com/Flash-Global66/global-design-system/commit/02cb55b2519b7288c2fad8ee4c2dad001c6b97ce))
+* add isError to slot helpText ([64a717d](https://github.com/Flash-Global66/global-design-system/commit/64a717dd68cf39420e0d7acb1101230af50b940c))
+* add slot helpText to input and select ([ebd2ba0](https://github.com/Flash-Global66/global-design-system/commit/ebd2ba0027c7d558f28dfdc8162037736ad40ee6))
+* delete error to select ([841eecf](https://github.com/Flash-Global66/global-design-system/commit/841eecf2d171677cfb192b7cab772fe41c4e5602))
+
+
+
+
+
 ## [0.1.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.2...@flash-global66/g-select@0.1.3) (2025-04-10)
 
 

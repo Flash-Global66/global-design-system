@@ -40,4 +40,5 @@ export {
   faDotCircle,
   faFolderDownload,
   faChevronDown,
-} from '@fortawesome/pro-solid-svg-icons';
+  faChevronUp,
+} from "@fortawesome/pro-solid-svg-icons";
