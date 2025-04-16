@@ -111,16 +111,6 @@ dayjs.extend(customParseFormat)
     },
 
     // 3. Apariencia y Estilos
-    size: {
-      description: "Tamaño del componente",
-      control: "select",
-      options: ["large", "default", "small"],
-      table: {
-        category: "Apariencia y Estilos",
-        type: { summary: "string" },
-        defaultValue: { summary: "default" },
-      },
-    },
     prefixIcon: {
       name: "prefix-icon",
       description: "Ícono al inicio del input",
@@ -201,6 +191,15 @@ dayjs.extend(customParseFormat)
     // 5. Etiquetas y Texto
     label: {
       description: "Label en modo simple",
+      control: "text",
+      table: {
+        category: "Etiquetas y Texto",
+        type: { summary: "string" },
+        defaultValue: { summary: "" },
+      },
+    },
+    helpText: {
+      description: "help texy en modo simple",
       control: "text",
       table: {
         category: "Etiquetas y Texto",
@@ -475,18 +474,20 @@ export const DisabledTimes: Story = {
     template: `
       <g-config-provider>
         <div class="flex flex-col gap-4">
-          <g-time-picker
-            v-model="value"
-            label="Seleccione hora"
-            :disabled-hours="disabledHours"
-            :disabled-minutes="disabledMinutes"
-            :disabled-seconds="disabledSeconds"
-          />
-          <div class="text-sm text-gray-500">
-            <p>Horas deshabilitadas: 0:00 - 8:59</p>
-            <p>Minutos deshabilitados a las 12:XX (solo pares)</p>
-            <p>Segundos deshabilitados a las 12:30:XX (solo mayores a 30)</p>
-          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <g-time-picker
+              v-model="value"
+              label="Seleccione hora"
+              :disabled-hours="disabledHours"
+              :disabled-minutes="disabledMinutes"
+              :disabled-seconds="disabledSeconds"
+            />
+            <div class="text-sm text-gray-500">
+              <p>Horas deshabilitadas: 0:00 - 8:59</p>
+              <p>Minutos deshabilitados a las 12:XX (solo pares)</p>
+              <p>Segundos deshabilitados a las 12:30:XX (solo mayores a 30)</p>
+            </div>
+          <div class="grid grid-cols-2 gap-4">
         </div>
       </g-config-provider>
     `,
@@ -518,14 +519,16 @@ export const CustomFormat: Story = {
     template: `
       <g-config-provider>
         <div class="flex flex-col gap-4">
-          <g-time-picker
-            v-model="value"
-            :format="format"
-            :value-format="valueFormat"
-            label="Ej: 02:30 PM"
-          />
-          <div>
-            <p>Valor mostrado: {{ value }}</p>
+          <div class="grid grid-cols-2 gap-4">
+            <g-time-picker
+              v-model="value"
+              :format="format"
+              :value-format="valueFormat"
+              label="Ej: 02:30 PM"
+            />
+            <div>
+              <p>Valor mostrado: {{ value }}</p>
+            </div>
           </div>
         </div>
       </g-config-provider>
@@ -551,26 +554,19 @@ export const States: Story = {
   render: () => ({
     components: { GTimePicker, GConfigProvider },
     setup() {
-      const time = ref("12:00:00");
-      const timeDisabled = ref("12:30:00");
-      const timeReadonly = ref("13:00:00");
-      const timeError = ref("");
-      const timeSmall = ref("");
-      const timeLarge = ref("");
+      const time = ref("");
+      const timeDisabled = ref("");
+      const timeHelpText = ref("");
 
       return {
         time,
         timeDisabled,
-        timeReadonly,
-        timeError,
-        timeSmall,
-        timeLarge,
+        timeHelpText,
       };
     },
     template: `
       <g-config-provider>
         <div class="flex flex-col gap-4">
-          <div class="grid grid-cols-2 gap-4">
             <g-time-picker
               v-model="time"
               label="Normal"
@@ -583,63 +579,11 @@ export const States: Story = {
             />
             
             <g-time-picker
-              v-model="timeReadonly"
-              label="Solo lectura"
-              readonly
-            />
-            
-            <g-time-picker
-              v-model="timeError"
-              label="Con error"
-              :validate-event="false"
-            />
-            
-            <g-time-picker
-              v-model="timeSmall"
-              label="Pequeño"
-              size="small"
-            />
-            
-            <g-time-picker
-              v-model="timeLarge"
-              label="Grande"
-              size="large"
+              v-model="timeHelpText"
+              label="Texto de apoyo"
+              helpText="Texto de apoyo"
             />
           </div>
-        </div>
-      </g-config-provider>
-    `,
-  }),
-};
-
-export const WithPrefixIcon: Story = {
-  name: "Con Ícono",
-  parameters: {
-    docs: {
-      description: {
-        story: `Time Picker con ícono personalizado.
-
-- Ícono de reloj como prefijo
-- Personalización del ícono clearable`,
-      },
-    },
-  },
-  render: () => ({
-    components: { GTimePicker, GConfigProvider },
-    setup() {
-      const value = ref("");
-
-      return { value };
-    },
-    template: `
-      <g-config-provider>
-        <div class="flex flex-col gap-4">
-          <g-time-picker
-            v-model="value"
-            label="Seleccione hora"
-            prefix-icon="regular clock"
-            clearable
-          />
         </div>
       </g-config-provider>
     `,

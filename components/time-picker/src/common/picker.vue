@@ -28,7 +28,6 @@
         container-role="combobox"
         :model-value="(displayValue as string)"
         :name="name"
-        :size="pickerSize"
         :disabled="pickerDisabled"
         :label="label"
         :class="[nsDate.b('editor'), nsDate.bm('editor', type), $attrs.class]"
@@ -44,6 +43,7 @@
         :aria-label="ariaLabel"
         :tabindex="tabindex"
         :validate-event="false"
+        :helpText="helpText"
         @input="onUserInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -172,7 +172,6 @@ import {
   useFocusController,
   useLocale,
   useNamespace,
-  useFormSize,
 } from "element-plus";
 import { useFormItem } from "@flash-global66/g-form";
 import GInput from "@flash-global66/g-input";
@@ -289,7 +288,6 @@ const rangeInputKls = computed(() => [
   nsDate.is("disabled", pickerDisabled.value),
   nsDate.is("active", pickerVisible.value),
   nsRange.b("editor"),
-  pickerSize ? nsRange.bm("editor", pickerSize.value) : "",
   attrs.class,
 ]);
 
@@ -530,8 +528,6 @@ const onTouchStartInput = (event: TouchEvent) => {
 const isRangeInput = computed(() => {
   return props.type.includes("range");
 });
-
-const pickerSize = useFormSize();
 
 const popperEl = computed(() => unref(refPopper)?.popperRef?.contentRef);
 
