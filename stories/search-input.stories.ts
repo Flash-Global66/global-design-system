@@ -17,8 +17,7 @@ export default {
 El componente SearchInput proporciona una manera optimizada para implementar campos de búsqueda con funcionalidades avanzadas.
 
 > Versión actual: ${version}
->
-> Este componente está basado en G-Input y desarrollado siguiendo los lineamientos del Global Design System
+
 
 ## Características
 - Campo de búsqueda con icono de lupa integrado
@@ -524,6 +523,226 @@ const lastSearch = ref('');
 const handleSearch = (query) => {
   lastSearch.value = query;
   // Aquí realizarías la llamada a tu API de búsqueda
+};
+</script>
+`, language: 'html'
+    }
+  }
+}
+
+export const ApiSimulation = () => ({
+  components: { GSearchInput, GConfigProvider },
+  setup() {
+    const search = ref('')
+    const isSearching = ref(false)
+    const hasError = ref(false)
+    const searchResults = ref<{ id: number; name: string; }[]>([])
+    const errorMessage = ref('')
+    
+    const mockData = [
+      { id: 1, name: 'Juan Pérez' },
+      { id: 2, name: 'María López' },
+      { id: 3, name: 'Carlos González' },
+      { id: 4, name: 'Ana Martínez' },
+      { id: 5, name: 'Ricardo Ruben' },
+      { id: 6, name: 'Lucía Rodríguez' },
+      { id: 7, name: 'Alejandro Morales' },
+      { id: 8, name: 'Valentina Torres' },
+      { id: 9, name: 'Diego Hernández' },
+      { id: 10, name: 'Sofía Ramírez' },
+    ]
+    
+    const searchInApi = (query) => {
+      
+      isSearching.value = true
+      hasError.value = false
+      errorMessage.value = ''
+      searchResults.value = []
+      
+      setTimeout(() => {
+        try {
+          if (Math.random() < 0.2 && query.length > 0) {
+            throw new Error('Error de conexión al servidor')
+          }
+          
+          if (query) {
+            searchResults.value = mockData.filter(item => 
+              item.name.toLowerCase().includes(query.toLowerCase())
+            )
+          } else {
+            searchResults.value = []
+          }
+          
+          action('API search success')(searchResults.value)
+        } catch (error) {
+          hasError.value = true
+          errorMessage.value = error.message
+          action('API search error')(error.message)
+        } finally {
+          isSearching.value = false
+        }
+      }, 1000)
+    }
+    
+    const handleClear = () => {
+      searchResults.value = []
+      hasError.value = false
+      errorMessage.value = ''
+      action('clear')()
+    }
+    
+    return { 
+      search, 
+      isSearching, 
+      hasError, 
+      searchResults, 
+      errorMessage, 
+      searchInApi,
+      handleClear
+    }
+  },
+  template: `
+    <g-config-provider>
+      <div class="space-y-6">
+        <div class="bg-gray-50 rounded-md p-4">
+          <h3 class="text-base font-semibold mb-2">Simulación de búsqueda en API</h3>
+          <p class="text-sm text-gray-600 mb-4">
+            Este ejemplo simula una integración completa con una API de búsqueda de nombres.
+            <br>
+            El tiempo de respuesta es de aproximadamente 1 segundo y hay un 20% de probabilidad de error.
+          </p>
+          
+          <g-search-input
+            v-model="search"
+            placeholder="Buscar nombres..."
+            :searching-loading="isSearching"
+            :message-error="errorMessage"
+            :debounce-time="500"
+            @search="searchInApi"
+            @clear="handleClear"
+          />
+          
+          <div class="mt-4 p-3 bg-white rounded border">
+            <div v-if="isSearching" class="text-sm text-gray-500">
+              Buscando nombres...
+            </div>
+            
+            <div v-else-if="hasError" class="text-sm text-red-500">
+              Error: {{ errorMessage }}
+            </div>
+            
+            <div v-else-if="searchResults.length === 0 && search" class="text-sm text-gray-500">
+              No se encontraron nombres que coincidan con "{{ search }}"
+            </div>
+            
+            <div v-else-if="searchResults.length > 0" class="text-sm">
+              <div class="font-medium mb-2">Resultados ({{ searchResults.length }}):</div>
+              <ul class="list-disc pl-5 space-y-1">
+                <li v-for="result in searchResults" :key="result.id">
+                  {{ result.name }}
+                </li>
+              </ul>
+            </div>
+            
+            <div v-else class="text-sm text-gray-500">
+              Escribe para buscar nombres
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-md p-4">
+          <h3 class="text-base font-semibold mb-2">¿Cómo está implementado?</h3>
+          <ol class="list-decimal pl-5 space-y-2 text-sm">
+            <li>Utilizamos la propiedad <code>searching-loading</code> para mostrar el estado de carga mientras se realiza la búsqueda</li>
+            <li>El <code>debounce-time</code> está configurado en 500ms para reducir las llamadas a la API</li>
+            <li>Utilizamos <code>message-error</code> para mostrar errores de la API cuando ocurren</li>
+            <li>El evento <code>search</code> dispara la función que realiza la llamada a la API</li>
+            <li>El evento <code>clear</code> resetea los resultados y estados de error</li>
+          </ol>
+        </div>
+      </div>
+    </g-config-provider>
+  `
+})
+
+ApiSimulation.parameters = {
+  docs: {
+    description: {
+      story: 'Este ejemplo muestra cómo integrar el componente SearchInput con una API, manejando estados de carga, resultados y errores.'
+    },
+    source: {
+      code: `
+<template>
+  <g-search-input
+    v-model="search"
+    placeholder="Buscar nombres..."
+    :searching-loading="isSearching"
+    :message-error="errorMessage"
+    :debounce-time="500"
+    @search="searchInApi"
+    @clear="handleClear"
+  />
+  
+  <!-- Resultados -->
+  <div v-if="isSearching">
+    Buscando nombres...
+  </div>
+  
+  <div v-else-if="hasError">
+    Error: {{ errorMessage }}
+  </div>
+  
+  <div v-else-if="searchResults.length === 0 && search">
+    No se encontraron nombres que coincidan con "{{ search }}"
+  </div>
+  
+  <div v-else-if="searchResults.length > 0">
+    <div>Resultados ({{ searchResults.length }}):</div>
+    <ul>
+      <li v-for="result in searchResults" :key="result.id">
+        {{ result.name }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { GSearchInput } from '@flash-global66/g-search-input';
+
+const search = ref('');
+const isSearching = ref(false);
+const hasError = ref(false);
+const searchResults = ref([]);
+const errorMessage = ref('');
+
+const searchInApi = async (query) => {
+  isSearching.value = true;
+  hasError.value = false;
+  errorMessage.value = '';
+  
+  try {
+    // Reemplazar con tu llamada a API real
+    const response = await fetch(\`/api/search?q=\${encodeURIComponent(query)}\`);
+    
+    if (!response.ok) {
+      throw new Error('Error en la respuesta del servidor');
+    }
+    
+    const data = await response.json();
+    searchResults.value = data.results;
+  } catch (error) {
+    hasError.value = true;
+    errorMessage.value = error.message;
+  } finally {
+    isSearching.value = false;
+  }
+};
+
+const handleClear = () => {
+  searchResults.value = [];
+  hasError.value = false;
+  errorMessage.value = '';
 };
 </script>
 `, language: 'html'
