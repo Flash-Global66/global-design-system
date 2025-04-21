@@ -1,15 +1,22 @@
 import type { ExtractPropTypes } from "vue";
-import type { OptionSegmented } from "./segmented.type";
+import type { OptionSegmented, RoundedSegmented, SizeSegmented, VariantSegmented } from "./segmented.type";
 import type Segmented from "./Segmented.vue";
 import {
   CHANGE_EVENT,
   UPDATE_MODEL_EVENT,
   useAriaProps,
-  useSizeProp,
 } from "element-plus";
 import { buildProps, definePropType, isBoolean, isNumber, isString } from "element-plus/es/utils/index.mjs";
 
 export const segmentedProps = buildProps({
+  variant: {
+    type: definePropType<VariantSegmented>(String),
+    default: "default",
+  },
+  rounded: {
+    type: definePropType<RoundedSegmented>(String),
+    default: "md",
+  },
   classItem: {
     type: String,
     default: "",
@@ -35,7 +42,10 @@ export const segmentedProps = buildProps({
   /**
    * @description size of component
    */
-  size: useSizeProp,
+  size: {
+    type: definePropType<SizeSegmented>(String),
+    default: "md",
+  },
   /**
    * @description whether segmented is disabled
    */
@@ -48,6 +58,10 @@ export const segmentedProps = buildProps({
     default: true,
   },
   messageError: {
+    type: String,
+    default: ""
+  },
+  helpText: {
     type: String,
     default: ""
   },
