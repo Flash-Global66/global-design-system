@@ -50,13 +50,36 @@ const meta: Meta<typeof GSegmented> = {
         defaultValue: { summary: 'false' }
       }
     },
-    size: {
-      description: 'Tamaño del componente',
+    variant: {
+      description: 'Variante del componente',
       control: 'select',
-      options: ['small', 'default', 'large'],
+      options: ['default', 'primary'],
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'default' }
+      }
+    },
+    messageError: {
+      description: 'Mensaje de error',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+      }
+    },
+    helpText: {
+      description: 'Texto de ayuda',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+      }
+    },
+    size: {
+      description: 'Tamaño del componente',
+      control: 'select',
+      options: ['sm', 'md'],
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'md' }
       }
     },
     disabled: {
@@ -124,6 +147,14 @@ const meta: Meta<typeof GSegmented> = {
         category: 'slots'
       },
     },
+    help: {
+      description: 'Slot de ayuda',
+      control: 'text',
+      table: {
+        type: { summary: 'slot' },
+        category: 'slots'
+      }
+    },
   },
   args: {
     options: [
@@ -131,7 +162,7 @@ const meta: Meta<typeof GSegmented> = {
       { label: 'Empresa', value: 'company', disabled: false },
     ],
     block: false,
-    size: 'default',
+    size: 'md',
     disabled: false,
     validateEvent: true,
     id: '',

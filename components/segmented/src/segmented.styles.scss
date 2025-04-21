@@ -1,80 +1,103 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
 @use "element-plus/theme-chalk/src/segmented.scss" as *;
 
-.prueba {
-  display: flex;
-  flex-direction: row;
-}
 
-.gui-segmented {
+@include b('segmented') {
+
   @apply bg-blue-50 p-2 rounded-lg;
 
-  &__help {
+  @include e('help') {
     @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
     min-height: 18px;
   }
 
-  &__help-error{
+  @include e('help-error') {
     @apply text-error-txt;
   }
 
-  &__item {
-    @apply text-nightBlue-900 p-4 font-normal transition-all duration-200 rounded-md cursor-pointer;
+  @include e('item') {
+    @apply text-nightBlue-900 font-normal transition-all duration-200 rounded-md cursor-pointer;
 
     &:not(.is-disabled):not(.is-selected):hover {
       @apply bg-transparent;
-      .gui-segmented__item-label {
+      @include e('item-label') {
         @apply font-medium;
       }
     }
     
-    &.is-selected {
-      .gui-segmented__item-label {
+    @include when('selected') {
+      @include e('item-label') {
         @apply font-medium text-everBlue-900;
       }
       &.is-disabled {
-        .gui-segmented__item-label {
+        @include e('item-label') {
           @apply text-grey-200;
         }
       }
     }
 
-    &.is-disabled {
+    @include when('disabled') {
       @apply text-grey-200 cursor-not-allowed;
     }
 
-    &-selected {
-      &.is-disabled {
+    @include e('selected') {
+      @include when('disabled') {
         @apply bg-grey-50 border-grey-50;
       }
     }
-
-    &-label {
-      @apply text-4 font-normal;
-    }
+  }
+  
+  @include e('item-label') {
+    @apply text-4 font-normal;
   }
 
-  &__item-selected {
+  @include e('item-selected') {
     @apply bg-white border-everBlue-100 border rounded-md;
+    @include when('disabled') {
+      @apply bg-grey-50 border-grey-50;
+    }
   }
 
-  &--large {
-    .gui-segmented {
-      &__item {
-        @apply px-4 py-5;
+  @include m('primary') {
+    @include e('item-selected') {
+      @apply bg-nightBlue-600;
+      @include when('disabled') {
+        @apply bg-grey-50 border-grey-50;
       }
-      &__item-selected {
-        @apply rounded-md;
+    }
+    @include e('item') {
+      @include when('selected') {
+        @include e('item-label') {
+          @apply text-white;
+        }
+        @include when('disabled') {
+          @include e('item-label') {
+            @apply text-disabled-txt;
+          }
+        }
       }
     }
   }
-  &--small {
-    .gui-segmented {
-      &__item {
-        @apply px-4 py-2;
-      }
-      &__item-selected {
-        @apply rounded-md;
-      }
+
+  @include m('md') {
+    @include e('item') {
+      @apply p-4;
+    }
+    @include e('item-selected') {
+      @apply rounded-md;
+    }
+  }
+
+  @include m('sm') {
+    @include e('item') {
+      @apply px-4 py-2;
+    }
+    @include e('item-selected') {
+      @apply rounded-md;
     }
   }
 }
