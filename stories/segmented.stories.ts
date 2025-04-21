@@ -42,6 +42,15 @@ const meta: Meta<typeof GSegmented> = {
         type: { summary: 'string | number | boolean' }
       }
     },
+    rounded: {
+      description: 'Redondea el componente',
+      control: 'select',
+      options: ['md', 'lg'],
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'md' }
+      }
+    },
     block: {
       description: 'Ajusta el ancho al contenedor padre',
       control: 'boolean',
@@ -161,6 +170,7 @@ const meta: Meta<typeof GSegmented> = {
       { label: 'Persona', value: 'person', disabled: false },
       { label: 'Empresa', value: 'company', disabled: false },
     ],
+    variant: 'default',
     block: false,
     size: 'md',
     disabled: false,

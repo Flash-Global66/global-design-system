@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from "vue";
-import type { OptionSegmented, SizeSegmented, VariantSegmented } from "./segmented.type";
+import type { OptionSegmented, RoundedSegmented, SizeSegmented, VariantSegmented } from "./segmented.type";
 import type Segmented from "./Segmented.vue";
 import {
   CHANGE_EVENT,
@@ -12,6 +12,10 @@ export const segmentedProps = buildProps({
   variant: {
     type: definePropType<VariantSegmented>(String),
     default: "default",
+  },
+  rounded: {
+    type: definePropType<RoundedSegmented>(String),
+    default: "md",
   },
   classItem: {
     type: String,

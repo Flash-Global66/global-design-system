@@ -165,6 +165,7 @@ const segmentedCls = computed(() => {
     ns.m(props.size),
     ns.m(props.variant),
     ns.is('block', props.block),
+    ns.m(`rounded-${props.rounded}`)
   ]
 })
 

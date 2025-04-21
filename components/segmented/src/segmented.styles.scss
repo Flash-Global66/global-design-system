@@ -6,9 +6,17 @@
 @use "element-plus/theme-chalk/src/segmented.scss" as *;
 
 
+@mixin disabled-bg {
+  @apply bg-grey-50 border-grey-50;
+}
+
+@mixin disabled-text {
+  @apply text-grey-200 cursor-not-allowed;
+}
+
 @include b('segmented') {
 
-  @apply bg-blue-50 p-2 rounded-lg;
+  @apply bg-blue-50 p-2;
 
   @include e('help') {
     @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
@@ -20,7 +28,7 @@
   }
 
   @include e('item') {
-    @apply text-nightBlue-900 font-normal transition-all duration-200 rounded-md cursor-pointer;
+    @apply text-nightBlue-900 font-normal transition-all duration-200 cursor-pointer;
 
     &:not(.is-disabled):not(.is-selected):hover {
       @apply bg-transparent;
@@ -41,12 +49,12 @@
     }
 
     @include when('disabled') {
-      @apply text-grey-200 cursor-not-allowed;
+      @include disabled-text;
     }
 
     @include e('selected') {
       @include when('disabled') {
-        @apply bg-grey-50 border-grey-50;
+        @include disabled-bg;
       }
     }
   }
@@ -56,9 +64,9 @@
   }
 
   @include e('item-selected') {
-    @apply bg-white border-everBlue-100 border rounded-md;
+    @apply bg-white border-everBlue-100 border;
     @include when('disabled') {
-      @apply bg-grey-50 border-grey-50;
+      @include disabled-bg;
     }
   }
 
@@ -66,7 +74,7 @@
     @include e('item-selected') {
       @apply bg-nightBlue-600;
       @include when('disabled') {
-        @apply bg-grey-50 border-grey-50;
+        @include disabled-bg;
       }
     }
     @include e('item') {
@@ -87,17 +95,25 @@
     @include e('item') {
       @apply p-4;
     }
-    @include e('item-selected') {
-      @apply rounded-md;
-    }
   }
 
   @include m('sm') {
     @include e('item') {
       @apply px-4 py-2;
     }
+  }
+
+  @include m('rounded-md') {
+    @apply rounded-md;
     @include e('item-selected') {
       @apply rounded-md;
+    }
+  }
+
+  @include m('rounded-lg') {
+    @apply rounded-2xl;
+    @include e('item-selected') {
+      @apply rounded-2xl;
     }
   }
 }
