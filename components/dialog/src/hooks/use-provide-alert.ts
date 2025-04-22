@@ -5,9 +5,9 @@ import type { ImageSize } from "@flash-global66/g-image";
 
 const defaultValuesAttributes: AlertProviderState = {
   showAlert: false,
-  type: "",
+  type: "info",
   title: "",
-  imageName: "",
+  imageName: "information",
   description: "",
   primaryText: "",
   secondaryText: "",
