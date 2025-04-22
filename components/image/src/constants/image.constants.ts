@@ -1,4 +1,5 @@
 export const IMAGE_NAMES = [
+  'alert',
   'at',
   'barrier',
   'bell',
@@ -33,12 +34,15 @@ export const IMAGE_NAMES = [
   'pound-currency',
   'price-tags',
   'prohibited',
+  'prohibited-red',
   'refresh',
   'sales',
   'scissors',
   'stairs',
   'user',
   'warning-sign',
+  'warning-sign-yellow',
+  'whatsapp',
   'wrench'
 ] as const;
 

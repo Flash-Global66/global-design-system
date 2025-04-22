@@ -28,14 +28,18 @@
             @change="handleChange(item)"
           />
           <div :class="ns.e('item-label')">
-            <slot :item="item">{{ getLabel(item) }}</slot>
+            <slot :item="item" :isActive="getSelected(item)">{{ getLabel(item) }}</slot>
           </div>
         </label>
       </div>
     </div>
-    <div v-if="hasHelpInfo" :class="helpTextKls">
-      <p v-if="isError">{{ error }}</p>
-    </div>
+    <slot name="help" :error="error" :isError="isError">
+      <p
+        v-if="formItem || helpText"
+        :key="isError ? 'error' : 'help'" :class="helpTextKls">
+        {{ isError ? error : helpText }}
+      </p>
+    </slot>
   </div>
 </template>
 
@@ -60,7 +64,6 @@ const emit = defineEmits(segmentedEmits)
 
 const ns = useNamespace('segmented')
 const segmentedId = useId()
-const segmentedSize = useFormSize()
 const _disabled = useFormDisabled()
 const { formItem } = useFormItem()
 const { inputId, isLabeledByFormItem } = useFormItemInputId(props, {
@@ -161,8 +164,10 @@ const updateSelect = () => {
 const segmentedCls = computed(() => {
   return[
     ns.b(),
-    ns.m(segmentedSize.value),
+    ns.m(props.size),
+    ns.m(props.variant),
     ns.is('block', props.block),
+    ns.m(`rounded-${props.rounded}`)
   ]
 })
 

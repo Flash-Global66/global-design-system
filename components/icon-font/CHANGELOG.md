@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.1.1...@flash-global66/g-icon-font@0.2.0) (2025-04-21)
+
+
+### Features
+
+* **g-icon:** add timer icon to solid pro set ([cb283e6](https://github.com/Flash-Global66/global-design-system/commit/cb283e6218539a010e085f32f84b478ac66e30d7))
+
+
+
+
+
 ## [0.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.1.0...@flash-global66/g-icon-font@0.1.1) (2025-04-09)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font

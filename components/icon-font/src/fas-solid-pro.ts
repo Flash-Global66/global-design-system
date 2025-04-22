@@ -54,4 +54,5 @@ export {
   faLightbulb,
   faStore,
   faSpinner,
+  faTimer,
 } from '@fortawesome/pro-solid-svg-icons';

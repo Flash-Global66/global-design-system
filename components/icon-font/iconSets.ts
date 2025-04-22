@@ -98,6 +98,7 @@ export const ICON_SETS = {
     "triangle",
     "lightbulb",
     "spinner",
+    "timer",
   ] as const,
 
   regular: [
