@@ -73,8 +73,8 @@ import { GOverlay } from "@flash-global66/g-overlay";
 import { useNamespace, useSameTarget } from "element-plus";
 import { dialogInjectionKey } from "./constants";
 import { dialogEmits, dialogProps } from "./dialog";
-import { useDialog } from "./use-dialog";
-import DialogContent from './DialogContent.vue';
+import { useDialog } from "./hooks/use-dialog";
+import DialogContent from './dialog-content.vue';
 
 const props = defineProps(dialogProps);
 const emit = defineEmits(dialogEmits);
@@ -137,4 +137,3 @@ defineExpose({
   resetPosition,
 });
 </script>
-
