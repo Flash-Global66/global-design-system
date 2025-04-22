@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.0.8...@flash-global66/g-inline@0.1.0) (2025-04-22)
+
+
+### Features
+
+* **inline:** restructure component for build process ([2536efa](https://github.com/Flash-Global66/global-design-system/commit/2536efa770e673c0e356cdec3ac8d22f1f840235))
+
+
+
+
+
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.0.7...@flash-global66/g-inline@0.0.8) (2025-03-31)
 
 **Note:** Version bump only for package @flash-global66/g-inline
