@@ -8,7 +8,7 @@
 
 
 @include b('dialog') {
-  @apply relative bg-sec-def-bg rounded-lg shadow-lg box-border p-8 break-words mt-14 mb-12 mx-auto;
+  @apply relative bg-sec-def-bg rounded-lg shadow-lg box-border p-8 break-words mx-auto;
 
   @include when('fullscreen') {
     @apply w-full h-full m-0 rounded-none overflow-auto;
@@ -166,7 +166,7 @@
 }
 
 .#{$namespace}-overlay-dialog {
-  @apply fixed inset-0 overflow-auto;
+  @apply fixed inset-0 overflow-auto flex items-center justify-center;
 }
 
 .dialog-fade-enter-active {

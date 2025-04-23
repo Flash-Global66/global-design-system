@@ -20,8 +20,8 @@ import { addUnit, isClient } from 'element-plus/es/utils/index'
 import { useGlobalConfig } from 'element-plus/es/components/config-provider/index'
 
 import type { CSSProperties, Ref, SetupContext, ComputedRef } from 'vue'
-import type { DialogEmits, DialogProps } from './dialog'
-import type { FooterButton } from './types'
+import type { DialogEmits, DialogProps } from '../dialog'
+import type { FooterButton } from '../types/types'
 
 export const useDialog = (
   props: DialogProps,
