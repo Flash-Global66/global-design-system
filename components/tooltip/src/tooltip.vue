@@ -39,7 +39,7 @@
       :append-to="appendTo"
     >
       <slot name="content">
-        <span v-if="rawContent" v-html="content" />
+        <span v-if="rawContent" :class="ns.e('content')" v-html="content" />
         <div v-if="title || description" :class="ns.e('container')">
           <div :class="ns.e('header')">
             <h6 v-if="title">{{ title }}</h6>
