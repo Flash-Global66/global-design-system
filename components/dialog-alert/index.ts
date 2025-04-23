@@ -1,6 +1,6 @@
 import DialogAlert from './dialog-alert.vue'
 import openAlert from './dialog-alert'
-import { AlertButtonResult, AlertOptions, AlertType } from './types/types'
+import { AlertButtonResult, AlertOptions, AlertType } from './types'
 
 export { DialogAlert }
 

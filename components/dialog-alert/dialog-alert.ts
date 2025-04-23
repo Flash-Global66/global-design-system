@@ -1,6 +1,6 @@
 import { createVNode, render } from 'vue'
 import DialogAlert from './dialog-alert.vue'
-import { AlertButtonResult, AlertOptions } from './types/types'
+import { AlertButtonResult, AlertOptions } from './types'
 
 /**
  * Programmatic function to display an alert dialog

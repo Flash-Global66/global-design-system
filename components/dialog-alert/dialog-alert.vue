@@ -27,7 +27,7 @@
 import { computed } from 'vue';
 import { GImage, ImageName, type ImageSize } from '@flash-global66/g-image';
 import { GDialog } from '@flash-global66/g-dialog';
-import { AlertType, FooterButton } from './types/types';
+import { AlertType, FooterButton } from './types';
 
 const props = defineProps({
   showAlert: {
