@@ -60,7 +60,7 @@ export const dialogContentProps = buildProps({
     default: true,
   },
   /**
-   * @description width of Dialog
+   * @description width of Dialog. Required when sizeMode is set to "fixed".
    */
   width: {
     type: [String, Number],
@@ -89,10 +89,9 @@ export const validateDialogProps = (props: {
 }) => {
   const { sizeMode, width } = props
 
-  // When Dialog is initially displayed, if prop width is not set and sizeMode is default
-  if (sizeMode === 'default' && width === undefined) {
+  if (sizeMode === 'fixed' && (!width || width === '')) {
     console.warn(
-      '[g-dialog] When sizeMode is set to "default", width should be defined.'
+      '[g-dialog] When sizeMode is set to "fixed", width must be defined.'
     )
   }
 }

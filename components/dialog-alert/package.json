@@ -1,5 +1,5 @@
 {
-  "name": "@flash-global66/g-dialog",
+  "name": "@flash-global66/g-dialog-alert",
   "author": "Global66",
   "version": "1.0.0",
   "license": "MIT",
@@ -10,7 +10,6 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/dialog.styles.scss",
     "./*": "./*"
   },
   "files": [
@@ -23,9 +22,6 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "peerDependencies": {
-    "@flash-global66/g-focus-trap": "0.0.8",
-    "@flash-global66/g-overlay": "0.0.7",
-    "@flash-global66/g-teleport": "0.0.6",
     "element-plus": "^2.9.7",
     "vue": "^3.2.0"
   },

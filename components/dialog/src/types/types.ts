@@ -1,7 +1,6 @@
 import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue'
 import type { UseNamespaceReturn } from 'element-plus/es/hooks'
 import type { ButtonVariant } from "@flash-global66/g-button";
-import type { ImageName, ImageSize } from "@flash-global66/g-image";
 
 export interface FooterButton {
   /**
@@ -36,51 +35,3 @@ export interface DialogContext {
 }
 
 export const dialogInjectionKey: InjectionKey<DialogContext> = Symbol('dialogInjectionKey');
-
-export type AlertType = "success" | "warning" | "error" | "info" | "important";
-export interface AlertButtonResult {
-  isPrimary?: boolean;
-  isSecondary?: boolean;
-  variant?: ButtonVariant;
-}
-
-/**
- * Configuration options for an alert dialog
- */
-export interface AlertOptions {
-  hideButtonClose?: boolean;
-  type?: AlertType;
-  title?: string;
-  description?: string;
-  srcIcon?: string;
-  imageSize?: ImageSize;
-  imageName?: ImageName;
-  primaryText?: string;
-  secondaryText?: string;
-  reverseButtons?: boolean;
-}
-
-/**
- * State attributes for the alert provider
- */
-export interface AlertProviderState {
-  showAlert: boolean;
-  type: AlertType;
-  title: string;
-  imageName: ImageName;
-  description: string;
-  primaryText: string;
-  secondaryText: string;
-  reverseButtons: boolean;
-  hideButtonClose?: boolean;
-  imageSize?: ImageSize;
-}
-
-
-export interface AlertProvider extends AlertProviderState {
-  openAlert: (params: AlertOptions, onNext?: (action: AlertButtonResult) => Promise<void> | void) => void;
-  hideAlert: () => void;
-  onNext: (action: AlertButtonResult) => Promise<void> | void;
-
-
-}
