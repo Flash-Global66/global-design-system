@@ -664,9 +664,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-dialog-alert@workspace:components/dialog-alert":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-dialog-alert@workspace:components/dialog-alert"
+  peerDependencies:
+    "@flash-global66/g-button": 0.3.0
+    "@flash-global66/g-dialog": 1.0.0
+    "@flash-global66/g-image": 0.0.3
+    element-plus: ^2.9.7
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-dialog@workspace:components/dialog":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-dialog@workspace:components/dialog"
+  peerDependencies:
+    "@flash-global66/g-focus-trap": 0.0.8
+    "@flash-global66/g-overlay": 0.0.7
+    "@flash-global66/g-teleport": 0.0.6
+    element-plus: ^2.9.7
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
