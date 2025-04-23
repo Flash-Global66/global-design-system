@@ -763,7 +763,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-inline@workspace:components/inline"
   peerDependencies:
-    "@flash-global66/g-icon-font": ^0.0.8
+    "@flash-global66/g-icon-font": ^0.2.0
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
