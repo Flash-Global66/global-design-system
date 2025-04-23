@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import { computed, ref } from 'vue';
 import { GIconFont } from '../components/icon-font';
 import { GConfigProvider } from '../components/config-provider';
-import { ICON_SETS } from '../components/icon-font/iconSets';
+import { ICON_SETS } from '@flash-global66/g-icon-font/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented/index.ts';
 import { GInput } from '../components/input';
 import { GButton } from '@flash-global66/g-button/index.ts';
