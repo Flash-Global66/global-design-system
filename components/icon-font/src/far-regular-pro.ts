@@ -69,4 +69,6 @@ export {
   faAnglesLeft,
   faAnglesRight,
   faEllipsis,
+  faTimer,
+  faGift,
 } from '@fortawesome/pro-regular-svg-icons';
