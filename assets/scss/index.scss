@@ -4,9 +4,6 @@
 @use "../../components/icon-button/src/icon-button.styles.scss" as *;
 @use "../../components/dialog/dialog.styles.scss" as *;
 @use "../../components/popover/popover.styles.scss" as *;
-@use "../../components/dropdown/dropdown.styles.scss" as *;
-@use "../../components/dropdown/dropdown-menu.styles.scss" as *;
-@use "../../components/dropdown/dropdown-item.styles.scss" as *;
 @use "../../components/skeleton/skeleton.styles.scss" as *;
 @use "../../components/skeleton/skeleton-item.styles.scss" as *;
 @use "../../components/input-code/input-code.styles.scss" as *;
@@ -33,6 +30,7 @@
 @use "@flash-global66/g-drawer/styles.scss" as *;
 @use "@flash-global66/g-popper/styles.scss" as *;
 @use "@flash-global66/g-pagination/styles.scss" as *;
+@use "@flash-global66/g-dropdown/styles.scss" as *;
 
 * {
   @apply font-montserrat;
