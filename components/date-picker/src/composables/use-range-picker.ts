@@ -1,5 +1,5 @@
 import { getCurrentInstance, inject, ref, unref, watch } from "vue";
-import { useLocale, useNamespace } from "element-plus";
+import { useLocale, useNamespace } from "element-plus/es/hooks/index";
 import { isArray } from "element-plus/es/utils/index.mjs";
 import { getDefaultValue, isValidRange } from "../utils";
 import { ROOT_PICKER_INJECTION_KEY } from "../constants";
@@ -9,6 +9,8 @@ import type { Ref } from "vue";
 import type { Dayjs } from "dayjs";
 import type { PanelRangeSharedProps, RangeState } from "../props/shared";
 import type { DefaultValue } from "../utils";
+
+import es from "../lang/es";
 
 type UseRangePickerProps = {
   onParsedValueChanged: (
@@ -35,8 +37,8 @@ export const useRangePicker = (
   const { emit } = getCurrentInstance()!;
 
   const { pickerNs } = inject(ROOT_PICKER_INJECTION_KEY)!;
-  const drpNs = useNamespace("date-range-picker");
-  const { t, lang } = useLocale();
+  const drpNs = useNamespace("date-range-picker", ref("gui"));
+  const { t, lang } = useLocale(ref(es));
   const handleShortcutClick = useShortcut(lang);
   const minDate = ref<Dayjs>();
   const maxDate = ref<Dayjs>();

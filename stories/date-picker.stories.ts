@@ -1,6 +1,7 @@
 import { StoryObj } from "@storybook/vue3";
 import { ref } from "vue";
 import dayjs from "dayjs";
+import es from "../common/locale/lang/es";
 
 // COMPONENTS
 import GDatePicker from "../components/date-picker";
@@ -348,19 +349,21 @@ dayjs.extend(localeData)
 export default meta;
 type Story = StoryObj<typeof GDatePicker>;
 
+console.log(es);
 export const Basic: Story = {
   name: "Básico",
   render: (args) => ({
     components: { GDatePicker, GConfigProvider },
     setup() {
       const value = ref("");
-      return { value, args };
+      return { value, args, es };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="es">
         <div class="flex flex-col gap-4">
-          <g-date-picker v-bind="args" v-model="value" />
+          <g-date-picker v-bind="args" v-model="value"/>
         </div>
+
       </g-config-provider>
     `,
   }),

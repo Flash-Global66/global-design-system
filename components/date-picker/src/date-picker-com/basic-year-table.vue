@@ -20,7 +20,7 @@
           @keydown.space.prevent.stop="handleYearTableClick"
           @keydown.enter.prevent.stop="handleYearTableClick"
         >
-          <el-date-picker-cell :cell="cell" />
+          <g-date-picker-cell :cell="cell" />
         </td>
       </tr>
     </tbody>
@@ -30,12 +30,12 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch } from "vue";
 import dayjs from "dayjs";
-import { useLocale, useNamespace } from "element-plus";
+import { useLocale, useNamespace } from "element-plus/es/hooks/index";
 import { castArray, hasClass } from "element-plus/es/utils/index.mjs";
-import { rangeArr } from "@element-plus/components/time-picker";
+import { rangeArr } from "@flash-global66/g-time-picker";
 import { basicYearTableProps } from "../props/basic-year-table";
 import { getValidDateOfYear } from "../utils";
-import ElDatePickerCell from "./basic-cell-render.vue";
+import GDatePickerCell from "./basic-cell-render.vue";
 
 type YearCell = {
   column: number;
@@ -58,9 +58,9 @@ const datesInYear = (year: number, lang: string) => {
 const props = defineProps(basicYearTableProps);
 const emit = defineEmits(["changerange", "pick", "select"]);
 
-const ns = useNamespace("year-table");
+const ns = useNamespace("year-table", ref("gui"));
 
-const { t, lang } = useLocale();
+const { t, lang } = useLocale(ref(es));
 const tbodyRef = ref<HTMLElement>();
 const currentCellRef = ref<HTMLElement>();
 const startYear = computed(() => {

@@ -37,7 +37,7 @@
           :tabindex="isSelectedCell(cell) ? 0 : -1"
           @focus="handleFocus"
         >
-          <el-date-picker-cell :cell="cell" />
+          <g-date-picker-cell :cell="cell" />
         </td>
       </tr>
     </tbody>
@@ -53,7 +53,7 @@ import {
   useBasicDateTable,
   useBasicDateTableDOM,
 } from "../composables/use-basic-date-table";
-import ElDatePickerCell from "./basic-cell-render.vue";
+import GDatePickerCell from "./basic-cell-render.vue";
 
 const props = defineProps(basicDateTableProps);
 const emit = defineEmits(basicDateTableEmits);
