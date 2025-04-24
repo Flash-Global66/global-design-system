@@ -58,15 +58,18 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 ### Ejemplo de uso
 
 \`\`\`ts
+<script setup lang="ts">
 import { GInline } from '@flash-global66/g-inline';
-import { default } from '../components/button-card/ButtonCard.vue';
+</script>
 
-<g-inline 
-  type="info"
-  title="Información"
-  description="Mensaje informativo"
-  icon="solid info-circle"
-/>
+<template>
+  <g-inline
+    type="info"
+    title="Información"
+    description="Mensaje informativo"
+    icon="solid info-circle"
+  />
+</template>
 \`\`\`
 `
       }
