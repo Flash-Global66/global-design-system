@@ -8,7 +8,7 @@
     role="dialog"
     teleported
     :transition="`${nsDate.namespace.value}-zoom-in-top`"
-    :popper-class="[`${nsDate.namespace.value}-picker__popper`, popperClass]"
+    :popper-class="[`${nsDate.namespace.value}-picker__popper`]"
     :popper-options="elPopperOptions"
     :fallback-placements="fallbackPlacements"
     :gpu-acceleration="false"
