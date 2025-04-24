@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
-import { computed, ref } from 'vue';
-import { GIconFont } from '../components/icon-font';
-import { GConfigProvider } from '../components/config-provider';
-import { ICON_SETS } from '../components/icon-font/iconSets';
-import { GSegmented } from '@flash-global66/g-segmented/index.ts';
-import { GInput } from '../components/input';
-import { GButton } from '@flash-global66/g-button/index.ts';
+import type { Meta, StoryObj } from '@storybook/vue3'
+import { computed, onMounted, ref } from 'vue'
+import { GIconFont } from '../components/icon-font'
+import { GConfigProvider } from '../components/config-provider'
+import { ICON_SETS } from '../components/icon-font/iconSets'
+import { GSegmented } from '@flash-global66/g-segmented/index.ts'
+import { GInput } from '../components/input'
+import { GButton } from '@flash-global66/g-button/index.ts'
 
 export const generateIconOptions = () => {
-  const options: string[] = [];
-  
+  const options: string[] = []
+
   Object.entries(ICON_SETS).forEach(([weight, icons]) => {
-    icons.forEach(icon => {
-      options.push(`${weight} ${icon}`);
-    });
-  });
-  
-  return options;
-};
+    icons.forEach((icon) => {
+      options.push(`${weight} ${icon}`)
+    })
+  })
+
+  return options
+}
 
 const meta: Meta<typeof GIconFont> = {
   title: 'Basic/IconFont',
@@ -61,24 +61,24 @@ El editor te mostrará las opciones disponibles gracias al tipado estricto.
       options: generateIconOptions(),
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'solid user' },
+        defaultValue: { summary: 'solid user' }
       }
     }
   },
   args: {
     name: 'solid user'
   }
-} as Meta;
+} as Meta
 
-export default meta;
-type Story = StoryObj<typeof GIconFont>;
+export default meta
+type Story = StoryObj<typeof GIconFont>
 
 export const Primary: Story = {
   name: 'Uso básico',
   render: (args) => ({
     components: { GIconFont, GConfigProvider },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
       <g-config-provider>
@@ -88,56 +88,91 @@ export const Primary: Story = {
       </g-config-provider>
     `
   })
-};
+}
 
 export const Galería: Story = {
   name: 'Galería de iconos',
   parameters: {
     docs: {
       description: {
-        story: 'Galería completa de íconos disponibles en el sistema. Haz clic en cualquier ícono para copiar su nombre. 📋'
+        story:
+          'Galería completa de íconos disponibles en el sistema. Haz clic en cualquier ícono para copiar su nombre. 📋'
       }
     }
   },
   render: () => ({
     components: { GIconFont, GConfigProvider, GSegmented, GInput, GButton },
     setup() {
-      const selectedWeight = ref('regular');
-      const searchTerm = ref('');
+      const selectedWeight = ref('regular')
+      const searchTerm = ref('')
+      const copiedIcon = ref<string | null>(null)
 
       const filteredIcons = computed(() => {
         if (!searchTerm.value.trim()) {
-          return ICON_SETS;
+          return ICON_SETS
         }
-        
-        const searchTermLower = searchTerm.value.toLowerCase().trim();
-        
+
+        const searchTermLower = searchTerm.value.toLowerCase().trim()
+
         return Object.entries(ICON_SETS).reduce((filtered, [weight, icons]) => {
-          filtered[weight] = icons.filter(icon => 
-            icon.toLowerCase().includes(searchTermLower)
-          );
-          return filtered;
-        }, {} as typeof ICON_SETS);
-      });
+          filtered[weight] = icons.filter((icon) => icon.toLowerCase().includes(searchTermLower))
+          return filtered
+        }, {} as typeof ICON_SETS)
+      })
 
       const clearSearch = () => {
         searchTerm.value = ''
       }
-      
-      const weightOptions = Object.keys(ICON_SETS).map(weight => ({
+
+      const weightOptions = Object.keys(ICON_SETS).map((weight) => ({
         label: weight.charAt(0).toUpperCase() + weight.slice(1),
         value: weight
-      }));
+      }))
 
-      const copyIconName = (iconName: string) => {
-        navigator.clipboard.writeText(iconName)
+      const copyIconName = (imageName: string) => {
+        navigator.clipboard
+          .writeText(imageName)
           .then(() => {
-            console.log('Nombre del icono copiado al portapapeles');
+            copiedIcon.value = imageName
+            setTimeout(() => {
+              copiedIcon.value = null
+            }, 1500)
+            console.log('Nombre de la ilustración copiado al portapapeles')
           })
           .catch(() => {
-            alert('No se pudo copiar el nombre del icono')
+            alert('No se pudo copiar el nombre de la ilustración')
           })
       }
+
+      onMounted(() => {
+        const styleElement = document.createElement('style')
+        styleElement.textContent = `
+                .copy-animation {
+                  transform: scale(1.05);
+                  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                  border-color: #10b981;
+                  z-index: 10;
+                }
+                
+                @keyframes fadeInOut {
+                  0% { opacity: 0; transform: translateY(10px); }
+                  20% { opacity: 1; transform: translateY(0); }
+                  80% { opacity: 1; transform: translateY(0); }
+                  100% { opacity: 0; transform: translateY(-10px); }
+                }
+                
+                .copy-feedback {
+                  animation: fadeInOut 1.5s ease forwards;
+                }
+              `
+        document.head.appendChild(styleElement)
+
+        return () => {
+          if (styleElement.parentNode) {
+            styleElement.parentNode.removeChild(styleElement)
+          }
+        }
+      })
 
       return {
         iconSets: ICON_SETS,
@@ -146,8 +181,9 @@ export const Galería: Story = {
         copyIconName,
         searchTerm,
         clearSearch,
-        filteredIcons
-      };
+        filteredIcons,
+        copiedIcon
+      }
     },
     template: `
       <g-config-provider>
@@ -164,16 +200,14 @@ export const Galería: Story = {
               v-model="searchTerm"
               placeholder="Buscar icono..."
               class="w-full max-w-md"
-              size="small"
             >
               <template #prefix>
-                <g-icon-font name="solid magnifying-glass" size="18px" />
+                <g-icon-font name="solid magnifying-glass" />
               </template>
             </g-input>
             <g-button 
               v-if="searchTerm"
               @click="clearSearch"
-              size="small"
             >
               Limpiar
             </g-button>
@@ -187,11 +221,28 @@ export const Galería: Story = {
                 <div
                   v-for="icon in icons"
                   :key="icon"
-                  class="flex bg-white flex-col items-center justify-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600"
+                  class="flex bg-white flex-col items-center justify-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600 relative overflow-hidden transition-all duration-300"
+                  :class="{ 'copy-animation': copiedIcon === \`\${weight} \${icon}\` }"
                   @click="copyIconName(\`\${weight} \${icon}\`)"
                 >
-                  <g-icon-font :name="\`\${weight} \${icon}\`" class="text-6 mb-2"/>
-                  <span class="text-xs text-center">{{ icon }}</span>
+                  <g-icon-font 
+                    :name="\`\${weight} \${icon}\`" 
+                    class="text-6 mb-2" 
+                    :class="{ 'invisible': copiedIcon === \`\${weight} \${icon}\` }"
+                  />
+                  <span 
+                    class="text-xs text-center" 
+                    :class="{ 'invisible': copiedIcon === \`\${weight} \${icon}\` }"
+                  >
+                    {{ icon }}
+                  </span>
+
+                  <div v-if="copiedIcon === \`\${weight} \${icon}\` " class="absolute inset-0 bg-emerald-50 bg-opacity-70 flex flex-col items-center justify-center transition-opacity duration-300 copy-feedback">
+                    <div class="text-emerald-600 mb-1">
+                      <g-icon-font name="solid check-circle" size="lg" />
+                    </div>
+                    <span class="text-xs font-medium text-emerald-700">¡Copiado!</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -200,4 +251,4 @@ export const Galería: Story = {
       </g-config-provider>
     `
   })
-};
+}

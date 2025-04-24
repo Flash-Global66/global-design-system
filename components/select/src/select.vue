@@ -219,7 +219,7 @@
           </div>
         </template>
         <template #content>
-          <el-select-menu
+          <g-select-menu
             ref="menuRef"
             :data="filteredOptions"
             :width="popperSize"
@@ -260,7 +260,7 @@
                 <slot name="footer" />
               </div>
             </template>
-          </el-select-menu>
+          </g-select-menu>
         </template>
       </g-tooltip>
     </div>
@@ -282,7 +282,7 @@ import { GTooltip } from '@flash-global66/g-tooltip'
 import { GTag } from '@flash-global66/g-tag'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { useCalcInputWidth } from 'element-plus'
-import ElSelectMenu from './select-dropdown'
+import GSelectMenu from './select-dropdown'
 import useSelect from './hooks/use-select'
 import { SelectProps, selectEmits } from './defaults'
 import { selectV2InjectionKey } from './types/token'
@@ -290,7 +290,7 @@ import { selectV2InjectionKey } from './types/token'
 export default defineComponent({
   name: 'GSelect',
   components: {
-    ElSelectMenu,
+    GSelectMenu,
     GTag,
     GTooltip,
     GIconFont

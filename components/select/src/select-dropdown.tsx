@@ -41,7 +41,7 @@ export type SelectDropdownInstance = ComponentPublicInstance<
 >
 
 export default defineComponent({
-  name: 'ElSelectDropdown',
+  name: 'GSelectDropdown',
   props,
   setup(props, { slots, expose }) {
     const select = inject(selectV2InjectionKey)!
@@ -239,9 +239,7 @@ export default defineComponent({
           }
         },
         [
-          
           slots.header?.(),
-          
           slots.loading?.() || slots.empty?.() || h(
             List,
             {
@@ -259,8 +257,6 @@ export default defineComponent({
               default: (props: ItemProps<any>) => h(Item, { ...props })
             }
           ),
-          
-          // Slots footer
           slots.footer?.()
         ].filter(Boolean) 
       )      
