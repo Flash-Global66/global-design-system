@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.2.0...@flash-global66/g-inline@0.3.0) (2025-04-24)
+
+
+### Features
+
+* **inline:** add close event to inline component ([70f455a](https://github.com/Flash-Global66/global-design-system/commit/70f455a508b27665d20191745ff551825600f8a1))
+
+
+
+
+
 # [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.1.0...@flash-global66/g-inline@0.2.0) (2025-04-23)
 
 
