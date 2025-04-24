@@ -668,8 +668,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-dialog-alert@workspace:components/dialog-alert"
   peerDependencies:
-    "@flash-global66/g-button": 0.3.0
-    "@flash-global66/g-dialog": 1.0.0
+    "@flash-global66/g-config-provider": 0.0.8
+    "@flash-global66/g-dialog": 0.0.8
     "@flash-global66/g-image": 0.0.3
     element-plus: ^2.9.7
     vue: ^3.2.0

@@ -1,15 +1,14 @@
-import { GButton } from "@flash-global66/g-button";
-import { openAlert } from "../components/dialog-alert";
-import { GConfigProvider } from "../components/config-provider";
-import { IMAGE_NAMES, IMAGE_SIZES } from '../components/image/src/constants/image.constants';
+import { GButton } from "@flash-global66/g-button/index.ts";
+import { openAlert, type DialogAlertInstance } from "@flash-global66/g-dialog-alert/index.ts";
+import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
+import { IMAGE_NAMES, IMAGE_SIZES } from '@flash-global66/g-image/index.ts';
 import type { Meta, StoryObj } from "@storybook/vue3";
-import type { DialogAlertInstance } from "../components/dialog-alert";
 
 import pkg, { version } from '../components/dialog-alert/package.json';
 
 const generatePeerDepsList = (deps: Record<string, string>): string => {
   if (!deps || Object.keys(deps).length === 0) {
-    return 'No se especifican dependencias de pares.';
+    return 'Sin dependencias.';
   }
   return Object.entries(deps)
     .map(([pkg, version]) => `- ${pkg}: ${version}`)
@@ -166,7 +165,7 @@ openAlert({
       table: {
         category: 'Personalización',
         type: { summary: Object.keys(IMAGE_SIZES).join(' | ') },
-        defaultValue: { summary: 'md' }
+        defaultValue: { summary: 'lg' }
       }
     }
   }
@@ -214,7 +213,7 @@ export const Playground: Story = {
     tertiaryText: '',
     hideButtonClose: false,
     imageName: undefined,
-    imageSize: 'md'
+    imageSize: 'lg'
   }
 };
 
