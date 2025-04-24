@@ -1,25 +1,29 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import { ref } from "vue";
 
-import { GInline } from "../components/inline";
-import { GConfigProvider } from "../components/config-provider";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { generateIconOptions } from "./icon-font.stories";
+import { GInline } from '@flash-global66/g-inline/index.ts';
+import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 
-const meta: Meta<typeof GInline> = {
+import { version, peerDependencies } from '@flash-global66/g-inline/package.json';
+import { generatePeerDepsList, generateIconOptions, generatePeerDepsInstalls } from "../helper/documentation-stories";
+
+const meta: Meta = {
   title: "Data/Inline",
   component: GInline,
   parameters: {
     docs: {
       description: {
-        component: `El componente Inline se utiliza para mostrar información en un formato compacto, con múltiples opciones de personalización:
+        component: `
+El componente Inline es utilizado para comunicar información contextual, como estados específicos (éxito, error, advertencia, información) dentro de una página o funcionalidad. Es ideal para mensajes secundarios que no necesitan interrumpir al usuario, como alertas, recordatorios o enlaces relevantes. Este componente asegura que el mensaje sea notorio pero no invasivo, proporcionando claridad visual y textual.
 
-> - Títulos y descripciones personalizables
-> - Íconos integrados
-> - Enlaces interactivos
-> - Diferentes tipos de mensajes (success, info, warning, error)
-> - Tamaños adaptables (md, sm)
-> - Control de visibilidad
+> Versión actual: ${version}
+
+## Características
+- Títulos y descripciones 
+- Íconos integrados
+- Enlaces interactivos
+- Diferentes tipos de mensajes (success, info, warning, error)
+- Tamaños adaptables (md, sm)
+- accesibilidad con etiquetas ARIA
 
 ### Instalación
 
@@ -27,11 +31,42 @@ const meta: Meta<typeof GInline> = {
 yarn add @flash-global66/g-inline
 \`\`\`
 
-### Importación
-
+### Importación del componente
 \`\`\`typescript
-import { GInline } from '@flash-global66/g-framework'
+# importar donde se va a utilizar
+import { GInline } from '@flash-global66/g-inline'
+
+# recomendado importar en los estilos globales
 import '@flash-global66/g-inline/inline.styles.scss'
+\`\`\`
+
+## Dependencias
+Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
+${generatePeerDepsList(peerDependencies)}
+
+> Revisar la documentación de cada dependencia para mas información.
+
+
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
+
+### Ejemplo de uso
+
+\`\`\`ts
+import { GInline } from '@flash-global66/g-inline';
+import { default } from '../components/button-card/ButtonCard.vue';
+
+<g-inline 
+  type="info"
+  title="Información"
+  description="Mensaje informativo"
+  icon="solid info-circle"
+/>
 \`\`\`
 `
       }
@@ -80,6 +115,19 @@ import '@flash-global66/g-inline/inline.styles.scss'
       description: "Etiqueta ARIA para accesibilidad.",
       control: "text",
     },
+    onClose: {
+      description: "Evento para el cierre del componente.",
+      table: {
+        category: 'Eventos',
+      }
+    },
+    default: {
+      description: 'Contenido personalizado.',
+      table: {
+        category: 'Slots',
+        type: { summary: 'slot' }
+      }
+    }
   },
   args: {
     icon: "solid undo-alt",
@@ -104,7 +152,7 @@ import '@flash-global66/g-inline/inline.styles.scss'
 };
 
 export default meta;
-type Story = StoryObj<typeof GInline>;
+type Story = StoryObj;
 export const Primary: Story = {
   name: 'Básico',
   parameters: {
@@ -148,6 +196,12 @@ export const AllTypes: Story = {
             description="Mensaje de éxito"
             icon="solid circle-check"
           />
+          <g-inline 
+            type="success"
+            icon="solid circle-check"
+          >
+            hola
+          </g-inline>
           <g-inline 
             type="info"
             title="Información"
@@ -232,7 +286,7 @@ export const WithoutClose: Story = {
 
 // Sin ícono
 export const WithoutIcon: Story = {
-  name: 'Sin ícono',
+  name: 'Sin ícono ni enlaces',
   parameters: {
     docs: {
       description: {
@@ -245,34 +299,8 @@ export const WithoutIcon: Story = {
     template: `
       <g-config-provider>
         <g-inline
-          icon=""
           title="Sin ícono"
           description="Este mensaje no tiene ícono"
-        />
-      </g-config-provider>
-    `
-  })
-};
-
-// Sin enlaces
-export const WithoutLinks: Story = {
-  name: 'Sin enlaces',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Si no quieres que el mensaje tenga enlaces, puedes omitir la propiedad links.'
-      }
-    }
-  },
-  render: () => ({
-    components: { GInline, GConfigProvider },
-    template: `
-      <g-config-provider>
-        <g-inline
-          title="Sin enlaces"
-          description="Este mensaje no tiene enlaces"
-          icon="solid info-circle"
-          :links="[]"
         />
       </g-config-provider>
     `
