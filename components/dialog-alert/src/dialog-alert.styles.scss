@@ -1,0 +1,12 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b(dialog-alert) {
+  @include e(description) {
+    @apply text-center text-4 font-normal text-secondary-txt hyphens-manual;
+  }
+}

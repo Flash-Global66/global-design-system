@@ -1,24 +1,14 @@
 import type { ImageName, ImageSize } from "@flash-global66/g-image";
-import type { ButtonVariant } from "@flash-global66/g-button";
-import type { FooterButton } from "@flash-global66/g-dialog";
 
-/**
- * Alert dialog types
- */
 export type AlertType = "success" | "warning" | "error" | "info" | "important";
 
-/**
- * Result from user interaction with the alert dialog
- */
 export interface AlertButtonResult {
   isPrimary?: boolean;
   isSecondary?: boolean;
-  variant?: ButtonVariant;
+  isTertiary?: boolean;
+  dismissedByClose?: boolean;
 }
 
-/**
- * Configuration options for the alert dialog
- */
 export interface AlertOptions {
   hideButtonClose?: boolean;
   type?: AlertType;
@@ -28,7 +18,11 @@ export interface AlertOptions {
   imageName?: ImageName;
   primaryText?: string;
   secondaryText?: string;
+  tertiaryText?: string;
   reverseButtons?: boolean;
 }
 
-export type { FooterButton };
+export interface AlertEmits {
+  (e: 'close'): void
+  (e: 'next', result: AlertButtonResult): void
+}
