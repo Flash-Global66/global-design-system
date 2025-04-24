@@ -5,9 +5,10 @@ import {
 } from "element-plus";
 import { computed, defineComponent, PropType, reactive, ref, watch } from "vue";
 import { GIconFont } from '@flash-global66/g-icon-font';
-import { inlineProps } from "./inline";
+import { inlineEmits, inlineProps } from "./inline";
 
 const props = defineProps(inlineProps)
+const emits = defineEmits(inlineEmits)
 
 const visible = ref(true);
 
@@ -22,8 +23,9 @@ const inlineClass = computed(() => [
   ns.m(props.type),
 ])
 
-async function onClose() {
+async function onClose(event: MouseEvent) {
   visible.value = false;
+  emits('close', event)
 }
 
 </script>
@@ -44,7 +46,7 @@ async function onClose() {
       <div class="">
         <h3 v-if="title" :class="[ns.e('title')]"> {{ title }} </h3>
         <p :class="[ns.e('description')]">
-          <slot>
+          <slot name="default">
             {{ description }}
           </slot>
         </p>
