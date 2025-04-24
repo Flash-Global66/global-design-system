@@ -1,0 +1,58 @@
+@use "element-plus/theme-chalk/src/dropdown.scss" as *;
+@use "element-plus/theme-chalk/src/scrollbar.scss" as *;
+@use "element-plus/theme-chalk/src/popper.scss" as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b('dropdown') {
+  @include e("popper") {
+    @apply rounded-md !important;
+
+    & .gui-popper__arrow {
+      @apply shadow-none !important;
+      &::before {
+        @apply bg-white !important;
+      }
+    }
+
+    & .gui-scrollbar__wrap {
+      @apply rounded-md !important;
+    }
+  }
+}
+
+@include b("dropdown-menu") {
+  @apply flex flex-col gap-xxs min-w-48 rounded-md;
+  @include e('item') {
+    @apply min-h-12 p-md flex items-center justify-start transition-all duration-200 ease-in !important;
+
+    @include m("content") {
+      @apply flex items-start justify-center flex-col overflow-hidden;
+    }
+    @include m("icon") {
+      @apply text-7 text-secondary-txt mr-md;
+    }
+    @include m("title") {
+      @apply text-4 text-secondary-txt font-medium overflow-hidden text-ellipsis w-full;
+    }
+    @include m("description") {
+      @apply text-2 text-terciary-txt font-medium text-pretty line-clamp-2 overflow-hidden text-ellipsis;
+    }
+
+    @include when(disabled) {
+      @apply cursor-not-allowed;
+
+      &:hover {
+        @apply bg-transparent;
+      }
+
+      & .gui-dropdown-menu__item--icon,
+      & .gui-dropdown-menu__item--title,
+      & .gui-dropdown-menu__item--description {
+        @apply text-grey-300;
+      }
+    }
+  }
+}
