@@ -32,9 +32,9 @@
     "@flash-global66/g-icon-font": "^0.0.8",
     "@flash-global66/g-input": "^0.3.1",
     "@flash-global66/g-scrollbar": "^0.1.0",
+    "dayjs": "^1.11.13",
     "element-plus": "^2.9.0",
-    "vue": "^3.2.0",
-    "dayjs": "^1.11.13"
+    "vue": "^3.2.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }
