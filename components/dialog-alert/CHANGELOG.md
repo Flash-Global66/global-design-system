@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog-alert@0.1.0...@flash-global66/g-dialog-alert@0.2.0) (2025-04-25)
+
+
+### Features
+
+* **dialog-alert:** refactor dialog alert component ([#43](https://github.com/Flash-Global66/global-design-system/issues/43)) ([f15477b](https://github.com/Flash-Global66/global-design-system/commit/f15477b9bf310da926b1478aafd8c01e627eff34))
+
+
+
+
+
 # 0.1.0 (2025-04-23)
 
 
