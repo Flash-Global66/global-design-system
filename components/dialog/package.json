@@ -1,11 +1,33 @@
 {
   "name": "@flash-global66/g-dialog",
   "author": "Global66",
-  "version": "0.0.8",
+  "version": "1.1.0",
   "license": "MIT",
+  "buildable": true,
   "exports": {
-    ".": "./index.ts",
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/dialog.styles.scss",
     "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-focus-trap": "0.0.8",
+    "@flash-global66/g-overlay": "0.0.7",
+    "@flash-global66/g-teleport": "0.0.6",
+    "element-plus": "^2.9.7",
+    "vue": "^3.2.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

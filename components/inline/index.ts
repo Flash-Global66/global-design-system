@@ -1,5 +1,17 @@
-import GInline from "./Inline.vue";
-export type * from './inline.type';
-export * from './inline.type';
+import Inline from "./src/inline.vue";
+import {
+  withInstall,
+  withNoopInstall,
+  SFCWithInstall,
+} from "element-plus/es/utils/index.mjs";
+export const GInline: SFCWithInstall<typeof Inline> & {
+  Inline: typeof Inline;
+} = withInstall(Inline, {
+  Inline,
+});
+export default GInline;
 
-export { GInline };
+export * from "./src/inline.type";
+export * from "./src/inline";
+
+export type InlineInstance = InstanceType<typeof Inline>;

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-tooltip@0.0.5...@flash-global66/g-tooltip@0.1.0) (2025-04-23)
+
+
+### Features
+
+* **tooltip:** apply styles to content slot ([56c5483](https://github.com/Flash-Global66/global-design-system/commit/56c5483a3a67d34b33cdf480aa5d02c686e8a573))
+
+
+
+
+
 ## [0.0.5](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-tooltip@0.0.4...@flash-global66/g-tooltip@0.0.5) (2025-04-08)
 
 

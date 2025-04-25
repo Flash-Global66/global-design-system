@@ -1,8 +1,6 @@
 import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue'
 import type { UseNamespaceReturn } from 'element-plus/es/hooks'
-
-// Button types
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+import type { ButtonVariant } from "@flash-global66/g-button";
 
 export interface FooterButton {
   /**
@@ -12,11 +10,13 @@ export interface FooterButton {
   /**
    * Function to be executed when clicking the button
    */
-  onClick: () => void;
+  onClick: () => void | Promise<void>;
   /**
    * Visual variant of the button
    */
   variant: ButtonVariant;
+  
+  [key: string]: any;
 }
 
 // Dialog types

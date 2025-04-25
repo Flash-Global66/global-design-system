@@ -1,10 +1,9 @@
 import type { ExtractPropTypes } from "vue";
-import type Inline from "./Inline.vue";
+import type Inline from "./inline.vue";
 import { useAriaProps} from "element-plus";
 import { buildProps, definePropType, isBoolean, isNumber, isString } from "element-plus/es/utils/index.mjs";
 
 import { InlineEnum, InlineLinks, InlineSize } from "./inline.type";
-import { de } from "element-plus/es/locales.mjs";
 import { IconString } from "@flash-global66/g-icon-font";
 
 export const inlineProps = buildProps({
@@ -60,6 +59,12 @@ export const inlineProps = buildProps({
   },
   ...useAriaProps(["ariaLabel"]),
 });
+
+export const inlineEmits = {
+  close: (evt: MouseEvent) => evt instanceof MouseEvent,
+};
+
+export type InlineEmits = typeof inlineEmits;
 
 export type InlineProps = ExtractPropTypes<typeof inlineProps>;
 

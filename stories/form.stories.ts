@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref, reactive, computed, watch } from "vue";
+// Para poder hacer cambios en el form se debe hacer build porque se usa provider
 import { FormInstance, GForm, GFormItem } from "@flash-global66/g-form/index.ts";
 import { GInput } from "@flash-global66/g-input/index.ts";
 import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
@@ -7,6 +8,7 @@ import { GButton } from "@flash-global66/g-button/index.ts";
 import { GSelect } from "@flash-global66/g-select/index.ts";
 import { GRadio } from "@flash-global66/g-radio/index.ts";
 import { GCheckbox } from "@flash-global66/g-checkbox/index.ts";
+import { GSegmented } from "@flash-global66/g-segmented/index.ts";
 
 const meta: Meta<FormInstance> = {
   title: "Form/Form",
@@ -141,7 +143,8 @@ export const CompleteForm: Story = {
       GButton,
       GSelect,
       GRadio,
-      GCheckbox
+      GCheckbox,
+      GSegmented
     },
     setup() {
       const formRef = ref<FormInstance>();
@@ -151,8 +154,15 @@ export const CompleteForm: Story = {
         country: '',
         city: '',
         gender: '',
-        termsAccepted: false
+        termsAccepted: false,
+        preferredContact: ''
       });
+
+      const contactOptions = [
+        { label: 'Email', value: 'email' },
+        { label: 'Teléfono', value: 'phone' },
+        { label: 'WhatsApp', value: 'whatsapp' }
+      ];
 
       // Lista de países
       const countries = [
@@ -240,6 +250,18 @@ export const CompleteForm: Story = {
             type: 'boolean',
             trigger: 'change' 
           }
+        ],
+        preferredContact: [
+          { 
+            validator: (rule: any, value: boolean, callback: any) => {
+              if (!value) {
+                callback(new Error('Debe aceptar los términos y condiciones para continuar'));
+              }
+              callback();
+            },
+            type: 'boolean',
+            trigger: 'change' 
+          }
         ]
       };
 
@@ -272,7 +294,9 @@ export const CompleteForm: Story = {
         formData, 
         countries, 
         availableCities,
-        rules, 
+        rules,
+        contactOptions,
+        GSegmented,
         handleSubmit, 
         handleReset 
       };
@@ -285,28 +309,37 @@ export const CompleteForm: Story = {
           :rules="rules"
         >
           <div class="mb-6">
+            <h3 class="text-lg font-bold mb-2">Método de contacto preferido</h3>
+            <g-form-item prop="preferredContact">
+              <g-segmented
+                v-model="formData.preferredContact"
+                :options="contactOptions"
+                block
+                size="sm"
+              />
+            </g-form-item>
+          </div>
+          <div class="mb-6">
             <h3 class="text-lg font-bold mb-2">Nombre completo y Email</h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <g-form-item prop="fullName">
-                  <g-input 
-                  v-model="formData.fullName" 
-                  label="Nombre completo"
-                  placeholder="Ingrese su nombre y apellidos"
-                  prefix-icon="regular user"
-                  help-text="Ingrese su nombre y apellidos completos"
-                />
-              </g-form-item>
-              
-              <g-form-item prop="email">
-                <g-input 
-                  v-model="formData.email" 
-                  label="Correo electrónico"
-                  placeholder="ejemplo@correo.com"
-                  prefix-icon="regular envelope"
-                  help-text="Usaremos este email para contactarlo"
-                />
-              </g-form-item>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <g-form-item prop="fullName">
+              <g-input 
+                v-model="formData.fullName" 
+                label="Nombre completo"
+                placeholder="Ingrese su nombre y apellidos"
+                prefix-icon="regular user"
+                help-text="Ingrese su nombre y apellidos completos"
+              />
+            </g-form-item>
+            
+            <g-form-item prop="email">
+              <g-input 
+                v-model="formData.email"
+                placeholder="ejemplo@correo.com"
+                prefix-icon="regular envelope"
+                help-text="Usaremos este email para contactarlo"
+              />
+            </g-form-item>
           </div>
           
           <div class="mb-6">

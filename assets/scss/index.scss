@@ -2,16 +2,13 @@
 @use "../../components/radio-group/radio-group.styles.scss" as *;
 @use "../../components/badge/badge.styles.scss" as *;
 @use "../../components/icon-button/src/icon-button.styles.scss" as *;
-@use "../../components/dialog/dialog.styles.scss" as *;
 @use "../../components/popover/popover.styles.scss" as *;
 @use "../../components/skeleton/skeleton.styles.scss" as *;
 @use "../../components/skeleton/skeleton-item.styles.scss" as *;
 @use "../../components/input-code/input-code.styles.scss" as *;
-@use "../../components/dialog/dialog.styles.scss" as *;
 @use "../../components/overlay/overlay.styles.scss" as *;
 @use "../../components/table/table.styles.scss" as *;
 @use "../../components/menu/menu.styles.scss" as *;
-@use "../../components/inline/inline.styles.scss" as *;
 @use "../../components/link/src/link.styles.scss" as *;
 @use "../../components/switch/switch.styles.scss" as *;
 @use "../../components/scrollbar/src/scrollbar.styles.scss" as *;
@@ -32,6 +29,8 @@
 @use "@flash-global66/g-time-picker/styles.scss" as *;
 @use "@flash-global66/g-pagination/styles.scss" as *;
 @use "@flash-global66/g-dropdown/styles.scss" as *;
+@use "@flash-global66/g-inline/styles.scss" as *;
+@use "@flash-global66/g-dialog/styles.scss" as *;
 @use "@flash-global66/g-dialog-alert/styles.scss" as *;
 
 * {

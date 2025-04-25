@@ -28,13 +28,15 @@
             @change="handleChange(item)"
           />
           <div :class="ns.e('item-label')">
-            <slot :item="item">{{ getLabel(item) }}</slot>
+            <slot :item="item" :isActive="getSelected(item)">{{ getLabel(item) }}</slot>
           </div>
         </label>
       </div>
     </div>
     <slot name="help" :error="error" :isError="isError">
-      <p :key="isError ? 'error' : 'help'" :class="helpTextKls">
+      <p
+        v-if="formItem || helpText"
+        :key="isError ? 'error' : 'help'" :class="helpTextKls">
         {{ isError ? error : helpText }}
       </p>
     </slot>
