@@ -246,7 +246,7 @@
       <g-button
         v-if="clearable"
         text
-        size="small"
+        size="sm"
         :class="ppNs.e('link-btn')"
         @click="handleClear"
       >
@@ -254,7 +254,7 @@
       </g-button>
       <g-button
         plain
-        size="small"
+        size="sm"
         :class="ppNs.e('link-btn')"
         :disabled="btnDisabled"
         @click="handleRangeConfirm(false)"
