@@ -1,0 +1,38 @@
+{
+  "name": "@flash-global66/g-search-input",
+  "version": "1.0.0",
+  "description": "Search input component with debounce functionality",
+  "author": "Global66",
+  "license": "MIT",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/search-input.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-config-provider": "0.0.8",
+    "@flash-global66/g-icon-font": "^0.0.8",
+    "@flash-global66/g-input": "0.3.0",
+    "@flash-global66/g-skeleton": "0.0.7",
+    "@vueuse/core": "^12.4.0",
+    "element-plus": "^2.9.7",
+    "vue": "^3.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
