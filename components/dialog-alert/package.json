@@ -1,0 +1,39 @@
+{
+  "name": "@flash-global66/g-dialog-alert",
+  "author": "Global66",
+  "version": "0.2.0",
+  "license": "MIT",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/dialog-alert.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-config-provider": "0.0.8",
+    "@flash-global66/g-dialog": "0.0.8",
+    "@flash-global66/g-image": "0.0.3",
+    "element-plus": "^2.9.7",
+    "vue": "^3.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
+}
