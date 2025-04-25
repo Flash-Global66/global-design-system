@@ -169,25 +169,23 @@
       </div>
     </div>
     <div v-show="footerVisible" :class="ppNs.e('footer')">
-      <g-button
+      <button
         v-show="!isMultipleType && showNow"
-        text
-        size="sm"
-        :class="ppNs.e('link-btn')"
+        type="button"
+        class="gui-time-panel__btn cancel"
         :disabled="disabledNow"
         @click="changeToNow"
       >
         {{ t("el.datepicker.now") }}
-      </g-button>
-      <g-button
-        plain
-        size="sm"
-        :class="ppNs.e('link-btn')"
+      </button>
+      <button
+        type="button"
+        class="gui-time-panel__btn confirm"
         :disabled="disabledConfirm"
         @click="onConfirm"
       >
         {{ t("el.datepicker.confirm") }}
-      </g-button>
+      </button>
     </div>
   </div>
 </template>
