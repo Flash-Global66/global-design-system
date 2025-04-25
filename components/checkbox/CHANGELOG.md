@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.2.0...@flash-global66/g-checkbox@0.2.1) (2025-04-23)
+
+
+### Bug Fixes
+
+* **checkbox:** adjust label leading for improved text layout ([183e8c8](https://github.com/Flash-Global66/global-design-system/commit/183e8c884b4e08f7efdeb81450f43dfd51d3c21b))
+
+
+
+
+
 # [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.1.0...@flash-global66/g-checkbox@0.2.0) (2025-04-10)
 
 

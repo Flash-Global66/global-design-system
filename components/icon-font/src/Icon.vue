@@ -12,11 +12,11 @@ import { debugWarn, isString } from "element-plus/es/utils/index.mjs";;
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import type { IconString } from './types';
-import * as SolidPro from './src/fas-solid-pro';
-import * as SolidFree from './src/fas-solid-free';
-import * as RegularPro from './src/far-regular-pro';
-import * as LightPro from './src/fal-light-pro';
-import * as BrandsFree from './src/fab-free';
+import * as SolidPro from './lib/fas-solid-pro';
+import * as SolidFree from './lib/fas-solid-free';
+import * as RegularPro from './lib/far-regular-pro';
+import * as LightPro from './lib/fal-light-pro';
+import * as BrandsFree from './lib/fab-free';
 import { iconProps } from './icon';
 
 // Registro de iconos

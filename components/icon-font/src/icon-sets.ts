@@ -99,6 +99,7 @@ export const ICON_SETS = {
     "lightbulb",
     "spinner",
     "timer",
+    "gift",
   ] as const,
 
   regular: [
@@ -171,6 +172,8 @@ export const ICON_SETS = {
     "ellipsis",
     "angles-right",
     "angles-left",
+    "gift",
+    "timer",
   ] as const,
 
   light: [

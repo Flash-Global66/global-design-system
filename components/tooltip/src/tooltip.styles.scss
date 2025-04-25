@@ -27,6 +27,10 @@
       @apply text-2 font-medium text-secondary-txt text-pretty;
     }
   
+    @include e('content') {
+      @apply text-2 font-medium text-secondary-txt text-pretty;
+    }
+  
     @include e('arrow') {
       &::before {
         @apply bg-everBlue-50 border-none !important;

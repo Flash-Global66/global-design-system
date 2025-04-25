@@ -34,7 +34,7 @@
   }
 
   @include e(label) {
-    @apply p-0 text-secondary-txt text-pretty;
+    @apply p-0 text-secondary-txt text-pretty leading-snug;
   }
 
   @include e(input) {

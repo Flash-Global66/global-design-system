@@ -29,7 +29,6 @@
     "reset-tags": "bash ./scripts-terminal/reset-tags.sh",
     "build": "node scripts/build-components.js",
     "build:types": "npx lerna run build:types --scope \"@flash-global66/g-*\"",
-    "publish": "npx lerna publish",
     "build:publish": "yarn build && yarn publish"
   },
   "dependencies": {

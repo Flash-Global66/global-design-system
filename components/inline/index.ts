@@ -12,5 +12,6 @@ export const GInline: SFCWithInstall<typeof Inline> & {
 export default GInline;
 
 export * from "./src/inline.type";
+export * from "./src/inline";
 
 export type InlineInstance = InstanceType<typeof Inline>;

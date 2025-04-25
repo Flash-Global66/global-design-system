@@ -60,6 +60,12 @@ export const inlineProps = buildProps({
   ...useAriaProps(["ariaLabel"]),
 });
 
+export const inlineEmits = {
+  close: (evt: MouseEvent) => evt instanceof MouseEvent,
+};
+
+export type InlineEmits = typeof inlineEmits;
+
 export type InlineProps = ExtractPropTypes<typeof inlineProps>;
 
 export type InlineInstance = InstanceType<typeof Inline>;

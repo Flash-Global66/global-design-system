@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref, reactive, computed, watch } from "vue";
 // Para poder hacer cambios en el form se debe hacer build porque se usa provider
-import { FormInstance, GForm, GFormItem } from "@flash-global66/g-form";
+import { FormInstance, GForm, GFormItem } from "@flash-global66/g-form/index.ts";
 import { GInput } from "@flash-global66/g-input/index.ts";
 import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 import { GButton } from "@flash-global66/g-button/index.ts";
