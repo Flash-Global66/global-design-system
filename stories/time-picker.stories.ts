@@ -487,7 +487,6 @@ export const DisabledTimes: Story = {
               <p>Minutos deshabilitados a las 12:XX (solo pares)</p>
               <p>Segundos deshabilitados a las 12:30:XX (solo mayores a 30)</p>
             </div>
-          <div class="grid grid-cols-2 gap-4">
         </div>
       </g-config-provider>
     `,
@@ -567,23 +566,22 @@ export const States: Story = {
     template: `
       <g-config-provider>
         <div class="flex flex-col gap-4">
-            <g-time-picker
-              v-model="time"
-              label="Normal"
-            />
-            
-            <g-time-picker
-              v-model="timeDisabled"
-              label="Deshabilitado"
-              disabled
-            />
-            
-            <g-time-picker
-              v-model="timeHelpText"
-              label="Texto de apoyo"
-              helpText="Texto de apoyo"
-            />
-          </div>
+          <g-time-picker
+            v-model="time"
+            label="Normal"
+          />
+          
+          <g-time-picker
+            v-model="timeDisabled"
+            label="Deshabilitado"
+            disabled
+          />
+          
+          <g-time-picker
+            v-model="timeHelpText"
+            label="Texto de apoyo"
+            helpText="Texto de apoyo"
+          />
         </div>
       </g-config-provider>
     `,
