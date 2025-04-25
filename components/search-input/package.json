@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-search-input",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Search input component with debounce functionality",
   "author": "Global66",
   "license": "MIT",
