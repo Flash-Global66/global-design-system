@@ -64,6 +64,9 @@
             :name="isTimeLikePicker ? 'regular clock' : 'regular calendar'"
           />
         </template>
+        <span>
+          {{ label }}
+        </span>
         <div v-if="label" :class="[nsInput.e('label')]" :style="labelStyle">
           {{ label }}
         </div>
