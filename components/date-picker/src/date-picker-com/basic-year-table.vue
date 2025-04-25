@@ -36,6 +36,7 @@ import { rangeArr } from "@flash-global66/g-time-picker";
 import { basicYearTableProps } from "../props/basic-year-table";
 import { getValidDateOfYear } from "../utils";
 import GDatePickerCell from "./basic-cell-render.vue";
+import es from "../lang/es";
 
 type YearCell = {
   column: number;

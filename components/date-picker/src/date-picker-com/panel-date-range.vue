@@ -105,17 +105,6 @@
             <button
               type="button"
               :class="ppNs.e('icon-btn')"
-              :aria-label="t(`el.datepicker.prevYear`)"
-              class="d-arrow-left"
-              @click="leftPrevYear"
-            >
-              <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
-              </slot>
-            </button>
-            <button
-              type="button"
-              :class="ppNs.e('icon-btn')"
               :aria-label="t(`el.datepicker.prevMonth`)"
               class="arrow-left"
               @click="leftPrevMonth"
@@ -197,17 +186,6 @@
             >
               <slot name="prev-month">
                 <g-icon-font name="solid chevron-left" />
-              </slot>
-            </button>
-            <button
-              type="button"
-              :aria-label="t(`el.datepicker.nextYear`)"
-              :class="ppNs.e('icon-btn')"
-              class="d-arrow-right"
-              @click="rightNextYear"
-            >
-              <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
               </slot>
             </button>
             <button

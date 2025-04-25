@@ -63,6 +63,7 @@
         >
           <span :class="dpNs.e('prev-btn')">
             <button
+              v-show="currentView !== 'date'"
               type="button"
               :aria-label="t(`el.datepicker.prevYear`)"
               class="d-arrow-left"
@@ -70,7 +71,7 @@
               @click="moveByYear(false)"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button
@@ -122,6 +123,7 @@
               </slot>
             </button>
             <button
+              v-show="currentView !== 'date'"
               type="button"
               :aria-label="t(`el.datepicker.nextYear`)"
               :class="ppNs.e('icon-btn')"
@@ -129,7 +131,7 @@
               @click="moveByYear(true)"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
           </span>

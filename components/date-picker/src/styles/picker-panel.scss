@@ -25,7 +25,7 @@
 
   @include e(content) {
     position: relative;
-    margin: 15px;
+    margin: 8px 15px 15px 15px;
   }
 
   @include e(footer) {
@@ -78,13 +78,12 @@
   }
 
   @include e(icon-btn) {
-    font-size: 12px;
-    color: getCssVar("datepicker-icon-color");
+    width: 1.25rem;
+    @apply text-terciary-txt;
     border: 0;
     background: transparent;
     cursor: pointer;
     outline: none;
-    margin-top: 8px;
 
     &:hover {
       color: getCssVar("datepicker-hover-text-color");
