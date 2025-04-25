@@ -1,23 +1,22 @@
-import { StoryFn, Meta } from '@storybook/vue3'
+import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
 import { GSearchInput } from '@flash-global66/g-search-input/index.ts'
-import { GConfigProvider } from '../components/config-provider'
+import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts"
 import { action } from '@storybook/addon-actions'
-import { version } from '../components/search-input/package.json'
 
-export default {
+import { version, peerDependencies } from '@flash-global66/g-search-input/package.json'
+import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories"
+
+const meta: Meta<typeof GSearchInput> = {
   title: "Form/SearchInput",
   component: GSearchInput,
   parameters: {
     docs: {
       description: {
         component: `
-# Search Input Component
-
-El componente SearchInput proporciona una manera optimizada para implementar campos de búsqueda con funcionalidades avanzadas.
+El componente SearchInput proporciona un campo de búsqueda optimizado con funcionalidades avanzadas como debounce, estados de carga y limpieza automática. Es ideal para implementar búsquedas en tiempo real, filtros en tablas o listados, y cualquier situación donde se requiera una búsqueda eficiente y con buena experiencia de usuario.
 
 > Versión actual: ${version}
-
 
 ## Características
 - Campo de búsqueda con icono de lupa integrado
@@ -26,40 +25,40 @@ El componente SearchInput proporciona una manera optimizada para implementar cam
 - Soporte para estados de carga (skeleton y búsqueda en progreso)
 - Integración completa con el sistema de diseño
 - Optimización de rendimiento para búsquedas en tiempo real
+- Hereda todas las propiedades del componente Input
 
-## Instalación
+### Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-search-input
 \`\`\`
 
+### Importación del componente
+\`\`\`typescript
+# importar donde se va a utilizar
+import { GSearchInput } from '@flash-global66/g-search-input'
+
+# recomendado importar en los estilos globales
+import '@flash-global66/g-search-input/styles.scss'
+\`\`\`
+
 ## Dependencias
-Este componente extiende la funcionalidad de G-Input y requiere las siguientes dependencias:
-- **@flash-global66/g-input**: Componente base para la entrada de texto
-- **@flash-global66/g-skeleton**: Para mostrar estados de carga
-- **@flash-global66/g-icon-font**: Para los iconos de búsqueda y limpiar
-- **@vueuse/core**: Para la funcionalidad de debounce
+Se hicieron pruebas con las siguientes dependencias. Puede que funcione con otras versiones, pero no se garantiza.
+${generatePeerDepsList(peerDependencies)}
+
+> Revisar la documentación de cada dependencia para más información.
 
 \`\`\`bash
-# Instalar dependencias requeridas
-yarn add @flash-global66/g-input @flash-global66/g-skeleton @flash-global66/g-icon-font @vueuse/core
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 \`\`\`
 
-## Importación de estilos SASS
-Para que el componente funcione correctamente, es necesario importar los estilos SASS:
+### Ejemplo de uso
 
-\`\`\`scss
-// Importar estilos del SearchInput
-@use '@flash-global66/g-search-input/styles.scss' as *;
-
-// Importar los estilos de los componentes dependientes
-@use '@flash-global66/g-input/styles.scss' as *;
-@use '@flash-global66/g-skeleton/skeleton-item.styles.scss' as *;
-\`\`\`
-
-## Uso básico
-
-\`\`\`vue
+\`\`\`html
 <template>
   <g-search-input 
     v-model="search"
@@ -86,60 +85,9 @@ const handleClear = () => {
 };
 </script>
 \`\`\`
-
-## Optimización de búsquedas
-- El componente implementa debounce para evitar múltiples llamadas innecesarias
-- El tiempo de espera es configurable mediante la propiedad \`debounceTime\` (ms)
-- La búsqueda se dispara automáticamente con el evento @search
-
-## Eventos
-- **update:modelValue**: Se emite cuando cambia el valor del input
-- **search**: Se emite cuando se realiza una búsqueda (después del debounce o al presionar Enter)
-- **clear**: Se emite cuando se limpia el input con el botón X
-
-## Métodos expuestos
-El componente expone los siguientes métodos que puedes utilizar mediante refs:
-
-- **focus()**: Enfoca el campo de búsqueda
-- **blur()**: Quita el foco del campo de búsqueda
-- **clear()**: Limpia el campo de búsqueda y emite los eventos correspondientes
-
-\`\`\`vue
-<template>
-  <g-search-input ref="searchInputRef" v-model="search" />
-  <g-button @click="focusSearch">Enfocar búsqueda</g-button>
-</template>
-
-<script setup>
-import { ref } from 'vue';
-import { GSearchInput } from '@flash-global66/g-search-input';
-import { GButton } from '@flash-global66/g-button';
-
-const search = ref('');
-const searchInputRef = ref(null);
-
-const focusSearch = () => {
-  searchInputRef.value.focus();
-};
-</script>
-\`\`\`
-
-## Contexto de uso recomendado
-El componente SearchInput está diseñado para:
-- Barras de búsqueda en aplicaciones web
-- Filtros en tablas y listados
-- Búsqueda en tiempo real con debounce
-- Formularios que requieren campos de búsqueda optimizados
-
-## Herencia de propiedades
-SearchInput extiende todas las propiedades disponibles en G-Input, por lo que puedes usar cualquier propiedad de G-Input directamente en SearchInput.
-`,
-      },
-      source: {
-        language: "vue",
-        format: true,
-      },
-    },
+`
+      }
+    }
   },
   argTypes: {
     modelValue: {
@@ -209,7 +157,6 @@ SearchInput extiende todas las propiedades disponibles en G-Input, por lo que pu
         category: "Estado y apariencia",
       },
     },
-
     debounceTime: {
       control: "number",
       description: "Tiempo de espera para el debounce (ms)",
@@ -219,7 +166,6 @@ SearchInput extiende todas las propiedades disponibles en G-Input, por lo que pu
         category: "Comportamiento",
       },
     },
-
     "onUpdate:modelValue": {
       description: "Se emite al actualizar el valor",
       table: {
@@ -242,40 +188,30 @@ SearchInput extiende todas las propiedades disponibles en G-Input, por lo que pu
       },
     },
   },
-} as Meta<typeof GSearchInput>;
+  args: {
+    placeholder: 'Buscar...',
+    label: '',
+    helpText: '',
+    messageError: '',
+    disabled: false,
+    initialLoading: false,
+    searchingLoading: false,
+    debounceTime: 300,
+  }
+};
 
-const Template: StoryFn<typeof GSearchInput> = (args) => ({
-  components: { GSearchInput, GConfigProvider },
-  setup() {
-    const search = ref('')
-    return { 
-      args,
-      search,
-      onSearch: action('search'),
-      onClear: action('clear')
-    }
-  },
-  template: `
-    <g-config-provider>
-      <g-search-input
-        v-model="search"
-        v-bind="args"
-        @search="onSearch"
-        @clear="onClear"
-      />
-    </g-config-provider>
-  `
-})
+export default meta;
+type Story = StoryObj<typeof GSearchInput>;
 
-export const Basic = Template.bind({})
-Basic.args = {
-  placeholder: 'Buscar...'
-}
-
-Basic.parameters = {
-  docs: {
-    source: {
-      code: `
+export const Primary: Story = {
+  name: 'Básico',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplo básico del componente SearchInput. Desde los controles puedes probar todas las propiedades disponibles.'
+      },
+      source: {
+        code: `
 <g-search-input
   v-model="search"
   placeholder="Buscar..."
@@ -283,21 +219,42 @@ Basic.parameters = {
   @clear="onClear"
 />
 `, language: 'html'
+      }
     }
-  }
+  },
+  render: (args) => ({
+    components: { GSearchInput, GConfigProvider },
+    setup() {
+      const search = ref('')
+      return { 
+        args,
+        search,
+        onSearch: action('search'),
+        onClear: action('clear')
+      }
+    },
+    template: `
+      <g-config-provider>
+        <g-search-input
+          v-model="search"
+          v-bind="args"
+          @search="onSearch"
+          @clear="onClear"
+        />
+      </g-config-provider>
+    `
+  })
 }
 
-export const WithLabel = Template.bind({})
-WithLabel.args = {
-  label: 'Buscar',
-  placeholder: 'Buscar',
-  helpText: 'Escribe para buscar'
-}
-
-WithLabel.parameters = {
-  docs: {
-    source: {
-      code: `
+export const WithLabel: Story = {
+  name: 'Con etiqueta',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente puede incluir una etiqueta y texto de ayuda para mejorar la comprensión del usuario.'
+      },
+      source: {
+        code: `
 <g-search-input
   v-model="search"
   label="Buscar"
@@ -307,203 +264,170 @@ WithLabel.parameters = {
   @clear="onClear"
 />
 `, language: "html",
+      },
     },
   },
-};
-
-export const States = () => ({
-  components: { GSearchInput, GConfigProvider },
-  setup() {
-    const search = ref('')
-    return { 
-      search,
-      onSearch: action('search'),
-      onClear: action('clear')
-    }
-  },
-  template: `
-    <g-config-provider>
-      <div class="flex flex-col gap-4">
-        <div>
-          <h3 class="text-base font-semibold mb-2">Estado normal</h3>
-          <p class="text-sm text-gray-500 mb-2">Estado predeterminado del componente con funcionalidad completa.</p>
-          <g-search-input
-            v-model="search"
-            placeholder="Búsqueda normal"
-            @search="onSearch"
-            @clear="onClear"
-          />
-        </div>
-        
-        <div>
-          <h3 class="text-base font-semibold mb-2">Estado de error</h3>
-          <p class="text-sm text-gray-500 mb-2">Se muestra cuando hay un error en la búsqueda o validación.</p>
-          <g-search-input
-            v-model="search"
-            placeholder="Búsqueda con error"
-            message-error="Ha ocurrido un error"
-            @search="onSearch"
-            @clear="onClear"
-          />
-        </div>
-        
-        <div>
-          <h3 class="text-base font-semibold mb-2">Estado deshabilitado</h3>
-          <p class="text-sm text-gray-500 mb-2">El componente no permite interacción cuando está deshabilitado.</p>
-          <g-search-input
-            v-model="search"
-            placeholder="Búsqueda deshabilitada"
-            disabled
-            @search="onSearch"
-            @clear="onClear"
-          />
-        </div>
-        
-        <div>
-          <h3 class="text-base font-semibold mb-2">Estado de búsqueda en progreso</h3>
-          <p class="text-sm text-gray-500 mb-2">Muestra un indicador de carga durante la búsqueda.</p>
-          <g-search-input
-            v-model="search"
-            placeholder="Búsqueda en progreso"
-            searching-loading
-            @search="onSearch"
-            @clear="onClear"
-          />
-        </div>
-        
-        <div>
-          <h3 class="text-base font-semibold mb-2">Estado de carga inicial</h3>
-          <p class="text-sm text-gray-500 mb-2">Muestra un skeleton cuando el componente está cargando datos iniciales.</p>
-          <g-search-input
-            placeholder="Carga inicial"
-            initial-loading
-          />
-        </div>
-      </div>
-    </g-config-provider>
-  `
-})
-
-States.parameters = {
-  docs: {
-    source: {
-      code: `
-  <!-- Estado normal -->
-  <g-search-input
-    v-model="search"
-    placeholder="Búsqueda normal"
-    @search="onSearch"
-    @clear="onClear"
-  />
-  
-  <!-- Estado de error -->
-    <g-search-input
-      v-model="search"
-      placeholder="Búsqueda con error"
-      message-error="Ha ocurrido un error"
-      @search="onSearch"
-      @clear="onClear"
-    />
-  
-  <!-- Estado deshabilitado -->
-  <g-search-input
-    v-model="search"
-    placeholder="Búsqueda deshabilitada"
-    disabled
-    @search="onSearch"
-    @clear="onClear"
-  />
-  
-  <!-- Estado de búsqueda en progreso -->
-  <g-search-input
-    v-model="search"
-    placeholder="Búsqueda en progreso"
-    searching-loading
-    @search="onSearch"
-    @clear="onClear"
-  />
-  
-  <!-- Estado de carga inicial -->
-  <g-search-input
-    placeholder="Carga inicial"
-    initial-loading
-  />
-</div>
-`, language: 'html'
-    }
-  }
+  render: (args) => ({
+    components: { GSearchInput, GConfigProvider },
+    setup() {
+      const search = ref('')
+      return { 
+        search,
+        onSearch: action('search'),
+        onClear: action('clear')
+      }
+    },
+    template: `
+      <g-config-provider>
+        <g-search-input
+          v-model="search"
+          label="Buscar"
+          placeholder="Buscar"
+          help-text="Escribe para buscar"
+          @search="onSearch"
+          @clear="onClear"
+        />
+      </g-config-provider>
+    `
+  })
 }
 
-export const WithDebounce = () => ({
-  components: { GSearchInput, GConfigProvider },
-  setup() {
-    const search = ref('')
-    const lastSearch = ref('')
-    const searchCount = ref(0)
-    
-    const handleSearch = (query: string) => {
-      lastSearch.value = query
-      searchCount.value++
-      action('search')(query)
+export const States: Story = {
+  name: 'Estados',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente SearchInput tiene varios estados que representan diferentes situaciones de uso: normal, error, deshabilitado, carga de búsqueda y carga inicial.'
+      },
+      source: {
+        code: `
+<!-- Estado normal -->
+<g-search-input
+  v-model="search"
+  placeholder="Búsqueda normal"
+  @search="onSearch"
+  @clear="onClear"
+/>
+
+<!-- Estado de error -->
+<g-search-input
+  v-model="search"
+  placeholder="Búsqueda con error"
+  message-error="Ha ocurrido un error"
+  @search="onSearch"
+  @clear="onClear"
+/>
+
+<!-- Estado deshabilitado -->
+<g-search-input
+  v-model="search"
+  placeholder="Búsqueda deshabilitada"
+  disabled
+  @search="onSearch"
+  @clear="onClear"
+/>
+
+<!-- Estado de búsqueda en progreso -->
+<g-search-input
+  v-model="search"
+  placeholder="Búsqueda en progreso"
+  searching-loading
+  @search="onSearch"
+  @clear="onClear"
+/>
+
+<!-- Estado de carga inicial -->
+<g-search-input
+  placeholder="Carga inicial"
+  initial-loading
+/>
+`, language: 'html'
+      }
     }
-    
-    return { search, lastSearch, searchCount, handleSearch }
   },
-  template: `
-    <g-config-provider>
-      <div class="space-y-6">
-        <div class="bg-gray-50 rounded-md p-4">
-          <h3 class="text-base font-semibold mb-2">Debounce en acción</h3>
-          <p class="text-sm text-gray-600 mb-4">
-            El debounce espera hasta que el usuario deje de escribir antes de emitir el evento de búsqueda.
-            En este ejemplo, se configura un tiempo de espera de <strong>1000ms (1 segundo)</strong>.
-          </p>
+  render: () => ({
+    components: { GSearchInput, GConfigProvider },
+    setup() {
+      const search = ref('')
+      return { 
+        search,
+        onSearch: action('search'),
+        onClear: action('clear')
+      }
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-4">
+          <div>
+            <h3 class="text-base font-semibold mb-2">Estado normal</h3>
+            <p class="text-sm text-gray-500 mb-2">Estado predeterminado del componente con funcionalidad completa.</p>
+            <g-search-input
+              v-model="search"
+              placeholder="Búsqueda normal"
+              @search="onSearch"
+              @clear="onClear"
+            />
+          </div>
           
-          <g-search-input
-            v-model="search"
-            placeholder="Escribe para buscar..."
-            :debounce-time="1000"
-            @search="handleSearch"
-          />
+          <div>
+            <h3 class="text-base font-semibold mb-2">Estado de error</h3>
+            <p class="text-sm text-gray-500 mb-2">Se muestra cuando hay un error en la búsqueda o validación.</p>
+            <g-search-input
+              v-model="search"
+              placeholder="Búsqueda con error"
+              message-error="Ha ocurrido un error"
+              @search="onSearch"
+              @clear="onClear"
+            />
+          </div>
           
-          <div class="mt-4 p-3 bg-white rounded border text-sm">
-            <div class="mb-2">
-              <span class="font-medium">Valor actual:</span> 
-              <span class="font-mono bg-gray-100 px-1 rounded">{{ search }}</span>
-              <span class="text-gray-400 ml-2">(se actualiza en tiempo real)</span>
-            </div>
-            <div>
-              <span class="font-medium">Última búsqueda:</span> 
-              <span class="font-mono bg-gray-100 px-1 rounded">{{ lastSearch }}</span>
-              <span class="text-gray-400 ml-2">(se actualiza después del debounce o al presionar Enter)</span>
-            </div>
-            <div class="mt-2 text-gray-500">
-              Número de búsquedas realizadas: {{ searchCount }}
-            </div>
+          <div>
+            <h3 class="text-base font-semibold mb-2">Estado deshabilitado</h3>
+            <p class="text-sm text-gray-500 mb-2">El componente no permite interacción cuando está deshabilitado.</p>
+            <g-search-input
+              v-model="search"
+              placeholder="Búsqueda deshabilitada"
+              disabled
+              @search="onSearch"
+              @clear="onClear"
+            />
+          </div>
+          
+          <div>
+            <h3 class="text-base font-semibold mb-2">Estado de búsqueda en progreso</h3>
+            <p class="text-sm text-gray-500 mb-2">Muestra un indicador de carga durante la búsqueda.</p>
+            <g-search-input
+              v-model="search"
+              placeholder="Búsqueda en progreso"
+              searching-loading
+              @search="onSearch"
+              @clear="onClear"
+            />
+          </div>
+          
+          <div>
+            <h3 class="text-base font-semibold mb-2">Estado de carga inicial</h3>
+            <p class="text-sm text-gray-500 mb-2">Muestra un skeleton cuando el componente está cargando datos iniciales.</p>
+            <g-search-input
+              placeholder="Carga inicial"
+              initial-loading
+            />
           </div>
         </div>
-        
-        <div class="bg-gray-50 rounded-md p-4">
-          <h3 class="text-base font-semibold mb-2">¿Cómo funciona el debounce?</h3>
-          <ol class="list-decimal pl-5 space-y-2 text-sm">
-            <li>Cuando escribes en el campo de búsqueda, el componente actualiza el v-model inmediatamente</li>
-            <li>El componente espera el tiempo configurado (debounceTime) antes de emitir el evento <code>search</code></li>
-            <li>Si sigues escribiendo dentro de ese tiempo, el temporizador se reinicia</li>
-            <li>Solo cuando dejas de escribir por el tiempo configurado, o presionas Enter, se emite el evento</li>
-            <li>Esto reduce significativamente el número de búsquedas y mejora el rendimiento</li>
-          </ol>
-        </div>
-      </div>
-    </g-config-provider>
-  `
-})
-WithDebounce.parameters = {
-  docs: {
-    description: {
-      story: 'El componente SearchInput incluye funcionalidad de debounce para optimizar las búsquedas, evitando llamadas innecesarias mientras el usuario está escribiendo.'
-    },
-    source: {
-      code: `
+      </g-config-provider>
+    `
+  })
+}
+
+export const WithDebounce: Story = {
+  name: 'Uso de debounce',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente SearchInput incluye funcionalidad de debounce para optimizar las búsquedas, evitando llamadas innecesarias mientras el usuario está escribiendo.'
+      },
+      source: {
+        code: `
 <template>
   <g-search-input
     v-model="search"
@@ -526,152 +450,83 @@ const handleSearch = (query) => {
 };
 </script>
 `, language: 'html'
-    }
-  }
-}
-
-export const ApiSimulation = () => ({
-  components: { GSearchInput, GConfigProvider },
-  setup() {
-    const search = ref('')
-    const isSearching = ref(false)
-    const hasError = ref(false)
-    const searchResults = ref<{ id: number; name: string; }[]>([])
-    const errorMessage = ref('')
-    
-    const mockData = [
-      { id: 1, name: 'Juan Pérez' },
-      { id: 2, name: 'María López' },
-      { id: 3, name: 'Carlos González' },
-      { id: 4, name: 'Ana Martínez' },
-      { id: 5, name: 'Ricardo Ruben' },
-      { id: 6, name: 'Lucía Rodríguez' },
-      { id: 7, name: 'Alejandro Morales' },
-      { id: 8, name: 'Valentina Torres' },
-      { id: 9, name: 'Diego Hernández' },
-      { id: 10, name: 'Sofía Ramírez' },
-    ]
-    
-    const searchInApi = (query) => {
-      
-      isSearching.value = true
-      hasError.value = false
-      errorMessage.value = ''
-      searchResults.value = []
-      
-      setTimeout(() => {
-        try {
-          if (Math.random() < 0.2 && query.length > 0) {
-            throw new Error('Error de conexión al servidor')
-          }
-          
-          if (query) {
-            searchResults.value = mockData.filter(item => 
-              item.name.toLowerCase().includes(query.toLowerCase())
-            )
-          } else {
-            searchResults.value = []
-          }
-          
-          action('API search success')(searchResults.value)
-        } catch (error) {
-          hasError.value = true
-          errorMessage.value = error.message
-          action('API search error')(error.message)
-        } finally {
-          isSearching.value = false
-        }
-      }, 1000)
-    }
-    
-    const handleClear = () => {
-      searchResults.value = []
-      hasError.value = false
-      errorMessage.value = ''
-      action('clear')()
-    }
-    
-    return { 
-      search, 
-      isSearching, 
-      hasError, 
-      searchResults, 
-      errorMessage, 
-      searchInApi,
-      handleClear
+      }
     }
   },
-  template: `
-    <g-config-provider>
-      <div class="space-y-6">
-        <div class="bg-gray-50 rounded-md p-4">
-          <h3 class="text-base font-semibold mb-2">Simulación de búsqueda en API</h3>
-          <p class="text-sm text-gray-600 mb-4">
-            Este ejemplo simula una integración completa con una API de búsqueda de nombres.
-            <br>
-            El tiempo de respuesta es de aproximadamente 1 segundo y hay un 20% de probabilidad de error.
-          </p>
-          
-          <g-search-input
-            v-model="search"
-            placeholder="Buscar nombres..."
-            :searching-loading="isSearching"
-            :message-error="errorMessage"
-            :debounce-time="500"
-            @search="searchInApi"
-            @clear="handleClear"
-          />
-          
-          <div class="mt-4 p-3 bg-white rounded border">
-            <div v-if="isSearching" class="text-sm text-gray-500">
-              Buscando nombres...
-            </div>
+  render: () => ({
+    components: { GSearchInput, GConfigProvider },
+    setup() {
+      const search = ref('')
+      const lastSearch = ref('')
+      const searchCount = ref(0)
+      
+      const handleSearch = (query: string) => {
+        lastSearch.value = query
+        searchCount.value++
+        action('search')(query)
+      }
+      
+      return { search, lastSearch, searchCount, handleSearch }
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-6">
+          <div class="bg-gray-50 rounded-md p-4">
+            <h3 class="text-base font-semibold mb-2">Debounce en acción</h3>
+            <p class="text-sm text-gray-600 mb-4">
+              El debounce espera hasta que el usuario deje de escribir antes de emitir el evento de búsqueda.
+              En este ejemplo, se configura un tiempo de espera de <strong>1000ms (1 segundo)</strong>.
+            </p>
             
-            <div v-else-if="hasError" class="text-sm text-red-500">
-              Error: {{ errorMessage }}
-            </div>
+            <g-search-input
+              v-model="search"
+              placeholder="Escribe para buscar..."
+              :debounce-time="1000"
+              @search="handleSearch"
+            />
             
-            <div v-else-if="searchResults.length === 0 && search" class="text-sm text-gray-500">
-              No se encontraron nombres que coincidan con "{{ search }}"
-            </div>
-            
-            <div v-else-if="searchResults.length > 0" class="text-sm">
-              <div class="font-medium mb-2">Resultados ({{ searchResults.length }}):</div>
-              <ul class="list-disc pl-5 space-y-1">
-                <li v-for="result in searchResults" :key="result.id">
-                  {{ result.name }}
-                </li>
-              </ul>
-            </div>
-            
-            <div v-else class="text-sm text-gray-500">
-              Escribe para buscar nombres
+            <div class="mt-4 p-3 bg-white rounded border text-sm">
+              <div class="mb-2">
+                <span class="font-medium">Valor actual:</span> 
+                <span class="font-mono bg-gray-100 px-1 rounded">{{ search }}</span>
+                <span class="text-gray-400 ml-2">(se actualiza en tiempo real)</span>
+              </div>
+              <div>
+                <span class="font-medium">Última búsqueda:</span> 
+                <span class="font-mono bg-gray-100 px-1 rounded">{{ lastSearch }}</span>
+                <span class="text-gray-400 ml-2">(se actualiza después del debounce o al presionar Enter)</span>
+              </div>
+              <div class="mt-2 text-gray-500">
+                Número de búsquedas realizadas: {{ searchCount }}
+              </div>
             </div>
           </div>
+          
+          <div class="bg-gray-50 rounded-md p-4">
+            <h3 class="text-base font-semibold mb-2">¿Cómo funciona el debounce?</h3>
+            <ol class="list-decimal pl-5 space-y-2 text-sm">
+              <li>Cuando escribes en el campo de búsqueda, el componente actualiza el v-model inmediatamente</li>
+              <li>El componente espera el tiempo configurado (debounceTime) antes de emitir el evento <code>search</code></li>
+              <li>Si sigues escribiendo dentro de ese tiempo, el temporizador se reinicia</li>
+              <li>Solo cuando dejas de escribir por el tiempo configurado, o presionas Enter, se emite el evento</li>
+              <li>Esto reduce significativamente el número de búsquedas y mejora el rendimiento</li>
+            </ol>
+          </div>
         </div>
-        
-        <div class="bg-gray-50 rounded-md p-4">
-          <h3 class="text-base font-semibold mb-2">¿Cómo está implementado?</h3>
-          <ol class="list-decimal pl-5 space-y-2 text-sm">
-            <li>Utilizamos la propiedad <code>searching-loading</code> para mostrar el estado de carga mientras se realiza la búsqueda</li>
-            <li>El <code>debounce-time</code> está configurado en 500ms para reducir las llamadas a la API</li>
-            <li>Utilizamos <code>message-error</code> para mostrar errores de la API cuando ocurren</li>
-            <li>El evento <code>search</code> dispara la función que realiza la llamada a la API</li>
-            <li>El evento <code>clear</code> resetea los resultados y estados de error</li>
-          </ol>
-        </div>
-      </div>
-    </g-config-provider>
-  `
-})
+      </g-config-provider>
+    `
+  })
+}
 
-ApiSimulation.parameters = {
-  docs: {
-    description: {
-      story: 'Este ejemplo muestra cómo integrar el componente SearchInput con una API, manejando estados de carga, resultados y errores.'
-    },
-    source: {
-      code: `
+export const ApiIntegration: Story = {
+  name: 'Integración con API',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Este ejemplo muestra cómo integrar el componente SearchInput con una API, manejando estados de carga, resultados y errores.'
+      },
+      source: {
+        code: `
 <template>
   <g-search-input
     v-model="search"
@@ -746,7 +601,131 @@ const handleClear = () => {
 };
 </script>
 `, language: 'html'
+      }
     }
-  }
+  },
+  render: () => ({
+    components: { GSearchInput, GConfigProvider },
+    setup() {
+      const search = ref('')
+      const isSearching = ref(false)
+      const hasError = ref(false)
+      const searchResults = ref<{ id: number; name: string; }[]>([])
+      const errorMessage = ref('')
+      
+      const mockData = [
+        { id: 1, name: 'Juan Pérez' },
+        { id: 2, name: 'María López' },
+        { id: 3, name: 'Carlos González' },
+        { id: 4, name: 'Ana Martínez' },
+        { id: 5, name: 'Ricardo Ruben' },
+        { id: 6, name: 'Lucía Rodríguez' },
+        { id: 7, name: 'Alejandro Morales' },
+        { id: 8, name: 'Valentina Torres' },
+        { id: 9, name: 'Diego Hernández' },
+        { id: 10, name: 'Sofía Ramírez' },
+      ]
+      
+      const searchInApi = (query) => {
+        
+        isSearching.value = true
+        hasError.value = false
+        errorMessage.value = ''
+        searchResults.value = []
+        
+        setTimeout(() => {
+          try {
+            if (Math.random() < 0.2 && query.length > 0) {
+              throw new Error('Error de conexión al servidor')
+            }
+            
+            if (query) {
+              searchResults.value = mockData.filter(item => 
+                item.name.toLowerCase().includes(query.toLowerCase())
+              )
+            } else {
+              searchResults.value = []
+            }
+            
+            action('API search success')(searchResults.value)
+          } catch (error) {
+            hasError.value = true
+            errorMessage.value = error.message
+            action('API search error')(error.message)
+          } finally {
+            isSearching.value = false
+          }
+        }, 1000)
+      }
+      
+      const handleClear = () => {
+        searchResults.value = []
+        hasError.value = false
+        errorMessage.value = ''
+        action('clear')()
+      }
+      
+      return { 
+        search, 
+        isSearching, 
+        hasError, 
+        searchResults, 
+        errorMessage, 
+        searchInApi,
+        handleClear
+      }
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-6">
+          <div class="bg-gray-50 rounded-md p-4">
+            <h3 class="text-base font-semibold mb-2">Simulación de búsqueda en API</h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Este ejemplo simula una integración completa con una API de búsqueda de nombres.
+              <br>
+              El tiempo de respuesta es de aproximadamente 1 segundo y hay un 20% de probabilidad de error.
+            </p>
+            
+            <g-search-input
+              v-model="search"
+              placeholder="Buscar nombres..."
+              :searching-loading="isSearching"
+              :message-error="errorMessage"
+              :debounce-time="500"
+              @search="searchInApi"
+              @clear="handleClear"
+            />
+            
+            <div class="mt-4 p-3 bg-white rounded border">
+              <div v-if="isSearching" class="text-sm text-gray-500">
+                Buscando nombres...
+              </div>
+              
+              <div v-else-if="hasError" class="text-sm text-red-500">
+                Error: {{ errorMessage }}
+              </div>
+              
+              <div v-else-if="searchResults.length === 0 && search" class="text-sm text-gray-500">
+                No se encontraron nombres que coincidan con "{{ search }}"
+              </div>
+              
+              <div v-else-if="searchResults.length > 0" class="text-sm">
+                <div class="font-medium mb-2">Resultados ({{ searchResults.length }}):</div>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li v-for="result in searchResults" :key="result.id">
+                    {{ result.name }}
+                  </li>
+                </ul>
+              </div>
+              
+              <div v-else class="text-sm text-gray-500">
+                Escribe para buscar nombres
+              </div>
+            </div>
+          </div>
+        </div>
+      </g-config-provider>
+    `
+  })
 }
 
