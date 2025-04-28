@@ -487,6 +487,7 @@ export const DisabledTimes: Story = {
               <p>Minutos deshabilitados a las 12:XX (solo pares)</p>
               <p>Segundos deshabilitados a las 12:30:XX (solo mayores a 30)</p>
             </div>
+          </div>
         </div>
       </g-config-provider>
     `,

@@ -1,4 +1,6 @@
 @use "sass:map" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
 
 @use "element-plus/theme-chalk/src/base.scss" as *;
 @use "../../input/src/input.styles.scss" as *;
@@ -11,40 +13,44 @@
 @use "../../date-picker/src/styles/time-picker.scss" as *;
 @use "../../date-picker/src/styles/time-range-picker.scss" as *;
 
-.gui-date-editor.gui-input,
-.gui-date-editor.gui-input__wrapper {
-  height: 3rem;
-  width: auto;
-  box-shadow: none;
+@include b(date-editor) {
+  &.#{$namespace}-input,
+  &.#{$namespace}-input__wrapper {
+    height: 3rem;
+    width: auto;
+    box-shadow: none;
 
-  &:hover {
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  &.is-active,
+  &.is-active:hover {
+    @apply border-everBlue-500;
     box-shadow: none;
   }
+
+  &.#{$namespace}-input__icon {
+    width: 1.25rem;
+    @apply text-terciary-txt;
+  }
+
+  #{$namespace}-range-input {
+    text-align: left !important;
+    font-size: 1rem;
+    color: var(--color-txt-primary);
+    font-weight: 500;
+
+    &::placeholder {
+      @apply transition-all duration-200 ease-in text-terciary-txt;
+    }
+  }
 }
+
 .gui-picker__popper.gui-popper__tooltip {
   max-width: none !important;
   padding: 0 !important;
-}
-
-.gui-date-editor.is-active,
-.gui-date-editor.is-active:hover {
-  @apply border-everBlue-500;
-  box-shadow: none;
-}
-.gui-date-editor .gui-input__icon {
-  width: 1.25rem;
-  @apply text-terciary-txt;
-}
-
-.gui-date-editor .gui-range-input {
-  text-align: left !important;
-  font-size: 1rem;
-  color: var(--color-txt-primary);
-  font-weight: 500;
-
-  &::placeholder {
-    @apply transition-all duration-200 ease-in text-terciary-txt;
-  }
 }
 
 .gui-date-editor--timerange .gui-input__label,
@@ -74,4 +80,8 @@
 .gui-time-range-picker__body {
   border-radius: 2px;
   border: 1px solid #949aab;
+}
+
+.gui-picker__popper.gui-popper .gui-popper__arrow:before {
+  background-color: white !important;
 }

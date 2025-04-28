@@ -343,6 +343,28 @@ dayjs.extend(localeData)
     endPlaceholder: "Fecha fin",
     rangeSeparator: "-",
     clearable: true,
+    shortcuts: [
+      {
+        text: "Hoy",
+        value: new Date(),
+      },
+      {
+        text: "Mañana",
+        value: () => {
+          const date = new Date();
+          date.setTime(date.getTime() - 3600 * 1000 * 24);
+          return date;
+        },
+      },
+      {
+        text: "Una semana atrás",
+        value: () => {
+          const date = new Date();
+          date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+          return date;
+        },
+      },
+    ],
   },
 };
 export default meta;
