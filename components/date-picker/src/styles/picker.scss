@@ -82,17 +82,6 @@
     }
   }
 
-  .#{$namespace}-range__icon {
-    height: inherit;
-    font-size: 14px;
-    color: getCssVar("text-color", "placeholder");
-    float: left;
-
-    svg {
-      vertical-align: middle;
-    }
-  }
-
   .#{$namespace}-range-input {
     appearance: none;
     border: none;
@@ -127,19 +116,6 @@
   }
 
   .#{$namespace}-range__close-icon {
-    font-size: 14px;
-    color: getCssVar("text-color", "placeholder");
-    height: inherit;
-    cursor: pointer;
-
-    &:hover {
-      color: getCssVar("text-color", "secondary");
-    }
-
-    svg {
-      vertical-align: middle;
-    }
-
     &--hidden {
       opacity: 0;
       visibility: hidden;
