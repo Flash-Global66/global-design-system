@@ -36,7 +36,7 @@
     @apply text-terciary-txt;
   }
 
-  #{$namespace}-range-input {
+  .#{$namespace}-range-input {
     text-align: left !important;
     font-size: 1rem;
     color: var(--color-txt-primary);

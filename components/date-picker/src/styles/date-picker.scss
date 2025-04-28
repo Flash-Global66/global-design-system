@@ -54,7 +54,8 @@
     @include m(bordered) {
       margin-bottom: 0;
       padding-bottom: 12px;
-      border-bottom: solid 1px getCssVar("border-color-lighter");
+      border-bottom: solid 1px #949aab;
+      margin-bottom: 14px;
 
       & + .#{$namespace}-picker-panel__content {
         margin-top: 0;
@@ -63,20 +64,21 @@
   }
 
   @include e(header-label) {
+    @apply text-grey-700;
+
     font-size: 16px;
     font-weight: 500;
     padding: 0 5px;
     line-height: 22px;
     text-align: center;
     cursor: pointer;
-    color: getCssVar("text-color", "regular");
 
     &:hover {
-      color: getCssVar("datepicker-hover-text-color");
+      @apply text-everBlue-500;
     }
     &:focus-visible {
+      @apply text-everBlue-500;
       outline: none;
-      color: getCssVar("datepicker-hover-text-color");
     }
 
     &.active {
