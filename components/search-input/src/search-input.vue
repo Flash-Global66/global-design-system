@@ -61,7 +61,7 @@ import { useNamespace } from 'element-plus'
 import { GInput } from '@flash-global66/g-input'
 import { GSkeleton, GSkeletonItem } from '@flash-global66/g-skeleton'
 import { GIconFont } from '@flash-global66/g-icon-font'
-import { useSearchInput } from './hooks/use-search-input'
+import { useSearchInput } from './use-search-input'
 import { searchInputEmits, searchInputProps } from './search-input'
 
 defineOptions({
