@@ -1,13 +1,13 @@
 <template>
   <div :class="[ns.b(), wrapperClass]">
     <template v-if="initialLoading">
-      <g-skeleton animated >
+      <g-skeleton animated>
         <template #template>
-          <div :class="ns.e('skeleton')" >
+          <div :class="ns.e('skeleton')">
             <g-skeleton-item variant="text" class="h-12 rounded-md" />
-            <g-skeleton-item 
+            <g-skeleton-item
               v-if="$attrs['help-text'] || props.helpText"
-              variant="text"  
+              variant="text"
             />
           </div>
         </template>
@@ -56,47 +56,47 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue'
-import { useNamespace } from 'element-plus'
-import { GInput } from '@flash-global66/g-input'
-import { GSkeleton, GSkeletonItem } from '@flash-global66/g-skeleton'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { useSearchInput } from './hooks/use-search-input'
-import { searchInputEmits, searchInputProps } from './search-input'
+import { computed, useAttrs } from "vue";
+import { useNamespace } from "element-plus";
+import { GInput } from "@flash-global66/g-input";
+import { GSkeleton, GSkeletonItem } from "@flash-global66/g-skeleton";
+import { GIconFont } from "@flash-global66/g-icon-font";
+import { useSearchInput } from "./use-search-input";
+import { searchInputEmits, searchInputProps } from "./search-input";
 
 defineOptions({
-  name: 'GSearchInput',
+  name: "GSearchInput",
   inheritAttrs: false,
-})
+});
 
-const props = defineProps(searchInputProps)
-const emit = defineEmits(searchInputEmits)
-const attrs = useAttrs()
+const props = defineProps(searchInputProps);
+const emit = defineEmits(searchInputEmits);
+const attrs = useAttrs();
 
-const ns = useNamespace('search-input')
+const ns = useNamespace("search-input");
 
 const wrapperClass = computed(() => [
   {
-    [ns.is('disabled')]: props.disabled,
-    [ns.is('searching')]: props.searchingLoading,
-    [ns.is('loading')]: props.initialLoading,
-    [ns.is('error')]: !!props.messageError,
+    [ns.is("disabled")]: props.disabled,
+    [ns.is("searching")]: props.searchingLoading,
+    [ns.is("loading")]: props.initialLoading,
+    [ns.is("error")]: !!props.messageError,
   },
-])
+]);
 
-const { 
-  inputRef, 
-  searchQuery, 
+const {
+  inputRef,
+  searchQuery,
   filteredAttrs,
   handleInput,
   handleEnterKey,
-  handleIconClick, 
-  clearSearch 
-} = useSearchInput(props, emit, attrs)
+  handleIconClick,
+  clearSearch,
+} = useSearchInput(props, emit, attrs);
 
 defineExpose({
   focus: () => inputRef.value?.focus(),
   blur: () => inputRef.value?.blur(),
   clear: clearSearch,
-})
+});
 </script>

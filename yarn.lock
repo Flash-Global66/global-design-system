@@ -916,6 +916,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-search-input@workspace:components/search-input"
   peerDependencies:
+    "@flash-global66/g-config-provider": 0.0.8
     "@flash-global66/g-icon-font": ^0.0.8
     "@flash-global66/g-input": 0.3.0
     "@flash-global66/g-skeleton": 0.0.7

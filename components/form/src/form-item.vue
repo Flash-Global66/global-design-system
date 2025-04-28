@@ -170,6 +170,7 @@ const onValidationFailed = (error: FormValidateFailure) => {
 
 const onValidationSucceeded = () => {
   setValidationState("success");
+  validateMessage.value = "";
   formContext?.emit("validate", props.prop!, true, "");
 };
 
