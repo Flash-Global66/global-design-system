@@ -123,7 +123,7 @@
               @click="leftNextYear"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
             <button
@@ -169,7 +169,7 @@
               @click="rightPrevYear"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button

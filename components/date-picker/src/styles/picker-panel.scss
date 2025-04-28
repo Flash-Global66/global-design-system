@@ -38,14 +38,15 @@
   }
 
   @include e(shortcut) {
+    @apply text-grey-700;
+
     display: block;
     width: 100%;
     border: 0;
     background-color: transparent;
     line-height: 16px;
     font-size: 12px;
-    color: getCssVar("datepicker-text-color");
-    font-weight: 500;
+    font-weight: 600;
     padding-left: 16px;
     padding-bottom: 10px;
     text-align: left;
@@ -53,7 +54,7 @@
     cursor: pointer;
 
     &:hover {
-      color: getCssVar("datepicker-hover-text-color");
+      @apply text-everBlue-500;
     }
 
     &.active {
@@ -80,18 +81,20 @@
   }
 
   @include e(icon-btn) {
-    width: 1.25rem;
     @apply text-terciary-txt;
+
+    width: 1.25rem;
+    font-size: 16px;
     border: 0;
     background: transparent;
     cursor: pointer;
     outline: none;
 
     &:hover {
-      color: getCssVar("datepicker-hover-text-color");
+      @apply text-everBlue-500;
     }
     &:focus-visible {
-      color: getCssVar("datepicker-hover-text-color");
+      @apply text-everBlue-500;
     }
 
     @include when(disabled) {
@@ -115,12 +118,15 @@
 .#{$namespace}-picker-panel *[slot="sidebar"],
 .#{$namespace}-picker-panel__sidebar {
   position: absolute;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
   top: 0;
   bottom: 0;
   width: 110px;
-  border-right: 1px solid getCssVar("datepicker-inner-border-color");
+  border-right: 1px solid #949aab;
   box-sizing: border-box;
-  padding-top: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
   background-color: getCssVar("bg-color", "overlay");
   overflow: auto;
 }
