@@ -71,4 +71,5 @@ export {
   faEllipsis,
   faTimer,
   faGift,
+  faWebhook,
 } from '@fortawesome/pro-regular-svg-icons';
