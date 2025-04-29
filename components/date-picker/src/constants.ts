@@ -1,5 +1,5 @@
 import type { InjectionKey, SetupContext } from "vue";
-import type { UseNamespaceReturn } from "element-plus/es/hooks";
+import type { UseNamespaceReturn } from "element-plus";
 
 interface DatePickerContext {
   slots: SetupContext["slots"];

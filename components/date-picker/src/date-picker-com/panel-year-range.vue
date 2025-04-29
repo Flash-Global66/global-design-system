@@ -95,7 +95,7 @@ import { computed, inject, ref, toRef, useSlots, watch } from "vue";
 import dayjs from "dayjs";
 import { isArray } from "element-plus/es/utils/index.mjs";
 import { GIconFont } from "@flash-global66/g-icon-font";
-import { useLocale, useNamespace } from "element-plus/es/hooks/index";
+import { useLocale, useNamespace } from "element-plus";
 import {
   panelYearRangeEmits,
   panelYearRangeProps,
@@ -122,7 +122,7 @@ const { lang } = useLocale(ref(es));
 const leftDate = ref(dayjs().locale(lang.value));
 const rightDate = ref(leftDate.value.add(10, "year"));
 const { pickerNs: ppNs } = inject(ROOT_PICKER_INJECTION_KEY)!;
-const drpNs = useNamespace("date-range-picker", ref("gui"));
+const drpNs = useNamespace("date-range-picker");
 
 const hasShortcuts = computed(() => !!shortcuts.length);
 

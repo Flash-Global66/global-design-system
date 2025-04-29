@@ -1,17 +1,17 @@
 @use "sass:map" as *;
 @use "element-plus/theme-chalk/src/mixins/mixins" as *;
 @use "element-plus/theme-chalk/src/common/var" as *;
-
 @use "element-plus/theme-chalk/src/base.scss" as *;
-@use "../../input/src/input.styles.scss" as *;
-@use "../../scrollbar/src/scrollbar.styles.scss" as *;
-@use "../../popper/src/popper.styles.scss" as *;
 
-@use "../../date-picker/src/styles/picker.scss" as *;
-@use "../../date-picker/src/styles/picker-panel.scss" as *;
-@use "../../date-picker/src/styles/time-spinner.scss" as *;
-@use "../../date-picker/src/styles/time-picker.scss" as *;
-@use "../../date-picker/src/styles/time-range-picker.scss" as *;
+@use "@flash-global66/g-input/src/input.styles.scss" as *;
+@use "@flash-global66/g-scrollbar/src/scrollbar.styles.scss" as *;
+@use "@flash-global66/g-popper/src/popper.styles.scss" as *;
+
+@use "./styles/picker.scss" as *;
+@use "./styles/picker-panel.scss" as *;
+@use "./styles/time-spinner.scss" as *;
+@use "./styles/time-picker.scss" as *;
+@use "./styles/time-range-picker.scss" as *;
 
 @include b(date-editor) {
   &.#{$namespace}-input,

@@ -1,15 +1,5 @@
 @use "sass:map";
 
-@forward "./styles/date-table.scss";
-@forward "./styles/month-table.scss";
-@forward "./styles/year-table.scss";
-@forward "./styles/time-spinner.scss";
-@forward "./styles/picker.scss";
-@forward "./styles/date-picker.scss";
-@forward "./styles/date-range-picker.scss";
-@forward "./styles/time-range-picker.scss";
-@forward "./styles/time-picker.scss";
-
 @use "element-plus/theme-chalk/src/scrollbar.scss" as *;
 @use "element-plus/theme-chalk/src/option.scss" as *;
 @use "element-plus/theme-chalk/src/tooltip-v2.scss" as *;
@@ -18,3 +8,14 @@
 @use "element-plus/theme-chalk/src/mixins/utils" as *;
 @use "element-plus/theme-chalk/src/mixins/var" as *;
 @use "element-plus/theme-chalk/src/common/var" as *;
+
+@forward "@flash-global66/g-time-picker/src/styles/picker.scss";
+@forward "@flash-global66/g-time-picker/src/styles/time-range-picker.scss";
+@forward "@flash-global66/g-time-picker/src/styles/time-picker.scss";
+@forward "@flash-global66/g-time-picker/src/styles/time-spinner.scss";
+
+@forward "./styles/date-picker.scss";
+@forward "./styles/date-table.scss";
+@forward "./styles/date-range-picker.scss";
+@forward "./styles/month-table.scss";
+@forward "./styles/year-table.scss";

@@ -204,7 +204,7 @@ import {
 import dayjs from "dayjs";
 import { GButton } from "@flash-global66/g-button";
 import { ClickOutside as vClickOutside } from "element-plus";
-import { useLocale, useNamespace } from "element-plus/es/hooks/index";
+import { useLocale, useNamespace } from "element-plus";
 import { GInput } from "@flash-global66/g-input";
 import {
   TimePickPanel,
@@ -240,8 +240,8 @@ type DatePickType = PanelDatePickProps["type"];
 const timeWithinRange = (_: ConfigType, __: any, ___: string) => true;
 const props = defineProps(panelDatePickProps);
 const contextEmit = defineEmits(["pick", "set-picker-option", "panel-change"]);
-const ppNs = useNamespace("picker-panel", ref("gui"));
-const dpNs = useNamespace("date-picker", ref("gui"));
+const ppNs = useNamespace("picker-panel");
+const dpNs = useNamespace("date-picker");
 const attrs = useAttrs();
 const slots = useSlots();
 

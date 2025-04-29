@@ -34,7 +34,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch } from "vue";
 import dayjs from "dayjs";
-import { useLocale, useNamespace } from "element-plus/es/hooks/index";
+import { useLocale, useNamespace } from "element-plus";
 import { castArray, hasClass } from "element-plus/es/utils/index.mjs";
 import { basicMonthTableProps } from "../props/basic-month-table";
 import { datesInMonth, getValidDateOfMonth } from "../utils";
@@ -55,7 +55,7 @@ type MonthCell = {
 const props = defineProps(basicMonthTableProps);
 const emit = defineEmits(["changerange", "pick", "select"]);
 
-const ns = useNamespace("month-table", ref("gui"));
+const ns = useNamespace("month-table");
 
 const { t, lang } = useLocale(ref(es));
 

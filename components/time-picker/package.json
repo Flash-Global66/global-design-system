@@ -33,6 +33,7 @@
     "@flash-global66/g-input": "^0.3.1",
     "@flash-global66/g-scrollbar": "^0.1.0",
     "@flash-global66/g-tooltip": "^0.0.5",
+    "@flash-global66/g-popper": "^0.0.10",
     "dayjs": "^1.11.13",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
