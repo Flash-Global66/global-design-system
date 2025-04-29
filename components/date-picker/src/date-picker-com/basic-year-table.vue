@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch } from "vue";
 import dayjs from "dayjs";
-import { useLocale, useNamespace } from "element-plus/es/hooks/index";
+import { useLocale, useNamespace } from "element-plus";
 import { castArray, hasClass } from "element-plus/es/utils/index.mjs";
 import { rangeArr } from "@flash-global66/g-time-picker";
 import { basicYearTableProps } from "../props/basic-year-table";
@@ -59,7 +59,7 @@ const datesInYear = (year: number, lang: string) => {
 const props = defineProps(basicYearTableProps);
 const emit = defineEmits(["changerange", "pick", "select"]);
 
-const ns = useNamespace("year-table", ref("gui"));
+const ns = useNamespace("year-table");
 
 const { t, lang } = useLocale(ref(es));
 const tbodyRef = ref<HTMLElement>();

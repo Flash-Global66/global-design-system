@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, ref } from "vue";
-import { useNamespace } from "element-plus/es/hooks/index";
+import { useNamespace } from "element-plus";
 import { ROOT_PICKER_INJECTION_KEY } from "../constants";
 import { basicCellProps } from "../props/basic-cell";
 
@@ -16,7 +16,7 @@ export default defineComponent({
   name: "GDatePickerCell",
   props: basicCellProps,
   setup(props) {
-    const ns = useNamespace("date-table-cell", ref("gui"));
+    const ns = useNamespace("date-table-cell");
     const { slots } = inject(ROOT_PICKER_INJECTION_KEY)!;
 
     return {

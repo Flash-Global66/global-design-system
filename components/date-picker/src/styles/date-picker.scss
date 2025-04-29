@@ -1,7 +1,7 @@
 @use "element-plus/theme-chalk/src/common/var" as *;
 @use "element-plus/theme-chalk/src/mixins/mixins" as *;
 @use "element-plus/theme-chalk/src/mixins/var" as *;
-@use "./picker-panel.scss";
+@use "@flash-global66/g-time-picker/src/styles/picker-panel.scss";
 
 @include b(date-picker) {
   @include set-component-css-var("datepicker", $datepicker);
@@ -74,10 +74,10 @@
     cursor: pointer;
 
     &:hover {
-      @apply text-everBlue-500;
+      @apply text-nightBlue-500;
     }
     &:focus-visible {
-      @apply text-everBlue-500;
+      @apply text-nightBlue-500;
       outline: none;
     }
 

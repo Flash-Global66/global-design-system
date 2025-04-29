@@ -41,7 +41,7 @@
     }
 
     @include b(date-table-cell__text) {
-      @apply text-everBlue-900;
+      @apply text-nightBlue-900;
       width: 80px;
       height: 44px;
       display: block;
@@ -56,7 +56,8 @@
       z-index: 1;
 
       &:hover {
-        @apply text-everBlue-500;
+        @apply bg-everBlue-50 bg-opacity-60;
+        border-radius: 18px;
       }
     }
 
@@ -75,7 +76,7 @@
 
     &.start-date .#{$namespace}-date-table-cell__text,
     &.end-date .#{$namespace}-date-table-cell__text {
-      @apply bg-everBlue-500;
+      @apply bg-nightBlue-500;
       color: $color-white;
     }
 
@@ -98,7 +99,7 @@
     }
 
     &.current:not(.disabled) .#{$namespace}-date-table-cell__text {
-      @apply bg-everBlue-500;
+      @apply bg-nightBlue-500;
       color: $color-white;
     }
 

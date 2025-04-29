@@ -1,7 +1,7 @@
 import { computed, nextTick, ref, unref, watch } from "vue";
 import dayjs from "dayjs";
 import { flatten } from "lodash-unified";
-import { useLocale, useNamespace } from "element-plus/es/hooks/index";
+import { useLocale, useNamespace } from "element-plus";
 import { castArray, isArray } from "element-plus/es/utils/index.mjs";
 import { buildPickerTable } from "../utils";
 
@@ -414,7 +414,7 @@ export const useBasicDateTableDOM = (
     isWeekActive,
   }: Pick<ReturnType<typeof useBasicDateTable>, "isCurrent" | "isWeekActive">
 ) => {
-  const ns = useNamespace("date-table", ref("gui"));
+  const ns = useNamespace("date-table");
   const { t } = useLocale(ref(es));
 
   const tableKls = computed(() => [

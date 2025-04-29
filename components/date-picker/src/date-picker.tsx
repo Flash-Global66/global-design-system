@@ -10,7 +10,7 @@ import weekYear from "dayjs/plugin/weekYear.js";
 import dayOfYear from "dayjs/plugin/dayOfYear.js";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
-import { useNamespace } from "element-plus/es/hooks/index";
+import { useNamespace } from "element-plus";
 import {
   CommonPicker,
   DEFAULT_FORMATS_DATE,
@@ -39,7 +39,7 @@ export default defineComponent({
   props: datePickerProps,
   emits: ["update:modelValue"],
   setup(props, { expose, emit, slots }) {
-    const ns = useNamespace("picker-panel", ref("gui"));
+    const ns = useNamespace("picker-panel");
 
     provide("ElPopperOptions", reactive(toRef(props, "popperOptions")));
     provide(ROOT_PICKER_INJECTION_KEY, {
