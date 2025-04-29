@@ -174,6 +174,7 @@ export const ICON_SETS = {
     "angles-left",
     "gift",
     "timer",
+    "webhook",
   ] as const,
 
   light: [
