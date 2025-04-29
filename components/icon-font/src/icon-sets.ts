@@ -173,7 +173,8 @@ export const ICON_SETS = {
     'angles-right',
     'angles-left',
     'gift',
-    'timer'
+    'timer',
+    'webhook'
   ] as const,
 
   light: [
