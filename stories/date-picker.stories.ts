@@ -8,6 +8,16 @@ import GDatePicker from "../components/date-picker";
 // CONFIG
 import { GConfigProvider } from "../components/config-provider";
 
+// DEPENDENCIES
+import {
+  version,
+  peerDependencies,
+} from "@flash-global66/g-date-picker/package.json";
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from "../helper/documentation-stories";
+
 const meta = {
   title: "Form/Date Picker",
   component: GDatePicker,
@@ -17,6 +27,8 @@ const meta = {
         component: `✨ \`GDatePicker\` - Componente para selección de fecha avanzado
 
 Un selector de fecha moderno con funcionalidades completas para manejar fechas en formularios. Soporta selección simple, rangos y varios tipos de selectores (año, mes, fecha, fecha y hora).
+
+> Versión actual: ${version}
 
 **Características principales:**
 
@@ -33,16 +45,19 @@ Un selector de fecha moderno con funcionalidades completas para manejar fechas e
 yarn add @flash-global66/g-date-picker
 \`\`\`
 
-🪝 **Dependencias**
+🪝 ## Dependencias
+Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
+${generatePeerDepsList(peerDependencies)}
 
-Este componente requiere:
+> Revisar la documentación de cada dependencia para mas información.
 
-> - @flash-global66/g-button
-> - @flash-global66/g-icon-font
-> - @flash-global66/g-input
-> - @flash-global66/g-time-picker
-> - @flash-global66/g-tooltip
-> - dayjs (para manejo de fechas)
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
 
 📥 **Importación básica**
 

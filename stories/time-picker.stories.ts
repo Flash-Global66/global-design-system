@@ -6,7 +6,17 @@ import { GTimePicker } from "../components/time-picker";
 
 // CONFIG
 import { GConfigProvider } from "../components/config-provider";
-import { generateIconOptions } from "./icon-font.stories";
+
+// DEPENDENCIES
+import {
+  version,
+  peerDependencies,
+} from "@flash-global66/g-inline/package.json";
+import {
+  generatePeerDepsList,
+  generateIconOptions,
+  generatePeerDepsInstalls,
+} from "../helper/documentation-stories";
 
 const meta = {
   title: "Form/Time Picker",
@@ -17,6 +27,8 @@ const meta = {
         component: `✨ \`GTimePicker\` - Componente para selección de hora avanzado
 
 Un selector de hora moderno con funcionalidades completas para manejar tiempos en formularios. Soporta selección simple y rangos de tiempo.
+
+> Versión actual: ${version}
 
 **Características principales:**
 
@@ -34,16 +46,19 @@ Un selector de hora moderno con funcionalidades completas para manejar tiempos e
 yarn add @flash-global66/g-time-picker
 \`\`\`
 
-🪝 **Dependencias**
+🪝 ## Dependencias
+Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
+${generatePeerDepsList(peerDependencies)}
 
-Este componente requiere:
+> Revisar la documentación de cada dependencia para mas información.
 
-> - @flash-global66/g-icon-font
-> - @flash-global66/g-input
-> - @flash-global66/g-scrollbar
-> - @flash-global66/g-tooltip
-> - @flash-global66/g-popper
-> - dayjs (para manejo de tiempos)
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
 
 📥 **Importación básica**
 
