@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { isFunction } from "element-plus/es/utils/index.mjs";
 
 import type { SetupContext } from "vue";
-import { useLocale } from "element-plus/es/hooks/index";
+import { useLocale } from "element-plus";
 import type { RangePickerSharedEmits } from "../props/shared";
 
 // FIXME: extract this to `date-picker.ts`

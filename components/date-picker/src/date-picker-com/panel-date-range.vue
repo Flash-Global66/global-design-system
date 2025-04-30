@@ -243,7 +243,7 @@
 import { computed, inject, ref, toRef, unref, watch } from "vue";
 import dayjs from "dayjs";
 import { ClickOutside as vClickoutside } from "element-plus";
-import { useLocale } from "element-plus/es/hooks/index";
+import { useLocale } from "element-plus";
 import { isArray } from "element-plus/es/utils/index.mjs";
 import { GButton } from "@flash-global66/g-button";
 import { GInput } from "@flash-global66/g-input";
