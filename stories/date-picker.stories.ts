@@ -37,8 +37,10 @@ yarn add @flash-global66/g-date-picker
 
 Este componente requiere:
 
-> - @flash-global66/g-input
+> - @flash-global66/g-button
 > - @flash-global66/g-icon-font
+> - @flash-global66/g-input
+> - @flash-global66/g-time-picker
 > - @flash-global66/g-tooltip
 > - dayjs (para manejo de fechas)
 

@@ -38,9 +38,11 @@ yarn add @flash-global66/g-time-picker
 
 Este componente requiere:
 
-> - @flash-global66/g-input
 > - @flash-global66/g-icon-font
+> - @flash-global66/g-input
+> - @flash-global66/g-scrollbar
 > - @flash-global66/g-tooltip
+> - @flash-global66/g-popper
 > - dayjs (para manejo de tiempos)
 
 📥 **Importación básica**
