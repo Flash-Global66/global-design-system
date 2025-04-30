@@ -111,7 +111,7 @@ import { computed, inject, ref, toRef, unref } from "vue";
 import dayjs from "dayjs";
 import { GIconFont } from "@flash-global66/g-icon-font";
 import { isArray } from "element-plus/es/utils/index.mjs";
-import { useLocale } from "element-plus/es/hooks/index";
+import { useLocale } from "element-plus";
 import { getDefaultValue, isValidRange } from "../utils";
 import {
   panelMonthRangeEmits,
