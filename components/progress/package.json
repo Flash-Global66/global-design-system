@@ -1,0 +1,36 @@
+{
+  "name": "@flash-global66/g-progress",
+  "author": "Global66",
+  "version": "0.1.0",
+  "license": "MIT",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/progress.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-icon-font": "^0.5.8",
+    "element-plus": "^2.9.7",
+    "vue": "^3.2.0"
+  }
+}
