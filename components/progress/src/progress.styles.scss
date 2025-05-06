@@ -1,0 +1,122 @@
+@use "element-plus/theme-chalk/src/progress.scss" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b(progress) {
+  @apply relative leading-none flex items-center;
+
+  @include e(text) {
+    // Assuming getCssVar('text-color', 'regular') maps to text-gray-800
+    @apply text-2 text-gray-700 ml-xs min-w-[50px] leading-none;
+
+    i {
+      // display: block; is default for <i>, vertical-align might depend on context
+      @apply align-middle block;
+    }
+  }
+
+  @include m((circle, dashboard)) {
+    display: inline-block;
+
+    .#{$namespace}-progress__text {
+      // transform: translate(0, -50%) becomes -translate-y-1/2
+      @apply absolute top-1/2 left-0 w-full text-center m-0 -translate-y-1/2;
+
+      i {
+        // display: inline-block; is needed here
+        @apply align-middle inline-block;
+      }
+    }
+  }
+
+  @include m(without-text) {
+    .#{$namespace}-progress__text {
+      @apply hidden;
+    }
+
+    .#{$namespace}-progress-bar {
+      @apply pr-0 mr-0 block;
+    }
+  }
+
+  @include m(text-inside) {
+    .#{$namespace}-progress-bar {
+      @apply pr-0 mr-0;
+    }
+  }
+
+  @include when(success) {
+    .#{$namespace}-progress-bar__inner {
+      @apply bg-success-bg;
+    }
+    .#{$namespace}-progress__text {
+      @apply text-success-txt
+    }
+  }
+  @include when(warning) {
+    .#{$namespace}-progress-bar__inner {
+      @apply bg-warning-bg;
+    }
+    .#{$namespace}-progress__text {
+      @apply text-warning-txt;
+    }
+  }
+  @include when(error) {
+    .#{$namespace}-progress-bar__inner {
+      @apply bg-error-bg;
+    }
+    .#{$namespace}-progress__text {
+      @apply text-error-txt;
+    }
+  }
+}
+@include b(progress-bar) {
+  @apply grow box-border;
+
+  @include e(outer) {
+    // Assuming getCssVar('border-color-lighter') maps to bg-gray-200
+    @apply h-[6px] rounded-full bg-gray-200 overflow-hidden relative align-middle;
+  }
+
+  @include e(inner) {
+    // Assuming getCssVar('--color-primary') maps to bg-nightBlue-500
+    // transition: width 0.6s ease -> transition-width duration-500 ease-linear (or ease-in-out etc.)
+    // Let's use ease-linear as default ease is often linear for width
+    @apply absolute left-0 top-0 h-full bg-primary-bg text-right rounded-full leading-none whitespace-nowrap transition-[width] duration-500 ease-linear;
+
+    @include utils-vertical-center;
+
+    @include m(indeterminate) {
+      // Tailwind doesn't have translateZ by default. Keep raw CSS or use a plugin.
+      // animation: indeterminate 3s infinite -> animate-indeterminate (assuming keyframes are defined and animation configured in tailwind.config.js)
+      transform: translateZ(0);
+      @apply animate-progress-indeterminate; // Requires 'indeterminate' animation in tailwind.config.js
+    }
+
+    @include m(striped) {
+      background-image: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.1) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.1) 50%,
+        rgba(0, 0, 0, 0.1) 75%,
+        transparent 75%,
+        transparent
+      );
+      // background-size: 1.25em 1.25em -> bg-[length:1.25em_1.25em]
+      @apply bg-[length:1.25em_1.25em];
+
+      &.#{$namespace}-progress-bar__inner--striped-flow {
+        // animation: striped-flow 3s linear infinite -> animate-striped-flow
+        @apply animate-progress-striped-flow; // Requires 'striped-flow' animation in tailwind.config.js
+      }
+    }
+  }
+
+  @include e(innerText) {
+    @apply inline-block align-middle text-white text-xs mx-[5px];
+  }
+}
