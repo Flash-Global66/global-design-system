@@ -6,7 +6,6 @@ export const ICON_SETS = {
     "paper-plane",
     "ticket-alt",
     "wallet",
-    "gift",
     "question-circle",
     "info-circle",
     "user-plus",
@@ -175,6 +174,7 @@ export const ICON_SETS = {
     "gift",
     "timer",
     "webhook",
+    "tag",
   ] as const,
 
   light: [

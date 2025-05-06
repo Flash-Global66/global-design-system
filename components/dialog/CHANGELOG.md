@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.0...@flash-global66/g-dialog@1.1.1) (2025-05-06)
+
+
+### Bug Fixes
+
+* **dialog:** update focus trap injection and change default name ([9eb223f](https://github.com/Flash-Global66/global-design-system/commit/9eb223febee7c2a9e5e17fb121f3d2aaa952c131))
+
+
+
+
+
 # [1.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@0.0.8...@flash-global66/g-dialog@1.1.0) (2025-04-23)
 
 
