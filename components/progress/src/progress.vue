@@ -241,7 +241,7 @@ const getCurrentColor = (percentage: number) => {
       :style="{ fontSize: `${progressTextSize}px` }"
     >
       <slot :percentage="percentage">
-        <g-icon-font v-if="loading" name="regular arrows-rotate" spin />
+        <g-icon-font v-if="loading" name="regular spinner" spin />
         <span v-else-if="!status">{{ content }}</span>
         <g-icon-font v-else :name="statusIcon" />
       </slot>
