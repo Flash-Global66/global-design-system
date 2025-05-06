@@ -13,7 +13,7 @@ import {
   useId,
   useLockscreen,
   useZIndex,
-} from 'element-plus/es/hooks/index'
+} from 'element-plus'
 import { UPDATE_MODEL_EVENT } from 'element-plus/es/constants/index'
 import { addUnit, isClient } from 'element-plus/es/utils/index'
 import { useGlobalConfig } from 'element-plus/es/components/config-provider/index'
