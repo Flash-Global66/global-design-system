@@ -438,6 +438,10 @@ module.exports = {
           "--color-border-error": theme("colors.red.700"),
           "--color-border-warning": theme("colors.yellow.700"),
           "--color-border-info": theme("colors.blue.500"),
+          "--color-progress-primary": theme("colors.everBlue.500"),
+          "--color-progress-success": theme("colors.green.700"),
+          "--color-progress-error": theme("colors.red.700"),
+          "--color-progress-warning": theme("colors.yellow.700"),
         },
       });
     }),

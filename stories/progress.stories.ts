@@ -66,35 +66,14 @@ import { GProgress } from '@flash-global66/g-progress'
         defaultValue: { summary: "line" },
       },
     },
-    "stroke-width": {
-      name: "stroke-width",
-      description: "Ancho de la barra de progreso.",
-      control: "number",
-      table: {
-        category: "Estado y Control",
-        type: { summary: "number" },
-        defaultValue: { summary: 6 },
-      },
-    },
-    "text-inside": {
-      name: "text-inside",
-      description:
-        "Colocar el porcentaje dentro de la barra de progreso (solo para type='line').",
-      control: "boolean",
-      table: {
-        category: "Estado y Control",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-      },
-    },
     status: {
       description: "Estado actual de la barra de progreso.",
       control: "select",
-      options: ["success", "exception", "warning", ""],
+      options: ["primary", "success", "warning", "error"],
       table: {
         category: "Estado y Control",
         type: { summary: "string" },
-        defaultValue: { summary: "" },
+        defaultValue: { summary: "primary" },
       },
     },
     loading: {
@@ -117,16 +96,6 @@ import { GProgress } from '@flash-global66/g-progress'
         defaultValue: { summary: false },
       },
     },
-    "show-text": {
-      name: "show-text",
-      description: "Mostrar el porcentaje",
-      control: "boolean",
-      table: {
-        category: "Estado y Control",
-        type: { summary: "boolean" },
-        defaultValue: { summary: true },
-      },
-    },
     format: {
       description: "Formato de texto personalizado.",
       control: "string",
@@ -138,7 +107,38 @@ import { GProgress } from '@flash-global66/g-progress'
         defaultValue: { summary: null },
       },
     },
+    "show-text": {
+      name: "show-text",
+      description: "Mostrar el porcentaje",
+      control: "boolean",
+      table: {
+        category: "Estado y Control",
+        type: { summary: "boolean" },
+        defaultValue: { summary: true },
+      },
+    },
     // 2. Estilo
+    "stroke-width": {
+      name: "stroke-width",
+      description: "Ancho de la barra de progreso.",
+      control: "number",
+      table: {
+        category: "Estilo",
+        type: { summary: "number" },
+        defaultValue: { summary: 6 },
+      },
+    },
+    "text-inside": {
+      name: "text-inside",
+      description:
+        "Colocar el porcentaje dentro de la barra de progreso (solo para type='line').",
+      control: "boolean",
+      table: {
+        category: "Estilo",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
     "stroke-linecap": {
       description: "Terminacion del cierre del estilo circulo/dashboard.",
       control: "select",
@@ -160,18 +160,6 @@ import { GProgress } from '@flash-global66/g-progress'
         defaultValue: { summary: "3" },
       },
     },
-    color: {
-      description:
-        "Color de fondo de la barra de progreso. Sobreescribe la propiedad 'status'.",
-      control: { type: "color", presetColors: ["red", "green"] },
-      table: {
-        category: "Estilo",
-        type: {
-          summary: "string",
-        },
-        defaultValue: { summary: "" },
-      },
-    },
     width: {
       name: "width",
       description:
@@ -186,7 +174,6 @@ import { GProgress } from '@flash-global66/g-progress'
   },
   args: {
     percentage: 75,
-    color: "",
     type: "line",
     "stroke-width": 6,
   },
@@ -195,7 +182,7 @@ export default meta;
 type Story = StoryObj<typeof GProgress>;
 
 export const Basic: Story = {
-  name: "Default",
+  name: "Básico",
   parameters: {
     docs: {
       description: {

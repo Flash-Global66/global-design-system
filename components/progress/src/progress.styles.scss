@@ -63,7 +63,7 @@
       @apply text-warning-txt;
     }
   }
-  @include when(exception) {
+  @include when(error) {
     .#{$namespace}-progress-bar__inner {
       @apply bg-error-bg;
     }

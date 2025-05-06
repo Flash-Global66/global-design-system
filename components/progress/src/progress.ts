@@ -27,8 +27,8 @@ export const progressProps = buildProps({
    */
   status: {
     type: String,
-    default: "",
-    values: ["", "success", "exception", "warning"],
+    default: "primary",
+    values: ["primary", "success", "error", "warning"],
   },
   /**
    * @description set indeterminate progress
@@ -74,18 +74,7 @@ export const progressProps = buildProps({
     default: true,
   },
   /**
-   * @description background color of progress bar. Overrides `status` prop
-   */
-  color: {
-    type: definePropType<string | ProgressColor[] | ProgressFn>([
-      String,
-      Array,
-      Function,
-    ]),
-    default: "",
-  },
-  /**
-   * @description background color of progress bar. Overrides `status` prop
+   * @description should show the loading spinner icon. Overrides status icon.
    */
   loading: {
     type: Boolean,

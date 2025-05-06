@@ -11,10 +11,10 @@ defineOptions({
 });
 
 const STATUS_COLOR_MAP: Record<string, string> = {
-  success: "--color-success",
-  exception: "--color-error",
-  warning: "--color-warning",
-  default: "--color-primary",
+  primary: "--color-progress-primary",
+  success: "--color-progress-success",
+  error: "--color-progress-error",
+  warning: "--color-progress-warning",
 };
 
 const props = defineProps(progressProps);
@@ -27,31 +27,9 @@ const barStyle = computed<CSSProperties>(() => {
     animationDuration: `${props.duration}s`,
   };
 
-  // Determinar si props.color tiene un valor "significativo"
-  // (no es el string vacío por defecto, o es una función o un array).
-  const hasMeaningfulColorProp =
-    (isString(props.color) && props.color !== "") ||
-    isFunction(props.color) ||
-    Array.isArray(props.color);
-
-  if (hasMeaningfulColorProp) {
-    const colorValue = getCurrentColor(props.percentage);
-    // Aplicar el color solo si colorValue es un string válido y no vacío.
-    // Si getCurrentColor devuelve '' o undefined (ej. función de color devuelve '', o array de colores no encuentra match),
-    // no se aplica color en línea, permitiendo que las clases CSS base (como bg-primary-bg) tomen efecto.
-    if (colorValue && typeof colorValue === "string" && colorValue !== "") {
-      if (colorValue.includes("gradient")) {
-        style.background = colorValue;
-      } else {
-        style.backgroundColor = colorValue;
-      }
-    }
-  } else {
-    // props.color es '' (el valor por defecto), así que usamos el color basado en status.
-    const statusColorVar =
-      STATUS_COLOR_MAP[props.status] || STATUS_COLOR_MAP.default;
-    style.backgroundColor = `var(${statusColorVar})`;
-  }
+  const statusColorVar =
+    STATUS_COLOR_MAP[props.status] || STATUS_COLOR_MAP.primary;
+  style.backgroundColor = `var(${statusColorVar})`;
   return style;
 });
 
@@ -105,13 +83,9 @@ const circlePathStyle = computed<CSSProperties>(() => ({
 
 const stroke = computed(() => {
   let ret: string;
-  if (props.color) {
-    ret = getCurrentColor(props.percentage);
-  } else {
-    const colorName =
-      STATUS_COLOR_MAP[props.status] || STATUS_COLOR_MAP.default;
-    ret = `var(${colorName})`;
-  }
+  const colorName = STATUS_COLOR_MAP[props.status] || STATUS_COLOR_MAP.primary;
+  ret = `var(${colorName})`;
+
   return ret;
 });
 
@@ -149,21 +123,6 @@ function getColors(color: ProgressColor[]) {
   });
   return seriesColors.sort((a, b) => a.percentage - b.percentage);
 }
-
-const getCurrentColor = (percentage: number) => {
-  const { color } = props;
-  if (isFunction(color)) {
-    return color(percentage);
-  } else if (isString(color)) {
-    return color;
-  } else {
-    const colors = getColors(color);
-    for (const color of colors) {
-      if (color.percentage > percentage) return color.color;
-    }
-    return colors[colors.length - 1]?.color;
-  }
-};
 </script>
 
 <template>
@@ -242,7 +201,7 @@ const getCurrentColor = (percentage: number) => {
     >
       <slot :percentage="percentage">
         <g-icon-font v-if="loading" name="regular spinner" spin />
-        <span v-else-if="!status">{{ content }}</span>
+        <span v-else-if="!status || status === 'primary'">{{ content }}</span>
         <g-icon-font v-else :name="statusIcon" />
       </slot>
     </div>
