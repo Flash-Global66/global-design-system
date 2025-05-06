@@ -1,0 +1,42 @@
+{
+  "name": "@flash-global66/g-time-picker",
+  "author": "Global66",
+  "version": "0.1.3",
+  "license": "MIT",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/time-picker.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-icon-font": "^0.0.8",
+    "@flash-global66/g-input": "^0.3.1",
+    "@flash-global66/g-scrollbar": "^0.1.0",
+    "@flash-global66/g-tooltip": "^0.0.5",
+    "@flash-global66/g-popper": "^0.0.10",
+    "dayjs": "^1.11.13",
+    "element-plus": "^2.9.0",
+    "vue": "^3.2.0"
+  },
+  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
+}

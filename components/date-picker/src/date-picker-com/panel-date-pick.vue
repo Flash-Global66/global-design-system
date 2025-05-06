@@ -28,7 +28,6 @@
             <g-input
               :placeholder="t('el.datepicker.selectDate')"
               :model-value="visibleDate"
-              size="small"
               :validate-event="false"
               @input="(val) => (userInputDate = val)"
               @change="handleVisibleDateChange"
@@ -41,7 +40,6 @@
             <g-input
               :placeholder="t('el.datepicker.selectTime')"
               :model-value="visibleTime"
-              size="small"
               :validate-event="false"
               @focus="onTimePickerInputFocus"
               @input="(val) => (userInputTime = val)"
@@ -65,6 +63,7 @@
         >
           <span :class="dpNs.e('prev-btn')">
             <button
+              v-show="currentView !== 'date'"
               type="button"
               :aria-label="t(`el.datepicker.prevYear`)"
               class="d-arrow-left"
@@ -72,7 +71,7 @@
               @click="moveByYear(false)"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button
@@ -124,6 +123,7 @@
               </slot>
             </button>
             <button
+              v-show="currentView !== 'date'"
               type="button"
               :aria-label="t(`el.datepicker.nextYear`)"
               :class="ppNs.e('icon-btn')"
@@ -131,7 +131,7 @@
               @click="moveByYear(true)"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
           </span>
@@ -169,25 +169,23 @@
       </div>
     </div>
     <div v-show="footerVisible" :class="ppNs.e('footer')">
-      <g-button
+      <button
         v-show="!isMultipleType && showNow"
-        text
-        size="small"
-        :class="ppNs.e('link-btn')"
+        type="button"
+        class="gui-time-panel__btn cancel"
         :disabled="disabledNow"
         @click="changeToNow"
       >
         {{ t("el.datepicker.now") }}
-      </g-button>
-      <g-button
-        plain
-        size="small"
-        :class="ppNs.e('link-btn')"
+      </button>
+      <button
+        type="button"
+        class="gui-time-panel__btn confirm"
         :disabled="disabledConfirm"
         @click="onConfirm"
       >
         {{ t("el.datepicker.confirm") }}
-      </g-button>
+      </button>
     </div>
   </div>
 </template>
@@ -204,19 +202,19 @@ import {
   watch,
 } from "vue";
 import dayjs from "dayjs";
-import { GButton } from "@flash-global66/g-button/index.js";
+import { GButton } from "@flash-global66/g-button";
 import { ClickOutside as vClickOutside } from "element-plus";
 import { useLocale, useNamespace } from "element-plus";
-import { GInput } from "@flash-global66/g-input/index.js";
+import { GInput } from "@flash-global66/g-input";
 import {
   TimePickPanel,
   extractDateFormat,
   extractTimeFormat,
-} from "@element-plus/components/time-picker";
+} from "@flash-global66/g-time-picker";
 import { GIconFont } from "@flash-global66/g-icon-font";
 import { isArray, isFunction } from "element-plus/es/utils/index.mjs";
 import { EVENT_CODE } from "element-plus/es/constants/index.mjs";
-import { TOOLTIP_INJECTION_KEY } from "@element-plus/components/tooltip";
+import { TOOLTIP_INJECTION_KEY } from "@flash-global66/g-tooltip";
 import { panelDatePickProps } from "../props/panel-date-pick";
 import { getValidDateOfMonth, getValidDateOfYear } from "../utils";
 import DateTable from "./basic-date-table.vue";
@@ -234,6 +232,8 @@ import type {
   YearsPickerEmits,
 } from "../props/basic-date-table";
 
+import es from "../lang/es";
+
 type DatePickType = PanelDatePickProps["type"];
 // todo
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -245,7 +245,7 @@ const dpNs = useNamespace("date-picker");
 const attrs = useAttrs();
 const slots = useSlots();
 
-const { t, lang } = useLocale();
+const { t, lang } = useLocale(ref(es));
 const pickerBase = inject("EP_PICKER_BASE") as any;
 const popper = inject(TOOLTIP_INJECTION_KEY);
 const { shortcuts, disabledDate, cellClassName, defaultTime } =
