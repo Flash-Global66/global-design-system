@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.1...@flash-global66/g-dialog@1.1.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* **dialog:** update import path for hooks from 'element-plus' ([#71](https://github.com/Flash-Global66/global-design-system/issues/71)) ([cbad1ca](https://github.com/Flash-Global66/global-design-system/commit/cbad1ca1670507cb472eec84107d152a90d2d932))
+
+
+
+
+
 ## [1.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.0...@flash-global66/g-dialog@1.1.1) (2025-05-06)
 
 
