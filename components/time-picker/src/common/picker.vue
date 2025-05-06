@@ -44,6 +44,7 @@
         :tabindex="tabindex"
         :validate-event="false"
         :helpText="helpText"
+        :messageError="messageError"
         @input="onUserInput"
         @focus="handleFocus"
         @blur="handleBlur"

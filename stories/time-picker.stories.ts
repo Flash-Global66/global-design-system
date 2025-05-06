@@ -24,14 +24,12 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `✨ \`GTimePicker\` - Componente para selección de hora avanzado
-
-Un selector de hora moderno con funcionalidades completas para manejar tiempos en formularios. Soporta selección simple y rangos de tiempo.
+        component: `
+El componente Time Picker está diseñado para gestionar la selección de tiempos en formularios de manera eficiente y moderna. Ofrece funcionalidades completas, permitiendo tanto la selección de horas individuales como rangos de tiempo, lo que lo hace ideal para aplicaciones que requieren precisión y flexibilidad en la gestión de horarios. Este componente garantiza una experiencia intuitiva y fluida, adaptándose a necesidades diversas sin sacrificar claridad o usabilidad.
 
 > Versión actual: ${version}
 
-**Características principales:**
-
+## Características
 - Selección de hora simple o en rangos
 - Formato personalizable de visualización
 - Validación integrada de horas
@@ -40,13 +38,27 @@ Un selector de hora moderno con funcionalidades completas para manejar tiempos e
 - Soporte para deshabilitar horas/minutos/segundos específicos
 - Personalización completa del popup
 
-🚀 **Instalación**
+### Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-time-picker
 \`\`\`
 
-🪝 ## Dependencias
+### Importación del componente
+\`\`\`typescript
+# importar donde se va a utilizar
+import { GTimePicker } from '@flash-global66/g-time-picker'
+
+# recomendado importar en los estilos globales
+import '@flash-global66/g-time-picker/style.scss'
+
+// Opcional: Extender dayjs con plugins necesarios
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+dayjs.extend(customParseFormat)
+\`\`\`
+
+## Dependencias
 Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
 ${generatePeerDepsList(peerDependencies)}
 
@@ -60,16 +72,23 @@ yarn add ${generatePeerDepsInstalls(peerDependencies)}
 yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 \`\`\`
 
-📥 **Importación básica**
+### Ejemplo de uso
 
-\`\`\`typescript
-import { GTimePicker } from '@flash-global66/g-time-picker'
-import '@flash-global66/g-time-picker/style.scss'
+\`\`\`ts
+<script setup lang="ts">
+import { GTimePicker } from '@flash-global66/g-time-picker';
+</script>
 
-// Opcional: Extender dayjs con plugins necesarios
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-dayjs.extend(customParseFormat)
+<template>
+  <g-time-picker
+    :picker="true"
+    :clearable="true"
+    endPlaceholder="Hora fin"
+    format="HH:mm:ss"
+    label="Seleccione hora"
+    startPlaceholder="Hora inicio"
+  />
+</template>
 \`\`\`
 `,
       },
@@ -585,6 +604,7 @@ export const States: Story = {
       <g-config-provider>
         <div class="flex flex-col gap-4">
           <g-time-picker
+            class="my-2"
             v-model="time"
             label="Normal"
           />
@@ -597,8 +617,8 @@ export const States: Story = {
           
           <g-time-picker
             v-model="timeHelpText"
-            label="Texto de apoyo"
-            helpText="Texto de apoyo"
+            label="Texto con error"
+            messageError="Debe ser mayor de 18 años"
           />
         </div>
       </g-config-provider>
