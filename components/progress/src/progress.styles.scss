@@ -1,0 +1,110 @@
+@use "element-plus/theme-chalk/src/progress.scss" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b(progress) {
+  @apply relative leading-none flex items-center;
+
+  @include e(text) {
+    @apply text-2 text-gray-700 ml-xs min-w-[50px] leading-none;
+
+    i {
+      @apply align-middle block;
+    }
+  }
+
+  @include m((circle, dashboard)) {
+    display: inline-block;
+
+    .#{$namespace}-progress__text {
+      @apply absolute top-1/2 left-0 w-full text-center m-0 -translate-y-1/2;
+
+      i {
+        @apply align-middle inline-block;
+      }
+    }
+  }
+
+  @include m(without-text) {
+    .#{$namespace}-progress__text {
+      @apply hidden;
+    }
+
+    .#{$namespace}-progress-bar {
+      @apply pr-0 mr-0 block;
+    }
+  }
+
+  @include m(text-inside) {
+    .#{$namespace}-progress-bar {
+      @apply pr-0 mr-0;
+    }
+  }
+
+  @include when(success) {
+    .#{$namespace}-progress-bar__inner {
+      @apply bg-success-bg;
+    }
+    .#{$namespace}-progress__text {
+      @apply text-success-txt;
+    }
+  }
+  @include when(warning) {
+    .#{$namespace}-progress-bar__inner {
+      @apply bg-warning-bg;
+    }
+    .#{$namespace}-progress__text {
+      @apply text-warning-txt;
+    }
+  }
+  @include when(error) {
+    .#{$namespace}-progress-bar__inner {
+      @apply bg-error-bg;
+    }
+    .#{$namespace}-progress__text {
+      @apply text-error-txt;
+    }
+  }
+}
+@include b(progress-bar) {
+  @apply grow box-border;
+
+  @include e(outer) {
+    @apply h-[6px] rounded-full bg-gray-200 overflow-hidden relative align-middle;
+  }
+
+  @include e(inner) {
+    @apply absolute left-0 top-0 h-full bg-primary-bg text-right rounded-full leading-none whitespace-nowrap transition-[width] duration-500 ease-linear;
+
+    @include utils-vertical-center;
+
+    @include m(indeterminate) {
+      transform: translateZ(0);
+      @apply animate-progress-indeterminate;
+    }
+
+    @include m(striped) {
+      background-image: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.1) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.1) 50%,
+        rgba(0, 0, 0, 0.1) 75%,
+        transparent 75%,
+        transparent
+      );
+      @apply bg-[length:1.25em_1.25em];
+
+      &.#{$namespace}-progress-bar__inner--striped-flow {
+        @apply animate-progress-striped-flow;
+      }
+    }
+  }
+
+  @include e(innerText) {
+    @apply inline-block align-middle text-white text-xs mx-[5px];
+  }
+}
