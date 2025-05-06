@@ -125,6 +125,13 @@ export const timePickerDefaultProps = buildProps({
     default: "",
   },
   /**
+   * @description label in non-range mode
+   */
+  messageError: {
+    type: String,
+    default: "",
+  },
+  /**
    * @description [popper.js](https://popper.js.org/docs/v2/) parameters
    */
   popperOptions: {

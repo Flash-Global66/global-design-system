@@ -24,14 +24,12 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `✨ \`GDatePicker\` - Componente para selección de fecha avanzado
+        component: `
 
-Un selector de fecha moderno con funcionalidades completas para manejar fechas en formularios. Soporta selección simple, rangos y varios tipos de selectores (año, mes, fecha, fecha y hora).
-
+El componente Date Picker está diseñado para gestionar la selección de fechas en formularios con flexibilidad y precisión. Ofrece funcionalidades completas, incluyendo selección simple, rangos de fechas y distintos modos de visualización (año, mes, día o fecha y hora). Es ideal para aplicaciones que requieren una interacción intuitiva y detallada con calendarios, asegurando una experiencia de usuario fluida sin sacrificar potencia o personalización.
 > Versión actual: ${version}
 
-**Características principales:**
-
+## Características
 - Selección de fecha simple o en rangos
 - Varios tipos de selectores: año, mes, fecha, fecha y hora
 - Formato personalizable de visualización
@@ -39,13 +37,31 @@ Un selector de fecha moderno con funcionalidades completas para manejar fechas e
 - Integración con Day.js para manejo de fechas
 - Personalización completa del popup
 
-🚀 **Instalación**
+### Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-date-picker
 \`\`\`
 
-🪝 ## Dependencias
+### Importación del componente
+\`\`\`typescript
+# importar donde se va a utilizar
+import { GDatePicker } from '@flash-global66/g-date-picker'
+
+# recomendado importar en los estilos globales
+import '@flash-global66/g-date-picker/style.scss'
+
+// Opcional: Extender dayjs con plugins necesarios
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
+import localeData from 'dayjs/plugin/localeData'
+dayjs.extend(customParseFormat)
+dayjs.extend(advancedFormat)
+dayjs.extend(localeData)
+\`\`\`
+
+## Dependencias
 Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
 ${generatePeerDepsList(peerDependencies)}
 
@@ -59,20 +75,25 @@ yarn add ${generatePeerDepsInstalls(peerDependencies)}
 yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 \`\`\`
 
-📥 **Importación básica**
+### Ejemplo de uso
 
-\`\`\`typescript
-import GDatePicker from '@flash-global66/g-date-picker/es/components/date-picker'
-import '@flash-global66/g-date-picker/style.scss'
+\`\`\`ts
+<script setup lang="ts">
+import { GDatePicker } from '@flash-global66/g-date-picker';
+</script>
 
-// Opcional: Extender dayjs con plugins necesarios
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-import advancedFormat from 'dayjs/plugin/advancedFormat'
-import localeData from 'dayjs/plugin/localeData'
-dayjs.extend(customParseFormat)
-dayjs.extend(advancedFormat)
-dayjs.extend(localeData)
+<template>
+  <g-date-picker    
+    :picker="true"
+    :clearable="true"
+    endPlaceholder="Fecha fin"
+    format="YYYY-MM-DD"
+    label="Seleccione fecha"
+    rangeSeparator="-"
+    :shortcuts="shortcuts"
+    startPlaceholder="Fecha inicio"
+  />
+</template>
 \`\`\`
 `,
       },
@@ -543,13 +564,13 @@ export const DifferentTypes: Story = {
     template: `
       <g-config-provider>
         <div class="flex flex-col gap-4">
-          <g-date-picker v-model="dateValue" label="Date" type="date" />
+          <g-date-picker v-model="dateValue" label="Date" type="date"/>
           <g-date-picker v-model="yearValue" label="Year" type="year" />
           <g-date-picker v-model="monthValue" label="Month" type="month" />
           <g-date-picker v-model="dateRangeValue" label="Date Range" type="daterange" />
           <g-date-picker v-model="monthRangeValue" label="Month Range" type="monthrange" />
           <g-date-picker v-model="yearRangeValue" label="Year Range" type="yearrange" />
-          <g-date-picker v-model="dateTimeValue" label="DateTime" type="datetime" format="YYYY-MM-DD HH:mm:ss" />
+          <g-date-picker v-model="dateTimeValue" label="DateTime" type="datetime" format="YYYY-MM-DD HH:mm:ss" messageError="Agregar fecha"/>
         </div>
       </g-config-provider>
     `,
