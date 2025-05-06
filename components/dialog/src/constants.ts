@@ -15,3 +15,5 @@ export type DialogContext = {
 
 export const dialogInjectionKey: InjectionKey<DialogContext> =
   Symbol('dialogInjectionKey')
+
+  export const Z_INDEX_MARGIN = 100

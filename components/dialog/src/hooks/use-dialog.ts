@@ -8,7 +8,6 @@ import {
 } from 'vue'
 import { useTimeoutFn } from '@vueuse/core'
 
-import { isUndefined } from 'lodash-unified'
 import {
   useId,
   useLockscreen,
@@ -17,6 +16,7 @@ import {
 import { UPDATE_MODEL_EVENT } from 'element-plus/es/constants/index'
 import { addUnit, isClient } from 'element-plus/es/utils/index'
 import { useGlobalConfig } from 'element-plus/es/components/config-provider/index'
+import { Z_INDEX_MARGIN } from '../constants'
 
 import type { CSSProperties, Ref, SetupContext, ComputedRef } from 'vue'
 import type { DialogEmits, DialogProps } from '../dialog'
@@ -35,7 +35,8 @@ export const useDialog = (
 ) => {
   const instance = getCurrentInstance()!
   const emit = instance.emit as SetupContext<DialogEmits>['emit']
-  const { nextZIndex } = useZIndex()
+  const { nextZIndex } = useZIndex();
+
 
   let lastPosition = ''
   const titleId = useId()
@@ -44,6 +45,13 @@ export const useDialog = (
   const closed = ref(false)
   const rendered = ref(false) // when desctroyOnClose is true, we initialize it as false vise versa
   const zIndex = ref(props.zIndex ?? nextZIndex())
+
+  const updateZIndexToHighest = () => {
+    if (!props.zIndex) {
+      const baseZIndex = nextZIndex();
+      zIndex.value = baseZIndex + Z_INDEX_MARGIN;
+    }
+  };
 
   const displayButtons = computed<FooterButton[]>(() => {
     return props.footerButtons?.slice(0, 3) || [];
@@ -137,6 +145,8 @@ export const useDialog = (
 
   function doOpen() {
     if (!isClient) return
+    
+    updateZIndexToHighest();
     visible.value = true
   }
 
@@ -175,7 +185,7 @@ export const useDialog = (
         closed.value = false
         open()
         rendered.value = true // enables lazy rendering
-        zIndex.value = isUndefined(props.zIndex) ? nextZIndex() : zIndex.value++
+        updateZIndexToHighest();
         // this.$el.addEventListener('scroll', this.updatePopper)
         nextTick(() => {
           emit('open')
