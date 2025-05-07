@@ -30,7 +30,6 @@
   },
   "peerDependencies": {
     "@flash-global66/g-icon-font": "^0.5.8",
-    "@vueuse/core": "^12.4.0",
     "element-plus": "^2.9.7",
     "vue": "^3.2.0"
   }

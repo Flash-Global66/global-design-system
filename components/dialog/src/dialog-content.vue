@@ -76,7 +76,10 @@ const emit = defineEmits(dialogContentEmits);
 validateDialogProps(props);
 
 const { dialogRef, headerRef, bodyId, ns, style, displayButtons, buttonLayoutClass } = inject(dialogInjectionKey)!;
-const { focusTrapRef } = inject(FOCUS_TRAP_INJECTION_KEY)!;
+const { focusTrapRef } = inject(FOCUS_TRAP_INJECTION_KEY, {
+  focusTrapRef: dialogRef,
+  onKeydown: () => {}
+})!;
 
 const dialogKls = computed(() => {
   const mode = props.fullscreen ? 'fullscreen' : (props.sizeMode || 'default');

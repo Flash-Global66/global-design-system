@@ -10,11 +10,10 @@ import { useTimeoutFn } from '@vueuse/core'
 
 import { isUndefined } from 'lodash-unified'
 import {
-  defaultNamespace,
   useId,
   useLockscreen,
   useZIndex,
-} from 'element-plus/es/hooks/index'
+} from 'element-plus'
 import { UPDATE_MODEL_EVENT } from 'element-plus/es/constants/index'
 import { addUnit, isClient } from 'element-plus/es/utils/index'
 import { useGlobalConfig } from 'element-plus/es/components/config-provider/index'
@@ -58,7 +57,8 @@ export const useDialog = (
   let openTimer: (() => void) | undefined = undefined
   let closeTimer: (() => void) | undefined = undefined
 
-  const namespace = useGlobalConfig('namespace', defaultNamespace)
+   const defaultNamespace = "gui";
+   const namespace = useGlobalConfig("namespace", defaultNamespace);
 
   const style = computed<CSSProperties>(() => {
     const style: CSSProperties = {}
@@ -238,4 +238,6 @@ export const useDialog = (
     displayButtons,
     buttonLayoutClass
   }
+
+
 }
