@@ -8,7 +8,7 @@ export default mergeConfig(
     build: {
       lib: {
         entry: resolve(__dirname, "index.ts"),
-        name: "B2BDatePicker",
+        name: "GDatePicker",
       },
     },
   })

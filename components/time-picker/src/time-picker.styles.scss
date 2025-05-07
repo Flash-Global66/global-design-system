@@ -1,0 +1,87 @@
+@use "sass:map" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+@use "element-plus/theme-chalk/src/base.scss" as *;
+
+@use "@flash-global66/g-input/src/input.styles.scss" as *;
+@use "@flash-global66/g-scrollbar/src/scrollbar.styles.scss" as *;
+@use "@flash-global66/g-popper/src/popper.styles.scss" as *;
+
+@use "./styles/picker.scss" as *;
+@use "./styles/picker-panel.scss" as *;
+@use "./styles/time-spinner.scss" as *;
+@use "./styles/time-picker.scss" as *;
+@use "./styles/time-range-picker.scss" as *;
+
+@include b(date-editor) {
+  &.#{$namespace}-input,
+  &.#{$namespace}-input__wrapper {
+    height: 3rem;
+    width: auto;
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  &.is-active,
+  &.is-active:hover {
+    @apply border-everBlue-500;
+    box-shadow: none;
+  }
+
+  &.#{$namespace}-input__icon {
+    width: 1.25rem;
+    @apply text-terciary-txt;
+  }
+
+  .#{$namespace}-range-input {
+    text-align: left !important;
+    font-size: 1rem;
+    color: var(--color-txt-primary);
+    font-weight: 500;
+
+    &::placeholder {
+      @apply transition-all duration-200 ease-in text-terciary-txt;
+    }
+  }
+}
+
+.gui-picker__popper.gui-popper__tooltip {
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.gui-date-editor--timerange .gui-input__label,
+.gui-date-editor--daterange .gui-input__label,
+.gui-date-editor--monthrange .gui-input__label,
+.gui-date-editor--yearrange .gui-input__label {
+  @apply text-secondary-txt;
+
+  left: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  font-weight: 500;
+  background: linear-gradient(180deg, transparent 40%, white 0);
+  top: 0;
+  transform: translateY(-50%);
+  padding: 0 2px;
+}
+.gui-date-editor--timerange.is-active,
+.gui-date-editor--daterange.is-active,
+.gui-date-editor--monthrange.is-active,
+.gui-date-editor--yearrange.is-active {
+  .gui-input__label {
+    @apply text-everBlue-500;
+  }
+}
+
+.gui-time-range-picker__body {
+  border-radius: 2px;
+  border: 1px solid #949aab;
+}
+
+.gui-picker__popper.gui-popper .gui-popper__arrow:before {
+  background-color: white !important;
+}

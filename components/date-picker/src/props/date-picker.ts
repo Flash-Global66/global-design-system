@@ -1,4 +1,4 @@
-import { timePickerDefaultProps } from "@element-plus/components/time-picker";
+import { timePickerDefaultProps } from "@flash-global66/g-time-picker";
 import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
 
 import type { ExtractPropTypes } from "vue";

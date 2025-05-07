@@ -1,5 +1,5 @@
 import { withInstall } from "element-plus/es/utils/index";
-import DatePicker from "./src/DatePicker.vue";
+import DatePicker from "./src/date-picker";
 
 import type { SFCWithInstall } from "element-plus/es/utils/index";
 

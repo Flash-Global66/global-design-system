@@ -6,7 +6,7 @@ import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 import { IMAGE_NAMES, IMAGE_SIZES } from '@flash-global66/g-image/index.ts';
 
 import { version, peerDependencies } from "@flash-global66/g-dialog-alert/package.json";
-import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories";
+import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories.ts";
 
 const AlertExampleWrapper = {
   name: 'AlertExampleWrapper',

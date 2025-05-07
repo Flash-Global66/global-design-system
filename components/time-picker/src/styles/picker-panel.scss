@@ -1,0 +1,139 @@
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b(picker-panel) {
+  color: getCssVar("text-color", "regular");
+  background: getCssVar("bg-color", "overlay");
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 6px 0px #00000029;
+  line-height: 30px;
+
+  .#{$namespace}-time-panel {
+    margin: 5px 0;
+    border: solid 1px getCssVar("datepicker-border-color");
+    background-color: getCssVar("bg-color", "overlay");
+    box-shadow: getCssVar("box-shadow-light");
+  }
+
+  @include e((body, body-wrapper)) {
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  @include e(content) {
+    position: relative;
+    margin: 8px 15px 15px 15px;
+  }
+
+  @include e(footer) {
+    border-top: 1px solid getCssVar("datepicker-inner-border-color");
+    padding: 4px 12px;
+    text-align: right;
+    background-color: getCssVar("bg-color", "overlay");
+    position: relative;
+    font-size: 0;
+  }
+
+  @include e(shortcut) {
+    @apply text-grey-700;
+
+    display: block;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 16px;
+    padding-bottom: 10px;
+    text-align: left;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      @apply text-everBlue-500;
+    }
+
+    &.active {
+      background-color: #e6f1fe;
+      color: getCssVar("datepicker-active-color");
+    }
+  }
+
+  @include e(btn) {
+    border: 1px solid getCssVar("fill-color", "darker");
+    color: getCssVar("text-color", "primary");
+    line-height: 24px;
+    border-radius: 2px;
+    padding: 0 20px;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    font-size: 12px;
+
+    &[disabled] {
+      color: getCssVar("text-color", "disabled");
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(icon-btn) {
+    @apply text-terciary-txt;
+
+    width: 1.25rem;
+    font-size: 16px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      @apply text-everBlue-500;
+    }
+    &:focus-visible {
+      @apply text-everBlue-500;
+    }
+
+    @include when(disabled) {
+      color: getCssVar("text-color-disabled");
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+    & .#{$namespace}-icon {
+      cursor: pointer;
+      font-size: inherit;
+    }
+  }
+
+  @include e(link-btn) {
+    vertical-align: middle;
+  }
+}
+
+.#{$namespace}-picker-panel *[slot="sidebar"],
+.#{$namespace}-picker-panel__sidebar {
+  position: absolute;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  top: 0;
+  bottom: 0;
+  width: 110px;
+  border-right: 1px solid #949aab;
+  box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: getCssVar("bg-color", "overlay");
+  overflow: auto;
+}
+
+.#{$namespace}-picker-panel
+  *[slot="sidebar"]
+  + .#{$namespace}-picker-panel__body,
+.#{$namespace}-picker-panel__sidebar + .#{$namespace}-picker-panel__body {
+  margin-left: 110px;
+}

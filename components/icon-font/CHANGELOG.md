@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.4.0...@flash-global66/g-icon-font@0.6.0) (2025-05-06)
+
+
+### Features
+
+* **icon:** add 'tag' icon to icon sets ([#64](https://github.com/Flash-Global66/global-design-system/issues/64)) ([f495b76](https://github.com/Flash-Global66/global-design-system/commit/f495b76cbca30dc5f54f5bb533e499fc883e12f0))
+* **icon:** add webhook icon to icon sets ([#61](https://github.com/Flash-Global66/global-design-system/issues/61)) ([dc40c9c](https://github.com/Flash-Global66/global-design-system/commit/dc40c9cd0a16db8cbe7a5093819928fa5a47b7cc))
+
+
+
+
+
 # [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.4.0...@flash-global66/g-icon-font@0.5.0) (2025-04-29)
 
 
