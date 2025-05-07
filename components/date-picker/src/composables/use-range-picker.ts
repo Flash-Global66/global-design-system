@@ -10,6 +10,8 @@ import type { Dayjs } from "dayjs";
 import type { PanelRangeSharedProps, RangeState } from "../props/shared";
 import type { DefaultValue } from "../utils";
 
+import es from "../lang/es";
+
 type UseRangePickerProps = {
   onParsedValueChanged: (
     minDate: Dayjs | undefined,
@@ -36,7 +38,7 @@ export const useRangePicker = (
 
   const { pickerNs } = inject(ROOT_PICKER_INJECTION_KEY)!;
   const drpNs = useNamespace("date-range-picker");
-  const { t, lang } = useLocale();
+  const { t, lang } = useLocale(ref(es));
   const handleShortcutClick = useShortcut(lang);
   const minDate = ref<Dayjs>();
   const maxDate = ref<Dayjs>();

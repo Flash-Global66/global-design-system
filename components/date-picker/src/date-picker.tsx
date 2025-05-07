@@ -1,6 +1,7 @@
 /** @jsx h */
 import { defineComponent, provide, reactive, ref, toRef, h } from "vue";
 import dayjs from "dayjs";
+import "dayjs/locale/es";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import advancedFormat from "dayjs/plugin/advancedFormat.js";
 import localeData from "dayjs/plugin/localeData.js";
@@ -16,7 +17,7 @@ import {
   DEFAULT_FORMATS_DATEPICKER,
   type DateModelType,
   type SingleOrRange,
-} from "@element-plus/components/time-picker";
+} from "@flash-global66/g-time-picker";
 import { ROOT_PICKER_INJECTION_KEY } from "./constants";
 
 import { datePickerProps } from "./props/date-picker";
@@ -33,7 +34,7 @@ dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
 export default defineComponent({
-  name: "ElDatePicker",
+  name: "GDatePicker",
   install: null,
   props: datePickerProps,
   emits: ["update:modelValue"],

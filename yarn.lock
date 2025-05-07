@@ -652,6 +652,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-collection@workspace:components/collection":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-collection@workspace:components/collection"
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-config-provider@workspace:components/config-provider":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-config-provider@workspace:components/config-provider"
@@ -706,6 +712,18 @@ __metadata:
 "@flash-global66/g-dropdown@workspace:components/dropdown":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-dropdown@workspace:components/dropdown"
+  peerDependencies:
+    "@flash-global66/g-collection": ^0.0.1
+    "@flash-global66/g-focus-trap": ^0.0.7
+    "@flash-global66/g-icon-font": ^0.4.0
+    "@flash-global66/g-popper": ^0.0.10
+    "@flash-global66/g-roving-focus-group": ^0.0.1
+    "@flash-global66/g-scrollbar": ^0.1.0
+    "@flash-global66/g-slot": ^0.0.2
+    "@flash-global66/g-tooltip": ^0.1.0
+    "@popperjs/core": ^2.11.6
+    element-plus: ^2.9.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
@@ -889,6 +907,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-roving-focus-group@workspace:components/roving-focus-group":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-roving-focus-group@workspace:components/roving-focus-group"
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-scrollbar@workspace:components/scrollbar":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-scrollbar@workspace:components/scrollbar"
@@ -976,6 +1000,19 @@ __metadata:
 "@flash-global66/g-teleport@workspace:components/teleport":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-teleport@workspace:components/teleport"
+  languageName: unknown
+  linkType: soft
+
+"@flash-global66/g-time-picker@workspace:components/time-picker":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-time-picker@workspace:components/time-picker"
+  peerDependencies:
+    "@flash-global66/g-icon-font": ^0.0.8
+    "@flash-global66/g-input": ^0.3.1
+    "@flash-global66/g-scrollbar": ^0.1.0
+    dayjs: ^1.11.13
+    element-plus: ^2.9.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 

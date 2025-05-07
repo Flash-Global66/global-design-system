@@ -1,9 +1,0 @@
-@use "element-plus/theme-chalk/src/dropdown-item.scss" as *;
-
-.gui-dropdown-menu__item {
-  @apply text-4 py-2;
-  &:hover,
-  &:focus {
-    @apply bg-gray-5 text-white;
-  }
-}
