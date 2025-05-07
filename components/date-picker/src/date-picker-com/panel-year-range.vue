@@ -109,8 +109,6 @@ import YearTable from "./basic-year-table.vue";
 import type { Dayjs } from "dayjs";
 import type { RangeState } from "../props/shared";
 
-import es from "../lang/es";
-
 defineOptions({
   name: "DatePickerYearRange",
 });
@@ -118,7 +116,7 @@ defineOptions({
 const props = defineProps(panelYearRangeProps);
 const emit = defineEmits(panelYearRangeEmits);
 
-const { lang } = useLocale(ref(es));
+const { lang } = useLocale();
 const leftDate = ref(dayjs().locale(lang.value));
 const rightDate = ref(leftDate.value.add(10, "year"));
 const { pickerNs: ppNs } = inject(ROOT_PICKER_INJECTION_KEY)!;

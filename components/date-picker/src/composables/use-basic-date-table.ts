@@ -13,8 +13,6 @@ import type {
   BasicDateTableProps,
 } from "../props/basic-date-table";
 
-import es from "../lang/es";
-
 const isNormalDay = (type = "") => {
   return ["normal", "today"].includes(type);
 };
@@ -23,7 +21,7 @@ export const useBasicDateTable = (
   props: BasicDateTableProps,
   emit: SetupContext<BasicDateTableEmits>["emit"]
 ) => {
-  const { lang } = useLocale(ref(es));
+  const { lang } = useLocale();
   const tbodyRef = ref<HTMLElement>();
   const currentCellRef = ref<HTMLElement>();
   // data
@@ -415,7 +413,7 @@ export const useBasicDateTableDOM = (
   }: Pick<ReturnType<typeof useBasicDateTable>, "isCurrent" | "isWeekActive">
 ) => {
   const ns = useNamespace("date-table");
-  const { t } = useLocale(ref(es));
+  const { t } = useLocale();
 
   const tableKls = computed(() => [
     ns.b(),

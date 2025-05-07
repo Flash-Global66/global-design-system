@@ -1,6 +1,7 @@
 import { StoryObj } from "@storybook/vue3";
 import { ref } from "vue";
 import dayjs from "dayjs";
+import { es } from "../common/lang";
 
 // COMPONENTS
 import GDatePicker from "../components/date-picker";
@@ -414,10 +415,11 @@ export const Basic: Story = {
     components: { GDatePicker, GConfigProvider },
     setup() {
       const value = ref("");
-      return { value, args };
+      const lang = es;
+      return { value, args, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker v-bind="args" v-model="value"/>
         </div>
@@ -444,10 +446,11 @@ export const Range: Story = {
     components: { GDatePicker, GConfigProvider },
     setup() {
       const value = ref([]);
-      return { value };
+      const lang = es;
+      return { value, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker
             v-model="value"
@@ -478,10 +481,11 @@ export const DateTime: Story = {
     components: { GDatePicker, GConfigProvider },
     setup() {
       const value = ref(new Date());
-      return { value };
+      const lang = es;
+      return { value, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker
             v-model="value"
@@ -512,10 +516,11 @@ export const DisabledDates: Story = {
       const disabledDate = (time: Date) => {
         return time.getTime() > Date.now(); // Deshabilitar fechas futuras
       };
-      return { value, disabledDate };
+      const lang = es;
+      return { value, disabledDate, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker
             v-model="value"
@@ -550,6 +555,7 @@ export const DifferentTypes: Story = {
       const monthRangeValue = ref([]);
       const yearRangeValue = ref([]);
       const dateTimeValue = ref(new Date());
+      const lang = es;
 
       return {
         dateValue,
@@ -559,10 +565,12 @@ export const DifferentTypes: Story = {
         monthRangeValue,
         yearRangeValue,
         dateTimeValue,
+        lang,
       };
     },
+
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker v-model="dateValue" label="Date" type="date"/>
           <g-date-picker v-model="yearValue" label="Year" type="year" />

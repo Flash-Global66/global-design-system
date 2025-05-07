@@ -232,8 +232,6 @@ import type {
   YearsPickerEmits,
 } from "../props/basic-date-table";
 
-import es from "../lang/es";
-
 type DatePickType = PanelDatePickProps["type"];
 // todo
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -245,7 +243,7 @@ const dpNs = useNamespace("date-picker");
 const attrs = useAttrs();
 const slots = useSlots();
 
-const { t, lang } = useLocale(ref(es));
+const { t, lang } = useLocale();
 const pickerBase = inject("EP_PICKER_BASE") as any;
 const popper = inject(TOOLTIP_INJECTION_KEY);
 const { shortcuts, disabledDate, cellClassName, defaultTime } =
