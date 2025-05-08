@@ -29,6 +29,7 @@ const meta = {
         component: `
 
 El componente Date Picker está diseñado para gestionar la selección de fechas en formularios con flexibilidad y precisión. Ofrece funcionalidades completas, incluyendo selección simple, rangos de fechas y distintos modos de visualización (año, mes, día o fecha y hora). Es ideal para aplicaciones que requieren una interacción intuitiva y detallada con calendarios, asegurando una experiencia de usuario fluida sin sacrificar potencia o personalización.
+
 > Versión actual: ${version}
 
 ## Características
@@ -38,6 +39,7 @@ El componente Date Picker está diseñado para gestionar la selección de fechas
 - Soporte para deshabilitar fechas específicas
 - Integración con Day.js para manejo de fechas
 - Personalización completa del popup
+- **Hereda** gran parte de las props del componente \`GInput\`
 
 ### Instalación
 
