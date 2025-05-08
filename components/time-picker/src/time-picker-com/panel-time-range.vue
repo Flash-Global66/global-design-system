@@ -5,9 +5,7 @@
   >
     <div :class="nsTime.be('range-picker', 'content')">
       <div :class="nsTime.be('range-picker', 'cell')">
-        <div :class="nsTime.be('range-picker', 'header')">
-          {{ t("el.datepicker.startTime") }}
-        </div>
+        <div :class="nsTime.be('range-picker', 'header')">Inicio</div>
         <div :class="startContainerKls">
           <time-spinner
             ref="minSpinner"
@@ -26,9 +24,7 @@
         </div>
       </div>
       <div :class="nsTime.be('range-picker', 'cell')">
-        <div :class="nsTime.be('range-picker', 'header')">
-          {{ t("el.datepicker.endTime") }}
-        </div>
+        <div :class="nsTime.be('range-picker', 'header')">Fin</div>
         <div :class="endContainerKls">
           <time-spinner
             ref="maxSpinner"
@@ -53,7 +49,7 @@
         :class="[nsTime.be('panel', 'btn'), 'cancel']"
         @click="handleCancel()"
       >
-        {{ t("el.datepicker.cancel") }}
+        Cancelar
       </button>
       <button
         type="button"
@@ -61,7 +57,7 @@
         :disabled="btnConfirmDisabled"
         @click="handleConfirm()"
       >
-        {{ t("el.datepicker.confirm") }}
+        Ok
       </button>
     </div>
   </div>

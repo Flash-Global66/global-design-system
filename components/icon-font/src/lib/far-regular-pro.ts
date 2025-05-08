@@ -1,6 +1,7 @@
 // prefijo far
 export {
   faChevronDown,
+  faChevronUp,
   faExclamationCircle,
   faCheckCircle,
   faMars,

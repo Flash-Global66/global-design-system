@@ -22,7 +22,7 @@
               @click="leftPrevYear"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button
@@ -33,7 +33,7 @@
               @click="leftNextYear"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
             <div>{{ leftLabel }}</div>
@@ -60,7 +60,7 @@
               @click="rightPrevYear"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button
@@ -69,7 +69,7 @@
               @click="rightNextYear"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
             <div>{{ rightLabel }}</div>

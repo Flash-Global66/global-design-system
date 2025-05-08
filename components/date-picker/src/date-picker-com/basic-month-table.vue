@@ -19,7 +19,7 @@
           @keydown.space.prevent.stop="handleMonthTableClick"
           @keydown.enter.prevent.stop="handleMonthTableClick"
         >
-          <el-date-picker-cell
+          <g-date-picker-cell
             :cell="{
               ...cell,
               renderText: t('el.datepicker.months.' + months[cell.text]),
@@ -38,7 +38,7 @@ import { useLocale, useNamespace } from "element-plus";
 import { castArray, hasClass } from "element-plus/es/utils/index.mjs";
 import { basicMonthTableProps } from "../props/basic-month-table";
 import { datesInMonth, getValidDateOfMonth } from "../utils";
-import ElDatePickerCell from "./basic-cell-render.vue";
+import GDatePickerCell from "./basic-cell-render.vue";
 
 type MonthCell = {
   column: number;
@@ -57,6 +57,7 @@ const emit = defineEmits(["changerange", "pick", "select"]);
 const ns = useNamespace("month-table");
 
 const { t, lang } = useLocale();
+
 const tbodyRef = ref<HTMLElement>();
 const currentCellRef = ref<HTMLElement>();
 const months = ref(

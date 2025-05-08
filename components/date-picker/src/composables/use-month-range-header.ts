@@ -1,5 +1,5 @@
 import { computed } from "vue";
-import { useLocale } from "element-plus";
+import { useLocale } from "element-plus/es/hooks/index";
 import type { Ref, ToRef } from "vue";
 import type { Dayjs } from "dayjs";
 

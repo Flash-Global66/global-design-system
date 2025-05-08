@@ -2,14 +2,13 @@
   <g-tooltip
     ref="refPopper"
     :visible="pickerVisible"
-    effect="light"
     pure
     trigger="click"
     v-bind="$attrs"
     role="dialog"
     teleported
     :transition="`${nsDate.namespace.value}-zoom-in-top`"
-    :popper-class="[`${nsDate.namespace.value}-picker__popper`, popperClass]"
+    :popper-class="[`${nsDate.namespace.value}-picker__popper`]"
     :popper-options="elPopperOptions"
     :fallback-placements="fallbackPlacements"
     :gpu-acceleration="false"
@@ -22,16 +21,15 @@
     @hide="onHide"
   >
     <template #default>
-      <el-input
+      <g-input
         v-if="!isRangeInput"
         :id="(id as string | undefined)"
         ref="inputRef"
         container-role="combobox"
         :model-value="(displayValue as string)"
         :name="name"
-        :size="pickerSize"
         :disabled="pickerDisabled"
-        :placeholder="placeholder"
+        :label="label"
         :class="[nsDate.b('editor'), nsDate.bm('editor', type), $attrs.class]"
         :style="$attrs.style"
         :readonly="
@@ -45,6 +43,8 @@
         :aria-label="ariaLabel"
         :tabindex="tabindex"
         :validate-event="false"
+        :helpText="helpText"
+        :messageError="messageError"
         @input="onUserInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -57,26 +57,30 @@
         @click.stop
       >
         <template #prefix>
-          <el-icon
+          <g-icon-font
             v-if="triggerIcon"
             :class="nsInput.e('icon')"
             @mousedown.prevent="onMouseDownInput"
             @touchstart.passive="onTouchStartInput"
-          >
-            <component :is="triggerIcon" />
-          </el-icon>
+            :name="triggerIcon"
+          />
         </template>
+        <span>
+          {{ label }}
+        </span>
+        <div v-if="label" :class="[nsInput.e('label')]" :style="labelStyle">
+          {{ label }}
+        </div>
         <template #suffix>
-          <el-icon
+          <g-icon-font
             v-if="showClose && clearIcon"
             :class="`${nsInput.e('icon')} clear-icon`"
             @mousedown.prevent="NOOP"
             @click="onClearIconClick"
-          >
-            <component :is="clearIcon" />
-          </el-icon>
+            name="regular times"
+          />
         </template>
-      </el-input>
+      </g-input>
       <picker-range-trigger
         v-else
         :id="(id as string[] | undefined)"
@@ -85,6 +89,7 @@
         :name="(name as string[] | undefined)"
         :disabled="pickerDisabled"
         :readonly="!editable || readonly"
+        :label="label"
         :start-placeholder="startPlaceholder"
         :end-placeholder="endPlaceholder"
         :class="rangeInputKls"
@@ -107,12 +112,11 @@
         @keydown="handleKeydownInput"
       >
         <template #prefix>
-          <el-icon
+          <g-icon-font
             v-if="triggerIcon"
             :class="[nsInput.e('icon'), nsRange.e('icon')]"
-          >
-            <component :is="triggerIcon" />
-          </el-icon>
+            :name="triggerIcon"
+          />
         </template>
         <template #range-separator>
           <slot name="range-separator">
@@ -120,14 +124,13 @@
           </slot>
         </template>
         <template #suffix>
-          <el-icon
+          <g-icon-font
             v-if="clearIcon"
             :class="clearIconKls"
             @mousedown.prevent="NOOP"
             @click="onClearIconClick"
-          >
-            <component :is="clearIcon" />
-          </el-icon>
+            name="regular times"
+          />
         </template>
       </picker-range-trigger>
     </template>
@@ -153,6 +156,7 @@
     </template>
   </g-tooltip>
 </template>
+
 <script lang="ts" setup>
 import {
   computed,
@@ -172,15 +176,14 @@ import {
   useFocusController,
   useLocale,
   useNamespace,
-  useFormSize,
 } from "element-plus";
 import { useFormItem } from "@flash-global66/g-form";
-import ElInput from "@flash-global66/g-input";
-import ElIcon from "@element-plus/components/icon";
+import GInput from "@flash-global66/g-input";
+import { GIconFont } from "@flash-global66/g-icon-font";
 import GTooltip from "@flash-global66/g-tooltip";
 import { NOOP, debugWarn, isArray } from "element-plus/es/utils/index";
 import { EVENT_CODE } from "element-plus/es/constants/index.mjs";
-import { Calendar, Clock } from "@element-plus/icons-vue";
+import { isNil } from "lodash-unified";
 import { dayOrDaysToDate, formatter, parseDate, valueEquals } from "../utils";
 import { timePickerDefaultProps } from "./props";
 import PickerRangeTrigger from "./picker-range-trigger.vue";
@@ -188,6 +191,7 @@ import type { InputInstance } from "@flash-global66/g-input";
 
 import type { Dayjs } from "dayjs";
 import type { ComponentPublicInstance, Ref } from "vue";
+import { useResizeObserver } from "@vueuse/core";
 import type { Options } from "@popperjs/core";
 import type {
   DateModelType,
@@ -222,6 +226,8 @@ const { lang } = useLocale();
 const nsDate = useNamespace("date");
 const nsInput = useNamespace("input");
 const nsRange = useNamespace("range");
+const leftPrefix = ref<string | undefined>(undefined);
+const prefixRef = ref<HTMLElement | null>(null);
 
 const { form, formItem } = useFormItem();
 const elPopperOptions = inject("ElPopperOptions", {} as Options);
@@ -255,6 +261,30 @@ const { isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
   },
 });
 
+const labelStyle = computed(() => {
+  const shouldMoveLabel = Boolean(nativeInputValue.value) || isFocused.value;
+  return {
+    left: !shouldMoveLabel ? `calc(${leftPrefix.value} + 16px)` : undefined,
+    zIndex: !shouldMoveLabel ? 10 : undefined,
+  };
+});
+
+const nativeInputValue = computed(() =>
+  isNil(props.modelValue) ? "" : String(props.modelValue)
+);
+
+const updatePrefixPosition = () => {
+  if (!props.prefixIcon) {
+    leftPrefix.value = "0";
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    const leftRef = prefixRef.value?.getBoundingClientRect().width;
+    leftPrefix.value = `${leftRef}px`;
+  });
+};
+
 const rangeInputKls = computed(() => [
   nsDate.b("editor"),
   nsDate.bm("editor", props.type),
@@ -262,7 +292,6 @@ const rangeInputKls = computed(() => [
   nsDate.is("disabled", pickerDisabled.value),
   nsDate.is("active", pickerVisible.value),
   nsRange.b("editor"),
-  pickerSize ? nsRange.bm("editor", pickerSize.value) : "",
   attrs.class,
 ]);
 
@@ -442,7 +471,9 @@ const isMonthsPicker = computed(() => props.type === "months");
 const isYearsPicker = computed(() => props.type === "years");
 
 const triggerIcon = computed(
-  () => props.prefixIcon || (isTimeLikePicker.value ? Clock : Calendar)
+  () =>
+    props.prefixIcon ||
+    (isTimeLikePicker.value ? "regular clock" : "regular calendar")
 );
 
 const showClose = ref(false);
@@ -502,8 +533,6 @@ const isRangeInput = computed(() => {
   return props.type.includes("range");
 });
 
-const pickerSize = useFormSize();
-
 const popperEl = computed(() => unref(refPopper)?.popperRef?.contentRef);
 
 const stophandle = onClickOutside(
@@ -528,6 +557,8 @@ onBeforeUnmount(() => {
 });
 
 const userInput = ref<UserInput>(null);
+
+useResizeObserver(prefixRef, updatePrefixPosition);
 
 const handleChange = () => {
   if (userInput.value) {
