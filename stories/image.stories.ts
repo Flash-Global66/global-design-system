@@ -433,12 +433,12 @@ import { GImage } from '@flash-global66/g-image';
             >
               <!-- Contenedor mejorado con dimensiones fijas para que no se corten las imágenes -->
               <div class="flex items-center justify-center mb-2 overflow-visible" 
-                  :style="{ 
-                    width: IMAGE_SIZES[selectedSize], 
-                    height: IMAGE_SIZES[selectedSize], 
-                    minHeight: IMAGE_SIZES[selectedSize],
-                    minWidth: IMAGE_SIZES[selectedSize]
-                  }">
+                   :style="{ 
+                     width: IMAGE_SIZES[selectedSize], 
+                     height: IMAGE_SIZES[selectedSize], 
+                     minHeight: IMAGE_SIZES[selectedSize],
+                     minWidth: IMAGE_SIZES[selectedSize]
+                   }">
                 <g-image :name="name" :size="selectedSize" />
               </div>
               <span class="text-xs text-center">{{ name }}</span>

@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/blocks";
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Concept/Guide/Components Documentation Guide" />
 
@@ -12,29 +12,30 @@ Esta guía establece los lineamientos para crear una documentación uniforme y c
 
 El archivo de documentación debe seguir esta estructura:
 
-- Agregar el title del componente manualmente para evitar errores si se cambia el nombre del archivo.
-- Descripción general del componente
-- Características principales
-- Instrucciones de instalación e importación
-- Dependencias internas y externas
-- Definición de propiedades (argTypes)
-- Ejemplos prácticos de uso
-- La documentación debe estar en español (títulos, descripciones, categorías)
-- Si el componente tiene variantes, tamaños, etc. se deben agregar como ejemplos.
-- Los elementos técnicos deben mantenerse en inglés (nombres de propiedades, métodos, types, interfaces, variables)
-- El nombre del archivo debe estar en kebab-case (ej: button-component.stories.ts)
-- El nombre de la sección debe estar en inglés (ej: Basic/Button)
-- Elementos Esenciales
+* Agregar el title del componente manualmente para evitar errores si se cambia el nombre del archivo.
+* Descripción general del componente
+* Características principales
+* Instrucciones de instalación e importación
+* Dependencias internas y externas
+* Definición de propiedades (argTypes)
+* Ejemplos prácticos de uso
+* La documentación debe estar en español (títulos, descripciones, categorías)
+* Si el componente tiene variantes, tamaños, etc. se deben agregar como ejemplos.
+* Los elementos técnicos deben mantenerse en inglés (nombres de propiedades, métodos, types, interfaces, variables)
+* El nombre del archivo debe estar en kebab-case (ej: button-component.stories.ts)
+* El nombre de la sección debe estar en inglés (ej: Basic/Button)
+* Elementos Esenciales
+
 
 ### Descripción del Componente
 
 Debe incluir:
 
-- Descripción concisa del propósito del componente
-- Version del componente. Esto se puede importar directamente desde el package.json
-- Si usaste element plus como base se debe indicar la version de element plus que usaste
-- Contexto de uso recomendado
-- Funcionalidades principales destacadas
+* Descripción concisa del propósito del componente
+* Version del componente. Esto se puede importar directamente desde el package.json
+* Si usaste element plus como base se debe indicar la version de element plus que usaste
+* Contexto de uso recomendado
+* Funcionalidades principales destacadas
 
 ### Instalación e Importación
 
@@ -61,7 +62,6 @@ Este componente utiliza la biblioteca [Nombre]. Para instalarla:
 ```bash
 yarn add nombre-biblioteca
 ```
-
 Para más información, consulte la [documentación oficial](https://global66.com).
 
 ### 4. Definición de Propiedades (ArgTypes)
@@ -78,14 +78,12 @@ Las propiedades deben organizarse en categorías en español:
 - Etc.
 
 Cada propiedad debe incluir:
-
 - Descripción clara
 - Tipo de datos esperado
 - Valor por defecto (cuando corresponda)
 - Control adecuado para Storybook
 
 ### Recomendaciones Generales
-
 - Mantenga ejemplos actualizados: Los ejemplos deben reflejar la funcionalidad actual del componente.
 - Sea conciso pero completo: Proporcione suficiente información sin ser excesivamente detallado.
 - Considere diferentes casos de uso: Incluya ejemplos para diferentes contextos y configuraciones.
@@ -96,12 +94,12 @@ Cada propiedad debe incluir:
 
 Si utiliza una IA como apoyo para generar la documentación:
 
-- Proporcione el componente como contexto a la IA
-- Incluya esta guía como referencia para el formato
-- Revise y analice cuidadosamente el resultado generado
-- Corrija cualquier inconsistencia o error
-- Asegúrese de que los ejemplos sean correctos y funcionales
-- Verifique que la documentación sea comprensible para otros desarrolladores
+* Proporcione el componente como contexto a la IA
+* Incluya esta guía como referencia para el formato
+* Revise y analice cuidadosamente el resultado generado
+* Corrija cualquier inconsistencia o error
+* Asegúrese de que los ejemplos sean correctos y funcionales
+* Verifique que la documentación sea comprensible para otros desarrolladores
 
 ## Ejemplos Prácticos
 
@@ -110,13 +108,13 @@ Si utiliza una IA como apoyo para generar la documentación:
 A continuación se muestra un script base para la creación de documentación de componentes o también se puede guiar de los componentes Tag, Button, Input, etc. :
 
 ```typescript
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { ref, reactive } from "vue";
-import { GComponente } from "../components/GComponente";
-import type { ComponenteProps } from "../components/GComponente";
+import type { Meta, StoryObj } from '@storybook/vue3'
+import { ref, reactive } from 'vue'
+import { GComponente } from '../components/GComponente'
+import type { ComponenteProps } from '../components/GComponente'
 
 const meta: Meta<ComponenteProps> = {
-  title: "Basic/Componente",
+  title: 'Basic/Componente',
   component: GComponente,
   parameters: {
     docs: {
@@ -157,152 +155,150 @@ yarn add nombre-biblioteca
 \`\`\`
 
 Para más información, consulte la [documentación oficial](https://link-a-documentacion.com).
-`,
-      },
-    },
+`
+      }
+    }
   },
   argTypes: {
     // Propiedades principales
     value: {
-      description: "Valor seleccionado o ingresado en el componente",
-      control: "text",
+      description: 'Valor seleccionado o ingresado en el componente',
+      control: 'text',
       table: {
-        category: "Propiedades principales",
-        type: { summary: "string | number" },
-        defaultValue: { summary: '""' },
-      },
+        category: 'Propiedades principales',
+        type: { summary: 'string | number' },
+        defaultValue: { summary: '""' }
+      }
     },
-
+    
     // Estilo y apariencia
     variant: {
-      description: "Variante visual del componente",
-      control: "select",
-      options: ["primary", "secondary", "tertiary"],
+      description: 'Variante visual del componente',
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary'],
       table: {
-        category: "Estilo y apariencia",
-        type: { summary: "string" },
-        defaultValue: { summary: "primary" },
-      },
+        category: 'Estilo y apariencia',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'primary' }
+      }
     },
     size: {
-      description: "Tamaño del componente",
-      control: "select",
-      options: ["small", "medium", "large"],
+      description: 'Tamaño del componente',
+      control: 'select',
+      options: ['small', 'medium', 'large'],
       table: {
-        category: "Estilo y apariencia",
-        type: { summary: "string" },
-        defaultValue: { summary: "medium" },
-      },
+        category: 'Estilo y apariencia',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'medium' }
+      }
     },
-
+    
     // Comportamiento
     disabled: {
-      description: "Deshabilita la interacción con el componente",
-      control: "boolean",
+      description: 'Deshabilita la interacción con el componente',
+      control: 'boolean',
       table: {
-        category: "Comportamiento",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-      },
+        category: 'Comportamiento',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' }
+      }
     },
-
+    
     // Eventos
     onChange: {
-      description: "Se dispara cuando cambia el valor del componente",
-      action: "changed",
+      description: 'Se dispara cuando cambia el valor del componente',
+      action: 'changed',
       table: {
-        category: "Eventos",
-        type: { summary: "(value: any) => void" },
-      },
+        category: 'Eventos',
+        type: { summary: '(value: any) => void' }
+      }
     },
     onClick: {
-      description: "Se dispara cuando se hace clic en el componente",
-      action: "clicked",
+      description: 'Se dispara cuando se hace clic en el componente',
+      action: 'clicked',
       table: {
-        category: "Eventos",
-        type: { summary: "(event: Event) => void" },
-      },
+        category: 'Eventos',
+        type: { summary: '(event: Event) => void' }
+      }
     },
-
+    
     // Slots
     default: {
-      description: "Contenido principal del componente",
+      description: 'Contenido principal del componente',
       table: {
-        category: "Slots",
-        type: { summary: "ReactNode" },
-      },
+        category: 'Slots',
+        type: { summary: 'ReactNode' }
+      }
     },
     prefix: {
-      description: "Contenido que se muestra antes del contenido principal",
+      description: 'Contenido que se muestra antes del contenido principal',
       table: {
-        category: "Slots",
-        type: { summary: "ReactNode" },
-      },
+        category: 'Slots',
+        type: { summary: 'ReactNode' }
+      }
     },
     suffix: {
-      description: "Contenido que se muestra después del contenido principal",
+      description: 'Contenido que se muestra después del contenido principal',
       table: {
-        category: "Slots",
-        type: { summary: "ReactNode" },
-      },
+        category: 'Slots',
+        type: { summary: 'ReactNode' }
+      }
     },
-
+    
     // Accesibilidad
     ariaLabel: {
-      description: "Etiqueta ARIA para mejorar la accesibilidad",
-      control: "text",
+      description: 'Etiqueta ARIA para mejorar la accesibilidad',
+      control: 'text',
       table: {
-        category: "Accesibilidad",
-        type: { summary: "string" },
-      },
-    },
-  },
-};
+        category: 'Accesibilidad',
+        type: { summary: 'string' }
+      }
+    }
+  }
+}
 
-export default meta;
-type Story = StoryObj<ComponenteProps>;
+export default meta
+type Story = StoryObj<ComponenteProps>
 
 // Ejemplo Básico Controlable
 export const Basic: Story = {
-  name: "Ejemplo básico",
+  name: 'Ejemplo básico',
   parameters: {
     docs: {
       description: {
-        story:
-          "Ejemplo básico de uso del componente con controles interactivos.",
-      },
-    },
+        story: 'Ejemplo básico de uso del componente con controles interactivos.'
+      }
+    }
   },
   args: {
     // Valores iniciales para los controles
-    value: "",
-    variant: "primary",
-    size: "medium",
-    disabled: false,
+    value: '',
+    variant: 'primary',
+    size: 'medium',
+    disabled: false
   },
   render: (args) => ({
     components: { GComponente },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
       <g-componente v-bind="args">
         Contenido del componente
       </g-componente>
-    `,
-  }),
-};
+    `
+  })
+}
 
 // Variantes Visuales
 export const Variants: Story = {
-  name: "Variantes",
+  name: 'Variantes',
   parameters: {
     docs: {
       description: {
-        story:
-          "El componente admite diferentes variantes visuales que se pueden usar según el contexto.",
-      },
-    },
+        story: 'El componente admite diferentes variantes visuales que se pueden usar según el contexto.'
+      }
+    }
   },
   render: () => ({
     components: { GComponente },
@@ -321,13 +317,13 @@ export const Variants: Story = {
           <g-componente size="large">Grande</g-componente>
         </div>
       </div>
-    `,
-  }),
-};
+    `
+  })
+}
 
 // Caso de Uso Avanzado
 export const AdvancedUsage: Story = {
-  name: "Caso de uso avanzado",
+  name: 'Caso de uso avanzado',
   parameters: {
     docs: {
       description: {
@@ -336,26 +332,26 @@ export const AdvancedUsage: Story = {
 #### Consideraciones importantes
 - El componente maneja estados internos complejos
 - Se puede personalizar completamente a través de slots
-- La validación de datos se realiza automáticamente`,
-      },
-    },
+- La validación de datos se realiza automáticamente`
+      }
+    }
   },
   render: () => ({
     components: { GComponente },
     setup() {
-      const value = ref("");
+      const value = ref('');
       const items = reactive([
-        { id: 1, name: "Opción 1" },
-        { id: 2, name: "Opción 2" },
-        { id: 3, name: "Opción 3" },
+        { id: 1, name: 'Opción 1' },
+        { id: 2, name: 'Opción 2' },
+        { id: 3, name: 'Opción 3' }
       ]);
-
+      
       function handleChange(newValue) {
         value.value = newValue;
         // Lógica adicional
       }
-
-      return { value, items, handleChange };
+      
+      return { value, items, handleChange }
     },
     template: `
       <div class="p-4 border rounded">
@@ -383,7 +379,7 @@ export const AdvancedUsage: Story = {
           <strong>Valor actual:</strong> {{ value }}
         </div>
       </div>
-    `,
-  }),
-};
+    `
+  })
+}
 ```

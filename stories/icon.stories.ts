@@ -134,6 +134,7 @@ export const IconGallery: Story = {
               v-model="searchTerm"
               placeholder="Buscar icono..."
               class="w-full max-w-md"
+              size="small"
             >
               <template #prefix>
                 <icon name="search" size="18px" />
@@ -142,6 +143,7 @@ export const IconGallery: Story = {
             <g-button 
               v-if="searchTerm"
               @click="clearSearch"
+              size="small"
             >
               Limpiar
             </g-button>

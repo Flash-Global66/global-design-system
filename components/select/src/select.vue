@@ -38,11 +38,15 @@
               nsSelect.is('hovering', states.inputHovering),
               nsSelect.is('filterable', filterable),
               nsSelect.is('disabled', selectDisabled),
-              nsSelect.is('complete', !isFocused && Boolean(hasModelValue))
+              nsSelect.is('complete', !isFocused && Boolean(hasModelValue)),
             ]"
             @click.prevent="toggleMenu"
           >
-            <div ref="prefixRef" :class="nsSelect.e('prefix')">
+            <div
+              ref="prefixRef"
+              :class="nsSelect.e('prefix')"
+              v-if="$slots.prefix || prefixIcon"
+            >
               <slot name="prefix">
                 <g-icon-font
                   v-if="prefixIcon"
@@ -56,7 +60,10 @@
               ref="selectionRef"
               :class="[
                 nsSelect.e('selection'),
-                nsSelect.is('near', multiple && !$slots.prefix && !!modelValue.length)
+                nsSelect.is(
+                  'near',
+                  multiple && !$slots.prefix && !!modelValue.length
+                ),
               ]"
             >
               <slot v-if="multiple" name="tag">
@@ -74,7 +81,11 @@
                     @close="deleteTag($event, item)"
                   >
                     <span :class="nsSelect.e('tags-text')">
-                      <slot name="selectedLabel" :label="getTitle(item)" :value="getValue(item)">
+                      <slot
+                        name="selectedLabel"
+                        :label="getTitle(item)"
+                        :value="getValue(item)"
+                      >
                         {{ getTitle(item) }}
                       </slot>
                     </span>
@@ -91,7 +102,10 @@
                   :teleported="teleported"
                 >
                   <template #default>
-                    <div ref="collapseItemRef" :class="nsSelect.e('selected-item')">
+                    <div
+                      ref="collapseItemRef"
+                      :class="nsSelect.e('selected-item')"
+                    >
                       <g-tag
                         :closable="false"
                         :type="tagType"
@@ -140,7 +154,7 @@
                   nsSelect.e('selected-item'),
                   nsSelect.e('input-wrapper'),
                   nsSelect.is('hidden', !filterable),
-                  nsSelect.is('withIcon', Boolean(prefixIcon))
+                  nsSelect.is('withIcon', Boolean(prefixIcon)),
                 ]"
               >
                 <input
@@ -181,14 +195,23 @@
                   v-text="states.inputValue"
                 />
               </div>
-              <div v-if="label" :class="[nsSelect.e('label')]" :style="labelStyle">{{ label }}</div>
+              <div
+                v-if="label"
+                :class="[nsSelect.e('label')]"
+                :style="labelStyle"
+              >
+                {{ label }}
+              </div>
               <div
                 v-if="shouldShowPlaceholder"
                 :class="[
                   nsSelect.e('selected-item'),
                   nsSelect.e('placeholder'),
-                  nsSelect.is('transparent', !hasModelValue || (expanded && !states.inputValue)),
-                  'dynamic-label-select'
+                  nsSelect.is(
+                    'transparent',
+                    !hasModelValue || (expanded && !states.inputValue)
+                  ),
+                  'dynamic-label-select',
                 ]"
               >
                 <slot
@@ -211,7 +234,11 @@
               />
               <g-icon-font
                 v-if="showClearBtn && clearIcon"
-                :class="[nsSelect.e('caret'), nsInput.e('icon'), nsSelect.e('clear')]"
+                :class="[
+                  nsSelect.e('caret'),
+                  nsInput.e('icon'),
+                  nsSelect.e('clear'),
+                ]"
                 @click.prevent.stop="handleClear"
                 name="regular circle-xmark"
               />
@@ -219,7 +246,7 @@
           </div>
         </template>
         <template #content>
-          <g-select-menu
+          <el-select-menu
             ref="menuRef"
             :data="filteredOptions"
             :width="popperSize"
@@ -239,14 +266,19 @@
                 <slot name="loading" />
               </div>
             </template>
-            <template v-else-if="loading || filteredOptions.length === 0" #empty>
+            <template
+              v-else-if="loading || filteredOptions.length === 0"
+              #empty
+            >
               <div v-if="filteredOptions.length === 0 && !loading">
                 <slot name="empty" v-if="$slots.empty" />
                 <div v-else :class="nsSelect.be('dropdown', 'empty')">
                   <span :class="nsSelect.bem('dropdown', 'empty', 'title')">
                     No hay coincidencias
                   </span>
-                  <span :class="nsSelect.bem('dropdown', 'empty', 'description')">
+                  <span
+                    :class="nsSelect.bem('dropdown', 'empty', 'description')"
+                  >
                     Revisa tu búsqueda o intenta con otras palabras
                   </span>
                 </div>
@@ -260,7 +292,7 @@
                 <slot name="footer" />
               </div>
             </template>
-          </g-select-menu>
+          </el-select-menu>
         </template>
       </g-tooltip>
     </div>
@@ -275,79 +307,86 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, provide, reactive, toRefs, useSlots } from 'vue'
-import { isArray } from 'element-plus/es/utils/index.mjs'
-import { ClickOutside } from 'element-plus'
-import { GTooltip } from '@flash-global66/g-tooltip'
-import { GTag } from '@flash-global66/g-tag'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { useCalcInputWidth } from 'element-plus'
-import GSelectMenu from './select-dropdown'
-import useSelect from './hooks/use-select'
-import { SelectProps, selectEmits } from './defaults'
-import { selectV2InjectionKey } from './types/token'
+import {
+  computed,
+  defineComponent,
+  provide,
+  reactive,
+  toRefs,
+  useSlots,
+} from "vue";
+import { isArray } from "element-plus/es/utils/index.mjs";
+import { ClickOutside } from "element-plus";
+import { GTooltip } from "@flash-global66/g-tooltip";
+import { GTag } from "@flash-global66/g-tag";
+import { GIconFont } from "@flash-global66/g-icon-font";
+import { useCalcInputWidth } from "element-plus";
+import ElSelectMenu from "./select-dropdown";
+import useSelect from "./hooks/use-select";
+import { SelectProps, selectEmits } from "./defaults";
+import { selectV2InjectionKey } from "./types/token";
 
 export default defineComponent({
-  name: 'GSelect',
+  name: "GSelect",
   components: {
-    GSelectMenu,
+    ElSelectMenu,
     GTag,
     GTooltip,
-    GIconFont
+    GIconFont,
   },
   directives: { ClickOutside },
   props: SelectProps,
   emits: selectEmits,
   setup(props, { emit }) {
     const modelValue = computed(() => {
-      const { modelValue: rawModelValue, multiple } = props
-      const fallback = multiple ? [] : undefined
+      const { modelValue: rawModelValue, multiple } = props;
+      const fallback = multiple ? [] : undefined;
       // When it is array, we check if this is multi-select.
       // Based on the result we get
       if (isArray(rawModelValue)) {
-        return multiple ? rawModelValue : fallback
+        return multiple ? rawModelValue : fallback;
       }
-      return multiple ? fallback : rawModelValue
-    })
+      return multiple ? fallback : rawModelValue;
+    });
 
     const API = useSelect(
       reactive({
         ...toRefs(props),
         modelValue,
-        slots: useSlots()
+        slots: useSlots(),
       }),
       emit
-    )
-    const { calculatorRef, inputStyle } = useCalcInputWidth()
+    );
+    const { calculatorRef, inputStyle } = useCalcInputWidth();
 
     provide(selectV2InjectionKey, {
       props: reactive({
         ...toRefs(props),
         height: API.popupHeight,
-        modelValue
+        modelValue,
       }),
       expanded: API.expanded,
       tooltipRef: API.tooltipRef,
       onSelect: API.onSelect,
       onHover: API.onHover,
       onKeyboardNavigate: API.onKeyboardNavigate,
-      onKeyboardSelect: API.onKeyboardSelect
-    })
+      onKeyboardSelect: API.onKeyboardSelect,
+    });
 
     const selectedLabel = computed(() => {
       if (!props.multiple) {
-        return API.states.selectedLabel
+        return API.states.selectedLabel;
       }
-      return API.states.cachedOptions.map((i) => i.label as string)
-    })
+      return API.states.cachedOptions.map((i) => i.label as string);
+    });
 
     return {
       ...API,
       modelValue,
       selectedLabel,
       calculatorRef,
-      inputStyle
-    }
-  }
-})
+      inputStyle,
+    };
+  },
+});
 </script>

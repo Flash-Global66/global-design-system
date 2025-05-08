@@ -12,8 +12,6 @@
 !components/**
 !stories/
 !stories/**
-!helper/
-!helper/**
 !common/
 !common/**
 !.storybook/
