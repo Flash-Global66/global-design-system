@@ -1,7 +1,7 @@
 <template>
   <div :class="[ns.b('spinner'), { 'has-seconds': showSeconds }]">
     <template v-if="!arrowControl">
-      <el-scrollbar
+      <g-scrollbar
         v-for="item in spinnerItems"
         :key="item"
         :ref="(scrollbar: unknown) => setRef(scrollbar as any, item)"
@@ -31,7 +31,7 @@
             {{ ("0" + key).slice(-2) }}
           </template>
         </li>
-      </el-scrollbar>
+      </g-scrollbar>
     </template>
     <template v-if="arrowControl">
       <div
@@ -40,18 +40,8 @@
         :class="[ns.be('spinner', 'wrapper'), ns.is('arrow')]"
         @mouseenter="emitSelectRange(item)"
       >
-        <el-icon
-          v-repeat-click="onDecrement"
-          :class="['arrow-up', ns.be('spinner', 'arrow')]"
-        >
-          <arrow-up />
-        </el-icon>
-        <el-icon
-          v-repeat-click="onIncrement"
-          :class="['arrow-down', ns.be('spinner', 'arrow')]"
-        >
-          <arrow-down />
-        </el-icon>
+        <g-icon-font v-repeat-click="onDecrement" name="regular chevron-up" />
+        <g-icon-font v-repeat-click="onIncrement" name="regular chevron-down" />
         <ul :class="ns.be('spinner', 'list')">
           <li
             v-for="(time, key) in arrowControlTimeList[item]"
@@ -81,9 +71,8 @@
 import { computed, inject, nextTick, onMounted, ref, unref, watch } from "vue";
 import { debounce } from "lodash-unified";
 import { vRepeatClick } from "element-plus";
-import ElScrollbar from "@element-plus/components/scrollbar";
-import ElIcon from "@element-plus/components/icon";
-import { ArrowDown, ArrowUp } from "@element-plus/icons-vue";
+import GScrollbar from "@flash-global66/g-scrollbar";
+import { GIconFont } from "@flash-global66/g-icon-font";
 import { useNamespace } from "element-plus";
 import { getStyle, isNumber } from "element-plus/es/utils/index.mjs";
 import { timeUnits } from "../constants";
@@ -92,7 +81,7 @@ import { basicTimeSpinnerProps } from "../props/basic-time-spinner";
 import { getTimeLists } from "../composables/use-time-picker";
 
 import type { Ref } from "vue";
-import type { ScrollbarInstance } from "@element-plus/components/scrollbar";
+import type { ScrollbarInstance } from "@flash-global66/g-scrollbar";
 import type { TimeUnit } from "../constants";
 import type { TimeList } from "../utils";
 
