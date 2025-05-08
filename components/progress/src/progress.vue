@@ -109,20 +109,6 @@ const progressTextSize = computed(() => {
 });
 
 const content = computed(() => props.format(props.percentage));
-
-function getColors(color: ProgressColor[]) {
-  const span = 100 / color.length;
-  const seriesColors = color.map((seriesColor, index) => {
-    if (isString(seriesColor)) {
-      return {
-        color: seriesColor,
-        percentage: (index + 1) * span,
-      };
-    }
-    return seriesColor;
-  });
-  return seriesColors.sort((a, b) => a.percentage - b.percentage);
-}
 </script>
 
 <template>

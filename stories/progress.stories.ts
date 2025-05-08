@@ -50,6 +50,16 @@ Los iconos del componente se utilizan directamente con \`GIconFont\`, por lo que
 yarn add @flash-global66/g-progress
 \`\`\`
 
+## Importación del componente
+
+\`\`\`typescript
+# importar donde se va a utilizar
+import { GProgress } from '@flash-global66/g-progress'
+
+# recomendado importar en los estilos globales
+@use "@flash-global66/g-progress/progress.styles.scss" as *;
+\`\`\`
+
 ## Dependencias
 
 Este componente requiere:
@@ -62,12 +72,6 @@ yarn add ${generatePeerDepsInstalls(peerDependencies)}
 
 # Dependencias externas
 yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
-\`\`\`
-
-## Importación de estilos SASS
-Para que el componente funcione correctamente, es necesario importar los estilos SASS:
-\`\`\`scss
-@use "@flash-global66/g-progress/progress.styles.scss" as *;
 \`\`\`
 
 ## Uso básico
@@ -162,7 +166,7 @@ status="success"
     },
     indeterminate: {
       name: "indeterminate",
-      description: "Establece el progreso como indeterminado.",
+      description: "Establece el progreso como indeterminado. Funciona solo para la barra de tipo 'line'",
       control: "boolean",
       table: {
         category: "Estado y Control",

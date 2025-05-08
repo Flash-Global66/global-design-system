@@ -351,7 +351,7 @@ module.exports = {
         to: { transform: "scale(0)", opacity: "0" },
       },
       progress: {
-        "0%": { backgroundPosition: "0 0" }, // Nota: background-position -> backgroundPosition
+        "0%": { backgroundPosition: "0 0" },
         "100%": { backgroundPosition: "32px 0" },
       },
       indeterminate: {
@@ -359,7 +359,7 @@ module.exports = {
         "100%": { left: "100%" },
       },
       "striped-flow": {
-        "0%": { backgroundPosition: "-100%" }, // Nota: usa camelCase para propiedades CSS
+        "0%": { backgroundPosition: "-100%" },
         "100%": { backgroundPosition: "100%" },
       },
     },
