@@ -80,17 +80,6 @@ export const progressProps = buildProps({
     type: Boolean,
     default: false,
   },
-  /**
-   * @description stripe over the progress bar's color
-   */
-  striped: Boolean,
-  /**
-   * @description get the stripes to flow
-   */
-  stripedFlow: Boolean,
-  /**
-   * @description custom text format
-   */
   format: {
     type: definePropType<ProgressFn>(Function),
     default: (percentage: number): string => `${percentage}%`,

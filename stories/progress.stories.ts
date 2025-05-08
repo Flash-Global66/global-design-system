@@ -7,39 +7,112 @@ import { GProgress } from "@flash-global66/g-progress/index.ts";
 // Config Provider
 import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 
+// Version
+import {
+  version,
+  peerDependencies,
+} from "@flash-global66/g-progress/package.json";
+
+// Helpers
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from "../helper/documentation-stories";
+
 const meta = {
   title: "Data/Progress",
   component: GProgress,
   parameters: {
     docs: {
       description: {
-        component: `✨ \`GProgress\` - Componente para indicar el progreso de cargas y descargas de datos.
+        component: `
+El componente Progress permite mostrar una interfaz clara e intuitiva al usuario, para indicar el estado de ciertas operaciones asíncronas.
 
-> Este componente usa la versión \`2.9.7\` de Element Plus.
+> Versión actual: ${version}
 
-**Características principales:**
+## Características
 
-- Permite mostrar una interfaz clara e intuitiva de cara al usuario, para indicar el estado de ciertas operaciones asíncronas
+El componente consta de una barra de progreso de operaciones asíncronas (por ejemplo, descarga de archivo a traves de WebSocket), pudiendo controlar tanto el formato del componente (lineal o circular) como el porcentaje de avance y el estado de la operación (en progreso, exito, error o aviso).
 
-🚀 **Instalación**
+No requiere de ninguna prop de caracter obligatorio, pero esto derivará en una barra de progreso gris al 0%.
+
+- Tres tipos de componente: \`line\` | \`circle\` | \`dashboard\`.
+- Gestión de distintos estados, gestionando colores e iconos: \`primary\` | \`success\` | \`warning\` | \`error\`.
+- \`percentage\`: gestiona el porcentaje de barra completado o la longitud de la barra de carga con la prop \`indeterminate\` activa.
+- \`loading\`: muestra el icono de carga en lugar del porcentaje o los iconos del estado.
+- \`indeterminate\`: muestra una barra con progreso indeterminado.
+
+Los iconos del componente se utilizan directamente con \`GIconFont\`, por lo que se agrega como dependencia.
+
+## Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-progress
 \`\`\`
 
-🪝 **Dependencias**
+## Dependencias
 
 Este componente requiere:
 
-> - @flash-global66/g-icon-font
-> - element-plus
-> - vue
+${generatePeerDepsList(peerDependencies)}
 
-📥 **Importación básica**
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
 
-\`\`\`typescript
-import { GProgress } from '@flash-global66/g-progress'
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 \`\`\`
+
+## Importación de estilos SASS
+Para que el componente funcione correctamente, es necesario importar los estilos SASS:
+\`\`\`scss
+@use "@flash-global66/g-progress/progress.styles.scss" as *;
+\`\`\`
+
+## Uso básico
+
+\`\`\`html
+<script setup lang="ts">
+import { GProgress } from '@flash-global66/g-progress'
+
+const reactivePercentage = ref<number>(0)
+const loading = ref<boolean>(true)
+</script>
+
+<template>
+<!--  Barra de progreso por defecto -->
+<!--  Muestra una barra lineal, determinada y con porcentaje de avance -->
+<g-progress
+:percentage="reactivePercentage"
+/>
+
+<!--  Barra de progreso circular con porcentaje determinado y estado warning -->
+<!--  Muestra una barra circular, determinada y con icono de warning -->
+<g-progress
+type="circle"
+status="warning"
+:percentage="reactivePercentage"
+/>
+
+<!--  Barra de progreso lineal con estado success -->
+<!--  Muestra una barra lineal, determinada y con icono de success -->
+<g-progress
+status="success"
+:percentage="reactivePercentage"
+/>
+
+<!--  Barra de progreso circular con progreso indeterminado y carga -->
+<!--  Muestra una barra circular, indeterminada y con icono de carga -->
+  <g-progress
+    type="circle"
+    status="primary"
+    loading="true"
+    indeterminate="true"
+  />
+</template>
+\`\`\`
+
 `,
       },
     },
@@ -48,7 +121,8 @@ import { GProgress } from '@flash-global66/g-progress'
     // 1. Estado y Control
     percentage: {
       name: "percentage",
-      description: "Porcentaje completado.",
+      description:
+        "Porcentaje completado o largo de barra completada con la propiedad indeterminate. Siempre debe estar, a menos que se quiera mostrar la barra vacía.",
       control: { type: "range", min: 0, max: 100 },
       table: {
         category: "Estado y Control",
@@ -186,7 +260,7 @@ export const Basic: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo básico de barra de progreso.",
+        story: "Ejemplo básico de barra de progreso lineal.",
       },
     },
   },
@@ -197,7 +271,133 @@ export const Basic: Story = {
     },
     template: `
       <g-config-provider>
-        <g-progress v-bind="args" />
+        <g-progress class="p-md" v-bind="args" />
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const States: Story = {
+  name: "Diferentes estados",
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo básico de barra de progreso circular.",
+      },
+    },
+  },
+  render: (args) => ({
+    components: { GProgress, GConfigProvider },
+    setup() {
+      return { args };
+    },
+    template: `
+      <g-config-provider>
+        <p class="pl-md">Primary</p>
+        <g-progress class="p-md" v-bind="args" />
+        <p class="pl-md">Warning</p>
+        <g-progress class="p-md" v-bind="args" status="warning" />
+        <p class="pl-md">Success</p>
+        <g-progress class="p-md" v-bind="args" status="success" percentage="100" />
+        <p class="pl-md">Error</p>
+        <g-progress class="p-md" v-bind="args" status="error" percentage="100" />
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const Types: Story = {
+  name: "Diferentes tipos",
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo básico de barra de progreso circular.",
+      },
+    },
+  },
+  render: (args) => ({
+    components: { GProgress, GConfigProvider },
+    setup() {
+      return { args };
+    },
+    template: `
+      <g-config-provider>
+          <h3 class="my-md">Line</h3>
+          <div>
+            <g-progress class="mb-md" v-bind="args" />
+            <g-progress class="mb-md" v-bind="args" status="warning" />
+            <g-progress class="mb-md" v-bind="args" status="success" percentage="100" />
+            <g-progress class="mb-md" v-bind="args" status="error" percentage="100" />
+          </div>
+          <hr />
+          <h3 class="my-md">Circle</h3>
+          <div class="flex gap-md">
+            <g-progress class="mb-md" v-bind="args" type="circle" />
+            <g-progress class="mb-md" v-bind="args" type="circle" status="warning" />
+            <g-progress class="mb-md" v-bind="args" type="circle" status="success" percentage="100" />
+            <g-progress class="mb-md" v-bind="args" type="circle" status="error" percentage="100" />
+          </div>
+          <hr />
+          <h3 class="my-md">Dashboard</h3>
+          <div class="flex gap-md">
+            <g-progress class="mb-md" v-bind="args" type="dashboard" />
+            <g-progress class="mb-md" v-bind="args" type="dashboard" status="warning" />
+            <g-progress class="mb-md" v-bind="args" type="dashboard" status="success" percentage="100" />
+            <g-progress class="mb-md" v-bind="args" type="dashboard" status="error" percentage="100" />
+          </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const Ideterminate: Story = {
+  name: "Progreso indeterminado",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Ejemplo básico de barra de progreso con porcentaje indeterminado.",
+      },
+    },
+  },
+  render: (args) => ({
+    components: { GProgress, GConfigProvider },
+    setup() {
+      return { args };
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-md">
+          <g-progress indeterminate percentage="25" />
+          <g-progress indeterminate status="warning" percentage="50" />
+          <g-progress indeterminate status="success" percentage="75" />
+          <g-progress indeterminate status="error" percentage="100" />
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const Loading: Story = {
+  name: "Progreso en carga",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Ejemplo básico de uso de barra de progreso con icono de loader.",
+      },
+    },
+  },
+  render: (args) => ({
+    components: { GProgress, GConfigProvider },
+    setup() {
+      return { args };
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-md">
+          <g-progress percentage="50" indeterminate loading />
+        </div>
       </g-config-provider>
     `,
   }),
