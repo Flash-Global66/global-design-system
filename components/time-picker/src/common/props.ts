@@ -1,6 +1,6 @@
 import { placements } from "@popperjs/core";
 import { buildProps, definePropType } from "element-plus/es/utils/index";
-import { useAriaProps, useEmptyValuesProps, useSizeProp } from "element-plus";
+import { useAriaProps, useEmptyValuesProps } from "element-plus";
 import { CircleClose } from "@element-plus/icons-vue";
 import { disabledTimeListsProps } from "../props/shared";
 
@@ -103,10 +103,6 @@ export const timePickerDefaultProps = buildProps({
     default: "",
   },
   /**
-   * @description size of Input
-   */
-  size: useSizeProp,
-  /**
    * @description whether TimePicker is read only
    */
   readonly: Boolean,
@@ -115,9 +111,23 @@ export const timePickerDefaultProps = buildProps({
    */
   disabled: Boolean,
   /**
-   * @description placeholder in non-range mode
+   * @description label in non-range mode
    */
-  placeholder: {
+  label: {
+    type: String,
+    default: "",
+  },
+  /**
+   * @description label in non-range mode
+   */
+  helpText: {
+    type: String,
+    default: "",
+  },
+  /**
+   * @description label in non-range mode
+   */
+  messageError: {
     type: String,
     default: "",
   },
@@ -262,6 +272,7 @@ export const timePickerRangeTriggerProps = buildProps({
   },
   startPlaceholder: String,
   endPlaceholder: String,
+  label: String,
 } as const);
 
 /**

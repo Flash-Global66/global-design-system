@@ -31,7 +31,7 @@
               @click="leftPrevYear"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button
@@ -46,7 +46,7 @@
               @click="leftNextYear"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
             <div>{{ leftLabel }}</div>
@@ -74,7 +74,7 @@
               @click="rightPrevYear"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button
@@ -84,7 +84,7 @@
               @click="rightNextYear"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
             <div>{{ rightLabel }}</div>
@@ -123,6 +123,8 @@ import MonthTable from "./basic-month-table.vue";
 
 import type { Dayjs } from "dayjs";
 
+import es from "../lang/es";
+
 defineOptions({
   name: "DatePickerMonthRange",
 });
@@ -131,7 +133,7 @@ const props = defineProps(panelMonthRangeProps);
 const emit = defineEmits(panelMonthRangeEmits);
 const unit = "year";
 
-const { lang } = useLocale();
+const { lang } = useLocale(ref(es));
 const pickerBase = inject("EP_PICKER_BASE") as any;
 const { shortcuts, disabledDate } = pickerBase.props;
 const format = toRef(pickerBase.props, "format");

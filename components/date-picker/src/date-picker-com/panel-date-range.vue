@@ -27,7 +27,6 @@
           <span :class="drpNs.e('editors-wrap')">
             <span :class="drpNs.e('time-picker-wrap')">
               <g-input
-                size="small"
                 :disabled="rangeState.selecting"
                 :placeholder="t('el.datepicker.startDate')"
                 :class="drpNs.e('editor')"
@@ -42,7 +41,6 @@
               :class="drpNs.e('time-picker-wrap')"
             >
               <g-input
-                size="small"
                 :class="drpNs.e('editor')"
                 :disabled="rangeState.selecting"
                 :placeholder="t('el.datepicker.startTime')"
@@ -67,7 +65,6 @@
           <span :class="drpNs.e('editors-wrap')" class="is-right">
             <span :class="drpNs.e('time-picker-wrap')">
               <g-input
-                size="small"
                 :class="drpNs.e('editor')"
                 :disabled="rangeState.selecting"
                 :placeholder="t('el.datepicker.endDate')"
@@ -83,7 +80,6 @@
               :class="drpNs.e('time-picker-wrap')"
             >
               <g-input
-                size="small"
                 :class="drpNs.e('editor')"
                 :disabled="rangeState.selecting"
                 :placeholder="t('el.datepicker.endTime')"
@@ -109,17 +105,6 @@
             <button
               type="button"
               :class="ppNs.e('icon-btn')"
-              :aria-label="t(`el.datepicker.prevYear`)"
-              class="d-arrow-left"
-              @click="leftPrevYear"
-            >
-              <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
-              </slot>
-            </button>
-            <button
-              type="button"
-              :class="ppNs.e('icon-btn')"
               :aria-label="t(`el.datepicker.prevMonth`)"
               class="arrow-left"
               @click="leftPrevMonth"
@@ -138,7 +123,7 @@
               @click="leftNextYear"
             >
               <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
+                <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
             <button
@@ -184,7 +169,7 @@
               @click="rightPrevYear"
             >
               <slot name="prev-year">
-                <g-icon-font name="solid arrow-left" />
+                <g-icon-font name="solid chevron-left" />
               </slot>
             </button>
             <button
@@ -201,17 +186,6 @@
             >
               <slot name="prev-month">
                 <g-icon-font name="solid chevron-left" />
-              </slot>
-            </button>
-            <button
-              type="button"
-              :aria-label="t(`el.datepicker.nextYear`)"
-              :class="ppNs.e('icon-btn')"
-              class="d-arrow-right"
-              @click="rightNextYear"
-            >
-              <slot name="next-year">
-                <g-icon-font name="solid arrow-right" />
               </slot>
             </button>
             <button
@@ -246,7 +220,7 @@
       <g-button
         v-if="clearable"
         text
-        size="small"
+        size="sm"
         :class="ppNs.e('link-btn')"
         @click="handleClear"
       >
@@ -254,7 +228,7 @@
       </g-button>
       <g-button
         plain
-        size="small"
+        size="sm"
         :class="ppNs.e('link-btn')"
         :disabled="btnDisabled"
         @click="handleRangeConfirm(false)"
@@ -271,13 +245,13 @@ import dayjs from "dayjs";
 import { ClickOutside as vClickoutside } from "element-plus";
 import { useLocale } from "element-plus";
 import { isArray } from "element-plus/es/utils/index.mjs";
-import { GButton } from "@flash-global66/g-button/index.js";
-import { GInput } from "@flash-global66/g-input/index.js";
+import { GButton } from "@flash-global66/g-button";
+import { GInput } from "@flash-global66/g-input";
 import {
   TimePickPanel,
   extractDateFormat,
   extractTimeFormat,
-} from "@element-plus/components/time-picker";
+} from "@flash-global66/g-time-picker";
 import { GIconFont } from "@flash-global66/g-icon-font";
 import { panelDateRangeProps } from "../props/panel-date-range";
 import { useRangePicker } from "../composables/use-range-picker";
@@ -285,6 +259,8 @@ import { getDefaultValue, isValidRange } from "../utils";
 import DateTable from "./basic-date-table.vue";
 
 import type { Dayjs } from "dayjs";
+
+import es from "../lang/es";
 
 type ChangeType = "min" | "max";
 type UserInput = {
@@ -308,7 +284,7 @@ const { disabledDate, cellClassName, defaultTime, clearable } =
 const format = toRef(pickerBase.props, "format");
 const shortcuts = toRef(pickerBase.props, "shortcuts");
 const defaultValue = toRef(pickerBase.props, "defaultValue");
-const { lang } = useLocale();
+const { lang } = useLocale(ref(es));
 const leftDate = ref<Dayjs>(dayjs().locale(lang.value));
 const rightDate = ref<Dayjs>(dayjs().locale(lang.value).add(1, unit));
 

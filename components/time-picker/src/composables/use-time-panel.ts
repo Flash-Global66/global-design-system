@@ -1,16 +1,16 @@
-import type { Dayjs } from 'dayjs'
+import type { Dayjs } from "dayjs";
 
 import type {
   GetDisabledHours,
   GetDisabledMinutes,
   GetDisabledSeconds,
-} from '../common/props'
+} from "../common/props";
 
 type UseTimePanelProps = {
-  getAvailableHours: GetDisabledHours
-  getAvailableMinutes: GetDisabledMinutes
-  getAvailableSeconds: GetDisabledSeconds
-}
+  getAvailableHours: GetDisabledHours;
+  getAvailableMinutes: GetDisabledMinutes;
+  getAvailableSeconds: GetDisabledSeconds;
+};
 
 export const useTimePanel = ({
   getAvailableHours,
@@ -27,36 +27,36 @@ export const useTimePanel = ({
       hour: getAvailableHours,
       minute: getAvailableMinutes,
       second: getAvailableSeconds,
-    } as const
-    let result = date
-    ;(['hour', 'minute', 'second'] as const).forEach((type) => {
+    } as const;
+    let result = date;
+    (["hour", "minute", "second"] as const).forEach((type) => {
       if (availableTimeGetters[type]) {
-        let availableTimeSlots: number[]
-        const method = availableTimeGetters[type]
+        let availableTimeSlots: number[];
+        const method = availableTimeGetters[type];
         switch (type) {
-          case 'minute': {
+          case "minute": {
             availableTimeSlots = (method as typeof getAvailableMinutes)(
               result.hour(),
               role,
               compareDate
-            )
-            break
+            );
+            break;
           }
-          case 'second': {
+          case "second": {
             availableTimeSlots = (method as typeof getAvailableSeconds)(
               result.hour(),
               result.minute(),
               role,
               compareDate
-            )
-            break
+            );
+            break;
           }
           default: {
             availableTimeSlots = (method as typeof getAvailableHours)(
               role,
               compareDate
-            )
-            break
+            );
+            break;
           }
         }
 
@@ -64,24 +64,24 @@ export const useTimePanel = ({
           availableTimeSlots?.length &&
           !availableTimeSlots.includes(result[type]())
         ) {
-          const pos = first ? 0 : availableTimeSlots.length - 1
-          result = result[type](availableTimeSlots[pos]) as unknown as Dayjs
+          const pos = first ? 0 : availableTimeSlots.length - 1;
+          result = result[type](availableTimeSlots[pos]) as unknown as Dayjs;
         }
       }
-    })
-    return result
-  }
+    });
+    return result;
+  };
 
-  const timePickerOptions: Record<string, (...args: any[]) => void> = {}
+  const timePickerOptions: Record<string, (...args: any[]) => void> = {};
 
   const onSetOption = ([key, val]: [string, (...args: any[]) => void]) => {
-    timePickerOptions[key] = val
-  }
+    timePickerOptions[key] = val;
+  };
 
   return {
     timePickerOptions,
 
     getAvailableTime,
     onSetOption,
-  }
-}
+  };
+};
