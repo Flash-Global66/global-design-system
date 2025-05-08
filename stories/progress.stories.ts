@@ -57,7 +57,39 @@ yarn add @flash-global66/g-progress
 import { GProgress } from '@flash-global66/g-progress'
 
 # recomendado importar en los estilos globales
-@use "@flash-global66/g-progress/progress.styles.scss" as *;
+@use "@flash-global66/g-progress/src/progress.styles.scss" as *;
+
+# requiere tener definidas los keyframes y animations en el tema de tailwind
+theme.keyframes: {
+    "ripple-expand": {
+      from: { transform: "scale(0)", opacity: "1" },
+      to: { transform: "scale(1.5)", opacity: "0" },
+    },
+    "ripple-contract": {
+      from: { transform: "scale(1)", opacity: "1" },
+      to: { transform: "scale(0)", opacity: "0" },
+    },
+    progress: {
+      "0%": { backgroundPosition: "0 0" },
+      "100%": { backgroundPosition: "32px 0" },
+    },
+    indeterminate: {
+      "0%": { left: "-100%" },
+      "100%": { left: "100%" },
+    },
+    "striped-flow": {
+      "0%": { backgroundPosition: "-100%" },
+      "100%": { backgroundPosition: "100%" },
+    },
+},
+
+theme.animation: {
+    "ripple-expand": "ripple-expand 0.5s ease-out",
+    "ripple-contract": "ripple-contract 0.5s ease-out",
+    progress: "progress 1s linear infinite",
+    "progress-indeterminate": "indeterminate 3s infinite",
+    "progress-striped-flow": "striped-flow 3s linear infinite",
+},
 \`\`\`
 
 ## Dependencias
