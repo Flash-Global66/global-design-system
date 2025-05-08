@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.5](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.4...@flash-global66/g-select@0.1.5) (2025-05-08)
+
+
+### Bug Fixes
+
+* **input-select:** adding mix background at label ([95e3e66](https://github.com/Flash-Global66/global-design-system/commit/95e3e669a81da88ecec5b15ec321a4bd8a653341))
+* **select:** updating conditional at prefixIcon ([08a5bd3](https://github.com/Flash-Global66/global-design-system/commit/08a5bd38a6f362e49897de81639e4c6fdb13cc11))
+
+
+
+
+
 ## [0.1.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.3...@flash-global66/g-select@0.1.4) (2025-04-10)
 
 

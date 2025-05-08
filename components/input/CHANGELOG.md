@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-input@0.3.2...@flash-global66/g-input@0.3.3) (2025-05-08)
+
+
+### Bug Fixes
+
+* **input-select:** adding mix background at label ([95e3e66](https://github.com/Flash-Global66/global-design-system/commit/95e3e669a81da88ecec5b15ec321a4bd8a653341))
+
+
+
+
+
 ## [0.3.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-input@0.3.1...@flash-global66/g-input@0.3.2) (2025-04-10)
 
 
