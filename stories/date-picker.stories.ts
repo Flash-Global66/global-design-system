@@ -16,6 +16,7 @@ import {
 } from "@flash-global66/g-date-picker/package.json";
 import {
   generatePeerDepsList,
+  generateIconOptions,
   generatePeerDepsInstalls,
 } from "../helper/documentation-stories";
 
@@ -158,7 +159,7 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
       name: "prefix-icon",
       description: "Ícono al inicio del input",
       control: "select",
-      options: ["" /* ...generateIconOptions() */], // TODO: Add icon options if available
+      options: ["", ...generateIconOptions()],
       table: {
         category: "Apariencia y Estilos",
         type: { summary: "string | Component" },
