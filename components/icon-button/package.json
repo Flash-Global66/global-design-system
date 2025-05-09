@@ -3,9 +3,15 @@
   "author": "Global66",
   "version": "0.1.0",
   "license": "MIT",
+  "buildable": true,
   "exports": {
-    ".": "./src/index.ts",
-    "./icon-button.styles.scss": "./src/icon-button.styles.scss"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/icon-button.styles.scss",
+    "./*": "./*"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -17,6 +23,15 @@
     "@flash-global66/g-icon-font": "^0.0.8",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }

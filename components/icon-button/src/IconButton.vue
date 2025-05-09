@@ -21,7 +21,7 @@
   </template>
   
   <script setup lang="ts">
-  import { computed, ref } from "vue";
+  import { computed } from "vue";
   import { useNamespace } from "element-plus";
   import { iconButtonEmits, iconButtonProps, validateIconButtonProps } from "./icon-button";
   import { GIconFont } from "@flash-global66/g-icon-font";
@@ -40,7 +40,7 @@
     allAttrs
   } = useIconButton(props, emit)
   
-  const ns = useNamespace('icon-button', ref('gui'))
+  const ns = useNamespace('icon-button')
       
   const standardClasses = computed(() => {
     return [
