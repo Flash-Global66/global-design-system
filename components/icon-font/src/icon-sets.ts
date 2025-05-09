@@ -175,6 +175,7 @@ export const ICON_SETS = {
     "timer",
     "webhook",
     "tag",
+    "sliders",
   ] as const,
 
   light: [

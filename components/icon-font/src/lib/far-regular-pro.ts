@@ -74,4 +74,5 @@ export {
   faGift,
   faWebhook,
   faTag,
+  faSliders,
 } from '@fortawesome/pro-regular-svg-icons';
