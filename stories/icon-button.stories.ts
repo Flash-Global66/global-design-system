@@ -1,26 +1,71 @@
-import { StoryFn, Meta } from "@storybook/vue3";
-import { fn } from "@storybook/test";
-import { GIconButton } from "../components/icon-button/src";
+import type { Meta, StoryObj } from "@storybook/vue3";
 
-// TYPES
-import { generateIconOptions } from "./icon-font.stories";
+import { GIconButton } from '@flash-global66/g-icon-button/index.ts';
+import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 
-// CONSTANTS
-import { action } from "@storybook/addon-actions";
+import { version, peerDependencies } from "@flash-global66/g-icon-button/package.json";
+import { generatePeerDepsList, generateIconOptions, generatePeerDepsInstalls } from "../helper/documentation-stories";
 
-export default {
+const meta: Meta = {
   title: "Basic/Icon Button",
   component: GIconButton,
   parameters: {
     docs: {
       description: {
         component: `
-### Uso básico
-Ejemplo de uso básico:
-\`\`\` vue
-<g-icon-button variant="grey" icon="solid check"/>
+El componente IconButton permite crear botones circulares que solo contienen un ícono. Es útil para acciones comunes donde el ícono es universalmente reconocido o cuando el espacio es limitado en la interfaz.
+
+> Versión actual: ${version}
+
+## Características
+- Múltiples variantes visuales (grey, black, blue)
+- Dos tamaños disponibles (medium, small)
+- Opción para mostrar borde
+- Compatible con enlaces (href)
+- Efecto ripple al hacer clic
+
+### Instalación
+
+\`\`\`bash
+yarn add @flash-global66/g-icon-button
 \`\`\`
-        `,
+
+### Importación del componente
+\`\`\`typescript
+import { GIconButton } from '@flash-global66/g-icon-button'
+import '@flash-global66/g-icon-button/styles.scss'
+\`\`\`
+
+## Dependencias
+
+Este componente requiere:
+
+${generatePeerDepsList(peerDependencies)}
+
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
+
+### Ejemplo de uso
+
+\`\`\`html
+<script setup lang="ts">
+import { GIconButton } from '@flash-global66/g-icon-button';
+</script>
+
+<template>
+  <g-icon-button
+    variant="grey"
+    icon="solid check"
+    size="medium"
+  />
+</template>
+\`\`\`
+`,
       },
     },
   },
@@ -38,7 +83,7 @@ Ejemplo de uso básico:
     size: {
       control: "select",
       options: ["medium", "small"],
-      description: "Variante tamaño del icono botón",
+      description: "Tamaño del icono botón",
       table: {
         type: { summary: "string" },
         category: "Principales",
@@ -46,7 +91,7 @@ Ejemplo de uso básico:
     },
     border: {
       control: "boolean",
-      description: "Deshabilita el icono botón",
+      description: "Muestra un borde alrededor del botón",
       table: {
         type: { summary: "boolean" },
         category: "Principales",
@@ -55,13 +100,12 @@ Ejemplo de uso básico:
 
     // Iconos
     icon: {
+      description: "Icono a mostrar en el botón.",
       control: "select",
       options: generateIconOptions(),
-      description:
-        "Icono renderizado utilizando el componente IconFont.\n\nVer [IconFont](/?path=/docs/basic-iconfont--docs) para los iconos disponibles.\n\nEjemplo 'solid check''",
       table: {
-        type: { summary: "Iconos" },
-        defaultValue: { summary: "" },
+        type: { summary: "string" },
+        defaultValue: { summary: "solid check" },
       },
     },
     autofocus: {
@@ -83,8 +127,7 @@ Ejemplo de uso básico:
     },
     download: {
       control: "text",
-      description:
-        "Especifica que el elemento se descargará cuando el usuario haga clic en el enlace.\n\n ⚠️ **Nota:**  Solo funciona si la propiedad href está definida.",
+      description: "Especifica que el elemento se descargará cuando el usuario haga clic en el enlace",
       table: {
         defaultValue: { summary: "undefined" },
         category: "Enlaces",
@@ -112,55 +155,262 @@ Ejemplo de uso básico:
 
     // Events
     onClick: {
-      description:
-        "Se dispara al hacer clic en el icono botón. No se dispara si el icono botón está deshabilitado.",
+      description: "Evento para el clic en el botón.",
       table: {
-        category: "Events",
-        type: { summary: "(event: Event) => void" },
+        category: "Eventos",
       },
     },
     onMousedown: {
-      description:
-        "Se dispara cuando se presiona el icono botón del mouse. No se dispara si el icono botón está deshabilitado.",
+      description: "Evento para cuando se presiona el mouse sobre el botón.",
       table: {
-        category: "Events",
-        type: { summary: "(event: Event) => void" },
+        category: "Eventos",
       },
     },
   },
-} as Meta<typeof GIconButton>;
-
-// Base template
-const Template: StoryFn<typeof GIconButton> = (args) => ({
-  components: { GIconButton },
-  setup() {
-    return {
-      args,
-      onClick: fn(action("click")),
-      onMousedown: fn(action("mousedown")),
-    };
+  args: {
+    icon: "solid check",
+    variant: "grey",
+    size: "medium",
+    disabled: false,
+    border: false,
   },
-  template: `
-    <g-icon-button 
-      v-bind="args" 
-      @click="onClick" 
-      @mousedown="onMousedown"
-    />
-  `,
-});
-
-// Current API Stories
-export const grey = Template.bind({});
-grey.args = {
-  variant: "grey",
 };
 
-export const black = Template.bind({});
-black.args = {
-  variant: "black",
+export default meta;
+type Story = StoryObj;
+
+export const Primary: Story = {
+  name: 'Básico',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplo básico del componente IconButton. Desde los controles puedes probar todas las propiedades disponibles.'
+      },
+      source: {
+        code: `
+<g-icon-button
+  variant="grey"
+  icon="solid check"
+  size="medium"
+/>
+`, language: 'html',
+      },
+    }
+  },
+  render: (args) => ({
+    components: { GIconButton, GConfigProvider },
+    setup() {
+      return { args };
+    },
+    template: `
+      <g-config-provider>
+        <g-icon-button v-bind="args" />
+      </g-config-provider>
+    `
+  })
 };
 
-export const blue = Template.bind({});
-blue.args = {
-  variant: "blue",
+export const Variants: Story = {
+  name: 'Variantes',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente tiene 3 variantes diferentes: grey, black y blue. Cada una establece un esquema de color apropiado para diferentes contextos.'
+      },
+      source: {
+        code: `
+<g-icon-button variant="grey" icon="solid user" />
+<g-icon-button variant="black" icon="solid envelope" />
+<g-icon-button variant="blue" icon="solid question-circle" />
+`, language: 'html',
+      },
+    }
+  },
+  render: () => ({
+    components: { GIconButton, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <div class="flex items-center space-x-md">
+          <g-icon-button 
+            variant="grey"
+            icon="solid user"
+          />
+          <g-icon-button 
+            variant="black"
+            icon="solid envelope"
+          />
+          <g-icon-button 
+            variant="blue"
+            icon="solid question-circle"
+          />
+        </div>
+      </g-config-provider>
+    `
+  })
 };
+
+export const Sizes: Story = {
+  name: 'Tamaños',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente tiene dos tamaños disponibles: medium (mediano) y small (pequeño).'
+      },
+      source: {
+        code: `
+<g-icon-button size="medium" icon="solid paper-plane" />
+<g-icon-button size="small" icon="solid paper-plane" />
+`, language: 'html',
+      },
+    }
+  },
+  render: () => ({
+    components: { GIconButton, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <div class="flex items-center space-x-md">
+          <g-icon-button 
+            size="medium"
+            icon="solid paper-plane"
+          />
+          <g-icon-button 
+            size="small"
+            icon="solid paper-plane"
+          />
+        </div>
+      </g-config-provider>
+    `
+  })
+};
+
+export const Border: Story = {
+  name: 'Con borde',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente puede mostrarse con un borde utilizando la propiedad border. Esta propiedad puede aplicarse a ambos tamaños (medium y small).'
+      },
+      source: {
+        code: `
+<!-- Tamaño medium con borde -->
+<g-icon-button variant="grey" icon="solid lock" border size="medium" />
+<g-icon-button variant="black" icon="solid lock" border size="medium" />
+<g-icon-button variant="blue" icon="solid lock" border size="medium" />
+
+<!-- Tamaño small con borde -->
+<g-icon-button variant="grey" icon="solid lock" border size="small" />
+<g-icon-button variant="black" icon="solid lock" border size="small" />
+<g-icon-button variant="blue" icon="solid lock" border size="small" />
+`, language: 'html',
+      },
+    }
+  },
+  render: () => ({
+    components: { GIconButton, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <div class="space-y-md">
+          <div>
+            <h3 class="text-sm font-medium mb-2">Tamaño medium con borde</h3>
+            <div class="flex items-center space-x-md">
+              <g-icon-button variant="grey" icon="solid lock" border size="medium" />
+              <g-icon-button variant="black" icon="solid lock" border size="medium" />
+              <g-icon-button variant="blue" icon="solid lock" border size="medium" />
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-sm font-medium mb-2">Tamaño small con borde</h3>
+            <div class="flex items-center space-x-md">
+              <g-icon-button variant="grey" icon="solid lock" border size="small" />
+              <g-icon-button variant="black" icon="solid lock" border size="small" />
+              <g-icon-button variant="blue" icon="solid lock" border size="small" />
+            </div>
+          </div>
+        </div>
+      </g-config-provider>
+    `
+  })
+};
+
+export const Disabled: Story = {
+  name: 'Deshabilitado',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente puede deshabilitarse utilizando la propiedad disabled.'
+      },
+      source: {
+        code: `
+<g-icon-button 
+  variant="grey"
+  icon="regular ban"
+  disabled
+/>
+`, language: 'html',
+      },
+    }
+  },
+  render: () => ({
+    components: { GIconButton, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <div class="flex items-center space-x-md">
+          <g-icon-button 
+            variant="grey"
+            icon="regular ban"
+            disabled
+          />
+          <g-icon-button 
+            variant="black"
+            icon="solid user-slash"
+            disabled
+          />
+          <g-icon-button 
+            variant="blue"
+            icon="solid times-circle"
+            disabled
+          />
+        </div>
+      </g-config-provider>
+    `
+  })
+};
+
+export const AsLink: Story = {
+  name: 'Como enlace',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente puede funcionar como un enlace utilizando la propiedad href.'
+      },
+      source: {
+        code: `
+<g-icon-button
+  variant="blue"
+  icon="solid arrow-up-from-bracket"
+  href="https://www.example.com"
+  target="_blank"
+/>
+`, language: 'html',
+      },
+    }
+  },
+  render: () => ({
+    components: { GIconButton, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <g-icon-button 
+          variant="blue"
+          icon="solid arrow-up-from-bracket"
+          href="https://www.example.com"
+          target="_blank"
+        />
+      </g-config-provider>
+    `
+  })
+};
+
+
+
+
