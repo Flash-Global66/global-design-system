@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.6.1...@flash-global66/g-icon-font@0.7.0) (2025-05-09)
+
+
+### Features
+
+* **icon:** add sliders icon to icon sets ([#78](https://github.com/Flash-Global66/global-design-system/issues/78)) ([53d20ec](https://github.com/Flash-Global66/global-design-system/commit/53d20ec0a68441381a371477fdc176c9c12336b6))
+
+
+
+
+
 ## [0.6.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.6.0...@flash-global66/g-icon-font@0.6.1) (2025-05-08)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font
