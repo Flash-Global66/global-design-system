@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-button@0.1.0...@flash-global66/g-icon-button@0.2.0) (2025-05-09)
+
+
+### Features
+
+* **icon-button:** refactor component structure and update styles ([#79](https://github.com/Flash-Global66/global-design-system/issues/79)) ([0267987](https://github.com/Flash-Global66/global-design-system/commit/0267987f5405fe373a9e64a0c14761548bce81ec))
+
+
+
+
+
 # [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-button@0.0.9...@flash-global66/g-icon-button@0.1.0) (2025-04-10)
 
 
