@@ -25,6 +25,14 @@ export const drawerProps = buildProps({
     type: String,
     default: '2',
   },
+  withHeader: {
+    type: Boolean,
+    default: true,
+  },
+  showClose: {
+    type: Boolean,
+    default: true,
+  },
 } as const)
 
 export type DrawerProps = ExtractPropTypes<typeof drawerProps>

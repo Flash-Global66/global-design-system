@@ -1,60 +1,106 @@
-import { StoryObj } from '@storybook/vue3'
+import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref } from 'vue'
 
 // COMPONENTS
-import GDrawer, { DrawerInstance } from '@flash-global66/g-drawer'
-import { GButton } from '@flash-global66/g-button'
+import { GDrawer, DrawerInstance } from '@flash-global66/g-drawer/index.ts'
+import { GButton } from '@flash-global66/g-button/index.ts'
 
 // CONFIG
-import { GConfigProvider } from '../components/config-provider'
-import { FooterButton } from '@flash-global66/g-dialog'
-import { GTag } from '@flash-global66/g-tag'
-import { GRadioGroup } from '@flash-global66/g-radio'
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts'
+import { FooterButton } from '@flash-global66/g-dialog/index.ts'
+import { GTag } from '@flash-global66/g-tag/index.ts'
+import { GRadioGroup } from '@flash-global66/g-radio/index.ts'
 
-const meta = {
+import { version, peerDependencies } from '@flash-global66/g-drawer/package.json'
+import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories"
+
+const meta: Meta = {
   title: 'Feedback/Drawer',
   component: GDrawer,
   parameters: {
     docs: {
       description: {
-        component: `✨ \`GDrawer\` - Componente de diálogo extensible de cualquier lado de la pantalla.
+        component: `
+El componente Drawer es un panel lateral deslizante que se utiliza para mostrar contenido adicional o acciones secundarias sin interrumpir el flujo principal de la interfaz. Este componente es ideal para mostrar formularios, detalles de elementos, configuraciones o cualquier contenido que no necesite ocupar toda la pantalla.
 
-Un elemento de diálogo que se desliza desde el borde de la ventana para revelar contenido adicional. Puede ser usado para mostrar información adicional, formularios, mensajes, etc.
+> Versión actual: ${version}
 
-> Este componente usa la versión \`2.9.6\` de Element Plus.
-
-**Características principales:**
-
-- Título y descripción
-- Posición y tamaño personalizado
+## Características
+- Título y descripción configurables
+- Múltiples direcciones de apertura (izquierda, derecha, arriba, abajo)
+- Tamaño personalizable
 - Botones de acción en el pie
-- Cierre con clic fuera del drawer
-- Cierre con tecla ESC
-- Cierre con botón de cierre
-- Contenido personalizado
+- Control de cierre (ESC, clic externo, botón X)
+- Header configurable (mostrar/ocultar)
+- Contenido personalizable
 
-🚀 **Instalación**
+### Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-drawer
 \`\`\`
 
-🪝 **Dependencias**
+## Dependencias
+Se hicieron pruebas con las siguientes dependencias. Puede que funcione con otras versiones, pero no se garantiza.
+${generatePeerDepsList(peerDependencies)}
 
-Este componente requiere:
+> Revisar la documentación de cada dependencia para más información.
 
-> - @flash-global66/g-overlay
-> - @flash-global66/g-focus-trap
-> - @flash-global66/g-teleport
-> - @flash-global66/g-dialog
-> - @flash-global66/g-button
-> - @flash-global66/g-icon-button
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
 
-📥 **Importación básica**
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
 
+### Importación del componente
 \`\`\`typescript
+# importar donde se va a utilizar
 import { GDrawer } from '@flash-global66/g-drawer'
+
+# recomendado importar en los estilos globales
 import '@flash-global66/g-drawer/styles.scss'
+\`\`\`
+
+### Ejemplo de uso
+
+\`\`\`html
+<template>
+  <g-drawer 
+    v-model="drawer"
+    title="Título del drawer"
+    description="Descripción del drawer"
+    :show-close="true"
+    :with-header="true"
+    :footer-buttons="[
+      {
+        text: 'Aceptar',
+        onClick: () => (drawer = false),
+        variant: 'primary'
+      },
+      {
+        text: 'Cancelar',
+        onClick: () => (drawer = false),
+        variant: 'secondary'
+      }
+    ]"
+  >
+    <span>Contenido personalizado del drawer</span>
+  </g-drawer>
+  
+  <g-button @click="drawer = true">
+    Abrir drawer
+  </g-button>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { GDrawer } from '@flash-global66/g-drawer';
+import { GButton } from '@flash-global66/g-button';
+
+const drawer = ref(false);
+</script>
 \`\`\`
 `
       }
@@ -104,6 +150,26 @@ import '@flash-global66/g-drawer/styles.scss'
         defaultValue: { summary: "''" }
       }
     },
+    showClose: {
+      name: 'show-close',
+      description: 'Mostrar botón de cierre (X) en el header',
+      control: 'boolean',
+      table: {
+        category: 'Apariencia y Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' }
+      }
+    },
+    withHeader: {
+      name: 'with-header',
+      description: 'Mostrar el header completo del drawer',
+      control: 'boolean',
+      table: {
+        category: 'Apariencia y Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' }
+      }
+    },
     description: {
       name: 'description',
       description: 'Descripción del drawer',
@@ -131,8 +197,8 @@ import '@flash-global66/g-drawer/styles.scss'
         }
       }
     },
-    width: {
-      name: 'width',
+    size: {
+      name: 'size',
       description: 'Ancho del drawer',
       control: 'text',
       table: {
@@ -387,7 +453,7 @@ import '@flash-global66/g-drawer/styles.scss'
     title: 'Title',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    width: '30%',
+    size: '30%',
     modalFade: true,
     direction: 'rtl',
     appendToBody: true,
@@ -399,6 +465,8 @@ import '@flash-global66/g-drawer/styles.scss'
     closeDelay: 0,
     destroyOnClose: false,
     modal: true,
+    showClose: true,
+    withHeader: true,
     modalClass: '',
     bodyClass: '',
     footerClass: '',
@@ -412,11 +480,19 @@ import '@flash-global66/g-drawer/styles.scss'
     ]
   }
 }
-export default meta
-type Story = StoryObj<DrawerInstance>
 
-export const Basic: Story = {
+export default meta;
+type Story = StoryObj;
+
+export const Primary: Story = {
   name: 'Básico',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplo básico del componente Drawer. Desde los controles puedes probar todas las propiedades disponibles.'
+      }
+    }
+  },
   render: (args) => ({
     components: { GDrawer, GConfigProvider, GButton },
     setup() {
@@ -437,8 +513,8 @@ export const Basic: Story = {
   })
 }
 
-export const withAllTypesOfButtons: Story = {
-  name: 'Todas las combinaciones de botones',
+export const FooterButtonsTypes: Story = {
+  name: 'Botones en footer',
   parameters: {
     docs: {
       description: {
@@ -522,8 +598,8 @@ export const withAllTypesOfButtons: Story = {
   })
 }
 
-export const allDirections: Story = {
-  name: 'Todas las direcciones',
+export const Directions: Story = {
+  name: 'Direcciones',
   parameters: {
     docs: {
       description: {
@@ -580,8 +656,8 @@ export const allDirections: Story = {
   })
 }
 
-export const withCustomHeader: Story = {
-  name: 'Con header personalizado',
+export const CustomHeader: Story = {
+  name: 'Header personalizado',
   parameters: {
     docs: {
       description: {
@@ -643,6 +719,266 @@ export const withCustomHeader: Story = {
             </template>
           </div>
         </g-drawer>
+      </g-config-provider>
+    `
+  })
+}
+
+export const Sizes: Story = {
+  name: 'Tamaños',
+  parameters: {
+    docs: {
+      description: {
+        story: `Este ejemplo muestra cómo utilizar la propiedad \`size\` para ajustar el tamaño del drawer según las necesidades de tu aplicación.
+
+- Valores en porcentaje (ej: '30%', '50%', '80%')
+- Valores en píxeles (ej: '300px', '500px')
+- Valores numéricos (ej: 300, 500)
+
+La propiedad \`size\` define el ancho del drawer cuando la dirección es 'ltr' o 'rtl', y la altura cuando la dirección es 'ttb' o 'btt'.`
+      },
+      source: {
+        code: `
+<template>
+  <div class="flex gap-3">
+    <g-button @click="openDrawer('30%')">Drawer 30%</g-button>
+    <g-button @click="openDrawer('500px')">Drawer 500px</g-button>
+    <g-button @click="openDrawer('80%')">Drawer 80%</g-button>
+  </div>
+  
+  <g-drawer
+    v-model="drawer"
+    :size="currentWidth"
+    title="Drawer con ancho personalizado"
+    :description="'Ancho actual: ' + currentWidth"
+    :footer-buttons="[{ text: 'Cerrar', onClick: handleClose, variant: 'primary' }]"
+  >
+    <div class="p-4">
+      <p>Este drawer tiene un ancho de: <strong>{{ currentWidth }}</strong></p>
+    </div>
+  </g-drawer>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { GDrawer } from '@flash-global66/g-drawer';
+import { GButton } from '@flash-global66/g-button';
+
+const drawer = ref(false);
+const currentWidth = ref('30%');
+
+const openDrawer = (size) => {
+  currentWidth.value = size;
+  drawer.value = true;
+};
+
+const handleClose = () => {
+  drawer.value = false;
+};
+</script>
+`, language: 'html'
+      }
+    }
+  },
+  render: () => ({
+    components: { GDrawer, GConfigProvider, GButton },
+    setup() {
+      const drawer = ref<boolean>(false)
+      const currentWidth = ref<string | number>('30%')
+      
+      const widthOptions = [
+        { label: 'Pequeño (30%)', value: '30%' },
+        { label: 'Medio (50%)', value: '50%' },
+        { label: 'Grande (80%)', value: '80%' },
+        { label: 'Fijo (400px)', value: '400px' }
+      ]
+      
+      const openDrawer = (size: string | number) => {
+        currentWidth.value = size
+        drawer.value = true
+      }
+      
+      const handleClose = () => {
+        drawer.value = false
+      }
+      
+      return { drawer, currentWidth, widthOptions, openDrawer, handleClose }
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-4">
+          <p class="text-sm text-gray-600">
+            Selecciona un drawer con diferentes valores para la propiedad <code>size</code>:
+          </p>
+          
+          <div class="flex flex-wrap gap-2">
+            <g-button v-for="option in widthOptions" :key="option.value" @click="openDrawer(option.value)">
+              {{ option.label }}
+            </g-button>
+          </div>
+        </div>
+        
+        <g-drawer 
+          v-model="drawer" 
+          :size="currentWidth"
+          title="Drawer con ancho personalizado"
+          :description="'Ancho actual: ' + currentWidth"
+          append-to-body
+          :footer-buttons="[{ text: 'Cerrar', onClick: handleClose, variant: 'primary' }]"
+        >
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-3">Configuración de ancho</h3>
+            
+            <div class="bg-gray-50 rounded p-3 mb-4">
+              <p class="font-medium">Este drawer tiene un ancho de: <code>{{ currentWidth }}</code></p>
+              
+              <div class="mt-4 text-sm">
+                <p>La propiedad <code>size</code> puede recibir valores de diferentes tipos:</p>
+                <ul class="list-disc ml-5 mt-2 space-y-1">
+                  <li>Porcentaje: <code>'30%'</code>, <code>'50%'</code>, <code>'80%'</code></li>
+                  <li>Píxeles: <code>'300px'</code>, <code>'500px'</code></li>
+                  <li>Números: <code>300</code>, <code>500</code> (interpretados como píxeles)</li>
+                </ul>
+              </div>
+            </div>
+            
+            <p class="text-sm text-gray-600">
+              Ajusta el ancho según el tipo de contenido que necesites mostrar en el drawer.
+              Para dispositivos móviles, considera usar anchos más grandes como '80%' o '100%'.
+            </p>
+          </div>
+        </g-drawer>
+      </g-config-provider>
+    `
+  })
+}
+
+export const HeaderOptions: Story = {
+  name: 'Opciones de Header',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente Drawer ofrece flexibilidad para personalizar el header con las propiedades `showClose` y `withHeader`. Esta historia muestra las distintas combinaciones posibles.'
+      },
+      source: {
+        code: `
+<template>
+  <!-- Drawer predeterminado (con header y botón de cierre) -->
+  <g-drawer
+    v-model="drawer"
+    title="Título del drawer"
+    description="Descripción opcional del drawer"
+  />
+  
+  <!-- Drawer sin botón de cierre pero con header -->
+  <g-drawer
+    v-model="drawer"
+    title="Título del drawer"
+    description="Descripción opcional del drawer"
+    :show-close="false"
+  />
+  
+  <!-- Drawer completamente sin header -->
+  <g-drawer
+    v-model="drawer"
+    :with-header="false"
+  />
+</template>
+`, language: "html",
+      }
+    }
+  },
+  render: () => ({
+    components: { GDrawer, GConfigProvider, GButton },
+    setup() {
+      const selectedOption = ref("default")
+      const drawer = ref<boolean>(false)
+      
+      const options = [
+        { value: "default", label: "Header completo (por defecto)" },
+        { value: "noClose", label: "Sin botón de cierre" },
+        { value: "noHeader", label: "Sin header" },
+      ]
+      
+      const openDrawer = () => {
+        drawer.value = true
+      }
+      
+      const closeDrawer = () => {
+        drawer.value = false
+      }
+      
+      return { drawer, selectedOption, options, openDrawer, closeDrawer }
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-6">
+          <div class="bg-gray-50 rounded-md p-4">
+            <h3 class="text-base font-semibold mb-2">Configuración del header</h3>
+            <p class="text-sm text-gray-600 mb-4">
+              El drawer permite personalizar la visualización del header y sus elementos
+            </p>
+            
+            <div class="flex flex-col gap-4 mb-4">
+              <div v-for="option in options" :key="option.value" class="flex items-center">
+                <input
+                  type="radio"
+                  :id="option.value"
+                  v-model="selectedOption"
+                  :value="option.value"
+                  class="mr-2"
+                />
+                <label :for="option.value">{{ option.label }}</label>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <g-button @click="openDrawer">
+                Abrir drawer
+              </g-button>
+            </div>
+            
+            <g-drawer
+              v-model="drawer"
+              title="Configuración del header"
+              description="Este ejemplo muestra las diferentes configuraciones del header"
+              append-to-body
+              :with-header="selectedOption !== 'noHeader'"
+              :show-close="selectedOption === 'default'"
+              :footer-buttons="[{ text: 'Cerrar', onClick: closeDrawer, variant: 'primary' }]"
+            >
+              <div class="p-4">
+                <h3 class="text-lg font-semibold mb-3">Configuración seleccionada:</h3>
+                <div class="mb-4 p-3 bg-gray-50 rounded">
+                  <div v-if="selectedOption === 'default'" class="text-sm">
+                    <div class="font-medium">Header completo (por defecto):</div>
+                    <ul class="list-disc pl-5 mt-1">
+                      <li><code>withHeader: true</code></li>
+                      <li><code>showClose: true</code></li>
+                    </ul>
+                  </div>
+                  <div v-else-if="selectedOption === 'noClose'" class="text-sm">
+                    <div class="font-medium">Sin botón de cierre:</div>
+                    <ul class="list-disc pl-5 mt-1">
+                      <li><code>withHeader: true</code></li>
+                      <li><code>showClose: false</code></li>
+                    </ul>
+                  </div>
+                  <div v-else-if="selectedOption === 'noHeader'" class="text-sm">
+                    <div class="font-medium">Sin header:</div>
+                    <ul class="list-disc pl-5 mt-1">
+                      <li><code>withHeader: false</code></li>
+                    </ul>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-600">
+                  Estas configuraciones permiten adaptar el drawer a diferentes necesidades de interfaz,
+                  desde mostrar toda la información hasta un diseño más minimalista.
+                </p>
+              </div>
+            </g-drawer>
+          </div>
+        </div>
       </g-config-provider>
     `
   })

@@ -36,8 +36,8 @@
             @click.stop
           >
             <span ref="focusStartRef" :class="ns.e('sr-focus')" tabindex="-1" />
-            <header :class="[ns.e('header'), headerClass]">
-              <div :class="ns.em('header', 'container-close')">
+            <header v-if="props.withHeader" :class="[ns.e('header'), headerClass]">
+              <div v-if="props.showClose" :class="ns.em('header', 'container-close')">
                 <g-icon-button icon="regular times" @click="handleClose" />
               </div>
               <div
@@ -80,9 +80,9 @@
                   <g-button
                     v-for="(button, index) in displayButtons"
                     :key="index"
-                    :variant="button.variant"
                     full
                     @click="button.onClick"
+                    v-bind="{ ...button, onClick: undefined }"
                   >
                     {{ button.text }}
                   </g-button>
