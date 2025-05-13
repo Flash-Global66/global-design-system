@@ -1,0 +1,1 @@
+import{u as o,a,g as s}from"./vue.esm-bundler-BQ5MY6wY.js";import{d as c,e as i}from"./ConfigProvider-C-g_q7t3.js";const t={prefix:Math.floor(Math.random()*1e4),current:0},u=Symbol("elIdInjection"),d=()=>s()?a(u,t):t,p=n=>{const e=d(),r=c();return i(()=>o(n)||`${r.value}-id-${e.prefix}-${e.current++}`)};export{d as a,p as u};

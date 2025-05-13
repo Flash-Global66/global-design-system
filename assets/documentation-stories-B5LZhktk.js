@@ -1,0 +1,2 @@
+import{I as i}from"./index-CFVVBxWq.js";const o=e=>!e||Object.keys(e).length===0?"No tiene dependencias":Object.entries(e).map(([r,n])=>`- ${r}: ${n}`).join(`
+`),c=(e,r=!1)=>{if(!e||Object.keys(e).length===0)return"No tiene dependencias";const n="@flash-global66";return r?Object.entries(e).filter(([t])=>!t.startsWith(n)).map(([t,s])=>`${t}@${s}`).join(" "):Object.entries(e).filter(([t])=>t.startsWith(n)).map(([t,s])=>`${t}@${s}`).join(" ")},l=()=>{const e=[];return Object.entries(i).forEach(([r,n])=>{n.forEach(t=>{e.push(`${r} ${t}`)})}),e};export{o as a,c as b,l as g};
