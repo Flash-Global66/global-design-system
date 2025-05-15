@@ -1,7 +1,15 @@
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
 @use "element-plus/theme-chalk/src/table.scss" as *;
 @use "element-plus/theme-chalk/src/table-column.scss" as *;
+@use 'element-plus/theme-chalk/src/tooltip-v2.scss' as *;
+@use "element-plus/theme-chalk/src/popper.scss" as *;
+@use "element-plus/theme-chalk/src/checkbox.scss" as *;
 
-.gui-table {
+
+/* .gui-table {
   @apply bg-transparent;
   --gui-table-row-hover-bg-color: #f6f6f6;
 
@@ -63,4 +71,4 @@
       }
     }
   }
-}
+} */

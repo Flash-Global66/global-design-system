@@ -7,7 +7,7 @@ import { version, peerDependencies } from "@flash-global66/g-icon-button/package
 import { generatePeerDepsList, generateIconOptions, generatePeerDepsInstalls } from "../helper/documentation-stories";
 
 const meta: Meta = {
-  title: "Basic/Icon Button",
+  title: "Basic/IconButton",
   component: GIconButton,
   parameters: {
     docs: {
