@@ -2,6 +2,17 @@
   <font-awesome-icon
     v-if="selectedIcon"
     :icon="selectedIcon"
+    :size="size"
+    :fixed-width="fixedWidth"
+    :pull="pull"
+    :pulse="pulse"
+    :rotation="rotation"
+    :spin="spin"
+    :bounce="bounce"
+    :shake="shake"
+    :beat="beat"
+    :fade="fade"
+    :beat-fade="beatFade"
   />
 </template>
 
@@ -13,7 +24,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import type { IconString } from './types';
 import * as SolidPro from './lib/fas-solid-pro';
-import * as SolidFree from './lib/fas-solid-free';
 import * as RegularPro from './lib/far-regular-pro';
 import * as LightPro from './lib/fal-light-pro';
 import * as BrandsFree from './lib/fab-free';
@@ -22,7 +32,6 @@ import { iconProps } from './icon';
 // Registro de iconos
 library.add(
   SolidPro,
-  SolidFree,
   RegularPro,
   LightPro,
   BrandsFree

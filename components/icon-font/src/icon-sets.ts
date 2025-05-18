@@ -1,6 +1,5 @@
 export const ICON_SETS = {
   solid: [
-    // Iconos de fas-solid-free.ts
     "user-secret",
     "home",
     "paper-plane",
@@ -54,7 +53,6 @@ export const ICON_SETS = {
     "bars",
     "store",
     "arrow-up-from-bracket",
-    // Iconos de fas-solid-pro.ts
     "usd-circle",
     "user",
     "sign-out",
@@ -176,6 +174,10 @@ export const ICON_SETS = {
     "webhook",
     "tag",
     "sliders",
+    "ballot-check",
+    "ballot",
+    "bell",
+    "circle-notch",
   ] as const,
 
   light: [

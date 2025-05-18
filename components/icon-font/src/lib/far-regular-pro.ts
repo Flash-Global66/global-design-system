@@ -75,4 +75,8 @@ export {
   faWebhook,
   faTag,
   faSliders,
+  faBallotCheck,
+  faBallot,
+  faBell,
+  faCircleNotch,
 } from '@fortawesome/pro-regular-svg-icons';
