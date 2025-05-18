@@ -765,6 +765,15 @@ __metadata:
     "@fortawesome/pro-regular-svg-icons": "npm:^6.7.2"
     "@fortawesome/pro-solid-svg-icons": "npm:^6.7.2"
     "@fortawesome/vue-fontawesome": "npm:^3.0.8"
+  peerDependencies:
+    "@fortawesome/fontawesome-svg-core": ^6.7.2
+    "@fortawesome/free-brands-svg-icons": ^6.7.2
+    "@fortawesome/free-solid-svg-icons": ^6.7.2
+    "@fortawesome/pro-duotone-svg-icons": ^6.7.2
+    "@fortawesome/pro-light-svg-icons": ^6.7.2
+    "@fortawesome/pro-regular-svg-icons": ^6.7.2
+    "@fortawesome/pro-solid-svg-icons": ^6.7.2
+    "@fortawesome/vue-fontawesome": ^3.0.8
   languageName: unknown
   linkType: soft
 
