@@ -2,7 +2,7 @@ import { StoryFn, Meta } from '@storybook/vue3'
 import { GButton } from '@flash-global66/g-button/index.ts'
 
 // TYPES
-import { generateIconOptions } from './icon-font.stories'
+import { generateIconOptions } from '../helper/documentation-stories'
 
 // CONSTANTS
 import { action } from '@storybook/addon-actions'
