@@ -97,7 +97,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 import { GOverlay } from '@flash-global66/g-overlay'
 import { GFocusTrap } from '@flash-global66/g-focus-trap'
@@ -122,9 +122,39 @@ const focusStartRef = ref<HTMLElement>()
 const ns = useNamespace('drawer')
 
 const isHorizontal = computed(() => props.direction === 'rtl' || props.direction === 'ltr')
-const drawerSize = computed(() => addUnit(props.size))
 const closeOnPressEscape = computed(() => props.closeOnPressEscape)
 const closeOnClickModal = computed(() => props.closeOnClickModal)
+
+const windowWidth = ref(window.innerWidth)
+
+const drawerSize = computed(() => {
+  let sizeCalculate = props.size;
+
+  if (windowWidth.value < 576) { //xs
+    sizeCalculate = '100%';
+  } else if (windowWidth.value < 768) { // sm
+    sizeCalculate = props.responsiveSize.sm || '400px';
+  } else if (windowWidth.value < 992) { // md
+    sizeCalculate = props.responsiveSize.md || '400px';
+  } else { // lg
+    sizeCalculate = props.responsiveSize.lg || props.size || '400px';
+  }
+
+  return addUnit(sizeCalculate);
+
+});
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+});
 
 const {
   afterEnter,
