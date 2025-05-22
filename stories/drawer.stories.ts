@@ -477,7 +477,7 @@ const drawer = ref(false);
     title: "Title",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    size: "30%",
+    size: "400px",
     modalFade: true,
     direction: "rtl",
     appendToBody: true,

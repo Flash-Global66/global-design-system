@@ -127,17 +127,20 @@ const closeOnClickModal = computed(() => props.closeOnClickModal)
 
 const windowWidth = ref(window.innerWidth)
 
+const DEFAULT_DRAWER_SIZE = '400px';
+
 const drawerSize = computed(() => {
   let sizeCalculate = props.size;
+  const isResponsiveObj = typeof props.responsiveSize === 'object' && props.responsiveSize !== null;
 
   if (windowWidth.value < 576) { //xs
     sizeCalculate = '100%';
   } else if (windowWidth.value < 768) { // sm
-    sizeCalculate = props.responsiveSize.sm || '400px';
+    sizeCalculate = isResponsiveObj ? props.responsiveSize.sm || DEFAULT_DRAWER_SIZE : DEFAULT_DRAWER_SIZE;
   } else if (windowWidth.value < 992) { // md
-    sizeCalculate = props.responsiveSize.md || '400px';
+    sizeCalculate = isResponsiveObj ? props.responsiveSize.md || DEFAULT_DRAWER_SIZE : DEFAULT_DRAWER_SIZE;
   } else { // lg
-    sizeCalculate = props.responsiveSize.lg || props.size || '400px';
+    sizeCalculate = isResponsiveObj ? props.responsiveSize.lg || props.size || DEFAULT_DRAWER_SIZE : props.size || DEFAULT_DRAWER_SIZE;
   }
 
   return addUnit(sizeCalculate);
