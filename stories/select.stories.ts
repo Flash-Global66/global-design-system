@@ -6,7 +6,7 @@ import { GSelect, OptionType, SelectInstance } from "@flash-global66/g-select/in
 
 // CONFIG
 import { GConfigProvider } from '../components/config-provider'
-import { generateIconOptions } from './icon-font.stories'
+import { generateIconOptions } from '../helper/documentation-stories'
 
 const meta = {
   title: 'Form/Select',

@@ -37,6 +37,7 @@ El componente Time Picker está diseñado para gestionar la selección de tiempo
 - Integración con Day.js para manejo de tiempos
 - Soporte para deshabilitar horas/minutos/segundos específicos
 - Personalización completa del popup
+- **Hereda** gran parte de las props del componente \`GInput\`
 
 ### Instalación
 

@@ -9,6 +9,8 @@ import { GSelect } from "@flash-global66/g-select/index.ts";
 import { GRadio } from "@flash-global66/g-radio/index.ts";
 import { GCheckbox } from "@flash-global66/g-checkbox/index.ts";
 import { GSegmented } from "@flash-global66/g-segmented/index.ts";
+import { GDatePicker } from "@flash-global66/g-date-picker/index.ts";
+import { GTimePicker } from "@flash-global66/g-time-picker/index.ts";
 
 const meta: Meta<FormInstance> = {
   title: "Form/Form",
@@ -144,7 +146,9 @@ export const CompleteForm: Story = {
       GSelect,
       GRadio,
       GCheckbox,
-      GSegmented
+      GSegmented,
+      GDatePicker,
+      GTimePicker
     },
     setup() {
       const formRef = ref<FormInstance>();
@@ -155,7 +159,10 @@ export const CompleteForm: Story = {
         city: '',
         gender: '',
         termsAccepted: false,
-        preferredContact: ''
+        preferredContact: '',
+        birthDate: '',
+        appointmentDate: '',
+        appointmentTime: ''
       });
 
       const contactOptions = [
@@ -219,6 +226,14 @@ export const CompleteForm: Story = {
         formData.city = '';
       });
 
+      const disableFutureDates = (time: Date) => {
+        return time.getTime() > Date.now();
+      };
+
+      const disablePastDates = (time: Date) => {
+        return time.getTime() < Date.now();
+      };
+
       // Reglas de validación
       const rules = {
         fullName: [
@@ -255,13 +270,22 @@ export const CompleteForm: Story = {
           { 
             validator: (rule: any, value: boolean, callback: any) => {
               if (!value) {
-                callback(new Error('Debe aceptar los términos y condiciones para continuar'));
+                callback(new Error('Debe seleccionar un método de contacto preferido'));
               }
               callback();
             },
             type: 'boolean',
             trigger: 'change' 
           }
+        ],
+        birthDate: [
+          { required: true, message: 'La fecha de nacimiento es requerida', trigger: 'change' }
+        ],
+        appointmentDate: [
+          { required: true, message: 'La fecha de cita es requerida', trigger: 'change' }
+        ],
+        appointmentTime: [
+          { required: true, message: 'La hora de cita es requerida', trigger: 'change' }
         ]
       };
 
@@ -296,6 +320,8 @@ export const CompleteForm: Story = {
         availableCities,
         rules,
         contactOptions,
+        disableFutureDates,
+        disablePastDates,
         GSegmented,
         handleSubmit, 
         handleReset 
@@ -374,17 +400,59 @@ export const CompleteForm: Story = {
           </div>
           
           <div class="mb-6">
-            <h3 class="text-lg font-bold mb-2">Género</h3>
-            <g-form-item prop="gender" show-message="parent" label="Género">
-              <div class="flex flex-row gap-6 mt-2">
-                <g-radio v-model="formData.gender" label="Masculino" value="male" />
-                <g-radio v-model="formData.gender" label="Femenino" value="female" />
-                <g-radio v-model="formData.gender" label="Prefiero no decir" value="other" />
-              </div>
-            </g-form-item>
+            <h3 class="text-lg font-bold mb-2">Información personal</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <g-form-item prop="gender" show-message="parent" label="Género">
+                <div class="flex flex-row gap-6 mt-2">
+                  <g-radio v-model="formData.gender" label="Masculino" value="male" />
+                  <g-radio v-model="formData.gender" label="Femenino" value="female" />
+                  <g-radio v-model="formData.gender" label="Prefiero no decir" value="other" />
+                </div>
+              </g-form-item>
+              
+              <g-form-item prop="birthDate">
+                <g-date-picker
+                  v-model="formData.birthDate"
+                  label="Fecha de nacimiento"
+                  format="DD/MM/YYYY"
+                  placeholder="Seleccione su fecha de nacimiento"
+                  :disabled-date="disableFutureDates"
+                  help-text="Debe ser mayor de edad"
+                  prefix-icon="regular calendar"
+                />
+              </g-form-item>
+            </div>
           </div>
           
-          <!-- Cuarta línea: Términos y condiciones -->
+          <div class="mb-10">
+            <h3 class="text-lg font-bold mb-2">Programación de cita</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <g-form-item prop="appointmentDate">
+                <g-date-picker
+                  v-model="formData.appointmentDate"
+                  label="Fecha de cita"
+                  format="DD/MM/YYYY"
+                  placeholder="Seleccione la fecha de su cita"
+                  :disabled-date="disablePastDates"
+                  help-text="Seleccione una fecha futura"
+                  prefix-icon="regular calendar-check"
+                />
+              </g-form-item>
+              
+              <g-form-item prop="appointmentTime">
+                <g-time-picker
+                  v-model="formData.appointmentTime"
+                  label="Hora de cita"
+                  format="HH:mm"
+                  placeholder="Seleccione la hora de su cita"
+                  help-text="Horario de atención: 9:00 - 18:00"
+                  prefix-icon="regular clock"
+                />
+              </g-form-item>
+            </div>
+          </div>
+          
+          <!-- Términos y condiciones -->
           <div class="mb-6">
             <g-form-item
               prop="termsAccepted"

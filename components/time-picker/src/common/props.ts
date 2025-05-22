@@ -3,6 +3,7 @@ import { buildProps, definePropType } from "element-plus/es/utils/index";
 import { useAriaProps, useEmptyValuesProps } from "element-plus";
 import { CircleClose } from "@element-plus/icons-vue";
 import { disabledTimeListsProps } from "../props/shared";
+import { IconString } from "@flash-global66/g-icon-font";
 
 import type { Component, ExtractPropTypes } from "vue";
 import type { Options } from "@popperjs/core";
@@ -99,7 +100,7 @@ export const timePickerDefaultProps = buildProps({
    * @description Custom prefix icon component
    */
   prefixIcon: {
-    type: definePropType<string | Component>([String, Object]),
+    type: definePropType<IconString>(String),
     default: "",
   },
   /**

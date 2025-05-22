@@ -62,7 +62,7 @@
             :class="nsInput.e('icon')"
             @mousedown.prevent="onMouseDownInput"
             @touchstart.passive="onTouchStartInput"
-            :name="isTimeLikePicker ? 'regular clock' : 'regular calendar'"
+            :name="triggerIcon"
           />
         </template>
         <span>
@@ -115,7 +115,7 @@
           <g-icon-font
             v-if="triggerIcon"
             :class="[nsInput.e('icon'), nsRange.e('icon')]"
-            :name="isTimeLikePicker ? 'regular clock' : 'regular calendar'"
+            :name="triggerIcon"
           />
         </template>
         <template #range-separator>

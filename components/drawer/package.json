@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-drawer",
   "author": "Global66",
-  "version": "0.0.8",
+  "version": "0.2.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -33,7 +33,8 @@
     "vue": "^3.2.0"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"

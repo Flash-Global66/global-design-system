@@ -1,6 +1,7 @@
 import { StoryObj } from "@storybook/vue3";
 import { ref } from "vue";
 import dayjs from "dayjs";
+import { es } from "../common/lang";
 
 // COMPONENTS
 import GDatePicker from "../components/date-picker";
@@ -15,6 +16,7 @@ import {
 } from "@flash-global66/g-date-picker/package.json";
 import {
   generatePeerDepsList,
+  generateIconOptions,
   generatePeerDepsInstalls,
 } from "../helper/documentation-stories";
 
@@ -27,6 +29,7 @@ const meta = {
         component: `
 
 El componente Date Picker está diseñado para gestionar la selección de fechas en formularios con flexibilidad y precisión. Ofrece funcionalidades completas, incluyendo selección simple, rangos de fechas y distintos modos de visualización (año, mes, día o fecha y hora). Es ideal para aplicaciones que requieren una interacción intuitiva y detallada con calendarios, asegurando una experiencia de usuario fluida sin sacrificar potencia o personalización.
+
 > Versión actual: ${version}
 
 ## Características
@@ -36,6 +39,7 @@ El componente Date Picker está diseñado para gestionar la selección de fechas
 - Soporte para deshabilitar fechas específicas
 - Integración con Day.js para manejo de fechas
 - Personalización completa del popup
+- **Hereda** gran parte de las props del componente \`GInput\`
 
 ### Instalación
 
@@ -157,7 +161,7 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
       name: "prefix-icon",
       description: "Ícono al inicio del input",
       control: "select",
-      options: ["" /* ...generateIconOptions() */], // TODO: Add icon options if available
+      options: ["", ...generateIconOptions()],
       table: {
         category: "Apariencia y Estilos",
         type: { summary: "string | Component" },
@@ -414,10 +418,11 @@ export const Basic: Story = {
     components: { GDatePicker, GConfigProvider },
     setup() {
       const value = ref("");
-      return { value, args };
+      const lang = es;
+      return { value, args, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker v-bind="args" v-model="value"/>
         </div>
@@ -444,10 +449,11 @@ export const Range: Story = {
     components: { GDatePicker, GConfigProvider },
     setup() {
       const value = ref([]);
-      return { value };
+      const lang = es;
+      return { value, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker
             v-model="value"
@@ -478,10 +484,11 @@ export const DateTime: Story = {
     components: { GDatePicker, GConfigProvider },
     setup() {
       const value = ref(new Date());
-      return { value };
+      const lang = es;
+      return { value, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker
             v-model="value"
@@ -512,10 +519,11 @@ export const DisabledDates: Story = {
       const disabledDate = (time: Date) => {
         return time.getTime() > Date.now(); // Deshabilitar fechas futuras
       };
-      return { value, disabledDate };
+      const lang = es;
+      return { value, disabledDate, lang };
     },
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker
             v-model="value"
@@ -550,6 +558,7 @@ export const DifferentTypes: Story = {
       const monthRangeValue = ref([]);
       const yearRangeValue = ref([]);
       const dateTimeValue = ref(new Date());
+      const lang = es;
 
       return {
         dateValue,
@@ -559,10 +568,12 @@ export const DifferentTypes: Story = {
         monthRangeValue,
         yearRangeValue,
         dateTimeValue,
+        lang,
       };
     },
+
     template: `
-      <g-config-provider>
+      <g-config-provider :locale="lang">
         <div class="flex flex-col gap-4">
           <g-date-picker v-model="dateValue" label="Date" type="date"/>
           <g-date-picker v-model="yearValue" label="Year" type="year" />

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.1.0...@flash-global66/g-drawer@0.2.0) (2025-05-21)
+
+
+### Features
+
+* **drawer:** add responsive size and enhance size customization ([#81](https://github.com/Flash-Global66/global-design-system/issues/81)) ([c49c60b](https://github.com/Flash-Global66/global-design-system/commit/c49c60bd53c61a0ec4bd631212e93cab731a1288))
+
+
+
+
+
+# [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.0.8...@flash-global66/g-drawer@0.1.0) (2025-05-13)
+
+
+### Features
+
+* **drawer:** enhance props and update documentation for header and close button options ([a528fb3](https://github.com/Flash-Global66/global-design-system/commit/a528fb318339b7558a27228f9426f66da6202e89))
+
+
+
+
+
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.0.7...@flash-global66/g-drawer@0.0.8) (2025-04-07)
 
 

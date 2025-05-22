@@ -13,7 +13,7 @@
 }
 
 @include b("icon-button") {
-  @apply rounded-full h-8 w-8 duration-200 relative;
+  @apply rounded-full h-12 w-12 duration-200 relative;
 
   @include when(disabled) {
     @apply cursor-not-allowed;
@@ -84,7 +84,7 @@
   }
 
   @include m("border") {
-    @apply rounded-sm border-1;
+    @apply rounded-sm border;
 
     &.is-disabled {
       --color-border-disabled: theme(colors.grey.300);
@@ -97,6 +97,7 @@
   }
 
   @include m("small") {
+    @apply h-8 w-8;
     .gui-icon-button__icon {
       height: 1em;
       vertical-align: -0.2em;

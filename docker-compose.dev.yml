@@ -15,6 +15,7 @@ services:
       - ./components:/app/components
       - ./.storybook:/app/.storybook
       - ./stories:/app/stories
+      - ./.git:/app/.git
       - /app/node_modules
     networks:
       - design-system-net

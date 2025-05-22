@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import { GInput, InputInstance } from "../components/input";
 import { GConfigProvider } from "../components/config-provider";
 import { reactive, ref } from "vue";
-import { generateIconOptions } from "./icon-font.stories";
+import { generateIconOptions } from "../helper/documentation-stories";
 import { prefix } from "@fortawesome/pro-solid-svg-icons";
 
 const meta: Meta<InputInstance> = {

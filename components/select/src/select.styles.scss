@@ -73,6 +73,11 @@
 
       @include e("label") {
         @apply text-disabled-txt;
+        background: linear-gradient(
+          180deg,
+          transparent 40%,
+          rgb(249 250 251 / var(--tw-bg-opacity, 1)) 0
+        );
       }
     }
   }

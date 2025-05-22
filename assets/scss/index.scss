@@ -1,7 +1,6 @@
 @use "../../components/config-provider/config.styles.scss" as *;
 @use "../../components/radio-group/radio-group.styles.scss" as *;
 @use "../../components/badge/badge.styles.scss" as *;
-@use "../../components/icon-button/src/icon-button.styles.scss" as *;
 @use "../../components/popover/popover.styles.scss" as *;
 @use "../../components/skeleton/skeleton.styles.scss" as *;
 @use "../../components/skeleton/skeleton-item.styles.scss" as *;
@@ -36,6 +35,7 @@
 @use "@flash-global66/g-dialog/styles.scss" as *;
 @use "@flash-global66/g-dialog-alert/styles.scss" as *;
 @use "@flash-global66/g-search-input/styles.scss" as *;
+@use "@flash-global66/g-icon-button/styles.scss" as *;
 
 * {
   @apply font-montserrat;
