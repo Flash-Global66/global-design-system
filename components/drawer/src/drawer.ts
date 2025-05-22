@@ -40,7 +40,7 @@ export const drawerProps = buildProps({
     default: true,
   },
   responsiveSize: {
-    type: Object as PropType<ResponsiveSizeDrawer>,
+    type: [Object, Boolean] as PropType<ResponsiveSizeDrawer | boolean>,
     default: false,
     validator: (val) => {
       if (typeof val === 'boolean') return true;
