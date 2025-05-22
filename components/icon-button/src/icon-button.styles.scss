@@ -84,7 +84,7 @@
   }
 
   @include m("border") {
-    @apply rounded-sm border-1;
+    @apply rounded-sm border;
 
     &.is-disabled {
       --color-border-disabled: theme(colors.grey.300);
