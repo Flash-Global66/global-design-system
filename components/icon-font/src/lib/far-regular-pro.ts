@@ -75,6 +75,7 @@ export {
   faWebhook,
   faTag,
   faSliders,
+  faSlidersSimple,
   faBallotCheck,
   faBallot,
   faBell,
