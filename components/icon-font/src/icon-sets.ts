@@ -174,6 +174,7 @@ export const ICON_SETS = {
     "webhook",
     "tag",
     "sliders",
+    "sliders-simple",
     "ballot-check",
     "ballot",
     "bell",
