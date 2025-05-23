@@ -179,6 +179,8 @@ export const ICON_SETS = {
     "ballot",
     "bell",
     "circle-notch",
+    "dollar-sign",
+    "id-badge",
   ] as const,
 
   light: [

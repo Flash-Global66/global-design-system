@@ -80,4 +80,7 @@ export {
   faBallot,
   faBell,
   faCircleNotch,
+  faDollarSign,
+  faTableList,
+  faIdBadge,
 } from '@fortawesome/pro-regular-svg-icons';
