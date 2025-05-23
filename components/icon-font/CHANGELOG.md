@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.8.1...@flash-global66/g-icon-font@0.9.0) (2025-05-23)
+
+
+### Features
+
+* **GIconFont:** add dollar-sign and id-badge icons ([df1239c](https://github.com/Flash-Global66/global-design-system/commit/df1239cc62ef9ce0889f9b01d155f19ff65677dd))
+
+
+
+
+
 ## [0.8.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.8.0...@flash-global66/g-icon-font@0.8.1) (2025-05-22)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font

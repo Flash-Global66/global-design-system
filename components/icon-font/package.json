@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-icon-font",
   "author": "Global66",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
