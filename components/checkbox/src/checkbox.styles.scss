@@ -33,6 +33,10 @@
     }
   }
 
+  @include when(boxed) {
+    @apply flex-row-reverse justify-between p-xs border border-disab-lt-bd rounded-md w-full;
+  }
+
   @include e(label) {
     @apply p-0 text-secondary-txt text-pretty leading-snug;
   }

@@ -79,6 +79,10 @@ export const checkboxProps = {
     type: Boolean,
     default: true
   },
+    /**
+   * @description whether to trigger form validation
+   */
+  isBoxed: Boolean,
   ...useAriaProps(['ariaControls'])
 }
 

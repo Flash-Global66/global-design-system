@@ -15,6 +15,7 @@
       :label="item?.label ?? item.value"
       :disabled="item?.disabled"
       :checked="item?.checked"
+      :isBoxed="props.isBoxed"
     />
     <slot v-else />
   </component>
