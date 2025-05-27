@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.9.0...@flash-global66/g-icon-font@0.10.0) (2025-05-27)
+
+
+### Features
+
+* **GIconFont:** add sliders-simple and arrow-down-to-bracket icons on solid weight ([a1cec88](https://github.com/Flash-Global66/global-design-system/commit/a1cec88546aa87855035837b61e83551a00b63f8))
+
+
+
+
+
 # [0.9.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.8.1...@flash-global66/g-icon-font@0.9.0) (2025-05-23)
 
 
