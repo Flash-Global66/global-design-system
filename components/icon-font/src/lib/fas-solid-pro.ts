@@ -41,6 +41,7 @@ export {
   faClock,
   faBars,
   faArrowUpFromBracket,
+  faArrowDownToBracket,
   faExclamationTriangle,
   faUsdCircle,
   faUser,
@@ -94,7 +95,8 @@ export {
   faTriangle,
   faLightbulb,
   faStore,
+  faSlidersSimple,
   faSpinner,
   faTimer,
   faGift,
-} from '@fortawesome/pro-solid-svg-icons';
+} from "@fortawesome/pro-solid-svg-icons";

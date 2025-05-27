@@ -53,6 +53,7 @@ export const ICON_SETS = {
     "bars",
     "store",
     "arrow-up-from-bracket",
+    "arrow-down-to-bracket",
     "usd-circle",
     "user",
     "sign-out",
@@ -94,6 +95,7 @@ export const ICON_SETS = {
     "caret-up",
     "triangle",
     "lightbulb",
+    "sliders-simple",
     "spinner",
     "timer",
     "gift",
@@ -179,6 +181,8 @@ export const ICON_SETS = {
     "ballot",
     "bell",
     "circle-notch",
+    "dollar-sign",
+    "id-badge",
   ] as const,
 
   light: [
