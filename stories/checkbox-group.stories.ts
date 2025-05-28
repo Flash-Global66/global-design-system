@@ -96,14 +96,6 @@ import '@flash-global66/g-checkbox/checkbox.styles.scss'
         category: "Principales",
       },
     },
-    isBoxed: {
-      description: "Indica si debe mostrarse el checkbox con borde",
-      control: "boolean",
-      table: {
-        category: "Principales",
-        type: { summary: "string | boolean | number | object" },
-      },
-    },
 
     // Validación
     min: {
@@ -141,6 +133,23 @@ import '@flash-global66/g-checkbox/checkbox.styles.scss'
         type: { summary: "layoutType", detail: "'horizontal' | 'vertical'" },
         defaultValue: { summary: "horizontal" },
         category: "Apariencia",
+      },
+    },
+    border: {
+      description: "Indica si debe mostrarse el checkbox con borde",
+      control: "boolean",
+      table: {
+        category: "Apariencia",
+        type: { summary: "boolean" },
+      },
+    },
+    invert: {
+      description:
+        "Indica si debe mostrarse el checkbox con el label y el check input invertidos",
+      control: "boolean",
+      table: {
+        category: "Apariencia",
+        type: { summary: "boolean" },
       },
     },
 

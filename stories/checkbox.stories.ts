@@ -61,12 +61,23 @@ import '@flash-global66/g-checkbox/checkbox.styles.scss'
         type: { summary: "string | boolean | number | object" },
       },
     },
-    isBoxed: {
+
+    // Apariencia
+    border: {
       description: "Indica si debe mostrarse el checkbox con borde",
       control: "boolean",
       table: {
-        category: "Principales",
-        type: { summary: "string | boolean | number | object" },
+        category: "Apariencia",
+        type: { summary: "boolean" },
+      },
+    },
+    invert: {
+      description:
+        "Indica si debe mostrarse el checkbox con el label y el check input invertidos",
+      control: "boolean",
+      table: {
+        category: "Apariencia",
+        type: { summary: "boolean" },
       },
     },
 

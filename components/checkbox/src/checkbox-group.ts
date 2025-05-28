@@ -65,7 +65,14 @@ export const checkboxGroupProps = buildProps({
   /**
    * @description show the checkbox with bordered style
    */
-  isBoxed: {
+  border: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * @description show the checkbox with inverted order of label and check input
+   */
+  invert: {
     type: Boolean,
     default: false,
   },

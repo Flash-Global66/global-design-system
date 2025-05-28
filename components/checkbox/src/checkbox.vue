@@ -93,7 +93,8 @@ const compKls = computed(() => {
     ns.b(),
     ns.is("disabled", isDisabled.value),
     ns.is("checked", isChecked.value),
-    ns.is("boxed", props.isBoxed),
+    ns.is("border", props.border),
+    ns.is("invert", props.invert),
   ];
 });
 

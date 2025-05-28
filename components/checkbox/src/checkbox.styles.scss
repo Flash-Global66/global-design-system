@@ -33,8 +33,15 @@
     }
   }
 
-  @include when(boxed) {
-    @apply flex-row-reverse justify-between p-xs border border-disab-lt-bd rounded-md w-full;
+  @include when(border) {
+    @apply justify-between p-xs border border-disab-lt-bd rounded-md h-12;
+  }
+
+  @include when(invert) {
+    @apply flex flex-row-reverse gap-xxs;
+    @include e(inner) {
+      @apply ml-xs
+    }
   }
 
   @include e(label) {
@@ -42,7 +49,7 @@
   }
 
   @include e(input) {
-    @apply self-start;
+    @apply self-center;
 
     @include when(indeterminate) {
       @include e(inner) {
@@ -78,7 +85,7 @@
   }
 
   @include e(inner) {
-    @apply w-[18px] h-[18px] border-disabled-bd border rounded mr-[7px] bg-transparent;
+    @apply w-[18px] h-[18px] border-disabled-bd border rounded mr-xs bg-transparent;
 
     &::after {
       @apply w-[3px] h-2 top-0.5 left-1.5 absolute;
