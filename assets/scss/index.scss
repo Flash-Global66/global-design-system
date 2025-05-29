@@ -6,7 +6,6 @@
 @use "../../components/skeleton/skeleton-item.styles.scss" as *;
 @use "../../components/input-code/input-code.styles.scss" as *;
 @use "../../components/overlay/overlay.styles.scss" as *;
-@use "../../components/table/table.styles.scss" as *;
 @use "../../components/menu/menu.styles.scss" as *;
 @use "../../components/link/src/link.styles.scss" as *;
 @use "../../components/switch/switch.styles.scss" as *;
@@ -36,6 +35,7 @@
 @use "@flash-global66/g-dialog-alert/styles.scss" as *;
 @use "@flash-global66/g-search-input/styles.scss" as *;
 @use "@flash-global66/g-icon-button/styles.scss" as *;
+@use "@flash-global66/g-table/styles.scss" as *;
 
 * {
   @apply font-montserrat;
