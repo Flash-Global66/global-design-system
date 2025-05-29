@@ -199,9 +199,8 @@ export default {
     default: () => [],
   },
   /**
-   * @description size of Table
+   * @description table width. By default it has an `auto` width. If its value is a number, the width is measured in pixels; if its value is a string, the value will be assigned to element's style.width, the width is affected by external styles
    */
-  size: useSizeProp,
   width: [String, Number],
   /**
    * @description table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the value will be assigned to element's style.height, the height is affected by external styles

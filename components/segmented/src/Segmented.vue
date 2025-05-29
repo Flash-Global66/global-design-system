@@ -101,7 +101,9 @@ const hasHelpInfo = computed(() => {
 })
 
 const handleChange = (item: OptionSegmented) => {
+  console.log('handleChange', item)
   const value = getValue(item)
+  console.log('value', value)
   emit(UPDATE_MODEL_EVENT, value)
   emit(CHANGE_EVENT, value)
 }

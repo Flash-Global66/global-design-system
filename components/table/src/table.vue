@@ -15,12 +15,12 @@
         [ns.m('enable-row-transition')]:
           (store.states.data.value || []).length !== 0 &&
           (store.states.data.value || []).length < 100,
-        'has-footer': showSummary,
+        'has-footer': showSummary
       },
       ns.m(tableSize),
       className,
       ns.b(),
-      ns.m(`layout-${tableLayout}`),
+      ns.m(`layout-${tableLayout}`)
     ]"
     :style="style"
     :data-prefix="ns.namespace.value"
@@ -44,10 +44,7 @@
           cellpadding="0"
           cellspacing="0"
         >
-          <hColgroup
-            :columns="store.states.columns.value"
-            :table-layout="tableLayout"
-          />
+          <hColgroup :columns="store.states.columns.value" :table-layout="tableLayout" />
           <table-header
             ref="tableHeaderRef"
             :border="border"
@@ -76,13 +73,10 @@
             border="0"
             :style="{
               width: bodyWidth,
-              tableLayout,
+              tableLayout
             }"
           >
-            <hColgroup
-              :columns="store.states.columns.value"
-              :table-layout="tableLayout"
-            />
+            <hColgroup :columns="store.states.columns.value" :table-layout="tableLayout" />
             <table-header
               v-if="showHeader && tableLayout === 'auto'"
               ref="tableHeaderRef"
@@ -123,11 +117,7 @@
               <slot name="empty">{{ computedEmptyText }}</slot>
             </span>
           </div>
-          <div
-            v-if="$slots.append"
-            ref="appendWrapper"
-            :class="ns.e('append-wrapper')"
-          >
+          <div v-if="$slots.append" ref="appendWrapper" :class="ns.e('append-wrapper')">
             <slot name="append" />
           </div>
         </g-scrollbar>
@@ -146,10 +136,7 @@
           border="0"
           :style="tableBodyStyles"
         >
-          <hColgroup
-            :columns="store.states.columns.value"
-            :table-layout="tableLayout"
-          />
+          <hColgroup :columns="store.states.columns.value" :table-layout="tableLayout" />
           <table-footer
             :border="border"
             :default-sort="defaultSort"
@@ -161,23 +148,13 @@
       </div>
       <div v-if="border || isGroup" :class="ns.e('border-left-patch')" />
     </div>
-    <div
-      v-show="resizeProxyVisible"
-      ref="resizeProxy"
-      :class="ns.e('column-resize-proxy')"
-    />
+    <div v-show="resizeProxyVisible" ref="resizeProxy" :class="ns.e('column-resize-proxy')" />
   </div>
 </template>
 
 <script lang="ts">
 // @ts-nocheck
-import {
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  onBeforeUnmount,
-  provide,
-} from 'vue'
+import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, provide } from 'vue'
 import { debounce } from 'lodash-unified'
 import { Mousewheel } from 'element-plus/es/directives/index'
 import { useLocale, useNamespace } from 'element-plus'
@@ -202,14 +179,14 @@ let tableIdSeed = 1
 export default defineComponent({
   name: 'GTable',
   directives: {
-    Mousewheel,
+    Mousewheel
   },
   components: {
     TableHeader,
     TableBody,
     TableFooter,
     GScrollbar,
-    hColgroup,
+    hColgroup
   },
   props: defaultProps,
   emits: [
@@ -231,10 +208,10 @@ export default defineComponent({
     'current-change',
     'header-dragend',
     'expand-change',
-    'scroll',
+    'scroll'
   ],
   setup(props) {
-    type Row = typeof props.data[number]
+    type Row = (typeof props.data)[number]
     const { t } = useLocale()
     const ns = useNamespace('table')
     const table = getCurrentInstance() as Table<Row>
@@ -245,7 +222,7 @@ export default defineComponent({
       store: table.store,
       table,
       fit: props.fit,
-      showHeader: props.showHeader,
+      showHeader: props.showHeader
     })
     table.layout = layout
 
@@ -264,7 +241,7 @@ export default defineComponent({
       toggleRowExpansion,
       clearSort,
       sort,
-      updateKeyChildren,
+      updateKeyChildren
     } = useUtils<Row>(store)
     const {
       isHidden,
@@ -283,11 +260,10 @@ export default defineComponent({
       tableBodyStyles,
       tableLayout,
       scrollbarViewStyle,
-      scrollbarStyle,
+      scrollbarStyle
     } = useStyle<Row>(props, layout, store, table)
 
-    const { scrollBarRef, scrollTo, setScrollLeft, setScrollTop } =
-      useScrollbar()
+    const { scrollBarRef, scrollTo, setScrollLeft, setScrollTop } = useScrollbar()
 
     const debouncedUpdateLayout = debounce(doLayout, 50)
 
@@ -297,11 +273,9 @@ export default defineComponent({
       isGroup,
       resizeState,
       doLayout,
-      debouncedUpdateLayout,
+      debouncedUpdateLayout
     }
-    const computedSumText = computed(
-      () => props.sumText ?? t('el.table.sumText')
-    )
+    const computedSumText = computed(() => props.sumText ?? t('el.table.sumText'))
 
     const computedEmptyText = computed(() => {
       return props.emptyText ?? t('el.table.emptyText')
@@ -405,8 +379,8 @@ export default defineComponent({
       /**
        * @description whether to allow drag the last column
        */
-      allowDragLastColumn: props.allowDragLastColumn,
+      allowDragLastColumn: props.allowDragLastColumn
     }
-  },
+  }
 })
 </script>

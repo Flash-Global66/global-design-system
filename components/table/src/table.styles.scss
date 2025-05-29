@@ -1,74 +1,93 @@
+@use 'sass:map';
+
+@use 'element-plus/theme-chalk/src/table.scss' as *;
+@use 'element-plus/theme-chalk/src/table-column.scss' as *;
+@use 'element-plus/theme-chalk/src/tooltip-v2.scss' as *;
+@use 'element-plus/theme-chalk/src/popper.scss' as *;
+@use 'element-plus/theme-chalk/src/checkbox.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/mixins' as *;
 @use 'element-plus/theme-chalk/src/mixins/utils' as *;
 @use 'element-plus/theme-chalk/src/mixins/var' as *;
 @use 'element-plus/theme-chalk/src/common/var' as *;
-@use "element-plus/theme-chalk/src/table.scss" as *;
-@use "element-plus/theme-chalk/src/table-column.scss" as *;
-@use 'element-plus/theme-chalk/src/tooltip-v2.scss' as *;
-@use "element-plus/theme-chalk/src/popper.scss" as *;
-@use "element-plus/theme-chalk/src/checkbox.scss" as *;
 
-
-/* .gui-table {
-  @apply bg-transparent;
-  --gui-table-row-hover-bg-color: #f6f6f6;
-
-  .gui-table__body-wrapper,
-  .gui-table__header-wrapper {
-    @apply rounded-sm relative;
-  }
-
-  .gui-table__border-left-patch {
-    display: none;
-  }
-
-  .gui-table__header-wrapper {
-    @apply mb-2;
-  }
-
-  .caret-wrapper {
-    @apply h-[18px] text-5;
-  }
-
-  thead {
-    th.gui-table__cell {
-      @apply text-gray-2 font-montserrat font-semibold py-4;
-      &:first-child {
-        @apply rounded-l-md;
+@include b('table') {
+  @include e('header') {
+    & thead {
+      @include when(group) {
+        & .gui-table__cell {
+          @apply bg-everBlue-50 border-everBlue-100 !important;
+        }
       }
-      &:last-child {
-        @apply rounded-r-md;
+    }
+    & tr {
+      & th {
+        & .cell {
+          @apply text-primary-txt font-semibold !important;
+        }
       }
     }
   }
 
-  td.gui-table__cell {
-    @apply py-4 text-gray-2;
-  }
-
-  &.gui-table--border {
-    &:before,
-    &:after {
-      display: none;
+  @include m('group') {
+    &::after {
+      @apply w-0;
     }
-
-    .gui-table__inner-wrapper {
-      &:before,
-      &:after {
-        display: none;
+    & .gui-table__header-wrapper {
+      @apply border-t-1 border-l-0 border-everBlue-100;
+    }
+    & .gui-table__header {
+      @apply relative;
+      &::before {
+        @apply content-[''] absolute top-0 left-0 w-[1px] h-full bg-everBlue-100 z-10;
       }
     }
+    &.gui-table--border .gui-table__inner-wrapper::after {
+      @apply h-0;
+    }
+    &.gui-table--border::before {
+      @apply w-0;
+    }
+  }
 
-    .gui-table__body-wrapper,
-    .gui-table__header-wrapper {
-      @apply border-solid border-t;
-      border-color: var(--gui-table-border-color);
-      border-bottom: none;
-      &:before {
-        content: "";
-        @apply h-full w-[1px] top-0 left-0 z-10 absolute rounded-sm;
-        background-color: var(--gui-table-border-color);
+  & tr {
+    @apply bg-sec-def-bg;
+  }
+
+  @include e('cell') {
+    @apply py-md border-b border-gray-100 !important;
+    & .cell {
+      @apply px-xs text-primary-txt font-medium text-3 !important;
+    }
+  }
+
+  @include e('expanded-cell') {
+    &.gui-table__cell {
+      @apply p-7 !important;
+    }
+  }
+
+  @include e('row') {
+    @apply transition-all duration-200 ease-in;
+
+    /* &:has(.is-checked) {
+      @apply bg-everBlue-50 border-everBlue-100 !important;
+    } */
+
+    &:hover {
+      & td.gui-table__cell {
+        @apply bg-everBlue-50 !important;
+      }
+    }
+    @include m('striped') {
+      & td.gui-table__cell {
+        @apply bg-everBlue-50 bg-opacity-50 !important;
       }
     }
   }
-} */
+
+  & .gui-table-column--selection {
+    & .cell {
+      @apply flex items-center justify-center h-9;
+    }
+  }
+}

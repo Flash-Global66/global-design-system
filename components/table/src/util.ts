@@ -420,6 +420,7 @@ const getTableOverflowTooltipProps = (
   return {
     slotContent: null,
     content: tooltipFormatterContent ?? innerText,
+    description: tooltipFormatterContent ?? innerText,
     ...props,
     popperOptions,
   }
@@ -457,7 +458,7 @@ export function createTablePopper(
   const parentNode = table?.refs.tableWrapper
   const ns = parentNode?.dataset.prefix
   const vm = createVNode(
-    ElTooltip,
+    GTooltip,
     {
       virtualTriggering: true,
       virtualRef: trigger,
