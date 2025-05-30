@@ -7,6 +7,7 @@ import { GButton } from '@flash-global66/g-button'
 import { GLink } from '@flash-global66/g-link'
 import { GTag } from '@flash-global66/g-tag'
 import { GIconFont } from '@flash-global66/g-icon-font'
+import { GIconButton } from '@flash-global66/g-icon-button'
 import { GSelect } from '@flash-global66/g-select'
 import { GInput } from '@flash-global66/g-input'
 
@@ -23,11 +24,9 @@ const meta = {
       description: {
         component: `\`GTable\` - Un componente de tabla altamente configurable y extensible para mostrar datos tabulares de manera eficiente y atractiva.
 
-> Este componente usa la versión \`2.9.10\` de Element Plus.
-
 > La versión de este componente es \`${version}\`.
 
-**Características principales:**
+## Características principales:
 
 - Soporte para filas expandibles y colapsables.
 - Selección de filas con soporte para selección múltiple.
@@ -35,20 +34,21 @@ const meta = {
 - Soporte para filtrado de datos.
 - Soporte para columnas fijas y ancladas.
 
-**Instalación**
+## Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-table
 \`\`\`
 
-**Importación básica**
+## Importación básica
 
 \`\`\`typescript
 import { GTable, GTableColumn } from '@flash-global66/g-table'
 import '@flash-global66/g-table/styles.scss'
+import GIconButton from '../components/icon-button/dist/types/index';
 \`\`\`
 
-🪝 **Dependencias**
+## Dependencias
 
 Este componente requiere:
 
@@ -131,7 +131,8 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
     },
     rowKey: {
       name: 'row-key',
-      description: 'Clave única para cada fila',
+      description:
+        'Clave de datos de fila, utilizada para optimizar la representación. Obligatoria if reserve-selection está true o se muestran los datos del árbol. Cuando su tipo es cadena, se admite el acceso multinivel (p. ej., user.info.id), pero no se admite user.info[0].id; en ese caso, se debe usar la función.',
       control: 'text',
       table: {
         category: 'Datos y Contenido',
@@ -321,7 +322,8 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
     },
     defaultExpandAll: {
       name: 'default-expand-all',
-      description: 'Expandir todas las filas por defecto',
+      description:
+        'Especifica si todas las filas se expanden por defecto, solo funciona cuando la tabla tiene una columna type="expand" o contiene datos de estructura de árbol',
       control: 'boolean',
       table: {
         category: 'Comportamiento y Funcionalidad',
@@ -331,7 +333,8 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
     },
     defaultSort: {
       name: 'default-sort',
-      description: 'Ordenamiento por defecto',
+      description:
+        'Establece la columna y orden por defecto. la propiedad prop es utilizada para establecer la columna de ordenamiento por defecto, la propiedad order es utilizada para definir el tipo de orden por defecto',
       control: 'object',
       table: {
         category: 'Comportamiento y Funcionalidad',
@@ -671,7 +674,8 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
     },
     append: {
       name: 'append',
-      description: 'Slot para contenido adicional al final de la tabla',
+      description:
+        'Slot para insertarse después de la última fila. Es posible que necesite este espacio si desea implementar scroll infinito para la tabla. Este slot se mostrará por encima de la fila de resumen si la hay.',
       control: false,
       table: {
         category: 'Slots',
@@ -1081,7 +1085,8 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
     },
     filterMethod: {
       name: 'filter-method',
-      description: 'Función para filtrar los datos de la columna',
+      description:
+        'Método para filtrado de datos. Si filter-multiple está activado, este método será llamado varias veces por cada fila, y se mostrará la fila si la llamada devuelve true',
       control: false,
       table: {
         category: 'Propiedades de Columnas',
@@ -1091,7 +1096,8 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
     },
     filteredValue: {
       name: 'filtered-value',
-      description: 'Valores filtrados para la columna',
+      description:
+        'El valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla es renderizado con render-header',
       control: false,
       table: {
         category: 'Propiedades de Columnas',
@@ -1282,7 +1288,9 @@ export const withFixed: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Tabla con columnas fijas a la izquierda y derecha, con botones de acción en la última columna.`
+        story: `Cuando se tienen demasiadas columnas, puede fijar algunas de ellas.
+
+El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es true, la columna será fijada a la izquierda. También acepta dos tipos: 'left' y 'right', ambos indican donde debe ser fijada la columna.`
       }
     }
   },
@@ -1363,7 +1371,9 @@ export const withLongHeader: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Tabla con encabezados agrupados, mostrando información adicional en columnas fijas a la derecha.`
+        story: `Cuando la estructura de datos es compleja, puede usar la cabecera de grupo para mostrar la jerarquía de datos.
+
+Solo necesita colocar el-table-column dentro de otro el-table-column, de esta forma logrará agruparles.`
       }
     }
   },
@@ -1509,7 +1519,9 @@ export const collapse: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Tabla con filas colapsables, mostrando información adicional al expandir una fila.`
+        story: `Cuando el contenido de la fila es demasiado largo y no quiere mostrar la barra de desplazamiento horizontal, puede usar la función de fila expandible.
+
+Puede activar la fila expandible estableciendo la propiedad type="expand" o con slots. La plantilla para el-table-column se mostrará como el contenido de la fila expandible, y puede acceder a los mismos atributos que cuando está usando slots en plantillas de columnas personalizadas.`
       }
     }
   },
@@ -1775,7 +1787,7 @@ export const withLazyAndLoad: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Tabla con encabezados agrupados, mostrando información adicional en columnas fijas a la derecha.`
+        story: `Puede visualizar datos con una estructura de árbol. Cuando la fila contiene el campo children, se trata como datos anidados. Para renderizar datos anidados, la propiedad row-key es necesaria. Además, los datos de registros secundarios se pueden cargar de forma asíncrona. Establezca la propiedad lazy de la tabla a true y la función que usara a load. Especifique el atributo hasChildren en la fila para determinar qué fila contiene descendencia. Tanto children como hasChildren pueden configurarse a través de tree-props.`
       }
     }
   },
@@ -2009,7 +2021,7 @@ export const tableEditable: Story = {
     }
   },
   render: () => ({
-    components: { GTable, GConfigProvider, GTableColumn, GIconFont, GSelect, GInput },
+    components: { GTable, GConfigProvider, GTableColumn, GIconFont, GSelect, GInput, GIconButton },
     setup() {
       const tableData = ref([
         {
@@ -2094,7 +2106,6 @@ export const tableEditable: Story = {
                   { title: 'Send', value: 'send', icon: 'regular gift' },
                   { title: 'Receive', value: 'receive', icon: 'regular money-bill-alt' }
                 ]"
-                label="Modalidad"
                 @change="handleClick"
               />
             </div>
@@ -2116,7 +2127,6 @@ export const tableEditable: Story = {
                   { title: 'AUD', value: 'AUD' },
                   { title: 'CAD', value: 'CAD' }
                 ]"
-                label="Moneda"
                 @change="handleClick"
               />
             </div>
@@ -2131,7 +2141,6 @@ export const tableEditable: Story = {
               <g-input
                 v-model.number="scope.row.amount"
                 type="number"
-                label="Monto"
                 @change="handleClick"
               >
                 <template #suffix>
@@ -2159,8 +2168,8 @@ export const tableEditable: Story = {
                   { title: 'Gastos de viaje', value: 'travel-expenses' },
                   { title: 'Honorarios de consultoría', value: 'consulting-fees' }
                 ]"
-                label="Razón"
                 @change="handleClick"
+                :fit-input-width="240"
               />
             </div>
             <div v-else>
@@ -2185,8 +2194,26 @@ export const tableEditable: Story = {
         <g-table-column label="Acciones" align="center" width="100">
           <template #default="scope">
             <div class="flex items-center justify-center items gap-2">
-              <g-icon-font name='regular pen' class="text-primary cursor-pointer" @click="handleEdit(scope.$index, scope.row)" />
-              <g-icon-font name='regular trash' class="text-danger cursor-pointer" @click="deleteRow(scope.$index)" />
+              <g-icon-button
+                v-if="!scope.row.isEditable"
+                @click="handleEdit(scope.$index, scope.row)"
+                variant="grey"
+                icon="regular pen"
+                size="small" 
+              />
+              <g-icon-button
+                v-else
+                @click="handleEdit(scope.$index, scope.row)"
+                variant="grey"
+                icon="regular check"
+                size="small"
+              />
+              <g-icon-button
+                variant="grey"
+                icon="regular trash"
+                size="small"
+                @click="deleteRow(scope.$index)"
+              />
             </div>
           </template>
         </g-table-column>
