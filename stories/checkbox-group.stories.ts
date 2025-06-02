@@ -1,11 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref } from "vue";
+
+// COMPONENTS
 import {
   GCheckbox,
   GCheckboxGroup,
   CheckboxGroupProps,
 } from "@flash-global66/g-checkbox/index.ts";
+
+// CONFIG
 import { GConfigProvider } from "../components/config-provider";
+
+// VERSION
+import {
+  version,
+  peerDependencies,
+} from "@flash-global66/g-checkbox/package.json";
+
+// HELPERS
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from "../helper/documentation-stories";
 
 const meta: Meta<typeof GCheckboxGroup> = {
   title: "Form/Checkbox/Group",
@@ -14,22 +30,55 @@ const meta: Meta<typeof GCheckboxGroup> = {
     docs: {
       description: {
         component: `
-El componente \`GCheckboxGroup\` es un grupo de checkboxes que permite selección múltiple con validación y configuración visual. Existen dos maneras
-de construir el grupo: mediante la propiedad \`options\` o con los slots predeterminados.
+El componente GCheckboxGroup es un grupo de checkboxes que permite selección múltiple con validación y configuración visual. 
 
-### Instalación
+> Versión actual: ${version}
+
+## Características
+
+La función principal del componente es la de agrupar un conjunto de Checkboxes y vincularlos a un mismo estado de referencia, y es por este motivo que el componente hereda todas las características del componente Checkbox, pudiendo personalizarse en mayor o menor medida de acuerdo a como se declaren las opciones del grupo.
+
+Todas las propiedades que se declaran en el componente aplican a todos los checkboxes incluidos en el grupo. Si se desea utilizar un estado por defecto en un elemento del grupo en particular, se puede realizar de las dos maneras en las que se pueden declarar los elementos del mismo:
+
+- Si el componente toma las opciones a través de la propiedad \`options\`, estas se deben declarar como un array de objetos con -como mínimo-, los atributos \`value\` y \`label\`. También se pueden agregar props que indiquen un estado por defecto para uno o mas elementos, simplemente agregando un atributo de tipo booleano, con el nombre de la prop que queremos declarar para ese elemento (por ejemplo: \`checked\`, \`disabled\` o \`indeterminate\`).
+- Si el componente toma las opciones a partir de slots con checkboxes individuales, se deben declarar al menos las propiedades de label y value de cada checkbox, y se pueden indicar estados y caracteristicas individuales a través de las props, tal como se indica en la documentación de estos componentes.
+
+> Se puede encontrar un ejemplo práctico en la sección de <a href="#uso-basico">Uso Básico</a>
+
+## Instalación
+
 \`\`\`bash
 yarn add @flash-global66/g-checkbox
 \`\`\`
 
-### Importación
+## Importación del componente
 
 \`\`\`typescript
+# importar donde se va a utilizar
 import { GCheckboxGroup } from '@flash-global66/g-checkbox'
-import '@flash-global66/g-checkbox/checkbox.styles.scss'
+
+# recomendado importar en los estilos globales
+@use '@flash-global66/g-checkbox/styles.scss' as *;
 \`\`\`
 
-### Ejemplo con slots personalizados:
+## Dependencias
+
+Este componente requiere:
+
+${generatePeerDepsList(peerDependencies)}
+
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
+
+<h2 id="uso-basico">Uso básico</h2>
+
+**Ejemplo con slots personalizados:**
+
 \`\`\`html
 <g-checkbox-group 
   v-bind="args"
@@ -40,10 +89,28 @@ import '@flash-global66/g-checkbox/checkbox.styles.scss'
 </g-checkbox-group>
 \`\`\`
 
-### Ejemplo con opciones predefinidas:
+**Ejemplo con opciones predefinidas:**
+
+\`\`\`javascript
+const selectedValues = ref([]);
+const options = [
+  { value: "Value A", label: "Importaciones" },
+  { value: "Value B", label: "Inversiones" },
+  { value: "Value C", label: "Exportaciones", checked: true },
+  { value: "Value D", label: "Transferencias", disabled: true },
+  { value: "Value E", label: "Otros", indeterminate: true },
+];
+
+const checkboxGroupProps = {
+    disabled: false,
+    layout: "horizontal",
+    ariaLabel: "Grupo de opciones",
+}
+\`\`\`
+
 \`\`\`html
 <g-checkbox-group
-  v-bind="args"
+  v-bind="checkboxGroupProps"
   v-model="selectedValues"
   :options="options"
 />
@@ -308,6 +375,54 @@ export const VerticalLayout: Story = {
       description: {
         story:
           "Checkboxes apilados verticalmente. Controlado mediante la propiedad `layout: vertical`. Ideal para formularios con espacio vertical limitado.",
+      },
+    },
+  },
+};
+
+export const InvertedStyle: Story = {
+  ...Template,
+  args: {
+    layout: "vertical",
+    invert: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Ejemplo del componente con checkboxes con elementos invertidos.",
+      },
+    },
+  },
+};
+
+export const BorderedStyle: Story = {
+  ...Template,
+  args: {
+    layout: "vertical",
+    border: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo del componente con checkboxes con bordes.",
+      },
+    },
+  },
+};
+
+export const InvertedBorderedStyle: Story = {
+  ...Template,
+  args: {
+    layout: "vertical",
+    border: true,
+    invert: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Ejemplo del componente con checkboxes con borde y elementos invertidos.",
       },
     },
   },

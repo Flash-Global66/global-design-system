@@ -7,6 +7,18 @@ import { GCheckbox, CheckboxProps } from "@flash-global66/g-checkbox/index.ts";
 // CONFIG
 import { GConfigProvider } from "../components/config-provider";
 
+// VERSION
+import {
+  version,
+  peerDependencies,
+} from "@flash-global66/g-checkbox/package.json";
+
+// HELPERS
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from "../helper/documentation-stories";
+
 const meta: Meta<typeof GCheckbox> = {
   title: "Form/Checkbox/Single",
   component: GCheckbox,
@@ -14,23 +26,65 @@ const meta: Meta<typeof GCheckbox> = {
     docs: {
       description: {
         component: `
-El componente \`GCheckbox\` es un elemento de selección que permite activar o desactivar una opción.
+El componente Checkbox es un elemento de selección que permite activar o desactivar una opción.
 
-### Instalación
+> Versión actual: ${version}
+
+## Características
+
+El componente consta de dos elementos base (input check + label), cuya disposición y apariencia puede variar
+
+Posee tres opciones de estilo, de acuerdo a si se le envían o no ciertas props:
+- Por defecto: el componente aparecerá con el formato input check + label
+- \`invert\`: invierte los elementos del componente para dejarlo con el formato label + input check. Es importante destacar que esta configuración alinea los elementos a la derecha, por lo cual se utiliza sobre todo con el border y en casos donde una serie de checks deban alinearse hacia la derecha y su tamaño dependerá del contenedor padre del checkbox.
+- \`border\`: agrega un borde al componente, envolviendo tanto el label como el input check, sea cual sea su orden.
+
+Mas allá del estilo seleccionado para el componente, este cuenta con 4 estados:
+- Sin checkear: el valor se encuentra deseleccionado.
+- Checked: el valor se ha seleccionado.
+- Indeterminate: el valor se encuentra en un punto medio (generalmente utilizado cuando existe un check 'padre' que cuenta con checks 'hijos' cuya selección no es completa.)
+- Disabled: el valor no se puede seleccionar.
+
+## Instalación
+
 \`\`\`bash
 yarn add @flash-global66/g-checkbox
 \`\`\`
 
-### Importación
+## Importación del componente
 
 \`\`\`typescript
+# importar donde se va a utilizar
 import { GCheckbox } from '@flash-global66/g-checkbox'
-import '@flash-global66/g-checkbox/checkbox.styles.scss'
+
+# recomendado importar en los estilos globales
+@use '@flash-global66/g-checkbox/styles.scss' as *;
 \`\`\`
 
-### Ejemplo básico:
+## Dependencias
+
+Este componente requiere:
+
+${generatePeerDepsList(peerDependencies)}
+
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
+
+## Uso básico
 \`\`\`html
+<!--- Componente básico --->
 <g-checkbox v-model="checked" label="Acepto los términos" />
+
+<!--- Componente con borde --->
+<g-checkbox v-model="checked" label="Acepto los términos" border />
+
+<!--- Componente invertido con borde --->
+<g-checkbox v-model="checked" label="Acepto los términos" border invert />
 \`\`\`
         `,
       },
@@ -235,14 +289,14 @@ const Template: StoryFn<CheckboxProps> = (
   `,
 });
 
-export const Default: Story = Template.bind({});
-Default.args = {
-  label: "Default Checkbox",
+export const Basic: Story = Template.bind({});
+Basic.args = {
+  label: "Básico",
   disabled: false,
   indeterminate: false,
   modelValue: false,
 } as CheckboxProps;
-Default.parameters = {
+Basic.parameters = {
   docs: {
     description: {
       story:
@@ -253,7 +307,7 @@ Default.parameters = {
 
 export const Checked: Story = Template.bind({});
 Checked.args = {
-  ...Default.args,
+  ...Basic.args,
   checked: true,
 } as CheckboxProps;
 Checked.parameters = {
@@ -267,7 +321,7 @@ Checked.parameters = {
 
 export const Disabled: Story = Template.bind({});
 Disabled.args = {
-  ...Default.args,
+  ...Basic.args,
   disabled: true,
 } as CheckboxProps;
 Disabled.parameters = {
@@ -281,7 +335,7 @@ Disabled.parameters = {
 
 export const Indeterminate: Story = Template.bind({});
 Indeterminate.args = {
-  ...Default.args,
+  ...Basic.args,
   indeterminate: true,
 } as CheckboxProps;
 Indeterminate.parameters = {
@@ -291,4 +345,76 @@ Indeterminate.parameters = {
         "Estado visual indeterminado (ni chequeado ni deschequeado). Usado comúnmente en selecciones parciales o grupos con múltiples opciones. Requiere control programático.",
     },
   },
+};
+
+export const Styles: Story = {
+  name: "Style options",
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo del componente con diferentes estilos.",
+      },
+      source: {
+        code: `
+<template>
+  <!-- Basic -->
+  <p class="ml-md font-semibold">Basic</p>
+  <div class="flex p-md items-center">
+    <g-checkbox label="Etiqueta del checkbox" value="Valor del checkbox" />
+  </div>
+
+  <!-- With border -->
+  <p class="ml-md font-semibold">With border</p>
+  <div class="p-md">
+    <g-checkbox label="Etiqueta del checkbox" value="Valor del checkbox" border />
+  </div>
+
+  <!-- Inverted -->
+  <p class="ml-md font-semibold">Inverted</p>
+  <div class='flex flex-col gap-xs p-md w-fit justify-start'>
+    <g-checkbox label="Etiqueta del checkbox" value="Valor del checkbox" invert />
+    <g-checkbox label="Etiqueta de Checkbox larga" value="Check-2" invert />
+  </div>
+
+  <!-- Border + invert -->
+  <p class="ml-md font-semibold">Border + invert</p>
+  <div class="p-md">
+    <g-checkbox label="Etiqueta del checkbox" value="Valor del checkbox" border invert />
+  </div>
+</template>
+        `,
+        language: "html",
+      },
+    },
+  },
+  render: (args) => ({
+    components: { GCheckbox, GConfigProvider },
+    setup() {
+      return { args };
+    },
+    template: `
+    <g-config-provider>
+      <p class="ml-md font-semibold">Basic</p>
+      <div class="flex p-md items-center">
+        <g-checkbox v-bind="args" />
+      </div>
+
+      <p class="ml-md font-semibold">With border</p>
+      <div class="p-md">
+        <g-checkbox v-bind="args" border />
+      </div>
+
+      <p class="ml-md font-semibold">Inverted</p>
+      <div class='flex flex-col gap-xs p-md w-fit justify-start'>
+        <g-checkbox v-bind="args" invert />
+        <g-checkbox label="Etiqueta de Checkbox larga" value="Check-2" invert />
+      </div>
+
+      <p class="ml-md font-semibold">Border + invert</p>
+      <div class="p-md">
+        <g-checkbox v-bind="args" border invert />
+      </div>
+    </g-config-provider>
+    `,
+  }),
 };
