@@ -1,10 +1,10 @@
-import { UPDATE_MODEL_EVENT, useAriaProps } from 'element-plus'
-import { isBoolean, isNumber, isString } from 'element-plus/es/utils/index.mjs'
+import { UPDATE_MODEL_EVENT, useAriaProps } from "element-plus";
+import { isBoolean, isNumber, isString } from "element-plus/es/utils/index.mjs";
 
-import type { ExtractPropTypes } from 'vue'
-import Checkbox from './checkbox.vue'
+import type { ExtractPropTypes } from "vue";
+import Checkbox from "./checkbox.vue";
 
-export type CheckboxValueType = string | number | boolean
+export type CheckboxValueType = string | number | boolean;
 
 export const checkboxProps = {
   /**
@@ -12,21 +12,21 @@ export const checkboxProps = {
    */
   modelValue: {
     type: [Number, String, Boolean],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description label of the Checkbox when used inside a `checkbox-group`
    */
   label: {
     type: [String, Boolean, Number, Object],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description value of the Checkbox when used inside a `checkbox-group`
    */
   value: {
     type: [String, Boolean, Number, Object],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description Set indeterminate state, only responsible for style control
@@ -45,28 +45,28 @@ export const checkboxProps = {
    */
   name: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   /**
    * @description value of the Checkbox if it's checked
    */
   trueValue: {
     type: [String, Number],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description value of the Checkbox if it's not checked
    */
   falseValue: {
     type: [String, Number],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description input id
    */
   id: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   /**
    * @description input tabindex
@@ -77,17 +77,32 @@ export const checkboxProps = {
    */
   validateEvent: {
     type: Boolean,
-    default: true
+    default: true,
   },
-  ...useAriaProps(['ariaControls'])
-}
+  /**
+   * @description show the checkbox with bordered style
+   */
+  border: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * @description show the checkbox with inverted order of label and check input
+   */
+  invert: {
+    type: Boolean,
+    default: false,
+  },
+  ...useAriaProps(["ariaControls"]),
+};
 
 export const checkboxEmits = {
   [UPDATE_MODEL_EVENT]: (val: CheckboxValueType) =>
     isString(val) || isNumber(val) || isBoolean(val),
-  change: (val: CheckboxValueType) => isString(val) || isNumber(val) || isBoolean(val)
-}
+  change: (val: CheckboxValueType) =>
+    isString(val) || isNumber(val) || isBoolean(val),
+};
 
-export type CheckboxProps = ExtractPropTypes<typeof checkboxProps>
-export type CheckboxEmits = typeof checkboxEmits
-export type CheckboxInstance = InstanceType<typeof Checkbox>
+export type CheckboxProps = ExtractPropTypes<typeof checkboxProps>;
+export type CheckboxEmits = typeof checkboxEmits;
+export type CheckboxInstance = InstanceType<typeof Checkbox>;
