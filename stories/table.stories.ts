@@ -1431,7 +1431,7 @@ El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es
     }
   },
   render: () => ({
-    components: { GTable, GConfigProvider, GTableColumn, GButton },
+    components: { GTable, GConfigProvider, GTableColumn, GIconButton },
     setup() {
       const tableData = [
         {
@@ -1487,13 +1487,19 @@ El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es
         <g-table-column prop="city" label="City" width="120" />
         <g-table-column prop="address" label="Address" width="600" />
         <g-table-column prop="zip" label="Zip" width="120" />
-        <g-table-column fixed="right" label="Operations" min-width="160">
+        <g-table-column fixed="right" label="Operations" min-width="100" align="center">
           <template #default>
-            <div class="flex items-center gap-2">
-              <g-button type="primary" size="sm" @click="handleClick">
-                Detail
-              </g-button>
-              <g-button type="primary" size="sm">Edit</g-button>
+            <div class="flex items-center justify-center gap-2">
+              <g-icon-button
+                variant="grey"
+                icon="regular pen"
+                size="small"
+              />
+              <g-icon-button
+                variant="grey"
+                icon="regular trash"
+                size="small"
+              />
             </div>
           </template>
         </g-table-column>
@@ -1579,7 +1585,7 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
     },
     template: `
     <g-config-provider>
-      <g-table :data="tableData" style="width: 100%" height="250">
+      <g-table :data="tableData" style="width: 100%" height="450">
         <g-table-column prop="date" label="Date" />
         <g-table-column prop="name" label="Name" />
         <g-table-column prop="zip" label="Zip" />
