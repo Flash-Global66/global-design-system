@@ -26,7 +26,7 @@ const meta = {
 
 > La versión de este componente es \`${version}\`.
 
-## Características principales:
+### Características principales:
 
 - Soporte para filas expandibles y colapsables.
 - Selección de filas con soporte para selección múltiple.
@@ -34,13 +34,13 @@ const meta = {
 - Soporte para filtrado de datos.
 - Soporte para columnas fijas y ancladas.
 
-## Instalación
+### Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-table
 \`\`\`
 
-## Importación básica
+### Importación básica
 
 \`\`\`typescript
 import { GTable, GTableColumn } from '@flash-global66/g-table'
@@ -48,9 +48,9 @@ import '@flash-global66/g-table/styles.scss'
 import GIconButton from '../components/icon-button/dist/types/index';
 \`\`\`
 
-## Dependencias
+### Dependencias
 
-Este componente requiere:
+Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
 
 ${generatePeerDepsList(peerDependencies)}
 
@@ -62,6 +62,43 @@ yarn add ${generatePeerDepsInstalls(peerDependencies)}
 
 # Dependencias externas
 yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
+
+### Ejemplo de uso
+
+\`\`\`html
+<template>
+  <g-table :data="tableData" style="width: 100%" stripe border>
+    <g-table-column prop="date" label="Date" width="180" />
+    <g-table-column prop="name" label="Name" width="180" />
+    <g-table-column prop="address" label="Address" />
+  </g-table>
+</template>
+
+<script setup>
+const tableData = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  }
+]
+</script>
 \`\`\`
 `
       }
@@ -1283,6 +1320,105 @@ export const prefixAndSuffix: Story = {
   })
 }
 
+export const withStatus: Story = {
+  name: 'Tabla con estados',
+  parameters: {
+    docs: {
+      description: {
+        story: `Puede destacar el contenido de la tabla para distinguir entre "success, information, warning, danger" y otros estados.
+
+Utilice row-class-name en el-table para agregar clases personalizadas a una fila específica. De esa manera podrá darle diseño con esas clases.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GConfigProvider, GTableColumn },
+    setup() {
+      const tableData = [
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        },
+        {
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        },
+        {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        },
+        {
+          date: '2016-05-01',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        },
+        {
+          date: '2016-05-05',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        },
+        {
+          date: '2016-05-06',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        },
+        {
+          date: '2016-05-07',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        },
+        {
+          date: '2016-05-08',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }
+      ]
+
+      const tableRowClassName = ({ row, rowIndex }: { row: any; rowIndex: number }) => {
+        if (rowIndex === 1) return '!bg-error-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+        if (rowIndex === 3) return '!bg-success-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+        if (rowIndex === 5) return '!bg-warning-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+        if (rowIndex === 7) return '!bg-info-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+        return ''
+      }
+
+      const cellClassName = ({
+        row,
+        column,
+        rowIndex
+      }: {
+        row: any
+        column: any
+        rowIndex: number
+      }) => {
+        if (rowIndex === 1) return 'group-hover:!bg-error-bg'
+        if (rowIndex === 3) return 'group-hover:!bg-success-bg'
+        if (rowIndex === 5) return 'group-hover:!bg-warning-bg'
+        if (rowIndex === 7) return 'group-hover:!bg-info-bg'
+        return ''
+      }
+
+      return { tableData, tableRowClassName, cellClassName }
+    },
+    template: `
+    <g-config-provider>
+      <g-table
+        :data="tableData"
+        style="width: 100%"
+        :row-class-name="tableRowClassName"
+        :cell-class-name="cellClassName"
+      >
+        <g-table-column prop="date" label="Date" width="180" />
+        <g-table-column prop="name" label="Name" width="180" />
+        <g-table-column prop="address" label="Address" />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
 export const withFixed: Story = {
   name: 'Tabla con columnas fijas',
   parameters: {
@@ -2190,6 +2326,7 @@ export const tableEditable: Story = {
             <div v-else>
               {{ scope.row.detail }}
             </div>
+          </template>
         </g-table-column>
         <g-table-column label="Acciones" align="center" width="100">
           <template #default="scope">
