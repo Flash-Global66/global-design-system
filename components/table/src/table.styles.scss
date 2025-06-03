@@ -74,12 +74,12 @@
     } */
 
     &:hover {
-      & td.gui-table__cell {
+      & .gui-table__cell {
         @apply bg-everBlue-50 !important;
       }
     }
     @include m('striped') {
-      & td.gui-table__cell {
+      & .gui-table__cell {
         @apply bg-everBlue-50 bg-opacity-50 !important;
       }
     }
