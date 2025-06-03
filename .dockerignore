@@ -14,6 +14,8 @@
 !stories/**
 !common/
 !common/**
+!helper/
+!helper/**
 !.storybook/
 !.storybook/**
 !assets/

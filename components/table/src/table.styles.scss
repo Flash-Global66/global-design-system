@@ -1,0 +1,93 @@
+@use 'sass:map';
+
+@use 'element-plus/theme-chalk/src/table.scss' as *;
+@use 'element-plus/theme-chalk/src/table-column.scss' as *;
+@use 'element-plus/theme-chalk/src/tooltip-v2.scss' as *;
+@use 'element-plus/theme-chalk/src/popper.scss' as *;
+@use 'element-plus/theme-chalk/src/checkbox.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b('table') {
+  @include e('header') {
+    & thead {
+      @include when(group) {
+        & .gui-table__cell {
+          @apply bg-everBlue-50 border-everBlue-100 !important;
+        }
+      }
+    }
+    & tr {
+      & th {
+        & .cell {
+          @apply text-primary-txt font-semibold !important;
+        }
+      }
+    }
+  }
+
+  @include m('group') {
+    &::after {
+      @apply w-0;
+    }
+    & .gui-table__header-wrapper {
+      @apply border-t-1 border-l-0 border-everBlue-100;
+    }
+    & .gui-table__header {
+      @apply relative;
+      &::before {
+        @apply content-[''] absolute top-0 left-0 w-[1px] h-full bg-everBlue-100 z-10;
+      }
+    }
+    &.gui-table--border .gui-table__inner-wrapper::after {
+      @apply h-0;
+    }
+    &.gui-table--border::before {
+      @apply w-0;
+    }
+  }
+
+  & tr {
+    @apply bg-sec-def-bg;
+  }
+
+  @include e('cell') {
+    @apply py-md border-b border-gray-100 !important;
+    & .cell {
+      @apply px-xs text-primary-txt font-medium text-3 !important;
+    }
+  }
+
+  @include e('expanded-cell') {
+    &.gui-table__cell {
+      @apply p-7 !important;
+    }
+  }
+
+  @include e('row') {
+    @apply transition-all duration-200 ease-in;
+
+    /* &:has(.is-checked) {
+      @apply bg-everBlue-50 border-everBlue-100 !important;
+    } */
+
+    &:hover {
+      & .gui-table__cell {
+        @apply bg-everBlue-50 !important;
+      }
+    }
+    @include m('striped') {
+      & .gui-table__cell {
+        @apply bg-everBlue-50 bg-opacity-50 !important;
+      }
+    }
+  }
+
+  & .gui-table-column--selection {
+    & .cell {
+      @apply flex items-center justify-center h-9;
+    }
+  }
+}
