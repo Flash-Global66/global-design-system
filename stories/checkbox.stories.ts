@@ -352,7 +352,7 @@ export const Styles: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo del componente con diferentes estilos.",
+        story: "Ejemplo del componente con diferentes estilos controlados por las propiedades `border` e `invert`.",
       },
       source: {
         code: `

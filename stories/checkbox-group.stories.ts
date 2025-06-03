@@ -390,7 +390,7 @@ export const InvertedStyle: Story = {
     docs: {
       description: {
         story:
-          "Ejemplo del componente con checkboxes con elementos invertidos.",
+          "Ejemplo del componente con checkboxes con elementos invertidos, controlados mediante la propiedad `invert: true`.",
       },
     },
   },
@@ -405,7 +405,7 @@ export const BorderedStyle: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo del componente con checkboxes con bordes.",
+        story: "Ejemplo del componente con checkboxes con bordes, controlados mediante la propiedad `border: true`.",
       },
     },
   },
@@ -422,7 +422,7 @@ export const InvertedBorderedStyle: Story = {
     docs: {
       description: {
         story:
-          "Ejemplo del componente con checkboxes con borde y elementos invertidos.",
+          "Ejemplo del componente con checkboxes con borde y elementos invertidos para mostrar la interacción de las propiedades `border` e `invert`.",
       },
     },
   },
