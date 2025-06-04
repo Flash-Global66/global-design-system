@@ -331,7 +331,6 @@ module.exports = {
         "3xl": "1900px",
       },
       borderWidth: {
-        1: "1px",
         3: "3px",
       },
       boxShadow: {
