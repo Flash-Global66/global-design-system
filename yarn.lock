@@ -1005,6 +1005,14 @@ __metadata:
 "@flash-global66/g-table@workspace:components/table":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-table@workspace:components/table"
+  peerDependencies:
+    "@flash-global66/g-checkbox": ^0.2.1
+    "@flash-global66/g-icon-font": ^0.0.8
+    "@flash-global66/g-scrollbar": ^0.1.0
+    "@flash-global66/g-tooltip": ^0.1.0
+    element-plus: ^2.9.0
+    lodash-unified: ^1.0.3
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
