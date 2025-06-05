@@ -346,19 +346,19 @@ export const RoundedBorder: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Cuando se usan las propiedades border y rounded juntas, el componente muestra un borde completamente redondeado (rounded-full). Esta variante proporciona un aspecto más moderno y distintivo.'
+        story: 'Cuando se usan las propiedades border y rounded juntas, el componente muestra un borde completamente redondeado (rounded-full).'
       },
       source: {
         code: `
 <!-- Tamaño medium con borde redondeado -->
-<g-icon-button variant="grey" icon="solid star" border rounded size="medium" />
-<g-icon-button variant="black" icon="solid star" border rounded size="medium" />
-<g-icon-button variant="blue" icon="solid star" border rounded size="medium" />
+<g-icon-button variant="grey" icon="solid lock" border rounded size="medium" />
+<g-icon-button variant="black" icon="solid lock" border rounded size="medium" />
+<g-icon-button variant="blue" icon="solid lock" border rounded size="medium" />
 
 <!-- Tamaño small con borde redondeado -->
-<g-icon-button variant="grey" icon="solid star" border rounded size="small" />
-<g-icon-button variant="black" icon="solid star" border rounded size="small" />
-<g-icon-button variant="blue" icon="solid star" border rounded size="small" />
+<g-icon-button variant="grey" icon="solid lock" border rounded size="small" />
+<g-icon-button variant="black" icon="solid lock" border rounded size="small" />
+<g-icon-button variant="blue" icon="solid lock" border rounded size="small" />
 `, language: 'html',
       },
     }
@@ -371,18 +371,18 @@ export const RoundedBorder: Story = {
           <div>
             <h3 class="text-sm font-medium mb-2">Tamaño medium con borde redondeado</h3>
             <div class="flex items-center space-x-md">
-              <g-icon-button variant="grey" icon="solid star" border rounded size="medium" />
-              <g-icon-button variant="black" icon="solid star" border rounded size="medium" />
-              <g-icon-button variant="blue" icon="solid star" border rounded size="medium" />
+              <g-icon-button variant="grey" icon="solid lock" border rounded size="medium" />
+              <g-icon-button variant="black" icon="solid lock" border rounded size="medium" />
+              <g-icon-button variant="blue" icon="solid lock" border rounded size="medium" />
             </div>
           </div>
           
           <div>
             <h3 class="text-sm font-medium mb-2">Tamaño small con borde redondeado</h3>
             <div class="flex items-center space-x-md">
-              <g-icon-button variant="grey" icon="solid star" border rounded size="small" />
-              <g-icon-button variant="black" icon="solid star" border rounded size="small" />
-              <g-icon-button variant="blue" icon="solid star" border rounded size="small" />
+              <g-icon-button variant="grey" icon="solid lock" border rounded size="small" />
+              <g-icon-button variant="black" icon="solid lock" border rounded size="small" />
+              <g-icon-button variant="blue" icon="solid lock" border rounded size="small" />
             </div>
           </div>
         </div>
