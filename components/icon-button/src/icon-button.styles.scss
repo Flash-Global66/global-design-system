@@ -96,6 +96,14 @@
     }
   }
 
+  @include m("rounded") {
+    @apply rounded-full;
+
+    & .hover-effect {
+      @apply rounded-full;
+    }
+  }
+
   @include m("small") {
     @apply h-8 w-8;
     .gui-icon-button__icon {
