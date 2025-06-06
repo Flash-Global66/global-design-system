@@ -17,6 +17,7 @@ export const useIconButton = (props: IconButtonProps, emit: SetupContext<IconBut
       return {
         disabled: _disabled.value,
         autofocus: props.autofocus,
+        type: props.type,
       };
     }
     return {};

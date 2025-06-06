@@ -160,6 +160,16 @@ import { GIconButton } from '@flash-global66/g-icon-button';
         type: { summary: "string" },
       },
     },
+    type: {
+      control: "select",
+      options: ["button", "submit", "reset"],
+      description: "Especifica el tipo de botón (solo cuando no se usa href).",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "button" },
+        category: "Principales",
+      },
+    },
 
     // Events
     onClick: {
@@ -181,6 +191,7 @@ import { GIconButton } from '@flash-global66/g-icon-button';
     size: "medium",
     disabled: false,
     border: false,
+    type: "button",
   },
 };
 

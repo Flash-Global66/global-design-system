@@ -86,6 +86,14 @@ export const iconButtonProps = buildProps({
   rounded: {
     type: Boolean as PropType<IconRounded>,
     default: false
+  },
+  /**
+   * Specifies the type of button (only when not using href).
+   * Allowed values are: "button", "submit", "reset".
+   */
+  type: {
+    type: String as PropType<'button' | 'submit' | 'reset'>,
+    default: 'button'
   }
 });
 export const iconButtonEmits = {
