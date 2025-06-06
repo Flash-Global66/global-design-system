@@ -17,6 +17,6 @@ export * from "./src/attach-file.type";
 export * from "./src/attach-file";
 
 export { useAttachFile } from "./src/composables/useAttachFile";
-export type { UseAttachFileOptions, UseAttachFileEmits } from "./src/composables/useAttachFile";
+export type { UseAttachFileOptions } from "./src/composables/useAttachFile";
 
 export type AttachFileInstance = InstanceType<typeof AttachFile>;
