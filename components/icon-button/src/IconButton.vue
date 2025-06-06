@@ -46,7 +46,8 @@
     return [
       props.variant && ns.m(`variant-${props.variant}`), 
       props.size && ns.m(props.size),
-      props.border && ns.m('border')
+      props.border && ns.m('border'),
+      props.rounded && props.border && ns.m('rounded')
     ]
   })
   

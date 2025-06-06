@@ -3,7 +3,8 @@ import { buildProps, debugWarn, isBoolean, isString } from "element-plus/es/util
 import type {
   IconButtonSize,
   IconButtonVariant,
-  IconBorder
+  IconBorder,
+  IconRounded
 } from "./icon-button.type";
 import { IconString } from '@flash-global66/g-icon-font'
 
@@ -81,6 +82,18 @@ export const iconButtonProps = buildProps({
   border: {
     type: Boolean as PropType<IconBorder>,
     default: false
+  },
+  rounded: {
+    type: Boolean as PropType<IconRounded>,
+    default: false
+  },
+  /**
+   * Specifies the type of button (only when not using href).
+   * Allowed values are: "button", "submit", "reset".
+   */
+  type: {
+    type: String as PropType<'button' | 'submit' | 'reset'>,
+    default: 'button'
   }
 });
 export const iconButtonEmits = {

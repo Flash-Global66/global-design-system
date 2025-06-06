@@ -97,6 +97,14 @@ import { GIconButton } from '@flash-global66/g-icon-button';
         category: "Principales",
       },
     },
+    rounded: {
+      control: "boolean",
+      description: "Hace que el borde sea completamente redondeado (requiere border: true)",
+      table: {
+        type: { summary: "boolean" },
+        category: "Principales",
+      },
+    },
 
     // Iconos
     icon: {
@@ -152,6 +160,16 @@ import { GIconButton } from '@flash-global66/g-icon-button';
         type: { summary: "string" },
       },
     },
+    type: {
+      control: "select",
+      options: ["button", "submit", "reset"],
+      description: "Especifica el tipo de botón (solo cuando no se usa href).",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "button" },
+        category: "Principales",
+      },
+    },
 
     // Events
     onClick: {
@@ -173,6 +191,7 @@ import { GIconButton } from '@flash-global66/g-icon-button';
     size: "medium",
     disabled: false,
     border: false,
+    type: "button",
   },
 };
 
@@ -325,6 +344,56 @@ export const Border: Story = {
               <g-icon-button variant="grey" icon="solid lock" border size="small" />
               <g-icon-button variant="black" icon="solid lock" border size="small" />
               <g-icon-button variant="blue" icon="solid lock" border size="small" />
+            </div>
+          </div>
+        </div>
+      </g-config-provider>
+    `
+  })
+};
+
+export const RoundedBorder: Story = {
+  name: 'Borde completamente redondeado',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Cuando se usan las propiedades border y rounded juntas, el componente muestra un borde completamente redondeado (rounded-full).'
+      },
+      source: {
+        code: `
+<!-- Tamaño medium con borde redondeado -->
+<g-icon-button variant="grey" icon="solid lock" border rounded size="medium" />
+<g-icon-button variant="black" icon="solid lock" border rounded size="medium" />
+<g-icon-button variant="blue" icon="solid lock" border rounded size="medium" />
+
+<!-- Tamaño small con borde redondeado -->
+<g-icon-button variant="grey" icon="solid lock" border rounded size="small" />
+<g-icon-button variant="black" icon="solid lock" border rounded size="small" />
+<g-icon-button variant="blue" icon="solid lock" border rounded size="small" />
+`, language: 'html',
+      },
+    }
+  },
+  render: () => ({
+    components: { GIconButton, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <div class="space-y-md">
+          <div>
+            <h3 class="text-sm font-medium mb-2">Tamaño medium con borde redondeado</h3>
+            <div class="flex items-center space-x-md">
+              <g-icon-button variant="grey" icon="solid lock" border rounded size="medium" />
+              <g-icon-button variant="black" icon="solid lock" border rounded size="medium" />
+              <g-icon-button variant="blue" icon="solid lock" border rounded size="medium" />
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-sm font-medium mb-2">Tamaño small con borde redondeado</h3>
+            <div class="flex items-center space-x-md">
+              <g-icon-button variant="grey" icon="solid lock" border rounded size="small" />
+              <g-icon-button variant="black" icon="solid lock" border rounded size="small" />
+              <g-icon-button variant="blue" icon="solid lock" border rounded size="small" />
             </div>
           </div>
         </div>

@@ -12,6 +12,8 @@ type IconButtonSize = "medium" | "small";
 
 type IconBorder = boolean;
 
+type IconRounded = boolean;
 
-export { IconButtonSize, IconButtonVariant, IconButtonState, Ripple, IconBorder };
+
+export { IconButtonSize, IconButtonVariant, IconButtonState, Ripple, IconBorder, IconRounded };
 
