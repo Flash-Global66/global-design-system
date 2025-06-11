@@ -14,7 +14,7 @@
       role="button"
       tabindex="0"
       :aria-label="`${uploadButtonText}. ${defaultRestrictionText || ''}`"
-      :aria-describedby="restrictionText || defaultRestrictionText ? `${inputId || 'drag-drop'}-restriction` : undefined"
+      :aria-describedby="(restrictionText || acceptExtNames.length || effectiveMaxSize) ? `${inputId || 'drag-drop'}-restriction` : undefined"
       @click="openFileDialog"
       @keydown.enter="openFileDialog"
       @keydown.space.prevent="openFileDialog"
