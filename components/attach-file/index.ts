@@ -15,6 +15,7 @@ export default GAttachFile;
 
 export * from "./src/attach-file.type";
 export * from "./src/attach-file";
+export * from "./src/constants";
 
 export { useAttachFile } from "./src/composables/useAttachFile";
 export type { UseAttachFileOptions } from "./src/composables/useAttachFile";

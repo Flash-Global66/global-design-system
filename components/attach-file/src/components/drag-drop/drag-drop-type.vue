@@ -11,6 +11,13 @@
           [ns.is('loading')]: isLoading,
         }
       ]"
+      role="button"
+      tabindex="0"
+      :aria-label="`${uploadButtonText}. ${defaultRestrictionText || ''}`"
+      :aria-describedby="restrictionText || defaultRestrictionText ? `${inputId || 'drag-drop'}-restriction` : undefined"
+      @click="openFileDialog"
+      @keydown.enter="openFileDialog"
+      @keydown.space.prevent="openFileDialog"
       @dragover.prevent="onDragOver" 
       @dragenter.prevent="onDragEnter" 
       @dragleave.prevent="onDragLeave"
@@ -22,12 +29,14 @@
           <button type="button"
             :class="ns.e('upload-button')"
             :disabled="disabled || isLoading" 
-            @click="openFileDialog">
+            @click.stop="openFileDialog">
             {{ uploadButtonText }}
           </button>
           {{ uploadText }}
         </p>
-        <p v-if="restrictionText || acceptExtNames.length || effectiveMaxSize" :class="ns.e('restriction-text')">
+        <p v-if="restrictionText || acceptExtNames.length || effectiveMaxSize" 
+           :class="ns.e('restriction-text')"
+           :id="`${inputId || 'drag-drop'}-restriction`">
           {{ restrictionText || defaultRestrictionText }}
         </p>
       </div>
@@ -39,6 +48,7 @@
         :accept="acceptExtNames.join(',')" 
         :disabled="disabled || isLoading"
         :class="ns.e('hidden-input')"
+        :aria-label="`${uploadButtonText} - ${defaultRestrictionText || ''}`"
         @change="onFileInputChange" />
     </div>
 
@@ -128,12 +138,14 @@ import { GIconFont } from "@flash-global66/g-icon-font";
 import { GIconButton } from "@flash-global66/g-icon-button";
 import { GProgress } from "@flash-global66/g-progress";
 import ValidationErrors from "../common/validation-errors.vue";
+import { useAttachFile } from "../../composables/useAttachFile";
 import { FILE_STATUS } from "../../constants";
 import type { FileStatus } from "../../constants";
 
 const ns = useNamespace("attach-file");
 
 export interface Props {
+  inputId?: string;
   modelValue: File[];
   uploadButtonText: string;
   uploadText: string;
@@ -153,6 +165,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  inputId: undefined,
   restrictionText: "",
   maxSize: "",
   maxFiles: undefined,
@@ -171,6 +184,7 @@ const emit = defineEmits<{
 }>();
 
 const {
+  inputId,
   modelValue,
   uploadButtonText,
   uploadText,
@@ -192,40 +206,7 @@ const {
 
 const safeModelValue = computed(() => modelValue.value || []);
 
-function formatFileSize(bytes: number): string {
-  if (bytes === 0) return "0 Bytes"
-  const k = 1024
-  const sizes = ["Bytes", "KB", "MB", "GB"]
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
-}
-
-function parseSizeString(sizeString: string | undefined | null): number {
-  if (!sizeString || typeof sizeString !== "string") {
-    return 0
-  }
-
-  const regex = /^([0-9]+(?:\.[0-9]+)?)\s*(B|KB|MB|GB|TB)$/i
-  const match = sizeString.trim().match(regex)
-
-  if (!match) {
-    console.warn(`Invalid size format: ${sizeString}. Expected format: "5MB", "500KB", "1.5GB"`)
-    return 0
-  }
-
-  const value = parseFloat(match[1])
-  const unit = match[2].toLowerCase()
-
-  const multipliers: Record<string, number> = {
-    b: 1,
-    kb: 1024,
-    mb: 1024 * 1024,
-    gb: 1024 * 1024 * 1024,
-    tb: 1024 * 1024 * 1024 * 1024,
-  }
-
-  return Math.floor(value * multipliers[unit])
-}
+const { formatFileSize, parseSizeString } = useAttachFile({});
 
 const dropZone = ref();
 const fileInput = ref();
@@ -283,7 +264,6 @@ function removeFile(index: number) {
   emit("change", updatedFiles);
 }
 
-// Drag and drop handlers
 function onDragEnter(event: DragEvent) {
   event.preventDefault();
   dragCounter.value++;

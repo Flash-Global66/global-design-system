@@ -7,6 +7,8 @@
       :accept="acceptExtNames.join(',')"
       :disabled="disabled" 
       :class="ns.e('hidden-input')"
+      :aria-label="title || 'Seleccionar archivos'"
+      :aria-describedby="infoText ? `${id || 'attach-file'}-info` : undefined"
       @change="handleFileInputChange" 
     />
     
@@ -158,14 +160,14 @@
         @retry="handleRetry"
         @remove="removeFile"
         @clear="clearAllFiles"
-    />
+      />
+    </div>
     
     <!-- Mensajes de validación -->
     <ValidationErrors 
       v-if="errors.length > 0" 
       :errors="errors"
     />
-  </div>
   </div>
 </template>
 
@@ -183,6 +185,7 @@ import ValidationErrors from "../common/validation-errors.vue";
 const ns = useNamespace("attach-file");
 
 interface Props {
+  id?: string;
   modelValue: File[];
   mode?: AttachFileMode;
   title: string;
