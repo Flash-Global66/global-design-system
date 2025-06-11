@@ -27,7 +27,7 @@ export const attachFileProps = buildProps({
   },
   maxSize: {
     type: String,
-    default: "2MB",
+    default: "10MB",
   },
   multiple: {
     type: Boolean,

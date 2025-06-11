@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref, reactive } from "vue";
 import { action } from '@storybook/addon-actions';
 
-import { GAttachFile } from "../components/attach-file/index.ts";
+import { GAttachFile } from "@flash-global66/g-attach-file/index.ts";
 import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 import { GForm, GFormItem } from "@flash-global66/g-form/index.ts";
 import { GButton } from "@flash-global66/g-button/index.ts";
 import { GInput } from "@flash-global66/g-input/index.ts";
 
-import { version, peerDependencies } from "../components/attach-file/package.json";
+import { version, peerDependencies } from "@flash-global66/g-attach-file/package.json";
 import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories";
 
 const meta: Meta<typeof GAttachFile> = {
@@ -36,15 +36,14 @@ El componente Attach File permite a los usuarios subir archivos con una interfaz
 ## Tipos disponibles
 
 ### Tipo "default" (por defecto)
-- Diseño estándar ideal para formularios
-- Estados visuales: idle (título + restricciones + icono upload), uploading (título + nombre archivo + progreso + icono), uploaded (título + check + nombre + tamaño + trash), error (X + mensaje + icono upload)
-- Ancho completo (w-full) y padding responsive
+- **Diseño compacto**: Ideal para formularios y espacios reducidos
+- **Estados claros**: Inicial, cargando, éxito y error con indicadores visuales
+- **Interfaz horizontal**: Título + información + botón en línea
 
-### Tipo "drag-drop"  
-- Área de arrastre grande y prominente
-- Ideal para documentos y archivos importantes
-- Drag & drop como funcionalidad principal
-- Lista de archivos con estados individuales
+### Tipo "drag-drop"
+- **Área de arrastre prominente**: Zona visual amplia para arrastrar archivos
+- **Funcionalidad destacada**: Ideal cuando subir archivos es la acción principal
+- **Lista externa**: Archivos mostrados fuera del área de arrastre
 
 ### Instalación
 
@@ -91,9 +90,9 @@ const files = ref<File[]>([]);
     v-model="files"
     type="default"
     :accept-ext-names="['.pdf','.doc','.docx']"
-    max-size="5MB"
+    max-size="10MB"
     title="Seleccionar documento"
-    info-text="Archivos PDF o Word, máximo 5MB"
+    info-text="Archivos PDF o Word, máximo 10MB"
   />
 
   <!-- Tipo drag-drop -->
@@ -149,11 +148,11 @@ const files = ref<File[]>([]);
       },
     },
     maxSize: {
-      description: "Tamaño máximo de archivo en formato legible (ej: '5MB', '500KB', '1.5GB')",
+      description: "Tamaño máximo de archivo en formato legible (ej: '10MB', '500KB', '1.5GB')",
       control: "text",
       table: {
         type: { summary: "string" },
-        defaultValue: { summary: "'2MB'" },
+        defaultValue: { summary: "'10MB'" },
       },
     },
     maxFiles: {
@@ -254,12 +253,22 @@ const files = ref<File[]>([]);
         defaultValue: { summary: "true" },
       },
     },
-    id: {
-      description: "ID único para el campo del formulario",
+    inputId: {
+      description: "ID único para los elementos internos de accesibilidad. Se usa para generar IDs únicos para aria-describedby y evitar conflictos cuando hay múltiples componentes en la misma página",
       control: "text",
       table: {
         type: { summary: "string" },
         defaultValue: { summary: "undefined" },
+        category: "Accesibilidad"
+      },
+    },
+    id: {
+      description: "ID único para el elemento raíz del componente. Se utiliza principalmente para integración con formularios y referencias externas",
+      control: "text",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "undefined" },
+        category: "Formularios"
       },
     },
     "onUpdate:modelValue": {
@@ -296,8 +305,8 @@ const files = ref<File[]>([]);
   },
   args: {
     type: "default",
-    acceptExtNames: [".pdf", ".doc", ".docx"],
-    maxSize: "5MB",
+    acceptExtNames: [],
+    maxSize: "",
     multiple: true,
     uploading: false,
     uploadProgress: 0,
@@ -307,7 +316,7 @@ const files = ref<File[]>([]);
     uploadButtonText: "Haz clic para cargar",
     uploadText: "un archivo o arrástralo aquí",
     restrictionText: "",
-    infoText: "",
+    infoText: "Puede subir cualquier tipo de archivo",
     modelValue: [],
     validateEvent: true,
     id: "",
@@ -323,17 +332,15 @@ export const Primary: Story = {
     docs: {
       description: {
         story:
-          "Ejemplo básico del componente Attach File. Desde los controles puedes probar todas las propiedades disponibles.",
+          "Ejemplo básico del componente Attach File sin restricciones de tipo de archivo o tamaño. Desde los controles puedes probar todas las propiedades disponibles.",
       },
       source: {
         code: `
 <g-attach-file 
   v-model="files"
   type="default"
-  :accept-ext-names="['.pdf','.doc','.docx']"
-  max-size="5MB"
-  title="Seleccionar documento"
-  info-text="Información adicional personalizada"
+  title="Seleccionar archivo"
+  info-text="Puede subir cualquier tipo de archivo"
   @update:model-value="handleUpdate"
 />
 `, language: 'html'
@@ -377,8 +384,8 @@ export const WithInfoText: Story = {
   v-model="files"
   type="default"
   :accept-ext-names="['.pdf','.doc','.docx']"
-  max-size="5MB"
-  info-text="Solo PDF o Word, máximo 5MB"
+  max-size="10MB"
+  info-text="Solo PDF o Word, máximo 10MB"
   title="Seleccionar documento"
 />
 `, language: "html",
@@ -403,8 +410,8 @@ export const WithInfoText: Story = {
           v-model="files"
           type="default"
           :accept-ext-names="['.pdf','.doc','.docx']"
-          max-size="5MB"
-          info-text="Solo PDF o Word, máximo 5MB"
+          max-size="10MB"
+          info-text="Solo PDF o Word, máximo 10MB"
           title="Seleccionar documento"
           @update:model-value="handleUpdate"
         />
@@ -418,7 +425,8 @@ export const States: Story = {
   parameters: {
     docs: {
       description: {
-        story: "El componente Attach File tiene varios estados que representan diferentes situaciones de uso: normal, carga en progreso, error y deshabilitado.",
+        story:
+          "El componente Attach File tiene varios estados que representan diferentes situaciones de uso: normal, carga en progreso (múltiples archivos y archivo único), error y deshabilitado.",
         source: {
           code: `
 <!-- Estado normal -->
@@ -426,19 +434,34 @@ export const States: Story = {
   v-model="files"
   type="default"
   :accept-ext-names="['.pdf','.doc','.docx']"
-  max-size="5MB"
+  max-size="10MB"
+  info-text="Max. 10MB, PDF o Word"
   title="Seleccionar documento"
 />
 
-<!-- Estado de carga en progreso -->
+<!-- Estado de carga en progreso (múltiples archivos) -->
 <g-attach-file 
   v-model="files"
   type="default"
   :accept-ext-names="['.pdf','.doc','.docx']"
-  max-size="5MB"
+  max-size="10MB"
   title="Seleccionar documento"
   :uploading="true"
   :upload-progress="60"
+  :multiple="true"
+/>
+
+<!-- Estado de carga en progreso (archivo único) -->
+<g-attach-file 
+  v-model="files"
+  type="default"
+  :accept-ext-names="['.pdf','.doc','.docx']"
+  max-size="10MB"
+  title="Subiendo documento"
+  info-text="Por favor espere mientras se sube el archivo"
+  :uploading="true"
+  :upload-progress="75"
+  :multiple="false"
 />
 
 <!-- Estado de error -->
@@ -446,7 +469,7 @@ export const States: Story = {
   v-model="files"
   type="default"
   :accept-ext-names="['.pdf','.doc','.docx']"
-  max-size="5MB"
+  max-size="10MB"
   title="Seleccionar documento"
   upload-error="Error al subir el archivo. Intente nuevamente."
 />
@@ -456,14 +479,15 @@ export const States: Story = {
   v-model="files"
   type="default"
   :accept-ext-names="['.pdf','.doc','.docx']"
-  max-size="5MB"
+  max-size="10MB"
   title="Seleccionar documento"
   disabled
 />
-`, language: 'html'
-        }
-      }
-    }
+`,
+          language: "html",
+        },
+      },
+    },
   },
   render: () => ({
     components: { GAttachFile, GConfigProvider },
@@ -478,19 +502,21 @@ export const States: Story = {
       const files2 = ref([
         createMockFile("ejemplo1.pdf", 1024000),
         createMockFile("ejemplo2.doc", 2048000),
-        createMockFile("ejemplo3.docx", 3072000)
+        createMockFile("ejemplo3.docx", 3072000),
       ]);
-      const files3 = ref([]);
+      const files3 = ref([createMockFile("documento_con_error.pdf", 2048000)]);
       const files4 = ref([]);
+      const files5 = ref([createMockFile("contrato-importante.pdf", 2048000)]);
 
       const handleUpdate = (index) => (selectedFiles) => {
         if (index === 1) files1.value = selectedFiles;
         else if (index === 2) files2.value = selectedFiles;
         else if (index === 3) files3.value = selectedFiles;
         else if (index === 4) files4.value = selectedFiles;
+        else if (index === 5) files5.value = selectedFiles;
       };
 
-      return { files1, files2, files3, files4, handleUpdate };
+      return { files1, files2, files3, files4, files5, handleUpdate };
     },
     template: `
       <g-config-provider>
@@ -501,23 +527,41 @@ export const States: Story = {
               v-model="files1"
               type="default"
               :accept-ext-names="['.pdf','.doc','.docx']"
-              max-size="5MB"
+              max-size="10MB"
+              info-text="Max. 10MB, PDF o Word"
               title="Seleccionar documento"
               @update:model-value="handleUpdate(1)"
             />
           </div>
 
           <div>
-            <h3 class="text-base font-semibold mb-2">Estado de carga en progreso</h3>
+            <h3 class="text-base font-semibold mb-2">Estado de carga en progreso (múltiples archivos)</h3>
             <g-attach-file 
               v-model="files2"
               type="default"
               :accept-ext-names="['.pdf','.doc','.docx']"
-              max-size="5MB"
+              max-size="10MB"
               title="Seleccionar documento"
               :uploading="true"
               :upload-progress="60"
+              :multiple="true"
               @update:model-value="handleUpdate(2)"
+            />
+          </div>
+
+          <div>
+            <h3 class="text-base font-semibold mb-2">Estado de carga en progreso (archivo único)</h3>
+            <g-attach-file 
+              v-model="files5"
+              type="default"
+              :accept-ext-names="['.pdf','.doc','.docx']"
+              max-size="10MB"
+              title="Subiendo documento"
+              info-text="Por favor espere mientras se sube el archivo"
+              :uploading="true"
+              :upload-progress="75"
+              :multiple="false"
+              @update:model-value="handleUpdate(5)"
             />
           </div>
 
@@ -527,7 +571,7 @@ export const States: Story = {
               v-model="files3"
               type="default"
               :accept-ext-names="['.pdf','.doc','.docx']"
-              max-size="5MB"
+              max-size="10MB"
               title="Seleccionar documento"
               upload-error="Error al subir el archivo. Intente nuevamente."
               @update:model-value="handleUpdate(3)"
@@ -540,7 +584,7 @@ export const States: Story = {
               v-model="files4"
               type="default"
               :accept-ext-names="['.pdf','.doc','.docx']"
-              max-size="5MB"
+              max-size="10MB"
               title="Seleccionar documento"
               disabled
               @update:model-value="handleUpdate(4)"
@@ -548,8 +592,8 @@ export const States: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const DragDrop: Story = {
@@ -805,10 +849,10 @@ export const Restrictions: Story = {
   v-model="files"
   type="default"
   :accept-ext-names="['.pdf','.doc','.docx']"
-  max-size="5MB"
+  max-size="10MB"
   :max-files="2"
   title="Seleccionar documento"
-  info-text="Solo PDF o Word, máximo 5MB y 2 archivos"
+  info-text="Solo PDF o Word, máximo 10MB y 2 archivos"
   :multiple="true"
 />
 
@@ -847,7 +891,7 @@ export const Restrictions: Story = {
               Este ejemplo muestra cómo configurar restricciones específicas para los archivos.
               <br>
               - Solo permite archivos PDF y Word (.pdf, .doc, .docx)
-              - Tamaño máximo de 5MB por archivo
+              - Tamaño máximo de 10MB por archivo
               - Máximo 2 archivos permitidos
               - Texto de información personalizado que aparece en todos los estados del componente
             </p>
@@ -856,10 +900,10 @@ export const Restrictions: Story = {
               v-model="files"
               type="default"
               :accept-ext-names="['.pdf','.doc','.docx']"
-              max-size="5MB"
+              max-size="10MB"
               :max-files="2"
               title="Seleccionar documento"
-              info-text="Solo PDF o Word, máximo 5MB y 2 archivos"
+              info-text="Solo PDF o Word, máximo 10MB y 2 archivos"
               :multiple="true"
               @update:model-value="handleUpdate"
               @error="handleError"
@@ -871,7 +915,7 @@ export const Restrictions: Story = {
             <h3 class="text-base font-semibold mb-2">¿Cómo funcionan las restricciones?</h3>
             <ol class="list-decimal pl-5 space-y-2 text-sm">
               <li><strong>accept-ext-names:</strong> Define las extensiones de archivo permitidas como array de strings</li>
-              <li><strong>max-size:</strong> Establece el tamaño máximo por archivo en formato legible (ej: '5MB')</li>
+              <li><strong>max-size:</strong> Establece el tamaño máximo por archivo en formato legible (ej: '10MB')</li>
               <li><strong>max-files:</strong> Limita el número total de archivos que se pueden seleccionar</li>
               <li><strong>info-text:</strong> Para el tipo 'default', personaliza el texto de información adicional que aparece en todos los estados</li>
               <li><strong>restriction-text:</strong> Para el tipo 'drag-drop', personaliza el texto de las restricciones que aparece en el área de arrastre</li>
@@ -1183,7 +1227,7 @@ Este ejemplo muestra un formulario de apertura de cuenta que requiere documentos
                   type="default"
                   :multiple="false"
                   :accept-ext-names="['pdf','jpg','jpeg','png']"
-                  max-size="5MB"
+                  max-size="10MB"
                   :validate-event="true"
                   @change="handleIdentityChange"
                   @error="handleError"
@@ -1243,4 +1287,5 @@ Este ejemplo muestra un formulario de apertura de cuenta que requiere documentos
       </g-config-provider>
     `
   })
+
 };

@@ -29,7 +29,7 @@
 
     <DragDropType
       v-else-if="props.type === 'drag-drop'" 
-      :id="inputId"
+      :input-id="inputId"
       :model-value="safeModelValue"
       :upload-button-text="props.uploadButtonText"
       :upload-text="props.uploadText"
@@ -127,7 +127,8 @@ const {
   parseSizeString, 
   validateFile, 
   validateFiles, 
-  validateFileCount 
+  validateFileCount,
+  removeDuplicateFiles
 } = useAttachFile({});
 
 const effectiveMaxSize = computed(() => {
@@ -138,7 +139,18 @@ const effectiveMaxSize = computed(() => {
 });
 
 function addFiles(newFiles: File[]) {
-  const fileValidationErrors = validateFiles(newFiles, props.maxSize, props.acceptExtNames);
+  const uniqueFiles = removeDuplicateFiles(newFiles, safeModelValue.value);
+  
+  if (uniqueFiles.length === 0) {
+    const duplicateMessage = newFiles.length === 1 
+      ? `El archivo "${newFiles[0].name}" ya ha sido seleccionado.`
+      : `Los archivos seleccionados ya han sido agregados.`;
+    errors.value = [duplicateMessage];
+    emit("error", [duplicateMessage]);
+    return;
+  }
+  
+  const fileValidationErrors = validateFiles(uniqueFiles, props.maxSize, props.acceptExtNames);
   
   if (fileValidationErrors.length > 0) {
     errors.value = fileValidationErrors;
@@ -150,10 +162,10 @@ function addFiles(newFiles: File[]) {
     return;
   }
 
-  const updatedFiles = props.multiple ? [...safeModelValue.value, ...newFiles] : newFiles;
+  const updatedFiles = props.multiple ? [...safeModelValue.value, ...uniqueFiles] : uniqueFiles;
   const totalErrors: string[] = [];
 
-  const countError = validateFileCount(safeModelValue.value.length, newFiles.length, props.maxFiles);
+  const countError = validateFileCount(safeModelValue.value.length, uniqueFiles.length, props.maxFiles);
   if (countError) {
     totalErrors.push(countError);
   }

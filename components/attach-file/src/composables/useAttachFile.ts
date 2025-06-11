@@ -1,5 +1,13 @@
 import { computed, ComputedRef, Ref, unref } from 'vue'
-import { ATTACH_FILE_MODES } from '../constants'
+import { 
+  ATTACH_FILE_MODES, 
+  EXTENSION_TO_MIME_TYPE, 
+  FILE_SIZE_MULTIPLIERS, 
+  FILE_SIZE_UNITS,
+  FILE_EXTENSIONS,
+  FILE_CATEGORIES,
+  GENERIC_MIME_TYPES
+} from '../constants'
 
 export interface UseAttachFileOptions {
   mode?: ComputedRef<string | undefined> | Ref<string | undefined>
@@ -10,9 +18,6 @@ export interface UseAttachFileOptions {
   uploadProgress?: ComputedRef<number | undefined> | Ref<number | undefined>
 }
 
-/**
- * Composable simplificado para la lógica básica del attach-file
- */
 export function useAttachFile(options: UseAttachFileOptions) {
   const uploadState = computed(() => {
     if (unref(options.uploadError)) return "error"
@@ -63,9 +68,8 @@ export function useAttachFile(options: UseAttachFileOptions) {
   function formatFileSize(bytes: number): string {
     if (bytes === 0) return "0 Bytes"
     const k = 1024
-    const sizes = ["Bytes", "KB", "MB", "GB"]
     const i = Math.floor(Math.log(bytes) / Math.log(k))
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + FILE_SIZE_UNITS[i]
   }
 
   function parseSizeString(sizeString: string | undefined | null): number {
@@ -84,36 +88,70 @@ export function useAttachFile(options: UseAttachFileOptions) {
     const value = parseFloat(match[1])
     const unit = match[2].toLowerCase()
 
-    const multipliers: Record<string, number> = {
-      b: 1,
-      kb: 1024,
-      mb: 1024 * 1024,
-      gb: 1024 * 1024 * 1024,
-      tb: 1024 * 1024 * 1024 * 1024,
-    }
-
-    return Math.floor(value * multipliers[unit])
+    return Math.floor(value * FILE_SIZE_MULTIPLIERS[unit as keyof typeof FILE_SIZE_MULTIPLIERS])
   }
 
   function getProgress(): number {
     return Math.round(unref(options.uploadProgress) || 0)
   }
 
+
+  function getValidMimeTypes(extensions: string[]): string[] {
+    const validMimeTypes: string[] = [];
+    
+    extensions.forEach(ext => {
+      const normalizedExt = ext.startsWith('.') ? ext.substring(1).toLowerCase() : ext.toLowerCase();
+      const mimeTypes = EXTENSION_TO_MIME_TYPE[normalizedExt];
+      if (mimeTypes) {
+        validMimeTypes.push(...mimeTypes);
+      }
+    });
+
+    return [...new Set(validMimeTypes)];
+  }
+
+  function validateMimeType(file: File, acceptExtNames: string[]): boolean {
+    if (!acceptExtNames?.length) return true;
+    
+    const validMimeTypes = getValidMimeTypes(acceptExtNames);
+    
+    if (validMimeTypes.length === 0) {
+      return validateFileExtension(file.name, acceptExtNames);
+    }
+    
+    if (validMimeTypes.includes(file.type)) {
+      return true;
+    }
+    
+    if (!file.type || GENERIC_MIME_TYPES.includes(file.type as any)) {
+      return validateFileExtension(file.name, acceptExtNames);
+    }
+    
+    return false;
+  }
+
+  function validateFileExtension(fileName: string, acceptExtNames: string[]): boolean {
+    const fileNameParts = fileName.split(".");
+    const fileExtension = fileNameParts.length > 1 ? fileNameParts.pop()!.toLowerCase() : "";
+    
+    const normalizedAcceptExtNames = acceptExtNames.map(ext => 
+      (ext.startsWith('.') ? ext.substring(1) : ext).toLowerCase()
+    );
+    
+    return normalizedAcceptExtNames.includes(fileExtension);
+  }
+
   function validateFile(file: File, maxSize?: string, acceptExtNames?: string[]): string | null {
     const effectiveMaxSize = parseSizeString(maxSize)
     if (effectiveMaxSize && file.size > effectiveMaxSize) {
-      return `El archivo "${file.name}" excede el tamaño máximo de ${formatFileSize(effectiveMaxSize)}`
+      return `El archivo "${file.name}" excede el tamaño máximo permitido de ${formatFileSize(effectiveMaxSize)}`
     }
 
-    const fileNameParts = file.name.split(".");
-    const fileExtension = fileNameParts.length > 1 ? fileNameParts.pop()!.toLowerCase() : "";
-
     if (acceptExtNames?.length) {
-      const normalizedAcceptExtNames = acceptExtNames.map(ext => 
-        (ext.startsWith('.') ? ext.substring(1) : ext).toLowerCase()
-      );
-      if (!normalizedAcceptExtNames.includes(fileExtension)) {
-        return `El archivo "${file.name}" tiene un formato no compatible. Formatos permitidos: ${acceptExtNames.join(", ")}`
+      const isValidMimeType = validateMimeType(file, acceptExtNames);
+      if (!isValidMimeType) {
+        const formattedExtensions = formatExtensions(acceptExtNames);
+        return `El archivo "${file.name}" no tiene un formato compatible. Formatos permitidos: ${formattedExtensions}`
       }
     }
 
@@ -135,7 +173,9 @@ export function useAttachFile(options: UseAttachFileOptions) {
 
   function validateFileCount(currentFilesCount: number, newFilesCount: number, maxFiles?: number): string | null {
     if (maxFiles && (currentFilesCount + newFilesCount) > maxFiles) {
-      return `Se permite un máximo de ${maxFiles} archivos. Actualmente tienes ${currentFilesCount} archivos y estás intentando agregar ${newFilesCount} más.`
+      const totalFiles = currentFilesCount + newFilesCount;
+      const fileWord = maxFiles === 1 ? 'archivo' : 'archivos';
+      return `Se permite un máximo de ${maxFiles} ${fileWord}. Intenta subir ${maxFiles - currentFilesCount} ${fileWord} o menos.`
     }
     return null
   }
@@ -160,6 +200,48 @@ export function useAttachFile(options: UseAttachFileOptions) {
     callback()
   }
 
+  function formatExtensions(extensions: string[]): string {
+    return extensions.map(ext => 
+      ext.startsWith('.') ? ext : `.${ext}`
+    ).join(", ");
+  }
+
+  function getFileType(fileName: string, mimeType?: string): string {
+    if (mimeType) {
+      if (mimeType.startsWith('image/')) return FILE_CATEGORIES.IMAGE;
+      if (mimeType.startsWith('video/')) return FILE_CATEGORIES.VIDEO;
+      if (mimeType.startsWith('audio/')) return FILE_CATEGORIES.AUDIO;
+      if (mimeType.includes('pdf') || 
+          mimeType.includes('msword') || 
+          mimeType.includes('officedocument') ||
+          mimeType.includes('text/')) return FILE_CATEGORIES.DOCUMENT;
+    }
+    
+    const fileNameParts = fileName.split(".");
+    const extension = fileNameParts.length > 1 ? fileNameParts.pop()!.toLowerCase() : "";
+    
+    if ((FILE_EXTENSIONS.IMAGE as readonly string[]).includes(extension)) return FILE_CATEGORIES.IMAGE;
+    if ((FILE_EXTENSIONS.DOCUMENT as readonly string[]).includes(extension)) return FILE_CATEGORIES.DOCUMENT;
+    if ((FILE_EXTENSIONS.VIDEO as readonly string[]).includes(extension)) return FILE_CATEGORIES.VIDEO;
+    if ((FILE_EXTENSIONS.AUDIO as readonly string[]).includes(extension)) return FILE_CATEGORIES.AUDIO;
+    if ((FILE_EXTENSIONS.ARCHIVE as readonly string[]).includes(extension)) return FILE_CATEGORIES.ARCHIVE;
+    if ((FILE_EXTENSIONS.CODE as readonly string[]).includes(extension)) return FILE_CATEGORIES.CODE;
+    
+    return FILE_CATEGORIES.FILE;
+  }
+
+  function isFileDuplicate(newFile: File, existingFiles: File[]): boolean {
+    return existingFiles.some(existingFile => 
+      existingFile.name === newFile.name && 
+      existingFile.size === newFile.size &&
+      existingFile.lastModified === newFile.lastModified
+    );
+  }
+
+  function removeDuplicateFiles(newFiles: File[], existingFiles: File[]): File[] {
+    return newFiles.filter(newFile => !isFileDuplicate(newFile, existingFiles));
+  }
+
   return {
     uploadState,
     isSuccess,
@@ -177,9 +259,16 @@ export function useAttachFile(options: UseAttachFileOptions) {
     validateFile,
     validateFiles,
     validateFileCount,
+    validateMimeType,
+    validateFileExtension,
+    getValidMimeTypes,
     handleHeaderClick,
     removeFile,
-    clearAllFiles
+    clearAllFiles,
+    formatExtensions,
+    getFileType,
+    isFileDuplicate,
+    removeDuplicateFiles
   }
 }
 

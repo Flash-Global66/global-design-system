@@ -1192,6 +1192,11 @@ __metadata:
 "@flash-global66/g-switch@workspace:components/switch":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-switch@workspace:components/switch"
+  peerDependencies:
+    "@flash-global66/g-form": ^0.1.1
+    "@flash-global66/g-icon-font": ^0.10.0
+    element-plus: ^2.9.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
