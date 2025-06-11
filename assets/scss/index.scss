@@ -11,7 +11,6 @@
 @use "../../components/overlay/overlay.styles.scss" as *;
 @use "../../components/menu/menu.styles.scss" as *;
 @use "../../components/link/src/link.styles.scss" as *;
-@use "../../components/switch/switch.styles.scss" as *;
 @use "../../components/scrollbar/src/scrollbar.styles.scss" as *;
 
 // new imports
@@ -37,6 +36,7 @@
 @use "@flash-global66/g-search-input/styles.scss" as *;
 @use "@flash-global66/g-icon-button/styles.scss" as *;
 @use "@flash-global66/g-table/styles.scss" as *;
+@use "@flash-global66/g-switch/styles.scss" as *;
 
 * {
   @apply font-montserrat;
