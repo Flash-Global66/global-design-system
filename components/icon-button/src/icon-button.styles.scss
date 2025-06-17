@@ -32,7 +32,7 @@
     }
 
     &.is-disabled {
-      @apply bg-transparent;
+      @apply bg-transparent text-disabled-txt;
     }
 
     &.gui-icon-button--border {
@@ -53,7 +53,7 @@
     }
 
     &.is-disabled {
-      @apply bg-transparent;
+      @apply bg-transparent text-disabled-txt;
     }
 
     &.gui-icon-button--border {
@@ -74,7 +74,7 @@
     }
 
     &.is-disabled {
-      @apply bg-transparent;
+      @apply bg-transparent text-disabled-txt;
     }
 
     &.gui-icon-button--border {
@@ -93,6 +93,14 @@
 
     & .hover-effect {
       @apply rounded-sm;
+    }
+  }
+
+  @include m("rounded") {
+    @apply rounded-full;
+
+    & .hover-effect {
+      @apply rounded-full;
     }
   }
 
