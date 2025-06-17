@@ -60,6 +60,7 @@
           <g-icon-font
             v-if="triggerIcon"
             :class="nsInput.e('icon')"
+            class="pr-2"
             @mousedown.prevent="onMouseDownInput"
             @touchstart.passive="onTouchStartInput"
             :name="triggerIcon"

@@ -8,7 +8,7 @@
 @include b("input") {
   @apply flex flex-col gap-xxs;
   @include e("wrapper") {
-    @apply relative flex bg-white gap-xs py-sm px-xs border border-disabled-bd rounded-md h-12;
+    @apply relative flex bg-white py-sm px-xs border border-disabled-bd rounded-md h-12;
   }
 
   @include e("label") {
@@ -17,14 +17,23 @@
     transform: translateY(-50%);
   }
 
+  @include e("prefix-icon") {
+    @apply pr-2;
+  }
+
+  @include e("sufix-icon") {
+    @apply pl-2;
+  }
+
   @each $status in (focus, complete) {
     @include when($status) {
       @include e("label") {
-        @apply text-2 left-xs font-medium;
+        @apply text-2 font-medium;
         background: linear-gradient(180deg, transparent 40%, white 0);
         top: 0;
         transform: translateY(-50%);
         padding: 0 2px;
+        left: 5px;
       }
       @include e("inner") {
         &::placeholder {
@@ -59,15 +68,13 @@
   @include when(disabled) {
     @include e("label") {
       @apply text-disabled-txt;
-      background: linear-gradient(
-        180deg,
-        transparent 40%,
-        rgb(249 250 251 / var(--tw-bg-opacity, 1)) 0
-      );
+      background: linear-gradient(180deg, transparent 40%, #eff0f2 0);
     }
     @include e("wrapper") {
-      // PREGUNTAR: por el semantic token
       @apply bg-primary-def-disabled border-grey-400;
+    }
+    @include e("inner") {
+      @apply text-disabled-txt;
     }
   }
 

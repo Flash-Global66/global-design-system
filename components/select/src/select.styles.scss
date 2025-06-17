@@ -17,7 +17,7 @@
 
 @include b("select") {
   @include e("wrapper") {
-    @apply h-12 p-sm rounded-md gap-xs border-disabled-bd border relative shadow-none;
+    @apply h-12 py-sm px-xs rounded-md gap-xs border-disabled-bd border relative shadow-none;
 
     @include e("label") {
       @apply absolute text-terciary-txt text-4 transition-all duration-200 ease-in font-medium;
@@ -50,11 +50,12 @@
     @each $status in (focused, complete) {
       @include when($status) {
         @include e("label") {
-          @apply text-2 left-xs font-medium text-secondary-txt;
+          @apply text-2 font-medium text-secondary-txt;
           background: linear-gradient(180deg, transparent 40%, white 0);
           top: 0;
           transform: translateY(-50%);
           padding: 0 2px;
+          left: 5px;
         }
         @include e("selected-item") {
           @include when(transparent) {
@@ -65,19 +66,21 @@
     }
 
     @include when(disabled) {
-      @apply shadow-none border-disabled-bd bg-gray-50 cursor-not-allowed;
-
+      @apply shadow-none cursor-not-allowed bg-primary-def-disabled border-grey-400;
       &:hover {
         @apply shadow-none;
       }
 
       @include e("label") {
         @apply text-disabled-txt;
-        background: linear-gradient(
-          180deg,
-          transparent 40%,
-          rgb(249 250 251 / var(--tw-bg-opacity, 1)) 0
-        );
+        background: linear-gradient(180deg, transparent 40%, #eff0f2 0);
+      }
+      @include e("inner") {
+        @apply text-disabled-txt;
+      }
+
+      @include e("selected-item") {
+        @apply text-disabled-txt;
       }
     }
   }
@@ -138,7 +141,7 @@
   }
 
   &__input-wrapper:not(.withIcon) {
-    @apply relative right-[7px];
+    @apply relative right-[7px] left-0;
     @include when(withIcon) {
       @apply right-0;
     }
