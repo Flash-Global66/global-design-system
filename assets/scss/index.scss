@@ -13,7 +13,6 @@
 @use '../../components/link/src/link.styles.scss' as *;
 @use '../../components/switch/switch.styles.scss' as *;
 @use '../../components/scrollbar/src/scrollbar.styles.scss' as *;
-@use '../../components/collapse/src/collapse.styles.scss' as *;
 
 // new imports
 @use '@flash-global66/g-checkbox/styles.scss' as *;
@@ -38,7 +37,7 @@
 @use '@flash-global66/g-search-input/styles.scss' as *;
 @use '@flash-global66/g-icon-button/styles.scss' as *;
 @use '@flash-global66/g-table/styles.scss' as *;
-/* @use "@flash-global66/g-collapse/styles.scss" as *; */
+@use "@flash-global66/g-collapse/styles.scss" as *;
 
 * {
   @apply font-montserrat;
