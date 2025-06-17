@@ -1,17 +1,17 @@
+import { ref, reactive, toRef } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 
-import { GSwitch } from '@flash-global66/g-switch/index.ts';
+import { GSwitch } from "@flash-global66/g-switch/index.ts";
 import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
-import { GForm, GFormItem, FormInstance } from '@flash-global66/g-form/index.ts';
-import { GButton } from '@flash-global66/g-button/index.ts';
-import { GInput } from '@flash-global66/g-input/index.ts';
+import { GForm, GFormItem, FormInstance } from "@flash-global66/g-form/index.ts";
+import { GButton } from "@flash-global66/g-button/index.ts";
+import { GInput } from "@flash-global66/g-input/index.ts";
 
-import { version, peerDependencies } from '@flash-global66/g-switch/package.json';
+import { version, peerDependencies } from "@flash-global66/g-switch/package.json";
 import { generatePeerDepsList, generateIconOptions, generatePeerDepsInstalls } from "../helper/documentation-stories";
-import { ref, reactive } from 'vue';
 
 const meta: Meta = {
-  title: "Data/Switch",
+  title: "Form/Switch",
   component: GSwitch,
   parameters: {
     docs: {
@@ -27,7 +27,7 @@ El componente Switch se utiliza para alternar entre dos estados opuestos.
 - Textos descriptivos configurables
 - Diferentes tamaños disponibles (large, default, small)
 - Estados de carga y deshabilitado
-- **Validación de formularios integrada** con soporte para @flash-global66/g-form
+- Validación de formularios integrada con soporte para @flash-global66/g-form
 - Accesibilidad completa con ARIA
 - Funciones de prevención de cambio (beforeChange)
 - Slots personalizados para acciones
@@ -119,252 +119,252 @@ const rules = {
   </g-form>
 </template>
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     modelValue: {
-      description: 'Valor de enlace del Switch (v-model). Debe ser equivalente a active-value o inactive-value.',
-      control: 'boolean',
+      description: "Valor de enlace del Switch (v-model). Debe ser equivalente a active-value o inactive-value.",
+      control: "boolean",
       table: {
-        category: 'Principales',
-        type: { summary: 'boolean | string | number' },
-        defaultValue: { summary: 'false' },
-      }
+        category: "Principales",
+        type: { summary: "boolean | string | number" },
+        defaultValue: { summary: "false" },
+      },
     },
     activeValue: {
-      description: 'Valor del switch cuando está en estado activo.',
-      control: 'text',
+      description: "Valor del switch cuando está en estado activo.",
+      control: "text",
       table: {
-        category: 'Principales',
-        type: { summary: 'boolean | string | number' },
-        defaultValue: { summary: 'true' },
-      }
+        category: "Principales",
+        type: { summary: "boolean | string | number" },
+        defaultValue: { summary: "true" },
+      },
     },
     inactiveValue: {
-      description: 'Valor del switch cuando está en estado inactivo.',
-      control: 'text',
+      description: "Valor del switch cuando está en estado inactivo.",
+      control: "text",
       table: {
-        category: 'Principales',
-        type: { summary: 'boolean | string | number' },
-        defaultValue: { summary: 'false' },
-      }
+        category: "Principales",
+        type: { summary: "boolean | string | number" },
+        defaultValue: { summary: "false" },
+      },
     },
     size: {
-      description: 'Tamaño del Switch.',
-      control: 'select',
-      options: ['', 'large', 'default', 'small'],
+      description: "Tamaño del Switch.",
+      control: "select",
+      options: ["", "large", "default", "small"],
       table: {
-        category: 'Apariencia',
+        category: "Apariencia",
         type: { summary: "'large' | 'default' | 'small'" },
-        defaultValue: { summary: 'default' },
-      }
+        defaultValue: { summary: "default" },
+      },
     },
     width: {
-      description: 'Ancho personalizado del Switch.',
-      control: 'text',
+      description: "Ancho personalizado del Switch.",
+      control: "text",
       table: {
-        category: 'Apariencia',
-        type: { summary: 'number | string' },
-        defaultValue: { summary: 'auto' },
-      }
+        category: "Apariencia",
+        type: { summary: "number | string" },
+        defaultValue: { summary: "auto" },
+      },
     },
     inlinePrompt: {
-      description: 'Si el icono o texto se muestra dentro del punto del switch.',
-      control: 'boolean',
+      description: "Si el icono o texto se muestra dentro del punto del switch.",
+      control: "boolean",
       table: {
-        category: 'Apariencia',
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      }
+        category: "Apariencia",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
     },
     activeIcon: {
-      description: 'Icono mostrado cuando está en estado activo.',
-      control: 'select',
-      options: ['', ...generateIconOptions()],
+      description: "Icono mostrado cuando está en estado activo.",
+      control: "select",
+      options: ["", ...generateIconOptions()],
       table: {
-        category: 'Iconos',
-        type: { summary: 'IconString' },
-        defaultValue: { summary: '—' },
-      }
+        category: "Iconos",
+        type: { summary: "IconString" },
+        defaultValue: { summary: "—" },
+      },
     },
     inactiveIcon: {
-      description: 'Icono mostrado cuando está en estado inactivo.',
-      control: 'select', 
-      options: ['', ...generateIconOptions()],
+      description: "Icono mostrado cuando está en estado inactivo.",
+      control: "select",
+      options: ["", ...generateIconOptions()],
       table: {
-        category: 'Iconos',
-        type: { summary: 'IconString' },
-        defaultValue: { summary: '—' },
-      }
+        category: "Iconos",
+        type: { summary: "IconString" },
+        defaultValue: { summary: "—" },
+      },
     },
     activeActionIcon: {
-      description: 'Icono mostrado en la acción cuando está en estado activo.',
-      control: 'select',
-      options: ['', ...generateIconOptions()],
+      description: "Icono mostrado en la acción cuando está en estado activo.",
+      control: "select",
+      options: ["", ...generateIconOptions()],
       table: {
-        category: 'Iconos',
-        type: { summary: 'IconString' },
-        defaultValue: { summary: '—' },
-      }
+        category: "Iconos",
+        type: { summary: "IconString" },
+        defaultValue: { summary: "—" },
+      },
     },
     inactiveActionIcon: {
-      description: 'Icono mostrado en la acción cuando está en estado inactivo.',
-      control: 'select',
-      options: ['', ...generateIconOptions()],
+      description: "Icono mostrado en la acción cuando está en estado inactivo.",
+      control: "select",
+      options: ["", ...generateIconOptions()],
       table: {
-        category: 'Iconos',
-        type: { summary: 'IconString' },
-        defaultValue: { summary: '—' },
-      }
+        category: "Iconos",
+        type: { summary: "IconString" },
+        defaultValue: { summary: "—" },
+      },
     },
     activeText: {
-      description: 'Texto mostrado cuando está en estado activo.',
-      control: 'text',
+      description: "Texto mostrado cuando está en estado activo.",
+      control: "text",
       table: {
-        category: 'Texto',
-        type: { summary: 'string' },
-        defaultValue: { summary: '' },
-      }
+        category: "Texto",
+        type: { summary: "string" },
+        defaultValue: { summary: "" },
+      },
     },
     inactiveText: {
-      description: 'Texto mostrado cuando está en estado inactivo.',
-      control: 'text',
+      description: "Texto mostrado cuando está en estado inactivo.",
+      control: "text",
       table: {
-        category: 'Texto',
-        type: { summary: 'string' },
-        defaultValue: { summary: '' },
-      }
+        category: "Texto",
+        type: { summary: "string" },
+        defaultValue: { summary: "" },
+      },
     },
 
     // Estados
     disabled: {
-      description: 'Si el Switch está deshabilitado.',
-      control: 'boolean',
+      description: "Si el Switch está deshabilitado.",
+      control: "boolean",
       table: {
-        category: 'Estados',
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      }
+        category: "Estados",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
     },
     loading: {
-      description: 'Si el Switch está en estado de carga.',
-      control: 'boolean',
+      description: "Si el Switch está en estado de carga.",
+      control: "boolean",
       table: {
-        category: 'Estados',
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      }
+        category: "Estados",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
     },
 
     // Validación y Formularios
     validateEvent: {
-      description: 'Si debe activar la validación del formulario cuando cambia el valor.',
-      control: 'boolean',
+      description: "Si debe activar la validación del formulario cuando cambia el valor.",
+      control: "boolean",
       table: {
-        category: 'Validación y Formularios',
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-      }
+        category: "Validación y Formularios",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+      },
     },
     beforeChange: {
-      description: 'Función ejecutada antes del cambio. Si retorna false o una Promise rechazada, previene el cambio.',
+      description: "Función ejecutada antes del cambio. Si retorna false o una Promise rechazada, previene el cambio.",
       table: {
-        category: 'Validación y Formularios',
-        type: { summary: '() => boolean | Promise<boolean>' },
-        defaultValue: { summary: '—' },
-      }
+        category: "Validación y Formularios",
+        type: { summary: "() => boolean | Promise<boolean>" },
+        defaultValue: { summary: "—" },
+      },
     },
 
     // Atributos HTML
     name: {
-      description: 'Atributo name nativo del input del Switch.',
-      control: 'text',
+      description: "Atributo name nativo del input del Switch.",
+      control: "text",
       table: {
-        category: 'Atributos HTML',
-        type: { summary: 'string' },
-        defaultValue: { summary: '' },
-      }
+        category: "Atributos HTML",
+        type: { summary: "string" },
+        defaultValue: { summary: "" },
+      },
     },
     id: {
-      description: 'ID para el input del Switch.',
-      control: 'text',
+      description: "ID para el input del Switch.",
+      control: "text",
       table: {
-        category: 'Atributos HTML',
-        type: { summary: 'string' },
-        defaultValue: { summary: 'auto-generado' },
-      }
+        category: "Atributos HTML",
+        type: { summary: "string" },
+        defaultValue: { summary: "auto-generado" },
+      },
     },
     tabindex: {
-      description: 'Orden de tabulación del input.',
-      control: 'text',
+      description: "Orden de tabulación del input.",
+      control: "text",
       table: {
-        category: 'Atributos HTML',
-        type: { summary: 'string | number' },
-        defaultValue: { summary: '—' },
-      }
+        category: "Atributos HTML",
+        type: { summary: "string | number" },
+        defaultValue: { summary: "—" },
+      },
     },
     ariaLabel: {
-      description: 'Etiqueta ARIA para accesibilidad cuando no hay texto visible.',
-      control: 'text',
+      description: "Etiqueta ARIA para accesibilidad cuando no hay texto visible.",
+      control: "text",
       table: {
-        category: 'Accesibilidad',
-        type: { summary: 'string' },
-        defaultValue: { summary: '—' },
-      }
+        category: "Accesibilidad",
+        type: { summary: "string" },
+        defaultValue: { summary: "—" },
+      },
     },
     onChange: {
-      description: 'Se dispara cuando el valor del switch cambia.',
+      description: "Se dispara cuando el valor del switch cambia.",
       table: {
-        category: 'Eventos',
-        type: { summary: '(value: boolean | string | number) => void' },
-      }
+        category: "Eventos",
+        type: { summary: "(value: boolean | string | number) => void" },
+      },
     },
-    'onUpdate:modelValue': {
-      description: 'Se dispara para actualizar el v-model.',
+    "onUpdate:modelValue": {
+      description: "Se dispara para actualizar el v-model.",
       table: {
-        category: 'Eventos',
-        type: { summary: '(value: boolean | string | number) => void' },
-      }
+        category: "Eventos",
+        type: { summary: "(value: boolean | string | number) => void" },
+      },
     },
 
     // Slots
-    'active-action': {
-      description: 'Contenido personalizado para la acción cuando está activo.',
+    "active-action": {
+      description: "Contenido personalizado para la acción cuando está activo.",
       table: {
-        category: 'Slots',
-        type: { summary: 'slot' }
-      }
+        category: "Slots",
+        type: { summary: "slot" },
+      },
     },
-    'inactive-action': {
-      description: 'Contenido personalizado para la acción cuando está inactivo.',
+    "inactive-action": {
+      description: "Contenido personalizado para la acción cuando está inactivo.",
       table: {
-        category: 'Slots',
-        type: { summary: 'slot' }
-      }
-    }
+        category: "Slots",
+        type: { summary: "slot" },
+      },
+    },
   },
   args: {
     modelValue: false,
     disabled: false,
     loading: false,
-    size: '',
-    width: '',
+    size: "",
+    width: "",
     inlinePrompt: false,
-    activeIcon: '',
-    inactiveIcon: '',
-    activeActionIcon: '',
-    inactiveActionIcon: '',
-    activeText: '',
-    inactiveText: '',
+    activeIcon: "",
+    inactiveIcon: "",
+    activeActionIcon: "",
+    inactiveActionIcon: "",
+    activeText: "",
+    inactiveText: "",
     activeValue: true,
     inactiveValue: false,
-    name: '',
+    name: "",
     validateEvent: true,
-    id: '',
-    tabindex: '',
-    ariaLabel: '',
+    id: "",
+    tabindex: "",
+    ariaLabel: "",
   },
 };
 
@@ -387,15 +387,15 @@ export const Primary: Story = {
   render: (args: any) => ({
     components: { GSwitch, GConfigProvider },
     setup() {
-      const value = ref(args.modelValue);
+      const value = toRef(args, "modelValue");
       return { args, value };
     },
     template: `
       <g-config-provider>
         <div class="space-y-4">
-          <g-switch
-            v-model="value" 
-            v-bind="args" 
+          <g-switch 
+            v-model="value"
+            v-bind="args"
           />
           <p>Valor actual: {{ value }}</p>
         </div>
@@ -406,18 +406,18 @@ export const Primary: Story = {
 
 // Tamaños
 export const Sizes: Story = {
-  name: 'Tamaños',
+  name: "Tamaños",
   parameters: {
     docs: {
       description: {
-        story: 'El Switch está disponible en diferentes tamaños: large, default (por defecto) y small.'
+        story: "El Switch está disponible en diferentes tamaños: large, default (por defecto) y small.",
       },
       source: {
         code: `<g-switch v-model="value" size="large" />
 <g-switch v-model="value" />
 <g-switch v-model="value" size="small" />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -444,17 +444,18 @@ export const Sizes: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Descripción de texto
 export const TextDescription: Story = {
-  name: 'Descripción de texto',
+  name: "Descripción de texto",
   parameters: {
     docs: {
       description: {
-        story: 'Puedes agregar los atributos active-text e inactive-text para mostrar textos. Usa el atributo inline-prompt para controlar si el texto se muestra dentro del punto.'
+        story:
+          "Puedes agregar los atributos active-text e inactive-text para mostrar textos. Usa el atributo inline-prompt para controlar si el texto se muestra dentro del punto.",
       },
       source: {
         code: `<!-- Con texto -->
@@ -481,7 +482,7 @@ export const TextDescription: Story = {
   inline-prompt
 />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -532,17 +533,18 @@ export const TextDescription: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Iconos personalizados
 export const CustomIcons: Story = {
-  name: 'Iconos personalizados',
+  name: "Iconos personalizados",
   parameters: {
     docs: {
       description: {
-        story: 'Puedes agregar los atributos active-icon e inactive-icon para mostrar iconos. Usa el atributo inline-prompt para controlar si el icono se muestra dentro del punto.'
+        story:
+          "Puedes agregar los atributos active-icon e inactive-icon para mostrar iconos. Usa el atributo inline-prompt para controlar si el icono se muestra dentro del punto.",
       },
       source: {
         code: `<!-- Aprobado/Rechazado -->
@@ -568,7 +570,7 @@ export const CustomIcons: Story = {
   inline-prompt
 />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -619,17 +621,18 @@ export const CustomIcons: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Tipos de valor extendidos
 export const ExtendedValueTypes: Story = {
-  name: 'Tipos de valor extendidos',
+  name: "Tipos de valor extendidos",
   parameters: {
     docs: {
       description: {
-        story: 'Puedes configurar los atributos active-value e inactive-value. Ambos reciben un valor de tipo Boolean, String o Number.'
+        story:
+          "Puedes configurar los atributos active-value e inactive-value. Ambos reciben un valor de tipo Boolean, String o Number.",
       },
       source: {
         code: `<!-- Números -->
@@ -659,13 +662,13 @@ export const ExtendedValueTypes: Story = {
   inactive-text="Off"
 />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
     setup() {
       const value1 = ref(100);
-      const value2 = ref('yes');
+      const value2 = ref("yes");
       const value3 = ref(1);
       return { value1, value2, value3 };
     },
@@ -707,17 +710,17 @@ export const ExtendedValueTypes: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Deshabilitado
 export const Disabled: Story = {
-  name: 'Deshabilitado',
+  name: "Deshabilitado",
   parameters: {
     docs: {
       description: {
-        story: 'Agregar el atributo disabled deshabilita el Switch.'
+        story: "Agregar el atributo disabled deshabilita el Switch.",
       },
       source: {
         code: `<g-switch v-model="value" disabled />
@@ -730,7 +733,7 @@ export const Disabled: Story = {
   inactive-text="Inactivo"
 />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -761,17 +764,17 @@ export const Disabled: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Estado de carga
 export const Loading: Story = {
-  name: 'Estado de carga',
+  name: "Estado de carga",
   parameters: {
     docs: {
       description: {
-        story: 'Configurar el atributo loading a true indica un estado de carga en el Switch.'
+        story: "Configurar el atributo loading a true indica un estado de carga en el Switch.",
       },
       source: {
         code: `<g-switch v-model="value" loading />
@@ -784,7 +787,7 @@ export const Loading: Story = {
   inactive-text="Desconectado"
 />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -815,17 +818,18 @@ export const Loading: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Prevenir cambio
 export const PreventSwitching: Story = {
-  name: 'Prevenir cambio',
+  name: "Prevenir cambio",
   parameters: {
     docs: {
       description: {
-        story: 'Configura la propiedad before-change. Si se devuelve false o se devuelve una Promise que luego es rechazada, se detendrá el cambio.'
+        story:
+          "Configura la propiedad before-change. Si se devuelve false o se devuelve una Promise que luego es rechazada, se detendrá el cambio.",
       },
       source: {
         code: `<!-- Con confirmación -->
@@ -851,26 +855,26 @@ const beforeChangeAsync = () => {
 };
 </script>`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
     setup() {
       const value1 = ref(false);
       const value2 = ref(false);
-      
+
       const beforeChange1 = () => {
-        return confirm('¿Estás seguro de que quieres cambiar el estado?');
+        return confirm("¿Estás seguro de que quieres cambiar el estado?");
       };
-      
+
       const beforeChange2 = () => {
         return new Promise((resolve) => {
           setTimeout(() => {
-            resolve(confirm('¿Confirmar cambio después de 1 segundo?'));
+            resolve(confirm("¿Confirmar cambio después de 1 segundo?"));
           }, 1000);
         });
       };
-      
+
       return { value1, value2, beforeChange1, beforeChange2 };
     },
     template: `
@@ -896,17 +900,18 @@ const beforeChangeAsync = () => {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Iconos de acción personalizados
 export const CustomActionIcons: Story = {
-  name: 'Iconos de acción personalizados',
+  name: "Iconos de acción personalizados",
   parameters: {
     docs: {
       description: {
-        story: 'Puedes agregar los atributos active-action-icon e inactive-action-icon para mostrar iconos en las acciones.'
+        story:
+          "Puedes agregar los atributos active-action-icon e inactive-action-icon para mostrar iconos en las acciones.",
       },
       source: {
         code: `<!-- Encendido/Apagado -->
@@ -933,7 +938,7 @@ export const CustomActionIcons: Story = {
   width="60px"
 />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -975,17 +980,17 @@ export const CustomActionIcons: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Slots de acción personalizados
 export const CustomActionSlots: Story = {
-  name: 'Slots de acción personalizados',
+  name: "Slots de acción personalizados",
   parameters: {
     docs: {
       description: {
-        story: 'Puedes usar los slots active-action e inactive-action para personalizar las acciones.'
+        story: "Puedes usar los slots active-action e inactive-action para personalizar las acciones.",
       },
       source: {
         code: `<!-- Con badges -->
@@ -1008,7 +1013,7 @@ export const CustomActionSlots: Story = {
   </template>
 </g-switch>`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -1044,17 +1049,17 @@ export const CustomActionSlots: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Ancho personalizado
 export const CustomWidth: Story = {
-  name: 'Ancho personalizado',
+  name: "Ancho personalizado",
   parameters: {
     docs: {
       description: {
-        story: 'Puedes personalizar el ancho del Switch usando la propiedad width.'
+        story: "Puedes personalizar el ancho del Switch usando la propiedad width.",
       },
       source: {
         code: `<!-- Ancho 40px -->
@@ -1078,7 +1083,7 @@ export const CustomWidth: Story = {
   inline-prompt
 />`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GSwitch, GConfigProvider },
@@ -1117,8 +1122,8 @@ export const CustomWidth: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Validación de formulario
@@ -1233,7 +1238,7 @@ const resetForm = () => {
           { min: 3, message: "El nombre de usuario debe tener al menos 3 caracteres", trigger: "blur" },
         ],
         acceptTerms: [
-          { 
+          {
             validator: (rule: any, value: any, callback: Function) => {
               if (value === true) {
                 callback();
@@ -1242,25 +1247,29 @@ const resetForm = () => {
               }
             },
             trigger: "change",
-            required: true
+            required: true,
           },
-        ]
+        ],
       };
 
       const submitForm = async () => {
         if (!formRef.value) return;
-        
+
         try {
           const valid = await formRef.value.validate();
-          
+
           if (valid) {
-            alert(`¡Formulario válido!\nUsuario: ${formData.username}\nTérminos: ${formData.acceptTerms ? 'Aceptados' : 'No aceptados'}\nNotificaciones: ${formData.enableNotifications ? 'Habilitadas' : 'Deshabilitadas'}`);
+            alert(
+              `¡Formulario válido!\nUsuario: ${formData.username}\nTérminos: ${
+                formData.acceptTerms ? "Aceptados" : "No aceptados"
+              }\nNotificaciones: ${formData.enableNotifications ? "Habilitadas" : "Deshabilitadas"}`
+            );
           } else {
-            alert('Por favor, corrige los errores del formulario antes de continuar.');
+            alert("Por favor, corrige los errores del formulario antes de continuar.");
           }
         } catch (fields) {
-          console.log('📋 ERRORES DE VALIDACIÓN:', fields);
-          alert('Por favor, corrige los errores del formulario antes de continuar.');
+          console.log("📋 ERRORES DE VALIDACIÓN:", fields);
+          alert("Por favor, corrige los errores del formulario antes de continuar.");
         }
       };
 
@@ -1364,5 +1373,3 @@ const resetForm = () => {
     `,
   }),
 };
-
-
