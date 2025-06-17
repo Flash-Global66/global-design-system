@@ -45,7 +45,6 @@ yarn add @flash-global66/g-table
 \`\`\`typescript
 import { GTable, GTableColumn } from '@flash-global66/g-table'
 import '@flash-global66/g-table/styles.scss'
-import GIconButton from '../components/icon-button/dist/types/index';
 \`\`\`
 
 ### Dependencias
