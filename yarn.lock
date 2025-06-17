@@ -1245,6 +1245,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-toast@workspace:components/toast":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-toast@workspace:components/toast"
+  peerDependencies:
+    "@flash-global66/g-icon-font": ^0.10.0
+    "@vueuse/core": ^12.4.0
+    element-plus: ^2.9.0
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-tooltip@workspace:components/tooltip":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-tooltip@workspace:components/tooltip"
