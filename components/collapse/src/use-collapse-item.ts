@@ -111,6 +111,7 @@ export const useCollapseItemDOM = (
   const contentHeaderKls = computed(() => [ns.bem('item', 'header', 'content')])
   const arrowKls = computed(() => [ns.be('item', 'arrow'), ns.is('active', unref(isActive))])
   const itemTitleKls = computed(() => [ns.be('item', 'title')])
+  const itemDescriptionKls = computed(() => [ns.be('item', 'description')])
   const contentHeaderTextKls = computed(() => [ns.bem('item', 'header', 'text')])
   const itemWrapperKls = computed(() => ns.be('item', 'wrap'))
   const itemContentKls = computed(() => ns.be('item', 'content'))
@@ -126,6 +127,7 @@ export const useCollapseItemDOM = (
     itemContentKls,
     scopedContentId,
     scopedHeadId,
+    itemDescriptionKls,
     iconsLeftKls,
     iconsRightKls,
     contentHeaderKls,
