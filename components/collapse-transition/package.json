@@ -1,7 +1,7 @@
 {
-  "name": "@flash-global66/g-collapse",
+  "name": "@flash-global66/g-collapse-transition",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -10,7 +10,6 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/collapse.styles.scss",
     "./*": "./*"
   },
   "files": [
@@ -22,18 +21,15 @@
     "build": "vite build",
     "build:types": "vue-tsc --project tsconfig.json"
   },
+  "peerDependencies": {
+    "element-plus": "^2.9.0",
+    "vue": "^3.2.0"
+  },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
-  },
-  "peerDependencies": {
-    "@flash-global66/g-icon-font": "^0.10.0",
-    "@flash-global66/g-collapse-transition": "^0.0.1",
-    "element-plus": "^2.9.0",
-    "lodash-unified": "^1.0.3",
-    "vue": "^3.2.0"
-  },
-  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
+  }
 }

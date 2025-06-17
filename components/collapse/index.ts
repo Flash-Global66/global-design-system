@@ -1,6 +1,19 @@
-import GCollapse from "./Collapse.vue";
-import GCollapseItem from "./CollapseItem.vue";
-import { ChangeCollapse, ValueCollapse } from './collapse.type';
+import { withInstall, withNoopInstall } from 'element-plus/es/utils/index'
 
-export { GCollapse, GCollapseItem };
-export type { ValueCollapse, ChangeCollapse };
+import Collapse from './src/collapse.vue'
+import CollapseItem from './src/collapse-item.vue'
+import type { SFCWithInstall } from 'element-plus/es/utils/index'
+
+export const GCollapse: SFCWithInstall<typeof Collapse> & {
+  CollapseItem: typeof CollapseItem
+} = withInstall(Collapse, {
+  CollapseItem,
+})
+export default GCollapse
+export const GCollapseItem: SFCWithInstall<typeof CollapseItem> =
+  withNoopInstall(CollapseItem)
+
+export * from './src/collapse'
+export * from './src/collapse-item'
+export * from './src/constants'
+export type { CollapseInstance, CollapseItemInstance } from './src/instance'
