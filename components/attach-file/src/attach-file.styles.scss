@@ -207,7 +207,7 @@
 
   // FileList component styles
   @include e('file-list') {
-    @apply bg-white border border-grey-50 rounded-sm px-md py-sm mt-xs;
+    @apply bg-white rounded-sm mt-xs;
     
     @include e('item') {
       @apply flex items-center justify-between mb-xs;
@@ -272,11 +272,11 @@
     }
 
     @include e('file-name') {
-      @apply truncate;
+      @apply truncate text-disab-lt-txt;
     }
 
     @include e('file-size') {
-      @apply ml-auto;
+      @apply ml-auto text-disab-lt-txt;
     }
 
     @include e('files-list') {
@@ -400,14 +400,6 @@
   }
 }
 
-// Accessibility improvements
-@include b('attach-file') {
-  @include e('drop-zone') {
-    &:focus-within {
-      @apply outline-none ring-2 ring-blue-500 ring-offset-2;
-    }
-  }
-}
 
 // Animation for file items
 @include b('attach-file') {

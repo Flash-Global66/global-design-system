@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-button@0.2.2...@flash-global66/g-icon-button@0.3.0) (2025-06-06)
+
+
+### Bug Fixes
+
+* **icon-button:** update disabled state styles to include text color ([c30cc7b](https://github.com/Flash-Global66/global-design-system/commit/c30cc7b7cc0c9c2324905339da94092cfff4190c))
+
+
+### Features
+
+* **icon-button:** add rounded prop for fully rounded borders ([cfa894b](https://github.com/Flash-Global66/global-design-system/commit/cfa894b472578200e40477e3f8ee4af8b30faae8))
+* **icon-button:** add type prop to icon button component and stories ([7358e23](https://github.com/Flash-Global66/global-design-system/commit/7358e2384fc54eac04fb32e050030ffe81a6fb5f))
+
+
+
+
+
 ## [0.2.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-button@0.2.1...@flash-global66/g-icon-button@0.2.2) (2025-05-27)
 
 **Note:** Version bump only for package @flash-global66/g-icon-button
