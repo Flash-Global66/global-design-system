@@ -11,6 +11,9 @@
         <template #default="slotData">
           <slot v-bind="slotData" :item="item" />
         </template>
+        <template #header="slotData">
+          <slot name="header" v-bind="slotData" :item="item" />
+        </template>
       </g-collapse-item>
     </div>
     <slot name="dynamic" v-else />

@@ -12,6 +12,7 @@ import { GRadioGroup } from '@flash-global66/g-radio/index.ts'
 import { GForm, GFormItem } from '@flash-global66/g-form/index.ts'
 import { GInput } from '@flash-global66/g-input/index.ts'
 import { GButton } from '@flash-global66/g-button/index.ts'
+import { GTag } from '@flash-global66/g-tag/index.ts'
 
 // CONFIG
 import { GConfigProvider } from '../components/config-provider'
@@ -663,7 +664,16 @@ export const slotDefault: Story = {
     }
   },
   render: () => ({
-    components: { GConfigProvider, GCollapse, GCollapseItem, GForm, GFormItem, GInput, GButton },
+    components: {
+      GConfigProvider,
+      GCollapse,
+      GCollapseItem,
+      GForm,
+      GFormItem,
+      GInput,
+      GButton,
+      GTag
+    },
     setup() {
       const activeNames = ref(['1'])
       const formData = reactive({
@@ -717,8 +727,19 @@ export const slotDefault: Story = {
     template: `
       <g-config-provider>
         <g-collapse :items="items" class="flex flex-col gap-6" v-model="activeNames">
+          <template #header="{ item }">
+            <div class="flex items-start flex-col gap-xxs">
+              <h6 class="text-6 font-semibold text-primary-txt line-clamp-2 overflow-hidden text-ellipsis">
+                {{ item.title }}
+              </h6>
+              <span class="text-2 font-medium text-secondary-txt line-clamp-1 overflow-hidden text-ellipsis">
+                {{ item.description }}
+              </span>
+              <g-tag text="completado" size="xs" type="success" prefix-icon="solid check" suffix-icon="solid check" />
+            </div>
+          </template>
           <template #default="{ item }">
-            <div class="flex p-4 w-full">
+            <div class="flex w-full">
               <g-form :model="formData" class="w-full">
                 <div class="grid grid-cols-2 gap-4">
                   <g-form-item>
