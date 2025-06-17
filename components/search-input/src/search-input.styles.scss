@@ -27,7 +27,15 @@
   }
 
   @include when(disabled) {
-    @apply opacity-50 cursor-not-allowed;
+    @apply cursor-not-allowed;
+
+    @include e(icon) {
+      @apply cursor-not-allowed;
+    }
+
+    .gui-input__inner {
+      @apply cursor-not-allowed;
+    }
   }
 
   @include when(loading) {
