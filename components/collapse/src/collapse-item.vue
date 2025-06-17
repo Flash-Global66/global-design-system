@@ -29,7 +29,7 @@
             <h5 :class="itemTitleKls">
               {{ title }}
             </h5>
-            <span>
+            <span :class="itemDescriptionKls">
               {{ description }}
             </span>
           </slot>
@@ -101,7 +101,8 @@ const {
   contentHeaderKls,
   iconsLeftKls,
   iconsRightKls,
-  contentHeaderTextKls
+  contentHeaderTextKls,
+  itemDescriptionKls
 } = useCollapseItemDOM(props, { focusing, isActive, id })
 
 defineExpose({
