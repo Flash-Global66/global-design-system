@@ -8,12 +8,10 @@
 
 <script lang="ts" setup>
 import { useNamespace } from "element-plus";
+import type { ValidationErrorsProps } from "../../attach-file.type";
 
 const ns = useNamespace("attach-file");
 
-interface Props {
-  errors: string[];
-}
-
-defineProps<Props>();
+defineProps<ValidationErrorsProps>();
 </script>
+

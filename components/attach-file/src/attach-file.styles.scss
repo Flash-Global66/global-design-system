@@ -9,130 +9,104 @@
   @apply w-full;
 
   @include e('drop-zone') {
-      @apply relative border-2 border-dashed border-secondary-bd rounded-lg p-8 text-center transition-colors duration-200;
-  
-      &:hover:not(.#{$namespace}-attach-file__drop-zone.is-disabled):not(.#{$namespace}-attach-file__drop-zone.is-dragging) {
-        @apply border-primary-bd;
-      }
-  
-      @include when('dragging') {
-        @apply border-primary-def bg-sec-def-bg shadow-lg;
-        transform: scale(1.05); 
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-      }
-  
-      @include when('disabled') {
-        @apply opacity-50 cursor-not-allowed;
-      }
+    @apply relative border-2 border-dashed border-secondary-bd rounded-lg p-2xl text-center transition-colors duration-200;
+
+    &:hover:not(.#{$namespace}-attach-file__drop-zone.is-disabled):not(.#{$namespace}-attach-file__drop-zone.is-dragging) {
+      @apply border-primary-bd;
     }
 
-  @include e('upload-icon') {
-    @apply mx-auto h-12 w-12 text-gray-400 mb-4;
+    @include when('dragging') {
+      @apply border-primary-def bg-sec-def-bg shadow-lg;
+      transform: scale(1.05);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    @include when('disabled') {
+      @apply opacity-50 cursor-not-allowed;
+    }
   }
 
   @include e('text-content') {
-    @apply space-y-2;
+    @apply space-y-xs;
   }
 
   @include e('main-text') {
-    @apply text-gray-600;
-  }
-
-  @include e('browse-button') {
-    @apply text-blue-600 hover:text-blue-500 font-medium focus:outline-none focus:underline;
-
-    &:disabled {
-      @apply cursor-not-allowed opacity-50;
-    }
-  }
-
-  @include e('supported-formats') {
-    @apply text-sm text-gray-500;
-  }
-
-  @include e('max-size') {
-    @apply text-sm text-gray-500;
+    @apply text-secondary-txt;
   }
 
   @include e('file-input') {
     @apply hidden;
   }
 
+  // File list con estilos base
   @include e('file-list') {
-    @apply mt-4 space-y-2;
-  }
+    @apply space-y-xs bg-sec-def-bg rounded-sm;
 
-  @include e('file-list-title') {
-    @apply text-gray-700 font-medium text-sm mb-2;
-  }
+    @include e('item') {
+      @apply flex items-center gap-xs;
 
-  @include e('file-item') {
-    @apply flex items-center justify-between;
-  }
-
-  @include e('file-info') {
-    @apply flex items-center space-x-3;
-  }
-
-  @include e('file-icon') {
-    @apply flex-shrink-0;
-
-    svg {
-      @apply h-8 w-8 text-gray-400;
-    }
-  }
-
-  @include e('file-details') {
-    @apply min-w-0 flex-1;
-  }
-
-  @include e('file-name') {
-    @apply text-sm font-medium text-gray-900 truncate;
-  }
-
-  @include e('file-size') {
-    @apply text-sm text-gray-500;
-  }
-
-  @include e('file-actions') {
-    @apply flex items-center space-x-2;
-  }
-
-  @include e('action-button') {
-    @apply focus:outline-none;
-
-    svg {
-      @apply h-5 w-5;
-    }
-
-    @include when('preview') {
-      @apply text-gray-400 hover:text-gray-600;
-    }
-
-    @include when('delete') {
-      @apply text-red-400 hover:text-red-600;
-
-      &:disabled {
-        @apply cursor-not-allowed opacity-50;
+      &:last-child {
+        @apply mb-0;
       }
     }
-  }
 
-  @include e('errors') {
-    @apply mt-2 space-y-1;
-  }
+    @include e('item-content') {
+      @apply flex items-center flex-1 gap-xs;
+    }
 
-  @include e('error') {
-    @apply text-red-600 text-sm;
-  }
+    @include e('file-status-icon') {
+      @apply w-lg h-lg flex items-center justify-center;
 
-  @include e('form-error') {
-    @apply text-red-600 text-sm font-medium mt-2;
+      @include e('icon') {
+        @apply flex-shrink-0 text-3;
+
+        @include when('success') {
+          @apply text-success-def;
+        }
+
+        @include when('error') {
+          @apply text-error-def;
+        }
+
+        @include when('loading') {
+          @apply text-primary-def;
+        }
+      }
+    }
+
+    @include e('file-name') {
+      @apply truncate flex-1 text-secondary-txt text-2;
+
+      @include when('error') {
+        @apply text-error-def;
+      }
+
+      @include when('success') {
+        @apply text-secondary-txt;
+      }
+    }
+
+    @include e('item-actions') {
+      @apply flex items-center gap-xs;
+    }
+
+    @include e('file-size') {
+      @apply text-disab-lt-txt text-2;
+    }
+
+    // Modificadores BEM como pseudo-selectores
+    &--clean {
+      @apply mt-xs;
+    }
+
+    &--boxed {
+      @apply bg-sec-def-bg rounded-sm mt-lg py-sm px-md;
+    }
   }
 
   // DefaultState component styles
   @include e('default-state') {
-    @apply flex w-full items-center py-sm px-md rounded-sm border border-grey-50 bg-white;
+    @apply flex w-full items-center py-sm px-md rounded-sm border border-grey-50 bg-sec-def-bg;
 
     @include e('content') {
       @apply flex flex-col flex-1 min-w-0;
@@ -151,21 +125,17 @@
     }
   }
 
-  // DefaultType component styles
+  // DefaultType component styles  
   @include e('default-type') {
     @apply w-full;
-
-    @include e('hidden-input') {
-      @apply hidden;
-    }
   }
 
-  // DragDropType component styles
+
   @include e('drag-drop-type') {
     @apply w-full;
 
     @include e('drop-zone') {
-      @apply relative border-2 border-dashed border-primary-def rounded-lg p-8 text-center transition-colors duration-200 bg-white;
+      @apply relative border-2 border-dashed border-primary-def rounded-lg p-2xl text-center transition-colors duration-200 bg-sec-def-bg;
 
       @include when('dragging') {
         @apply border-primary-def bg-sec-def-bg;
@@ -181,7 +151,7 @@
     }
 
     @include e('text-content') {
-      @apply space-y-2;
+      @apply space-y-xs;
     }
 
     @include e('main-text') {
@@ -205,70 +175,27 @@
     }
   }
 
-  // FileList component styles
-  @include e('file-list') {
-    @apply bg-white rounded-sm mt-xs;
-    
-    @include e('item') {
-      @apply flex items-center justify-between mb-xs;
-    }
-
-    @include e('item-content') {
-      @apply flex items-center gap-xs flex-1;
-    }
-
-    @include e('file-name') {
-      @apply text-xs font-medium truncate;
-
-      @include when('error') {
-        @apply text-error-def;
-      }
-
-      @include when('success') {
-        @apply text-secondary-txt;
-      }
-    }
-
-    @include e('item-actions') {
-      @apply flex items-center space-x-2;
-    }
-
-    @include e('file-size') {
-      @apply text-xs text-disab-lt-txt;
-    }
-  }
-
-  // DefaultType component styles
-  @include e('default-type') {
-    @apply w-full;
-
-    @include e('hidden-input') {
-      @apply hidden;
-    }
-  }
-
-  // LoadingState component styles
   @include e('loading-state') {
-    @apply flex w-full items-start py-sm px-md gap-md rounded-sm border border-grey-50 bg-white;
+    @apply flex w-full items-start py-sm px-md gap-md rounded-sm border border-grey-50 bg-sec-def-bg;
 
     @include e('content') {
       @apply flex flex-col flex-1 min-w-0;
     }
 
     @include e('title') {
-      @apply text-3 font-semibold leading-snug text-secondary-txt;
+      @apply text-secondary-txt font-semibold text-3;
     }
 
     @include e('info-text') {
-      @apply text-2 font-medium text-disab-lt-txt;
+      @apply text-disab-lt-txt text-2;
     }
 
     @include e('progress-wrapper') {
-      @apply mt-xs;
+      @apply pt-xs;
     }
 
     @include e('file-info') {
-      @apply flex items-center justify-between text-disab-lt-txt text-xs mt-xxs;
+      @apply flex items-center justify-between text-disab-lt-txt text-2 pt-xxs;
     }
 
     @include e('file-name') {
@@ -280,15 +207,15 @@
     }
 
     @include e('files-list') {
-      @apply mt-xxs;
+      @apply pt-xxs;
     }
 
     @include e('files-container') {
-      @apply space-y-2;
+      @apply space-y-xs;
     }
 
     @include e('file-item') {
-      @apply flex items-center gap-2;
+      @apply flex items-center gap-xs;
     }
 
     @include e('file-item-content') {
@@ -296,11 +223,11 @@
     }
 
     @include e('file-item-progress') {
-      @apply my-xxs;
+      @apply pt-xs;
     }
 
     @include e('file-item-info') {
-      @apply flex justify-between items-center text-xs text-disab-lt-txt;
+      @apply flex justify-between items-center text-disab-lt-txt text-2 pt-xxs;
     }
 
     @include e('file-item-name') {
@@ -312,15 +239,14 @@
     }
   }
 
-  // ResultState component styles
-  @include e('result-state') {
-    @apply w-full py-sm px-md rounded-sm border border-grey-50 bg-white;
+  @include e('content') {
+    @apply w-full rounded-sm py-sm px-md border border-grey-50 bg-sec-def-bg;
 
     @include e('header') {
-      @apply flex items-start justify-between space-x-md;
+      @apply flex items-center justify-between gap-md;
 
       @include when('with-file-list') {
-        @apply mb-xs;
+        //@apply mb-xs;
       }
     }
 
@@ -329,43 +255,11 @@
     }
 
     @include e('title') {
-      @apply text-3 font-semibold leading-snug text-secondary-txt;
+      @apply text-secondary-txt text-3 font-semibold;
     }
 
     @include e('info-text') {
-      @apply text-2 font-medium text-disab-lt-txt;
-    }
-
-    @include e('single-file-success') {
-      @apply flex items-center justify-between text-xs mt-xxs;
-    }
-
-    @include e('success-icon') {
-      @apply text-lg text-success-def mr-xs;
-    }
-
-    @include e('file-name-success') {
-      @apply text-sm text-secondary-txt text-ellipsis;
-    }
-
-    @include e('file-size-success') {
-      @apply text-disab-lt-txt ml-auto;
-    }
-
-    @include e('single-file-error') {
-      @apply mt-xxs;
-    }
-
-    @include e('error-content') {
-      @apply flex items-center space-x-2;
-    }
-
-    @include e('error-icon') {
-      @apply text-sm flex-shrink-0 text-error-def;
-    }
-
-    @include e('error-message') {
-      @apply text-xs font-medium text-error-def;
+      @apply text-disab-lt-txt text-2;
     }
   }
 
@@ -374,32 +268,10 @@
     @apply mt-xs;
 
     @include e('error-text') {
-      @apply text-xs text-error-def font-medium;
-    }
-  }
-
-  // File status icon styles (inlined from FileStatusIcon)
-  @include e('file-status-icon') {
-    @apply w-3 h-3 flex items-center justify-center;
-
-    @include e('icon') {
-      @apply text-sm flex-shrink-0;
-
-      @include when('success') {
-        @apply text-success-def;
-      }
-
-      @include when('error') {
-        @apply text-error-def;
-      }
-
-      @include when('loading') {
-        @apply text-primary-def;
-      }
+      @apply text-1 text-error-def font-medium;
     }
   }
 }
-
 
 // Animation for file items
 @include b('attach-file') {
@@ -413,13 +285,13 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-// Responsive adjustments
 @media (max-width: 640px) {
   @include b('attach-file') {
     @include e('drop-zone') {
@@ -431,11 +303,11 @@
     }
 
     @include e('file-item') {
-      @apply p-2;
+      @apply p-xxs;
     }
 
     @include e('file-actions') {
-      @apply space-x-1;
+      @apply space-x-xxs;
     }
   }
 }

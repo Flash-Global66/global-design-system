@@ -1,7 +1,7 @@
 <template>
   <div :class="ns.b()">
-    <DefaultType 
-      v-if="props.type === 'default'" 
+    <default-type
+      v-if="props.type === 'default'"
       :id="inputId"
       :model-value="safeModelValue"
       :mode="props.mode"
@@ -27,8 +27,8 @@
       @file-input-change="onFileInputChange"
     />
 
-    <DragDropType
-      v-else-if="props.type === 'drag-drop'" 
+    <drag-drop-type
+      v-else-if="props.type === 'drag-drop'"
       :input-id="inputId"
       :model-value="safeModelValue"
       :upload-button-text="props.uploadButtonText"
@@ -61,8 +61,8 @@ import { debugWarn } from "element-plus/es/utils/index.mjs";
 import { useFormItem, useFormItemInputId } from "@flash-global66/g-form";
 import { attachFileProps, attachFileEmits } from "./attach-file";
 import { useAttachFile } from "./composables/useAttachFile";
-import { FILE_STATUS } from "./constants";
-import type { FileStatus } from "./constants";
+import { FILE_STATUS } from "./attach-file.type";
+import type { FileStatus } from "./attach-file.type";
 import DefaultType from "./components/default/default-type.vue";
 import DragDropType from "./components/drag-drop/drag-drop-type.vue";
 
@@ -95,7 +95,7 @@ const fileProgress = ref<Record<number, number>>({});
 
 const fileStatuses = computed(() => {
   const statuses: Record<number, FileStatus> = {};
-  
+
   safeModelValue.value.forEach((_, index) => {
     if (fileErrors.value[index]) {
       statuses[index] = FILE_STATUS.ERROR;
@@ -107,7 +107,7 @@ const fileStatuses = computed(() => {
       statuses[index] = FILE_STATUS.SUCCESS;
     }
   });
-  
+
   return statuses;
 });
 
@@ -122,14 +122,8 @@ const displayErrors = computed(() => {
   return combinedErrors;
 });
 
-const { 
-  formatFileSize, 
-  parseSizeString, 
-  validateFile, 
-  validateFiles, 
-  validateFileCount,
-  removeDuplicateFiles
-} = useAttachFile({});
+const { formatFileSize, parseSizeString, validateFile, validateFiles, validateFileCount, removeDuplicateFiles } =
+  useAttachFile({});
 
 const effectiveMaxSize = computed(() => {
   if (props.maxSize) {
@@ -140,24 +134,25 @@ const effectiveMaxSize = computed(() => {
 
 function addFiles(newFiles: File[]) {
   const uniqueFiles = removeDuplicateFiles(newFiles, safeModelValue.value);
-  
+
   if (uniqueFiles.length === 0) {
-    const duplicateMessage = newFiles.length === 1 
-      ? `El archivo "${newFiles[0].name}" ya ha sido seleccionado.`
-      : `Los archivos seleccionados ya han sido agregados.`;
+    const duplicateMessage =
+      newFiles.length === 1
+        ? `El archivo "${newFiles[0].name}" ya ha sido seleccionado.`
+        : `Los archivos seleccionados ya han sido agregados.`;
     errors.value = [duplicateMessage];
     emit("error", [duplicateMessage]);
     return;
   }
-  
+
   const fileValidationErrors = validateFiles(uniqueFiles, props.maxSize, props.acceptExtNames);
-  
+
   if (fileValidationErrors.length > 0) {
     errors.value = fileValidationErrors;
     emit("error", fileValidationErrors);
-    
+
     if (props.validateEvent) {
-      formItem?.validate('change').catch((err) => debugWarn(err));
+      formItem?.validate("change").catch((err) => debugWarn(err));
     }
     return;
   }
@@ -173,9 +168,9 @@ function addFiles(newFiles: File[]) {
   if (totalErrors.length > 0) {
     errors.value = totalErrors;
     emit("error", totalErrors);
-    
+
     if (props.validateEvent) {
-      formItem?.validate('change').catch((err) => debugWarn(err));
+      formItem?.validate("change").catch((err) => debugWarn(err));
     }
     return;
   }
@@ -184,9 +179,9 @@ function addFiles(newFiles: File[]) {
 
   emit("update:modelValue", updatedFiles);
   emit("change", updatedFiles);
-  
+
   if (props.validateEvent) {
-    formItem?.validate('change').catch((err) => debugWarn(err));
+    formItem?.validate("change").catch((err) => debugWarn(err));
   }
 }
 
@@ -226,9 +221,9 @@ function removeFile(index: number) {
 
   emit("update:modelValue", updatedFiles);
   emit("change", updatedFiles);
-  
+
   if (props.validateEvent) {
-    formItem?.validate('change').catch((err) => debugWarn(err));
+    formItem?.validate("change").catch((err) => debugWarn(err));
   }
 }
 
@@ -296,7 +291,7 @@ defineExpose({
   clearFileError,
   setFileProgress,
   clearFileProgress,
-  updateFileProgress
+  updateFileProgress,
 });
 </script>
 

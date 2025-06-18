@@ -1,7 +1,8 @@
 <template>
   <div :class="ns.e('drag-drop-type')">
     <!-- Drop Zone -->
-    <div ref="dropZone"
+    <div
+      ref="dropZone"
       :class="[
         ns.e('drop-zone'),
         {
@@ -9,68 +10,81 @@
           [ns.is('error')]: errors.length > 0,
           [ns.is('disabled')]: disabled,
           [ns.is('loading')]: isLoading,
-        }
+        },
       ]"
       role="button"
       tabindex="0"
       :aria-label="`${uploadButtonText}. ${defaultRestrictionText || ''}`"
-      :aria-describedby="(restrictionText || acceptExtNames.length || effectiveMaxSize) ? `${inputId || 'drag-drop'}-restriction` : undefined"
+      :aria-describedby="
+        restrictionText || acceptExtNames.length || effectiveMaxSize
+          ? `${inputId || 'drag-drop'}-restriction`
+          : undefined
+      "
       @click="openFileDialog"
       @keydown.enter="openFileDialog"
       @keydown.space.prevent="openFileDialog"
-      @dragover.prevent="onDragOver" 
-      @dragenter.prevent="onDragEnter" 
+      @dragover.prevent="onDragOver"
+      @dragenter.prevent="onDragEnter"
       @dragleave.prevent="onDragLeave"
-      @drop.prevent="onDrop">
-      
+      @drop.prevent="onDrop"
+    >
       <!-- Text Content -->
       <div :class="ns.e('text-content')">
         <p :class="ns.e('main-text')">
-          <button type="button"
+          <button
+            type="button"
             :class="ns.e('upload-button')"
-            :disabled="disabled || isLoading" 
-            @click.stop="openFileDialog">
+            :disabled="disabled || isLoading"
+            @click.stop="openFileDialog"
+          >
             {{ uploadButtonText }}
           </button>
           {{ uploadText }}
         </p>
-        <p v-if="restrictionText || acceptExtNames.length || effectiveMaxSize" 
-           :class="ns.e('restriction-text')"
-           :id="`${inputId || 'drag-drop'}-restriction`">
+        <p
+          v-if="restrictionText || acceptExtNames.length || effectiveMaxSize"
+          :class="ns.e('restriction-text')"
+          :id="`${inputId || 'drag-drop'}-restriction`"
+        >
           {{ restrictionText || defaultRestrictionText }}
         </p>
       </div>
 
       <!-- Hidden File Input -->
-      <input ref="fileInput" 
-        type="file" 
-        :multiple="multiple" 
-        :accept="acceptExtNames.join(',')" 
+      <input
+        ref="fileInput"
+        type="file"
+        :multiple="multiple"
+        :accept="acceptExtNames.join(',')"
         :disabled="disabled || isLoading"
         :class="ns.e('hidden-input')"
         :aria-label="`${uploadButtonText} - ${defaultRestrictionText || ''}`"
-        @change="onFileInputChange" />
+        @change="onFileInputChange"
+      />
     </div>
 
     <!-- File List for Drag-Drop Type -->
-    <div v-if="safeModelValue.length > 0" :class="ns.e('file-list')">
-      <div v-for="(file, index) in safeModelValue" :key="index" 
-           :class="[
-             ns.e('item'),
-             {
-               [ns.is('loading')]: isLoading
-             }
-           ]">
+    <div v-if="safeModelValue.length > 0" :class="ns.em('file-list', 'boxed')">
+      <div
+        v-for="(file, index) in safeModelValue"
+        :key="index"
+        :class="[
+          ns.e('item'),
+          {
+            [ns.is('loading')]: isLoading,
+          },
+        ]"
+      >
         <div :class="ns.e('item-content')">
           <!-- Loading state: show progress bar and file name -->
           <template v-if="isLoading">
             <!-- Progress bar with proper wrapper structure like loading-state -->
             <div :class="ns.e('file-item-content')">
-              <g-progress 
-                :percentage="fileProgress[index] || uploadProgress || 0" 
-                type="line" 
+              <g-progress
+                :percentage="fileProgress[index] || uploadProgress || 0"
+                type="line"
                 :stroke-width="7"
-                :show-text="false" 
+                :show-text="false"
                 :class="ns.e('file-item-progress')"
               />
               <div :class="ns.e('file-item-info')">
@@ -79,43 +93,45 @@
               </div>
             </div>
           </template>
-          
+
           <!-- Normal state: show status icon and file name -->
           <template v-else>
             <div :class="ns.e('file-status-icon')">
-              <g-icon-font 
-                :name="getFileStatus(index) === FILE_STATUS.ERROR ? 'solid times' : 'solid check'" 
+              <g-icon-font
+                :name="getFileStatus(index) === FILE_STATUS.ERROR ? 'solid times' : 'solid check'"
                 :class="[
                   ns.e('icon'),
                   {
                     [ns.is('success')]: getFileStatus(index) !== FILE_STATUS.ERROR,
-                    [ns.is('error')]: getFileStatus(index) === FILE_STATUS.ERROR
-                  }
+                    [ns.is('error')]: getFileStatus(index) === FILE_STATUS.ERROR,
+                  },
                 ]"
               />
             </div>
-            <span :class="[
-              ns.e('file-name'),
-              {
-                [ns.is('error')]: getFileStatus(index) === FILE_STATUS.ERROR,
-                [ns.is('success')]: getFileStatus(index) !== FILE_STATUS.ERROR
-              }
-            ]">
+            <span
+              :class="[
+                ns.e('file-name'),
+                {
+                  [ns.is('error')]: getFileStatus(index) === FILE_STATUS.ERROR,
+                  [ns.is('success')]: getFileStatus(index) !== FILE_STATUS.ERROR,
+                },
+              ]"
+            >
               {{ file.name }}
             </span>
           </template>
         </div>
-        
-        <div :class="ns.e('item-actions')">          
+
+        <div :class="ns.e('item-actions')">
           <!-- Normal state: show file size and delete button -->
           <template v-if="!isLoading">
             <span :class="ns.e('file-size')">{{ formatFileSize(file.size) }}</span>
-            <g-icon-button 
-              icon="solid trash-alt" 
-              variant="grey" 
-              size="small" 
+            <g-icon-button
+              icon="solid trash-alt"
+              variant="grey"
+              size="small"
               :disabled="disabled"
-              @click="!disabled && removeFile(index)" 
+              @click="!disabled && removeFile(index)"
               title="Eliminar archivo"
             />
           </template>
@@ -124,10 +140,7 @@
     </div>
 
     <!-- Validation Errors -->
-    <ValidationErrors 
-      v-if="errors.length > 0" 
-      :errors="errors"
-    />
+    <ValidationErrors v-if="errors.length > 0" :errors="errors" />
   </div>
 </template>
 
@@ -139,32 +152,12 @@ import { GIconButton } from "@flash-global66/g-icon-button";
 import { GProgress } from "@flash-global66/g-progress";
 import ValidationErrors from "../common/validation-errors.vue";
 import { useAttachFile } from "../../composables/useAttachFile";
-import { FILE_STATUS } from "../../constants";
-import type { FileStatus } from "../../constants";
+import { FILE_STATUS } from "../../attach-file.type";
+import type { FileStatus, DragDropTypeProps, DragDropTypeEmits } from "../../attach-file.type";
 
 const ns = useNamespace("attach-file");
 
-export interface Props {
-  inputId?: string;
-  modelValue: File[];
-  uploadButtonText: string;
-  uploadText: string;
-  restrictionText?: string;
-  acceptExtNames: string[];
-  multiple: boolean;
-  disabled: boolean;
-  maxSize?: string;
-  maxFiles?: number;
-  errors: string[];
-  fileErrors: Record<number, string>;
-  fileProgress: Record<number, number>;
-  fileStatuses?: Record<number, FileStatus>;
-  loadingState?: boolean;
-  uploading?: boolean;
-  uploadProgress?: number;
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<DragDropTypeProps>(), {
   inputId: undefined,
   restrictionText: "",
   maxSize: "",
@@ -172,16 +165,10 @@ const props = withDefaults(defineProps<Props>(), {
   fileStatuses: () => ({} as Record<number, FileStatus>),
   loadingState: false,
   uploading: false,
-  uploadProgress: 0
+  uploadProgress: 0,
 });
 
-const emit = defineEmits<{
-  'update:modelValue': [files: File[]];
-  'change': [files: File[]];
-  'error': [errors: string[]];
-  'fileInputChange': [event: Event];
-  'files-drop': [files: FileList];
-}>();
+const emit = defineEmits<DragDropTypeEmits>();
 
 const {
   inputId,
@@ -200,9 +187,8 @@ const {
   fileStatuses,
   loadingState,
   uploading,
-  uploadProgress
+  uploadProgress,
 } = toRefs(props);
-
 
 const safeModelValue = computed(() => modelValue.value || []);
 
@@ -218,7 +204,6 @@ const isLoading = computed(() => loadingState.value || uploading.value);
 const getFileStatus = (index: number): FileStatus | undefined => {
   return fileStatuses.value[index] as FileStatus;
 };
-
 
 const effectiveMaxSize = computed(() => {
   if (maxSize.value) {
@@ -252,12 +237,12 @@ function openFileDialog() {
 }
 
 function onFileInputChange(event: Event) {
-  emit('fileInputChange', event);
+  emit("fileInputChange", event);
 }
 
 function removeFile(index: number) {
   if (isLoading.value) return;
-  
+
   const updatedFiles = [...safeModelValue.value];
   updatedFiles.splice(index, 1);
   emit("update:modelValue", updatedFiles);
@@ -291,12 +276,13 @@ function onDrop(event: DragEvent) {
 
   const files = event.dataTransfer?.files;
   if (files) {
-    emit('files-drop', files);
+    emit("files-drop", files);
   }
 }
 
 defineExpose({
   fileInput,
-  openFileDialog
+  openFileDialog,
 });
 </script>
+
