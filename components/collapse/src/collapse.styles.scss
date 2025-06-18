@@ -1,0 +1,50 @@
+@use 'sass:map';
+
+@use 'element-plus/theme-chalk/src/collapse.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b(collapse) {
+  @apply rounded-md border-none flex flex-col gap-md;
+}
+
+@include b(collapse-item) {
+  @include e(header) {
+    @apply flex px-lg py-md justify-between items-center h-auto rounded-md border-none transition-colors duration-500 ease-in-out;
+    @include when(active) {
+      @apply bg-everBlue-50 rounded-bl-none rounded-br-none;
+    }
+    @include m(content) {
+      @apply flex gap-xs items-center justify-center;
+    }
+    @include m('icon-left') {
+      @apply flex items-center justify-center gap-xs;
+      & svg {
+        @apply h-5 w-5 text-icon-primary;
+      }
+    }
+    @include m('text') {
+      @apply flex flex-col items-start justify-center;
+    }
+    @include m('icon-right') {
+      @apply flex items-center justify-center gap-xs;
+      & svg {
+        @apply h-5 w-5 text-icon-primary;
+      }
+    }
+    @include e(title) {
+      @apply text-6 font-semibold text-primary-txt line-clamp-2 overflow-hidden text-ellipsis;
+    }
+    @include e(description) {
+      @apply text-2 font-medium text-secondary-txt line-clamp-1 overflow-hidden text-ellipsis;
+    }
+  }
+  @include e(wrap) {
+    @apply border-none rounded-bl-md rounded-br-md;
+  }
+  @include e(content) {
+    @apply px-lg py-md;
+  }
+}
