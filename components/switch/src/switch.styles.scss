@@ -1,0 +1,266 @@
+@use 'sass:map';
+
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+$switch-height: () !default;
+$switch-height: map.merge(
+  (
+    'large': 36px,
+    'default': 30px,
+    'small': 24px,
+  ),
+  $switch-height
+);
+
+
+$switch-core-width: () !default;
+$switch-core-width: map.merge(
+  (
+    'large': 67px,
+    'default': 56px,
+    'small': 45px,
+  ),
+  $switch-core-width
+);
+
+$switch-core-height: () !default;
+$switch-core-height: map.merge(
+  (
+    'large': 36px,
+    'default': 30px,
+    'small': 24px,
+  ),
+  $switch-core-height
+);
+
+$switch-button-size: () !default;
+$switch-button-size: map.merge(
+  (
+    'large': 30px,
+    'default': 24px,
+    'small': 18px,
+  ),
+  $switch-button-size
+);
+
+$switch-core-border-radius: () !default;
+$switch-core-border-radius: map.merge(
+  (
+    'large': 18px,
+    'default': 15px,
+    'small': 12px,
+  ),
+  $switch-core-border-radius
+);
+
+$switch-content-padding: () !default;
+$switch-content-padding: map.merge(
+  (
+    'large': 6px,
+    'default': 4px,
+    'small': 2px,
+  ),
+  $switch-content-padding
+);
+
+@include b(switch) {
+  @include set-component-css-var('switch', $switch);
+}
+
+@include b(switch) {
+  @apply inline-flex items-center relative text-3;
+  height: map.get($switch-height, 'default');
+  vertical-align: middle;
+
+  @include e(label) {
+    @apply inline-block font-medium cursor-pointer text-secondary-txt;
+    transition: getCssVar('transition-duration-fast');
+    vertical-align: middle;
+
+    @include when(active) {
+      @apply text-primary-def;
+    }
+
+    @include m(left) {
+      @apply mr-2;
+    }
+    @include m(right) {
+      @apply ml-2;
+    }
+    & * {
+      line-height: 1;
+      @apply inline-block;
+    }
+    .#{$namespace}-icon {
+      height: inherit;
+
+      svg {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  @include e(input) {
+    @apply absolute opacity-0;
+    width: 0;
+    height: 0;
+    margin: 0;
+
+    &:focus-visible {
+      & ~ .#{$namespace}-switch__core {
+        @apply outline-2 outline-primary-def outline-offset-1;
+        outline-style: solid;
+      }
+    }
+  }
+
+  @include e(core) {
+    @apply inline-flex relative items-center border border-solid cursor-pointer;
+    border-radius: map.get($switch-core-border-radius, 'default');
+    min-width: map.get($switch-core-width, 'default');
+    height: map.get($switch-core-height, 'default');
+    border-color: var(
+      #{getCssVarName('switch-border-color')},
+      #{getCssVar('switch-off-color')}
+    );
+    outline: none;
+    box-sizing: border-box;
+    background: getCssVar('switch-off-color');
+    @apply border-disab-lt-bd bg-disab-lt-bg;
+    transition: border-color getCssVar('transition-duration'),
+      background-color getCssVar('transition-duration');
+
+    .#{$namespace}-switch__inner {
+      @apply w-full h-full flex justify-center items-center overflow-hidden;
+      transition: all getCssVar('transition-duration');
+      padding: 0 #{map.get($switch-content-padding, 'default')} 0 calc(#{map.get(
+              $switch-button-size,
+              'default'
+            )} + 2px);
+
+      .is-icon,
+      .is-text {
+        @apply text-xs text-white flex items-center justify-center;
+        user-select: none;
+        @include utils-ellipsis;
+        min-width: 0; 
+        flex-shrink: 1;
+      }
+    }
+
+    .#{$namespace}-switch__action {
+      @apply absolute flex justify-center items-center bg-white;
+      left: 3px;
+      border-radius: getCssVar('border-radius-circle');
+      transition: all getCssVar('transition-duration');
+      width: map.get($switch-button-size, 'default');
+      height: map.get($switch-button-size, 'default');
+      @apply text-disab-lt-txt;
+    }
+  }
+
+  @include when(checked) {
+    .#{$namespace}-switch__core {
+      @apply border-primary-bd bg-primary-def;
+
+      .#{$namespace}-switch__action {
+        left: calc(100% - #{map.get($switch-button-size, 'default') + 3px});
+        @apply text-primary-def;
+      }
+
+      .#{$namespace}-switch__inner {
+        padding: 0 calc(#{map.get($switch-button-size, 'default')} + 2px) 0 #{map.get(
+            $switch-content-padding,
+            'default'
+          )};
+      }
+    }
+  }
+
+  @include when(disabled) {
+    & .#{$namespace}-switch__core,
+    & .#{$namespace}-switch__label {
+      @apply cursor-not-allowed;
+    }
+
+    & .#{$namespace}-switch__core {
+      @apply bg-grey-200 border-grey-200;
+    }
+
+    & .#{$namespace}-switch__action {
+      @apply bg-grey-100;
+    }
+  }
+
+  @include m(wide) {
+    .#{$namespace}-switch__label {
+      &.#{$namespace}-switch__label--left {
+        span {
+          left: 10px;
+        }
+      }
+
+      &.#{$namespace}-switch__label--right {
+        span {
+          right: 10px;
+        }
+      }
+    }
+  }
+
+  & .label-fade-enter-from,
+  & .label-fade-leave-active {
+    opacity: 0;
+  }
+
+  @each $size in (large, small) {
+    @include m($size) {
+      height: map.get($switch-height, $size);
+
+      @include e(label) {
+        // Altura natural sin altura fija
+      }
+
+      @include e(core) {
+        min-width: map.get($switch-core-width, $size);
+        height: map.get($switch-core-height, $size);
+        border-radius: map.get($switch-core-border-radius, $size);
+
+        .#{$namespace}-switch__inner {
+          padding: 0 #{map.get($switch-content-padding, $size)} 0 calc(#{map.get(
+                  $switch-button-size,
+                  $size
+                )} + 2px);
+        }
+
+        .#{$namespace}-switch__action {
+          width: map.get($switch-button-size, $size);
+          height: map.get($switch-button-size, $size);
+          @if $size == 'large' {
+            left: 4px;
+          } @else if $size == 'small' {
+            left: 2px;
+          }
+        }
+      }
+
+      @include when(checked) {
+        .#{$namespace}-switch__core {
+          .#{$namespace}-switch__action {
+            left: calc(100% - #{map.get($switch-button-size, $size) + 3px});
+          }
+
+          .#{$namespace}-switch__inner {
+            padding: 0 calc(#{map.get($switch-button-size, $size)} + 2px) 0 #{map.get(
+                $switch-content-padding,
+                $size
+              )};
+          }
+        }
+      }
+    }
+  }
+}
