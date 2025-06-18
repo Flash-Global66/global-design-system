@@ -1,0 +1,194 @@
+@use 'sass:map';
+
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+
+@include b(toast) {
+  @apply flex items-center gap-xs px-sm rounded-md border w-96 box-border fixed overflow-hidden;
+  overflow-wrap: break-word;
+  z-index: 9999;
+  transition: top 300ms ease-out;
+
+  &.right {
+    @apply right-4;
+  }
+
+  &.left {
+    @apply left-4;
+  }
+
+  @include e(group) {
+    @apply flex-1 min-w-0 mx-0;
+  }
+
+  @include e(content) {
+    @apply leading-6 m-0 font-medium text-secondary-txt;
+    
+    p {
+      @apply m-0;
+    }
+  }
+
+  @include e(icon) {
+    @apply shrink-0;
+  }
+
+  @include e(closeBtn) {
+    @apply cursor-pointer text-icon-secondary flex-shrink-0 ml-xs;
+
+    &:hover {
+      @apply text-primary-def-hover;
+    }
+  }
+
+  @include e(progress) {
+    @apply absolute bottom-0 left-0 right-0 h-1 overflow-hidden;
+  }
+
+  @include e(progress-bar) {
+    @apply h-full w-0;
+    animation: progressFill linear forwards;
+  }
+
+
+    @include m(success) {
+      @apply border-success-bd bg-success-bg;
+  
+      @include e(icon) {
+        @apply text-success-txt;
+      }
+  
+      @include e(progress) {
+        @apply text-success-txt;
+      }
+  
+      @include e(progress-bar) {
+        @apply bg-success-def;
+      }
+    }
+
+  @include m(info) {
+    @apply border-info-bd bg-info-bg;
+    
+    @include e(icon) {
+      @apply text-info-txt;
+    }
+    
+    @include e(progress) {
+      @apply text-info-txt;
+    }
+    
+    @include e(progress-bar) {
+      @apply bg-info-def;
+    }
+  }
+
+  @include m(warning) {
+    @apply border-warning-bd bg-warning-bg;
+    
+    @include e(icon) {
+      @apply text-warning-txt;
+    }
+    
+    @include e(progress) {
+      @apply text-warning-txt;
+    }
+    
+    @include e(progress-bar) {
+      @apply bg-warning-def;
+    }
+  }
+
+  @include m(error) {
+    @apply border-error-bd bg-error-bg;
+    
+    @include e(icon) {
+      @apply text-error-txt;
+    }
+    
+    @include e(progress) {
+      @apply text-error-txt;
+    }
+    
+    @include e(progress-bar) {
+      @apply bg-error-def;
+    }
+  }
+
+  @include m(sm) {
+    @apply min-h-14 py-2;
+    
+    @include e(content) {
+      @apply text-2;
+    }
+    
+    @include e(icon) {
+      @apply w-5 h-5 text-9;
+    }
+    
+    @include e(closeBtn) {
+      @apply w-4 h-4;
+    }
+  }
+
+  @include m(md) {
+    @apply min-h-16 py-3;
+    
+    @include e(content) {
+      @apply text-4;
+    }
+    
+    @include e(icon) {
+      @apply w-6 h-6 text-10;
+    }
+    
+    @include e(closeBtn) {
+      @apply w-5 h-5;
+    }
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+
+@include b(toast-fade-enter-active) {
+  @apply transition-all ease-out duration-300;
+}
+
+@include b(toast-fade-leave-active) {
+  @apply transition-all ease-in duration-300;
+}
+
+@include b(toast-fade-enter-from) {
+  @apply opacity-0;
+  
+  &.right {
+    @apply translate-x-5;
+  }
+
+  &.left {
+    @apply -translate-x-5;
+  }
+}
+
+@include b(toast-fade-leave-to) {
+  @apply opacity-0;
+  
+  &.right {
+    @apply translate-x-5;
+  }
+
+  &.left {
+    @apply -translate-x-5;
+  }
+}

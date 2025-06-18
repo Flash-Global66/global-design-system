@@ -1,7 +1,7 @@
 {
-  "name": "@flash-global66/g-collapse",
+  "name": "@flash-global66/g-toast",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "1.1.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -10,7 +10,7 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/collapse.styles.scss",
+    "./styles.scss": "./src/toast.styles.scss",
     "./*": "./*"
   },
   "files": [
@@ -29,11 +29,9 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "peerDependencies": {
-    "@flash-global66/g-collapse-transition": "^0.0.1",
     "@flash-global66/g-icon-font": "^0.10.0",
+    "@vueuse/core": "^12.4.0",
     "element-plus": "^2.9.0",
-    "lodash-unified": "^1.0.3",
     "vue": "^3.2.0"
-  },
-  "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
+  }
 }

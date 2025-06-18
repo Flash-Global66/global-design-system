@@ -20,13 +20,13 @@
       @apply flex gap-xs items-center justify-center;
     }
     @include m('icon-left') {
-      @apply flex items-center justify-center gap-xxs;
+      @apply flex items-center justify-center gap-xs;
       & svg {
         @apply h-5 w-5 text-icon-primary;
       }
     }
     @include m('text') {
-      @apply flex flex-col items-start justify-center gap-xs;
+      @apply flex flex-col items-start justify-center;
     }
     @include m('icon-right') {
       @apply flex items-center justify-center gap-xs;
