@@ -1,6 +1,6 @@
 import type { ExtractPropTypes } from "vue";
 import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
-import { ATTACH_FILE_MODES, FileStatus, type AttachFileMode } from './constants';
+import { ATTACH_FILE_MODES, FileStatus, type AttachFileMode } from "./attach-file.type";
 
 export const attachFileProps = buildProps({
   modelValue: {
@@ -84,16 +84,15 @@ export const attachFileProps = buildProps({
 } as const);
 
 export const attachFileEmits = {
-  'update:modelValue': (files: File[]) => true,
-  'change': (files: File[]) => true,
-  'preview': (data: { file: File; index: number }) => true,
-  'error': (errors: string[]) => true,
-  'retry': () => true,
-  'onRetry': () => true,
-  'download': () => true,
+  "update:modelValue": (files: File[]) => true,
+  change: (files: File[]) => true,
+  preview: (data: { file: File; index: number }) => true,
+  error: (errors: string[]) => true,
+  retry: () => true,
+  onRetry: () => true,
+  download: () => true,
 };
 
 export type AttachFilePropsType = ExtractPropTypes<typeof attachFileProps>;
 export type AttachFileEmitsType = typeof attachFileEmits;
-
 
