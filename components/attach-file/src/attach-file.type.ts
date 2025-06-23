@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, ComputedRef, Ref } from "vue";
+import type { ComputedRef, Ref } from "vue";
 
 export const ATTACH_FILE_MODES = {
   UPLOAD: "upload",
@@ -35,107 +35,6 @@ export type FileCategory = (typeof FILE_CATEGORIES)[keyof typeof FILE_CATEGORIES
 
 export interface AttachFileProps {
   modelValue: File[];
-  acceptExtNames?: string[];
-  maxSize?: number;
-  multiple?: boolean;
-  disabled?: boolean;
-  label?: string;
-  placeholder?: string;
-}
-
-export interface AttachFileEmits {
-  "update:modelValue": (files: File[]) => void;
-  change: (files: File[]) => void;
-  preview: (data: { file: File; index: number }) => void;
-  error: (errors: string[]) => void;
-}
-
-export interface FileValidationError {
-  file: File;
-  error: string;
-}
-
-export interface AttachFileInstance {
-  addFiles: (files: File[]) => void;
-  removeFile: (index: number) => void;
-  clearFiles: () => void;
-  validateFiles: () => string[];
-}
-
-export type AttachFileStatus = "idle" | "dragging" | "uploading" | "success" | "error";
-
-export interface DefaultTypeProps {
-  id?: string;
-  modelValue: File[];
-  mode?: AttachFileMode;
-  title: string;
-  infoText: string;
-  multiple: boolean;
-  acceptExtNames: string[];
-  disabled: boolean;
-  uploading?: boolean;
-  uploadError?: boolean;
-  uploadProgress?: number;
-  errorMessage?: string;
-  fileStatuses?: Record<number, FileStatus>;
-  errors: string[];
-  fileErrors: Record<number, string>;
-  fileProgress: Record<number, number>;
-}
-
-export interface DefaultTypeEmits {
-  "update:modelValue": [files: File[]];
-  change: [files: File[]];
-  error: [errors: string[]];
-  download: [];
-  "file-input-change": [event: Event];
-}
-
-export interface DragDropTypeProps {
-  inputId?: string;
-  modelValue: File[];
-  uploadButtonText: string;
-  uploadText: string;
-  restrictionText?: string;
-  acceptExtNames: string[];
-  multiple: boolean;
-  disabled: boolean;
-  maxSize?: string;
-  maxFiles?: number;
-  errors: string[];
-  fileErrors: Record<number, string>;
-  fileProgress: Record<number, number>;
-  fileStatuses?: Record<number, FileStatus>;
-  loadingState?: boolean;
-  uploading?: boolean;
-  uploadProgress?: number;
-}
-
-export interface DragDropTypeEmits {
-  "update:modelValue": [files: File[]];
-  change: [files: File[]];
-  error: [errors: string[]];
-  fileInputChange: [event: Event];
-  "files-drop": [files: FileList];
-}
-
-export interface ValidationErrorsProps {
-  errors: string[];
-}
-
-export interface UseAttachFileOptions {
-  mode?: ComputedRef<string | undefined> | Ref<string | undefined>;
-  multiple?: ComputedRef<boolean | undefined> | Ref<boolean | undefined>;
-  files?: ComputedRef<File[] | undefined> | Ref<File[] | undefined>;
-  uploading?: ComputedRef<boolean | undefined> | Ref<boolean | undefined>;
-  uploadError?: ComputedRef<boolean | undefined> | Ref<boolean | undefined>;
-  uploadProgress?: ComputedRef<number | undefined> | Ref<number | undefined>;
-  fileStatuses?: ComputedRef<Record<number, FileStatus> | undefined> | Ref<Record<number, FileStatus> | undefined>;
-  fileErrors?: ComputedRef<Record<number, string> | undefined> | Ref<Record<number, string> | undefined>;
-}
-
-export interface AttachFilePropsFromBuildProps {
-  modelValue: File[];
   type: "default" | "drag-drop";
   mode: AttachFileMode;
   id?: string;
@@ -151,8 +50,99 @@ export interface AttachFilePropsFromBuildProps {
   restrictionText: string;
   infoText: string;
   uploading: boolean;
-  uploadProgress: number;
-  uploadError: string;
-  fileStatuses: Record<number, FileStatus>;
+  uploadError: boolean | string;
+  fileErrors: Record<number, string>;
+  fileProgress: Record<number, number>;
+}
+
+export interface AttachFileEmits {
+  (event: "update:modelValue", files: File[]): void;
+  (event: "change", files: File[]): void;
+  (event: "error", errors: string[]): void;
+  (event: "validation-error", errors: ValidationError[]): void;
+  (event: "onRetry"): void;
+  (event: "download"): void;
+  (event: "clearProgress"): void;
+}
+
+export interface FileValidationError {
+  file: File;
+  error: string;
+}
+
+export interface ValidationError {
+  type: 'file-size-exceeded' | 'invalid-file-type' | 'max-files-exceeded';
+  file?: File;
+  message?: string;
+  data?: {
+    maxSize?: string;
+    actualSize?: number;
+    acceptedExtensions?: string[];
+    actualExtension?: string;
+    maxFiles?: number;
+    currentFiles?: number;
+    allowedNewFiles?: number;
+  };
+}
+
+export type AttachFileStatus = "idle" | "dragging" | "uploading" | "success" | "error";
+
+// Props base compartidas entre tipos
+export interface BaseTypeProps {
+  modelValue: File[];
+  multiple: boolean;
+  acceptExtNames: string[];
+  disabled: boolean;
+  errors: string[];
+  fileErrors: Record<number, string>;
+  fileProgress: Record<number, number>;
+  fileStatuses?: Record<number, FileStatus>;
+  uploading?: boolean;
+}
+
+export interface DefaultTypeProps extends BaseTypeProps {
+  id?: string;
+  mode?: AttachFileMode;
+  title: string;
+  infoText: string;
+  uploadError?: boolean;
+}
+
+export interface DefaultTypeEmits {
+  "update:modelValue": (files: File[]) => void;
+  change: (files: File[]) => void;
+  error: (errors: string[]) => void;
+  "onRetry": () => void;
+  download: () => void;
+  "file-input-change": (event: Event) => void;
+}
+
+export interface DragDropTypeProps extends BaseTypeProps {
+  id?: string;
+  uploadButtonText: string;
+  uploadText: string;
+  restrictionText?: string;
+  maxSize?: string;
+  maxFiles?: number;
+  loadingState?: boolean;
+}
+
+export interface DragDropTypeEmits {
+  "update:modelValue": (files: File[]) => void;
+  change: (files: File[]) => void;
+  error: (errors: string[]) => void;
+  "onRetry": () => void;
+  "file-input-change": (event: Event) => void;
+  "files-drop": (files: FileList) => void;
+}
+
+export interface UseAttachFileOptions {
+  mode?: ComputedRef<string | undefined> | Ref<string | undefined>;
+  multiple?: ComputedRef<boolean | undefined> | Ref<boolean | undefined>;
+  files?: ComputedRef<File[] | undefined> | Ref<File[] | undefined>;
+  uploading?: ComputedRef<boolean | undefined> | Ref<boolean | undefined>;
+  uploadError?: ComputedRef<boolean | undefined> | Ref<boolean | undefined>;
+  fileStatuses?: ComputedRef<Record<number, FileStatus> | undefined> | Ref<Record<number, FileStatus> | undefined>;
+  fileErrors?: ComputedRef<Record<number, string> | undefined> | Ref<Record<number, string> | undefined>;
 }
 

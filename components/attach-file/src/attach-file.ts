@@ -1,6 +1,6 @@
-import type { ExtractPropTypes } from "vue";
+import type { ExtractPropTypes, PropType } from "vue";
 import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
-import { ATTACH_FILE_MODES, FileStatus, type AttachFileMode } from "./attach-file.type";
+import { ATTACH_FILE_MODES, type AttachFileMode, type ValidationError } from "./attach-file.type";
 
 export const attachFileProps = buildProps({
   modelValue: {
@@ -8,77 +8,77 @@ export const attachFileProps = buildProps({
     default: () => [],
   },
   type: {
-    type: String,
+    type: String as PropType<"default" | "drag-drop">,
     values: ["default", "drag-drop"],
     default: "default",
   },
   mode: {
-    type: definePropType<AttachFileMode>(String),
+    type: String as PropType<AttachFileMode>,
     values: Object.values(ATTACH_FILE_MODES),
     default: ATTACH_FILE_MODES.UPLOAD,
   },
-  id: {
-    type: String,
+  inputId: {
+    type: String as PropType<string>,
     default: undefined,
   },
   acceptExtNames: {
-    type: definePropType<string[]>(Array),
+    type: Array as PropType<string[]>,
     default: () => [],
   },
   maxSize: {
-    type: String,
+    type: String as PropType<string>,
     default: "10MB",
   },
   multiple: {
-    type: Boolean,
+    type: Boolean as PropType<boolean>,
     default: true,
   },
   maxFiles: {
-    type: Number,
+    type: Number as PropType<number>,
     default: undefined,
   },
   disabled: {
-    type: Boolean,
+    type: Boolean as PropType<boolean>,
     default: false,
   },
   validateEvent: {
-    type: Boolean,
+    type: Boolean as PropType<boolean>,
     default: true,
   },
   uploadButtonText: {
-    type: String,
-    default: "Haz clic para cargar",
+    type: String as PropType<string>,
+    default: "",
   },
   title: {
-    type: String,
-    default: "Seleccionar archivo",
+    type: String as PropType<string>,
+    default: "",
   },
   uploadText: {
-    type: String,
-    default: "un archivo o arrástralo aquí",
+    type: String as PropType<string>,
+    default: "",
   },
   restrictionText: {
-    type: String,
+    type: String as PropType<string>,
     default: "",
   },
   infoText: {
-    type: String,
+    type: String as PropType<string>,
     default: "",
   },
   uploading: {
-    type: Boolean,
+    type: Boolean as PropType<boolean>,
     default: false,
   },
-  uploadProgress: {
-    type: Number,
-    default: 0,
-  },
   uploadError: {
-    type: String,
-    default: "",
+    type: [Boolean, String] as PropType<boolean | string>,
+    default: false,
   },
-  fileStatuses: {
-    type: definePropType<Record<number, FileStatus>>(Object),
+  fileErrors: {
+    type: Object as PropType<Record<number, string>>,
+    default: () => ({}),
+  },
+  fileProgress: {
+    type: Object as PropType<Record<number, number>>,
     default: () => ({}),
   },
 } as const);
@@ -86,13 +86,12 @@ export const attachFileProps = buildProps({
 export const attachFileEmits = {
   "update:modelValue": (files: File[]) => true,
   change: (files: File[]) => true,
-  preview: (data: { file: File; index: number }) => true,
   error: (errors: string[]) => true,
-  retry: () => true,
+  "validation-error": (errors: ValidationError[]) => true,
   onRetry: () => true,
   download: () => true,
+  clearProgress: () => true,
 };
 
 export type AttachFilePropsType = ExtractPropTypes<typeof attachFileProps>;
 export type AttachFileEmitsType = typeof attachFileEmits;
-
