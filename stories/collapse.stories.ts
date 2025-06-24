@@ -45,7 +45,10 @@ yarn add @flash-global66/g-collapse
 ### Importación básica
 
 \`\`\`typescript
+# importar donde se va a utilizar
 import { GCollapse, GCollapseItem, type CollapseItemType } from '@flash-global66/g-collapse'
+
+# recomendado importar en los estilos globales
 import '@flash-global66/g-collapse/styles.css'
 \`\`\`
 
