@@ -38,7 +38,6 @@
     @apply hidden;
   }
 
-  // File list con estilos base
   @include e('file-list') {
     @apply space-y-xs bg-sec-def-bg rounded-sm;
 
@@ -94,7 +93,6 @@
       @apply text-disab-lt-txt text-2;
     }
 
-    // Modificadores BEM como pseudo-selectores
     &--clean {
       @apply mt-xs;
     }
@@ -104,7 +102,6 @@
     }
   }
 
-  // DefaultState component styles
   @include e('default-state') {
     @apply flex w-full items-center py-sm px-md rounded-sm border border-grey-50 bg-sec-def-bg;
 
@@ -125,7 +122,6 @@
     }
   }
 
-  // DefaultType component styles  
   @include e('default-type') {
     @apply w-full;
   }
@@ -244,10 +240,6 @@
 
     @include e('header') {
       @apply flex items-center justify-between gap-md;
-
-      @include when('with-file-list') {
-        //@apply mb-xs;
-      }
     }
 
     @include e('header-content') {
@@ -263,7 +255,6 @@
     }
   }
 
-  // ValidationErrors component styles
   @include e('validation-errors') {
     @apply mt-xs;
 
@@ -273,7 +264,6 @@
   }
 }
 
-// Animation for file items
 @include b('attach-file') {
   @include e('file-item') {
     animation: slideIn 0.2s ease-out;

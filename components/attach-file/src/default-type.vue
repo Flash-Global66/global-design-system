@@ -7,7 +7,7 @@
       :accept="acceptExtNames.join(',')"
       :disabled="disabled"
       :class="ns.e('hidden-input')"
-      :aria-label="title || 'Seleccionar archivos'"
+      :aria-label="title || undefined"
       :aria-describedby="infoText ? `${id || 'attach-file'}-info` : undefined"
       @change="handleFileInputChange"
     />
@@ -37,7 +37,7 @@
           <div v-for="(file, index) in modelValue" :key="index" :class="ns.e('file-item')">
             <div :class="ns.e('file-item-content')">
               <g-progress
-                :percentage="fileProgress[index] || uploadProgress"
+                :percentage="fileProgress[index] || 0"
                 type="line"
                 :stroke-width="7"
                 :show-text="false"
@@ -59,12 +59,12 @@
           <div :class="ns.e('item-content')">
             <div :class="ns.e('file-status-icon')">
               <g-icon-font
-                :name="getFileStatus(index) === FILE_STATUS.ERROR ? 'solid times' : 'solid check'"
+                :name="getFileStatusForIndex(index) === FILE_STATUS.ERROR ? 'solid times' : 'solid check'"
                 :class="[
                   ns.e('icon'),
                   {
-                    [ns.is('success')]: getFileStatus(index) !== FILE_STATUS.ERROR,
-                    [ns.is('error')]: getFileStatus(index) === FILE_STATUS.ERROR,
+                    [ns.is('success')]: getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
+                    [ns.is('error')]: getFileStatusForIndex(index) === FILE_STATUS.ERROR,
                   },
                 ]"
               />
@@ -73,12 +73,12 @@
               :class="[
                 ns.e('file-name'),
                 {
-                  [ns.is('error')]: getFileStatus(index) === FILE_STATUS.ERROR,
-                  [ns.is('success')]: getFileStatus(index) !== FILE_STATUS.ERROR,
+                  [ns.is('error')]: getFileStatusForIndex(index) === FILE_STATUS.ERROR,
+                  [ns.is('success')]: getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
                 },
               ]"
             >
-              {{ fileName(index, file) }}
+              {{ file.name }}
             </span>
           </div>
           <div :class="ns.e('item-actions')">
@@ -87,15 +87,20 @@
               icon="solid trash-alt"
               variant="grey"
               size="small"
-              :disabled="disabled"
-              @click="!disabled && removeFile(index)"
-              title="Eliminar archivo"
+              :disabled="props.disabled"
+              @click="!props.disabled && removeFile(index)"
             />
           </div>
         </div>
       </div>
     </div>
-    <validation-errors v-if="errors.length > 0" :errors="errors" />
+    
+    <!-- Errores de validación -->
+    <div v-if="primaryError" :class="ns.e('validation-errors')">
+      <p :class="ns.e('error-text')">
+        {{ primaryError }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -105,10 +110,9 @@ import { useNamespace } from "element-plus";
 import { GIconButton } from "@flash-global66/g-icon-button";
 import { GIconFont } from "@flash-global66/g-icon-font";
 import { GProgress } from "@flash-global66/g-progress";
-import { useAttachFile } from "../../composables/useAttachFile";
-import { ATTACH_FILE_MODES, FileStatus, FILE_STATUS, type AttachFileMode } from "../../attach-file.type";
-import type { DefaultTypeProps, DefaultTypeEmits } from "../../attach-file.type";
-import ValidationErrors from "../common/validation-errors.vue";
+import { FILE_STATUS } from "./attach-file.type";
+import type { DefaultTypeProps } from "./attach-file.type";
+import { formatFileSize, getFileStatus, openFileDialogHelper, createRemoveFileHandler, getPrimaryError } from "./attach-file-helpers";
 
 const ns = useNamespace("attach-file");
 
@@ -122,55 +126,48 @@ const props = withDefaults(defineProps<DefaultTypeProps>(), {
   fileProgress: () => ({}),
 });
 
-const emit = defineEmits<DefaultTypeEmits>();
+const emit = defineEmits([
+  "update:modelValue",
+  "change",
+  "error", 
+  "onRetry",
+  "download",
+  "file-input-change"
+]);
 
 const hiddenFileInput = ref<HTMLInputElement>();
 
-function openFileDialog() {
-  if (!props.disabled) {
-    if (props.uploadError) {
-      // Handle retry logic if needed
-    }
-    hiddenFileInput.value?.click();
-  }
-}
-
 function handleButtonClick() {
-  if (props.mode === ATTACH_FILE_MODES.DOWNLOAD) {
+  if (props.mode === "download") {
     emit("download");
+  } else if (props.uploadError || Object.keys(props.fileErrors).length > 0) {
+    emit("onRetry");
   } else {
-    openFileDialog();
+    openFileDialogHelper(hiddenFileInput, props.disabled, props.uploading);
   }
 }
 
 function handleFileInputChange(event: Event) {
-  emit("file-input-change", event);
+  emit("file-input-change", event as Event);
 }
 
-const {
-  uploadState,
-  formatFileSize,
-  showFileList,
-  showInfoText,
-  buttonIcon,
-  safeFiles,
-  getFileStatus,
-  fileName,
-  createRemoveFile,
-} = useAttachFile({
-  mode: computed(() => props.mode),
-  uploadProgress: computed(() => props.uploadProgress || 0),
-  multiple: computed(() => props.multiple),
-  files: computed(() => props.modelValue),
-  uploading: computed(() => props.uploading),
-  uploadError: computed(() => props.uploadError),
-  fileStatuses: computed(() => props.fileStatuses),
-  fileErrors: computed(() => props.fileErrors),
-});
-
-const removeFile = createRemoveFile(
-  (event: "update:modelValue", files: File[]) => emit(event, files),
-  (event: "change", files: File[]) => emit(event, files)
+const safeFiles = computed(() => props.modelValue || []);
+const showFileList = computed(() => safeFiles.value.length > 0);
+const showInfoText = computed(() => props.multiple || props.uploadError);
+const uploadState = computed(() => 
+  props.uploadError ? "error" : 
+  (props.uploading ? "loading" : 
+  (safeFiles.value.length > 0 ? "success" : "default"))
 );
+const primaryError = computed(() => getPrimaryError(props.errors));
+const buttonIcon = computed(() => props.mode === "download" ? "solid download" : "solid upload");
+
+const removeFile = createRemoveFileHandler(props.modelValue, emit);
+
+const getFileStatusForIndex = (index: number) => getFileStatus(index, props.fileErrors, props.uploadError, props.uploading, props.fileProgress);
+
+defineExpose({
+  hiddenFileInput,
+});
 </script>
 
