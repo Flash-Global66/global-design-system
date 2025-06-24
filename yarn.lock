@@ -603,6 +603,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-attach-file@workspace:components/attach-file":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-attach-file@workspace:components/attach-file"
+  peerDependencies:
+    "@flash-global66/g-form": 1.0.0
+    "@flash-global66/g-icon-button": 0.2.2
+    "@flash-global66/g-icon-font": 0.6.0
+    "@flash-global66/g-progress": 0.2.0
+    element-plus: 2.9.0
+    vue: 3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-avatar@workspace:components/avatar":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-avatar@workspace:components/avatar"
