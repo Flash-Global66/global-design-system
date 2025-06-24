@@ -38,7 +38,7 @@
             @entry-focus="handleEntryFocus"
           >
             <g-dropdown-collection>
-              <g-dropdown-menu v-if="actions.length">
+              <g-dropdown-menu v-if="actions.length > 0">
                 <g-dropdown-item v-for="(action, index) in actions" :key="index" v-bind="action">
                   <template #default v-if="$slots.option">
                     <slot name="option" v-bind="action" />
@@ -71,7 +71,6 @@ import {
   unref,
   watch
 } from 'vue'
-import GButton from '@flash-global66/g-button'
 import GTooltip from '@flash-global66/g-tooltip'
 import GScrollbar from '@flash-global66/g-scrollbar'
 import { GIconFont } from '@flash-global66/g-icon-font'
@@ -90,7 +89,6 @@ import type { CSSProperties } from 'vue'
 export default defineComponent({
   name: 'GDropdown',
   components: {
-    GButton,
     GScrollbar,
     GDropdownCollection,
     GDropdownMenu,
