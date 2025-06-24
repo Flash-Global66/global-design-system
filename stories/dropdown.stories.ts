@@ -2,14 +2,16 @@ import { StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
 
 // COMPONENTS
-import { GDropdown, GDropdownInstance, type actionType } from '@flash-global66/g-dropdown'
+import { GDropdown, GDropdownInstance, type actionType } from '@flash-global66/g-dropdown/index.ts'
 import { GButton } from '@flash-global66/g-button'
+import { GIconButton } from '@flash-global66/g-icon-button/index.ts'
+import { GRadioGroup } from '@flash-global66/g-radio/index.ts'
+import GTag from '@flash-global66/g-tag/index.ts'
 
 // CONFIG
-import { GConfigProvider } from '../components/config-provider'
-import { GIconButton } from '@flash-global66/g-icon-button'
-import { GRadioGroup } from '@flash-global66/g-radio'
-import GTag from '@flash-global66/g-tag'
+import { GConfigProvider } from '../components/config-provider/index.ts'
+import { version, peerDependencies } from '@flash-global66/g-dropdown/package.json'
+import { generatePeerDepsInstalls, generatePeerDepsList } from '../helper/documentation-stories'
 
 const meta = {
   title: 'Data/Dropdown',
@@ -17,13 +19,13 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `✨ \`GDropdown\` - Componente que permite crear un menú desplegable con múltiples opciones y acciones.
+        component: `\`GDropdown\` - Componente que permite crear un menú desplegable con múltiples opciones y acciones.
 
 Un elemento de interfaz de usuario que permite a los usuarios seleccionar una opción de una lista de opciones. Puede contener texto, iconos y otros elementos interactivos.
 
-> Este componente usa la versión \`2.9.7\` de Element Plus.
+> La versión de este componente es \`${version}\`.
 
-**Características principales:**
+### Características principales:
 
 - Múltiples tipos de disparadores (click, hover, focus).
 - Múltiples tipos de contenido (texto, iconos, botones).
@@ -32,30 +34,76 @@ Un elemento de interfaz de usuario que permite a los usuarios seleccionar una op
 - Soporte para eventos personalizados.
 - Soporte para accesibilidad (ARIA).
 
-🚀 **Instalación**
+### Instalación
 
 \`\`\`bash
 yarn add @flash-global66/g-dropdown
 \`\`\`
 
-🪝 **Dependencias**
-
-Este componente requiere:
-
-> - @flash-global66/g-roving-focus-group
-> - @flash-global66/g-collection
-> - @flash-global66/g-focus-trap
-> - @flash-global66/g-icon-font
-> - @flash-global66/g-tooltip
-> - @flash-global66/g-popper
-> - @flash-global66/g-scrollbar
-> - @flash-global66/g-slot
-
-📥 **Importación básica**
+### Importación básica
 
 \`\`\`typescript
-import { GDropdown } from '@flash-global66/g-dropdown'
+# importar donde se va a utilizar
+import { GDropdown, type actionType } from '@flash-global66/g-dropdown'
+
+# recomendado importar en los estilos globales
 import '@flash-global66/g-dropdown/styles.scss'
+\`\`\`
+
+### Dependencias
+Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
+${generatePeerDepsList(peerDependencies)}
+
+> Revisar la documentación de cada dependencia para mas información.
+
+
+\`\`\`bash
+# Dependencias global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
+
+### Ejemplo de uso
+
+\`\`\`html
+<template>
+  <g-dropdown :actions="actions" class="pt-6">
+    <g-tag type="success" size="sm">
+      Ejemplo de Dropdown
+    </g-tag>
+  </g-dropdown>
+</template>
+
+<script setup>
+const actions: actionType[] = [
+  {
+    title: 'Enviar correo',
+    icon: 'regular envelope',
+    description: 'Esta acción te permite enviar un correo electrónico',
+    action: () => {
+      console.log('Enviar correo')
+    }
+  },
+  {
+    title: 'Buscar',
+    icon: 'regular magnifying-glass',
+    description: 'Esta acción te permite buscar un elemento',
+    action: () => {
+      console.log('Buscar')
+    }
+  },
+  {
+    title: 'Exportar',
+    icon: 'regular arrow-up-from-bracket',
+    description: 'Esta acción te permite exportar un elemento',
+    action: () => {
+      console.log('Exportar')
+    }
+  }
+]
+</script>
 \`\`\`
 `
       }
