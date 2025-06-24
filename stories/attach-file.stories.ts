@@ -18,7 +18,7 @@ const meta: Meta<typeof GAttachFile> = {
     docs: {
       description: {
         component: `
-El componente Attach File permite cargar archivos con una interfaz intuitiva que incluye dos tipos de visualización: default (compacto) y drag-drop (zona de arrastre). Proporciona validaciones automáticas, manejo de estados y eventos estructurados para una integración flexible en aplicaciones.
+El componente Attach File permite cargar archivos con una interfaz intuitiva que incluye dos tipos de visualización: default (compacto) y drag-drop (zona de arrastre).
 
 > Versión actual: ${version}
 
@@ -26,51 +26,19 @@ El componente Attach File permite cargar archivos con una interfaz intuitiva que
 
 - **Dos tipos de visualización**: \`default\` (compacto) y \`drag-drop\` (zona de arrastre)
 - **Validaciones automáticas**: Tamaño, tipo y cantidad de archivos
-- **Estados visuales claros** activo, cargando, éxito y error
-- **Eventos estructurados**: Datos técnicos sin interpretación
 - **Progreso de carga**: Indicadores por archivo individual
 - **Integración con formularios**: Compatible con validaciones híbridas
 - **Accesibilidad**: Soporte completo para lectores de pantalla
-- **Responsivo**: Adaptable a diferentes tamaños de pantalla
-
-## Enfoque de Design System
-
-Este componente implementa un enfoque técnico que separa la lógica de presentación:
-
-- **Validaciones automáticas**: \`maxSize\`, \`acceptExtNames\`, \`maxFiles\` se procesan automáticamente
-- **Eventos estructurados**: Emite \`validation-error\` con datos técnicos para manejo personalizado
-- **Componente agnóstico**: Sin mensajes predefinidos, la implementación controla todos los textos
-- **Responsabilidad clara**: El componente maneja estados, la implementación maneja la presentación
 
 ## Tipos disponibles
 
 ### Tipo "default"
-Diseño compacto ideal para formularios y espacios reducidos. Presenta una interfaz horizontal con título, información y botón de acción en línea.
+Presenta una interfaz horizontal con título, información y botón de acción en línea.
 
 ### Tipo "drag-drop"  
-Área de arrastre prominente ideal cuando la carga de archivos es la acción principal. Incluye zona visual amplia para arrastrar archivos con lista externa.
+Área de arrastre con lista externa.
 
 ## Manejo de Estados de Error
-
-El componente gestiona tres tipos de errores de forma completamente técnica:
-
-### 1. Validación Automática
-- **Cuándo**: Durante la selección de archivos
-- **Evento**: \`validation-error\` con datos estructurados
-- **Comportamiento**: Archivos inválidos no se añaden al modelo
-- **Propósito**: Retroalimentación inmediata
-
-### 2. Error General de Carga  
-- **Prop**: \`uploadError\`
-- **Valores**: \`false\` (sin error), \`true\` (solo estado visual), \`string\` (estado + mensaje)
-- **Efecto**: Afecta todos los archivos en el listado
-
-### 3. Errores Específicos por Archivo
-- **Prop**: \`fileErrors\` 
-- **Formato**: \`{ índice: "mensaje" }\`
-- **Efecto**: Solo archivos específicos muestran error
-
-> **Principio clave**: El componente nunca genera mensajes automáticos. La implementación controla completamente los textos mostrados.
 
 ### Instalación
 
