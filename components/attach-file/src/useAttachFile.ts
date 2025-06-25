@@ -39,12 +39,24 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   const displayErrors = computed(() => {
     const combinedErrors: string[] = [];
     
+    if (props.errors && Array.isArray(props.errors)) {
+      props.errors.forEach((error) => {
+        if (typeof error === 'string' && error.trim() && !combinedErrors.includes(error)) {
+          combinedErrors.push(error);
+        }
+      });
+    }
+    
     if (formItem?.shouldShowErrorChild && formItem?.validateMessage) {
-      combinedErrors.push(formItem.validateMessage);
+      if (!combinedErrors.includes(formItem.validateMessage)) {
+        combinedErrors.push(formItem.validateMessage);
+      }
     }
     
     if (uploadError.value && typeof uploadError.value === 'string') {
-      combinedErrors.push(uploadError.value);
+      if (!combinedErrors.includes(uploadError.value)) {
+        combinedErrors.push(uploadError.value);
+      }
     }
     
     Object.values(fileErrors.value).forEach((error) => {
@@ -61,6 +73,23 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
     const validFiles: File[] = [];
     
     const acceptedExtensions = props.acceptExtNames?.map((ext: string) => ext.toLowerCase()) || [];
+    const currentFiles = multiple.value ? modelValue.value : [];
+    
+    if (props.maxFiles && (currentFiles.length + newFiles.length) > props.maxFiles) {
+      validationErrors.push({
+        type: 'max-files-exceeded' as const,
+        data: { 
+          maxFiles: props.maxFiles, 
+          currentFiles: currentFiles.length, 
+          attemptedFiles: newFiles.length,
+          totalAttempted: currentFiles.length + newFiles.length
+        }
+      });
+      
+  
+      emit("validation-error", validationErrors);
+      return;
+    }
     
     newFiles.forEach(file => {
       let fileValid = true;
@@ -94,25 +123,9 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
       }
     });
     
-    const currentFiles = multiple.value ? modelValue.value : [];
-    const totalFiles = currentFiles.length + validFiles.length;
-    
-    if (props.maxFiles && totalFiles > props.maxFiles) {
-      const allowedNewFiles = Math.max(0, props.maxFiles - currentFiles.length);
-      validationErrors.push({
-        type: 'max-files-exceeded' as const,
-        data: { maxFiles: props.maxFiles, currentFiles: currentFiles.length, allowedNewFiles }
-      });
-      
-      if (allowedNewFiles > 0) {
-        validFiles.splice(allowedNewFiles);
-      } else {
-        validFiles.length = 0;
-      }
-    }
-    
     if (validationErrors.length > 0) {
       emit("validation-error", validationErrors);
+      return;
     }
     
     if (validFiles.length > 0) {

@@ -230,10 +230,10 @@ function onDrop(event: DragEvent) {
   dragCounter.value = 0;
   isDragging.value = false;
   
-  if (props.disabled || isLoading) return;
+  if (props.disabled || isLoading.value) return;
   
   const files = event.dataTransfer?.files;
-  if (files) {
+  if (files && files.length > 0) {
     emit("files-drop", files as FileList);
   }
 }

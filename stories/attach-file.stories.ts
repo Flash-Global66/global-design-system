@@ -18,27 +18,17 @@ const meta: Meta<typeof GAttachFile> = {
     docs: {
       description: {
         component: `
-El componente Attach File permite cargar archivos con una interfaz intuitiva que incluye dos tipos de visualización: default (compacto) y drag-drop (zona de arrastre).
+El componente Attach File permite cargar archivos con una interfaz intuitiva que incluye dos tipos de visualización: default (compacto) y drag-drop (arrastrar y soltar).
 
 > Versión actual: ${version}
 
 ## Características
 
-- **Dos tipos de visualización**: \`default\` (compacto) y \`drag-drop\` (zona de arrastre)
-- **Validaciones automáticas**: Tamaño, tipo y cantidad de archivos
-- **Progreso de carga**: Indicadores por archivo individual
-- **Integración con formularios**: Compatible con validaciones híbridas
-- **Accesibilidad**: Soporte completo para lectores de pantalla
-
-## Tipos disponibles
-
-### Tipo "default"
-Presenta una interfaz horizontal con título, información y botón de acción en línea.
-
-### Tipo "drag-drop"  
-Área de arrastre con lista externa.
-
-## Manejo de Estados de Error
+- Dos tipos de visualización: \`default\` (compacto) y \`drag-drop\` (arrastrar y soltar)
+- Validaciones automáticas: Tamaño, tipo y cantidad de archivos
+- Progreso de carga: Indicadores por archivo individual
+- Integración con formularios: Compatible con validaciones híbridas
+- Accesibilidad: Soporte completo para lectores de pantalla
 
 ### Instalación
 
@@ -46,18 +36,21 @@ Presenta una interfaz horizontal con título, información y botón de acción e
 yarn add @flash-global66/g-attach-file
 \`\`\`
 
-### Importación
+### Importación del componente
 
 \`\`\`typescript
+# importar donde se va a utilizar
 import { GAttachFile } from '@flash-global66/g-attach-file'
+
+# recomendado importar en los estilos globales
 import '@flash-global66/g-attach-file/attach-file.styles.scss'
 \`\`\`
 
 ## Dependencias
-Se realizaron pruebas con las siguientes versiones. Puede funcionar con otras versiones, pero no se garantiza compatibilidad.
+Se hicieron pruebas con las siguientes versiones. Puede funcionar con otras versiones, pero no se garantiza.
 ${generatePeerDepsList(peerDependencies)}
 
-> Consultar la documentación de cada dependencia para más información.
+> Revisar la documentación de cada dependencia para más información.
 
 \`\`\`bash
 # Dependencias global66
@@ -238,7 +231,7 @@ const rules = {
     },
 
     acceptExtNames: {
-      description: "Array de extensiones permitidas. El componente valida automáticamente y emite eventos de error.",
+      description: "Array de extensiones permitidas. El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'.",
       control: "object",
       table: {
         category: "Validación Automática",
@@ -247,16 +240,16 @@ const rules = {
       },
     },
     maxSize: {
-      description: "Tamaño máximo permitido (ej: '10MB'). El componente valida automáticamente y emite eventos de error.",
+      description: "Tamaño máximo permitido (ej: '10MB'). El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'. Para permitir cualquier tamaño, pasa undefined, null o cadena vacía ''.",
       control: "text",
       table: {
         category: "Validación Automática",
-        type: { summary: "string" },
+        type: { summary: "string | undefined" },
         defaultValue: { summary: "'10MB'" },
       },
     },
     maxFiles: {
-      description: "Número máximo de archivos. El componente valida automáticamente y emite eventos de error.",
+      description: "Número máximo de archivos. El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'.",
       control: "number",
       table: {
         category: "Validación Automática",
@@ -368,7 +361,7 @@ const rules = {
       },
     },
     inputId: {
-      description: "ID único para los elementos internos de accesibilidad.",
+      description: "ID único para el elemento input file interno y las asociaciones de accesibilidad (aria-describedby). Se usa principalmente para integración con formularios y etiquetas de accesibilidad. Si no se proporciona, se genera automáticamente cuando está dentro de un FormItem.",
       control: "text",
       table: {
         category: "Formularios",
@@ -381,42 +374,49 @@ const rules = {
       description: "Evento emitido cuando cambian los archivos seleccionados.",
       table: {
         category: "Eventos",
+        type: { summary: "(files: File[]) => void" },
       },
     },
     onChange: {
       description: "Evento emitido cuando se modifica la selección de archivos.",
       table: {
         category: "Eventos",
+        type: { summary: "(files: File[]) => void" },
       },
     },
     onError: {
       description: "Evento emitido cuando ocurren errores durante la validación o manipulación de archivos.",
       table: {
         category: "Eventos",
+        type: { summary: "(error: string | Error) => void" },
       },
     },
-    "onValidation-error": {
-      description: "Evento emitido con errores de validación estructurados. Permite manejo personalizado de mensajes de error.",
+    onValidationError: {
+      description: "Evento emitido con errores de validación estructurados. Recibe un array de objetos ValidationError con propiedades: type ('file-size-exceeded' | 'invalid-file-type' | 'max-files-exceeded'), file (opcional), message (opcional), y data (información adicional específica del error).",
       table: {
         category: "Eventos",
+        type: { summary: "(errors: ValidationError[]) => void" },
       },
     },
     onRetry: {
       description: "Evento emitido cuando se hace clic en reintentar después de un error.",
       table: {
         category: "Eventos",
+        type: { summary: "() => void" },
       },
     },
     onClearProgress: {
       description: "Evento emitido automáticamente cuando el estado 'uploading' cambia de true a false.",
       table: {
         category: "Eventos",
+        type: { summary: "() => void" },
       },
     },
     onDownload: {
       description: "Evento emitido en modo download cuando se hace clic en el botón.",
       table: {
         category: "Eventos",
+        type: { summary: "() => void" },
       },
     },
 
@@ -456,10 +456,14 @@ type Story = StoryObj<typeof GAttachFile>;
 
 export const Primary: Story = {
   name: "Básico",
+  args: {
+    maxSize: "",
+    acceptExtNames: [],
+  },
   parameters: {
     docs: {
       description: {
-        story: "Implementación básica del componente con configuración estándar. Permite explorar todas las propiedades disponibles desde los controles."
+        story: "Implementación básica del componente con configuración estándar que acepta cualquier tipo de archivo y cualquier tamaño. Permite explorar todas las propiedades disponibles desde los controles."
       },
       source: {
         code: `<script setup lang="ts">
@@ -474,6 +478,8 @@ const files = ref<File[]>([])
     v-model="files"
     title="Seleccionar archivo"
     info-text="Puede cargar cualquier tipo de archivo"
+    max-size=""
+    :accept-ext-names="[]"
   />
 </template>`
       }
@@ -498,11 +504,11 @@ const files = ref<File[]>([])
 };
 
 export const DragDrop: Story = {
-  name: "Zona de Arrastre",
+  name: "Arrastrar y Soltar",
   parameters: {
     docs: {
       description: {
-        story: "El tipo 'drag-drop' proporciona una zona de arrastre prominente, ideal cuando la carga de archivos es la acción principal de la interfaz."
+        story: "El tipo 'drag-drop' proporciona una zona de arastrar y soltar que acepta cualquier tipo de archivo y cualquier tamaño"
       },
       source: {
         code: `<script setup lang="ts">
@@ -516,11 +522,10 @@ const files = ref<File[]>([])
   <g-attach-file 
     v-model="files"
     type="drag-drop"
-    :accept-ext-names="['.jpg', '.jpeg', '.png', '.gif']"
-    max-size="5MB"
-    upload-button-text="Seleccionar imágenes"
-    upload-text=" o arrastra archivos aquí"
-    restriction-text="Solo imágenes JPG, PNG o GIF hasta 5MB"
+    max-size=""
+    :accept-ext-names="[]"
+    upload-button-text="Seleccionar archivos"
+    upload-text=" o arrastra aquí"
     :multiple="true"
   />
 </template>`
@@ -537,20 +542,29 @@ const files = ref<File[]>([])
         action('update:model-value')(selectedFiles);
       };
 
-      return { files, handleUpdate };
+      const handleValidationError = (errors: Array<{type: string, file?: File, data?: any}>) => {
+        action('validation-error')(errors);
+      };
+
+      const handleChange = (selectedFiles: File[]) => {
+        action('change')(selectedFiles);
+      };
+
+      return { files, handleUpdate, handleValidationError, handleChange };
     },
     template: `
       <g-config-provider>
         <g-attach-file 
           v-model="files"
           type="drag-drop"
-          :accept-ext-names="['.jpg', '.jpeg', '.png', '.gif']"
-          max-size="5MB"
-          upload-button-text="Seleccionar imágenes"
-          upload-text=" o arrastra archivos aquí"
-          restriction-text="Solo imágenes JPG, PNG o GIF hasta 5MB"
+          upload-button-text="Seleccionar archivos"
+          upload-text=" o arrastra aquí"
           :multiple="true"
+          max-size=""
+          :accept-ext-names="[]"
           @update:model-value="handleUpdate"
+          @change="handleChange"
+          @validation-error="handleValidationError"
         />
       </g-config-provider>
     `
@@ -779,185 +793,181 @@ const handleRetry = () => {
   })
 };
 
-export const ValidacionesAutomaticas: Story = {
-  name: "Validaciones Automáticas",
+export const FlujoCargaCompleto: Story = {
+  name: "Flujo de Carga Completo",
   parameters: {
     docs: {
       description: {
         story: `
-Demostración del sistema de validaciones automáticas y manejo de eventos estructurados.
-
-### Validaciones implementadas:
-- **Tamaño de archivo**: Verificación contra \`maxSize\` en bytes reales
-- **Tipos de archivo**: Validación de extensiones mediante \`acceptExtNames\`
-- **Límite de archivos**: Control de cantidad máxima con \`maxFiles\`
-
-### Evento validation-error
-El componente emite eventos estructurados que permiten personalización completa de mensajes:
-
-\`\`\`typescript
-{
-  type: 'file-size-exceeded' | 'invalid-file-type' | 'max-files-exceeded',
-  file?: File,
-  data: { /* información técnica específica */ }
-}
-\`\`\`
+Validaciones automáticas con manejo de mensajes de error.
 
 ### Pruebas sugeridas:
 - Cargar archivo > 1MB → Error de tamaño
-- Cargar archivo .txt o .exe → Error de tipo  
 - Cargar más de 2 archivos → Error de cantidad
         `
-      },
-      source: {
-        code: `<script setup lang="ts">
-import { ref } from 'vue'
-import { GAttachFile } from '@flash-global66/g-attach-file'
-
-const files = ref<File[]>([])
-const validationErrors = ref<string[]>([])
-
-const handleValidationError = (errors: ValidationError[]) => {
-  const customMessages = errors.map(error => {
-    switch (error.type) {
-      case 'file-size-exceeded':
-        return \`"\${error.file?.name}" excede \${error.data?.maxSize}\`
-      case 'invalid-file-type':
-        const extensions = error.data?.acceptedExtensions?.join(', ')
-        return \`"\${error.file?.name}" no es válido. Permitidos: \${extensions}\`
-      case 'max-files-exceeded':
-        return \`Solo puede agregar \${error.data?.allowedNewFiles} archivo(s) más\`
-      default:
-        return 'Error de validación'
-    }
-  })
-  
-  validationErrors.value = customMessages
-  setTimeout(() => validationErrors.value = [], 6000)
-}
-</script>
-
-<template>
-  <div v-if="validationErrors.length" class="error-display">
-    <h4>Errores de Validación</h4>
-    <ul>
-      <li v-for="error in validationErrors" :key="error">{{ error }}</li>
-    </ul>
-  </div>
-
-  <g-attach-file 
-    v-model="files"
-    :accept-ext-names="['.pdf', '.doc', '.docx']"
-    max-size="1MB"
-    :max-files="2"
-    title="Seleccionar documentos (validaciones activas)"
-    info-text="PDF o Word, máximo 1MB y 2 archivos"
-    :multiple="true"
-    @validation-error="handleValidationError"
-  />
-</template>`
       }
     }
   },
   render: () => ({
-    components: { GAttachFile, GConfigProvider },
+    components: { GAttachFile, GConfigProvider, GForm, GFormItem, GButton, GInput },
     setup() {
-      const files = ref<File[]>([]);
-      const validationErrors = ref<string[]>([]);
-
-      const handleUpdate = (selectedFiles: File[]) => {
-        files.value = selectedFiles;
-        validationErrors.value = [];
-        action('update:model-value')(selectedFiles);
-      };
-
-      const handleValidationError = (errors: Array<{type: string, file?: File, data?: any}>) => {
-        action('validation-error')(errors);
+      const files = ref([])
+      const uploading = ref(false)
+      const uploadError = ref(false)
+      const validationErrorMsg = ref('')
+      const maxFilesErrorMsg = ref('')
+      const fileProgress = ref({})
+      const fileErrors = ref({})
+      
+      const simulateUpload = async (filesArray) => {
+        if (filesArray.length === 0) return
         
-        const customMessages = errors.map(error => {
-          switch (error.type) {
-            case 'file-size-exceeded':
-              return `El archivo "${error.file?.name}" excede el tamaño máximo de ${error.data?.maxSize}`;
-            case 'invalid-file-type':
-              const extensions = error.data?.acceptedExtensions?.join(', ');
-              return `El archivo "${error.file?.name}" no es válido. Solo se permiten: ${extensions}`;
-            case 'max-files-exceeded':
-              const hasAllowedFiles = error.data?.allowedNewFiles > 0;
-              return hasAllowedFiles 
-                ? `Se pueden agregar ${error.data?.allowedNewFiles} archivo(s) adicional(es)`
-                : `Límite de ${error.data?.maxFiles} archivos alcanzado`;
-            default:
-              return 'Error de validación desconocido';
+        uploading.value = true
+        uploadError.value = false
+        fileErrors.value = {}
+        fileProgress.value = {}
+        
+        for (let i = 0; i < filesArray.length; i++) {
+          fileProgress.value = { ...fileProgress.value, [i]: 0 }
+        }
+        
+       
+        const progressSteps = 20
+        const stepDelay = 150 
+        
+        for (let step = 0; step <= progressSteps; step++) {
+          await new Promise(resolve => setTimeout(resolve, stepDelay))
+          
+          const progressPercent = Math.round((step / progressSteps) * 100)
+          
+          for (let i = 0; i < filesArray.length; i++) {
+            const randomVariation = Math.random() * 10 - 5
+            const adjustedProgress = Math.min(100, Math.max(0, progressPercent + randomVariation))
+            fileProgress.value = { ...fileProgress.value, [i]: Math.round(adjustedProgress) }
           }
-        });
+        }
         
-        validationErrors.value = customMessages;
+        await new Promise(resolve => setTimeout(resolve, 500))
         
-        setTimeout(() => {
-          validationErrors.value = [];
-        }, 6000);
-      };
-
+        const shouldFail = Math.random() < 0.6
+        
+        if (shouldFail) {
+          const errorFileIndex = Math.floor(Math.random() * filesArray.length)
+          const errorMessages = [
+            'Error de conexión al servidor',
+            'Archivo corrupto detectado',
+            'Formato no soportado por el servidor',
+            'Timeout en la carga'
+          ]
+          const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)]
+          
+          fileErrors.value = { [errorFileIndex]: randomError }
+        } 
+        
+        uploading.value = false
+      }
+      
+      function handleValidationError(errors) {
+        let generalMsg = ''
+        let maxFilesError = ''
+        
+        errors.forEach((error) => {
+          if (!error) return;
+          if (error.type === 'file-size-exceeded') {
+            const sizeMB = Math.round((error.file?.size || 0) / (1024 * 1024) * 100) / 100
+            generalMsg = `"${error.file?.name}" (${sizeMB}MB) excede el límite de ${error.data?.maxSize || '2MB'}`
+          } else if (error.type === 'invalid-file-type') {
+            generalMsg = `"${error.file?.name}" tipo no válido. Solo ${error.data?.acceptedExtensions?.join(', ') || 'tipos específicos'}`
+          } else if (error.type === 'max-files-exceeded') {
+            maxFilesError = `Máximo ${error.data?.maxFiles} archivos permitidos (intentaste subir ${error.data?.totalAttempted || 'varios'})`
+          }
+        })
+        
+        validationErrorMsg.value = generalMsg
+        maxFilesErrorMsg.value = maxFilesError
+      }
+      
+      function handleUpdate(selectedFiles) {
+        console.log('📁 Archivos actualizados:', selectedFiles.length)
+        files.value = selectedFiles
+        
+        if (selectedFiles.length >= 0) {
+          validationErrorMsg.value = ''
+          maxFilesErrorMsg.value = ''
+        }
+        
+        if (selectedFiles.length > 0 && !uploading.value) {
+          simulateUpload(selectedFiles)
+        }
+      }
+      
+      function handleRetry() {
+        uploadError.value = false
+        fileErrors.value = {}
+        fileProgress.value = {}
+        validationErrorMsg.value = ''
+        maxFilesErrorMsg.value = ''
+        
+        if (files.value.length > 0) {
+          simulateUpload(files.value)
+        }
+      }
+      
+      function handleClearAll() {
+        files.value = []
+        uploading.value = false
+        uploadError.value = false
+        validationErrorMsg.value = ''
+        maxFilesErrorMsg.value = ''
+        fileProgress.value = {}
+        fileErrors.value = {}
+      }
+      
       return { 
         files, 
-        validationErrors, 
+        uploading,
+        uploadError,
+        validationErrorMsg, 
+        maxFilesErrorMsg,
+        fileProgress,
+        fileErrors,
+        handleValidationError, 
         handleUpdate, 
-        handleValidationError 
-      };
+        handleRetry,
+        handleClearAll
+      }
     },
     template: `
       <g-config-provider>
         <div class="space-y-6">
-          <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-            <h3 class="text-base font-semibold text-green-900 mb-2">Validaciones Automáticas Activas</h3>
-            <p class="text-sm text-green-800">
-              Restricciones: Solo PDF/DOC/DOCX, máximo 1MB por archivo, máximo 2 archivos.
-              Para probar las validaciones, seleccione archivos que excedan estas restricciones.
-            </p>
-          </div>
-
-          <div v-if="validationErrors.length > 0" class="bg-red-50 border border-red-200 rounded-lg p-4">
-            <h4 class="text-sm font-semibold text-red-900 mb-2">Errores de Validación</h4>
-            <ul class="text-sm text-red-800 space-y-1">
-              <li v-for="error in validationErrors" :key="error" class="flex items-start">
-                <span class="text-red-500 mr-2">•</span>
-                {{ error }}
-              </li>
-            </ul>
-            <p class="text-xs text-red-600 mt-2 italic">Los errores se ocultan automáticamente en 6 segundos</p>
-          </div>
-
           <g-attach-file 
             v-model="files"
             type="default"
-            :accept-ext-names="['.pdf', '.doc', '.docx']"
-            max-size="1MB"
+            max-size="2MB"
             :max-files="2"
-            title="Seleccionar documentos (con validaciones)"
-            info-text="Solo PDF o Word, máximo 1MB y 2 archivos"
+            title="Simulador de Carga de Archivos"
+            info-text="Máximo 2MB por archivo, 2 archivos total"
             :multiple="true"
-            @update:model-value="handleUpdate"
+            :uploading="uploading"
+            :upload-error="uploadError"
+            :file-progress="fileProgress"
+            :file-errors="fileErrors"
+            :errors="[validationErrorMsg, maxFilesErrorMsg].filter(Boolean)"
             @validation-error="handleValidationError"
+            @update:model-value="handleUpdate"
+            @on-retry="handleRetry"
           />
-
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 class="text-sm font-semibold text-blue-900 mb-2">Estructura del Evento</h4>
-            <p class="text-sm text-blue-800 mb-2">
-              El evento <code>validation-error</code> incluye datos estructurados:
-            </p>
-            <pre class="text-xs text-blue-700 bg-blue-100 p-3 rounded overflow-x-auto"><code>// Ejemplo de error de tamaño
-{
-  type: 'file-size-exceeded',
-  file: File, // objeto del archivo
-  data: {
-    maxSize: '1MB',
-    actualSize: 2097152 // bytes
-  }
-}</code></pre>
-            <p class="text-xs text-blue-600 mt-2">
-              <strong>Ventaja:</strong> La implementación puede crear mensajes en cualquier idioma o formato.
-            </p>
+          
+          <div class="flex gap-2">
+            <g-button 
+              @click="handleClearAll"
+              class="px-4 py-2"
+              :disabled="uploading"
+            >
+              Limpiar Todo
+            </g-button>
           </div>
+        
         </div>
       </g-config-provider>
     `
@@ -971,15 +981,7 @@ export const DownloadMode: Story = {
       description: {
         story: `
 En modo descarga, el componente cambia su comportamiento para mostrar un icono de descarga y emitir un evento 'download' en lugar de abrir el selector de archivos.
-
-### Casos de uso:
-- Descargar plantillas o documentos modelo
-- Obtener archivos de referencia o ejemplos
-- Exportar datos procesados o reportes
-
-El evento \`download\` debe ser manejado por el componente padre para implementar la lógica de descarga específica según las necesidades de la aplicación.
-        `
-      },
+ ` },
       source: {
         code: `<script setup lang="ts">
 import { GAttachFile } from '@flash-global66/g-attach-file'
@@ -1027,14 +1029,6 @@ const handleDownload = () => {
             info-text="Haz clic para descargar el archivo de plantilla"
             @download="handleDownload"
           />
-          
-          <div class="p-4 bg-gray-50 rounded-lg">
-            <h4 class="font-medium text-gray-900 mb-2">Información</h4>
-            <p class="text-sm text-gray-700">
-              En modo descarga, el componente emite el evento <code>download</code> que debe ser manejado 
-              por la implementación para ejecutar la lógica específica de descarga requerida.
-            </p>
-          </div>
         </div>
       </g-config-provider>
     `
@@ -1046,30 +1040,13 @@ export const FormIntegration: Story = {
   parameters: {
     docs: {
       description: {
-        story: `
-Implementación práctica del patrón de validación híbrida recomendado para aplicaciones empresariales.
-
-### Arquitectura de Validación Híbrida:
-
-1. **Validaciones técnicas automáticas**: El componente procesa automáticamente \`maxSize\`, \`acceptExtNames\` y \`maxFiles\`
-2. **Validaciones de reglas de negocio**: El formulario aplica validators personalizados para lógica específica del dominio
-3. **Doble capa de protección**: Retroalimentación inmediata + validación contextual completa
-
-### Flujo de validación:
-- Selección de archivos → Validación técnica inmediata
-- Archivos válidos → Se integran al modelo de datos
-- Envío de formulario → Validación de reglas de negocio
-- Errores contextuales → Mostrados automáticamente por FormItem
-
-Este patrón proporciona una experiencia óptima combinando usabilidad inmediata con robustez empresarial.
-        `
+        story: `Integración del componente GAttachFile con GForm y validaciones de formulario.`
       },
       source: {
         code: `<script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { GForm, GFormItem } from '@flash-global66/g-form'
 import { GAttachFile } from '@flash-global66/g-attach-file'
-import { GButton, GInput } from '@flash-global66/g-components'
 
 const formRef = ref()
 const formData = reactive({
@@ -1079,103 +1056,49 @@ const formData = reactive({
 
 const rules = {
   name: [
-    { required: true, message: 'El nombre es obligatorio', trigger: 'blur' },
-    { min: 3, message: 'Mínimo 3 caracteres', trigger: 'blur' }
+    { required: true, message: 'El nombre es requerido', trigger: 'blur' }
   ],
   documents: [
-    { required: true, message: 'Debe adjuntar documentos', trigger: 'change' },
-    {
-      validator: (rule: any, files: File[], callback: any) => {
-        const hasPdf = files.some(f => f.name.endsWith('.pdf'))
-        if (!hasPdf) {
-          callback(new Error('Debe incluir al menos un archivo PDF'))
-        } else {
-          callback()
-        }
-      },
-      trigger: 'change'
-    }
+    { required: true, message: 'Debe adjuntar documentos', trigger: 'change' }
   ]
 }
 
-const validationErrors = ref<string[]>([])
-
 const handleSubmit = async () => {
-  try {
-    const valid = await formRef.value.validate()
-    if (valid) {
-      alert('¡Documentos enviados exitosamente!')
-    }
-  } catch (error) {
-    console.error('Error de validación:', error)
+  const valid = await formRef.value.validate()
+  if (valid) {
+    alert('¡Documentos enviados exitosamente!')
   }
-}
-
-const handleValidationError = (errors: ValidationError[]) => {
-  const messages = errors.map(error => {
-    switch (error.type) {
-      case 'file-size-exceeded':
-        return \`"\${error.file?.name}" excede \${error.data?.maxSize}\`
-      case 'invalid-file-type':
-        return \`"\${error.file?.name}" tipo no válido\`
-      case 'max-files-exceeded':
-        return \`Máximo \${error.data?.maxFiles} archivos\`
-      default:
-        return 'Error de validación'
-    }
-  })
-  
-  validationErrors.value = messages
-  setTimeout(() => validationErrors.value = [], 5000)
 }
 </script>
 
 <template>
-  <div class="form-container">
-    <h2>Envío de Documentos</h2>
-    
-    <div v-if="validationErrors.length" class="validation-errors">
-      <h4>Errores de validación automática:</h4>
-      <ul>
-        <li v-for="error in validationErrors" :key="error">{{ error }}</li>
-      </ul>
-    </div>
-    
-    <g-form ref="formRef" :model="formData" :rules="rules">
-      <g-form-item prop="name" show-message="parent">
-        <g-input 
-          v-model="formData.name"
-          label="Nombre completo"
-          placeholder="Ingrese su nombre"
-        />
-      </g-form-item>
+  <g-form ref="formRef" :model="formData" :rules="rules">
+    <g-form-item prop="name" show-message="parent">
+      <g-input 
+        v-model="formData.name"
+        label="Nombre completo"
+        placeholder="Ingrese su nombre"
+      />
+    </g-form-item>
 
-      <g-form-item prop="documents" show-message="parent">
-        <g-attach-file
-          v-model="formData.documents"
-          title="Documentos requeridos"
-          info-text="PDF o imágenes, máximo 5MB cada uno"
-          type="drag-drop"
-          :multiple="true"
-          :max-files="3"
-          max-size="5MB"
-          :accept-ext-names="['.pdf', '.jpg', '.jpeg', '.png']"
-          upload-button-text="Seleccionar documentos"
-          upload-text=" o arrastra archivos aquí"
-          @validation-error="handleValidationError"
-        />
-      </g-form-item>
+    <g-form-item prop="documents" show-message="parent">
+      <g-attach-file
+        v-model="formData.documents"
+        title="Documentos requeridos"
+        type="drag-drop"
+        :multiple="true"
+        :max-files="3"
+        max-size="5MB"
+        :accept-ext-names="['.pdf', '.jpg', '.jpeg', '.png']"
+        upload-button-text="Seleccionar documentos"
+        upload-text=" o arrastra archivos aquí"
+      />
+    </g-form-item>
 
-      <div class="form-actions">
-        <g-button variant="primary" @click="handleSubmit">
-          Enviar Documentos
-        </g-button>
-        <g-button variant="secondary" @click="formRef.resetFields()">
-          Limpiar
-        </g-button>
-      </div>
-    </g-form>
-  </div>
+    <g-button variant="primary" @click="handleSubmit">
+      Enviar Documentos
+    </g-button>
+  </g-form>
 </template>`
       }
     }
@@ -1351,35 +1274,130 @@ const handleValidationError = (errors: ValidationError[]) => {
               </g-button>
             </div>
           </g-form>
+        </div>
+      </g-config-provider>
+    `
+  })
+};
 
-          <div class="mt-6 space-y-4">
-            <div class="p-4 bg-green-50 rounded-lg border border-green-200">
-              <h4 class="font-semibold text-green-900 mb-2">Validaciones Automáticas (Componente)</h4>
-              <ul class="text-sm text-green-800 space-y-1">
-                <li>• Tamaño máximo: 5MB por archivo</li>
-                <li>• Tipos permitidos: PDF, JPG, PNG</li>
-                <li>• Cantidad máxima: 3 archivos</li>
-                <li>• <strong>Feedback inmediato</strong> al seleccionar</li>
-              </ul>
-            </div>
+export const AddFilesMethod: Story = {
+  name: "Método addFiles",
+  parameters: {
+    docs: {
+      description: {
+        story: `Método  \`addFiles\` que permite agregar archivos programáticamente al componente.`
+      },
+      source: {
+        code: `<script setup lang="ts">
+import { ref } from 'vue'
+import { GAttachFile } from '@flash-global66/g-attach-file'
+
+const files = ref<File[]>([])
+const attachFileRef = ref()
+
+const addMockFiles = () => {
+  // Crear archivos de ejemplo
+  const mockFiles = [
+    new File(['contenido'], 'documento1.pdf', { type: 'application/pdf' }),
+    new File(['contenido'], 'imagen1.jpg', { type: 'image/jpeg' })
+  ]
+  
+  // Usar el método addFiles para agregar los archivos
+  attachFileRef.value?.addFiles(mockFiles)
+}
+</script>
+
+<template>
+  <g-attach-file 
+    ref="attachFileRef"
+    v-model="files"
+    title="Agregar archivos programáticamente"
+    :accept-ext-names="['.pdf', '.jpg', '.png']"
+    max-size="5MB"
+    :max-files="3"
+  />
+  
+  <g-button @click="addMockFiles">
+    Agregar archivos de ejemplo
+  </g-button>
+</template>`
+      }
+    }
+  },
+  render: () => ({
+    components: { GAttachFile, GConfigProvider, GButton },
+    setup() {
+      const files = ref<File[]>([])
+      const attachFileRef = ref()
+      
+      const addMockFiles = () => {
+        const mockFiles = [
+          new File(['contenido PDF de ejemplo'], 'documento-ejemplo.pdf', { type: 'application/pdf' }),
+          new File(['contenido imagen de ejemplo'], 'imagen-ejemplo.jpg', { type: 'image/jpeg' })
+        ]
+        
+        Object.defineProperty(mockFiles[0], 'size', { value: 1024 * 500 })
+        Object.defineProperty(mockFiles[1], 'size', { value: 1024 * 800 })
+        
+        if (attachFileRef.value?.addFiles) {
+          attachFileRef.value.addFiles(mockFiles)
+        }
+      }
+      
+      const addSingleFile = () => {
+        const singleFile = new File(['contenido de texto'], 'nota.txt', { type: 'text/plain' })
+        Object.defineProperty(singleFile, 'size', { value: 1024 * 100 })
+        
+        if (attachFileRef.value?.addFiles) {
+          attachFileRef.value.addFiles([singleFile])
+        }
+      }
+      
+      const clearFiles = () => {
+        files.value = []
+      }
+
+      return { 
+        files, 
+        attachFileRef, 
+        addMockFiles, 
+        addSingleFile,
+        clearFiles
+      }
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-4">
+          <g-attach-file 
+            ref="attachFileRef"
+            v-model="files"
+            title="Agregar archivos programáticamente"
+            info-text="Usa los botones de abajo para agregar archivos sin selector"
+            :accept-ext-names="['.pdf', '.jpg', '.png', '.txt']"
+            max-size="5MB"
+            :max-files="3"
+            :multiple="true"
+          />
+          
+          <div class="flex gap-2 flex-wrap">
+            <g-button @click="addMockFiles" variant="primary">
+              Agregar 2 archivos
+            </g-button>
             
-            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <h4 class="font-semibold text-blue-900 mb-2">Validaciones de Negocio (Formulario)</h4>
-              <ul class="text-sm text-blue-800 space-y-1">
-                <li>• Campo obligatorio</li>
-                <li>• Al menos un archivo PDF</li>
-                <li>• Nombres descriptivos requeridos</li>
-                <li>• <strong>Validación al enviar</strong> formulario</li>
-              </ul>
-            </div>
-
-            <div class="p-4 bg-amber-50 rounded-lg border border-amber-200">
-              <h4 class="font-semibold text-amber-900 mb-2">Patrón Híbrido Recomendado</h4>
-              <p class="text-sm text-amber-800">
-                <strong>Doble capa:</strong> Validación automática para UX + Reglas de negocio para lógica específica. 
-                El usuario recibe feedback inmediato y validación completa al enviar.
-              </p>
-            </div>
+            <g-button @click="addSingleFile" variant="secondary">
+             Agregar 1 archivo
+            </g-button>
+            
+            <g-button @click="clearFiles" variant="tertiary">
+               Limpiar
+            </g-button>
+          </div>
+          
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <h4 class="font-medium text-gray-900 mb-2">Información</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• <strong>addFiles()</strong> aplica todas las validaciones automáticas</li>
+            </ul>
           </div>
         </div>
       </g-config-provider>

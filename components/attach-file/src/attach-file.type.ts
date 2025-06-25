@@ -18,20 +18,9 @@ export const FILE_STATUS = {
   LOADING: "loading",
 } as const;
 
-export const FILE_CATEGORIES = {
-  IMAGE: "image",
-  DOCUMENT: "document",
-  VIDEO: "video",
-  AUDIO: "audio",
-  ARCHIVE: "archive",
-  CODE: "code",
-  FILE: "file",
-} as const;
-
 export type AttachFileMode = (typeof ATTACH_FILE_MODES)[keyof typeof ATTACH_FILE_MODES];
 export type UploadState = (typeof UPLOAD_STATES)[keyof typeof UPLOAD_STATES];
 export type FileStatus = (typeof FILE_STATUS)[keyof typeof FILE_STATUS];
-export type FileCategory = (typeof FILE_CATEGORIES)[keyof typeof FILE_CATEGORIES];
 
 export interface AttachFileProps {
   modelValue: File[];
@@ -53,6 +42,7 @@ export interface AttachFileProps {
   uploadError: boolean | string;
   fileErrors: Record<number, string>;
   fileProgress: Record<number, number>;
+  errors: string[];
 }
 
 export interface AttachFileEmits {
@@ -82,12 +72,13 @@ export interface ValidationError {
     maxFiles?: number;
     currentFiles?: number;
     allowedNewFiles?: number;
+    attemptedFiles?: number;
+    totalAttempted?: number;
   };
 }
 
 export type AttachFileStatus = "idle" | "dragging" | "uploading" | "success" | "error";
 
-// Props base compartidas entre tipos
 export interface BaseTypeProps {
   modelValue: File[];
   multiple: boolean;
