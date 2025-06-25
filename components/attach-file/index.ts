@@ -1,7 +1,6 @@
 import AttachFile from "./src/attach-file.vue";
 import {
   withInstall,
-  withNoopInstall,
   SFCWithInstall,
 } from "element-plus/es/utils/index.mjs";
 

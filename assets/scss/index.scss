@@ -38,7 +38,8 @@
 @use "@flash-global66/g-switch/styles.scss" as *;
 @use "@flash-global66/g-toast/styles.scss" as *;
 @use "@flash-global66/g-collapse/styles.scss" as *;
-  
+@use "@flash-global66/g-attach-file/styles.scss" as *; 
+
 * {
   @apply font-montserrat;
 }

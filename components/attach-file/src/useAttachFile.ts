@@ -20,12 +20,10 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   const fileErrors = computed(() => props.fileErrors || {});
   const fileProgress = computed(() => props.fileProgress || {});
 
-  const safeModelValue = computed(() => modelValue.value || []);
-
   const fileStatuses = computed(() => {
     const statuses: Record<number, FileStatus> = {};
 
-    safeModelValue.value.forEach((file: File, index: number) => {
+    modelValue.value.forEach((file: File, index: number) => {
       statuses[index] = getFileStatus(
         index,
         fileErrors.value,
@@ -41,12 +39,24 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   const displayErrors = computed(() => {
     const combinedErrors: string[] = [];
     
+    if (props.errors && Array.isArray(props.errors)) {
+      props.errors.forEach((error) => {
+        if (typeof error === 'string' && error.trim() && !combinedErrors.includes(error)) {
+          combinedErrors.push(error);
+        }
+      });
+    }
+    
     if (formItem?.shouldShowErrorChild && formItem?.validateMessage) {
-      combinedErrors.push(formItem.validateMessage);
+      if (!combinedErrors.includes(formItem.validateMessage)) {
+        combinedErrors.push(formItem.validateMessage);
+      }
     }
     
     if (uploadError.value && typeof uploadError.value === 'string') {
-      combinedErrors.push(uploadError.value);
+      if (!combinedErrors.includes(uploadError.value)) {
+        combinedErrors.push(uploadError.value);
+      }
     }
     
     Object.values(fileErrors.value).forEach((error) => {
@@ -61,6 +71,25 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   function addFiles(newFiles: File[]) {
     const validationErrors: ValidationError[] = [];
     const validFiles: File[] = [];
+    
+    const acceptedExtensions = props.acceptExtNames?.map((ext: string) => ext.toLowerCase()) || [];
+    const currentFiles = multiple.value ? modelValue.value : [];
+    
+    if (props.maxFiles && (currentFiles.length + newFiles.length) > props.maxFiles) {
+      validationErrors.push({
+        type: 'max-files-exceeded' as const,
+        data: { 
+          maxFiles: props.maxFiles, 
+          currentFiles: currentFiles.length, 
+          attemptedFiles: newFiles.length,
+          totalAttempted: currentFiles.length + newFiles.length
+        }
+      });
+      
+  
+      emit("validation-error", validationErrors);
+      return;
+    }
     
     newFiles.forEach(file => {
       let fileValid = true;
@@ -77,9 +106,8 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
         }
       }
       
-      if (props.acceptExtNames && props.acceptExtNames.length > 0) {
+      if (acceptedExtensions.length > 0) {
         const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
-        const acceptedExtensions = props.acceptExtNames.map((ext: string) => ext.toLowerCase());
         if (!acceptedExtensions.includes(fileExtension)) {
           validationErrors.push({
             type: 'invalid-file-type' as const,
@@ -95,30 +123,14 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
       }
     });
     
-    const currentFiles = multiple.value ? safeModelValue.value : [];
-    const totalFiles = currentFiles.length + validFiles.length;
-    
-    if (props.maxFiles && totalFiles > props.maxFiles) {
-      const allowedNewFiles = Math.max(0, props.maxFiles - currentFiles.length);
-      validationErrors.push({
-        type: 'max-files-exceeded' as const,
-        data: { maxFiles: props.maxFiles, currentFiles: currentFiles.length, allowedNewFiles }
-      });
-      
-      if (allowedNewFiles > 0) {
-        validFiles.splice(allowedNewFiles);
-      } else {
-        validFiles.length = 0;
-      }
-    }
-    
     if (validationErrors.length > 0) {
       emit("validation-error", validationErrors);
+      return;
     }
     
     if (validFiles.length > 0) {
       const updatedFiles = multiple.value 
-        ? [...safeModelValue.value, ...validFiles] 
+        ? [...modelValue.value, ...validFiles] 
         : validFiles;
 
       emit("update:modelValue", updatedFiles);
@@ -151,7 +163,7 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   );
 
   return {
-    safeModelValue,
+    modelValue,
     fileStatuses,
     displayErrors,
     fileErrors,

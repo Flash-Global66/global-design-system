@@ -3,7 +3,7 @@
     <default-type
       v-if="props.type === 'default'"
       :id="inputId"
-      :model-value="safeModelValue"
+      :model-value="modelValue"
       :mode="props.mode"
       :title="props.title"
       :info-text="props.infoText"
@@ -27,7 +27,7 @@
     <drag-drop-type
       v-else-if="props.type === 'drag-drop'"
       :id="inputId"
-      :model-value="safeModelValue"
+      :model-value="modelValue"
       :upload-button-text="props.uploadButtonText"
       :upload-text="props.uploadText"
       :restriction-text="props.restrictionText"
@@ -65,7 +65,7 @@ const props = defineProps(attachFileProps);
 const emit = defineEmits(attachFileEmits);
 
 const {
-  safeModelValue,
+  modelValue,
   fileStatuses,
   displayErrors,
   fileErrors,

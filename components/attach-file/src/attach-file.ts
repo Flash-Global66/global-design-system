@@ -81,6 +81,10 @@ export const attachFileProps = buildProps({
     type: Object as PropType<Record<number, number>>,
     default: () => ({}),
   },
+  errors: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
 } as const);
 
 export const attachFileEmits = {
