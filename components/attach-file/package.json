@@ -1,0 +1,39 @@
+{
+  "name": "@flash-global66/g-attach-file",
+  "author": "Global66",
+  "version": "1.0.0",
+  "license": "MIT",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styles.scss": "./src/attach-file.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-form": "1.0.0",
+    "@flash-global66/g-icon-button": "0.2.2",
+    "@flash-global66/g-icon-font": "0.6.0",
+    "@flash-global66/g-progress": "0.2.0",
+    "element-plus": "2.9.0",
+    "vue": "3.2.0"
+  }
+}
