@@ -123,6 +123,8 @@ import MonthTable from "./basic-month-table.vue";
 
 import type { Dayjs } from "dayjs";
 
+import es from "../lang/es";
+
 defineOptions({
   name: "DatePickerMonthRange",
 });
@@ -131,7 +133,7 @@ const props = defineProps(panelMonthRangeProps);
 const emit = defineEmits(panelMonthRangeEmits);
 const unit = "year";
 
-const { lang } = useLocale();
+const { lang } = useLocale(ref(es));
 const pickerBase = inject("EP_PICKER_BASE") as any;
 const { shortcuts, disabledDate } = pickerBase.props;
 const format = toRef(pickerBase.props, "format");

@@ -260,6 +260,8 @@ import DateTable from "./basic-date-table.vue";
 
 import type { Dayjs } from "dayjs";
 
+import es from "../lang/es";
+
 type ChangeType = "min" | "max";
 type UserInput = {
   min: string | null;
@@ -282,7 +284,7 @@ const { disabledDate, cellClassName, defaultTime, clearable } =
 const format = toRef(pickerBase.props, "format");
 const shortcuts = toRef(pickerBase.props, "shortcuts");
 const defaultValue = toRef(pickerBase.props, "defaultValue");
-const { lang } = useLocale();
+const { lang } = useLocale(ref(es));
 const leftDate = ref<Dayjs>(dayjs().locale(lang.value));
 const rightDate = ref<Dayjs>(dayjs().locale(lang.value).add(1, unit));
 

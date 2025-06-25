@@ -250,15 +250,15 @@ import { GIconFont } from '@flash-global66/g-icon-font';
   },
 } as Meta;
 
-export default meta;
-type Story = StoryObj<typeof GIconFont>;
+export default meta
+type Story = StoryObj<typeof GIconFont>
 
 export const Primary: Story = {
   name: "Uso básico",
   render: (args) => ({
     components: { GIconFont, GConfigProvider },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
       <g-config-provider>
@@ -351,16 +351,14 @@ export const Galería: Story = {
               v-model="searchTerm"
               placeholder="Buscar icono..."
               class="w-full max-w-md"
-              size="small"
             >
               <template #prefix>
-                <g-icon-font name="solid magnifying-glass" size="18px" />
+                <g-icon-font name="solid magnifying-glass" />
               </template>
             </g-input>
             <g-button 
               v-if="searchTerm"
               @click="clearSearch"
-              size="small"
             >
               Limpiar
             </g-button>
@@ -374,11 +372,28 @@ export const Galería: Story = {
                 <div
                   v-for="icon in icons"
                   :key="icon"
-                  class="flex bg-white flex-col items-center justify-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600"
+                  class="flex bg-white flex-col items-center justify-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600 relative overflow-hidden transition-all duration-300"
+                  :class="{ 'copy-animation': copiedIcon === \`\${weight} \${icon}\` }"
                   @click="copyIconName(\`\${weight} \${icon}\`)"
                 >
-                  <g-icon-font :name="\`\${weight} \${icon}\`" class="text-6 mb-2"/>
-                  <span class="text-xs text-center">{{ icon }}</span>
+                  <g-icon-font 
+                    :name="\`\${weight} \${icon}\`" 
+                    class="text-6 mb-2" 
+                    :class="{ 'invisible': copiedIcon === \`\${weight} \${icon}\` }"
+                  />
+                  <span 
+                    class="text-xs text-center" 
+                    :class="{ 'invisible': copiedIcon === \`\${weight} \${icon}\` }"
+                  >
+                    {{ icon }}
+                  </span>
+
+                  <div v-if="copiedIcon === \`\${weight} \${icon}\` " class="absolute inset-0 bg-emerald-50 bg-opacity-70 flex flex-col items-center justify-center transition-opacity duration-300 copy-feedback">
+                    <div class="text-emerald-600 mb-1">
+                      <g-icon-font name="solid check-circle" size="lg" />
+                    </div>
+                    <span class="text-xs font-medium text-emerald-700">¡Copiado!</span>
+                  </div>
                 </div>
               </div>
             </div>

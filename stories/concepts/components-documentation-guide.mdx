@@ -1,0 +1,385 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Concept/Guide/Components Documentation Guide" />
+
+### Guía para la Documentación de Componentes en B2B UI Framework
+
+## Introducción
+
+Esta guía establece los lineamientos para crear una documentación uniforme y completa para los componentes de nuestra biblioteca B2B UI Framework. Una documentación bien estructurada facilita la adopción de los componentes y mejora la experiencia del desarrollador.
+
+### Estructura General
+
+El archivo de documentación debe seguir esta estructura:
+
+* Agregar el title del componente manualmente para evitar errores si se cambia el nombre del archivo.
+* Descripción general del componente
+* Características principales
+* Instrucciones de instalación e importación
+* Dependencias internas y externas
+* Definición de propiedades (argTypes)
+* Ejemplos prácticos de uso
+* La documentación debe estar en español (títulos, descripciones, categorías)
+* Si el componente tiene variantes, tamaños, etc. se deben agregar como ejemplos.
+* Los elementos técnicos deben mantenerse en inglés (nombres de propiedades, métodos, types, interfaces, variables)
+* El nombre del archivo debe estar en kebab-case (ej: button-component.stories.ts)
+* El nombre de la sección debe estar en inglés (ej: Basic/Button)
+* Elementos Esenciales
+
+
+### Descripción del Componente
+
+Debe incluir:
+
+* Descripción concisa del propósito del componente
+* Version del componente. Esto se puede importar directamente desde el package.json
+* Si usaste element plus como base se debe indicar la version de element plus que usaste
+* Contexto de uso recomendado
+* Funcionalidades principales destacadas
+
+### Instalación e Importación
+
+```typescript
+// Instalación
+yarn add @flash-global66/g-componente
+
+// Importación
+import { GComponente } from '@flash-global66/g-componente'
+import '@flash-global66/g-componente/componente.styles.scss'
+```
+
+### Dependencias
+
+#### Internas (de nuestra biblioteca)
+
+- [GButton](/docs/ui-button--docs)
+- [GInput](/docs/form-input--docs)
+
+#### Externas (de terceros)
+
+Este componente utiliza la biblioteca [Nombre]. Para instalarla:
+
+```bash
+yarn add nombre-biblioteca
+```
+Para más información, consulte la [documentación oficial](https://global66.com).
+
+### 4. Definición de Propiedades (ArgTypes)
+
+Las propiedades deben organizarse en categorías en español:
+
+- Propiedades principales
+- Estilo y apariencia
+- Comportamiento
+- Eventos
+- Slots
+- Accesibilidad
+- Métodos expuestos
+- Etc.
+
+Cada propiedad debe incluir:
+- Descripción clara
+- Tipo de datos esperado
+- Valor por defecto (cuando corresponda)
+- Control adecuado para Storybook
+
+### Recomendaciones Generales
+- Mantenga ejemplos actualizados: Los ejemplos deben reflejar la funcionalidad actual del componente.
+- Sea conciso pero completo: Proporcione suficiente información sin ser excesivamente detallado.
+- Considere diferentes casos de uso: Incluya ejemplos para diferentes contextos y configuraciones.
+- Documente props de accesibilidad: Siempre mencione las propiedades relacionadas con la accesibilidad.
+- Proporcione una navegación clara: Use enlaces a documentación relacionada cuando sea relevante.
+
+### Uso de IA para Generar Documentación
+
+Si utiliza una IA como apoyo para generar la documentación:
+
+* Proporcione el componente como contexto a la IA
+* Incluya esta guía como referencia para el formato
+* Revise y analice cuidadosamente el resultado generado
+* Corrija cualquier inconsistencia o error
+* Asegúrese de que los ejemplos sean correctos y funcionales
+* Verifique que la documentación sea comprensible para otros desarrolladores
+
+## Ejemplos Prácticos
+
+### Estructura de un Archivo de Documentación Completo
+
+A continuación se muestra un script base para la creación de documentación de componentes o también se puede guiar de los componentes Tag, Button, Input, etc. :
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/vue3'
+import { ref, reactive } from 'vue'
+import { GComponente } from '../components/GComponente'
+import type { ComponenteProps } from '../components/GComponente'
+
+const meta: Meta<ComponenteProps> = {
+  title: 'Basic/Componente',
+  component: GComponente,
+  parameters: {
+    docs: {
+      description: {
+        component: `
+## Descripción
+
+El componente \`GComponente\` permite [descripción breve de su funcionalidad principal].
+
+### Características principales
+- [Característica 1]
+- [Característica 2]
+- [Característica 3]
+
+### Instalación
+
+\`\`\`bash
+yarn add @flash-global66/g-componente
+\`\`\`
+
+### Importación
+
+\`\`\`typescript
+import { GComponente } from '@flash-global66/g-componente'
+import '@flash-global66/g-componente/componente.styles.scss'
+\`\`\`
+
+### Dependencias
+Este componente utiliza los siguientes componentes internos:
+- [GButton](/docs/ui-button--docs)
+- [GInput](/docs/form-input--docs)
+
+### Dependencias externas
+Este componente utiliza la biblioteca [Nombre]. Para instalarla:
+
+\`\`\`bash
+yarn add nombre-biblioteca
+\`\`\`
+
+Para más información, consulte la [documentación oficial](https://link-a-documentacion.com).
+`
+      }
+    }
+  },
+  argTypes: {
+    // Propiedades principales
+    value: {
+      description: 'Valor seleccionado o ingresado en el componente',
+      control: 'text',
+      table: {
+        category: 'Propiedades principales',
+        type: { summary: 'string | number' },
+        defaultValue: { summary: '""' }
+      }
+    },
+    
+    // Estilo y apariencia
+    variant: {
+      description: 'Variante visual del componente',
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary'],
+      table: {
+        category: 'Estilo y apariencia',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'primary' }
+      }
+    },
+    size: {
+      description: 'Tamaño del componente',
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+      table: {
+        category: 'Estilo y apariencia',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'medium' }
+      }
+    },
+    
+    // Comportamiento
+    disabled: {
+      description: 'Deshabilita la interacción con el componente',
+      control: 'boolean',
+      table: {
+        category: 'Comportamiento',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' }
+      }
+    },
+    
+    // Eventos
+    onChange: {
+      description: 'Se dispara cuando cambia el valor del componente',
+      action: 'changed',
+      table: {
+        category: 'Eventos',
+        type: { summary: '(value: any) => void' }
+      }
+    },
+    onClick: {
+      description: 'Se dispara cuando se hace clic en el componente',
+      action: 'clicked',
+      table: {
+        category: 'Eventos',
+        type: { summary: '(event: Event) => void' }
+      }
+    },
+    
+    // Slots
+    default: {
+      description: 'Contenido principal del componente',
+      table: {
+        category: 'Slots',
+        type: { summary: 'ReactNode' }
+      }
+    },
+    prefix: {
+      description: 'Contenido que se muestra antes del contenido principal',
+      table: {
+        category: 'Slots',
+        type: { summary: 'ReactNode' }
+      }
+    },
+    suffix: {
+      description: 'Contenido que se muestra después del contenido principal',
+      table: {
+        category: 'Slots',
+        type: { summary: 'ReactNode' }
+      }
+    },
+    
+    // Accesibilidad
+    ariaLabel: {
+      description: 'Etiqueta ARIA para mejorar la accesibilidad',
+      control: 'text',
+      table: {
+        category: 'Accesibilidad',
+        type: { summary: 'string' }
+      }
+    }
+  }
+}
+
+export default meta
+type Story = StoryObj<ComponenteProps>
+
+// Ejemplo Básico Controlable
+export const Basic: Story = {
+  name: 'Ejemplo básico',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ejemplo básico de uso del componente con controles interactivos.'
+      }
+    }
+  },
+  args: {
+    // Valores iniciales para los controles
+    value: '',
+    variant: 'primary',
+    size: 'medium',
+    disabled: false
+  },
+  render: (args) => ({
+    components: { GComponente },
+    setup() {
+      return { args }
+    },
+    template: `
+      <g-componente v-bind="args">
+        Contenido del componente
+      </g-componente>
+    `
+  })
+}
+
+// Variantes Visuales
+export const Variants: Story = {
+  name: 'Variantes',
+  parameters: {
+    docs: {
+      description: {
+        story: 'El componente admite diferentes variantes visuales que se pueden usar según el contexto.'
+      }
+    }
+  },
+  render: () => ({
+    components: { GComponente },
+    template: `
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-4">
+          <g-componente variant="primary">Variante primaria</g-componente>
+          <g-componente variant="secondary">Variante secundaria</g-componente>
+          <g-componente variant="tertiary">Variante terciaria</g-componente>
+        </div>
+        
+        <h3 class="text-lg font-medium mt-4">Tamaños</h3>
+        <div class="flex items-center gap-4">
+          <g-componente size="sm">Pequeño</g-componente>
+          <g-componente size="md">Mediano</g-componente>
+          <g-componente size="lg">Grande</g-componente>
+        </div>
+      </div>
+    `
+  })
+}
+
+// Caso de Uso Avanzado
+export const AdvancedUsage: Story = {
+  name: 'Caso de uso avanzado',
+  parameters: {
+    docs: {
+      description: {
+        story: `Este ejemplo muestra un caso de uso avanzado con funcionalidades específicas.
+        
+#### Consideraciones importantes
+- El componente maneja estados internos complejos
+- Se puede personalizar completamente a través de slots
+- La validación de datos se realiza automáticamente`
+      }
+    }
+  },
+  render: () => ({
+    components: { GComponente },
+    setup() {
+      const value = ref('');
+      const items = reactive([
+        { id: 1, name: 'Opción 1' },
+        { id: 2, name: 'Opción 2' },
+        { id: 3, name: 'Opción 3' }
+      ]);
+      
+      function handleChange(newValue) {
+        value.value = newValue;
+        // Lógica adicional
+      }
+      
+      return { value, items, handleChange }
+    },
+    template: `
+      <div class="p-4 border rounded">
+        <h3 class="text-lg font-medium mb-2">Implementación avanzada</h3>
+        <g-componente 
+          v-model="value"
+          @change="handleChange"
+          variant="primary"
+        >
+          <template #prefix>
+            <span class="text-gray-500">Prefijo personalizado</span>
+          </template>
+          
+          <!-- Contenido principal -->
+          <div v-for="item in items" :key="item.id">
+            {{ item.name }}
+          </div>
+          
+          <template #suffix>
+            <span class="text-gray-500">Sufijo personalizado</span>
+          </template>
+        </g-componente>
+        
+        <div class="mt-4">
+          <strong>Valor actual:</strong> {{ value }}
+        </div>
+      </div>
+    `
+  })
+}
+```
