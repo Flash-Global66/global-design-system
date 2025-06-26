@@ -183,6 +183,11 @@ export const ICON_SETS = {
     "circle-notch",
     "dollar-sign",
     "id-badge",
+    "address-book",
+    "address-card",
+    "hashtag",
+    "landmark",
+    'at'
   ] as const,
 
   light: [

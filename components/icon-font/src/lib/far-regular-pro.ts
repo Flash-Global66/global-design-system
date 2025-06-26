@@ -83,4 +83,9 @@ export {
   faDollarSign,
   faTableList,
   faIdBadge,
+  faAddressBook,
+  faHashtag,
+  faAddressCard,
+  faLandmarkAlt,
+  faAt
 } from '@fortawesome/pro-regular-svg-icons';
