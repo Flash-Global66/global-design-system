@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.6...@flash-global66/g-select@0.2.0) (2025-06-25)
+
+
+### Features
+
+* create component dropdown ([f48dc07](https://github.com/Flash-Global66/global-design-system/commit/f48dc076d148ea5728e5de85a9b30a9d8fa255a6))
+* improve in dropdown ([5d979f5](https://github.com/Flash-Global66/global-design-system/commit/5d979f5e62175c28d46f6813e8c51ac225f9fd7f))
+
+
+
+
+
 ## [0.1.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.5...@flash-global66/g-select@0.1.6) (2025-06-17)
 
 
