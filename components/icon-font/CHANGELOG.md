@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.10.0...@flash-global66/g-icon-font@0.11.0) (2025-06-26)
+
+
+### Features
+
+* add new icons ([f67f062](https://github.com/Flash-Global66/global-design-system/commit/f67f062d53ed6cb686d8aad5b404da2b64c19542))
+
+
+
+
+
 # [0.10.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.9.0...@flash-global66/g-icon-font@0.10.0) (2025-05-27)
 
 
