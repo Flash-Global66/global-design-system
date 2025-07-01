@@ -87,11 +87,11 @@ export const chipProps = buildProps({
    */
   dropdownEnabled: Boolean,
   /**
-   * @description
+   * @description dropdown actions
    */
   dropdownActions: dropdownProps.actions,
   /**
-   * @description
+   * @description whether to hide menu after clicking menu-item
    */
   dropdownHideOnClick: dropdownProps.hideOnClick,
   /**
@@ -103,11 +103,11 @@ export const chipProps = buildProps({
     default: 'bottom'
   },
   /**
-   * @description
+   * @description delay time before show a dropdown
    */
   dropdownShowTimeout: dropdownProps.showTimeout,
   /**
-   * @description
+   * @description delay time before hide a dropdown
    */
   dropdownHideTimeout: dropdownProps.hideTimeout,
   /**
