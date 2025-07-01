@@ -657,6 +657,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-chip@workspace:components/chip":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-chip@workspace:components/chip"
+  peerDependencies:
+    "@flash-global66/g-icon-font": ^0.10.0
+    "@flash-global66/g-popover": ^0.0.7
+    element-plus: ^2.9.0
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-collapse-transition@workspace:components/collapse-transition":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-collapse-transition@workspace:components/collapse-transition"
