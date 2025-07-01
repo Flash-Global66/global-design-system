@@ -475,6 +475,325 @@ export const TypesWithAutomaticRadius: Story = {
   }),
 };
 
+// Tipos para el sistema de filtros
+interface MainFilter {
+  id: string
+  text: string
+  selected: boolean
+  options: string[]
+}
+
+interface AppliedFilter {
+  id: string
+  category: string
+  value: string
+  text: string
+}
+
+export const SelectableFilters: Story = {
+  name: 'Sistema de filtros en cascada',
+  parameters: {
+    docs: {
+      source: {
+        code: `<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import { GChip } from '@flash-global66/g-chip'
+
+// Tipos para el sistema de filtros
+interface MainFilter {
+  id: string
+  text: string
+  selected: boolean
+  options: string[]
+}
+
+interface AppliedFilter {
+  id: string
+  category: string
+  value: string
+  text: string
+}
+
+const mainFilters = reactive<MainFilter[]>([
+  { id: 'year', text: 'Año', selected: false, options: ['2015', '2016', '2017', '2018', '2019', '2020'] },
+  { id: 'category', text: 'Categoría', selected: false, options: ['Importaciones', 'Exportaciones'] },
+  { id: 'country', text: 'País', selected: false, options: ['Chile', 'Argentina', 'Brasil'] }
+])
+
+const appliedFilters = ref<AppliedFilter[]>([])
+
+const toggleMainFilter = (filterId: string) => {
+  const filter = mainFilters.find(f => f.id === filterId)
+  if (filter) {
+    filter.selected = !filter.selected
+    if (!filter.selected) {
+      const filteredItems = appliedFilters.value.filter(af => af.category !== filterId)
+      appliedFilters.value.splice(0, appliedFilters.value.length)
+      appliedFilters.value.push(...filteredItems)
+    }
+  }
+}
+
+const addAppliedFilter = (category: string, value: string, categoryText: string) => {
+  const exists = appliedFilters.value.find(af => af.category === category && af.value === value)
+  if (!exists) {
+    appliedFilters.value.push({
+      id: \`\${category}-\${value}\`,
+      category,
+      value,
+      text: \`\${categoryText}: \${value}\`
+    })
+  }
+}
+
+const removeAppliedFilter = (filterId: string) => {
+  const index = appliedFilters.value.findIndex(af => af.id === filterId)
+  if (index > -1) {
+    appliedFilters.value.splice(index, 1)
+  }
+}
+
+const clearAllFilters = () => {
+  appliedFilters.value.splice(0)
+  mainFilters.forEach(filter => filter.selected = false)
+}
+</script>
+
+<template>
+  <div class="flex flex-col gap-6">
+    <!-- Filtros principales -->
+    <div>
+      <h4>Categorías disponibles</h4>
+      <div class="flex flex-wrap gap-3">
+        <g-chip
+          v-for="filter in mainFilters"
+          :key="filter.id"
+          variant="outline"
+          type="primary"
+          :text="filter.text"
+          :selected="filter.selected"
+          @click="toggleMainFilter(filter.id)"
+        />
+      </div>
+    </div>
+    
+    <!-- Opciones para categorías seleccionadas -->
+    <div v-for="filter in mainFilters.filter(f => f.selected)" :key="'options-' + filter.id">
+      <h4>Opciones de {{ filter.text }}:</h4>
+      <div class="flex flex-wrap gap-2">
+        <g-chip
+          v-for="option in filter.options"
+          :key="filter.id + '-' + option"
+          variant="outline"
+          type="secondary"
+          :text="option"
+          :selected="appliedFilters.some(af => af.category === filter.id && af.value === option)"
+          @click="addAppliedFilter(filter.id, option, filter.text)"
+          size="sm"
+        />
+      </div>
+    </div>
+    
+    <!-- Filtros aplicados -->
+    <div v-if="appliedFilters.length > 0">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <h4>Filtros aplicados</h4>
+        <g-chip
+          variant="outline"
+          type="secondary"
+          text="Limpiar todo"
+          size="sm"
+          @click="clearAllFilters"
+        />
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <g-chip
+          v-for="applied in appliedFilters"
+          :key="applied.id"
+          variant="solid"
+          type="primary"
+          :text="applied.text"
+          closable
+          @close="removeAppliedFilter(applied.id)"
+          size="sm"
+        />
+      </div>
+    </div>
+  </div>
+</template>`,
+      },
+    }
+  },
+  render: () => ({
+    components: { GChip, GConfigProvider },
+    setup() {
+      const mainFilters = reactive<MainFilter[]>([
+        { 
+          id: 'year', 
+          text: 'Año', 
+          selected: false,
+          options: ['2015', '2016', '2017', '2018', '2019', '2020']
+        },
+        { 
+          id: 'category', 
+          text: 'Categoría', 
+          selected: false,
+          options: ['Importaciones', 'Exportaciones', 'Balanza comercial']
+        },
+        { 
+          id: 'country', 
+          text: 'País', 
+          selected: false,
+          options: ['Chile', 'Argentina', 'Brasil', 'Colombia', 'Perú']
+        },
+        { 
+          id: 'currency', 
+          text: 'Moneda', 
+          selected: false,
+          options: ['USD', 'EUR', 'CLP', 'ARS']
+        }
+      ])
+      
+      const appliedFilters = ref<AppliedFilter[]>([])
+      
+      const toggleMainFilter = (filterId: string) => {
+        const filter = mainFilters.find(f => f.id === filterId)
+        if (filter) {
+          filter.selected = !filter.selected
+          
+          if (!filter.selected) {
+            const filteredItems = appliedFilters.value.filter(af => af.category !== filterId)
+            appliedFilters.value.splice(0, appliedFilters.value.length)
+            appliedFilters.value.push(...filteredItems)
+          }
+        }
+      }
+      
+      const addAppliedFilter = (category: string, value: string, categoryText: string) => {
+        const exists = appliedFilters.value.find(af => 
+          af.category === category && af.value === value
+        )
+        
+        if (!exists) {
+          appliedFilters.value.push({
+            id: `${category}-${value}`,
+            category,
+            value,
+            text: `${categoryText}: ${value}`
+          })
+        }
+      }
+      
+      const removeAppliedFilter = (filterId: string) => {
+        const index = appliedFilters.value.findIndex(af => af.id === filterId)
+        if (index > -1) {
+          appliedFilters.value.splice(index, 1)
+        }
+      }
+      
+      const clearAllFilters = () => {
+        appliedFilters.value.splice(0)
+        mainFilters.forEach(filter => filter.selected = false)
+      }
+
+      
+      return { 
+        mainFilters, 
+        appliedFilters, 
+        toggleMainFilter, 
+        addAppliedFilter, 
+        removeAppliedFilter,
+        clearAllFilters
+      }
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-6" style="max-width: 800px;">
+          
+          <!-- Título -->
+          <div>
+            <h3 style="margin: 0 0 8px 0; font-size: 16px;">Sistema de filtros - Ejemplo financiero</h3>
+            <p style="margin: 0; font-size: 12px; color: #666;">
+              Selecciona categorías de filtro, luego elige valores específicos que aparecerán como chips eliminables.
+            </p>
+          </div>
+          
+          <!-- Filtros principales (categorías) -->
+          <div>
+            <h4 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600;">Categorías disponibles</h4>
+            <div class="flex flex-wrap gap-3">
+              <g-chip
+                v-for="filter in mainFilters"
+                :key="filter.id"
+                variant="outline"
+                type="primary"
+                :text="filter.text"
+                :selected="filter.selected"
+                @click="toggleMainFilter(filter.id)"
+              />
+            </div>
+          </div>
+          
+          <!-- Opciones para categorías seleccionadas -->
+          <div v-for="filter in mainFilters.filter(f => f.selected)" :key="'options-' + filter.id">
+            <h4 style="margin: 0 0 8px 0; font-size: 13px; font-weight: 500;">
+              Opciones de {{ filter.text }}:
+            </h4>
+            <div class="flex flex-wrap gap-2" style="margin-bottom: 16px;">
+              <g-chip
+                v-for="option in filter.options"
+                :key="filter.id + '-' + option"
+                variant="outline"
+                type="secondary"
+                :text="option"
+                :selected="appliedFilters.some(af => af.category === filter.id && af.value === option)"
+                @click="addAppliedFilter(filter.id, option, filter.text)"
+                style="cursor: pointer; font-size: 12px;"
+                size="sm"
+              />
+            </div>
+          </div>
+          
+          <!-- Filtros aplicados -->
+          <div v-if="appliedFilters.length > 0">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+              <h4 style="margin: 0; font-size: 14px; font-weight: 600;">Filtros aplicados</h4>
+              <g-chip
+                variant="outline"
+                type="secondary"
+                text="Limpiar todo"
+                size="sm"
+                @click="clearAllFilters"
+                style="cursor: pointer; color: #666;"
+              />
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <g-chip
+                v-for="applied in appliedFilters"
+                :key="applied.id"
+                variant="solid"
+                type="primary"
+                :text="applied.text"
+                closable
+                @close="removeAppliedFilter(applied.id)"
+                size="sm"
+              />
+            </div>
+          </div>
+          
+          <!-- Estado actual -->
+          <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; font-size: 12px;">
+            <strong>Estado actual:</strong><br>
+            Categorías activas: {{ mainFilters.filter(f => f.selected).map(f => f.text).join(', ') || 'Ninguna' }}<br>
+            Filtros aplicados: {{ appliedFilters.length }} filtro(s)
+          </div>
+          
+        </div>
+      </g-config-provider>
+    `
+  })
+}
+
 export const WithIntegratedDropdown: Story = {
   name: "Chip con dropdown integrado",
   parameters: {
