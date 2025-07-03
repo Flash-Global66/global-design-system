@@ -2,8 +2,6 @@ import type { ExtractPropTypes } from 'vue'
 import type Chip from './chip.vue'
 import { buildProps, definePropType } from 'element-plus/es/utils/index'
 import { IconString } from '@flash-global66/g-icon-font'
-import { useTooltipTriggerProps } from '@flash-global66/g-tooltip'
-import { type Placement } from '@flash-global66/g-popper'
 import { type actionType } from '@flash-global66/g-dropdown'
 import { 
   CHIP_TYPES, 
@@ -17,6 +15,20 @@ import {
 import type { ChipType, ChipVariant, ChipSize } from './chip.types'
 
 export type DropdownCommand = string | number | Record<string, any>
+export type DropdownTriggerType = 'hover' | 'focus' | 'click' | 'contextmenu'
+export type DropdownPlacement = 
+  | 'top' 
+  | 'top-start' 
+  | 'top-end' 
+  | 'bottom' 
+  | 'bottom-start' 
+  | 'bottom-end' 
+  | 'left' 
+  | 'left-start' 
+  | 'left-end' 
+  | 'right' 
+  | 'right-start' 
+  | 'right-end'
 
 export const chipProps = buildProps({
   /**
@@ -105,14 +117,17 @@ export const chipProps = buildProps({
    * @description dropdown trigger type
    * @default 'click'
    */
-  trigger: useTooltipTriggerProps.trigger,
+  trigger: {
+    type: definePropType<DropdownTriggerType>(String),
+    default: 'click'
+  },
 
   /**
    * @description dropdown placement
    * @default 'bottom-start'
    */
   placement: {
-    type: definePropType<Placement>(String),
+    type: definePropType<DropdownPlacement>(String),
     default: 'bottom-start'
   },
 } as const)
