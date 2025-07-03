@@ -171,7 +171,7 @@ import { GChip } from '@flash-global66/g-chip'
       },
     },
     dropdownEnabled: {
-      description: "Habilita el dropdown integrado",
+      description: "Habilita el dropdown integrado. Automáticamente muestra un icono chevron-down en el sufijo cuando está habilitado. Para configurar el dropdown, usa las props estándar de GDropdown.",
       control: "boolean",
       table: {
         category: "Dropdown",
@@ -179,25 +179,16 @@ import { GChip } from '@flash-global66/g-chip'
         defaultValue: { summary: "false" },
       },
     },
-    dropdownActions: {
-      description: "Acciones del dropdown (array de objetos { title: string, command: any })",
+    actions: {
+      description: "Acciones del dropdown (array de objetos { title: string, command: any }). Para más opciones de configuración, consulta la documentación de GDropdown.",
       control: "object",
       table: {
         category: "Dropdown",
         type: { summary: "Array<object>" },
       },
     },
-    dropdownHideOnClick: {
-      description: "Oculta el dropdown al hacer clic en un elemento",
-      control: "boolean",
-      table: {
-        category: "Dropdown",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
-      },
-    },
-    dropdownTrigger: {
-      description: "Cómo se activa el dropdown",
+    trigger: {
+      description: "Cómo se activa el dropdown: 'hover', 'click', 'contextmenu'. Para más opciones, consulta la documentación de GDropdown.",
       control: "select",
       options: ["hover", "click", "contextmenu"],
       table: {
@@ -206,8 +197,8 @@ import { GChip } from '@flash-global66/g-chip'
         defaultValue: { summary: "hover" },
       },
     },
-    dropdownPlacement: {
-      description: "Posición del dropdown",
+    placement: {
+      description: "Posición del dropdown. Para todas las opciones de posicionamiento disponibles, consulta la documentación de GDropdown.",
       control: "select",
       options: [
         "top",
@@ -227,24 +218,7 @@ import { GChip } from '@flash-global66/g-chip'
         category: "Dropdown",
         type: { summary: "string" },
         defaultValue: { summary: "bottom" },
-      },
-    },
-    dropdownShowTimeout: {
-      description: "Retraso para mostrar (ms)",
-      control: "number",
-      table: {
-        category: "Dropdown",
-        type: { summary: "number" },
-        defaultValue: { summary: "150" },
-      },
-    },
-    dropdownHideTimeout: {
-      description: "Retraso para ocultar (ms)",
-      control: "number",
-      table: {
-        category: "Dropdown",
-        type: { summary: "number" },
-        defaultValue: { summary: "150" },
+        description: "**Nota:** Todas las demás props de GDropdown se pasan directamente al componente. Para configuración avanzada (triggerKeys, popperOptions, hideOnClick, timeouts, etc.), consulta la documentación de GDropdown."
       },
     },
     close: {
@@ -321,12 +295,9 @@ import { GChip } from '@flash-global66/g-chip'
     selected: false,
     disabled: false,
     dropdownEnabled: false,
-    dropdownActions: [],
-    dropdownHideOnClick: true,
-    dropdownTrigger: "hover",
-    dropdownPlacement: "bottom",
-    dropdownShowTimeout: 150,
-    dropdownHideTimeout: 150,
+    actions: [],
+    trigger: "hover",
+    placement: "bottom",
   },
 };
 export default meta;
@@ -372,10 +343,93 @@ export const AllCombinations: Story = {
                   :size="size"
                   :variant="variant"
                   text="Chip"
-                  icon-left="solid check"
-                  icon-right="solid check"
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const WithIcons: Story = {
+  name: "Chips con iconos",
+  render: () => ({
+    components: { GChip, GConfigProvider },
+    setup() {
+      const iconExamples = [
+        { iconLeft: "solid check", text: "Verificado" },
+        { iconRight: "regular chevron-down", text: "Dropdown" },
+        { iconLeft: "solid user", iconRight: "solid check", text: "Usuario activo" },
+        { iconLeft: "regular heart", text: "Favorito", variant: "outline" },
+        { iconLeft: "regular bell", text: "Notificación", type: "secondary" },
+        { iconRight: "solid arrow-right", text: "Siguiente", variant: "outline", type: "secondary" },
+      ]
+      
+      return { iconExamples }
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-6">
+          <div>
+            <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600;">Ejemplos con iconos</h3>
+            <p style="margin: 0 0 16px 0; font-size: 14px; color: #666;">
+              Diferentes combinaciones de iconos prefijo y sufijo
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <g-chip
+                v-for="(example, index) in iconExamples"
+                :key="index"
+                :text="example.text"
+                :icon-left="example.iconLeft"
+                :icon-right="example.iconRight"
+                :variant="example.variant || 'solid'"
+                :type="example.type || 'primary'"
+                size="md"
+              />
+            </div>
+          </div>
+          
+          <div>
+            <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">Solo iconos prefijo</h4>
+            <div class="flex flex-wrap gap-2">
+              <g-chip text="Check" icon-left="solid check" size="sm" />
+              <g-chip text="Usuario" icon-left="solid user" size="sm" />
+              <g-chip text="Home" icon-left="solid home" size="sm" />
+              <g-chip text="Search" icon-left="solid search" size="sm" />
+              <g-chip text="Filter" icon-left="solid filter" size="sm" />
+            </div>
+          </div>
+          
+          <div>
+            <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">Solo iconos sufijo</h4>
+            <div class="flex flex-wrap gap-2">
+              <g-chip text="Dropdown" icon-right="regular chevron-down" size="sm" variant="outline" />
+              <g-chip text="Arrow" icon-right="solid arrow-right" size="sm" variant="outline" />
+              <g-chip text="Times" icon-right="solid times" size="sm" variant="outline" />
+              <g-chip text="Info" icon-right="solid info-circle" size="sm" variant="outline" />
+              <g-chip text="Edit" icon-right="solid edit" size="sm" variant="outline" />
+            </div>
+          </div>
+          
+          <div>
+            <h4 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">Ambos iconos</h4>
+            <div class="flex flex-wrap gap-2">
+              <g-chip 
+                text="Usuario activo" 
+                icon-left="solid user" 
+                icon-right="solid check" 
+                variant="solid" 
+                type="primary" 
+              />
+              <g-chip 
+                text="Filtro aplicado" 
+                icon-left="solid filter" 
+                icon-right="solid times" 
+                variant="outline" 
+                type="secondary" 
+              />
             </div>
           </div>
         </div>
@@ -499,7 +553,6 @@ export const SelectableFilters: Story = {
 import { reactive, ref } from 'vue'
 import { GChip } from '@flash-global66/g-chip'
 
-// Tipos para el sistema de filtros
 interface MainFilter {
   id: string
   text: string
@@ -561,7 +614,6 @@ const clearAllFilters = () => {
 
 <template>
   <div class="flex flex-col gap-6">
-    <!-- Filtros principales -->
     <div>
       <h4>Categorías disponibles</h4>
       <div class="flex flex-wrap gap-3">
@@ -577,7 +629,6 @@ const clearAllFilters = () => {
       </div>
     </div>
     
-    <!-- Opciones para categorías seleccionadas -->
     <div v-for="filter in mainFilters.filter(f => f.selected)" :key="'options-' + filter.id">
       <h4>Opciones de {{ filter.text }}:</h4>
       <div class="flex flex-wrap gap-2">
@@ -823,8 +874,8 @@ const handleCurrencyCommand = (command) => {
     variant="outline"
     type="primary"
     :dropdown-enabled="true"
-    dropdown-trigger="click"
-    dropdown-placement="bottom-start"
+    trigger="click"
+    placement="bottom-start"
     @command="handleCurrencyCommand"
   >
     <template #prefix>
@@ -857,9 +908,9 @@ const handleCurrencyCommand = (command) => {
     variant="solid"
     type="secondary"
     :dropdown-enabled="true"
-    dropdown-trigger="contextmenu"
-    dropdown-placement="bottom-start"
-    :dropdown-actions="[
+    trigger="contextmenu"
+    placement="bottom-start"
+    :actions="[
       { title: 'Copiar', command: 'copy' },
       { title: 'Editar', command: 'edit' },
       { title: 'Eliminar', command: 'delete' },
@@ -896,7 +947,6 @@ const handleCurrencyCommand = (command) => {
       <g-config-provider>
         <div style="display: flex; flex-direction: column; gap: 24px; max-width: 600px;">
           
-          <!-- Ejemplo selector de monedas -->
           <div>
             <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600;">Selector de moneda</h3>
             <p style="margin: 0 0 16px 0; font-size: 14px; color: #666;">
@@ -908,16 +958,12 @@ const handleCurrencyCommand = (command) => {
               variant="outline"
               type="primary"
               :dropdown-enabled="true"
-              dropdown-trigger="click"
-              dropdown-placement="bottom-start"
+              trigger="click"
+              placement="bottom-start"
               @command="handleCurrencyCommand"
             >
               <template #prefix>
                 <span style="margin-right: 4px;">{{ selectedCurrency.flag }}</span>
-              </template>
-
-              <template #suffix>
-                <span style="margin-left: 4px; transform: rotate(90deg); font-size: 12px;">›</span>
               </template>
 
               <template #dropdown>
@@ -939,7 +985,6 @@ const handleCurrencyCommand = (command) => {
             </div>
           </div>
           
-          <!-- Ejemplo menú contextual -->
           <div>
             <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600;">Menú contextual</h3>
             <p style="margin: 0 0 16px 0; font-size: 14px; color: #666;">
@@ -951,9 +996,9 @@ const handleCurrencyCommand = (command) => {
               variant="solid"
               type="secondary"
               :dropdown-enabled="true"
-              dropdown-trigger="contextmenu"
-              dropdown-placement="bottom-start"
-              :dropdown-actions="[
+              trigger="contextmenu"
+              placement="bottom-start"
+              :actions="[
                 { title: 'Copiar', command: 'copy' },
                 { title: 'Editar', command: 'edit' },
                 { title: 'Eliminar', command: 'delete' },
@@ -968,4 +1013,3 @@ const handleCurrencyCommand = (command) => {
     `,
   }),
 };
-

@@ -3,6 +3,7 @@
     v-bind="dropdownProps"
     :disabled="disabled || !dropdownEnabled"
     @command="handleCommand"
+    @visible-change="handleDropdownVisibleChange"
   >
     <span
       :class="containerKls"
@@ -15,18 +16,21 @@
       :aria-disabled="disabled ? 'true' : 'false'"
       :title="text"
     >
-      <slot v-if="$slots.prefix || prefixIcon" name="prefix">
-        <span v-if="prefixIcon" :class="ns.em(size, 'prefix-icon')">
-          <g-icon-font :name="prefixIcon" />
+      <slot v-if="$slots.prefix || iconLeft" name="prefix">
+        <span v-if="iconLeft" :class="ns.em(size, 'prefix-icon')">
+          <g-icon-font :name="iconLeft" />
         </span>
       </slot>
       <span :class="ns.e('content')">
         <span v-if="text">{{ text }}</span>
         <slot v-else />
       </span>
-      <slot name="suffix" v-if="$slots.suffix || suffixIcon || closable">
-        <span v-if="suffixIcon && !closable" :class="ns.em(size, 'suffix-icon')">
-          <g-icon-font :name="suffixIcon" />
+      <slot name="suffix" v-if="$slots.suffix || iconRight || closable || dropdownEnabled">
+        <span v-if="iconRight && !closable && !dropdownEnabled" :class="ns.em(size, 'suffix-icon')">
+          <g-icon-font :name="iconRight" />
+        </span>
+        <span v-else-if="dropdownEnabled && !closable" :class="[ns.em(size, 'suffix-icon'), ns.e('dropdown-icon')]">
+          <g-icon-font :name="dropdownVisible ? 'regular chevron-up' : 'regular chevron-down'" />
         </span>
         <span
           v-else-if="closable"
@@ -45,11 +49,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useNamespace } from 'element-plus'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { GDropdown } from '@flash-global66/g-dropdown'
-import { chipEmits, chipProps } from './chip'
+import { chipEmits, chipProps, type DropdownCommand } from './chip'
 
 defineOptions({
   name: 'GChip'
@@ -59,6 +63,17 @@ const props = defineProps(chipProps)
 const emit = defineEmits(chipEmits)
 
 const ns = useNamespace('chip')
+const dropdownVisible = ref(false)
+
+const dropdownProps = computed(() => {
+  const {
+    type, variant, size, iconLeft, iconRight, closable,
+    text, selected, disabled, dropdownEnabled,
+    ...dropdownProps
+  } = props
+  
+  return dropdownProps
+})
 
 const containerKls = computed(() => {
   const { variant, size, selected, disabled, type } = props
@@ -73,15 +88,6 @@ const containerKls = computed(() => {
   ]
 })
 
-const dropdownProps = computed(() => ({
-  actions: props.dropdownActions,
-  'hide-on-click': props.dropdownHideOnClick,
-  placement: props.dropdownPlacement,
-  'show-timeout': props.dropdownShowTimeout,
-  'hide-timeout': props.dropdownHideTimeout,
-  trigger: props.dropdownTrigger,
-}))
-
 const handleClose = (event: MouseEvent) => {
   emit('close', event)
 }
@@ -90,7 +96,12 @@ const handleClick = (event: MouseEvent | KeyboardEvent) => {
   if (!props.disabled) emit('click', event)
 }
 
-const handleCommand = (command: any) => {
+const handleCommand = (command: DropdownCommand) => {
   emit('command', command)
+}
+
+const handleDropdownVisibleChange = (visible: boolean) => {
+  dropdownVisible.value = visible
+  emit('visible-change', visible)
 }
 </script>
