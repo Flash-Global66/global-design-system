@@ -2,22 +2,25 @@ import type { ExtractPropTypes } from 'vue'
 import type Chip from './chip.vue'
 import { buildProps, definePropType } from 'element-plus/es/utils/index'
 import { IconString } from '@flash-global66/g-icon-font'
+import { useTooltipTriggerProps } from '@flash-global66/g-tooltip'
+import { type Placement } from '@flash-global66/g-popper'
+import { type actionType } from '@flash-global66/g-dropdown'
 import { 
   CHIP_TYPES, 
   CHIP_VARIANTS, 
   CHIP_SIZES, 
-  DROPDOWN_PLACEMENTS,
-  DROPDOWN_TRIGGERS,
   CLOSE_EVENT,
   CLICK_EVENT,
-  COMMAND_EVENT
+  COMMAND_EVENT,
+  VISIBLE_CHANGE_EVENT
 } from './constants'
-import type { ChipType, ChipVariant, ChipSize, DropdownPlacement, DropdownTrigger } from './chip.types'
-import { dropdownProps } from '@flash-global66/g-dropdown'
+import type { ChipType, ChipVariant, ChipSize } from './chip.types'
+
+export type DropdownCommand = string | number | Record<string, any>
 
 export const chipProps = buildProps({
   /**
-   * @description tipo del chip (controla el border radius: primary=xl, secondary=sm)
+   * @description chip type (controls border radius: primary=xl, secondary=sm)
    */
   type: {
     type: definePropType<ChipType>(String),
@@ -25,9 +28,9 @@ export const chipProps = buildProps({
     default: 'primary'
   },
   /**
-   * @description variante visual (controla el color)
-   * el solid el fondo es grey-100
-   * el outline tien solo el borde de color ever-blue-200
+   * @description visual variant (controls color)
+   * solid has grey-100 background
+   * outline has only ever-blue-200 border
    */ 
   variant: {
     type: definePropType<ChipVariant>(String),
@@ -35,8 +38,7 @@ export const chipProps = buildProps({
     default: 'solid'
   },
   /**
-   * @description tamaño del chip
-   * esto es correcto
+   * @description chip size
    */
   size: {
     type: definePropType<ChipSize>(String),
@@ -48,7 +50,7 @@ export const chipProps = buildProps({
    * @default undefined
    * @type {IconString}
    */
-  prefixIcon: {
+  iconLeft: {
     type: definePropType<IconString>(String),
     default: undefined
   },
@@ -57,16 +59,16 @@ export const chipProps = buildProps({
    * @default undefined
    * @type {IconString}
    */
-  suffixIcon: {
+  iconRight: {
     type: definePropType<IconString>(String),
     default: undefined
   },
   /**
-   * @description muestra el botón de cierre
+   * @description shows close button
    */
   closable: Boolean,
   /**
-   * @description texto del chip
+   * @description chip text
    * @default undefined
    * @type {String}
    */
@@ -75,48 +77,43 @@ export const chipProps = buildProps({
     default: undefined
   },
   /**
-   * @description chip seleccionado
+   * @description selected chip
    */
   selected: Boolean,
   /**
-   * @description chip deshabilitado
+   * @description disabled chip
    */
   disabled: Boolean,
   /**
-   * @description si el chip tiene dropdown habilitado
+   * @description whether the chip has dropdown enabled. Automatically shows a chevron-down icon in the suffix.
+   * Dropdown props are passed directly to the GDropdown component using v-bind.
+   * For advanced dropdown options, consult the GDropdown documentation.
    */
   dropdownEnabled: Boolean,
+
   /**
-   * @description dropdown actions
+   * @description actions for the dropdown menu
+   * @default undefined
+   * @type {Array<actionType>}
    */
-  dropdownActions: dropdownProps.actions,
-  /**
-   * @description whether to hide menu after clicking menu-item
-   */
-  dropdownHideOnClick: dropdownProps.hideOnClick,
-  /**
-   * @description
-   */
-  dropdownPlacement: {
-    type: definePropType<DropdownPlacement>(String),
-    values: DROPDOWN_PLACEMENTS,
-    default: 'bottom'
+  actions: {
+    type: definePropType<actionType[]>(Array),
+    default: undefined
   },
+
   /**
-   * @description delay time before show a dropdown
+   * @description dropdown trigger type
+   * @default 'click'
    */
-  dropdownShowTimeout: dropdownProps.showTimeout,
+  trigger: useTooltipTriggerProps.trigger,
+
   /**
-   * @description delay time before hide a dropdown
+   * @description dropdown placement
+   * @default 'bottom-start'
    */
-  dropdownHideTimeout: dropdownProps.hideTimeout,
-  /**
-   * @description
-   */
-  dropdownTrigger: {
-    type: definePropType<DropdownTrigger>(String),
-    values: DROPDOWN_TRIGGERS,
-    default: 'hover'
+  placement: {
+    type: definePropType<Placement>(String),
+    default: 'bottom-start'
   },
 } as const)
 
@@ -125,7 +122,11 @@ export type ChipProps = ExtractPropTypes<typeof chipProps>
 export const chipEmits = {
   [CLOSE_EVENT]: (evt: MouseEvent) => evt instanceof MouseEvent,
   [CLICK_EVENT]: (evt: MouseEvent | KeyboardEvent) => evt instanceof Event,
-  [COMMAND_EVENT]: (command: any) => typeof command !== 'undefined'
+  [COMMAND_EVENT]: (command: DropdownCommand) => 
+    typeof command === 'string' || 
+    typeof command === 'number' || 
+    (typeof command === 'object' && command !== null),
+  [VISIBLE_CHANGE_EVENT]: (visible: boolean) => typeof visible === 'boolean'
 }
 export type ChipEmits = typeof chipEmits
 

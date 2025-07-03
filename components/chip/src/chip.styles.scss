@@ -162,4 +162,8 @@
       @apply bg-inherit text-inherit !important;
     }
   }
+
+  @include e('dropdown-icon') {
+    transition: transform 0.2s ease-in-out;
+  }
 }
