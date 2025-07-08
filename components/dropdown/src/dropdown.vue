@@ -39,7 +39,11 @@
           >
             <g-dropdown-collection>
               <g-dropdown-menu v-if="actions.length > 0">
-                <g-dropdown-item v-for="(action, index) in actions" :key="index" v-bind="action">
+                <g-dropdown-item
+                  v-for="(action, index) in actions"
+                  :key="`action-${index}`"
+                  v-bind="action"
+                >
                   <template #default v-if="$slots.option">
                     <slot name="option" v-bind="action" />
                   </template>
@@ -64,6 +68,7 @@ import {
   computed,
   defineComponent,
   getCurrentInstance,
+  nextTick,
   onBeforeUnmount,
   provide,
   ref,
@@ -138,7 +143,7 @@ export default defineComponent({
           triggeringElement.$el.addEventListener('pointerenter', onAutofocusTriggerEnter)
         }
       },
-      { immediate: true }
+      { immediate: true, flush: 'post' }
     )
 
     onBeforeUnmount(() => {
@@ -164,7 +169,7 @@ export default defineComponent({
     }
 
     function onAutofocusTriggerEnter() {
-      triggeringElementRef.value?.$el?.focus()
+      triggeringElementRef?.value?.$el?.focus()
     }
 
     function onItemEnter() {
@@ -174,12 +179,20 @@ export default defineComponent({
     function onItemLeave() {
       const contentEl = unref(contentRef)
 
-      trigger.value.includes('hover') && contentEl?.focus()
+      if (trigger.value.includes('hover') && contentEl) {
+        // Use nextTick to avoid recursive updates
+        nextTick(() => {
+          contentEl?.focus()
+        })
+      }
       currentTabId.value = null
     }
 
     function handleCurrentTabIdChange(id: string) {
-      currentTabId.value = id
+      // Use nextTick to avoid recursive updates
+      nextTick(() => {
+        currentTabId.value = id
+      })
     }
 
     function handleEntryFocus(e: Event) {
@@ -194,8 +207,10 @@ export default defineComponent({
     }
 
     function handleShowTooltip(event?: Event) {
-      if (event?.type === 'keydown') {
-        contentRef.value?.focus()
+      if (event?.type === 'keydown' && contentRef?.value) {
+        nextTick(() => {
+          contentRef?.value?.focus()
+        })
       }
     }
 
@@ -222,9 +237,14 @@ export default defineComponent({
 
     const onFocusAfterTrapped = (e: Event) => {
       e.preventDefault()
-      contentRef.value?.focus?.({
-        preventScroll: true
-      })
+      if (contentRef?.value?.focus) {
+        // Use nextTick to avoid recursive updates
+        nextTick(() => {
+          contentRef.value?.focus({
+            preventScroll: true
+          })
+        })
+      }
     }
 
     const handlerMainButtonClick = (event: MouseEvent) => {
@@ -251,7 +271,7 @@ export default defineComponent({
       contentRef,
       triggeringElementRef,
       referenceElementRef,
-      actions: computed(() => props.actions)
+      actions: toRef(props, 'actions')
     }
   }
 })
