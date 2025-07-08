@@ -87,5 +87,14 @@ export {
   faHashtag,
   faAddressCard,
   faLandmarkAlt,
-  faAt
+  faAt,
+  faCircleDollar,
+  faEarthAmericas,
+  faEarthAsia,
+  faEarthEurope,
+  faEarthAfrica,
+  faEarthOceania,
+  faUserGroup,
+  faUserCheck,
+  faUserMinus
 } from '@fortawesome/pro-regular-svg-icons';
