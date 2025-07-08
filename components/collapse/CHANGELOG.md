@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.1.0...@flash-global66/g-collapse@0.2.0) (2025-07-08)
+
+
+### Features
+
+* agregar la propiedad headerOnly a GCollapseItem y manejar eventos de clic en el encabezado ([2b8b5ef](https://github.com/Flash-Global66/global-design-system/commit/2b8b5ef9bc979e3a4189a4aee2bf0ad555f68c00))
+
+
+
+
+
 # [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.0.7...@flash-global66/g-collapse@0.1.0) (2025-06-24)
 
 
