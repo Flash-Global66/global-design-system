@@ -55,6 +55,13 @@ export const collapseItemProps = buildProps({
   expandIconPosition: {
     type: definePropType<'left' | 'right'>(String),
     default: 'right',
+  },
+  /**
+   * @description if true, header only triggers an event without opening/closing the body
+   */
+  headerOnly: {
+    type: Boolean,
+    default: false,
   }
 } as const)
 export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>

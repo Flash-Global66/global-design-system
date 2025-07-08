@@ -67,13 +67,23 @@ export const useCollapseItem = (props: CollapseItemProps) => {
 
   const handleHeaderClick = () => {
     if (props.disabled) return
-    collapse?.handleItemClick(unref(name))
+    
+    if (props.headerOnly) {
+      collapse?.handleHeaderOnlyClick?.(unref(name))
+    } else {
+      collapse?.handleItemClick(unref(name))
+    }
+
     focusing.value = false
     isClick.value = true
   }
 
   const handleEnterClick = () => {
-    collapse?.handleItemClick(unref(name))
+    if (props.headerOnly) {
+      collapse?.handleHeaderOnlyClick?.(unref(name))
+    } else {
+      collapse?.handleItemClick(unref(name))
+    }
   }
 
   return {

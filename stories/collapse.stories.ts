@@ -858,3 +858,65 @@ export const simpleDifferentContent: Story = {
     `
   })
 }
+
+export const headerOnlyExample: Story = {
+  name: 'Header solo click',
+  parameters: {
+    docs: {
+      description: {
+        story: `Ejemplo simple de uso de la prop \`headerOnly\` en GCollapseItem. Un item se comporta como collapse normal y el otro solo ejecuta un evento al hacer click en el header.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GConfigProvider, GCollapse, GCollapseItem, GIconFont },
+    setup() {
+      const activeNames = ref(['1'])
+      const message = ref('')
+
+      const handleHeaderClick = (name: string | number) => {
+        message.value = `Oprimiste el header del item ${name}`
+      }
+
+      return { activeNames, message, handleHeaderClick }
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-4">
+          <div v-if="message" class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <p class="text-blue-800">{{ message }}</p>
+          </div>
+          
+          <g-collapse v-model="activeNames" class="flex flex-col gap-4" @header-click="handleHeaderClick">
+            <template #dynamic>
+              <!-- Item normal que se abre/cierra -->
+              <g-collapse-item name="normal" title="Abrir normal">
+                <template #default>
+                  <div class="p-4 bg-gray-50 rounded-lg">
+                    <p>Este es un item normal que se abre y cierra al hacer click en el header.</p>
+                  </div>
+                </template>
+              </g-collapse-item>
+
+              <!-- Item con headerOnly que solo ejecuta evento -->
+              <g-collapse-item name="header-only" title="Ejecutar evento" header-only>
+                <template #default>
+                  <div class="p-4 bg-green-50 rounded-lg">
+                    <p>Este contenido nunca se mostrará porque headerOnly es true.</p>
+                  </div>
+                </template>
+              </g-collapse-item>
+              <g-collapse-item name="header-only-2" title="Ejecutar evento 2" header-only>
+                <template #default>
+                  <div class="p-4 bg-green-50 rounded-lg">
+                    <p>Este contenido nunca se mostrará porque headerOnly es true.</p>
+                  </div>
+                </template>
+              </g-collapse-item>
+            </template>
+          </g-collapse>
+        </div>
+      </g-config-provider>
+    `
+  })
+}
