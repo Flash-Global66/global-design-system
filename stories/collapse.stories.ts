@@ -13,6 +13,7 @@ import { GForm, GFormItem } from '@flash-global66/g-form/index.ts'
 import { GInput } from '@flash-global66/g-input/index.ts'
 import { GButton } from '@flash-global66/g-button/index.ts'
 import { GTag } from '@flash-global66/g-tag/index.ts'
+import { GIconFont } from '@flash-global66/g-icon-font'
 
 // CONFIG
 import { GConfigProvider } from '../components/config-provider'
@@ -774,6 +775,83 @@ export const slotDefault: Story = {
                 </div>
               </g-form>
             </div>
+          </template>
+        </g-collapse>
+      </g-config-provider>
+    `
+  })
+}
+
+export const simpleDifferentContent: Story = {
+  name: 'Collapse item con formularios',
+  parameters: {
+    docs: {
+      description: {
+        story: `Ejemplo de uso de GCollapseItem con un formulario.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GConfigProvider, GCollapse, GCollapseItem, GForm, GFormItem, GInput },
+    setup() {
+      const activeNames = ref(1)
+      const formData = reactive({
+        name: 'Pepito',
+        lastName: 'Perez',
+        phone: '999888777',
+        email: 'pepito@ejemplo.com',
+        city: 'Lima',
+        address: ''
+      })
+      return { activeNames, formData }
+    },
+    template: `
+      <g-config-provider>
+        <g-collapse v-model="activeNames" class="flex flex-col gap-4" accordion>
+          <template #dynamic>
+            <g-collapse-item name="1">
+              <template #header>
+                <p class="text-6 font-semibold text-blue-600">Datos básicos</p>
+              </template>
+              <template #default>
+                <g-form :model="formData" class="w-full">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <g-form-item label="Nombre">
+                      <g-input v-model="formData.name" label="Nombre" />
+                    </g-form-item>
+                    <g-form-item label="Apellido">
+                      <g-input v-model="formData.lastName" label="Apellido" />
+                    </g-form-item>
+                  </div>
+                </g-form>
+              </template>
+            </g-collapse-item>
+
+            <g-collapse-item name="2" title="Datos de contacto">
+              <g-form :model="formData" class="w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <g-form-item label="Teléfono">
+                    <g-input v-model="formData.phone" label="Teléfono" />
+                  </g-form-item>
+                  <g-form-item label="Email">
+                    <g-input v-model="formData.email" label="Email" />
+                  </g-form-item>
+                </div>
+              </g-form>
+            </g-collapse-item>
+
+            <g-collapse-item name="3" title="Datos de dirección">
+              <g-form :model="formData" class="w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <g-form-item label="Ciudad">
+                    <g-input v-model="formData.city" label="Ciudad" />
+                  </g-form-item>
+                  <g-form-item label="Dirección">
+                    <g-input v-model="formData.address" label="Dirección" />
+                  </g-form-item>
+                </div>
+              </g-form>
+            </g-collapse-item>
           </template>
         </g-collapse>
       </g-config-provider>
