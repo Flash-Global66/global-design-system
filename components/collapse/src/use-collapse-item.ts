@@ -55,6 +55,19 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     return isString ? props.content : props.content?.() || ''
   })
 
+  const slotProps = computed(() => ({
+    isActive: isActive.value,
+    name: name.value,
+    title: props.title,
+    description: props.description,
+    disabled: props.disabled,
+    headerOnly: props.headerOnly,
+    expandIconPosition: props.expandIconPosition,
+    iconsLeft: iconsLeft.value,
+    iconsRight: iconsRight.value,
+    focusing: focusing.value
+  }))
+
   const handleFocus = () => {
     setTimeout(() => {
       if (!isClick.value) {
@@ -96,7 +109,8 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     iconsLeft,
     iconsRight,
     content,
-    name
+    name,
+    slotProps
   }
 }
 

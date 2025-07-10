@@ -25,7 +25,7 @@
           />
         </div>
         <div :class="contentHeaderTextKls">
-          <slot name="header" :is-active="isActive">
+          <slot name="header" v-bind="slotProps">
             <h5 :class="itemTitleKls">
               {{ title }}
             </h5>
@@ -58,7 +58,7 @@
       >
         <div :class="itemContentKls">
           <div v-if="content" v-html="content" />
-          <slot v-else />
+          <slot v-else v-bind="slotProps" />
         </div>
       </div>
     </g-collapse-transition>
@@ -86,7 +86,8 @@ const {
   content,
   iconsLeft,
   iconsRight,
-  name
+  name,
+  slotProps
 } = useCollapseItem(props)
 
 const {
