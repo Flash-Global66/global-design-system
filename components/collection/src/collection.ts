@@ -1,6 +1,4 @@
-import { inject, onBeforeUnmount, onMounted, provide, ref, unref } from 'vue'
-import Collection from './collection.vue'
-import CollectionItem from './collection-item.vue'
+import { inject, onBeforeUnmount, onMounted, provide, ref, unref, defineComponent } from 'vue'
 
 import type { InjectionKey } from 'vue'
 import type { SetupContext } from '@vue/runtime-core'
@@ -12,9 +10,11 @@ import type {
 
 export const COLLECTION_ITEM_SIGN = `data-g-collection-item`
 
-export const createCollectionWithScope = (name: string): {
-  COLLECTION_INJECTION_KEY: import("vue").InjectionKey<GCollectionInjectionContext>
-  COLLECTION_ITEM_INJECTION_KEY: import("vue").InjectionKey<GCollectionItemInjectionContext>
+export const createCollectionWithScope = (
+  name: string
+): {
+  COLLECTION_INJECTION_KEY: import('vue').InjectionKey<GCollectionInjectionContext>
+  COLLECTION_ITEM_INJECTION_KEY: import('vue').InjectionKey<GCollectionItemInjectionContext>
   GCollection: any
   GCollectionItem: any
 } => {
@@ -25,9 +25,10 @@ export const createCollectionWithScope = (name: string): {
   const COLLECTION_ITEM_INJECTION_KEY: InjectionKey<GCollectionItemInjectionContext> =
     Symbol(COLLECTION_ITEM_NAME)
 
-  const GCollection = {
-    ...Collection,
+  // Create GCollection component
+  const GCollection = defineComponent({
     name: COLLECTION_NAME,
+    template: '<slot />',
     setup() {
       const collectionRef = ref<HTMLElement>()
       const itemMap: GCollectionInjectionContext['itemMap'] = new Map()
@@ -50,11 +51,13 @@ export const createCollectionWithScope = (name: string): {
         collectionRef
       })
     }
-  }
+  })
 
-  const GCollectionItem = {
-    ...CollectionItem,
+  // Create GCollectionItem component
+  const GCollectionItem = defineComponent({
     name: COLLECTION_ITEM_NAME,
+    template: '<div :data-g-collection-item="true" v-bind="$attrs"><slot /></div>',
+    inheritAttrs: false,
     setup(_: unknown, { attrs }: SetupContext) {
       const collectionItemRef = ref<HTMLElement>()
       const collectionInjection = inject(COLLECTION_INJECTION_KEY, undefined)!
@@ -78,7 +81,7 @@ export const createCollectionWithScope = (name: string): {
         collectionInjection.itemMap.delete(collectionItemG)
       })
     }
-  }
+  })
 
   return {
     COLLECTION_INJECTION_KEY,

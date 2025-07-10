@@ -271,7 +271,7 @@ export default defineComponent({
       contentRef,
       triggeringElementRef,
       referenceElementRef,
-      actions: toRef(props, 'actions')
+      actions: computed(() => props.actions)
     }
   }
 })

@@ -12,7 +12,7 @@ import GRovingFocusGroupImpl from './roving-focus-group-impl.vue'
 import { GCollection as GFocusGroupCollection } from './roving-focus-group'
 
 export default defineComponent({
-  name: 'ElRovingFocusGroup',
+  name: 'GRovingFocusGroup',
   components: {
     GFocusGroupCollection,
     GRovingFocusGroupImpl,
