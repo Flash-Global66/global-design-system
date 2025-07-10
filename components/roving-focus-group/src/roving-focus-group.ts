@@ -24,7 +24,7 @@ export const rovingFocusGroupProps = buildProps({
   onMousedown: Function,
 })
 
-export type ElRovingFocusGroupProps = ExtractPropTypes<
+export type GRovingFocusGroupProps = ExtractPropTypes<
   typeof rovingFocusGroupProps
 >
 

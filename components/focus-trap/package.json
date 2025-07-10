@@ -1,11 +1,26 @@
 {
   "name": "@flash-global66/g-focus-trap",
   "author": "Global66",
+  "description": "A focus trap component for accessibility",
   "version": "0.0.8",
   "license": "MIT",
+  "buildable": true,
   "exports": {
-    ".": "./index.ts",
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
     "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -13,6 +28,5 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
-  "description": "A focus trap component for accessibility",
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }
