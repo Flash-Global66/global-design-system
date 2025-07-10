@@ -187,7 +187,17 @@ export const ICON_SETS = {
     "address-card",
     "hashtag",
     "landmark",
-    'at'
+    'at',
+    'circle-dollar',
+    'earth-americas',
+    'earth-asia',
+    'earth-europe',
+    'earth-africa',
+    'earth-oceania',
+    'earth-south-america',
+    'user-group',
+    'user-check',
+    'user-minus'
   ] as const,
 
   light: [

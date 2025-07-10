@@ -55,6 +55,19 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     return isString ? props.content : props.content?.() || ''
   })
 
+  const slotProps = computed(() => ({
+    isActive: isActive.value,
+    name: name.value,
+    title: props.title,
+    description: props.description,
+    disabled: props.disabled,
+    headerOnly: props.headerOnly,
+    expandIconPosition: props.expandIconPosition,
+    iconsLeft: iconsLeft.value,
+    iconsRight: iconsRight.value,
+    focusing: focusing.value
+  }))
+
   const handleFocus = () => {
     setTimeout(() => {
       if (!isClick.value) {
@@ -67,13 +80,23 @@ export const useCollapseItem = (props: CollapseItemProps) => {
 
   const handleHeaderClick = () => {
     if (props.disabled) return
-    collapse?.handleItemClick(unref(name))
+    
+    if (props.headerOnly) {
+      collapse?.handleHeaderOnlyClick?.(unref(name))
+    } else {
+      collapse?.handleItemClick(unref(name))
+    }
+
     focusing.value = false
     isClick.value = true
   }
 
   const handleEnterClick = () => {
-    collapse?.handleItemClick(unref(name))
+    if (props.headerOnly) {
+      collapse?.handleHeaderOnlyClick?.(unref(name))
+    } else {
+      collapse?.handleItemClick(unref(name))
+    }
   }
 
   return {
@@ -86,7 +109,8 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     iconsLeft,
     iconsRight,
     content,
-    name
+    name,
+    slotProps
   }
 }
 

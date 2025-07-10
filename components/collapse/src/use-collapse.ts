@@ -67,6 +67,10 @@ export const useCollapse = (props: CollapseProps, emit: SetupContext<CollapseEmi
     }
   }
 
+  const handleHeaderOnlyClick = (name: CollapseActiveName) => {
+    emit('header-click', name)
+  }
+
   watch(
     () => props.modelValue,
     () => (activeNames.value = ensureArray(props.modelValue)),
@@ -75,7 +79,8 @@ export const useCollapse = (props: CollapseProps, emit: SetupContext<CollapseEmi
 
   provide(collapseContextKey, {
     activeNames,
-    handleItemClick
+    handleItemClick,
+    handleHeaderOnlyClick
   })
   return {
     activeNames,

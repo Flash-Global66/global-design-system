@@ -72,6 +72,7 @@ export type CollapseProps = ExtractPropTypes<typeof collapseProps>
 
 export const collapseEmits = {
   [UPDATE_MODEL_EVENT]: emitChangeFn,
-  [CHANGE_EVENT]: emitChangeFn
+  [CHANGE_EVENT]: emitChangeFn,
+  'header-click': (name: CollapseActiveName) => isString(name) || isNumber(name)
 }
 export type CollapseEmits = typeof collapseEmits
