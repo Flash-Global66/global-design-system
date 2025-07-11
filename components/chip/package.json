@@ -1,7 +1,7 @@
 {
-  "name": "@flash-global66/g-collection",
+  "name": "@flash-global66/g-chip",
   "author": "Global66",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -10,6 +10,7 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
+    "./styles.scss": "./src/chip.styles.scss",
     "./*": "./*"
   },
   "files": [
@@ -20,6 +21,13 @@
   "scripts": {
     "build": "vite build",
     "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-dropdown": "^0.1.0",
+    "@flash-global66/g-icon-font": "^0.11.0",
+    "@flash-global66/g-popover": "^0.0.7",
+    "element-plus": "^2.9.0",
+    "vue": "^3.2.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

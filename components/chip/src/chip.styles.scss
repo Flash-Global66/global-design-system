@@ -1,0 +1,169 @@
+@use "sass:map";
+
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+
+@include b('chip') {
+  @apply flex items-center justify-center w-min font-medium select-none transition-all duration-200 cursor-pointer;
+  white-space: nowrap;
+
+  @include e('sm') {
+    @apply py-xxs px-sm text-2 gap-xxs rounded-full;
+    @each $typeIcon in ('prefix-icon', 'suffix-icon') {
+      @include m($typeIcon) {
+        @apply w-3 h-3 flex justify-center items-center;
+        .g-icon-font {
+          @apply text-1 align-super;
+        }
+      }
+    }
+  }
+
+  @include e('md') {
+    @apply py-xxs px-md text-3 gap-xxs rounded-full;
+    @each $typeIcon in ('prefix-icon', 'suffix-icon') {
+      @include m($typeIcon) {
+        @apply w-[14px] h-[14px] flex justify-center items-center;
+        .g-icon-font {
+          @apply text-2 align-super;
+        }
+      }
+    }
+  }
+
+  @include m('primary') {
+    @apply rounded-full;
+  }
+  
+  @include m('secondary') {
+    @apply rounded;
+  }
+
+  @include m('solid') {
+    @apply bg-grey-100 text-primary-txt border-none;
+    
+    // Iconos en estado enabled
+    .g-icon-font {
+      @apply text-icon-primary;
+    }
+    
+    // Hover
+    &:hover {
+      @apply bg-nightBlue-200 text-primary-txt;
+      .g-icon-font {
+        @apply text-icon-primary;
+      }
+    }
+    
+    // Pressed
+    &:active {
+      @apply bg-primary-def-press text-inverse-txt;
+      .g-icon-font {
+        @apply text-icon-inverse;
+      }
+    }
+    
+    // Disabled
+    &:disabled,
+    &.is-disabled {
+      @apply bg-grey-50 text-disab-lt-txt pointer-events-none;
+      .g-icon-font {
+        @apply text-icon-disab-lt;
+      }
+    }
+    
+    // Selected - para solid mantiene la misma apariencia
+    &.is-selected {
+      @apply bg-grey-100 text-primary-txt border-none;
+      .g-icon-font {
+        @apply text-icon-primary;
+      }
+      
+      // Selected + Hover
+      &:hover {
+        @apply bg-nightBlue-200 text-primary-txt;
+        .g-icon-font {
+          @apply text-icon-primary;
+        }
+      }
+    }
+  }
+  
+  @include m('outline') {
+    // Enabled (default)
+    @apply bg-transparent text-primary-txt border border-everBlue-200;
+    
+    // Iconos en estado enabled
+    .g-icon-font {
+      @apply text-icon-primary;
+    }
+    
+    // Hover
+    &:hover {
+      @apply bg-everBlue-100 text-primary-txt border-everBlue-100;
+      .g-icon-font {
+        @apply text-icon-primary;
+      }
+    }
+    
+    // Focused
+    &:focus-visible {
+      @apply bg-primary-def text-inverse-txt border-primary-def;
+      .g-icon-font {
+        @apply text-icon-inverse;
+      }
+    }
+    
+    // Pressed
+    &:active {
+      @apply bg-primary-def-press text-inverse-txt border-primary-def-press;
+      .g-icon-font {
+        @apply text-icon-inverse;
+      }
+    }
+    
+    // Disabled
+    &:disabled,
+    &.is-disabled {
+      @apply bg-transparent text-disabled-txt border-disab-lt-bd pointer-events-none;
+      .g-icon-font {
+        @apply text-icon-disab-lt;
+      }
+    }
+    
+    // Selected - para outline cambia a fondo azul (como pressed)
+    &.is-selected {
+      @apply bg-primary-def text-inverse-txt border-primary-def;
+      .g-icon-font {
+        @apply text-icon-inverse;
+      }
+      
+      // Selected + Hover - mantiene el estado selected
+      &:hover {
+        @apply bg-primary-def-press text-inverse-txt border-primary-def-press;
+        .g-icon-font {
+          @apply text-icon-inverse;
+        }
+      }
+    }
+  }
+
+  @include e('content') {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include e('close') {
+    @apply m-0 ml-0 cursor-pointer !important;
+    &:hover {
+      @apply bg-inherit text-inherit !important;
+    }
+  }
+
+  @include e('dropdown-icon') {
+    transition: transform 0.2s ease-in-out;
+  }
+}

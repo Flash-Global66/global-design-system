@@ -1,5 +1,5 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { isElement, isFocusable } from "element-plus/es/utils/index";
+import { isElement, isFocusable } from 'element-plus/es/utils/index'
 import { FOCUSOUT_PREVENTED, FOCUSOUT_PREVENTED_OPTS } from './tokens'
 
 const focusReason = ref<'pointer' | 'keyboard'>()
@@ -15,9 +15,7 @@ export type FocusLayer = {
 
 export type FocusStack = FocusLayer[]
 
-export const obtainAllFocusableElements = (
-  element: HTMLElement
-): HTMLElement[] => {
+export const obtainAllFocusableElements = (element: HTMLElement): HTMLElement[] => {
   const nodes: HTMLElement[] = []
   const walker = document.createTreeWalker(element, NodeFilter.SHOW_ELEMENT, {
     acceptNode: (
@@ -29,22 +27,18 @@ export const obtainAllFocusableElements = (
       }
     ) => {
       const isHiddenInput = node.tagName === 'INPUT' && node.type === 'hidden'
-      if (node.disabled || node.hidden || isHiddenInput)
-        return NodeFilter.FILTER_SKIP
+      if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP
       return node.tabIndex >= 0 || node === document.activeElement
         ? NodeFilter.FILTER_ACCEPT
         : NodeFilter.FILTER_SKIP
-    },
+    }
   })
   while (walker.nextNode()) nodes.push(walker.currentNode as HTMLElement)
 
   return nodes
 }
 
-export const getVisibleElement = (
-  elements: HTMLElement[],
-  container: HTMLElement
-) => {
+export const getVisibleElement = (elements: HTMLElement[], container: HTMLElement) => {
   for (const element of elements) {
     if (!isHidden(element, container)) return element
   }
@@ -69,9 +63,7 @@ export const getEdges = (container: HTMLElement) => {
   return [first, last]
 }
 
-const isSelectable = (
-  element: any
-): element is HTMLInputElement & { select: () => void } => {
+const isSelectable = (element: any): element is HTMLInputElement & { select: () => void } => {
   return element instanceof HTMLInputElement && 'select' in element
 }
 
@@ -83,11 +75,7 @@ export const tryFocus = (
     const prevFocusedElement = document.activeElement
     let cleanup: boolean = false
 
-    if (
-      isElement(element) &&
-      !isFocusable(element) &&
-      !element.getAttribute('tabindex')
-    ) {
+    if (isElement(element) && !isFocusable(element) && !element.getAttribute('tabindex')) {
       element.setAttribute('tabindex', '-1')
       cleanup = true
     }
@@ -95,11 +83,7 @@ export const tryFocus = (
     element.focus({ preventScroll: true })
     lastAutomatedFocusTimestamp.value = window.performance.now()
 
-    if (
-      element !== prevFocusedElement &&
-      isSelectable(element) &&
-      shouldSelect
-    ) {
+    if (element !== prevFocusedElement && isSelectable(element) && shouldSelect) {
       element.select()
     }
     if (isElement(element) && cleanup) {
@@ -140,14 +124,11 @@ const createFocusableStack = () => {
 
   return {
     push,
-    remove,
+    remove
   }
 }
 
-export const focusFirstDescendant = (
-  elements: HTMLElement[],
-  shouldSelect = false
-) => {
+export const focusFirstDescendant = (elements: HTMLElement[], shouldSelect = false) => {
   const prevFocusedElement = document.activeElement
   for (const element of elements) {
     tryFocus(element, shouldSelect)
@@ -197,16 +178,13 @@ export const useFocusReason = (): {
   return {
     focusReason,
     lastUserFocusTimestamp,
-    lastAutomatedFocusTimestamp,
+    lastAutomatedFocusTimestamp
   }
 }
 
-export const createFocusOutPreventedEvent = (
-  detail: CustomEventInit['detail']
-) => {
+export const createFocusOutPreventedEvent = (detail: CustomEventInit['detail']) => {
   return new CustomEvent(FOCUSOUT_PREVENTED, {
     ...FOCUSOUT_PREVENTED_OPTS,
-    detail,
+    detail
   })
 }
-
