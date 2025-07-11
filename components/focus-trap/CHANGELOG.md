@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-focus-trap@0.0.8...@flash-global66/g-focus-trap@0.0.9) (2025-07-11)
+
+
+### Bug Fixes
+
+* improve dropdown and resolve bug render ([441b3e0](https://github.com/Flash-Global66/global-design-system/commit/441b3e0f100f5ced3b416f0540aa8201802aa4e6))
+
+
+
+
+
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-focus-trap@0.0.7...@flash-global66/g-focus-trap@0.0.8) (2025-04-07)
 
 
