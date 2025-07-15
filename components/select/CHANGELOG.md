@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.2.0...@flash-global66/g-select@0.3.0) (2025-07-15)
+
+
+### Features
+
+* **select:** add data-test selector to option item ([5cf969a](https://github.com/Flash-Global66/global-design-system/commit/5cf969a1ab21efa748329043aa0abfa3e70d57c3))
+
+
+
+
+
 # [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.1.6...@flash-global66/g-select@0.2.0) (2025-06-25)
 
 
