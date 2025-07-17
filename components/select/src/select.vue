@@ -176,6 +176,7 @@
                   spellcheck="false"
                   type="text"
                   :name="name"
+                  :data-test="`select-input:${name || label}`"
                   @input="onInput"
                   @compositionstart="handleCompositionStart"
                   @compositionupdate="handleCompositionUpdate"
