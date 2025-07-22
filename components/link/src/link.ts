@@ -9,7 +9,7 @@ export const linkProps = buildProps({
    */
   type: {
     type: String,
-    values: ["primary", "secondary"],
+    values: ["primary", "secondary", "tertiary"],
     default: "primary",
   },
   /**
