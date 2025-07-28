@@ -140,8 +140,20 @@ Para que el componente funcione correctamente, es necesario importar los estilos
     href="https://empresas.global66.com/"
     target="_blank"
   >
-    link secundario con icono
+    link secundario con icono a la derecha
   </g-link>
+  
+  <!-- Link terciario -->
+  <div class="bg-primary-def p-xs">
+    <g-link 
+      type="tertiary"
+      icon-left="regular chevron-left"
+      href="https://empresas.global66.com/"
+      target="_blank"
+    >
+      link terciario con icono a la izquierda
+    </g-link>
+  </div>
   
   <!-- Link con underline permanente -->
   <g-link underline href="https://empresas.global66.com/">
@@ -421,6 +433,22 @@ export const IconsWithUnderline: Story = {
             >
               Link secundario con íconos y underline
             </g-link>
+          </div>
+
+          <div>
+            <h3 class="mb-2 font-semibold">Tertiary con íconos y underline</h3>
+            <div class="bg-primary-def p-xs">
+              <g-link 
+                type="tertiary" 
+                underline 
+                icon-left="regular envelope" 
+                icon-right="regular arrow-up-right-from-square" 
+                href="https://empresas.global66.com/"
+                target="_blank"
+              >
+                Link terciario con íconos y underline
+              </g-link>
+            </div>
           </div>
         </div>
       </g-config-provider>

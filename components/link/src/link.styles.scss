@@ -64,7 +64,7 @@
   &.#{$namespace}-link--primary {
     @apply text-everBlue-500;
 
-    &:hover {
+    &:not(.is-disabled):hover {
       @apply text-everBlue-700;
     }
 
@@ -94,7 +94,7 @@
   &.#{$namespace}-link--secondary {
     @apply text-grey-700;
 
-    &:hover {
+    &:not(.is-disabled):hover {
       @apply text-grey-900;
     }
 
@@ -124,8 +124,8 @@
   &.#{$namespace}-link--tertiary {
     @apply text-white;
 
-    &:hover {
-      @apply text-nightBlue-200;
+    &:not(.is-disabled):hover {
+      @apply text-nightBlue-50;
     }
 
     &:active {
@@ -141,7 +141,7 @@
       }
 
       &:hover .#{$namespace}-link__inner:after {
-        @apply border-nightBlue-200;
+        @apply border-nightBlue-50;
       }
 
       &:active .#{$namespace}-link__inner:after {
