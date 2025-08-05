@@ -16,10 +16,6 @@
 @include b(date-editor) {
   &.#{$namespace}-input,
   &.#{$namespace}-input__wrapper {
-    height: 3rem;
-    width: auto;
-    box-shadow: none;
-
     &:hover {
       box-shadow: none;
     }
