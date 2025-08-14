@@ -23,11 +23,11 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "peerDependencies": {
-    "@flash-global66/g-collection": "^0.0.1",
-    "@flash-global66/g-focus-trap": "^0.0.7",
-    "@flash-global66/g-icon-font": "^0.4.0",
+    "@flash-global66/g-collection": "^0.1.1",
+    "@flash-global66/g-focus-trap": "^0.0.9",
+    "@flash-global66/g-icon-font": "^0.13.0",
     "@flash-global66/g-popper": "^0.0.10",
-    "@flash-global66/g-roving-focus-group": "^0.0.1",
+    "@flash-global66/g-roving-focus-group": "^0.1.1",
     "@flash-global66/g-scrollbar": "^0.1.0",
     "@flash-global66/g-slot": "^0.0.2",
     "@flash-global66/g-tooltip": "^0.1.0",
