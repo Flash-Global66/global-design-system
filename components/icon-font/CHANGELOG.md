@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.12.0...@flash-global66/g-icon-font@0.13.0) (2025-08-04)
+
+
+### Features
+
+* **icon:** agregar nuevo ícono 'envelope-open' a los conjuntos de íconos ([d7a3614](https://github.com/Flash-Global66/global-design-system/commit/d7a3614886de47c5f14340915fe2e4d3bac3d0a6))
+
+
+
+
+
 # [0.12.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.11.0...@flash-global66/g-icon-font@0.12.0) (2025-07-08)
 
 

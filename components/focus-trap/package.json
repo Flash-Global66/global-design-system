@@ -25,6 +25,11 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
+  "peerDependencies": {
+    "lodash-unified": "^1.0.3",
+    "element-plus": "^2.9.0",
+    "vue": "^3.2.0"
+  },
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },

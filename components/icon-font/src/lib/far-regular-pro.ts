@@ -96,5 +96,6 @@ export {
   faEarthOceania,
   faUserGroup,
   faUserCheck,
-  faUserMinus
+  faUserMinus,
+  faEnvelopeOpen,
 } from '@fortawesome/pro-regular-svg-icons';

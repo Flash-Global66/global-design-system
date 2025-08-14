@@ -197,7 +197,8 @@ export const ICON_SETS = {
     'earth-south-america',
     'user-group',
     'user-check',
-    'user-minus'
+    'user-minus',
+    'envelope-open',
   ] as const,
 
   light: [

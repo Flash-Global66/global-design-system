@@ -36,12 +36,6 @@
     }
   }
 
-  &.#{$namespace}-input,
-  &.#{$namespace}-input__wrapper {
-    width: getCssVar("date-editor-width");
-    height: var(#{getCssVarName("input-height")}, getCssVar("component-size"));
-  }
-
   @include m((monthrange)) {
     @include css-var-from-global(
       "date-editor-width",
