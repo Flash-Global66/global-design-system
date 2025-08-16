@@ -13,8 +13,8 @@ export const COLLECTION_ITEM_SIGN = `data-g-collection-item`
 export const createCollectionWithScope = (
   name: string
 ): {
-  COLLECTION_INJECTION_KEY: import('vue').InjectionKey<GCollectionInjectionContext>
-  COLLECTION_ITEM_INJECTION_KEY: import('vue').InjectionKey<GCollectionItemInjectionContext>
+  COLLECTION_INJECTION_KEY: InjectionKey<GCollectionInjectionContext>
+  COLLECTION_ITEM_INJECTION_KEY: InjectionKey<GCollectionItemInjectionContext>
   GCollection: any
   GCollectionItem: any
 } => {
