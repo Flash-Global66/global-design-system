@@ -1,7 +1,6 @@
-import { inject, onBeforeUnmount, onMounted, provide, ref, unref, defineComponent } from 'vue'
+import { inject, onBeforeUnmount, onMounted, provide, ref, unref, defineComponent, h } from 'vue'
 
 import type { InjectionKey } from 'vue'
-import type { SetupContext } from '@vue/runtime-core'
 import type {
   CollectionItem as CollectionItemType,
   GCollectionInjectionContext,
@@ -28,18 +27,14 @@ export const createCollectionWithScope = (
   // Create GCollection component
   const GCollection = defineComponent({
     name: COLLECTION_NAME,
-    template: '<slot />',
-    setup() {
+    setup(_, { slots }) {
       const collectionRef = ref<HTMLElement>()
       const itemMap: GCollectionInjectionContext['itemMap'] = new Map()
       const getItems = <T>() => {
         const collectionG = unref(collectionRef)
-
         if (!collectionG) return []
         const orderedNodes = Array.from(collectionG.querySelectorAll(`[${COLLECTION_ITEM_SIGN}]`))
-
         const items = [...itemMap.values()]
-
         return items.sort(
           (a, b) => orderedNodes.indexOf(a.ref!) - orderedNodes.indexOf(b.ref!)
         ) as CollectionItemType<T>[]
@@ -50,15 +45,16 @@ export const createCollectionWithScope = (
         getItems,
         collectionRef
       })
+
+      return () => h('div', { ref: collectionRef }, slots.default?.())
     }
   })
 
   // Create GCollectionItem component
   const GCollectionItem = defineComponent({
     name: COLLECTION_ITEM_NAME,
-    template: '<div :data-g-collection-item="true" v-bind="$attrs"><slot /></div>',
     inheritAttrs: false,
-    setup(_: unknown, { attrs }: SetupContext) {
+    setup(_, { attrs, slots }) {
       const collectionItemRef = ref<HTMLElement>()
       const collectionInjection = inject(COLLECTION_INJECTION_KEY, undefined)!
 
@@ -80,6 +76,17 @@ export const createCollectionWithScope = (
         const collectionItemG = unref(collectionItemRef)!
         collectionInjection.itemMap.delete(collectionItemG)
       })
+
+      return () =>
+        h(
+          'div',
+          {
+            ref: collectionItemRef,
+            [COLLECTION_ITEM_SIGN]: true,
+            ...attrs
+          },
+          slots.default?.()
+        )
     }
   })
 
