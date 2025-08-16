@@ -2,7 +2,7 @@
   "name": "@flash-global66/g-focus-trap",
   "author": "Global66",
   "description": "A focus trap component for accessibility",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -26,8 +26,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "peerDependencies": {
-    "lodash-unified": "^1.0.3",
     "element-plus": "^2.9.0",
+    "lodash-unified": "^1.0.3",
     "vue": "^3.2.0"
   },
   "repository": {

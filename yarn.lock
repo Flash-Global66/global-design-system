@@ -766,11 +766,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-dropdown@workspace:components/dropdown"
   peerDependencies:
-    "@flash-global66/g-collection": ^0.0.1
-    "@flash-global66/g-focus-trap": ^0.0.7
-    "@flash-global66/g-icon-font": ^0.4.0
+    "@flash-global66/g-collection": ^0.1.1
+    "@flash-global66/g-focus-trap": ^0.0.9
+    "@flash-global66/g-icon-font": ^0.13.0
     "@flash-global66/g-popper": ^0.0.10
-    "@flash-global66/g-roving-focus-group": ^0.0.1
+    "@flash-global66/g-roving-focus-group": ^0.1.1
     "@flash-global66/g-scrollbar": ^0.1.0
     "@flash-global66/g-slot": ^0.0.2
     "@flash-global66/g-tooltip": ^0.1.0
@@ -783,6 +783,10 @@ __metadata:
 "@flash-global66/g-focus-trap@workspace:components/focus-trap":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-focus-trap@workspace:components/focus-trap"
+  peerDependencies:
+    element-plus: ^2.9.0
+    lodash-unified: ^1.0.3
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
@@ -930,7 +934,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-popper@workspace:components/popper"
   peerDependencies:
-    "@flash-global66/g-focus-trap": ^0.0.7
+    "@flash-global66/g-focus-trap": ^0.0.9
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-slot": ^0.0.2
     "@popperjs/core": ^2.11.6
@@ -971,6 +975,11 @@ __metadata:
 "@flash-global66/g-roving-focus-group@workspace:components/roving-focus-group":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-roving-focus-group@workspace:components/roving-focus-group"
+  peerDependencies:
+    "@flash-global66/g-collection": ^0.1.1
+    "@vueuse/core": ^12.4.0
+    element-plus: ^2.9.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 

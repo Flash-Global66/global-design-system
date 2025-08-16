@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dropdown@0.1.1...@flash-global66/g-dropdown@0.1.2) (2025-08-14)
+
+
+### Bug Fixes
+
+* add peer depencies missings ([892626b](https://github.com/Flash-Global66/global-design-system/commit/892626b15ca0667435622926012c0b7e988e22f0))
+
+
+
+
+
 ## [0.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dropdown@0.1.0...@flash-global66/g-dropdown@0.1.1) (2025-07-11)
 
 

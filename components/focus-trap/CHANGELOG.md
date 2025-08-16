@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-focus-trap@0.0.9...@flash-global66/g-focus-trap@0.0.10) (2025-08-14)
+
+
+### Bug Fixes
+
+* add peer depencies missings ([892626b](https://github.com/Flash-Global66/global-design-system/commit/892626b15ca0667435622926012c0b7e988e22f0))
+
+
+
+
+
 ## [0.0.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-focus-trap@0.0.8...@flash-global66/g-focus-trap@0.0.9) (2025-07-11)
 
 
