@@ -434,6 +434,7 @@ export const allTypesOfTriggers: Story = {
               <g-tag type="success" size="sm">
                 {{ trigger }}
               </g-tag>
+            </g-dropdown>
           </div>
         </div>
       </g-config-provider>
