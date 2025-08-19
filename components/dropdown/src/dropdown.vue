@@ -30,6 +30,7 @@
     >
       <template #content>
         <g-scrollbar ref="scrollbar" :wrap-style="wrapStyle" tag="div" :view-class="ns.e('list')">
+          <slot name="dropdown-additional-top" />
           <g-roving-focus-group
             :loop="loop"
             :current-tab-id="currentTabId"
@@ -52,6 +53,7 @@
               <slot v-else name="dropdown" />
             </g-dropdown-collection>
           </g-roving-focus-group>
+          <slot name="dropdown-additional-bottom" />
         </g-scrollbar>
       </template>
       <template #default>
