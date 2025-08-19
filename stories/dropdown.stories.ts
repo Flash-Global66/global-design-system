@@ -434,7 +434,6 @@ export const allTypesOfTriggers: Story = {
               <g-tag type="success" size="sm">
                 {{ trigger }}
               </g-tag>
-            </g-dropdown>
           </div>
         </div>
       </g-config-provider>
@@ -498,6 +497,20 @@ export const commandEvent: Story = {
         <div class="flex gap-4 w-full items-center justify-center flex-col">
           <g-dropdown trigger="click" :actions="actions" @command="handleCommand">
             <g-button type="primary" size="sm">Abrir menú</g-button>
+            <template #dropdown-additional-top>
+              <div class="flex w-full justify-center items-center pt-4">
+                <g-tag type="info" size="sm">
+                  Información adicional arriba
+                </g-tag>
+              </div>
+            </template>
+            <template #dropdown-additional-bottom>
+              <div class="flex w-full justify-center items-center pb-4">
+                <g-tag type="info" size="sm">
+                  Información adicional abajo
+                </g-tag>
+              </div>
+            </template>
           </g-dropdown>
           <span class="text-2 text-primary-def font-medium flex gap-2 justify-center items-center">
             El comando que se ejecuto fue:
@@ -533,7 +546,7 @@ export const dropdownMethods: Story = {
 
       const getCountries = async () => {
         try {
-          const response = await fetch('https://restcountries.com/v3.1/all')
+          const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags')
           const data = await response.json()
 
           const limitedData = data.slice(0, 25)
@@ -541,7 +554,7 @@ export const dropdownMethods: Story = {
           const countries = limitedData.map((country) => ({
             icon: country.flags.svg,
             title: country.name.common,
-            command: country.flags.svg,
+            command: country.flags.svg
           }))
 
           return countries

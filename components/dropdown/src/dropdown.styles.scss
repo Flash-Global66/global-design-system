@@ -8,7 +8,7 @@
 
 @include b('dropdown') {
   @include e("popper") {
-    @apply rounded-md !important;
+    @apply rounded-md shadow-md !important;
 
     & .gui-popper__arrow {
       @apply shadow-none !important;
