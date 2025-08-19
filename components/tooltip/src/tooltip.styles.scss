@@ -9,7 +9,7 @@
 
 @include b('popper') {
   &.gui-popper__tooltip {
-    @apply p-md bg-everBlue-50 border-none rounded-md max-w-56 pt-sm !important;
+    @apply p-md bg-everBlue-50 border-none rounded-md max-w-56 pt-sm shadow-md !important;
 
     @include e('container') {
       @apply flex flex-col gap-xxs;
