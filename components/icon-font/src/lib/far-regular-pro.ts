@@ -98,4 +98,8 @@ export {
   faUserCheck,
   faUserMinus,
   faEnvelopeOpen,
+  faArrowLeftFromBracket,
+  faArrowRightFromBracket,
+  faBadgePercent,
+  faClockRotateLeft,
 } from '@fortawesome/pro-regular-svg-icons';
