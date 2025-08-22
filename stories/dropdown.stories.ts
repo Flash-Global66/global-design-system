@@ -434,6 +434,7 @@ export const allTypesOfTriggers: Story = {
               <g-tag type="success" size="sm">
                 {{ trigger }}
               </g-tag>
+            </g-dropdown>
           </div>
         </div>
       </g-config-provider>
@@ -592,7 +593,7 @@ export const dropdownMethods: Story = {
               :actions="countries" 
               @visible-change="handleVisibleChange" 
               max-height="280px" 
-              placement="bottom-start"
+              placement="bottom-end"
               class="pt-6"
               @command="handleCommand"
             >

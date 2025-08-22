@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-tooltip@0.1.0...@flash-global66/g-tooltip@0.1.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* add new slots to dropdown and add box-shadow ([b5a07a4](https://github.com/Flash-Global66/global-design-system/commit/b5a07a4bb8b289eedb3ff01744787af7b43050fe))
+
+
+
+
+
 # [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-tooltip@0.0.5...@flash-global66/g-tooltip@0.1.0) (2025-04-23)
 
 

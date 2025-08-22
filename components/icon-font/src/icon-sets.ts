@@ -194,11 +194,14 @@ export const ICON_SETS = {
     'earth-europe',
     'earth-africa',
     'earth-oceania',
-    'earth-south-america',
     'user-group',
     'user-check',
     'user-minus',
     'envelope-open',
+    'arrow-left-from-bracket',
+    'arrow-right-from-bracket',
+    'badge-percent',
+    'clock-rotate-left',
   ] as const,
 
   light: [
