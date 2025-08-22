@@ -593,7 +593,7 @@ export const dropdownMethods: Story = {
               :actions="countries" 
               @visible-change="handleVisibleChange" 
               max-height="280px" 
-              placement="bottom-start"
+              placement="bottom-end"
               class="pt-6"
               @command="handleCommand"
             >
