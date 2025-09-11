@@ -4,6 +4,7 @@ export type actionType = {
   description?: string
   disabled?: boolean
   action?: () => void
-  command?: String | number | Record<string, any>
+  command?: string | number | Record<string, any>
   divider?: boolean
+  [x: string]: string | number | Record<string, any> | undefined | boolean | Function
 }

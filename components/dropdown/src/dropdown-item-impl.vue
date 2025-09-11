@@ -7,6 +7,7 @@
     :class="[ns.be('menu', 'item'), ns.is('disabled', disabled)]"
     :tabindex="tabIndex"
     :role="role"
+    :data-test="attrs['data-test'] ?? `dropdown-item:${title}`"
     @click="
       (e) => {
         if (action) {
@@ -53,7 +54,7 @@ export default defineComponent({
   },
   props: dropdownItemProps,
   emits: ['pointermove', 'pointerleave', 'click', 'clickimpl'],
-  setup(_, { emit }) {
+  setup(_, { emit, attrs }) {
     const ns = useNamespace('dropdown')
 
     const { role: menuRole } = inject(DROPDOWN_INJECTION_KEY, undefined)!
@@ -111,7 +112,8 @@ export default defineComponent({
       tabIndex,
       handleFocus,
       handleKeydown,
-      handleMousedown
+      handleMousedown,
+      attrs
     }
   }
 })
