@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dropdown@0.1.3...@flash-global66/g-dropdown@0.1.4) (2025-09-11)
+
+
+### Bug Fixes
+
+* add prop data test to dropdown ([#140](https://github.com/Flash-Global66/global-design-system/issues/140)) ([512c6e3](https://github.com/Flash-Global66/global-design-system/commit/512c6e3d9f19dfd83b31ded2469571f65e34023d))
+
+
+
+
+
 ## [0.1.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dropdown@0.1.2...@flash-global66/g-dropdown@0.1.3) (2025-08-19)
 
 
