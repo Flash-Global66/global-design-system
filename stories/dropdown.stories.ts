@@ -403,7 +403,8 @@ export const allTypesOfTriggers: Story = {
           description: 'Esta acción te permite enviar un correo electrónico',
           action: () => {
             console.log('Enviar correo')
-          }
+          },
+          'data-test': 'send-email'
         },
         {
           title: 'Buscar',
@@ -411,7 +412,8 @@ export const allTypesOfTriggers: Story = {
           description: 'Esta acción te permite buscar un elemento',
           action: () => {
             console.log('Buscar')
-          }
+          },
+          'data-test': 'search'
         },
         {
           title: 'Exportar',
@@ -419,7 +421,8 @@ export const allTypesOfTriggers: Story = {
           description: 'Esta acción te permite exportar un elemento',
           action: () => {
             console.log('Exportar')
-          }
+          },
+          'data-test': 'export'
         }
       ]
 
@@ -465,7 +468,8 @@ export const commandEvent: Story = {
           description: 'Esta acción te permite enviar un correo electrónico',
           action: () => {
             console.log('Enviar correo')
-          }
+          },
+          'data-test': 'send-email'
         },
         {
           title: 'Buscar',
@@ -474,7 +478,8 @@ export const commandEvent: Story = {
           description: 'Esta acción te permite buscar un elemento',
           action: () => {
             console.log('Buscar')
-          }
+          },
+          'data-test': 'search'
         },
         {
           title: 'Exportar',
@@ -483,7 +488,8 @@ export const commandEvent: Story = {
           description: 'Esta acción te permite exportar un elemento',
           action: () => {
             console.log('Exportar')
-          }
+          },
+          'data-test': 'export'
         }
       ]
 
