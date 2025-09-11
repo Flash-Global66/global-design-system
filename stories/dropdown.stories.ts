@@ -33,6 +33,7 @@ Un elemento de interfaz de usuario que permite a los usuarios seleccionar una op
 - Soporte para slots personalizados.
 - Soporte para eventos personalizados.
 - Soporte para accesibilidad (ARIA).
+- Soporte para datos de prueba por item y global (data-test).
 
 ### Instalación
 
@@ -84,7 +85,8 @@ const actions: actionType[] = [
     description: 'Esta acción te permite enviar un correo electrónico',
     action: () => {
       console.log('Enviar correo')
-    }
+    },
+    'data-test': 'action:send-email'
   },
   {
     title: 'Buscar',
@@ -92,7 +94,8 @@ const actions: actionType[] = [
     description: 'Esta acción te permite buscar un elemento',
     action: () => {
       console.log('Buscar')
-    }
+    },
+    'data-test': 'action:search'
   },
   {
     title: 'Exportar',
@@ -100,7 +103,8 @@ const actions: actionType[] = [
     description: 'Esta acción te permite exportar un elemento',
     action: () => {
       console.log('Exportar')
-    }
+    },
+    'data-test': 'action:export'
   }
 ]
 </script>
