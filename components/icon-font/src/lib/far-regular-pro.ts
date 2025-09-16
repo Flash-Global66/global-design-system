@@ -102,4 +102,5 @@ export {
   faArrowRightFromBracket,
   faBadgePercent,
   faClockRotateLeft,
+  faLightbulb,
 } from '@fortawesome/pro-regular-svg-icons';
