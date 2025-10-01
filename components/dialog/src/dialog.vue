@@ -1,11 +1,16 @@
 <template>
   <g-teleport :to="appendTo" :disabled="appendTo !== 'body' ? false : !appendToBody">
-    <transition name="dialog-fade" @after-enter="afterEnter" @after-leave="afterLeave" @before-leave="beforeLeave">
-      <g-overlay 
-        v-show="visible" 
-        custom-mask-event 
-        :mask="modal" 
-        :overlay-class="modalClass" 
+    <transition
+      name="dialog-fade"
+      @after-enter="afterEnter"
+      @after-leave="afterLeave"
+      @before-leave="beforeLeave"
+    >
+      <g-overlay
+        v-show="visible"
+        custom-mask-event
+        :mask="modal"
+        :overlay-class="modalClass"
         :z-index="zIndex"
       >
         <div
@@ -29,7 +34,7 @@
             @focusout-prevented="onFocusoutPrevented"
             @release-requested="onCloseRequested"
           >
-            <dialog-content 
+            <dialog-content
               v-if="rendered"
               ref="dialogContentRef"
               v-bind="$attrs"
@@ -48,6 +53,10 @@
               :footer-buttons="footerButtons"
               @close="handleClose"
             >
+              <template v-if="$slots.header" #header>
+                <slot name="header" />
+              </template>
+
               <template v-if="$slots.image" #image>
                 <slot name="image" />
               </template>
@@ -66,26 +75,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref } from "vue";
-import { GFocusTrap } from "@flash-global66/g-focus-trap";
-import { GTeleport } from "@flash-global66/g-teleport";
-import { GOverlay } from "@flash-global66/g-overlay";
-import { useNamespace, useSameTarget } from "element-plus";
-import { dialogInjectionKey } from "./constants";
-import { dialogEmits, dialogProps } from "./dialog";
-import { useDialog } from "./hooks/use-dialog";
-import DialogContent from './dialog-content.vue';
+import { computed, provide, ref } from 'vue'
+import { GFocusTrap } from '@flash-global66/g-focus-trap'
+import { GTeleport } from '@flash-global66/g-teleport'
+import { GOverlay } from '@flash-global66/g-overlay'
+import { useNamespace, useSameTarget } from 'element-plus'
+import { dialogInjectionKey } from './constants'
+import { dialogEmits, dialogProps } from './dialog'
+import { useDialog } from './hooks/use-dialog'
+import DialogContent from './dialog-content.vue'
 
-const props = defineProps(dialogProps);
-const emit = defineEmits(dialogEmits);
+const props = defineProps(dialogProps)
+const emit = defineEmits(dialogEmits)
 
-const ns = useNamespace("dialog");
-const dialogRef = ref<HTMLElement>();
-const headerRef = ref<HTMLElement>();
-const dialogContentRef = ref();
+const ns = useNamespace('dialog')
+const dialogRef = ref<HTMLElement>()
+const headerRef = ref<HTMLElement>()
+const dialogContentRef = ref()
 
-const closeOnClickModal = computed(() => props.showClose && props.closeOnClickModal);
-const closeOnPressEscape = computed(() => props.showClose && props.closeOnPressEscape);
+const closeOnClickModal = computed(() => props.showClose && props.closeOnClickModal)
+const closeOnPressEscape = computed(() => props.showClose && props.closeOnPressEscape)
 
 const {
   visible,
@@ -108,8 +117,8 @@ const {
   buttonLayoutClass
 } = useDialog(props, dialogRef, {
   closeOnClickModal,
-  closeOnPressEscape,
-});
+  closeOnPressEscape
+})
 
 provide(dialogInjectionKey, {
   dialogRef,
@@ -120,20 +129,20 @@ provide(dialogInjectionKey, {
   style,
   displayButtons,
   buttonLayoutClass
-});
+})
 
-const overlayEvent = useSameTarget(onModalClick);
+const overlayEvent = useSameTarget(onModalClick)
 
-const draggable = computed(() => props.draggable && !props.fullscreen);
+const draggable = computed(() => props.draggable && !props.fullscreen)
 
 const resetPosition = () => {
-  dialogContentRef.value?.resetPosition();
-};
+  dialogContentRef.value?.resetPosition()
+}
 
 defineExpose({
   /** @description whether the dialog is visible */
   visible,
   dialogContentRef,
-  resetPosition,
-});
+  resetPosition
+})
 </script>

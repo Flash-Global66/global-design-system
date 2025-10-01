@@ -1,11 +1,10 @@
-@use "sass:map";
+@use 'sass:map';
 
-@use "element-plus/theme-chalk/src/mixins/mixins" as *;
-@use "element-plus/theme-chalk/src/mixins/utils" as *;
-@use "element-plus/theme-chalk/src/mixins/var" as *;
-@use "element-plus/theme-chalk/src/common/var" as *;
-@use "element-plus/theme-chalk/src/common/popup" as *;
-
+@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
+@use 'element-plus/theme-chalk/src/mixins/utils' as *;
+@use 'element-plus/theme-chalk/src/mixins/var' as *;
+@use 'element-plus/theme-chalk/src/common/var' as *;
+@use 'element-plus/theme-chalk/src/common/popup' as *;
 
 @include b('dialog') {
   @apply relative bg-sec-def-bg rounded-lg shadow-lg box-border p-8 break-words mx-auto;
@@ -13,7 +12,7 @@
   @include when('fullscreen') {
     @apply w-full h-full m-0 rounded-none overflow-auto;
   }
-  
+
   @include when('default') {
     @apply w-4/12 max-w-md;
   }
@@ -31,19 +30,19 @@
 
   @media (max-width: theme('screens.sm')) {
     @apply mt-4 mb-4 mx-4 p-6 rounded-lg;
-    
+
     @include when('default') {
       width: calc(100% - 2rem);
       max-width: none;
       min-width: 0;
     }
-    
+
     @include when('fixed') {
       width: calc(100% - 2rem);
       max-width: none;
       min-width: 0;
     }
-    
+
     @include when('adaptive') {
       width: calc(100% - 2rem);
       max-width: none;
@@ -65,7 +64,7 @@
 
   @include when('draggable') {
     @apply cursor-move relative;
-    
+
     @include e('header') {
       @apply select-none;
     }
@@ -78,6 +77,10 @@
 
   @include e('header') {
     @apply relative;
+
+    & .header-content {
+      @apply absolute top-0 left-0 -translate-y-4;
+    }
 
     &.show-close {
       @apply pr-0;
@@ -94,7 +97,7 @@
 
     &:focus,
     &:hover {
-      @apply text-grey-100
+      @apply text-grey-100;
     }
   }
 
@@ -105,44 +108,43 @@
       @apply max-w-sm mx-auto;
     }
   }
-  
+
   @include e('footer') {
     @apply w-full mx-auto;
 
     &-buttons {
       @apply w-full;
-      
+
       &.layout-dual-row {
         @apply grid gap-xs grid-cols-2;
-        
+
         > button:nth-child(3) {
-        @apply mt-xs mx-auto col-span-2 col-start-1;
-        max-width: 50%;
+          @apply mt-xs mx-auto col-span-2 col-start-1;
+          max-width: 50%;
         }
-        
+
         @media (max-width: theme('screens.sm')) {
           @apply flex flex-col;
-          
+
           > button:nth-child(3) {
             @apply max-w-full mx-0 mt-xxs;
           }
         }
       }
-      
+
       &.layout-single-column {
         @apply flex flex-col gap-xs;
       }
     }
   }
 
-  
   @include e('title') {
     @apply font-semibold text-8 text-primary-txt block mb-md;
   }
 
   @include e('image') {
     @apply mx-auto mb-lg flex flex-col items-center;
-    
+
     .is-adaptive & img {
       @apply max-w-full h-auto w-auto;
     }
