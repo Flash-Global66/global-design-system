@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.13.2...@flash-global66/g-icon-font@0.14.0) (2025-10-14)
+
+
+### Features
+
+* add 'book' icon to ICON_SETS and export from fas-solid-pro ([#147](https://github.com/Flash-Global66/global-design-system/issues/147)) ([aa7fc9e](https://github.com/Flash-Global66/global-design-system/commit/aa7fc9e8140a791f4fa9270a4b5ca4194a70741c))
+
+
+
+
+
 ## [0.13.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.13.1...@flash-global66/g-icon-font@0.13.2) (2025-09-16)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font
