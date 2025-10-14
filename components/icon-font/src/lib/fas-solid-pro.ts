@@ -99,4 +99,5 @@ export {
   faSpinner,
   faTimer,
   faGift,
+  faBook,
 } from "@fortawesome/pro-solid-svg-icons";
