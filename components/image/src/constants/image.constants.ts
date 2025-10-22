@@ -40,6 +40,7 @@ export const IMAGE_NAMES = [
   'scissors',
   'stairs',
   'user',
+  'users',
   'warning-sign',
   'warning-sign-yellow',
   'whatsapp',
