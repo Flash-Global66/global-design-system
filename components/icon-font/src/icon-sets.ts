@@ -204,6 +204,7 @@ export const ICON_SETS = {
     'badge-percent',
     'clock-rotate-left',
     'lightbulb',
+    'receipt',
   ] as const,
 
   light: [
