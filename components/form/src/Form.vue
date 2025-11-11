@@ -109,7 +109,6 @@ const validateField: FormContext["validateField"] = async (
   modelProps = [],
   callback
 ) => {
-  console.log("modelProps", modelProps);
   const shouldThrow = !isFunction(callback);
   try {
     const result = await doValidateField(modelProps);
