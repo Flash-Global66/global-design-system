@@ -1,0 +1,1 @@
+import{s as t,o as s,i as e}from"./index-DG2QIyoI.js";import{i as o}from"./index-DE1oVCG-.js";import{m as a}from"./install-B47IWttr.js";function f(i,r){return t(s(i,r,e),i+"")}function p(i){return a(i)&&o(i)}export{f as b,p as i};
