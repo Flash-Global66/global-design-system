@@ -6,7 +6,6 @@
       @close="(e) => $emit('close', e)"
       @select="(e) => $emit('select', e)"
     >
-  
       <!--
         @slot Menu Content
       -->
@@ -18,13 +17,11 @@
 </template>
 
 <script lang="ts">
-import { Component, defineComponent, PropType } from 'vue';
-import {
-  ElMenu,
-} from "element-plus";
+import { Component, defineComponent, PropType } from "vue";
+import { ElMenu } from "element-plus";
 
 export default defineComponent({
-  name: 'GMenu',
+  name: "GMenu",
   components: {
     ElMenu,
   },
@@ -32,12 +29,12 @@ export default defineComponent({
     /**
      * open a specific sub-menu. Params:index: index of the sub-menu to open
      */
-    'open',
+    "open",
     /**
      * close a specific sub-menu. Params:	index: index of the sub-menu to close
      */
-    'close',
-    'select',
+    "close",
+    "select",
   ],
   props: {
     /**
@@ -45,42 +42,41 @@ export default defineComponent({
      */
     defaultActive: {
       type: String,
-      default: '',
+      default: "",
     },
     /**
      * array that contains indexes of currently active sub-menus
-    */
+     */
     defaultOpeneds: {
       type: Array as PropType<string[]>,
       default: () => [],
     },
     /**
      * whether only one sub-menu can be active
-    */
+     */
     uniqueOpened: Boolean,
     /**
      * whether vue-router mode is activated. If true, index will be used as 'path' to activate the route action. Use with default-active to set the active item on load.
-    */
+     */
     router: Boolean,
     /**
      * whether the menu is collapsed
-    */
+     */
     collapse: Boolean,
     /**
      * 	whether to enable the collapse transition
-    */
+     */
     collapseTransition: {
       type: Boolean,
       default: true,
     },
   },
-  setup(_ , { emit }) {
+  setup(_, { emit }) {
     return {
       onOpen: () => {
-        console.log('onOpen');
-        emit('open')
+        emit("open");
       },
-    }
+    };
   },
 });
 </script>
