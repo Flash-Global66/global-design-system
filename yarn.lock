@@ -1045,6 +1045,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-stepper@workspace:components/stepper":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-stepper@workspace:components/stepper"
+  peerDependencies:
+    "@flash-global66/g-button": ^0.3.1
+    "@flash-global66/g-config-provider": ^0.0.8
+    "@flash-global66/g-icon-font": ^0.15.0
+    "@flash-global66/g-progress": ^0.2.0
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-switch@workspace:components/switch":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-switch@workspace:components/switch"

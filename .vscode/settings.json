@@ -10,5 +10,6 @@
     "tailwindcss",
     "vitejs",
     "xsmall"
-  ]
+  ],
+  "scss.lint.unknownAtRules": "ignore"
 }

@@ -1,0 +1,38 @@
+{
+  "name": "@flash-global66/g-stepper",
+  "author": "Global66",
+  "version": "0.0.1",
+  "license": "MIT",
+  "buildable": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/stepper.styles.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-button": "^0.3.1",
+    "@flash-global66/g-config-provider": "^0.0.8",
+    "@flash-global66/g-icon-font": "^0.15.0",
+    "@flash-global66/g-progress": "^0.2.0",
+    "vue": "^3.2.0"
+  }
+}

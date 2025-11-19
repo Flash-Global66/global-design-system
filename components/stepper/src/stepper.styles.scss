@@ -1,0 +1,61 @@
+// TODO Revisar si es necesario
+
+@use "sass:map";
+
+.progress-container {
+  @apply w-full bg-grey-50 relative rounded-full;
+
+  .progress-percentage {
+    @apply absolute rounded-full bg-everBlue-500 h-full transition-all duration-500 ease-in-out;
+  }
+}
+
+// HEADER
+.step-title {
+  @apply w-full text-grey-400 font-semibold flex justify-between mb-4 mt-1;
+}
+
+.header-btn {
+  @apply transition duration-300 ease-in-out
+        flex justify-center items-center
+        text-everBlue-200 hover:text-everBlue-400
+        text-6 rounded-full w-10 h-10
+        hover:bg-grey-50 cursor-pointer;
+}
+
+.header-stepper {
+  .top-btn-left {
+    @apply text-6;
+  }
+
+  .top-btn-right {
+    @apply text-4;
+    @apply flex items-center font-medium;
+  }
+}
+
+// PROGRESS
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transform: opacity 1s;
+  position: absolute !important;
+  top: 0;
+  width: 100%;
+}
+
+.fade2-enter-active,
+.fade2-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade2-enter-from,
+.fade2-leave-to {
+  opacity: 0;
+}
