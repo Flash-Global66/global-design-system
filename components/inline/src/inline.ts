@@ -19,7 +19,6 @@ export const inlineProps = buildProps({
   */
   description: {
     type: String,
-    required: true,
     default: "",
   },
   /**

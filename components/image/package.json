@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-image",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Componente de imágenes predefinidas con diferentes tamaños",
   "author": "Global66",
   "main": "dist/index.js",

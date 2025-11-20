@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.3...@flash-global66/g-dialog@1.1.4) (2025-10-15)
+
+
+### Bug Fixes
+
+* remove width setting for default dialog style ([#148](https://github.com/Flash-Global66/global-design-system/issues/148)) ([0b87fdb](https://github.com/Flash-Global66/global-design-system/commit/0b87fdbc9eb1a36cc12e192fb0f7d5cbb7b7d164))
+
+
+
+
+
+## [1.1.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.2...@flash-global66/g-dialog@1.1.3) (2025-10-01)
+
+
+### Bug Fixes
+
+* add slot header to component dialog ([#145](https://github.com/Flash-Global66/global-design-system/issues/145)) ([31dee7b](https://github.com/Flash-Global66/global-design-system/commit/31dee7b5340703cb7ce730b897eb3f65c41d92f4))
+
+
+
+
+
 ## [1.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.1...@flash-global66/g-dialog@1.1.2) (2025-05-06)
 
 

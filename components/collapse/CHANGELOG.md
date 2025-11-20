@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.3.0...@flash-global66/g-collapse@0.3.1) (2025-09-18)
+
+
+### Bug Fixes
+
+* disabled prop blocking onClick for GIconFont arrows ([#144](https://github.com/Flash-Global66/global-design-system/issues/144)) ([b95c7fd](https://github.com/Flash-Global66/global-design-system/commit/b95c7fd5463af88b1c3e9bcdceb5ad310116de54))
+
+
+
+
+
 # [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.2.0...@flash-global66/g-collapse@0.3.0) (2025-07-10)
 
 

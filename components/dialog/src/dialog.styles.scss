@@ -14,7 +14,7 @@
   }
 
   @include when('default') {
-    @apply w-4/12 max-w-md;
+    @apply max-w-md;
   }
 
   @include when('fixed') {

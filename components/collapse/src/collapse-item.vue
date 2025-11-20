@@ -20,7 +20,11 @@
             :key="index"
             :name="icon.icon"
             :class="icon.icon === 'regular angle-right' ? arrowKls : ''"
-            @click.stop="icon?.onClick && icon?.onClick(name, icon.icon, isActive!)"
+            @click.stop="
+              !disabled &&
+                icon?.onClick &&
+                icon?.onClick(name, icon.icon, isActive!)
+            "
             :spin="icon.spin"
           />
         </div>
@@ -41,7 +45,11 @@
           :key="index"
           :name="icon.icon"
           :class="icon.icon === 'regular angle-right' ? arrowKls : ''"
-          @click.stop="icon?.onClick && icon.onClick(name, icon.icon, isActive!)"
+          @click.stop="
+            !disabled &&
+              icon?.onClick &&
+              icon.onClick(name, icon.icon, isActive!)
+          "
           :spin="icon.spin"
         />
       </div>
@@ -66,16 +74,16 @@
 </template>
 
 <script lang="ts" setup>
-import GCollapseTransition from '@flash-global66/g-collapse-transition'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { collapseItemProps } from './collapse-item'
-import { useCollapseItem, useCollapseItemDOM } from './use-collapse-item'
+import GCollapseTransition from "@flash-global66/g-collapse-transition";
+import { GIconFont } from "@flash-global66/g-icon-font";
+import { collapseItemProps } from "./collapse-item";
+import { useCollapseItem, useCollapseItemDOM } from "./use-collapse-item";
 
 defineOptions({
-  name: 'GCollapseItem'
-})
+  name: "GCollapseItem",
+});
 
-const props = defineProps(collapseItemProps)
+const props = defineProps(collapseItemProps);
 const {
   focusing,
   id,
@@ -87,8 +95,8 @@ const {
   iconsLeft,
   iconsRight,
   name,
-  slotProps
-} = useCollapseItem(props)
+  slotProps,
+} = useCollapseItem(props);
 
 const {
   arrowKls,
@@ -103,11 +111,11 @@ const {
   iconsLeftKls,
   iconsRightKls,
   contentHeaderTextKls,
-  itemDescriptionKls
-} = useCollapseItemDOM(props, { focusing, isActive, id })
+  itemDescriptionKls,
+} = useCollapseItemDOM(props, { focusing, isActive, id });
 
 defineExpose({
   /** @description current collapse-item whether active */
-  isActive
-})
+  isActive,
+});
 </script>

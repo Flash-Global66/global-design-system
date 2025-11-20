@@ -8,7 +8,7 @@ export default {
 
 const Template: StoryFn<typeof Loader> = (args) => ({
   components: { Loader },
-  template: `<Loader v-bind="args"/>`,
+  template: `<Loader class="min-h-[500px]" v-bind="args"/>`,
   setup() {
     return { args };
   }
@@ -17,4 +17,10 @@ const Template: StoryFn<typeof Loader> = (args) => ({
 export const Default = Template.bind({});
 Default.args = {
   show: true
+};
+
+export const WithMessage = Template.bind({});
+WithMessage.args = {
+  show: true,
+  message: 'Mostrando mensaje de carga'
 };
