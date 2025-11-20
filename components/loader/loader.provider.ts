@@ -3,7 +3,7 @@ import { InjectionKey, Ref, ref } from "vue";
 export type LoaderProviderType = {
   isLoading: Ref<boolean>;
   showGLoader(show: boolean): void;
-  updateGLoaderMessage(message: string): void;
+  setLoaderMessage(message: string): void;
 };
 
 const showLoader: Ref<boolean> = ref(false);
@@ -15,7 +15,7 @@ const initialValues: LoaderProviderType = {
     loaderMessage.value = show && message ? message : "";
     showLoader.value = show;
   },
-  updateGLoaderMessage: (message: string) => {
+  setLoaderMessage: (message: string) => {
     loaderMessage.value = message;
   },
 };

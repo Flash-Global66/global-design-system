@@ -7,14 +7,14 @@ import {
 } from "./loader.provider";
 
 const useLoader = () => {
-  const { showGLoader, updateGLoaderMessage, isLoading } = inject(
+  const { showGLoader, setLoaderMessage, isLoading } = inject(
     LoaderProvider,
     initialValues
   );
 
   return {
     showGLoader,
-    updateGLoaderMessage,
+    setLoaderMessage,
     isLoading,
     showLoader,
     loaderMessage,

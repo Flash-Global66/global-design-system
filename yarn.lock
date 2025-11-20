@@ -1148,11 +1148,10 @@ __metadata:
     "@element-plus/utils": "npm:0.0.5"
     "@fortawesome/fontawesome-common-types": "npm:6.7.2"
     "@fortawesome/fontawesome-svg-core": "npm:6.7.2"
-    "@fortawesome/free-solid-svg-icons": "npm:6.7.2"
-    "@fortawesome/pro-duotone-svg-icons": "npm:6.7.2"
-    "@fortawesome/pro-light-svg-icons": "npm:6.7.2"
-    "@fortawesome/pro-regular-svg-icons": "npm:6.7.2"
-    "@fortawesome/pro-solid-svg-icons": "npm:6.7.2"
+    "@fortawesome/pro-duotone-svg-icons": "npm:^6.2.1"
+    "@fortawesome/pro-light-svg-icons": "npm:^6.2.1"
+    "@fortawesome/pro-regular-svg-icons": "npm:^6.2.1"
+    "@fortawesome/pro-solid-svg-icons": "npm:^6.2.1"
     "@fortawesome/vue-fontawesome": "npm:3.1.1"
     "@popperjs/core": "npm:2.11.8"
     "@storybook/addon-actions": "npm:8.6.14"
@@ -1240,7 +1239,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/free-solid-svg-icons@npm:6.7.2, @fortawesome/free-solid-svg-icons@npm:^6.7.2":
+"@fortawesome/free-solid-svg-icons@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/free-solid-svg-icons@npm:6.7.2"
   dependencies:
@@ -1249,7 +1248,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/pro-duotone-svg-icons@npm:6.7.2, @fortawesome/pro-duotone-svg-icons@npm:^6.7.2":
+"@fortawesome/pro-duotone-svg-icons@npm:^6.2.1, @fortawesome/pro-duotone-svg-icons@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/pro-duotone-svg-icons@npm:6.7.2"
   dependencies:
@@ -1258,7 +1257,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/pro-light-svg-icons@npm:6.7.2, @fortawesome/pro-light-svg-icons@npm:^6.7.2":
+"@fortawesome/pro-light-svg-icons@npm:^6.2.1, @fortawesome/pro-light-svg-icons@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/pro-light-svg-icons@npm:6.7.2"
   dependencies:
@@ -1267,7 +1266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/pro-regular-svg-icons@npm:6.7.2, @fortawesome/pro-regular-svg-icons@npm:^6.7.2":
+"@fortawesome/pro-regular-svg-icons@npm:^6.2.1, @fortawesome/pro-regular-svg-icons@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/pro-regular-svg-icons@npm:6.7.2"
   dependencies:
@@ -1276,7 +1275,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/pro-solid-svg-icons@npm:6.7.2, @fortawesome/pro-solid-svg-icons@npm:^6.7.2":
+"@fortawesome/pro-solid-svg-icons@npm:^6.2.1, @fortawesome/pro-solid-svg-icons@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/pro-solid-svg-icons@npm:6.7.2"
   dependencies:
