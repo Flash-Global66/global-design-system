@@ -18,3 +18,9 @@ export const Default = Template.bind({});
 Default.args = {
   show: true
 };
+
+export const WithMessage = Template.bind({});
+WithMessage.args = {
+  show: true,
+  message: 'Mostrando mensaje de carga'
+};

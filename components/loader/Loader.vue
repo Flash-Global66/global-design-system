@@ -2,23 +2,32 @@
   <transition name="fade">
     <div
       class="gui-loader"
-      style="background-color: rgba(4, 16, 66, 0.8)"
+      style="background-color: rgba(52, 57, 71, 0.8)"
       v-if="show"
     >
-      <img src="./assets/img/preloader.gif" class="h-12" />
+      <div class="flex flex-col items-center justify-center">
+        <img src="./assets/img/preloader.gif" class="h-12" />
+        <p v-if="message" class="mt-md text-white text-lg">
+          {{ message }}
+        </p>
+      </div>
     </div>
   </transition>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Loader',
+  name: "Loader",
   props: {
     show: {
       default: false,
       type: Boolean,
+    },
+    message: {
+      default: "",
+      type: String,
     },
   },
 });
