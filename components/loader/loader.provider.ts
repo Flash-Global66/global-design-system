@@ -11,8 +11,7 @@ const loaderMessage: Ref<string> = ref("");
 
 const initialValues: LoaderProviderType = {
   isLoading: ref(false),
-  showGLoader: (show: boolean, message?: string) => {
-    loaderMessage.value = show && message ? message : "";
+  showGLoader: (show: boolean) => {
     showLoader.value = show;
   },
   setLoaderMessage: (message: string) => {
