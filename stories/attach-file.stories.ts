@@ -1053,6 +1053,7 @@ Ejemplo del componente con un link de descarga integrado. Útil cuando se necesi
         code: `<script setup lang="ts">
 import { ref } from 'vue'
 import { GAttachFile } from '@flash-global66/g-attach-file'
+import { GIconFont } from '@flash-global66/g-icon-font'
 
 const files = ref<File[]>([])
 </script>
