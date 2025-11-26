@@ -253,6 +253,14 @@
     @include e('info-text') {
       @apply text-disab-lt-txt text-2;
     }
+
+    @include e('download-link') {
+      @apply text-everBlue-500 font-montserrat text-2 font-bold underline;
+    }
+
+    @include e('extra-content') {
+      @apply mt-sm;
+    }
   }
 
   @include e('validation-errors') {

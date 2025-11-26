@@ -811,7 +811,7 @@ Validaciones automáticas con manejo de mensajes de error.
   render: () => ({
     components: { GAttachFile, GConfigProvider, GForm, GFormItem, GButton, GInput },
     setup() {
-      const files = ref([])
+      const files = ref<File[]>([])
       const uploading = ref(false)
       const uploadError = ref(false)
       const validationErrorMsg = ref('')
@@ -819,7 +819,7 @@ Validaciones automáticas con manejo de mensajes de error.
       const fileProgress = ref({})
       const fileErrors = ref({})
       
-      const simulateUpload = async (filesArray) => {
+      const simulateUpload = async (filesArray: File[]) => {
         if (filesArray.length === 0) return
         
         uploading.value = true
@@ -867,11 +867,11 @@ Validaciones automáticas con manejo de mensajes de error.
         uploading.value = false
       }
       
-      function handleValidationError(errors) {
+      function handleValidationError(errors: Array<{type: string, file?: File, data?: any}>) {
         let generalMsg = ''
         let maxFilesError = ''
         
-        errors.forEach((error) => {
+        errors.forEach((error: {type: string, file?: File, data?: any}) => {
           if (!error) return;
           if (error.type === 'file-size-exceeded') {
             const sizeMB = Math.round((error.file?.size || 0) / (1024 * 1024) * 100) / 100
@@ -887,7 +887,7 @@ Validaciones automáticas con manejo de mensajes de error.
         maxFilesErrorMsg.value = maxFilesError
       }
       
-      function handleUpdate(selectedFiles) {
+      function handleUpdate(selectedFiles: File[]) {
         console.log('📁 Archivos actualizados:', selectedFiles.length)
         files.value = selectedFiles
         
@@ -1029,6 +1029,138 @@ const handleDownload = () => {
             info-text="Haz clic para descargar el archivo de plantilla"
             @download="handleDownload"
           />
+        </div>
+      </g-config-provider>
+    `
+  })
+};
+
+export const DownloadLink: Story = {
+  name: "Con Link de Descarga",
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Ejemplo del componente con un link de descarga integrado. Útil cuando se necesita proporcionar un archivo de plantilla o referencia junto con la opción de carga.
+
+### Características:
+- **downloadUrl**: URL del archivo a descargar
+- **downloadLinkText**: Texto del enlace (requerido si se usa downloadUrl)
+- **slot extra-content**: Permite agregar contenido adicional dentro del componente (errores, mensajes, etc.)
+        `
+      },
+      source: {
+        code: `<script setup lang="ts">
+import { ref } from 'vue'
+import { GAttachFile } from '@flash-global66/g-attach-file'
+
+const files = ref<File[]>([])
+</script>
+
+<template>
+  <!-- Con link de descarga -->
+  <g-attach-file 
+    v-model="files"
+    title="Registro Único Tributario (RUT)"
+    info-text="Adjunta la composición accionaria firmada."
+    download-url="https://example.com/plantilla-rut.pdf"
+    download-link-text="Descárgalo desde aquí"
+    :accept-ext-names="['.pdf']"
+    max-size="10MB"
+  />
+
+  <!-- Con slot para contenido adicional (errores) -->
+  <g-attach-file 
+    v-model="files"
+    title="Registro Único Tributario (RUT)"
+    info-text="Adjunta la composición accionaria firmada."
+    download-url="https://example.com/plantilla-rut.pdf"
+    download-link-text="Descárgalo desde aquí"
+  >
+    <template #extra-content>
+      <div class="flex items-start gap-xs">
+        <g-icon-font name="solid times" class="text-error-def" />
+        <div>
+          <p class="font-semibold text-error-def">Documento rechazado por:</p>
+          <ol class="list-decimal pl-md text-secondary-txt text-2">
+            <li>Certificado de existencia superior a 30 días.</li>
+            <li>El representante legal no coincide.</li>
+          </ol>
+        </div>
+      </div>
+    </template>
+  </g-attach-file>
+</template>`
+      }
+    }
+  },
+  render: () => ({
+    components: { GAttachFile, GConfigProvider },
+    setup() {
+      const files = ref<File[]>([]);
+      const filesWithError = ref<File[]>([]);
+
+      const handleUpdate = (selectedFiles: File[]) => {
+        files.value = selectedFiles;
+        action('update:model-value')(selectedFiles);
+      };
+
+      return { files, filesWithError, handleUpdate };
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-sm font-medium mb-2 text-gray-700">Con link de descarga</h4>
+            <g-attach-file 
+              v-model="files"
+              title="Registro Único Tributario (RUT)"
+              info-text="Adjunta la composición accionaria firmada."
+              download-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+              download-link-text="Descárgalo desde aquí"
+              :accept-ext-names="['.pdf']"
+              max-size="10MB"
+              @update:model-value="handleUpdate"
+            />
+          </div>
+
+          <div>
+            <h4 class="text-sm font-medium mb-2 text-gray-700">Con slot de errores de validación</h4>
+            <g-attach-file 
+              v-model="filesWithError"
+              title="Registro Único Tributario (RUT)"
+              info-text="Adjunta la composición accionaria firmada."
+              download-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+              download-link-text="Descárgalo desde aquí"
+              :accept-ext-names="['.pdf']"
+              max-size="10MB"
+            >
+              <template #extra-content>
+                <div class="flex items-start gap-2">
+                  <span class="text-red-500 text-lg">✕</span>
+                  <div>
+                    <p class="font-semibold text-red-700">Documento rechazado por:</p>
+                    <ol class="list-decimal pl-5 text-gray-700 text-sm mt-1 space-y-1">
+                      <li>Certificado de existencia superior a 30 días.</li>
+                      <li>Certificado de existencia incorrecto. El representante legal del Certificado de existencia no coincide con el representante legal de quien hizo el registro.</li>
+                    </ol>
+                  </div>
+                </div>
+              </template>
+            </g-attach-file>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-medium mb-2 text-gray-700">Sin link de descarga (comportamiento normal)</h4>
+            <g-attach-file 
+              v-model="files"
+              title="Documento adicional"
+              info-text="Adjunta cualquier documento relevante."
+              :accept-ext-names="['.pdf', '.doc', '.docx']"
+              max-size="10MB"
+              @update:model-value="handleUpdate"
+            />
+          </div>
         </div>
       </g-config-provider>
     `

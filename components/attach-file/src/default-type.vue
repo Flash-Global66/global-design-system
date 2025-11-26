@@ -21,6 +21,15 @@
           <p v-if="showInfoText" :class="ns.e('info-text')">
             {{ infoText }}
           </p>
+          <a
+            v-if="downloadUrl && downloadLinkText"
+            :href="downloadUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            :class="ns.e('download-link')"
+          >
+            {{ downloadLinkText }}
+          </a>
         </div>
         <g-icon-button
           :icon="buttonIcon"
@@ -93,6 +102,10 @@
           </div>
         </div>
       </div>
+      
+      <div v-if="$slots['extra-content']" :class="ns.e('extra-content')">
+        <slot name="extra-content" />
+      </div>
     </div>
     
     <!-- Errores de validación -->
@@ -124,6 +137,8 @@ const props = withDefaults(defineProps<DefaultTypeProps>(), {
   errors: () => [],
   fileErrors: () => ({}),
   fileProgress: () => ({}),
+  downloadUrl: "",
+  downloadLinkText: "",
 });
 
 const emit = defineEmits([
