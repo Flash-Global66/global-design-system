@@ -351,6 +351,24 @@ const rules = {
         defaultValue: { summary: "''" },
       },
     },
+    downloadUrl: {
+      description: "URL del archivo para descargar. Se muestra como un link debajo del texto informativo. Solo visible en tipo 'default' cuando se proporciona junto con downloadLinkText.",
+      control: "text",
+      table: {
+        category: "Interfaz",
+        type: { summary: "string" },
+        defaultValue: { summary: "''" },
+      },
+    },
+    downloadLinkText: {
+      description: "Texto del enlace de descarga. Requerido junto con downloadUrl para mostrar el link. Solo visible en tipo 'default'.",
+      control: "text",
+      table: {
+        category: "Interfaz",
+        type: { summary: "string" },
+        defaultValue: { summary: "''" },
+      },
+    },
 
     validateEvent: {
       description: "Activa la validación del formulario cuando se modifican los archivos.",
@@ -428,6 +446,14 @@ const rules = {
         type: { summary: "(files: File[]) => void" },
       },
     },
+
+    "extra-content": {
+      description: "Slot para agregar contenido adicional debajo de la lista de archivos. Útil para mostrar mensajes de error personalizados, información adicional o validaciones externas. Solo disponible en tipo 'default'.",
+      table: {
+        category: "Slots",
+        type: { summary: "Slot" },
+      },
+    },
   },
   args: {
     type: "default",
@@ -447,6 +473,8 @@ const rules = {
     uploadText: "un archivo o arrástralo aquí",
     restrictionText: "",
     infoText: "",
+    downloadUrl: "",
+    downloadLinkText: "",
     validateEvent: true,
     inputId: undefined,
   },
