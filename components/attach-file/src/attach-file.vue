@@ -25,7 +25,7 @@
       @download="emit('download')"
       @file-input-change="onFileInputChange"
     >
-      <template #extra-content>
+      <template v-if="$slots['extra-content']" #extra-content>
         <slot name="extra-content" />
       </template>
     </default-type>
