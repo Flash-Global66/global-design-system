@@ -27,6 +27,7 @@
             target="_blank"
             rel="noopener noreferrer"
             :class="ns.e('download-link')"
+            :aria-label="`${downloadLinkText} (opens in new tab)`"
           >
             {{ downloadLinkText }}
           </a>
