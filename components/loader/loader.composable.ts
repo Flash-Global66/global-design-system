@@ -14,7 +14,7 @@ interface SetLoaderMessageParams {
 }
 
 const useLoader = () => {
-  const { showGLoader, setLoaderMessage, isLoading } = inject(
+  const { showGLoader, setMessage, isLoading } = inject(
     LoaderProvider,
     initialValues
   );
@@ -26,25 +26,25 @@ const useLoader = () => {
     }
   };
 
-  const enhancedSetLoaderMessage = (
+  const setLoaderMessage = (
     config: string | SetLoaderMessageParams
   ) => {
     stopInterval();
 
     if (typeof config === "string") {
-      setLoaderMessage(config);
+      setMessage(config);
       return;
     }
 
     const { messages, duration = 5, shuffle = false } = config;
 
     if (!messages || messages.length === 0) {
-      setLoaderMessage("");
+      setMessage("");
       return;
     }
 
     let currentIndex = 0;
-    setLoaderMessage(messages[currentIndex]);
+    setMessage(messages[currentIndex]);
 
     if (messages.length > 1) {
       intervalId.value = window.setInterval(() => {
@@ -52,12 +52,12 @@ const useLoader = () => {
           let nextIndex;
           do {
             nextIndex = Math.floor(Math.random() * messages.length);
-          } while (nextIndex === currentIndex  && messages.length > 1);
+          } while (nextIndex === currentIndex && messages.length > 1);
           currentIndex = nextIndex;
         } else {
           currentIndex = (currentIndex + 1) % messages.length;
         }
-        setLoaderMessage(messages[currentIndex]);
+        setMessage(messages[currentIndex]);
       }, duration * 1000);
     }
   };
@@ -74,7 +74,7 @@ const useLoader = () => {
 
   return {
     showGLoader,
-    setLoaderMessage: enhancedSetLoaderMessage,
+    setLoaderMessage,
     isLoading,
     showLoader,
     loaderMessage,
