@@ -1,9 +1,10 @@
-import { inject, watch } from "vue";
+import { inject, onUnmounted, ref, Ref, watch } from "vue";
 import {
   initialValues,
   LoaderProvider,
   showLoader,
   loaderMessage,
+  intervalId,
 } from "./loader.provider";
 
 interface SetLoaderMessageParams {
@@ -17,12 +18,11 @@ const useLoader = () => {
     LoaderProvider,
     initialValues
   );
-  let intervalId: number | undefined;
 
   const stopInterval = () => {
-    if (intervalId) {
-      window.clearInterval(intervalId);
-      intervalId = undefined;
+    if (intervalId.value) {
+      window.clearInterval(intervalId.value);
+      intervalId.value = undefined;
     }
   };
 
@@ -47,12 +47,12 @@ const useLoader = () => {
     setLoaderMessage(messages[currentIndex]);
 
     if (messages.length > 1) {
-      intervalId = window.setInterval(() => {
+      intervalId.value = window.setInterval(() => {
         if (shuffle) {
           let nextIndex;
           do {
             nextIndex = Math.floor(Math.random() * messages.length);
-          } while (nextIndex === currentIndex);
+          } while (nextIndex === currentIndex  && messages.length > 1);
           currentIndex = nextIndex;
         } else {
           currentIndex = (currentIndex + 1) % messages.length;
@@ -66,6 +66,10 @@ const useLoader = () => {
     if (!isVisible) {
       stopInterval();
     }
+  });
+
+  onUnmounted(() => {
+    stopInterval();
   });
 
   return {
