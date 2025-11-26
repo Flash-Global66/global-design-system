@@ -3,6 +3,7 @@ import { ref, reactive } from "vue";
 import { action } from '@storybook/addon-actions';
 
 import { GAttachFile } from "@flash-global66/g-attach-file/index.ts";
+import type { ValidationError } from "@flash-global66/g-attach-file/index.ts";
 import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 import { GForm, GFormItem } from "@flash-global66/g-form/index.ts";
 import { GButton } from "@flash-global66/g-button/index.ts";
@@ -542,7 +543,7 @@ const files = ref<File[]>([])
         action('update:model-value')(selectedFiles);
       };
 
-      const handleValidationError = (errors: Array<{type: string, file?: File, data?: any}>) => {
+      const handleValidationError = (errors: ValidationError[]) => {
         action('validation-error')(errors);
       };
 
@@ -867,11 +868,11 @@ Validaciones automáticas con manejo de mensajes de error.
         uploading.value = false
       }
       
-      function handleValidationError(errors: Array<{type: string, file?: File, data?: any}>) {
+      function handleValidationError(errors: ValidationError[]) {
         let generalMsg = ''
         let maxFilesError = ''
         
-        errors.forEach((error: {type: string, file?: File, data?: any}) => {
+        errors.forEach((error) => {
           if (!error) return;
           if (error.type === 'file-size-exceeded') {
             const sizeMB = Math.round((error.file?.size || 0) / (1024 * 1024) * 100) / 100
@@ -1318,7 +1319,7 @@ const handleSubmit = async () => {
         validationErrors.value = [];
       }
 
-      const handleValidationError = (errors: Array<{type: string, file?: File, data?: any}>) => {
+      const handleValidationError = (errors: ValidationError[]) => {
         action('validation-error')(errors);
         
         const messages = errors.map(error => {
