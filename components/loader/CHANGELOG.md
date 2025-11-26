@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-loader@0.1.0...@flash-global66/g-loader@0.2.0) (2025-11-26)
+
+
+### Features
+
+* **loader:** add multiple messages iterations and shuffle option ([#155](https://github.com/Flash-Global66/global-design-system/issues/155)) ([d3428cc](https://github.com/Flash-Global66/global-design-system/commit/d3428ccfa6f7ebe2430c548c6888881ac886667d))
+
+
+
+
+
 # [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-loader@0.0.7...@flash-global66/g-loader@0.1.0) (2025-11-20)
 
 
