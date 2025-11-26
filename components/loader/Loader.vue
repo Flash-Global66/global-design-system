@@ -6,7 +6,7 @@
     >
       <div class="flex flex-col items-center justify-center">
         <img src="./assets/img/preloader.gif" class="h-20" />
-        <p v-if="message" class="mt-md text-inverse-txt text-4 font-medium max-w-96 mx-auto text-center">
+        <p v-if="message" class="mt-md text-inverse-txt text-4 font-medium max-w-96 mx-auto text-center drop-shadow-lg">
           {{ message }}
         </p>
       </div>
