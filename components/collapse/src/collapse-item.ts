@@ -62,6 +62,13 @@ export const collapseItemProps = buildProps({
   headerOnly: {
     type: Boolean,
     default: false,
+  },
+  /**
+   * @description if true, hides the expand/collapse icon
+   */
+  hideExpandIcon: {
+    type: Boolean,
+    default: false,
   }
 } as const)
 export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>

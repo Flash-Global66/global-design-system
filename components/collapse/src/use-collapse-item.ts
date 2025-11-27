@@ -20,7 +20,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
 
   const iconsLeft = computed(() => {
     return [
-      ...(props.expandIconPosition === 'left'
+      ...(props.expandIconPosition === 'left' && !props.hideExpandIcon
         ? [
             {
               icon: 'regular angle-right',
@@ -36,7 +36,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
 
   const iconsRight = computed(() => {
     return [
-      ...(props.expandIconPosition === 'right'
+      ...(props.expandIconPosition === 'right' && !props.hideExpandIcon
         ? [
             {
               icon: 'regular angle-right',
@@ -63,6 +63,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     disabled: props.disabled,
     headerOnly: props.headerOnly,
     expandIconPosition: props.expandIconPosition,
+    hideExpandIcon: props.hideExpandIcon,
     iconsLeft: iconsLeft.value,
     iconsRight: iconsRight.value,
     focusing: focusing.value
@@ -81,7 +82,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
   const handleHeaderClick = () => {
     if (props.disabled) return
     
-    if (props.headerOnly) {
+    if (props.headerOnly || props.hideExpandIcon) {
       collapse?.handleHeaderOnlyClick?.(unref(name))
     } else {
       collapse?.handleItemClick(unref(name))
@@ -92,7 +93,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
   }
 
   const handleEnterClick = () => {
-    if (props.headerOnly) {
+    if (props.headerOnly || props.hideExpandIcon) {
       collapse?.handleHeaderOnlyClick?.(unref(name))
     } else {
       collapse?.handleItemClick(unref(name))
