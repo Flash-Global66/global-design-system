@@ -1088,7 +1088,7 @@ export const headerOnlyExample: Story = {
               </g-collapse-item>
 
               <!-- Item con hideExpandIcon (sin icono, no se expande) -->
-              <g-collapse-item name="3" title="hideExpandIcon (sin icono)" hide-expand-icon />
+              <g-collapse-item name="4" title="hideExpandIcon (sin icono)" hide-expand-icon />
             </template>
           </g-collapse>
         </div>
