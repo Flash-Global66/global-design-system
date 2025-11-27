@@ -20,7 +20,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
 
   const iconsLeft = computed(() => {
     return [
-      ...(props.expandIconPosition === 'left'
+      ...(props.expandIconPosition === 'left' && !props.hideIcon
         ? [
             {
               icon: 'regular angle-right',
@@ -36,7 +36,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
 
   const iconsRight = computed(() => {
     return [
-      ...(props.expandIconPosition === 'right'
+      ...(props.expandIconPosition === 'right' && !props.hideIcon
         ? [
             {
               icon: 'regular angle-right',
@@ -63,6 +63,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     disabled: props.disabled,
     headerOnly: props.headerOnly,
     expandIconPosition: props.expandIconPosition,
+      hideIcon: props.hideIcon,
     iconsLeft: iconsLeft.value,
     iconsRight: iconsRight.value,
     focusing: focusing.value
