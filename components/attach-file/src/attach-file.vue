@@ -7,6 +7,8 @@
       :mode="props.mode"
       :title="props.title"
       :info-text="props.infoText"
+      :download-url="props.downloadUrl"
+      :download-link-text="props.downloadLinkText"
       :multiple="multiple"
       :accept-ext-names="props.acceptExtNames"
       :disabled="props.disabled"
@@ -22,7 +24,11 @@
       @on-retry="emit('onRetry')"
       @download="emit('download')"
       @file-input-change="onFileInputChange"
-    />
+    >
+      <template v-if="$slots['extra-content']" #extra-content>
+        <slot name="extra-content" />
+      </template>
+    </default-type>
 
     <drag-drop-type
       v-else-if="props.type === 'drag-drop'"

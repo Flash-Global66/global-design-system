@@ -65,6 +65,14 @@ export const attachFileProps = buildProps({
     type: String as PropType<string>,
     default: "",
   },
+  downloadUrl: {
+    type: String as PropType<string>,
+    default: "",
+  },
+  downloadLinkText: {
+    type: String as PropType<string>,
+    default: "",
+  },
   uploading: {
     type: Boolean as PropType<boolean>,
     default: false,

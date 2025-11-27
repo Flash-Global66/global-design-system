@@ -97,6 +97,8 @@ export interface DefaultTypeProps extends BaseTypeProps {
   title: string;
   infoText: string;
   uploadError?: boolean;
+  downloadUrl?: string;
+  downloadLinkText?: string;
 }
 
 export interface DefaultTypeEmits {
