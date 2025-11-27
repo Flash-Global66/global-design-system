@@ -386,7 +386,7 @@ Props disponibles:
     hideExpandIcon: {
       name: "hide-expand-icon",
       description:
-        "Si es true, oculta el icono de expansión/colapso y el item no se expandirá. A diferencia de 'headerOnly' (que mantiene el icono visible pero deshabilita la expansión), 'hideExpandIcon' oculta el icono y también deshabilita la expansión. Útil para items que solo ejecutan una acción sin mostrar contenido.",
+        "Si es true, oculta el icono de expansión/colapso. A diferencia de 'headerOnly' (que mantiene el icono visible), 'hideExpandIcon' oculta completamente el icono. Ambas props ejecutan solo un evento sin expandir el item.",
       control: "boolean",
       table: {
         category: "Props (Hijo)",
