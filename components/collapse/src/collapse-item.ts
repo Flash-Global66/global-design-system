@@ -66,7 +66,7 @@ export const collapseItemProps = buildProps({
   /**
    * @description if true, hides the expand/collapse icon
    */
-  hideExpandIcon: {
+  hideIcon: {
     type: Boolean,
     default: false,
   }

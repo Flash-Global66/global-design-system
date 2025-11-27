@@ -383,10 +383,10 @@ Props disponibles:
         defaultValue: { summary: "false" },
       },
     },
-    hideExpandIcon: {
-      name: "hide-expand-icon",
+    hideIcon: {
+      name: "hide-icon",
       description:
-        "Si es true, oculta el icono de expansión/colapso. A diferencia de 'headerOnly' (que mantiene el icono visible), 'hideExpandIcon' oculta completamente el icono. Ambas props ejecutan solo un evento sin expandir el item.",
+        "Si es true, oculta el icono de expansión/colapso (flecha). El collapse sigue funcionando normalmente, solo se oculta el indicador visual.",
       control: "boolean",
       table: {
         category: "Props (Hijo)",
@@ -415,7 +415,7 @@ Props disponibles:
   disabled: boolean;
   headerOnly: boolean;
   expandIconPosition: 'left' | 'right';
-  hideExpandIcon: boolean;
+  hideIcon: boolean;
   iconsLeft: IconsType[];
   iconsRight: IconsType[];
   focusing: boolean;
@@ -443,7 +443,7 @@ Props disponibles:
   disabled: boolean;
   headerOnly: boolean;
   expandIconPosition: 'left' | 'right';
-  hideExpandIcon: boolean;
+  hideIcon: boolean;
   iconsLeft: IconsType[];
   iconsRight: IconsType[];
   focusing: boolean;
@@ -1033,10 +1033,10 @@ export const headerOnlyExample: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Ejemplo de uso de las props \`headerOnly\` y \`hideExpandIcon\` en GCollapseItem. 
+        story: `Ejemplo de uso de las props \`headerOnly\` y \`hideIcon\` en GCollapseItem. 
         
 - **headerOnly**: El item solo ejecuta un evento sin expandirse, pero mantiene el icono de flecha.
-- **hideExpandIcon**: Oculta el icono de flecha y el item no se expande (se comporta como headerOnly).`,
+- **hideIcon**: Solo oculta el icono de flecha, el collapse sigue funcionando normalmente.`,
       },
     },
   },
@@ -1087,8 +1087,14 @@ export const headerOnlyExample: Story = {
                 </template>
               </g-collapse-item>
 
-              <!-- Item con hideExpandIcon (sin icono, no se expande) -->
-              <g-collapse-item name="4" title="hideExpandIcon (sin icono)" hide-expand-icon />
+              <!-- Item con hideIcon (sin icono, se expande normalmente) -->
+              <g-collapse-item name="4" title="hideIcon (sin icono)" hide-icon>
+                <template #default>
+                  <div class="p-4 bg-yellow-50 rounded-lg">
+                    <p>Este item no muestra el icono pero se expande normalmente.</p>
+                  </div>
+                </template>
+              </g-collapse-item>
             </template>
           </g-collapse>
         </div>
@@ -1102,7 +1108,7 @@ export const slotDefaultWithProps: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Ejemplo que demuestra las props disponibles en el slot default de GCollapseItem: isActive, name, title, description, disabled, headerOnly, expandIconPosition, hideExpandIcon, iconsLeft, iconsRight, focusing.`,
+        story: `Ejemplo que demuestra las props disponibles en el slot default de GCollapseItem: isActive, name, title, description, disabled, headerOnly, expandIconPosition, hideIcon, iconsLeft, iconsRight, focusing.`,
       },
     },
   },

@@ -30,7 +30,7 @@ export type CollapseItemType = {
   iconsLeft?: IconsType[]
   description?: string
   content?: string | (() => string)
-  hideExpandIcon?: boolean
+  hideIcon?: boolean
 }
 
 export const emitChangeFn = (value: CollapseModelValue) =>
