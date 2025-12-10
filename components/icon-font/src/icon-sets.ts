@@ -100,6 +100,8 @@ export const ICON_SETS = {
     "timer",
     "gift",
     "book",
+    "chart-mixed-up-circle-dollar",
+    "calendar"
   ] as const,
 
   regular: [

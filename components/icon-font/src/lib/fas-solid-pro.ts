@@ -100,4 +100,6 @@ export {
   faTimer,
   faGift,
   faBook,
+  faChartMixedUpCircleDollar,
+  faCalendar,
 } from "@fortawesome/pro-solid-svg-icons";
