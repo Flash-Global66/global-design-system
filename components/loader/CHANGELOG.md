@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-loader@0.2.1...@flash-global66/g-loader@0.2.2) (2025-12-12)
+
+
+### Bug Fixes
+
+* **loader:** clean message on hide and unmount ([d87470c](https://github.com/Flash-Global66/global-design-system/commit/d87470c297b4ecc470cc9960b76c9a55878b7e44))
+
+
+
+
+
 ## [0.2.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-loader@0.2.0...@flash-global66/g-loader@0.2.1) (2025-11-26)
 
 **Note:** Version bump only for package @flash-global66/g-loader
