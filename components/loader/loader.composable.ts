@@ -23,6 +23,7 @@ const useLoader = () => {
     if (intervalId.value) {
       window.clearInterval(intervalId.value);
       intervalId.value = undefined;
+      setMessage('')
     }
   };
 
