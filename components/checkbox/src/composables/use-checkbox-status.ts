@@ -54,7 +54,8 @@ export const useCheckboxStatus = (
       setTimeout(() => {
         currentRipple.value = ''
       }, 500)
-    }
+    },
+    { immediate: true }
   )
 
   return {
