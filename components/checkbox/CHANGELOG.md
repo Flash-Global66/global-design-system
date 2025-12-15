@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.3.0...@flash-global66/g-checkbox@0.3.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* **checkbox:** add dynamic height to checkbox ([ce62e7d](https://github.com/Flash-Global66/global-design-system/commit/ce62e7d5b5645084881122597277564b0e4696ae))
+
+
+
+
+
 # [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.2.1...@flash-global66/g-checkbox@0.3.0) (2025-06-03)
 
 
