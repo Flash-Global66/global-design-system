@@ -1,4 +1,4 @@
-import { computed, isRef, ref, toRaw, watch } from 'vue'
+import { computed, isRef, ref, toRaw, watch, onBeforeUnmount } from 'vue'
 import { isEqual } from 'lodash-unified'
 import { isArray, isBoolean, isObject, isPropAbsent } from 'element-plus/es/utils/index.mjs'
 
@@ -13,6 +13,8 @@ export const useCheckboxStatus = (
 ) => {
   const isFocused = ref(false)
   const currentRipple = ref('')
+  let rippleTimeoutId: number | null = null
+
   const actualValue = computed(() => {
     // In version 2.x, if there's no props.value, props.label will act as props.value
     // In version 3.x, remove this computed value, use props.value instead.
@@ -47,11 +49,23 @@ export const useCheckboxStatus = (
   })
 
   watch(isChecked, (newValue) => {
+    if (rippleTimeoutId !== null) {
+      clearTimeout(rippleTimeoutId)
+    }
+
     currentRipple.value = newValue ? 'expand' : 'contract'
 
-    setTimeout(() => {
+    rippleTimeoutId = setTimeout(() => {
       currentRipple.value = ''
+      rippleTimeoutId = null
     }, 500)
+  })
+
+  onBeforeUnmount(() => {
+    if (rippleTimeoutId !== null) {
+      clearTimeout(rippleTimeoutId)
+      rippleTimeoutId = null
+    }
   })
 
   return {
