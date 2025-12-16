@@ -39,7 +39,7 @@
     "@vueuse/core": "13.0.0",
     "async-validator": "4.2.5",
     "autoprefixer": "10.4.21",
-    "element-plus": "2.10.7",
+    "element-plus": "2.9.7",
     "lodash-unified": "1.0.3",
     "vue-router": "4.5.1"
   },

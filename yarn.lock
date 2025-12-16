@@ -1173,7 +1173,7 @@ __metadata:
     async-validator: "npm:4.2.5"
     autoprefixer: "npm:10.4.21"
     babel-loader: "npm:8.4.1"
-    element-plus: "npm:2.10.7"
+    element-plus: "npm:2.9.7"
     jest-mock: "npm:28.1.3"
     lerna: "npm:8.2.4"
     lodash-unified: "npm:1.0.3"
@@ -4968,9 +4968,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"element-plus@npm:2.10.7":
-  version: 2.10.7
-  resolution: "element-plus@npm:2.10.7"
+"element-plus@npm:2.9.7":
+  version: 2.9.7
+  resolution: "element-plus@npm:2.9.7"
   dependencies:
     "@ctrl/tinycolor": "npm:^3.4.1"
     "@element-plus/icons-vue": "npm:^2.3.1"
@@ -4989,7 +4989,7 @@ __metadata:
     normalize-wheel-es: "npm:^1.2.0"
   peerDependencies:
     vue: ^3.2.0
-  checksum: 10c0/692d4f9a468f10920ec1e51ae005b4f8ba146e0ca9d6bb718f0c5360425efa429719c40bbfc521c72e3f6301f8e60cf4be5d37a0b2785e30b36b71f5f08972f1
+  checksum: 10c0/bad868b54ab80bad3c63abf5001f40e334d18efcc7cec2265c31a08fe9ad06b4f33858aa710af9dc2e3a513083e21ce60da4db3c1cfc6806359bf5e3ec3987ff
   languageName: node
   linkType: hard
 
