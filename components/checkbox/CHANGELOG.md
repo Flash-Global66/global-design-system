@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.3.1...@flash-global66/g-checkbox@0.3.2) (2025-12-16)
+
+
+### Bug Fixes
+
+* **checkbox:** ensure immediate execution of watch for checkbox state ([#163](https://github.com/Flash-Global66/global-design-system/issues/163)) ([f771d5b](https://github.com/Flash-Global66/global-design-system/commit/f771d5b2ef181d94365df4fe730ffe5e8b9e2fd1))
+
+
+
+
+
 ## [0.3.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.3.0...@flash-global66/g-checkbox@0.3.1) (2025-12-15)
 
 
