@@ -12,7 +12,6 @@ export const useCheckboxStatus = (
   { model }: Pick<CheckboxModel, 'model'>
 ) => {
   const isFocused = ref(false)
-  const isChecked = ref<boolean>(false)
   const currentRipple = ref('')
   const actualValue = computed(() => {
     // In version 2.x, if there's no props.value, props.label will act as props.value
@@ -37,26 +36,23 @@ export const useCheckboxStatus = (
     return !!slots.default || !isPropAbsent(actualValue.value)
   })
 
-  watch(
-    () => {
-      const value = model.value
+  const isChecked = computed<boolean>(() => {
+    const value = model.value
 
-      if (isBoolean(value)) return value
-      if (isArray(value)) return checkArrayContainsValue(value, actualValue.value)
-      if (value != null) return value === props.trueValue
+    if (isBoolean(value)) return value
+    if (isArray(value)) return checkArrayContainsValue(value, actualValue.value)
+    if (value != null) return value === props.trueValue
 
-      return Boolean(value)
-    },
-    (newValue) => {
-      isChecked.value = newValue
-      currentRipple.value = newValue ? 'expand' : 'contract'
+    return Boolean(value)
+  })
 
-      setTimeout(() => {
-        currentRipple.value = ''
-      }, 500)
-    },
-    { immediate: true }
-  )
+  watch(isChecked, (newValue) => {
+    currentRipple.value = newValue ? 'expand' : 'contract'
+
+    setTimeout(() => {
+      currentRipple.value = ''
+    }, 500)
+  })
 
   return {
     actualValue,
