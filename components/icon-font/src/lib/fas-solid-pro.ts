@@ -102,4 +102,7 @@ export {
   faBook,
   faChartMixedUpCircleDollar,
   faCalendar,
+  faEye,
+  faGear,
+  faUnlock
 } from "@fortawesome/pro-solid-svg-icons";
