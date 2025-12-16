@@ -1,4 +1,4 @@
-import { computed, isRef, ref, toRaw, watch } from 'vue'
+import { computed, isRef, ref, toRaw, watch, onBeforeUnmount } from 'vue'
 import { isEqual } from 'lodash-unified'
 import { isArray, isBoolean, isObject, isPropAbsent } from 'element-plus/es/utils/index.mjs'
 
@@ -12,8 +12,9 @@ export const useCheckboxStatus = (
   { model }: Pick<CheckboxModel, 'model'>
 ) => {
   const isFocused = ref(false)
-  const isChecked = ref<boolean>(false)
   const currentRipple = ref('')
+  let rippleTimeoutId: number | null = null
+
   const actualValue = computed(() => {
     // In version 2.x, if there's no props.value, props.label will act as props.value
     // In version 3.x, remove this computed value, use props.value instead.
@@ -37,25 +38,35 @@ export const useCheckboxStatus = (
     return !!slots.default || !isPropAbsent(actualValue.value)
   })
 
-  watch(
-    () => {
-      const value = model.value
+  const isChecked = computed<boolean>(() => {
+    const value = model.value
 
-      if (isBoolean(value)) return value
-      if (isArray(value)) return checkArrayContainsValue(value, actualValue.value)
-      if (value != null) return value === props.trueValue
+    if (isBoolean(value)) return value
+    if (isArray(value)) return checkArrayContainsValue(value, actualValue.value)
+    if (value != null) return value === props.trueValue
 
-      return Boolean(value)
-    },
-    (newValue) => {
-      isChecked.value = newValue
-      currentRipple.value = newValue ? 'expand' : 'contract'
+    return Boolean(value)
+  })
 
-      setTimeout(() => {
-        currentRipple.value = ''
-      }, 500)
+  watch(isChecked, (newValue) => {
+    if (rippleTimeoutId !== null) {
+      clearTimeout(rippleTimeoutId)
     }
-  )
+
+    currentRipple.value = newValue ? 'expand' : 'contract'
+
+    rippleTimeoutId = setTimeout(() => {
+      currentRipple.value = ''
+      rippleTimeoutId = null
+    }, 500)
+  })
+
+  onBeforeUnmount(() => {
+    if (rippleTimeoutId !== null) {
+      clearTimeout(rippleTimeoutId)
+      rippleTimeoutId = null
+    }
+  })
 
   return {
     actualValue,
