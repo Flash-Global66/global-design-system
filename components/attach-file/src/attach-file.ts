@@ -93,6 +93,14 @@ export const attachFileProps = buildProps({
     type: Array as PropType<string[]>,
     default: () => [],
   },
+  showFileSize: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  showRemoveButton: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
 } as const);
 
 export const attachFileEmits = {

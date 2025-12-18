@@ -92,8 +92,9 @@
             </span>
           </div>
           <div :class="ns.e('item-actions')">
-            <span :class="ns.e('file-size')">{{ formatFileSize(file.size) }}</span>
+            <span v-if="props.showFileSize" :class="ns.e('file-size')">{{ formatFileSize(file.size) }}</span>
             <g-icon-button
+              v-if="props.showRemoveButton"
               icon="solid trash-alt"
               variant="grey"
               size="small"

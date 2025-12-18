@@ -43,6 +43,8 @@ export interface AttachFileProps {
   fileErrors: Record<number, string>;
   fileProgress: Record<number, number>;
   errors: string[];
+  showFileSize: boolean;
+  showRemoveButton: boolean;
 }
 
 export interface AttachFileEmits {
@@ -89,6 +91,8 @@ export interface BaseTypeProps {
   fileProgress: Record<number, number>;
   fileStatuses?: Record<number, FileStatus>;
   uploading?: boolean;
+  showFileSize: boolean;
+  showRemoveButton: boolean;
 }
 
 export interface DefaultTypeProps extends BaseTypeProps {
