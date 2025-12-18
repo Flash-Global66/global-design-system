@@ -369,6 +369,24 @@ const rules = {
         defaultValue: { summary: "''" },
       },
     },
+    showFileSize: {
+      description: "Controla la visibilidad del tamaño del archivo en la lista de archivos cargados.",
+      control: "boolean",
+      table: {
+        category: "Interfaz",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+      },
+    },
+    showRemoveButton: {
+      description: "Controla la visibilidad del botón de eliminar en la lista de archivos cargados.",
+      control: "boolean",
+      table: {
+        category: "Interfaz",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+      },
+    },
 
     validateEvent: {
       description: "Activa la validación del formulario cuando se modifican los archivos.",
@@ -475,6 +493,8 @@ const rules = {
     infoText: "",
     downloadUrl: "",
     downloadLinkText: "",
+    showFileSize: true,
+    showRemoveButton: true,
     validateEvent: true,
     inputId: undefined,
   },
@@ -1562,6 +1582,189 @@ const addMockFiles = () => {
             </ul>
           </div>
         </div>
+      </g-config-provider>
+    `
+  })
+};
+
+export const ReadOnlySingle: Story = {
+  name: "Estado Solo Lectura (Un Archivo)",
+  args: {
+    title: "Documento Aprobado",
+    infoText: "Este documento ya ha sido validado y no puede ser modificado.",
+    showFileSize: false,
+    showRemoveButton: false,
+    disabled: true,
+    downloadUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    downloadLinkText: "Ver documento",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo de configuración para mostrar un único archivo en estado de solo lectura o aprobado, con enlace para visualizar el documento."
+      },
+      source: {
+        code: `<script setup lang="ts">
+import { ref } from 'vue'
+import { GAttachFile } from '@flash-global66/g-attach-file'
+
+// Simulamos un archivo ya cargado
+const files = ref<File[]>([
+  new File([''], 'documento_validado.pdf', { type: 'application/pdf' })
+])
+</script>
+
+<template>
+  <g-attach-file 
+    v-model="files"
+    title="Documento Aprobado"
+    info-text="Este documento ya ha sido validado y no puede ser modificado."
+    download-url="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    download-link-text="Ver documento"
+    :show-file-size="false"
+    :show-remove-button="false"
+    :disabled="true"
+  />
+</template>`
+      }
+    }
+  },
+  render: (args) => ({
+    components: { GAttachFile, GConfigProvider },
+    setup() {
+      const files = ref<File[]>([
+        new File(['dummy content'], 'documento_validado.pdf', { type: 'application/pdf' })
+      ]);
+      
+      return { args, files };
+    },
+    template: `
+      <g-config-provider>
+        <g-attach-file 
+          v-bind="args" 
+          v-model="files"
+        />
+      </g-config-provider>
+    `
+  })
+};
+
+export const ReadOnlyMultiple: Story = {
+  name: "Estado Solo Lectura (Múltiples Archivos)",
+  args: {
+    title: "Documentos Aprobados",
+    infoText: "Estos documentos ya han sido validados y no pueden ser modificados.",
+    showFileSize: false,
+    showRemoveButton: false,
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo de configuración para mostrar múltiples archivos en estado de solo lectura o aprobados."
+      },
+      source: {
+        code: `<script setup lang="ts">
+import { ref } from 'vue'
+import { GAttachFile } from '@flash-global66/g-attach-file'
+
+// Simulamos archivos ya cargados
+const files = ref<File[]>([
+  new File([''], 'documento_validado.pdf', { type: 'application/pdf' }),
+  new File([''], 'comprobante_pago.jpg', { type: 'image/jpeg' }),
+  new File([''], 'identificacion_frontal.png', { type: 'image/png' })
+])
+</script>
+
+<template>
+  <g-attach-file 
+    v-model="files"
+    title="Documentos Aprobados"
+    info-text="Estos documentos ya han sido validados y no pueden ser modificados."
+    :show-file-size="false"
+    :show-remove-button="false"
+    :disabled="true"
+  />
+</template>`
+      }
+    }
+  },
+  render: (args) => ({
+    components: { GAttachFile, GConfigProvider },
+    setup() {
+      const files = ref<File[]>([
+        new File(['dummy content'], 'documento_validado.pdf', { type: 'application/pdf' }),
+        new File(['dummy content'], 'comprobante_pago.jpg', { type: 'image/jpeg' }),
+        new File(['dummy content'], 'identificacion_frontal.png', { type: 'image/png' })
+      ]);
+      
+      return { args, files };
+    },
+    template: `
+      <g-config-provider>
+        <g-attach-file 
+          v-bind="args" 
+          v-model="files"
+        />
+      </g-config-provider>
+    `
+  })
+};
+
+export const ReadOnlyDragDrop: Story = {
+  name: "Estado Solo Lectura (Drag & Drop)",
+  args: {
+    type: "drag-drop",
+    uploadButtonText: "Cargar archivos",
+    uploadText: "o arrastra aquí",
+    showFileSize: false,
+    showRemoveButton: false,
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo de configuración para el modo Drag & Drop en estado de solo lectura. Muestra la lista de archivos sin opciones de eliminación ni tamaño."
+      },
+      source: {
+        code: `<script setup lang="ts">
+import { ref } from 'vue'
+import { GAttachFile } from '@flash-global66/g-attach-file'
+
+const files = ref<File[]>([
+  new File([''], 'contrato_firmado.pdf', { type: 'application/pdf' }),
+  new File([''], 'anexo_1.docx', { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' })
+])
+</script>
+
+<template>
+  <g-attach-file 
+    v-model="files"
+    type="drag-drop"
+    :show-file-size="false"
+    :show-remove-button="false"
+    :disabled="true"
+  />
+</template>`
+      }
+    }
+  },
+  render: (args) => ({
+    components: { GAttachFile, GConfigProvider },
+    setup() {
+      const files = ref<File[]>([
+        new File(['dummy content'], 'contrato_firmado.pdf', { type: 'application/pdf' }),
+        new File(['dummy content'], 'anexo_1.docx', { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' })
+      ]);
+      
+      return { args, files };
+    },
+    template: `
+      <g-config-provider>
+        <g-attach-file 
+          v-bind="args" 
+          v-model="files"
+        />
       </g-config-provider>
     `
   })

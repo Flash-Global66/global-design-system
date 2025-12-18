@@ -89,7 +89,7 @@
               />
               <div :class="ns.e('file-item-info')">
                 <span :class="ns.e('file-item-name')">{{ file.name }}</span>
-                <span :class="ns.e('file-item-size')">{{ formatFileSize(file.size) }}</span>
+                <span v-if="props.showFileSize" :class="ns.e('file-item-size')">{{ formatFileSize(file.size) }}</span>
               </div>
             </div>
           </template>
@@ -125,8 +125,9 @@
         <div :class="ns.e('item-actions')">
           <!-- Normal state: show file size and delete button -->
           <template v-if="!isLoading">
-            <span :class="ns.e('file-size')">{{ formatFileSize(file.size) }}</span>
+            <span v-if="props.showFileSize" :class="ns.e('file-size')">{{ formatFileSize(file.size) }}</span>
             <g-icon-button
+              v-if="props.showRemoveButton"
               icon="solid trash-alt"
               variant="grey"
               size="small"

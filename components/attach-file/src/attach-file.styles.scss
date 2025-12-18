@@ -50,7 +50,7 @@
     }
 
     @include e('item-content') {
-      @apply flex items-center flex-1 gap-xs;
+      @apply flex items-center flex-1 gap-xs min-w-0;
     }
 
     @include e('file-status-icon') {
