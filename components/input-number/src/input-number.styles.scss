@@ -1,0 +1,349 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+@use "../../config-provider/config.styles.scss" as *;
+
+@include b("input-number") {
+  @apply inline-flex relative w-fit border border-grey-100 rounded-md h-10;
+  overflow: hidden;
+  background: white;
+  min-width: 120px;
+
+  @media (max-width: 640px) {
+    @apply w-full min-w-10;
+  }
+
+  .#{$namespace}-input {
+    @apply w-full flex-1;
+
+    &__wrapper {
+      @apply relative h-10 flex items-center py-0;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+
+      @media (max-width: 640px) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    &__inner {
+      @apply text-center text-terciary-txt text-4 font-medium p-2 outline-none my-auto;
+      border: none;
+      background: transparent;
+      -moz-appearance: textfield;
+      width: 100%;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      @media (max-width: 640px) {
+        @apply text-3 px-1 min-w-10;
+      }
+    }
+
+    &.is-disabled {
+      @apply text-disabled-txt opacity-50;
+    }
+
+    &__prefix {
+      @apply pl-2;
+
+      @media (max-width: 640px) {
+        @apply pl-1;
+      }
+    }
+
+    &__suffix {
+      @apply pr-2;
+
+      @media (max-width: 640px) {
+        @apply pr-1;
+      }
+    }
+  }
+
+  @include e("decrease") {
+    @apply absolute z-10 cursor-pointer flex items-center justify-center h-full;
+    @apply bg-grey-50 text-terciary-txt transition-colors duration-200 text-everBlue-900 text-2;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2.5rem;
+    min-width: 2rem;
+    border-right: 1px solid;
+    @apply border-grey-100;
+    border-radius: 0.375rem 0 0 0.375rem;
+
+    @media (max-width: 640px) {
+      width: 2rem;
+      min-width: 1.75rem;
+    }
+
+    @media (max-width: 480px) {
+      width: 1.75rem;
+      min-width: 1.5rem;
+    }
+
+    &:hover:not(.is-disabled) {
+      @apply bg-grey-200;
+    }
+
+    &.is-disabled {
+      @apply cursor-not-allowed text-disabled-txt opacity-50;
+    }
+  }
+
+  @include e("increase") {
+    @apply absolute z-10 cursor-pointer flex items-center justify-center h-full;
+    @apply bg-grey-50 text-terciary-txt transition-colors duration-200 text-everBlue-900 text-2;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 2.5rem;
+    min-width: 2rem;
+    border-left: 1px solid;
+    @apply border-grey-100;
+    border-radius: 0 0.375rem 0.375rem 0;
+
+    @media (max-width: 640px) {
+      width: 2rem;
+      min-width: 1.75rem;
+    }
+
+    @media (max-width: 480px) {
+      width: 1.75rem;
+      min-width: 1.5rem;
+    }
+
+    &:hover:not(.is-disabled) {
+      @apply bg-grey-200;
+    }
+
+    &.is-disabled {
+      @apply cursor-not-allowed text-disabled-txt opacity-50;
+    }
+  }
+
+  @include when("controls-right") {
+    .#{$namespace}-input__wrapper {
+      padding-left: 0.75rem;
+      padding-right: 5rem;
+
+      @media (max-width: 640px) {
+        padding-right: 4rem;
+      }
+
+      @media (max-width: 480px) {
+        padding-right: 3.5rem;
+      }
+    }
+
+    .#{$namespace}-input__inner {
+      padding-right: 0.75rem;
+
+      @media (max-width: 640px) {
+        padding-right: 0.5rem;
+      }
+    }
+
+    @include e("decrease") {
+      left: auto;
+      right: 2.5rem;
+      border-right: none;
+      border-left: 1px solid;
+      @apply border-grey-100;
+      border-radius: 0;
+
+      @media (max-width: 640px) {
+        right: 2rem;
+      }
+
+      @media (max-width: 480px) {
+        right: 1.75rem;
+      }
+    }
+
+    @include e("increase") {
+      right: 0;
+      border-left: 1px solid;
+      border-right: none;
+      @apply border-grey-100;
+      border-radius: 0 0.375rem 0.375rem 0;
+    }
+  }
+
+  @include when("without-controls") {
+    .#{$namespace}-input__wrapper {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+  }
+
+  @include when("left") {
+    .#{$namespace}-input__inner {
+      @apply text-left;
+    }
+  }
+
+  @include when("right") {
+    .#{$namespace}-input__inner {
+      @apply text-right;
+    }
+  }
+
+  @include when("center") {
+    .#{$namespace}-input__inner {
+      @apply text-center;
+    }
+  }
+
+  @include when("disabled") {
+    @include e("decrease" "increase") {
+      @apply cursor-not-allowed text-disabled-txt bg-grey-50;
+    }
+
+    .#{$namespace}-input__inner {
+      @apply text-disabled-txt;
+    }
+  }
+
+  @include m("small") {
+    @apply h-8;
+
+    @media (max-width: 640px) {
+      min-width: 100px;
+    }
+
+    .#{$namespace}-input__wrapper {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      @apply h-full;
+
+      @media (max-width: 640px) {
+        padding-left: 1.75rem;
+        padding-right: 1.75rem;
+      }
+    }
+
+    .#{$namespace}-input__inner {
+      @apply text-3 py-1;
+
+      @media (max-width: 640px) {
+        @apply px-1;
+      }
+    }
+
+    @include e("decrease" "increase") {
+      width: 2rem;
+      @apply h-full;
+
+      @media (max-width: 640px) {
+        width: 1.75rem;
+      }
+    }
+
+    &.is-controls-right {
+      .#{$namespace}-input__wrapper {
+        padding-left: 0.75rem;
+        padding-right: 4rem;
+
+        @media (max-width: 640px) {
+          padding-right: 3.5rem;
+        }
+      }
+
+      .#{$namespace}-input__inner {
+        padding-right: 0.5rem;
+
+        @media (max-width: 640px) {
+          padding-right: 0.25rem;
+        }
+      }
+
+      @include e("decrease") {
+        right: 2rem;
+
+        @media (max-width: 640px) {
+          right: 1.75rem;
+        }
+      }
+    }
+  }
+
+  @include m("large") {
+    @apply h-14;
+
+    @media (max-width: 640px) {
+      @apply h-12;
+    }
+
+    .#{$namespace}-input__wrapper {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      @apply h-full;
+
+      @media (max-width: 640px) {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+    }
+
+    .#{$namespace}-input__inner {
+      @apply text-5 py-3;
+
+      @media (max-width: 640px) {
+        @apply text-4 py-2;
+      }
+    }
+
+    @include e("decrease" "increase") {
+      @apply h-full text-2;
+      width: 3rem;
+
+      @media (max-width: 640px) {
+        width: 2.5rem;
+      }
+    }
+
+    &.is-controls-right {
+      .#{$namespace}-input__wrapper {
+        padding-left: 0.75rem;
+        padding-right: 6rem;
+
+        @media (max-width: 640px) {
+          padding-right: 5rem;
+        }
+      }
+
+      .#{$namespace}-input__inner {
+        padding-right: 0;
+      }
+
+      @include e("decrease") {
+        right: 3rem;
+        border-left: 1px solid;
+        border-right: none;
+        @apply border-grey-100;
+
+        @media (max-width: 640px) {
+          right: 2.5rem;
+        }
+      }
+
+      @include e("increase") {
+        border-left: 1px solid;
+        border-right: none;
+        @apply border-grey-100;
+      }
+    }
+  }
+}
