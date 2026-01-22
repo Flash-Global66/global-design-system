@@ -210,6 +210,7 @@ export const ICON_SETS = {
     'clock-rotate-left',
     'lightbulb',
     'receipt',
+    'money-bill-transfer'
   ] as const,
 
   light: [
