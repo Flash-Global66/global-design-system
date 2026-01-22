@@ -104,4 +104,5 @@ export {
   faClockRotateLeft,
   faLightbulb,
   faReceipt,
+  faMoneyBillTransfer
 } from '@fortawesome/pro-regular-svg-icons';
