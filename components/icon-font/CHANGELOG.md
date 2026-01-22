@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.15.2...@flash-global66/g-icon-font@0.16.0) (2026-01-22)
+
+
+### Features
+
+* **icon:** add money bill transfer icon to icon sets ([#167](https://github.com/Flash-Global66/global-design-system/issues/167)) ([de0a6be](https://github.com/Flash-Global66/global-design-system/commit/de0a6be43f7e5825de2a788fea27c94e203f5127))
+
+
+
+
+
 ## [0.15.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.15.1...@flash-global66/g-icon-font@0.15.2) (2025-12-16)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font
