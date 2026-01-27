@@ -166,9 +166,7 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   const defaultTypeRef = ref<InstanceType<typeof DefaultType>>();
 
   function openFilePicker() {
-    if (props.type === 'default' && defaultTypeRef.value) {
-      defaultTypeRef.value.openFilePicker();
-    }
+    defaultTypeRef.value?.openFilePicker();
   }
 
   return {
