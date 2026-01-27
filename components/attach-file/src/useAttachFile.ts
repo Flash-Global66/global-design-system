@@ -7,7 +7,7 @@ import {
   parseSizeString,
   getFileStatus,
 } from "./attach-file-helpers";
-import DefaultType from "./default-type.vue";
+import type DefaultType from "./default-type.vue";
 
 export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   const { formItem } = useFormItem();
@@ -163,10 +163,12 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
     { immediate: true }
   );
 
-  const defaultTypeRef = ref<InstanceType<typeof DefaultType>>();
+  const defaultTypeRef = ref<InstanceType<typeof DefaultType> | null>(null);
 
   function openFilePicker() {
-    defaultTypeRef.value?.openFilePicker();
+    if (props.type === 'default') {
+      defaultTypeRef.value?.openFilePicker();
+    }
   }
 
   return {
