@@ -1,4 +1,4 @@
-import { computed, watch } from "vue";
+import { computed, watch, ref } from "vue";
 import { useFormItem, useFormItemInputId } from "@flash-global66/g-form";
 import { type FileStatus, type AttachFileProps, type AttachFileEmits, type ValidationError } from "./attach-file.type";
 import {
@@ -7,6 +7,7 @@ import {
   parseSizeString,
   getFileStatus,
 } from "./attach-file-helpers";
+import type DefaultType from "./default-type.vue";
 
 export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
   const { formItem } = useFormItem();
@@ -162,6 +163,14 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
     { immediate: true }
   );
 
+  const defaultTypeRef = ref<InstanceType<typeof DefaultType> | null>(null);
+
+  function openFilePicker() {
+    if (props.type === 'default') {
+      defaultTypeRef.value?.openFilePicker();
+    }
+  }
+
   return {
     modelValue,
     fileStatuses,
@@ -172,9 +181,11 @@ export function useAttachFile(props: AttachFileProps, emit: AttachFileEmits) {
     multiple,
     uploading,
     uploadError,
+    defaultTypeRef,
     
     onFileInputChange,
     onFilesDrop,
     addFiles,
+    openFilePicker,
   };
 }

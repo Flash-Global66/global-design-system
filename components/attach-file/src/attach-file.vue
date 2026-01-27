@@ -2,6 +2,7 @@
   <div :class="ns.b()">
     <default-type
       v-if="props.type === 'default'"
+      ref="defaultTypeRef"
       :id="inputId"
       :model-value="modelValue"
       :mode="props.mode"
@@ -84,14 +85,17 @@ const {
   multiple,
   uploading,
   uploadError,
+  defaultTypeRef,
   onFileInputChange,
   onFilesDrop,
   addFiles,
+  openFilePicker,
 } = useAttachFile(props, emit);
 
 const ns = useNamespace("attach-file");
 
 defineExpose({
   addFiles,
+  openFilePicker,
 });
 </script>

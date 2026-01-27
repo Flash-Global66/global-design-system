@@ -183,8 +183,13 @@ const removeFile = createRemoveFileHandler(props.modelValue, emit);
 
 const getFileStatusForIndex = (index: number) => getFileStatus(index, props.fileErrors, props.uploadError, props.uploading, props.fileProgress);
 
+function openFilePicker() {
+  openFileDialogHelper(hiddenFileInput, props.disabled, props.uploading);
+}
+
 defineExpose({
   hiddenFileInput,
+  openFilePicker,
 });
 </script>
 

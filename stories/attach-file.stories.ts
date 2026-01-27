@@ -465,6 +465,14 @@ const rules = {
       },
     },
 
+    openFilePicker: {
+      description: "Abre el diálogo de selección de archivos de forma programática. Solo disponible para type='default'.",
+      table: {
+        category: "Métodos Públicos",
+        type: { summary: "() => void" },
+      },
+    },
+
     "extra-content": {
       description: "Slot para agregar contenido adicional debajo de la lista de archivos. Útil para mostrar mensajes de error personalizados, información adicional o validaciones externas. Solo disponible en tipo 'default'.",
       table: {
