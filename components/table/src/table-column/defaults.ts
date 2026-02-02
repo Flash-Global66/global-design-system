@@ -69,6 +69,14 @@ interface TableColumnCtx<T> {
   getColumnIndex: () => number
   no: number
   filterOpened?: boolean
+  /** Tipo de celda: 'select' pinta un select cuando no hay slot default */
+  cellType?: string
+  /** Opciones por tipo; para 'select': { options: { value, title }[] } */
+  cellOptions?: Record<string, unknown>
+  /** Número de columnas que abarca el overlay al expandir (celdas editables); >= 1 */
+  expandColspan?: number
+  /** Dirección de expansión del overlay: 'left' | 'right' */
+  expandDirection?: 'left' | 'right'
 }
 
 interface TableColumn<T> extends ComponentInternalInstance {
@@ -243,5 +251,32 @@ export default {
         ['ascending', 'descending', null].includes(order)
       )
     },
+  },
+  /**
+   * @description tipo de celda: 'select' pinta un select cuando no hay slot default
+   */
+  cellType: String,
+  /**
+   * @description opciones por tipo; para select: { options: { value, title }[] }
+   */
+  cellOptions: Object,
+  /**
+   * @description texto accionable que se muestra cuando la celda está vacía (para cell-type="input")
+   */
+  emptyActionText: String,
+  /**
+   * @description label del input cuando está en modo edición (para cell-type="input")
+   */
+  inputLabel: String,
+  /**
+   * @description número de columnas que abarca el overlay al expandir (celdas editables); >= 1
+   */
+  expandColspan: [Number, String],
+  /**
+   * @description dirección de expansión del overlay: 'left' o 'right'
+   */
+  expandDirection: {
+    type: String,
+    validator: (val: string) => val == null || val === '' || ['left', 'right'].includes(val),
   },
 }
