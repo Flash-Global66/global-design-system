@@ -104,7 +104,8 @@ export const ICON_SETS = {
     "calendar",
     "eye",
     "gear",
-    "unlock"
+    "unlock",
+    "bell"
   ] as const,
 
   regular: [

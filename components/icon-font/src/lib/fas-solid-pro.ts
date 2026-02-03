@@ -104,5 +104,6 @@ export {
   faCalendar,
   faEye,
   faGear,
-  faUnlock
+  faUnlock,
+  faBell
 } from "@fortawesome/pro-solid-svg-icons";
