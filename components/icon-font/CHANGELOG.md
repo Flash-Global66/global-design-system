@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.16.0...@flash-global66/g-icon-font@0.17.0) (2026-02-03)
+
+
+### Features
+
+* **icon-font:** add bell icon ([#170](https://github.com/Flash-Global66/global-design-system/issues/170)) ([a195035](https://github.com/Flash-Global66/global-design-system/commit/a195035705b113876e9cd661b498e131a3cef43a))
+
+
+
+
+
 # [0.16.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.15.2...@flash-global66/g-icon-font@0.16.0) (2026-01-22)
 
 
