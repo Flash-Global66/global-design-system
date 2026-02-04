@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/vue3'
 import { ref, watch } from 'vue'
 import { GInputNumber } from '../components/input-number'
-import { GConfigProvider } from '../components/config-provider'
+import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 import { version, peerDependencies } from '../components/input-number/package.json'
 import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories'
 
