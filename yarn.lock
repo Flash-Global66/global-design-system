@@ -895,6 +895,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-input-number@workspace:components/input-number"
   peerDependencies:
+    "@flash-global66/g-config-provider": ^0.0.8
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-input": ^0.1.0
     element-plus: ^2.9.0
