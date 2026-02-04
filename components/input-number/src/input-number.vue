@@ -58,10 +58,14 @@
       @change="handleInputChange"
     >
       <template v-if="$slots.prefix" #prefix>
-        <slot name="prefix" />
+        <span :class="ns.e('prefix')">
+          <slot name="prefix" />
+        </span>
       </template>
       <template v-if="$slots.suffix" #suffix>
-        <slot name="suffix" />
+        <span :class="ns.e('suffix')">
+          <slot name="suffix" />
+        </span>
       </template>
     </GInput>
   </div>
@@ -78,9 +82,16 @@ import {
 } from '@flash-global66/g-form'
 
 import { getEventCode, getEventKey } from '../utils/index'
-import { useFormSize } from 'element-plus/es/components/form/index.mjs'
-import { vRepeatClick } from 'element-plus/es/directives/index.mjs'
-import { useLocale, useNamespace } from 'element-plus/es/hooks/index.mjs'
+import {
+  CHANGE_EVENT,
+  EVENT_CODE,
+  INPUT_EVENT,
+  UPDATE_MODEL_EVENT,
+  useFormSize,
+  useLocale,
+  useNamespace,
+  vRepeatClick,
+} from 'element-plus'
 import {
   debugWarn,
   isNumber,
@@ -88,12 +99,6 @@ import {
   isUndefined,
   throwError,
 } from 'element-plus/es/utils/index.mjs'
-import {
-  CHANGE_EVENT,
-  EVENT_CODE,
-  INPUT_EVENT,
-  UPDATE_MODEL_EVENT,
-} from 'element-plus/es/constants/index.mjs'
 import { inputNumberEmits } from './input-number'
 
 import type { InputInstance } from '@flash-global66/g-input'
@@ -121,7 +126,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 const emit = defineEmits(inputNumberEmits)
 
 const { t } = useLocale()
-const ns = useNamespace('input-number', ref('gui'))
+const ns = useNamespace('input-number')
 const input = ref<InputInstance>()
 
 interface Data {
