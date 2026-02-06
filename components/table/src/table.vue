@@ -172,6 +172,7 @@ import defaultProps from './table/defaults'
 import { TABLE_INJECTION_KEY } from './tokens'
 import { hColgroup } from './h-helper'
 import { useScrollbar } from './composables/use-scrollbar'
+import { clearExpansionCacheForTable } from './table-column/cell-renderers/cell-expansion-utils'
 
 import type { Table } from './table/defaults'
 
@@ -208,7 +209,11 @@ export default defineComponent({
     'current-change',
     'header-dragend',
     'expand-change',
-    'scroll'
+    'scroll',
+    'cell-edit-open',
+    'cell-edit-close',
+    'cell-edit-change',
+    'cell-edit-validate'
   ],
   setup(props) {
     type Row = (typeof props.data)[number]
@@ -289,6 +294,8 @@ export default defineComponent({
 
     onBeforeUnmount(() => {
       debouncedUpdateLayout.cancel()
+      const wrapper = (table as any).refs?.tableWrapper as HTMLElement | undefined
+      clearExpansionCacheForTable(wrapper)
     })
 
     return {

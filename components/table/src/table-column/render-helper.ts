@@ -6,6 +6,7 @@ import {
   h,
   ref,
   renderSlot,
+  toRaw,
   unref,
   watchEffect,
 } from 'vue'
@@ -20,6 +21,7 @@ import {
 import { parseMinWidth, parseWidth } from '../util'
 import type { ComputedRef } from 'vue'
 import type { TableColumn, TableColumnCtx } from './defaults'
+import { renderCellByType } from './cell-renderers'
 
 function useRender<T>(
   props: TableColumnCtx<T>,
@@ -155,6 +157,10 @@ function useRender<T>(
           children = vnodes.some((v) => v.type !== Comment)
             ? vnodes
             : originRenderCell(data)
+        } else if (column.cellType) {
+          children =
+            renderCellByType(column.cellType, column, data, column.cellOptions, owner.value) ??
+            originRenderCell(data)
         } else {
           children = originRenderCell(data)
         }
@@ -188,11 +194,16 @@ function useRender<T>(
     return propsKey.reduce((prev, cur) => {
       if (isArray(cur)) {
         cur.forEach((key) => {
-          prev[key] = props[key]
+          const propValue = props[key as keyof typeof props]
+          if (key === 'cellOptions' && propValue && typeof propValue === 'object') {
+            prev[key] = toRaw(propValue)
+          } else {
+            prev[key] = propValue
+          }
         })
       }
       return prev
-    }, {})
+    }, {} as Record<string, unknown>)
   }
   const getColumnElIndex = (children, child) => {
     return Array.prototype.indexOf.call(children, child)

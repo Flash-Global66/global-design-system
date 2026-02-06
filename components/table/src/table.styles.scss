@@ -11,6 +11,11 @@
 @use 'element-plus/theme-chalk/src/common/var' as *;
 
 @include b('table') {
+  tbody {
+    &:has(.gui-table-cell-input-editing) {
+      overflow: visible !important;
+    }
+  }
   @include e('header') {
     & thead {
       @include when(group) {
@@ -38,7 +43,7 @@
     & .gui-table__header {
       @apply relative;
       &::before {
-        @apply content-[''] absolute top-0 left-0 w-[1px] h-full bg-everBlue-100 z-10;
+        @apply content-[''] absolute top-0 left-0 w-[1px] h-full bg-everBlue-100;
       }
     }
     &.gui-table--border .gui-table__inner-wrapper::after {
@@ -54,9 +59,140 @@
   }
 
   @include e('cell') {
-    @apply py-md border-b border-gray-100 !important;
+    @apply border-b border-gray-100 !important;
+    position: relative;
+
+    &:has(.gui-table-cell-edit-wrapper),
+    &:has(.gui-table-cell-input-wrapper) {
+      @apply p-0 !important;
+      
+      & .cell {
+        position: static !important;
+      }
+    }
+
+    &:has(.gui-table-cell-input-reading) {
+      &:hover {
+        @apply bg-everBlue-100 bg-opacity-30;
+      }
+    }
+    &:has(.gui-table-cell-input-editing) {
+      overflow: visible !important;
+      & .cell {
+        overflow: visible !important;
+      }
+      & .gui-table-cell-edit-wrapper {
+        @apply bg-white;
+      }
+    }
     & .cell {
-      @apply px-xs text-primary-txt font-medium text-3 !important;
+      @apply text-primary-txt font-medium text-3 !important;
+      position: relative;
+      min-height: 3.8rem;
+      display: flex;
+      align-items: center;
+
+      &:not(:has(.gui-table-cell-edit-wrapper)):not(:has(.gui-table-cell-input-wrapper)) {
+        @apply px-xs;
+      }
+    }
+    &:has(.absolute.items-start) {
+      height: auto;
+      & .cell {
+        height: auto;
+        min-height: auto;
+      }
+    }
+    & .gui-table-cell-select {
+      @apply w-full min-w-0 py-xxs px-xs text-3 border border-transparent rounded bg-transparent outline-none;
+      min-height: 3.8rem;
+      &:focus {
+        @apply border-everBlue-200;
+      }
+    }
+    & .gui-table-cell-select-read {
+      @apply w-full flex items-center justify-center cursor-pointer outline-none py-xxs px-xs rounded;
+      min-height: 3.8rem;
+      &:focus {
+        @apply ring-1 ring-everBlue-200 ring-offset-0;
+      }
+    }
+    & .gui-table-cell-input {
+      @apply w-full min-w-0 py-xxs px-xs text-3 border border-transparent rounded bg-transparent outline-none;
+      min-height: 3.8rem;
+      &:focus {
+        @apply border-everBlue-200;
+      }
+    }
+    & .gui-table-cell-input-read {
+      @apply w-full flex items-center justify-center cursor-pointer outline-none py-xxs px-xs rounded;
+      min-height: 3.8rem;
+      &:focus {
+        @apply ring-1 ring-everBlue-200 ring-offset-0;
+      }
+    }
+    & .gui-table-cell-edit-wrapper {
+      @apply w-full flex items-center;
+      min-height: 3.8rem;
+      &.has-textarea {
+        @apply items-start;
+        align-items: flex-start;
+        min-height: auto;
+        height: auto;
+      }
+    }
+    & .gui-table-cell-input-textarea-wrapper {
+      @apply w-full flex flex-col gap-xxs;
+      min-width: 0;
+      width: 100%;
+    }
+    & .gui-table-cell-input-label {
+      @apply text-3 font-medium text-primary-txt mb-xxs;
+    }
+    & .gui-table-cell-input-textarea {
+      @apply w-full min-w-0 py-xxs px-xs text-3 border border-transparent rounded bg-transparent outline-none resize-none;
+      font-family: inherit;
+      line-height: 1.5;
+      min-height: auto;
+      &:focus {
+        @apply border-everBlue-200;
+      }
+      &::placeholder {
+        @apply text-terciary-txt;
+      }
+    }
+    & .gui-table-cell-input-error {
+      @apply text-2 text-error-def mt-xxs;
+    }
+   
+    & .gui-table-cell-input-textarea--error {
+      border-color: var(--color-error);
+      &:focus {
+        border-color: var(--color-error);
+        box-shadow: 0 0 0 1px var(--color-error);
+      }
+    }
+    & .gui-table-cell-edit-enter-active {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    & .gui-table-cell-edit-enter-from {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    & .gui-table-cell-edit-enter-to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    & .gui-table-cell-edit-leave-active {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    & .gui-table-cell-edit-leave-from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    & .gui-table-cell-edit-leave-to {
+      opacity: 0;
+      transform: translateX(8px);
     }
   }
 

@@ -32,3 +32,31 @@ export type {
   TableColumnCtx,
   TableTooltipData,
 } from './src/table/defaults'
+
+export { useTableCellSelect } from './src/composables/useTableCellSelect'
+export type {
+  TableCellSelectOption,
+  TableCellSelectCellOptions,
+  UseTableCellSelectOptions,
+} from './src/composables/useTableCellSelect'
+
+export { useTableCellInput } from './src/composables/useTableCellInput'
+export type {
+  TableCellInputCellOptions,
+  UseTableCellInputOptions,
+} from './src/composables/useTableCellInput'
+
+export { useTableCellValidation } from './src/composables/useTableCellValidation'
+export type {
+  TableCellRule,
+  TableCellValidateState,
+  ValidationResult,
+  CellValidationState,
+  UseTableCellValidationOptions,
+  TableCellValidationApi,
+} from './src/composables/useTableCellValidation'
+
+import GCellEdit from './src/cell-edit/GCellEdit.vue'
+export { GCellEdit }
+
+export { clearExpansionCacheForTable } from './src/table-column/cell-renderers/cell-expansion-utils'

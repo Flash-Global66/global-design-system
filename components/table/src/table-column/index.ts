@@ -124,8 +124,15 @@ export default defineComponent({
         'filterPlacement',
         'filterClassName',
       ]
+      const cellProps = ['cellType', 'cellOptions', 'emptyActionText', 'inputLabel']
 
-      let column = getPropsData(basicProps, sortProps, selectProps, filterProps)
+      let column = getPropsData(
+        basicProps,
+        sortProps,
+        selectProps,
+        filterProps,
+        cellProps
+      )
 
       column = mergeOptions(defaults, column)
       // 注意 compose 中函数执行的顺序是从右到左
