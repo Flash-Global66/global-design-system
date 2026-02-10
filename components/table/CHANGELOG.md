@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.1.1...@flash-global66/g-table@0.2.0) (2026-02-10)
+
+
+### Features
+
+* **table:** add editable cells with input and select renderers ([#169](https://github.com/Flash-Global66/global-design-system/issues/169)) ([9b8749b](https://github.com/Flash-Global66/global-design-system/commit/9b8749bd0960deffc85277611799e96e627222a7))
+
+
+
+
+
 ## [0.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.1.0...@flash-global66/g-table@0.1.1) (2025-06-04)
 
 **Note:** Version bump only for package @flash-global66/g-table
