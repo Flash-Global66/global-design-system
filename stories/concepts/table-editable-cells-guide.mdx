@@ -1,0 +1,336 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Componentes/Tablas/Celdas editables en Table" />
+
+# Guía: Celdas editables en GTable
+
+Esta guía describe cómo implementar **celdas editables** en la tabla (`GTable`): qué son, cuándo conviene usarlas y las dos formas de implementación (rápida con `cell-type` o personalizada con `GCellEdit`).
+
+---
+
+## ¿Qué son las celdas editables?
+
+Una **celda editable** es una celda en la que el usuario puede hacer clic para pasar a “modo edición”: se muestra un control (input, select, etc.) sobre la celda, el usuario modifica el valor y, al confirmar (Enter, blur o clic fuera), se cierra la edición y se actualiza el dato de la fila.
+
+**Flujo habitual:**
+
+- **Vista normal:** se muestra el valor actual (texto o etiqueta).
+- **Al hacer clic:** la celda pasa a modo edición y aparece el control (input o select).
+- **Al salir:** Enter, blur del control o **clic fuera de la celda** cierra el modo edición y se guarda el valor.
+
+La tabla emite eventos (`cell-edit-open`, `cell-edit-close`, `cell-edit-change`, `cell-edit-validate`) que permiten sincronizar estado, enviar analytics o ejecutar validación externa.
+
+---
+
+## Dos formas de implementar
+
+Puedes elegir entre **dos enfoques** según el grado de personalización que necesites:
+
+<table>
+  <thead>
+    <tr>
+      <th>Enfoque</th>
+      <th>Cuándo usarlo</th>
+      <th>Qué necesitas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Columna con <code>cell-type</code></strong></td>
+      <td>Input o select estándar, sin diseño propio</td>
+      <td><code>cell-type="input"</code> o <code>cell-type="select"</code> + composable + <code>:cell-options</code></td>
+    </tr>
+    <tr>
+      <td><strong>Columna con <code>GCellEdit</code></strong></td>
+      <td>Vista y edición totalmente personalizadas (varios controles, otro diseño)</td>
+      <td>Slot <code>#default</code> de la columna + componente <code>GCellEdit</code> con slots <code>#view</code> y <code>#edit</code></td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## 1. Implementación rápida: `cell-type` (input o select)
+
+Cuando la celda solo debe mostrar y editar un valor con un **input** o un **select** estándar, no hace falta definir template: basta con usar `cell-type` y un composable.
+
+### Celda tipo input
+
+1. Importa `useTableCellInput` (la tabla usa internamente el componente `GInput`).
+2. Obtén `cellOptions` con `useTableCellInput(tableData, { placeholder, useRowIndex: true, ... })`.
+3. En la columna: `cell-type="input"` y `:cell-options="cellOptions"`.
+
+```vue
+<template>
+  <g-table :data="tableData" border>
+    <g-table-column prop="name" label="Nombre" />
+    <g-table-column
+      prop="comment"
+      label="Comentario"
+      cell-type="input"
+      :cell-options="cellOptions"
+    />
+  </g-table>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { GTable, GTableColumn, useTableCellInput } from '@flash-global66/g-table'
+
+const tableData = ref([
+  { name: 'Fila 1', comment: 'Texto inicial' },
+  { name: 'Fila 2', comment: '' }
+])
+
+const { cellOptions } = useTableCellInput(tableData, {
+  placeholder: 'Escriba un comentario...',
+  useRowIndex: true
+})
+</script>
+```
+
+- **Clic** en la celda → se abre el input.
+- **Blur** o **Enter** → se cierra la edición y se actualiza `row.comment`.
+- Opciones útiles: `placeholder`, `emptyActionText` (texto cuando la celda está vacía), `expandColspan`, `expandDirection`, `rules` (validación).
+
+### Celda tipo select
+
+1. Importa `useTableCellSelect`.
+2. Define las opciones como `{ value, title }` (o `label`).
+3. Obtén `cellOptions` con `useTableCellSelect(tableData, { options, useRowIndex: true })`.
+4. En la columna: `cell-type="select"` y `:cell-options="cellOptions"`.
+
+```vue
+<template>
+  <g-table :data="tableData" border>
+    <g-table-column prop="name" label="Nombre" />
+    <g-table-column
+      prop="status"
+      label="Estado"
+      cell-type="select"
+      :cell-options="cellOptions"
+    />
+  </g-table>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { GTable, GTableColumn, useTableCellSelect } from '@flash-global66/g-table'
+
+const tableData = ref([
+  { name: 'María', status: 'active' },
+  { name: 'Juan', status: 'pending' }
+])
+
+const statusOptions = [
+  { value: 'active', title: 'Activo' },
+  { value: 'pending', title: 'Pendiente' },
+  { value: 'inactive', title: 'Inactivo' }
+]
+
+const { cellOptions } = useTableCellSelect(tableData, {
+  options: statusOptions,
+  useRowIndex: true
+})
+</script>
+```
+
+El label del select en modo edición se configura con la prop `input-label` en `GTableColumn` o con `label` en las opciones del composable.
+
+---
+
+## 2. Implementación personalizada: `GCellEdit`
+
+Cuando necesitas **vista y edición totalmente personalizadas** (varios controles, otro diseño o tipo de input), usa una columna con slot `#default` y, dentro, el componente **`GCellEdit`**.
+
+`GCellEdit` se encarga de:
+
+- Alternar entre **vista** y **edición** (con transición).
+- **Expandir** el overlay hacia la izquierda o la derecha (`expand-direction`, `expand-colspan`).
+- **Cerrar al hacer clic fuera** de la celda.
+- **Enfocar automáticamente** el primer input, textarea o select dentro del slot `#edit`.
+
+Solo tienes que definir **qué mostrar en vista** y **qué mostrar en edición**.
+
+### Estructura básica
+
+```vue
+<g-table-column prop="miCampo" label="Mi columna" width="200">
+  <template #default="{ row, column, $index }">
+    <g-cell-edit
+      v-model="row.isEditing"
+      :row="row"
+      :column="column"
+      :index="$index"
+      prop="miCampo"
+      expand-direction="left"
+      expand-colspan="1"
+    >
+      <template #view="{ toggle }">
+        <!-- Contenido cuando NO está editando (solo lectura) -->
+        <div class="w-full flex items-center justify-between">
+          <span>{{ row.miCampo }}</span>
+        </div>
+      </template>
+
+      <template #edit="{ close }">
+        <!-- Contenido cuando SÍ está editando (inputs, botones, etc.) -->
+        <div class="flex items-center gap-2 w-full px-2">
+          <g-input
+            v-model="row.miCampo"
+            size="small"
+            class="w-full"
+            @keydown.enter="close"
+            @blur="close"
+          />
+        </div>
+      </template>
+    </g-cell-edit>
+  </template>
+</g-table-column>
+```
+
+### Props que debes proporcionar
+
+- **`v-model="row.isEditing"`**  
+  Controla si esa fila está en modo edición. Cada fila debe tener una propiedad booleana (por ejemplo `isEditing`); puede ser la misma para todas las filas o una por columna, según tu modelo de datos.
+
+- **`row` y `column`**  
+  La fila y la columna que recibe el slot `#default` de `GTableColumn`; la tabla y los eventos los usan para identificar la celda.
+
+- **`index`**  
+  Índice de la fila (corresponde a `$index` del slot).
+
+- **`prop`**  
+  Nombre de la propiedad del `row` que se edita (por ejemplo `"miCampo"`). Se usa para la expansión del overlay y para los eventos.
+
+- **`expand-direction`**  
+  `"left"` o `"right"`: dirección en la que crece el overlay al editar.
+
+- **`expand-colspan`**  
+  Número de columnas que abarca el overlay (incluida la actual). Por ejemplo: `1` = solo la celda; `2` = celda actual más una columna en la dirección indicada.
+
+### Slots
+
+- **`#view="{ toggle }"`**  
+  Contenido en modo solo lectura. El usuario entra en edición al hacer clic (o con foco y Enter/Espacio); internamente se llama a `toggle`. No es necesario llamar a `toggle` manualmente si usas el área clicable que envuelve el slot por defecto.
+
+- **`#edit="{ close }"`**  
+  Contenido en modo edición. Debes llamar a **`close`** cuando quieras cerrar (por ejemplo en `@keydown.enter` y `@blur` del input). Si incluyes un input, textarea o select, el componente le dará foco al abrir y cerrará la edición al hacer **clic fuera** de la celda.
+
+### Cómo cerrar la edición
+
+- **Desde dentro del slot `#edit`:** llama a **`close()`** (por ejemplo en `@keydown.enter` y `@blur` del input).
+- **Desde fuera:** un **clic en cualquier lugar fuera de la celda** cierra la edición automáticamente (el componente escucha `mousedown` en el documento y llama a `close` cuando el clic es fuera del contenedor de la celda).
+
+No es necesario usar `autofocus` en el input: si hay un input, textarea o select en `#edit`, el componente intenta enfocarlo al abrir.
+
+### Datos de ejemplo
+
+Cada fila debe incluir una propiedad que indique si está en modo edición. Por ejemplo:
+
+```ts
+const tableData = ref([
+  { name: 'Producto A', miCampo: 'Valor 1', isEditing: false },
+  { name: 'Producto B', miCampo: 'Valor 2', isEditing: false }
+])
+```
+
+Al abrir o cerrar la edición, `row.isEditing` se actualiza automáticamente mediante el `v-model` de `GCellEdit`.
+
+---
+
+## Expansión del overlay (columnas que abarca)
+
+Tanto con `cell-type` como con `GCellEdit` puedes hacer que, al editar, el overlay **ocupe más de una columna** (útil para inputs largos o selects con mucho texto).
+
+- **`expand-colspan`**  
+  Número de columnas que abarca el overlay (incluida la actual). Por ejemplo: `2` = celda actual más una columna.
+
+- **`expand-direction`**  
+  - `"right"`: el overlay crece hacia la derecha (valor por defecto cuando la columna no es la última).
+  - `"left"`: el overlay crece hacia la izquierda (recomendable en las últimas columnas).
+
+En columnas con `cell-type`, estas opciones se configuran en el composable (`expandColspan`, `expandDirection`) o en las props de `GTableColumn` (`expand-colspan`, `expand-direction`). En `GCellEdit` son props directas del componente.
+
+---
+
+## Eventos de la tabla
+
+La tabla emite estos eventos al usar celdas editables (tanto con `cell-type` como con `GCellEdit`):
+
+<table>
+  <thead>
+    <tr>
+      <th>Evento</th>
+      <th>Cuándo se emite</th>
+      <th>Parámetros</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>cell-edit-open</code></td>
+      <td>La celda entra en modo edición (clic o foco)</td>
+      <td><code>(row, column)</code></td>
+    </tr>
+    <tr>
+      <td><code>cell-edit-close</code></td>
+      <td>La celda sale de modo edición (blur, Enter o clic fuera)</td>
+      <td><code>(row, column)</code></td>
+    </tr>
+    <tr>
+      <td><code>cell-edit-change</code></td>
+      <td>El valor de la celda cambió (input o select)</td>
+      <td><code>(row, column, newValue, oldValue)</code></td>
+    </tr>
+    <tr>
+      <td><code>cell-edit-validate</code></td>
+      <td>Finalizó la validación de la celda (solo si hay reglas)</td>
+      <td><code>(row, column, result)</code> con <code>result.valid</code> y <code>result.message</code></td>
+    </tr>
+  </tbody>
+</table>
+
+Puedes usarlos para registrar logs, enviar analytics, sincronizar con un backend o mostrar mensajes de error globales.
+
+```vue
+<g-table
+  :data="tableData"
+  @cell-edit-open="onOpen"
+  @cell-edit-close="onClose"
+  @cell-edit-change="onChange"
+  @cell-edit-validate="onValidate"
+>
+  <!-- columnas -->
+</g-table>
+```
+
+---
+
+## Validación (columnas con `cell-type="input"`)
+
+En columnas **tipo input** puedes definir reglas compatibles con `async-validator` (igual que en `GForm`) mediante las opciones del composable:
+
+```ts
+const { cellOptions } = useTableCellInput(tableData, {
+  placeholder: 'Email',
+  useRowIndex: true,
+  rules: [
+    { required: true, message: 'Requerido', trigger: 'blur' },
+    { type: 'email', message: 'Email inválido', trigger: 'blur' }
+  ]
+})
+```
+
+Si defines reglas, al salir de la celda se ejecuta la validación y se emite `cell-edit-validate`. También puedes usar `onValidationFailed` y `onValidationSuccess` en las opciones del composable.
+
+---
+
+## Resumen rápido
+
+- **Solo input o select estándar:** usa `cell-type="input"` o `cell-type="select"` con `useTableCellInput` / `useTableCellSelect` y `:cell-options`. No hace falta template.
+- **Vista y edición totalmente personalizadas:** usa una columna con slot `#default` y dentro `GCellEdit` con slots `#view` y `#edit`. En `#edit` llama a `close` para cerrar; si incluyes un input, recibirá el foco al abrir y la edición se cerrará también al hacer clic fuera.
+- **Cerrar al hacer clic fuera:** ya está implementado en `GCellEdit`; no requiere código adicional.
+- **Reaccionar a apertura, cierre o cambio:** escucha en `GTable` los eventos `cell-edit-open`, `cell-edit-close`, `cell-edit-change` y, si usas validación, `cell-edit-validate`.
+
+Para ver ejemplos en vivo, en Storybook consulta las historias de **Table** relacionadas con celdas editables (input, select, GCellEdit, eventos y expansión).

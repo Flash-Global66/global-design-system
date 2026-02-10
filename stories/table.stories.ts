@@ -2,7 +2,7 @@ import { h, ref } from 'vue'
 import { StoryObj } from '@storybook/vue3'
 
 // COMPONENTS
-import { GTable, TableInstance, GTableColumn, type TableTooltipData } from '@flash-global66/g-table'
+import { GTable, TableInstance, GTableColumn, useTableCellSelect, useTableCellInput, GCellEdit, type TableTooltipData } from '../components/table/index.ts'
 import { GButton } from '@flash-global66/g-button'
 import { GLink } from '@flash-global66/g-link'
 import { GTag } from '@flash-global66/g-tag'
@@ -13,8 +13,8 @@ import { GInput } from '@flash-global66/g-input'
 
 // CONFIG
 import { GConfigProvider } from '../components/config-provider'
-import { version, peerDependencies } from '@flash-global66/g-table/package.json'
-import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories'
+import { version, peerDependencies } from '../components/table/package.json'
+import { generatePeerDepsInstalls } from '../helper/documentation-stories'
 
 const meta = {
   title: 'Data/Table',
@@ -22,48 +22,41 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `\`GTable\` - Un componente de tabla altamente configurable y extensible para mostrar datos tabulares de manera eficiente y atractiva.
+        component: `\`GTable\` - Componente de tabla altamente configurable y extensible para mostrar datos tabulares de manera eficiente y atractiva.
 
 > La versión de este componente es \`${version}\`.
 
-### Características principales:
+**Características principales:**
 
-- Soporte para filas expandibles y colapsables.
+- Filas expandibles y colapsables.
 - Selección de filas con soporte para selección múltiple.
-- Soporte para ordenamiento de columnas.
-- Soporte para filtrado de datos.
-- Soporte para columnas fijas y ancladas.
+- Ordenamiento y filtrado de columnas.
+- Columnas fijas (izquierda/derecha) y ancladas.
+- Celdas editables: \`cell-type="input"\` / \`cell-type="select"\` con composables, o \`GCellEdit\` para UI personalizada (ver sección **Celdas editables** más abajo).
+- Validación de celdas compatible con \`async-validator\` y \`GForm\`.
+- Tooltips en celdas y formateador personalizado.
+- Soporte para datos en árbol y carga perezosa.
 
-### Instalación
+**Instalación**
 
 \`\`\`bash
 yarn add @flash-global66/g-table
 \`\`\`
 
-### Importación básica
+**Dependencias**
+
+Este componente requiere:
+
+${Object.entries(peerDependencies || {}).map(([pkg, v]) => `> - ${pkg}: ${v}`).join('\n') || '> No tiene dependencias.'}
+
+**Importación básica**
 
 \`\`\`typescript
 import { GTable, GTableColumn } from '@flash-global66/g-table'
 import '@flash-global66/g-table/styles.scss'
 \`\`\`
 
-### Dependencias
-
-Se hicieron pruebas con las siguientes dependencias: Puede que funcione con otras versiones, pero no se garantiza.
-
-${generatePeerDepsList(peerDependencies)}
-
-> Revisar la documentación de cada dependencia para más información.
-
-\`\`\`bash
-# Dependencias global66
-yarn add ${generatePeerDepsInstalls(peerDependencies)}
-
-# Dependencias externas
-yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
-\`\`\`
-
-### Ejemplo de uso
+**Ejemplo de uso**
 
 \`\`\`html
 <template>
@@ -76,29 +69,33 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 
 <script setup>
 const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  }
+  { date: '2016-05-03', name: 'Tom', address: 'No. 189, Grove St, Los Angeles' },
+  { date: '2016-05-02', name: 'Tom', address: 'No. 189, Grove St, Los Angeles' },
+  { date: '2016-05-04', name: 'Tom', address: 'No. 189, Grove St, Los Angeles' },
+  { date: '2016-05-01', name: 'Tom', address: 'No. 189, Grove St, Los Angeles' }
 ]
 </script>
 \`\`\`
+
+**Instalar dependencias del componente**
+
+\`\`\`bash
+# Dependencias @flash-global66
+yarn add ${generatePeerDepsInstalls(peerDependencies)}
+
+# Dependencias externas
+yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+\`\`\`
+
+---
+
+## Celdas editables
+
+Para implementar celdas editables (input, select o UI personalizada con \`GCellEdit\`), expansión del overlay, eventos y validación, consulte la guía dedicada:
+
+👉 **[Guía: Celdas editables en Table](/docs/concept-guide-celdas-editables-en-table--docs)**
+
+En esta documentación de Table encontrará las historias de ejemplo: **Celda tipo select**, **Celda tipo input**, **Celda personalizada con GCellEdit**, **Eventos de celdas editables** y las de expansión.
 `
       }
     }
@@ -696,6 +693,48 @@ const tableData = [
         }
       }
     },
+    cellEditOpen: {
+      name: 'cell-edit-open',
+      description: 'Celda editable entra en modo edición (click o foco)',
+      control: false,
+      table: {
+        category: 'Eventos',
+        type: { summary: 'Function', detail: '(row: any, column: any) => void' }
+      }
+    },
+    cellEditClose: {
+      name: 'cell-edit-close',
+      description: 'Celda editable sale de modo edición (blur o Enter)',
+      control: false,
+      table: {
+        category: 'Eventos',
+        type: { summary: 'Function', detail: '(row: any, column: any) => void' }
+      }
+    },
+    cellEditChange: {
+      name: 'cell-edit-change',
+      description: 'Valor de celda editable cambió (input o select)',
+      control: false,
+      table: {
+        category: 'Eventos',
+        type: {
+          summary: 'Function',
+          detail: '(row: any, column: any, newValue: any, oldValue: any) => void'
+        }
+      }
+    },
+    cellEditValidate: {
+      name: 'cell-edit-validate',
+      description: 'Validación de celda editable terminó (solo columnas con validación)',
+      control: false,
+      table: {
+        category: 'Eventos',
+        type: {
+          summary: 'Function',
+          detail: '(row: any, column: any, result: { valid: boolean, message: string }) => void'
+        }
+      }
+    },
 
     // 6. Slots
     default: {
@@ -1251,10 +1290,17 @@ const tableData = [
   }
 }
 export default meta
-type Story = StoryObj<TableInstance>
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   name: 'Básico',
+  parameters: {
+    docs: {
+      description: {
+        story: `Tabla básica con columnas definidas por \`prop\`, \`label\` y \`width\`. Los datos se pasan mediante la prop \`data\`.`
+      }
+    }
+  },
   render: (args) => ({
     components: { GTable, GConfigProvider, GTableColumn },
     setup() {
@@ -2222,7 +2268,7 @@ export const tableEditable: Story = {
         console.log('click')
       }
 
-      const handleEdit = (index: number, row) => {
+      const handleEdit = (index: number, row: any) => {
         tableData.value.splice(index, 1, {
           ...row,
           isEditable: !row.isEditable
@@ -2360,6 +2406,813 @@ export const tableEditable: Story = {
           </template>
         </g-table-column>
       </g-table>
+    </g-config-provider>`
+  })
+}
+
+/** Implementación de celda tipo select: useTableCellSelect + cell-type="select" + :cell-options. La UI (GSelect) está en el UI system. */
+
+export const TableCellSelect: Story = {
+  name: 'Celda tipo select (cell-type)',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** columna que debe mostrar y editar un valor desde una lista fija (estado, categoría, rol). No requiere template ni slot.
+
+**Pasos:** (1) Definir opciones \`{ value, title }\` (o \`label\`). (2) \`useTableCellSelect(tableData, { options, useRowIndex: true })\` → \`cellOptions\`. (3) En la columna: \`cell-type="select"\` y \`:cell-options="cellOptions"\`. Click en la celda abre el select; blur o Enter cierra.
+
+**Label:** \`input-label\` en \`GTableColumn\` o \`label\` en \`cellOptions\`; se muestra sobre el select en modo edición.
+
+**Ejemplo de implementación:**
+
+\`\`\`vue
+<template>
+  <g-table :data="tableData" border>
+    <g-table-column prop="name" label="Nombre" />
+    <g-table-column
+      prop="status"
+      label="Estado"
+      cell-type="select"
+      :cell-options="cellOptions"
+    />
+  </g-table>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { GTable, GTableColumn, useTableCellSelect } from '@flash-global66/g-table'
+
+const tableData = ref([
+  { name: 'María', status: 'active' },
+  { name: 'Juan', status: 'pending' },
+  { name: 'Ana', status: 'inactive' }
+])
+
+const statusOptions = [
+  { value: 'active', title: 'Activo' },
+  { value: 'pending', title: 'Pendiente' },
+  { value: 'inactive', title: 'Inactivo' }
+]
+
+const { cellOptions } = useTableCellSelect(tableData, {
+  options: statusOptions,
+  useRowIndex: true
+})
+</script>
+\`\`\``
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { id: 1, name: 'María González', email: 'maria@example.com', department: 'IT', role: 'admin', status: 'active', phone: '+34 600 123 456', location: 'Madrid', joinDate: '2020-01-15', comment: 'Excelente desempeño en el proyecto Q4. Lideró el desarrollo de nuevas funcionalidades y mejoró significativamente la eficiencia del equipo.' },
+        { id: 2, name: 'Juan Pérez', email: 'juan@example.com', department: 'Sales', role: 'user', status: 'pending', phone: '+34 600 234 567', location: 'Barcelona', joinDate: '2021-03-20', comment: '' },
+        { id: 3, name: 'Ana Martínez', email: 'ana@example.com', department: 'Marketing', role: 'editor', status: 'inactive', phone: '+34 600 345 678', location: 'Valencia', joinDate: '2019-11-10', comment: 'Lideró la campaña de verano con resultados destacados. Incrementó el engagement en redes sociales en un 40% y generó más de 10,000 leads calificados.' },
+        { id: 4, name: 'Carlos Rodríguez', email: 'carlos@example.com', department: 'IT', role: 'user', status: 'active', phone: '+34 600 456 789', location: 'Madrid', joinDate: '2022-05-08', comment: '' },
+        { id: 5, name: 'Laura Sánchez', email: 'laura@example.com', department: 'HR', role: 'admin', status: 'pending', phone: '+34 600 567 890', location: 'Sevilla', joinDate: '2020-07-12', comment: 'Coordinó exitosamente el proceso de onboarding de 25 nuevos empleados durante el último trimestre, reduciendo el tiempo de incorporación en un 30%.' },
+        { id: 6, name: 'Pedro López', email: 'pedro@example.com', department: 'Sales', role: 'editor', status: 'active', phone: '+34 600 678 901', location: 'Barcelona', joinDate: '2021-09-25', comment: '' },
+        { id: 7, name: 'Sofía Fernández', email: 'sofia@example.com', department: 'Marketing', role: 'user', status: 'inactive', phone: '+34 600 789 012', location: 'Valencia', joinDate: '2023-02-14', comment: 'Especialista en redes sociales y contenido digital. Gestiona las cuentas corporativas y desarrolla estrategias de contenido que han aumentado el alcance orgánico.' },
+        { id: 8, name: 'Diego Torres', email: 'diego@example.com', department: 'IT', role: 'admin', status: 'active', phone: '+34 600 890 123', location: 'Madrid', joinDate: '2018-06-30', comment: '' },
+        { id: 9, name: 'Carmen Ruiz', email: 'carmen@example.com', department: 'Sales', role: 'user', status: 'pending', phone: '+34 600 901 234', location: 'Barcelona', joinDate: '2022-11-05', comment: 'Nuevo en el equipo, mostrando gran potencial. Ha cerrado 5 deals importantes en su primer mes y demuestra excelente capacidad de comunicación con clientes.' },
+        { id: 10, name: 'Miguel Herrera', email: 'miguel@example.com', department: 'Marketing', role: 'editor', status: 'active', phone: '+34 600 012 345', location: 'Valencia', joinDate: '2021-04-18', comment: '' }
+      ])
+      const statusOptions = [
+        { value: 'active', title: 'Activo' },
+        { value: 'pending', title: 'Pendiente' },
+        { value: 'inactive', title: 'Inactivo' }
+      ]
+      const roleOptions = [
+        { value: 'admin', title: 'Administrador' },
+        { value: 'editor', title: 'Editor' },
+        { value: 'user', title: 'Usuario' }
+      ]
+      const departmentOptions = [
+        { value: 'IT', title: 'Tecnología' },
+        { value: 'Sales', title: 'Ventas' },
+        { value: 'Marketing', title: 'Marketing' },
+        { value: 'HR', title: 'Recursos Humanos' }
+      ]
+      
+      const { cellOptions: statusCellOptions } = useTableCellSelect(tableData, {
+        options: statusOptions,
+        label: 'Estado',
+        useRowIndex: true
+      })
+      const { cellOptions: roleCellOptions } = useTableCellSelect(tableData, {
+        options: roleOptions,
+        useRowIndex: true
+      })
+      const { cellOptions: departmentCellOptions } = useTableCellSelect(tableData, {
+        options: departmentOptions,
+        useRowIndex: true
+      })
+      const { cellOptions: joinDateCellOptions } = useTableCellInput(tableData, {
+        label: 'Fecha Ingreso',
+        placeholder: 'YYYY-MM-DD',
+        useRowIndex: true
+      })
+      const { cellOptions: commentCellOptions } = useTableCellInput(tableData, {
+        label: 'Detalle',
+        placeholder: 'Opcional',
+        rows: 3,
+        useRowIndex: true
+      })
+      return { tableData, statusCellOptions, roleCellOptions, departmentCellOptions, joinDateCellOptions, commentCellOptions }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData" style="width: 100%" 
+       :cell-style="{ zIndex: 'auto' }"
+      >
+        <g-table-column prop="name" label="Nombre" width="160" />
+        <g-table-column prop="email" label="Email" width="200" />
+        <g-table-column
+          prop="department"
+          label="Departamento"
+          width="150"
+          cell-type="select"
+          :cell-options="departmentCellOptions"
+          input-label="Departamento del usuario"
+        />
+        <g-table-column
+          prop="role"
+          label="Rol"
+          width="150"
+          cell-type="select"
+          :cell-options="roleCellOptions"
+          input-label="Rol del usuario"
+        />
+        <g-table-column
+          prop="status"
+          label="Estado"
+          width="140"
+          cell-type="select"
+          :cell-options="statusCellOptions"
+          input-label="Estado del usuario"
+        />
+        <g-table-column prop="phone" label="Teléfono" width="150" />
+        <g-table-column prop="location" label="Ubicación" width="120" />
+        <g-table-column prop="joinDate" label="Fecha Ingreso" width="140" cell-type="input" :cell-options="joinDateCellOptions" />
+        <g-table-column
+          prop="comment"
+          label="Detalle"
+          cell-type="input"
+          empty-action-text="Click para agregar detalle"
+          input-label="Detalle"
+        />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+
+export const TableCellInput: Story = {
+  name: 'Celda tipo input (cell-type)',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** columna que debe mostrar y editar texto (o número) con un input estándar. No requiere template ni slot.
+
+**Pasos:** (1) \`useTableCellInput(tableData, { placeholder, useRowIndex: true, ... })\` → \`cellOptions\`. (2) En la columna: \`cell-type="input"\` y \`:cell-options="cellOptions"\`. Click en la celda abre el input; blur o Enter cierra.
+
+**Opciones útiles:** \`placeholder\`, \`label\` / \`input-label\` (label sobre el input en edición), \`emptyActionText\` / \`empty-action-text\` (texto cuando está vacío; al hacer click activa edición), \`expandColspan\` / \`expand-colspan\` (columnas que abarca el overlay; por defecto 2), \`expandDirection\` (\`"left"\` | \`"right"\`), \`rules\` (validación).
+
+**Textarea:** pase \`rows\` en \`useTableCellInput\`; se renderiza un textarea y la fila puede crecer en altura. Cerrar con \`Ctrl+Enter\` o \`Cmd+Enter\`.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { name: 'María', comment: 'Inversión inicial para el proyecto Q4', notes: 'Revisar detalles adicionales con el equipo de finanzas antes de aprobar el presupuesto completo.' },
+        { name: 'Juan', comment: '', notes: '' },
+        { name: 'Ana', comment: 'Gastos de marketing', notes: 'Incluir campaña de redes sociales y publicidad digital para el próximo trimestre.' }
+      ])
+      const { cellOptions } = useTableCellInput(tableData, {
+        label: 'Detalle',
+        placeholder: 'Opcional',
+        useRowIndex: true
+      })
+      const { cellOptions: notesCellOptions } = useTableCellInput(tableData, {
+        label: 'Notas',
+        placeholder: 'Agregar notas adicionales...',
+        rows: 3,
+        useRowIndex: true
+      })
+      return { tableData, cellOptions, notesCellOptions }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData"
+       :cell-style="{ zIndex: 'auto' }"
+      >
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column
+          prop="comment"
+          label="Detalle"
+          cell-type="input"
+          empty-action-text="Click para agregar detalle"
+          input-label="Detalle"
+        />
+        <g-table-column
+          prop="notes"
+          label="Notas"
+          cell-type="input"
+          empty-action-text="Click para agregar notas"
+          input-label="Notas"
+        />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+export const CustomCellEdit: Story = {
+  name: 'Celda personalizada con GCellEdit',
+  parameters: {
+    docs: {
+      description: {
+        story: `**GCellEdit** permite crear celdas editables con vista y edición totalmente personalizadas (varios controles, otro diseño). Se usa dentro del slot \`#default\` de \`GTableColumn\`.
+
+**Qué hace el componente:** alterna entre vista y edición (con transición), expande el overlay según \`expand-direction\` y \`expand-colspan\`, **cierra al hacer clic fuera** de la celda y **enfoca automáticamente** el primer input/textarea/select dentro del slot \`#edit\`.
+
+**Props:** \`v-model\` (estado de edición por fila, p. ej. \`row.isEditing\`), \`row\`, \`column\`, \`index\`, \`prop\` (nombre del campo), \`expand-direction\` (\`"left"\` | \`"right"\`), \`expand-colspan\` (columnas que abarca).
+
+**Slots:**
+- \`#view="{ toggle }"\` — Contenido en modo solo lectura. Click o Enter/Espacio entra en edición.
+- \`#edit="{ close }"\` — Contenido en modo edición. Llame \`close()\` para cerrar (p. ej. en \`@keydown.enter\` y \`@blur\` del input). No es obligatorio poner \`autofocus\` en el input: el componente intenta enfocar el primer input/textarea/select al abrir.
+
+**Datos:** cada fila debe tener una propiedad booleana para el estado de edición (aquí \`isEditing\`).`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider, GCellEdit, GInput },
+    setup() {
+      const tableData = ref([
+        { name: 'Producto A', color: '#ff0000', customValue: 'Valor 1', isEditing: false },
+        { name: 'Producto B', color: '#00ff00', customValue: 'Valor 2', isEditing: false },
+        { name: 'Producto C', color: '#0000ff', customValue: 'Valor 3', isEditing: false }
+      ])
+      
+      return { tableData }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData" border style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        <g-table-column prop="name" label="Nombre" />
+        
+        <g-table-column prop="customValue" label="Custom Edit" width="200">
+          <template #default="{ row, column, $index }">
+            <g-cell-edit
+              v-model="row.isEditing"
+              :row="row"
+              :column="column"
+              :index="$index"
+              prop="customValue"
+              expand-direction="left"
+              expand-colspan="1"
+            >
+              <template #view="{ toggle }">
+                <div class="w-full flex items-center justify-between">
+                  <span>{{ row.customValue }}</span>
+                </div>
+              </template>
+              
+              <template #edit="{ close }">
+                 <div class="flex items-center gap-2 w-full px-2">
+                    <g-input v-model="row.customValue" size="small" @keydown.enter="close" @blur="close" autofocus class="w-full" />
+                 </div>
+              </template>
+            </g-cell-edit>
+          </template>
+        </g-table-column>
+        
+        <g-table-column prop="color" label="Otro Campo" />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+/** Casos de uso: expansión configurable (expand-colspan, expand-direction). */
+
+export const TableCellExpandRight: Story = {
+  name: 'Expansión hacia la derecha (expand-direction="right")',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** cuando la celda editable está a la izquierda o en el centro y quiere que el overlay ocupe más espacio hacia la derecha (p. ej. comentarios largos).
+
+**Qué demuestra:** \`expand-direction="right"\` (por defecto) y \`expand-colspan="3"\`: al editar, el overlay abarca la celda actual y 2 columnas más a la derecha. El overlay no se desplaza (\`leftOffset\` = 0). Configure \`expandColspan\` en \`useTableCellInput\` o \`expand-colspan\` en \`GTableColumn\`.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { name: 'A', comment: 'Texto corto', extra: 'Col extra' },
+        { name: 'B', comment: '', extra: '' },
+        { name: 'C', comment: 'Otro comentario largo para ver expansión', extra: '' }
+      ])
+      const { cellOptions } = useTableCellInput(tableData, {
+        placeholder: 'Editar...',
+        useRowIndex: true,
+        expandColspan: 3,
+        expandDirection: 'right'
+      })
+      return { tableData, cellOptions }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData" border style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="name" label="Nombre" width="120" />
+        <g-table-column prop="name" label="Col 2" width="120" />
+        <g-table-column
+          prop="comment"
+          label="Comentario (expand right 3)"
+          cell-type="input"
+          expand-colspan="3"
+          expand-direction="right"
+          :cell-options="cellOptions"
+        />
+        <g-table-column prop="extra" label="Col 4" width="120" />
+        <g-table-column prop="extra" label="Col 5" width="120" />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+export const TableCellExpandLeft: Story = {
+  name: 'Expansión hacia la izquierda (expand-direction="left")',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** cuando la celda editable está a la derecha o es una de las últimas columnas y quiere que el overlay crezca hacia la izquierda (evitar que se salga por la derecha).
+
+**Qué demuestra:** \`expand-direction="left"\` y \`expand-colspan="2"\`: al editar, el overlay abarca la columna anterior y la actual; se desplaza a la izquierda (\`leftOffset\` > 0). Configure \`expandDirection: 'left'\` y \`expandColspan\` en \`useTableCellInput\` o las props equivalentes en \`GTableColumn\`.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { name: 'A', comment: 'Texto', notes: 'Notas' },
+        { name: 'B', comment: '', notes: '' },
+        { name: 'C', comment: 'Ver expansión a la izquierda', notes: '' }
+      ])
+      const { cellOptions } = useTableCellInput(tableData, {
+        placeholder: 'Editar...',
+        useRowIndex: true,
+        expandColspan: 2,
+        expandDirection: 'left'
+      })
+      return { tableData, cellOptions }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData" border style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="name" label="Nombre" width="120" />
+        <g-table-column prop="notes" label="Notas" width="140" />
+        <g-table-column
+          prop="comment"
+          label="Comentario (expand left 2)"
+          cell-type="input"
+          expand-colspan="2"
+          expand-direction="left"
+          :cell-options="cellOptions"
+        />
+        <g-table-column prop="name" label="Col 4" width="120" />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+export const TableCellExpandLastColumn: Story = {
+  name: 'Última columna editable (siempre expande a la izquierda)',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** tabla donde la última columna es editable (p. ej. notas, comentarios). El componente fuerza expansión a la izquierda para no salirse del borde derecho.
+
+**Qué demuestra:** cuando la celda editable es la **última columna**, el overlay siempre expande hacia la **izquierda**; no hace falta indicar \`expand-direction\` en este caso. Combine con \`expand-colspan\` si quiere abarcar más de una columna.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { name: 'María', status: 'active', notes: 'Revisar presupuesto Q4' },
+        { name: 'Juan', status: 'pending', notes: '' },
+        { name: 'Ana', status: 'inactive', notes: 'Seguimiento con cliente' }
+      ])
+      const { cellOptions: statusCellOptions } = useTableCellSelect(tableData, {
+        options: [
+          { value: 'active', title: 'Activo' },
+          { value: 'pending', title: 'Pendiente' },
+          { value: 'inactive', title: 'Inactivo' }
+        ],
+        useRowIndex: true
+      })
+      const { cellOptions: notesCellOptions } = useTableCellInput(tableData, {
+        placeholder: 'Notas (última columna)...',
+        useRowIndex: true
+      })
+      return { tableData, statusCellOptions, notesCellOptions }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData" border style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="name" label="Nombre" width="140" />
+        <g-table-column
+          prop="status"
+          label="Estado"
+          width="140"
+          cell-type="select"
+          :cell-options="statusCellOptions"
+        />
+        <g-table-column
+          prop="notes"
+          label="Notas (última columna)"
+          cell-type="input"
+          :cell-options="notesCellOptions"
+        />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+export const TableCellExpandAllCases: Story = {
+  name: 'Todos los casos de expansión en una tabla',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** referencia rápida de los tres comportamientos de expansión en una sola tabla.
+
+**Qué demuestra:** **Col 3** — \`expand-direction="right"\` y \`expand-colspan="3"\` (overlay a la derecha). **Col 5** — \`expand-direction="left"\` y \`expand-colspan="2"\` (overlay a la izquierda). **Col 7** — última columna; siempre expande a la izquierda sin configurar \`expand-direction\`.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { id: 1, a: 'A1', b: 'B1', commentRight: 'Expand right 3', d: 'D1', commentLeft: 'Expand left 2', f: 'F1', lastCol: 'Última col' },
+        { id: 2, a: 'A2', b: 'B2', commentRight: '', d: 'D2', commentLeft: '', f: 'F2', lastCol: '' },
+        { id: 3, a: 'A3', b: 'B3', commentRight: 'Texto largo para ver overlay', d: 'D3', commentLeft: 'Overlay a la izquierda', f: 'F3', lastCol: 'Siempre left' }
+      ])
+      const { cellOptions: rightOptions } = useTableCellInput(tableData, {
+        placeholder: 'Editar (right 3)...',
+        useRowIndex: true,
+        expandColspan: 3,
+        expandDirection: 'right'
+      })
+      const { cellOptions: leftOptions } = useTableCellInput(tableData, {
+        placeholder: 'Editar (left 2)...',
+        useRowIndex: true,
+        expandColspan: 2,
+        expandDirection: 'left'
+      })
+      const { cellOptions: lastOptions } = useTableCellInput(tableData, {
+        placeholder: 'Última col...',
+        useRowIndex: true
+      })
+      return { tableData, rightOptions, leftOptions, lastOptions }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData" border style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="a" label="Col 1" width="90" />
+        <g-table-column prop="b" label="Col 2" width="90" />
+        <g-table-column
+          prop="commentRight"
+          label="Col 3 (right 3)"
+          cell-type="input"
+          expand-colspan="3"
+          expand-direction="right"
+          :cell-options="rightOptions"
+        />
+        <g-table-column prop="d" label="Col 4" width="90" />
+        <g-table-column
+          prop="commentLeft"
+          label="Col 5 (left 2)"
+          cell-type="input"
+          expand-colspan="2"
+          expand-direction="left"
+          :cell-options="leftOptions"
+        />
+        <g-table-column prop="f" label="Col 6" width="90" />
+        <g-table-column
+          prop="lastCol"
+          label="Col 7 (última)"
+          cell-type="input"
+          :cell-options="lastOptions"
+        />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+export const TableCellValidation: Story = {
+  name: 'Celda con validación (rules)',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** columnas tipo input donde el valor debe cumplir reglas (requerido, email, rango, etc.) antes de considerar la edición válida.
+
+**Qué demuestra:** pase \`rules\` en las opciones de \`useTableCellInput\` (compatible con \`async-validator\` y \`GForm\`). La tabla emite \`cell-edit-validate\` con \`{ valid, message }\`. Opcionales: \`onValidationFailed\`, \`onValidationSuccess\` y la API \`validation.clearAllValidation()\` para limpiar errores.
+
+**Características:**
+- Validación en \`blur\` (al salir de la celda) y/o \`change\` (al escribir)
+- Mensajes de error personalizados
+- Estados visuales de error
+- API para limpiar validación programáticamente
+
+**Reglas disponibles:**
+- \`required\`: Campo requerido
+- \`type\`: Tipo de dato (email, url, number, etc.)
+- \`min/max\`: Longitud mínima/máxima
+- \`pattern\`: Expresión regular
+- \`validator\`: Función de validación personalizada
+
+**Ejemplo de implementación:**
+
+\`\`\`vue
+<template>
+  <g-table :data="tableData">
+    <g-table-column
+      prop="email"
+      label="Email"
+      cell-type="input"
+      :cell-options="emailCellOptions"
+    />
+  </g-table>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { GTable, GTableColumn, useTableCellInput } from '@flash-global66/g-table'
+
+const tableData = ref([
+  { id: 1, name: 'Juan', email: '' },
+  { id: 2, name: 'María', email: 'maria@example.com' }
+])
+
+const { cellOptions: emailCellOptions, validation } = useTableCellInput(tableData, {
+  label: 'Email',
+  placeholder: 'correo@ejemplo.com',
+  rules: [
+    { required: true, message: 'El email es requerido', trigger: 'blur' },
+    { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
+  ],
+  useRowIndex: true,
+  onValidationFailed: (errors, row, prop, index) => {
+    console.log('Validación fallida:', errors)
+  }
+})
+
+// Limpiar validación programáticamente
+const clearAllErrors = () => validation?.clearAllValidation()
+</script>
+\`\`\``
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider, GButton },
+    setup() {
+      const tableData = ref([
+        { id: 1, name: 'Juan Pérez', email: '', age: '', website: '' },
+        { id: 2, name: 'María García', email: 'maria@example.com', age: '28', website: 'https://maria.dev' },
+        { id: 3, name: 'Carlos López', email: 'carlos-invalid', age: '150', website: 'not-a-url' },
+        { id: 4, name: 'Ana Martínez', email: '', age: '', website: '' }
+      ])
+
+      const { cellOptions: emailCellOptions, validation: emailValidation } = useTableCellInput(tableData, {
+        label: 'Email',
+        placeholder: 'correo@ejemplo.com',
+        emptyActionText: 'Agregar email',
+        rules: [
+          { required: true, message: 'El email es requerido', trigger: 'blur' },
+          { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
+        ],
+        useRowIndex: true,
+        onValidationFailed: (errors, row, prop, index) => {
+          console.log('Email validación fallida:', { errors, row, prop, index })
+        }
+      })
+
+      const { cellOptions: ageCellOptions, validation: ageValidation } = useTableCellInput(tableData, {
+        label: 'Edad',
+        placeholder: '18-120',
+        emptyActionText: 'Agregar edad',
+        type: 'number',
+        rules: [
+          { required: true, message: 'La edad es requerida', trigger: 'blur' },
+          {
+            type: 'number',
+            transform: (value: string) => Number(value),
+            message: 'Debe ser un número',
+            trigger: 'blur'
+          },
+          {
+            type: 'number',
+            transform: (value: string) => Number(value),
+            min: 18,
+            max: 120,
+            message: 'La edad debe estar entre 18 y 120',
+            trigger: 'blur'
+          }
+        ],
+        useRowIndex: true
+      })
+
+      const { cellOptions: websiteCellOptions, validation: websiteValidation } = useTableCellInput(tableData, {
+        label: 'Sitio web',
+        placeholder: 'https://ejemplo.com',
+        emptyActionText: 'Agregar URL',
+        rules: [
+          { type: 'url', message: 'Ingresa una URL válida (ej: https://...)', trigger: 'blur' }
+        ],
+        useRowIndex: true
+      })
+
+      const clearAllValidations = () => {
+        emailValidation?.clearAllValidation()
+        ageValidation?.clearAllValidation()
+        websiteValidation?.clearAllValidation()
+      }
+
+      return {
+        tableData,
+        emailCellOptions,
+        ageCellOptions,
+        websiteCellOptions,
+        clearAllValidations
+      }
+    },
+    template: `
+    <g-config-provider>
+      <div class="mb-md">
+        <g-button @click="clearAllValidations">Limpiar validaciones</g-button>
+      </div>
+      <g-table :data="tableData" border style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="name" label="Nombre" width="160" />
+        <g-table-column
+          prop="email"
+          label="Email (required + email)"
+          width="220"
+          cell-type="input"
+          :cell-options="emailCellOptions"
+        />
+        <g-table-column
+          prop="age"
+          label="Edad (18-120)"
+          width="150"
+          cell-type="input"
+          :cell-options="ageCellOptions"
+        />
+        <g-table-column
+          prop="website"
+          label="Website (URL)"
+          width="220"
+          cell-type="input"
+          :cell-options="websiteCellOptions"
+        />
+      </g-table>
+      <div class="mt-md text-gray-500 text-3">
+        <p><strong>Instrucciones:</strong> Haz click en una celda para editarla. Al salir (blur), se validará el contenido.</p>
+        <p>Prueba dejando campos vacíos, ingresando emails inválidos, edades fuera de rango, o URLs mal formadas.</p>
+      </div>
+    </g-config-provider>`
+  })
+}
+
+export const TableCellEditEvents: Story = {
+  name: 'Eventos de celdas editables',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** cuando necesita reaccionar a apertura/cierre/cambio de celdas editables (analytics, sincronizar con backend, mostrar mensajes).
+
+**Qué demuestra:** la tabla emite estos eventos cuando se usan celdas editables (tanto con \`cell-type\` como con \`GCellEdit\`):
+
+| Evento | Cuándo se emite | Parámetros |
+|--------|------------------|------------|
+| \`cell-edit-open\` | La celda entra en modo edición (click o foco) | \`(row, column)\` |
+| \`cell-edit-close\` | La celda sale de modo edición (blur, Enter o clic fuera) | \`(row, column)\` |
+| \`cell-edit-change\` | El valor de la celda cambió (input o select) | \`(row, column, newValue, oldValue)\` |
+| \`cell-edit-validate\` | Terminó la validación de la celda (solo si hay reglas) | \`(row, column, result)\` con \`result.valid\` y \`result.message\` |
+
+Útil para sincronizar estado, analytics o validación externa. En esta historia se registran los últimos eventos en el panel derecho.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { id: 1, name: 'Tom', status: 'active', note: '' },
+        { id: 2, name: 'Jane', status: 'inactive', note: '' }
+      ])
+      const eventsLog = ref<Array<{ event: string; payload: string }>>([])
+      const maxLog = 12
+
+      const pushLog = (event: string, ...args: unknown[]) => {
+        const payload = args.map((a) => (typeof a === 'object' && a !== null && 'property' in a) ? `column.${(a as { property?: string }).property}` : String(a)).join(', ')
+        eventsLog.value = [{ event, payload }, ...eventsLog.value].slice(0, maxLog)
+      }
+
+      const onCellEditOpen = (row: unknown, column: unknown) => {
+        pushLog('cell-edit-open', row, column)
+      }
+      const onCellEditClose = (row: unknown, column: unknown) => {
+        pushLog('cell-edit-close', row, column)
+      }
+      const onCellEditChange = (row: unknown, column: unknown, newVal: unknown, oldVal: unknown) => {
+        pushLog('cell-edit-change', row, column, String(oldVal) + ' -> ' + String(newVal))
+      }
+      const onCellEditValidate = (row: unknown, column: unknown, result: { valid: boolean; message: string }) => {
+        pushLog('cell-edit-validate', row, column, result.valid ? 'valid' : result.message)
+      }
+
+      const statusOptions = [
+        { value: 'active', title: 'Activo' },
+        { value: 'inactive', title: 'Inactivo' }
+      ]
+      const { cellOptions: statusCellOptions } = useTableCellSelect(tableData, {
+        options: statusOptions,
+        useRowIndex: true
+      })
+      const { cellOptions: noteCellOptions } = useTableCellInput(tableData, {
+        placeholder: 'Nota',
+        useRowIndex: true
+      })
+
+      return {
+        tableData,
+        eventsLog,
+        onCellEditOpen,
+        onCellEditClose,
+        onCellEditChange,
+        onCellEditValidate,
+        statusCellOptions,
+        noteCellOptions
+      }
+    },
+    template: `
+    <g-config-provider>
+      <div class="flex gap-md">
+        <div class="flex-1 min-w-0">
+          <g-table
+            :data="tableData"
+            border
+            style="width: 100%"
+            :cell-style="{ zIndex: 'auto' }"
+            @cell-edit-open="onCellEditOpen"
+            @cell-edit-close="onCellEditClose"
+            @cell-edit-change="onCellEditChange"
+            @cell-edit-validate="onCellEditValidate"
+          >
+            <g-table-column prop="name" label="Nombre" width="120" />
+            <g-table-column
+              prop="status"
+              label="Estado"
+              width="140"
+              cell-type="select"
+              :cell-options="statusCellOptions"
+            />
+            <g-table-column
+              prop="note"
+              label="Nota"
+              cell-type="input"
+              :cell-options="noteCellOptions"
+            />
+          </g-table>
+        </div>
+        <div class="w-72 flex-shrink-0">
+          <p class="font-medium text-3 mb-xs">Últimos eventos</p>
+          <ul class="text-2 space-y-xxs text-gray-600">
+            <li v-for="(entry, i) in eventsLog" :key="i" class="font-mono truncate" :title="entry.payload">
+              <span class="text-primary-txt font-medium">{{ entry.event }}</span>
+            </li>
+            <li v-if="eventsLog.length === 0" class="text-gray-400">Interactúa con las celdas editables</li>
+          </ul>
+        </div>
+      </div>
     </g-config-provider>`
   })
 }
