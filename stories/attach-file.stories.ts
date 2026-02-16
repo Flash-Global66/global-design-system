@@ -388,7 +388,7 @@ const rules = {
       },
     },
     showUploadButton: {
-      description: "Controla la visibilidad del botón de subir archivo (ícono en default y botón de texto en drag-drop).",
+      description: "Controla la visibilidad del botón principal. En tipo 'default', al establecer false se oculta el ícono interno y el componente queda sin disparador de UI para abrir el selector (puede usarse openFilePicker de forma programática). Según el estado/modo, también puede ocultar acciones como reintento o descarga.",
       control: "boolean",
       table: {
         category: "Interfaz",
