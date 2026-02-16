@@ -32,6 +32,7 @@
       <div :class="ns.e('text-content')">
         <p :class="ns.e('main-text')">
           <button
+            v-if="props.showUploadButton"
             type="button"
             :class="ns.e('upload-button')"
             :disabled="props.disabled || isLoading"
@@ -169,6 +170,7 @@ const props = withDefaults(defineProps<DragDropTypeProps>(), {
   loadingState: false,
   uploading: false,
   uploadProgress: 0,
+  showUploadButton: true,
 });
 
 const emit = defineEmits([

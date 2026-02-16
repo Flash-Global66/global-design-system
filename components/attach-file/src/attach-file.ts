@@ -101,6 +101,10 @@ export const attachFileProps = buildProps({
     type: Boolean as PropType<boolean>,
     default: true,
   },
+  showUploadButton: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
 } as const);
 
 export const attachFileEmits = {

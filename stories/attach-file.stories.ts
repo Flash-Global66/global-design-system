@@ -387,6 +387,15 @@ const rules = {
         defaultValue: { summary: "true" },
       },
     },
+    showUploadButton: {
+      description: "Controla la visibilidad del botón de subir archivo (ícono en default y botón de texto en drag-drop).",
+      control: "boolean",
+      table: {
+        category: "Interfaz",
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+      },
+    },
 
     validateEvent: {
       description: "Activa la validación del formulario cuando se modifican los archivos.",
@@ -503,6 +512,7 @@ const rules = {
     downloadLinkText: "",
     showFileSize: true,
     showRemoveButton: true,
+    showUploadButton: true,
     validateEvent: true,
     inputId: undefined,
   },
@@ -1773,6 +1783,82 @@ const files = ref<File[]>([
           v-bind="args" 
           v-model="files"
         />
+      </g-config-provider>
+    `
+  })
+};
+
+export const DefaultSimpleNoUploadButton: Story = {
+  name: "Default simple (sin ícono)",
+  args: {
+    type: "default",
+    showUploadButton: false,
+    title: "Seleccionar archivo",
+    infoText: "Usa el botón externo para abrir el selector de archivos.",
+    maxSize: "",
+    acceptExtNames: [],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Ejemplo del modo default sin ícono de carga interno. Se utiliza un botón externo para activar el selector de archivos de forma explícita."
+      },
+      source: {
+        code: `<script setup lang="ts">
+import { ref } from 'vue'
+import { GAttachFile } from '@flash-global66/g-attach-file'
+import { GButton } from '@flash-global66/g-button'
+
+const files = ref<File[]>([])
+const attachFileRef = ref<{ openFilePicker?: () => void } | null>(null)
+
+const handleOpenFilePicker = () => {
+  attachFileRef.value?.openFilePicker?.()
+}
+</script>
+
+<template>
+  <g-attach-file
+    ref="attachFileRef"
+    v-model="files"
+    :show-upload-button="false"
+    title="Seleccionar archivo"
+    info-text="Usa el botón externo para abrir el selector de archivos."
+  />
+
+  <g-button @click="handleOpenFilePicker">
+    Seleccionar archivo
+  </g-button>
+</template>`
+      }
+    }
+  },
+  render: (args) => ({
+    components: { GAttachFile, GConfigProvider, GButton },
+    setup() {
+      const files = ref<File[]>([]);
+      const attachFileRef = ref<{ openFilePicker?: () => void } | null>(null);
+
+      const handleOpenFilePicker = () => {
+        action('open-file-picker')();
+        attachFileRef.value?.openFilePicker?.();
+      };
+
+      return { args, files, attachFileRef, handleOpenFilePicker };
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-3">
+          <g-attach-file 
+            ref="attachFileRef"
+            v-bind="args"
+            v-model="files"
+          />
+
+          <g-button variant="primary" @click="handleOpenFilePicker">
+            Seleccionar archivo
+          </g-button>
+        </div>
       </g-config-provider>
     `
   })
