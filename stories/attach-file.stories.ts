@@ -1793,7 +1793,6 @@ export const DefaultSimpleNoUploadButton: Story = {
   args: {
     type: "default",
     showUploadButton: false,
-    title: "Seleccionar archivo",
     infoText: "Usa el botón externo para abrir el selector de archivos.",
     maxSize: "",
     acceptExtNames: [],
