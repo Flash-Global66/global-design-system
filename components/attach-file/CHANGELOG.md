@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-attach-file@1.3.1...@flash-global66/g-attach-file@1.4.0) (2026-02-17)
+
+
+### Features
+
+* **attach-file:** add showUploadButton prop to control upload button… ([#172](https://github.com/Flash-Global66/global-design-system/issues/172)) ([c5d81ff](https://github.com/Flash-Global66/global-design-system/commit/c5d81ff65ef6d2b0aaee430a191b04f3526e75ce))
+
+
+
+
+
 ## [1.3.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-attach-file@1.3.0...@flash-global66/g-attach-file@1.3.1) (2026-01-27)
 
 **Note:** Version bump only for package @flash-global66/g-attach-file
