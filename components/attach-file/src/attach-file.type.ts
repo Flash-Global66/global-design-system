@@ -45,6 +45,7 @@ export interface AttachFileProps {
   errors: string[];
   showFileSize: boolean;
   showRemoveButton: boolean;
+  showUploadButton: boolean;
 }
 
 export interface AttachFileEmits {
@@ -93,6 +94,7 @@ export interface BaseTypeProps {
   uploading?: boolean;
   showFileSize: boolean;
   showRemoveButton: boolean;
+  showUploadButton: boolean;
 }
 
 export interface DefaultTypeProps extends BaseTypeProps {

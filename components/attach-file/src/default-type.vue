@@ -33,6 +33,7 @@
           </a>
         </div>
         <g-icon-button
+          v-if="props.showUploadButton"
           :icon="buttonIcon"
           variant="blue"
           border
@@ -141,6 +142,7 @@ const props = withDefaults(defineProps<DefaultTypeProps>(), {
   fileProgress: () => ({}),
   downloadUrl: "",
   downloadLinkText: "",
+  showUploadButton: true,
 });
 
 const emit = defineEmits([
