@@ -47,7 +47,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
           ]
         : []),
       ...(props.iconsRight || [])
-    ].toReversed()
+    ].slice().reverse()
   })
 
   const content = computed(() => {
