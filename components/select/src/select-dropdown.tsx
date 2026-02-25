@@ -15,6 +15,8 @@ import type { DynamicSizeListInstance, FixedSizeListInstance, ItemProps } from '
 import type { Option, OptionItemProps } from './types/select.types'
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, Ref } from 'vue'
 
+const GROUP_ITEM_HEIGHT = 34
+
 const props = {
   loading: Boolean,
   data: {
@@ -54,6 +56,10 @@ export default defineComponent({
 
     const size = computed(() => props.data.length)
 
+    const hasGroups = computed(() =>
+      props.data.some((item: any) => item?.type === 'Group')
+    )
+
     watch(
       () => size.value,
       () => {
@@ -61,8 +67,27 @@ export default defineComponent({
       }
     )
 
+    watch(
+      () => [props.data, select.props.itemHeight] as const,
+      () => {
+        if (hasGroups.value) {
+          cachedHeights.value = props.data.map((item: any) =>
+            item?.type === 'Group' ? GROUP_ITEM_HEIGHT : select.props.itemHeight
+          )
+        }
+      },
+      { immediate: true }
+    )
+
     const isSized = computed(() => isUndefined(select.props.estimatedOptionHeight))
     const listProps = computed(() => {
+      if (hasGroups.value) {
+        return {
+          estimatedSize: select.props.itemHeight,
+          itemSize: (idx: number) =>
+            cachedHeights.value[idx] ?? select.props.itemHeight
+        }
+      }
       if (isSized.value) {
         return {
           itemSize: select.props.itemHeight
@@ -155,7 +180,7 @@ export default defineComponent({
           <GroupItem
             item={item}
             style={style}
-            height={sized ? (itemSize as number) : estimatedSize}
+            height={GROUP_ITEM_HEIGHT}
           />
         )
       }
@@ -228,7 +253,8 @@ export default defineComponent({
       const { data, width } = props
       const { height, multiple, scrollbarAlwaysOn } = select.props
 
-      const List = unref(isSized) ? FixedSizeList : DynamicSizeList
+      const useVariableSize = unref(hasGroups) || !unref(isSized)
+      const List = useVariableSize ? DynamicSizeList : FixedSizeList
 
       return h(
         'div',

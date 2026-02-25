@@ -1,6 +1,6 @@
 <template>
-  <div :class="ns.be('group', 'title')" :style="{ ...style, lineHeight: `${height}px` }">
-    {{ item.label }}
+  <div :class="ns.be('group', 'title')" :style="style">
+    {{ item.title }}
   </div>
 </template>
 

@@ -17,7 +17,7 @@
 
 @include b("select") {
   @include e("wrapper") {
-    @apply h-12 py-sm px-xs rounded-md gap-xs border-disabled-bd border relative shadow-none;
+    @apply h-fit py-sm px-xs rounded-md gap-xs border-disabled-bd border relative shadow-none;
 
     @include e("label") {
       @apply absolute text-terciary-txt text-4 transition-all duration-200 ease-in font-medium;
@@ -96,6 +96,11 @@
 
   @include e("selection") {
     @apply static;
+
+    &.is-near {
+      @apply flex flex-wrap items-center gap-xxs m-0;
+      min-height: 1.5rem;
+    }
   }
 
   @include e("prefix") {
@@ -124,14 +129,36 @@
   }
 
   @include e("selected-item") {
-    @apply w-9/12 text-4 text-primary-txt font-medium transition-all duration-200 ease-in;
+    @apply text-4 text-primary-txt font-medium transition-all duration-200 ease-in w-auto flex-shrink-0;
 
     @include when(transparent) {
       @apply text-terciary-txt text-4 font-medium opacity-0;
     }
   }
 
+  @include e("input-wrapper") {
+    @apply w-9/12;
+  }
+
+  @include e("placeholder") {
+    @apply w-9/12;
+  }
+
+  @include e("tags-text") {
+    @apply inline-block max-w-full truncate align-middle;
+  }
+
   @include e("popper") {
+    @at-root .gui-popper.is-light.is-light {
+      @apply bg-white !important;
+      & .gui-popper__arrow {
+        @apply left-5 shadow-none !important;
+        &::before {
+          @apply bg-white !important;
+        }
+      }
+    }
+
     & .gui-popper__arrow {
       @apply left-5 shadow-none !important;
       &::before {
@@ -151,13 +178,26 @@
 @include b("select-dropdown") {
   @apply my-xs;
   @include e("item") {
-    @apply min-h-12 p-md flex items-center justify-start transition-all duration-200 ease-in !important;
+    @apply min-h-12 px-1 py-[2px] flex items-center justify-between gap-xs transition-all duration-200 ease-in !important;
 
+    @include m("inner") {
+      @apply flex items-center justify-between gap-xs w-full min-w-0 h-full px-sm;
+      &:hover {
+        @apply bg-everBlue-50 bg-opacity-60;
+      } 
+      
+      &:active {
+        @apply bg-everBlue-50;
+      }
+    }
     @include m("content") {
-      @apply flex items-start justify-center flex-col overflow-hidden;
+      @apply flex items-start justify-center flex-col overflow-hidden flex-1 min-w-0;
     }
     @include m("icon") {
-      @apply text-7 text-secondary-txt mr-md;
+      @apply text-7 text-secondary-txt mr-md shrink-0;
+    }
+    @include m("check") {
+      @apply text-everBlue-500 shrink-0;
     }
     @include m("title") {
       @apply text-4 text-secondary-txt font-medium overflow-hidden text-ellipsis w-full;
@@ -167,15 +207,28 @@
     }
 
     @include when(hovering) {
-      @apply bg-everBlue-50 bg-opacity-60;
+      @apply bg-transparent;
     }
 
     @include when(selected) {
+      @apply bg-transparent;
+
+      &::after {
+        display: none;
+      }
+
+      @include m("inner") {
+        @apply bg-everBlue-50;
+      }
+    }
+
+    /* Aplicar con namespace gui: ítem seleccionado → inner con fondo */
+    @at-root .gui-select-dropdown__item.is-selected .gui-select-dropdown__item--inner {
       @apply bg-everBlue-50;
     }
 
     &:active {
-      @apply bg-everBlue-50;
+      @apply bg-transparent;
     }
 
     @include when(disabled) {
@@ -189,6 +242,30 @@
       & .gui-select-dropdown__item--title,
       & .gui-select-dropdown__item--description {
         @apply text-grey-300;
+      }
+    }
+  }
+
+  @include b("select-group") {
+    @include e("title") {
+      @apply text-2 text-ellipsis text-terciary-txt font-medium cursor-default pointer-events-none p-0 flex items-center px-xs;
+      line-height: 1.25rem;
+      min-height: unset;
+
+      & ~ & {
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: calc(100% - 0.5rem);
+          height: 1px;
+          background: #eff0f2;
+          z-index: 1;
+        }
       }
     }
   }

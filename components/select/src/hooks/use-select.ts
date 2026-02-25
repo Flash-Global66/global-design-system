@@ -381,6 +381,9 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
 
   const shouldShowPlaceholder = computed(() => {
     if (isArray(props.modelValue)) {
+      if (props.emptyDisplay) {
+        return !states.inputValue
+      }
       return props.modelValue.length === 0 && !states.inputValue
     }
 
