@@ -149,20 +149,30 @@
   }
 
   @include e("popper") {
-    @at-root .gui-popper.is-light.is-light {
+    @include m("is-light") {
       @apply bg-white !important;
-      & .gui-popper__arrow {
-        @apply left-5 shadow-none !important;
-        &::before {
-          @apply bg-white !important;
-        }
-      }
     }
 
-    & .gui-popper__arrow {
-      @apply left-5 shadow-none !important;
-      &::before {
-        @apply bg-white !important;
+
+    @at-root {
+      @include b("popper") {
+        &.#{$state-prefix}light.#{$state-prefix}light {
+          @apply bg-white !important;
+
+          @include e("arrow") {
+            @apply left-5 shadow-none !important;
+            &::before {
+              @apply bg-white !important;
+            }
+          }
+        }
+
+        @include e("arrow") {
+          @apply left-5 shadow-none !important;
+          &::before {
+            @apply bg-white !important;
+          }
+        }
       }
     }
   }
@@ -217,14 +227,9 @@
         display: none;
       }
 
-      @include m("inner") {
+      .#{$namespace}-select-dropdown#{$element-separator}item#{$modifier-separator}inner {
         @apply bg-everBlue-50;
       }
-    }
-
-    /* Aplicar con namespace gui: ítem seleccionado → inner con fondo */
-    @at-root .gui-select-dropdown__item.is-selected .gui-select-dropdown__item--inner {
-      @apply bg-everBlue-50;
     }
 
     &:active {
@@ -238,9 +243,7 @@
         @apply bg-transparent;
       }
 
-      & .gui-select-dropdown__item--icon,
-      & .gui-select-dropdown__item--title,
-      & .gui-select-dropdown__item--description {
+      @include m(("icon", "title", "description")) {
         @apply text-grey-300;
       }
     }
