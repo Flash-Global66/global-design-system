@@ -13,24 +13,33 @@
     @mousemove="hoverItem"
     @click.stop="selectOptionClick"
   >
-    <slot :item="item" :index="index" :disabled="disabled">
+    <div :class="ns.bem('dropdown', 'item', 'inner')">
+      <slot :item="item" :index="index" :disabled="disabled">
+        <g-icon-font
+          v-if="Boolean(getIcon(item))"
+          :name="getIcon(item)"
+          :class="ns.bem('dropdown', 'item', 'icon')"
+        />
+        <div :class="ns.bem('dropdown', 'item', 'content')">
+          <span :class="ns.bem('dropdown', 'item', 'title')">{{
+            getTitle(item)
+          }}</span>
+          <span
+            v-if="Boolean(getDescription(item))"
+            :class="ns.bem('dropdown', 'item', 'description')"
+          >
+            {{ getDescription(item) }}
+          </span>
+        </div>
+      </slot>
       <g-icon-font
-        v-if="Boolean(getIcon(item))"
-        :name="getIcon(item)"
-        :class="ns.bem('dropdown', 'item', 'icon')"
+        v-if="selected && multiple"
+        :class="ns.bem('dropdown', 'item', 'check')"
+        name="solid check"
+        aria-hidden="true"
+        size="xl"
       />
-      <div :class="ns.bem('dropdown', 'item', 'content')">
-        <span :class="ns.bem('dropdown', 'item', 'title')">{{
-          getTitle(item)
-        }}</span>
-        <span
-          v-if="Boolean(getDescription(item))"
-          :class="ns.bem('dropdown', 'item', 'description')"
-        >
-          {{ getDescription(item) }}
-        </span>
-      </div>
-    </slot>
+    </div>
   </li>
 </template>
 
@@ -52,6 +61,7 @@ export default defineComponent({
     const ns = useNamespace("select");
     const { hoverItem, selectOptionClick } = useOption(props, { emit });
     const { getIcon, getTitle, getDescription } = useProps(select.props);
+    const multiple = select.props.multiple;
 
     return {
       ns,
@@ -60,6 +70,7 @@ export default defineComponent({
       getTitle,
       getDescription,
       getIcon,
+      multiple,
     };
   },
 });
