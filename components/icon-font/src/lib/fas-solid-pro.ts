@@ -105,5 +105,8 @@ export {
   faEye,
   faGear,
   faUnlock,
-  faBell
+  faBell,
+  fa1,
+  fa2,
+  fa3,
 } from "@fortawesome/pro-solid-svg-icons";
