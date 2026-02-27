@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.17.0...@flash-global66/g-icon-font@0.18.0) (2026-02-27)
+
+
+### Features
+
+* **icon-font:** add number and credit-card icons ([#175](https://github.com/Flash-Global66/global-design-system/issues/175)) ([53a65dd](https://github.com/Flash-Global66/global-design-system/commit/53a65dd15fa8123bbc5ca5b1266aba0b54e6494a))
+
+
+
+
+
 # [0.17.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.16.0...@flash-global66/g-icon-font@0.17.0) (2026-02-03)
 
 
