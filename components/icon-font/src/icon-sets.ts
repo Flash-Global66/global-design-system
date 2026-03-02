@@ -109,6 +109,8 @@ export const ICON_SETS = {
     "1",
     "2",
     "3",
+    "pen",
+    "user-group",
   ] as const,
 
   regular: [
@@ -215,7 +217,10 @@ export const ICON_SETS = {
     'lightbulb',
     'receipt',
     'money-bill-transfer',
-    'credit-card'
+    'credit-card',
+    'treasure-chest',
+    'trophy',
+    'medal',
   ] as const,
 
   light: [

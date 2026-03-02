@@ -105,5 +105,8 @@ export {
   faLightbulb,
   faReceipt,
   faMoneyBillTransfer,
-  faCreditCard
+  faCreditCard,
+  faTreasureChest,
+  faTrophy,
+  faMedal
 } from '@fortawesome/pro-regular-svg-icons';
