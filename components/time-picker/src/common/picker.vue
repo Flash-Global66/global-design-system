@@ -305,6 +305,7 @@ const clearIconKls = computed(() => [
 watch(pickerVisible, (val) => {
   if (!val) {
     userInput.value = null;
+    pickerOptions.value.intermediateValue = null;
     nextTick(() => {
       emitChange(props.modelValue);
     });
@@ -376,6 +377,7 @@ const onPick = (date: any = "", visible = false) => {
     result = date ? date.toDate() : date;
   }
   userInput.value = null;
+  pickerOptions.value.intermediateValue = null;
   emitInput(result);
 };
 
@@ -451,6 +453,12 @@ const displayValue = computed<UserInput>(() => {
   } else if (userInput.value !== null) {
     return userInput.value;
   }
+
+  const intermediateValue = pickerOptions.value.intermediateValue;
+  if (intermediateValue && isRangeInput.value && pickerVisible.value) {
+    return intermediateValue;
+  }
+
   if (!isTimePicker.value && valueIsEmpty.value) return "";
   if (!pickerVisible.value && valueIsEmpty.value) return "";
   if (formattedValue) {

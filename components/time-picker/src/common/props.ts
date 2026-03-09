@@ -259,6 +259,7 @@ export interface PickerOptions {
   panelReady: boolean;
   handleClear: () => void;
   handleFocusPicker?: () => void;
+  intermediateValue?: [string, string] | null;
 }
 
 export const timePickerRangeTriggerProps = buildProps({

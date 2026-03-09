@@ -205,6 +205,15 @@ const handleRangePick = (val: RangePickValue, close = true) => {
   maxDate.value = maxDate_;
   minDate.value = minDate_;
 
+  if (!maxDate_) {
+    emit("set-picker-option", [
+      "intermediateValue",
+      [minDate_ ? minDate_.format(format.value) : "", ""],
+    ]);
+  } else {
+    emit("set-picker-option", ["intermediateValue", null]);
+  }
+
   if (!close) return;
   handleConfirm();
 };
