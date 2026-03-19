@@ -110,26 +110,71 @@ export const useDialogAlert = (props: DialogAlertProps, emit: AlertEmits) => {
   }
 }
 
+let activeAlertState: null | {
+  container: HTMLDivElement
+  resolve: (result: AlertButtonResult) => void
+  closedRef: { current: boolean }
+  requestId: number
+} = null
+
+let latestOpenAlertRequestId = 0
+
 export function openAlert(options: AlertOptions): Promise<AlertButtonResult> {
   return new Promise((resolve) => {
-    const container = document.createElement('div')
-    document.body.appendChild(container)
-    let closed = false
+    const requestId = ++latestOpenAlertRequestId
 
-    const onNext = (result: AlertButtonResult) => {
-      if (closed) return
-      closed = true
-      render(null, container)
-      document.body.removeChild(container)
-      resolve(result)
+    if (activeAlertState) {
+      const prev = activeAlertState
+      activeAlertState = null
+
+      if (prev.closedRef.current) {
+        render(null, prev.container)
+        try {
+          prev.container.remove()
+        } catch {}
+      } else {
+        prev.closedRef.current = true
+        render(null, prev.container)
+        try {
+          prev.container.remove()
+        } catch {}
+
+        prev.resolve({
+          isPrimary: false,
+          isSecondary: false,
+          isTertiary: false,
+          isCloseByOtherAlert: true,
+        })
+      }
     }
 
-    const onClose = () => {
-      if (closed) return
-      closed = true
+    if (requestId !== latestOpenAlertRequestId) {
+      resolve({
+        isPrimary: false,
+        isSecondary: false,
+        isTertiary: false,
+        isCloseByOtherAlert: true,
+      })
+      return
+    }
+
+    const container = document.createElement('div')
+    document.body.appendChild(container)
+    const closedRef = { current: false }
+
+    const cleanupCurrentAlert = () => {
       render(null, container)
-      document.body.removeChild(container)
-      resolve({ isPrimary: false, isSecondary: false, isTertiary: false, dismissedByClose: true })
+      try {
+        container.remove()
+      } catch {}
+      if (activeAlertState?.container === container) activeAlertState = null
+    }
+
+    const resolveOnce = (result: AlertButtonResult) => {
+      if (closedRef.current) return
+      closedRef.current = true
+      cleanupCurrentAlert()
+      resolve(result)
     }
 
     const dialogVNode = createVNode(DialogAlert, {
@@ -143,14 +188,21 @@ export function openAlert(options: AlertOptions): Promise<AlertButtonResult> {
       secondaryText: options.secondaryText || '',
       tertiaryText: options.tertiaryText || '',
       hideButtonClose: options.hideButtonClose || false,
-      onNext,
-      onClose,
+      onNext: (result: AlertButtonResult) => resolveOnce(result),
+      onClose: () =>
+        resolveOnce({
+          isPrimary: false,
+          isSecondary: false,
+          isTertiary: false,
+          dismissedByClose: true,
+        }),
     })
 
     const vnode = h(GConfigProvider, null, {
       default: () => [dialogVNode]
     })
 
+    activeAlertState = { container, resolve, closedRef, requestId }
     render(vnode, container)
   })
 }
