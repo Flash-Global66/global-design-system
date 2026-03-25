@@ -45,7 +45,8 @@ export const IMAGE_NAMES = [
   'warning-sign-yellow',
   'whatsapp',
   'wrench',
-  'people'
+  'people',
+  'vault'
 ] as const;
 
 export const IMAGE_SIZES = {
