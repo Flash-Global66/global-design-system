@@ -24,4 +24,15 @@ export {
   faBriefcase,
   faChartSimple,
   faDownToLine,
+  faVault,
+  faPlane,
+  faHouse,
+  faBowlChopsticks,
+  faGraduationCap,
+  faCartShopping,
+  faGameConsoleHandheld,
+  faTrophy,
+  faStar,
+  faFlag,
+  faHeartPulse
 } from '@fortawesome/pro-light-svg-icons';

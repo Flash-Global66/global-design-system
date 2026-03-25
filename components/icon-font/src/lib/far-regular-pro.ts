@@ -108,5 +108,15 @@ export {
   faCreditCard,
   faTreasureChest,
   faTrophy,
-  faMedal
+  faMedal,
+  faVault,
+  faPlane,
+  faHouse,
+  faBowlChopsticks,
+  faGraduationCap,
+  faCartShopping,
+  faGameConsoleHandheld,
+  faStar,
+  faFlag,
+  faHeartPulse,
 } from '@fortawesome/pro-regular-svg-icons';
