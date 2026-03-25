@@ -41,6 +41,7 @@ interface InputCellConfig {
   editingStyles: Record<string, string> | ((row: unknown, prop: string, index?: number) => Record<string, string>) | undefined
   setEditing: (key: string | null) => void
   toggle: (row: unknown, prop: string, index?: number) => void
+  preventCloseOnError?: boolean
   table?: { emit: TableEmit }
   column?: TableColumnCtx<unknown>
 }
@@ -248,16 +249,16 @@ function createReadVNode(
       }
     },
     [
-      h('div', { class: 'flex flex-col items-center w-full' }, [
+      h('div', { class: 'flex flex-col items-center w-full min-w-0 overflow-hidden' }, [
         isEmpty && emptyActionText
           ? h(
               'span',
-              { class: `font-medium text-3 line-clamp-2 text-center px-xs ${isValidationError ? 'text-error-def' : 'text-gray-500'}` },
+              { class: `font-medium text-3 line-clamp-2 text-center px-xs w-full ${isValidationError ? 'text-error-def' : 'text-gray-500'}` },
               emptyActionText
             )
           : h(
               'span',
-              { class: `font-medium text-3 line-clamp-2 text-center px-xs ${isValidationError ? 'text-error-def' : 'text-primary-txt'}` },
+              { class: `font-medium text-3 line-clamp-2 text-center px-xs w-full ${isValidationError ? 'text-error-def' : 'text-primary-txt'}` },
               displayValue
             ),
         isValidationError && validationMessage && !isEditing
@@ -410,6 +411,7 @@ export function renderInputCell(
     leftOffsetOption: co?.leftOffset as number | ((row: unknown, prop: string, index?: number) => number | undefined) | undefined,
     editingClasses: co?.editingClasses as string | Record<string, boolean> | ((row: unknown, prop: string, index?: number) => string | Record<string, boolean>) | undefined,
     editingStyles: co?.editingStyles as Record<string, string> | ((row: unknown, prop: string, index?: number) => Record<string, string>) | undefined,
+    preventCloseOnError: co?.preventCloseOnError as boolean | undefined,
     setEditing,
     toggle,
     table,
@@ -429,10 +431,15 @@ export function renderInputCell(
   const handleBlur = async () => {
     if (hasValidation && validation) {
       const currentValue = prop ? row[prop] : undefined
+      if (config.preventCloseOnError) {
+        const currentState = validation.getValidationState(row, prop, idx)
+        if (currentState.state === 'error') return
+      }
       const result = await validation.validate(currentValue, row, prop, 'blur', idx)
       if (table?.emit && column) {
         table.emit('cell-edit-validate', row, column, { valid: result.valid, message: result.message })
       }
+      if (config.preventCloseOnError && !result.valid) return
     }
     if (table?.emit && column) {
       table.emit('cell-edit-close', row, column)
