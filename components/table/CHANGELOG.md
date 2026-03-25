@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.2.0...@flash-global66/g-table@0.2.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* add validation to dont close edit in table ([#184](https://github.com/Flash-Global66/global-design-system/issues/184)) ([aa3b8e3](https://github.com/Flash-Global66/global-design-system/commit/aa3b8e33a2bdf697c50e51352fa8b0b4e25f666e))
+
+
+
+
+
 # [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.1.1...@flash-global66/g-table@0.2.0) (2026-02-10)
 
 
