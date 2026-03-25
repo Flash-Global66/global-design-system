@@ -2,7 +2,15 @@ import { h, ref } from 'vue'
 import { StoryObj } from '@storybook/vue3'
 
 // COMPONENTS
-import { GTable, TableInstance, GTableColumn, useTableCellSelect, useTableCellInput, GCellEdit, type TableTooltipData } from '../components/table/index.ts'
+import {
+  GTable,
+  TableInstance,
+  GTableColumn,
+  useTableCellSelect,
+  useTableCellInput,
+  GCellEdit,
+  type TableTooltipData
+} from '../components/table/index.ts'
 import { GButton } from '@flash-global66/g-button'
 import { GLink } from '@flash-global66/g-link'
 import { GTag } from '@flash-global66/g-tag'
@@ -47,7 +55,11 @@ yarn add @flash-global66/g-table
 
 Este componente requiere:
 
-${Object.entries(peerDependencies || {}).map(([pkg, v]) => `> - ${pkg}: ${v}`).join('\n') || '> No tiene dependencias.'}
+${
+  Object.entries(peerDependencies || {})
+    .map(([pkg, v]) => `> - ${pkg}: ${v}`)
+    .join('\n') || '> No tiene dependencias.'
+}
 
 **Importación básica**
 
@@ -1424,8 +1436,10 @@ Utilice row-class-name en el-table para agregar clases personalizadas a una fila
 
       const tableRowClassName = ({ row, rowIndex }: { row: any; rowIndex: number }) => {
         if (rowIndex === 1) return '!bg-error-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
-        if (rowIndex === 3) return '!bg-success-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
-        if (rowIndex === 5) return '!bg-warning-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+        if (rowIndex === 3)
+          return '!bg-success-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+        if (rowIndex === 5)
+          return '!bg-warning-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
         if (rowIndex === 7) return '!bg-info-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
         return ''
       }
@@ -2467,16 +2481,131 @@ const { cellOptions } = useTableCellSelect(tableData, {
     components: { GTable, GTableColumn, GConfigProvider },
     setup() {
       const tableData = ref([
-        { id: 1, name: 'María González', email: 'maria@example.com', department: 'IT', role: 'admin', status: 'active', phone: '+34 600 123 456', location: 'Madrid', joinDate: '2020-01-15', comment: 'Excelente desempeño en el proyecto Q4. Lideró el desarrollo de nuevas funcionalidades y mejoró significativamente la eficiencia del equipo.' },
-        { id: 2, name: 'Juan Pérez', email: 'juan@example.com', department: 'Sales', role: 'user', status: 'pending', phone: '+34 600 234 567', location: 'Barcelona', joinDate: '2021-03-20', comment: '' },
-        { id: 3, name: 'Ana Martínez', email: 'ana@example.com', department: 'Marketing', role: 'editor', status: 'inactive', phone: '+34 600 345 678', location: 'Valencia', joinDate: '2019-11-10', comment: 'Lideró la campaña de verano con resultados destacados. Incrementó el engagement en redes sociales en un 40% y generó más de 10,000 leads calificados.' },
-        { id: 4, name: 'Carlos Rodríguez', email: 'carlos@example.com', department: 'IT', role: 'user', status: 'active', phone: '+34 600 456 789', location: 'Madrid', joinDate: '2022-05-08', comment: '' },
-        { id: 5, name: 'Laura Sánchez', email: 'laura@example.com', department: 'HR', role: 'admin', status: 'pending', phone: '+34 600 567 890', location: 'Sevilla', joinDate: '2020-07-12', comment: 'Coordinó exitosamente el proceso de onboarding de 25 nuevos empleados durante el último trimestre, reduciendo el tiempo de incorporación en un 30%.' },
-        { id: 6, name: 'Pedro López', email: 'pedro@example.com', department: 'Sales', role: 'editor', status: 'active', phone: '+34 600 678 901', location: 'Barcelona', joinDate: '2021-09-25', comment: '' },
-        { id: 7, name: 'Sofía Fernández', email: 'sofia@example.com', department: 'Marketing', role: 'user', status: 'inactive', phone: '+34 600 789 012', location: 'Valencia', joinDate: '2023-02-14', comment: 'Especialista en redes sociales y contenido digital. Gestiona las cuentas corporativas y desarrolla estrategias de contenido que han aumentado el alcance orgánico.' },
-        { id: 8, name: 'Diego Torres', email: 'diego@example.com', department: 'IT', role: 'admin', status: 'active', phone: '+34 600 890 123', location: 'Madrid', joinDate: '2018-06-30', comment: '' },
-        { id: 9, name: 'Carmen Ruiz', email: 'carmen@example.com', department: 'Sales', role: 'user', status: 'pending', phone: '+34 600 901 234', location: 'Barcelona', joinDate: '2022-11-05', comment: 'Nuevo en el equipo, mostrando gran potencial. Ha cerrado 5 deals importantes en su primer mes y demuestra excelente capacidad de comunicación con clientes.' },
-        { id: 10, name: 'Miguel Herrera', email: 'miguel@example.com', department: 'Marketing', role: 'editor', status: 'active', phone: '+34 600 012 345', location: 'Valencia', joinDate: '2021-04-18', comment: '' }
+        {
+          id: 1,
+          name: 'María González',
+          email: 'maria@example.com',
+          department: 'IT',
+          role: 'admin',
+          status: 'active',
+          phone: '+34 600 123 456',
+          location: 'Madrid',
+          joinDate: '2020-01-15',
+          comment:
+            'Excelente desempeño en el proyecto Q4. Lideró el desarrollo de nuevas funcionalidades y mejoró significativamente la eficiencia del equipo.'
+        },
+        {
+          id: 2,
+          name: 'Juan Pérez',
+          email: 'juan@example.com',
+          department: 'Sales',
+          role: 'user',
+          status: 'pending',
+          phone: '+34 600 234 567',
+          location: 'Barcelona',
+          joinDate: '2021-03-20',
+          comment: ''
+        },
+        {
+          id: 3,
+          name: 'Ana Martínez',
+          email: 'ana@example.com',
+          department: 'Marketing',
+          role: 'editor',
+          status: 'inactive',
+          phone: '+34 600 345 678',
+          location: 'Valencia',
+          joinDate: '2019-11-10',
+          comment:
+            'Lideró la campaña de verano con resultados destacados. Incrementó el engagement en redes sociales en un 40% y generó más de 10,000 leads calificados.'
+        },
+        {
+          id: 4,
+          name: 'Carlos Rodríguez',
+          email: 'carlos@example.com',
+          department: 'IT',
+          role: 'user',
+          status: 'active',
+          phone: '+34 600 456 789',
+          location: 'Madrid',
+          joinDate: '2022-05-08',
+          comment: ''
+        },
+        {
+          id: 5,
+          name: 'Laura Sánchez',
+          email: 'laura@example.com',
+          department: 'HR',
+          role: 'admin',
+          status: 'pending',
+          phone: '+34 600 567 890',
+          location: 'Sevilla',
+          joinDate: '2020-07-12',
+          comment:
+            'Coordinó exitosamente el proceso de onboarding de 25 nuevos empleados durante el último trimestre, reduciendo el tiempo de incorporación en un 30%.'
+        },
+        {
+          id: 6,
+          name: 'Pedro López',
+          email: 'pedro@example.com',
+          department: 'Sales',
+          role: 'editor',
+          status: 'active',
+          phone: '+34 600 678 901',
+          location: 'Barcelona',
+          joinDate: '2021-09-25',
+          comment: ''
+        },
+        {
+          id: 7,
+          name: 'Sofía Fernández',
+          email: 'sofia@example.com',
+          department: 'Marketing',
+          role: 'user',
+          status: 'inactive',
+          phone: '+34 600 789 012',
+          location: 'Valencia',
+          joinDate: '2023-02-14',
+          comment:
+            'Especialista en redes sociales y contenido digital. Gestiona las cuentas corporativas y desarrolla estrategias de contenido que han aumentado el alcance orgánico.'
+        },
+        {
+          id: 8,
+          name: 'Diego Torres',
+          email: 'diego@example.com',
+          department: 'IT',
+          role: 'admin',
+          status: 'active',
+          phone: '+34 600 890 123',
+          location: 'Madrid',
+          joinDate: '2018-06-30',
+          comment: ''
+        },
+        {
+          id: 9,
+          name: 'Carmen Ruiz',
+          email: 'carmen@example.com',
+          department: 'Sales',
+          role: 'user',
+          status: 'pending',
+          phone: '+34 600 901 234',
+          location: 'Barcelona',
+          joinDate: '2022-11-05',
+          comment:
+            'Nuevo en el equipo, mostrando gran potencial. Ha cerrado 5 deals importantes en su primer mes y demuestra excelente capacidad de comunicación con clientes.'
+        },
+        {
+          id: 10,
+          name: 'Miguel Herrera',
+          email: 'miguel@example.com',
+          department: 'Marketing',
+          role: 'editor',
+          status: 'active',
+          phone: '+34 600 012 345',
+          location: 'Valencia',
+          joinDate: '2021-04-18',
+          comment: ''
+        }
       ])
       const statusOptions = [
         { value: 'active', title: 'Activo' },
@@ -2494,7 +2623,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
         { value: 'Marketing', title: 'Marketing' },
         { value: 'HR', title: 'Recursos Humanos' }
       ]
-      
+
       const { cellOptions: statusCellOptions } = useTableCellSelect(tableData, {
         options: statusOptions,
         label: 'Estado',
@@ -2519,7 +2648,14 @@ const { cellOptions } = useTableCellSelect(tableData, {
         rows: 3,
         useRowIndex: true
       })
-      return { tableData, statusCellOptions, roleCellOptions, departmentCellOptions, joinDateCellOptions, commentCellOptions }
+      return {
+        tableData,
+        statusCellOptions,
+        roleCellOptions,
+        departmentCellOptions,
+        joinDateCellOptions,
+        commentCellOptions
+      }
     },
     template: `
     <g-config-provider>
@@ -2567,7 +2703,6 @@ const { cellOptions } = useTableCellSelect(tableData, {
   })
 }
 
-
 export const TableCellInput: Story = {
   name: 'Celda tipo input (cell-type)',
   parameters: {
@@ -2587,9 +2722,18 @@ export const TableCellInput: Story = {
     components: { GTable, GTableColumn, GConfigProvider },
     setup() {
       const tableData = ref([
-        { name: 'María', comment: 'Inversión inicial para el proyecto Q4', notes: 'Revisar detalles adicionales con el equipo de finanzas antes de aprobar el presupuesto completo.' },
+        {
+          name: 'María',
+          comment: 'Inversión inicial para el proyecto Q4',
+          notes:
+            'Revisar detalles adicionales con el equipo de finanzas antes de aprobar el presupuesto completo.'
+        },
         { name: 'Juan', comment: '', notes: '' },
-        { name: 'Ana', comment: 'Gastos de marketing', notes: 'Incluir campaña de redes sociales y publicidad digital para el próximo trimestre.' }
+        {
+          name: 'Ana',
+          comment: 'Gastos de marketing',
+          notes: 'Incluir campaña de redes sociales y publicidad digital para el próximo trimestre.'
+        }
       ])
       const { cellOptions } = useTableCellInput(tableData, {
         label: 'Detalle',
@@ -2660,7 +2804,7 @@ export const CustomCellEdit: Story = {
         { name: 'Producto B', color: '#00ff00', customValue: 'Valor 2', isEditing: false },
         { name: 'Producto C', color: '#0000ff', customValue: 'Valor 3', isEditing: false }
       ])
-      
+
       return { tableData }
     },
     template: `
@@ -2691,9 +2835,9 @@ export const CustomCellEdit: Story = {
               </template>
               
               <template #edit="{ close }">
-                 <div class="flex items-center gap-2 w-full px-2">
+                  <div class="flex items-center gap-2 w-full px-2">
                     <g-input v-model="row.customValue" size="small" @keydown.enter="close" @blur="close" autofocus class="w-full" />
-                 </div>
+                  </div>
               </template>
             </g-cell-edit>
           </template>
@@ -2870,9 +3014,36 @@ export const TableCellExpandAllCases: Story = {
     components: { GTable, GTableColumn, GConfigProvider },
     setup() {
       const tableData = ref([
-        { id: 1, a: 'A1', b: 'B1', commentRight: 'Expand right 3', d: 'D1', commentLeft: 'Expand left 2', f: 'F1', lastCol: 'Última col' },
-        { id: 2, a: 'A2', b: 'B2', commentRight: '', d: 'D2', commentLeft: '', f: 'F2', lastCol: '' },
-        { id: 3, a: 'A3', b: 'B3', commentRight: 'Texto largo para ver overlay', d: 'D3', commentLeft: 'Overlay a la izquierda', f: 'F3', lastCol: 'Siempre left' }
+        {
+          id: 1,
+          a: 'A1',
+          b: 'B1',
+          commentRight: 'Expand right 3',
+          d: 'D1',
+          commentLeft: 'Expand left 2',
+          f: 'F1',
+          lastCol: 'Última col'
+        },
+        {
+          id: 2,
+          a: 'A2',
+          b: 'B2',
+          commentRight: '',
+          d: 'D2',
+          commentLeft: '',
+          f: 'F2',
+          lastCol: ''
+        },
+        {
+          id: 3,
+          a: 'A3',
+          b: 'B3',
+          commentRight: 'Texto largo para ver overlay',
+          d: 'D3',
+          commentLeft: 'Overlay a la izquierda',
+          f: 'F3',
+          lastCol: 'Siempre left'
+        }
       ])
       const { cellOptions: rightOptions } = useTableCellInput(tableData, {
         placeholder: 'Editar (right 3)...',
@@ -2996,59 +3167,74 @@ const clearAllErrors = () => validation?.clearAllValidation()
     setup() {
       const tableData = ref([
         { id: 1, name: 'Juan Pérez', email: '', age: '', website: '' },
-        { id: 2, name: 'María García', email: 'maria@example.com', age: '28', website: 'https://maria.dev' },
+        {
+          id: 2,
+          name: 'María García',
+          email: 'maria@example.com',
+          age: '28',
+          website: 'https://maria.dev'
+        },
         { id: 3, name: 'Carlos López', email: 'carlos-invalid', age: '150', website: 'not-a-url' },
         { id: 4, name: 'Ana Martínez', email: '', age: '', website: '' }
       ])
 
-      const { cellOptions: emailCellOptions, validation: emailValidation } = useTableCellInput(tableData, {
-        label: 'Email',
-        placeholder: 'correo@ejemplo.com',
-        emptyActionText: 'Agregar email',
-        rules: [
-          { required: true, message: 'El email es requerido', trigger: 'blur' },
-          { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
-        ],
-        useRowIndex: true,
-        onValidationFailed: (errors, row, prop, index) => {
-          console.log('Email validación fallida:', { errors, row, prop, index })
-        }
-      })
-
-      const { cellOptions: ageCellOptions, validation: ageValidation } = useTableCellInput(tableData, {
-        label: 'Edad',
-        placeholder: '18-120',
-        emptyActionText: 'Agregar edad',
-        type: 'number',
-        rules: [
-          { required: true, message: 'La edad es requerida', trigger: 'blur' },
-          {
-            type: 'number',
-            transform: (value: string) => Number(value),
-            message: 'Debe ser un número',
-            trigger: 'blur'
-          },
-          {
-            type: 'number',
-            transform: (value: string) => Number(value),
-            min: 18,
-            max: 120,
-            message: 'La edad debe estar entre 18 y 120',
-            trigger: 'blur'
+      const { cellOptions: emailCellOptions, validation: emailValidation } = useTableCellInput(
+        tableData,
+        {
+          label: 'Email',
+          placeholder: 'correo@ejemplo.com',
+          emptyActionText: 'Agregar email',
+          rules: [
+            { required: true, message: 'El email es requerido', trigger: 'blur' },
+            { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
+          ],
+          useRowIndex: true,
+          onValidationFailed: (errors, row, prop, index) => {
+            console.log('Email validación fallida:', { errors, row, prop, index })
           }
-        ],
-        useRowIndex: true
-      })
+        }
+      )
 
-      const { cellOptions: websiteCellOptions, validation: websiteValidation } = useTableCellInput(tableData, {
-        label: 'Sitio web',
-        placeholder: 'https://ejemplo.com',
-        emptyActionText: 'Agregar URL',
-        rules: [
-          { type: 'url', message: 'Ingresa una URL válida (ej: https://...)', trigger: 'blur' }
-        ],
-        useRowIndex: true
-      })
+      const { cellOptions: ageCellOptions, validation: ageValidation } = useTableCellInput(
+        tableData,
+        {
+          label: 'Edad',
+          placeholder: '18-120',
+          emptyActionText: 'Agregar edad',
+          type: 'number',
+          rules: [
+            { required: true, message: 'La edad es requerida', trigger: 'blur' },
+            {
+              type: 'number',
+              transform: (value: string) => Number(value),
+              message: 'Debe ser un número',
+              trigger: 'blur'
+            },
+            {
+              type: 'number',
+              transform: (value: string) => Number(value),
+              min: 18,
+              max: 120,
+              message: 'La edad debe estar entre 18 y 120',
+              trigger: 'blur'
+            }
+          ],
+          useRowIndex: true
+        }
+      )
+
+      const { cellOptions: websiteCellOptions, validation: websiteValidation } = useTableCellInput(
+        tableData,
+        {
+          label: 'Sitio web',
+          placeholder: 'https://ejemplo.com',
+          emptyActionText: 'Agregar URL',
+          rules: [
+            { type: 'url', message: 'Ingresa una URL válida (ej: https://...)', trigger: 'blur' }
+          ],
+          useRowIndex: true
+        }
+      )
 
       const clearAllValidations = () => {
         emailValidation?.clearAllValidation()
@@ -3101,6 +3287,119 @@ const clearAllErrors = () => validation?.clearAllValidation()
   })
 }
 
+export const TableCellPreventCloseOnError: Story = {
+  name: 'Celda con preventCloseOnError',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** cuando el usuario NO debe poder abandonar una celda hasta que el valor sea válido.
+
+**Qué demuestra:** la opción \`preventCloseOnError: true\` en \`useTableCellInput\` impide que la celda se cierre en \`blur\` o \`Enter\` si la validación falla. La celda permanece abierta y muestra el error hasta que el valor cumpla las reglas.
+
+**Ejemplo de implementación:**
+
+\`\`\`vue
+<template>
+  <g-table :data="tableData">
+    <g-table-column
+      prop="email"
+      label="Email"
+      cell-type="input"
+      :cell-options="emailCellOptions"
+    />
+  </g-table>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { GTable, GTableColumn, useTableCellInput } from '@flash-global66/g-table'
+
+const tableData = ref([
+  { id: 1, name: 'Juan', email: '' }
+])
+
+const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
+  label: 'Email',
+  placeholder: 'correo@ejemplo.com',
+  rules: [
+    { required: true, message: 'El email es requerido', trigger: 'blur' },
+    { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
+  ],
+  preventCloseOnError: true,
+  useRowIndex: true
+})
+</script>
+\`\`\``
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { id: 1, name: 'Juan Pérez', email: '', username: '' },
+        { id: 2, name: 'María García', email: 'marianombreextensoperomuyextensodemasiadodeletras@example.com', username: 'maria99' },
+        { id: 3, name: 'Carlos López', email: 'carlos-invalid', username: 'ab!' }
+      ])
+
+      const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
+        label: 'Email',
+        placeholder: 'correo@ejemplo.com',
+        emptyActionText: 'Agregar email',
+        rules: [
+          { required: true, message: 'El email es requerido', trigger: 'blur' },
+          { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
+        ],
+        preventCloseOnError: true,
+        useRowIndex: true
+      })
+
+      const { cellOptions: usernameCellOptions } = useTableCellInput(tableData, {
+        label: 'Usuario',
+        placeholder: 'mínimo 4 caracteres, solo letras y números',
+        emptyActionText: 'Agregar usuario',
+        rules: [
+          { required: true, message: 'El usuario es requerido', trigger: 'change' },
+          { min: 4, message: 'Mínimo 4 caracteres', trigger: 'change' },
+          {
+            pattern: /^[a-zA-Z0-9]+$/,
+            message: 'Solo letras y números',
+            trigger: 'change'
+          }
+        ],
+        preventCloseOnError: true,
+        useRowIndex: true
+      })
+
+      return { tableData, emailCellOptions, usernameCellOptions }
+    },
+    template: `
+    <g-config-provider>
+      <g-table :data="tableData" border style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="name" label="Nombre" width="160" />
+        <g-table-column
+          prop="email"
+          label="Email (trigger: blur)"
+          width="260"
+          cell-type="input"
+          :cell-options="emailCellOptions"
+        />
+        <g-table-column
+          prop="username"
+          label="Usuario (trigger: change)"
+          width="260"
+          cell-type="input"
+          :cell-options="usernameCellOptions"
+        />
+      </g-table>
+      <div class="mt-md text-gray-500 text-3">
+        <p><strong>Email</strong> — valida al salir (blur): la celda no cierra hasta que el valor sea válido.</p>
+        <p><strong>Usuario</strong> — valida mientras escribe (change): el error aparece en tiempo real y la celda tampoco cierra hasta que el valor sea válido.</p>
+      </div>
+    </g-config-provider>`
+  })
+}
+
 export const TableCellEditEvents: Story = {
   name: 'Eventos de celdas editables',
   parameters: {
@@ -3132,7 +3431,13 @@ export const TableCellEditEvents: Story = {
       const maxLog = 12
 
       const pushLog = (event: string, ...args: unknown[]) => {
-        const payload = args.map((a) => (typeof a === 'object' && a !== null && 'property' in a) ? `column.${(a as { property?: string }).property}` : String(a)).join(', ')
+        const payload = args
+          .map((a) =>
+            typeof a === 'object' && a !== null && 'property' in a
+              ? `column.${(a as { property?: string }).property}`
+              : String(a)
+          )
+          .join(', ')
         eventsLog.value = [{ event, payload }, ...eventsLog.value].slice(0, maxLog)
       }
 
@@ -3142,10 +3447,19 @@ export const TableCellEditEvents: Story = {
       const onCellEditClose = (row: unknown, column: unknown) => {
         pushLog('cell-edit-close', row, column)
       }
-      const onCellEditChange = (row: unknown, column: unknown, newVal: unknown, oldVal: unknown) => {
+      const onCellEditChange = (
+        row: unknown,
+        column: unknown,
+        newVal: unknown,
+        oldVal: unknown
+      ) => {
         pushLog('cell-edit-change', row, column, String(oldVal) + ' -> ' + String(newVal))
       }
-      const onCellEditValidate = (row: unknown, column: unknown, result: { valid: boolean; message: string }) => {
+      const onCellEditValidate = (
+        row: unknown,
+        column: unknown,
+        result: { valid: boolean; message: string }
+      ) => {
         pushLog('cell-edit-validate', row, column, result.valid ? 'valid' : result.message)
       }
 
