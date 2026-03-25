@@ -48,6 +48,8 @@ export interface UseTableCellInputOptions {
   onValidationFailed?: (errors: unknown[], row: unknown, prop: string, index?: number) => void
   /** Callback cuando la validación es exitosa */
   onValidationSuccess?: (row: unknown, prop: string, index?: number) => void
+  /** Si true, la celda no se cierra cuando la validación falla en blur */
+  preventCloseOnError?: boolean
 }
 
 export interface TableCellInputCellOptions {
@@ -80,6 +82,8 @@ export interface TableCellInputCellOptions {
   validation?: TableCellValidationApi
   /** Reglas de validación */
   rules?: TableCellRule[]
+  /** Si true, la celda no se cierra cuando la validación falla en blur */
+  preventCloseOnError?: boolean
 }
 
 /**
@@ -129,7 +133,8 @@ export function useTableCellInput<T extends Record<string, unknown>>(
     expandDirection,
     rules,
     onValidationFailed,
-    onValidationSuccess
+    onValidationSuccess,
+    preventCloseOnError
   } = config
 
   const { getEditing, toggle, setEditing } = useEditableCell(dataRef, {
@@ -165,7 +170,8 @@ export function useTableCellInput<T extends Record<string, unknown>>(
     expandColspan,
     expandDirection,
     validation,
-    rules
+    rules,
+    preventCloseOnError
   }
 
   return { cellOptions, validation }

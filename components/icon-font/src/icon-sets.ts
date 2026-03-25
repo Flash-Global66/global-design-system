@@ -105,7 +105,12 @@ export const ICON_SETS = {
     "eye",
     "gear",
     "unlock",
-    "bell"
+    "bell",
+    "1",
+    "2",
+    "3",
+    "pen",
+    "user-group",
   ] as const,
 
   regular: [
@@ -211,7 +216,11 @@ export const ICON_SETS = {
     'clock-rotate-left',
     'lightbulb',
     'receipt',
-    'money-bill-transfer'
+    'money-bill-transfer',
+    'credit-card',
+    'treasure-chest',
+    'trophy',
+    'medal',
   ] as const,
 
   light: [

@@ -38,6 +38,7 @@ El componente Date Picker está diseñado para gestionar la selección de fechas
 - Formato personalizable de visualización
 - Soporte para deshabilitar fechas específicas
 - Integración con Day.js para manejo de fechas
+- Retroalimentación visual inmediata en modo rango: al seleccionar la fecha de inicio, esta se muestra en el input antes de elegir la fecha fin
 - Personalización completa del popup
 - **Hereda** gran parte de las props del componente \`GInput\`
 
@@ -439,9 +440,10 @@ export const Range: Story = {
       description: {
         story: `Selector de rango de fechas que permite seleccionar un intervalo de días.
 
-- Selección de fecha inicial y final
+- Selección de fecha inicial y final con retroalimentación visual inmediata: al elegir la fecha de inicio, esta se muestra en el input correspondiente mientras la fecha fin permanece vacía hasta ser seleccionada
 - Placeholders personalizados para cada input
-- Separador personalizable`,
+- Separador personalizable
+- Este comportamiento es consistente en todos los modos de rango: \`daterange\`, \`monthrange\` y \`yearrange\``,
       },
     },
   },

@@ -7,6 +7,7 @@ export interface AlertButtonResult {
   isSecondary?: boolean;
   isTertiary?: boolean;
   dismissedByClose?: boolean;
+  isCloseByOtherAlert?: boolean;
 }
 
 export interface AlertOptions {

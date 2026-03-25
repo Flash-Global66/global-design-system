@@ -283,6 +283,10 @@ export const SelectProps = buildProps({
    */
   tagEffect: { ...tagProps.effect, default: 'light' },
   /**
+   * @description when true (and multiple), selected items are not shown as tags; the select looks empty but keeps the value
+   */
+  emptyDisplay: Boolean,
+  /**
    * @description tabindex for input
    */
   tabindex: {

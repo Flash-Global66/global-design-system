@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.4.0...@flash-global66/g-collapse@0.4.1) (2026-02-23)
+
+
+### Bug Fixes
+
+* **collapse:** usar slice().reverse() en lugar de toReversed() para compatibilidad ([#173](https://github.com/Flash-Global66/global-design-system/issues/173)) ([d2abb5c](https://github.com/Flash-Global66/global-design-system/commit/d2abb5cd8d095ee98462bf5fcf9959a40a8621a2))
+
+
+
+
+
 # [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.3.1...@flash-global66/g-collapse@0.4.0) (2025-11-27)
 
 

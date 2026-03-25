@@ -835,3 +835,285 @@ export const states: Story = {
     `
   })
 }
+
+export const multiple: Story = {
+  name: 'Selección múltiple',
+  parameters: {
+    docs: {
+      description: {
+        story: `El select con selección múltiple permite elegir varios valores a la vez.
+
+- Prop \`multiple\` para habilitar varios valores
+- \`v-model\` debe ser un array
+- Cada valor seleccionado se muestra como tag removible
+- \`collapseTags\` colapsa los tags mostrando un contador
+- \`multipleLimit\` limita la cantidad de opciones seleccionables (0 = sin límite)`
+      }
+    }
+  },
+  render: () => ({
+    components: { GSelect, GConfigProvider },
+    setup() {
+      const value = ref<string[]>([])
+
+      const options = [
+        { value: 'react', title: 'React' },
+        { value: 'vue', title: 'Vue' },
+        { value: 'angular', title: 'Angular' },
+        { value: 'svelte', title: 'Svelte' },
+        { value: 'solid', title: 'Solid' }
+      ]
+
+      return { value, options }
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-6">
+          <g-select
+            v-model="value"
+            label="Frameworks (múltiple)"
+            placeholder="Elige uno o más"
+            :options="options"
+            multiple
+            :filterable="true"
+            :clearable="true"
+            style="width: 320px"
+            help-text="Selecciona varios frameworks. Cada valor aparece como tag y puedes quitarlo con la X."
+          />
+          <p class="text-3 text-secondary-txt">Seleccionados: {{ value?.length ? value.join(', ') : 'ninguno' }}</p>
+        </div>
+      </g-config-provider>
+    `
+  })
+}
+
+export const multipleEmptyDisplay: Story = {
+  name: 'Selección múltiple (estado empty)',
+  parameters: {
+    docs: {
+      description: {
+        story: `Con \`empty-display\` los ítems seleccionados no se muestran como tags; el select se ve vacío pero el valor se mantiene.
+
+- Útil para una vista más limpia o cuando los seleccionados se muestran en otro lugar
+- El placeholder sigue visible cuando el input está vacío
+- Requiere \`multiple\``
+      }
+    }
+  },
+  render: () => ({
+    components: { GSelect, GConfigProvider },
+    setup() {
+      const value = ref<string[]>(['react', 'vue'])
+
+      const options = [
+        { value: 'react', title: 'React' },
+        { value: 'vue', title: 'Vue' },
+        { value: 'angular', title: 'Angular' },
+        { value: 'svelte', title: 'Svelte' },
+        { value: 'solid', title: 'Solid' }
+      ]
+
+      return { value, options }
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-6">
+          <g-select
+            v-model="value"
+            label="Frameworks"
+            placeholder="Buscar..."
+            :options="options"
+            multiple
+            empty-display
+            :filterable="true"
+            :clearable="true"
+            style="width: 320px"
+            help-text="Los seleccionados no se muestran como tags (valor: React, Vue)."
+          />
+          <p class="text-3 text-secondary-txt">Valor real: {{ value?.length ? value.join(', ') : 'ninguno' }}</p>
+        </div>
+      </g-config-provider>
+    `
+  })
+}
+
+export const multipleCollapseTags: Story = {
+  name: 'Selección múltiple con tags colapsados',
+  parameters: {
+    docs: {
+      description: {
+        story: `Cuando hay muchos valores seleccionados, los tags se pueden colapsar en uno solo.
+
+- \`collapseTags\`: muestra un solo tag con el número de seleccionados
+- \`collapseTagsTooltip\`: al hacer hover se ven todos los tags
+- \`maxCollapseTags\`: cuántos tags mostrar antes de colapsar (por defecto 1)`
+      }
+    }
+  },
+  render: () => ({
+    components: { GSelect, GConfigProvider },
+    setup() {
+      const value = ref<string[]>(['react', 'vue', 'angular'])
+
+      const options = [
+        { value: 'react', title: 'React' },
+        { value: 'vue', title: 'Vue' },
+        { value: 'angular', title: 'Angular' },
+        { value: 'svelte', title: 'Svelte' },
+        { value: 'solid', title: 'Solid' }
+      ]
+
+      return { value, options }
+    },
+    template: `
+      <g-config-provider>
+        <g-select
+          v-model="value"
+          label="Frameworks (tags colapsados)"
+          placeholder="Elige uno o más"
+          :options="options"
+          multiple
+          collapse-tags
+          collapse-tags-tooltip
+          :max-collapse-tags="1"
+          :filterable="true"
+          style="width: 320px"
+          help-text="Pasa el mouse sobre el tag +N para ver todos los seleccionados."
+        />
+      </g-config-provider>
+    `
+  })
+}
+
+export const grouped: Story = {
+  name: 'Opciones agrupadas',
+  parameters: {
+    docs: {
+      description: {
+        story: `Las opciones pueden organizarse en grupos. Cada grupo tiene un título y un array de opciones.
+
+- Estructura: \`{ title: 'Nombre del grupo', options: [{ value, title }, ...] }\`
+- Por defecto se usan las claves \`title\` y \`options\` (configurable con la prop \`props\`)
+- Útil para categorías, regiones, tipos, etc.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GSelect, GConfigProvider },
+    setup() {
+      const value = ref('')
+
+      const optionsWithGroups = [
+        {
+          title: 'Frutas',
+          options: [
+            { value: 'apple', title: 'Manzana' },
+            { value: 'banana', title: 'Plátano' },
+            { value: 'orange', title: 'Naranja' }
+          ]
+        },
+        {
+          title: 'Verduras',
+          options: [
+            { value: 'carrot', title: 'Zanahoria' },
+            { value: 'lettuce', title: 'Lechuga' },
+            { value: 'tomato', title: 'Tomate' }
+          ]
+        },
+        {
+          title: 'Lácteos',
+          options: [
+            { value: 'milk', title: 'Leche' },
+            { value: 'cheese', title: 'Queso' },
+            { value: 'yogurt', title: 'Yogur' }
+          ]
+        }
+      ]
+
+      return { value, optionsWithGroups }
+    },
+    template: `
+      <g-config-provider>
+        <g-select
+          v-model="value"
+          label="Categoría"
+          placeholder="Selecciona un producto"
+          :options="optionsWithGroups"
+          :filterable="true"
+          :clearable="true"
+          style="width: 320px"
+          help-text="Las opciones están agrupadas por tipo (Frutas, Verduras, Lácteos)."
+        />
+      </g-config-provider>
+    `
+  })
+}
+
+export const groupedMultiple: Story = {
+  name: 'Agrupación + selección múltiple',
+  parameters: {
+    docs: {
+      description: {
+        story: `Combinación de opciones agrupadas con selección múltiple. Ideal para elegir varios ítems de distintas categorías.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GSelect, GConfigProvider },
+    setup() {
+      const value = ref<string[]>([])
+
+      const optionsWithGroups = [
+        {
+          title: 'Frontend',
+          options: [
+            { value: 'html', title: 'HTML' },
+            { value: 'css', title: 'CSS' },
+            { value: 'js', title: 'JavaScript' }
+          ]
+        },
+        {
+          title: 'Backend',
+          options: [
+            { value: 'node', title: 'Node.js' },
+            { value: 'python', title: 'Python' },
+            { value: 'go', title: 'Go' }
+          ]
+        },
+        {
+          title: 'Database',
+          options: [
+            { value: 'mysql', title: 'MySQL' },
+            { value: 'postgresql', title: 'PostgreSQL' },
+            { value: 'mongodb', title: 'MongoDB' }
+          ]
+        },
+        {
+          title: 'DevOps',
+          options: [
+            { value: 'docker', title: 'Docker' },
+            { value: 'kubernetes', title: 'Kubernetes' },
+            { value: 'terraform', title: 'Terraform' }
+          ]
+        }
+      ]
+
+      return { value, optionsWithGroups }
+    },
+    template: `
+      <g-config-provider>
+        <g-select
+          v-model="value"
+          label="Tecnologías"
+          placeholder="Elige varias"
+          :options="optionsWithGroups"
+          multiple
+          :filterable="true"
+          :clearable="true"
+          style="width: 320px"
+          help-text="Opciones agrupadas con selección múltiple."
+        />
+      </g-config-provider>
+    `
+  })
+}

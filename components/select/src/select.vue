@@ -3,7 +3,10 @@
     <div
       ref="selectRef"
       v-click-outside:[popperRef]="handleClickOutside"
-      :class="[nsSelect.b(), nsSelect.is('error', isErrorKls)]"
+      :class="[
+        nsSelect.b(),
+        nsSelect.is('error', isErrorKls),
+      ]"
       @mouseenter="states.inputHovering = true"
       @mouseleave="states.inputHovering = false"
     >
@@ -62,11 +65,11 @@
                 nsSelect.e('selection'),
                 nsSelect.is(
                   'near',
-                  multiple && !$slots.prefix && !!modelValue.length
+                  multiple && !emptyDisplay && !$slots.prefix && !!modelValue.length
                 ),
               ]"
             >
-              <slot v-if="multiple" name="tag">
+              <slot v-if="multiple && !emptyDisplay" name="tag">
                 <div
                   v-for="item in showTagList"
                   :key="getValueKey(getValue(item))"
