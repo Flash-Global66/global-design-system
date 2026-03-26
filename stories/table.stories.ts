@@ -3338,12 +3338,7 @@ const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
     setup() {
       const tableData = ref([
         { id: 1, name: 'Juan Pérez', email: '', username: '' },
-        {
-          id: 2,
-          name: 'María García',
-          email: 'marianombreextensoperomuyextensodemasiadodeletras@example.com',
-          username: 'maria99'
-        },
+        { id: 2, name: 'María García', email: 'marianombreextensoperomuyextensodemasiadodeletras@example.com', username: 'maria99' },
         { id: 3, name: 'Carlos López', email: 'carlos-invalid', username: 'ab!' }
       ])
 
