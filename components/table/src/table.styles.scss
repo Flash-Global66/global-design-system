@@ -145,6 +145,7 @@
       @apply w-full flex flex-col gap-xxs;
       min-width: 0;
       width: 100%;
+      position: relative;
     }
     & .gui-table-cell-input-label {
       @apply text-3 font-medium text-primary-txt mb-xxs;
@@ -171,6 +172,26 @@
         border-color: var(--color-error);
         box-shadow: 0 0 0 1px var(--color-error);
       }
+    }
+    & .gui-table-cell-input-textarea--validating {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    & .gui-table-cell-input-textarea-loading {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      width: 14px;
+      height: 14px;
+      border: 2px solid transparent;
+      border-top-color: var(--color-everBlue-200, #60a5fa);
+      border-radius: 50%;
+      animation: gui-table-cell-textarea-spin 0.6s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes gui-table-cell-textarea-spin {
+      to { transform: rotate(360deg); }
     }
     & .gui-table-cell-edit-enter-active {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

@@ -11,6 +11,7 @@ import {
 } from './cell-expansion-utils'
 
 const defaultEditingState = ref<string | null>(null)
+const isAnyValidating = ref(false)
 
 type TableEmit = (event: string, ...args: unknown[]) => void
 
@@ -34,6 +35,7 @@ interface InputCellConfig {
   expandDirection: 'left' | 'right' | undefined
   validation: TableCellValidationApi | undefined
   isValidationError: boolean
+  isValidating: boolean
   validationMessage: string
   expandedWidthOption: number | ((row: unknown, prop: string, index?: number) => number | undefined) | undefined
   leftOffsetOption: number | ((row: unknown, prop: string, index?: number) => number | undefined) | undefined
@@ -91,7 +93,7 @@ function createTextareaEditVNode(
   inputWrapperClass: string,
   handleBlur: () => Promise<void>
 ): VNode {
-  const { label, displayValue, placeholder, isValidationError, messageError, rows, formatter, parser } = config
+  const { label, displayValue, placeholder, isValidationError, isValidating, messageError, rows, formatter, parser } = config
   const table = config.table
   const column = config.column
 
@@ -104,7 +106,9 @@ function createTextareaEditVNode(
       table.emit('cell-edit-change', config.row, column, v, oldValue)
     }
     if (config.validation) {
+      isAnyValidating.value = true
       config.validation.validate(v, config.row, config.prop, 'change', config.idx).then((result) => {
+        isAnyValidating.value = false
         if (table?.emit && column) {
           table.emit('cell-edit-validate', config.row, column, { valid: result.valid, message: result.message })
         }
@@ -117,8 +121,11 @@ function createTextareaEditVNode(
     { class: `${inputWrapperClass} gui-table-cell-input-textarea-wrapper` },
     [
       label ? h('label', { class: 'gui-table-cell-input-label' }, label) : null,
+      isValidating
+        ? h('span', { class: 'gui-table-cell-input-textarea-loading', 'aria-hidden': 'true' })
+        : null,
       h('textarea', {
-        class: `gui-table-cell-input-textarea ${isValidationError ? 'gui-table-cell-input-textarea--error' : ''}`,
+        class: `gui-table-cell-input-textarea ${isValidationError ? 'gui-table-cell-input-textarea--error' : ''} ${isValidating ? 'gui-table-cell-input-textarea--validating' : ''}`,
         rows: rows,
         value: displayValue,
         placeholder,
@@ -161,7 +168,7 @@ function createInputEditVNode(
   inputWrapperClass: string,
   handleBlur: () => Promise<void>
 ): VNode {
-  const { label, displayValue, placeholder, type, isValidationError, messageError, formatter, parser } = config
+  const { label, displayValue, placeholder, type, isValidationError, isValidating, messageError, formatter, parser } = config
   const table = config.table
   const column = config.column
 
@@ -174,7 +181,9 @@ function createInputEditVNode(
       table.emit('cell-edit-change', config.row, column, v, oldValue)
     }
     if (config.validation) {
+      isAnyValidating.value = true
       config.validation.validate(v, config.row, config.prop, 'change', config.idx).then((result) => {
+        isAnyValidating.value = false
         if (table?.emit && column) {
           table.emit('cell-edit-validate', config.row, column, { valid: result.valid, message: result.message })
         }
@@ -193,6 +202,7 @@ function createInputEditVNode(
         type: type === 'textarea' ? 'text' : type,
         formatter,
         parser,
+        loading: isValidating,
         messageError,
         class: `w-full ${isValidationError ? 'gui-table-cell-input--error' : ''}`,
         'aria-invalid': isValidationError,
@@ -231,6 +241,7 @@ function createReadVNode(
       role: 'button',
       tabIndex: 0,
       onClick: (e: MouseEvent) => {
+        if (isAnyValidating.value) return
         setActiveTableFromEvent(e)
         config.toggle(config.row, config.prop, config.idx)
         if (table?.emit && column) {
@@ -239,6 +250,7 @@ function createReadVNode(
       },
       onKeydown: (e: KeyboardEvent) => {
         if (e.key === 'Enter' || e.key === ' ') {
+          if (isAnyValidating.value) return
           e.preventDefault()
           setActiveTableFromEvent(e)
           config.toggle(config.row, config.prop, config.idx)
@@ -364,6 +376,7 @@ export function renderInputCell(
   const hasValidation = validation && validation.rules && validation.rules.length > 0
   const validationState = hasValidation ? validation.getValidationState(row, prop, idx) : null
   const isValidationError = validationState?.state === 'error'
+  const isValidating = validationState?.state === 'validating'
   const validationMessage = validationState?.message || ''
 
   const isEditing = getEditing(row, prop, idx)
@@ -406,6 +419,7 @@ export function renderInputCell(
     expandDirection,
     validation,
     isValidationError,
+    isValidating,
     validationMessage,
     expandedWidthOption: co?.expandedWidth as number | ((row: unknown, prop: string, index?: number) => number | undefined) | undefined,
     leftOffsetOption: co?.leftOffset as number | ((row: unknown, prop: string, index?: number) => number | undefined) | undefined,
@@ -435,7 +449,9 @@ export function renderInputCell(
         const currentState = validation.getValidationState(row, prop, idx)
         if (currentState.state === 'error') return
       }
+      isAnyValidating.value = true
       const result = await validation.validate(currentValue, row, prop, 'blur', idx)
+      isAnyValidating.value = false
       if (table?.emit && column) {
         table.emit('cell-edit-validate', row, column, { valid: result.valid, message: result.message })
       }
