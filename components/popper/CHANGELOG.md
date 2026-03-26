@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.11...@flash-global66/g-popper@0.0.12) (2026-03-25)
+
+
+### Bug Fixes
+
+* add validation to dont close edit in table ([#184](https://github.com/Flash-Global66/global-design-system/issues/184)) ([aa3b8e3](https://github.com/Flash-Global66/global-design-system/commit/aa3b8e33a2bdf697c50e51352fa8b0b4e25f666e))
+
+
+
+
+
 ## [0.0.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.10...@flash-global66/g-popper@0.0.11) (2025-08-14)
 
 

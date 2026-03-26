@@ -3354,6 +3354,8 @@ const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
         useRowIndex: true
       })
 
+      const takenUsernames = ['admin', 'root', 'superuser']
+
       const { cellOptions: usernameCellOptions } = useTableCellInput(tableData, {
         label: 'Usuario',
         placeholder: 'mínimo 4 caracteres, solo letras y números',
@@ -3365,6 +3367,20 @@ const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
             pattern: /^[a-zA-Z0-9]+$/,
             message: 'Solo letras y números',
             trigger: 'change'
+          },
+          {
+            asyncValidator: (_rule: unknown, value: unknown) => {
+              return new Promise<void>((resolve, reject) => {
+                setTimeout(() => {
+                  if (takenUsernames.includes(String(value))) {
+                    reject(new Error(`El usuario "${value}" ya está en uso`))
+                  } else {
+                    resolve()
+                  }
+                }, 500)
+              })
+            },
+            trigger: 'blur'
           }
         ],
         preventCloseOnError: true,
@@ -3386,15 +3402,15 @@ const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
         />
         <g-table-column
           prop="username"
-          label="Usuario (trigger: change)"
-          width="260"
+          label="Usuario (async, trigger: change)"
+          width="300"
           cell-type="input"
           :cell-options="usernameCellOptions"
         />
       </g-table>
       <div class="mt-md text-gray-500 text-3">
         <p><strong>Email</strong> — valida al salir (blur): la celda no cierra hasta que el valor sea válido.</p>
-        <p><strong>Usuario</strong> — valida mientras escribe (change): el error aparece en tiempo real y la celda tampoco cierra hasta que el valor sea válido.</p>
+        <p><strong>Usuario</strong> — valida mientras escribe (change) con asyncValidator (500 ms de delay). Prueba con <code>admin</code>, <code>root</code> o <code>superuser</code> para ver el error de usuario en uso. El spinner aparece mientras se ejecuta la validación asíncrona.</p>
       </div>
     </g-config-provider>`
   })
