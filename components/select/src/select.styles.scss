@@ -153,24 +153,25 @@
       @apply bg-white !important;
     }
 
-
     @at-root {
       @include b("popper") {
-        &.#{$state-prefix}light.#{$state-prefix}light {
-          @apply bg-white !important;
+        &.#{$namespace}-select__popper {
+          &.#{$state-prefix}light.#{$state-prefix}light {
+            @apply bg-white !important;
+
+            @include e("arrow") {
+              @apply shadow-none !important;
+              &::before {
+                @apply bg-white !important;
+              }
+            }
+          }
 
           @include e("arrow") {
-            @apply left-5 shadow-none !important;
+            @apply shadow-none !important;
             &::before {
               @apply bg-white !important;
             }
-          }
-        }
-
-        @include e("arrow") {
-          @apply left-5 shadow-none !important;
-          &::before {
-            @apply bg-white !important;
           }
         }
       }
