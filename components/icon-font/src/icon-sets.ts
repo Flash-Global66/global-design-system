@@ -111,6 +111,7 @@ export const ICON_SETS = {
     "3",
     "pen",
     "user-group",
+    "shield-check",
   ] as const,
 
   regular: [

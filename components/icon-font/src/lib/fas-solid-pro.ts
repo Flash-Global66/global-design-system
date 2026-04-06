@@ -110,5 +110,6 @@ export {
   fa2,
   fa3,
   faPen,
-  faUserGroup
+  faUserGroup,
+  faShieldCheck,
 } from "@fortawesome/pro-solid-svg-icons";
