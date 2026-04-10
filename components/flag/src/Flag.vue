@@ -39,5 +39,5 @@ validateFlagProps(props);
 
 const ns = useNamespace("flag");
 
-const { sizeValue, containerStyle, isLoaded, imageSrc, imageContainer, handleImageError, hasError } = useFlag(props);
+const { containerStyle, isLoaded, imageSrc, imageContainer, handleImageError, hasError } = useFlag(props);
 </script>
