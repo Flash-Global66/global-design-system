@@ -34,9 +34,7 @@ export const useFlag = (props: FlagProps): FlagState => {
   function resolveImageSrc(name: string): void {
     const assetPath = `../assets/flags/${String(name).toLowerCase().trim()}.svg`;
     const resolvedSrc = FLAG_ASSET_URLS[assetPath];
-    console.debug('[GFlag] lookup:', { name, assetPath, resolvedSrc, availableKeys: Object.keys(FLAG_ASSET_URLS).slice(0, 5) });
     if (!name || !resolvedSrc) {
-      console.warn(`[GFlag] No asset found for code "${name}". Path tried: ${assetPath}`);
       imageSrc.value = '';
       hasError.value = true;
       return;
@@ -47,7 +45,6 @@ export const useFlag = (props: FlagProps): FlagState => {
   resolveImageSrc(props.name ?? '');
 
   const handleImageError = (): void => {
-    console.warn(`[GFlag] Failed to load SVG for code "${props.name}" from: ${imageSrc.value}`);
     hasError.value = true;
   };
 
