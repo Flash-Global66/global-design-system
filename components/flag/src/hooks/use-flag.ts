@@ -16,10 +16,17 @@ export const useFlag = (props: FlagProps): FlagState => {
   let stopObserver: (() => void) | null = null;
   
   const sizeValue = computed<string>(() => FLAG_SIZES[props.size as keyof typeof FLAG_SIZES]);
-  
-  const imageSrc = computed<string>(() =>
-    new URL(`../assets/flags/${String(props.name).toLowerCase()}.svg`, import.meta.url).href
-  );
+
+  const imageSrc = ref<string>('');
+
+  function resolveImageSrc(name: string): void {
+    try {
+      imageSrc.value = new URL(`../assets/flags/${String(name).toLowerCase()}.svg`, import.meta.url).href;
+    } catch {
+      imageSrc.value = '';
+      hasError.value = true;
+    }
+  }
 
   const handleImageError = (): void => {
     hasError.value = true;
@@ -60,6 +67,7 @@ export const useFlag = (props: FlagProps): FlagState => {
   };
 
   onMounted(() => {
+    resolveImageSrc(props.name ?? '');
     setupObserver();
   });
 
@@ -69,9 +77,10 @@ export const useFlag = (props: FlagProps): FlagState => {
     }
   });
   
-  watch(() => props.name, () => {
+  watch(() => props.name, (name) => {
     isLoaded.value = false;
     hasError.value = false;
+    resolveImageSrc(name ?? '');
     setupObserver();
   });
 
