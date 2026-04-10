@@ -17,16 +17,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
-import { debugWarn, isString } from "element-plus/es/utils/index.mjs";;
+import { computed } from 'vue';
+import { debugWarn, isString } from "element-plus/es/utils/index.mjs";
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import type { IconString } from './types';
 import * as SolidPro from './lib/fas-solid-pro';
 import * as RegularPro from './lib/far-regular-pro';
 import * as LightPro from './lib/fal-light-pro';
 import * as BrandsFree from './lib/fab-free';
+import * as DuotonePro from './lib/fad-duotone-pro';
 import { iconProps } from './icon';
 
 // Registro de iconos
@@ -34,7 +34,8 @@ library.add(
   SolidPro,
   RegularPro,
   LightPro,
-  BrandsFree
+  BrandsFree,
+  DuotonePro
 );
 
 const props = defineProps(iconProps);

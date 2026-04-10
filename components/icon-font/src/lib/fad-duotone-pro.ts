@@ -12,5 +12,6 @@ export {
   faSparkles,
   faUniversity,
   faArrowToBottom,
-  faStore
+  faStore,
+  faArrowsRepeat
 } from '@fortawesome/pro-duotone-svg-icons';

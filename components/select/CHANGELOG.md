@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.3.2...@flash-global66/g-select@0.3.3) (2026-04-06)
+
+
+### Bug Fixes
+
+* correct visually dropdown ([#188](https://github.com/Flash-Global66/global-design-system/issues/188)) ([ee69cf1](https://github.com/Flash-Global66/global-design-system/commit/ee69cf108a19e76722c9a839fd1c6ade1e9f94dc))
+
+
+
+
+
 ## [0.3.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.3.1...@flash-global66/g-select@0.3.2) (2026-02-26)
 
 **Note:** Version bump only for package @flash-global66/g-select
