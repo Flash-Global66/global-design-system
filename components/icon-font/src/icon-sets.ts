@@ -232,6 +232,7 @@ export const ICON_SETS = {
     'star',
     'flag',
     'heart-pulse',
+    'ticket-perforated',
   ] as const,
 
   light: [
@@ -288,5 +289,6 @@ export const ICON_SETS = {
     "university",
     "arrow-to-bottom",
     "store",
+    "arrows-repeat",
   ] as const,
 } as const;
