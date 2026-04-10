@@ -232,7 +232,7 @@ export const ICON_SETS = {
     'star',
     'flag',
     'heart-pulse',
-    'ticket-perforated'
+    'ticket-perforated',
   ] as const,
 
   light: [
