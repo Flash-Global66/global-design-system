@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.19.2...@flash-global66/g-icon-font@0.20.0) (2026-04-10)
+
+
+### Features
+
+* add duotone icons and update icon sets ([#190](https://github.com/Flash-Global66/global-design-system/issues/190)) ([08b994b](https://github.com/Flash-Global66/global-design-system/commit/08b994b7e19487b5a4c357f3a8f934bea59c64e9))
+
+
+
+
+
 ## [0.19.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.19.1...@flash-global66/g-icon-font@0.19.2) (2026-03-26)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font
