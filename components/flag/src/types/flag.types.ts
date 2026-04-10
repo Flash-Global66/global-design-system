@@ -15,7 +15,8 @@ export interface FlagState {
   isLoaded: Ref<boolean>;
   hasError: Ref<boolean>;
   sizeValue: ComputedRef<string>;
-  imageSrc: Ref<string>;
+  containerStyle: ComputedRef<Record<string, string>>;
+  imageSrc: Readonly<Ref<string>>;
   imageContainer: Ref<HTMLElement | null>;
   handleImageError: () => void;
 }

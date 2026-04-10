@@ -2,12 +2,7 @@
   <figure
     :class="ns.b('container')"
     ref="imageContainer"
-    :style="{
-      width: sizeValue,
-      height: sizeValue,
-      minWidth: sizeValue,
-      minHeight: sizeValue,
-    }"
+    :style="containerStyle"
   >
     <img
       v-if="isLoaded && !hasError"
@@ -44,5 +39,5 @@ validateFlagProps(props);
 
 const ns = useNamespace("flag");
 
-const { sizeValue, isLoaded, imageSrc, imageContainer, handleImageError, hasError } = useFlag(props);
+const { sizeValue, containerStyle, isLoaded, imageSrc, imageContainer, handleImageError, hasError } = useFlag(props);
 </script>

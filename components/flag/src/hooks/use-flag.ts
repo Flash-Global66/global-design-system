@@ -1,8 +1,13 @@
-import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { computed, ref, readonly, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { FlagProps } from '../flag.props';
 import { FLAG_SIZES } from '../constants/flag.constants';
 import { FlagState } from '../types/flag.types';
+
+const FLAG_ASSET_URLS = import.meta.glob('../assets/flags/*.svg', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
 
 /**
  * Hook to handle the functionality of the Flag component
@@ -17,18 +22,31 @@ export const useFlag = (props: FlagProps): FlagState => {
   
   const sizeValue = computed<string>(() => FLAG_SIZES[props.size as keyof typeof FLAG_SIZES]);
 
+  const containerStyle = computed<Record<string, string>>(() => ({
+    width: sizeValue.value,
+    height: sizeValue.value,
+    minWidth: sizeValue.value,
+    minHeight: sizeValue.value,
+  }));
+
   const imageSrc = ref<string>('');
 
   function resolveImageSrc(name: string): void {
-    try {
-      imageSrc.value = new URL(`../assets/flags/${String(name).toLowerCase()}.svg`, import.meta.url).href;
-    } catch {
+    const assetPath = `../assets/flags/${String(name).toLowerCase().trim()}.svg`;
+    const resolvedSrc = FLAG_ASSET_URLS[assetPath];
+    if (!name || !resolvedSrc) {
+      console.warn(`[GFlag] No asset found for code "${name}". Path tried: ${assetPath}`);
       imageSrc.value = '';
       hasError.value = true;
+      return;
     }
+    imageSrc.value = resolvedSrc;
   }
 
+  resolveImageSrc(props.name ?? '');
+
   const handleImageError = (): void => {
+    console.warn(`[GFlag] Failed to load SVG for code "${props.name}" from: ${imageSrc.value}`);
     hasError.value = true;
   };
 
@@ -67,7 +85,6 @@ export const useFlag = (props: FlagProps): FlagState => {
   };
 
   onMounted(() => {
-    resolveImageSrc(props.name ?? '');
     setupObserver();
   });
 
@@ -81,14 +98,14 @@ export const useFlag = (props: FlagProps): FlagState => {
     isLoaded.value = false;
     hasError.value = false;
     resolveImageSrc(name ?? '');
-    setupObserver();
   });
 
   return {
     sizeValue,
+    containerStyle,
     isLoaded,
     hasError,
-    imageSrc,
+    imageSrc: readonly(imageSrc),
     imageContainer,
     handleImageError
   };
