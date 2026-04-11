@@ -1,5 +1,5 @@
 import { Ref, ComputedRef } from 'vue';
-import { COUNTRIES_CODE, SPECIAL_CODES, FLAG_SIZES } from '../constants/flag.constants';
+import { COUNTRIES_CODE, SPECIAL_CODES, FLAG_SIZES } from '../constants/country-flag.constants';
 
 export type CountryCode = typeof COUNTRIES_CODE[number];
 

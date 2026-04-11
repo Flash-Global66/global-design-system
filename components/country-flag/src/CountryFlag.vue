@@ -1,6 +1,6 @@
 <template>
   <figure
-    :class="ns.b('container')"
+    :class="ns.e('container')"
     ref="imageContainer"
     :style="containerStyle"
   >
@@ -30,14 +30,14 @@
 
 <script setup lang="ts">
 import { useNamespace } from "element-plus";
-import { flagProps, validateFlagProps } from "./flag.props";
-import { useFlag } from "./hooks/use-flag";
+import { flagProps, validateFlagProps } from "./country-flag.props";
+import { useCountryFlag } from "./hooks/use-country-flag";
 
 const props = defineProps(flagProps);
 
 validateFlagProps(props);
 
-const ns = useNamespace("flag");
+const ns = useNamespace("country-flag");
 
-const { containerStyle, isLoaded, imageSrc, imageContainer, handleImageError, hasError } = useFlag(props);
+const { containerStyle, isLoaded, imageSrc, imageContainer, handleImageError, hasError } = useCountryFlag(props);
 </script>

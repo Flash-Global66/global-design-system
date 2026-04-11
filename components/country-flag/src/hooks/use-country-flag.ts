@@ -1,26 +1,25 @@
 import { computed, ref, readonly, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
-import { FlagProps } from '../flag.props';
-import { FLAG_SIZES } from '../constants/flag.constants';
-import { FlagState } from '../types/flag.types';
+import { FlagProps } from '../country-flag.props';
+import { FLAG_SIZES } from '../constants/country-flag.constants';
+import { FlagState } from '../types/country-flag.types';
 
-const FLAG_ASSET_URLS = import.meta.glob('../assets/flags/*.svg', {
-  eager: true,
+const FLAG_ASSET_LOADERS = import.meta.glob('../assets/flags/*.svg', {
   import: 'default',
-}) as Record<string, string>;
+}) as Record<string, () => Promise<string>>;
 
 /**
  * Hook to handle the functionality of the Flag component
  * @param props - The props of the Flag component
  * @returns State and methods for the Flag component
  */
-export const useFlag = (props: FlagProps): FlagState => {
+export const useCountryFlag = (props: FlagProps): FlagState => {
   const isLoaded = ref<boolean>(false);
   const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
   let stopObserver: (() => void) | null = null;
   
-  const sizeValue = computed<string>(() => FLAG_SIZES[props.size as keyof typeof FLAG_SIZES]);
+  const sizeValue = computed<string>(() => FLAG_SIZES[props.size as keyof typeof FLAG_SIZES] ?? FLAG_SIZES.md);
 
   const containerStyle = computed<Record<string, string>>(() => ({
     width: sizeValue.value,
@@ -31,18 +30,21 @@ export const useFlag = (props: FlagProps): FlagState => {
 
   const imageSrc = ref<string>('');
 
-  function resolveImageSrc(name: string): void {
+  async function resolveImageSrc(name: string): Promise<void> {
     const assetPath = `../assets/flags/${String(name).toLowerCase().trim()}.svg`;
-    const resolvedSrc = FLAG_ASSET_URLS[assetPath];
-    if (!name || !resolvedSrc) {
+    const loader = FLAG_ASSET_LOADERS[assetPath];
+    if (!name || !loader) {
       imageSrc.value = '';
       hasError.value = true;
       return;
     }
-    imageSrc.value = resolvedSrc;
+    try {
+      imageSrc.value = await loader();
+    } catch {
+      imageSrc.value = '';
+      hasError.value = true;
+    }
   }
-
-  resolveImageSrc(props.name ?? '');
 
   const handleImageError = (): void => {
     hasError.value = true;
@@ -79,10 +81,13 @@ export const useFlag = (props: FlagProps): FlagState => {
       );
       
       stopObserver = stop;
+    } else {
+      loadImage();
     }
   };
 
-  onMounted(() => {
+  onMounted(async () => {
+    await resolveImageSrc(props.name ?? '');
     setupObserver();
   });
 
@@ -92,14 +97,14 @@ export const useFlag = (props: FlagProps): FlagState => {
     }
   });
   
-  watch(() => props.name, (name) => {
+  watch(() => props.name, async (name) => {
     isLoaded.value = false;
     hasError.value = false;
     if (stopObserver) {
       stopObserver();
       stopObserver = null;
     }
-    resolveImageSrc(name ?? '');
+    await resolveImageSrc(name ?? '');
     if (!hasError.value) {
       setupObserver();
     }
