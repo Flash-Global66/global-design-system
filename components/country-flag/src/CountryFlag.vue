@@ -21,7 +21,7 @@
       v-else
       :class="[ns.e('placeholder'), `text-size-${size}`]"
       role="img"
-      aria-label="Error al cargar la bandera"
+      :aria-label="`Error al cargar la bandera: ${name}`"
     >
       404
     </div>
