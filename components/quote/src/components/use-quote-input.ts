@@ -28,7 +28,7 @@ export function useQuoteInput(props: QuoteInputProps, emit: QuoteInputEmit) {
   })
 
   const isFocused = ref(false)
-  const isBig = computed(() => isFocused.value && !props.quoteDone && !props.isResult)
+  const isBig = computed(() => isFocused.value && !props.quoteDone)
 
   const selectedCurrency = computed<Currency | null>(
     () => props.currencies?.find((c: Currency) => c.code === props.currencyCode) ?? null
