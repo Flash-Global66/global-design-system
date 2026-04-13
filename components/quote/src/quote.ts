@@ -37,7 +37,7 @@ export const quoteEmits = {
   'from-currency-change': (currency: Currency) => !!currency,
   'to-currency-change': (currency: Currency) => !!currency,
   swap: (payload: { from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode; toFlagCode?: FlagCode }) =>
-    typeof payload.from === 'string' && typeof payload.to === 'string' && typeof payload.fromAmount === 'string',
+    typeof payload.from === 'string' && typeof payload.to === 'string' && typeof payload.fromAmount === 'string' && typeof payload.toAmount === 'string',
   'from-focus': () => true,
   'to-focus': () => true,
   'action-click': () => true,

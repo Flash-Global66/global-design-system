@@ -79,19 +79,23 @@ export function useQuote(props: QuoteProps, emit: QuoteEmit) {
   }
 
   async function onSwap() {
+    if (isSwapFading.value) return
     isSwapFading.value = true
-    await delay(SWAP_FADE_MS)
-    emit('swap', {
-      from: props.toCurrency,
-      to: props.fromCurrency,
-      fromAmount: props.toAmount || '',
-      toAmount: props.fromAmount || '',
-      fromFlagCode: props.toFlagCode,
-      toFlagCode: props.fromFlagCode,
-    })
-    await nextTick()
-    isSwapFading.value = false
-    swapRotation.value = (swapRotation.value + 180) % 360
+    try {
+      await delay(SWAP_FADE_MS)
+      emit('swap', {
+        from: props.toCurrency,
+        to: props.fromCurrency,
+        fromAmount: props.toAmount || '',
+        toAmount: props.fromAmount || '',
+        fromFlagCode: props.toFlagCode,
+        toFlagCode: props.fromFlagCode,
+      })
+      await nextTick()
+      swapRotation.value = (swapRotation.value + 180) % 360
+    } finally {
+      isSwapFading.value = false
+    }
   }
 
   return {

@@ -25,9 +25,9 @@
           :placeholder="fromPlaceholder"
           :empty-results-text="emptyResultsText"
           @input="onFromInput"
-          @blur="$emit('from-blur', $event)"
+          @blur="emit('from-blur', $event)"
           @focus="onFromFocus"
-          @currency-change="$emit('from-currency-change', $event)"
+          @currency-change="emit('from-currency-change', $event)"
         />
       </div>
 
@@ -61,9 +61,9 @@
           :placeholder="toPlaceholder"
           :empty-results-text="emptyResultsText"
           @input="onToInput"
-          @blur="$emit('to-blur', $event)"
+          @blur="emit('to-blur', $event)"
           @focus="onToFocus"
-          @currency-change="$emit('to-currency-change', $event)"
+          @currency-change="emit('to-currency-change', $event)"
         />
       </div>
 

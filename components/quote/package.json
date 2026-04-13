@@ -10,7 +10,8 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/quote.styles.scss"
+    "./styles.scss": "./src/quote.styles.scss",
+    "./*": "./*"
   },
   "files": [
     "dist",
