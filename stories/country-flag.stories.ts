@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import { ref, onMounted, onUnmounted } from 'vue';
-import { GFlag, ALL_FLAG_CODES, FLAG_SIZES } from '@flash-global66/g-flag/index.ts';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { GCountryFlag, ALL_FLAG_CODES, FLAG_SIZES } from '@flash-global66/g-country-flag/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
 import { GInput } from '@flash-global66/g-input';
 import { GButton } from '@flash-global66/g-button';
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { GConfigProvider } from '../components/config-provider';
 import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories';
-import { version, peerDependencies } from '@flash-global66/g-flag/package.json';
+import { version, peerDependencies } from '@flash-global66/g-country-flag/package.json';
 
-const meta: Meta<typeof GFlag> = {
-  title: 'Basic/Flag',
-  component: GFlag,
+const meta: Meta<typeof GCountryFlag> = {
+  title: 'Basic/CountryFlag',
+  component: GCountryFlag,
   parameters: {
     docs: {
       description: {
         component: `
-El componente Flag muestra banderas de países y códigos especiales mediante imágenes SVG optimizadas con lazy loading.
+El componente CountryFlag muestra banderas de países y códigos especiales mediante imágenes SVG optimizadas con lazy loading.
 
 > Versión actual: ${version}
 
@@ -31,16 +31,16 @@ El componente Flag muestra banderas de países y códigos especiales mediante im
 ## Instalación
 
 \`\`\`bash
-yarn add @flash-global66/g-flag
+yarn add @flash-global66/g-country-flag
 \`\`\`
 
 ## Importación del componente
 \`\`\`typescript
-# importar donde se va a utilizar
-import { GFlag } from '@flash-global66/g-flag'
+// Importar donde se va a utilizar
+import { GCountryFlag } from '@flash-global66/g-country-flag'
 
-# recomendado importar en los estilos globales
-@use '@flash-global66/g-flag/styles.scss'
+// Recomendado: importar en los estilos globales
+@use '@flash-global66/g-country-flag/styles.scss'
 \`\`\`
 
 ## Dependencias
@@ -68,9 +68,9 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 
 ## Agregar nuevas banderas al componente
 
-1. Coloca el archivo SVG en \`components/flag/assets/flags/\` con el código ISO en minúsculas (ej: \`co.svg\`)
-2. Añade el código en \`src/constants/flag.constants.ts\` dentro de \`COUNTRIES_CODE\` o \`SPECIAL_CODES\`
-3. Ejecuta \`yarn build flag\`
+1. Coloca el archivo SVG en \`components/country-flag/src/assets/flags/\` con el código ISO en minúsculas (ej: \`co.svg\`)
+2. Añade el código en \`src/constants/country-flag.constants.ts\` dentro de \`COUNTRIES_CODE\` o \`SPECIAL_CODES\`
+3. Ejecuta \`yarn build country-flag\`
         `
       }
     }
@@ -114,33 +114,36 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 } as Meta;
 
 export default meta;
-type Story = StoryObj<typeof GFlag>;
+type Story = StoryObj<typeof GCountryFlag>;
 
 export const Primary: Story = {
   name: 'Uso básico',
   render: (args) => ({
-    components: { GFlag, GConfigProvider },
+    components: { GCountryFlag, GConfigProvider },
     setup() {
       return { args };
     },
     template: `
       <g-config-provider>
         <div class="flex flex-col gap-4">
-          <g-flag v-bind="args" />
+          <g-country-flag v-bind="args" />
         </div>
       </g-config-provider>
     `
   }),
   parameters: {
     docs: {
+      description: {
+        story: 'Uso básico del componente con los valores predeterminados. Permite explorar las props mediante los controles interactivos.'
+      },
       source: {
         code: `
 <template>
-  <g-flag name="CO" size="md" />
+  <g-country-flag name="CO" size="md" />
 </template>
 
 <script setup>
-import { GFlag } from '@flash-global66/g-flag';
+import { GCountryFlag } from '@flash-global66/g-country-flag';
 </script>
 `,
         language: 'html'
@@ -152,7 +155,7 @@ import { GFlag } from '@flash-global66/g-flag';
 export const Sizes: Story = {
   name: 'Tamaños disponibles',
   render: (args) => ({
-    components: { GFlag, GConfigProvider },
+    components: { GCountryFlag, GConfigProvider },
     setup() {
       const sizes = Object.keys(FLAG_SIZES);
       return { args, sizes, FLAG_SIZES };
@@ -165,7 +168,7 @@ export const Sizes: Story = {
               class="flex items-center justify-center"
               :style="{ width: FLAG_SIZES[size], height: FLAG_SIZES[size], minHeight: FLAG_SIZES[size], minWidth: FLAG_SIZES[size] }"
             >
-              <g-flag v-bind="args" :size="size" />
+              <g-country-flag v-bind="args" :size="size" />
             </div>
             <span class="mt-2 text-sm text-gray-500">{{ size }} ({{ FLAG_SIZES[size] }})</span>
           </div>
@@ -175,33 +178,36 @@ export const Sizes: Story = {
   }),
   parameters: {
     docs: {
+      description: {
+        story: 'El componente ofrece siete tamaños predefinidos (xs a 3xl) para adaptarse a distintos contextos de uso.'
+      },
       source: {
         code: `
 <template>
   <!-- Tamaño xs: 16x16px -->
-  <g-flag name="CO" size="xs" />
+  <g-country-flag name="CO" size="xs" />
 
   <!-- Tamaño sm: 24x24px -->
-  <g-flag name="CO" size="sm" />
+  <g-country-flag name="CO" size="sm" />
 
   <!-- Tamaño md: 32x32px (por defecto) -->
-  <g-flag name="CO" size="md" />
+  <g-country-flag name="CO" size="md" />
 
   <!-- Tamaño lg: 40x40px -->
-  <g-flag name="CO" size="lg" />
+  <g-country-flag name="CO" size="lg" />
 
   <!-- Tamaño xl: 48x48px -->
-  <g-flag name="CO" size="xl" />
+  <g-country-flag name="CO" size="xl" />
 
   <!-- Tamaño 2xl: 128x128px -->
-  <g-flag name="CO" size="2xl" />
+  <g-country-flag name="CO" size="2xl" />
 
   <!-- Tamaño 3xl: 256x256px -->
-  <g-flag name="CO" size="3xl" />
+  <g-country-flag name="CO" size="3xl" />
 </template>
 
 <script setup>
-import { GFlag } from '@flash-global66/g-flag';
+import { GCountryFlag } from '@flash-global66/g-country-flag';
 </script>
 `,
         language: 'html'
@@ -222,15 +228,15 @@ export const Gallery: Story = {
 <template>
   <div class="gallery-container">
     <div v-for="code in ['CO', 'MX', 'US', 'ES', 'AR']" :key="code" class="flag-item">
-      <g-flag :name="code" size="md" />
+      <g-country-flag :name="code" size="md" />
       <span class="flag-code">{{ code }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { GFlag } from '@flash-global66/g-flag';
-// import { ALL_FLAG_CODES } from '@flash-global66/g-flag';
+import { GCountryFlag } from '@flash-global66/g-country-flag';
+// import { ALL_FLAG_CODES } from '@flash-global66/g-country-flag';
 </script>
 
 <style scoped>
@@ -259,7 +265,7 @@ import { GFlag } from '@flash-global66/g-flag';
     }
   },
   render: () => ({
-    components: { GFlag, GConfigProvider, GSegmented, GInput, GButton, GIconFont },
+    components: { GCountryFlag, GConfigProvider, GSegmented, GInput, GButton, GIconFont },
     setup() {
       const selectedSize = ref('md');
       const searchTerm = ref('');
@@ -271,6 +277,11 @@ import { GFlag } from '@flash-global66/g-flag';
       }));
 
       const filteredFlags = ref<string[]>([...ALL_FLAG_CODES]);
+
+      const gridMinWidth = computed(() => {
+        const size = parseInt(FLAG_SIZES[selectedSize.value as keyof typeof FLAG_SIZES]);
+        return `${size + 32}px`;
+      });
 
       const updateFilteredFlags = () => {
         if (!searchTerm.value.trim()) {
@@ -292,41 +303,35 @@ import { GFlag } from '@flash-global66/g-flag';
             copiedCode.value = code;
             setTimeout(() => { copiedCode.value = null; }, 1500);
           })
-          .catch(() => {
-            alert('No se pudo copiar el código de la bandera');
-          });
+          .catch(() => {});
       };
 
-      onMounted(() => {
-        const styleElement = document.createElement('style');
-        styleElement.textContent = `
-          .flag-copy-animation {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-color: #10b981;
-            z-index: 10;
-          }
-          @keyframes flagFadeInOut {
-            0%   { opacity: 0; transform: translateY(10px); }
-            20%  { opacity: 1; transform: translateY(0); }
-            80%  { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
-          }
-          .flag-copy-feedback {
-            animation: flagFadeInOut 1.5s ease forwards;
-          }
-        `;
-        document.head.appendChild(styleElement);
+      const styleElement = document.createElement('style');
+      styleElement.textContent = `
+        @keyframes flagFadeInOut {
+          0%   { opacity: 0; transform: translateY(10px); }
+          20%  { opacity: 1; transform: translateY(0); }
+          80%  { opacity: 1; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-10px); }
+        }
+        .flag-copy-feedback {
+          animation: flagFadeInOut 1.5s ease forwards;
+        }
+      `;
 
-        onUnmounted(() => {
-          if (styleElement.parentNode) styleElement.parentNode.removeChild(styleElement);
-        });
+      onMounted(() => {
+        document.head.appendChild(styleElement);
+      });
+
+      onUnmounted(() => {
+        if (styleElement.parentNode) styleElement.parentNode.removeChild(styleElement);
       });
 
       return {
         ALL_FLAG_CODES,
         FLAG_SIZES,
         selectedSize,
+        gridMinWidth,
         sizeOptions,
         searchTerm,
         clearSearch,
@@ -367,12 +372,12 @@ import { GFlag } from '@flash-global66/g-flag';
             </g-button>
           </div>
 
-          <div class="grid gap-3" style="grid-template-columns: repeat(auto-fill, minmax(72px, 1fr))">
+          <div class="grid gap-3" :style="{ gridTemplateColumns: 'repeat(auto-fill, minmax(' + gridMinWidth + ', 1fr))' }">
             <div
               v-for="code in filteredFlags"
               :key="code"
               class="flex bg-white flex-col items-center justify-center p-2 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600 relative overflow-hidden transition-all duration-300"
-              :class="{ 'flag-copy-animation': copiedCode === code }"
+              :class="{ 'scale-105 shadow-md border-emerald-500 z-10': copiedCode === code }"
               :title="code"
               @click="copyFlagCode(code)"
             >
@@ -385,7 +390,7 @@ import { GFlag } from '@flash-global66/g-flag';
                   minWidth: FLAG_SIZES[selectedSize]
                 }"
               >
-                <g-flag :name="code" :size="selectedSize" />
+                <g-country-flag :name="code" :size="selectedSize" />
               </div>
               <span class="text-xs text-center font-mono w-full truncate">{{ code }}</span>
 
@@ -417,10 +422,10 @@ export const ErrorHandling: Story = {
       source: {
         code: `
 <!-- Esta bandera no existe y mostrará el estado de error -->
-<g-flag name="XX" size="md" />
+<g-country-flag name="XX" size="md" />
 
 <script setup>
-import { GFlag } from '@flash-global66/g-flag';
+import { GCountryFlag } from '@flash-global66/g-country-flag';
 </script>
 `,
         language: 'html'
@@ -428,7 +433,7 @@ import { GFlag } from '@flash-global66/g-flag';
     }
   },
   render: () => ({
-    components: { GFlag, GConfigProvider },
+    components: { GCountryFlag, GConfigProvider },
     setup() {
       const errorSizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
       return { FLAG_SIZES, errorSizes };
@@ -442,7 +447,7 @@ import { GFlag } from '@flash-global66/g-flag';
               :key="size"
               class="flex flex-col items-center gap-2"
             >
-              <g-flag name="XX" :size="size" />
+              <g-country-flag name="XX" :size="size" />
               <span class="text-sm text-gray-500">{{ size }} ({{ FLAG_SIZES[size] }})</span>
             </div>
           </div>
