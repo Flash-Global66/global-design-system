@@ -23,6 +23,7 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "peerDependencies": {
+    "@flash-global66/g-checkbox": "^0.2.1",
     "@flash-global66/g-config-provider": "0.0.8",
     "@flash-global66/g-dialog": "0.0.8",
     "@flash-global66/g-image": "0.0.3",

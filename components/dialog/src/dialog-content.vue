@@ -48,6 +48,7 @@
             v-for="(button, index) in displayButtons"
             :key="index"
             :variant="button.variant"
+            :disabled="button.disabled"
             full
             @click="button.onClick"
           >
