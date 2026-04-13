@@ -1,26 +1,15 @@
-import GCountryFlag from "./src/CountryFlag.vue";
-import { useCountryFlag } from "./src/hooks/use-country-flag";
-import { FLAG_SIZES, COUNTRIES_CODE, SPECIAL_CODES, ALL_FLAG_CODES } from './src/constants/country-flag.constants';
-import type { CountryCode, SpecialCode, FlagCode, FlagSize, FlagState } from './src/types/country-flag.types';
-import { flagProps, validateFlagProps } from './src/country-flag.props';
-import type { FlagProps } from './src/country-flag.props';
+import CountryFlag from './src/CountryFlag.vue'
+import { withInstall, SFCWithInstall } from 'element-plus/es/utils/index.mjs'
 
-export { 
-  GCountryFlag,
-  useCountryFlag,
-  FLAG_SIZES,
-  COUNTRIES_CODE,
-  SPECIAL_CODES,
-  ALL_FLAG_CODES,
-  flagProps, 
-  validateFlagProps
-};
+export const GCountryFlag: SFCWithInstall<typeof CountryFlag> & {
+  CountryFlag: typeof CountryFlag
+} = withInstall(CountryFlag, { CountryFlag })
 
-export type {
-  CountryCode,
-  SpecialCode,
-  FlagCode,
-  FlagSize,
-  FlagState,
-  FlagProps
-};
+export default GCountryFlag
+
+export * from './src/country-flag.props'
+export * from './src/types/country-flag.types'
+export * from './src/constants/country-flag.constants'
+export * from './src/hooks/use-country-flag'
+
+export type CountryFlagInstance = InstanceType<typeof CountryFlag>

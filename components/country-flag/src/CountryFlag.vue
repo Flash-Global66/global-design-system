@@ -33,6 +33,8 @@ import { useNamespace } from "element-plus";
 import { flagProps, validateFlagProps } from "./country-flag.props";
 import { useCountryFlag } from "./hooks/use-country-flag";
 
+defineOptions({ name: 'GCountryFlag' })
+
 const props = defineProps(flagProps);
 
 validateFlagProps(props);

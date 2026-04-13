@@ -1,19 +1,14 @@
 import { computed, ref, readonly, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
-import { FlagProps } from '../country-flag.props';
+import type { FlagProps } from '../country-flag.props';
 import { FLAG_SIZES } from '../constants/country-flag.constants';
-import { FlagState } from '../types/country-flag.types';
+import type { FlagState } from '../types/country-flag.types';
 
 const FLAG_ASSET_LOADERS = import.meta.glob('../assets/flags/*.svg', {
   import: 'default',
 }) as Record<string, () => Promise<string>>;
 
-/**
- * Hook to handle the functionality of the Flag component
- * @param props - The props of the Flag component
- * @returns State and methods for the Flag component
- */
-export const useCountryFlag = (props: FlagProps): FlagState => {
+export function useCountryFlag(props: FlagProps): FlagState {
   const isLoaded = ref<boolean>(false);
   const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
@@ -111,12 +106,11 @@ export const useCountryFlag = (props: FlagProps): FlagState => {
   });
 
   return {
-    sizeValue,
     containerStyle,
     isLoaded,
     hasError,
     imageSrc: readonly(imageSrc),
     imageContainer,
     handleImageError
-  };
-};
+  }
+}

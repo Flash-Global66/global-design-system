@@ -1,42 +1,30 @@
-import type { ExtractPropTypes, PropType } from 'vue';
-import { buildProps, debugWarn } from 'element-plus/es/utils/index';
-import type { FlagCode, FlagSize, FlagLazyLoad } from './types/country-flag.types';
-import { ALL_FLAG_CODES } from './constants/country-flag.constants';
+import type { ExtractPropTypes } from 'vue'
+import { buildProps, definePropType, debugWarn } from 'element-plus/es/utils/index.mjs'
+import type { FlagCode, FlagSize } from './types/country-flag.types'
+import { ALL_FLAG_CODES } from './constants/country-flag.constants'
 
-/**
- * Props definition for the Flag component
- */
 export const flagProps = buildProps({
-  /**
-   * 2-letter country code (ISO 3166-1 alpha-2). Uppercase is recommended.
-   */
   name: {
-    type: String as PropType<FlagCode>,
+    type: definePropType<FlagCode>(String),
     required: true,
   },
-  /**
-   * Size key
-   */
   size: {
-    type: String as PropType<FlagSize>,
+    type: definePropType<FlagSize>(String),
     default: 'md',
   },
-  /**
-   * Whether to lazy load the flag
-   */
   lazyLoad: {
-    type: Boolean as PropType<FlagLazyLoad>,
+    type: Boolean,
     default: true,
   },
-});
+} as const)
 
-export type FlagProps = ExtractPropTypes<typeof flagProps>;
+export type FlagProps = ExtractPropTypes<typeof flagProps>
 
 export function validateFlagProps(props: FlagProps) {
   if (props.name && !ALL_FLAG_CODES.includes(String(props.name).toUpperCase() as FlagCode)) {
     debugWarn(
       'GCountryFlag',
       `Invalid flag name: "${props.name}". Use a valid ISO 3166-1 alpha-2 code (e.g. "CO", "US") or a special code (e.g. "EU", "USDC").`
-    );
+    )
   }
 }

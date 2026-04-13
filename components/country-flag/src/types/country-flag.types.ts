@@ -14,7 +14,6 @@ export type FlagLazyLoad = boolean;
 export interface FlagState {
   isLoaded: Ref<boolean>;
   hasError: Ref<boolean>;
-  sizeValue: ComputedRef<string>;
   containerStyle: ComputedRef<Record<string, string>>;
   imageSrc: Readonly<Ref<string>>;
   imageContainer: Ref<HTMLElement | null>;

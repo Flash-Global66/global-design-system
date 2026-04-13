@@ -303,35 +303,28 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
             copiedCode.value = code;
             setTimeout(() => { copiedCode.value = null; }, 1500);
           })
-          .catch(() => {
-            alert('No se pudo copiar el código de la bandera');
-          });
+          .catch(() => {});
       };
 
-      onMounted(() => {
-        const styleElement = document.createElement('style');
-        styleElement.textContent = `
-          .flag-copy-animation {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-color: #10b981;
-            z-index: 10;
-          }
-          @keyframes flagFadeInOut {
-            0%   { opacity: 0; transform: translateY(10px); }
-            20%  { opacity: 1; transform: translateY(0); }
-            80%  { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
-          }
-          .flag-copy-feedback {
-            animation: flagFadeInOut 1.5s ease forwards;
-          }
-        `;
-        document.head.appendChild(styleElement);
+      const styleElement = document.createElement('style');
+      styleElement.textContent = `
+        @keyframes flagFadeInOut {
+          0%   { opacity: 0; transform: translateY(10px); }
+          20%  { opacity: 1; transform: translateY(0); }
+          80%  { opacity: 1; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-10px); }
+        }
+        .flag-copy-feedback {
+          animation: flagFadeInOut 1.5s ease forwards;
+        }
+      `;
 
-        onUnmounted(() => {
-          if (styleElement.parentNode) styleElement.parentNode.removeChild(styleElement);
-        });
+      onMounted(() => {
+        document.head.appendChild(styleElement);
+      });
+
+      onUnmounted(() => {
+        if (styleElement.parentNode) styleElement.parentNode.removeChild(styleElement);
       });
 
       return {
@@ -384,7 +377,7 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
               v-for="code in filteredFlags"
               :key="code"
               class="flex bg-white flex-col items-center justify-center p-2 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600 relative overflow-hidden transition-all duration-300"
-              :class="{ 'flag-copy-animation': copiedCode === code }"
+              :class="{ 'scale-105 shadow-md border-emerald-500 z-10': copiedCode === code }"
               :title="code"
               @click="copyFlagCode(code)"
             >
