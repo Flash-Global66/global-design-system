@@ -995,6 +995,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-quote@workspace:components/quote":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-quote@workspace:components/quote"
+  peerDependencies:
+    "@flash-global66/g-country-flag": ^0.0.1
+    "@flash-global66/g-dropdown": ^0.1.0
+    "@flash-global66/g-icon-font": ^0.13.0
+    vue: ^3.2.0
+    vue-currency-input: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-radio-group@workspace:components/radio-group":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-radio-group@workspace:components/radio-group"
@@ -1211,6 +1223,7 @@ __metadata:
     vite: "npm:5.2.11"
     vite-dts: "npm:1.0.4"
     vue: "npm:3.5.18"
+    vue-currency-input: "npm:3.2.2"
     vue-loader: "npm:16.8.3"
     vue-router: "npm:4.5.1"
     vue-tsc: "npm:2.2.12"
@@ -10316,6 +10329,15 @@ __metadata:
   version: 3.1.4
   resolution: "vue-component-type-helpers@npm:3.1.4"
   checksum: 10c0/82a30a3ee271bab57c697e04b46716521575fde6a1f397edeb8c69f9edf7fe705d8bbc9cafa501e6294ceaee9e5585daadf3f6385209479bd82f88ae54730b25
+  languageName: node
+  linkType: hard
+
+"vue-currency-input@npm:3.2.2":
+  version: 3.2.2
+  resolution: "vue-currency-input@npm:3.2.2"
+  peerDependencies:
+    vue: ^2.7 || ^3.0.0
+  checksum: 10c0/5fdcc415bffeecf72f50135b57fcb08d4c8457c7379067c9a0076668290b98d1c8ec94c9c07220ede31f5b932947d225b23959c77d636207816939c862052c71
   languageName: node
   linkType: hard
 
