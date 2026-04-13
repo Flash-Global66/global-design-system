@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.4...@flash-global66/g-dialog@1.2.0) (2026-04-13)
+
+
+### Features
+
+* **dialog-alert:** add checkbox support to dialog alert component ([f65c591](https://github.com/Flash-Global66/global-design-system/commit/f65c5919823c339eb9c206f2a7e375743105b079))
+
+
+
+
+
 ## [1.1.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.3...@flash-global66/g-dialog@1.1.4) (2025-10-15)
 
 
