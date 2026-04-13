@@ -1,0 +1,21 @@
+import { Ref, ComputedRef } from 'vue';
+import { COUNTRIES_CODE, SPECIAL_CODES, FLAG_SIZES } from '../constants/country-flag.constants';
+
+export type CountryCode = typeof COUNTRIES_CODE[number];
+
+export type SpecialCode = typeof SPECIAL_CODES[number];
+
+export type FlagCode = CountryCode | SpecialCode;
+
+export type FlagSize = keyof typeof FLAG_SIZES;
+
+export type FlagLazyLoad = boolean;
+
+export interface FlagState {
+  isLoaded: Ref<boolean>;
+  hasError: Ref<boolean>;
+  containerStyle: ComputedRef<Record<string, string>>;
+  imageSrc: Readonly<Ref<string>>;
+  imageContainer: Ref<HTMLElement | null>;
+  handleImageError: () => void;
+}
