@@ -12,7 +12,8 @@
 
 @include b('table') {
   tbody {
-    &:has(.gui-table-cell-input-editing) {
+    &:has(.gui-table-cell-input-editing),
+    &:has(.gui-table-cell-select-editing) {
       overflow: visible !important;
     }
   }
@@ -76,7 +77,8 @@
         @apply bg-everBlue-100 bg-opacity-30;
       }
     }
-    &:has(.gui-table-cell-input-editing) {
+    &:has(.gui-table-cell-input-editing),
+    &:has(.gui-table-cell-select-editing) {
       overflow: visible !important;
       & .cell {
         overflow: visible !important;
@@ -110,11 +112,27 @@
         @apply border-everBlue-200;
       }
     }
+    // Select read: cell .cell already sets min-height; avoid double min-height + extra vertical padding.
     & .gui-table-cell-select-read {
-      @apply w-full flex items-center justify-center cursor-pointer outline-none py-xxs px-xs rounded;
-      min-height: 3.8rem;
+      @apply w-full h-full min-h-0 max-w-full flex items-center justify-start cursor-pointer outline-none py-0 px-xs rounded;
       &:focus {
         @apply ring-1 ring-everBlue-200 ring-offset-0;
+      }
+    }
+    & .gui-table-cell-select-inner {
+      @apply min-w-0 w-full h-full flex items-center justify-start;
+    }
+    & .gui-table-cell-edit-wrapper:has(.gui-table-cell-select-inner) {
+      justify-content: flex-start;
+    }
+
+    // align="center" sets is-center + text-align:center on the td; select editors should stay
+    // left-aligned like Storybook (columns without align).
+    &.is-center:has(.gui-table-cell-select-inner) {
+      text-align: left;
+
+      & .cell {
+        justify-content: flex-start;
       }
     }
     & .gui-table-cell-input {
@@ -132,8 +150,11 @@
       }
     }
     & .gui-table-cell-edit-wrapper {
-      @apply w-full flex items-center;
+      @apply w-full flex items-center bg-white;
       min-height: 3.8rem;
+      &:hover {
+        @apply bg-everBlue-100 !important;
+      }
       &.has-textarea {
         @apply items-start;
         align-items: flex-start;
@@ -224,7 +245,7 @@
   }
 
   @include e('row') {
-    @apply transition-all duration-200 ease-in;
+    @apply transition-colors duration-200 ease-in;
 
     /* &:has(.is-checked) {
       @apply bg-everBlue-50 border-everBlue-100 !important;
@@ -234,6 +255,9 @@
       & .gui-table__cell {
         @apply bg-everBlue-50 !important;
       }
+    }
+    &:hover .gui-table-cell-edit-wrapper {
+      @apply bg-everBlue-50;
     }
     @include m('striped') {
       & .gui-table__cell {
@@ -245,6 +269,30 @@
   & .gui-table-column--selection {
     & .cell {
       @apply flex items-center justify-center h-9;
+    }
+  }
+
+  // Horizontal scroll: instant content motion; no shadow/transition easing on fixed columns.
+  @include e('body-wrapper') {
+    .gui-scrollbar__wrap {
+      scroll-behavior: auto;
+    }
+  }
+
+  @include e((header-wrapper, body-wrapper, footer-wrapper)) {
+    tr {
+      td,
+      th {
+        &.gui-table-fixed-column--left,
+        &.gui-table-fixed-column--right {
+          &.is-last-column,
+          &.is-first-column {
+            &::before {
+              transition: none;
+            }
+          }
+        }
+      }
     }
   }
 }

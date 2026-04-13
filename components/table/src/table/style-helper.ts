@@ -14,6 +14,7 @@ import type { Table, TableProps } from './defaults'
 import type { Store } from '../store'
 import type TableLayout from '../table-layout'
 import type { TableColumnCtx } from '../table-column/defaults'
+import { parseWidth } from '../util'
 
 function useStyle<T>(
   props: TableProps<T>,
@@ -107,17 +108,41 @@ function useStyle<T>(
     }
   })
 
+  function applyScrollMinWidth() {
+    const raw = props.scrollMinWidth
+    if (raw === undefined || raw === null || raw === '') return
+    const parsed = parseWidth(raw)
+    if (parsed === '') return
+    const minW = Number(parsed)
+    if (!Number.isFinite(minW) || minW <= 0) return
+    const el = table.vnode.el as HTMLElement | undefined
+    if (!el) return
+    const current = Number(layout.bodyWidth.value) || 0
+    const nextWidth = Math.max(current, minW)
+    layout.bodyWidth.value = nextWidth
+    layout.scrollX.value = nextWidth > el.clientWidth
+  }
+
   const doLayout = () => {
     if (shouldUpdateHeight.value) {
       layout.updateElsHeight()
     }
     layout.updateColumnsWidth()
+    applyScrollMinWidth()
 
     // When the test case is running, the context environment simulated by jsdom may have been destroyed,
     // and window.requestAnimationFrame does not exist at this time.
     if (typeof window === 'undefined') return
     requestAnimationFrame(syncPosition)
   }
+
+  watch(
+    () => props.scrollMinWidth,
+    () => {
+      nextTick(() => doLayout())
+    }
+  )
+
   onMounted(async () => {
     await nextTick()
     store.updateColumns()

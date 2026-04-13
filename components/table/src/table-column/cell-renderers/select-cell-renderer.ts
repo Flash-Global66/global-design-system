@@ -13,6 +13,7 @@ interface SelectOption {
   value: string | number
   title?: string
   label?: string
+  description?: string
 }
 
 function getColumnIndex(column: TableColumnCtx<unknown>, data: RenderCellData): number {
@@ -40,8 +41,9 @@ export function renderSelectCell(
   cellOptions?: Record<string, unknown>,
   table?: { emit: TableEmit }
 ): VNode | null {
-  const opts = (cellOptions?.options as SelectOption[]) || []
   const co = cellOptions as Record<string, unknown> | undefined
+  const getOptionsFn = co?.getOptions as ((row: unknown) => SelectOption[]) | undefined
+  const opts = getOptionsFn ? getOptionsFn(data.row) : ((co?.options as SelectOption[]) || [])
   const getEditing = co?.getEditing as ((r: unknown, p: string, i?: number) => boolean) | undefined
   const toggle = co?.toggle as ((r: unknown, p: string, i?: number) => void) | undefined
   const setEditing = co?.setEditing as ((key: string | null) => void) | undefined
@@ -107,7 +109,7 @@ export function renderSelectCell(
     }
 
     const editVNode = h(GSelect, {
-      class: 'gui-table-cell-select w-full px-xs',
+      class: 'gui-table-cell-select gui-table-cell-select-editing w-full min-w-0 px-xs',
       modelValue: val,
       label: fieldLabel,
       automaticDropdown: true,
@@ -137,9 +139,11 @@ export function renderSelectCell(
     const readVNode = h(
       'div',
       {
-        class: 'gui-table-cell-select-read w-full h-full flex items-center px-xs',
+        class:
+          'gui-table-cell-select-read w-full h-full min-w-0 max-w-full flex items-center justify-start overflow-hidden px-xs',
         role: 'button',
         tabIndex: 0,
+        title: displayText,
         onClick: (e: MouseEvent) => {
           setActiveTableFromEvent(e)
           toggle(row, prop, idx)
@@ -158,11 +162,21 @@ export function renderSelectCell(
           }
         }
       },
-      displayText
+      [
+        h(
+          'span',
+          {
+            class:
+              'gui-table-cell-select-read__label min-w-0 w-full flex-1 text-left text-pretty break-words leading-snug line-clamp-2'
+          },
+          displayText
+        )
+      ]
     )
 
     const wrapperStyle: Record<string, string> = {}
-    const wrapperClass = 'gui-table-cell-edit-wrapper absolute top-0 left-0 h-full w-full flex items-center justify-center transition-all duration-200 ease-in hover:bg-everBlue-100 hover:bg-opacity-30'
+    const wrapperClass =
+      'gui-table-cell-edit-wrapper absolute top-0 left-0 h-full w-full flex items-center justify-start transition-all duration-200 ease-in hover:bg-everBlue-100 hover:bg-opacity-30'
 
     if (isEditing) {
       wrapperStyle.zIndex = '10'
@@ -188,9 +202,18 @@ export function renderSelectCell(
       },
       [
         h(
-          Transition,
-          { name: 'gui-table-cell-edit', mode: 'out-in' },
-          { default: () => (isEditing ? editVNode : readVNode) }
+          'div',
+          {
+            class:
+              'gui-table-cell-select-inner min-h-0 min-w-0 w-full h-full flex items-center justify-start'
+          },
+          [
+            h(
+              Transition,
+              { name: 'gui-table-cell-edit', mode: 'out-in' },
+              { default: () => (isEditing ? editVNode : readVNode) }
+            )
+          ]
         )
       ]
     )

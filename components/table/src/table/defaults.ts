@@ -103,6 +103,12 @@ interface TableProps<T> {
   width?: string | number
   height?: string | number
   maxHeight?: string | number
+  /**
+   * Ancho mínimo en px del área scrollable de la tabla (suma efectiva del `<table>`).
+   * Tras el layout normal, si el valor parseado es mayor que el ancho calculado, se fuerza ese mínimo
+   * y se activa scroll horizontal cuando el contenedor es más estrecho.
+   */
+  scrollMinWidth?: string | number
   fit?: boolean
   stripe?: boolean
   border?: boolean
@@ -210,6 +216,10 @@ export default {
    * @description table's max-height. The legal value is a number or the height in px
    */
   maxHeight: [String, Number],
+  /**
+   * @description minimum width (px) of the table for horizontal scroll; see TableProps.scrollMinWidth
+   */
+  scrollMinWidth: [String, Number],
   /**
    * @description whether width of column automatically fits its container
    */
