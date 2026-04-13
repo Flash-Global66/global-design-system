@@ -173,7 +173,7 @@ function useQuoteSimulator(initialFrom = 'CLP', initialTo = 'USD') {
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta<QuoteInstance> = {
-  title: 'Forms/Quote',
+  title: 'Form/Quote',
   component: GQuote,
   parameters: {
     layout: 'centered',
