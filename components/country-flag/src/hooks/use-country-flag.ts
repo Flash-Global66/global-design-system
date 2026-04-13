@@ -60,13 +60,20 @@ export function useCountryFlag(props: FlagProps): FlagState {
       stopObserver = null;
     }
 
+    const onIntersect = async (): Promise<void> => {
+      await resolveImageSrc(props.name ?? '');
+      if (!hasError.value) {
+        loadImage();
+      }
+    };
+
     if (imageContainer.value) {
       const { stop } = useIntersectionObserver(
         imageContainer,
-        ([{ isIntersecting }]) => {
+        async ([{ isIntersecting }]) => {
           if (isIntersecting) {
-            loadImage();
             stop();
+            await onIntersect();
           }
         },
         {
@@ -77,12 +84,14 @@ export function useCountryFlag(props: FlagProps): FlagState {
       
       stopObserver = stop;
     } else {
-      loadImage();
+      onIntersect();
     }
   };
 
   onMounted(async () => {
-    await resolveImageSrc(props.name ?? '');
+    if (!props.lazyLoad) {
+      await resolveImageSrc(props.name ?? '');
+    }
     setupObserver();
   });
 
@@ -99,8 +108,12 @@ export function useCountryFlag(props: FlagProps): FlagState {
       stopObserver();
       stopObserver = null;
     }
-    await resolveImageSrc(name ?? '');
-    if (!hasError.value) {
+    if (!props.lazyLoad) {
+      await resolveImageSrc(name ?? '');
+      if (!hasError.value) {
+        setupObserver();
+      }
+    } else {
       setupObserver();
     }
   });
