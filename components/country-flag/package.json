@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-country-flag",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Componente para mostrar banderas de países",
   "author": "Global66",
   "main": "dist/index.js",
