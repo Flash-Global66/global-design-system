@@ -1,0 +1,268 @@
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+
+// ─── Quote Container ────────────────────────────────────────────────────────
+
+@include b("quote") {
+  @apply flex flex-col gap-xs;
+
+  @include e("available") {
+    @apply flex items-center gap-xxs px-xxs;
+    @apply text-2 font-medium text-terciary-txt;
+  }
+
+  @include e("available-value") {
+    @apply font-semibold text-secondary-txt;
+  }
+
+  @include e("card") {
+    @apply relative bg-white rounded-lg shadow-sm overflow-hidden;
+
+    @include when(error) {
+      @apply rounded-b-none border-l border-r border-t border-error-bd shadow-none;
+    }
+  }
+
+  @include e("card-group") {
+    @apply flex flex-col;
+  }
+
+  @include e("action") {
+    @apply flex justify-center items-center px-md py-md;
+    @apply bg-everBlue-50 rounded-b-md;
+    @apply border-l border-r border-b border-error-bd;
+  }
+
+  @include e("action-link") {
+    @apply flex items-center gap-xxs
+      text-4 font-semibold text-primary-def
+      bg-transparent border-none cursor-pointer p-0;
+
+    svg {
+      @apply text-3;
+    }
+
+    &:hover {
+      @apply underline;
+    }
+  }
+
+  @include e("error-message") {
+    @apply text-2 text-error-txt px-xxs;
+  }
+
+  @include e("input-from") {
+    @apply relative;
+  }
+
+  @include e("input-to") {
+    @apply relative;
+  }
+
+  @include e("divider") {
+    @apply relative h-px w-full bg-blue-50;
+  }
+
+  @include e("swap-icon") {
+    @apply flex items-center justify-center text-6;
+    transition: transform 0.4s ease;
+  }
+
+  @include e("swap-btn") {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+      z-10 flex items-center justify-center
+      w-xl h-xl rounded-xl bg-everBlue-50
+      cursor-pointer border-none
+      transition-colors duration-200;
+
+    &:hover:not(:disabled) {
+      @apply bg-everBlue-100;
+    }
+
+    &:active:not(:disabled) {
+      @apply bg-everBlue-200;
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed opacity-50;
+    }
+  }
+}
+
+// ─── Quote Input ────────────────────────────────────────────────────────────
+
+@include b("quote-input") {
+  @apply flex flex-col gap-xxs justify-center px-md overflow-hidden;
+  height: 112px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+
+  @include e("label") {
+    @apply text-4 font-medium text-secondary-txt;
+  }
+
+  @include e("row") {
+    @apply flex items-center gap-xs;
+    min-height: 36px;
+    transition: opacity 0.2s ease;
+
+    @include when(fading) {
+      opacity: 0;
+    }
+  }
+
+  @include e("amount-wrapper") {
+    @apply flex-1 min-w-0;
+  }
+
+  @include e("amount") {
+    @apply w-full text-9 font-bold text-primary-txt
+      appearance-none outline-none bg-transparent;
+    transition: font-size 0.15s ease;
+
+    @media (max-width: theme('screens.sm')) {
+      @apply text-7;
+    }
+
+    &::placeholder {
+      @apply text-terciary-txt font-bold;
+    }
+
+    @include when(big) {
+      @apply text-11;
+
+      @media (max-width: theme('screens.sm')) {
+        @apply text-9;
+      }
+    }
+
+    @include when(empty) {
+      @apply text-terciary-txt;
+    }
+
+    @include when(error) {
+      @apply text-error-txt;
+    }
+
+    @include when(disabled) {
+      @apply text-disabled-txt cursor-not-allowed;
+
+      &::placeholder {
+        @apply text-disabled-txt;
+      }
+    }
+  }
+
+  @include e("currency") {
+    @apply flex items-center gap-xxs bg-transparent border-none
+      cursor-pointer p-0 shrink-0 outline-none;
+
+    &:focus-visible {
+      @apply outline-none;
+    }
+
+    @include when(disabled) {
+      @apply cursor-not-allowed;
+    }
+
+    @include when(open) {
+      @apply px-md py-xs rounded-md;
+      outline: 1px solid var(--color-border-primary);
+      outline-offset: -1px;
+    }
+  }
+
+  @include e("flag-group") {
+    @apply flex items-center gap-xs;
+  }
+
+  @include e("flag") {
+    @apply flex items-center justify-center shrink-0;
+  }
+
+  @include e("flag-img") {
+    @apply w-4 h-4 rounded-full object-cover;
+  }
+
+  @include e("flag-fallback") {
+    @apply text-4;
+  }
+
+  @include e("currency-code") {
+    @apply text-4 font-semibold text-primary-txt
+           bg-transparent border-none outline-none p-0;
+
+    &::placeholder {
+      @apply text-primary-txt font-semibold;
+    }
+
+    @include when(disabled) {
+      @apply text-disabled-txt cursor-not-allowed;
+
+      &::placeholder {
+        @apply text-disabled-txt;
+      }
+    }
+  }
+
+  @include e("arrow") {
+    @apply flex items-center text-secondary-txt;
+    transition: transform 0.2s ease;
+
+    svg {
+      @apply text-4;
+    }
+
+    @include when(disabled) {
+      @apply text-disabled-txt;
+    }
+
+    @include when(open) {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include e("dropdown") {
+    @apply max-h-60 overflow-y-auto;
+
+    .gui-dropdown-menu__item {
+      @apply p-2;
+      min-height: unset;
+    }
+
+    .gui-dropdown-menu__item.is-active {
+      @apply bg-everBlue-50;
+    }
+  }
+
+  @include e("dropdown-popper") {
+    @apply w-72 rounded-lg shadow-md;
+
+    .gui-scrollbar__wrap {
+      @apply rounded-lg;
+    }
+  }
+
+  @include e("dropdown-item") {
+    @apply flex items-center gap-xs;
+  }
+
+  @include e("dropdown-empty") {
+    @apply px-md py-xs text-3 text-terciary-txt text-center;
+  }
+
+  @include e("dropdown-flag") {
+    @apply w-5 h-5 rounded-full object-cover shrink-0;
+  }
+
+  @include e("dropdown-flag-fallback") {
+    @apply text-4;
+  }
+
+  @include e("dropdown-label") {
+    @apply flex items-center gap-xxs;
+  }
+
+  @include e("dropdown-code") {
+    @apply text-secondary-txt;
+  }
+}
