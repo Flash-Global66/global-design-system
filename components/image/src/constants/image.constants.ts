@@ -11,6 +11,7 @@ export const IMAGE_NAMES = [
   'check',
   'clock',
   'disconnected-plug',
+  'discount',
   'document',
   'dollar-currency',
   'door',
