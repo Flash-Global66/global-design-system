@@ -24,8 +24,20 @@ export function useQuote(props: QuoteProps, emit: QuoteEmit) {
     props.toCurrencies?.find((c: Currency) => c.code === props.toCurrency) ?? null
   )
 
+  const hasFromError = computed(
+    () => props.action === 'FromError' || props.action === 'Error'
+  )
+
+  const hasToError = computed(
+    () => props.action === 'ToError'
+  )
+
   const hasCardError = computed(
-    () => props.action === 'FromError' || props.action === 'ToError' || props.action === 'Error'
+    () => hasFromError.value || hasToError.value
+  )
+
+  const shouldShowAction = computed(
+    () => hasCardError.value && (props.showAction ?? props.action === 'FromError')
   )
 
   const fromPlaceholder = computed(() => {
@@ -103,7 +115,10 @@ export function useQuote(props: QuoteProps, emit: QuoteEmit) {
     isToQuoteDone,
     fromCurrencyObj,
     toCurrencyObj,
+    hasFromError,
+    hasToError,
     hasCardError,
+    shouldShowAction,
     fromPlaceholder,
     toPlaceholder,
     swapTransform,

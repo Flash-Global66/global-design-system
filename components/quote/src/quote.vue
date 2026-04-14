@@ -6,7 +6,9 @@
     </p>
 
     <div :class="ns.e('card-group')">
-    <div :class="[ns.e('card'), ns.is('error', hasCardError)]">
+    <div
+      :class="[ns.e('card'), ns.is('error', hasCardError), ns.is('error-with-action', shouldShowAction)]"
+    >
       <div
         v-if="!singleInput"
         :class="ns.e('input-from')"
@@ -19,7 +21,7 @@
           :flag-code="props.fromFlagCode ?? fromCurrencyObj?.flagCountryCode"
           :is-fading="isSwapFading"
           :is-disabled="isDisabled"
-          :has-error="action === 'FromError' || action === 'Error'"
+          :has-error="hasFromError"
           :is-empty-value="action === 'NoValue'"
           :quote-done="isFromQuoteDone"
           :placeholder="fromPlaceholder"
@@ -54,7 +56,7 @@
           :flag-code="props.toFlagCode ?? toCurrencyObj?.flagCountryCode"
           :is-fading="isSwapFading"
           :is-disabled="isDisabled"
-          :has-error="action === 'ToError'"
+          :has-error="hasToError"
           :is-empty-value="action === 'NoValue'"
           :is-result="true"
           :quote-done="isToQuoteDone"
@@ -69,7 +71,7 @@
 
     </div>
 
-    <div v-if="hasCardError" :class="ns.e('action')">
+    <div v-if="shouldShowAction" :class="ns.e('action')">
       <slot name="action">
         <button
           type="button"
@@ -101,7 +103,10 @@ const props = defineProps(quoteProps)
 const emit = defineEmits(quoteEmits)
 
 const {
+  hasFromError,
+  hasToError,
   hasCardError,
+  shouldShowAction,
   fromCurrencyObj,
   toCurrencyObj,
   isFromQuoteDone,
