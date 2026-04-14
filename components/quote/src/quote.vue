@@ -6,8 +6,8 @@
     </p>
 
     <div :class="ns.e('card-group')">
-    <div
-      :class="[ns.e('card'), ns.is('error', hasCardError), ns.is('error-with-action', shouldShowAction)]"
+      <div
+        :class="[ns.e('card'), ns.is('error', hasCardError), ns.is('error-with-action', shouldShowAction)]"
     >
       <div
         v-if="!singleInput"
@@ -69,22 +69,22 @@
         />
       </div>
 
-    </div>
+      </div>
 
-    <div v-if="shouldShowAction" :class="ns.e('action')">
-      <slot name="action">
-        <button
-          type="button"
-          :class="ns.e('action-link')"
-          @click="emit('action-click')"
-        >
-          {{ actionText }}
-          <g-icon-font name="regular chevron-right" />
-        </button>
-      </slot>
-    </div>
+      <div v-if="shouldShowAction" :class="ns.e('action')">
+        <slot name="action">
+          <button
+            type="button"
+            :class="ns.e('action-link')"
+            @click="emit('action-click')"
+          >
+            {{ actionText }}
+            <g-icon-font name="regular chevron-right" />
+          </button>
+        </slot>
+      </div>
 
-    <p v-if="errorMessage" :class="ns.e('error-message')">{{ errorMessage }}</p>
+      <p v-if="errorMessage" :class="ns.e('error-message')">{{ errorMessage }}</p>
     </div>
   </div>
 </template>

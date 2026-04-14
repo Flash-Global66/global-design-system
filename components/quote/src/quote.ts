@@ -23,7 +23,7 @@ export const quoteProps = buildProps({
   swapAriaLabel: { type: String, default: 'Intercambiar monedas' },
   emptyResultsText: { type: String, default: 'Sin resultados' },
   actionText: { type: String, default: 'Cargar dinero' },
-  showAction: { type: definePropType<boolean | undefined>(null), default: undefined },
+  showAction: { type: definePropType<boolean | null>(null), default: null },
   fromFlagCode: { type: definePropType<FlagCode>(String), default: undefined },
   toFlagCode: { type: definePropType<FlagCode>(String), default: undefined },
 } as const)
