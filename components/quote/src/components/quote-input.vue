@@ -56,7 +56,6 @@
                   size="xs"
                   aria-hidden="true"
                 />
-                <span v-else :class="ns.e('flag-fallback')" aria-hidden="true">🏳</span>
               </slot>
             </span>
 
@@ -106,7 +105,6 @@
                   size="md"
                   aria-hidden="true"
                 />
-                <span v-else :class="ns.e('dropdown-flag-fallback')" aria-hidden="true">🏳</span>
                 <span :class="ns.e('dropdown-label')">
                   <span :class="ns.e('dropdown-code')">({{ currency.code }})</span>
                   {{ currency.name }}

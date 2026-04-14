@@ -18,7 +18,11 @@
     @apply relative bg-white rounded-lg shadow-sm overflow-hidden;
 
     @include when(error) {
-      @apply rounded-b-none border-l border-r border-t border-error-bd shadow-none;
+      @apply border border-error-bd shadow-none;
+    }
+
+    @include when("error-with-action") {
+      @apply border-b-0 rounded-b-none;
     }
   }
 
@@ -183,10 +187,6 @@
     @apply w-4 h-4 rounded-full object-cover;
   }
 
-  @include e("flag-fallback") {
-    @apply text-4;
-  }
-
   @include e("currency-code") {
     @apply text-4 font-semibold text-primary-txt
            bg-transparent border-none outline-none p-0;
@@ -205,12 +205,8 @@
   }
 
   @include e("arrow") {
-    @apply flex items-center text-secondary-txt;
+    @apply flex items-center text-secondary-txt text-4;
     transition: transform 0.2s ease;
-
-    svg {
-      @apply text-4;
-    }
 
     @include when(disabled) {
       @apply text-disabled-txt;
@@ -248,14 +244,6 @@
 
   @include e("dropdown-empty") {
     @apply px-md py-xs text-3 text-terciary-txt text-center;
-  }
-
-  @include e("dropdown-flag") {
-    @apply w-5 h-5 rounded-full object-cover shrink-0;
-  }
-
-  @include e("dropdown-flag-fallback") {
-    @apply text-4;
   }
 
   @include e("dropdown-label") {

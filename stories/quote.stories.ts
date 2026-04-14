@@ -252,6 +252,14 @@ interface Currency {
         defaultValue: { summary: 'Default' },
       },
     },
+    showAction: {
+      description: 'Controla si se muestra la franja de acción cuando existe un error',
+      control: { type: 'boolean' },
+      table: {
+        type: { summary: 'boolean | undefined' },
+        defaultValue: { summary: "FromError => true; otros errores => false" },
+      },
+    },
     isDisabled: {
       description: 'Deshabilita toda la interacción',
       control: { type: 'boolean' },
