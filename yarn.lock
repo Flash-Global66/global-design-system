@@ -1061,6 +1061,8 @@ __metadata:
 "@flash-global66/g-select@workspace:components/select":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-select@workspace:components/select"
+  dependencies:
+    "@tanstack/vue-virtual": "npm:^3.13.23"
   peerDependencies:
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.0.8
@@ -2927,6 +2929,24 @@ __metadata:
     storybook: ^8.6.14
     vue: ^3.0.0
   checksum: 10c0/5445030fcb1ae2bd81a2a7c452b1897a13b514c771c30f075cd56188c69cf3680c65dd0a812c8a37689374f114335a590f776d8742ecbf5008d78b3a1f00b7bc
+  languageName: node
+  linkType: hard
+
+"@tanstack/virtual-core@npm:3.13.23":
+  version: 3.13.23
+  resolution: "@tanstack/virtual-core@npm:3.13.23"
+  checksum: 10c0/3487089ea4e1dcbb01836f51a1b35b709f9ba03312fe600ddb97c893c16be213e1690af735717b1d6b2e22dfec691c338bc96b5965228c195840249699d5273a
+  languageName: node
+  linkType: hard
+
+"@tanstack/vue-virtual@npm:^3.13.23":
+  version: 3.13.23
+  resolution: "@tanstack/vue-virtual@npm:3.13.23"
+  dependencies:
+    "@tanstack/virtual-core": "npm:3.13.23"
+  peerDependencies:
+    vue: ^2.7.0 || ^3.0.0
+  checksum: 10c0/d036bc1dccd221185bfac6bf7d43bf259000b18c6b4049f581f5de2d4d766c99317ae40643130747050417629f73120ae0d13ea82840827f8d80471669690fb3
   languageName: node
   linkType: hard
 
