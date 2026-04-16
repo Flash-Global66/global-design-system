@@ -28,6 +28,9 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
+  "dependencies": {
+    "@tanstack/vue-virtual": "3.13.23"
+  },
   "peerDependencies": {
     "@flash-global66/g-form": "^0.1.0",
     "@flash-global66/g-icon-font": "^0.0.8",

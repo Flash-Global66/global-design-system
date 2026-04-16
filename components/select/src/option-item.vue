@@ -1,5 +1,7 @@
 <template>
   <li
+    :data-index="index"
+    :ref="(el) => measureElement?.(el as HTMLElement | null)"
     :aria-selected="selected"
     :data-test="`item:${getTitle(item)}`"
     :style="style"
@@ -26,7 +28,10 @@
           }}</span>
           <span
             v-if="Boolean(getDescription(item))"
-            :class="ns.bem('dropdown', 'item', 'description')"
+            :class="[
+              ns.bem('dropdown', 'item', 'description'),
+              descriptionLines > 0 ? `line-clamp-${descriptionLines}` : ''
+            ]"
           >
             {{ getDescription(item) }}
           </span>
@@ -71,6 +76,7 @@ export default defineComponent({
       getDescription,
       getIcon,
       multiple,
+      descriptionLines: props.descriptionLines,
     };
   },
 });

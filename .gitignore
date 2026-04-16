@@ -15,3 +15,10 @@ backups-temporal/
 
 # Build output
 storybook-static/
+
+
+# Playwright
+.playwright-mcp/
+
+# yalc
+.yalc/

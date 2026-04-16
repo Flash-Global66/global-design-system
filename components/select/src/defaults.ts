@@ -113,6 +113,13 @@ export const SelectProps = buildProps({
     default: 55
   },
   /**
+   * @description Maximum number of lines for item description (0 = unlimited)
+   */
+  descriptionLines: {
+    type: Number,
+    default: 0
+  },
+  /**
    * @description
    */
   id: String,
@@ -338,7 +345,15 @@ export const OptionProps = buildProps({
   index: Number,
   style: Object,
   selected: Boolean,
-  created: Boolean
+  created: Boolean,
+  measureElement: {
+    type: definePropType<(el: HTMLElement | null) => void>(Function),
+    default: undefined
+  },
+  descriptionLines: {
+    type: Number,
+    default: 0
+  }
 } as const)
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -353,7 +368,8 @@ export const selectEmits = {
 }
 export const optionEmits = {
   hover: (index?: number) => isNumber(index),
-  select: (val: Option, index?: number) => true
+  select: (val: Option, index?: number) => true,
+  resize: (index: number, height: number) => true
 }
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
