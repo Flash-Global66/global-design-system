@@ -1074,7 +1074,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-select@workspace:components/select"
   dependencies:
-    "@tanstack/vue-virtual": "npm:^3.13.23"
+    "@tanstack/vue-virtual": "npm:3.13.23"
   peerDependencies:
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.0.8
@@ -2952,7 +2952,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/vue-virtual@npm:^3.13.23":
+"@tanstack/vue-virtual@npm:3.13.23":
   version: 3.13.23
   resolution: "@tanstack/vue-virtual@npm:3.13.23"
   dependencies:
