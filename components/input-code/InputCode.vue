@@ -274,6 +274,7 @@ defineExpose({
             { disabled: disabled },
             classContentInput(index),
           ]"
+          @click="inputs[index + 1]?.focus()"
         >
           <input
             :ref="(el) => setInputs(el, index + 1)"
