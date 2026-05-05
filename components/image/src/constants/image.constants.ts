@@ -47,7 +47,8 @@ export const IMAGE_NAMES = [
   'whatsapp',
   'wrench',
   'people',
-  'vault'
+  'vault',
+  'usdt-usdc'
 ] as const;
 
 export const IMAGE_SIZES = {
