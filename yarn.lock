@@ -29,6 +29,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@awesome.me/kit-3edc55bdad@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "@awesome.me/kit-3edc55bdad@npm:1.0.9"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": "npm:^6.7.2"
+  checksum: 10c0/1c413ca14076368bbdd1c5c52918bae3341a69b10d7dfde2d8820f471ad32d383ac37d2e51c13c6bc0b028884c184a7d2c1f8c87008167081971ec1476a3305d
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/code-frame@npm:7.27.1"
@@ -844,6 +853,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-font@workspace:components/icon-font"
   dependencies:
+    "@awesome.me/kit-3edc55bdad": "npm:^1.0.9"
     "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
     "@fortawesome/free-brands-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
@@ -853,6 +863,7 @@ __metadata:
     "@fortawesome/pro-solid-svg-icons": "npm:^6.7.2"
     "@fortawesome/vue-fontawesome": "npm:^3.0.8"
   peerDependencies:
+    "@awesome.me/kit-3edc55bdad": ^1.0.9
     "@fortawesome/fontawesome-svg-core": ^6.7.2
     "@fortawesome/free-brands-svg-icons": ^6.7.2
     "@fortawesome/free-solid-svg-icons": ^6.7.2
@@ -1259,7 +1270,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-common-types@npm:6.7.2":
+"@fortawesome/fontawesome-common-types@npm:6.7.2, @fortawesome/fontawesome-common-types@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/fontawesome-common-types@npm:6.7.2"
   checksum: 10c0/0785df560542d9c08a0ba07bb7a39902274a3cd65c018672eb2520a99efccce18bdb7f7f4b1c6089763bc5627bf0f0837c3af963a8427eaeb535bd57c820a723
