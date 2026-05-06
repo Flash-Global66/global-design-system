@@ -1,4 +1,10 @@
 export const ICON_SETS = {
+  kit: [
+    "send",
+    "deposit",
+    "exchange",
+  ] as const,
+
   solid: [
     "user-secret",
     "home",

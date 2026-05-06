@@ -27,6 +27,7 @@ import * as RegularPro from './lib/far-regular-pro';
 import * as LightPro from './lib/fal-light-pro';
 import * as BrandsFree from './lib/fab-free';
 import * as DuotonePro from './lib/fad-duotone-pro';
+import * as KitIcons from './lib/fa-kit';
 import { iconProps } from './icon';
 
 // Registro de iconos
@@ -35,7 +36,8 @@ library.add(
   RegularPro,
   LightPro,
   BrandsFree,
-  DuotonePro
+  DuotonePro,
+  KitIcons
 );
 
 const props = defineProps(iconProps);
@@ -52,7 +54,8 @@ const selectedIcon = computed(() => {
     regular: 'far',
     light: 'fal',
     brands: 'fab',
-    duotone: 'fad'
+    duotone: 'fad',
+    kit: 'fak'
   }[weight];
 
   return [prefix, iconName];
