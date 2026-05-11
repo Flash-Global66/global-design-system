@@ -240,6 +240,7 @@ export const ICON_SETS = {
     'flag',
     'heart-pulse',
     'ticket-perforated',
+    'paper-plane'
   ] as const,
 
   light: [
