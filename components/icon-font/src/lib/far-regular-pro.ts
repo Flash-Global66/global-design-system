@@ -119,5 +119,6 @@ export {
   faStar,
   faFlag,
   faHeartPulse,
-  faTicketPerforated
+  faTicketPerforated,
+  faPaperPlane
 } from '@fortawesome/pro-regular-svg-icons';
