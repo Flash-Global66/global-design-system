@@ -148,7 +148,6 @@ export const ICON_SETS = {
     "comment-alt",
     "file-alt",
     "redo",
-    "lock-alt",
     "chevron-right",
     "chevron-left",
     "envelope",
@@ -279,7 +278,7 @@ export const ICON_SETS = {
     "heart-pulse",
   ] as const,
 
-  brands: ["whatsapp"] as const,
+  brands: ["whatsapp", "apple-pay", "google-pay"] as const,
 
   duotone: [
     "spinner",
