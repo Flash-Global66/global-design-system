@@ -31,13 +31,8 @@ export const generatePeerDepsInstalls = (deps: Record<string, string>, external 
 
 
 export const generateIconOptions = () => {
-  const options: string[] = [];
-  
-  Object.entries(ICON_SETS).forEach(([weight, icons]) => {
-    icons.forEach(icon => {
-      options.push(`${weight} ${icon}`);
-    });
-  });
-  
-  return options;
+  return Object.entries(ICON_SETS)
+    .flatMap(([weight, icons]) => icons.map(icon => `${weight} ${icon}`))
+    .sort();
 };
+
