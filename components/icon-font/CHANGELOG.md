@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.22.0...@flash-global66/g-icon-font@0.23.0) (2026-05-18)
+
+
+### Features
+
+* **icon-button:** map apple pay and google pay icons on brands family ([79ad3b5](https://github.com/Flash-Global66/global-design-system/commit/79ad3b5099c3c4fd7552d9f9cd64f7f53e219148))
+* **icon-button:** map lock-alt and unlock icons on regular family ([dfd95dd](https://github.com/Flash-Global66/global-design-system/commit/dfd95dd510e44b92cc0b4ba8449a443e6b3a78f4))
+
+
+
+
+
 # [0.22.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.21.1...@flash-global66/g-icon-font@0.22.0) (2026-05-11)
 
 
