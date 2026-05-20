@@ -1,5 +1,6 @@
 import { h, Transition, ref, type VNode } from 'vue'
 import { GInput } from '@flash-global66/g-input'
+import { GIconFont } from '@flash-global66/g-icon-font'
 import type { TableColumnCtx } from '../defaults'
 import type { RenderCellData } from './types'
 import type { TableCellValidationApi } from '../../composables/useTableCellValidation'
@@ -237,7 +238,7 @@ function createReadVNode(
   return h(
     'div',
     {
-      class: `w-full h-full flex items-center justify-center cursor-pointer px-xs ${errorReadClass}`,
+      class: `relative w-full h-full flex items-center justify-center cursor-pointer px-xs ${errorReadClass}`,
       role: 'button',
       tabIndex: 0,
       onClick: (e: MouseEvent) => {
@@ -261,11 +262,27 @@ function createReadVNode(
       }
     },
     [
+      h('span', {
+        class: 'absolute top-xs right-xs opacity-0 group-hover:opacity-100 transition-opacity duration-150'
+      }, [
+        h('span', {
+          class: 'group/badge inline-flex items-center justify-center p-0.5 rounded-sm bg-primary-bg border border-primary-bd hover:border-secondary-bd transition-colors duration-150 cursor-pointer'
+        }, [
+          h('span', { class: 'px-1 rounded-sm hover:bg-sec-hover-bg transition-colors duration-150' }, [
+            h(GIconFont as unknown as string, {
+              name: 'regular pen',
+              class: 'text-icon-primary group-hover/badge:text-icon-secondary leading-none',
+              style: { fontSize: '10px' },
+              'aria-hidden': true
+            })
+          ])
+        ])
+      ]),
       h('div', { class: 'flex flex-col items-center w-full min-w-0 overflow-hidden' }, [
         isEmpty && emptyActionText
           ? h(
               'span',
-              { class: `font-medium text-3 line-clamp-2 text-center px-xs w-full ${isValidationError ? 'text-error-def' : 'text-gray-500'}` },
+              { class: `font-medium text-3 line-clamp-2 text-center px-xs w-full ${isValidationError ? 'text-error-def' : 'text-gray-700'}` },
               emptyActionText
             )
           : h(
@@ -287,8 +304,8 @@ function computeWrapperClasses(
   computedEditingClasses: string | Record<string, boolean> | undefined
 ): string {
   let wrapperClass = config.isEditing
-    ? `${cellWrapperClass} gui-table-cell-input-wrapper gui-table-cell-input-editing hover:bg-everBlue-100 hover:bg-opacity-30`
-    : `${cellWrapperClass} gui-table-cell-input-wrapper gui-table-cell-input-reading hover:bg-everBlue-100 hover:bg-opacity-30`
+    ? `${cellWrapperClass} group gui-table-cell-input-wrapper gui-table-cell-input-editing hover:bg-everBlue-100 hover:bg-opacity-30`
+    : `${cellWrapperClass} group gui-table-cell-input-wrapper gui-table-cell-input-reading hover:bg-everBlue-100 hover:bg-opacity-30`
 
   if (config.isValidationError) {
     wrapperClass = `${wrapperClass} gui-table-cell-input-wrapper--error`
