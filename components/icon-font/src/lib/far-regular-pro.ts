@@ -123,4 +123,5 @@ export {
   faPaperPlane,
   faUnlock,
   faWallet,
+  faMoneyBillTrendUp
 } from "@fortawesome/pro-regular-svg-icons";
