@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.3.1...@flash-global66/g-button@0.4.0) (2026-05-20)
+
+
+### Features
+
+* **button:** update g-icon-font peer dependency version ([484791c](https://github.com/Flash-Global66/global-design-system/commit/484791c84d78ab4e624422c05a908aec61103aad))
+
+
+
+
+
 ## [0.3.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.3.0...@flash-global66/g-button@0.3.1) (2025-05-08)
 
 **Note:** Version bump only for package @flash-global66/g-button

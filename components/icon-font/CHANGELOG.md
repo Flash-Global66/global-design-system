@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.23.0...@flash-global66/g-icon-font@0.24.0) (2026-05-20)
+
+
+### Features
+
+* **icon-button:** add regular wallet icon ([81cf1db](https://github.com/Flash-Global66/global-design-system/commit/81cf1db20a4dd1e972086ded4c6f360c682960c5))
+
+
+
+
+
 # [0.23.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.22.0...@flash-global66/g-icon-font@0.23.0) (2026-05-18)
 
 
