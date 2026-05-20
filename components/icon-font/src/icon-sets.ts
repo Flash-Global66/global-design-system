@@ -238,6 +238,7 @@ export const ICON_SETS = {
     "paper-plane",
     "unlock",
     "lock-alt",
+    "wallet",
   ] as const,
 
   light: [
