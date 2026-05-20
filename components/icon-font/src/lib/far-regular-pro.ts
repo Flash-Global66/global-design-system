@@ -121,5 +121,6 @@ export {
   faHeartPulse,
   faTicketPerforated,
   faPaperPlane,
-  faUnlock
-} from '@fortawesome/pro-regular-svg-icons';
+  faUnlock,
+  faWallet,
+} from "@fortawesome/pro-regular-svg-icons";
