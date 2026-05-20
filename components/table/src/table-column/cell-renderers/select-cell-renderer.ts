@@ -1,5 +1,6 @@
 import { h, Transition, nextTick, type VNode } from 'vue'
 import { GSelect } from '@flash-global66/g-select'
+import { GIconFont } from '@flash-global66/g-icon-font'
 import type { TableColumnCtx } from '../defaults'
 import type { RenderCellData } from './types'
 import {
@@ -140,7 +141,7 @@ export function renderSelectCell(
       'div',
       {
         class:
-          'gui-table-cell-select-read w-full h-full min-w-0 max-w-full flex items-center justify-start overflow-hidden px-xs',
+          'gui-table-cell-select-read relative w-full h-full min-w-0 max-w-full flex items-center justify-start overflow-hidden px-xs',
         role: 'button',
         tabIndex: 0,
         title: displayText,
@@ -163,6 +164,22 @@ export function renderSelectCell(
         }
       },
       [
+        h('span', {
+          class: 'absolute top-xxs right-xxs opacity-0 group-hover:opacity-100 transition-opacity duration-150'
+        }, [
+          h('span', {
+            class: 'group/badge inline-flex items-center justify-center p-0.5 rounded-sm bg-primary-bg border border-primary-bd hover:border-secondary-bd transition-colors duration-150 cursor-pointer'
+          }, [
+            h('span', { class: 'px-1 rounded-sm hover:bg-sec-hover-bg transition-colors duration-150' }, [
+              h(GIconFont as unknown as string, {
+                name: 'regular pen',
+                class: 'text-icon-primary group-hover/badge:text-icon-secondary leading-none',
+                style: { fontSize: '10px' },
+                'aria-hidden': true
+              })
+            ])
+          ])
+        ]),
         h(
           'span',
           {
@@ -176,7 +193,7 @@ export function renderSelectCell(
 
     const wrapperStyle: Record<string, string> = {}
     const wrapperClass =
-      'gui-table-cell-edit-wrapper absolute top-0 left-0 h-full w-full flex items-center justify-start transition-all duration-200 ease-in hover:bg-everBlue-100 hover:bg-opacity-30'
+      'group gui-table-cell-edit-wrapper absolute top-0 left-0 h-full w-full flex items-center justify-start transition-all duration-200 ease-in hover:bg-everBlue-100 hover:bg-opacity-30'
 
     if (isEditing) {
       wrapperStyle.zIndex = '10'

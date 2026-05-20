@@ -14,10 +14,24 @@
       <button
         v-else
         type="button"
-        class="w-full h-full flex items-center px-xs cursor-pointer border-0 bg-transparent text-left font-inherit text-primary-txt"
+        class="relative w-full h-full flex items-center px-xs cursor-pointer border-0 bg-transparent text-left font-inherit text-primary-txt"
         @click="handleClick"
         @keydown="handleKeydown"
       >
+        <span
+          class="absolute top-xs right-xs opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+        >
+          <span class="group/badge inline-flex items-center justify-center p-0.5 rounded-sm bg-primary-bg border border-primary-bd hover:border-secondary-bd transition-colors duration-150 cursor-pointer">
+            <span class="px-1 rounded-sm hover:bg-sec-hover-bg transition-colors duration-150">
+              <GIconFont
+                name="regular pen"
+                class="text-icon-primary group-hover/badge:text-icon-secondary leading-none"
+                style="font-size: 10px"
+                :aria-hidden="true"
+              />
+            </span>
+          </span>
+        </span>
         <slot name="view" :toggle="toggleEdit"></slot>
       </button>
     </transition>
@@ -26,6 +40,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref, watch, nextTick, onUnmounted } from 'vue'
+import { GIconFont } from '@flash-global66/g-icon-font'
 import { TABLE_INJECTION_KEY } from '../tokens'
 import {
   calculateExpandedWidthSync,
@@ -209,7 +224,7 @@ onUnmounted(() => {
 })
 
 const wrapperClass = computed(() => {
-  const base = 'absolute top-0 left-0 h-full w-full flex items-center justify-center transition-all duration-200 ease-in'
+  const base = 'group absolute top-0 left-0 h-full w-full flex items-center justify-center transition-all duration-200 ease-in'
   if (isEditing.value) {
     return `${base} gui-table-cell-edit-wrapper hover:bg-everBlue-100 hover:bg-opacity-30 z-10`
   }
