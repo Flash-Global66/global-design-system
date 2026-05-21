@@ -16,28 +16,29 @@
   }
 
   @include e(placeholder) {
-    @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full text-center text-terciary-txt font-medium leading-none;
+    @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full text-center p-2 text-terciary-txt font-medium leading-none;
 
-    &.text-size-xs {
-      padding: 1px 2px;
-      font-size: 7px;
-      letter-spacing: -0.02em;
+    &.text-size-2xs {
+      @apply text-1 p-0.5;
     }
 
+    &.text-size-xs,
     &.text-size-sm {
-      padding: 1px 3px;
-      font-size: 8px;
-      letter-spacing: -0.02em;
+      @apply text-2;
     }
 
     &.text-size-md {
-      padding: 2px 4px;
-      font-size: 10px;
+      @apply text-3;
     }
 
-    &.text-size-lg {
-      padding: 3px 5px;
-      font-size: 12px;
+    &.text-size-lg,
+    &.text-size-xl {
+      @apply text-4;
+    }
+
+    &.text-size-2xl,
+    &.text-size-3xl {
+      @apply text-10;
     }
   }
 }

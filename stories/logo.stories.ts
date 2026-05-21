@@ -10,8 +10,18 @@ import {
   LOGO_SIZES,
 } from '@flash-global66/g-logo/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
-import { GIconFont } from '@flash-global66/g-icon-font';
 import { GConfigProvider } from '../components/config-provider';
+
+/** Logos de referencia en ejemplos (Colombia) */
+const DEMO_LOGO_BANCOLOMBIA = 'logo-bancolombia';
+const DEMO_LOGO_PSE = 'logo-pse';
+const DEMO_LOGO_NEQUI = 'logo-nequi';
+
+const DEMO_LOGOS_FILTER = [
+  { label: 'Bancolombia', value: DEMO_LOGO_BANCOLOMBIA },
+  { label: 'PSE', value: DEMO_LOGO_PSE },
+  { label: 'Nequi', value: DEMO_LOGO_NEQUI },
+] as const;
 
 const meta: Meta<typeof GLogo> = {
   title: 'Basic/Logo',
@@ -24,7 +34,7 @@ Centraliza las marcas visuales de Global66, aliados y proveedores en los distint
 
 ## Características
 - SVG de marca listos para usar
-- Por defecto muestra el **tamaño original del SVG**; \`size\` (xs–lg) o \`size-custom\` cuando necesites escalar
+- Por defecto muestra el **tamaño original del SVG**; \`size\` (2xs–3xl) o \`size-custom\` cuando necesites escalar
 - Presets de \`filter\` (original, gris, negro, blanco, sepia, etc.)
 - \`color\` para teñir con cualquier valor CSS (hex, rgb, nombre)
 - Lazy loading para optimizar el rendimiento
@@ -52,18 +62,13 @@ Para que el componente funcione correctamente, es necesario importar los estilos
 
 \`\`\`vue
 <template>
-  <g-logo name="logo-global66" />
+  <g-logo name="logo-pse" />
 </template>
 
 <script setup>
 import { GLogo } from '@flash-global66/g-logo';
 </script>
 \`\`\`
-
-## Tamaño
-- **Por defecto** (sin \`size\`): dimensiones **originales del SVG** (width/height del archivo).
-- **\`size\`** (xs, sm, md, lg): escala por **altura** fija; ancho proporcional.
-- **\`size-custom\`** (ej: \`120px\`): ancho libre; altura proporcional. Excluye \`size\`.
 
 ## Color personalizado
 \`color\` acepta cualquier valor CSS (\`#00A651\`, \`green\`, \`rgb(0, 166, 81)\`) y unifica la marca en una sola tinta.
@@ -98,15 +103,15 @@ Para incorporar una marca nueva:
       options: LOGO_NAMES,
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'logo-global66' },
+        defaultValue: { summary: 'logo-pse' },
       }
     },
     size: {
-      description: 'Altura preset (xs–lg). Vacío = tamaño original del SVG',
+      description: 'Altura preset (2xs 22px, xs 44px … 3xl 260px). Vacío = tamaño original del SVG',
       control: 'select',
       options: [undefined, ...Object.keys(LOGO_SIZES)],
       table: {
-        type: { summary: 'xs | sm | md | lg' },
+        type: { summary: '2xs | xs | sm | md | lg | xl | 2xl | 3xl' },
         defaultValue: { summary: 'original (SVG)' },
       }
     },
@@ -145,7 +150,7 @@ Para incorporar una marca nueva:
     }
   },
   args: {
-    name: 'logo-global66',
+    name: DEMO_LOGO_PSE,
     filter: 'none',
     color: '',
     sizeCustom: '',
@@ -179,7 +184,7 @@ export const Primary: Story = {
       source: {
         code: `
 <template>
-  <g-logo name="logo-global66" />
+  <g-logo name="logo-pse" />
 </template>
 
 <script setup>
@@ -256,15 +261,16 @@ export const AllLogos: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Colección completa a tamaño original por defecto. Usa el selector para xs–lg. Variantes `-on-dark` sobre fondo oscuro.'
+        story: 'Colección completa a tamaño original por defecto. Usa el selector para xs–3xl. Variantes `-on-dark` sobre fondo oscuro.'
       },
       source: {
         code: `
 <template>
-  <g-logo name="logo-global66" />
+  <g-logo name="logo-pse" />
+  <g-logo name="icon-bre-b" />
   <g-logo name="logo-bancolombia" size="sm" />
   <g-logo name="logo-pse" />
-  <g-logo name="logo-bcp" size="lg" />
+  <g-logo name="logo-nequi" size="lg" />
 </template>
 
 <script setup>
@@ -282,7 +288,7 @@ export const Sizes: Story = {
   render: () => ({
     components: { GLogo, GConfigProvider },
     setup() {
-      return { LOGO_SIZES };
+      return { LOGO_SIZES, DEMO_LOGO_PSE };
     },
     template: `
       <g-config-provider>
@@ -290,7 +296,7 @@ export const Sizes: Story = {
           <div v-for="(px, size) in LOGO_SIZES" :key="size" class="flex items-center gap-6">
             <span class="text-sm font-mono text-gray-400 w-8">{{ size }}</span>
             <span class="text-xs text-gray-300 w-12">{{ px }}</span>
-            <g-logo name="logo-global66" :size="size" />
+            <g-logo :name="DEMO_LOGO_PSE" :size="size" />
           </div>
         </div>
       </g-config-provider>
@@ -299,15 +305,19 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Los 4 tamaños definidos por altura. El ancho del logo varía según la proporción natural del SVG.'
+        story: 'Ocho tamaños por altura (2xs 22px … 3xl 260px). El ancho varía según la proporción del SVG.'
       },
       source: {
         code: `
 <template>
-  <g-logo name="logo-global66" size="xs" />  <!-- 12px alto -->
-  <g-logo name="logo-global66" size="sm" />  <!-- 16px alto -->
-  <g-logo name="logo-global66" />  <!-- 24px alto -->
-  <g-logo name="logo-global66" size="lg" />  <!-- 32px alto -->
+  <g-logo name="logo-pse" size="2xs" />  <!-- 22px alto -->
+  <g-logo name="logo-pse" size="xs" />   <!-- 44px alto -->
+  <g-logo name="logo-pse" size="sm" />   <!-- 64px alto -->
+  <g-logo name="logo-pse" size="md" />   <!-- 80px alto -->
+  <g-logo name="logo-pse" size="lg" />   <!-- 112px alto -->
+  <g-logo name="logo-pse" size="xl" />   <!-- 160px alto -->
+  <g-logo name="logo-pse" size="2xl" />  <!-- 208px alto -->
+  <g-logo name="logo-pse" size="3xl" />  <!-- 260px alto -->
 </template>
 
 <script setup>
@@ -331,7 +341,7 @@ export const SizeCustom: Story = {
         { label: 'size-custom="120px"', sizeCustom: '120px' },
         { label: 'size-custom="160px"', sizeCustom: '160px' },
       ];
-      return { examples };
+      return { examples, DEMO_LOGO_BANCOLOMBIA };
     },
     template: `
       <g-config-provider>
@@ -343,12 +353,12 @@ export const SizeCustom: Story = {
           >
             <g-logo
               v-if="ex.sizeCustom"
-              name="logo-global66"
+              :name="DEMO_LOGO_BANCOLOMBIA"
               :size-custom="ex.sizeCustom"
             />
             <g-logo
               v-else
-              name="logo-global66"
+              :name="DEMO_LOGO_BANCOLOMBIA"
               :size="ex.size"
             />
             <span class="text-sm text-gray-500">{{ ex.label }}</span>
@@ -364,8 +374,8 @@ export const SizeCustom: Story = {
       },
       source: {
         code: `
-<g-logo name="logo-global66" size="md" />
-<g-logo name="logo-global66" size-custom="120px" />
+<g-logo name="logo-bancolombia" size="md" />
+<g-logo name="logo-bancolombia" size-custom="120px" />
 `,
         language: 'html'
       }
@@ -390,7 +400,7 @@ export const Colors: Story = {
       <g-config-provider>
         <div class="flex flex-wrap gap-8 items-end">
           <div class="flex flex-col items-center gap-3">
-            <g-logo name="logo-global66" />
+            <g-logo name="logo-global66" :lazy-load="false" />
             <span class="text-xs text-gray-500">Original</span>
           </div>
           <div
@@ -398,7 +408,7 @@ export const Colors: Story = {
             :key="c.value"
             class="flex flex-col items-center gap-3"
           >
-            <g-logo name="logo-global66" size="md" :color="c.value" />
+            <g-logo name="logo-global66" size="md" :color="c.value" :lazy-load="false" />
             <span class="text-xs text-gray-500">{{ c.label }}</span>
             <code class="text-xs text-gray-400">{{ c.value }}</code>
           </div>
@@ -414,7 +424,7 @@ export const Colors: Story = {
       source: {
         code: `
 <g-logo name="logo-global66" size="md" color="#00A651" />
-<g-logo name="icon-bre-b" size="md" color="green" />
+<g-logo name="logo-global66" size="md" color="#203478" />
 `,
         language: 'html'
       }
@@ -427,8 +437,8 @@ export const Filters: Story = {
   render: () => ({
     components: { GLogo, GConfigProvider, GSegmented },
     setup() {
-      const selectedLogo = ref('logo-global66');
-      const logoOptions = LOGO_NAMES.map(n => ({ label: n, value: n }));
+      const selectedLogo = ref(DEMO_LOGO_PSE);
+      const logoOptions = [...DEMO_LOGOS_FILTER];
 
       const filters = LOGO_FILTER_OPTIONS.map((value) => ({
         label: LOGO_FILTER_LABELS[value],
@@ -460,18 +470,16 @@ export const Filters: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Presets disponibles del prop `filter`. Cambia el logo seleccionado para comparar variantes.'
+        story: 'Presets del prop `filter` con Bancolombia, PSE y Nequi.'
       },
       source: {
         code: `
 <template>
-  <!-- Original -->
-  <g-logo name="logo-global66" />
-
-  <g-logo name="logo-global66" size="md" filter="grayscale" />
-  <g-logo name="logo-global66" size="md" filter="black" />
-  <g-logo name="logo-global66" size="md" filter="white" />
-  <g-logo name="logo-global66" size="md" filter="sepia" />
+  <g-logo name="logo-pse" size="md" />
+  <g-logo name="logo-pse" size="md" filter="grayscale" />
+  <g-logo name="logo-bancolombia" size="md" filter="black" />
+  <g-logo name="logo-nequi" size="md" filter="white" />
+  <g-logo name="logo-pse" size="md" filter="sepia" />
 </template>
 
 <script setup>

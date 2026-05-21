@@ -150,19 +150,28 @@ export const LOGO_GROUPS = [
   },
 ] as const;
 
+/** Altura por preset (2xs = mitad de xs; resto alineado con g-image) */
 export const LOGO_SIZES = {
-  'xs': '12px',
-  'sm': '16px',
-  'md': '24px',
-  'lg': '32px',
+  '2xs': '22px',
+  xs: '44px',
+  sm: '64px',
+  md: '80px',
+  lg: '112px',
+  xl: '160px',
+  '2xl': '208px',
+  '3xl': '260px',
 } as const;
 
 /** Dimensiones del contenedor en carga/error (ancho extra para que quepa "404") */
 export const LOGO_PLACEHOLDER_SIZES = {
-  xs: { width: '28px', height: '12px' },
-  sm: { width: '34px', height: '16px' },
-  md: { width: '40px', height: '24px' },
-  lg: { width: '52px', height: '32px' },
+  '2xs': { width: '28px', height: '22px' },
+  xs: { width: '56px', height: '44px' },
+  sm: { width: '80px', height: '64px' },
+  md: { width: '100px', height: '80px' },
+  lg: { width: '140px', height: '112px' },
+  xl: { width: '200px', height: '160px' },
+  '2xl': { width: '260px', height: '208px' },
+  '3xl': { width: '320px', height: '260px' },
 } as const;
 
 export const LOGO_FILTERS = {

@@ -62,12 +62,26 @@ export function useLogo(props: LogoProps): LogoState {
     return 'auto';
   });
 
+  const widthFromPresetHeight = computed<string>(() => {
+    if (!hasPresetSize.value || !aspectRatio.value) {
+      return 'auto';
+    }
+    const heightPx = parseFloat(LOGO_SIZES[props.size as keyof typeof LOGO_SIZES]);
+    if (Number.isNaN(heightPx)) {
+      return 'auto';
+    }
+    return `${heightPx * aspectRatio.value}px`;
+  });
+
   const widthValue = computed<string>(() => {
     if (hasSizeCustom.value) {
       return props.sizeCustom!.trim();
     }
     if (usesNaturalSize.value && naturalWidth.value) {
       return `${naturalWidth.value}px`;
+    }
+    if (hasPresetSize.value) {
+      return widthFromPresetHeight.value;
     }
     return 'auto';
   });
@@ -116,6 +130,10 @@ export function useLogo(props: LogoProps): LogoState {
         height: heightValue.value,
         minHeight: heightValue.value,
       };
+      if (widthFromPresetHeight.value !== 'auto') {
+        style.width = widthFromPresetHeight.value;
+        style.minWidth = widthFromPresetHeight.value;
+      }
       return style;
     }
 
@@ -151,6 +169,9 @@ export function useLogo(props: LogoProps): LogoState {
       style.height = heightValue.value;
       style.width = widthValue.value;
       style.maxHeight = heightValue.value;
+      if (widthValue.value !== 'auto') {
+        style.maxWidth = widthValue.value;
+      }
       return style;
     }
 
@@ -162,23 +183,29 @@ export function useLogo(props: LogoProps): LogoState {
 
   const colorBoxStyle = computed<Record<string, string>>(() => {
     const height = heightValue.value;
+    const width = widthValue.value;
     const style: Record<string, string> = {
       display: 'inline-block',
       height,
-      width: widthValue.value,
+      width,
       minHeight: height,
       backgroundColor: props.color?.trim() ?? '',
       maskSize: 'contain',
       maskRepeat: 'no-repeat',
       maskPosition: 'center',
+      maskMode: 'alpha',
       WebkitMaskSize: 'contain',
       WebkitMaskRepeat: 'no-repeat',
       WebkitMaskPosition: 'center',
       filter: filterValue.value,
     };
 
+    if (width !== 'auto') {
+      style.minWidth = width;
+    }
+
     if (imageSrc.value) {
-      const maskUrl = `url("${imageSrc.value}")`;
+      const maskUrl = `url(${JSON.stringify(imageSrc.value)})`;
       style.maskImage = maskUrl;
       style.WebkitMaskImage = maskUrl;
     }
@@ -209,6 +236,20 @@ export function useLogo(props: LogoProps): LogoState {
     });
   }
 
+  function loadAspectRatio(src: string): Promise<void> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+          aspectRatio.value = img.naturalWidth / img.naturalHeight;
+        }
+        resolve();
+      };
+      img.onerror = () => resolve();
+      img.src = src;
+    });
+  }
+
   async function prepareDimensionsBeforeShow(): Promise<void> {
     if (!imageSrc.value) {
       return;
@@ -216,14 +257,9 @@ export function useLogo(props: LogoProps): LogoState {
     if (usesNaturalSize.value) {
       await loadNaturalDimensions(imageSrc.value);
     } else {
-      resetNaturalDimensions();
-      const img = new Image();
-      img.onload = () => {
-        if (img.naturalWidth > 0 && img.naturalHeight > 0) {
-          aspectRatio.value = img.naturalWidth / img.naturalHeight;
-        }
-      };
-      img.src = imageSrc.value;
+      naturalWidth.value = null;
+      naturalHeight.value = null;
+      await loadAspectRatio(imageSrc.value);
     }
   }
 
