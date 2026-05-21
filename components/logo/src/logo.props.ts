@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType, debugWarn } from 'element-plus/es/utils/index.mjs';
 import type { LogoFilter, LogoName, LogoSize } from './types/logo.types';
-import { LOGO_FILTER_OPTIONS, LOGO_FILTERS, LOGO_NAMES } from './constants/logo.constants';
+import { LOGO_FILTER_OPTIONS, LOGO_FILTERS, LOGO_NAMES, LOGO_SIZES } from './constants/logo.constants';
 
 export const logoProps = buildProps({
   name: {
@@ -10,7 +10,7 @@ export const logoProps = buildProps({
   },
   size: {
     type: definePropType<LogoSize>(String),
-    default: 'md',
+    default: undefined,
   },
   sizeCustom: {
     type: String,
@@ -37,6 +37,12 @@ export function validateLogoProps(props: LogoProps) {
     debugWarn(
       'GLogo',
       `Invalid logo name: "${props.name}". Available logos: ${LOGO_NAMES.join(', ')}`
+    );
+  }
+  if (props.size && !(props.size in LOGO_SIZES)) {
+    debugWarn(
+      'GLogo',
+      `Invalid size: "${props.size}". Available sizes: ${Object.keys(LOGO_SIZES).join(', ')}`
     );
   }
   if (props.filter && !LOGO_FILTER_OPTIONS.includes(props.filter as LogoFilter)) {

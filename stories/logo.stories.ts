@@ -24,7 +24,7 @@ Centraliza las marcas visuales de Global66, aliados y proveedores en los distint
 
 ## Características
 - SVG de marca listos para usar
-- Cuatro tamaños por altura (\`size\`) o ancho libre (\`size-custom\`): usa una u otra, no las dos
+- Por defecto muestra el **tamaño original del SVG**; \`size\` (xs–lg) o \`size-custom\` cuando necesites escalar
 - Presets de \`filter\` (original, gris, negro, blanco, sepia, etc.)
 - \`color\` para teñir con cualquier valor CSS (hex, rgb, nombre)
 - Lazy loading para optimizar el rendimiento
@@ -52,7 +52,7 @@ Para que el componente funcione correctamente, es necesario importar los estilos
 
 \`\`\`vue
 <template>
-  <g-logo name="logo-global66" size="md" />
+  <g-logo name="logo-global66" />
 </template>
 
 <script setup>
@@ -60,9 +60,10 @@ import { GLogo } from '@flash-global66/g-logo';
 </script>
 \`\`\`
 
-## Tamaño: \`size\` o \`size-custom\` (mutuamente excluyentes)
-- **\`size\`** (xs, sm, md, lg): fija la **altura**; el ancho es proporcional al SVG.
-- **\`size-custom\`** (ej: \`120px\`): fija el **ancho**; la altura es proporcional. Si lo usas, \`size\` se ignora.
+## Tamaño
+- **Por defecto** (sin \`size\`): dimensiones **originales del SVG** (width/height del archivo).
+- **\`size\`** (xs, sm, md, lg): escala por **altura** fija; ancho proporcional.
+- **\`size-custom\`** (ej: \`120px\`): ancho libre; altura proporcional. Excluye \`size\`.
 
 ## Color personalizado
 \`color\` acepta cualquier valor CSS (\`#00A651\`, \`green\`, \`rgb(0, 166, 81)\`) y unifica la marca en una sola tinta.
@@ -101,12 +102,12 @@ Para incorporar una marca nueva:
       }
     },
     size: {
-      description: 'Altura preset (xs–lg). Ignorado si defines size-custom',
+      description: 'Altura preset (xs–lg). Vacío = tamaño original del SVG',
       control: 'select',
-      options: Object.keys(LOGO_SIZES),
+      options: [undefined, ...Object.keys(LOGO_SIZES)],
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'md' },
+        type: { summary: 'xs | sm | md | lg' },
+        defaultValue: { summary: 'original (SVG)' },
       }
     },
     sizeCustom: {
@@ -145,7 +146,6 @@ Para incorporar una marca nueva:
   },
   args: {
     name: 'logo-global66',
-    size: 'md',
     filter: 'none',
     color: '',
     sizeCustom: '',
@@ -179,7 +179,7 @@ export const Primary: Story = {
       source: {
         code: `
 <template>
-  <g-logo name="logo-global66" size="md" />
+  <g-logo name="logo-global66" />
 </template>
 
 <script setup>
@@ -197,15 +197,22 @@ export const AllLogos: Story = {
   render: () => ({
     components: { GLogo, GConfigProvider, GSegmented },
     setup() {
-      const selectedSize = ref('md');
-      const sizeOptions = Object.keys(LOGO_SIZES).map(s => ({ label: s.toUpperCase(), value: s }));
+      const NATURAL_SIZE = '__natural__';
+      const selectedSize = ref(NATURAL_SIZE);
+      const sizeOptions = [
+        { label: 'Original', value: NATURAL_SIZE },
+        ...Object.keys(LOGO_SIZES).map(s => ({ label: s.toUpperCase(), value: s })),
+      ];
       const isOnDark = (name: string) => name.endsWith('-on-dark');
+      const logoSizeProps = (sizeKey: string) =>
+        sizeKey === NATURAL_SIZE ? {} : { size: sizeKey };
       return {
         LOGO_GROUPS,
         LOGO_NAMES,
         selectedSize,
         sizeOptions,
         isOnDark,
+        logoSizeProps,
       };
     },
     template: `
@@ -230,7 +237,11 @@ export const AllLogos: Story = {
                 class="flex flex-col items-center gap-3 p-4 border rounded-md min-w-[120px]"
                 :class="isOnDark(name) ? 'bg-gray-900 border-gray-700' : 'bg-white'"
               >
-                <g-logo :name="name" :size="selectedSize" :lazy-load="false" />
+                <g-logo
+                  :name="name"
+                  v-bind="logoSizeProps(selectedSize)"
+                  :lazy-load="false"
+                />
                 <span
                   class="text-xs font-mono text-center break-all"
                   :class="isOnDark(name) ? 'text-gray-400' : 'text-gray-500'"
@@ -245,15 +256,15 @@ export const AllLogos: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Colección completa agrupada por región/tipo. Las variantes `-on-dark` se muestran sobre fondo oscuro.'
+        story: 'Colección completa a tamaño original por defecto. Usa el selector para xs–lg. Variantes `-on-dark` sobre fondo oscuro.'
       },
       source: {
         code: `
 <template>
-  <g-logo name="logo-global66" size="md" />
-  <g-logo name="logo-bancolombia" size="md" />
-  <g-logo name="logo-pse" size="md" />
-  <g-logo name="logo-bcp" size="md" />
+  <g-logo name="logo-global66" />
+  <g-logo name="logo-bancolombia" size="sm" />
+  <g-logo name="logo-pse" />
+  <g-logo name="logo-bcp" size="lg" />
 </template>
 
 <script setup>
@@ -295,7 +306,7 @@ export const Sizes: Story = {
 <template>
   <g-logo name="logo-global66" size="xs" />  <!-- 12px alto -->
   <g-logo name="logo-global66" size="sm" />  <!-- 16px alto -->
-  <g-logo name="logo-global66" size="md" />  <!-- 24px alto -->
+  <g-logo name="logo-global66" />  <!-- 24px alto -->
   <g-logo name="logo-global66" size="lg" />  <!-- 32px alto -->
 </template>
 
@@ -379,7 +390,7 @@ export const Colors: Story = {
       <g-config-provider>
         <div class="flex flex-wrap gap-8 items-end">
           <div class="flex flex-col items-center gap-3">
-            <g-logo name="logo-global66" size="md" />
+            <g-logo name="logo-global66" />
             <span class="text-xs text-gray-500">Original</span>
           </div>
           <div
@@ -455,7 +466,7 @@ export const Filters: Story = {
         code: `
 <template>
   <!-- Original -->
-  <g-logo name="logo-global66" size="md" />
+  <g-logo name="logo-global66" />
 
   <g-logo name="logo-global66" size="md" filter="grayscale" />
   <g-logo name="logo-global66" size="md" filter="black" />
