@@ -4,6 +4,7 @@ import {
   GLogo,
   LOGO_FILTER_LABELS,
   LOGO_FILTER_OPTIONS,
+  LOGO_GROUPS,
   LOGO_NAMES,
   LOGO_PLACEHOLDER_SIZES,
   LOGO_SIZES,
@@ -76,10 +77,12 @@ import { GLogo } from '@flash-global66/g-logo';
 Para incorporar una marca nueva:
 
 1. **Añadir el archivo**
-   - Coloca el archivo SVG en \`components/logo/src/assets/logos/\` (nombre en minúsculas, ej: \`pse.svg\`)
+   - Coloca el SVG en \`components/logo/src/assets/logos/\` con convención kebab-case:
+   - \`icon-{marca}\` isotipo · \`label-{marca}\` wordmark · \`logo-{marca}\` lockup completo
+   - Sufijos: \`-on-dark\` (fondo oscuro), \`-b2b\` / \`-b2c\` (segmento Global66)
 
 2. **Actualizar las constantes**
-   - Modifica \`src/constants/logo.constants.ts\` para incluir el nuevo nombre en \`LOGO_NAMES\`
+   - Agrega el nombre en \`LOGO_NAMES\` y en el grupo correspondiente de \`LOGO_GROUPS\` en \`logo.constants.ts\`
 
 3. **Construir el componente**
    - Ejecuta \`yarn build logo\` para actualizar el componente
@@ -196,22 +199,45 @@ export const AllLogos: Story = {
     setup() {
       const selectedSize = ref('md');
       const sizeOptions = Object.keys(LOGO_SIZES).map(s => ({ label: s.toUpperCase(), value: s }));
-      return { LOGO_NAMES, LOGO_SIZES, selectedSize, sizeOptions };
+      const isOnDark = (name: string) => name.endsWith('-on-dark');
+      return {
+        LOGO_GROUPS,
+        LOGO_NAMES,
+        selectedSize,
+        sizeOptions,
+        isOnDark,
+      };
     },
     template: `
       <g-config-provider>
-        <div class="space-y-6">
-          <g-segmented block v-model="selectedSize" :options="sizeOptions" />
-          <div class="flex flex-wrap gap-8 items-center">
-            <div
-              v-for="name in LOGO_NAMES"
-              :key="name"
-              class="flex flex-col items-center gap-3 p-4 border rounded-md bg-white"
-            >
-              <g-logo :name="name" :size="selectedSize" />
-              <span class="text-xs text-gray-500 font-mono">{{ name }}</span>
-            </div>
+        <div class="space-y-10">
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <p class="text-sm text-gray-600 m-0">
+              {{ LOGO_NAMES.length }} logos · colores originales del SVG
+            </p>
+            <g-segmented v-model="selectedSize" :options="sizeOptions" />
           </div>
+          <section
+            v-for="group in LOGO_GROUPS"
+            :key="group.id"
+            class="space-y-4"
+          >
+            <h3 class="text-base font-semibold text-gray-800 m-0">{{ group.label }}</h3>
+            <div class="flex flex-wrap gap-6 items-center">
+              <div
+                v-for="name in group.names"
+                :key="name"
+                class="flex flex-col items-center gap-3 p-4 border rounded-md min-w-[120px]"
+                :class="isOnDark(name) ? 'bg-gray-900 border-gray-700' : 'bg-white'"
+              >
+                <g-logo :name="name" :size="selectedSize" :lazy-load="false" />
+                <span
+                  class="text-xs font-mono text-center break-all"
+                  :class="isOnDark(name) ? 'text-gray-400' : 'text-gray-500'"
+                >{{ name }}</span>
+              </div>
+            </div>
+          </section>
         </div>
       </g-config-provider>
     `
@@ -219,15 +245,15 @@ export const AllLogos: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Los 4 logos disponibles en todos los tamaños. El ancho se ajusta automáticamente a la proporción natural de cada logo.'
+        story: 'Colección completa agrupada por región/tipo. Las variantes `-on-dark` se muestran sobre fondo oscuro.'
       },
       source: {
         code: `
 <template>
-  <g-logo name="icon-bre-b" size="md" />
-  <g-logo name="label-global66" size="md" />
-  <g-logo name="icon-global66" size="md" />
   <g-logo name="logo-global66" size="md" />
+  <g-logo name="logo-bancolombia" size="md" />
+  <g-logo name="logo-pse" size="md" />
+  <g-logo name="logo-bcp" size="md" />
 </template>
 
 <script setup>
