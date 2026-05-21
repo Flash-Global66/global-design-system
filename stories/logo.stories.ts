@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref, onMounted, onUnmounted } from 'vue';
-import { GLogo, LOGO_NAMES, LOGO_SIZES } from '@flash-global66/g-logo/index.ts';
+import { GLogo, LOGO_NAMES, LOGO_PLACEHOLDER_SIZES, LOGO_SIZES } from '@flash-global66/g-logo/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { GConfigProvider } from '../components/config-provider';
@@ -333,7 +333,7 @@ export const ErrorHandling: Story = {
   render: () => ({
     components: { GLogo, GConfigProvider },
     setup() {
-      return { LOGO_SIZES };
+      return { LOGO_SIZES, LOGO_PLACEHOLDER_SIZES };
     },
     template: `
       <g-config-provider>
@@ -345,7 +345,9 @@ export const ErrorHandling: Story = {
               class="flex flex-col items-center gap-2"
             >
               <g-logo name="logo-inexistente" :size="size" />
-              <span class="text-sm text-gray-500">{{ size }} ({{ px }})</span>
+              <span class="text-sm text-gray-500">
+                {{ size }} ({{ LOGO_PLACEHOLDER_SIZES[size].width }} × {{ LOGO_PLACEHOLDER_SIZES[size].height }})
+              </span>
             </div>
           </div>
 

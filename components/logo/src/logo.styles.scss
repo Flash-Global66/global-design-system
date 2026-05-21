@@ -8,23 +8,32 @@
   @apply block object-contain w-full h-full max-w-full max-h-full;
 
   @include e(container) {
-    @apply flex items-center justify-center box-border overflow-hidden;
+    @apply flex items-center justify-center box-border;
   }
 
   @include e(placeholder) {
-    @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full text-center p-2 text-terciary-txt;
+    @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full text-center text-terciary-txt font-medium leading-none;
 
-    &.text-size-xs,
+    &.text-size-xs {
+      padding: 1px 2px;
+      font-size: 7px;
+      letter-spacing: -0.02em;
+    }
+
     &.text-size-sm {
-      @apply text-2;
+      padding: 1px 3px;
+      font-size: 8px;
+      letter-spacing: -0.02em;
     }
 
     &.text-size-md {
-      @apply text-3;
+      padding: 2px 4px;
+      font-size: 10px;
     }
 
     &.text-size-lg {
-      @apply text-4;
+      padding: 3px 5px;
+      font-size: 12px;
     }
   }
 }

@@ -1,7 +1,7 @@
 import { computed, ref, readonly, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import type { LogoProps } from '../logo.props';
-import { LOGO_SIZES } from '../constants/logo.constants';
+import { LOGO_PLACEHOLDER_SIZES, LOGO_SIZES } from '../constants/logo.constants';
 import type { LogoState } from '../types/logo.types';
 
 const LOGO_ASSET_LOADERS = import.meta.glob('../assets/logos/*.svg', {
@@ -20,20 +20,23 @@ export function useLogo(props: LogoProps): LogoState {
   );
 
   const containerStyle = computed<Record<string, string>>(() => {
-    const base: Record<string, string> = {
-      height: sizeValue.value,
-      minHeight: sizeValue.value,
-    };
-
     if (!isLoaded.value || hasError.value) {
+      const placeholderSize =
+        LOGO_PLACEHOLDER_SIZES[props.size as keyof typeof LOGO_PLACEHOLDER_SIZES] ??
+        LOGO_PLACEHOLDER_SIZES.md;
+
       return {
-        ...base,
-        width: sizeValue.value,
-        minWidth: sizeValue.value,
+        width: placeholderSize.width,
+        minWidth: placeholderSize.width,
+        height: placeholderSize.height,
+        minHeight: placeholderSize.height,
       };
     }
 
-    return base;
+    return {
+      height: sizeValue.value,
+      minHeight: sizeValue.value,
+    };
   });
 
   const imageStyle = computed<Record<string, string>>(() => ({
