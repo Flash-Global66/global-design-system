@@ -1,7 +1,8 @@
 import { computed, ref, readonly, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import type { LogoProps } from '../logo.props';
-import { LOGO_PLACEHOLDER_SIZES, LOGO_SIZES } from '../constants/logo.constants';
+import { LOGO_FILTERS, LOGO_PLACEHOLDER_SIZES, LOGO_SIZES } from '../constants/logo.constants';
+import type { LogoFilter } from '../types/logo.types';
 import type { LogoState } from '../types/logo.types';
 
 const LOGO_ASSET_LOADERS = import.meta.glob('../assets/logos/*.svg', {
@@ -13,7 +14,10 @@ export function useLogo(props: LogoProps): LogoState {
   const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
   const imageSrc = ref<string>('');
+  const aspectRatio = ref<number | null>(null);
   let stopObserver: (() => void) | null = null;
+
+  const hasColor = computed<boolean>(() => Boolean(props.color?.trim()));
 
   const sizeValue = computed<string>(
     () => LOGO_SIZES[props.size as keyof typeof LOGO_SIZES] ?? LOGO_SIZES.md
@@ -33,18 +37,66 @@ export function useLogo(props: LogoProps): LogoState {
       };
     }
 
-    return {
+    const style: Record<string, string> = {
       height: sizeValue.value,
       minHeight: sizeValue.value,
     };
+    return style;
+  });
+
+  const filterValue = computed<string>(() => {
+    const key = props.filter as LogoFilter;
+    return LOGO_FILTERS[key] ?? LOGO_FILTERS.none;
   });
 
   const imageStyle = computed<Record<string, string>>(() => ({
     height: sizeValue.value,
     width: 'auto',
     maxHeight: sizeValue.value,
-    filter: props.filter ?? 'none',
+    filter: filterValue.value,
   }));
+
+  const colorBoxStyle = computed<Record<string, string>>(() => {
+    const height = sizeValue.value;
+    const heightPx = parseFloat(height);
+    const width =
+      aspectRatio.value && !Number.isNaN(heightPx)
+        ? `${heightPx * aspectRatio.value}px`
+        : height;
+    const style: Record<string, string> = {
+      display: 'inline-block',
+      height,
+      width,
+      minHeight: height,
+      backgroundColor: props.color?.trim() ?? '',
+      maskSize: 'contain',
+      maskRepeat: 'no-repeat',
+      maskPosition: 'center',
+      WebkitMaskSize: 'contain',
+      WebkitMaskRepeat: 'no-repeat',
+      WebkitMaskPosition: 'center',
+      filter: filterValue.value,
+    };
+
+    if (imageSrc.value) {
+      const maskUrl = `url("${imageSrc.value}")`;
+      style.maskImage = maskUrl;
+      style.WebkitMaskImage = maskUrl;
+    }
+
+    return style;
+  });
+
+  function loadAspectRatio(src: string): void {
+    aspectRatio.value = null;
+    const img = new Image();
+    img.onload = () => {
+      if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+        aspectRatio.value = img.naturalWidth / img.naturalHeight;
+      }
+    };
+    img.src = src;
+  }
 
   async function resolveImageSrc(name: string): Promise<void> {
     const assetPath = `../assets/logos/${String(name).toLowerCase().trim()}.svg`;
@@ -121,9 +173,18 @@ export function useLogo(props: LogoProps): LogoState {
     }
   });
 
+  watch(imageSrc, (src) => {
+    if (src) {
+      loadAspectRatio(src);
+    } else {
+      aspectRatio.value = null;
+    }
+  });
+
   watch(() => props.name, async (name) => {
     isLoaded.value = false;
     hasError.value = false;
+    aspectRatio.value = null;
     if (stopObserver) {
       stopObserver();
       stopObserver = null;
@@ -142,6 +203,8 @@ export function useLogo(props: LogoProps): LogoState {
     sizeValue,
     containerStyle,
     imageStyle,
+    colorBoxStyle,
+    hasColor,
     isLoaded,
     hasError,
     imageSrc: readonly(imageSrc),

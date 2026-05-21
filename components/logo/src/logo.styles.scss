@@ -11,6 +11,10 @@
     @apply flex items-center justify-center box-border;
   }
 
+  @include e(color) {
+    @apply inline-block shrink-0;
+  }
+
   @include e(placeholder) {
     @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full text-center text-terciary-txt font-medium leading-none;
 

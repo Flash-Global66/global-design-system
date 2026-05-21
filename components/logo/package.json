@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-logo",
   "version": "0.0.1",
-  "description": "Componente para mostrar logos de marca con soporte de tamaños y filtros CSS",
+  "description": "Logos de Global66 y, progresivamente, de aliados y proveedores (PSE, Bancolombia, Bre-B, etc.) con tamaños y filtros CSS",
   "author": "Global66",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

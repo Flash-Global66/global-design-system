@@ -4,8 +4,15 @@
     ref="imageContainer"
     :style="containerStyle"
   >
+    <span
+      v-if="isLoaded && !hasError && hasColor"
+      :class="ns.e('color')"
+      :style="colorBoxStyle"
+      role="img"
+      :aria-label="name"
+    />
     <img
-      v-if="isLoaded && !hasError"
+      v-else-if="isLoaded && !hasError"
       :src="imageSrc"
       :alt="name"
       :class="ns.b()"
@@ -45,6 +52,8 @@ const ns = useNamespace('logo');
 const {
   containerStyle,
   imageStyle,
+  colorBoxStyle,
+  hasColor,
   isLoaded,
   imageSrc,
   imageContainer,

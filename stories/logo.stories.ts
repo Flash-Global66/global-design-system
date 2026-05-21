@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import { ref, onMounted, onUnmounted } from 'vue';
-import { GLogo, LOGO_NAMES, LOGO_PLACEHOLDER_SIZES, LOGO_SIZES } from '@flash-global66/g-logo/index.ts';
+import { ref } from 'vue';
+import {
+  GLogo,
+  LOGO_FILTER_LABELS,
+  LOGO_FILTER_OPTIONS,
+  LOGO_NAMES,
+  LOGO_PLACEHOLDER_SIZES,
+  LOGO_SIZES,
+} from '@flash-global66/g-logo/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { GConfigProvider } from '../components/config-provider';
-import { version, peerDependencies } from '@flash-global66/g-logo/package.json';
-import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories';
 
 const meta: Meta<typeof GLogo> = {
   title: 'Basic/Logo',
@@ -14,17 +19,17 @@ const meta: Meta<typeof GLogo> = {
     docs: {
       description: {
         component: `
-El componente Logo muestra los logos de marca de Global66 con soporte de tamaños y filtros CSS.
+# Logo Component
 
-> Versión actual: ${version}
+El componente Logo muestra los logos usados en las aplicaciones de Global66 (marca propia y, progresivamente, aliados y proveedores como PSE, Bancolombia o Bre-B) con tamaños consistentes y filtros CSS opcionales:
 
 ## Características
-- 4 logos disponibles: icon-bre-b, icon-global66, label-global66, logo-global66
-- 4 tamaños definidos por altura (el ancho se ajusta automáticamente respetando la proporción)
-- Prop \`filter\` para aplicar cualquier filtro CSS (grayscale, brightness, sepia, etc.)
-- Lazy loading con IntersectionObserver para optimizar el rendimiento
-- Manejo de errores cuando el logo no puede cargarse
-- Tipado estricto para autocompletado
+- Colección de logos SVG listos para usar
+- Cuatro tamaños por altura (ancho automático según proporción)
+- Prop \`filter\` con presets predefinidos (original, gris, negro, blanco, sepia, etc.)
+- Prop \`color\` para teñir el logo con cualquier color CSS (hex, rgb, nombre)
+- Lazy loading para optimizar el rendimiento
+- Tipado estricto para autocompletado de nombres y tamaños
 
 ## Instalación
 
@@ -32,81 +37,110 @@ El componente Logo muestra los logos de marca de Global66 con soporte de tamaño
 yarn add @flash-global66/g-logo
 \`\`\`
 
-## Importación del componente
-\`\`\`typescript
-import { GLogo } from '@flash-global66/g-logo'
-
-// Recomendado: importar en los estilos globales
-@use '@flash-global66/g-logo/styles.scss'
-\`\`\`
-
 ## Dependencias
-Se hicieron pruebas con las siguientes dependencias. Puede que funcione con otras versiones, pero no se garantiza.
-${generatePeerDepsList(peerDependencies)}
+Este componente requiere:
+- @vueuse/core (para el lazy loading)
+- element-plus (para estilos y utilidades)
 
-\`\`\`bash
-yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
+## Importación de estilos SASS
+Para que el componente funcione correctamente, es necesario importar los estilos SASS:
+
+\`\`\`scss
+@use "@flash-global66/g-logo/styles.scss";
 \`\`\`
 
-## Tamaños disponibles (basados en altura)
+## Uso básico
+
+\`\`\`vue
+<template>
+  <g-logo name="logo-global66" size="md" />
+</template>
+
+<script setup>
+import { GLogo } from '@flash-global66/g-logo';
+</script>
+\`\`\`
+
+## Tamaños disponibles
 - **xs**: 12px de alto
 - **sm**: 16px de alto
 - **md**: 24px de alto (predeterminado)
 - **lg**: 32px de alto
 
-## Filtros de color disponibles
-El prop \`filter\` acepta cualquier valor CSS válido de la propiedad \`filter\`:
-- **Original**: \`none\` (predeterminado)
-- **Gris**: \`grayscale(100%)\`
-- **Negro**: \`brightness(0)\`
-- **Blanco**: \`brightness(0) invert(1)\`
-- **Sepia**: \`sepia(100%)\`
-- **Opacidad reducida**: \`opacity(50%)\`
+## Filtros disponibles
+- **none**: original
+- **grayscale**: escala de grises
+- **black**: negro
+- **white**: blanco (ideal sobre fondo oscuro)
+- **sepia**: sepia
+- **opacity-50**: 50% de opacidad
+- **high-contrast**: contraste alto
+- **invert**: invertido
 
-## Agregar nuevos logos
+## Color personalizado
+Usa \`color\` con cualquier valor CSS válido (\`#00A651\`, \`green\`, \`rgb(0, 166, 81)\`). Tiñe el logo como una sola tinta; si defines \`color\`, tiene prioridad sobre los colores originales del SVG.
 
-1. Coloca el archivo SVG en \`components/logo/src/assets/logos/\` en minúsculas (ej: \`mi-logo.svg\`)
-2. Añade el nombre en \`src/constants/logo.constants.ts\` dentro de \`LOGO_NAMES\`
-3. Ejecuta \`yarn build logo\`
+## Optimizaciones de rendimiento
+### Lazy Loading
+- El componente utiliza IntersectionObserver para cargar los logos sólo cuando son visibles
+- Puedes desactivar esta función con \`lazyLoad=false\`
+
+## Agregar nuevos logos al componente
+
+Para añadir nuevos logos al componente:
+
+1. **Añadir el archivo**
+   - Coloca el archivo SVG en \`components/logo/src/assets/logos/\` (nombre en minúsculas, ej: \`pse.svg\`)
+
+2. **Actualizar las constantes**
+   - Modifica \`src/constants/logo.constants.ts\` para incluir el nuevo nombre en \`LOGO_NAMES\`
+
+3. **Construir el componente**
+   - Ejecuta \`yarn build logo\` para actualizar el componente
         `
       }
     }
   },
   argTypes: {
     name: {
-      description: 'Nombre del logo a mostrar',
+      description: 'Nombre del logo',
       control: 'select',
       options: LOGO_NAMES,
       table: {
-        category: 'Principal',
-        type: { summary: 'LogoName' },
+        type: { summary: 'string' },
         defaultValue: { summary: 'logo-global66' },
       }
     },
     size: {
-      description: 'Tamaño del logo (controla la altura; el ancho es automático)',
+      description: 'Tamaño del logo',
       control: 'select',
       options: Object.keys(LOGO_SIZES),
       table: {
-        category: 'Apariencia',
         type: { summary: 'string' },
         defaultValue: { summary: 'md' },
       }
     },
     filter: {
-      description: 'Filtro CSS para modificar el color del logo',
-      control: 'text',
+      description: 'Preset de filtro CSS aplicado al logo',
+      control: 'select',
+      options: LOGO_FILTER_OPTIONS,
       table: {
-        category: 'Apariencia',
-        type: { summary: 'string' },
+        type: { summary: 'LogoFilter' },
         defaultValue: { summary: 'none' },
       }
     },
+    color: {
+      description: 'Color CSS para teñir el logo (vacío = colores originales del SVG)',
+      control: 'color',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
+      }
+    },
     lazyLoad: {
-      description: 'Activa la carga diferida: el logo se carga solo cuando entra en el viewport',
+      description: 'Activar carga diferida del logo',
       control: 'boolean',
       table: {
-        category: 'Comportamiento',
         type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
       }
@@ -116,6 +150,7 @@ El prop \`filter\` acepta cualquier valor CSS válido de la propiedad \`filter\`
     name: 'logo-global66',
     size: 'md',
     filter: 'none',
+    color: '',
     lazyLoad: true
   }
 } as Meta;
@@ -253,6 +288,55 @@ import { GLogo } from '@flash-global66/g-logo';
   }
 };
 
+export const Colors: Story = {
+  name: 'Color personalizado',
+  render: () => ({
+    components: { GLogo, GConfigProvider },
+    setup() {
+      const colors = [
+        { label: 'Verde', value: '#00A651' },
+        { label: 'Azul marca', value: '#203478' },
+        { label: 'Rojo', value: '#E53935' },
+        { label: 'Naranja', value: '#FF9800' },
+      ];
+      return { colors };
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-wrap gap-8 items-end">
+          <div class="flex flex-col items-center gap-3">
+            <g-logo name="logo-global66" size="md" />
+            <span class="text-xs text-gray-500">Original</span>
+          </div>
+          <div
+            v-for="c in colors"
+            :key="c.value"
+            class="flex flex-col items-center gap-3"
+          >
+            <g-logo name="logo-global66" size="md" :color="c.value" />
+            <span class="text-xs text-gray-500">{{ c.label }}</span>
+            <code class="text-xs text-gray-400">{{ c.value }}</code>
+          </div>
+        </div>
+      </g-config-provider>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'El prop `color` teñe el logo con cualquier valor CSS. Útil para adaptarlo a fondos o paletas de producto.'
+      },
+      source: {
+        code: `
+<g-logo name="logo-global66" size="md" color="#00A651" />
+<g-logo name="icon-bre-b" size="md" color="green" />
+`,
+        language: 'html'
+      }
+    }
+  }
+};
+
 export const Filters: Story = {
   name: 'Filtros de color',
   render: () => ({
@@ -261,16 +345,10 @@ export const Filters: Story = {
       const selectedLogo = ref('logo-global66');
       const logoOptions = LOGO_NAMES.map(n => ({ label: n, value: n }));
 
-      const filters = [
-        { label: 'Original',          value: 'none' },
-        { label: 'Gris',              value: 'grayscale(100%)' },
-        { label: 'Negro',             value: 'brightness(0)' },
-        { label: 'Blanco',            value: 'brightness(0) invert(1)' },
-        { label: 'Sepia',             value: 'sepia(100%)' },
-        { label: '50% opacidad',      value: 'opacity(50%)' },
-        { label: 'Contraste alto',    value: 'contrast(200%)' },
-        { label: 'Invertido',         value: 'invert(100%)' },
-      ];
+      const filters = LOGO_FILTER_OPTIONS.map((value) => ({
+        label: LOGO_FILTER_LABELS[value],
+        value,
+      }));
 
       return { filters, selectedLogo, logoOptions };
     },
@@ -297,7 +375,7 @@ export const Filters: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El prop `filter` acepta cualquier valor CSS válido de la propiedad `filter`. Cambia el logo seleccionado para ver cómo afecta a cada uno.'
+        story: 'Presets disponibles del prop `filter`. Cambia el logo seleccionado para comparar variantes.'
       },
       source: {
         code: `
@@ -305,17 +383,10 @@ export const Filters: Story = {
   <!-- Original -->
   <g-logo name="logo-global66" size="md" />
 
-  <!-- Gris -->
-  <g-logo name="logo-global66" size="md" filter="grayscale(100%)" />
-
-  <!-- Negro puro -->
-  <g-logo name="logo-global66" size="md" filter="brightness(0)" />
-
-  <!-- Blanco puro (sobre fondo oscuro) -->
-  <g-logo name="logo-global66" size="md" filter="brightness(0) invert(1)" />
-
-  <!-- Sepia -->
-  <g-logo name="logo-global66" size="md" filter="sepia(100%)" />
+  <g-logo name="logo-global66" size="md" filter="grayscale" />
+  <g-logo name="logo-global66" size="md" filter="black" />
+  <g-logo name="logo-global66" size="md" filter="white" />
+  <g-logo name="logo-global66" size="md" filter="sepia" />
 </template>
 
 <script setup>
