@@ -27,7 +27,7 @@
     />
     <div
       v-else
-      :class="[ns.e('placeholder'), `text-size-${size}`]"
+      :class="[ns.e('placeholder'), `text-size-${sizeCustom?.trim() ? 'md' : size}`]"
       role="img"
       :aria-label="`Error al cargar el logo: ${name}`"
     >

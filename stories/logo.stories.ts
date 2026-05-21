@@ -19,15 +19,13 @@ const meta: Meta<typeof GLogo> = {
     docs: {
       description: {
         component: `
-# Logo Component
-
-El componente Logo muestra los logos usados en las aplicaciones de Global66 (marca propia y, progresivamente, aliados y proveedores como PSE, Bancolombia o Bre-B) con tamaños consistentes y filtros CSS opcionales:
+Centraliza las marcas visuales de Global66, aliados y proveedores en los distintos segmentos (B2B, B2C), como Bancolombia, PSE o Bre-B, con tamaños consistentes y estilos opcionales:
 
 ## Características
-- Colección de logos SVG listos para usar
-- Cuatro tamaños por altura (ancho automático según proporción)
-- Prop \`filter\` con presets predefinidos (original, gris, negro, blanco, sepia, etc.)
-- Prop \`color\` para teñir el logo con cualquier color CSS (hex, rgb, nombre)
+- SVG de marca listos para usar
+- Cuatro tamaños por altura (\`size\`) o ancho libre (\`size-custom\`): usa una u otra, no las dos
+- Presets de \`filter\` (original, gris, negro, blanco, sepia, etc.)
+- \`color\` para teñir con cualquier valor CSS (hex, rgb, nombre)
 - Lazy loading para optimizar el rendimiento
 - Tipado estricto para autocompletado de nombres y tamaños
 
@@ -61,33 +59,21 @@ import { GLogo } from '@flash-global66/g-logo';
 </script>
 \`\`\`
 
-## Tamaños disponibles
-- **xs**: 12px de alto
-- **sm**: 16px de alto
-- **md**: 24px de alto (predeterminado)
-- **lg**: 32px de alto
-
-## Filtros disponibles
-- **none**: original
-- **grayscale**: escala de grises
-- **black**: negro
-- **white**: blanco (ideal sobre fondo oscuro)
-- **sepia**: sepia
-- **opacity-50**: 50% de opacidad
-- **high-contrast**: contraste alto
-- **invert**: invertido
+## Tamaño: \`size\` o \`size-custom\` (mutuamente excluyentes)
+- **\`size\`** (xs, sm, md, lg): fija la **altura**; el ancho es proporcional al SVG.
+- **\`size-custom\`** (ej: \`120px\`): fija el **ancho**; la altura es proporcional. Si lo usas, \`size\` se ignora.
 
 ## Color personalizado
-Usa \`color\` con cualquier valor CSS válido (\`#00A651\`, \`green\`, \`rgb(0, 166, 81)\`). Tiñe el logo como una sola tinta; si defines \`color\`, tiene prioridad sobre los colores originales del SVG.
+\`color\` acepta cualquier valor CSS (\`#00A651\`, \`green\`, \`rgb(0, 166, 81)\`) y unifica la marca en una sola tinta.
 
 ## Optimizaciones de rendimiento
 ### Lazy Loading
-- El componente utiliza IntersectionObserver para cargar los logos sólo cuando son visibles
+- Utiliza IntersectionObserver para cargar el SVG sólo cuando es visible
 - Puedes desactivar esta función con \`lazyLoad=false\`
 
-## Agregar nuevos logos al componente
+## Agregar nuevas marcas
 
-Para añadir nuevos logos al componente:
+Para incorporar una marca nueva:
 
 1. **Añadir el archivo**
    - Coloca el archivo SVG en \`components/logo/src/assets/logos/\` (nombre en minúsculas, ej: \`pse.svg\`)
@@ -112,12 +98,20 @@ Para añadir nuevos logos al componente:
       }
     },
     size: {
-      description: 'Tamaño del logo',
+      description: 'Altura preset (xs–lg). Ignorado si defines size-custom',
       control: 'select',
       options: Object.keys(LOGO_SIZES),
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'md' },
+      }
+    },
+    sizeCustom: {
+      description: 'Ancho libre (ej: 120px). Excluye size; la altura es proporcional',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       }
     },
     filter: {
@@ -151,6 +145,7 @@ Para añadir nuevos logos al componente:
     size: 'md',
     filter: 'none',
     color: '',
+    sizeCustom: '',
     lazyLoad: true
   }
 } as Meta;
@@ -281,6 +276,59 @@ export const Sizes: Story = {
 <script setup>
 import { GLogo } from '@flash-global66/g-logo';
 </script>
+`,
+        language: 'html'
+      }
+    }
+  }
+};
+
+export const SizeCustom: Story = {
+  name: 'Ancho personalizado',
+  render: () => ({
+    components: { GLogo, GConfigProvider },
+    setup() {
+      const examples = [
+        { label: 'size="md" (preset)', size: 'md' as const, sizeCustom: '' },
+        { label: 'size-custom="80px"', sizeCustom: '80px' },
+        { label: 'size-custom="120px"', sizeCustom: '120px' },
+        { label: 'size-custom="160px"', sizeCustom: '160px' },
+      ];
+      return { examples };
+    },
+    template: `
+      <g-config-provider>
+        <div class="space-y-6">
+          <div
+            v-for="ex in examples"
+            :key="ex.label"
+            class="flex items-center gap-4 border rounded-md p-4 bg-white"
+          >
+            <g-logo
+              v-if="ex.sizeCustom"
+              name="logo-global66"
+              :size-custom="ex.sizeCustom"
+            />
+            <g-logo
+              v-else
+              name="logo-global66"
+              :size="ex.size"
+            />
+            <span class="text-sm text-gray-500">{{ ex.label }}</span>
+          </div>
+        </div>
+      </g-config-provider>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Con `size-custom` defines el ancho y la altura escala sola. No combines con `size`.'
+      },
+      source: {
+        code: `
+<g-logo name="logo-global66" size="md" />
+<g-logo name="logo-global66" size-custom="120px" />
 `,
         language: 'html'
       }

@@ -12,6 +12,10 @@ export const logoProps = buildProps({
     type: definePropType<LogoSize>(String),
     default: 'md',
   },
+  sizeCustom: {
+    type: String,
+    default: '',
+  },
   filter: {
     type: definePropType<LogoFilter>(String),
     default: 'none',

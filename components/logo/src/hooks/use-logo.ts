@@ -18,17 +18,47 @@ export function useLogo(props: LogoProps): LogoState {
   let stopObserver: (() => void) | null = null;
 
   const hasColor = computed<boolean>(() => Boolean(props.color?.trim()));
+  const hasSizeCustom = computed<boolean>(() => Boolean(props.sizeCustom?.trim()));
+  const usesPresetSize = computed<boolean>(() => !hasSizeCustom.value);
 
   const sizeValue = computed<string>(
     () => LOGO_SIZES[props.size as keyof typeof LOGO_SIZES] ?? LOGO_SIZES.md
   );
 
-  const containerStyle = computed<Record<string, string>>(() => {
-    if (!isLoaded.value || hasError.value) {
-      const placeholderSize =
-        LOGO_PLACEHOLDER_SIZES[props.size as keyof typeof LOGO_PLACEHOLDER_SIZES] ??
-        LOGO_PLACEHOLDER_SIZES.md;
+  const heightFromCustomWidth = computed<string>(() => {
+    if (!hasSizeCustom.value || !aspectRatio.value) {
+      return 'auto';
+    }
+    const widthPx = parseFloat(props.sizeCustom!.trim());
+    if (Number.isNaN(widthPx)) {
+      return 'auto';
+    }
+    return `${widthPx / aspectRatio.value}px`;
+  });
 
+  const heightValue = computed<string>(() =>
+    usesPresetSize.value ? sizeValue.value : heightFromCustomWidth.value
+  );
+
+  const widthValue = computed<string>(() => {
+    if (hasSizeCustom.value) {
+      return props.sizeCustom!.trim();
+    }
+    return 'auto';
+  });
+
+  const placeholderSizeKey = computed(
+    () =>
+      (usesPresetSize.value
+        ? props.size
+        : 'md') as keyof typeof LOGO_PLACEHOLDER_SIZES
+  );
+
+  const containerStyle = computed<Record<string, string>>(() => {
+    const placeholderSize =
+      LOGO_PLACEHOLDER_SIZES[placeholderSizeKey.value] ?? LOGO_PLACEHOLDER_SIZES.md;
+
+    if (!isLoaded.value || hasError.value) {
       return {
         width: placeholderSize.width,
         minWidth: placeholderSize.width,
@@ -37,9 +67,19 @@ export function useLogo(props: LogoProps): LogoState {
       };
     }
 
+    if (usesPresetSize.value) {
+      const style: Record<string, string> = {
+        height: heightValue.value,
+        minHeight: heightValue.value,
+      };
+      return style;
+    }
+
     const style: Record<string, string> = {
-      height: sizeValue.value,
-      minHeight: sizeValue.value,
+      width: widthValue.value,
+      minWidth: widthValue.value,
+      height: heightValue.value,
+      minHeight: heightValue.value,
     };
     return style;
   });
@@ -49,24 +89,29 @@ export function useLogo(props: LogoProps): LogoState {
     return LOGO_FILTERS[key] ?? LOGO_FILTERS.none;
   });
 
-  const imageStyle = computed<Record<string, string>>(() => ({
-    height: sizeValue.value,
-    width: 'auto',
-    maxHeight: sizeValue.value,
-    filter: filterValue.value,
-  }));
+  const imageStyle = computed<Record<string, string>>(() => {
+    const filter = filterValue.value;
+    const style: Record<string, string> = { filter };
+
+    if (usesPresetSize.value) {
+      style.height = heightValue.value;
+      style.width = widthValue.value;
+      style.maxHeight = heightValue.value;
+      return style;
+    }
+
+    style.width = widthValue.value;
+    style.height = heightValue.value;
+    style.maxWidth = widthValue.value;
+    return style;
+  });
 
   const colorBoxStyle = computed<Record<string, string>>(() => {
-    const height = sizeValue.value;
-    const heightPx = parseFloat(height);
-    const width =
-      aspectRatio.value && !Number.isNaN(heightPx)
-        ? `${heightPx * aspectRatio.value}px`
-        : height;
+    const height = heightValue.value;
     const style: Record<string, string> = {
       display: 'inline-block',
       height,
-      width,
+      width: widthValue.value,
       minHeight: height,
       backgroundColor: props.color?.trim() ?? '',
       maskSize: 'contain',
