@@ -1,31 +1,52 @@
-import { computed, ref, readonly, onMounted, onBeforeUnmount, watch } from 'vue';
-import { useIntersectionObserver } from '@vueuse/core';
-import type { LogoProps } from '../logo.props';
-import { LOGO_FILTERS, LOGO_PLACEHOLDER_SIZES, LOGO_SIZES } from '../constants/logo.constants';
-import type { LogoFilter } from '../types/logo.types';
-import type { LogoState } from '../types/logo.types';
+import {
+  computed,
+  ref,
+  readonly,
+  onMounted,
+  onBeforeUnmount,
+  watch,
+} from "vue";
+import { useIntersectionObserver } from "@vueuse/core";
+import type { LogoProps } from "../logo.props";
+import {
+  LOGO_FILTERS,
+  LOGO_PLACEHOLDER_SIZES,
+  LOGO_SIZES,
+} from "../constants/logo.constants";
+import type { LogoFilter } from "../types/logo.types";
+import type { LogoState } from "../types/logo.types";
 
-const LOGO_ASSET_LOADERS = import.meta.glob('../assets/logos/*.svg', {
-  import: 'default',
+const LOGO_ASSET_LOADERS = import.meta.glob("../assets/logos/*.svg", {
+  import: "default",
 }) as Record<string, () => Promise<string>>;
 
 export function useLogo(props: LogoProps): LogoState {
   const isLoaded = ref<boolean>(false);
   const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
-  const imageSrc = ref<string>('');
+  const imageSrc = ref<string>("");
   const aspectRatio = ref<number | null>(null);
   const naturalWidth = ref<number | null>(null);
   const naturalHeight = ref<number | null>(null);
   let stopObserver: (() => void) | null = null;
 
+  const normalizedSizeCustom = computed<string>(() => {
+    const raw = props.sizeCustom?.trim() ?? "";
+    if (!raw) {
+      return "";
+    }
+    return /^\d+(\.\d+)?$/.test(raw) ? `${raw}px` : raw;
+  });
+
   const hasColor = computed<boolean>(() => Boolean(props.color?.trim()));
-  const hasSizeCustom = computed<boolean>(() => Boolean(props.sizeCustom?.trim()));
-  const hasPresetSize = computed<boolean>(
-    () => Boolean(props.size && props.size in LOGO_SIZES)
+  const hasSizeCustom = computed<boolean>(() =>
+    Boolean(normalizedSizeCustom.value),
+  );
+  const hasPresetSize = computed<boolean>(() =>
+    Boolean(props.size && props.size in LOGO_SIZES),
   );
   const usesNaturalSize = computed<boolean>(
-    () => !hasSizeCustom.value && !hasPresetSize.value
+    () => !hasSizeCustom.value && !hasPresetSize.value,
   );
 
   const sizeValue = computed<string>(() => {
@@ -35,16 +56,16 @@ export function useLogo(props: LogoProps): LogoState {
     if (naturalHeight.value) {
       return `${naturalHeight.value}px`;
     }
-    return 'auto';
+    return "auto";
   });
 
   const heightFromCustomWidth = computed<string>(() => {
     if (!hasSizeCustom.value || !aspectRatio.value) {
-      return 'auto';
+      return "auto";
     }
-    const widthPx = parseFloat(props.sizeCustom!.trim());
+    const widthPx = parseFloat(normalizedSizeCustom.value);
     if (Number.isNaN(widthPx)) {
-      return 'auto';
+      return "auto";
     }
     return `${widthPx / aspectRatio.value}px`;
   });
@@ -59,23 +80,25 @@ export function useLogo(props: LogoProps): LogoState {
     if (naturalHeight.value) {
       return `${naturalHeight.value}px`;
     }
-    return 'auto';
+    return "auto";
   });
 
   const widthFromPresetHeight = computed<string>(() => {
     if (!hasPresetSize.value || !aspectRatio.value) {
-      return 'auto';
+      return "auto";
     }
-    const heightPx = parseFloat(LOGO_SIZES[props.size as keyof typeof LOGO_SIZES]);
+    const heightPx = parseFloat(
+      LOGO_SIZES[props.size as keyof typeof LOGO_SIZES],
+    );
     if (Number.isNaN(heightPx)) {
-      return 'auto';
+      return "auto";
     }
     return `${heightPx * aspectRatio.value}px`;
   });
 
   const widthValue = computed<string>(() => {
     if (hasSizeCustom.value) {
-      return props.sizeCustom!.trim();
+      return normalizedSizeCustom.value;
     }
     if (usesNaturalSize.value && naturalWidth.value) {
       return `${naturalWidth.value}px`;
@@ -83,19 +106,20 @@ export function useLogo(props: LogoProps): LogoState {
     if (hasPresetSize.value) {
       return widthFromPresetHeight.value;
     }
-    return 'auto';
+    return "auto";
   });
 
   const placeholderSizeKey = computed(
     () =>
       (hasPresetSize.value
         ? props.size
-        : 'md') as keyof typeof LOGO_PLACEHOLDER_SIZES
+        : "md") as keyof typeof LOGO_PLACEHOLDER_SIZES,
   );
 
   const containerStyle = computed<Record<string, string>>(() => {
     const placeholderSize =
-      LOGO_PLACEHOLDER_SIZES[placeholderSizeKey.value] ?? LOGO_PLACEHOLDER_SIZES.md;
+      LOGO_PLACEHOLDER_SIZES[placeholderSizeKey.value] ??
+      LOGO_PLACEHOLDER_SIZES.md;
 
     if (!isLoaded.value || hasError.value) {
       return {
@@ -130,18 +154,18 @@ export function useLogo(props: LogoProps): LogoState {
         height: heightValue.value,
         minHeight: heightValue.value,
       };
-      if (widthFromPresetHeight.value !== 'auto') {
+      if (widthFromPresetHeight.value !== "auto") {
         style.width = widthFromPresetHeight.value;
         style.minWidth = widthFromPresetHeight.value;
       }
       return style;
     }
 
+    const w = normalizedSizeCustom.value;
     const style: Record<string, string> = {
-      width: widthValue.value,
-      minWidth: widthValue.value,
-      height: heightValue.value,
-      minHeight: heightValue.value,
+      width: w,
+      minWidth: w,
+      height: "auto",
     };
     return style;
   });
@@ -169,15 +193,16 @@ export function useLogo(props: LogoProps): LogoState {
       style.height = heightValue.value;
       style.width = widthValue.value;
       style.maxHeight = heightValue.value;
-      if (widthValue.value !== 'auto') {
+      if (widthValue.value !== "auto") {
         style.maxWidth = widthValue.value;
       }
       return style;
     }
 
-    style.width = widthValue.value;
-    style.height = heightValue.value;
-    style.maxWidth = widthValue.value;
+    const w = normalizedSizeCustom.value;
+    style.width = w;
+    style.height = "auto";
+    style.maxWidth = w;
     return style;
   });
 
@@ -185,22 +210,22 @@ export function useLogo(props: LogoProps): LogoState {
     const height = heightValue.value;
     const width = widthValue.value;
     const style: Record<string, string> = {
-      display: 'inline-block',
+      display: "inline-block",
       height,
       width,
       minHeight: height,
-      backgroundColor: props.color?.trim() ?? '',
-      maskSize: 'contain',
-      maskRepeat: 'no-repeat',
-      maskPosition: 'center',
-      maskMode: 'alpha',
-      WebkitMaskSize: 'contain',
-      WebkitMaskRepeat: 'no-repeat',
-      WebkitMaskPosition: 'center',
+      backgroundColor: props.color?.trim() ?? "",
+      maskSize: "contain",
+      maskRepeat: "no-repeat",
+      maskPosition: "center",
+      maskMode: "alpha",
+      WebkitMaskSize: "contain",
+      WebkitMaskRepeat: "no-repeat",
+      WebkitMaskPosition: "center",
       filter: filterValue.value,
     };
 
-    if (width !== 'auto') {
+    if (width !== "auto") {
       style.minWidth = width;
     }
 
@@ -267,14 +292,14 @@ export function useLogo(props: LogoProps): LogoState {
     const assetPath = `../assets/logos/${String(name).toLowerCase().trim()}.svg`;
     const loader = LOGO_ASSET_LOADERS[assetPath];
     if (!name || !loader) {
-      imageSrc.value = '';
+      imageSrc.value = "";
       hasError.value = true;
       return;
     }
     try {
       imageSrc.value = await loader();
     } catch {
-      imageSrc.value = '';
+      imageSrc.value = "";
       hasError.value = true;
     }
   }
@@ -299,7 +324,7 @@ export function useLogo(props: LogoProps): LogoState {
     }
 
     const onIntersect = async (): Promise<void> => {
-      await resolveImageSrc(props.name ?? '');
+      await resolveImageSrc(props.name ?? "");
       if (!hasError.value) {
         await prepareDimensionsBeforeShow();
         loadImage();
@@ -317,8 +342,8 @@ export function useLogo(props: LogoProps): LogoState {
         },
         {
           threshold: 0.1,
-          rootMargin: '50px',
-        }
+          rootMargin: "50px",
+        },
       );
       stopObserver = stop;
     } else {
@@ -328,7 +353,7 @@ export function useLogo(props: LogoProps): LogoState {
 
   onMounted(async () => {
     if (!props.lazyLoad) {
-      await resolveImageSrc(props.name ?? '');
+      await resolveImageSrc(props.name ?? "");
       if (!hasError.value) {
         await prepareDimensionsBeforeShow();
       }
@@ -342,24 +367,27 @@ export function useLogo(props: LogoProps): LogoState {
     }
   });
 
-  watch(() => props.name, async (name) => {
-    isLoaded.value = false;
-    hasError.value = false;
-    resetNaturalDimensions();
-    if (stopObserver) {
-      stopObserver();
-      stopObserver = null;
-    }
-    if (!props.lazyLoad) {
-      await resolveImageSrc(name ?? '');
-      if (!hasError.value) {
-        await prepareDimensionsBeforeShow();
-        loadImage();
+  watch(
+    () => props.name,
+    async (name) => {
+      isLoaded.value = false;
+      hasError.value = false;
+      resetNaturalDimensions();
+      if (stopObserver) {
+        stopObserver();
+        stopObserver = null;
       }
-    } else {
-      setupObserver();
-    }
-  });
+      if (!props.lazyLoad) {
+        await resolveImageSrc(name ?? "");
+        if (!hasError.value) {
+          await prepareDimensionsBeforeShow();
+          loadImage();
+        }
+      } else {
+        setupObserver();
+      }
+    },
+  );
 
   return {
     sizeValue,

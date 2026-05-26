@@ -71,7 +71,21 @@ import { GLogo } from '@flash-global66/g-logo';
 \`\`\`
 
 ## Color personalizado
-\`color\` acepta cualquier valor CSS (\`#00A651\`, \`green\`, \`rgb(0, 166, 81)\`) y unifica la marca en una sola tinta.
+\`color\` acepta cualquier valor CSS (\`#00A651\`, \`green\`, \`rgb(0, 166, 81)\`) y unifica la marca en una sola tinta. Internamente aplica \`mask-image\` con el canal alfa del SVG como máscara: las zonas opacas del SVG toman el color elegido y las zonas transparentes desaparecen.
+
+### Logos compatibles
+
+| Logo | Tipo |
+|---|---|
+| \`icon-bre-b\` | Isotipo |
+| \`icon-global66\` | Isotipo |
+| \`icon-global66-b2b\` | Isotipo |
+| \`icon-global66-b2b-on-dark\` | Isotipo |
+| \`icon-global66-b2c\` | Isotipo |
+| \`icon-global66-b2c-on-dark\` | Isotipo |
+| \`label-global66\` | Wordmark |
+
+Para el resto de logos disponibles, se recomienda usar la prop \`filter\` para ajustar su apariencia (por ejemplo, escala de grises, negro o blanco).
 
 ## Optimizaciones de rendimiento
 ### Lazy Loading
@@ -116,10 +130,10 @@ Para incorporar una marca nueva:
       }
     },
     sizeCustom: {
-      description: 'Ancho libre (ej: 120px). Excluye size; la altura es proporcional',
+      description: 'Ancho libre. Acepta `120px`, `8rem`, `50%` o solo un número (`200` → `200px`). La altura escala sola. Excluye `size`.',
       control: 'text',
       table: {
-        type: { summary: 'string' },
+        type: { summary: 'string | number' },
         defaultValue: { summary: '' },
       }
     },
@@ -370,12 +384,14 @@ export const SizeCustom: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Con `size-custom` defines el ancho y la altura escala sola. No combines con `size`.'
+        story: 'Define el **ancho** con `size-custom`; la altura escala automáticamente según la proporción del SVG. Puedes usar `120px`, `8rem` o solo un número (`200` → se trata como `200px`). No combines con `size`.'
       },
       source: {
         code: `
 <g-logo name="logo-bancolombia" size="md" />
 <g-logo name="logo-bancolombia" size-custom="120px" />
+<!-- También acepta número sin unidad: -->
+<g-logo name="logo-bancolombia" size-custom="200" />
 `,
         language: 'html'
       }
@@ -383,34 +399,46 @@ export const SizeCustom: Story = {
   }
 };
 
+const DEMO_LOGOS_COLOR_COMPATIBLE = [
+  { label: 'icon-bre-b', value: 'icon-bre-b' },
+  { label: 'icon-global66', value: 'icon-global66' },
+  { label: 'label-global66', value: 'label-global66' },
+] as const;
+
 export const Colors: Story = {
   name: 'Color personalizado',
   render: () => ({
     components: { GLogo, GConfigProvider },
     setup() {
+      const logos = [...DEMO_LOGOS_COLOR_COMPATIBLE];
       const colors = [
         { label: 'Verde', value: '#00A651' },
         { label: 'Azul marca', value: '#203478' },
         { label: 'Rojo', value: '#E53935' },
         { label: 'Naranja', value: '#FF9800' },
       ];
-      return { colors };
+      return { logos, colors };
     },
     template: `
       <g-config-provider>
-        <div class="flex flex-wrap gap-8 items-end">
-          <div class="flex flex-col items-center gap-3">
-            <g-logo name="logo-global66" :lazy-load="false" />
-            <span class="text-xs text-gray-500">Original</span>
-          </div>
-          <div
-            v-for="c in colors"
-            :key="c.value"
-            class="flex flex-col items-center gap-3"
-          >
-            <g-logo name="logo-global66" size="md" :color="c.value" :lazy-load="false" />
-            <span class="text-xs text-gray-500">{{ c.label }}</span>
-            <code class="text-xs text-gray-400">{{ c.value }}</code>
+        <div class="flex flex-col gap-10">
+          <div v-for="logo in logos" :key="logo.value" class="flex flex-col gap-3">
+            <span class="text-xs font-mono text-gray-400">{{ logo.value }}</span>
+            <div class="flex flex-wrap gap-8 items-end">
+              <div class="flex flex-col items-center gap-3">
+                <g-logo :name="logo.value" size="md" :lazy-load="false" />
+                <span class="text-xs text-gray-500">Original</span>
+              </div>
+              <div
+                v-for="c in colors"
+                :key="c.value"
+                class="flex flex-col items-center gap-3"
+              >
+                <g-logo :name="logo.value" size="md" :color="c.value" :lazy-load="false" />
+                <span class="text-xs text-gray-500">{{ c.label }}</span>
+                <code class="text-xs text-gray-400">{{ c.value }}</code>
+              </div>
+            </div>
           </div>
         </div>
       </g-config-provider>
@@ -419,13 +447,17 @@ export const Colors: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El prop `color` teñe el logo con cualquier valor CSS. Útil para adaptarlo a fondos o paletas de producto.'
+        story: `Ejemplos con los logos 100% compatibles: \`icon-*\` e \`label-*\`. Son SVG vectoriales de fondo transparente donde la máscara CSS preserva la forma exacta del ícono y aplica el color elegido sin pérdida de detalle.\n\nSi necesitas adaptar el tono de logos de terceros (bancos, fintechs), usa la prop \`filter\` que funciona en los 59 logos.`
       },
       source: {
-        code: `
-<g-logo name="logo-global66" size="md" color="#00A651" />
-<g-logo name="logo-global66" size="md" color="#203478" />
-`,
+        code: `<!-- ✅ Funciona perfectamente -->
+<g-logo name="icon-bre-b"    size="md" color="#00A651" />
+<g-logo name="icon-global66" size="md" color="#203478" />
+<g-logo name="label-global66" size="md" color="#E53935" />
+
+<!-- ⚠️ Para logos de terceros usa filter -->
+<g-logo name="logo-bancolombia" size="md" filter="grayscale" />
+<g-logo name="logo-pse"         size="md" filter="black" />`,
         language: 'html'
       }
     }
