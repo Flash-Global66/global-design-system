@@ -15,7 +15,11 @@ export interface FooterButton {
    * Visual variant of the button
    */
   variant: ButtonVariant;
-  
+  /**
+   * Disables the button
+   */
+  disabled?: boolean;
+
   [key: string]: any;
 }
 

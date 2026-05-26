@@ -1,10 +1,11 @@
-import { createVNode, render, computed, h, type ExtractPropTypes } from 'vue'
+import { createVNode, render, computed, h, ref, watch, type ExtractPropTypes } from 'vue'
 import { buildProps, definePropType } from "element-plus/es/utils/index"
 import DialogAlert from './dialog-alert.vue'
 import { GConfigProvider } from '@flash-global66/g-config-provider'
 import { FooterButton } from '@flash-global66/g-dialog/'
-import type { AlertButtonResult, AlertEmits, AlertOptions, AlertType } from './dialog.type'
+import type { AlertButtonResult, AlertCheckboxItem, AlertEmits, AlertOptions, AlertType } from './dialog.type'
 import type { ImageName, ImageSize } from '@flash-global66/g-image'
+import type { CheckboxValueType } from '@flash-global66/g-checkbox'
 
 export const dialogAlertProps = buildProps({
   showAlert: {
@@ -46,6 +47,10 @@ export const dialogAlertProps = buildProps({
   hideButtonClose: {
     type: Boolean,
     default: false
+  },
+  checkboxes: {
+    type: definePropType<AlertCheckboxItem[]>(Array),
+    default: () => [] as AlertCheckboxItem[]
   }
 } as const)
 
@@ -55,6 +60,15 @@ export const dialogAlertEmits = {
   close: () => true,
   next: (_result: AlertButtonResult) => true
 } as const
+
+function emitWithCheckboxStates(
+  emit: AlertEmits,
+  payload: Omit<AlertButtonResult, 'checkboxStates'>,
+  states: boolean[]
+) {
+  const extra = states.length ? { checkboxStates: [...states] } : {}
+  emit('next', { ...payload, ...extra })
+}
 
 export const useDialogAlert = (props: DialogAlertProps, emit: AlertEmits) => {
   const imageMapping: Record<AlertType, ImageName> = {
@@ -68,14 +82,47 @@ export const useDialogAlert = (props: DialogAlertProps, emit: AlertEmits) => {
   const computedImageName = computed(() => props.imageName || (props.type ? imageMapping[props.type] : 'information'))
   const computedImageSize = computed<ImageSize>(() => props.imageSize || 'lg')
 
+  const checkboxStates = ref<boolean[]>([])
+
+  watch(
+    () => props.checkboxes,
+    (items) => {
+      if (items?.length) {
+        checkboxStates.value = items.map((item) => item.checked ?? false)
+      } else {
+        checkboxStates.value = []
+      }
+    },
+    { immediate: true, deep: true }
+  )
+
+  const isPrimaryDisabled = computed(() => {
+    const items = props.checkboxes
+    if (!items?.length) return false
+    return items.some((item, index) => item.required === true && !checkboxStates.value[index])
+  })
+
+  const onCheckboxModelUpdate = (index: number, val: CheckboxValueType) => {
+    const checked = Boolean(val)
+    checkboxStates.value[index] = checked
+    props.checkboxes?.[index]?.onChange?.(checked)
+  }
+
  const footerButtons = computed<FooterButton[]>(() => {
    const buttons: FooterButton[] = [];
+   const statesSnapshot = () => [...checkboxStates.value]
 
    if (props.primaryText) {
      buttons.push({
        text: props.primaryText,
        variant: "primary",
-       onClick: () => emit("next", { isPrimary: true, isSecondary: false, isTertiary: false }),
+       disabled: isPrimaryDisabled.value,
+       onClick: () =>
+         emitWithCheckboxStates(
+           emit,
+           { isPrimary: true, isSecondary: false, isTertiary: false },
+           statesSnapshot()
+         ),
      });
    }
 
@@ -83,7 +130,12 @@ export const useDialogAlert = (props: DialogAlertProps, emit: AlertEmits) => {
      buttons.push({
        text: props.secondaryText,
        variant: "secondary",
-       onClick: () => emit("next", { isPrimary: false, isSecondary: true, isTertiary: false }),
+       onClick: () =>
+         emitWithCheckboxStates(
+           emit,
+           { isPrimary: false, isSecondary: true, isTertiary: false },
+           statesSnapshot()
+         ),
      });
    }
 
@@ -91,7 +143,12 @@ export const useDialogAlert = (props: DialogAlertProps, emit: AlertEmits) => {
      buttons.push({
        text: props.tertiaryText,
        variant: "tertiary",
-       onClick: () => emit("next", { isPrimary: false, isSecondary: false, isTertiary: true }),
+       onClick: () =>
+         emitWithCheckboxStates(
+           emit,
+           { isPrimary: false, isSecondary: false, isTertiary: true },
+           statesSnapshot()
+         ),
      });
    }
 
@@ -106,7 +163,9 @@ export const useDialogAlert = (props: DialogAlertProps, emit: AlertEmits) => {
     computedImageName,
     computedImageSize,
     footerButtons,
-    handleClose
+    handleClose,
+    checkboxStates,
+    onCheckboxModelUpdate
   }
 }
 
@@ -188,6 +247,7 @@ export function openAlert(options: AlertOptions): Promise<AlertButtonResult> {
       secondaryText: options.secondaryText || '',
       tertiaryText: options.tertiaryText || '',
       hideButtonClose: options.hideButtonClose || false,
+      checkboxes: options.checkboxes ?? [],      
       onNext: (result: AlertButtonResult) => resolveOnce(result),
       onClose: () =>
         resolveOnce({

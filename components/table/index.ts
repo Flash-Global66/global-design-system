@@ -36,6 +36,7 @@ export type {
 export { useTableCellSelect } from './src/composables/useTableCellSelect'
 export type {
   TableCellSelectOption,
+  TableCellSelectGetOptions,
   TableCellSelectCellOptions,
   UseTableCellSelectOptions,
 } from './src/composables/useTableCellSelect'

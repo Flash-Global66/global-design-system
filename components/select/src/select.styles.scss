@@ -189,10 +189,13 @@
 @include b("select-dropdown") {
   @apply my-xs;
   @include e("item") {
-    @apply min-h-12 px-1 py-[2px] flex items-center justify-between gap-xs transition-all duration-200 ease-in !important;
+    @apply flex items-start justify-between gap-xs transition-all duration-200 px-2 ease-in !important;
+    min-height: unset !important;
+    line-height: normal !important;
+    height: unset !important;
 
     @include m("inner") {
-      @apply flex items-center justify-between gap-xs w-full min-w-0 h-full px-sm;
+      @apply flex items-center justify-between gap-xs w-full min-w-0 px-sm py-md;
       &:hover {
         @apply bg-everBlue-50 bg-opacity-60;
       } 
@@ -202,7 +205,7 @@
       }
     }
     @include m("content") {
-      @apply flex items-start justify-center flex-col overflow-hidden flex-1 min-w-0;
+      @apply flex items-start justify-start flex-col flex-1 min-w-0;
     }
     @include m("icon") {
       @apply text-7 text-secondary-txt mr-md shrink-0;
@@ -214,7 +217,7 @@
       @apply text-4 text-secondary-txt font-medium overflow-hidden text-ellipsis w-full;
     }
     @include m("description") {
-      @apply text-2 text-terciary-txt font-medium text-pretty line-clamp-2 overflow-hidden text-ellipsis;
+      @apply text-2 text-terciary-txt font-medium text-wrap;
     }
 
     @include when(hovering) {
@@ -252,7 +255,7 @@
 
   @include b("select-group") {
     @include e("title") {
-      @apply text-2 text-ellipsis text-terciary-txt font-medium cursor-default pointer-events-none p-0 flex items-center px-xs;
+      @apply text-2 text-ellipsis text-terciary-txt font-medium cursor-default pointer-events-none pb-xs pt-sm flex items-center px-xs first:pb-2 first:pt-2;
       line-height: 1.25rem;
       min-height: unset;
 
@@ -287,6 +290,18 @@
     }
     @include m("description") {
       @apply text-3 text-terciary-txt font-medium text-pretty;
+    }
+  }
+
+  @include e("list") {
+    @include when("scrollbar-always-on") {
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      &::-webkit-scrollbar-thumb {
+        @apply bg-grey-300 rounded-full;
+      }
     }
   }
 }

@@ -103,11 +103,20 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 
 ## Celdas editables
 
+**Si usas \`cell-type="select"\`** (en especial con opciones que traen \`description\`), importa también los estilos de **GSelect** además de los de la tabla; sin ellos el menú del desplegable puede verse incompleto o sin los recortes de texto esperados.
+
+\`\`\`typescript
+import '@flash-global66/g-table/styles.scss'
+import '@flash-global66/g-select/styles.scss'
+\`\`\`
+
+**Alineación:** en columnas con select se recomienda dejar \`align\` por defecto o usar \`left\`. Si pones \`align="center"\`, los estilos de tabla **siguen mostrando el contenido del select alineado a la izquierda** en lectura y edición (comportamiento deliberado para alinearlo con columnas sin \`center\`). Un centrado explícito del texto del select sería un cambio de producto distinto.
+
 Para implementar celdas editables (input, select o UI personalizada con \`GCellEdit\`), expansión del overlay, eventos y validación, consulte la guía dedicada:
 
 👉 **[Guía: Celdas editables en Table](/docs/concept-guide-celdas-editables-en-table--docs)**
 
-En esta documentación de Table encontrará las historias de ejemplo: **Celda tipo select**, **Celda tipo input**, **Celda personalizada con GCellEdit**, **Eventos de celdas editables** y las de expansión.
+En esta documentación de Table encontrará historias de ejemplo alineadas con el comportamiento actual: **Celda tipo select**, **Celda tipo select (con description)** (menú con descripción acotada a dos líneas; en lectura solo el título de la opción), **Celda tipo input**, **Celda personalizada con GCellEdit**, **Eventos de celdas editables** y las de expansión.
 `
       }
     }
@@ -2437,6 +2446,12 @@ export const TableCellSelect: Story = {
 
 **Label:** \`input-label\` en \`GTableColumn\` o \`label\` en \`cellOptions\`; se muestra sobre el select en modo edición.
 
+**Modo lectura:** en la celda se muestra el texto de la opción elegida (\`title\` o \`label\`). Si tus opciones llevan \`description\`, esa segunda línea **no** aparece en la celda; solo en el menú al editar (véase la historia **Celda tipo select (con description)**).
+
+**Texto largo o celda estrecha:** el valor en lectura puede mostrarse en hasta **dos líneas** con recorte; el atributo nativo \`title\` del control ofrece el **texto completo** al pasar el cursor (tooltip del navegador).
+
+**Alineación:** conviene \`align\` por defecto o \`left\`. Con \`align="center"\` la tabla fuerza el bloque del select **alineado a la izquierda** dentro del \`td\` (documentado en la página principal de Table).
+
 **Ejemplo de implementación:**
 
 \`\`\`vue
@@ -2463,7 +2478,7 @@ const tableData = ref([
 ])
 
 const statusOptions = [
-  { value: 'active', title: 'Activo' },
+  { value: 'active', title: 'Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo ' },
   { value: 'pending', title: 'Pendiente' },
   { value: 'inactive', title: 'Inactivo' }
 ]
@@ -2608,7 +2623,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
         }
       ])
       const statusOptions = [
-        { value: 'active', title: 'Activo' },
+        { value: 'active', title: 'Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo ' },
         { value: 'pending', title: 'Pendiente' },
         { value: 'inactive', title: 'Inactivo' }
       ]
@@ -2675,7 +2690,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
         <g-table-column
           prop="role"
           label="Rol"
-          width="150"
+          width="200"
           cell-type="select"
           :cell-options="roleCellOptions"
           input-label="Rol del usuario"
@@ -2701,6 +2716,143 @@ const { cellOptions } = useTableCellSelect(tableData, {
       </g-table>
     </g-config-provider>`
   })
+}
+
+export const TableCellSelectWithDescription: Story = {
+  name: 'Celda tipo select (con description)',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** cuando cada opción debe mostrar **título** y **texto aclaratorio** en el menú del \`GSelect\` al editar (p. ej. motivos de transferencia con ayuda contextual).
+
+**Formato:** \`{ value, title, description? }\` en \`options\` o en lo que devuelva \`getOptions\`. \`GSelect\` muestra la descripción como segunda línea bajo el título de cada ítem.
+
+**Menú (edición):** la descripción de cada opción está **limitada a dos líneas** en el listado, con puntos suspensivos si el texto es más largo. El título del ítem sigue en una sola línea con recorte horizontal si hace falta.
+
+**Ancho del panel:** lo controla **GSelect** (p. ej. \`fit-input-width\` en el componente o valores por defecto del design system), no la tabla. La tabla solo reserva el ancho de la columna y, si aplica, el \`expandColspan\` del overlay en edición.
+
+**Modo lectura:** en la celda solo se ve el **título** (\`title\` / \`label\`) de la opción elegida. La \`description\` sirve para orientar al usuario **al abrir** el desplegable. Si el título es largo o la columna es estrecha, en lectura puede mostrarse hasta **dos líneas** con recorte; el **tooltip nativo** (\`title\`) del control muestra el texto completo al pasar el cursor. El contenido queda alineado a la izquierda.
+
+**Código mínimo:**
+
+\`\`\`ts
+const purposeOptions = [
+  { value: 1, title: 'Pago a proveedores', description: 'A proveedores nacionales o internacionales.' },
+  { value: 2, title: 'Servicios digitales', description: 'Plataformas publicitarias, SaaS, etc.' }
+]
+const { cellOptions } = useTableCellSelect(tableData, {
+  options: purposeOptions,
+  label: 'Motivo',
+  rowKey: 'id'
+})
+\`\`\``
+      }
+    }
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { id: 1, name: 'Empresa Alpha', purpose: 1 },
+        { id: 2, name: 'Empresa Beta', purpose: 2 },
+        { id: 3, name: 'Empresa Gamma', purpose: 3 }
+      ])
+      const purposeOptions = [
+        {
+          value: 1,
+          title: 'Pago a proveedores',
+          description: 'Transferencias a proveedores nacionales o internacionales.'
+        },
+        {
+          value: 2,
+          title: 'Pago de servicios digitales y plataformas',
+          description:
+            'Incluye plataformas publicitarias, SaaS y otros servicios en línea.'
+        },
+        {
+          value: 3,
+          title: 'Otros conceptos',
+          description: 'Operaciones que no encajan en las categorías anteriores.'
+        }
+      ]
+      const { cellOptions: purposeCellOptions } = useTableCellSelect(tableData, {
+        options: purposeOptions,
+        label: 'Motivo',
+        rowKey: 'id',
+        expandColspan: 2,
+        expandDirection: 'right'
+      })
+      return { tableData, purposeCellOptions }
+    },
+    template: `
+    <g-config-provider>
+      <p class="text-3 text-secondary-txt mb-md max-w-xl">
+        Columna «Motivo» estrecha (120px): en lectura solo el <strong>título</strong> de la opción (hasta 2 líneas con recorte); pasa el cursor para el texto completo vía <code class="text-2">title</code>. Al editar, en el menú cada opción muestra título + <code class="text-2">description</code> (la descripción, como máximo 2 líneas en el listado).
+      </p>
+      <g-table :data="tableData" style="width: 100%" :cell-style="{ zIndex: 'auto' }">
+        <g-table-column prop="name" label="Nombre" width="200" />
+        <g-table-column
+          prop="purpose"
+          label="Motivo"
+          min-width="120"
+          width="120"
+          cell-type="select"
+          :cell-options="purposeCellOptions"
+          empty-action-text="Seleccionar"
+        />
+      </g-table>
+    </g-config-provider>`
+  })
+}
+
+export const TableScrollMinWidth: Story = {
+  name: 'Scroll horizontal (scroll-min-width)',
+  parameters: {
+    docs: {
+      description: {
+        story: `**Cuándo usar:** el contenedor es más estrecho que el contenido que quieres mostrar y necesitas un **ancho mínimo total** del área de la tabla (scroll horizontal).
+
+**Prop \`scroll-min-width\`** (número o string en px): después del layout de columnas, el ancho del \`<table>\` será al menos ese valor; si el wrapper es más angosto, aparece scroll horizontal (\`gui-table--scrollable-x\`).
+
+**Cuándo no hace falta:** si todas las columnas tienen \`width\` / \`min-width\` y la suma ya supera el contenedor, \`fit\` puede activar el scroll solo. Usa \`scroll-min-width\` cuando quieras un **piso explícito** (p. ej. tablas en viewport móvil) aunque las columnas flex sumen menos.`,
+      },
+    },
+  },
+  render: () => ({
+    components: { GTable, GTableColumn, GConfigProvider },
+    setup() {
+      const tableData = ref([
+        { id: 1, colA: 'Alpha', colB: 'Beta', colC: 'Gamma', colD: 'Delta', colE: 'Épsilon' },
+        { id: 2, colA: 'A2', colB: 'B2', colC: 'C2', colD: 'D2', colE: 'E2' },
+        { id: 3, colA: 'A3', colB: 'B3', colC: 'C3', colD: 'D3', colE: 'E3' },
+      ])
+      return { tableData }
+    },
+    template: `
+    <g-config-provider>
+      <p class="text-3 text-secondary-txt mb-md max-w-sm">
+        Contenedor de 360px; la tabla fuerza un ancho mínimo de 900px — usa el scroll horizontal.
+      </p>
+      <div
+        class="rounded-md overflow-hidden border border-everBlue-100"
+        style="width: 360px; max-width: 100%;"
+      >
+        <g-table
+          :data="tableData"
+          border
+          :scroll-min-width="6000"
+          class="w-full"
+        >
+          <g-table-column prop="id" label="ID" width="80" />
+          <g-table-column prop="colA" label="Columna A" width="160" />
+          <g-table-column prop="colB" label="Columna B" width="160" />
+          <g-table-column prop="colC" label="Columna C" width="160" />
+          <g-table-column prop="colD" label="Columna D" width="160" />
+          <g-table-column prop="colE" label="Columna E" width="160" />
+        </g-table>
+      </div>
+    </g-config-provider>`,
+  }),
 }
 
 export const TableCellInput: Story = {

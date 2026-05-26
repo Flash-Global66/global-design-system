@@ -1,11 +1,26 @@
 {
   "name": "@flash-global66/g-teleport",
   "author": "Global66",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
+  "buildable": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "exports": {
-    ".": "./index.ts",
-    "./*": "./*"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json",
+    "check:package": "node ../../scripts/check-package-entrypoints.js package.json"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

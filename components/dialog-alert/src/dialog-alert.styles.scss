@@ -9,4 +9,8 @@
   @include e(description) {
     @apply text-center text-4 font-normal text-secondary-txt hyphens-manual;
   }
+
+  @include e(checkboxes) {
+    @apply mt-4 flex w-full flex-col gap-3 text-left text-3;
+  }
 }
