@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-dialog-alert",
   "author": "Global66",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -23,6 +23,7 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "peerDependencies": {
+    "@flash-global66/g-checkbox": "^0.2.1",
     "@flash-global66/g-config-provider": "0.0.8",
     "@flash-global66/g-dialog": "0.0.8",
     "@flash-global66/g-image": "0.0.3",

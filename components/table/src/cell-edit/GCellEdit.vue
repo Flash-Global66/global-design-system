@@ -1,8 +1,11 @@
 <template>
   <div
+    ref="cellRef"
     :class="wrapperClass"
     :style="wrapperStyle"
-    ref="cellRef"
+    :data-g-cell-edit-amount-peer="
+      outsideCloseScope === 'amountRowPeer' ? '' : undefined
+    "
   >
     <transition name="gui-table-cell-edit" mode="out-in">
       <div v-if="isEditing" ref="editWrapperRef" :class="editWrapperClass">
@@ -11,10 +14,24 @@
       <button
         v-else
         type="button"
-        class="w-full h-full flex items-center px-xs cursor-pointer border-0 bg-transparent text-left font-inherit text-primary-txt"
+        class="relative w-full h-full flex items-center px-xs cursor-pointer border-0 bg-transparent text-left font-inherit text-primary-txt"
         @click="handleClick"
         @keydown="handleKeydown"
       >
+        <span
+          class="absolute top-xs right-xs opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+        >
+          <span class="group/badge inline-flex items-center justify-center p-0.5 rounded-sm bg-primary-bg border border-primary-bd hover:border-secondary-bd transition-colors duration-150 cursor-pointer">
+            <span class="px-1 rounded-sm hover:bg-sec-hover-bg transition-colors duration-150">
+              <GIconFont
+                name="regular pen"
+                class="text-icon-primary group-hover/badge:text-icon-secondary leading-none"
+                style="font-size: 10px"
+                :aria-hidden="true"
+              />
+            </span>
+          </span>
+        </span>
         <slot name="view" :toggle="toggleEdit"></slot>
       </button>
     </transition>
@@ -23,6 +40,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref, watch, nextTick, onUnmounted } from 'vue'
+import { GIconFont } from '@flash-global66/g-icon-font'
 import { TABLE_INJECTION_KEY } from '../tokens'
 import {
   calculateExpandedWidthSync,
@@ -43,6 +61,7 @@ export interface GCellEditProps {
   expandDirection?: 'left' | 'right'
   expandedWidth?: number
   leftOffset?: number
+  outsideCloseScope?: 'cell' | 'amountRowPeer'
 }
 
 const props = withDefaults(defineProps<GCellEditProps>(), {
@@ -53,13 +72,16 @@ const props = withDefaults(defineProps<GCellEditProps>(), {
   expandColspan: undefined,
   expandDirection: undefined,
   expandedWidth: undefined,
-  leftOffset: undefined
+  leftOffset: undefined,
+  outsideCloseScope: 'cell'
 })
 
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]
   toggle: [value: boolean]
   close: []
+  'cell-edit-open': [row: Record<string, unknown>, column: Record<string, unknown>]
+  'cell-edit-close': [row: Record<string, unknown>, column: Record<string, unknown>]
 }>()
 
 const cellRef = ref<HTMLElement>()
@@ -75,9 +97,18 @@ const focusFirstInput = (el: HTMLElement | null | undefined) => {
   }
 }
 
+const internalEditing = ref(props.modelValue)
+
+watch(() => props.modelValue, (val) => {
+  internalEditing.value = val
+})
+
 const isEditing = computed({
-  get: () => props.modelValue,
-  set: (val) => emit('update:modelValue', val)
+  get: () => internalEditing.value,
+  set: (val: boolean) => {
+    internalEditing.value = val
+    emit('update:modelValue', val)
+  }
 })
 
 const computedExpandedWidth = ref<number | undefined>(undefined)
@@ -126,16 +157,42 @@ const closeEdit = () => {
   if (table?.emit && props.column) {
     table.emit('cell-edit-close', props.row, props.column)
   }
+  emit('cell-edit-close', props.row, props.column)
   isEditing.value = false
   emit('close')
+}
+
+const POPPER_SELECTORS = '.el-popper, .el-select-dropdown, .gui-select-dropdown, .el-date-picker, .el-picker-panel'
+
+function isInsidePopper(target: Node): boolean {
+  const el = target as HTMLElement
+  return Boolean(el.closest?.(POPPER_SELECTORS))
+}
+
+function isTargetInsideCloseScope(target: Node): boolean {
+  if (props.outsideCloseScope === 'cell') {
+    return Boolean(cellRef.value?.contains(target))
+  }
+  if (props.outsideCloseScope === 'amountRowPeer') {
+    const tr = cellRef.value?.closest('tr')
+    if (!tr) return false
+    const peers = Array.from(
+      tr.querySelectorAll('[data-g-cell-edit-amount-peer]')
+    )
+    for (const el of peers) {
+      if (el.contains(target)) return true
+    }
+    return false
+  }
+  return false
 }
 
 function handleClickOutside(e: MouseEvent) {
   if (!isEditing.value) return
   const target = e.target as Node
-  if (cellRef.value && !cellRef.value.contains(target)) {
-    closeEdit()
-  }
+  if (isInsidePopper(target)) return
+  if (isTargetInsideCloseScope(target)) return
+  closeEdit()
 }
 
 function setupClickOutsideListener() {
@@ -167,7 +224,7 @@ onUnmounted(() => {
 })
 
 const wrapperClass = computed(() => {
-  const base = 'absolute top-0 left-0 h-full w-full flex items-center justify-center transition-all duration-200 ease-in'
+  const base = 'group absolute top-0 left-0 h-full w-full flex items-center justify-center transition-all duration-200 ease-in'
   if (isEditing.value) {
     return `${base} gui-table-cell-edit-wrapper hover:bg-everBlue-100 hover:bg-opacity-30 z-10`
   }
@@ -198,10 +255,14 @@ const wrapperStyle = computed(() => {
 
 const toggleEdit = (e?: Event) => {
   if (e) setActiveTableFromEvent(e)
-  isEditing.value = !isEditing.value
-  emit('toggle', isEditing.value)
-  if (isEditing.value && table?.emit && props.column) {
-    table.emit('cell-edit-open', props.row, props.column)
+  const newValue = !isEditing.value
+  isEditing.value = newValue
+  emit('toggle', newValue)
+  if (newValue) {
+    if (table?.emit && props.column) {
+      table.emit('cell-edit-open', props.row, props.column)
+    }
+    emit('cell-edit-open', props.row, props.column)
   }
 }
 

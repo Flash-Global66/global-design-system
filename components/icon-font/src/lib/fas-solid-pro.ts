@@ -112,4 +112,5 @@ export {
   faPen,
   faUserGroup,
   faShieldCheck,
+  faArrowTrendUp
 } from "@fortawesome/pro-solid-svg-icons";

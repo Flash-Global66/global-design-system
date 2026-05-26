@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.2.0...@flash-global66/g-image@0.3.0) (2026-05-05)
+
+
+### Features
+
+* add usdt-usdc.webp image ([#208](https://github.com/Flash-Global66/global-design-system/issues/208)) ([ea35c22](https://github.com/Flash-Global66/global-design-system/commit/ea35c22db7a386098f4d30a74000193dac763a57))
+
+
+
+
+
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.1.1...@flash-global66/g-image@0.2.0) (2026-04-15)
+
+
+### Features
+
+* add discount illustration and update image constants ([#203](https://github.com/Flash-Global66/global-design-system/issues/203)) ([7fb66e1](https://github.com/Flash-Global66/global-design-system/commit/7fb66e13e33309abcfed77de576a6c3f17b9c4f2))
+
+
+
+
+
 ## [0.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.1.0...@flash-global66/g-image@0.1.1) (2026-03-26)
 
 **Note:** Version bump only for package @flash-global66/g-image

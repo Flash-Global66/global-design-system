@@ -1,8 +1,8 @@
 /** @jsx h */
-import { computed, defineComponent, inject, ref, toRaw, unref, watch, h } from 'vue'
+import { computed, defineComponent, inject, ref, toRaw, h } from 'vue'
 import { get } from 'lodash-unified'
-import { isObject, isUndefined } from 'element-plus/es/utils/index.mjs'
-import { DynamicSizeList, FixedSizeList } from 'element-plus'
+import { isObject } from 'element-plus/es/utils/index.mjs'
+import { useVirtualizer } from '@tanstack/vue-virtual'
 import { useNamespace } from 'element-plus'
 import { EVENT_CODE } from 'element-plus/es/constants/index.mjs'
 import GroupItem from './group-item.vue'
@@ -11,9 +11,8 @@ import { useProps } from './hooks/use-props'
 
 import { selectV2InjectionKey } from './types/token'
 
-import type { DynamicSizeListInstance, FixedSizeListInstance, ItemProps } from 'element-plus'
 import type { Option, OptionItemProps } from './types/select.types'
-import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, Ref } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, Ref, CSSProperties } from 'vue'
 
 const GROUP_ITEM_HEIGHT = 34
 
@@ -28,12 +27,12 @@ const props = {
 }
 
 interface SelectDropdownExposed {
-  listRef: Ref<FixedSizeListInstance | DynamicSizeListInstance | undefined>
+  listRef: Ref<HTMLElement | undefined>
   isSized: ComputedRef<boolean>
   isItemDisabled: (modelValue: any[] | any, selected: boolean) => boolean
   isItemHovering: (target: number) => boolean
   isItemSelected: (modelValue: any[] | any, target: Option) => boolean
-  scrollToItem: (index: number) => void
+  scrollToItem: (index: number, align?: 'auto' | 'start' | 'center' | 'end') => void
   resetScrollTop: () => void
 }
 
@@ -50,55 +49,19 @@ export default defineComponent({
     const ns = useNamespace('select')
     const { getTitle, getValue, getDisabled } = useProps(select.props)
 
-    const cachedHeights = ref<Array<number>>([])
+    const scrollContainerRef = ref<HTMLElement>()
 
-    const listRef = ref<FixedSizeListInstance | DynamicSizeListInstance>()
-
-    const size = computed(() => props.data.length)
-
-    const hasGroups = computed(() =>
-      props.data.some((item: any) => item?.type === 'Group')
+    const virtualizer = useVirtualizer(
+      computed(() => ({
+        count: scrollContainerRef.value ? props.data.length : 0,
+        getScrollElement: () => scrollContainerRef.value ?? null,
+        estimateSize: () => 44,
+        overscan: 5,
+      }))
     )
 
-    watch(
-      () => size.value,
-      () => {
-        select.tooltipRef.value!.updatePopper?.()
-      }
-    )
 
-    watch(
-      () => [props.data, select.props.itemHeight] as const,
-      () => {
-        if (hasGroups.value) {
-          cachedHeights.value = props.data.map((item: any) =>
-            item?.type === 'Group' ? GROUP_ITEM_HEIGHT : select.props.itemHeight
-          )
-        }
-      },
-      { immediate: true }
-    )
-
-    const isSized = computed(() => isUndefined(select.props.estimatedOptionHeight))
-    const listProps = computed(() => {
-      if (hasGroups.value) {
-        return {
-          estimatedSize: select.props.itemHeight,
-          itemSize: (idx: number) =>
-            cachedHeights.value[idx] ?? select.props.itemHeight
-        }
-      }
-      if (isSized.value) {
-        return {
-          itemSize: select.props.itemHeight
-        }
-      }
-
-      return {
-        estimatedSize: select.props.estimatedOptionHeight,
-        itemSize: (idx: number) => cachedHeights.value[idx]
-      }
-    })
+    const isSized = computed(() => true)
 
     const contains = (arr: Array<any> = [], target: any) => {
       const {
@@ -143,21 +106,17 @@ export default defineComponent({
     const isItemHovering: SelectDropdownExposed['isItemHovering'] = (target) =>
       props.hoveringIndex === target
 
-    const scrollToItem: SelectDropdownExposed['scrollToItem'] = (index) => {
-      const list = listRef.value
-      if (list) {
-        list.scrollToItem(index)
+    const scrollToItem: SelectDropdownExposed['scrollToItem'] = (index, align = 'auto') => {
+      if (virtualizer.value) {
+        virtualizer.value.scrollToIndex(index, { align })
       }
     }
 
     const resetScrollTop: SelectDropdownExposed['resetScrollTop'] = () => {
-      const list = listRef.value
-      if (list) {
-        list.resetScrollTop()
-      }
+      scrollContainerRef.value?.scrollTo({ top: 0 })
     }
     const exposed: SelectDropdownExposed = {
-      listRef,
+      listRef: scrollContainerRef,
       isSized,
 
       isItemDisabled,
@@ -168,19 +127,18 @@ export default defineComponent({
     }
     expose(exposed)
 
-    const Item = (itemProps: ItemProps<any>) => {
-      const { index, data, style } = itemProps
-      const sized = unref(isSized)
-      const { itemSize, estimatedSize } = unref(listProps)
+    const Item = (itemProps: any) => {
+      const { index, data, style, measureElement } = itemProps
       const { modelValue } = select.props
       const { onSelect, onHover } = select
       const item = data[index]
-      if (item.type === 'Group') {
+      if (item?.type === 'Group') {
         return (
           <GroupItem
             item={item}
             style={style}
             height={GROUP_ITEM_HEIGHT}
+            measureElement={measureElement}
           />
         )
       }
@@ -196,6 +154,8 @@ export default defineComponent({
           created={!!item.created}
           hovering={isHovering}
           item={item}
+          measureElement={measureElement}
+          descriptionLines={select.props.descriptionLines}
           onSelect={onSelect}
           onHover={onHover}
         >
@@ -252,9 +212,8 @@ export default defineComponent({
     return () => {
       const { data, width } = props
       const { height, multiple, scrollbarAlwaysOn } = select.props
-
-      const useVariableSize = unref(hasGroups) || !unref(isSized)
-      const List = useVariableSize ? DynamicSizeList : FixedSizeList
+      const virtualItems = virtualizer.value?.getVirtualItems() ?? []
+      const totalSize = virtualizer.value?.getTotalSize() ?? 0
 
       return h(
         'div',
@@ -267,25 +226,52 @@ export default defineComponent({
         [
           slots.header?.(),
           slots.loading?.() || slots.empty?.() || h(
-            List,
+            'div',
             {
-              ref: listRef,
-              ...unref(listProps),
-              className: ns.be('dropdown', 'list'),
-              scrollbarAlwaysOn: scrollbarAlwaysOn,
-              data: data,
-              height: height,
-              width: width,
-              total: data.length,
+              ref: scrollContainerRef,
+              class: [
+                ns.be('dropdown', 'list'),
+                scrollbarAlwaysOn ? ns.is('scrollbar-always-on') : ''
+              ],
+              style: { height: `${height}px`, overflowY: 'auto' as const },
               onKeydown: onKeydown
             },
-            {
-              default: (props: ItemProps<any>) => h(Item, { ...props })
-            }
+            [
+              h(
+                'div',
+                {
+                  style: {
+                    height: `${totalSize}px`,
+                    width: '100%',
+                    position: 'relative' as const
+                  }
+                },
+                virtualItems.map((virtualItem) => {
+                  return h(Item, {
+                    key: String(virtualItem.key),
+                    index: virtualItem.index,
+                    data: data,
+                    style: {
+                      position: 'absolute' as const,
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      transform: `translateY(${virtualItem.start}px)`
+                    } as CSSProperties,
+                    measureElement: (el: HTMLElement | null) => {
+                      if (!el || !select.expanded.value) {
+                        return
+                      }
+                      virtualizer.value?.measureElement(el)
+                    }
+                  })
+                })
+              )
+            ]
           ),
           slots.footer?.()
-        ].filter(Boolean) 
-      )      
+        ].filter(Boolean)
+      )
     }
   }
 })

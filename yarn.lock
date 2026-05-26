@@ -29,6 +29,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@awesome.me/kit-3edc55bdad@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "@awesome.me/kit-3edc55bdad@npm:1.0.9"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": "npm:^6.7.2"
+  checksum: 10c0/1c413ca14076368bbdd1c5c52918bae3341a69b10d7dfde2d8820f471ad32d383ac37d2e51c13c6bc0b028884c184a7d2c1f8c87008167081971ec1476a3305d
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/code-frame@npm:7.27.1"
@@ -653,7 +662,7 @@ __metadata:
   resolution: "@flash-global66/g-button@workspace:components/button"
   peerDependencies:
     "@flash-global66/g-form": ^0.1.0
-    "@flash-global66/g-icon-font": ^0.0.8
+    "@flash-global66/g-icon-font": ^0.24.0
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
@@ -722,6 +731,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-country-flag@workspace:components/country-flag":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-country-flag@workspace:components/country-flag"
+  peerDependencies:
+    "@vueuse/core": ^13.0.0
+    element-plus: ^2.0.0
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-date-picker@workspace:components/date-picker":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-date-picker@workspace:components/date-picker"
@@ -741,6 +760,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-dialog-alert@workspace:components/dialog-alert"
   peerDependencies:
+    "@flash-global66/g-checkbox": ^0.2.1
     "@flash-global66/g-config-provider": 0.0.8
     "@flash-global66/g-dialog": 0.0.8
     "@flash-global66/g-image": 0.0.3
@@ -823,7 +843,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-button@workspace:components/icon-button"
   peerDependencies:
-    "@flash-global66/g-icon-font": ^0.10.0
+    "@flash-global66/g-icon-font": ^0.24.0
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
@@ -833,6 +853,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-font@workspace:components/icon-font"
   dependencies:
+    "@awesome.me/kit-3edc55bdad": "npm:^1.0.9"
     "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
     "@fortawesome/free-brands-svg-icons": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
@@ -842,6 +863,7 @@ __metadata:
     "@fortawesome/pro-solid-svg-icons": "npm:^6.7.2"
     "@fortawesome/vue-fontawesome": "npm:^3.0.8"
   peerDependencies:
+    "@awesome.me/kit-3edc55bdad": ^1.0.9
     "@fortawesome/fontawesome-svg-core": ^6.7.2
     "@fortawesome/free-brands-svg-icons": ^6.7.2
     "@fortawesome/free-solid-svg-icons": ^6.7.2
@@ -932,6 +954,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-logo@workspace:components/logo":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-logo@workspace:components/logo"
+  peerDependencies:
+    "@vueuse/core": ^13.0.0
+    element-plus: ^2.0.0
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-menu@workspace:components/menu":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-menu@workspace:components/menu"
@@ -982,6 +1014,18 @@ __metadata:
     "@flash-global66/g-icon-font": ^0.5.8
     element-plus: ^2.9.7
     vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
+"@flash-global66/g-quote@workspace:components/quote":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-quote@workspace:components/quote"
+  peerDependencies:
+    "@flash-global66/g-country-flag": ^0.0.2
+    "@flash-global66/g-dropdown": ^0.1.4
+    "@flash-global66/g-icon-font": ^0.20.0
+    vue: ^3.2.0
+    vue-currency-input: ^3.2.0
   languageName: unknown
   linkType: soft
 
@@ -1050,6 +1094,8 @@ __metadata:
 "@flash-global66/g-select@workspace:components/select":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-select@workspace:components/select"
+  dependencies:
+    "@tanstack/vue-virtual": "npm:3.13.23"
   peerDependencies:
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.0.8
@@ -1094,7 +1140,7 @@ __metadata:
     "@flash-global66/g-icon-font": ^0.0.8
     "@flash-global66/g-input": ^0.3.0
     "@flash-global66/g-scrollbar": ^0.1.0
-    "@flash-global66/g-select": ^0.3.0
+    "@flash-global66/g-select": ^0.3.4
     "@flash-global66/g-tooltip": ^0.1.0
     async-validator: ^4.2.5
     element-plus: ^2.9.0
@@ -1201,6 +1247,7 @@ __metadata:
     vite: "npm:5.2.11"
     vite-dts: "npm:1.0.4"
     vue: "npm:3.5.18"
+    vue-currency-input: "npm:3.2.2"
     vue-loader: "npm:16.8.3"
     vue-router: "npm:4.5.1"
     vue-tsc: "npm:2.2.12"
@@ -1233,7 +1280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-common-types@npm:6.7.2":
+"@fortawesome/fontawesome-common-types@npm:6.7.2, @fortawesome/fontawesome-common-types@npm:^6.7.2":
   version: 6.7.2
   resolution: "@fortawesome/fontawesome-common-types@npm:6.7.2"
   checksum: 10c0/0785df560542d9c08a0ba07bb7a39902274a3cd65c018672eb2520a99efccce18bdb7f7f4b1c6089763bc5627bf0f0837c3af963a8427eaeb535bd57c820a723
@@ -2916,6 +2963,24 @@ __metadata:
     storybook: ^8.6.14
     vue: ^3.0.0
   checksum: 10c0/5445030fcb1ae2bd81a2a7c452b1897a13b514c771c30f075cd56188c69cf3680c65dd0a812c8a37689374f114335a590f776d8742ecbf5008d78b3a1f00b7bc
+  languageName: node
+  linkType: hard
+
+"@tanstack/virtual-core@npm:3.13.23":
+  version: 3.13.23
+  resolution: "@tanstack/virtual-core@npm:3.13.23"
+  checksum: 10c0/3487089ea4e1dcbb01836f51a1b35b709f9ba03312fe600ddb97c893c16be213e1690af735717b1d6b2e22dfec691c338bc96b5965228c195840249699d5273a
+  languageName: node
+  linkType: hard
+
+"@tanstack/vue-virtual@npm:3.13.23":
+  version: 3.13.23
+  resolution: "@tanstack/vue-virtual@npm:3.13.23"
+  dependencies:
+    "@tanstack/virtual-core": "npm:3.13.23"
+  peerDependencies:
+    vue: ^2.7.0 || ^3.0.0
+  checksum: 10c0/d036bc1dccd221185bfac6bf7d43bf259000b18c6b4049f581f5de2d4d766c99317ae40643130747050417629f73120ae0d13ea82840827f8d80471669690fb3
   languageName: node
   linkType: hard
 
@@ -10306,6 +10371,15 @@ __metadata:
   version: 3.1.4
   resolution: "vue-component-type-helpers@npm:3.1.4"
   checksum: 10c0/82a30a3ee271bab57c697e04b46716521575fde6a1f397edeb8c69f9edf7fe705d8bbc9cafa501e6294ceaee9e5585daadf3f6385209479bd82f88ae54730b25
+  languageName: node
+  linkType: hard
+
+"vue-currency-input@npm:3.2.2":
+  version: 3.2.2
+  resolution: "vue-currency-input@npm:3.2.2"
+  peerDependencies:
+    vue: ^2.7 || ^3.0.0
+  checksum: 10c0/5fdcc415bffeecf72f50135b57fcb08d4c8457c7379067c9a0076668290b98d1c8ec94c9c07220ede31f5b932947d225b23959c77d636207816939c862052c71
   languageName: node
   linkType: hard
 

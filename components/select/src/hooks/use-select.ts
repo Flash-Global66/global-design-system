@@ -346,7 +346,7 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     const selector = nsSelect.be('dropdown', 'item')
-    const dom = menuRef.value?.listRef?.innerRef || document
+    const dom = menuRef.value?.listRef || document
     const dropdownItemEl = dom.querySelector(`.${selector}`)
     if (dropdownItemEl === null || ctx === null) return 0
     const style = getComputedStyle(dropdownItemEl)
@@ -743,12 +743,12 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
   const updateHoveringIndex = () => {
     if (!props.multiple) {
       states.hoveringIndex = filteredOptions.value.findIndex((item) => {
-        return getValueKey(item) === getValueKey(props.modelValue)
+        return getValueKey(getValue(item)) === getValueKey(props.modelValue)
       })
     } else {
       states.hoveringIndex = filteredOptions.value.findIndex((item) =>
         props.modelValue.some(
-          (modelValue: unknown) => getValueKey(modelValue) === getValueKey(item)
+          (modelValue: unknown) => getValueKey(modelValue) === getValueKey(getValue(item))
         )
       )
     }
@@ -776,13 +776,16 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
     states.isBeforeHide = false
     return nextTick(() => {
       if (~indexRef.value) {
-        scrollToItem(states.hoveringIndex)
+        scrollToItem(states.hoveringIndex, 'center')
       }
     })
   }
 
-  const scrollToItem = (index: number) => {
-    menuRef.value!.scrollToItem(index)
+  const scrollToItem = (index: number, align: 'auto' | 'start' | 'center' | 'end' = 'auto') => {
+    if (!menuRef.value || index < 0) {
+      return
+    }
+    menuRef.value.scrollToItem(index, align)
   }
 
   const getOption = (value: unknown, cachedOptions?: Option[]) => {
@@ -881,6 +884,15 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
         calculatePopperSize()
       }
       handleQueryChange('')
+      nextTick(() => {
+        updateHoveringIndex()
+        if (states.hoveringIndex >= 0) {
+          scrollToItem(states.hoveringIndex, 'center')
+          requestAnimationFrame(() => {
+            scrollToItem(states.hoveringIndex, 'center')
+          })
+        }
+      })
     } else {
       states.inputValue = ''
       states.previousQuery = null
@@ -931,6 +943,10 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
     () => filteredOptions.value,
     () => {
       calculatePopperSize()
+      const shouldResetScrollTop = props.filterable && states.inputValue.length > 0
+      if (!shouldResetScrollTop) {
+        return
+      }
       return menuRef.value && nextTick(menuRef.value.resetScrollTop)
     }
   )

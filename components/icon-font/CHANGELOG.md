@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.24.0...@flash-global66/g-icon-font@0.24.1) (2026-05-20)
+
+**Note:** Version bump only for package @flash-global66/g-icon-font
+
+
+
+
+
+# [0.24.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.23.0...@flash-global66/g-icon-font@0.24.0) (2026-05-20)
+
+
+### Features
+
+* **icon-button:** add regular wallet icon ([81cf1db](https://github.com/Flash-Global66/global-design-system/commit/81cf1db20a4dd1e972086ded4c6f360c682960c5))
+
+
+
+
+
+# [0.23.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.22.0...@flash-global66/g-icon-font@0.23.0) (2026-05-18)
+
+
+### Features
+
+* **icon-button:** map apple pay and google pay icons on brands family ([79ad3b5](https://github.com/Flash-Global66/global-design-system/commit/79ad3b5099c3c4fd7552d9f9cd64f7f53e219148))
+* **icon-button:** map lock-alt and unlock icons on regular family ([dfd95dd](https://github.com/Flash-Global66/global-design-system/commit/dfd95dd510e44b92cc0b4ba8449a443e6b3a78f4))
+
+
+
+
+
+# [0.22.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.21.1...@flash-global66/g-icon-font@0.22.0) (2026-05-11)
+
+
+### Features
+
+* **icon-font:** add paper plane icon ([#210](https://github.com/Flash-Global66/global-design-system/issues/210)) ([0153e36](https://github.com/Flash-Global66/global-design-system/commit/0153e3667ce1a3b15301abe269ac41ef6894694f))
+
+
+
+
+
+## [0.21.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.21.0...@flash-global66/g-icon-font@0.21.1) (2026-05-06)
+
+**Note:** Version bump only for package @flash-global66/g-icon-font
+
+
+
+
+
+# [0.21.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.20.0...@flash-global66/g-icon-font@0.21.0) (2026-04-27)
+
+
+### Features
+
+* add icon for wallet detailds ([#206](https://github.com/Flash-Global66/global-design-system/issues/206)) ([4f4993a](https://github.com/Flash-Global66/global-design-system/commit/4f4993a4061b7075337fc3a9ac55d77245532f31))
+
+
+
+
+
 # [0.20.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.19.2...@flash-global66/g-icon-font@0.20.0) (2026-04-10)
 
 

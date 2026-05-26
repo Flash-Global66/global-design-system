@@ -292,7 +292,7 @@ export const Galería: Story = {
           return Object.entries(ICON_SETS).reduce((sorted, [weight, icons]) => {
             sorted[weight] = [...icons].sort((a, b) => a.localeCompare(b));
             return sorted;
-          }, {} as typeof ICON_SETS);
+          }, {} as Record<string, string[]>);
         }
 
         const searchTermLower = searchTerm.value.toLowerCase().trim();
@@ -303,7 +303,7 @@ export const Galería: Story = {
             .filter((icon) => icon.toLowerCase().includes(searchTermLower))
             .sort((a, b) => a.localeCompare(b));
           return filtered;
-        }, {} as typeof ICON_SETS);
+        }, {} as Record<string, string[]>);
       });
 
       const clearSearch = () => {

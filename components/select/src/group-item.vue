@@ -1,5 +1,9 @@
 <template>
-  <div :class="ns.be('group', 'title')" :style="style">
+  <div
+    :class="ns.be('group', 'title')"
+    :style="style"
+    :ref="(el) => measureElement?.(el as HTMLElement | null)"
+  >
     {{ item.title }}
   </div>
 </template>
@@ -18,12 +22,17 @@ export default defineComponent({
     style: {
       type: Object as PropType<CSSProperties>
     },
-    height: Number
+    height: Number,
+    measureElement: {
+      type: Function as PropType<(el: HTMLElement | null) => void>,
+      default: undefined
+    }
   },
-  setup() {
+  setup(props) {
     const ns = useNamespace('select')
     return {
-      ns
+      ns,
+      measureElement: props.measureElement
     }
   }
 })

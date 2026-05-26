@@ -1,5 +1,5 @@
 import { StoryObj } from '@storybook/vue3'
-import { onMounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 // COMPONENTS
 import { GSelect, OptionType, SelectInstance } from "@flash-global66/g-select/index.ts";
@@ -138,6 +138,19 @@ import type { OptionType } from '@flash-global66/g-select'
         category: 'Apariencia y Estilos',
         type: { summary: 'number' },
         defaultValue: { summary: '55' }
+      }
+    },
+    descriptionLines: {
+      name: 'description-lines',
+      description: 'Número máximo de líneas para la descripción (0 = sin límite, 1 o 2 = trunca con ellipsis)',
+      control: {
+        type: 'select',
+        options: [0, 1, 2]
+      },
+      table: {
+        category: 'Apariencia y Estilos',
+        type: { summary: 'number' },
+        defaultValue: { summary: '0' }
       }
     },
     prefixIcon: {
@@ -455,7 +468,13 @@ export const withAllProps: Story = {
 - Muestra ícono y descripción
 - Opciones deshabilitadas
 - Búsqueda de opciones
-- Largo de opciones personalizado`
+- Largo de opciones personalizado
+
+Nota técnica de virtualización:
+- \`measureElement\` no es un prop de negocio ni de configuración funcional para producto.
+- \`measureElement\` permite medir la altura real de cada fila en runtime.
+- Es necesario cuando las opciones tienen descripciones multilinea o contenido variable.
+- Evita desajustes de espacio/scroll al abrir y cerrar el dropdown con listas grandes.`
       }
     }
   },
@@ -490,6 +509,7 @@ export const withAllProps: Story = {
             style="width: 300px"
             :clearable="true"
             helpText="This is a help text"
+            :description-lines="2"
           />
           <g-select
             v-model="value2"
@@ -503,6 +523,7 @@ export const withAllProps: Story = {
             :clearable="true"
             helpText="This is a help text"
             :fit-input-width="440"
+            :description-lines="2"
           />
         </div>
       </g-config-provider>
@@ -713,6 +734,10 @@ export const clearable: Story = {
   })
 }
 
+const handleClick = (e: MouseEvent) => {
+  alert('Click en el input')
+}
+
 export const states: Story = {
   name: 'Estados',
   parameters: {
@@ -773,10 +798,6 @@ export const states: Story = {
           icon: 'regular bolt'
         }
       ]
-
-      function handleClick(e: MouseEvent) {
-        alert('Click en el input')
-      }
 
       return { states, handleClick, options }
     },
@@ -1113,6 +1134,120 @@ export const groupedMultiple: Story = {
           style="width: 320px"
           help-text="Opciones agrupadas con selección múltiple."
         />
+      </g-config-provider>
+    `
+  })
+}
+
+export const descriptionLinesLimit: Story = {
+  name: 'Límite de líneas en descripción',
+  parameters: {
+    docs: {
+      description: {
+        story: `La prop \`description-lines\` permite limitar el número de líneas que se muestran en la descripción de las opciones.
+
+**Casos de uso:**
+
+- **0 (sin límite)**: Las descripciones se expanden completamente sin truncarse
+- **1 línea**: Ideal para descripciones cortas, muestra solo la primera línea con ellipsis
+- **2 líneas**: Balance entre brevedad e información (máximo soportado)
+
+**Ejemplo en el componente:**
+
+\`\`\`vue
+<g-select
+  v-model="value"
+  :options="options"
+  description-lines="2"  <!-- Limita a máximo 2 líneas -->
+/>
+\`\`\`
+
+Usa las clases Tailwind \`line-clamp-1\` o \`line-clamp-2\` internamente para truncar el texto.`
+      }
+    }
+  },
+  render: () => ({
+    components: { GSelect, GConfigProvider },
+    setup() {
+      const value0 = ref()
+      const value1 = ref()
+      const value2 = ref()
+
+      const longDescriptionOptions = [
+        {
+          value: '1',
+          title: 'Opción 1',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in enim elementum, sagittis velit eu, feugiat sem. Sed lacinia tincidunt lacinia. Donec molestie lacus nec risus semper lobortis.',
+          icon: 'regular bolt'
+        },
+        {
+          value: '2',
+          title: 'Opción 2',
+          description: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, rhoncus id, erat. Fusce rhoncus, massa sed semper.',
+          icon: 'regular user'
+        },
+        {
+          value: '3',
+          title: 'Opción 3',
+          description: 'Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy ac, gravida a, est. Proin eget sem. Sed viverra viverra nisl. Curabitur suscipit suscipit tellus.',
+          icon: 'regular bolt'
+        },
+        {
+          value: '4',
+          title: 'Opción 4',
+          description: 'Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed dignissim, metus nec consectetuer malesuada, ipsum augue molestie justo, sed accumsan nisi nunc sit amet erat.',
+          icon: 'regular user'
+        }
+      ]
+
+      return { value0, value1, value2, longDescriptionOptions }
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-6">
+          <div>
+            <h3 class="text-3 font-semibold text-primary-txt mb-2">Sin límite (description-lines="0")</h3>
+            <g-select
+              v-model="value0"
+              :options="longDescriptionOptions"
+              placeholder="Selecciona una opción"
+              label="Sin límite"
+              :item-height="140"
+              :filterable="true"
+              style="width: 340px"
+              description-lines="0"
+            />
+          </div>
+
+          <div>
+            <h3 class="text-3 font-semibold text-primary-txt mb-2">1 línea (description-lines="1")</h3>
+            <g-select
+              v-model="value1"
+              :options="longDescriptionOptions"
+              placeholder="Selecciona una opción"
+              label="1 línea"
+              :item-height="70"
+              :filterable="true"
+              style="width: 340px"
+              description-lines="1"
+            />
+          </div>
+
+          <div>
+            <h3 class="text-3 font-semibold text-primary-txt mb-2">2 líneas (description-lines="2")</h3>
+            <g-select
+              v-model="value2"
+              :options="longDescriptionOptions"
+              placeholder="Selecciona una opción"
+              label="2 líneas"
+              :item-height="90"
+              :filterable="true"
+              style="width: 340px"
+              description-lines="2"
+            />
+          </div>
+
+        </div>
       </g-config-provider>
     `
   })

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 
 import { GButton } from "@flash-global66/g-button/index.ts";
 import { openAlert, type DialogAlertInstance } from "@flash-global66/g-dialog-alert/index.ts";
+import type { AlertCheckboxItem } from "@flash-global66/g-dialog-alert/index.ts";
 import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
 import { IMAGE_NAMES, IMAGE_SIZES } from '@flash-global66/g-image/index.ts';
 
@@ -51,6 +52,7 @@ El componente Dialog Alert permite invocar alertas directamente mediante funcion
 - Hasta tres botones de acción (primario, secundario, terciario)
 - Imágenes personalizables con diferentes tamaños
 - API programática mediante Promise
+- Checkboxes opcionales bajo la descripción con validación del botón primario
 
 ### Instalación
 
@@ -194,6 +196,20 @@ openAlert({
         type: { summary: Object.keys(IMAGE_SIZES).join(' | ') },
         defaultValue: { summary: 'lg' }
       }
+    },
+    checkboxes: {
+      description:
+        "Checkbox. Puede ser uno o varios. Cada ítem debe incluir un `label`. pero también se puede indicar si es un checkbox obligatorio o no con `required` deshabilita el botón primario hasta marcarlo. `onChange` es opcional. `checked` define el estado inicial.",
+      control: 'object',
+      table: {
+        category: 'Contenido',
+        type: {
+          summary: 'AlertCheckboxItem[]',
+          detail:
+            '{ label: string; required?: boolean; checked?: boolean; onChange?: (checked: boolean) => void }[]'
+        },
+        defaultValue: { summary: '[]' }
+      }
     }
   },
   args: {
@@ -205,7 +221,8 @@ openAlert({
     tertiaryText: '',
     hideButtonClose: false,
     imageName: undefined,
-    imageSize: 'lg'
+    imageSize: 'lg',
+    checkboxes: [] as AlertCheckboxItem[]
   }
 };
 
@@ -249,6 +266,7 @@ openAlert({
           hideButtonClose: args.hideButtonClose,
           imageName: args.imageName,
           imageSize: args.imageSize,
+          checkboxes: args.checkboxes?.length ? args.checkboxes : undefined,
         });
       };
 
@@ -278,6 +296,91 @@ openAlert({
             Haz clic en el botón para mostrar una alerta con las propiedades seleccionadas.
           </p>
           <GButton @click="showAlert" variant="primary">Mostrar Alerta Personalizada</GButton>
+        </div>
+      </alert-example-wrapper>
+    `
+  })
+};
+
+export const WithCheckboxes: Story = {
+  name: 'Checkboxes',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Checkboxes bajo la descripción: útiles para términos, “no volver a mostrar”, etc. Si algún ítem tiene `required: true`, el botón primario permanece deshabilitado hasta marcarlo. El resultado de `openAlert` incluye `checkboxStates` en el mismo orden que el array.'
+      },
+      source: {
+        code: `
+import { openAlert } from '@flash-global66/g-dialog-alert';
+
+openAlert({
+  type: 'warning',
+  title: 'Antes de continuar',
+  description: 'Confirma la información y acepta los términos si aplica.',
+  primaryText: 'Aceptar',
+  secondaryText: 'Cancelar',
+  checkboxes: [
+    { label: 'Acepto los términos y condiciones', required: true, checked: false },
+    {
+      label: 'No volver a mostrar este mensaje',
+      onChange: (checked) => {
+        /* opcional: telemetría o estado local */
+      }
+    }
+  ]
+}).then((result) => {
+  if (result.isPrimary && result.checkboxStates) {
+    const [terminos, noMostrarDeNuevo] = result.checkboxStates;
+  }
+});`
+      }
+    }
+  },
+  render: () => ({
+    components: { GButton, AlertExampleWrapper },
+    setup() {
+      const showAlert = () => {
+        openAlert({
+          type: 'warning',
+          title: 'Antes de continuar',
+          description: 'Confirma la información y acepta los términos si aplica.',
+          primaryText: 'Aceptar',
+          secondaryText: 'Cancelar',
+          checkboxes: [
+            { label: 'Acepto los términos y condiciones', required: true, checked: false },
+            {
+              label: 'No volver a mostrar este mensaje',
+              onChange: () => undefined
+            }
+          ]
+        });
+      };
+
+      const codeExample = `
+import { openAlert } from '@flash-global66/g-dialog-alert';
+
+openAlert({
+  type: 'warning',
+  title: 'Antes de continuar',
+  description: 'Confirma la información y acepta los términos si aplica.',
+  primaryText: 'Aceptar',
+  secondaryText: 'Cancelar',
+  checkboxes: [
+    { label: 'Acepto los términos y condiciones', required: true },
+    { label: 'No volver a mostrar este mensaje', onChange: (checked) => { /* ... */ } }
+  ]
+});`;
+
+      return { showAlert, codeExample };
+    },
+    template: `
+      <alert-example-wrapper :code-example="codeExample">
+        <div class="p-4 space-y-4">
+          <p class="text-gray-600 text-sm">
+            El botón primario está deshabilitado hasta marcar el checkbox obligatorio.
+          </p>
+          <GButton @click="showAlert" variant="primary">Mostrar alerta con checkboxes</GButton>
         </div>
       </alert-example-wrapper>
     `
