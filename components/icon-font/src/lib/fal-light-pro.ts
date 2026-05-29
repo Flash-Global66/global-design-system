@@ -34,5 +34,10 @@ export {
   faTrophy,
   faStar,
   faFlag,
-  faHeartPulse
+  faHeartPulse,
+  faCircleDollar,
+  faCircleQuestion,
+  faKeySkeleton,
+  faMobile,
+  faQrcode,
 } from '@fortawesome/pro-light-svg-icons';
