@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.24.1...@flash-global66/g-icon-font@0.25.0) (2026-05-29)
+
+
+### Features
+
+* **icon-font:** add new icons including circle-question, circle-dollar, key-skeleton, mobile, and qrcode ([#219](https://github.com/Flash-Global66/global-design-system/issues/219)) ([3677ca0](https://github.com/Flash-Global66/global-design-system/commit/3677ca0fc1c75dce721f3023e0843e830095eb25))
+
+
+
+
+
 ## [0.24.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.24.0...@flash-global66/g-icon-font@0.24.1) (2026-05-20)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font
