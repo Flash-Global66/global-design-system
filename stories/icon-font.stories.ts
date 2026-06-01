@@ -61,20 +61,21 @@ yarn add ${generatePeerDepsInstalls(peerDependencies)}
 yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 \`\`\`
 
-## Cómo añadir nuevos iconos al componente
+## Cómo añadir nuevos iconos
 
-Para extender la biblioteca con iconos adicionales de Font Awesome, sigue estos pasos:
+Los iconos viven inline en \`src/lib/*.ts\` como data SVG (archivos autogenerados — no editar a mano). El catálogo está en \`src/icon-sets.ts\`, con weights \`solid | regular | light | duotone | brands | kit\`.
 
-1. **Busca y selecciona** el icono deseado en <a href="https://fontawesome.com/search" target="_blank">Font Awesome</a> (requiere licencia Pro para iconos premium)
+\`\`\`bash
+yarn icon:add "solid coffee"
+\`\`\`
 
-2. **Agrega la importación** en el archivo correspondiente de la carpeta \`src/lib/\` según el peso del icono:
-   - \`fas-solid-pro.ts\` para iconos solid (fas)
-   - \`far-regular-pro.ts\` para iconos regular (far)
-   - \`fal-light-pro.ts\` para iconos light (fal)
-   - \`fab-free.ts\` para iconos de marcas (fab)
-   - \`fad-duotone-pro.ts\` para iconos duotone (fad)
+Valida que el icono exista en el paquete fuente de Font Awesome, lo agrega al catálogo y regenera los \`lib/*.ts\`. Si el icono no existe, revierte sin dejar cambios.
 
-3. **Registra el nombre** del icono en \`src/icon-sets.ts\` para habilitar el autocompletado y validación de tipos
+\`\`\`bash
+yarn icon:extract
+\`\`\`
+
+Solo regenera los \`lib/*.ts\` desde el catálogo actual. Útil tras editar \`icon-sets.ts\` a mano o tras un bump de versión de los paquetes Font Awesome.
 
 ### Ejemplo de uso
 Pesos disponibles

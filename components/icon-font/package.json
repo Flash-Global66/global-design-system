@@ -19,7 +19,9 @@
   ],
   "scripts": {
     "build": "vite build",
-    "build:types": "vue-tsc --project tsconfig.json"
+    "build:types": "vue-tsc --project tsconfig.json",
+    "icon:extract": "node scripts/extract-icons.mjs",
+    "icon:add": "node scripts/add-icon.mjs"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
