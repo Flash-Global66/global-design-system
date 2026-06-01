@@ -2,8 +2,9 @@ import { computed } from 'vue'
 import type { IOptionProps } from '../types/token'
 import type { OptionEmitFn } from '../defaults'
 
-function getClampClass(lineCount: number): string {
-  switch (lineCount) {
+function getClampClass(lineCount: unknown): string {
+  const normalized = Number(lineCount)
+  switch (normalized) {
     case 1:
       return 'line-clamp-1'
     case 2:
@@ -11,6 +12,7 @@ function getClampClass(lineCount: number): string {
     default:
       return ''
   }
+}
 }
 
 export function useOption(
