@@ -63,12 +63,19 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 
 ## Cómo añadir nuevos iconos
 
-Los iconos viven inline en \`src/lib/*.ts\` (archivos autogenerados). Weights: \`solid | regular | light | duotone | brands | kit\`.
+Los iconos viven inline en \`src/lib/*.ts\` como data SVG (archivos autogenerados — no editar a mano). El catálogo está en \`src/icon-sets.ts\`, con weights \`solid | regular | light | duotone | brands | kit\`.
 
 \`\`\`bash
-yarn icon:add "solid coffee"   # agrega un icono al catálogo y regenera lib/*.ts
-yarn icon:extract              # solo regenera lib/*.ts desde icon-sets.ts
+yarn icon:add "solid coffee"
 \`\`\`
+
+Valida que el icono exista en el paquete fuente de Font Awesome, lo agrega al catálogo y regenera los \`lib/*.ts\`. Si el icono no existe, revierte sin dejar cambios.
+
+\`\`\`bash
+yarn icon:extract
+\`\`\`
+
+Solo regenera los \`lib/*.ts\` desde el catálogo actual. Útil tras editar \`icon-sets.ts\` a mano o tras un bump de versión de los paquetes Font Awesome.
 
 ### Ejemplo de uso
 Pesos disponibles
