@@ -112,6 +112,7 @@ export const ICON_SETS = {
     "2",
     "3",
     "pen",
+    "pencil",
     "user-group",
     "shield-check",
     "arrow-trend-up",
