@@ -562,6 +562,20 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
     tooltipRef.value?.updatePopper?.()
   }
 
+  const scheduleDropdownWidthRecalculation = () => {
+    if (props.fitInputWidth !== false || !expanded.value) {
+      return
+    }
+
+    nextTick(() => {
+      requestAnimationFrame(() => {
+        if (!expanded.value) return
+        calculatePopperSize()
+        updateTooltip()
+      })
+    })
+  }
+
   const updateTagTooltip = () => {
     tagTooltipRef.value?.updatePopper?.()
   }
@@ -882,6 +896,7 @@ const useSelect: useSelectReturnType = (props: propsUseSelect, emit: SelectEmitF
     if (val) {
       if (!props.persistent) {
         calculatePopperSize()
+        scheduleDropdownWidthRecalculation()
       }
       handleQueryChange('')
       nextTick(() => {
