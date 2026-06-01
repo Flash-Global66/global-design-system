@@ -201,7 +201,6 @@ export const ICON_SETS = {
     "address-book",
     "address-card",
     "hashtag",
-    "landmark",
     "at",
     "circle-dollar",
     "earth-americas",
