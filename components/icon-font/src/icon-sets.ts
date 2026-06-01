@@ -105,6 +105,7 @@ export const ICON_SETS = {
     "chart-mixed-up-circle-dollar",
     "calendar",
     "eye",
+    "eye-slash",
     "gear",
     "unlock",
     "bell",
