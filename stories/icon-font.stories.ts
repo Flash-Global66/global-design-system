@@ -63,14 +63,12 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 
 ## Cómo añadir nuevos iconos
 
-Los iconos viven inline en \`src/lib/*.ts\` (archivos autogenerados). Para agregar uno nuevo:
+Los iconos viven inline en \`src/lib/*.ts\` (archivos autogenerados). Weights: \`solid | regular | light | duotone | brands | kit\`.
 
 \`\`\`bash
-yarn icon:add "<weight> <icon-name>"
-# ej: yarn icon:add "solid coffee"
+yarn icon:add "solid coffee"   # agrega un icono al catálogo y regenera lib/*.ts
+yarn icon:extract              # solo regenera lib/*.ts desde icon-sets.ts
 \`\`\`
-
-El comando actualiza \`src/icon-sets.ts\` y regenera los \`lib/*.ts\`. Weights: \`solid | regular | light | duotone | brands | kit\`.
 
 ### Ejemplo de uso
 Pesos disponibles
