@@ -155,6 +155,7 @@ export default defineComponent({
           hovering={isHovering}
           item={item}
           measureElement={measureElement}
+          titleLines={select.props.titleLines}
           descriptionLines={select.props.descriptionLines}
           onSelect={onSelect}
           onHover={onHover}

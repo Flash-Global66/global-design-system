@@ -23,14 +23,19 @@
           :class="ns.bem('dropdown', 'item', 'icon')"
         />
         <div :class="ns.bem('dropdown', 'item', 'content')">
-          <span :class="ns.bem('dropdown', 'item', 'title')">{{
-            getTitle(item)
-          }}</span>
+          <span
+            :class="[
+              ns.bem('dropdown', 'item', 'title'),
+              titleClampClass
+            ]"
+          >
+            {{ getTitle(item) }}
+          </span>
           <span
             v-if="Boolean(getDescription(item))"
             :class="[
               ns.bem('dropdown', 'item', 'description'),
-              descriptionLines > 0 ? `line-clamp-${descriptionLines}` : ''
+              descriptionClampClass
             ]"
           >
             {{ getDescription(item) }}
@@ -64,7 +69,12 @@ export default defineComponent({
   setup(props, { emit }) {
     const select = inject(selectV2InjectionKey)!;
     const ns = useNamespace("select");
-    const { hoverItem, selectOptionClick } = useOption(props, { emit });
+    const {
+      hoverItem,
+      selectOptionClick,
+      titleClampClass,
+      descriptionClampClass,
+    } = useOption(props, { emit });
     const { getIcon, getTitle, getDescription } = useProps(select.props);
     const multiple = select.props.multiple;
 
@@ -75,8 +85,9 @@ export default defineComponent({
       getTitle,
       getDescription,
       getIcon,
+      titleClampClass,
+      descriptionClampClass,
       multiple,
-      descriptionLines: props.descriptionLines,
     };
   },
 });

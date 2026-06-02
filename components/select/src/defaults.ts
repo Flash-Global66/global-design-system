@@ -113,11 +113,20 @@ export const SelectProps = buildProps({
     default: 55
   },
   /**
+   * @description Maximum number of lines for item title (0 = unlimited)
+   */
+  titleLines: {
+    type: Number,
+    default: 1,
+    validator: (val: number) => val >= 0 && val <= 2
+  },
+  /**
    * @description Maximum number of lines for item description (0 = unlimited)
    */
   descriptionLines: {
     type: Number,
-    default: 0
+    default: 0,
+    validator: (val: number) => val >= 0 && val <= 2
   },
   /**
    * @description
@@ -350,9 +359,15 @@ export const OptionProps = buildProps({
     type: definePropType<(el: HTMLElement | null) => void>(Function),
     default: undefined
   },
+  titleLines: {
+    type: Number,
+    default: 1,
+    validator: (val: number) => val >= 0 && val <= 2
+  },
   descriptionLines: {
     type: Number,
-    default: 0
+    default: 0,
+    validator: (val: number) => val >= 0 && val <= 2
   }
 } as const)
 

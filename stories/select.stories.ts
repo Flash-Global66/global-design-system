@@ -140,6 +140,19 @@ import type { OptionType } from '@flash-global66/g-select'
         defaultValue: { summary: '55' }
       }
     },
+    titleLines: {
+      name: 'title-lines',
+      description: 'Número máximo de líneas para el título (0 = sin límite, 1 o 2 = trunca con ellipsis)',
+      control: {
+        type: 'select',
+        options: [0, 1, 2]
+      },
+      table: {
+        category: 'Apariencia y Estilos',
+        type: { summary: 'number' },
+        defaultValue: { summary: '1' }
+      }
+    },
     descriptionLines: {
       name: 'description-lines',
       description: 'Número máximo de líneas para la descripción (0 = sin límite, 1 o 2 = trunca con ellipsis)',
@@ -1139,30 +1152,22 @@ export const groupedMultiple: Story = {
   })
 }
 
-export const descriptionLinesLimit: Story = {
-  name: 'Límite de líneas en descripción',
+export const optionLinesLimit: Story = {
+  name: 'Límite de líneas en opciones',
   parameters: {
     docs: {
       description: {
-        story: `La prop \`description-lines\` permite limitar el número de líneas que se muestran en la descripción de las opciones.
-
-**Casos de uso:**
-
-- **0 (sin límite)**: Las descripciones se expanden completamente sin truncarse
-- **1 línea**: Ideal para descripciones cortas, muestra solo la primera línea con ellipsis
-- **2 líneas**: Balance entre brevedad e información (máximo soportado)
-
-**Ejemplo en el componente:**
-
-\`\`\`vue
-<g-select
-  v-model="value"
-  :options="options"
-  description-lines="2"  <!-- Limita a máximo 2 líneas -->
-/>
-\`\`\`
-
-Usa las clases Tailwind \`line-clamp-1\` o \`line-clamp-2\` internamente para truncar el texto.`
+        story:
+          'Las props title-lines y description-lines permiten controlar cuántas líneas se muestran en el título y la descripción de cada opción del dropdown.' +
+          '\n\n' +
+          '**Casos de uso:**\n\n' +
+          '- **0 (sin límite):** muestra todo el contenido disponible.\n' +
+          '- **1 línea:** prioriza densidad visual y truncado rápido con ellipsis.\n' +
+          '- **2 líneas:** da más contexto sin dejar que cada opción crezca demasiado.\n\n' +
+          '**Consideraciones:**\n\n' +
+          '- Estas props afectan el contenido del dropdown, no el valor ya seleccionado en el input.\n' +
+          '- Esta story compara el comportamiento con títulos y descripciones largas para visualizar mejor la diferencia entre 0, 1 y 2 líneas.\n' +
+          '- Si el contenido ocupa más altura, recuerda ajustar item-height para evitar cortes visuales durante la virtualización.'
       }
     }
   },
@@ -1176,25 +1181,25 @@ Usa las clases Tailwind \`line-clamp-1\` o \`line-clamp-2\` internamente para tr
       const longDescriptionOptions = [
         {
           value: '1',
-          title: 'Opción 1',
+          title: 'Transporte de carga nacional e internacional con servicios complementarios',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in enim elementum, sagittis velit eu, feugiat sem. Sed lacinia tincidunt lacinia. Donec molestie lacus nec risus semper lobortis.',
           icon: 'regular bolt'
         },
         {
           value: '2',
-          title: 'Opción 2',
+          title: 'Servicios de asesoría tributaria y contable para empresas medianas y grandes',
           description: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, rhoncus id, erat. Fusce rhoncus, massa sed semper.',
           icon: 'regular user'
         },
         {
           value: '3',
-          title: 'Opción 3',
+          title: 'Comercialización y distribución de equipos tecnológicos para operaciones críticas',
           description: 'Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy ac, gravida a, est. Proin eget sem. Sed viverra viverra nisl. Curabitur suscipit suscipit tellus.',
           icon: 'regular bolt'
         },
         {
           value: '4',
-          title: 'Opción 4',
+          title: 'Gestión logística integral para abastecimiento, almacenamiento y última milla',
           description: 'Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed dignissim, metus nec consectetuer malesuada, ipsum augue molestie justo, sed accumsan nisi nunc sit amet erat.',
           icon: 'regular user'
         }
@@ -1206,7 +1211,7 @@ Usa las clases Tailwind \`line-clamp-1\` o \`line-clamp-2\` internamente para tr
       <g-config-provider>
         <div class="flex flex-col gap-6">
           <div>
-            <h3 class="text-3 font-semibold text-primary-txt mb-2">Sin límite (description-lines="0")</h3>
+            <h3 class="text-3 font-semibold text-primary-txt mb-2">Sin límite (title-lines="0" + description-lines="0")</h3>
             <g-select
               v-model="value0"
               :options="longDescriptionOptions"
@@ -1215,12 +1220,13 @@ Usa las clases Tailwind \`line-clamp-1\` o \`line-clamp-2\` internamente para tr
               :item-height="140"
               :filterable="true"
               style="width: 340px"
-              description-lines="0"
+              :title-lines="0"
+              :description-lines="0"
             />
           </div>
 
           <div>
-            <h3 class="text-3 font-semibold text-primary-txt mb-2">1 línea (description-lines="1")</h3>
+            <h3 class="text-3 font-semibold text-primary-txt mb-2">1 línea (title-lines="1" + description-lines="1")</h3>
             <g-select
               v-model="value1"
               :options="longDescriptionOptions"
@@ -1229,12 +1235,13 @@ Usa las clases Tailwind \`line-clamp-1\` o \`line-clamp-2\` internamente para tr
               :item-height="70"
               :filterable="true"
               style="width: 340px"
-              description-lines="1"
+              :title-lines="1"
+              :description-lines="1"
             />
           </div>
 
           <div>
-            <h3 class="text-3 font-semibold text-primary-txt mb-2">2 líneas (description-lines="2")</h3>
+            <h3 class="text-3 font-semibold text-primary-txt mb-2">2 líneas (title-lines="2" + description-lines="2")</h3>
             <g-select
               v-model="value2"
               :options="longDescriptionOptions"
@@ -1243,7 +1250,8 @@ Usa las clases Tailwind \`line-clamp-1\` o \`line-clamp-2\` internamente para tr
               :item-height="90"
               :filterable="true"
               style="width: 340px"
-              description-lines="2"
+              :title-lines="2"
+              :description-lines="2"
             />
           </div>
 
