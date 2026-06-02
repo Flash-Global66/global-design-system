@@ -13,7 +13,6 @@ function getClampClass(lineCount: unknown): string {
       return ''
   }
 }
-}
 
 export function useOption(
   props: IOptionProps,
