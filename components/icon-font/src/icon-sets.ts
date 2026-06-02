@@ -110,6 +110,7 @@ export const ICON_SETS = {
     "qrcode",
     "calendar",
     "eye",
+    "eye-slash",
     "gear",
     "unlock",
     "bell",
@@ -316,5 +317,6 @@ export const ICON_SETS = {
     "arrow-to-bottom",
     "store",
     "arrows-repeat",
+    "copy",
   ] as const,
 } as const;
