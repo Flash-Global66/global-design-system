@@ -3,7 +3,7 @@
 // Prefix: fad
 // Run `yarn icon:extract` to regenerate. Add icons via `yarn icon:add "<weight> <name>"`.
 
-import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 export const faSpinner = { prefix: 'fad', iconName: 'spinner', icon: [512, 512, [], "f110", ["M60.9 403.1a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zM208 464a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zM369.1 75A48 48 0 1 0 437 142.9 48 48 0 1 0 369.1 75zm0 294.2A48 48 0 1 0 437 437a48 48 0 1 0 -67.9-67.9zM416 256a48 48 0 1 0 96 0 48 48 0 1 0 -96 0z","M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM96 256A48 48 0 1 0 0 256a48 48 0 1 0 96 0zM75 142.9A48 48 0 1 0 142.9 75 48 48 0 1 0 75 142.9z"]] } as IconDefinition;
 export const faUserCircle = { prefix: 'fad', iconName: 'circle-user', icon: [512, 512, ["user-circle"], "f2bd", ["M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM113 384.2c22.1-38.3 63.5-64.2 111-64.2l64 0c47.4 0 88.9 25.8 111 64.2C363.8 423.3 312.8 448 256 448s-107.8-24.7-143-63.8zM328 200a72 72 0 1 1 -144 0 72 72 0 1 1 144 0z","M256 272a72 72 0 1 0 0-144 72 72 0 1 0 0 144zm0 176c56.8 0 107.8-24.7 143-63.8C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8z"]] } as IconDefinition;

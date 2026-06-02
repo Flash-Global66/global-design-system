@@ -76,7 +76,7 @@ async function extractCategory(category, { pkg, prefix, file, accessor }, catalo
     `// Prefix: ${prefix}`,
     '// Run `yarn icon:extract` to regenerate. Add icons via `yarn icon:add "<weight> <name>"`.',
     '',
-    "import type { IconDefinition } from '@fortawesome/fontawesome-common-types';",
+    "import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';",
     '',
   ];
   const missing = [];

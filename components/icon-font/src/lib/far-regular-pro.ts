@@ -3,7 +3,7 @@
 // Prefix: far
 // Run `yarn icon:extract` to regenerate. Add icons via `yarn icon:add "<weight> <name>"`.
 
-import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 export const faChevronDown = { prefix: 'far', iconName: 'chevron-down', icon: [512, 512, [], "f078", "M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-175 175L81 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L239 401z"] } as IconDefinition;
 export const faChevronUp = { prefix: 'far', iconName: 'chevron-up', icon: [512, 512, [], "f077", "M239 111c9.4-9.4 24.6-9.4 33.9 0L465 303c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-175-175L81 337c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 111z"] } as IconDefinition;
