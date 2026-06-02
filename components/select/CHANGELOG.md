@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.3.4...@flash-global66/g-select@0.4.0) (2026-06-02)
+
+
+### Features
+
+* **select:** add titleLines prop and update descriptionLines validation for item display ([#221](https://github.com/Flash-Global66/global-design-system/issues/221)) ([4f5d6f9](https://github.com/Flash-Global66/global-design-system/commit/4f5d6f9adab728c491f2dd33d306e718207db557))
+
+
+
+
+
 ## [0.3.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.3.3...@flash-global66/g-select@0.3.4) (2026-04-16)
 
 **Note:** Version bump only for package @flash-global66/g-select

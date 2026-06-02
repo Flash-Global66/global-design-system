@@ -214,7 +214,7 @@
       @apply text-everBlue-500 shrink-0;
     }
     @include m("title") {
-      @apply text-4 text-secondary-txt font-medium overflow-hidden text-ellipsis w-full;
+      @apply text-4 text-secondary-txt font-medium w-full whitespace-normal break-words;
     }
     @include m("description") {
       @apply text-2 text-terciary-txt font-medium text-wrap;
