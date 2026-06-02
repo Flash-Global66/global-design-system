@@ -849,7 +849,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-icon-font@workspace:components/icon-font":
+"@flash-global66/g-icon-font@npm:^0.25.0, @flash-global66/g-icon-font@workspace:components/icon-font":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-font@workspace:components/icon-font"
   dependencies:
@@ -901,6 +901,8 @@ __metadata:
 "@flash-global66/g-input-code@workspace:components/input-code":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-input-code@workspace:components/input-code"
+  dependencies:
+    "@flash-global66/g-icon-font": "npm:^0.25.0"
   languageName: unknown
   linkType: soft
 
