@@ -12,8 +12,7 @@ import {
   computed,
   onMounted,
 } from "vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/pro-solid-svg-icons";
+import { GIconFont } from '@flash-global66/g-icon-font'
 
 const props = defineProps({
   password: {
@@ -300,8 +299,8 @@ defineExpose({
         @click="showPassword = !showPassword"
         class="gui-input-code-password"
       >
-        <font-awesome-icon v-if="!showPassword" :icon="faEye" />
-        <font-awesome-icon v-else :icon="faEyeSlash" />
+        <GIconFont v-if="!showPassword" name="solid eye" />
+        <GIconFont v-else name="solid eye-slash" />
 
         <p class="gui-input-code-icon">
           {{ showPassword ? "Mostrar" : "Ocultar" }}

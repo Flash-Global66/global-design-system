@@ -22,3 +22,7 @@ storybook-static/
 
 # yalc
 .yalc/
+
+# agents
+.pi/
+.atl/
