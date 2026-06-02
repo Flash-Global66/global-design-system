@@ -4,7 +4,7 @@ import { ref } from 'vue';
 // COMPONENTS
 import { GMenu, GMenuItem, GMenuItemGroup, GSubMenu } from '../components/menu';
 import { GButton } from '@flash-global66/g-button/index.ts';
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { GIconFont } from '@flash-global66/g-icon-font/index.ts';
 
 // CONFIG
 import { GConfigProvider } from '../components/config-provider';
@@ -25,7 +25,7 @@ export default {
 
 const Template: StoryFn<typeof GMenu> = (args) => {
   return {
-    components: { GMenu, GConfigProvider, GButton, GMenuItem, GMenuItemGroup, GSubMenu, FontAwesomeIcon },
+    components: { GMenu, GConfigProvider, GButton, GMenuItem, GMenuItemGroup, GSubMenu, GIconFont },
     setup() {
       const isCollapse = ref(false);
 
@@ -45,7 +45,7 @@ const Template: StoryFn<typeof GMenu> = (args) => {
         <div class="w-full max-w-xs">
           <g-menu :collapse="isCollapse" class="px-4 py-5 bg-white">
             <g-menu-item index="5">
-              <font-awesome-icon class="text-6" :icon="['fal', 'home-lg-alt']" />
+              <g-icon-font class="text-6" name="light house" />
               <template #title>
                 <h4 class="ml-3">Home</h4>
               </template>
@@ -53,7 +53,7 @@ const Template: StoryFn<typeof GMenu> = (args) => {
 
             <g-sub-menu index="1">
               <template #title>
-                <font-awesome-icon :icon="['fal', 'sack']" />
+                <g-icon-font name="regular paper-plane" />
                 <span class="ml-3">Enviar</span>
               </template>
 
@@ -67,7 +67,7 @@ const Template: StoryFn<typeof GMenu> = (args) => {
 
               <g-sub-menu index="1-4">
                 <template #title>
-                  <font-awesome-icon :icon="['fal', 'hand-holding-usd']" />
+                  <g-icon-font name="solid hand-holding-usd" />
                   <span class="ml-3">Envió de algo</span>
                 </template>
                 <g-menu-item index="1-4-1">item one</g-menu-item>
@@ -76,7 +76,7 @@ const Template: StoryFn<typeof GMenu> = (args) => {
 
             <g-sub-menu index="2">
               <template #title>
-                <font-awesome-icon :icon="['fal', 'coins']" />
+                <g-icon-font name="light money-bill-wave" />
                 <span class="ml-3">Navigator Otro</span>
               </template>
               <g-menu-item index="2-1">item one</g-menu-item>
@@ -84,7 +84,7 @@ const Template: StoryFn<typeof GMenu> = (args) => {
             </g-sub-menu>
 
             <g-menu-item index="4" disabled>
-              <font-awesome-icon :icon="['fal', 'receipt']" />
+              <g-icon-font name="regular receipt" />
               <template #title>
                 <span class="ml-3">Movimientos</span>
               </template>
