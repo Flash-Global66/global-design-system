@@ -1,0 +1,124 @@
+@use "sass:map";
+
+@use "element-plus/theme-chalk/src/input-tag.scss" as *;
+@use "@flash-global66/g-tag/src/tag.styles.scss" as *;
+@use "@flash-global66/g-tooltip/styles.scss" as *;
+@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "element-plus/theme-chalk/src/mixins/utils" as *;
+@use "element-plus/theme-chalk/src/mixins/var" as *;
+@use "element-plus/theme-chalk/src/common/var" as *;
+
+@include b("input-tag") {
+  @apply relative flex items-center bg-white py-sm px-xs border border-disabled-bd rounded-md min-h-12 gap-xs shadow-none text-primary-txt font-medium text-4 transition-all duration-200 ease-in;
+  box-shadow: none !important;
+  border-width: 1px;
+
+  @include when(focused) {
+    @apply border-everBlue-500;
+    box-shadow: none !important;
+  }
+
+  @include when(complete) {
+    @apply border-secondary-bd;
+    box-shadow: none !important;
+  }
+
+  @include when(disabled) {
+    @apply bg-primary-def-disabled border-grey-400 text-disabled-txt cursor-not-allowed shadow-none;
+    box-shadow: none !important;
+    pointer-events: none;
+
+    .#{$namespace}-tag {
+      @apply cursor-not-allowed;
+    }
+  }
+
+  @include e("wrapper") {
+    @apply w-full;
+  }
+
+  @include e("inner") {
+    @apply flex flex-wrap items-center gap-xs w-full;
+    min-height: 1.5rem;
+
+    @include when(left-space) {
+      @apply pl-xxs;
+    }
+
+    @include when(right-space) {
+      @apply pr-xxs;
+    }
+
+    @include when(draggable) {
+      .#{$namespace}-input-tag__tag-wrapper {
+        @apply cursor-move;
+      }
+    }
+  }
+
+  @include e("tag-wrapper") {
+    @apply inline-flex max-w-full;
+  }
+
+  @include e("input-wrapper") {
+    @apply flex-1 min-w-[80px];
+  }
+
+  @include e("input") {
+    @apply w-full bg-transparent border-0 outline-none text-primary-txt text-4 font-medium p-0 caret-everBlue-500;
+    appearance: none;
+
+    &::placeholder {
+      @apply text-terciary-txt transition-all duration-200 ease-in;
+    }
+  }
+
+  @include e("input-calculator") {
+    @apply absolute left-0 top-0 max-w-full invisible whitespace-pre overflow-hidden;
+  }
+
+  @include e("prefix") {
+    @apply inline-flex items-center flex-shrink-0 pr-2 text-terciary-txt;
+  }
+
+  @include e("suffix") {
+    @apply inline-flex items-center flex-shrink-0 pl-2 gap-xxs text-terciary-txt;
+  }
+
+  @include e("icon") {
+    @apply text-6 text-grey-500 cursor-pointer select-none w-5 transition-colors duration-200;
+  }
+
+  @include e("clear") {
+    &:hover {
+      @apply text-secondary-txt;
+    }
+  }
+
+  @include e("drop-indicator") {
+    @apply absolute w-px bg-everBlue-500;
+    top: 0;
+    height: 1.25rem;
+  }
+
+  @include e("collapse-tag") {
+    @apply inline-flex max-w-full;
+  }
+
+  @include e("input-tag-list") {
+    @apply flex flex-col gap-xs;
+    max-width: 16rem;
+  }
+
+  @include m(small) {
+    @apply min-h-10 text-3 px-xs py-xs;
+
+    @include e("input") {
+      @apply text-3;
+    }
+  }
+
+  @include m(large) {
+    @apply min-h-12 text-4 px-xs py-sm;
+  }
+}
