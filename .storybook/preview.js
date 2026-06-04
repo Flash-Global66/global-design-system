@@ -1,16 +1,8 @@
 import * as jest from "jest-mock";
 window.jest = jest;
-import { setup } from '@storybook/vue3';
 
 import '../assets/scss/index.scss';
 import '../stories/assets/styles/tailwind.css';
-
-import { vueFontawesome } from '../libs/vue-fontawesome/index';
-
-// Configurar la aplicación de Vue dentro de la función setup
-setup((app) => {
-  vueFontawesome(app);
-});
 
 export const parameters = {
   controls: {

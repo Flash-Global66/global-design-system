@@ -3,6 +3,8 @@ export default { name: 'GButtonCard' }
 </script>
 
 <script lang='ts' setup>
+import type { PropType } from 'vue'
+import { GIconFont, type IconString } from '@flash-global66/g-icon-font'
 
 defineProps({
   title: {
@@ -18,8 +20,8 @@ defineProps({
     default: '',
   },
   icon: {
-    type: Array,
-    default: () => [''],
+    type: String as PropType<IconString>,
+    default: '',
   },
   disabled: {
     type: Boolean,
@@ -55,7 +57,7 @@ function onClick (event: Event) {
     >
       <slot name="image">
         <div :class="{ 'w-20 h-20 bg-gray-9 rounded-full flex justify-center items-center': iconRounded }">
-          <fa-icon class="text-blue-1 text-12 duration-200 group-hover:text-gray-3" :icon="icon" />
+          <GIconFont v-if="icon" class="text-blue-1 text-12 duration-200 group-hover:text-gray-3" :name="icon" />
         </div>
       </slot>
   
