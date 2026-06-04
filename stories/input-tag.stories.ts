@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { action } from '@storybook/addon-actions'
 
 import { GInputTag, InputTagInstance } from '@flash-global66/g-input-tag/index.ts'
 import '@flash-global66/g-input-tag/styles.scss'
 import { GConfigProvider } from '../components/config-provider'
 import { GForm, GFormItem, FormInstance } from '@flash-global66/g-form/index.ts'
+import { GButton } from '@flash-global66/g-button/index.ts'
 
 import { version, peerDependencies } from '@flash-global66/g-input-tag/package.json'
 import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories'
@@ -428,10 +429,10 @@ export const FormValidation: Story = {
     }
   },
   render: () => ({
-    components: { GInputTag, GConfigProvider, GForm, GFormItem },
+    components: { GInputTag, GConfigProvider, GForm, GFormItem, GButton },
     setup() {
       const formRef = ref<FormInstance>()
-      const model = ref<Record<string, string[]>>({ tags: ['vue'] })
+      const model = reactive<Record<string, string[]>>({ tags: ['vue'] })
       const submit = async () => {
         const valid = await formRef.value?.validate().catch(() => false)
         action('submit')(valid ? 'valid' : 'invalid')
@@ -444,6 +445,7 @@ export const FormValidation: Story = {
           <g-form-item
             label="Tags"
             prop="tags"
+            show-message="parent"
             :rules="[
               { required: true, message: 'Agrega al menos un tag', trigger: 'change' },
               {
@@ -458,7 +460,13 @@ export const FormValidation: Story = {
             <g-input-tag v-model="model.tags" placeholder="Mínimo 2 tags" />
           </g-form-item>
         </g-form>
-        <button type="button" @click="submit" style="margin-top: 12px;">Validar formulario</button>
+        <g-button
+          type-native="button"
+          variant="primary"
+          title="Validar formulario"
+          style="margin-top: 12px;"
+          @click="submit"
+        />
       </g-config-provider>
     `
   })
