@@ -654,6 +654,8 @@ __metadata:
 "@flash-global66/g-button-card@workspace:components/button-card":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-button-card@workspace:components/button-card"
+  peerDependencies:
+    "@flash-global66/g-icon-font": ^0.25.1
   languageName: unknown
   linkType: soft
 
