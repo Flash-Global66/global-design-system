@@ -20,6 +20,13 @@ import type { PopperEffect } from 'element-plus/es/components/popper'
 
 export const inputTagProps = buildProps({
   /**
+   * @description help text for input tag
+   */
+  helpText: {
+    type: String,
+    default: undefined,
+  },
+  /**
    * @description binding value (array of string tags)
    */
   modelValue: {

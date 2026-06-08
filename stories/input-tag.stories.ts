@@ -4,6 +4,8 @@ import { action } from '@storybook/addon-actions'
 
 import { GInputTag, InputTagInstance } from '@flash-global66/g-input-tag/index.ts'
 import '@flash-global66/g-input-tag/styles.scss'
+import { GInput } from '@flash-global66/g-input/index.ts'
+import '@flash-global66/g-input/styles.scss'
 import { GConfigProvider } from '../components/config-provider'
 import { GForm, GFormItem, FormInstance } from '@flash-global66/g-form/index.ts'
 import { GButton } from '@flash-global66/g-button/index.ts'
@@ -145,6 +147,11 @@ const onRemove = (value) => console.log('eliminado', value);
       description: 'Icono de clear (IconString, p. ej. "regular circle-xmark")',
       table: { category: 'Apariencia' }
     },
+    helpText: {
+      control: 'text',
+      description: 'Texto de ayuda mostrado debajo del input tag',
+      table: { category: 'Contenido' }
+    },
     disabled: {
       control: 'boolean',
       description: 'Deshabilita el input y la gestión de tags',
@@ -228,7 +235,8 @@ const onRemove = (value) => console.log('eliminado', value);
     collapseTags: false,
     collapseTagsTooltip: false,
     maxCollapseTags: 1,
-    saveOnBlur: true
+    saveOnBlur: true,
+    helpText: 'Escribe un tag y presiona Enter'
   }
 }
 
@@ -432,7 +440,7 @@ export const FormValidation: Story = {
     components: { GInputTag, GConfigProvider, GForm, GFormItem, GButton },
     setup() {
       const formRef = ref<FormInstance>()
-      const model = reactive<Record<string, string[]>>({ tags: ['vue'] })
+      const model = reactive<Record<string, string[]>>({ tags: [] })
       const submit = async () => {
         const valid = await formRef.value?.validate().catch(() => false)
         action('submit')(valid ? 'valid' : 'invalid')
@@ -445,19 +453,17 @@ export const FormValidation: Story = {
           <g-form-item
             label="Tags"
             prop="tags"
-            show-message="parent"
+            show-message="child"
             :rules="[
-              { required: true, message: 'Agrega al menos un tag', trigger: 'change' },
-              {
-                validator: (_rule, value, cb) =>
-                  Array.isArray(value) && value.length >= 2
-                    ? cb()
-                    : cb(new Error('Necesitas al menos 2 tags')),
-                trigger: 'change'
-              }
+              { type: 'array', required: true, message: 'Agrega al menos un tag', trigger: 'change' },
+              { type: 'array', min: 2, message: 'Necesitas al menos 2 tags', trigger: 'change' }
             ]"
           >
-            <g-input-tag v-model="model.tags" placeholder="Mínimo 2 tags" />
+            <g-input-tag
+              v-model="model.tags"
+              placeholder="Mínimo 2 tags"
+              help-text="Agrega al menos dos tecnologías"
+            />
           </g-form-item>
         </g-form>
         <g-button
@@ -467,6 +473,73 @@ export const FormValidation: Story = {
           style="margin-top: 12px;"
           @click="submit"
         />
+      </g-config-provider>
+    `
+  })
+}
+
+export const ParentFormRules: Story = {
+  name: 'Reglas desde GForm padre',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Ejemplo comparativo con `GInput` y `GInputTag` usando reglas definidas en el `GForm` padre. `GInputTag` requiere reglas de tipo `array` para validar correctamente tags vacíos o incompletos.'
+      }
+    }
+  },
+  render: () => ({
+    components: { GInputTag, GInput, GConfigProvider, GForm, GFormItem, GButton },
+    setup() {
+      const formRef = ref<FormInstance>()
+      const model = reactive({
+        name: '',
+        tags: [] as string[]
+      })
+      const rules = {
+        name: [
+          { required: true, message: 'Ingresa un nombre', trigger: 'change' },
+          { min: 3, message: 'El nombre debe tener al menos 3 caracteres', trigger: 'change' }
+        ],
+        tags: [
+          { type: 'array', required: true, message: 'Agrega al menos un tag', trigger: 'change' },
+          { type: 'array', min: 2, message: 'Necesitas al menos 2 tags', trigger: 'change' }
+        ]
+      }
+      const submit = async () => {
+        const valid = await formRef.value?.validate().catch(() => false)
+        action('parent-rules-submit')(valid ? 'valid' : 'invalid')
+      }
+      return { formRef, model, rules, submit }
+    },
+    template: `
+      <g-config-provider>
+        <g-form ref="formRef" :model="model" :rules="rules" class="flex flex-col gap-4">
+          <g-form-item prop="name" show-message="child">
+            <g-input
+              v-model="model.name"
+              label="Nombre"
+              placeholder="Ingresa un nombre"
+              help-text="Mínimo 3 caracteres"
+            />
+          </g-form-item>
+
+          <g-form-item prop="tags" show-message="child">
+            <g-input-tag
+              v-model="model.tags"
+              placeholder="Agrega tecnologías"
+              help-text="Agrega al menos dos tags"
+            />
+          </g-form-item>
+        </g-form>
+        <g-button
+          type-native="button"
+          variant="primary"
+          title="Validar formulario"
+          style="margin-top: 12px;"
+          @click="submit"
+        />
+        <pre style="margin-top: 12px; font-size: 12px;">{{ model }}</pre>
       </g-config-provider>
     `
   })

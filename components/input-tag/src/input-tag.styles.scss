@@ -13,6 +13,10 @@
   box-shadow: none !important;
   border-width: 1px;
 
+  @include e("container") {
+    @apply flex flex-col gap-xxs;
+  }
+
   @include when(focused) {
     @apply border-everBlue-500;
     box-shadow: none !important;
@@ -31,6 +35,23 @@
     .#{$namespace}-tag {
       @apply cursor-not-allowed;
     }
+  }
+
+  @include when(error) {
+    @apply border-error-bd;
+  }
+
+  @include e("help") {
+    @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
+    min-height: 18px;
+  }
+
+  @include e("help-text") {
+    @apply line-clamp-2;
+  }
+
+  @include e("help-error") {
+    @apply text-error-txt;
   }
 
   @include e("wrapper") {
