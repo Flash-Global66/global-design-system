@@ -36,7 +36,6 @@ export function useInputTagDom({
     ns.is('hovering', hovering.value),
     ns.is('disabled', disabled.value),
     ns.m(size.value),
-    ns.e('wrapper'),
     attrs.class,
   ])
   const containerStyle = computed<StyleValue>(() => [
