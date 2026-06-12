@@ -4,11 +4,13 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
-const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const ICON_SETS_PATH = join(ROOT, 'src/icon-sets.ts');
 const LIB_DIR = join(ROOT, 'src/lib');
+// FA source packages live in the gitignored .fa-vendor dir (see ensure-fa.mjs),
+// not in the workspace — CI must never depend on npm.fontawesome.com.
+const require = createRequire(join(ROOT, '.fa-vendor', 'package.json'));
 
 const CATEGORY_MAP = {
   solid:   { pkg: '@fortawesome/pro-solid-svg-icons',   prefix: 'fas', file: 'fas-solid-pro.ts',   accessor: (m) => m },
@@ -67,7 +69,14 @@ function serializeIcon(catalogName, exportName, faIcon, isCustomKit) {
 }
 
 async function extractCategory(category, { pkg, prefix, file, accessor }, catalog) {
-  const mod = require(pkg);
+  let mod;
+  try {
+    mod = require(pkg);
+  } catch {
+    throw new Error(
+      `Cannot resolve "${pkg}" in .fa-vendor. Run \`node scripts/ensure-fa.mjs\` first (requires FONT_AWESOME_TOKEN).`,
+    );
+  }
   const lookup = accessor(mod);
   const isCustomKit = category === 'kit';
   const lines = [

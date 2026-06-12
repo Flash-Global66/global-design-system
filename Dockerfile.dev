@@ -15,11 +15,9 @@ WORKDIR /app
 
 # Variables de entorno para registros privados
 ARG GBP_PACKAGE_TOKEN
-ARG FONT_AWESOME_TOKEN
 
 # Convierte los ARGs en ENV para que Yarn las use durante el build
 ENV GBP_PACKAGE_TOKEN=$GBP_PACKAGE_TOKEN
-ENV FONT_AWESOME_TOKEN=$FONT_AWESOME_TOKEN
 
 # Copiar archivos de configuración
 COPY .yarnrc.yml package.json lerna.json tsconfig.json vite.config.base.ts ./
