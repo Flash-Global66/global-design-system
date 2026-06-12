@@ -29,7 +29,6 @@ jobs:
       - name: Build and push Docker image
         env:
           GBP_PACKAGE_TOKEN: ${{ secrets.GBP_PACKAGE_TOKEN }}
-          FONT_AWESOME_TOKEN: ${{ secrets.FONT_AWESOME_TOKEN }}
           REPO_NAME: ${{ github.event.repository.name }}
           OWNER_NAME: ${{ github.repository_owner }}
         run: |
@@ -38,7 +37,6 @@ jobs:
           docker build \
             -f Dockerfile.prod \
             --build-arg GBP_PACKAGE_TOKEN=$GBP_PACKAGE_TOKEN \
-            --build-arg FONT_AWESOME_TOKEN=$FONT_AWESOME_TOKEN \
             -t ghcr.io/$owner/$repo_name:develop .
           
           docker push ghcr.io/$owner/$repo_name:develop

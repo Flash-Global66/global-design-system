@@ -21,7 +21,6 @@ jobs:
       packages: write
     env:
       GBP_PACKAGE_TOKEN: ${{ secrets.GBP_PACKAGE_TOKEN }}
-      FONT_AWESOME_TOKEN: ${{ secrets.FONT_AWESOME_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -42,12 +41,8 @@ jobs:
 
       - name: Verify environment variables
         run: |
-          if [ -z "$GBP_PACKAGE_TOKEN" ]; then 
+          if [ -z "$GBP_PACKAGE_TOKEN" ]; then
             echo "::error::GBP_PACKAGE_TOKEN no está configurado"
-            exit 1
-          fi
-          if [ -z "$FONT_AWESOME_TOKEN" ]; then 
-            echo "::error::FONT_AWESOME_TOKEN no está configurado"
             exit 1
           fi
           echo "✅ Variables de entorno configuradas correctamente"
@@ -133,8 +128,6 @@ jobs:
         run: |
           echo "//npm.pkg.github.com/:_authToken=${GBP_PACKAGE_TOKEN}" > .npmrc
           echo "@flash-global66:registry=https://npm.pkg.github.com/" >> .npmrc
-          echo "//npm.fontawesome.com/:_authToken=${FONT_AWESOME_TOKEN}" >> .npmrc
-          echo "@fortawesome:registry=https://npm.fontawesome.com/" >> .npmrc
 
       - name: Publish packages with Lerna
         if: matrix.task == 'publish' && steps.version.outputs.no_changes != 'true'

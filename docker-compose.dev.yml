@@ -5,7 +5,6 @@ services:
       dockerfile: Dockerfile.dev
       args:
         GBP_PACKAGE_TOKEN: ${GBP_PACKAGE_TOKEN}
-        FONT_AWESOME_TOKEN: ${FONT_AWESOME_TOKEN}
     container_name: design-system-dev
     ports:
       - "6006:6006"

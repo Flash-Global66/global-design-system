@@ -19,7 +19,6 @@ WORKDIR /app
 
 # Variables de entorno (usadas en build-time)
 ARG GBP_PACKAGE_TOKEN
-ARG FONT_AWESOME_TOKEN
 
 # Configurar entorno
 ENV STORYBOOK_DISABLE_TELEMETRY=true
