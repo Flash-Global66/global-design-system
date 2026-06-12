@@ -192,7 +192,12 @@ El componente Quote permite al usuario ingresar montos y seleccionar monedas par
 - Estado de saldo disponible
 - Mensaje de error personalizable
 - Modo de entrada única (singleInput) para transferencias nacionales
-- Estado deshabilitado
+- Estado deshabilitado general y granular:
+  - isDisabled: desactiva toda interacción del cotizador
+  - disableOriginInput: desactiva el input de origen
+  - disableDestinationInput: desactiva el input de destino
+  - disableOriginSelect: desactiva el select de origen
+  - disableDestinationSelect: desactiva el select de destino
 
 ### Instalación
 
@@ -261,6 +266,26 @@ interface Currency {
       },
     },
     isDisabled: {
+      description: 'Deshabilita toda la interacción',
+      control: { type: 'boolean' },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    disableOriginSelect: {
+      description: 'Deshabilita toda la interacción',
+      control: { type: 'boolean' },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    disableOriginInput: {
+      description: 'Deshabilita toda la interacción',
+      control: { type: 'boolean' },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    disableDestinationSelect: {
+      description: 'Deshabilita toda la interacción',
+      control: { type: 'boolean' },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    disableDestinationInput: {
       description: 'Deshabilita toda la interacción',
       control: { type: 'boolean' },
       table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
