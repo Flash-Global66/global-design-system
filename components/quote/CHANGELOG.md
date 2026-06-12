@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.2.0...@flash-global66/g-quote@0.3.0) (2026-06-12)
+
+
+### Features
+
+* **quoter:** disable any select or input individually ([282327a](https://github.com/Flash-Global66/global-design-system/commit/282327a3c56130776b756b256972971c774f729d))
+
+
+
+
+
 # [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.1.0...@flash-global66/g-quote@0.2.0) (2026-04-15)
 
 
