@@ -6,7 +6,7 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/typescript/recommended',
-    'prettier', // eslint-config-prettier — desactiva reglas de ESLint que conflictúan con Prettier
+    'prettier',
   ],
   parserOptions: {
     ecmaVersion: 2020,
@@ -15,5 +15,9 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    // Los componentes del DS son intencionalmente single-word (Button, Input, Select…)
+    'vue/multi-word-component-names': 'off',
+    // Los utils internos de librería usan `any` para manipulación genérica de tipos
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 }

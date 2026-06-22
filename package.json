@@ -43,7 +43,11 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.{vue,ts,js,jsx,tsx,scss,md,json,yaml,yml}": [
+    "*.{vue,ts,js,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{scss,md,json,yaml,yml}": [
       "prettier --write"
     ]
   },
@@ -76,9 +80,11 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "5.2.4",
+    "@vue/eslint-config-typescript": "^13",
     "babel-loader": "8.4.1",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-vue": "9",
     "jest-mock": "28.1.3",
     "jsdom": "^29.1.1",
     "lerna": "8.2.4",
