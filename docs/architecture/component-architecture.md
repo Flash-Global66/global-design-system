@@ -141,7 +141,7 @@ export type ButtonInstance = InstanceType<typeof Button>;
 {
   "name": "@flash-global66/g-<name>",
   "buildable": true,
-  "sideEffects": ["**/*.css", "**/*.scss", "dist/index.css"],
+  "sideEffects": ["**/*.scss"],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/types/index.d.ts",
