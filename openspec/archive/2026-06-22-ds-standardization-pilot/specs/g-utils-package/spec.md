@@ -12,16 +12,16 @@ Defines the requirements for the `@flash-global66/g-utils` package: a self-owned
 
 The package MUST export the following TypeScript symbols, each with behavior equivalent to their element-plus counterparts, resolvable via the package's main entry point:
 
-| Symbol | Kind |
-|--------|------|
-| `buildProps<T>(props: T): T` | function |
-| `definePropType<T>(val: any): PropType<T>` | function |
-| `withInstall<T, E>(main: T, extra?: E): SFCWithInstall<T> & E` | function |
-| `withNoopInstall<T>(comp: T): SFCWithInstall<T>` | function |
-| `SFCWithInstall<T>` | type alias (`T & Plugin`) |
-| `isBoolean(v: unknown): v is boolean` | type guard |
-| `isString(v: unknown): v is string` | type guard |
-| `debugWarn(scope: string, message: string): void` | function |
+| Symbol                                                         | Kind                      |
+| -------------------------------------------------------------- | ------------------------- |
+| `buildProps<T>(props: T): T`                                   | function                  |
+| `definePropType<T>(val: any): PropType<T>`                     | function                  |
+| `withInstall<T, E>(main: T, extra?: E): SFCWithInstall<T> & E` | function                  |
+| `withNoopInstall<T>(comp: T): SFCWithInstall<T>`               | function                  |
+| `SFCWithInstall<T>`                                            | type alias (`T & Plugin`) |
+| `isBoolean(v: unknown): v is boolean`                          | type guard                |
+| `isString(v: unknown): v is string`                            | type guard                |
+| `debugWarn(scope: string, message: string): void`              | function                  |
 
 #### Scenario: Consumer imports TS utilities via package name
 
@@ -48,16 +48,16 @@ The package MUST export the following TypeScript symbols, each with behavior equ
 
 The package MUST export `useNamespace(block: string, namespaceRef?: Ref<string>): NamespaceHelpers` that produces BEM class names using namespace `'gui'` by default. The generated class names MUST be identical to those produced by `element-plus`'s `useNamespace` called with the same arguments and namespace `'gui'`.
 
-| Helper method | Example output (block=`button`, ns=`gui`) |
-|---------------|-------------------------------------------|
-| `.b()` | `gui-button` |
-| `.e('content')` | `gui-button__content` |
-| `.m('variant-primary')` | `gui-button--variant-primary` |
-| `.m('sm')` | `gui-button--sm` |
-| `.is('disabled', true)` | `is-disabled` |
-| `.is('loading', true)` | `is-loading` |
-| `.is('href', true)` | `is-href` |
-| `.is('full', true)` | `is-full` |
+| Helper method           | Example output (block=`button`, ns=`gui`) |
+| ----------------------- | ----------------------------------------- |
+| `.b()`                  | `gui-button`                              |
+| `.e('content')`         | `gui-button__content`                     |
+| `.m('variant-primary')` | `gui-button--variant-primary`             |
+| `.m('sm')`              | `gui-button--sm`                          |
+| `.is('disabled', true)` | `is-disabled`                             |
+| `.is('loading', true)`  | `is-loading`                              |
+| `.is('href', true)`     | `is-href`                                 |
+| `.is('full', true)`     | `is-full`                                 |
 
 #### Scenario: Block class generation
 
@@ -77,7 +77,7 @@ The package MUST export `useNamespace(block: string, namespaceRef?: Ref<string>)
 - WHEN `.m('variant-primary')` is invoked
 - THEN the returned string is exactly `'gui-button--variant-primary'`
 
-#### Scenario: State class generation (is-* classes)
+#### Scenario: State class generation (is-\* classes)
 
 - GIVEN `useNamespace('button', ref('gui'))` is called
 - WHEN `.is('disabled', true)` is invoked
@@ -96,12 +96,12 @@ The package MUST export `useNamespace(block: string, namespaceRef?: Ref<string>)
 
 The package MUST expose SCSS mixins resolvable via `@use '@flash-global66/g-utils/mixins' as *`. The four mixins MUST produce CSS output IDENTICAL to `element-plus/theme-chalk/src/mixins/mixins`.
 
-| Mixin signature | Generated CSS selector |
-|-----------------|------------------------|
-| `b($block)` | `.gui-#{$block} { ... }` |
-| `e($el)` | `&__#{$el} { ... }` |
-| `m($mod)` | `&--#{$mod} { ... }` |
-| `when($state)` | `&.is-#{$state} { ... }` |
+| Mixin signature | Generated CSS selector   |
+| --------------- | ------------------------ |
+| `b($block)`     | `.gui-#{$block} { ... }` |
+| `e($el)`        | `&__#{$el} { ... }`      |
+| `m($mod)`       | `&--#{$mod} { ... }`     |
+| `when($state)`  | `&.is-#{$state} { ... }` |
 
 #### Scenario: b() mixin produces root block selector
 

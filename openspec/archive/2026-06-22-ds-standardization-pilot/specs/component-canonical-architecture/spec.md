@@ -104,22 +104,22 @@ The public API of `@flash-global66/g-button` MUST remain byte-compatible with it
 
 **Props that MUST remain (no additions, no removals, no type changes):**
 
-| Prop | Type | Default |
-|------|------|---------|
-| `typeNative` | `'button' \| 'submit' \| 'reset'` | `'button'` |
-| `disabled` | `boolean` | `false` |
-| `full` | `boolean` | `false` |
-| `autofocus` | `boolean` | `false` |
-| `href` | `string \| undefined` | `undefined` |
-| `target` | `string \| undefined` | `undefined` |
-| `download` | `string \| undefined` | `undefined` |
-| `variant` | `'primary' \| 'secondary' \| 'tertiary'` | `'primary'` |
-| `size` | `'sm' \| 'md'` | `'md'` |
-| `loading` | `boolean` | `false` |
-| `title` | `string` | `''` |
-| `iconLeft` | `IconString` | `''` |
-| `iconRight` | `IconString` | `''` |
-| `ariaLabel` | `string` | `''` |
+| Prop         | Type                                     | Default     |
+| ------------ | ---------------------------------------- | ----------- |
+| `typeNative` | `'button' \| 'submit' \| 'reset'`        | `'button'`  |
+| `disabled`   | `boolean`                                | `false`     |
+| `full`       | `boolean`                                | `false`     |
+| `autofocus`  | `boolean`                                | `false`     |
+| `href`       | `string \| undefined`                    | `undefined` |
+| `target`     | `string \| undefined`                    | `undefined` |
+| `download`   | `string \| undefined`                    | `undefined` |
+| `variant`    | `'primary' \| 'secondary' \| 'tertiary'` | `'primary'` |
+| `size`       | `'sm' \| 'md'`                           | `'md'`      |
+| `loading`    | `boolean`                                | `false`     |
+| `title`      | `string`                                 | `''`        |
+| `iconLeft`   | `IconString`                             | `''`        |
+| `iconRight`  | `IconString`                             | `''`        |
+| `ariaLabel`  | `string`                                 | `''`        |
 
 **Emits that MUST remain:** `click: (evt: MouseEvent) => boolean`, `mousedown: (evt: MouseEvent) => boolean`.
 
@@ -153,25 +153,25 @@ The CSS classes emitted by the migrated button MUST be byte-for-byte identical t
 
 **Classes that MUST be generated (non-exhaustive, but exemplary):**
 
-| Condition | Expected class |
-|-----------|---------------|
-| Root element | `gui-button` |
-| variant=primary | `gui-button--variant-primary` |
-| variant=secondary | `gui-button--variant-secondary` |
-| variant=tertiary | `gui-button--variant-tertiary` |
-| size=sm | `gui-button--sm` |
-| size=md | `gui-button--md` |
-| disabled=true | `is-disabled` |
-| loading=true | `is-loading` |
-| href set | `is-href` |
-| full=true | `is-full` |
-| element: content div | `gui-button__content` |
-| element: icon left | `gui-button__icon-left` |
-| element: icon right | `gui-button__icon-right` |
-| element: loader | `gui-button__loader` |
-| element: dot | `gui-button__dot` |
-| element: ripple | `gui-button__ripple` |
-| element: title | `gui-button__title` |
+| Condition            | Expected class                  |
+| -------------------- | ------------------------------- |
+| Root element         | `gui-button`                    |
+| variant=primary      | `gui-button--variant-primary`   |
+| variant=secondary    | `gui-button--variant-secondary` |
+| variant=tertiary     | `gui-button--variant-tertiary`  |
+| size=sm              | `gui-button--sm`                |
+| size=md              | `gui-button--md`                |
+| disabled=true        | `is-disabled`                   |
+| loading=true         | `is-loading`                    |
+| href set             | `is-href`                       |
+| full=true            | `is-full`                       |
+| element: content div | `gui-button__content`           |
+| element: icon left   | `gui-button__icon-left`         |
+| element: icon right  | `gui-button__icon-right`        |
+| element: loader      | `gui-button__loader`            |
+| element: dot         | `gui-button__dot`               |
+| element: ripple      | `gui-button__ripple`            |
+| element: title       | `gui-button__title`             |
 
 #### Scenario: Unit test asserts every CSS class exactly
 
@@ -192,14 +192,14 @@ The CSS classes emitted by the migrated button MUST be byte-for-byte identical t
 
 `components/button/package.json` MUST declare the following fields after migration:
 
-| Field | Required value |
-|-------|----------------|
-| `sideEffects` | `["**/*.css", "**/*.scss"]` |
-| `main` | pointing to CJS dist entry |
-| `module` | pointing to ESM dist entry |
-| `types` | pointing to `.d.ts` entry |
-| `exports["./styles.scss"]` | `"./src/styles/button.style.scss"` |
-| `exports["."]` | `{ import, require, types }` sub-map |
+| Field                      | Required value                       |
+| -------------------------- | ------------------------------------ |
+| `sideEffects`              | `["**/*.css", "**/*.scss"]`          |
+| `main`                     | pointing to CJS dist entry           |
+| `module`                   | pointing to ESM dist entry           |
+| `types`                    | pointing to `.d.ts` entry            |
+| `exports["./styles.scss"]` | `"./src/styles/button.style.scss"`   |
+| `exports["."]`             | `{ import, require, types }` sub-map |
 
 #### Scenario: sideEffects prevents tree-shaking of styles
 

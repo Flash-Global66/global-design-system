@@ -11,6 +11,7 @@
 ## Scope
 
 ### In Scope
+
 - Crear `@flash-global66/g-utils` en `common/` (MÍNIMO para button): TS (`buildProps`, `definePropType`, `withInstall`, `withNoopInstall`, `SFCWithInstall`, `isBoolean`, `isString`, `debugWarn`) + helper BEM propio (reemplazo de `useNamespace`) + mixins SCSS `b()/e()/m()/when()` vía package exports.
 - Configurar Vitest único en raíz con `deps.inline: [/@flash-global66\/.*/]`, util `withSetup` para composables, script `test` en `package.json` raíz.
 - Migrar `components/button` a estructura canónica modular (`src/{Button.vue, composables/, types/, constants/, props/, styles/}` + `tests/` espejando `src/`).
@@ -18,6 +19,7 @@
 - Fixes de packaging en `components/button/package.json`: `sideEffects` (`["**/*.css","**/*.scss"]`), `main`/`module`/`types`, mantener `exports` backward-compat.
 
 ### Out of Scope
+
 - **Cambio 2** (`g-utils-g-hooks-complete`): utils/hooks completos (`useZIndex`, `useId`, `useLocale`, `addUnit`, `ensureArray`, `useNamespace` reactivo) + migrar `g-form` (saca EP transitivo) + 3-5 componentes.
 - **Cambio 3** (`g-tokens-foundations`): paquete `g-tokens` + foundations Figma (BLOQUEADO por rate limit del seat; desbloquear con export Tokens Studio JSON) + theming por provider + reordenar Storybook estilo Strapi.
 - **Cambio 4** (`mass-component-migration`): resto de componentes.
@@ -28,16 +30,19 @@
 ## Capabilities
 
 ### New Capabilities
+
 - `g-utils-package`: paquete propio que exporta utilidades TS + mixins SCSS BEM, reemplazando element-plus para button.
 - `component-canonical-architecture`: estructura modular de componente publicable (template puro + composables + props + types + constants + styles + tests).
 - `monorepo-testing`: Vitest único en raíz con resolución de paquetes internos y util `withSetup`.
 
 ### Modified Capabilities
+
 - None (no hay specs previos; el contrato de comportamiento público de button NO cambia).
 
 ## Approach
 
 **g-utils — API TS (firmas esperadas):**
+
 - `buildProps<T>(props: T): T` — normaliza definiciones de props.
 - `definePropType<T>(val: any): PropType<T>`.
 - `withInstall<T, E>(main: T, extra?: E): SFCWithInstall<T> & E` — añade `.install`.
@@ -48,6 +53,7 @@
 - BEM helper (reemplazo de `useNamespace`): `useNamespace(block, namespaceRef?)` que produzca EXACTAMENTE `gui-button`, `gui-button--{mod}`, `gui-button__{el}`, `is-{state}` (namespace `gui`).
 
 **g-utils — mixins SCSS (`@use '@flash-global66/g-utils/mixins' as *`):**
+
 - `b($block)` → `.gui-#{block}` · `e($el)` → `&__#{el}` · `m($mod)` → `&--#{mod}` · `when($state)` → `&.is-#{state}`. Output CSS IDÉNTICO a `element-plus/theme-chalk`.
 
 **Vitest**: config raíz, `environment: jsdom`, `deps.inline` para `@flash-global66/*`, `withSetup` para montar composables (patrón front-b2b `config-vitest.md` + `withSetup.md`).
@@ -57,6 +63,7 @@
 ## Backward-Compatibility Contract (CRÍTICO)
 
 `front-b2b` usa `@flash-global66/g-button` en producción. DEBEN permanecer idénticos:
+
 - **Clases CSS**: `gui-button`, `gui-button--{variant}`, `gui-button--{size}`, `gui-button__content`, `gui-button__icon-left`, `is-disabled`, `is-loading`, etc. (namespace `gui`, hoy `useNamespace('button', ref('gui'))`).
 - **API pública**: props, emits, slots y export `GButton` SIN cambios.
 - **Export SCSS**: la clave pública sigue siendo `"./styles.scss"` aunque el archivo interno se renombre → `exports["./styles.scss"] = "./src/styles/button.style.scss"`.
@@ -64,24 +71,24 @@
 
 ## Affected Areas
 
-| Area | Impact | Description |
-|------|--------|-------------|
-| `common/g-utils/` | New | Paquete `@flash-global66/g-utils` (TS + mixins SCSS) |
-| `vitest.config.*` + raíz `package.json` | New/Modified | Config Vitest única + script `test` + `withSetup` |
-| `components/button/src/` | Modified | Reestructura a layout canónico modular |
-| `components/button/tests/` | New | 4 specs (useButton, useRipple, props, Button render) |
-| `components/button/package.json` | Modified | `sideEffects`, `main/module/types`, exports backward-compat |
+| Area                                    | Impact       | Description                                                 |
+| --------------------------------------- | ------------ | ----------------------------------------------------------- |
+| `common/g-utils/`                       | New          | Paquete `@flash-global66/g-utils` (TS + mixins SCSS)        |
+| `vitest.config.*` + raíz `package.json` | New/Modified | Config Vitest única + script `test` + `withSetup`           |
+| `components/button/src/`                | Modified     | Reestructura a layout canónico modular                      |
+| `components/button/tests/`              | New          | 4 specs (useButton, useRipple, props, Button render)        |
+| `components/button/package.json`        | Modified     | `sideEffects`, `main/module/types`, exports backward-compat |
 
 ## Risks
 
-| Risk | Likelihood | Mitigation |
-|------|------------|------------|
-| R2: mixins SCSS propios no producen CSS idéntico a EP | High | Snapshot/diff del CSS buildeado vs actual antes de mergear |
-| R3: BEM helper genera clases distintas a `useNamespace` | Med | Test unitario que asserta cada clase exacta (`gui-button--md`, `is-loading`) |
-| R4: ruptura de backward-compat con front-b2b | High | Criterios de aceptación medibles + verificación de consumo sin cambios |
-| R5: Vitest no resuelve `@flash-global66/*` | Med | `deps.inline: [/@flash-global66\/.*/]` desde el inicio |
-| R1: EP transitivo vía g-form | Med (aceptado) | Documentado como out-of-scope; se resuelve en Cambio 2 |
-| Token GitHub hardcodeado en `.npmrc` | Known | Fuera de scope; tarea de seguridad aparte |
+| Risk                                                    | Likelihood     | Mitigation                                                                   |
+| ------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------- |
+| R2: mixins SCSS propios no producen CSS idéntico a EP   | High           | Snapshot/diff del CSS buildeado vs actual antes de mergear                   |
+| R3: BEM helper genera clases distintas a `useNamespace` | Med            | Test unitario que asserta cada clase exacta (`gui-button--md`, `is-loading`) |
+| R4: ruptura de backward-compat con front-b2b            | High           | Criterios de aceptación medibles + verificación de consumo sin cambios       |
+| R5: Vitest no resuelve `@flash-global66/*`              | Med            | `deps.inline: [/@flash-global66\/.*/]` desde el inicio                       |
+| R1: EP transitivo vía g-form                            | Med (aceptado) | Documentado como out-of-scope; se resuelve en Cambio 2                       |
+| Token GitHub hardcodeado en `.npmrc`                    | Known          | Fuera de scope; tarea de seguridad aparte                                    |
 
 ## Rollback Plan
 

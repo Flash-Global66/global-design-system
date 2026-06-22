@@ -93,12 +93,12 @@ A `withSetup` utility function for testing composables MUST exist at `tests/util
 
 The following four test files MUST exist and MUST pass via `yarn test` after migration:
 
-| File | What it tests |
-|------|--------------|
-| `components/button/tests/useButton.spec.ts` | composable logic: componentId, allAttrs, shouldShowLeftIcon/Right |
-| `components/button/tests/useRipple.spec.ts` | ripple array mutation, removeRipple, animation lifecycle |
-| `components/button/tests/button.props.spec.ts` | prop validator warnings for invalid variant/size/type values |
-| `components/button/tests/Button.spec.ts` | rendered DOM: correct classes, slot rendering, emit on click |
+| File                                           | What it tests                                                     |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| `components/button/tests/useButton.spec.ts`    | composable logic: componentId, allAttrs, shouldShowLeftIcon/Right |
+| `components/button/tests/useRipple.spec.ts`    | ripple array mutation, removeRipple, animation lifecycle          |
+| `components/button/tests/button.props.spec.ts` | prop validator warnings for invalid variant/size/type values      |
+| `components/button/tests/Button.spec.ts`       | rendered DOM: correct classes, slot rendering, emit on click      |
 
 #### Scenario: All 4 specs pass with yarn test
 

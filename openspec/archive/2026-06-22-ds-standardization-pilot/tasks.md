@@ -2,14 +2,14 @@
 
 ## Review Workload Forecast
 
-| Field | Value |
-|-------|-------|
-| Estimated changed lines | 900–1 200 (additions + deletions) |
-| 400-line budget risk | High |
-| Chained PRs recommended | Yes |
-| Suggested split | PR 1 (g-utils + Vitest) → PR 2 (button migration + tests) → PR 3 (docs + skills) |
-| Delivery strategy | ask-on-risk |
-| Chain strategy | stacked-to-main |
+| Field                   | Value                                                                            |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| Estimated changed lines | 900–1 200 (additions + deletions)                                                |
+| 400-line budget risk    | High                                                                             |
+| Chained PRs recommended | Yes                                                                              |
+| Suggested split         | PR 1 (g-utils + Vitest) → PR 2 (button migration + tests) → PR 3 (docs + skills) |
+| Delivery strategy       | ask-on-risk                                                                      |
+| Chain strategy          | stacked-to-main                                                                  |
 
 Decision needed before apply: Yes
 Chained PRs recommended: Yes
@@ -18,11 +18,11 @@ Chain strategy: stacked-to-main
 
 ### Suggested Work Units
 
-| Unit | Goal | Likely PR | Notes |
-|------|------|-----------|-------|
-| WU-1 | g-utils package + Vitest root setup | PR 1 → main | Foundation; all later units depend on it |
-| WU-2 | Button migration to canonical structure | PR 2 → main | Depends on WU-1 (g-utils consumable) |
-| WU-3 | Docs evolution + AI skills | PR 3 → main | Depends on WU-2 (button as reference example) |
+| Unit | Goal                                    | Likely PR   | Notes                                         |
+| ---- | --------------------------------------- | ----------- | --------------------------------------------- |
+| WU-1 | g-utils package + Vitest root setup     | PR 1 → main | Foundation; all later units depend on it      |
+| WU-2 | Button migration to canonical structure | PR 2 → main | Depends on WU-1 (g-utils consumable)          |
+| WU-3 | Docs evolution + AI skills              | PR 3 → main | Depends on WU-2 (button as reference example) |
 
 ---
 
@@ -31,14 +31,14 @@ Chain strategy: stacked-to-main
 - [x] 1.1 Create `common/g-utils/` directory; add `package.json` with `name: "@flash-global66/g-utils"`, `buildable: false`, `exports: { ".": "./index.ts", "./mixins": "./styles/mixins.scss", "./config": "./styles/config.scss" }`, `peerDependencies: { "vue": "^3.2.0" }`. Done: bundler resolves both TS and SCSS entries.
 - [x] 1.2 Create `common/g-utils/styles/config.scss` — mirrors `element-plus/theme-chalk/src/mixins/config.scss`: `$namespace: 'el' !default`, `$element-separator: '__' !default`, `$modifier-separator: '--' !default`, `$state-prefix: 'is-' !default`. Done: `@forward 'config' with ($namespace: 'gui')` is possible.
 - [x] 1.3 Create `common/g-utils/styles/function.scss` — copy `hitAllSpecialNestRule` and `bem` Sass functions from element-plus source (pure functions, no output). Done: functions importable by `mixins.scss`.
-- [x] 1.4 Create `common/g-utils/styles/mixins.scss` — `@use 'config' as *; @use 'function' as *;` then implement `b($block)`, `e($el)`, `m($mod)`, `when($state)` with `@at-root` logic identical to EP theme-chalk. Done: compiling a minimal test SCSS with `@include b('button') { @include m('md') {} }` produces `.gui-button--md {}` (no el-* anywhere).
+- [x] 1.4 Create `common/g-utils/styles/mixins.scss` — `@use 'config' as *; @use 'function' as *;` then implement `b($block)`, `e($el)`, `m($mod)`, `when($state)` with `@at-root` logic identical to EP theme-chalk. Done: compiling a minimal test SCSS with `@include b('button') { @include m('md') {} }` produces `.gui-button--md {}` (no el-\* anywhere).
 - [x] 1.5 Create `common/g-utils/src/props.ts` — export `buildProps<T>` and `definePropType<T>` (re-export or reimplement from `@element-plus/utils` or inline). Done: `import { buildProps } from '@flash-global66/g-utils'` resolves and types correctly.
 - [x] 1.6 Create `common/g-utils/src/install.ts` — export `withInstall<T,E>`, `withNoopInstall<T>`, `SFCWithInstall<T>` (type alias `T & Plugin`). Implementations may delegate to `@element-plus/utils` internally; public import path is `@flash-global66/g-utils`. Done: `withInstall` attaches `install(app)` method; `SFCWithInstall<T>` type is assignable.
 - [x] 1.7 Create `common/g-utils/src/types.ts` — export `SFCWithInstall<T>` type alias (re-export from `install.ts`). Done: importable as standalone.
 - [x] 1.8 Create `common/g-utils/src/error.ts` — export `debugWarn(scope: string, msg: string): void`. Done: calling `debugWarn('Button','msg')` emits a `console.warn('[Button] msg')`.
 - [x] 1.9 Create `common/g-utils/src/shared.ts` — export `isBoolean(val: unknown): val is boolean` and `isString(val: unknown): val is string`. Done: type guards narrow correctly in TS; `isBoolean(true)` returns `true`.
 - [x] 1.10 Create `common/g-utils/src/use-namespace.ts` — export `useNamespace(block: string, namespaceOverride?: Ref<string>)` returning `{ namespace, b, e, m, is }`. Output must satisfy: `b()→'gui-button'`, `e('icon-left')→'gui-button__icon-left'`, `m('variant-primary')→'gui-button--variant-primary'`, `is('disabled',true)→'is-disabled'`, `is('disabled',false)→''`. Done: all 5 spec scenarios pass.
-- [x] 1.11 Create `common/g-utils/index.ts` — barrel re-exporting all public symbols from src/*.ts (no SCSS here). Done: `import { buildProps, useNamespace, withInstall, isBoolean, debugWarn } from '@flash-global66/g-utils'` resolves in a single import.
+- [x] 1.11 Create `common/g-utils/index.ts` — barrel re-exporting all public symbols from src/\*.ts (no SCSS here). Done: `import { buildProps, useNamespace, withInstall, isBoolean, debugWarn } from '@flash-global66/g-utils'` resolves in a single import.
 - [x] 1.12 Add `common/g-utils` to root `package.json` workspaces array if not auto-discovered (verify `"common/*"` covers it — it does; no change needed). Done: `yarn workspaces list` shows `@flash-global66/g-utils`.
 
 ---
