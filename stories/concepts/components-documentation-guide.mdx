@@ -2,29 +2,47 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Concept/Guide/Components Documentation Guide" />
 
-### Guía para la Documentación de Componentes en B2B UI Framework
+### Guía para la Documentación de Componentes — Global Design System
+
+> **Guía actualizada a Vue 3.5 / Storybook 8.6 / `@flash-global66/g-utils`.**
+> Fuente de verdad detallada: [`docs/storybook/story-documentation.md`](https://github.com/Flash-Global66/global-design-system/blob/main/docs/storybook/story-documentation.md) en el repositorio.
 
 ## Introducción
 
-Esta guía establece los lineamientos para crear una documentación uniforme y completa para los componentes de nuestra biblioteca B2B UI Framework. Una documentación bien estructurada facilita la adopción de los componentes y mejora la experiencia del desarrollador.
+Esta guía establece los lineamientos para crear una documentación uniforme y completa para los componentes del Global Design System. Una documentación bien estructurada facilita la adopción de los componentes y mejora la experiencia del desarrollador.
+
+### Regla de idioma
+
+| Qué | Idioma |
+|---|---|
+| Títulos, descripciones, categorías de argTypes | **Español** |
+| Nombres de props, tipos, interfaces, variables, comentarios de código | **Inglés** |
 
 ### Estructura General
 
 El archivo de documentación debe seguir esta estructura:
 
-* Agregar el title del componente manualmente para evitar errores si se cambia el nombre del archivo.
-* Descripción general del componente
+* Agregar el `title` del componente manualmente para evitar errores si se cambia el nombre del archivo.
+* Descripción general del componente en `parameters.docs.description.component`
 * Características principales
-* Instrucciones de instalación e importación
+* Instrucciones de instalación e importación (usar `@flash-global66/g-<name>`, no rutas internas)
 * Dependencias internas y externas
-* Definición de propiedades (argTypes)
+* Definición de propiedades (`argTypes`) con categorías en español
 * Ejemplos prácticos de uso
-* La documentación debe estar en español (títulos, descripciones, categorías)
-* Si el componente tiene variantes, tamaños, etc. se deben agregar como ejemplos.
-* Los elementos técnicos deben mantenerse en inglés (nombres de propiedades, métodos, types, interfaces, variables)
-* El nombre del archivo debe estar en kebab-case (ej: button-component.stories.ts)
-* El nombre de la sección debe estar en inglés (ej: Basic/Button)
-* Elementos Esenciales
+* Si el componente tiene variantes, tamaños, etc. se deben agregar como stories separadas.
+* El nombre del archivo debe estar en kebab-case (ej: `button.stories.ts`)
+* El `title` sigue el patrón `'Category/ComponentName'` (ej: `'Basic/Button'`)
+
+### Importación de componentes en stories
+
+```ts
+// Correcto — importar desde el entrypoint del paquete
+import { GButton } from '@flash-global66/g-button/index.ts'
+import type { ButtonProps } from '@flash-global66/g-button'
+
+// Incorrecto — nunca desde rutas internas
+import { GButton } from '../components/button/src/Button.vue'  // NO
+```
 
 
 ### Descripción del Componente
@@ -66,16 +84,17 @@ Para más información, consulte la [documentación oficial](https://global66.co
 
 ### 4. Definición de Propiedades (ArgTypes)
 
-Las propiedades deben organizarse en categorías en español:
+Las propiedades deben organizarse en categorías en español usando `table.category`:
 
-- Propiedades principales
+- Principales
 - Estilo y apariencia
 - Comportamiento
+- Navegación (solo para componentes con href/target)
+- Iconos (solo para componentes con soporte de iconos)
 - Eventos
 - Slots
 - Accesibilidad
 - Métodos expuestos
-- Etc.
 
 Cada propiedad debe incluir:
 - Descripción clara
