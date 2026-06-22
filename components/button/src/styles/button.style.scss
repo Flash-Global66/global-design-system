@@ -1,8 +1,6 @@
+@use '@flash-global66/g-utils/config' with ($namespace: 'gui');
+@use '@flash-global66/g-utils/mixins' as *;
 @use 'sass:map';
-@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
-@use 'element-plus/theme-chalk/src/mixins/utils' as *;
-@use 'element-plus/theme-chalk/src/mixins/var' as *;
-@use 'element-plus/theme-chalk/src/common/var' as *;
 
 @mixin ripple-animation($duration: 0.6s, $ease: ease-out, $fill-mode: forwards) {
   animation: ripple-effect $duration $ease $fill-mode;
@@ -24,7 +22,7 @@
     @include e('icon-left') {
       @apply text-2;
     }
-    
+
     @include e('icon-right') {
       @apply text-2;
     }
@@ -33,12 +31,12 @@
   @include m('md') {
     @apply px-2xl py-md h-3xl text-4;
   }
-  
+
   @include m('md') {
     @include e('icon-left') {
       @apply text-5;
     }
-    
+
     @include e('icon-right') {
       @apply text-5;
     }
