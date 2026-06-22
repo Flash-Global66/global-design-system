@@ -72,3 +72,5 @@ const {
   classes,
 } = useButton(props, emit);
 </script>
+
+<style lang="scss" src="./styles/button.style.scss"></style>
