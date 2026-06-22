@@ -69,7 +69,7 @@ describe('useButton', () => {
 
   it('shouldShowLeftIcon/RightIcon reflejan los iconos', () => {
     const { result } = withSetup(() =>
-      useButton(makeProps({ iconLeft: 'solid check', iconRight: '' }), vi.fn())
+      useButton(makeProps({ iconLeft: 'solid check' }), vi.fn())
     )
     expect(result.shouldShowLeftIcon.value).toBe(true)
     expect(result.shouldShowRightIcon.value).toBe(false)

@@ -11,5 +11,5 @@
     "./**/*.tsx",
     "./**/*.vue"
   ],
-  "exclude": ["dist", "vite.config.ts"]
+  "exclude": ["dist", "vite.config.ts", "tests", "**/*.spec.ts"]
 }

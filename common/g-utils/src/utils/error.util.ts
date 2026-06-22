@@ -12,8 +12,9 @@ class GUtilsError extends Error {
 }
 
 /**
- * Emite una advertencia en la consola del navegador o de Node.js,
- * pero solo en entornos que no sean producción (`process.env.NODE_ENV !== 'production'`).
+ * Emite una advertencia en la consola, pero solo en entornos de desarrollo
+ * (`import.meta.env.DEV`). En producción no hace nada, por lo que el bundler
+ * puede eliminar el bloque por tree-shaking.
  *
  * El mensaje sigue el formato `[scope] message` para facilitar la identificación
  * del componente o módulo que genera la advertencia.
@@ -26,7 +27,7 @@ class GUtilsError extends Error {
  * // Imprime en consola: [GUtilsError: [Button] Variante no válida: "ghost". Se esperaba 'primary' | 'secondary'.]
  */
 export function debugWarn(scope: string, message: string): void {
-  if (process.env.NODE_ENV !== 'production') {
+  if (import.meta.env.DEV) {
     const error = isString(scope)
       ? new GUtilsError(`[${scope}] ${message}`)
       : scope
