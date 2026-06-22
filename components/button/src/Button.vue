@@ -35,10 +35,10 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useNamespace } from 'element-plus'
-import { buttonEmits, buttonProps, validateButtonProps } from './button'
+import { useNamespace } from '@flash-global66/g-utils'
+import { buttonEmits, buttonProps, validateButtonProps } from './props/button.props'
 import { GIconFont } from '@flash-global66/g-icon-font'
-import { useButton } from './use-button'
+import { useButton } from './composables/useButton'
 
 const props = defineProps(buttonProps)
 const emit = defineEmits(buttonEmits)

@@ -1,0 +1,61 @@
+// BEM support functions — mirrors element-plus/theme-chalk/src/mixins/function.scss
+// Pure functions, no CSS output.
+@use 'config';
+@use 'sass:meta';
+@use 'sass:string';
+
+@function selectorToString($selector) {
+  $selector: meta.inspect($selector);
+  $selector: string.slice($selector, 2, -2);
+  @return $selector;
+}
+
+@function containsModifier($selector) {
+  $selector: selectorToString($selector);
+
+  @if string.index($selector, config.$modifier-separator) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+@function containWhenFlag($selector) {
+  $selector: selectorToString($selector);
+
+  @if string.index($selector, '.' + config.$state-prefix) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+@function containPseudoClass($selector) {
+  $selector: selectorToString($selector);
+
+  @if string.index($selector, ':') {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+@function hitAllSpecialNestRule($selector) {
+  @return containsModifier($selector) or containWhenFlag($selector) or
+    containPseudoClass($selector);
+}
+
+// bem('block', 'element', 'modifier') => 'el-block__element--modifier'
+@function bem($block, $element: '', $modifier: '') {
+  $name: config.$namespace + config.$common-separator + $block;
+
+  @if $element != '' {
+    $name: $name + config.$element-separator + $element;
+  }
+
+  @if $modifier != '' {
+    $name: $name + config.$modifier-separator + $modifier;
+  }
+
+  @return $name;
+}
