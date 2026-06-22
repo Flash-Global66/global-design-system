@@ -1,8 +1,8 @@
 import { computed, getCurrentInstance, inject, ref, unref } from 'vue'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
-/** Espacio de nombres predeterminado, alineado con element-plus. */
-const defaultNamespace = 'el'
+/** Espacio de nombres del Global Design System. */
+const defaultNamespace = 'gui'
 
 /** Prefijo fijo para clases de estado BEM (ej: `is-disabled`). */
 const statePrefix = 'is-'
@@ -56,7 +56,7 @@ const _bem = (
  * Prioridad de resolución:
  * 1. `namespaceOverrides` explícito.
  * 2. Valor inyectado mediante `namespaceContextKey` (si existe instancia activa de Vue).
- * 3. `defaultNamespace` (`'el'`).
+ * 3. `defaultNamespace` (`'gui'`).
  *
  * @param namespaceOverrides - Ref opcional para sobreescribir el namespace directamente.
  * @returns `ComputedRef<string>` con el namespace efectivo.
@@ -125,7 +125,7 @@ export interface NamespaceHelpers {
  *
  * @example
  * // En un componente Vue:
- * const ns = useNamespace('button', ref('gui'))
+ * const ns = useNamespace('button')
  * ns.b()                        // 'gui-button'
  * ns.e('icon-left')             // 'gui-button__icon-left'
  * ns.m('variant-primary')       // 'gui-button--variant-primary'

@@ -14,9 +14,9 @@ describe('useNamespace', () => {
       expect(ns.b('group')).toBe('gui-button-group')
     })
 
-    it('uses default namespace (el) without override', () => {
+    it('usa el namespace gui por defecto cuando no se pasa override', () => {
       const ns = useNamespace('button')
-      expect(ns.b()).toBe('el-button')
+      expect(ns.b()).toBe('gui-button')
     })
   })
 

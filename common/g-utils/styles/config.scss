@@ -1,6 +1,7 @@
-// BEM configuration — mirrors element-plus/theme-chalk/src/mixins/config.scss
-// Variables use !default so consumers can reconfigure via @forward ... with ($namespace: 'gui')
-$namespace: 'el' !default;
+// Configuración BEM del Global Design System.
+// El namespace 'gui' (Global UI) es nuestro estándar. El !default permite
+// que el sistema de módulos de Sass lo reconfigure en compilación si es necesario.
+$namespace: 'gui' !default;
 $common-separator: '-' !default;
 $element-separator: '__' !default;
 $modifier-separator: '--' !default;

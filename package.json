@@ -30,6 +30,8 @@
     "build": "node scripts/build-components.js",
     "build:types": "npx lerna run build:types --scope \"@flash-global66/g-*\"",
     "build:publish": "yarn build && yarn publish",
+    "format": "prettier --write \"**/*.{ts,vue,scss,json,md}\" --ignore-path .gitignore",
+    "format:check": "prettier --check \"**/*.{ts,vue,scss,json,md}\" --ignore-path .gitignore",
     "test": "vitest run",
     "test:run": "vitest run",
     "test:watch": "vitest"
@@ -78,7 +80,10 @@
     "vue": "3.5.18",
     "vue-currency-input": "3.2.2",
     "vue-loader": "16.8.3",
-    "vue-tsc": "2.2.12"
+    "vue-tsc": "2.2.12",
+    "prettier": "3.6.2",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.4.1"
   },
   "packageManager": "yarn@4.11.0"
 }
