@@ -1,6 +1,7 @@
 import { computed, ref } from 'vue'
 import type { SetupContext } from 'vue'
 import { useFormItem } from '@flash-global66/g-form'
+import { useNamespace } from '@flash-global66/g-utils'
 import { ButtonEmits, ButtonProps } from '../props/button.props'
 import { useRipple } from './useRipple'
 
@@ -13,6 +14,7 @@ import { useRipple } from './useRipple'
  * @returns El estado y los manejadores que consume el template de `Button.vue`.
  */
 export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['emit']) => {
+  const ns = useNamespace('button')
   const _disabled = computed(() => props.disabled)
   const _ref = ref<HTMLElement>()
   const { form } = useFormItem()
@@ -72,6 +74,18 @@ export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['e
   const shouldShowLeftIcon = computed(() => Boolean(props.iconLeft))
   const shouldShowRightIcon = computed(() => Boolean(props.iconRight))
 
+  const classes = computed(() =>
+    [
+      ns.b(),
+      ns.m(`variant-${props.variant}`),
+      ns.m(props.size ?? 'md'),
+      ns.is('disabled', props.disabled || props.loading),
+      ns.is('href', Boolean(props.href)),
+      ns.is('loading', props.loading),
+      ns.is('full', props.full),
+    ].filter(Boolean),
+  )
+
   return {
     _ref,
     _disabled,
@@ -85,5 +99,7 @@ export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['e
     handleRipple,
     removeRipple,
     allAttrs,
+    ns,
+    classes,
   }
 }

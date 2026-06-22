@@ -34,8 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useNamespace } from '@flash-global66/g-utils'
 import { buttonEmits, buttonProps, validateButtonProps } from './props/button.props'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { useButton } from './composables/useButton'
@@ -45,27 +43,6 @@ const emit = defineEmits(buttonEmits)
 
 validateButtonProps(props)
 
-const {
-  _ref,
-  shouldShowLeftIcon,
-  shouldShowRightIcon,
-  componentId,
-  ripples,
-  removeRipple,
-  allAttrs
-} = useButton(props, emit)
-
-const ns = useNamespace('button', ref('gui'))
-
-const classes = computed(() => {
-  return [
-    ns.b(),
-    ns.m(`variant-${props.variant}`),
-    ns.m(props.size ?? 'md'),
-    ns.is('disabled', props.disabled || props.loading),
-    ns.is('href', Boolean(props.href)),
-    ns.is('loading', props.loading),
-    ns.is('full', props.full)
-  ].filter(Boolean)
-})
+const { _ref, shouldShowLeftIcon, shouldShowRightIcon, componentId, ripples, removeRipple, allAttrs, ns, classes } =
+  useButton(props, emit)
 </script>
