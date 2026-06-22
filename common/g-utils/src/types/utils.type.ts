@@ -6,5 +6,5 @@
  * única fuente de verdad y facilita el tree-shaking.
  */
 
-export type { SFCWithInstall } from '../utils/install.util'
-export type { NamespaceHelpers } from '../composables/useNamespace'
+export type { SFCWithInstall } from '../utils/install.util';
+export type { NamespaceHelpers } from '../composables/useNamespace';

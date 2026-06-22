@@ -1,11 +1,11 @@
-import { computed, getCurrentInstance, inject, ref, unref } from 'vue'
-import type { ComputedRef, InjectionKey, Ref } from 'vue'
+import { computed, getCurrentInstance, inject, ref, unref } from 'vue';
+import type { ComputedRef, InjectionKey, Ref } from 'vue';
 
 /** Espacio de nombres del Global Design System. */
-const defaultNamespace = 'gui'
+const defaultNamespace = 'gui';
 
 /** Prefijo fijo para clases de estado BEM (ej: `is-disabled`). */
-const statePrefix = 'is-'
+const statePrefix = 'is-';
 
 /**
  * Clave de inyección para propagar el espacio de nombres BEM mediante `provide/inject`.
@@ -19,7 +19,7 @@ const statePrefix = 'is-'
  */
 export const namespaceContextKey: InjectionKey<Ref<string>> = Symbol(
   'namespaceContextKey',
-)
+);
 
 /**
  * Genera clases BEM combinando namespace, bloque, sufijo de bloque, elemento y modificador.
@@ -38,18 +38,18 @@ const _bem = (
   element: string,
   modifier: string,
 ): string => {
-  let cls = `${namespace}-${block}`
+  let cls = `${namespace}-${block}`;
   if (blockSuffix) {
-    cls += `-${blockSuffix}`
+    cls += `-${blockSuffix}`;
   }
   if (element) {
-    cls += `__${element}`
+    cls += `__${element}`;
   }
   if (modifier) {
-    cls += `--${modifier}`
+    cls += `--${modifier}`;
   }
-  return cls
-}
+  return cls;
+};
 
 /**
  * Resuelve el espacio de nombres derivado en función de la jerarquía de componentes.
@@ -73,11 +73,11 @@ export const useGetDerivedNamespace = (
     namespaceOverrides ||
     (getCurrentInstance()
       ? inject(namespaceContextKey, ref(defaultNamespace))
-      : ref(defaultNamespace))
+      : ref(defaultNamespace));
 
-  const namespace = computed(() => unref(derivedNamespace) || defaultNamespace)
-  return namespace
-}
+  const namespace = computed(() => unref(derivedNamespace) || defaultNamespace);
+  return namespace;
+};
 
 /**
  * Conjunto de métodos de ayuda para generar clases BEM con el namespace activo.
@@ -87,31 +87,31 @@ export const useGetDerivedNamespace = (
  */
 export interface NamespaceHelpers {
   /** `ComputedRef` con el namespace activo (ej: `'gui'`). */
-  namespace: ComputedRef<string>
+  namespace: ComputedRef<string>;
   /** Retorna la clase del bloque: `{ns}-{block}`. */
-  b(blockSuffix?: string): string
+  b(blockSuffix?: string): string;
   /** Retorna la clase del elemento: `{ns}-{block}__{element}`. */
-  e(element?: string): string
+  e(element?: string): string;
   /** Retorna la clase del modificador: `{ns}-{block}--{modifier}`. */
-  m(modifier?: string): string
+  m(modifier?: string): string;
   /** Retorna bloque + elemento: `{ns}-{block}-{blockSuffix}__{element}`. */
-  be(blockSuffix: string, element: string): string
+  be(blockSuffix: string, element: string): string;
   /** Retorna elemento + modificador: `{ns}-{block}__{element}--{modifier}`. */
-  em(element: string, modifier: string): string
+  em(element: string, modifier: string): string;
   /** Retorna bloque + modificador: `{ns}-{block}-{blockSuffix}--{modifier}`. */
-  bm(blockSuffix: string, modifier: string): string
+  bm(blockSuffix: string, modifier: string): string;
   /** Retorna bloque + elemento + modificador completo. */
-  bem(blockSuffix: string, element: string, modifier: string): string
+  bem(blockSuffix: string, element: string, modifier: string): string;
   /** Retorna clase de estado: `is-{name}` si `state` es verdadero, cadena vacía si no. */
-  is(name: string, state?: boolean | unknown): string
+  is(name: string, state?: boolean | unknown): string;
   /** Genera variables CSS con prefijo de namespace: `--{ns}-{key}`. */
-  cssVar(object: Record<string, string>): Record<string, string>
+  cssVar(object: Record<string, string>): Record<string, string>;
   /** Genera el nombre de una variable CSS con prefijo de namespace. */
-  cssVarName(name: string): string
+  cssVarName(name: string): string;
   /** Genera variables CSS con prefijo de bloque: `--{ns}-{block}-{key}`. */
-  cssVarBlock(object: Record<string, string>): Record<string, string>
+  cssVarBlock(object: Record<string, string>): Record<string, string>;
   /** Genera el nombre de una variable CSS con prefijo de bloque. */
-  cssVarBlockName(name: string): string
+  cssVarBlockName(name: string): string;
 }
 
 /**
@@ -137,67 +137,67 @@ export const useNamespace = (
   block: string,
   namespaceOverrides?: Ref<string>,
 ): NamespaceHelpers => {
-  const namespace = useGetDerivedNamespace(namespaceOverrides)
+  const namespace = useGetDerivedNamespace(namespaceOverrides);
 
   const b = (blockSuffix = '') =>
-    _bem(namespace.value, block, blockSuffix, '', '')
+    _bem(namespace.value, block, blockSuffix, '', '');
 
   const e = (element?: string) =>
-    element ? _bem(namespace.value, block, '', element, '') : ''
+    element ? _bem(namespace.value, block, '', element, '') : '';
 
   const m = (modifier?: string) =>
-    modifier ? _bem(namespace.value, block, '', '', modifier) : ''
+    modifier ? _bem(namespace.value, block, '', '', modifier) : '';
 
   const be = (blockSuffix: string, element: string) =>
     blockSuffix && element
       ? _bem(namespace.value, block, blockSuffix, element, '')
-      : ''
+      : '';
 
   const em = (element: string, modifier: string) =>
     element && modifier
       ? _bem(namespace.value, block, '', element, modifier)
-      : ''
+      : '';
 
   const bm = (blockSuffix: string, modifier: string) =>
     blockSuffix && modifier
       ? _bem(namespace.value, block, blockSuffix, '', modifier)
-      : ''
+      : '';
 
   const bem = (blockSuffix: string, element: string, modifier: string) =>
     blockSuffix && element && modifier
       ? _bem(namespace.value, block, blockSuffix, element, modifier)
-      : ''
+      : '';
 
   const is = (name: string, ...args: [boolean?] | [unknown]): string => {
-    const state = args.length >= 1 ? args[0] : true
-    return name && state ? `${statePrefix}${name}` : ''
-  }
+    const state = args.length >= 1 ? args[0] : true;
+    return name && state ? `${statePrefix}${name}` : '';
+  };
 
   const cssVar = (object: Record<string, string>): Record<string, string> => {
-    const styles: Record<string, string> = {}
+    const styles: Record<string, string> = {};
     for (const key in object) {
       if (object[key]) {
-        styles[`--${namespace.value}-${key}`] = object[key]
+        styles[`--${namespace.value}-${key}`] = object[key];
       }
     }
-    return styles
-  }
+    return styles;
+  };
 
   const cssVarBlock = (
     object: Record<string, string>,
   ): Record<string, string> => {
-    const styles: Record<string, string> = {}
+    const styles: Record<string, string> = {};
     for (const key in object) {
       if (object[key]) {
-        styles[`--${namespace.value}-${block}-${key}`] = object[key]
+        styles[`--${namespace.value}-${block}-${key}`] = object[key];
       }
     }
-    return styles
-  }
+    return styles;
+  };
 
-  const cssVarName = (name: string) => `--${namespace.value}-${name}`
+  const cssVarName = (name: string) => `--${namespace.value}-${name}`;
   const cssVarBlockName = (name: string) =>
-    `--${namespace.value}-${block}-${name}`
+    `--${namespace.value}-${block}-${name}`;
 
   return {
     namespace,
@@ -213,5 +213,5 @@ export const useNamespace = (
     cssVarName,
     cssVarBlock,
     cssVarBlockName,
-  }
-}
+  };
+};

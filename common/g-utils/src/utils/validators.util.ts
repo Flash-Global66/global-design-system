@@ -13,7 +13,7 @@
  * }
  */
 export const isBoolean = (val: unknown): val is boolean =>
-  typeof val === 'boolean'
+  typeof val === 'boolean';
 
 /**
  * Comprueba si un valor es de tipo `string`.
@@ -29,7 +29,8 @@ export const isBoolean = (val: unknown): val is boolean =>
  *   // val es string aquí
  * }
  */
-export const isString = (val: unknown): val is string => typeof val === 'string'
+export const isString = (val: unknown): val is string =>
+  typeof val === 'string';
 
 /**
  * Comprueba si un valor es un objeto no nulo (incluye arrays y objetos planos).
@@ -45,4 +46,4 @@ export const isString = (val: unknown): val is string => typeof val === 'string'
  * }
  */
 export const isObject = (val: unknown): val is Record<string, unknown> =>
-  val !== null && typeof val === 'object'
+  val !== null && typeof val === 'object';

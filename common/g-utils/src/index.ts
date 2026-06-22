@@ -6,9 +6,9 @@
  * (`@flash-global66/g-utils`) y no directamente desde este archivo.
  */
 
-export * from './utils/props.util'
-export * from './utils/install.util'
-export * from './utils/validators.util'
-export * from './utils/error.util'
-export * from './composables/useNamespace'
-export * from './types/utils.type'
+export * from './utils/props.util';
+export * from './utils/install.util';
+export * from './utils/validators.util';
+export * from './utils/error.util';
+export * from './composables/useNamespace';
+export * from './types/utils.type';

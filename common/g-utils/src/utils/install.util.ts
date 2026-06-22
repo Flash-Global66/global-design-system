@@ -1,7 +1,7 @@
-import type { App, Plugin } from 'vue'
+import type { App, Plugin } from 'vue';
 
 /** Función vacía (no-op) reutilizable; equivalente al `NOOP` interno de Vue. */
-const NOOP = (): void => {}
+const NOOP = (): void => {};
 
 /**
  * Tipo auxiliar que combina un componente Vue (`T`) con la interfaz `Plugin` de Vue.
@@ -10,7 +10,7 @@ const NOOP = (): void => {}
  *
  * @template T - Tipo del componente SFC original.
  */
-export type SFCWithInstall<T> = T & Plugin
+export type SFCWithInstall<T> = T & Plugin;
 
 /**
  * Adjunta un método `install` a un componente principal y a sus subcomponentes opcionales,
@@ -32,20 +32,20 @@ export const withInstall = <T, E extends Record<string, unknown>>(
   main: T,
   extra?: E,
 ): SFCWithInstall<T> & E => {
-  ;(main as any).install = (app: App): void => {
+  (main as any).install = (app: App): void => {
     for (const comp of [main, ...Object.values(extra ?? {})]) {
-      app.component((comp as any).name, comp as any)
+      app.component((comp as any).name, comp as any);
     }
-  }
+  };
 
   if (extra) {
     for (const [key, comp] of Object.entries(extra)) {
-      ;(main as any)[key] = comp
+      (main as any)[key] = comp;
     }
   }
 
-  return main as SFCWithInstall<T> & E
-}
+  return main as SFCWithInstall<T> & E;
+};
 
 /**
  * Adjunta un método `install` vacío (no-op) a un componente.
@@ -60,6 +60,6 @@ export const withInstall = <T, E extends Record<string, unknown>>(
  * export const GButtonGroup = withNoopInstall(MyButtonGroup)
  */
 export const withNoopInstall = <T>(component: T): SFCWithInstall<T> => {
-  ;(component as any).install = NOOP
-  return component as SFCWithInstall<T>
-}
+  (component as any).install = NOOP;
+  return component as SFCWithInstall<T>;
+};

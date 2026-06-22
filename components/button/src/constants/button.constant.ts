@@ -6,10 +6,10 @@
  */
 
 /** Variantes visuales admitidas por el botón. */
-export const BUTTON_VARIANTS = ['primary', 'secondary', 'tertiary'] as const
+export const BUTTON_VARIANTS = ['primary', 'secondary', 'tertiary'] as const;
 
 /** Tamaños admitidos por el botón. */
-export const BUTTON_SIZES = ['sm', 'md'] as const
+export const BUTTON_SIZES = ['sm', 'md'] as const;
 
 /** Tipos nativos del atributo `type` del elemento `<button>`. */
-export const BUTTON_NATIVE_TYPES = ['button', 'submit', 'reset'] as const
+export const BUTTON_NATIVE_TYPES = ['button', 'submit', 'reset'] as const;

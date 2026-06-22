@@ -51,14 +51,14 @@ import {
   buttonEmits,
   buttonProps,
   validateButtonProps,
-} from './props/button.props'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { useButton } from './composables/useButton'
+} from './props/button.props';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { useButton } from './composables/useButton';
 
-const props = defineProps(buttonProps)
-const emit = defineEmits(buttonEmits)
+const props = defineProps(buttonProps);
+const emit = defineEmits(buttonEmits);
 
-validateButtonProps(props)
+validateButtonProps(props);
 
 const {
   _ref,
@@ -70,5 +70,5 @@ const {
   allAttrs,
   ns,
   classes,
-} = useButton(props, emit)
+} = useButton(props, emit);
 </script>

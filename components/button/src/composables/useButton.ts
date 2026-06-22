@@ -1,9 +1,9 @@
-import { computed, ref } from 'vue'
-import type { SetupContext } from 'vue'
-import { useFormItem } from '@flash-global66/g-form'
-import { useNamespace } from '@flash-global66/g-utils'
-import { ButtonEmits, ButtonProps } from '../props/button.props'
-import { useRipple } from './useRipple'
+import { computed, ref } from 'vue';
+import type { SetupContext } from 'vue';
+import { useFormItem } from '@flash-global66/g-form';
+import { useNamespace } from '@flash-global66/g-utils';
+import { ButtonEmits, ButtonProps } from '../props/button.props';
+import { useRipple } from './useRipple';
 
 /**
  * Lógica del componente Button: estado reactivo, atributos derivados y manejadores
@@ -17,15 +17,15 @@ export const useButton = (
   props: ButtonProps,
   emit: SetupContext<ButtonEmits>['emit'],
 ) => {
-  const ns = useNamespace('button')
-  const _disabled = computed(() => props.disabled)
-  const _ref = ref<HTMLElement>()
-  const { form } = useFormItem()
+  const ns = useNamespace('button');
+  const _disabled = computed(() => props.disabled);
+  const _ref = ref<HTMLElement>();
+  const { form } = useFormItem();
   const { ripples, handleRipple, removeRipple } = useRipple(
     () => _disabled.value || props.loading,
-  )
+  );
 
-  const componentId = computed(() => (!props.href ? 'button' : 'a'))
+  const componentId = computed(() => (!props.href ? 'button' : 'a'));
 
   const _props = computed(() => {
     if (!props.href) {
@@ -33,10 +33,10 @@ export const useButton = (
         disabled: _disabled.value || props.loading,
         autofocus: props.autofocus,
         type: props.typeNative,
-      }
+      };
     }
-    return {}
-  })
+    return {};
+  });
 
   const allAttrs = computed(() => ({
     ..._props.value,
@@ -56,30 +56,30 @@ export const useButton = (
       (e: KeyboardEvent) =>
         e.key === 'Enter' && (e.preventDefault(), handleClick(e as any)),
     ],
-  }))
+  }));
 
   const handleClick = (evt: MouseEvent) => {
     if (_disabled.value || props.loading) {
-      evt.preventDefault()
-      evt.stopPropagation()
-      return
+      evt.preventDefault();
+      evt.stopPropagation();
+      return;
     }
     if (props.typeNative === 'reset') {
-      form?.resetFields()
+      form?.resetFields();
     }
-    emit('click', evt)
-  }
+    emit('click', evt);
+  };
 
   const handleMouseDown = (evt: MouseEvent) => {
     if (_disabled.value || props.loading) {
-      evt.preventDefault()
-      return
+      evt.preventDefault();
+      return;
     }
-    emit('mousedown', evt)
-  }
+    emit('mousedown', evt);
+  };
 
-  const shouldShowLeftIcon = computed(() => Boolean(props.iconLeft))
-  const shouldShowRightIcon = computed(() => Boolean(props.iconRight))
+  const shouldShowLeftIcon = computed(() => Boolean(props.iconLeft));
+  const shouldShowRightIcon = computed(() => Boolean(props.iconRight));
 
   const classes = computed(() =>
     [
@@ -91,7 +91,7 @@ export const useButton = (
       ns.is('loading', props.loading),
       ns.is('full', props.full),
     ].filter(Boolean),
-  )
+  );
 
   return {
     _ref,
@@ -108,5 +108,5 @@ export const useButton = (
     allAttrs,
     ns,
     classes,
-  }
-}
+  };
+};

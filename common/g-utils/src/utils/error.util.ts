@@ -1,4 +1,4 @@
-import { isString } from './validators.util'
+import { isString } from './validators.util';
 
 /**
  * Error interno del paquete g-utils.
@@ -6,8 +6,8 @@ import { isString } from './validators.util'
  */
 class GUtilsError extends Error {
   constructor(m: string) {
-    super(m)
-    this.name = 'GUtilsError'
+    super(m);
+    this.name = 'GUtilsError';
   }
 }
 
@@ -30,7 +30,7 @@ export function debugWarn(scope: string, message: string): void {
   if (import.meta.env.DEV) {
     const error = isString(scope)
       ? new GUtilsError(`[${scope}] ${message}`)
-      : scope
-    console.warn(error)
+      : scope;
+    console.warn(error);
   }
 }

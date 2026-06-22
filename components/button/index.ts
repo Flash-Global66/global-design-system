@@ -1,13 +1,13 @@
-import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils'
-import Button from './src/Button.vue'
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
+import Button from './src/Button.vue';
 
 export const GButton: SFCWithInstall<typeof Button> & {
-  Button: typeof Button
+  Button: typeof Button;
 } = withInstall(Button, {
   Button,
-})
-export default GButton
+});
+export default GButton;
 
-export * from './src/types/button.type'
+export * from './src/types/button.type';
 
-export type ButtonInstance = InstanceType<typeof Button>
+export type ButtonInstance = InstanceType<typeof Button>;

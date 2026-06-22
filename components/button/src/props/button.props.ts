@@ -1,17 +1,17 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue';
 import {
   buildProps,
   debugWarn,
   isBoolean,
   isString,
-} from '@flash-global66/g-utils'
+} from '@flash-global66/g-utils';
 import type {
   ButtonSize,
   ButtonVariant,
   ButtonNativeType,
-} from '../types/button.type'
-import { BUTTON_VARIANTS, BUTTON_SIZES } from '../constants/button.constant'
-import { IconString } from '@flash-global66/g-icon-font'
+} from '../types/button.type';
+import { BUTTON_VARIANTS, BUTTON_SIZES } from '../constants/button.constant';
+import { IconString } from '@flash-global66/g-icon-font';
 
 export const buttonProps = buildProps({
   /**
@@ -135,15 +135,15 @@ export const buttonProps = buildProps({
     type: String as PropType<string>,
     default: '',
   },
-})
+});
 
 export const buttonEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
   mousedown: (evt: MouseEvent) => evt instanceof MouseEvent,
-}
+};
 
-export type ButtonProps = ExtractPropTypes<typeof buttonProps>
-export type ButtonEmits = typeof buttonEmits
+export type ButtonProps = ExtractPropTypes<typeof buttonProps>;
+export type ButtonEmits = typeof buttonEmits;
 
 /**
  * Valida en runtime (solo fuera de producción) que las props del botón tengan
@@ -152,62 +152,62 @@ export type ButtonEmits = typeof buttonEmits
  * @param props - Props resueltas del componente Button.
  */
 export function validateButtonProps(props: ButtonProps) {
-  const allowedVariants = BUTTON_VARIANTS
-  const allowedSizes = BUTTON_SIZES
+  const allowedVariants = BUTTON_VARIANTS;
+  const allowedSizes = BUTTON_SIZES;
 
   if (!isString(props.variant) || !allowedVariants.includes(props.variant)) {
     debugWarn(
       'Button',
       `Invalid prop "variant": expected one of ${allowedVariants.join(', ')}, but received "${props.variant}".`,
-    )
+    );
   }
 
   if (!allowedSizes.includes(props.size)) {
     debugWarn(
       'Button',
       `Invalid prop "size": expected one of ${allowedSizes.join(', ')}, but received "${props.size}".`,
-    )
+    );
   }
 
   if (props.title && !isString(props.title)) {
     debugWarn(
       'Button',
       `Invalid prop "title": expected a string, but received "${typeof props.title}".`,
-    )
+    );
   }
 
   if (!isBoolean(props.disabled)) {
     debugWarn(
       'Button',
       `Invalid prop "disabled": expected a boolean, but received "${typeof props.disabled}".`,
-    )
+    );
   }
 
   if (!isBoolean(props.loading)) {
     debugWarn(
       'Button',
       `Invalid prop "loading": expected a boolean, but received "${typeof props.loading}".`,
-    )
+    );
   }
 
   if (!isBoolean(props.full)) {
     debugWarn(
       'Button',
       `Invalid prop "full": expected a boolean, but received "${typeof props.full}".`,
-    )
+    );
   }
 
   if (props.iconLeft && !isString(props.iconLeft)) {
     debugWarn(
       'Button',
       `Invalid prop "iconLeft": expected a string for icon name, but received "${typeof props.iconLeft}".`,
-    )
+    );
   }
 
   if (props.iconRight && !isString(props.iconRight)) {
     debugWarn(
       'Button',
       `Invalid prop "iconLeft": expected a string for icon name, but received "${typeof props.iconLeft}".`,
-    )
+    );
   }
 }
