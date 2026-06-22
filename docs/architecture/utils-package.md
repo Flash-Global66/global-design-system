@@ -59,14 +59,14 @@ El paquete `common/g-utils/` es el ejemplo canónico de esta estructura.
     "./mixins": "./styles/mixins.scss",
     "./config": "./styles/config.scss"
   },
-  "sideEffects": ["**/*.scss", "**/*.css"],
+  "sideEffects": ["**/*.scss"],
   "peerDependencies": {
     "vue": "^3.2.0"
   }
 }
 ```
 
-**`sideEffects: ["**/_.scss", "\*\*/_.css"]`** — los bundlers asumen por defecto que los módulos son puros (tree-shakeable). Los archivos SCSS/CSS sí tienen efectos globales (modifican el DOM con estilos), por lo que esta bandera le indica al bundler que **no los elimine\*\* aunque no vea un import explícito desde JS. Sin este campo, el CSS compilado de los componentes puede desaparecer en producción.
+**`sideEffects: ["**/\*.scss"]`\*\* — los bundlers asumen por defecto que los módulos son puros (tree-shakeable). Los archivos SCSS sí tienen efectos globales (modifican el DOM con estilos), por lo que esta bandera le indica al bundler que no los elimine aunque no vea un import explícito desde JS. Solo SCSS — g-utils no produce CSS; es source-only.
 
 Diferencias clave respecto al `package.json` de un componente:
 
@@ -90,13 +90,16 @@ La consecuencia de esta arquitectura: si en el futuro el DS necesita un namespac
 
 ## 5. Distribución de estilos
 
-Cuando `vite build` compila un componente:
+El DS usa un modelo **source-first**: los estilos se distribuyen como SCSS, y el bundler del consumidor (Vite) los procesa directamente. No hay un paso de compilación previo en el DS.
 
-1. Sass procesa el SCSS → CSS con las clases finales (`gui-button`, etc.)
-2. Vite empaqueta ese CSS en `dist/index.css`
-3. El consumidor importa el CSS ya compilado: `import '@flash-global66/g-button/dist/index.css'`
+El bloque `<style lang="scss" src="...">` en el SFC es el punto de entrada — Vite detecta el SCSS, lo pasa por Sass (con `@use '@flash-global66/g-utils/mixins'`) y lo inyecta como CSS en el bundle del consumidor. El consumidor necesita Sass configurado en su pipeline.
 
-El consumidor **NO necesita Sass** para consumir el CSS compilado. Si un consumidor quiere compilar el SCSS fuente (para acceder a variables o mixins propios), usa `exports["./styles.scss"]` y necesita Sass configurado en su bundler.
+```vue
+<!-- Button.vue — Vite procesa este bloque como parte del SFC -->
+<style lang="scss" src="./styles/button.style.scss"></style>
+```
+
+`exports["./styles.scss"]` en `package.json` del componente permite que otros consumidores (ej: tests, otros paquetes del DS) accedan al SCSS fuente directamente por nombre de paquete si lo necesitan.
 
 ---
 
