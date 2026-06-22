@@ -1,0 +1,7 @@
+// BEM configuration — mirrors element-plus/theme-chalk/src/mixins/config.scss
+// Variables use !default so consumers can reconfigure via @forward ... with ($namespace: 'gui')
+$namespace: 'el' !default;
+$common-separator: '-' !default;
+$element-separator: '__' !default;
+$modifier-separator: '--' !default;
+$state-prefix: 'is-' !default;

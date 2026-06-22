@@ -1,0 +1,45 @@
+## SDD Config — global-design-system
+## Generated: 2026-06-20
+
+project: global-design-system
+artifact_store: hybrid
+
+context:
+  stack: Vue 3.5 / TypeScript 5.9 / Vite 5 / Storybook 8.6
+  monorepo: Lerna 8 (independent, conventionalCommits) / Yarn 4
+  workspaces: [components/*, common/*, config/*]
+  component_count: 59
+  base_library: element-plus 2.9.7
+  styling: Sass + Tailwind 3.4
+  ci: GitHub Actions → publish to GitHub Packages + Storybook on gh-pages
+  component_pattern: "src/{name}.vue + {name}.ts + {name}.type.ts + {name}.styles.scss + use-{name}.ts"
+
+testing:
+  strict_tdd: false
+  reason: "No test runner configured. Vitest setup is a pending task."
+  test_command: null
+  unit: false
+  integration: false
+  e2e: false
+  coverage: false
+  quality:
+    linter: "eslint (.eslintrc.cjs)"
+    type_checker: "vue-tsc (build:types)"
+    formatter: "prettier (via prettier-vue)"
+
+phases:
+  proposal:
+    description: "Intent, scope, approach, risks. No code yet."
+  spec:
+    description: "Delta specs with requirements and scenarios. Based on proposal."
+  design:
+    description: "Architecture decisions, component structure, data flow."
+  tasks:
+    description: "Actionable ordered checklist. Based on spec + design."
+  apply:
+    description: "Implementation following task checklist. Work-unit commits."
+    note: "strict_tdd is false — no automated test assertions required until Vitest configured."
+  verify:
+    description: "Validate implementation against spec and tasks."
+  archive:
+    description: "Close change, merge delta specs, persist archive report."
