@@ -1,8 +1,13 @@
-import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { computed, ref, onMounted, onBeforeUnmount, watch, readonly } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { ImageProps } from '../image.props';
 import { IMAGE_SIZES } from '../constants/image.constants';
 import { ImageState } from '../types/image.types';
+
+const illustrations = import.meta.glob<string>('../assets/illustrations/*.webp', {
+  query: '?url',
+  import: 'default',
+});
 
 /**
  * Hook to handle the functionality of the Image component
@@ -13,27 +18,33 @@ export const useImage = (props: ImageProps): ImageState => {
   const isLoaded = ref<boolean>(false);
   const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
+  const imageSrc = ref<string>('');
   let stopObserver: Function | null = null;
-  
+
   const sizeValue = computed<string>(() => IMAGE_SIZES[props.size as keyof typeof IMAGE_SIZES]);
-  
-  const imageSrc = computed<string>(() => {
-    try {
-      return new URL(`../assets/illustrations/${props.name}.webp`, import.meta.url).href;
-    } catch (error) {
+
+  const resolveSrc = async (): Promise<void> => {
+    const loader = illustrations[`../assets/illustrations/${props.name}.webp`];
+    if (!loader) {
       hasError.value = true;
-      return '';
+      return;
     }
-  });
+    try {
+      imageSrc.value = await loader();
+    } catch {
+      hasError.value = true;
+    }
+  };
 
   const handleImageError = (): void => {
     hasError.value = true;
   };
 
-  const loadImage = (): void => {
+  const loadImage = async (): Promise<void> => {
+    await resolveSrc();
     isLoaded.value = true;
   };
-  
+
   const setupObserver = (): void => {
     if (!props.lazyLoad) {
       loadImage();
@@ -59,7 +70,7 @@ export const useImage = (props: ImageProps): ImageState => {
           rootMargin: '50px',
         }
       );
-      
+
       stopObserver = stop;
     }
   };
@@ -73,9 +84,10 @@ export const useImage = (props: ImageProps): ImageState => {
       stopObserver();
     }
   });
-  
+
   watch(() => props.name, () => {
     isLoaded.value = false;
+    imageSrc.value = '';
     setupObserver();
   });
 
@@ -83,7 +95,7 @@ export const useImage = (props: ImageProps): ImageState => {
     sizeValue,
     isLoaded,
     hasError,
-    imageSrc,
+    imageSrc: readonly(imageSrc),
     imageContainer,
     handleImageError
   };
