@@ -7,6 +7,11 @@ export default mergeConfig(baseConfig, defineConfig({
     lib: {
       entry: resolve(__dirname, 'index.ts'),
       name: 'B2BImage'
+    },
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: false
+      }
     }
   }
 }));
