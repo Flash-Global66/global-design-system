@@ -23,7 +23,10 @@ const makeProps = (overrides: Partial<ButtonProps> = {}): ButtonProps =>
   }) as ButtonProps
 
 const mouseEvent = () =>
-  ({ preventDefault: vi.fn(), stopPropagation: vi.fn() }) as unknown as MouseEvent
+  ({
+    preventDefault: vi.fn(),
+    stopPropagation: vi.fn(),
+  }) as unknown as MouseEvent
 
 describe('useButton', () => {
   it('componentId es "button" sin href', () => {
@@ -32,7 +35,9 @@ describe('useButton', () => {
   })
 
   it('componentId es "a" con href', () => {
-    const { result } = withSetup(() => useButton(makeProps({ href: 'https://x.com' }), vi.fn()))
+    const { result } = withSetup(() =>
+      useButton(makeProps({ href: 'https://x.com' }), vi.fn()),
+    )
     expect(result.componentId.value).toBe('a')
   })
 
@@ -41,7 +46,7 @@ describe('useButton', () => {
     expect(result.allAttrs.value.role).toBe('button')
 
     const { result: linkResult } = withSetup(() =>
-      useButton(makeProps({ href: 'https://x.com' }), vi.fn())
+      useButton(makeProps({ href: 'https://x.com' }), vi.fn()),
     )
     expect(linkResult.allAttrs.value.role).toBe('link')
   })
@@ -55,21 +60,25 @@ describe('useButton', () => {
 
   it('NO emite "click" cuando está disabled', () => {
     const emit = vi.fn()
-    const { result } = withSetup(() => useButton(makeProps({ disabled: true }), emit))
+    const { result } = withSetup(() =>
+      useButton(makeProps({ disabled: true }), emit),
+    )
     result.handleClick(mouseEvent())
     expect(emit).not.toHaveBeenCalled()
   })
 
   it('NO emite "click" cuando está loading', () => {
     const emit = vi.fn()
-    const { result } = withSetup(() => useButton(makeProps({ loading: true }), emit))
+    const { result } = withSetup(() =>
+      useButton(makeProps({ loading: true }), emit),
+    )
     result.handleClick(mouseEvent())
     expect(emit).not.toHaveBeenCalled()
   })
 
   it('shouldShowLeftIcon/RightIcon reflejan los iconos', () => {
     const { result } = withSetup(() =>
-      useButton(makeProps({ iconLeft: 'solid check' }), vi.fn())
+      useButton(makeProps({ iconLeft: 'solid check' }), vi.fn()),
     )
     expect(result.shouldShowLeftIcon.value).toBe(true)
     expect(result.shouldShowRightIcon.value).toBe(false)

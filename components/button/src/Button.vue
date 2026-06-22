@@ -2,15 +2,28 @@
   <component :is="componentId" ref="_ref" v-bind="allAttrs" :class="classes">
     <div :class="ns.e('content')">
       <div :class="{ 'opacity-0': loading }">
-        <g-icon-font v-if="shouldShowLeftIcon" :name="iconLeft" :class="ns.e('icon-left')" />
+        <g-icon-font
+          v-if="shouldShowLeftIcon"
+          :name="iconLeft"
+          :class="ns.e('icon-left')"
+        />
         <span :class="ns.e('title')">
           <slot>{{ title }}</slot>
         </span>
-        <g-icon-font v-if="shouldShowRightIcon" :name="iconRight" :class="ns.e('icon-right')" />
+        <g-icon-font
+          v-if="shouldShowRightIcon"
+          :name="iconRight"
+          :class="ns.e('icon-right')"
+        />
       </div>
 
       <!-- Loading State -->
-      <div v-if="loading" :class="ns.e('loader')" role="status" aria-live="polite">
+      <div
+        v-if="loading"
+        :class="ns.e('loader')"
+        role="status"
+        aria-live="polite"
+      >
         <div :class="ns.e('dot')"></div>
         <div :class="ns.e('dot')"></div>
         <div :class="ns.e('dot')"></div>
@@ -25,7 +38,7 @@
         :class="ns.e('ripple')"
         :style="{
           left: ripple.x + 'px',
-          top: ripple.y + 'px'
+          top: ripple.y + 'px',
         }"
         @animationend="removeRipple(ripple.id)"
       />
@@ -34,7 +47,11 @@
 </template>
 
 <script setup lang="ts">
-import { buttonEmits, buttonProps, validateButtonProps } from './props/button.props'
+import {
+  buttonEmits,
+  buttonProps,
+  validateButtonProps,
+} from './props/button.props'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import { useButton } from './composables/useButton'
 
@@ -43,6 +60,15 @@ const emit = defineEmits(buttonEmits)
 
 validateButtonProps(props)
 
-const { _ref, shouldShowLeftIcon, shouldShowRightIcon, componentId, ripples, removeRipple, allAttrs, ns, classes } =
-  useButton(props, emit)
+const {
+  _ref,
+  shouldShowLeftIcon,
+  shouldShowRightIcon,
+  componentId,
+  ripples,
+  removeRipple,
+  allAttrs,
+  ns,
+  classes,
+} = useButton(props, emit)
 </script>

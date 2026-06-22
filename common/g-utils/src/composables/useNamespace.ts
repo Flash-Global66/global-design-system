@@ -17,8 +17,9 @@ const statePrefix = 'is-'
  * // En el componente proveedor:
  * provide(namespaceContextKey, ref('gui'))
  */
-export const namespaceContextKey: InjectionKey<Ref<string>> =
-  Symbol('namespaceContextKey')
+export const namespaceContextKey: InjectionKey<Ref<string>> = Symbol(
+  'namespaceContextKey',
+)
 
 /**
  * Genera clases BEM combinando namespace, bloque, sufijo de bloque, elemento y modificador.
@@ -35,7 +36,7 @@ const _bem = (
   block: string,
   blockSuffix: string,
   element: string,
-  modifier: string
+  modifier: string,
 ): string => {
   let cls = `${namespace}-${block}`
   if (blockSuffix) {
@@ -66,7 +67,7 @@ const _bem = (
  * console.log(ns.value) // 'gui'
  */
 export const useGetDerivedNamespace = (
-  namespaceOverrides?: Ref<string>
+  namespaceOverrides?: Ref<string>,
 ): ComputedRef<string> => {
   const derivedNamespace =
     namespaceOverrides ||
@@ -134,7 +135,7 @@ export interface NamespaceHelpers {
  */
 export const useNamespace = (
   block: string,
-  namespaceOverrides?: Ref<string>
+  namespaceOverrides?: Ref<string>,
 ): NamespaceHelpers => {
   const namespace = useGetDerivedNamespace(namespaceOverrides)
 
@@ -183,7 +184,7 @@ export const useNamespace = (
   }
 
   const cssVarBlock = (
-    object: Record<string, string>
+    object: Record<string, string>,
   ): Record<string, string> => {
     const styles: Record<string, string> = {}
     for (const key in object) {

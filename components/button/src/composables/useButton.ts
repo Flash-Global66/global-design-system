@@ -13,12 +13,17 @@ import { useRipple } from './useRipple'
  * @param emit - Función `emit` del componente para propagar eventos.
  * @returns El estado y los manejadores que consume el template de `Button.vue`.
  */
-export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['emit']) => {
+export const useButton = (
+  props: ButtonProps,
+  emit: SetupContext<ButtonEmits>['emit'],
+) => {
   const ns = useNamespace('button')
   const _disabled = computed(() => props.disabled)
   const _ref = ref<HTMLElement>()
   const { form } = useFormItem()
-  const { ripples, handleRipple, removeRipple } = useRipple(() => _disabled.value || props.loading)
+  const { ripples, handleRipple, removeRipple } = useRipple(
+    () => _disabled.value || props.loading,
+  )
 
   const componentId = computed(() => (!props.href ? 'button' : 'a'))
 
@@ -46,8 +51,10 @@ export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['e
     onMousedown: handleMouseDown,
     onPointerdown: handleRipple,
     onKeydown: [
-      (e: KeyboardEvent) => e.key === ' ' && (e.preventDefault(), handleClick(e as any)),
-      (e: KeyboardEvent) => e.key === 'Enter' && (e.preventDefault(), handleClick(e as any)),
+      (e: KeyboardEvent) =>
+        e.key === ' ' && (e.preventDefault(), handleClick(e as any)),
+      (e: KeyboardEvent) =>
+        e.key === 'Enter' && (e.preventDefault(), handleClick(e as any)),
     ],
   }))
 

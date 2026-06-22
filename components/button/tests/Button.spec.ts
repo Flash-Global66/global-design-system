@@ -6,13 +6,22 @@ describe('Button (render + backward-compat de clases)', () => {
   it('renderiza con las clases base gui-button (default primary/md)', () => {
     const { getByRole } = render(Button, { slots: { default: 'Hola' } })
     const el = getByRole('button')
-    expect(el).toHaveClass('gui-button', 'gui-button--variant-primary', 'gui-button--md')
+    expect(el).toHaveClass(
+      'gui-button',
+      'gui-button--variant-primary',
+      'gui-button--md',
+    )
     expect(el).toHaveTextContent('Hola')
   })
 
   it('aplica variante y tamaño', () => {
-    const { getByRole } = render(Button, { props: { variant: 'secondary', size: 'sm' } })
-    expect(getByRole('button')).toHaveClass('gui-button--variant-secondary', 'gui-button--sm')
+    const { getByRole } = render(Button, {
+      props: { variant: 'secondary', size: 'sm' },
+    })
+    expect(getByRole('button')).toHaveClass(
+      'gui-button--variant-secondary',
+      'gui-button--sm',
+    )
   })
 
   it('estado disabled aplica is-disabled', () => {

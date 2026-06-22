@@ -18,11 +18,11 @@ const ROOT = resolve(__dirname, '../../../')
 const G_UTILS_STYLES = resolve(__dirname, '../styles')
 const EP_MIXINS = resolve(
   ROOT,
-  'node_modules/element-plus/theme-chalk/src/mixins'
+  'node_modules/element-plus/theme-chalk/src/mixins',
 )
 const EP_COMMON = resolve(
   ROOT,
-  'node_modules/element-plus/theme-chalk/src/common'
+  'node_modules/element-plus/theme-chalk/src/common',
 )
 
 /** Compile SCSS that uses g-utils mixins with $namespace configured to 'gui' */
@@ -55,7 +55,7 @@ function compileWithEP(scss: string): string {
 function normalizeCSS(css: string): string {
   return css
     .replace(/\/\*[\s\S]*?\*\//g, '') // remove comments
-    .replace(/\s+/g, ' ')             // collapse whitespace
+    .replace(/\s+/g, ' ') // collapse whitespace
     .trim()
 }
 

@@ -46,8 +46,13 @@ export const isEpProp = (val: unknown): val is Record<string, unknown> =>
 export const buildProp = <T>(prop: T, key?: string): T => {
   if (!isObject(prop) || isEpProp(prop)) return prop
 
-  const { values, required, default: defaultValue, type, validator } =
-    prop as any
+  const {
+    values,
+    required,
+    default: defaultValue,
+    type,
+    validator,
+  } = prop as any
 
   const _validator =
     values || validator
@@ -67,12 +72,12 @@ export const buildProp = <T>(prop: T, key?: string): T => {
 
           if (!valid && allowedValues.length > 0) {
             const allowValuesText = [...new Set(allowedValues)]
-              .map((v) => JSON.stringify(v))
+              .map(v => JSON.stringify(v))
               .join(', ')
             warn(
               `Invalid prop: validation failed${
                 key ? ` for prop "${key}"` : ''
-              }. Expected one of [${allowValuesText}], got value ${JSON.stringify(val)}.`
+              }. Expected one of [${allowValuesText}], got value ${JSON.stringify(val)}.`,
             )
           }
 
@@ -111,5 +116,5 @@ export const buildProp = <T>(prop: T, key?: string): T => {
  */
 export const buildProps = <T extends Record<string, any>>(props: T): T =>
   Object.fromEntries(
-    Object.entries(props).map(([key, option]) => [key, buildProp(option, key)])
+    Object.entries(props).map(([key, option]) => [key, buildProp(option, key)]),
   ) as T

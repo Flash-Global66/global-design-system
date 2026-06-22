@@ -29,8 +29,7 @@ export const isBoolean = (val: unknown): val is boolean =>
  *   // val es string aquí
  * }
  */
-export const isString = (val: unknown): val is string =>
-  typeof val === 'string'
+export const isString = (val: unknown): val is string => typeof val === 'string'
 
 /**
  * Comprueba si un valor es un objeto no nulo (incluye arrays y objetos planos).

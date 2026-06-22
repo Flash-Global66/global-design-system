@@ -28,7 +28,7 @@ export const useRipple = (isDisabled: () => boolean) => {
   }
 
   const removeRipple = (id: number) => {
-    ripples.value = ripples.value.filter((r) => r.id !== id)
+    ripples.value = ripples.value.filter(r => r.id !== id)
   }
 
   return {

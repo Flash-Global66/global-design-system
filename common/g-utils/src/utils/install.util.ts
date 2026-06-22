@@ -30,7 +30,7 @@ export type SFCWithInstall<T> = T & Plugin
  */
 export const withInstall = <T, E extends Record<string, unknown>>(
   main: T,
-  extra?: E
+  extra?: E,
 ): SFCWithInstall<T> & E => {
   ;(main as any).install = (app: App): void => {
     for (const comp of [main, ...Object.values(extra ?? {})]) {
