@@ -21,6 +21,7 @@
     "registry": "https://npm.pkg.github.com/@flash-global"
   },
   "scripts": {
+    "prepare": "simple-git-hooks",
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
     "diff": "npx lerna diff",
@@ -30,11 +31,25 @@
     "build": "node scripts/build-components.js",
     "build:types": "npx lerna run build:types --scope \"@flash-global66/g-*\"",
     "build:publish": "yarn build && yarn publish",
-    "format": "prettier --write \"**/*.{ts,vue,scss,json,md}\" --ignore-path .gitignore",
-    "format:check": "prettier --check \"**/*.{ts,vue,scss,json,md}\" --ignore-path .gitignore",
+    "format": "prettier --write --cache .",
+    "format:check": "prettier --check --cache .",
+    "lint": "eslint . --ext .vue,.ts,.js --cache --max-warnings 0",
+    "lint:fix": "eslint . --ext .vue,.ts,.js --fix",
     "test": "vitest run",
     "test:run": "vitest run",
     "test:watch": "vitest"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{vue,ts,js,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{scss,md,json,yaml,yml}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@element-plus/utils": "0.0.5",
@@ -66,11 +81,15 @@
     "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "5.2.4",
     "babel-loader": "8.4.1",
+    "eslint-config-prettier": "9.1.0",
     "jest-mock": "28.1.3",
     "jsdom": "^29.1.1",
     "lerna": "8.2.4",
+    "lint-staged": "16.1.2",
+    "prettier": "3.6.2",
     "rollup-plugin-copy": "3.5.0",
     "sass": "1.90.0",
+    "simple-git-hooks": "2.13.0",
     "storybook": "8.6.14",
     "tailwindcss": "3.4.17",
     "typescript": "5.9.2",
@@ -80,10 +99,7 @@
     "vue": "3.5.18",
     "vue-currency-input": "3.2.2",
     "vue-loader": "16.8.3",
-    "vue-tsc": "2.2.12",
-    "prettier": "3.6.2",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.4.1"
+    "vue-tsc": "2.2.12"
   },
   "packageManager": "yarn@4.11.0"
 }
