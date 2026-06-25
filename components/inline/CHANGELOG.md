@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.3.1...@flash-global66/g-inline@0.4.0) (2026-06-25)
+
+
+### Features
+
+* **inline:** enhance inline component with new properties and styles ([#236](https://github.com/Flash-Global66/global-design-system/issues/236)) ([e251998](https://github.com/Flash-Global66/global-design-system/commit/e251998a120b70a87a3c4b69dd5a3f2d95c24b8b))
+
+
+
+
+
 ## [0.3.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.3.0...@flash-global66/g-inline@0.3.1) (2025-11-18)
 
 
