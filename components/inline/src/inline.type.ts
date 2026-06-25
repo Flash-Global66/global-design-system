@@ -4,6 +4,8 @@ export interface InlineLinks {
   ariaLabel?: string;
 }
 
-export type InlineEnum = 'success' | 'warning' | 'error' | 'info';
+export type InlineEnum = 'success' | 'warning' | 'error' | 'info' | 'card';
 
 export type InlineSize = 'md' | 'sm';
+
+export type InlineIconAlign = 'top' | 'medium' | 'bottom';
