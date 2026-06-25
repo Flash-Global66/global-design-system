@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import {
-  useFormSize,
-  useNamespace,
-} from "element-plus";
-import { computed, defineComponent, PropType, reactive, ref, watch } from "vue";
+import { useFormSize, useNamespace } from "element-plus";
+import { computed, ref } from "vue";
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { inlineEmits, inlineProps } from "./inline";
 
@@ -21,13 +18,15 @@ const inlineClass = computed(() => [
   ns.b(),
   ns.m(inlineSize.value),
   ns.m(props.type),
+  props.shadow && ns.m('shadow'),
+  !props.border && ns.m('no-border'),
+  ns.m(`icon-align-${props.iconAlign}`),
 ])
 
-async function onClose(event: MouseEvent) {
+function onClose(event: MouseEvent) {
   visible.value = false;
   emits('close', event)
 }
-
 </script>
 
 
@@ -39,11 +38,20 @@ async function onClose(event: MouseEvent) {
       ref="inlineRef"
       :aria-label="ariaLabel || 'inline'"
     >
+      <div v-if="iconFill" :class="ns.e('icon-fill')">
+        <g-icon-font
+          aria-label="icon informative"
+          :class="ns.e('icon')"
+          :name="icon"
+        />
+      </div>
       <g-icon-font
+        v-else
         aria-label="icon informative"
-        :class="[ns.e('icon')]" :name="icon"
+        :class="ns.e('icon')"
+        :name="icon"
       />
-      <div class="">
+      <div>
         <h3 v-if="title" :class="[ns.e('title')]"> {{ title }} </h3>
         <p :class="[ns.e('description')]">
           <slot name="default">
@@ -58,12 +66,17 @@ async function onClose(event: MouseEvent) {
           <button
             v-for="(link, idx) in links"
             :key="idx"
-            @click="link.action" 
-            :class="[ns.e('link')]"
+            @click="link.action()"
+            :class="[ns.e('link'), showArrow && ns.em('link', 'arrow')]"
             :aria-label="link.ariaLabel || link.label"
             type="button"
           >
             {{ link.label }}
+            <g-icon-font
+              v-if="showArrow"
+              name="regular chevron-right"
+              :class="ns.e('link-arrow')"
+            />
           </button>
         </div>
       </div>

@@ -24,6 +24,28 @@
 
   @include e("link") {
     @apply text-2 underline text-grey-700 font-medium;
+
+    @include m("arrow") {
+      @apply font-semibold flex items-center gap-xs;
+      text-decoration: none;
+    }
+  }
+
+  @include e("link-arrow") {
+    @apply text-2;
+  }
+
+  @include e("icon-fill") {
+    display: flex;
+    min-width: 2rem;
+    min-height: 2rem;
+    padding: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.25rem;
+    background: rgba(236, 240, 249, 0.40);
+    flex-shrink: 0;
   }
 
   @include e("icon") {
@@ -60,6 +82,26 @@
     }
   }
 
+  @include m("shadow") {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  @include m("no-border") {
+    border: none;
+  }
+
+  @include m("icon-align-top") {
+    @apply items-start;
+  }
+
+  @include m("icon-align-medium") {
+    @apply items-center;
+  }
+
+  @include m("icon-align-bottom") {
+    @apply items-end;
+  }
+
   @include m("success") {
     @apply border-success-bd bg-success-bg;
     @include e("icon") {
@@ -83,5 +125,11 @@
     @include e("icon") {
       @apply text-error-txt;
     }
+  }
+  @include m("card") {
+    border: none;
+    border-radius: var(--Radius-md, 0.5rem);
+    background: var(--background-secondary, #FFF);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   }
 }

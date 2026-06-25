@@ -3,7 +3,7 @@ import type Inline from "./inline.vue";
 import { useAriaProps} from "element-plus";
 import { buildProps, definePropType, isBoolean, isNumber, isString } from "element-plus/es/utils/index.mjs";
 
-import { InlineEnum, InlineLinks, InlineSize } from "./inline.type";
+import { InlineEnum, InlineIconAlign, InlineLinks, InlineSize } from "./inline.type";
 import { IconString } from "@flash-global66/g-icon-font";
 
 export const inlineProps = buildProps({
@@ -55,6 +55,41 @@ export const inlineProps = buildProps({
   links: {
     type: definePropType<InlineLinks[]>(Array),
     default: () => [],
+  },
+  /**
+   * @description activates box-shadow
+   */
+  shadow: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * @description shows/hides the border
+   */
+  border: {
+    type: Boolean,
+    default: true,
+  },
+  /**
+   * @description vertical alignment of the left icon
+   */
+  iconAlign: {
+    type: definePropType<InlineIconAlign>(String),
+    default: 'medium',
+  },
+  /**
+   * @description adds a filled background behind the left icon
+   */
+  iconFill: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * @description shows a chevron-right arrow on each link
+   */
+  showArrow: {
+    type: Boolean,
+    default: true,
   },
   ...useAriaProps(["ariaLabel"]),
 });
