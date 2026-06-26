@@ -1,0 +1,1 @@
+import{I as r,r as s,c}from"./vue.esm-bundler-BCWWDzSy.js";import{u as n}from"./index-CkP4L3ZS.js";function m(){const t=r(),e=s(0),o=11,u=c(()=>({minWidth:`${Math.max(e.value,o)}px`}));return n(t,()=>{var a,l;e.value=(l=(a=t.value)==null?void 0:a.getBoundingClientRect().width)!=null?l:0}),{calculatorRef:t,calculatorWidth:e,inputStyle:u}}export{m as u};
