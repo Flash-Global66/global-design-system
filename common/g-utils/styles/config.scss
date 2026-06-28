@@ -1,0 +1,8 @@
+// Configuración BEM del Global Design System.
+// El namespace 'gui' (Global UI) es nuestro estándar. El !default permite
+// que el sistema de módulos de Sass lo reconfigure en compilación si es necesario.
+$namespace: 'gui' !default;
+$common-separator: '-' !default;
+$element-separator: '__' !default;
+$modifier-separator: '--' !default;
+$state-prefix: 'is-' !default;

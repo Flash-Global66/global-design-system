@@ -1,0 +1,8 @@
+# SCSS usa @apply de Tailwind — prettier no soporta esta sintaxis en archivos Sass
+**/*.scss
+
+# Generados
+dist/
+node_modules/
+*.min.js
+*.min.css
