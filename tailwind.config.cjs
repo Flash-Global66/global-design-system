@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import type { Config } from "tailwindcss";
-import plugin from "tailwindcss/plugin";
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   content: [
@@ -451,4 +449,4 @@ module.exports = {
     //   })
     // })
   ],
-} satisfies Config;
+};
