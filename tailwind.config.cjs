@@ -1,10 +1,20 @@
 const path = require("path");
 const plugin = require("tailwindcss/plugin");
 
+const SPACING_TOKENS = ["xxs", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "none"];
+const SPACING_UTILITIES = ["gap", "p", "px", "py", "pt", "pb", "pl", "pr", "m", "mx", "my", "mt", "mb", "ml", "mr", "h", "w", "min-h", "min-w", "max-h", "max-w", "space-x", "space-y"];
+
 module.exports = {
   content: [
     path.resolve(__dirname, "./components/**/*.{vue,js,ts,jsx,tsx}"),
     path.resolve(__dirname, "./stories/**/*.{vue,js,ts,jsx,tsx}"),
+  ],
+  safelist: [
+    ...SPACING_UTILITIES.flatMap((u) => SPACING_TOKENS.map((t) => `${u}-${t}`)),
+    ...["xs", "sm", "md", "lg", "xl", "2xl", "none"].map((t) => `rounded-${t}`),
+    ...["sm", "md", "lg", "xl"].map((t) => `shadow-${t}`),
+    "w-fit",
+    "gap-1",
   ],
   theme: {
     extend: {
