@@ -21,6 +21,7 @@
     "registry": "https://npm.pkg.github.com/@flash-global"
   },
   "scripts": {
+    "prepare": "simple-git-hooks",
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
     "diff": "npx lerna diff",
@@ -29,7 +30,26 @@
     "reset-tags": "bash ./scripts-terminal/reset-tags.sh",
     "build": "node scripts/build-components.js",
     "build:types": "npx lerna run build:types --scope \"@flash-global66/g-*\"",
-    "build:publish": "yarn build && yarn publish"
+    "build:publish": "yarn build && yarn publish",
+    "format": "prettier --write --cache .",
+    "format:check": "prettier --check --cache .",
+    "lint": "eslint . --ext .vue,.ts,.js --cache --max-warnings 0",
+    "lint:fix": "eslint . --ext .vue,.ts,.js --fix",
+    "test": "vitest run",
+    "test:run": "vitest run",
+    "test:watch": "vitest"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{vue,ts,js,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,json,yaml,yml}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@element-plus/utils": "0.0.5",
@@ -57,17 +77,28 @@
     "@storybook/test": "8.4.7",
     "@storybook/vue3": "8.6.14",
     "@storybook/vue3-vite": "8.4.7",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "5.2.4",
+    "@vue/eslint-config-typescript": "^13",
     "babel-loader": "8.4.1",
+    "eslint": "8.57.1",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-vue": "9",
     "jest-mock": "28.1.3",
+    "jsdom": "^29.1.1",
     "lerna": "8.2.4",
+    "lint-staged": "16.1.2",
+    "prettier": "3.6.2",
     "rollup-plugin-copy": "3.5.0",
     "sass": "1.90.0",
+    "simple-git-hooks": "2.13.0",
     "storybook": "8.6.14",
     "tailwindcss": "3.4.17",
     "typescript": "5.9.2",
     "vite": "5.2.11",
     "vite-dts": "1.0.4",
+    "vitest": "2",
     "vue": "3.5.18",
     "vue-currency-input": "3.2.2",
     "vue-loader": "16.8.3",

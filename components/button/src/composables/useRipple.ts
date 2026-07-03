@@ -1,7 +1,14 @@
-import { ref } from "vue";
-import { useTimeoutFn } from "@vueuse/core";
-import type { Ripple } from "./button.type";
+import { ref } from 'vue';
+import { useTimeoutFn } from '@vueuse/core';
+import type { Ripple } from '../types/button.type';
 
+/**
+ * Gestiona el efecto visual de ondas (ripple) del botón.
+ *
+ * @param isDisabled - Función que indica si el botón está deshabilitado o cargando
+ *   (en cuyo caso no se generan ondas).
+ * @returns El estado reactivo de las ondas y los manejadores para crearlas y eliminarlas.
+ */
 export const useRipple = (isDisabled: () => boolean) => {
   const ripples = ref<Ripple[]>([]);
   let rippleCount = 0;
@@ -21,7 +28,7 @@ export const useRipple = (isDisabled: () => boolean) => {
   };
 
   const removeRipple = (id: number) => {
-    ripples.value = ripples.value.filter((r) => r.id !== id);
+    ripples.value = ripples.value.filter(r => r.id !== id);
   };
 
   return {
@@ -30,4 +37,3 @@ export const useRipple = (isDisabled: () => boolean) => {
     removeRipple,
   };
 };
-

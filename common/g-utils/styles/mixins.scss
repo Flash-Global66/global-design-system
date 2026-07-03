@@ -1,0 +1,79 @@
+// BEM mixins — mirrors element-plus/theme-chalk/src/mixins/mixins.scss
+// b/e/m/when produce CSS output IDENTICAL to element-plus theme-chalk.
+@use 'function' as *;
+// Forward config so consumers can do @forward '@flash-global66/g-utils/config' with ($namespace: 'gui')
+@forward 'config';
+@use 'config' as *;
+@use 'sass:string';
+@use 'sass:map';
+
+$B: null !default;
+$E: null !default;
+
+// BEM block
+@mixin b($block) {
+  $B: $namespace + $common-separator + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+// BEM element
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector +
+      '.' +
+      $B +
+      $element-separator +
+      $unit +
+      ','};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+}
+
+// BEM modifier
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector +
+      $selector +
+      $modifier-separator +
+      $unit +
+      ','};
+  }
+
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
+// State mixin
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}

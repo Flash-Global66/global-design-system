@@ -1,0 +1,31 @@
+{
+  "name": "@flash-global66/g-utils",
+  "version": "0.1.0",
+  "author": "Global66",
+  "license": "MIT",
+  "buildable": false,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./mixins": "./styles/mixins.scss",
+    "./config": "./styles/config.scss"
+  },
+  "sideEffects": [
+    "**/*.scss",
+    "**/*.css"
+  ],
+  "files": [
+    "index.ts",
+    "src",
+    "styles"
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  }
+}

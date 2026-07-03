@@ -1,9 +1,6 @@
-import {
-  withInstall,
-  withNoopInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
-import Button from "./src/button.vue";
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
+import Button from './src/Button.vue';
+
 export const GButton: SFCWithInstall<typeof Button> & {
   Button: typeof Button;
 } = withInstall(Button, {
@@ -11,6 +8,6 @@ export const GButton: SFCWithInstall<typeof Button> & {
 });
 export default GButton;
 
-export * from "./src/button.type";
+export * from './src/types/button.type';
 
 export type ButtonInstance = InstanceType<typeof Button>;
