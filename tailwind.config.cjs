@@ -1,9 +1,10 @@
+const path = require("path");
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   content: [
-    "./components/**/*.{vue,js,ts,jsx,tsx}",
-    "./stories/**/*.{vue,js,ts,jsx,tsx}",
+    path.resolve(__dirname, "./components/**/*.{vue,js,ts,jsx,tsx}"),
+    path.resolve(__dirname, "./stories/**/*.{vue,js,ts,jsx,tsx}"),
   ],
   theme: {
     extend: {
