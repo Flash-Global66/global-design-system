@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.2.0...@flash-global66/g-utils@0.3.0) (2026-07-08)
+
+### Features
+
+- **g-utils:** extend with array/number/function/object/dom utils and event constants ([aff35ed](https://github.com/Flash-Global66/global-design-system/commit/aff35eda24f68463678123a119da83202de0b2de))
+
 # 0.2.0 (2026-07-08)
 
 ### Features
