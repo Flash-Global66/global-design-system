@@ -1,5 +1,8 @@
 <template>
-  <g-teleport :to="appendTo" :disabled="appendTo !== 'body' ? false : !appendToBody">
+  <g-teleport
+    :to="appendTo"
+    :disabled="appendTo !== 'body' ? false : !appendToBody"
+  >
     <transition
       :name="ns.b('fade')"
       @after-enter="afterEnter"
@@ -31,20 +34,31 @@
             :aria-describedby="bodyId"
             v-bind="$attrs"
             :class="[ns.b(), direction, visible && 'open']"
-            :style="isHorizontal ? 'width: ' + drawerSize : 'height: ' + drawerSize"
+            :style="
+              isHorizontal ? 'width: ' + drawerSize : 'height: ' + drawerSize
+            "
             role="dialog"
             @click.stop
           >
             <span ref="focusStartRef" :class="ns.e('sr-focus')" tabindex="-1" />
-            <header v-if="props.withHeader" :class="[ns.e('header'), headerClass]">
-              <div v-if="props.showClose" :class="ns.em('header', 'container-close')">
+            <header
+              v-if="props.withHeader"
+              :class="[ns.e('header'), headerClass]"
+            >
+              <div
+                v-if="props.showClose"
+                :class="ns.em('header', 'container-close')"
+              >
                 <g-icon-button icon="regular times" @click="handleClose" />
               </div>
               <div
                 v-if="$slots.customHeader || title || description"
                 :class="ns.em('header', 'container-title')"
               >
-                <div v-if="title || description" :class="ns.em('header', 'title-description')">
+                <div
+                  v-if="title || description"
+                  :class="ns.em('header', 'title-description')"
+                >
                   <h5
                     v-if="title"
                     :id="titleId"
@@ -97,54 +111,65 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
-import { GOverlay } from '@flash-global66/g-overlay'
-import { GFocusTrap } from '@flash-global66/g-focus-trap'
-import { GTeleport } from '@flash-global66/g-teleport'
-import { useDialog } from '@flash-global66/g-dialog'
-import { addUnit } from 'element-plus/es/utils/index'
-import { GButton } from '@flash-global66/g-button'
-import { GIconButton } from '@flash-global66/g-icon-button'
-import { useNamespace } from 'element-plus'
-import { drawerEmits, drawerProps } from './drawer'
+import { GOverlay } from '@flash-global66/g-overlay';
+import { GFocusTrap } from '@flash-global66/g-focus-trap';
+import { GTeleport } from '@flash-global66/g-teleport';
+import { useDialog } from '@flash-global66/g-dialog';
+import { GButton } from '@flash-global66/g-button';
+import { GIconButton } from '@flash-global66/g-icon-button';
+import { addUnit, useNamespace } from '@flash-global66/g-utils';
+import { drawerEmits, drawerProps } from './drawer';
 
 defineOptions({
   name: 'GDrawer',
-  inheritAttrs: false
-})
+  inheritAttrs: false,
+});
 
-const props = defineProps(drawerProps)
-defineEmits(drawerEmits)
+const props = defineProps(drawerProps);
+defineEmits(drawerEmits);
 
-const drawerRef = ref<HTMLElement>()
-const focusStartRef = ref<HTMLElement>()
-const ns = useNamespace('drawer')
+const drawerRef = ref<HTMLElement>();
+const focusStartRef = ref<HTMLElement>();
+const ns = useNamespace('drawer');
 
-const isHorizontal = computed(() => props.direction === 'rtl' || props.direction === 'ltr')
-const closeOnPressEscape = computed(() => props.closeOnPressEscape)
-const closeOnClickModal = computed(() => props.closeOnClickModal)
+const isHorizontal = computed(
+  () => props.direction === 'rtl' || props.direction === 'ltr',
+);
+const closeOnPressEscape = computed(() => props.closeOnPressEscape);
+const closeOnClickModal = computed(() => props.closeOnClickModal);
 
-const windowWidth = ref(window.innerWidth)
+const windowWidth = ref(window.innerWidth);
 
 const DEFAULT_DRAWER_SIZE = '400px';
 
 const drawerSize = computed(() => {
   let sizeCalculate = props.size;
-  const isResponsiveObj = typeof props.responsiveSize === 'object' && props.responsiveSize !== null;
+  const isResponsiveObj =
+    typeof props.responsiveSize === 'object' && props.responsiveSize !== null;
 
-  if (windowWidth.value < 576) { //xs
+  if (windowWidth.value < 576) {
+    //xs
     sizeCalculate = '100%';
-  } else if (windowWidth.value < 768) { // sm
-    sizeCalculate = isResponsiveObj ? props.responsiveSize.sm || DEFAULT_DRAWER_SIZE : DEFAULT_DRAWER_SIZE;
-  } else if (windowWidth.value < 992) { // md
-    sizeCalculate = isResponsiveObj ? props.responsiveSize.md || DEFAULT_DRAWER_SIZE : DEFAULT_DRAWER_SIZE;
-  } else { // lg
-    sizeCalculate = isResponsiveObj ? props.responsiveSize.lg || props.size || DEFAULT_DRAWER_SIZE : props.size || DEFAULT_DRAWER_SIZE;
+  } else if (windowWidth.value < 768) {
+    // sm
+    sizeCalculate = isResponsiveObj
+      ? props.responsiveSize.sm || DEFAULT_DRAWER_SIZE
+      : DEFAULT_DRAWER_SIZE;
+  } else if (windowWidth.value < 992) {
+    // md
+    sizeCalculate = isResponsiveObj
+      ? props.responsiveSize.md || DEFAULT_DRAWER_SIZE
+      : DEFAULT_DRAWER_SIZE;
+  } else {
+    // lg
+    sizeCalculate = isResponsiveObj
+      ? props.responsiveSize.lg || props.size || DEFAULT_DRAWER_SIZE
+      : props.size || DEFAULT_DRAWER_SIZE;
   }
 
   return addUnit(sizeCalculate);
-
 });
 
 const handleResize = () => {
@@ -175,15 +200,15 @@ const {
   onCloseRequested,
   handleClose,
   displayButtons,
-  buttonLayoutClass
+  buttonLayoutClass,
 } = useDialog(props, drawerRef, {
   closeOnClickModal,
-  closeOnPressEscape
-})
+  closeOnPressEscape,
+});
 
 defineExpose({
   handleClose,
   afterEnter,
-  afterLeave
-})
+  afterLeave,
+});
 </script>

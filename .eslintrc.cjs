@@ -20,4 +20,71 @@ module.exports = {
     // Los utils internos de librería usan `any` para manipulación genérica de tipos
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  overrides: [
+    {
+      // EP Extraction guard: packages already migrated off element-plus must
+      // never re-introduce a direct dependency on it, in either their src/
+      // implementation or their public barrel (index.ts).
+      files: ['components/*/src/**', 'common/*/src/**', 'components/*/index.ts'],
+      excludedFiles: [
+        // Islands: intentionally wrap/re-export a real element-plus component.
+        'components/badge/**',
+        'components/menu/**',
+        'components/config-provider/**',
+        'components/popover/**',
+        'components/radio-group/**',
+        'components/form-item/**',
+        'components/skeleton/**',
+        'components/infinite-scroll/**',
+        // Deferred: need hooks/utilities outside this change's scope
+        // (useAriaProps, useLocale, usePopper*, useSizeProp, useFormSize,
+        // useSameTarget, useEscapeKeydown, iconPropType) or embed a real
+        // element-plus component.
+        'components/inline/**',
+        'components/input-tag/**',
+        'components/tooltip/**',
+        'components/toast/**',
+        'components/time-picker/**',
+        'components/table/**',
+        'components/switch/**',
+        'components/slot/**',
+        'components/select/**',
+        'components/segmented/**',
+        'components/scrollbar/**',
+        'components/radio/**',
+        'components/popper/**',
+        'components/pagination/**',
+        'components/input/**',
+        'components/input-number/**',
+        'components/focus-trap/**',
+        'components/dropdown/**',
+        'components/dialog/**',
+        'components/date-picker/**',
+        'components/collapse/**',
+        'components/checkbox/**',
+        'components/overlay/**',
+      ],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              {
+                name: 'element-plus',
+                message:
+                  'Import from @flash-global66/g-utils or @flash-global66/g-hooks instead of element-plus.',
+              },
+            ],
+            patterns: [
+              {
+                group: ['element-plus/*'],
+                message:
+                  'Import from @flash-global66/g-utils or @flash-global66/g-hooks instead of element-plus.',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
 }

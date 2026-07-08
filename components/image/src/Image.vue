@@ -1,28 +1,28 @@
 <template>
-  <figure 
-    :class="ns.b('container')" 
+  <figure
+    :class="ns.b('container')"
     ref="imageContainer"
     :style="{
       width: sizeValue,
       height: sizeValue,
       minWidth: sizeValue,
-      minHeight: sizeValue
+      minHeight: sizeValue,
     }"
   >
-    <img 
+    <img
       v-if="isLoaded && !hasError"
-      :src="imageSrc" 
-      :alt="name" 
+      :src="imageSrc"
+      :alt="name"
       :class="ns.b()"
       @error="handleImageError"
     />
-    <div 
+    <div
       v-else-if="!hasError"
       :class="ns.e('placeholder')"
       role="img"
       :aria-label="`Cargando imagen: ${name}`"
     />
-    <div 
+    <div
       v-else
       :class="[ns.e('placeholder'), `text-size-${size}`]"
       role="img"
@@ -33,9 +33,8 @@
   </figure>
 </template>
 
-
 <script setup lang="ts">
-import { useNamespace } from "element-plus";
+import { useNamespace } from '@flash-global66/g-utils';
 import { imageProps, validateImageProps } from './image.props';
 import { useImage } from './hooks/use-image';
 
@@ -51,6 +50,6 @@ const {
   imageSrc,
   imageContainer,
   handleImageError,
-  hasError
+  hasError,
 } = useImage(props);
 </script>

@@ -29,6 +29,9 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
+  "dependencies": {
+    "@flash-global66/g-utils": "^0.2.0"
+  },
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.0.8"

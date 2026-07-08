@@ -25,6 +25,10 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
+  "dependencies": {
+    "@flash-global66/g-hooks": "^0.1.0",
+    "@flash-global66/g-utils": "^0.2.0"
+  },
   "peerDependencies": {
     "@flash-global66/g-collection": "^0.1.1",
     "@vueuse/core": "^12.4.0",

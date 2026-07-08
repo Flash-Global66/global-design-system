@@ -99,15 +99,15 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "element-plus";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import QuoteInput from "./components/quote-input.vue";
-import { quoteProps, quoteEmits } from "./quote";
-import { useQuote } from "./use-quote";
+import { useNamespace } from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import QuoteInput from './components/quote-input.vue';
+import { quoteProps, quoteEmits } from './quote';
+import { useQuote } from './use-quote';
 
-defineOptions({ name: "GQuote" });
+defineOptions({ name: 'GQuote' });
 
-const ns = useNamespace("quote");
+const ns = useNamespace('quote');
 const props = defineProps(quoteProps);
 const emit = defineEmits(quoteEmits);
 

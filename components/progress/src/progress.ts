@@ -1,6 +1,6 @@
-import type { ExtractPropTypes, SVGAttributes } from "vue";
-import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
-import type Progress from "./progress.vue";
+import type { ExtractPropTypes, SVGAttributes } from 'vue';
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import type Progress from './progress.vue';
 
 export type ProgressColor = { color: string; percentage: number };
 export type ProgressFn = (percentage: number) => string;
@@ -11,8 +11,8 @@ export const progressProps = buildProps({
    */
   type: {
     type: String,
-    default: "line",
-    values: ["line", "circle", "dashboard"],
+    default: 'line',
+    values: ['line', 'circle', 'dashboard'],
   },
   /**
    * @description percentage, required
@@ -27,8 +27,8 @@ export const progressProps = buildProps({
    */
   status: {
     type: String,
-    default: "primary",
-    values: ["primary", "success", "error", "warning"],
+    default: 'primary',
+    values: ['primary', 'success', 'error', 'warning'],
   },
   /**
    * @description set indeterminate progress
@@ -52,8 +52,8 @@ export const progressProps = buildProps({
    * @description butt/circle/dashboard type shape at the end path
    */
   strokeLinecap: {
-    type: definePropType<NonNullable<SVGAttributes["stroke-linecap"]>>(String),
-    default: "round",
+    type: definePropType<NonNullable<SVGAttributes['stroke-linecap']>>(String),
+    default: 'round',
   },
   /**
    * @description whether to place the percentage inside progress bar, only works when `type` is 'line'

@@ -13,7 +13,9 @@
     />
 
     <div :class="ns.e('content')">
-      <div :class="[ns.e('header'), { [ns.is('with-file-list')]: showFileList }]">
+      <div
+        :class="[ns.e('header'), { [ns.is('with-file-list')]: showFileList }]"
+      >
         <div :class="ns.e('header-content')">
           <p :class="ns.e('title')">
             {{ title }}
@@ -45,7 +47,11 @@
       </div>
       <div v-if="uploadState === 'loading'" :class="ns.e('files-list')">
         <div :class="ns.e('files-container')">
-          <div v-for="(file, index) in modelValue" :key="index" :class="ns.e('file-item')">
+          <div
+            v-for="(file, index) in modelValue"
+            :key="index"
+            :class="ns.e('file-item')"
+          >
             <div :class="ns.e('file-item-content')">
               <g-progress
                 :percentage="fileProgress[index] || 0"
@@ -66,16 +72,26 @@
       </div>
 
       <div v-else-if="showFileList" :class="ns.em('file-list', 'clean')">
-        <div v-for="(file, index) in safeFiles" :key="index" :class="ns.e('item')">
+        <div
+          v-for="(file, index) in safeFiles"
+          :key="index"
+          :class="ns.e('item')"
+        >
           <div :class="ns.e('item-content')">
             <div :class="ns.e('file-status-icon')">
               <g-icon-font
-                :name="getFileStatusForIndex(index) === FILE_STATUS.ERROR ? 'solid times' : 'solid check'"
+                :name="
+                  getFileStatusForIndex(index) === FILE_STATUS.ERROR
+                    ? 'solid times'
+                    : 'solid check'
+                "
                 :class="[
                   ns.e('icon'),
                   {
-                    [ns.is('success')]: getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
-                    [ns.is('error')]: getFileStatusForIndex(index) === FILE_STATUS.ERROR,
+                    [ns.is('success')]:
+                      getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
+                    [ns.is('error')]:
+                      getFileStatusForIndex(index) === FILE_STATUS.ERROR,
                   },
                 ]"
               />
@@ -84,8 +100,10 @@
               :class="[
                 ns.e('file-name'),
                 {
-                  [ns.is('error')]: getFileStatusForIndex(index) === FILE_STATUS.ERROR,
-                  [ns.is('success')]: getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
+                  [ns.is('error')]:
+                    getFileStatusForIndex(index) === FILE_STATUS.ERROR,
+                  [ns.is('success')]:
+                    getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
                 },
               ]"
             >
@@ -93,7 +111,9 @@
             </span>
           </div>
           <div :class="ns.e('item-actions')">
-            <span v-if="props.showFileSize" :class="ns.e('file-size')">{{ formatFileSize(file.size) }}</span>
+            <span v-if="props.showFileSize" :class="ns.e('file-size')">{{
+              formatFileSize(file.size)
+            }}</span>
             <g-icon-button
               v-if="props.showRemoveButton"
               icon="solid trash-alt"
@@ -105,12 +125,12 @@
           </div>
         </div>
       </div>
-      
+
       <div v-if="$slots['extra-content']" :class="ns.e('extra-content')">
         <slot name="extra-content" />
       </div>
     </div>
-    
+
     <!-- Errores de validación -->
     <div v-if="primaryError" :class="ns.e('validation-errors')">
       <p :class="ns.e('error-text')">
@@ -121,69 +141,88 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from "vue";
-import { useNamespace } from "element-plus";
-import { GIconButton } from "@flash-global66/g-icon-button";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { GProgress } from "@flash-global66/g-progress";
-import { FILE_STATUS } from "./attach-file.type";
-import type { DefaultTypeProps } from "./attach-file.type";
-import { formatFileSize, getFileStatus, openFileDialogHelper, createRemoveFileHandler, getPrimaryError } from "./attach-file-helpers";
+import { ref, computed } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { GIconButton } from '@flash-global66/g-icon-button';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GProgress } from '@flash-global66/g-progress';
+import { FILE_STATUS } from './attach-file.type';
+import type { DefaultTypeProps } from './attach-file.type';
+import {
+  formatFileSize,
+  getFileStatus,
+  openFileDialogHelper,
+  createRemoveFileHandler,
+  getPrimaryError,
+} from './attach-file-helpers';
 
-const ns = useNamespace("attach-file");
+const ns = useNamespace('attach-file');
 
 const props = withDefaults(defineProps<DefaultTypeProps>(), {
-  mode: "upload",
+  mode: 'upload',
   uploading: false,
   uploadError: false,
   fileStatuses: () => ({}),
   errors: () => [],
   fileErrors: () => ({}),
   fileProgress: () => ({}),
-  downloadUrl: "",
-  downloadLinkText: "",
+  downloadUrl: '',
+  downloadLinkText: '',
   showUploadButton: true,
 });
 
 const emit = defineEmits([
-  "update:modelValue",
-  "change",
-  "error", 
-  "onRetry",
-  "download",
-  "file-input-change"
+  'update:modelValue',
+  'change',
+  'error',
+  'onRetry',
+  'download',
+  'file-input-change',
 ]);
 
 const hiddenFileInput = ref<HTMLInputElement>();
 
 function handleButtonClick() {
-  if (props.mode === "download") {
-    emit("download");
+  if (props.mode === 'download') {
+    emit('download');
   } else if (props.uploadError || Object.keys(props.fileErrors).length > 0) {
-    emit("onRetry");
+    emit('onRetry');
   } else {
     openFileDialogHelper(hiddenFileInput, props.disabled, props.uploading);
   }
 }
 
 function handleFileInputChange(event: Event) {
-  emit("file-input-change", event as Event);
+  emit('file-input-change', event as Event);
 }
 
 const safeFiles = computed(() => props.modelValue || []);
 const showFileList = computed(() => safeFiles.value.length > 0);
 const showInfoText = computed(() => props.multiple || props.uploadError);
-const uploadState = computed(() => 
-  props.uploadError ? "error" : 
-  (props.uploading ? "loading" : 
-  (safeFiles.value.length > 0 ? "success" : "default"))
+const uploadState = computed(() =>
+  props.uploadError
+    ? 'error'
+    : props.uploading
+      ? 'loading'
+      : safeFiles.value.length > 0
+        ? 'success'
+        : 'default',
 );
 const primaryError = computed(() => getPrimaryError(props.errors));
-const buttonIcon = computed(() => props.mode === "download" ? "solid download" : "solid upload");
+const buttonIcon = computed(() =>
+  props.mode === 'download' ? 'solid download' : 'solid upload',
+);
 
 const removeFile = createRemoveFileHandler(props.modelValue, emit);
 
-const getFileStatusForIndex = (index: number) => getFileStatus(index, props.fileErrors, props.uploadError, props.uploading, props.fileProgress);
+const getFileStatusForIndex = (index: number) =>
+  getFileStatus(
+    index,
+    props.fileErrors,
+    props.uploadError,
+    props.uploading,
+    props.fileProgress,
+  );
 
 function openFilePicker() {
   openFileDialogHelper(hiddenFileInput, props.disabled, props.uploading);
@@ -194,4 +233,3 @@ defineExpose({
   openFilePicker,
 });
 </script>
-

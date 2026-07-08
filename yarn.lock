@@ -951,6 +951,8 @@ __metadata:
 "@flash-global66/g-attach-file@workspace:components/attach-file":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-attach-file@workspace:components/attach-file"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-form": 1.0.0
     "@flash-global66/g-icon-button": 0.2.2
@@ -1008,6 +1010,8 @@ __metadata:
 "@flash-global66/g-chip@workspace:components/chip":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-chip@workspace:components/chip"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-dropdown": ^0.1.0
     "@flash-global66/g-icon-font": ^0.11.0
@@ -1020,6 +1024,8 @@ __metadata:
 "@flash-global66/g-collapse-transition@workspace:components/collapse-transition":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-collapse-transition@workspace:components/collapse-transition"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     element-plus: ^2.9.0
     vue: ^3.2.0
@@ -1059,6 +1065,8 @@ __metadata:
 "@flash-global66/g-country-flag@workspace:components/country-flag":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-country-flag@workspace:components/country-flag"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@vueuse/core": ^13.0.0
     element-plus: ^2.0.0
@@ -1084,6 +1092,8 @@ __metadata:
 "@flash-global66/g-dialog-alert@workspace:components/dialog-alert":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-dialog-alert@workspace:components/dialog-alert"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-checkbox": ^0.2.1
     "@flash-global66/g-config-provider": 0.0.8
@@ -1109,6 +1119,8 @@ __metadata:
 "@flash-global66/g-drawer@workspace:components/drawer":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-drawer@workspace:components/drawer"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-button": ^0.1.0
     "@flash-global66/g-dialog": ^0.0.8
@@ -1158,8 +1170,21 @@ __metadata:
 "@flash-global66/g-form@workspace:components/form":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-form@workspace:components/form"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.1.0"
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     element-plus: ^2.9.0
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
+"@flash-global66/g-hooks@npm:^0.1.0, @flash-global66/g-hooks@workspace:common/g-hooks":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-hooks@workspace:common/g-hooks"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
+  peerDependencies:
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1167,7 +1192,10 @@ __metadata:
 "@flash-global66/g-icon-button@workspace:components/icon-button":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-button@workspace:components/icon-button"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
+    "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.24.0
     element-plus: ^2.9.0
     vue: ^3.2.0
@@ -1177,6 +1205,8 @@ __metadata:
 "@flash-global66/g-icon-font@workspace:components/icon-font":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-font@workspace:components/icon-font"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": ^6.7.2
     "@fortawesome/vue-fontawesome": ^3.0.8
@@ -1187,6 +1217,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon@workspace:components/icon"
   dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
     vue-icomoon: "npm:^0.6.1"
   languageName: unknown
   linkType: soft
@@ -1194,6 +1225,8 @@ __metadata:
 "@flash-global66/g-image@workspace:components/image":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-image@workspace:components/image"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     vue: ^3.2.0
   languageName: unknown
@@ -1267,6 +1300,8 @@ __metadata:
 "@flash-global66/g-link@workspace:components/link":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-link@workspace:components/link"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -1282,6 +1317,8 @@ __metadata:
 "@flash-global66/g-logo@workspace:components/logo":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-logo@workspace:components/logo"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@vueuse/core": ^13.0.0
     element-plus: ^2.0.0
@@ -1335,6 +1372,8 @@ __metadata:
 "@flash-global66/g-progress@workspace:components/progress":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-progress@workspace:components/progress"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-icon-font": ^0.5.8
     element-plus: ^2.9.7
@@ -1345,6 +1384,8 @@ __metadata:
 "@flash-global66/g-quote@workspace:components/quote":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-quote@workspace:components/quote"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-country-flag": ^0.0.2
     "@flash-global66/g-dropdown": ^0.1.4
@@ -1374,6 +1415,9 @@ __metadata:
 "@flash-global66/g-roving-focus-group@workspace:components/roving-focus-group":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-roving-focus-group@workspace:components/roving-focus-group"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.1.0"
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-collection": ^0.1.1
     "@vueuse/core": ^12.4.0
@@ -1395,6 +1439,8 @@ __metadata:
 "@flash-global66/g-search-input@workspace:components/search-input":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-search-input@workspace:components/search-input"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-config-provider": 0.0.8
     "@flash-global66/g-icon-font": ^0.0.8
@@ -1477,6 +1523,8 @@ __metadata:
 "@flash-global66/g-tag@workspace:components/tag":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-tag@workspace:components/tag"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-icon-font": ^0.0.8
     element-plus: ^2.9.0
@@ -1487,6 +1535,8 @@ __metadata:
 "@flash-global66/g-teleport@workspace:components/teleport":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-teleport@workspace:components/teleport"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -1533,6 +1583,8 @@ __metadata:
 "@flash-global66/g-utils@npm:^0.2.0, @flash-global66/g-utils@workspace:common/g-utils":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-utils@workspace:common/g-utils"
+  dependencies:
+    lodash-unified: "npm:1.0.3"
   peerDependencies:
     vue: ^3.2.0
   languageName: unknown

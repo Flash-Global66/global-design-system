@@ -28,6 +28,9 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
+  "dependencies": {
+    "@flash-global66/g-utils": "^0.2.0"
+  },
   "peerDependencies": {
     "@flash-global66/g-country-flag": "^0.0.2",
     "@flash-global66/g-dropdown": "^0.1.4",

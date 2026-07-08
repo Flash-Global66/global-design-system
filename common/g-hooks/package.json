@@ -1,0 +1,27 @@
+{
+  "name": "@flash-global66/g-hooks",
+  "version": "0.1.0",
+  "author": "Global66",
+  "license": "MIT",
+  "buildable": false,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "files": [
+    "index.ts",
+    "src"
+  ],
+  "dependencies": {
+    "@flash-global66/g-utils": "^0.2.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  }
+}

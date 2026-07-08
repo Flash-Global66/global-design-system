@@ -28,6 +28,10 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
+  "dependencies": {
+    "@flash-global66/g-hooks": "^0.1.0",
+    "@flash-global66/g-utils": "^0.2.0"
+  },
   "peerDependencies": {
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"

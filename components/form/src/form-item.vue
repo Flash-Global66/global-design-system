@@ -22,49 +22,47 @@ import {
   reactive,
   ref,
   toRefs,
-  useSlots,
-  watch,
-} from "vue";
-import AsyncValidator from "async-validator";
-import { clone } from "lodash-unified";
-import { refDebounced } from "@vueuse/core";
+} from 'vue';
+import AsyncValidator from 'async-validator';
+import { clone } from 'lodash-unified';
+import { refDebounced } from '@vueuse/core';
 import {
   ensureArray,
   getProp,
   isArray,
   isFunction,
   isString,
-  Arrayable,
-} from "element-plus/es/utils/index.mjs";
-import { useId, useNamespace } from "element-plus";
-import { formItemProps } from "./form-item";
-import { formContextKey, formItemContextKey } from "./constants";
+  useNamespace,
+} from '@flash-global66/g-utils';
+import type { Arrayable } from '@flash-global66/g-utils';
+import { useId } from '@flash-global66/g-hooks';
+import { formItemProps } from './form-item';
+import { formContextKey, formItemContextKey } from './constants';
 
-import type { RuleItem } from "async-validator";
+import type { RuleItem } from 'async-validator';
 import type {
   FormItemContext,
   FormItemRule,
   FormValidateFailure,
-} from "./types";
-import type { FormItemValidateState } from "./form-item";
+} from './types';
+import type { FormItemValidateState } from './form-item';
 
 defineOptions({
-  name: "FormItem",
+  name: 'FormItem',
 });
 const props = defineProps(formItemProps);
 
 const formContext = inject(formContextKey, undefined);
-const parentFormItemContext = inject(formItemContextKey, undefined);
 
-const ns = useNamespace("form-item");
+const ns = useNamespace('form-item');
 
-const labelId = useId().value
+const labelId = useId().value;
 
 const inputIds = ref<string[]>([]);
 
-const validateState = ref<FormItemValidateState>("");
+const validateState = ref<FormItemValidateState>('');
 const validateStateDebounced = refDebounced(validateState, 100);
-const validateMessage = ref("");
+const validateMessage = ref('');
 const formItemRef = ref<HTMLDivElement>();
 // special inline value.
 let initialValue: any = undefined;
@@ -72,17 +70,15 @@ let isResettingField = false;
 
 const formItemClasses = computed(() => [
   ns.b(),
-  ns.is("error", validateState.value === "error"),
-  ns.is("validating", validateState.value === "validating"),
-  ns.is("success", validateState.value === "success"),
+  ns.is('error', validateState.value === 'error'),
+  ns.is('validating', validateState.value === 'validating'),
+  ns.is('success', validateState.value === 'success'),
 ]);
 
 const propString = computed(() => {
-  if (!props.prop) return "";
-  return isString(props.prop) ? props.prop : props.prop.join(".");
+  if (!props.prop) return '';
+  return isString(props.prop) ? props.prop : props.prop.join('.');
 });
-
-const isNested = !!parentFormItemContext;
 
 const fieldValue = computed(() => {
   const model = formContext?.model;
@@ -93,7 +89,6 @@ const fieldValue = computed(() => {
 });
 
 const normalizedRules = computed(() => {
-
   const rules: FormItemRule[] = [];
 
   if (props.rules) {
@@ -104,7 +99,7 @@ const normalizedRules = computed(() => {
   if (formRules && props.prop) {
     const _rules = getProp<Arrayable<FormItemRule> | undefined>(
       formRules,
-      props.prop
+      props.prop,
     ).value;
     if (_rules) {
       rules.push(...ensureArray(_rules));
@@ -120,7 +115,7 @@ const getFilteredRule = (trigger: string) => {
   const rules = normalizedRules.value;
   return (
     rules
-      .filter((rule) => {
+      .filter(rule => {
         if (!rule.trigger || !trigger) return true;
         if (isArray(rule.trigger)) {
           return rule.trigger.includes(trigger);
@@ -134,20 +129,14 @@ const getFilteredRule = (trigger: string) => {
   );
 };
 
-const isRequired = computed(() =>
-  normalizedRules.value.some((rule) => rule.required)
-);
-
 const shouldShowError = computed(
   () =>
-    validateStateDebounced.value === "error" &&
-    props.showMessage === "parent"
+    validateStateDebounced.value === 'error' && props.showMessage === 'parent',
 );
 
 const shouldShowErrorChild = computed(
   () =>
-    validateStateDebounced.value === "error" &&
-    props.showMessage === "child"
+    validateStateDebounced.value === 'error' && props.showMessage === 'child',
 );
 
 const setValidationState = (state: FormItemValidateState) => {
@@ -160,18 +149,18 @@ const onValidationFailed = (error: FormValidateFailure) => {
     console.error(error);
   }
 
-  setValidationState("error");
+  setValidationState('error');
   validateMessage.value = errors
-    ? errors?.[0]?.message ?? `${props.prop} es requerido`
-    : "";
+    ? (errors?.[0]?.message ?? `${props.prop} es requerido`)
+    : '';
 
-  formContext?.emit("validate", props.prop!, false, validateMessage.value);
+  formContext?.emit('validate', props.prop!, false, validateMessage.value);
 };
 
 const onValidationSucceeded = () => {
-  setValidationState("success");
-  validateMessage.value = "";
-  formContext?.emit("validate", props.prop!, true, "");
+  setValidationState('success');
+  validateMessage.value = '';
+  formContext?.emit('validate', props.prop!, true, '');
 };
 
 const doValidate = async (rules: RuleItem[]): Promise<true> => {
@@ -191,7 +180,7 @@ const doValidate = async (rules: RuleItem[]): Promise<true> => {
     });
 };
 
-const validate: FormItemContext["validate"] = async (trigger, callback) => {
+const validate: FormItemContext['validate'] = async (trigger, callback) => {
   // skip validation if its resetting
   if (isResettingField || !props.prop) {
     return false;
@@ -209,7 +198,7 @@ const validate: FormItemContext["validate"] = async (trigger, callback) => {
     return true;
   }
 
-  setValidationState("validating");
+  setValidationState('validating');
 
   return doValidate(rules)
     .then(() => {
@@ -223,13 +212,13 @@ const validate: FormItemContext["validate"] = async (trigger, callback) => {
     });
 };
 
-const clearValidate: FormItemContext["clearValidate"] = () => {
-  setValidationState("");
-  validateMessage.value = "";
+const clearValidate: FormItemContext['clearValidate'] = () => {
+  setValidationState('');
+  validateMessage.value = '';
   isResettingField = false;
 };
 
-const resetField: FormItemContext["resetField"] = async () => {
+const resetField: FormItemContext['resetField'] = async () => {
   const model = formContext?.model;
   if (!model || !props.prop) return;
 
@@ -246,14 +235,14 @@ const resetField: FormItemContext["resetField"] = async () => {
   isResettingField = false;
 };
 
-const addInputId: FormItemContext["addInputId"] = (id: string) => {
+const addInputId: FormItemContext['addInputId'] = (id: string) => {
   if (!inputIds.value.includes(id)) {
     inputIds.value.push(id);
   }
 };
 
-const removeInputId: FormItemContext["removeInputId"] = (id: string) => {
-  inputIds.value = inputIds.value.filter((listId) => listId !== id);
+const removeInputId: FormItemContext['removeInputId'] = (id: string) => {
+  inputIds.value = inputIds.value.filter(listId => listId !== id);
 };
 
 const context: FormItemContext = reactive({

@@ -1,9 +1,5 @@
-import IconFont from './src/Icon.vue'
-import {
-  withInstall,
-  withNoopInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
+import IconFont from './src/Icon.vue';
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
 export const GIconFont: SFCWithInstall<typeof IconFont> & {
   IconFont: typeof IconFont;
 } = withInstall(IconFont, {

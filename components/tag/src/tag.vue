@@ -39,7 +39,10 @@
         <slot v-else />
       </span>
       <slot name="suffix" v-if="$slots.suffix || suffixIcon || closable">
-        <span v-if="suffixIcon && !closable" :class="ns.em(size, 'suffix-icon')">
+        <span
+          v-if="suffixIcon && !closable"
+          :class="ns.em(size, 'suffix-icon')"
+        >
           <g-icon-font :name="suffixIcon" />
         </span>
         <span
@@ -55,46 +58,46 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import type { VNode } from 'vue'
+import { computed } from 'vue';
+import type { VNode } from 'vue';
 
-import { useNamespace } from 'element-plus'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { tagEmits, tagProps } from './tag'
+import { useNamespace } from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { tagEmits, tagProps } from './tag';
 
 defineOptions({
-  name: 'GTag'
-})
-const props = defineProps(tagProps)
-const emit = defineEmits(tagEmits)
+  name: 'GTag',
+});
+const props = defineProps(tagProps);
+const emit = defineEmits(tagEmits);
 
-const ns = useNamespace('tag')
+const ns = useNamespace('tag');
 
 const containerKls = computed(() => {
-  const { type, effect, closable, size } = props
+  const { type, effect, closable, size } = props;
   return [
     ns.b(),
     ns.is('closable', closable),
     ns.e(type || 'grey'),
     ns.e(size),
-    ns.em(effect, type || 'grey')
-  ]
-})
+    ns.em(effect, type || 'grey'),
+  ];
+});
 
 // methods
 const handleClose = (event: MouseEvent) => {
-  emit('close', event)
-}
+  emit('close', event);
+};
 
 const handleClick = (event: MouseEvent) => {
-  emit('click', event)
-}
+  emit('click', event);
+};
 
 const handleVNodeMounted = (vnode: VNode) => {
-  // @ts-ignore
+  // @ts-expect-error -- `bum` is an internal Vue instance hook array, not part of public types
   if (vnode?.component?.subTree?.component?.bum) {
-    // @ts-ignore
-    vnode.component.subTree.component.bum = null
+    // @ts-expect-error -- `bum` is an internal Vue instance hook array, not part of public types
+    vnode.component.subTree.component.bum = null;
   }
-}
+};
 </script>
