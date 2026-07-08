@@ -5,85 +5,85 @@
 </template>
 
 <script lang="ts" setup>
-import { useNamespace } from 'element-plus'
-import type { RendererElement } from 'vue'
+import { useNamespace } from '@flash-global66/g-utils';
+import type { RendererElement } from 'vue';
 
 defineOptions({
-  name: 'GCollapseTransition'
-})
+  name: 'GCollapseTransition',
+});
 
-const ns = useNamespace('collapse-transition')
+const ns = useNamespace('collapse-transition');
 
 const reset = (el: RendererElement) => {
-  el.style.maxHeight = ''
-  el.style.overflow = el.dataset.oldOverflow
-  el.style.paddingTop = el.dataset.oldPaddingTop
-  el.style.paddingBottom = el.dataset.oldPaddingBottom
-}
+  el.style.maxHeight = '';
+  el.style.overflow = el.dataset.oldOverflow;
+  el.style.paddingTop = el.dataset.oldPaddingTop;
+  el.style.paddingBottom = el.dataset.oldPaddingBottom;
+};
 
 const on = {
   beforeEnter(el: RendererElement) {
-    if (!el.dataset) el.dataset = {}
+    if (!el.dataset) el.dataset = {};
 
-    el.dataset.oldPaddingTop = el.style.paddingTop
-    el.dataset.oldPaddingBottom = el.style.paddingBottom
-    if (el.style.height) el.dataset.elExistsHeight = el.style.height
+    el.dataset.oldPaddingTop = el.style.paddingTop;
+    el.dataset.oldPaddingBottom = el.style.paddingBottom;
+    if (el.style.height) el.dataset.elExistsHeight = el.style.height;
 
-    el.style.maxHeight = 0
-    el.style.paddingTop = 0
-    el.style.paddingBottom = 0
+    el.style.maxHeight = 0;
+    el.style.paddingTop = 0;
+    el.style.paddingBottom = 0;
   },
 
   enter(el: RendererElement) {
     requestAnimationFrame(() => {
-      el.dataset.oldOverflow = el.style.overflow
+      el.dataset.oldOverflow = el.style.overflow;
       if (el.dataset.elExistsHeight) {
-        el.style.maxHeight = el.dataset.elExistsHeight
+        el.style.maxHeight = el.dataset.elExistsHeight;
       } else if (el.scrollHeight !== 0) {
-        el.style.maxHeight = `${el.scrollHeight}px`
+        el.style.maxHeight = `${el.scrollHeight}px`;
       } else {
-        el.style.maxHeight = 0
+        el.style.maxHeight = 0;
       }
 
-      el.style.paddingTop = el.dataset.oldPaddingTop
-      el.style.paddingBottom = el.dataset.oldPaddingBottom
-      el.style.overflow = 'hidden'
-    })
+      el.style.paddingTop = el.dataset.oldPaddingTop;
+      el.style.paddingBottom = el.dataset.oldPaddingBottom;
+      el.style.overflow = 'hidden';
+    });
   },
 
   afterEnter(el: RendererElement) {
-    el.style.maxHeight = ''
-    el.style.overflow = el.dataset.oldOverflow
+    el.style.maxHeight = '';
+    el.style.overflow = el.dataset.oldOverflow;
   },
 
   enterCancelled(el: RendererElement) {
-    reset(el)
+    reset(el);
   },
 
   beforeLeave(el: RendererElement) {
-    if (!el.dataset) el.dataset = {}
-    el.dataset.oldPaddingTop = el.style.paddingTop
-    el.dataset.oldPaddingBottom = el.style.paddingBottom
-    el.dataset.oldOverflow = el.style.overflow
+    if (!el.dataset) el.dataset = {};
+    el.dataset.oldPaddingTop = el.style.paddingTop;
+    el.dataset.oldPaddingBottom = el.style.paddingBottom;
+    el.dataset.oldOverflow = el.style.overflow;
 
-    el.style.maxHeight = `${el.scrollHeight}px`
-    el.style.overflow = 'hidden'
+    el.style.maxHeight = `${el.scrollHeight}px`;
+    el.style.overflow = 'hidden';
   },
 
   leave(el: RendererElement) {
     if (el.scrollHeight !== 0) {
-      el.style.maxHeight = 0
-      el.style.paddingTop = 0
-      el.style.paddingBottom = 0
+      el.style.maxHeight = 0;
+      el.style.paddingTop = 0;
+      el.style.paddingBottom = 0;
     }
   },
 
   afterLeave(el: RendererElement) {
-    reset(el)
+    reset(el);
   },
 
   leaveCancelled(el: RendererElement) {
-    reset(el)
-  }
-}
+    reset(el);
+  },
+};
 </script>

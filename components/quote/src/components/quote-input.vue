@@ -120,20 +120,20 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "element-plus";
-import { GIconFont } from "@flash-global66/g-icon-font";
+import { useNamespace } from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
 import {
   GDropdown,
   GDropdownMenu,
   GDropdownItem,
-} from "@flash-global66/g-dropdown";
-import { GCountryFlag } from "@flash-global66/g-country-flag";
-import { quoteInputProps, quoteInputEmits } from "./quote-input";
-import { useQuoteInput } from "./use-quote-input";
+} from '@flash-global66/g-dropdown';
+import { GCountryFlag } from '@flash-global66/g-country-flag';
+import { quoteInputProps, quoteInputEmits } from './quote-input';
+import { useQuoteInput } from './use-quote-input';
 
-defineOptions({ name: "GQuoteInput" });
+defineOptions({ name: 'GQuoteInput' });
 
-const ns = useNamespace("quote-input");
+const ns = useNamespace('quote-input');
 const props = defineProps(quoteInputProps);
 const emit = defineEmits(quoteInputEmits);
 

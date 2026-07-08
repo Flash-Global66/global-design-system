@@ -17,18 +17,18 @@ import {
   provide,
   ref,
   unref,
-} from 'vue'
-import { useId, EVENT_CODE } from 'element-plus'
-import { composeEventHandlers } from 'element-plus/es/utils/index'
+} from 'vue';
+import { useId } from '@flash-global66/g-hooks';
+import { EVENT_CODE, composeEventHandlers } from '@flash-global66/g-utils';
 import {
   GCollectionItem as GRovingFocusCollectionItem,
   ROVING_FOCUS_COLLECTION_INJECTION_KEY,
-} from './roving-focus-group'
+} from './roving-focus-group';
 import {
   ROVING_FOCUS_GROUP_INJECTION_KEY,
   ROVING_FOCUS_GROUP_ITEM_INJECTION_KEY,
-} from './tokens'
-import { focusFirst, getFocusIntent, reorderArray } from './utils'
+} from './tokens';
+import { focusFirst, getFocusIntent, reorderArray } from './utils';
 
 export default defineComponent({
   components: {
@@ -48,89 +48,87 @@ export default defineComponent({
   setup(props, { emit }) {
     const { currentTabbedId, loop, onItemFocus, onItemShiftTab } = inject(
       ROVING_FOCUS_GROUP_INJECTION_KEY,
-      undefined
-    )!
+      undefined,
+    )!;
 
     const { getItems } = inject(
       ROVING_FOCUS_COLLECTION_INJECTION_KEY,
-      undefined
-    )!
+      undefined,
+    )!;
 
-    const id = useId()
-    const rovingFocusGroupItemRef = ref<HTMLElement>()
+    const id = useId();
+    const rovingFocusGroupItemRef = ref<HTMLElement>();
 
     const handleMousedown = composeEventHandlers(
       (e: Event) => {
-        emit('mousedown', e)
+        emit('mousedown', e);
       },
-      (e) => {
+      e => {
         if (!props.focusable) {
-          e.preventDefault()
+          e.preventDefault();
         } else {
-          onItemFocus(unref(id))
+          onItemFocus(unref(id));
         }
-      }
-    )
+      },
+    );
 
     const handleFocus = composeEventHandlers(
       (e: Event) => {
-        emit('focus', e)
+        emit('focus', e);
       },
       () => {
-        onItemFocus(unref(id))
-      }
-    )
+        onItemFocus(unref(id));
+      },
+    );
 
     const handleKeydown = composeEventHandlers(
       (e: Event) => {
-        emit('keydown', e)
+        emit('keydown', e);
       },
-      (e) => {
-        const { code, shiftKey, target, currentTarget } = e as KeyboardEvent
+      e => {
+        const { code, shiftKey, target, currentTarget } = e as KeyboardEvent;
         if (code === EVENT_CODE.tab && shiftKey) {
-          onItemShiftTab()
-          return
+          onItemShiftTab();
+          return;
         }
-        if (target !== currentTarget) return
-        const focusIntent = getFocusIntent(e as KeyboardEvent)
+        if (target !== currentTarget) return;
+        const focusIntent = getFocusIntent(e as KeyboardEvent);
 
         if (focusIntent) {
-          e.preventDefault()
-          const items = getItems<typeof props>().filter(
-            (item) => item.focusable
-          )
+          e.preventDefault();
+          const items = getItems<typeof props>().filter(item => item.focusable);
 
-          let elements = items.map((item) => item.ref!)
+          let elements = items.map(item => item.ref!);
 
           switch (focusIntent) {
             case 'last': {
-              elements.reverse()
-              break
+              elements.reverse();
+              break;
             }
             case 'prev':
             case 'next': {
               if (focusIntent === 'prev') {
-                elements.reverse()
+                elements.reverse();
               }
-              const currentIdx = elements.indexOf(currentTarget as HTMLElement)
+              const currentIdx = elements.indexOf(currentTarget as HTMLElement);
               elements = loop.value
                 ? reorderArray(elements, currentIdx + 1)
-                : elements.slice(currentIdx + 1)
-              break
+                : elements.slice(currentIdx + 1);
+              break;
             }
             default: {
-              break
+              break;
             }
           }
 
           nextTick(() => {
-            focusFirst(elements)
-          })
+            focusFirst(elements);
+          });
         }
-      }
-    )
+      },
+    );
 
-    const isCurrentTab = computed(() => currentTabbedId.value === unref(id))
+    const isCurrentTab = computed(() => currentTabbedId.value === unref(id));
 
     provide(ROVING_FOCUS_GROUP_ITEM_INJECTION_KEY, {
       rovingFocusGroupItemRef,
@@ -138,14 +136,14 @@ export default defineComponent({
       handleMousedown,
       handleFocus,
       handleKeydown,
-    })
+    });
 
     return {
       id,
       handleKeydown,
       handleFocus,
       handleMousedown,
-    }
+    };
   },
-})
+});
 </script>
