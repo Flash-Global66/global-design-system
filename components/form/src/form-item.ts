@@ -1,14 +1,14 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
 
-import type { ExtractPropTypes } from "vue";
-import type { Arrayable } from "element-plus/es/utils/index.mjs";
-import type { FormItemRule, ShowMessage } from "./types";
+import type { ExtractPropTypes } from 'vue';
+import type { Arrayable } from '@flash-global66/g-utils';
+import type { FormItemRule, ShowMessage } from './types';
 
 export const formItemValidateStates = [
-  "",
-  "error",
-  "validating",
-  "success",
+  '',
+  'error',
+  'validating',
+  'success',
 ] as const;
 export type FormItemValidateState = (typeof formItemValidateStates)[number];
 
@@ -32,7 +32,7 @@ export const formItemProps = buildProps({
    */
   showMessage: {
     type: definePropType<ShowMessage>(String),
-    default: "child",
+    default: 'child',
   },
-} as const);
+});
 export type FormItemProps = ExtractPropTypes<typeof formItemProps>;
