@@ -84,16 +84,7 @@ Note: `icon` and `teleport` were not in the original 39-package exploration coun
 
 ## Batch 3 gate finding: barrels were not actually migrated
 
-Batch 2's WU-4.2.5 verification checked `src/**` only. The root `index.ts` barrel of
-14 of the 17 WU-4 packages (plus `form` and `icon-button` from WU-3) still imported
-`withInstall`/`withNoopInstall`/`SFCWithInstall` directly from `element-plus/es/utils`.
-5 packages (`link`, `image`, `roving-focus-group`, `icon`, `teleport`) were already
-clean because their barrel never used the `withInstall` pattern from element-plus.
-Fixed in this batch (commit `0c39a73`) by switching all 14 barrels to import from
-`@flash-global66/g-utils`, matching `components/button/index.ts`. Also dropped a
-pre-existing unused `withNoopInstall` import in `dialog-alert`, `icon-button`,
-`icon-font`, `search-input` barrels (dead since before this migration, exposed once
-lint ran against the edited import line).
+Batch 2's WU-4.2.5 verification checked `src/**` only. The root `index.ts` barrel of 14 of the 17 WU-4 packages (plus `form` and `icon-button` from WU-3) still imported `withInstall`/`withNoopInstall`/`SFCWithInstall` directly from `element-plus/es/utils`. 5 packages (`link`, `image`, `roving-focus-group`, `icon`, `teleport`) were already clean because their barrel never used the `withInstall` pattern from element-plus. Fixed in this batch (commit `0c39a73`) by switching all 14 barrels to import from `@flash-global66/g-utils`, matching `components/button/index.ts`. Also dropped a pre-existing unused `withNoopInstall` import in `dialog-alert`, `icon-button`, `icon-font`, `search-input` barrels (dead since before this migration, exposed once lint ran against the edited import line).
 
 ## WU-5: ESLint Guard (deps: WU-3, WU-4 complete and lint-clean)
 
