@@ -985,7 +985,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-button@workspace:components/button"
   dependencies:
-    "@flash-global66/g-utils": "npm:^0.1.0"
+    "@flash-global66/g-utils": "npm:^0.2.0"
   peerDependencies:
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.24.0
@@ -1530,7 +1530,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-utils@npm:^0.1.0, @flash-global66/g-utils@workspace:common/g-utils":
+"@flash-global66/g-utils@npm:^0.2.0, @flash-global66/g-utils@workspace:common/g-utils":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-utils@workspace:common/g-utils"
   peerDependencies:
