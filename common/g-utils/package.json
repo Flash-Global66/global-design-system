@@ -19,6 +19,9 @@
     "src",
     "styles"
   ],
+  "dependencies": {
+    "lodash-unified": "1.0.3"
+  },
   "peerDependencies": {
     "vue": "^3.2.0"
   },
