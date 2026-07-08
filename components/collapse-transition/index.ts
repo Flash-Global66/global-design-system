@@ -1,8 +1,7 @@
-import { withInstall } from 'element-plus/es/utils/index'
-import CollapseTransition from './src/collapse-transition.vue'
-import type { SFCWithInstall } from 'element-plus/es/utils/index'
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
+import CollapseTransition from './src/collapse-transition.vue';
 
 export const GCollapseTransition: SFCWithInstall<typeof CollapseTransition> =
-  withInstall(CollapseTransition)
+  withInstall(CollapseTransition);
 
-export default GCollapseTransition
+export default GCollapseTransition;

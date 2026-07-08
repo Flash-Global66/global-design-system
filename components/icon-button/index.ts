@@ -1,9 +1,5 @@
-import IconButton from "./src/IconButton.vue";
-import {
-  withInstall,
-  withNoopInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
+import IconButton from './src/IconButton.vue';
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
 
 export const GIconButton: SFCWithInstall<typeof IconButton> & {
   IconButton: typeof IconButton;

@@ -1,11 +1,12 @@
-import {
-  withInstall,
-  withNoopInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
 import DialogAlert from './src/dialog-alert.vue';
 import { openAlert } from './src/dialog-alert';
-import type { AlertButtonResult, AlertCheckboxItem, AlertOptions, AlertType } from './src/dialog.type';
+import type {
+  AlertButtonResult,
+  AlertCheckboxItem,
+  AlertOptions,
+  AlertType,
+} from './src/dialog.type';
 
 export const GDialogAlert: SFCWithInstall<typeof DialogAlert> & {
   DialogAlert: typeof DialogAlert;
