@@ -33,18 +33,18 @@ Every child PR body must include this diagram with the current PR marked `📍`,
 
 Publishes: `@flash-global66/g-utils`. Est. ~150 changed lines. Requirements: `g-utils-extended` → `component-size-validation`, `promise-type-guard`, `mutable-identity-cast`, `new-utils-unit-tested`.
 
-- [ ] T1.1 Write failing unit test for `componentSizes` (equals `['', 'default', 'small', 'large']`) — extend `common/g-utils/tests/utils/validators.util.spec.ts` or a new `tests/types/component.type.spec.ts`.
-- [ ] T1.2 Implement `componentSizes` constant next to `ComponentSize` in `common/g-utils/src/types/component.type.ts` (runtime array keeps `''` for EP validator parity; do NOT change the `ComponentSize` type union). Run `yarn test:run` → green.
-- [ ] T1.3 Write failing unit tests for `isValidComponentSize` (`true` for `''`/`'default'`/`'small'`/`'large'`, `false` for `'medium'`/`'xl'`) in `common/g-utils/tests/utils/validators.util.spec.ts`.
-- [ ] T1.4 Implement `isValidComponentSize` in `common/g-utils/src/utils/validators.util.ts` using `componentSizes.includes(val)`. Run `yarn test:run` → green.
-- [ ] T1.5 Write failing unit tests for `isPromise` (`true` for a real `Promise` and a `{then, catch}` thenable; `false` for `{}`, `null`, functions) in `common/g-utils/tests/utils/validators.util.spec.ts`.
-- [ ] T1.6 Implement `isPromise` in `common/g-utils/src/utils/validators.util.ts` (reuses existing `isObject` + `isFunction` guards — do not reimplement those). Run `yarn test:run` → green.
-- [ ] T1.7 Write failing unit test for `mutable`/`Mutable` (runtime identity — returns the same reference; type-level test that `readonly` is stripped) — new `common/g-utils/tests/types/utils.type.spec.ts`.
-- [ ] T1.8 Implement `Mutable<T>` type + `mutable()` identity cast in `common/g-utils/src/types/utils.type.ts`. Run `yarn test:run` → green.
-- [ ] T1.9 Update `common/g-utils/src/index.ts` barrel to export the 4 new symbols.
-- [ ] T1.10 Confirm zero regressions: full `yarn test:run` (129 + new tests), `yarn lint --max-warnings 0` on `common/g-utils/**`.
-- [ ] T1.11 **Do NOT touch** already-shipped helpers (`isBoolean`/`isObject`/`isString`/`buildProps`/`definePropType`/`debugWarn`/`withInstall`/`SFCWithInstall`) — verify via `git diff --stat` that only the 4 new-symbol files changed.
-- [ ] T1.12 Commit as one work unit (`feat(g-utils): add componentSizes, isValidComponentSize, isPromise, mutable`), open PR #1 (stacked-to-main, target `main`), Lerna-publish `g-utils` on merge.
+- [x] T1.1 Write failing unit test for `componentSizes` (equals `['', 'default', 'small', 'large']`) — extend `common/g-utils/tests/utils/validators.util.spec.ts` or a new `tests/types/component.type.spec.ts`.
+- [x] T1.2 Implement `componentSizes` constant next to `ComponentSize` in `common/g-utils/src/types/component.type.ts` (runtime array keeps `''` for EP validator parity; do NOT change the `ComponentSize` type union). Run `yarn test:run` → green.
+- [x] T1.3 Write failing unit tests for `isValidComponentSize` (`true` for `''`/`'default'`/`'small'`/`'large'`, `false` for `'medium'`/`'xl'`) in `common/g-utils/tests/utils/validators.util.spec.ts`.
+- [x] T1.4 Implement `isValidComponentSize` in `common/g-utils/src/utils/validators.util.ts` using `componentSizes.includes(val)`. Run `yarn test:run` → green.
+- [x] T1.5 Write failing unit tests for `isPromise` (`true` for a real `Promise` and a `{then, catch}` thenable; `false` for `{}`, `null`, functions) in `common/g-utils/tests/utils/validators.util.spec.ts`.
+- [x] T1.6 Implement `isPromise` in `common/g-utils/src/utils/validators.util.ts` (reuses existing `isObject` + `isFunction` guards — do not reimplement those). Run `yarn test:run` → green.
+- [x] T1.7 Write failing unit test for `mutable`/`Mutable` (runtime identity — returns the same reference; type-level test that `readonly` is stripped) — new `common/g-utils/tests/types/utils.type.spec.ts`.
+- [x] T1.8 Implement `Mutable<T>` type + `mutable()` identity cast in `common/g-utils/src/types/utils.type.ts`. Run `yarn test:run` → green.
+- [x] T1.9 Update `common/g-utils/src/index.ts` barrel to export the 4 new symbols. (Already covered by existing `export *` wildcards from `types/component.type`, `types/utils.type`, `utils/validators.util`; locked in with an `imports.spec.ts` regression assertion.)
+- [x] T1.10 Confirm zero regressions: full `yarn test:run` (129 + new tests), `yarn lint --max-warnings 0` on `common/g-utils/**`. (158/158 green; touched files lint-clean.)
+- [x] T1.11 **Do NOT touch** already-shipped helpers (`isBoolean`/`isObject`/`isString`/`buildProps`/`definePropType`/`debugWarn`/`withInstall`/`SFCWithInstall`) — verify via `git diff --stat` that only the 4 new-symbol files changed. (Confirmed: only additions, zero deletions, no shipped helper touched.)
+- [x] T1.12 Commit as one work unit (`feat(g-utils): add componentSizes, isValidComponentSize, isPromise, mutable`), open PR #1 (stacked-to-main, target `main`), Lerna-publish `g-utils` on merge. (Committed as `d3cb617` on `feat/ds-ep-extraction-v3-wu1`. PR opening / Lerna publish left to the user per task scope — not pushed.)
 
 ## WU-2 — `g-hooks` shared form-control composables + `g-form: useFormSize` (depends on WU-1; parallelizable with WU-4)
 
