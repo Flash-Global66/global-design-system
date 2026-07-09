@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-hooks",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Global66",
   "license": "MIT",
   "buildable": false,
@@ -13,7 +13,7 @@
     "src"
   ],
   "dependencies": {
-    "@flash-global66/g-utils": "^0.3.0"
+    "@flash-global66/g-utils": "^0.4.0"
   },
   "peerDependencies": {
     "vue": "^3.2.0"

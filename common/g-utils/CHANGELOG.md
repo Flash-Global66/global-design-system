@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.3.0...@flash-global66/g-utils@0.4.0) (2026-07-09)
+
+### Bug Fixes
+
+- **g-utils:** match element-plus isPromise (callable thenables) and restore isValidComponentSize type guard ([776c929](https://github.com/Flash-Global66/global-design-system/commit/776c9294904a3108332b5a240053f071e3d90dc4))
+
+### Features
+
+- **g-utils:** add componentSizes, isValidComponentSize, isPromise, mutable ([d3cb617](https://github.com/Flash-Global66/global-design-system/commit/d3cb617356473ceb348faa090f317922cb4bc751))
+
 # [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.2.0...@flash-global66/g-utils@0.3.0) (2026-07-08)
 
 ### Features

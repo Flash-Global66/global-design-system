@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-image",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Componente de imágenes predefinidas con diferentes tamaños",
   "author": "Global66",
   "main": "dist/index.js",
@@ -32,7 +32,7 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-utils": "^0.3.0"
+    "@flash-global66/g-utils": "^0.4.0"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
