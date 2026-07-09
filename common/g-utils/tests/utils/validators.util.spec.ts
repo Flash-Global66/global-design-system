@@ -5,6 +5,7 @@ import {
   isValidComponentSize,
   isPromise,
 } from '../../src/utils/validators.util';
+import type { ComponentSize } from '../../src/types/component.type';
 
 describe('isBoolean', () => {
   it('returns true for true', () => {
@@ -81,6 +82,15 @@ describe('isValidComponentSize', () => {
       expect(isValidComponentSize(val)).toBe(false);
     },
   );
+
+  it('narrows the type to ComponentSize | "" in TS', () => {
+    const val: string = 'default';
+    if (isValidComponentSize(val)) {
+      // TypeScript should accept this without error
+      const _narrowed: ComponentSize | '' = val;
+      expect(typeof _narrowed).toBe('string');
+    }
+  });
 });
 
 describe('isPromise', () => {
@@ -91,6 +101,13 @@ describe('isPromise', () => {
   it('returns true for a {then, catch}-shaped thenable', () => {
     const thenable = { then: () => {}, catch: () => {} };
     expect(isPromise(thenable)).toBe(true);
+  });
+
+  it('returns true for a callable thenable (a function with then/catch attached)', () => {
+    const callableThenable = () => {};
+    callableThenable.then = () => {};
+    callableThenable.catch = () => {};
+    expect(isPromise(callableThenable)).toBe(true);
   });
 
   it('returns false for a plain object', () => {
