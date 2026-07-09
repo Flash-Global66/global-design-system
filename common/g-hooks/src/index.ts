@@ -9,3 +9,5 @@
 export * from './composables/useId';
 export * from './composables/useGlobalSize';
 export * from './composables/useProp';
+export * from './composables/useAriaProps';
+export * from './composables/useSizeProp';
