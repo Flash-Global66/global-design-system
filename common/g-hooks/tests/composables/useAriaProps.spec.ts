@@ -21,6 +21,10 @@ describe('useAriaProps', () => {
     expect('ariaControls' in result).toBe(false);
   });
 
+  it('returns an empty object for an empty keys array', () => {
+    expect(useAriaProps([])).toEqual({});
+  });
+
   it('excludes unknown keys not present in ariaProps', () => {
     const result = useAriaProps(['ariaLabel', 'notARealAriaKey' as never]);
     expect(Object.keys(result)).toEqual(['ariaLabel']);

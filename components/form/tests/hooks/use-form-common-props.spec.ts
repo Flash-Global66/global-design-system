@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createApp, defineComponent, h, provide } from 'vue';
+import { createApp, defineComponent, h, provide, ref, nextTick } from 'vue';
 import type { ComputedRef } from 'vue';
 import { sizeInjectionKey } from '@flash-global66/g-hooks';
 import type { ComponentSize } from '@flash-global66/g-utils';
@@ -35,7 +35,11 @@ const mountUseFormSize = (options: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         provide(formContextKey, options.formContext as any);
       }
-      return () => h(Child, options.sizeProp ? { size: options.sizeProp } : {});
+      return () =>
+        h(
+          Child,
+          options.sizeProp !== undefined ? { size: options.sizeProp } : {},
+        );
     },
   });
 
@@ -103,5 +107,42 @@ describe('useFormSize', () => {
       formContext: { size: 'large' },
     });
     expect(size.value).toBe('default');
+  });
+
+  it('an explicit size="" prop is falsy and falls through to fallback (EP-faithful quirk)', () => {
+    // componentSizes includes '' (see g-utils), matching element-plus's own
+    // validator. Because useFormSize resolves via `size.value || ...`, an
+    // explicit but empty-string size is NOT treated as "set" — it falls
+    // through to the next precedence tier, exactly like element-plus.
+    const size = mountUseFormSize({
+      sizeProp: '',
+      fallback: 'small',
+      globalSize: 'default',
+    });
+    expect(size.value).toBe('small');
+  });
+
+  it('stays reactive: updates when the injected global-size provider changes after mount', async () => {
+    let result!: ComputedRef<ComponentSize>;
+    const globalSize = ref<ComponentSize>('small');
+
+    const Child = defineComponent({
+      setup() {
+        result = useFormSize();
+        return () => null;
+      },
+    });
+    const Parent = defineComponent({
+      setup() {
+        provide(sizeInjectionKey, { size: globalSize });
+        return () => h(Child);
+      },
+    });
+    createApp(Parent).mount(document.createElement('div'));
+
+    expect(result.value).toBe('small');
+    globalSize.value = 'large';
+    await nextTick();
+    expect(result.value).toBe('large');
   });
 });
