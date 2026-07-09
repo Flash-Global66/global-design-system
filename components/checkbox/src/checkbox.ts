@@ -1,8 +1,13 @@
-import { UPDATE_MODEL_EVENT, useAriaProps } from "element-plus";
-import { isBoolean, isNumber, isString } from "element-plus/es/utils/index.mjs";
+import {
+  UPDATE_MODEL_EVENT,
+  isBoolean,
+  isNumber,
+  isString,
+} from '@flash-global66/g-utils';
+import { useAriaProps } from '@flash-global66/g-hooks';
 
-import type { ExtractPropTypes } from "vue";
-import Checkbox from "./checkbox.vue";
+import type { ExtractPropTypes } from 'vue';
+import Checkbox from './checkbox.vue';
 
 export type CheckboxValueType = string | number | boolean;
 
@@ -93,7 +98,7 @@ export const checkboxProps = {
     type: Boolean,
     default: false,
   },
-  ...useAriaProps(["ariaControls"]),
+  ...useAriaProps(['ariaControls']),
 };
 
 export const checkboxEmits = {

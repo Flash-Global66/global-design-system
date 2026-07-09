@@ -4,14 +4,14 @@
       ns.b(),
       ns.is('disabled', disabled),
       ns.is('focus', focus),
-      ns.is('checked', modelValue === actualValue)
+      ns.is('checked', modelValue === actualValue),
     ]"
   >
     <span
       :class="[
         ns.e('input'),
         ns.is('disabled', disabled),
-        ns.is('checked', modelValue === actualValue)
+        ns.is('checked', modelValue === actualValue),
       ]"
     >
       <input
@@ -41,25 +41,30 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick } from 'vue'
-import { useNamespace } from 'element-plus'
-import { radioEmits, radioProps } from './radio'
-import { useRadio } from './use-radio'
+import { nextTick } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { radioEmits, radioProps } from './radio';
+import { useRadio } from './use-radio';
 
 defineOptions({
-  name: 'GuiRadio'
-})
+  name: 'GuiRadio',
+});
 
-const props = defineProps(radioProps)
-const emit = defineEmits(radioEmits)
+const props = defineProps(radioProps);
+const emit = defineEmits(radioEmits);
 
-const ns = useNamespace('radio')
-const { radioRef, radioGroup, focus, disabled, modelValue, actualValue, currentRipple } = useRadio(
-  props,
-  emit
-)
+const ns = useNamespace('radio');
+const {
+  radioRef,
+  radioGroup,
+  focus,
+  disabled,
+  modelValue,
+  actualValue,
+  currentRipple,
+} = useRadio(props, emit);
 
 function handleChange() {
-  nextTick(() => emit('change', modelValue.value))
+  nextTick(() => emit('change', modelValue.value));
 }
 </script>

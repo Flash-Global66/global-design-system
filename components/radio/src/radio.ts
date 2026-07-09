@@ -1,7 +1,13 @@
-import { buildProps, isBoolean, isNumber, isString } from 'element-plus/es/utils/index.mjs'
-import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from 'element-plus'
-import type { ExtractPropTypes } from 'vue'
-import type Radio from './radio.vue'
+import {
+  buildProps,
+  isBoolean,
+  isNumber,
+  isString,
+  CHANGE_EVENT,
+  UPDATE_MODEL_EVENT,
+} from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import type Radio from './radio.vue';
 
 export const radioPropsBase = buildProps({
   /**
@@ -9,7 +15,7 @@ export const radioPropsBase = buildProps({
    */
   modelValue: {
     type: [String, Number, Boolean],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description whether Radio is disabled
@@ -20,35 +26,35 @@ export const radioPropsBase = buildProps({
    */
   label: {
     type: [String, Number, Boolean],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description the value of Radio
    */
   value: {
     type: [String, Number, Boolean],
-    default: undefined
+    default: undefined,
   },
   /**
    * @description native `name` attribute
    */
   name: {
     type: String,
-    default: undefined
-  }
-})
+    default: undefined,
+  },
+});
 
 export const radioProps = buildProps({
-  ...radioPropsBase
-} as const)
+  ...radioPropsBase,
+});
 
 export const radioEmits = {
   [UPDATE_MODEL_EVENT]: (val: string | number | boolean | undefined) =>
     isString(val) || isNumber(val) || isBoolean(val),
   [CHANGE_EVENT]: (val: string | number | boolean | undefined) =>
-    isString(val) || isNumber(val) || isBoolean(val)
-}
+    isString(val) || isNumber(val) || isBoolean(val),
+};
 
-export type RadioProps = ExtractPropTypes<typeof radioProps>
-export type RadioEmits = typeof radioEmits
-export type RadioInstance = InstanceType<typeof Radio>
+export type RadioProps = ExtractPropTypes<typeof radioProps>;
+export type RadioEmits = typeof radioEmits;
+export type RadioInstance = InstanceType<typeof Radio>;

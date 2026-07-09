@@ -5,7 +5,7 @@ import {
   isBoolean,
   isObject,
   isPropAbsent,
-} from 'element-plus/es/utils/index.mjs';
+} from '@flash-global66/g-utils';
 
 import type { ComponentInternalInstance } from 'vue';
 import type { CheckboxProps } from '../checkbox';
