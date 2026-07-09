@@ -1,45 +1,56 @@
 ## SDD Config — global-design-system
 ## Generated: 2026-06-20
+## Refreshed: 2026-07-08 (testing capabilities corrected — Vitest is live, not pending)
 
 project: global-design-system
 artifact_store: hybrid
 
 context:
   stack: Vue 3.5 / TypeScript 5.9 / Vite 5 / Storybook 8.6
-  monorepo: Lerna 8 (independent, conventionalCommits) / Yarn 4
+  monorepo: Lerna 8 (independent, conventionalCommits) / Yarn 4.11.0 (Berry)
   workspaces: [components/*, common/*, config/*]
-  component_count: 59
+  component_count: 58
   base_library: element-plus 2.9.7
   styling: Sass + Tailwind 3.4
   ci: GitHub Actions → publish to GitHub Packages + Storybook on gh-pages
-  component_pattern: "src/{name}.vue + {name}.ts + {name}.type.ts + {name}.styles.scss + use-{name}.ts"
+  component_pattern: 'src/{name}.vue + {name}.ts + {name}.type.ts + {name}.styles.scss + use-{name}.ts'
+  source_only_packages: "common/g-utils and common/g-hooks are buildable:false — consumed as .ts source, compiled by the consumer's bundler"
+  node_version: '20.19.3 (see .nvmrc)'
+  env_note: 'yarn/npx commands require GBP_PACKAGE_TOKEN set (dummy value works locally) and node 20.19.3 on PATH (nvm use)'
 
 testing:
-  strict_tdd: false
-  reason: "No test runner configured. Vitest setup is a pending task."
-  test_command: null
-  unit: false
+  strict_tdd: true
+  reason: 'Vitest v2.1.9 fully configured and green: 129 unit tests across 18 files, verified by direct execution on 2026-07-08.'
+  test_command: 'yarn test:run'
+  test_command_alias: 'yarn test (both resolve to `vitest run`)'
+  test_policy: 'UNIT-ONLY. No integration, no DOM/component tests (2 DOM tests were deleted). New tests must be pure logic (utils/composables/props/use* hooks).'
+  config_file: 'vitest.config.ts (jsdom environment, setupFiles ./tests/setup.ts)'
+  include_globs:
+    ['components/**/tests/**/*.spec.ts', 'common/**/tests/**/*.spec.ts']
+  unit: true
   integration: false
   e2e: false
   coverage: false
+  push_gate: 'simple-git-hooks pre-push runs `yarn test:run` (full vitest suite) — NEW as of this refresh'
+  pre_commit_gate: 'simple-git-hooks pre-commit runs `npx lint-staged` (eslint --fix + prettier on staged files)'
+  hooks_manager: 'simple-git-hooks (NOT Husky)'
   quality:
-    linter: "eslint (.eslintrc.cjs)"
-    type_checker: "vue-tsc (build:types)"
-    formatter: "prettier (via prettier-vue)"
+    linter: 'eslint . --ext .vue,.ts,.js --max-warnings 0 (any warning fails)'
+    type_checker: 'vue-tsc (build:types)'
+    formatter: 'prettier --write --cache .'
 
 phases:
   proposal:
-    description: "Intent, scope, approach, risks. No code yet."
+    description: 'Intent, scope, approach, risks. No code yet.'
   spec:
-    description: "Delta specs with requirements and scenarios. Based on proposal."
+    description: 'Delta specs with requirements and scenarios. Based on proposal.'
   design:
-    description: "Architecture decisions, component structure, data flow."
+    description: 'Architecture decisions, component structure, data flow.'
   tasks:
-    description: "Actionable ordered checklist. Based on spec + design."
+    description: 'Actionable ordered checklist. Based on spec + design.'
   apply:
-    description: "Implementation following task checklist. Work-unit commits."
-    note: "strict_tdd is false — no automated test assertions required until Vitest configured."
+    description: 'Implementation following task checklist. Work-unit commits. STRICT TDD MODE ACTIVE — write failing unit test first, then implementation. Test runner: yarn test:run.'
   verify:
-    description: "Validate implementation against spec and tasks."
+    description: 'Validate implementation against spec and tasks. Run yarn test:run and yarn lint as evidence.'
   archive:
-    description: "Close change, merge delta specs, persist archive report."
+    description: 'Close change, merge delta specs, persist archive report.'

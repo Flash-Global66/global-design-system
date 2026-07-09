@@ -1,3 +1,6 @@
+import { componentSizes, ComponentSize } from '../types/component.type';
+import { isFunction } from './function.util';
+
 /**
  * Comprueba si un valor es de tipo `boolean`.
  *
@@ -47,3 +50,33 @@ export const isString = (val: unknown): val is string =>
  */
 export const isObject = (val: unknown): val is Record<string, unknown> =>
   val !== null && typeof val === 'object';
+
+/**
+ * Comprueba si un valor es un tamaño de componente válido.
+ *
+ * Usa `componentSizes` (que incluye `''` para paridad con el validador de
+ * element-plus) como fuente de verdad de los valores aceptados.
+ *
+ * @param val - El valor a verificar.
+ * @returns `true` si `val` pertenece a `componentSizes`.
+ */
+export const isValidComponentSize = (val: string): val is ComponentSize | '' =>
+  (componentSizes as readonly string[]).includes(val);
+
+/**
+ * Comprueba si un valor es una `Promise` nativa o un objeto/función
+ * "thenable" (con métodos `then` y `catch`).
+ *
+ * Replica el algoritmo de `@vue/shared` (reexportado por element-plus como
+ * `isPromise`): acepta tanto objetos como funciones, siempre que expongan
+ * `then` y `catch`, para cubrir thenables invocables.
+ *
+ * Actúa como type guard de TypeScript.
+ *
+ * @param val - El valor a verificar.
+ * @returns `true` si `val` es una `Promise` o un thenable.
+ */
+export const isPromise = <T = unknown>(val: unknown): val is Promise<T> =>
+  (isObject(val) || isFunction(val)) &&
+  isFunction((val as Record<string, unknown>).then) &&
+  isFunction((val as Record<string, unknown>).catch);

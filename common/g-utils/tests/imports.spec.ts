@@ -32,6 +32,10 @@ import {
   UPDATE_MODEL_EVENT,
   CHANGE_EVENT,
   EVENT_CODE,
+  componentSizes,
+  isValidComponentSize,
+  isPromise,
+  mutable,
 } from '@flash-global66/g-utils';
 import { ref } from 'vue';
 
@@ -104,5 +108,14 @@ describe('@flash-global66/g-utils barrel exports', () => {
     expect(UPDATE_MODEL_EVENT).toBe('update:modelValue');
     expect(CHANGE_EVENT).toBe('change');
     expect(EVENT_CODE.esc).toBe('Escape');
+  });
+
+  it('exports the ep-extraction-v3 WU-1 additions (component-size + promise + mutable)', () => {
+    expect(componentSizes).toEqual(['', 'default', 'small', 'large']);
+    expect(isValidComponentSize('large')).toBe(true);
+    expect(isValidComponentSize('huge')).toBe(false);
+    expect(isPromise(Promise.resolve())).toBe(true);
+    const frozen = ['a'] as const;
+    expect(mutable(frozen)).toBe(frozen);
   });
 });
