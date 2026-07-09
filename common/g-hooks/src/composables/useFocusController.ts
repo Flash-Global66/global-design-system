@@ -26,7 +26,6 @@ export interface UseFocusControllerReturn {
   isFocused: Ref<boolean>;
   handleFocus: (event: FocusEvent) => void;
   handleBlur: (event: FocusEvent) => void;
-  handleClick: () => void;
 }
 
 /**
@@ -73,6 +72,12 @@ export const useFocusController = <T extends { focus: () => void }>(
   };
 
   const handleClick = (): void => {
+    if (
+      wrapperRef.value?.contains(document.activeElement) &&
+      wrapperRef.value !== document.activeElement
+    ) {
+      return;
+    }
     target.value?.focus();
   };
 
@@ -102,5 +107,5 @@ export const useFocusController = <T extends { focus: () => void }>(
     onBeforeUnmount(() => detach?.());
   }
 
-  return { wrapperRef, isFocused, handleFocus, handleBlur, handleClick };
+  return { wrapperRef, isFocused, handleFocus, handleBlur };
 };

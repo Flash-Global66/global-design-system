@@ -43,6 +43,36 @@ describe('useCursor', () => {
     expect(fakeInput.selectionEnd).toBe(6);
   });
 
+  it('restores the cursor position by matching the preserved prefix when the suffix match fails (e.g. a char deleted at the end)', () => {
+    const fakeInput = makeFakeInput('hello world', 5, 5);
+    const inputRef = ref<HTMLInputElement | undefined>(fakeInput);
+    const [record, restore] = useCursor(inputRef);
+
+    record();
+    // Simulate deleting the last char: beforeTxt "hello" still matches the
+    // prefix, but afterTxt " world" no longer matches the (shorter) suffix.
+    fakeInput.value = 'hello worl';
+    restore();
+
+    expect(fakeInput.selectionStart).toBe(5);
+    expect(fakeInput.selectionEnd).toBe(5);
+  });
+
+  it('restores the cursor position via character search when neither the prefix nor the suffix match (e.g. a masked/formatted input reflow)', () => {
+    const fakeInput = makeFakeInput('abXzz', 2, 2);
+    const inputRef = ref<HTMLInputElement | undefined>(fakeInput);
+    const [record, restore] = useCursor(inputRef);
+
+    record();
+    // Neither startsWith("ab") nor endsWith("Xzz") holds for the new value,
+    // forcing the fallback search for the last char before the cursor ("b").
+    fakeInput.value = 'aXbYzz';
+    restore();
+
+    expect(fakeInput.selectionStart).toBe(3);
+    expect(fakeInput.selectionEnd).toBe(3);
+  });
+
   it('restores to the end of the value when neither the before nor after text can be matched', () => {
     const fakeInput = makeFakeInput('abc', 1, 1);
     const inputRef = ref<HTMLInputElement | undefined>(fakeInput);

@@ -94,20 +94,51 @@ describe('useFocusController', () => {
     expect(afterBlur).not.toHaveBeenCalled();
   });
 
-  it('handleClick calls target.focus()', () => {
+  // `handleClick` is wired internally onto wrapperRef's native `click`
+  // listener (capture phase) and is not part of the public return, matching
+  // element-plus's contract. It is exercised here via a real click event.
+  it('a click on wrapperRef calls target.focus()', () => {
     const target = ref<FakeTarget>(makeTarget());
-    const { handleClick } = useFocusController(target);
+    const { wrapperRef } = useFocusController(target);
 
-    handleClick();
+    const wrapperEl = document.createElement('div');
+    wrapperRef.value = wrapperEl;
+
+    wrapperEl.dispatchEvent(new MouseEvent('click'));
 
     expect(target.value?.focus).toHaveBeenCalledTimes(1);
   });
 
-  it('handleClick is a no-op (no throw) when the target ref is empty', () => {
+  it('a click on wrapperRef is a no-op (no throw) when the target ref is empty', () => {
     const target = ref<FakeTarget>();
-    const { handleClick } = useFocusController(target);
+    const { wrapperRef } = useFocusController(target);
 
-    expect(() => handleClick()).not.toThrow();
+    const wrapperEl = document.createElement('div');
+    wrapperRef.value = wrapperEl;
+
+    expect(() =>
+      wrapperEl.dispatchEvent(new MouseEvent('click')),
+    ).not.toThrow();
+  });
+
+  it('a click on wrapperRef does not steal focus when a different focusable element inside it already holds focus', () => {
+    const target = ref<FakeTarget>(makeTarget());
+    const { wrapperRef } = useFocusController(target);
+
+    const wrapperEl = document.createElement('div');
+    const innerButton = document.createElement('button');
+    wrapperEl.appendChild(innerButton);
+    document.body.appendChild(wrapperEl);
+    wrapperRef.value = wrapperEl;
+
+    innerButton.focus();
+    expect(document.activeElement).toBe(innerButton);
+
+    wrapperEl.dispatchEvent(new MouseEvent('click'));
+
+    expect(target.value?.focus).not.toHaveBeenCalled();
+
+    document.body.removeChild(wrapperEl);
   });
 
   it('auto-wires focus/blur listeners onto whatever element is assigned to wrapperRef', () => {
