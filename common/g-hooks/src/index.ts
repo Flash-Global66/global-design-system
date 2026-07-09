@@ -11,3 +11,5 @@ export * from './composables/useGlobalSize';
 export * from './composables/useProp';
 export * from './composables/useAriaProps';
 export * from './composables/useSizeProp';
+export * from './composables/useComposition';
+export * from './composables/useCursor';
