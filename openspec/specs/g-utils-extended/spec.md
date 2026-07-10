@@ -1,7 +1,7 @@
 # Spec: g-utils Extended Utilities
 
-> Artifact store: hybrid. Implemented in change `ep-extraction-v2`. Branch: `feat/ds-ep-extraction-v2`.
-> This spec documents the extended g-utils package (v0.2.0, source-only) as implemented and verified.
+> Artifact store: hybrid. Implemented in changes `ep-extraction-v2` and `ep-extraction-v3`. Branches: `feat/ds-ep-extraction-v2`, `feat/ds-ep-extraction-v3-wu1`.
+> This spec documents the extended g-utils package (v0.2.0+, source-only) as implemented and verified.
 
 ## Purpose
 
@@ -64,6 +64,20 @@ The `@flash-global66/g-utils` package provides tree-shakeable pure utility funct
 
 - `Arrayable<T> = T | T[]` — Union type for single item or array of items
 - `ComponentSize = 'large' | 'default' | 'small'` — Design system size token
+- `Mutable<T> = { -readonly [P in keyof T]: T[P] }` — Readonly-stripping identity type (added in `ep-extraction-v3`)
+
+**Component Size Validation** (added in `ep-extraction-v3`)
+
+- `componentSizes: readonly ['', 'default', 'small', 'large']` — Runtime array of valid size values, keeps `''` for element-plus validator parity (the `ComponentSize` TYPE intentionally omits `''` and is unchanged)
+- `isValidComponentSize(val: unknown): boolean` — `true` only for values in `componentSizes`
+
+**Promise Guard** (added in `ep-extraction-v3`)
+
+- `isPromise<T>(val: unknown): val is Promise<T>` — `true` for native `Promise` instances and `{then, catch}`-shaped thenables; `false` otherwise
+
+**Identity Cast** (added in `ep-extraction-v3`)
+
+- `mutable<T>(val: T): Mutable<T>` — Readonly-stripping identity cast; returns the SAME reference, only re-typed. Used to unfreeze `as const`-declared prop-definition arrays/objects passed through `buildProps`.
 
 ## Requirements
 
@@ -106,13 +120,69 @@ Constants (`UPDATE_MODEL_EVENT`, `CHANGE_EVENT`, `EVENT_CODE`) and types (`Array
 - WHEN the import is resolved
 - THEN it resolves directly to source files with no build step required
 
+### Requirement: component-size-validation
+
+`componentSizes` MUST be a runtime constant array `['', 'default', 'small', 'large']` (keeps `''` for element-plus validator parity). `isValidComponentSize(val)` MUST return `true` only for values in `componentSizes`. The existing `ComponentSize` type (`'large' | 'default' | 'small'`) is unchanged — it intentionally omits `''`.
+
+#### Scenario: size validator accepts EP-valid values including empty string
+
+- GIVEN `isValidComponentSize('')`, `isValidComponentSize('small')`, `isValidComponentSize('large')`
+- WHEN each is called
+- THEN each returns `true`
+
+#### Scenario: size validator rejects invalid values
+
+- GIVEN `isValidComponentSize('huge')`
+- WHEN it is called
+- THEN it returns `false`
+
+### Requirement: promise-type-guard
+
+`isPromise<T>(val): val is Promise<T>` MUST be a pure type guard, returning `true` for native `Promise` instances and `{then, catch}`-shaped thenables.
+
+#### Scenario: guard recognizes real and thenable promises
+
+- GIVEN a native `Promise.resolve()` and a plain object `{then: fn, catch: fn}`
+- WHEN `isPromise` is called on each
+- THEN both return `true`
+
+#### Scenario: guard rejects non-promise values
+
+- GIVEN `isPromise({})`, `isPromise(null)`, `isPromise(() => {})`
+- WHEN each is called
+- THEN each returns `false`
+
+### Requirement: mutable-identity-cast
+
+`mutable<T>(val)` and the type `Mutable<T> = { -readonly [P in keyof T]: T[P] }` MUST provide a readonly-stripping identity cast for `as const` literal arrays/objects (used by `input`'s prop definitions). `mutable` MUST return the same reference it received, only re-typed.
+
+#### Scenario: identity cast preserves reference and strips readonly
+
+- GIVEN a `readonly` tuple `['a', 'b'] as const`
+- WHEN passed through `mutable(...)`
+- THEN the returned value is reference-equal to the input and its static type is no longer `readonly`
+
+### Requirement: new-utils-unit-tested
+
+Every symbol added in `ep-extraction-v3` (`componentSizes`, `isValidComponentSize`, `isPromise`, `mutable`/`Mutable`) MUST ship a Vitest unit test file. Tests MUST be unit-only (no DOM/integration), and the full suite MUST pass via `yarn test:run`.
+
+#### Scenario: full suite green after additions
+
+- GIVEN all utilities in this delta implemented with unit tests
+- WHEN `yarn test:run` executes
+- THEN all tests pass, including the new utility tests
+
 ## Non-Goals
 
 - Building/bundling g-utils as a distributable artifact (stays source-only)
 - Depending on g-hooks or any external packages (pure utilities only)
 - Reimplementing whole components or design patterns
+- `ValidateComponentsMap` — not hosted here; it maps to `@element-plus/icons-vue` in EP and must be re-authored against `@flash-global66/g-icon-font`; it is `input`-local (see `form-control-migration` spec) to avoid `g-utils` depending on an icon package
+- `INPUT_EVENT` — consumed only by `input-number` (deferred to `ep-extraction-v4`); `switch` imports it from its own local `./constants`
+- Adding a `g-icon-font` dependency to `g-utils`
 
 ## References
 
 - Change: `ep-extraction-v2` (proposal #239, spec #240, design #241, tasks #242, verify-report #247)
-- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`
+- Change: `ep-extraction-v3` (proposal #252, spec #257, design #258, tasks #260, verify-report #268)
+- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`, `openspec/archive/2026-07-10-ep-extraction-v3/`

@@ -1,7 +1,7 @@
 # Spec: ESLint element-plus Import Guard
 
-> Artifact store: hybrid. Implemented in change `ep-extraction-v2`. Branch: `feat/ds-ep-extraction-v2`.
-> This spec documents the new ESLint guard rule as implemented and verified.
+> Artifact store: hybrid. Implemented in changes `ep-extraction-v2` and `ep-extraction-v3`. Branches: `feat/ds-ep-extraction-v2`, `feat/ds-ep-extraction-v3-wu3`, `feat/ds-ep-extraction-v3-wu5`.
+> This spec documents the ESLint guard rule as implemented and verified.
 
 ## Purpose
 
@@ -24,8 +24,12 @@ The ESLint `no-restricted-imports` guard prevents new direct imports from `eleme
 
 **Excluded Packages (No Guard Applied)**
 
-- **8 Island packages** (wrap real element-plus components): `badge`, `menu`, `config-provider`, `popover`, `radio-group`, `form-item`, `skeleton`, `infinite-scroll`
-- **22 Deferred packages** (need hooks/utilities not yet extracted): `inline`, `input-tag`, `tooltip`, `toast`, `time-picker`, `table`, `switch`, `slot`, `select`, `segmented`, `scrollbar`, `radio`, `popper`, `pagination`, `input`, `input-number`, `focus-trap`, `dropdown`, `dialog`, `date-picker`, `collapse`, `checkbox`, `overlay`
+- **8 Island packages** (permanent — wrap real element-plus components): `badge`, `menu`, `config-provider`, `popover`, `radio-group`, `form-item`, `skeleton`, `infinite-scroll`
+- **17 Deferred packages + `input-number`** (need hooks/utilities not yet extracted; target of `ep-extraction-v4`): `inline`, `input-tag`, `tooltip`, `toast`, `time-picker`, `table`, `slot`, `select`, `scrollbar`, `popper`, `pagination`, `input-number`, `focus-trap`, `dropdown`, `dialog`, `date-picker`, `collapse`, `overlay`
+
+**Migrated Packages (guard active, no longer excluded — as of `ep-extraction-v3`)**
+
+- `checkbox`, `radio`, `switch`, `segmented`, `input` — removed from `excludedFiles`; any new `element-plus` import in these packages now errors
 
 ## Requirements
 
@@ -41,12 +45,24 @@ ESLint MUST error on any import specifier matching `element-plus` or `element-pl
 
 ### Requirement: island-override-exclusion
 
-The rule MUST include exclusions for the 8 island packages and 22 deferred packages so their legitimate element-plus imports are not blocked.
+The rule MUST include exclusions for the 8 permanent island packages and the deferred packages not yet migrated off element-plus internals, so their legitimate element-plus imports are not blocked. As of `ep-extraction-v3`, `checkbox`, `radio`, `switch`, `segmented`, and `input` are migrated and MUST NO LONGER appear in `excludedFiles` — they are guarded like any other component source path. The remaining 17 deferred packages and `input-number` (deferred to `ep-extraction-v4`) MUST stay excluded.
 
 #### Scenario: island import not blocked
 
 - GIVEN the guard active and exclusions configured for island/deferred packages
 - WHEN a file in `components/badge/index.ts` (island) imports `from 'element-plus'`
+- THEN ESLint reports no error
+
+#### Scenario: migrated packages are no longer excluded
+
+- GIVEN `checkbox`, `radio`, `switch`, `segmented`, and `input` removed from `excludedFiles`
+- WHEN a file under `components/checkbox/src/**` imports `from 'element-plus'`
+- THEN ESLint reports error `'element-plus' import is restricted`
+
+#### Scenario: input-number stays excluded
+
+- GIVEN `input-number` is deferred to `ep-extraction-v4` and remains in `excludedFiles`
+- WHEN a file under `components/input-number/src/**` imports `from 'element-plus'`
 - THEN ESLint reports no error
 
 ### Requirement: guard-lands-after-migration
@@ -71,7 +87,7 @@ The rule is configured in `.eslintrc.cjs` under `overrides`:
     'components/*/index.ts'
   ],
   excludedFiles: [
-    // 8 islands (wrap real EP components)
+    // 8 islands (wrap real EP components) — permanent
     'components/badge/**',
     'components/menu/**',
     'components/config-provider/**',
@@ -80,11 +96,26 @@ The rule is configured in `.eslintrc.cjs` under `overrides`:
     'components/form-item/**',
     'components/skeleton/**',
     'components/infinite-scroll/**',
-    // 22 deferred packages (need hooks/utilities not covered by this change)
+    // 17 deferred packages + input-number (need hooks/utilities not built yet — target of ep-extraction-v4)
     'components/inline/**',
     'components/input-tag/**',
     'components/tooltip/**',
-    // ... (see full exclude list in .eslintrc.cjs)
+    'components/toast/**',
+    'components/time-picker/**',
+    'components/table/**',
+    'components/slot/**',
+    'components/select/**',
+    'components/scrollbar/**',
+    'components/popper/**',
+    'components/pagination/**',
+    'components/input-number/**',
+    'components/focus-trap/**',
+    'components/dropdown/**',
+    'components/dialog/**',
+    'components/date-picker/**',
+    'components/collapse/**',
+    'components/overlay/**',
+    // checkbox, radio, switch, segmented, input REMOVED here as of ep-extraction-v3 — now guarded
   ],
   rules: {
     'no-restricted-imports': [
@@ -117,5 +148,6 @@ The rule is configured in `.eslintrc.cjs` under `overrides`:
 ## References
 
 - Change: `ep-extraction-v2` (proposal #239, spec #240, design #241, tasks #242, verify-report #247)
-- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`
+- Change: `ep-extraction-v3` (proposal #252, spec #257, design #258, tasks #260, verify-report #268) — removed `checkbox`/`radio`/`switch`/`segmented`/`input` from `excludedFiles`
+- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`, `openspec/archive/2026-07-10-ep-extraction-v3/`
 - Configuration file: `.eslintrc.cjs`
