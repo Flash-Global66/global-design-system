@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.4.0...@flash-global66/g-hooks@0.4.1) (2026-07-10)
+
+### Bug Fixes
+
+- **g-hooks:** narrow useComposition emit type to match element-plus fidelity ([d56c413](https://github.com/Flash-Global66/global-design-system/commit/d56c413312f6f38e708ca6986b414796abb7d480))
+
 # [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.3.0...@flash-global66/g-hooks@0.4.0) (2026-07-10)
 
 ### Bug Fixes
