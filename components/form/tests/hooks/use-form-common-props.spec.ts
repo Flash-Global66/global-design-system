@@ -13,7 +13,11 @@ import { formContextKey } from '../../src/constants';
  * (Vue's `provide`/`inject` only crosses component boundaries).
  */
 const mountUseFormSize = (options: {
-  sizeProp?: ComponentSize;
+  // '' is a valid runtime componentSizes member (EP validator parity, see
+  // g-utils's componentSizes fidelity note) even though it is not part of
+  // the ComponentSize type union — widened here so the "empty string prop"
+  // regression test below type-checks.
+  sizeProp?: ComponentSize | '';
   globalSize?: ComponentSize;
   fallback?: ComponentSize;
   ignore?: Partial<Record<'prop' | 'global', boolean>>;
