@@ -998,8 +998,11 @@ __metadata:
 "@flash-global66/g-checkbox@workspace:components/checkbox":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-checkbox@workspace:components/checkbox"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.4.1"
+    "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
-    "@flash-global66/g-form": ^0.1.0
+    "@flash-global66/g-form": ^0.2.0
     "@vueuse/core": ^12.4.0
     element-plus: ^2.9.0
     lodash-unified: ^1.0.3
@@ -1287,8 +1290,11 @@ __metadata:
 "@flash-global66/g-input@workspace:components/input":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-input@workspace:components/input"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.4.1"
+    "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
-    "@flash-global66/g-form": ^0.1.0
+    "@flash-global66/g-form": ^0.2.0
     "@flash-global66/g-icon-font": ^0.0.8
     "@vueuse/core": ^12.4.0
     element-plus: ^2.9.0
@@ -1404,8 +1410,11 @@ __metadata:
 "@flash-global66/g-radio@workspace:components/radio":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-radio@workspace:components/radio"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.4.1"
+    "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
-    "@flash-global66/g-form": ^0.1.0
+    "@flash-global66/g-form": ^0.2.0
     "@vueuse/core": ^12.4.0
     element-plus: ^2.9.0
     vue: ^3.2.0
@@ -1455,8 +1464,11 @@ __metadata:
 "@flash-global66/g-segmented@workspace:components/segmented":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-segmented@workspace:components/segmented"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.4.1"
+    "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
-    "@flash-global66/g-form": ^0.1.0
+    "@flash-global66/g-form": ^0.2.0
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
@@ -1495,8 +1507,11 @@ __metadata:
 "@flash-global66/g-switch@workspace:components/switch":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-switch@workspace:components/switch"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.4.1"
+    "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
-    "@flash-global66/g-form": ^0.1.1
+    "@flash-global66/g-form": ^0.2.0
     "@flash-global66/g-icon-font": ^0.10.0
     element-plus: ^2.9.0
     vue: ^3.2.0
