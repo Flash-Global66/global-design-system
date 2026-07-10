@@ -29,7 +29,10 @@
     <span ref="core" :class="ns.e('core')" :style="coreStyle">
       <div v-if="inlinePrompt" :class="ns.e('inner')">
         <template v-if="activeIcon || inactiveIcon">
-          <g-icon-font :name="checked ? activeIcon : inactiveIcon" :class="ns.is('icon')" />
+          <g-icon-font
+            :name="checked ? activeIcon : inactiveIcon"
+            :class="ns.is('icon')"
+          />
         </template>
         <template v-else-if="activeText || inactiveText">
           <span :class="ns.is('text')" :aria-hidden="!checked">
@@ -38,7 +41,12 @@
         </template>
       </div>
       <div :class="ns.e('action')">
-        <g-icon-font v-if="loading" name="solid spinner" spin :class="ns.is('loading')" />
+        <g-icon-font
+          v-if="loading"
+          name="solid spinner"
+          spin
+          :class="ns.is('loading')"
+        />
         <slot v-else-if="checked" name="active-action">
           <g-icon-font v-if="activeActionIcon" :name="activeActionIcon" />
         </slot>
@@ -60,157 +68,151 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import {
   addUnit,
   debugWarn,
   isBoolean,
   isPromise,
   throwError,
-} from 'element-plus/es/utils/index'
-import { GIconFont } from '@flash-global66/g-icon-font'
+  useNamespace,
+} from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
 import {
   useFormDisabled,
   useFormSize,
-  useNamespace,
-} from 'element-plus'
-import {
   useFormItem,
   useFormItemInputId,
-} from '@flash-global66/g-form'
-import {
-  CHANGE_EVENT,
-  INPUT_EVENT,
-  UPDATE_MODEL_EVENT,
-} from './constants'
-import { switchEmits, switchProps } from './switch'
-import type { CSSProperties } from 'vue'
+} from '@flash-global66/g-form';
+import { CHANGE_EVENT, INPUT_EVENT, UPDATE_MODEL_EVENT } from './constants';
+import { switchEmits, switchProps } from './switch';
+import type { CSSProperties } from 'vue';
 
-const COMPONENT_NAME = 'GSwitch'
+const COMPONENT_NAME = 'GSwitch';
 defineOptions({
   name: COMPONENT_NAME,
-})
+});
 
-const props = defineProps(switchProps)
-const emit = defineEmits(switchEmits)
+const props = defineProps(switchProps);
+const emit = defineEmits(switchEmits);
 
-const { formItem } = useFormItem()
-const switchSize = useFormSize()
-const ns = useNamespace('switch')
+const { formItem } = useFormItem();
+const switchSize = useFormSize();
+const ns = useNamespace('switch');
 
 const { inputId } = useFormItemInputId(props, {
   formItemContext: formItem,
-})
+});
 
-const switchDisabled = useFormDisabled(computed(() => props.loading))
-const isControlled = ref(props.modelValue !== false)
-const input = ref<HTMLInputElement>()
-const core = ref<HTMLSpanElement>()
+const switchDisabled = useFormDisabled(computed(() => props.loading));
+const isControlled = ref(props.modelValue !== false);
+const input = ref<HTMLInputElement>();
+const core = ref<HTMLSpanElement>();
 
 const switchKls = computed(() => [
   ns.b(),
   ns.m(switchSize.value),
   ns.is('disabled', switchDisabled.value),
   ns.is('checked', checked.value),
-])
+]);
 
 const labelLeftKls = computed(() => [
   ns.e('label'),
   ns.em('label', 'left'),
   ns.is('active', !checked.value),
-])
+]);
 
 const labelRightKls = computed(() => [
   ns.e('label'),
   ns.em('label', 'right'),
   ns.is('active', checked.value),
-])
+]);
 
 const coreStyle = computed<CSSProperties>(() => ({
   width: addUnit(props.width),
-}))
+}));
 
 watch(
   () => props.modelValue,
   () => {
-    isControlled.value = true
-  }
-)
+    isControlled.value = true;
+  },
+);
 
 const actualValue = computed(() => {
-  return isControlled.value ? props.modelValue : false
-})
+  return isControlled.value ? props.modelValue : false;
+});
 
-const checked = computed(() => actualValue.value === props.activeValue)
+const checked = computed(() => actualValue.value === props.activeValue);
 
 if (![props.activeValue, props.inactiveValue].includes(actualValue.value)) {
-  emit(UPDATE_MODEL_EVENT, props.inactiveValue)
-  emit(CHANGE_EVENT, props.inactiveValue)
-  emit(INPUT_EVENT, props.inactiveValue)
+  emit(UPDATE_MODEL_EVENT, props.inactiveValue);
+  emit(CHANGE_EVENT, props.inactiveValue);
+  emit(INPUT_EVENT, props.inactiveValue);
 }
 
-watch(checked, (val) => {
-  input.value!.checked = val
+watch(checked, val => {
+  input.value!.checked = val;
 
   if (props.validateEvent) {
-    formItem?.validate?.('change').catch((err) => debugWarn(err))
+    formItem?.validate?.('change').catch(err => debugWarn(err));
   }
-})
+});
 
 const handleChange = () => {
-  const val = checked.value ? props.inactiveValue : props.activeValue
-  emit(UPDATE_MODEL_EVENT, val)
-  emit(CHANGE_EVENT, val)
-  emit(INPUT_EVENT, val)
+  const val = checked.value ? props.inactiveValue : props.activeValue;
+  emit(UPDATE_MODEL_EVENT, val);
+  emit(CHANGE_EVENT, val);
+  emit(INPUT_EVENT, val);
   nextTick(() => {
-    input.value!.checked = checked.value
-  })
-}
+    input.value!.checked = checked.value;
+  });
+};
 
 const switchValue = () => {
-  if (switchDisabled.value) return
+  if (switchDisabled.value) return;
 
-  const { beforeChange } = props
+  const { beforeChange } = props;
   if (!beforeChange) {
-    handleChange()
-    return
+    handleChange();
+    return;
   }
 
-  const shouldChange = beforeChange()
+  const shouldChange = beforeChange();
 
   const isPromiseOrBool = [
     isPromise(shouldChange),
     isBoolean(shouldChange),
-  ].includes(true)
+  ].includes(true);
   if (!isPromiseOrBool) {
     throwError(
       COMPONENT_NAME,
-      'beforeChange must return type `Promise<boolean>` or `boolean`'
-    )
+      'beforeChange must return type `Promise<boolean>` or `boolean`',
+    );
   }
 
   if (isPromise(shouldChange)) {
     shouldChange
-      .then((result) => {
+      .then(result => {
         if (result) {
-          handleChange()
+          handleChange();
         }
       })
-      .catch((e) => {
-        debugWarn(COMPONENT_NAME, `some error occurred: ${e}`)
-      })
+      .catch(e => {
+        debugWarn(COMPONENT_NAME, `some error occurred: ${e}`);
+      });
   } else if (shouldChange) {
-    handleChange()
+    handleChange();
   }
-}
+};
 
 const focus = (): void => {
-  input.value?.focus?.()
-}
+  input.value?.focus?.();
+};
 
 onMounted(() => {
-  input.value!.checked = checked.value
-})
+  input.value!.checked = checked.value;
+});
 
 defineExpose({
   /**
@@ -221,5 +223,5 @@ defineExpose({
    * @description whether Switch is checked
    */
   checked,
-})
+});
 </script>

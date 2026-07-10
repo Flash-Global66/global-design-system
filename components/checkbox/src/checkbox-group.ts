@@ -1,18 +1,19 @@
-import { UPDATE_MODEL_EVENT, useAriaProps } from "element-plus";
 import {
+  UPDATE_MODEL_EVENT,
   buildProps,
   definePropType,
   isArray,
-} from "element-plus/es/utils/index.mjs";
+} from '@flash-global66/g-utils';
+import { useAriaProps } from '@flash-global66/g-hooks';
 
-import type { ExtractPropTypes, PropType } from "vue";
-import type checkboxGroup from "./checkbox-group.vue";
-import type { CheckboxValueType } from "./checkbox";
+import type { ExtractPropTypes, PropType } from 'vue';
+import type checkboxGroup from './checkbox-group.vue';
+import type { CheckboxValueType } from './checkbox';
 import {
   CheckboxGroupValueType,
   layoutType,
   Option,
-} from "./checkbox-group.types";
+} from './checkbox-group.types';
 
 export const checkboxGroupProps = buildProps({
   /**
@@ -46,14 +47,14 @@ export const checkboxGroupProps = buildProps({
    */
   layout: {
     type: String as PropType<layoutType>,
-    default: "horizontal",
+    default: 'horizontal',
   },
   /**
    * @description element tag of the checkbox group
    */
   tag: {
     type: String,
-    default: "div",
+    default: 'div',
   },
   /**
    * @description whether to trigger form validation
@@ -76,12 +77,12 @@ export const checkboxGroupProps = buildProps({
     type: Boolean,
     default: false,
   },
-  ...useAriaProps(["ariaLabel"]),
+  ...useAriaProps(['ariaLabel']),
 } as const);
 
 export const checkboxGroupEmits = {
   [UPDATE_MODEL_EVENT]: (
-    val: CheckboxGroupValueType | CheckboxGroupValueType[]
+    val: CheckboxGroupValueType | CheckboxGroupValueType[],
   ) => isArray(val),
   change: (val: CheckboxValueType[] | CheckboxGroupValueType[]) => isArray(val),
 };
