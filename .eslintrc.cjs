@@ -51,7 +51,6 @@ module.exports = {
         'components/scrollbar/**',
         'components/popper/**',
         'components/pagination/**',
-        'components/input/**',
         'components/input-number/**',
         'components/focus-trap/**',
         'components/dropdown/**',

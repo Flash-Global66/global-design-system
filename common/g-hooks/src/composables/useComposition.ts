@@ -1,5 +1,5 @@
 import { nextTick, ref } from 'vue';
-import type { Ref, SetupContext } from 'vue';
+import type { Ref } from 'vue';
 
 /**
  * Detecta si el último carácter compuesto pertenece al alfabeto coreano
@@ -16,8 +16,25 @@ const isKorean = (text: string): boolean => /([가-힯㄰-㆏])+/gi.test(text);
 export interface UseCompositionOptions {
   /** Se invoca (en el siguiente tick) cuando la composición IME termina. */
   afterComposition: (event: CompositionEvent) => void;
-  /** `emit` del componente consumidor; opcional, ya que este hook no asume un `SetupContext`. */
-  emit?: SetupContext['emit'];
+  /**
+   * `emit` del componente consumidor; opcional, ya que este hook no asume un
+   * `SetupContext`.
+   *
+   * NOTE (type fidelity, found while wiring WU-5's `input.vue`): narrowed to
+   * exactly the 3 composition events, matching real element-plus's own
+   * `.d.ts` (`node_modules/element-plus/es/hooks/use-composition/index.d.ts`)
+   * instead of the generic `SetupContext['emit']` design.md originally
+   * specified. A component's `defineEmits`-derived `emit` (declared via an
+   * object-form emits definition, as `input.vue` does) infers a specific
+   * per-event overloaded type that is NOT structurally assignable to the
+   * fully generic `(event: string, ...args: any[]) => void` signature of
+   * `SetupContext['emit']`, but IS assignable to this narrower overload
+   * (a function with more overloads satisfies a target requiring fewer).
+   * Type-only change — zero runtime behavior difference.
+   */
+  emit?: ((event: 'compositionstart', evt: CompositionEvent) => void) &
+    ((event: 'compositionupdate', evt: CompositionEvent) => void) &
+    ((event: 'compositionend', evt: CompositionEvent) => void);
 }
 
 /** Valor retornado por `useComposition`. */

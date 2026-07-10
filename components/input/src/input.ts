@@ -3,13 +3,13 @@ import {
   definePropType,
   isString,
   mutable,
-} from 'element-plus/es/utils/index.mjs'
-import { UPDATE_MODEL_EVENT } from 'element-plus'
-import { useAriaProps, useSizeProp } from 'element-plus'
-import type { ExtractPropTypes, StyleValue } from 'vue'
-import { IconString } from "@flash-global66/g-icon-font";
+  UPDATE_MODEL_EVENT,
+} from '@flash-global66/g-utils';
+import { useAriaProps } from '@flash-global66/g-hooks';
+import type { ExtractPropTypes, StyleValue } from 'vue';
+import { IconString } from '@flash-global66/g-icon-font';
 
-export type InputAutoSize = { minRows?: number; maxRows?: number } | boolean
+export type InputAutoSize = { minRows?: number; maxRows?: number } | boolean;
 
 export const inputProps = buildProps({
   /**
@@ -127,14 +127,14 @@ export const inputProps = buildProps({
    */
   suffixIcon: {
     type: definePropType<IconString>(String),
-    default: "",
+    default: '',
   },
   /**
    * @description prefix icon
    */
   prefixIcon: {
     type: definePropType<IconString>(String),
-    default: "",
+    default: '',
   },
   /**
    * @description container role, internal properties provided for use by the picker component
@@ -173,8 +173,8 @@ export const inputProps = buildProps({
    */
   autofocus: Boolean,
   ...useAriaProps(['ariaLabel']),
-} as const)
-export type InputProps = ExtractPropTypes<typeof inputProps>
+});
+export type InputProps = ExtractPropTypes<typeof inputProps>;
 
 export const inputEmits = {
   [UPDATE_MODEL_EVENT]: (value: string) => isString(value),
@@ -192,5 +192,5 @@ export const inputEmits = {
   compositionstart: (evt: CompositionEvent) => evt instanceof CompositionEvent,
   compositionupdate: (evt: CompositionEvent) => evt instanceof CompositionEvent,
   compositionend: (evt: CompositionEvent) => evt instanceof CompositionEvent,
-}
-export type InputEmits = typeof inputEmits
+};
+export type InputEmits = typeof inputEmits;

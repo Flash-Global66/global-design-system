@@ -95,60 +95,62 @@ import {
   onMounted,
   ref,
   shallowRef,
-  toRef,
   useAttrs as useRawAttrs,
   useSlots,
-  watch
-} from 'vue'
-import { useResizeObserver } from '@vueuse/core'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { isNil } from 'lodash-unified'
-import { useFormItem, useFormItemInputId, useFormDisabled } from '@flash-global66/g-form'
+  watch,
+} from 'vue';
+import { useResizeObserver } from '@vueuse/core';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { isNil } from 'lodash-unified';
+import {
+  useFormItem,
+  useFormItemInputId,
+  useFormDisabled,
+} from '@flash-global66/g-form';
 
 import {
   useAttrs,
   useComposition,
   useCursor,
   useFocusController,
-  useNamespace,
-  UPDATE_MODEL_EVENT
-} from 'element-plus'
+} from '@flash-global66/g-hooks';
 import {
-  NOOP,
-  ValidateComponentsMap,
+  useNamespace,
+  UPDATE_MODEL_EVENT,
   debugWarn,
-  isClient,
-  isObject
-} from 'element-plus/es/utils/index.mjs'
+} from '@flash-global66/g-utils';
 
-import { inputEmits, inputProps } from './input'
-import type { StyleValue } from 'vue'
+import { inputEmits, inputProps } from './input';
+import type { StyleValue } from 'vue';
 
-type TargetElement = HTMLInputElement
+type TargetElement = HTMLInputElement;
 
 defineOptions({
+  // eslint-disable-next-line vue/no-reserved-component-names -- pre-existing internal component name, unrelated to this migration; renaming is a public-facing behavior change out of scope here
   name: 'Input',
-  inheritAttrs: false
-})
-const props = defineProps(inputProps)
-const emit = defineEmits(inputEmits)
+  inheritAttrs: false,
+});
+const props = defineProps(inputProps);
+const emit = defineEmits(inputEmits);
 
-const ns = useNamespace('input')
-const rawAttrs = useRawAttrs()
-const attrs = useAttrs()
-const slots = useSlots()
+const ns = useNamespace('input');
+const rawAttrs = useRawAttrs();
+const attrs = useAttrs();
+const slots = useSlots();
 
-const leftPrefix = ref<string | undefined>(undefined)
-const prefixRef = ref<HTMLElement | null>(null)
+const leftPrefix = ref<string | undefined>(undefined);
+const prefixRef = ref<HTMLElement | null>(null);
 
-const { form: elForm, formItem: elFormItem } = useFormItem()
+const { formItem: elFormItem } = useFormItem();
 
-const isError = computed(() => elFormItem?.shouldShowErrorChild || Boolean(props?.messageError))
+const isError = computed(
+  () => elFormItem?.shouldShowErrorChild || Boolean(props?.messageError),
+);
 
 const error = computed(() => {
-  if (props?.messageError) return props.messageError
-  return elFormItem?.validateMessage
-})
+  if (props?.messageError) return props.messageError;
+  return elFormItem?.validateMessage;
+});
 
 const containerKls = computed(() => [
   ns.b(),
@@ -168,59 +170,82 @@ const containerKls = computed(() => [
     [ns.m('prefix')]: props.prefixIcon || slots.prefix,
     [ns.m('suffix')]: slots.suffix || props.suffixIcon || props.showPassword,
     [ns.is('password')]: props.showPassword,
-    [ns.b('hidden')]: props.type === 'hidden'
+    [ns.b('hidden')]: props.type === 'hidden',
   },
 
-  rawAttrs.class
-])
+  rawAttrs.class,
+]);
 
 const helpTextKls = computed(() => [
   ns.e('help-text'),
   {
-    [ns.e('help-error')]: isError.value
-  }
-])
+    [ns.e('help-error')]: isError.value,
+  },
+]);
 
 const hasHelpInfo = computed(() => {
-  return error.value || props.helpText || elFormItem?.$el
-})
+  return error.value || props.helpText || elFormItem?.$el;
+});
 
 const { inputId } = useFormItemInputId(props, {
-  formItemContext: elFormItem
-})
-const inputDisabled = useFormDisabled()
+  formItemContext: elFormItem,
+});
+const inputDisabled = useFormDisabled();
 
-const input = shallowRef<HTMLInputElement>()
+const input = shallowRef<HTMLInputElement>();
 
-const hovering = ref(false)
-const passwordVisible = ref(false)
+const hovering = ref(false);
+const passwordVisible = ref(false);
 
-const _ref = computed(() => input.value)
+const _ref = computed(() => input.value);
 
 // wrapperRef for type="text", handleFocus and handleBlur for type="textarea"
-const { wrapperRef, isFocused, handleFocus, handleBlur } = useFocusController(input, {
-  beforeFocus() {
-    return inputDisabled.value
+// NOTE: unlike element-plus's useFocusController, the g-hooks version does not
+// auto-emit 'focus'/'blur' (it has no getCurrentInstance()/emit wiring) and its
+// afterFocus/afterBlur callbacks receive no event argument. beforeFocus/beforeBlur
+// DO receive the native FocusEvent, so it is stashed here and re-emitted from the
+// matching after* callback to preserve the exact same emit payload/timing as before.
+let pendingFocusEvent: FocusEvent | undefined;
+let pendingBlurEvent: FocusEvent | undefined;
+
+const { wrapperRef, isFocused } = useFocusController(input, {
+  beforeFocus(event) {
+    pendingFocusEvent = event;
+    return inputDisabled.value;
+  },
+  afterFocus() {
+    if (pendingFocusEvent) emit('focus', pendingFocusEvent);
+  },
+  beforeBlur(event) {
+    pendingBlurEvent = event;
+    return false;
   },
   afterBlur() {
+    if (pendingBlurEvent) emit('blur', pendingBlurEvent);
     if (props.validateEvent) {
-      elFormItem?.validate?.('blur').catch((err) => debugWarn(err))
+      elFormItem?.validate?.('blur').catch(err => debugWarn(err));
     }
-  }
-})
+  },
+});
 
 const labelStyle = computed(() => {
-  const shouldMoveLabel = Boolean(nativeInputValue.value) || isFocused.value
+  const shouldMoveLabel = Boolean(nativeInputValue.value) || isFocused.value;
   return {
     left: !shouldMoveLabel ? `calc(${leftPrefix.value} + 16px)` : undefined,
-    zIndex: !shouldMoveLabel ? 10 : undefined
-  }
-})
+    zIndex: !shouldMoveLabel ? 10 : undefined,
+  };
+});
 
-const passwordIcon = computed(() => (passwordVisible.value ? 'regular eye' : 'regular eye-slash'))
-const containerStyle = computed<StyleValue>(() => [rawAttrs.style as StyleValue])
+const passwordIcon = computed(() =>
+  passwordVisible.value ? 'regular eye' : 'regular eye-slash',
+);
+const containerStyle = computed<StyleValue>(() => [
+  rawAttrs.style as StyleValue,
+]);
 
-const nativeInputValue = computed(() => (isNil(props.modelValue) ? '' : String(props.modelValue)))
+const nativeInputValue = computed(() =>
+  isNil(props.modelValue) ? '' : String(props.modelValue),
+);
 
 const isWordLimitVisible = computed(
   () =>
@@ -229,113 +254,115 @@ const isWordLimitVisible = computed(
     props.type === 'text' &&
     !inputDisabled.value &&
     !props.readonly &&
-    !props.showPassword
-)
-const textLength = computed(() => nativeInputValue.value.length)
+    !props.showPassword,
+);
+const textLength = computed(() => nativeInputValue.value.length);
 const inputExceed = computed(
   () =>
     // show exceed style if length of initial value greater then maxlength
-    !!isWordLimitVisible.value && textLength.value > Number(props.maxlength)
-)
-const suffixVisible = computed(() => !!props.suffixIcon || props.showPassword)
-
-const [recordCursor, setCursor] = useCursor(input)
+    !!isWordLimitVisible.value && textLength.value > Number(props.maxlength),
+);
+const [recordCursor, setCursor] = useCursor(input);
 
 const setNativeInputValue = () => {
-  const input = _ref.value
+  const input = _ref.value;
   const formatterValue = props.formatter
     ? props.formatter(nativeInputValue.value)
-    : nativeInputValue.value
-  if (!input || input.value === formatterValue) return
-  input.value = formatterValue
-}
+    : nativeInputValue.value;
+  if (!input || input.value === formatterValue) return;
+  input.value = formatterValue;
+};
 
 const handleInput = async (event: Event) => {
-  recordCursor()
+  recordCursor();
 
-  let { value } = event.target as TargetElement
+  let { value } = event.target as TargetElement;
 
   if (props.formatter) {
-    value = props.parser ? props.parser(value) : value
+    value = props.parser ? props.parser(value) : value;
   }
 
   // should not emit input during composition
   // see: https://github.com/ElemeFE/element/issues/10516
-  if (isComposing.value) return
+  if (isComposing.value) return;
 
   // hack for https://github.com/ElemeFE/element/issues/8548
   // should remove the following line when we don't support IE
   if (value === nativeInputValue.value) {
-    setNativeInputValue()
-    return
+    setNativeInputValue();
+    return;
   }
 
-  emit(UPDATE_MODEL_EVENT, value)
-  emit('input', value)
+  emit(UPDATE_MODEL_EVENT, value);
+  emit('input', value);
 
   // ensure native input value is controlled
   // see: https://github.com/ElemeFE/element/issues/12850
-  await nextTick()
-  setNativeInputValue()
-  setCursor()
-}
+  await nextTick();
+  setNativeInputValue();
+  setCursor();
+};
 
 const handleChange = (event: Event) => {
-  emit('change', (event.target as TargetElement).value)
-}
+  emit('change', (event.target as TargetElement).value);
+};
 
-const { isComposing, handleCompositionStart, handleCompositionUpdate, handleCompositionEnd } =
-  useComposition({ emit, afterComposition: handleInput })
+const {
+  isComposing,
+  handleCompositionStart,
+  handleCompositionUpdate,
+  handleCompositionEnd,
+} = useComposition({ emit, afterComposition: handleInput });
 
 const handlePasswordVisible = () => {
-  recordCursor()
-  passwordVisible.value = !passwordVisible.value
+  recordCursor();
+  passwordVisible.value = !passwordVisible.value;
   // The native input needs a little time to regain focus
-  setTimeout(setCursor)
-}
+  setTimeout(setCursor);
+};
 
-const focus = () => input.value?.focus()
+const focus = () => input.value?.focus();
 
-const blur = () => input.value?.blur()
+const blur = () => input.value?.blur();
 
 const handleMouseLeave = (evt: MouseEvent) => {
-  hovering.value = false
-  emit('mouseleave', evt)
-}
+  hovering.value = false;
+  emit('mouseleave', evt);
+};
 
 const handleMouseEnter = (evt: MouseEvent) => {
-  hovering.value = true
-  emit('mouseenter', evt)
-}
+  hovering.value = true;
+  emit('mouseenter', evt);
+};
 
 const handleKeydown = (evt: KeyboardEvent) => {
-  emit('keydown', evt)
-}
+  emit('keydown', evt);
+};
 
 const select = () => {
-  input.value?.select()
-}
+  input.value?.select();
+};
 
 const clear = () => {
-  emit(UPDATE_MODEL_EVENT, '')
-  emit('change', '')
-  emit('clear')
-  emit('input', '')
-}
+  emit(UPDATE_MODEL_EVENT, '');
+  emit('change', '');
+  emit('clear');
+  emit('input', '');
+};
 
 watch(
   () => props.modelValue,
   () => {
     if (props.validateEvent) {
-      elFormItem?.validate?.('change').catch((err) => debugWarn(err))
+      elFormItem?.validate?.('change').catch(err => debugWarn(err));
     }
-  }
-)
+  },
+);
 
 // native input value is set explicitly
 // do not use v-model / :value in template
 // see: https://github.com/ElemeFE/element/issues/14521
-watch(nativeInputValue, () => setNativeInputValue())
+watch(nativeInputValue, () => setNativeInputValue());
 
 // when change between <input> and <textarea>,
 // update DOM dependent value and styles
@@ -343,31 +370,34 @@ watch(nativeInputValue, () => setNativeInputValue())
 watch(
   () => props.type,
   async () => {
-    await nextTick()
-    setNativeInputValue()
-  }
-)
+    await nextTick();
+    setNativeInputValue();
+  },
+);
 
 onMounted(() => {
   if (!props.formatter && props.parser) {
-    debugWarn(ns.b(), 'If you set the parser, you also need to set the formatter.')
+    debugWarn(
+      ns.b(),
+      'If you set the parser, you also need to set the formatter.',
+    );
   }
-  setNativeInputValue()
-})
+  setNativeInputValue();
+});
 
 const updatePrefixPosition = () => {
   if (!props.prefixIcon && !slots.prefix) {
-    leftPrefix.value = '0'
-    return
+    leftPrefix.value = '0';
+    return;
   }
 
   requestAnimationFrame(() => {
-    const leftRef = prefixRef.value?.getBoundingClientRect().width
-    leftPrefix.value = `${leftRef}px`
-  })
-}
+    const leftRef = prefixRef.value?.getBoundingClientRect().width;
+    leftPrefix.value = `${leftRef}px`;
+  });
+};
 
-useResizeObserver(prefixRef, updatePrefixPosition)
+useResizeObserver(prefixRef, updatePrefixPosition);
 
 defineExpose({
   /** @description HTML element, input or textarea */
@@ -383,6 +413,6 @@ defineExpose({
   /** @description HTML input element native method */
   select,
   /** @description clear input value */
-  clear
-})
+  clear,
+});
 </script>
