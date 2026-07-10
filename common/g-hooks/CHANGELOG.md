@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.3.0...@flash-global66/g-hooks@0.4.0) (2026-07-10)
+
+### Bug Fixes
+
+- **g-hooks:** restore useFocusController focus-steal guard + cover useCursor restore branches ([f870f05](https://github.com/Flash-Global66/global-design-system/commit/f870f052c03a87415277af3a133f1ae100f4cf23))
+
+### Features
+
+- **g-hooks:** add useComposition and useCursor (input sub-family pt.1) ([16d09a3](https://github.com/Flash-Global66/global-design-system/commit/16d09a3e4ffd685b5a88b4580a99c888df53c4b1))
+- **g-hooks:** add useFocusController and useAttrs (input sub-family pt.2) ([91c4fbc](https://github.com/Flash-Global66/global-design-system/commit/91c4fbc9b37ed09e59990dd0b622b9ab48bacaf3))
+
 # [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.2.1...@flash-global66/g-hooks@0.3.0) (2026-07-10)
 
 ### Features
