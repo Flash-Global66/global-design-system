@@ -1,7 +1,7 @@
 # Spec: g-hooks Composables Package
 
-> Artifact store: hybrid. Implemented in change `ep-extraction-v2`. Branch: `feat/ds-ep-extraction-v2`.
-> This spec documents the new `@flash-global66/g-hooks` package (v0.1.0, source-only) as implemented and verified.
+> Artifact store: hybrid. Implemented in changes `ep-extraction-v2` and `ep-extraction-v3`. Branches: `feat/ds-ep-extraction-v2`, `feat/ds-ep-extraction-v3-wu2`, `feat/ds-ep-extraction-v3-wu4`.
+> This spec documents the `@flash-global66/g-hooks` package (v0.1.0+, source-only) as implemented and verified.
 
 ## Purpose
 
@@ -23,6 +23,18 @@ The `@flash-global66/g-hooks` package provides Vue 3 composables for stateful, c
 **Form Context (Injected from g-form)**
 
 - `useFormItem()` — Note: This composable is NOT in g-hooks. It is exported from `@flash-global66/g-form` because it reads form-item injection context specific to the form domain. See g-form spec.
+
+**Form-Control ARIA / Size (added in `ep-extraction-v3`)**
+
+- `useAriaProps(arias: string[])` — Replicates the element-plus algorithm exactly; returns a `Pick`'d object of `buildProp`'d `String` aria entries, unwrapped (not `{ ariaProps }`). Consumed by `checkbox`, `radio`, `switch`, `segmented`, `input`.
+- `useSizeProp` — A `buildProp`'d prop DEFINITION constant (not a function) built from `componentSizes` (`@flash-global66/g-utils`). Consumed by `input` to declare its reactive `size` prop.
+
+**Input Sub-Family (added in `ep-extraction-v3`, consumed only by `input`)**
+
+- `useComposition({ afterComposition, emit? })` — IME composition state tracking, byte-exact copy of the element-plus algorithm. `emit` narrowed to the exact 3 composition-event overloaded signature (not the fully generic `SetupContext['emit']`) for compatibility with `defineEmits`-derived emit functions.
+- `useCursor(inputRef)` → `[record, restore]` — Cursor position preservation across value mutations.
+- `useFocusController(target, { beforeFocus?, afterFocus?, beforeBlur?, afterBlur? })` → `{ wrapperRef, isFocused, handleFocus, handleBlur, handleClick }` — Focus/blur controller; does NOT auto-emit `focus`/`blur` (callers wire their own emit from the `afterFocus`/`afterBlur` callbacks using the event captured in `beforeFocus`/`beforeBlur`). Includes `beforeFocus` beyond the original design draft to match `input.vue`'s real call site.
+- `useAttrs({ excludeListeners?, excludeKeys? })` — EP-flavored, own-code implementation distinct from Vue core's `useAttrs` (`input.vue` imports both). Excludes `class`/`style` (+ any `excludeKeys`) always; `excludeListeners: true` additionally strips `on[A-Z]*` handlers.
 
 ## Requirements
 
@@ -76,14 +88,68 @@ Calling `useGlobalSize()`, `useProp()`, or `useId()` outside a `setup()` context
 - WHEN analyzed
 - THEN no import path exists from `g-utils` to `g-hooks`
 
+### Requirement: form-control-aria-composable
+
+`useAriaProps` MUST replicate the element-plus algorithm exactly (no reimplementation), and MUST be consumed by `checkbox`, `radio`, `switch`, `segmented`, and `input` in place of the element-plus import.
+
+#### Scenario: aria attrs resolve identically to element-plus
+
+- GIVEN a component calling `useAriaProps(...)` with the same inputs as its pre-migration element-plus call
+- WHEN the returned aria attribute object is compared to the pre-migration output
+- THEN the attributes are identical
+
+### Requirement: input-size-prop-composable
+
+`useSizeProp` MUST be a `buildProp`'d prop DEFINITION constant (mirroring element-plus, not a hook function) built from `componentSizes` (`@flash-global66/g-utils`), and consumed by `input` to declare its reactive `size` prop.
+
+#### Scenario: prop definition validates size values
+
+- GIVEN `input`'s `size` prop declared via `useSizeProp`
+- WHEN a value from `componentSizes` is assigned versus an invalid value like `'huge'`
+- THEN valid values are accepted and `'huge'` fails the prop validator
+
+### Requirement: input-composable-subfamily
+
+`useComposition`, `useCursor`, `useFocusController`, and an EP-flavored `useAttrs` (distinct from Vue core's `useAttrs`; `input.vue` imports both) MUST have algorithms copied exactly from element-plus. This subfamily MUST be consumed only by `input`.
+
+#### Scenario: composition and cursor state preserved
+
+- GIVEN an IME composition sequence and a subsequent cursor-position update on the same input
+- WHEN `useComposition` and `useCursor` process the events
+- THEN composing state and cursor position match element-plus's pre-migration behavior
+
+#### Scenario: focus controller forwards events
+
+- GIVEN `input`'s focus/blur handlers wired through `useFocusController`
+- WHEN the input gains and loses focus
+- THEN `focus`/`blur` events fire with the same payload shape as before migration
+
+#### Scenario: EP-flavored useAttrs excludes class/style and listeners on demand
+
+- GIVEN `useAttrs({ excludeListeners: true })` on a component with `class`, `style`, and an `onClick` handler in `$attrs`
+- WHEN the computed attrs object is read
+- THEN `class`, `style`, and `onClick` are absent while other attrs pass through reactively
+
+### Requirement: new-hooks-unit-tested
+
+Every composable added in `ep-extraction-v3` (`useAriaProps`, `useSizeProp`, `useComposition`, `useCursor`, `useFocusController`, EP-flavored `useAttrs`) MUST ship a Vitest unit test file. Tests MUST be unit-only (no DOM/integration), and the full suite MUST pass via `yarn test:run`.
+
+#### Scenario: full suite green after additions
+
+- GIVEN all hooks in this delta implemented with unit tests
+- WHEN `yarn test:run` executes
+- THEN all tests pass, including the new hook tests
+
 ## Non-Goals
 
 - Building/bundling g-hooks as a distributable artifact (stays source-only)
-- Creating form-context composables here (form context lives in g-form per domain responsibility)
+- Creating form-context composables here (form context lives in g-form per domain responsibility) — `useFormSize` specifically is NOT in `g-hooks`; hosting it here would create a `g-hooks → g-form → g-hooks` cycle (see `g-form` spec)
 - Reimplementing composable algorithms beyond exact copies of element-plus (no "improvements")
+- `usePopper*`, `useSameTarget`, `useEscapeKeydown` — deferred to `ep-extraction-v4`
 
 ## References
 
 - Change: `ep-extraction-v2` (proposal #239, spec #240, design #241, tasks #242, verify-report #247)
-- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`
+- Change: `ep-extraction-v3` (proposal #252, spec #257, design #258, tasks #260, verify-report #268)
+- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`, `openspec/archive/2026-07-10-ep-extraction-v3/`
 - Depends on: `openspec/specs/g-utils-extended/spec.md`

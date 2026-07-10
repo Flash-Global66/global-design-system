@@ -105,17 +105,17 @@ Each WU is a separate PR/merge commit. Roll back a WU with `git revert` of its m
 
 ## Success Criteria
 
-- [ ] Zero `from ['"]element-plus` matches under the 5 migrated packages' `src/**` and `index.ts`.
-- [ ] New hooks/utils each have passing Vitest unit tests; full suite stays green.
-- [ ] `.eslintrc.cjs` `excludedFiles` no longer lists the 5 migrated packages (the other deferred packages, `input-number`, and the 8 islands remain).
-- [ ] `yarn build` succeeds for all buildable packages; `yarn lint` passes with `--max-warnings 0`.
-- [ ] Each migration WU validated in `front-b2b` via real copies (no symlinks).
+- [x] Zero `from ['"]element-plus` matches under the 5 migrated packages' `src/**` and `index.ts`. — Confirmed by verify-report obs #268.
+- [x] New hooks/utils each have passing Vitest unit tests; full suite stays green. — 218/218, verify-report obs #268.
+- [x] `.eslintrc.cjs` `excludedFiles` no longer lists the 5 migrated packages (the other deferred packages, `input-number`, and the 8 islands remain). — Confirmed exact list, verify-report obs #268.
+- [x] `yarn build` succeeds for all buildable packages; `yarn lint` passes with `--max-warnings 0`. — Confirmed (scoped clean; repo-wide pre-existing debt only), verify-report obs #268.
+- [x] Each migration WU validated in `front-b2b` via real copies (no symlinks). — Performed live by the user post-verification, user-confirmed to the orchestrator; reconciled in tasks.md T3.8/T5.8 at archive time.
 
 ## Proposal question round
 
 Open product/scope decisions worth confirming before `sdd-spec`/`sdd-design`:
 
-1. **`useFormSize` placement** — it reads form context for size. Does it belong in `g-hooks` (size domain) or in `@flash-global66/g-form` (form-context domain, where `useFormItem`/`useFormDisabled` already live)? Assumption: build it where it minimizes cross-package coupling; defer the final call to `sdd-design`.
-2. **Publish cadence** — assumption: publish per WU (incremental). Confirm vs. publishing once at the end of the slice.
+1. **`useFormSize` placement** — it reads form context for size. Does it belong in `g-hooks` (size domain) or in `@flash-global66/g-form` (form-context domain, where `useFormItem`/`useFormDisabled` already live)? Assumption: build it where it minimizes cross-package coupling; defer the final call to `sdd-design`. **Resolved in design**: `g-form`.
+2. **Publish cadence** — assumption: publish per WU (incremental). Confirm vs. publishing once at the end of the slice. **Resolved**: publish per WU, as delivered.
 
 _Resolved: `input-number` is deferred to v4 (user decision) — v3 covers 5 packages._

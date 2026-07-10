@@ -63,7 +63,7 @@ Full requirements/scenarios: `specs/form-control-migration/spec.md`.
 
 ## References
 
-- Proposal: `openspec/changes/ep-extraction-v3/proposal.md` (Engram #252)
-- Design: `openspec/changes/ep-extraction-v3/design.md` (decisions 2.1, 2.3)
-- Baseline specs: `openspec/specs/g-utils-extended/spec.md`, `openspec/specs/g-hooks-package/spec.md`, `openspec/specs/eslint-ep-import-guard/spec.md`
+- Proposal: `openspec/archive/2026-07-10-ep-extraction-v3/proposal.md` (Engram #252)
+- Design: `openspec/archive/2026-07-10-ep-extraction-v3/design.md` (decisions 2.1, 2.3)
+- Baseline specs: `openspec/specs/g-utils-extended/spec.md`, `openspec/specs/g-hooks-package/spec.md`, `openspec/specs/eslint-ep-import-guard/spec.md`, `openspec/specs/g-form/spec.md`, `openspec/specs/form-control-migration/spec.md`
 - Prior change: `openspec/archive/2026-07-08-ep-extraction-v2/`
