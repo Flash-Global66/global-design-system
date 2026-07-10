@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-radio@0.3.1...@flash-global66/g-radio@0.3.2) (2026-07-10)
+
+### Bug Fixes
+
+- **components:** declare g-utils/g-hooks deps in migrated form-controls ([107b8bf](https://github.com/Flash-Global66/global-design-system/commit/107b8bfd12516915fc3cd09ae82cff79fe9862b8))
+
 ## [0.3.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-radio@0.3.0...@flash-global66/g-radio@0.3.1) (2026-07-10)
 
 **Note:** Version bump only for package @flash-global66/g-radio

@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-input",
   "author": "Global66",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "license": "MIT",
   "buildable": true,
   "exports": {
