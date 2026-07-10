@@ -25,6 +25,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Full history so we can diff the PR against its base branch.
+          fetch-depth: 0
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
@@ -47,8 +50,22 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Lint (eslint --max-warnings 0)
-        run: yarn lint
+      # Lint only the files the PR changed, not the whole repo. Full-repo
+      # `yarn lint` would fail on pre-existing lint debt in deferred packages
+      # (date-picker, collapse, ...) that this PR didn't touch, blocking
+      # unrelated PRs. Scoping keeps each PR accountable for its own changes.
+      - name: Lint changed files (eslint --max-warnings 0)
+        run: |
+          BASE="origin/${{ github.base_ref }}"
+          git fetch origin "${{ github.base_ref }}" --quiet || true
+          FILES=$(git diff --name-only --diff-filter=ACMR "$BASE"...HEAD -- '*.vue' '*.ts' '*.js' | tr '\n' ' ')
+          if [ -z "$FILES" ]; then
+            echo "No lintable (.vue/.ts/.js) files changed in this PR — skipping lint."
+            exit 0
+          fi
+          echo "Linting changed files:"
+          echo "$FILES" | tr ' ' '\n'
+          npx eslint $FILES --max-warnings 0
 
       - name: Unit tests (Vitest)
         run: yarn test:run
