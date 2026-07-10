@@ -1171,7 +1171,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-form@workspace:components/form"
   dependencies:
-    "@flash-global66/g-hooks": "npm:^0.2.1"
+    "@flash-global66/g-hooks": "npm:^0.3.0"
     "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
     element-plus: ^2.9.0
@@ -1179,7 +1179,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-hooks@npm:^0.2.1, @flash-global66/g-hooks@workspace:common/g-hooks":
+"@flash-global66/g-hooks@npm:^0.3.0, @flash-global66/g-hooks@workspace:common/g-hooks":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-hooks@workspace:common/g-hooks"
   dependencies:
@@ -1416,7 +1416,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-roving-focus-group@workspace:components/roving-focus-group"
   dependencies:
-    "@flash-global66/g-hooks": "npm:^0.2.1"
+    "@flash-global66/g-hooks": "npm:^0.3.0"
     "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
     "@flash-global66/g-collection": ^0.1.1

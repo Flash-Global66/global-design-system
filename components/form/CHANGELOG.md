@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-form@0.1.4...@flash-global66/g-form@0.2.0) (2026-07-10)
+
+### Bug Fixes
+
+- **g-form:** widen useFormSize test helper sizeProp type to include '' ([26c4aa9](https://github.com/Flash-Global66/global-design-system/commit/26c4aa9cfa8abe621a0b1a31d3549c426c279eff))
+
+### Features
+
+- **g-form:** add useFormSize (prop > global) ([6098779](https://github.com/Flash-Global66/global-design-system/commit/609877913baf7da8a53dfe0fac38f901a50c29cd))
+
 ## [0.1.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-form@0.1.3...@flash-global66/g-form@0.1.4) (2026-07-09)
 
 **Note:** Version bump only for package @flash-global66/g-form
