@@ -53,20 +53,20 @@ Every child PR body must include this diagram with the current PR marked `📍`,
 
 Publishes: `focus-trap`. Est. ~200 changed lines. Requirements: `popper-overlay-migration` → `zero-ep-imports-per-migrated-package`, `public-api-and-styles-preserved`, `barrel-exports-stable`, `new-hook-algorithms-copied-exactly`, `packaging-convention-followed`, `migration-gated-by-green-tests`; `g-hooks-package` → `popper-overlay-composables-added`, `v4-hooks-unit-tested`; `g-utils-extended` → `popper-overlay-utils-added`, `v4-utils-unit-tested`; `eslint-ep-import-guard` → `exclude-removed-per-work-unit`.
 
-- [ ] T1.1 Read EP's `useEscapeKeydown` from `node_modules/element-plus/es/hooks/use-escape-keydown/index.mjs` (2.9.7, source of truth). Cross-check against `../element-plus/packages/hooks/use-escape-keydown/` (sibling, 2.8.3-1908) — diff any signature/behavior drift before proceeding.
-- [ ] T1.2 Write failing unit test for `useEscapeKeydown` (invokes handler only on `Escape` keydown; no-op for other keys; cleans up listener on unmount) — new `common/g-hooks/tests/composables/useEscapeKeydown.spec.ts`.
-- [ ] T1.3 Implement `useEscapeKeydown` in `common/g-hooks/src/composables/useEscapeKeydown.ts` — byte-exact copy of the 2.9.7 algorithm. Run `yarn test:run` → green.
-- [ ] T1.4 Read EP's `isFocusable` from `node_modules/element-plus/es/utils/dom/aria.mjs` (2.9.7). Cross-check sibling `../element-plus/packages/utils/dom/aria.ts`.
-- [ ] T1.5 Write failing unit test for `isFocusable` (true for links/buttons/inputs/tabindex>=0 elements; false for disabled/tabindex=-1/plain divs) — new `common/g-utils/tests/utils/dom.util.spec.ts` (or existing dom-utils spec file).
-- [ ] T1.6 Implement `isFocusable` in `common/g-utils/src/utils/dom.util.ts` (or equivalent existing dom-utils module) — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T1.7 Update `common/g-hooks/src/index.ts` and `common/g-utils/src/index.ts` barrels to export the 2 new symbols.
-- [ ] T1.8 Migrate `components/focus-trap/src/**`: re-point `isString`/`isElement`/`EVENT_CODE` → `@flash-global66/g-utils`; wire the new `useEscapeKeydown`/`isFocusable`. Zero public API change (props/emits/slots/types + `/styles.scss` path untouched).
-- [ ] T1.9 Grep-verify zero `from ['"]element-plus` matches under `components/focus-trap/src/**` and `index.ts` (SCSS `@use` theme imports and comments excluded).
-- [ ] T1.10 Confirm `focus-trap`'s `package.json` declares `g-utils`/`g-hooks` in `dependencies` (not `peerDependencies`); `element-plus`/`vue` (if referenced) stay in `peerDependencies` — packaging convention.
-- [ ] T1.11 Remove `'components/focus-trap/**'` from `excludedFiles` in `.eslintrc.cjs`. Run `yarn lint --max-warnings 0` — must pass with the exclude removed.
-- [ ] T1.12 `yarn build` succeeds for `focus-trap`. Full `yarn test:run` green, no regressions.
-- [ ] T1.13 Validate in `front-b2b` using a **real copy** in `node_modules` (never a symlink) on `ander/update/version-packages` with the exact published version.
-- [ ] T1.14 Commit as one work unit (`feat(focus-trap): migrate off element-plus internals`), open PR #1 (stacked-to-main, target `main`), Lerna-publish `focus-trap` (+ `g-hooks`/`g-utils` if their new exports warrant a publish) on merge.
+- [x] T1.1 Read EP's `useEscapeKeydown` from `node_modules/element-plus/es/hooks/use-escape-keydown/index.mjs` (2.9.7, source of truth). Cross-check against `../element-plus/packages/hooks/use-escape-keydown/` (sibling, 2.8.3-1908) — diff any signature/behavior drift before proceeding.
+- [x] T1.2 Write failing unit test for `useEscapeKeydown` (invokes handler only on `Escape` keydown; no-op for other keys; cleans up listener on unmount) — new `common/g-hooks/tests/composables/useEscapeKeydown.spec.ts`.
+- [x] T1.3 Implement `useEscapeKeydown` in `common/g-hooks/src/composables/useEscapeKeydown.ts` — byte-exact copy of the 2.9.7 algorithm. Run `yarn test:run` → green.
+- [x] T1.4 Read EP's `isFocusable` from `node_modules/element-plus/es/utils/dom/aria.mjs` (2.9.7). Cross-check sibling `../element-plus/packages/utils/dom/aria.ts`.
+- [x] T1.5 Write failing unit test for `isFocusable` (true for links/buttons/inputs/tabindex>=0 elements; false for disabled/tabindex=-1/plain divs) — new `common/g-utils/tests/utils/dom.util.spec.ts` (or existing dom-utils spec file).
+- [x] T1.6 Implement `isFocusable` in `common/g-utils/src/utils/dom.util.ts` (or equivalent existing dom-utils module) — byte-exact copy. Run `yarn test:run` → green.
+- [x] T1.7 Update `common/g-hooks/src/index.ts` and `common/g-utils/src/index.ts` barrels to export the 2 new symbols.
+- [x] T1.8 Migrate `components/focus-trap/src/**`: re-point `isString`/`isElement`/`EVENT_CODE` → `@flash-global66/g-utils`; wire the new `useEscapeKeydown`/`isFocusable`. Zero public API change (props/emits/slots/types + `/styles.scss` path untouched).
+- [x] T1.9 Grep-verify zero `from ['"]element-plus` matches under `components/focus-trap/src/**` and `index.ts` (SCSS `@use` theme imports and comments excluded).
+- [x] T1.10 Confirm `focus-trap`'s `package.json` declares `g-utils`/`g-hooks` in `dependencies` (not `peerDependencies`); `element-plus`/`vue` (if referenced) stay in `peerDependencies` — packaging convention. (element-plus dropped entirely from peerDependencies — focus-trap has zero remaining EP imports and no SCSS theme dependency on it; `vue`/`lodash-unified` stay in peerDependencies.)
+- [x] T1.11 Remove `'components/focus-trap/**'` from `excludedFiles` in `.eslintrc.cjs`. Run `yarn lint --max-warnings 0` — must pass with the exclude removed. (Scoped lint on focus-trap/g-hooks/g-utils: 0 errors. Full-repo lint has 129 pre-existing errors in unrelated files — table/time-picker/stories — confirmed present before this WU and untouched by it.)
+- [x] T1.12 `yarn build` succeeds for `focus-trap`. Full `yarn test:run` green, no regressions. (234/234 tests green across 31 files, monorepo-wide.)
+- [ ] T1.13 Validate in `front-b2b` using a **real copy** in `node_modules` (never a symlink) on `ander/update/version-packages` with the exact published version. **Deferred**: requires a merged + Lerna-published `focus-trap` version and CodeCommit network access to `front-b2b`, neither available during `sdd-apply`. Do after merge/publish.
+- [ ] T1.14 Commit as one work unit (`feat(focus-trap): migrate off element-plus internals`), open PR #1 (stacked-to-main, target `main`), Lerna-publish `focus-trap` (+ `g-hooks`/`g-utils` if their new exports warrant a publish) on merge. **Partially done**: implementation committed locally as 3 work-unit commits (`16f1316`, `6be043e`, `6f0ca2f`) on branch `feat/ds-ep-v4-wu1-focus-trap`, plus a docs commit (`b58b869`) for the SDD planning artifacts. PR creation and Lerna publish are deferred to the orchestrator/reviewer per this apply phase's explicit instruction to stop after local commit.
 
 ## WU-2 — `slot` (deep migration; near-leaf, no dependencies)
 
