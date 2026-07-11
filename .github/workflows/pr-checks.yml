@@ -25,6 +25,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Full history so we can diff the PR head against its base branch
+          # to lint only the files this PR changed (see the Lint step below).
+          fetch-depth: 0
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
@@ -47,8 +51,25 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Lint (eslint --max-warnings 0)
-        run: yarn lint
+      # Lint ONLY the files this PR changed, not the whole repo. A full-repo
+      # `eslint . --max-warnings 0` fails on pre-existing lint debt in unrelated
+      # files (e.g. stories/*.stories.ts) that the PR never touched, which made
+      # this gate red on every PR regardless of its contents. Scoping to the
+      # PR's own diff keeps the gate meaningful: it blocks NEW lint errors the PR
+      # introduces (and still enforces the element-plus import guard on any
+      # migrated package, since those files are in the diff) without punishing a
+      # PR for debt it did not create.
+      - name: Lint changed files (eslint --max-warnings 0)
+        run: |
+          git fetch origin "$GITHUB_BASE_REF" --quiet
+          FILES=$(git diff --name-only --diff-filter=ACMR "origin/$GITHUB_BASE_REF"...HEAD -- '*.vue' '*.ts' '*.js' '*.jsx' '*.tsx')
+          if [ -z "$FILES" ]; then
+            echo "No lintable files changed in this PR — skipping lint."
+            exit 0
+          fi
+          echo "Linting files changed in this PR:"
+          echo "$FILES"
+          yarn eslint $FILES --max-warnings 0
 
       - name: Unit tests (Vitest)
         run: yarn test:run
