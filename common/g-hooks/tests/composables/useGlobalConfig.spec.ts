@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { createApp, defineComponent, h } from 'vue';
+// Import EP's real key to assert the DS shim never reuses it (no coupling to
+// the still-EP-backed config-provider island).
+import { configProviderContextKey } from 'element-plus';
 import {
   useGlobalConfig,
   provideGlobalConfig,
@@ -79,5 +82,8 @@ describe('useGlobalConfig', () => {
     expect(gConfigProviderContextKey.toString()).toContain(
       'gConfigProviderContextKey',
     );
+    // La garantía central del shim: NUNCA reutiliza la clave de element-plus,
+    // así que jamás inyecta del island config-provider (aún montado sobre EP).
+    expect(gConfigProviderContextKey).not.toBe(configProviderContextKey);
   });
 });
