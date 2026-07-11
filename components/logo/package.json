@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-logo",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Logos de Global66 y, progresivamente, de aliados y proveedores (PSE, Bancolombia, Bre-B, etc.) con tamaños y filtros CSS",
   "author": "Global66",
   "main": "dist/index.js",
@@ -32,7 +32,7 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-utils": "^0.5.1"
+    "@flash-global66/g-utils": "^0.6.0"
   },
   "peerDependencies": {
     "@vueuse/core": "^13.0.0",

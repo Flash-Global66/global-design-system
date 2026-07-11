@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-overlay",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
@@ -18,8 +18,8 @@
     "vue": "^3.2.0"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.6.0",
-    "@flash-global66/g-utils": "^0.5.0"
+    "@flash-global66/g-hooks": "^0.7.0",
+    "@flash-global66/g-utils": "^0.6.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }

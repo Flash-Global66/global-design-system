@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.6.1...@flash-global66/g-hooks@0.7.0) (2026-07-11)
+
+### Features
+
+- **g-hooks:** add useSameTarget and PatchFlags ported from element-plus ([abadea8](https://github.com/Flash-Global66/global-design-system/commit/abadea8d76fe1c836db01f63633aef46deb69f34))
+
 ## [0.6.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.6.0...@flash-global66/g-hooks@0.6.1) (2026-07-11)
 
 **Note:** Version bump only for package @flash-global66/g-hooks
