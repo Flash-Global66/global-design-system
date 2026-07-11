@@ -8,79 +8,83 @@ import {
   inject,
   withDirectives,
   h,
-} from 'vue'
-import { NOOP, debugWarn, isObject } from 'element-plus/es/utils/index'
+} from 'vue';
+import {
+  NOOP,
+  debugWarn,
+  isObject,
+  useNamespace,
+} from '@flash-global66/g-utils';
 import {
   FORWARD_REF_INJECTION_KEY,
   useForwardRefDirective,
-  useNamespace,
-} from 'element-plus'
+} from '@flash-global66/g-hooks';
 
-import type { Ref, VNode } from 'vue'
+import type { Ref, VNode } from 'vue';
 
-const NAME = 'GOnlyChild'
+const NAME = 'GOnlyChild';
 
 export const OnlyChild = defineComponent({
   name: NAME,
   setup(_, { slots, attrs }) {
-    const forwardRefInjection = inject(FORWARD_REF_INJECTION_KEY)
+    const forwardRefInjection = inject(FORWARD_REF_INJECTION_KEY);
     const forwardRefDirective = useForwardRefDirective(
-      forwardRefInjection?.setForwardRef ?? NOOP
-    )
+      forwardRefInjection?.setForwardRef ?? NOOP,
+    );
     return () => {
-      const defaultSlot = slots.default?.(attrs)
-      if (!defaultSlot) return null
+      const defaultSlot = slots.default?.(attrs);
+      if (!defaultSlot) return null;
 
       if (defaultSlot.length > 1) {
-        debugWarn(NAME, 'requires exact only one valid child.')
-        return null
+        debugWarn(NAME, 'requires exact only one valid child.');
+        return null;
       }
 
-      const firstLegitNode = findFirstLegitChild(defaultSlot)
+      const firstLegitNode = findFirstLegitChild(defaultSlot);
       if (!firstLegitNode) {
-        debugWarn(NAME, 'no valid child node found')
-        return null
+        debugWarn(NAME, 'no valid child node found');
+        return null;
       }
 
       return withDirectives(cloneVNode(firstLegitNode!, attrs), [
         [forwardRefDirective],
-      ])
-    }
+      ]);
+    };
   },
-})
+});
 
 function findFirstLegitChild(node: VNode[] | undefined): VNode | null {
-  if (!node) return null
-  const children = node as VNode[]
+  if (!node) return null;
+  const children = node as VNode[];
   for (const child of children) {
     /**
-     * when user uses h(Fragment, [text]) to render plain string,
-     * this switch case just cannot handle, when the value is primitives
-     * we should just return the wrapped string
+     * Cuando se usa h(Fragment, [text]) para renderizar un string plano,
+     * este switch no puede manejarlo; cuando el valor es un primitivo,
+     * simplemente devolvemos el string envuelto.
      */
     if (isObject(child)) {
       switch (child.type) {
         case Comment:
-          continue
+          continue;
         case Text:
         case 'svg':
-          return wrapTextContent(child)
+          return wrapTextContent(child);
         case Fragment:
-          return findFirstLegitChild(child.children as VNode[])
+          return findFirstLegitChild(child.children as VNode[]);
         default:
-          return child
+          return child;
       }
     }
-    return wrapTextContent(child)
+    return wrapTextContent(child);
   }
-  return null
+  return null;
 }
 
 function wrapTextContent(s: string | VNode) {
-  const ns = useNamespace('only-child')
-  return h('span', { class: ns.e('content') }, s)
+  const ns = useNamespace('only-child');
+  return h('span', { class: ns.e('content') }, s);
 }
 
 export type OnlyChildExpose = {
-  forwardRef: Ref<HTMLElement>
-}
+  forwardRef: Ref<HTMLElement>;
+};

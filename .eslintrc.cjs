@@ -46,7 +46,6 @@ module.exports = {
         'components/toast/**',
         'components/time-picker/**',
         'components/table/**',
-        'components/slot/**',
         'components/select/**',
         'components/scrollbar/**',
         'components/popper/**',
