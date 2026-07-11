@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.3.3...@flash-global66/g-drawer@0.3.4) (2026-07-11)
+
+**Note:** Version bump only for package @flash-global66/g-drawer
+
 ## [0.3.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.3.2...@flash-global66/g-drawer@0.3.3) (2026-07-11)
 
 **Note:** Version bump only for package @flash-global66/g-drawer
