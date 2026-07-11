@@ -72,14 +72,14 @@ export const rAF = (fn: FrameRequestCallback): number =>
     : (setTimeout(fn, 16) as unknown as number);
 
 /**
- * Checks whether an element can receive focus (via tab order or
- * programmatically).
+ * Verifica si un elemento puede recibir foco (por orden de tabulación o
+ * programáticamente).
  *
- * Byte-exact copy of element-plus's `isFocusable` algorithm
+ * Copia byte-exact del algoritmo `isFocusable` de element-plus
  * (`es/utils/dom/aria.mjs`, 2.9.7).
  *
- * @param element - The element to check.
- * @returns `true` if the element is focusable.
+ * @param element - El elemento a verificar.
+ * @returns `true` si el elemento puede recibir foco.
  */
 export const isFocusable = (element: HTMLElement): boolean => {
   if (
