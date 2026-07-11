@@ -1,9 +1,9 @@
-import { buildProps, definePropType } from 'element-plus/es/utils/index'
-import { popperContentProps } from '@flash-global66/g-popper'
-import { useAriaProps, useDelayedToggleProps } from 'element-plus'
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { popperContentProps } from '@flash-global66/g-popper';
+import { useAriaProps, useDelayedToggleProps } from '@flash-global66/g-hooks';
 
-import type TooltipContent from './content.vue'
-import type { ExtractPropTypes } from 'vue'
+import type TooltipContent from './content.vue';
+import type { ExtractPropTypes } from 'vue';
 
 export const useTooltipContentProps = buildProps({
   ...useDelayedToggleProps,
@@ -84,11 +84,11 @@ export const useTooltipContentProps = buildProps({
     default: false,
   },
   ...useAriaProps(['ariaLabel']),
-} as const)
+} as const);
 
 export type GTooltipContentProps = ExtractPropTypes<
   typeof useTooltipContentProps
->
+>;
 
 export type TooltipContentInstance = InstanceType<typeof TooltipContent> &
-  unknown
+  unknown;

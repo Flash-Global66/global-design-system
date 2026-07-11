@@ -20,3 +20,7 @@ export * from './composables/useForwardRef';
 export * from './composables/useSameTarget';
 export * from './composables/usePopper';
 export * from './composables/useZIndex';
+export * from './composables/useTimeout';
+export * from './composables/useDelayedToggle';
+export * from './composables/useModelToggle';
+export * from './composables/usePopperContainer';

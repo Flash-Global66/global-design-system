@@ -22,7 +22,11 @@
       :gpu-acceleration="gpuAcceleration"
       :offset="offset"
       :persistent="persistent"
-      :popper-class="[isComponent ? `${popperClass ?? ''}` : `${ns.e('tooltip')} ${popperClass ?? ''}`]"
+      :popper-class="[
+        isComponent
+          ? `${popperClass ?? ''}`
+          : `${ns.e('tooltip')} ${popperClass ?? ''}`,
+      ]"
       :popper-style="popperStyle"
       :placement="placement"
       :popper-options="popperOptions"
@@ -43,7 +47,12 @@
         <div v-if="title || description" :class="ns.e('container')">
           <div :class="ns.e('header')">
             <h6 v-if="title">{{ title }}</h6>
-            <g-icon-button v-if="closable" icon="regular times" size="small" @click="onClose" />
+            <g-icon-button
+              v-if="closable"
+              icon="regular times"
+              size="small"
+              @click="onClose"
+            />
           </div>
           <p v-if="description" :class="ns.e('description')">
             {{ description }}
@@ -56,57 +65,76 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onDeactivated, provide, readonly, ref, toRef, unref, watch } from 'vue'
-import { GPopper, GPopperArrow } from '@flash-global66/g-popper'
+import {
+  computed,
+  onDeactivated,
+  provide,
+  readonly,
+  ref,
+  toRef,
+  unref,
+  watch,
+} from 'vue';
+import { GPopper, GPopperArrow } from '@flash-global66/g-popper';
 
-import { isBoolean } from 'element-plus/es/utils/index'
-import { useDelayedToggle, useId, usePopperContainer, useNamespace } from 'element-plus'
-import { TOOLTIP_INJECTION_KEY } from './constants'
-import { tooltipEmits, useTooltipModelToggle, useTooltipProps } from './tooltip'
-import GTooltipTrigger from './trigger.vue'
-import GTooltipContent from './content.vue'
-import { GIconButton } from '@flash-global66/g-icon-button'
+import { isBoolean, useNamespace } from '@flash-global66/g-utils';
+import {
+  useDelayedToggle,
+  useId,
+  usePopperContainer,
+} from '@flash-global66/g-hooks';
+import { TOOLTIP_INJECTION_KEY } from './constants';
+import {
+  tooltipEmits,
+  useTooltipModelToggle,
+  useTooltipProps,
+} from './tooltip';
+import GTooltipTrigger from './trigger.vue';
+import GTooltipContent from './content.vue';
+import { GIconButton } from '@flash-global66/g-icon-button';
 
-import type { TooltipContentInstance } from './content'
-import type { PopperInstance } from '@flash-global66/g-popper'
+import type { TooltipContentInstance } from './content';
+import type { PopperInstance } from '@flash-global66/g-popper';
 
 defineOptions({
-  name: 'GTooltip'
-})
+  name: 'GTooltip',
+});
 
-const props = defineProps(useTooltipProps)
-const emit = defineEmits(tooltipEmits)
+const props = defineProps(useTooltipProps);
+const emit = defineEmits(tooltipEmits);
 
-usePopperContainer()
+usePopperContainer();
 
-const id = useId()
-const ns = useNamespace('popper')
-const popperRef = ref<PopperInstance>()
-const contentRef = ref<TooltipContentInstance>()
+const id = useId();
+const ns = useNamespace('popper');
+const popperRef = ref<PopperInstance>();
+const contentRef = ref<TooltipContentInstance>();
 
 const updatePopper = () => {
-  const popperComponent = unref(popperRef)
+  const popperComponent = unref(popperRef);
   if (popperComponent) {
-    popperComponent.popperInstanceRef?.update()
+    popperComponent.popperInstanceRef?.update();
   }
-}
-const open = ref(false)
-const toggleReason = ref<Event>()
+};
+const open = ref(false);
+const toggleReason = ref<Event>();
 
 const { show, hide, hasUpdateHandler } = useTooltipModelToggle({
   indicator: open,
-  toggleReason
-})
+  toggleReason,
+});
 
 const { onOpen, onClose } = useDelayedToggle({
   showAfter: toRef(props, 'showAfter'),
   hideAfter: toRef(props, 'hideAfter'),
   autoClose: toRef(props, 'autoClose'),
   open: show,
-  close: hide
-})
+  close: hide,
+});
 
-const controlled = computed(() => isBoolean(props.visible) && !hasUpdateHandler.value)
+const controlled = computed(
+  () => isBoolean(props.visible) && !hasUpdateHandler.value,
+);
 
 provide(TOOLTIP_INJECTION_KEY, {
   controlled,
@@ -114,47 +142,47 @@ provide(TOOLTIP_INJECTION_KEY, {
   open: readonly(open),
   trigger: toRef(props, 'trigger'),
   onOpen: (event?: Event) => {
-    onOpen(event)
+    onOpen(event);
   },
   onClose: (event?: Event) => {
-    onClose(event)
+    onClose(event);
   },
   onToggle: (event?: Event) => {
     if (unref(open)) {
-      onClose(event)
+      onClose(event);
     } else {
-      onOpen(event)
+      onOpen(event);
     }
   },
   onShow: () => {
-    emit('show', toggleReason.value)
+    emit('show', toggleReason.value);
   },
   onHide: () => {
-    emit('hide', toggleReason.value)
+    emit('hide', toggleReason.value);
   },
   onBeforeShow: () => {
-    emit('before-show', toggleReason.value)
+    emit('before-show', toggleReason.value);
   },
   onBeforeHide: () => {
-    emit('before-hide', toggleReason.value)
+    emit('before-hide', toggleReason.value);
   },
-  updatePopper
-})
+  updatePopper,
+});
 
 watch(
   () => props.disabled,
-  (disabled) => {
+  disabled => {
     if (disabled && open.value) {
-      open.value = false
+      open.value = false;
     }
-  }
-)
+  },
+);
 
 const isFocusInsideContent = (event?: FocusEvent) => {
-  return contentRef.value?.isFocusInsideContent(event)
-}
+  return contentRef.value?.isFocusInsideContent(event);
+};
 
-onDeactivated(() => open.value && hide())
+onDeactivated(() => open.value && hide());
 
 defineExpose({
   /**
@@ -184,6 +212,6 @@ defineExpose({
   /**
    * @description expose hide function
    */
-  hide
-})
+  hide,
+});
 </script>

@@ -1,10 +1,13 @@
-import { buildProps, definePropType } from 'element-plus/es/utils/index'
-import { popperTriggerProps } from '@flash-global66/g-popper'
-import { EVENT_CODE } from 'element-plus'
-import type { Arrayable } from 'element-plus/es/utils/index'
-import type { ExtractPropTypes } from 'vue'
+import {
+  buildProps,
+  definePropType,
+  EVENT_CODE,
+} from '@flash-global66/g-utils';
+import { popperTriggerProps } from '@flash-global66/g-popper';
+import type { Arrayable } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
 
-export type TooltipTriggerType = 'hover' | 'focus' | 'click' | 'contextmenu'
+export type TooltipTriggerType = 'hover' | 'focus' | 'click' | 'contextmenu';
 
 export const useTooltipTriggerProps = buildProps({
   ...popperTriggerProps,
@@ -26,8 +29,8 @@ export const useTooltipTriggerProps = buildProps({
     type: definePropType<string[]>(Array),
     default: () => [EVENT_CODE.enter, EVENT_CODE.numpadEnter, EVENT_CODE.space],
   },
-} as const)
+} as const);
 
 export type GTooltipTriggerProps = ExtractPropTypes<
   typeof useTooltipTriggerProps
->
+>;

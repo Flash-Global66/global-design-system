@@ -28,12 +28,16 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
+  "dependencies": {
+    "@flash-global66/g-focus-trap": "^0.1.5",
+    "@flash-global66/g-hooks": "^0.8.0",
+    "@flash-global66/g-icon-button": "^0.4.6",
+    "@flash-global66/g-popper": "^0.0.13",
+    "@flash-global66/g-slot": "^0.0.7",
+    "@flash-global66/g-teleport": "^0.0.13",
+    "@flash-global66/g-utils": "^0.6.0"
+  },
   "peerDependencies": {
-    "@flash-global66/g-focus-trap": "^0.0.7",
-    "@flash-global66/g-icon-button": "^0.0.9",
-    "@flash-global66/g-popper": "^0.0.10",
-    "@flash-global66/g-slot": "^0.0.2",
-    "@flash-global66/g-teleport": "^0.0.6",
     "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   }

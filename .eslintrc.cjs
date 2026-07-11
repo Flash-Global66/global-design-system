@@ -45,7 +45,6 @@ module.exports = {
         // element-plus component.
         'components/inline/**',
         'components/input-tag/**',
-        'components/tooltip/**',
         'components/toast/**',
         'components/time-picker/**',
         'components/table/**',
