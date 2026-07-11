@@ -15,6 +15,7 @@ export * from './utils/number.util';
 export * from './utils/function.util';
 export * from './utils/object.util';
 export * from './utils/dom.util';
+export * from './utils/refs.util';
 export * from './composables/useNamespace';
 export * from './constants/event.constant';
 export * from './types/utils.type';

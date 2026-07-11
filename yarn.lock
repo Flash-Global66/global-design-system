@@ -983,7 +983,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-button@workspace:components/button":
+"@flash-global66/g-button@npm:^0.5.6, @flash-global66/g-button@workspace:components/button":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-button@workspace:components/button"
   dependencies:
@@ -1110,10 +1110,15 @@ __metadata:
 "@flash-global66/g-dialog@workspace:components/dialog":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-dialog@workspace:components/dialog"
+  dependencies:
+    "@flash-global66/g-button": "npm:^0.5.6"
+    "@flash-global66/g-focus-trap": "npm:^0.1.6"
+    "@flash-global66/g-hooks": "npm:^0.9.0"
+    "@flash-global66/g-icon-font": "npm:^0.25.8"
+    "@flash-global66/g-overlay": "npm:^0.0.11"
+    "@flash-global66/g-teleport": "npm:^0.0.13"
+    "@flash-global66/g-utils": "npm:^0.6.0"
   peerDependencies:
-    "@flash-global66/g-focus-trap": 0.0.8
-    "@flash-global66/g-overlay": 0.0.7
-    "@flash-global66/g-teleport": 0.0.6
     element-plus: ^2.9.7
     vue: ^3.2.0
   languageName: unknown
@@ -1209,7 +1214,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-icon-font@workspace:components/icon-font":
+"@flash-global66/g-icon-font@npm:^0.25.8, @flash-global66/g-icon-font@workspace:components/icon-font":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-font@workspace:components/icon-font"
   dependencies:
@@ -1342,7 +1347,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-overlay@workspace:components/overlay":
+"@flash-global66/g-overlay@npm:^0.0.11, @flash-global66/g-overlay@workspace:components/overlay":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-overlay@workspace:components/overlay"
   dependencies:
