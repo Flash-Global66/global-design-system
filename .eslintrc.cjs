@@ -50,7 +50,6 @@ module.exports = {
         'components/time-picker/**',
         'components/table/**',
         'components/select/**',
-        'components/popper/**',
         'components/pagination/**',
         'components/input-number/**',
         'components/dropdown/**',
