@@ -1,17 +1,17 @@
-import { buildProps } from 'element-plus/es/utils/index'
-import { createModelToggleComposable } from 'element-plus/es/hooks/index'
-import { popperArrowProps, popperProps } from '@flash-global66/g-popper'
-import { useTooltipContentProps } from './content'
-import { useTooltipTriggerProps } from './trigger'
-import type Tooltip from './tooltip.vue'
+import { buildProps } from '@flash-global66/g-utils';
+import { createModelToggleComposable } from '@flash-global66/g-hooks';
+import { popperArrowProps, popperProps } from '@flash-global66/g-popper';
+import { useTooltipContentProps } from './content';
+import { useTooltipTriggerProps } from './trigger';
+import type Tooltip from './tooltip.vue';
 
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes } from 'vue';
 
 export const {
   useModelToggleProps: useTooltipModelToggleProps,
   useModelToggleEmits: useTooltipModelToggleEmits,
   useModelToggle: useTooltipModelToggle,
-} = createModelToggleComposable('visible' as const)
+} = createModelToggleComposable('visible' as const);
 
 export const useTooltipProps = buildProps({
   ...popperProps,
@@ -26,7 +26,7 @@ export const useTooltipProps = buildProps({
     type: Boolean,
     default: true,
   },
-})
+});
 
 export const tooltipEmits = [
   ...useTooltipModelToggleEmits,
@@ -36,7 +36,7 @@ export const tooltipEmits = [
   'hide',
   'open',
   'close',
-]
+];
 
-export type GTooltipProps = ExtractPropTypes<typeof useTooltipProps>
-export type TooltipInstance = InstanceType<typeof Tooltip> & unknown
+export type GTooltipProps = ExtractPropTypes<typeof useTooltipProps>;
+export type TooltipInstance = InstanceType<typeof Tooltip> & unknown;

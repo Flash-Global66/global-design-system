@@ -1154,7 +1154,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-focus-trap@workspace:components/focus-trap":
+"@flash-global66/g-focus-trap@npm:^0.1.5, @flash-global66/g-focus-trap@workspace:components/focus-trap":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-focus-trap@workspace:components/focus-trap"
   dependencies:
@@ -1196,7 +1196,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-icon-button@workspace:components/icon-button":
+"@flash-global66/g-icon-button@npm:^0.4.6, @flash-global66/g-icon-button@workspace:components/icon-button":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-button@workspace:components/icon-button"
   dependencies:
@@ -1370,7 +1370,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-popper@workspace:components/popper":
+"@flash-global66/g-popper@npm:^0.0.13, @flash-global66/g-popper@workspace:components/popper":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-popper@workspace:components/popper"
   dependencies:
@@ -1511,7 +1511,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-slot@workspace:components/slot":
+"@flash-global66/g-slot@npm:^0.0.7, @flash-global66/g-slot@workspace:components/slot":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-slot@workspace:components/slot"
   dependencies:
@@ -1565,7 +1565,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-teleport@workspace:components/teleport":
+"@flash-global66/g-teleport@npm:^0.0.13, @flash-global66/g-teleport@workspace:components/teleport":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-teleport@workspace:components/teleport"
   dependencies:
@@ -1602,12 +1602,15 @@ __metadata:
 "@flash-global66/g-tooltip@workspace:components/tooltip":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-tooltip@workspace:components/tooltip"
+  dependencies:
+    "@flash-global66/g-focus-trap": "npm:^0.1.5"
+    "@flash-global66/g-hooks": "npm:^0.8.0"
+    "@flash-global66/g-icon-button": "npm:^0.4.6"
+    "@flash-global66/g-popper": "npm:^0.0.13"
+    "@flash-global66/g-slot": "npm:^0.0.7"
+    "@flash-global66/g-teleport": "npm:^0.0.13"
+    "@flash-global66/g-utils": "npm:^0.6.0"
   peerDependencies:
-    "@flash-global66/g-focus-trap": ^0.0.7
-    "@flash-global66/g-icon-button": ^0.0.9
-    "@flash-global66/g-popper": ^0.0.10
-    "@flash-global66/g-slot": ^0.0.2
-    "@flash-global66/g-teleport": ^0.0.6
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
