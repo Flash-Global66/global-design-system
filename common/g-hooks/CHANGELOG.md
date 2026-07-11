@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.8.0...@flash-global66/g-hooks@0.9.0) (2026-07-11)
+
+### Features
+
+- **g-hooks:** add useTimeout/useDelayedToggle/useModelToggle/usePopperContainer ported from element-plus ([182685d](https://github.com/Flash-Global66/global-design-system/commit/182685d255094a81447f1c4f697510b6a4645026))
+
 # [0.8.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.7.1...@flash-global66/g-hooks@0.8.0) (2026-07-11)
 
 ### Features
