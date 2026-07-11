@@ -52,7 +52,6 @@ module.exports = {
         'components/popper/**',
         'components/pagination/**',
         'components/input-number/**',
-        'components/focus-trap/**',
         'components/dropdown/**',
         'components/dialog/**',
         'components/date-picker/**',
