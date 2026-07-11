@@ -88,20 +88,20 @@ Publishes: `slot`. Est. ~220 changed lines. Requirements: same `popper-overlay-m
 
 Publishes: `overlay`. Est. ~180 changed lines. Requirements: same `popper-overlay-migration`/`g-hooks-package`/`g-utils-extended` set as WU-1; `shared-hook-single-ownership` (owns `useSameTarget`, shared with `dialog`/WU-7).
 
-- [ ] T3.1 Read EP's `useSameTarget` from `node_modules/element-plus/es/hooks/use-same-target/index.mjs` (2.9.7). Cross-check sibling `../element-plus/packages/hooks/use-same-target/`.
-- [ ] T3.2 Write failing unit test for `useSameTarget` (returned `onClick`/`onMousedown`/`onMouseup` only fire the handler when mousedown and mouseup/click targets are the same node — guards against drag-selection-triggered false positives) — new `common/g-hooks/tests/composables/useSameTarget.spec.ts`.
-- [ ] T3.3 Implement `useSameTarget` in `common/g-hooks/src/composables/useSameTarget.ts` — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T3.4 Read EP's `PatchFlags` from `node_modules/element-plus/es/utils/vnode.mjs` (2.9.7 Vue-internal re-export). Cross-check sibling.
-- [ ] T3.5 Write failing unit test for `PatchFlags` (enum/const values match EP's exactly, e.g. `TEXT`, `CLASS`, `STYLE`, `PROPS`, `FULL_PROPS`, `HYDRATE_EVENTS`, `STABLE_FRAGMENT`, `KEYED_FRAGMENT`, `UNKEYED_FRAGMENT`, `NEED_PATCH`, `DYNAMIC_SLOTS`, `DEV_ROOT_FRAGMENT`, `HOISTED`, `BAIL`) — new `common/g-utils/tests/types/vnode.type.spec.ts`.
-- [ ] T3.6 Implement `PatchFlags` in `common/g-utils/src/types/vnode.type.ts` (or equivalent) — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T3.7 Update `common/g-hooks/src/index.ts` and `common/g-utils/src/index.ts` barrels.
-- [ ] T3.8 Migrate `components/overlay/src/**`: re-point `buildProps`/`definePropType` → `@flash-global66/g-utils`; wire `useSameTarget`/`PatchFlags`. Zero public API change.
-- [ ] T3.9 Grep-verify zero `from ['"]element-plus` matches under `components/overlay/src/**` and `index.ts`.
-- [ ] T3.10 Confirm `overlay`'s `package.json` packaging convention.
-- [ ] T3.11 Remove `'components/overlay/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
-- [ ] T3.12 `yarn build` succeeds for `overlay`. Full `yarn test:run` green.
-- [ ] T3.13 Validate in `front-b2b` (real copy).
-- [ ] T3.14 Commit as one work unit (`feat(overlay): migrate off element-plus internals, add useSameTarget/PatchFlags`), open PR #3 (parallel to PR #1/#2, targets `main`), Lerna-publish on merge.
+- [x] T3.1 Read EP's `useSameTarget` from `node_modules/element-plus/es/hooks/use-same-target/index.mjs` (2.9.7). Cross-check sibling `../element-plus/packages/hooks/use-same-target/`. (Identical algorithm; sibling only differs in `NOOP` import path — no drift.)
+- [x] T3.2 Write failing unit test for `useSameTarget` (returned `onClick`/`onMousedown`/`onMouseup` only fire the handler when mousedown and mouseup/click targets are the same node — guards against drag-selection-triggered false positives) — new `common/g-hooks/tests/composables/useSameTarget.spec.ts`.
+- [x] T3.3 Implement `useSameTarget` in `common/g-hooks/src/composables/useSameTarget.ts` — byte-exact copy. Run `yarn test:run` → green.
+- [x] T3.4 Read EP's `PatchFlags` from `node_modules/element-plus/es/utils/vue/vnode.mjs` (2.9.7; module path is `utils/vue/vnode`, not `utils/vnode` as brief anticipated). Cross-check sibling `packages/utils/vue/vnode.ts` — identical, ported as a real TS `enum` (matches EP's own `.d.ts export declare enum`).
+- [x] T3.5 Write failing unit test for `PatchFlags` (enum values match EP's exactly: `TEXT`, `CLASS`, `STYLE`, `PROPS`, `FULL_PROPS`, `HYDRATE_EVENTS`, `STABLE_FRAGMENT`, `KEYED_FRAGMENT`, `UNKEYED_FRAGMENT`, `NEED_PATCH`, `DYNAMIC_SLOTS`, `HOISTED`, `BAIL`, plus bitwise-OR composition) — new `common/g-utils/tests/types/vnode.type.spec.ts`. (EP 2.9.7 has no `DEV_ROOT_FRAGMENT` member; brief's list included it in error — omitted, matches source exactly.)
+- [x] T3.6 Implement `PatchFlags` in `common/g-utils/src/types/vnode.type.ts` — byte-exact copy. Run `yarn test:run` → green.
+- [x] T3.7 Update `common/g-hooks/src/index.ts` and `common/g-utils/src/index.ts` barrels.
+- [x] T3.8 Migrate `components/overlay/overlay.ts` (flat-layout package, no `src/**` — brief anticipated `src/**` in error): re-point `buildProps`/`definePropType`/`useNamespace` → `@flash-global66/g-utils`; `useSameTarget` → `@flash-global66/g-hooks`. Zero public API change. Comments translated to Spanish.
+- [x] T3.9 Grep-verify zero `from ['"]element-plus` matches under `components/overlay/overlay.ts` and `index.ts` (only a doc-comment URL reference remains in `index.ts`, not an import).
+- [x] T3.10 Confirm `overlay`'s `package.json` packaging convention: added `@flash-global66/g-hooks@^0.6.0` + `@flash-global66/g-utils@^0.5.0` to `dependencies`; added `element-plus@^2.9.0` + `vue@^3.2.0` to `peerDependencies` (package previously had none declared at all — `element-plus` kept/added because `overlay.styles.scss` still `@use`s its theme-chalk mixins, out of scope for this WU). `yarn install` run to sync `yarn.lock` workspace resolution.
+- [x] T3.11 Remove `'components/overlay/**'` from `excludedFiles` in `.eslintrc.cjs`. Scoped `yarn eslint components/overlay common/g-hooks/src common/g-utils/src common/g-hooks/tests common/g-utils/tests .eslintrc.cjs --max-warnings 0` passes (0 errors/warnings).
+- [x] T3.12 `yarn build` — `overlay` has no `buildable: true`/build script (ships raw TS like `g-hooks`/`g-utils`, confirmed via `scripts/build-components.js`), so this is a no-op for this package (consistent with the flat-layout, non-buildable convention). Full `yarn test:run`: 251/251 green across 34 files.
+- [ ] T3.13 Validate in `front-b2b` using a real copy. **Deferred**: same blocker as WU-1/WU-2 — requires a merged + Lerna-published `overlay` version; CodeCommit registry network access unavailable in this sandbox.
+- [ ] T3.14 Commit as one work unit, open PR #3, Lerna-publish on merge. **Partial**: implementation committed locally as 2 work-unit commits (`abadea8` feat g-hooks/g-utils, `860ae98` refactor overlay) on branch `feat/ds-ep-v4-wu3-overlay`, rebased onto `origin/main` @ `e38cd7a`. PR creation + publish deferred to orchestrator/reviewer per this apply phase's explicit instruction to stop after local commit.
 
 ## WU-4 — `scrollbar` (pure re-point; no dependencies)
 
