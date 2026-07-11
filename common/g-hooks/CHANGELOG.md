@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.4.1...@flash-global66/g-hooks@0.5.0) (2026-07-11)
+
+### Features
+
+- **g-hooks:** add useEscapeKeydown ported from element-plus ([16f1316](https://github.com/Flash-Global66/global-design-system/commit/16f13160697809dc2b25bc098159a0666a7c0a4f))
+
 ## [0.4.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.4.0...@flash-global66/g-hooks@0.4.1) (2026-07-10)
 
 ### Bug Fixes
