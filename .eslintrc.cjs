@@ -52,7 +52,6 @@ module.exports = {
         'components/pagination/**',
         'components/input-number/**',
         'components/dropdown/**',
-        'components/dialog/**',
         'components/date-picker/**',
         'components/collapse/**',
       ],

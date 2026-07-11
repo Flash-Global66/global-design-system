@@ -1,6 +1,6 @@
-import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue'
-import type { UseNamespaceReturn } from 'element-plus/es/hooks'
-import type { ButtonVariant } from "@flash-global66/g-button";
+import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue';
+import type { NamespaceHelpers } from '@flash-global66/g-utils';
+import type { ButtonVariant } from '@flash-global66/g-button';
 
 export interface FooterButton {
   /**
@@ -30,12 +30,13 @@ export type DialogBeforeCloseFn = (done: (cancel?: boolean) => void) => void;
 
 // Context types
 export interface DialogContext {
-  dialogRef: Ref<HTMLElement | undefined>
-  headerRef: Ref<HTMLElement | undefined>
-  bodyId: Ref<string>
-  ns: UseNamespaceReturn
-  rendered: Ref<boolean>
-  style: ComputedRef<CSSProperties>
+  dialogRef: Ref<HTMLElement | undefined>;
+  headerRef: Ref<HTMLElement | undefined>;
+  bodyId: Ref<string>;
+  ns: NamespaceHelpers;
+  rendered: Ref<boolean>;
+  style: ComputedRef<CSSProperties>;
 }
 
-export const dialogInjectionKey: InjectionKey<DialogContext> = Symbol('dialogInjectionKey');
+export const dialogInjectionKey: InjectionKey<DialogContext> =
+  Symbol('dialogInjectionKey');

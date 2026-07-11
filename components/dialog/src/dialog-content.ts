@@ -1,6 +1,6 @@
-import { buildProps } from 'element-plus/es/utils/index'
-import type { ExtractPropTypes } from 'vue'
-import type { DialogSizeMode, FooterButton } from './types/types'
+import { buildProps } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import type { DialogSizeMode, FooterButton } from './types/types';
 
 export const dialogContentProps = buildProps({
   /**
@@ -16,7 +16,7 @@ export const dialogContentProps = buildProps({
    */
   overflow: {
     type: Boolean,
-    default: true
+    default: true,
   },
   /**
    * @description control the body element overflow
@@ -79,27 +79,32 @@ export const dialogContentProps = buildProps({
     type: Array as () => FooterButton[],
     default: () => [],
   },
-} as const)
+} as const);
 
 export const validateDialogProps = (props: {
-  sizeMode?: DialogSizeMode
-  width?: string | number
-  alignCenter?: boolean
-  top?: string
+  // `@flash-global66/g-utils`'s `buildProps` no angosta el tipo literal a
+  // partir de `values` (a diferencia del `buildProp` de element-plus, que
+  // usa un sistema de tipos condicional); el validador en tiempo de
+  // ejecución sigue aplicando el conjunto de `values`, por lo que se acepta
+  // `string` aquí para reflejar el tipo real que `defineProps` infiere.
+  sizeMode?: DialogSizeMode | string;
+  width?: string | number;
+  alignCenter?: boolean;
+  top?: string;
 }) => {
-  const { sizeMode, width } = props
+  const { sizeMode, width } = props;
 
   if (sizeMode === 'fixed' && (!width || width === '')) {
     console.warn(
-      '[g-dialog] When sizeMode is set to "fixed", width must be defined.'
-    )
+      '[g-dialog] When sizeMode is set to "fixed", width must be defined.',
+    );
   }
-}
+};
 
-export type DialogContentProps = ExtractPropTypes<typeof dialogContentProps>
+export type DialogContentProps = ExtractPropTypes<typeof dialogContentProps>;
 
 export const dialogContentEmits = {
   close: () => true,
-}
+};
 
-export type DialogContentEmits = typeof dialogContentEmits
+export type DialogContentEmits = typeof dialogContentEmits;

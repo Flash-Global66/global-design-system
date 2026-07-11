@@ -1,9 +1,13 @@
-import { buildProps, definePropType, isBoolean } from 'element-plus/es/utils/index'
-import { UPDATE_MODEL_EVENT } from 'element-plus/es/constants/index'
-import { dialogContentProps } from './dialog-content'
-import type { ExtractPropTypes } from 'vue'
-import type { DialogBeforeCloseFn } from './types/types'
-import type Dialog from './dialog.vue'
+import {
+  buildProps,
+  definePropType,
+  isBoolean,
+  UPDATE_MODEL_EVENT,
+} from '@flash-global66/g-utils';
+import { dialogContentProps } from './dialog-content';
+import type { ExtractPropTypes } from 'vue';
+import type { DialogBeforeCloseFn } from './types/types';
+import type Dialog from './dialog.vue';
 
 export const dialogProps = buildProps({
   ...dialogContentProps,
@@ -128,9 +132,9 @@ export const dialogProps = buildProps({
     type: String,
     default: '2',
   },
-} as const)
+} as const);
 
-export type DialogProps = ExtractPropTypes<typeof dialogProps>
+export type DialogProps = ExtractPropTypes<typeof dialogProps>;
 
 export const dialogEmits = {
   open: () => true,
@@ -140,6 +144,6 @@ export const dialogEmits = {
   [UPDATE_MODEL_EVENT]: (value: boolean) => isBoolean(value),
   openAutoFocus: () => true,
   closeAutoFocus: () => true,
-}
-export type DialogEmits = typeof dialogEmits
-export type DialogInstance = InstanceType<typeof Dialog>
+};
+export type DialogEmits = typeof dialogEmits;
+export type DialogInstance = InstanceType<typeof Dialog>;

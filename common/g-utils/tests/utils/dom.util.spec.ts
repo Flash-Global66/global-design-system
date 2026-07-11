@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import {
   isClient,
   isElement,
@@ -7,6 +7,8 @@ import {
   hasClass,
   rAF,
   isFocusable,
+  getStyle,
+  getScrollBarWidth,
 } from '../../src/utils/dom.util';
 
 describe('isClient', () => {
@@ -148,5 +150,36 @@ describe('isFocusable', () => {
     const button = document.createElement('button');
     button.setAttribute('aria-disabled', 'true');
     expect(isFocusable(button)).toBe(false);
+  });
+});
+
+describe('getStyle', () => {
+  it('retorna el valor inline cuando el estilo está seteado directamente', () => {
+    const el = document.createElement('div');
+    el.style.width = '100px';
+    expect(getStyle(el, 'width')).toBe('100px');
+  });
+
+  it('convierte a camelCase el nombre de la propiedad (ej: "overflow-y" -> "overflowY")', () => {
+    const el = document.createElement('div');
+    el.style.overflowY = 'scroll';
+    expect(getStyle(el, 'overflow-y')).toBe('scroll');
+  });
+
+  it('retorna cadena vacía cuando falta el elemento o el nombre de estilo', () => {
+    expect(getStyle(null, 'width')).toBe('');
+    expect(getStyle(document.createElement('div'), '')).toBe('');
+  });
+});
+
+describe('getScrollBarWidth', () => {
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it('retorna un número y no deja el elemento auxiliar en el DOM tras medir (memoiza el resultado)', () => {
+    const width = getScrollBarWidth('gui');
+    expect(typeof width).toBe('number');
+    expect(document.querySelector('.gui-scrollbar__wrap')).toBeNull();
   });
 });

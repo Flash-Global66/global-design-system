@@ -1,5 +1,8 @@
 <template>
-  <g-teleport :to="appendTo" :disabled="appendTo !== 'body' ? false : !appendToBody">
+  <g-teleport
+    :to="appendTo"
+    :disabled="appendTo !== 'body' ? false : !appendToBody"
+  >
     <transition
       name="dialog-fade"
       @after-enter="afterEnter"
@@ -75,26 +78,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
-import { GFocusTrap } from '@flash-global66/g-focus-trap'
-import { GTeleport } from '@flash-global66/g-teleport'
-import { GOverlay } from '@flash-global66/g-overlay'
-import { useNamespace, useSameTarget } from 'element-plus'
-import { dialogInjectionKey } from './constants'
-import { dialogEmits, dialogProps } from './dialog'
-import { useDialog } from './hooks/use-dialog'
-import DialogContent from './dialog-content.vue'
+import { computed, provide, ref } from 'vue';
+import { GFocusTrap } from '@flash-global66/g-focus-trap';
+import { GTeleport } from '@flash-global66/g-teleport';
+import { GOverlay } from '@flash-global66/g-overlay';
+import { useNamespace } from '@flash-global66/g-utils';
+import { useSameTarget } from '@flash-global66/g-hooks';
+import { dialogInjectionKey } from './constants';
+import { dialogEmits, dialogProps } from './dialog';
+import { useDialog } from './hooks/use-dialog';
+import DialogContent from './dialog-content.vue';
 
-const props = defineProps(dialogProps)
-const emit = defineEmits(dialogEmits)
+const props = defineProps(dialogProps);
+defineEmits(dialogEmits);
 
-const ns = useNamespace('dialog')
-const dialogRef = ref<HTMLElement>()
-const headerRef = ref<HTMLElement>()
-const dialogContentRef = ref()
+const ns = useNamespace('dialog');
+const dialogRef = ref<HTMLElement>();
+const headerRef = ref<HTMLElement>();
+const dialogContentRef = ref();
 
-const closeOnClickModal = computed(() => props.showClose && props.closeOnClickModal)
-const closeOnPressEscape = computed(() => props.showClose && props.closeOnPressEscape)
+const closeOnClickModal = computed(
+  () => props.showClose && props.closeOnClickModal,
+);
+const closeOnPressEscape = computed(
+  () => props.showClose && props.closeOnPressEscape,
+);
 
 const {
   visible,
@@ -114,11 +122,11 @@ const {
   onCloseRequested,
   onFocusoutPrevented,
   displayButtons,
-  buttonLayoutClass
+  buttonLayoutClass,
 } = useDialog(props, dialogRef, {
   closeOnClickModal,
-  closeOnPressEscape
-})
+  closeOnPressEscape,
+});
 
 provide(dialogInjectionKey, {
   dialogRef,
@@ -128,21 +136,21 @@ provide(dialogInjectionKey, {
   rendered,
   style,
   displayButtons,
-  buttonLayoutClass
-})
+  buttonLayoutClass,
+});
 
-const overlayEvent = useSameTarget(onModalClick)
+const overlayEvent = useSameTarget(onModalClick);
 
-const draggable = computed(() => props.draggable && !props.fullscreen)
+const draggable = computed(() => props.draggable && !props.fullscreen);
 
 const resetPosition = () => {
-  dialogContentRef.value?.resetPosition()
-}
+  dialogContentRef.value?.resetPosition();
+};
 
 defineExpose({
   /** @description whether the dialog is visible */
   visible,
   dialogContentRef,
-  resetPosition
-})
+  resetPosition,
+});
 </script>
