@@ -23,9 +23,12 @@ module.exports = {
   overrides: [
     {
       // EP Extraction guard: packages already migrated off element-plus must
-      // never re-introduce a direct dependency on it, in either their src/
-      // implementation or their public barrel (index.ts).
-      files: ['components/*/src/**', 'common/*/src/**', 'components/*/index.ts'],
+      // never re-introduce a direct dependency on it. Covers nested-layout
+      // implementations (components/*/src/**, common/*/src/**) AND flat-layout
+      // package roots + barrels (components/*/*.ts, e.g. overlay/overlay.ts,
+      // overlay/index.ts). The flat-layout glob is required because packages
+      // like `overlay` ship implementation at the package root, not under src/.
+      files: ['components/*/src/**', 'common/*/src/**', 'components/*/*.ts'],
       excludedFiles: [
         // Islands: intentionally wrap/re-export a real element-plus component.
         'components/badge/**',
