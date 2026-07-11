@@ -107,6 +107,19 @@ describe('isFocusable', () => {
     expect(isFocusable(input)).toBe(false);
   });
 
+  it('returns false for a file input', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    expect(isFocusable(input)).toBe(false);
+  });
+
+  it('returns false for a link with href but rel="ignore"', () => {
+    const link = document.createElement('a');
+    link.setAttribute('href', '/foo');
+    link.setAttribute('rel', 'ignore');
+    expect(isFocusable(link)).toBe(false);
+  });
+
   it('returns true for a select element', () => {
     expect(isFocusable(document.createElement('select'))).toBe(true);
   });

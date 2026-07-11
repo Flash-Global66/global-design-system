@@ -63,4 +63,17 @@ describe('useEscapeKeydown', () => {
     expect(handlerA).toHaveBeenCalledTimes(1);
     expect(handlerB).toHaveBeenCalledTimes(1);
   });
+
+  it('keeps invoking remaining handlers when only one of several unmounts (partial teardown of the shared listener)', () => {
+    const handlerA = vi.fn();
+    const handlerB = vi.fn();
+    const unmountA = mountWithEscapeKeydown(handlerA);
+    mountWithEscapeKeydown(handlerB);
+
+    unmountA();
+    dispatchKeydown('Escape');
+
+    expect(handlerA).not.toHaveBeenCalled();
+    expect(handlerB).toHaveBeenCalledTimes(1);
+  });
 });
