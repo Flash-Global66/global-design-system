@@ -58,9 +58,9 @@ function findFirstLegitChild(node: VNode[] | undefined): VNode | null {
   const children = node as VNode[];
   for (const child of children) {
     /**
-     * when user uses h(Fragment, [text]) to render plain string,
-     * this switch case just cannot handle, when the value is primitives
-     * we should just return the wrapped string
+     * Cuando se usa h(Fragment, [text]) para renderizar un string plano,
+     * este switch no puede manejarlo; cuando el valor es un primitivo,
+     * simplemente devolvemos el string envuelto.
      */
     if (isObject(child)) {
       switch (child.type) {

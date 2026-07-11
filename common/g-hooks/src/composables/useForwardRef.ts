@@ -2,15 +2,15 @@ import { provide } from 'vue';
 import type { InjectionKey, ObjectDirective, Ref } from 'vue';
 
 /**
- * Ported byte-exact from element-plus 2.9.7's `useForwardRef` module
+ * Portado byte-exact desde el módulo `useForwardRef` de element-plus 2.9.7
  * (`es/hooks/use-forward-ref/index.mjs`).
  *
- * This module is the SOLE owner of the forward-ref family: `useForwardRef`,
- * `useForwardRefDirective`, and `FORWARD_REF_INJECTION_KEY` must never be
- * split across two modules or packages. Every consumer (`slot`, later
- * `popper`) provides/injects through this exact same exported `Symbol()`
- * instance — splitting the definitions would break the provide/inject
- * handshake by creating two distinct symbols.
+ * Este módulo es el ÚNICO dueño de la familia forward-ref: `useForwardRef`,
+ * `useForwardRefDirective` y `FORWARD_REF_INJECTION_KEY` nunca deben
+ * separarse en dos módulos o paquetes. Todos los consumidores (`slot` y,
+ * más adelante, `popper`) proveen/inyectan a través de esta misma instancia
+ * de `Symbol()` exportada: separar las definiciones rompería el handshake
+ * de provide/inject al crear dos símbolos distintos.
  */
 
 type ForwardRefSetter = <T>(el: T) => void;
