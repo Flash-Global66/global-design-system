@@ -1,11 +1,7 @@
-import {
-  buildProps,
-  definePropType,
-  isNumber,
-} from "element-plus/es/utils/index";
-import { useAriaProps } from "element-plus";
-import type { ExtractPropTypes, StyleValue } from "vue";
-import type Scrollbar from "./scrollbar.vue";
+import { buildProps, definePropType, isNumber } from '@flash-global66/g-utils';
+import { useAriaProps } from '@flash-global66/g-hooks';
+import type { ExtractPropTypes, StyleValue } from 'vue';
+import type Scrollbar from './scrollbar.vue';
 
 export const scrollbarProps = buildProps({
   /**
@@ -13,14 +9,14 @@ export const scrollbarProps = buildProps({
    */
   height: {
     type: [String, Number],
-    default: "",
+    default: '',
   },
   /**
    * @description max height of scrollbar
    */
   maxHeight: {
     type: [String, Number],
-    default: "",
+    default: '',
   },
   /**
    * @description whether to use the native scrollbar
@@ -34,28 +30,28 @@ export const scrollbarProps = buildProps({
    */
   wrapStyle: {
     type: definePropType<StyleValue>([String, Object, Array]),
-    default: "",
+    default: '',
   },
   /**
    * @description class of wrap
    */
   wrapClass: {
     type: [String, Array],
-    default: "",
+    default: '',
   },
   /**
    * @description class of view
    */
   viewClass: {
     type: [String, Array],
-    default: "",
+    default: '',
   },
   /**
    * @description style of view
    */
   viewStyle: {
     type: [String, Array, Object],
-    default: "",
+    default: '',
   },
   /**
    * @description do not respond to container size changes, if the container size does not change, it is better to set it to optimize performance
@@ -66,7 +62,7 @@ export const scrollbarProps = buildProps({
    */
   tag: {
     type: String,
-    default: "div",
+    default: 'div',
   },
   /**
    * @description always show
@@ -94,7 +90,7 @@ export const scrollbarProps = buildProps({
    * @description role of view
    */
   role: String,
-  ...useAriaProps(["ariaLabel", "ariaOrientation"]),
+  ...useAriaProps(['ariaLabel', 'ariaOrientation']),
 } as const);
 export type ScrollbarProps = ExtractPropTypes<typeof scrollbarProps>;
 
