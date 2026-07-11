@@ -70,3 +70,52 @@ export const rAF = (fn: FrameRequestCallback): number =>
   isClient
     ? window.requestAnimationFrame(fn)
     : (setTimeout(fn, 16) as unknown as number);
+
+/**
+ * Checks whether an element can receive focus (via tab order or
+ * programmatically).
+ *
+ * Byte-exact copy of element-plus's `isFocusable` algorithm
+ * (`es/utils/dom/aria.mjs`, 2.9.7).
+ *
+ * @param element - The element to check.
+ * @returns `true` if the element is focusable.
+ */
+export const isFocusable = (element: HTMLElement): boolean => {
+  if (
+    element.tabIndex > 0 ||
+    (element.tabIndex === 0 && element.getAttribute('tabIndex') !== null)
+  ) {
+    return true;
+  }
+  if (
+    element.tabIndex < 0 ||
+    element.hasAttribute('disabled') ||
+    element.getAttribute('aria-disabled') === 'true'
+  ) {
+    return false;
+  }
+
+  switch (element.nodeName) {
+    case 'A': {
+      return (
+        !!(element as HTMLAnchorElement).href &&
+        (element as HTMLAnchorElement).rel !== 'ignore'
+      );
+    }
+    case 'INPUT': {
+      return !(
+        (element as HTMLInputElement).type === 'hidden' ||
+        (element as HTMLInputElement).type === 'file'
+      );
+    }
+    case 'BUTTON':
+    case 'SELECT':
+    case 'TEXTAREA': {
+      return true;
+    }
+    default: {
+      return false;
+    }
+  }
+};

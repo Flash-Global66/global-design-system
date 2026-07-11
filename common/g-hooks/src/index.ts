@@ -15,3 +15,4 @@ export * from './composables/useComposition';
 export * from './composables/useCursor';
 export * from './composables/useFocusController';
 export * from './composables/useAttrs';
+export * from './composables/useEscapeKeydown';
