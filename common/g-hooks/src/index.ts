@@ -24,3 +24,5 @@ export * from './composables/useTimeout';
 export * from './composables/useDelayedToggle';
 export * from './composables/useModelToggle';
 export * from './composables/usePopperContainer';
+export * from './composables/useGlobalConfig';
+export * from './composables/useDraggable';
