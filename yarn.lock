@@ -1184,7 +1184,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-hooks@npm:^0.6.1, @flash-global66/g-hooks@workspace:common/g-hooks":
+"@flash-global66/g-hooks@npm:^0.6.0, @flash-global66/g-hooks@npm:^0.6.1, @flash-global66/g-hooks@workspace:common/g-hooks":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-hooks@workspace:common/g-hooks"
   dependencies:
@@ -1605,7 +1605,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-utils@npm:^0.5.1, @flash-global66/g-utils@workspace:common/g-utils":
+"@flash-global66/g-utils@npm:^0.5.0, @flash-global66/g-utils@npm:^0.5.1, @flash-global66/g-utils@workspace:common/g-utils":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-utils@workspace:common/g-utils"
   dependencies:
