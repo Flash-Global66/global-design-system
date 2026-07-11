@@ -6,6 +6,7 @@ import {
   removeClass,
   hasClass,
   rAF,
+  isFocusable,
 } from '../../src/utils/dom.util';
 
 describe('isClient', () => {
@@ -69,5 +70,70 @@ describe('rAF', () => {
     await new Promise<void>(resolve => {
       rAF(() => resolve());
     });
+  });
+});
+
+describe('isFocusable', () => {
+  it('returns true for a link with an href', () => {
+    const link = document.createElement('a');
+    link.setAttribute('href', '/foo');
+    expect(isFocusable(link)).toBe(true);
+  });
+
+  it('returns false for a link without an href', () => {
+    const link = document.createElement('a');
+    expect(isFocusable(link)).toBe(false);
+  });
+
+  it('returns true for an enabled button', () => {
+    expect(isFocusable(document.createElement('button'))).toBe(true);
+  });
+
+  it('returns false for a disabled button', () => {
+    const button = document.createElement('button');
+    button.setAttribute('disabled', '');
+    expect(isFocusable(button)).toBe(false);
+  });
+
+  it('returns true for a text input', () => {
+    const input = document.createElement('input');
+    input.type = 'text';
+    expect(isFocusable(input)).toBe(true);
+  });
+
+  it('returns false for a hidden input', () => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    expect(isFocusable(input)).toBe(false);
+  });
+
+  it('returns true for a select element', () => {
+    expect(isFocusable(document.createElement('select'))).toBe(true);
+  });
+
+  it('returns true for a textarea element', () => {
+    expect(isFocusable(document.createElement('textarea'))).toBe(true);
+  });
+
+  it('returns true for a plain div with tabindex="0"', () => {
+    const div = document.createElement('div');
+    div.setAttribute('tabindex', '0');
+    expect(isFocusable(div)).toBe(true);
+  });
+
+  it('returns false for a plain div with no tabindex (defaults to -1)', () => {
+    expect(isFocusable(document.createElement('div'))).toBe(false);
+  });
+
+  it('returns false for an element explicitly set to tabindex="-1"', () => {
+    const div = document.createElement('div');
+    div.setAttribute('tabindex', '-1');
+    expect(isFocusable(div)).toBe(false);
+  });
+
+  it('returns false for an element with aria-disabled="true"', () => {
+    const button = document.createElement('button');
+    button.setAttribute('aria-disabled', 'true');
+    expect(isFocusable(button)).toBe(false);
   });
 });
