@@ -55,7 +55,6 @@ module.exports = {
         'components/dialog/**',
         'components/date-picker/**',
         'components/collapse/**',
-        'components/overlay/**',
       ],
       rules: {
         'no-restricted-imports': [
