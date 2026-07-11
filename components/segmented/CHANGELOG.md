@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.9...@flash-global66/g-segmented@0.4.10) (2026-07-11)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
 ## [0.4.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.8...@flash-global66/g-segmented@0.4.9) (2026-07-11)
 
 **Note:** Version bump only for package @flash-global66/g-segmented

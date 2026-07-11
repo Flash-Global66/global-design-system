@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.6...@flash-global66/g-collapse-transition@0.2.7) (2026-07-11)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
 ## [0.2.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.5...@flash-global66/g-collapse-transition@0.2.6) (2026-07-11)
 
 **Note:** Version bump only for package @flash-global66/g-collapse-transition

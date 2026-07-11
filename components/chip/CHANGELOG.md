@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.7](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-chip@1.1.6...@flash-global66/g-chip@1.1.7) (2026-07-11)
+
+**Note:** Version bump only for package @flash-global66/g-chip
+
 ## [1.1.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-chip@1.1.5...@flash-global66/g-chip@1.1.6) (2026-07-11)
 
 **Note:** Version bump only for package @flash-global66/g-chip

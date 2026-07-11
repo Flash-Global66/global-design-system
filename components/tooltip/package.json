@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-tooltip",
   "author": "Global66",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,13 +29,13 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-focus-trap": "^0.1.6",
-    "@flash-global66/g-hooks": "^0.9.0",
-    "@flash-global66/g-icon-button": "^0.4.6",
-    "@flash-global66/g-popper": "^0.0.14",
-    "@flash-global66/g-slot": "^0.0.8",
-    "@flash-global66/g-teleport": "^0.0.13",
-    "@flash-global66/g-utils": "^0.6.0"
+    "@flash-global66/g-focus-trap": "^0.1.7",
+    "@flash-global66/g-hooks": "^0.10.0",
+    "@flash-global66/g-icon-button": "^0.4.7",
+    "@flash-global66/g-popper": "^0.0.15",
+    "@flash-global66/g-slot": "^0.0.9",
+    "@flash-global66/g-teleport": "^0.0.14",
+    "@flash-global66/g-utils": "^0.7.0"
   },
   "peerDependencies": {
     "element-plus": "^2.9.0",
