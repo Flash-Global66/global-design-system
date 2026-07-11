@@ -1184,11 +1184,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-hooks@npm:^0.7.1, @flash-global66/g-hooks@workspace:common/g-hooks":
+"@flash-global66/g-hooks@npm:^0.7.0, @flash-global66/g-hooks@npm:^0.7.1, @flash-global66/g-hooks@workspace:common/g-hooks":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-hooks@workspace:common/g-hooks"
   dependencies:
     "@flash-global66/g-utils": "npm:^0.6.1"
+    "@popperjs/core": "npm:^2.11.6"
+    lodash-unified: "npm:^1.0.3"
   peerDependencies:
     vue: ^3.2.0
   languageName: unknown
@@ -1371,6 +1373,9 @@ __metadata:
 "@flash-global66/g-popper@workspace:components/popper":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-popper@workspace:components/popper"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.7.0"
+    "@flash-global66/g-utils": "npm:^0.6.0"
   peerDependencies:
     "@flash-global66/g-focus-trap": ^0.0.9
     "@flash-global66/g-form": ^0.1.0
@@ -1608,7 +1613,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-utils@npm:^0.6.1, @flash-global66/g-utils@workspace:common/g-utils":
+"@flash-global66/g-utils@npm:^0.6.0, @flash-global66/g-utils@npm:^0.6.1, @flash-global66/g-utils@workspace:common/g-utils":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-utils@workspace:common/g-utils"
   dependencies:
@@ -2616,7 +2621,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:2.11.8":
+"@popperjs/core@npm:2.11.8, @popperjs/core@npm:^2.11.6":
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
   checksum: 10c0/4681e682abc006d25eb380d0cf3efc7557043f53b6aea7a5057d0d1e7df849a00e281cd8ea79c902a35a414d7919621fc2ba293ecec05f413598e0b23d5a1e63
@@ -8823,7 +8828,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-unified@npm:1.0.3, lodash-unified@npm:^1.0.2":
+"lodash-unified@npm:1.0.3, lodash-unified@npm:^1.0.2, lodash-unified@npm:^1.0.3":
   version: 1.0.3
   resolution: "lodash-unified@npm:1.0.3"
   peerDependencies:
