@@ -4,7 +4,7 @@ import { useAriaProps } from '@flash-global66/g-hooks';
 
 import type { PopperEffect } from './popper';
 import type { ExtractPropTypes, StyleValue } from 'vue';
-import type { Options, Placement } from '@popperjs/core';
+import type { Options, Placement, PositioningStrategy } from '@popperjs/core';
 import type { Measurable } from './constants';
 import type Content from './content.vue';
 
@@ -43,7 +43,9 @@ export const popperCoreConfigProps = buildProps({
    * @description position of Tooltip
    */
   placement: {
-    type: String,
+    // `definePropType<Placement>` preserva el tipo real de @popperjs/core;
+    // `values` sigue validando en runtime contra la misma lista `placements`.
+    type: definePropType<Placement>(String),
     values: placements,
     default: 'bottom',
   },
@@ -55,7 +57,9 @@ export const popperCoreConfigProps = buildProps({
     default: () => ({}),
   },
   strategy: {
-    type: String,
+    // Igual que `placement`: tipamos con `PositioningStrategy` real de
+    // @popperjs/core en vez del `string` genérico que infiere `StringConstructor`.
+    type: definePropType<PositioningStrategy>(String),
     values: POSITIONING_STRATEGIES,
     default: 'absolute',
   },
