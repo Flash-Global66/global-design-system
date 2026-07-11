@@ -1157,8 +1157,10 @@ __metadata:
 "@flash-global66/g-focus-trap@workspace:components/focus-trap":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-focus-trap@workspace:components/focus-trap"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.4.1"
+    "@flash-global66/g-utils": "npm:^0.4.0"
   peerDependencies:
-    element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
