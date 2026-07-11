@@ -2,14 +2,14 @@ import { onBeforeUnmount, onMounted } from 'vue';
 import { isClient, EVENT_CODE } from '@flash-global66/g-utils';
 
 /**
- * Ported byte-exact from element-plus 2.9.7's `useEscapeKeydown`
+ * Portado byte-exact desde `useEscapeKeydown` de element-plus 2.9.7
  * (`es/hooks/use-escape-keydown/index.mjs`).
  *
- * Handlers registered by every currently-mounted consumer share a single
- * module-level `document` `keydown` listener: the listener is attached once
- * (when the first handler registers) and detached once the last handler
- * unregisters. Every registered handler is invoked on each `Escape`
- * keydown, regardless of which component instance is currently mounted.
+ * Los handlers registrados por cada consumidor montado comparten un único
+ * listener `keydown` a nivel de módulo sobre `document`: el listener se agrega
+ * una sola vez (cuando se registra el primer handler) y se remueve cuando se
+ * desregistra el último. Cada handler registrado se invoca en cada keydown de
+ * `Escape`, sin importar qué instancia de componente esté montada.
  */
 let registeredEscapeHandlers: ((event: KeyboardEvent) => void)[] = [];
 
@@ -22,10 +22,10 @@ const cachedHandler = (event: KeyboardEvent): void => {
 };
 
 /**
- * Registers `handler` to run on every `Escape` keydown while the calling
- * component is mounted. Cleans up automatically on unmount.
+ * Registra `handler` para ejecutarse en cada keydown de `Escape` mientras el
+ * componente que lo llama esté montado. Se limpia automáticamente al desmontar.
  *
- * @param handler - Invoked with the `KeyboardEvent` on `Escape` keydown.
+ * @param handler - Se invoca con el `KeyboardEvent` en el keydown de `Escape`.
  */
 export const useEscapeKeydown = (
   handler: (event: KeyboardEvent) => void,
