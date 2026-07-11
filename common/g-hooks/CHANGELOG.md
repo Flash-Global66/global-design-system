@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.5.0...@flash-global66/g-hooks@0.6.0) (2026-07-11)
+
+### Features
+
+- **g-hooks:** add unified forward-ref module ported from element-plus ([5536eb2](https://github.com/Flash-Global66/global-design-system/commit/5536eb26dfc965b1acbcd5c16e271a3210cc29c6))
+
 # [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.4.1...@flash-global66/g-hooks@0.5.0) (2026-07-11)
 
 ### Features
