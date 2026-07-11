@@ -72,17 +72,17 @@ Publishes: `focus-trap`. Est. ~200 changed lines. Requirements: `popper-overlay-
 
 Publishes: `slot`. Est. ~220 changed lines. Requirements: same `popper-overlay-migration` set as WU-1 plus `g-hooks-package` → `shared-hook-single-ownership` (this WU is the sole owner of the forward-ref family, design §2.2).
 
-- [ ] T2.1 Read EP's forward-ref module from `node_modules/element-plus/es/hooks/use-forward-ref/index.mjs` (2.9.7) — the single module exporting `useForwardRef`, `useForwardRefDirective`, `FORWARD_REF_INJECTION_KEY`. Cross-check sibling `../element-plus/packages/hooks/use-forward-ref/`.
-- [ ] T2.2 Write failing unit tests asserting the **shared-symbol handshake** (design §2.2, correctness requirement, not style): `useForwardRef` provides `FORWARD_REF_INJECTION_KEY`; `useForwardRefDirective`'s returned directive object (`mounted`/`updated`/`unmounted`) calls `setForwardRef` with the bound element on mount/update and `undefined` on unmount; both functions reference the exact same exported `Symbol()` instance — new `common/g-hooks/tests/composables/useForwardRef.spec.ts`.
-- [ ] T2.3 Implement **one module** `common/g-hooks/src/composables/useForwardRef.ts` exporting all three (`useForwardRef`, `useForwardRefDirective`, `FORWARD_REF_INJECTION_KEY`), mirroring EP's own file layout exactly — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T2.4 Update `common/g-hooks/src/index.ts` barrel to export the 3 new symbols.
-- [ ] T2.5 Migrate `components/slot/src/**`: re-point `NOOP`/`debugWarn`/`isObject`/`useNamespace` → `@flash-global66/g-utils`; wire the new forward-ref family. Zero public API change.
-- [ ] T2.6 Grep-verify zero `from ['"]element-plus` matches under `components/slot/src/**` and `index.ts`.
-- [ ] T2.7 Confirm `slot`'s `package.json` packaging convention (g-utils/g-hooks in `dependencies`).
-- [ ] T2.8 Remove `'components/slot/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
-- [ ] T2.9 `yarn build` succeeds for `slot`. Full `yarn test:run` green.
-- [ ] T2.10 Validate in `front-b2b` (real copy, `ander/update/version-packages`).
-- [ ] T2.11 Commit as one work unit (`feat(slot): migrate off element-plus internals, add forward-ref family to g-hooks`), open PR #2 (parallel to PR #1, both target `main`), Lerna-publish on merge.
+- [x] T2.1 Read EP's forward-ref module from `node_modules/element-plus/es/hooks/use-forward-ref/index.mjs` (2.9.7) — the single module exporting `useForwardRef`, `useForwardRefDirective`, `FORWARD_REF_INJECTION_KEY`. Cross-check sibling `../element-plus/packages/hooks/use-forward-ref/`.
+- [x] T2.2 Write failing unit tests asserting the **shared-symbol handshake** (design §2.2, correctness requirement, not style): `useForwardRef` provides `FORWARD_REF_INJECTION_KEY`; `useForwardRefDirective`'s returned directive object (`mounted`/`updated`/`unmounted`) calls `setForwardRef` with the bound element on mount/update and `undefined` on unmount; both functions reference the exact same exported `Symbol()` instance — new `common/g-hooks/tests/composables/useForwardRef.spec.ts`.
+- [x] T2.3 Implement **one module** `common/g-hooks/src/composables/useForwardRef.ts` exporting all three (`useForwardRef`, `useForwardRefDirective`, `FORWARD_REF_INJECTION_KEY`), mirroring EP's own file layout exactly — byte-exact copy. Run `yarn test:run` → green.
+- [x] T2.4 Update `common/g-hooks/src/index.ts` barrel to export the 3 new symbols.
+- [x] T2.5 Migrate `components/slot/src/**`: re-point `NOOP`/`debugWarn`/`isObject`/`useNamespace` → `@flash-global66/g-utils`; wire the new forward-ref family. Zero public API change.
+- [x] T2.6 Grep-verify zero `from ['"]element-plus` matches under `components/slot/src/**` and `index.ts`.
+- [x] T2.7 Confirm `slot`'s `package.json` packaging convention (g-utils/g-hooks in `dependencies`).
+- [x] T2.8 Remove `'components/slot/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
+- [x] T2.9 `yarn build` succeeds for `slot`. Full `yarn test:run` green.
+- [ ] T2.10 Validate in `front-b2b` (real copy, `ander/update/version-packages`). **Deferred**: same blocker as WU-1/T1.13 — requires a merged+Lerna-published `slot` version; CodeCommit registry network access unavailable in this sandbox.
+- [ ] T2.11 Commit as one work unit (`feat(slot): migrate off element-plus internals, add forward-ref family to g-hooks`), open PR #2 (parallel to PR #1, both target `main`), Lerna-publish on merge. **Partial**: implementation committed locally on `feat/ds-ep-v4-wu2-slot`; PR creation + publish deferred to orchestrator review per apply-phase boundary.
 
 ## WU-3 — `overlay` (deep migration; near-leaf, no dependencies)
 
