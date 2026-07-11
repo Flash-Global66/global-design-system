@@ -1446,6 +1446,9 @@ __metadata:
 "@flash-global66/g-scrollbar@workspace:components/scrollbar":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-scrollbar@workspace:components/scrollbar"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.7.0"
+    "@flash-global66/g-utils": "npm:^0.6.0"
   peerDependencies:
     "@vueuse/core": ^12.4.0
     element-plus: ^2.9.0
