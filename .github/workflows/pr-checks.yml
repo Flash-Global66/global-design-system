@@ -71,14 +71,19 @@ jobs:
           echo "$FILES"
           yarn eslint $FILES --max-warnings 0
 
-      - name: Unit tests (Vitest)
-        run: yarn test:run
-
-      # Full build so `build:types` (vue-tsc) errors are caught in the PR, not
-      # after merge. This is heavier than lint/test (40+ components); if it ever
-      # becomes a bottleneck, scope it to affected packages
-      # (e.g. `lerna run build:types --since origin/main`) instead of the full
-      # `yarn build`. Kept full for now because latent type errors surface when
+      # Build BEFORE tests. Several packages are `buildable` and expose their
+      # entry via `exports` → `dist/` (e.g. g-form, g-icon-font). The unit tests
+      # import those packages by their bare specifier, so `dist/` must exist
+      # before Vitest can resolve them — in CI nothing is pre-built, so running
+      # tests first fails with "Failed to resolve entry for package
+      # @flash-global66/g-form". Building first also surfaces build:types
+      # (vue-tsc) errors before tests run. (source-only packages g-utils/g-hooks
+      # resolve from src and don't need this.)
+      #
+      # Full build (not scoped) because latent type errors surface when
       # dependency bumps force dependents to rebuild — a scoped run can miss them.
       - name: Build all components
         run: yarn build
+
+      - name: Unit tests (Vitest)
+        run: yarn test:run
