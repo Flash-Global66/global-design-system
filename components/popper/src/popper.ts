@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { buildProps } from 'element-plus/es/utils/index'
+import { buildProps } from '@flash-global66/g-utils';
 
-import type { ExtractPropTypes } from 'vue'
-import type Popper from './popper.vue'
+import type { ExtractPropTypes } from 'vue';
+import type Popper from './popper.vue';
 
-const effects = ['light', 'dark'] as const
-const triggers = ['click', 'contextmenu', 'hover', 'focus'] as const
+const effects = ['light', 'dark'] as const;
+const triggers = ['click', 'contextmenu', 'hover', 'focus'] as const;
 
 export const Effect = {
   LIGHT: 'light',
   DARK: 'dark',
-} as const
+} as const;
 
 export const roleTypes = [
   'dialog',
@@ -22,12 +22,12 @@ export const roleTypes = [
   'navigation',
   'tooltip',
   'tree',
-] as const
+] as const;
 
 export type PopperEffect =
-  | typeof effects[number]
-  | (string & NonNullable<unknown>)
-export type PopperTrigger = typeof triggers[number]
+  | (typeof effects)[number]
+  | (string & NonNullable<unknown>);
+export type PopperTrigger = (typeof triggers)[number];
 
 export const popperProps = buildProps({
   role: {
@@ -35,14 +35,14 @@ export const popperProps = buildProps({
     values: roleTypes,
     default: 'tooltip',
   },
-} as const)
+} as const);
 
-export type PopperProps = ExtractPropTypes<typeof popperProps>
+export type PopperProps = ExtractPropTypes<typeof popperProps>;
 
-export type PopperInstance = InstanceType<typeof Popper> & unknown
+export type PopperInstance = InstanceType<typeof Popper> & unknown;
 
 /** @deprecated use `popperProps` instead, and it will be deprecated in the next major version */
-export const usePopperProps = popperProps
+export const usePopperProps = popperProps;
 
 /** @deprecated use `PopperProps` instead, and it will be deprecated in the next major version */
-export type UsePopperProps = PopperProps
+export type UsePopperProps = PopperProps;
