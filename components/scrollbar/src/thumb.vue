@@ -17,26 +17,25 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, onBeforeUnmount, ref, toRef } from "vue";
-import { useEventListener } from "@vueuse/core";
-import { isClient, throwError } from "element-plus/es/utils/index";
-import { useNamespace } from "element-plus";
-import { scrollbarContextKey } from "./constants";
-import { BAR_MAP, renderThumbStyle } from "./util";
-import { thumbProps } from "./thumb";
+import { computed, inject, onBeforeUnmount, ref, toRef } from 'vue';
+import { useEventListener } from '@vueuse/core';
+import { isClient, throwError, useNamespace } from '@flash-global66/g-utils';
+import { scrollbarContextKey } from './constants';
+import { BAR_MAP, renderThumbStyle } from './util';
+import { thumbProps } from './thumb';
 
-const COMPONENT_NAME = "Thumb";
+const COMPONENT_NAME = 'Thumb';
 const props = defineProps(thumbProps);
 
 const scrollbar = inject(scrollbarContextKey);
-const ns = useNamespace("scrollbar");
+const ns = useNamespace('scrollbar');
 
-if (!scrollbar) throwError(COMPONENT_NAME, "can not inject scrollbar context");
+if (!scrollbar) throwError(COMPONENT_NAME, 'can not inject scrollbar context');
 
 const instance = ref<HTMLDivElement>();
 const thumb = ref<HTMLDivElement>();
 
-const thumbState = ref<Partial<Record<"X" | "Y", number>>>({});
+const thumbState = ref<Partial<Record<'X' | 'Y', number>>>({});
 const visible = ref(false);
 
 let cursorDown = false;
@@ -45,14 +44,14 @@ let originalOnSelectStart:
   | ((this: GlobalEventHandlers, ev: Event) => any)
   | null = isClient ? document.onselectstart : null;
 
-const bar = computed(() => BAR_MAP[props.vertical ? "vertical" : "horizontal"]);
+const bar = computed(() => BAR_MAP[props.vertical ? 'vertical' : 'horizontal']);
 
 const thumbStyle = computed(() =>
   renderThumbStyle({
     size: props.size,
     move: props.move,
     bar: bar.value,
-  })
+  }),
 );
 
 const offsetRatio = computed(
@@ -63,7 +62,7 @@ const offsetRatio = computed(
     instance.value![bar.value.offset] ** 2 /
     scrollbar.wrapElement![bar.value.scrollSize] /
     props.ratio /
-    thumb.value![bar.value.offset]
+    thumb.value![bar.value.offset],
 );
 
 const clickThumbHandler = (e: MouseEvent) => {
@@ -86,7 +85,7 @@ const clickTrackHandler = (e: MouseEvent) => {
 
   const offset = Math.abs(
     (e.target as HTMLElement).getBoundingClientRect()[bar.value.direction] -
-      e[bar.value.client]
+      e[bar.value.client],
   );
   const thumbHalf = thumb.value[bar.value.offset] / 2;
   const thumbPositionPercentage =
@@ -101,8 +100,8 @@ const clickTrackHandler = (e: MouseEvent) => {
 const startDrag = (e: MouseEvent) => {
   e.stopImmediatePropagation();
   cursorDown = true;
-  document.addEventListener("mousemove", mouseMoveDocumentHandler);
-  document.addEventListener("mouseup", mouseUpDocumentHandler);
+  document.addEventListener('mousemove', mouseMoveDocumentHandler);
+  document.addEventListener('mouseup', mouseUpDocumentHandler);
   originalOnSelectStart = document.onselectstart;
   document.onselectstart = () => false;
 };
@@ -130,8 +129,8 @@ const mouseMoveDocumentHandler = (e: MouseEvent) => {
 const mouseUpDocumentHandler = () => {
   cursorDown = false;
   thumbState.value[bar.value.axis] = 0;
-  document.removeEventListener("mousemove", mouseMoveDocumentHandler);
-  document.removeEventListener("mouseup", mouseUpDocumentHandler);
+  document.removeEventListener('mousemove', mouseMoveDocumentHandler);
+  document.removeEventListener('mouseup', mouseUpDocumentHandler);
   restoreOnselectstart();
   if (cursorLeave) visible.value = false;
 };
@@ -148,7 +147,7 @@ const mouseLeaveScrollbarHandler = () => {
 
 onBeforeUnmount(() => {
   restoreOnselectstart();
-  document.removeEventListener("mouseup", mouseUpDocumentHandler);
+  document.removeEventListener('mouseup', mouseUpDocumentHandler);
 });
 
 const restoreOnselectstart = () => {
@@ -157,13 +156,13 @@ const restoreOnselectstart = () => {
 };
 
 useEventListener(
-  toRef(scrollbar, "scrollbarElement"),
-  "mousemove",
-  mouseMoveScrollbarHandler
+  toRef(scrollbar, 'scrollbarElement'),
+  'mousemove',
+  mouseMoveScrollbarHandler,
 );
 useEventListener(
-  toRef(scrollbar, "scrollbarElement"),
-  "mouseleave",
-  mouseLeaveScrollbarHandler
+  toRef(scrollbar, 'scrollbarElement'),
+  'mouseleave',
+  mouseLeaveScrollbarHandler,
 );
 </script>

@@ -107,13 +107,13 @@ Publishes: `overlay`. Est. ~180 changed lines. Requirements: same `popper-overla
 
 Publishes: `scrollbar`. Est. ~80 changed lines. Requirements: `popper-overlay-migration` → `zero-ep-imports-per-migrated-package`, `public-api-and-styles-preserved`, `reused-composables-repointed`, `packaging-convention-followed`, `migration-gated-by-green-tests`; `eslint-ep-import-guard` → `exclude-removed-per-work-unit`.
 
-- [ ] T4.1 Re-point `components/scrollbar/src/**` imports: `useAriaProps` → `@flash-global66/g-hooks`; `useNamespace`/`isClient`/`throwError`/`buildProps` → `@flash-global66/g-utils`. No new hooks built (pure re-point). Zero public API change.
-- [ ] T4.2 Grep-verify zero `from ['"]element-plus` matches under `components/scrollbar/src/**` and `index.ts`.
-- [ ] T4.3 Confirm `scrollbar`'s `package.json` packaging convention.
-- [ ] T4.4 Remove `'components/scrollbar/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
-- [ ] T4.5 `yarn build` succeeds for `scrollbar`. Full `yarn test:run` green (no new tests expected — pure re-point).
-- [ ] T4.6 Validate in `front-b2b` (real copy).
-- [ ] T4.7 Commit as one work unit (`refactor(scrollbar): re-point imports off element-plus internals`), open PR #4 (parallel to PR #1/#2/#3, targets `main`), Lerna-publish on merge.
+- [x] T4.1 Re-point `components/scrollbar/src/**` + root imports: `withInstall`/`SFCWithInstall`/`buildProps`/`definePropType`/`isNumber`/`addUnit`/`debugWarn`/`isObject`/`useNamespace`/`isClient`/`throwError` → `@flash-global66/g-utils`; `useAriaProps` → `@flash-global66/g-hooks`. All 6 EP-coupled files (`index.ts`, `src/scrollbar.ts`, `src/bar.ts`, `src/thumb.ts`, `src/scrollbar.vue`, `src/thumb.vue`) re-pointed. No new hooks built — every symbol already existed in g-utils/g-hooks (pure re-point confirmed). Zero public API change.
+- [x] T4.2 Grep-verify zero `from ['"]element-plus` matches under `components/scrollbar/src/**` and `index.ts` — confirmed (0 matches).
+- [x] T4.3 Confirmed `scrollbar`'s `package.json` packaging convention: added `dependencies` (`@flash-global66/g-hooks@^0.7.0`, `@flash-global66/g-utils@^0.6.0`, matching current workspace versions 0.7.0/0.6.0 after rebasing onto the WU-3-merged main — same pattern as the WU-2/WU-3 stale-range bugfix, obs #283). Kept `element-plus` in `peerDependencies` because `scrollbar.styles.scss` still `@use`s `element-plus/theme-chalk` mixins (theme coupling, out of scope, same as overlay).
+- [x] T4.4 Removed `'components/scrollbar/**'` from `excludedFiles` in `.eslintrc.cjs`. Scoped `eslint --max-warnings 0` (components/scrollbar/src, index.ts, common/g-hooks/src, common/g-utils/src, .eslintrc.cjs, dist ignored): 0 errors, 0 warnings. Fixed a pre-existing, unrelated `@typescript-eslint/ban-ts-comment` error on scrollbar.vue's `@ts-nocheck` (same class of debt as `components/table/**`) with a targeted `eslint-disable-next-line`, since lint-staged now runs full-file lint on this touched file.
+- [~] T4.5 `yarn build` for `scrollbar` blocked by a pre-existing environment issue: `npx lerna run build` reports "command not found: vite" (verified NOT scrollbar-specific — `inline`, also `buildable: true`, hits the identical failure; `yarn vite --version` resolves fine, so it's a Yarn-PnP/Lerna-runner path issue, not introduced by this WU). Full `yarn test:run` green: 251/251 (no new tests — pure re-point, no behavior change).
+- [ ] T4.6 Validate in `front-b2b` (real copy) — deferred, same blocker as WU-1/WU-2/WU-3 (CodeCommit registry network unavailable in sandbox).
+- [~] T4.7 Commit as one work unit (`refactor(scrollbar): migrate off element-plus internals`, commit `881ab8b`) on branch `feat/ds-ep-v4-wu4-scrollbar`, branched from `origin/main` @ `1b2b222` (includes WU-3/overlay merged). PR creation + Lerna-publish deferred to orchestrator/reviewer, per this apply phase's explicit instruction to stop after local commit.
 
 ## WU-5 — `popper` (deep migration, core; depends on WU-1, WU-2)
 
