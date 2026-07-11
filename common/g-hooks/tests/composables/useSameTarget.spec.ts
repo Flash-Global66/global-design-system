@@ -68,7 +68,7 @@ describe('useSameTarget', () => {
     onClick(makeMouseEvent(container, container));
     expect(handler).toHaveBeenCalledTimes(1);
 
-    // Second click without a preceding mousedown/mouseup pair must NOT fire.
+    // Un segundo click sin un par mousedown/mouseup previo NO debe disparar.
     onClick(makeMouseEvent(container, container));
     expect(handler).toHaveBeenCalledTimes(1);
   });
