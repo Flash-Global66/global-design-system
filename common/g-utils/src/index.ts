@@ -19,3 +19,4 @@ export * from './composables/useNamespace';
 export * from './constants/event.constant';
 export * from './types/utils.type';
 export * from './types/component.type';
+export * from './types/vnode.type';
