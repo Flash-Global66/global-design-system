@@ -13,14 +13,23 @@ import type { ExtractPropTypes, ToRefs } from 'vue';
  * mostrarse, antes de ocultarse, y cierre automático tras un tiempo abierto.
  */
 export const useDelayedToggleProps = buildProps({
+  /**
+   * @description retardo antes de mostrarse, en milisegundos.
+   */
   showAfter: {
     type: Number,
     default: 0,
   },
+  /**
+   * @description retardo antes de ocultarse, en milisegundos.
+   */
   hideAfter: {
     type: Number,
     default: 200,
   },
+  /**
+   * @description cierre automático tras estar abierto, en milisegundos (0 lo desactiva).
+   */
   autoClose: {
     type: Number,
     default: 0,
