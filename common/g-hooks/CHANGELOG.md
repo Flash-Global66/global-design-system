@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.7.1...@flash-global66/g-hooks@0.8.0) (2026-07-11)
+
+### Features
+
+- **g-hooks:** add usePopper ported from element-plus ([0432cf5](https://github.com/Flash-Global66/global-design-system/commit/0432cf571587398c2670c9fcec1c88a8366bbb14))
+- **g-hooks:** add useZIndex ported from element-plus ([90010e1](https://github.com/Flash-Global66/global-design-system/commit/90010e18ddfd74a6d059f7490302d56e1046eeab))
+
 ## [0.7.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.7.0...@flash-global66/g-hooks@0.7.1) (2026-07-11)
 
 **Note:** Version bump only for package @flash-global66/g-hooks
