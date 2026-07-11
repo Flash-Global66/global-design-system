@@ -19,3 +19,4 @@ export * from './composables/useEscapeKeydown';
 export * from './composables/useForwardRef';
 export * from './composables/useSameTarget';
 export * from './composables/usePopper';
+export * from './composables/useZIndex';
