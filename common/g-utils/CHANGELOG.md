@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.6.0...@flash-global66/g-utils@0.6.1) (2026-07-11)
+
+### Bug Fixes
+
+- **g-utils:** buildProps return type strips readonly for defineProps ([82f7a20](https://github.com/Flash-Global66/global-design-system/commit/82f7a20625b6f6336bebad889a8501a8aefead78))
+
 # [0.6.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.5.1...@flash-global66/g-utils@0.6.0) (2026-07-11)
 
 ### Features
