@@ -100,13 +100,35 @@ export const buildProp = <T>(prop: T, key?: string): T => {
 };
 
 /**
+ * Elimina recursivamente los modificadores `readonly` de un tipo, dejando
+ * intactos los constructores/funciones (p. ej. `StringConstructor`).
+ *
+ * Es necesario porque los componentes definen sus props con `as const`
+ * (mismo patrón que element-plus), lo que vuelve `readonly` los arrays del
+ * campo `type` (p. ej. `readonly [String, Number]`). `defineProps` exige
+ * arrays de props mutables, así que el tipo de retorno de `buildProps` debe
+ * "des-readonly-izar" la entrada. Para props definidas sin `as const` el
+ * mapeo es estructuralmente idéntico a la entrada (no cambia nada).
+ */
+type WritableProps<T> = T extends
+  | ((...args: any[]) => any)
+  | (abstract new (...args: any[]) => any)
+  ? T
+  : T extends readonly (infer U)[]
+    ? WritableProps<U>[]
+    : T extends object
+      ? { -readonly [K in keyof T]: WritableProps<T[K]> }
+      : T;
+
+/**
  * Construye y valida el mapa completo de props de un componente Vue.
  *
  * Aplica `buildProp` a cada entrada del objeto, añadiendo validadores
  * automáticos donde se definen conjuntos de valores permitidos.
  *
  * @param props - Objeto con las definiciones de todas las props del componente.
- * @returns El mismo objeto con cada prop procesada y validada.
+ * @returns El mismo objeto con cada prop procesada y validada, con el tipo
+ *   "des-readonly-izado" para ser compatible con `defineProps`.
  *
  * @example
  * const buttonProps = buildProps({
@@ -114,7 +136,9 @@ export const buildProp = <T>(prop: T, key?: string): T => {
  *   disabled: { type: Boolean, default: false },
  * })
  */
-export const buildProps = <T extends Record<string, any>>(props: T): T =>
+export const buildProps = <T extends Record<string, any>>(
+  props: T,
+): WritableProps<T> =>
   Object.fromEntries(
     Object.entries(props).map(([key, option]) => [key, buildProp(option, key)]),
-  ) as T;
+  ) as unknown as WritableProps<T>;
