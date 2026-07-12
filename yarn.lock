@@ -1377,8 +1377,10 @@ __metadata:
 "@flash-global66/g-pagination@workspace:components/pagination":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-pagination@workspace:components/pagination"
+  dependencies:
+    "@flash-global66/g-icon-font": "npm:^0.25.15"
+    "@flash-global66/g-utils": "npm:^0.12.0"
   peerDependencies:
-    "@flash-global66/g-icon-button": ^0.1.1
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown

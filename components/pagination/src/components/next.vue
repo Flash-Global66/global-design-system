@@ -12,25 +12,25 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { paginationNextProps } from './next'
-import { useNamespace } from 'element-plus'
+import { computed } from 'vue';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { paginationNextProps } from './next';
+import { useNamespace } from '@flash-global66/g-utils';
 
 defineOptions({
   name: 'GPaginationNext',
-})
+});
 
-const props = defineProps(paginationNextProps)
+const props = defineProps(paginationNextProps);
 
-const ns = useNamespace('pagination')
+const ns = useNamespace('pagination');
 
-defineEmits(['click'])
+defineEmits(['click']);
 
 const internalDisabled = computed(
   () =>
     props.disabled ||
     props.currentPage === props.pageCount ||
-    props.pageCount === 0
-)
+    props.pageCount === 0,
+);
 </script>
