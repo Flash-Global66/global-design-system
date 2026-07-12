@@ -16,37 +16,47 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, unref } from 'vue'
-import { composeEventHandlers, composeRefs } from 'element-plus/es/utils/index'
-import { useNamespace, EVENT_CODE } from 'element-plus'
-import { FOCUS_TRAP_INJECTION_KEY } from '@flash-global66/g-focus-trap'
+import { computed, defineComponent, inject, unref } from 'vue';
+import {
+  composeEventHandlers,
+  composeRefs,
+  useNamespace,
+  EVENT_CODE,
+} from '@flash-global66/g-utils';
+import { FOCUS_TRAP_INJECTION_KEY } from '@flash-global66/g-focus-trap';
 import {
   ROVING_FOCUS_COLLECTION_INJECTION_KEY,
   ROVING_FOCUS_GROUP_INJECTION_KEY,
-  focusFirst
-} from '@flash-global66/g-roving-focus-group'
-import { DROPDOWN_INJECTION_KEY } from './tokens'
+  focusFirst,
+} from '@flash-global66/g-roving-focus-group';
+import { DROPDOWN_INJECTION_KEY } from './tokens';
 import {
   DROPDOWN_COLLECTION_INJECTION_KEY,
   FIRST_LAST_KEYS,
   LAST_KEYS,
-  dropdownMenuProps
-} from './dropdown'
+  dropdownMenuProps,
+} from './dropdown';
 
 export default defineComponent({
   name: 'GDropdownMenu',
   props: dropdownMenuProps,
   setup(props) {
-    const ns = useNamespace('dropdown')
+    const ns = useNamespace('dropdown');
 
-    const { focusTrapRef, onKeydown } = inject(FOCUS_TRAP_INJECTION_KEY, undefined)!
+    const { focusTrapRef, onKeydown } = inject(
+      FOCUS_TRAP_INJECTION_KEY,
+      undefined,
+    )!;
 
-    const { contentRef, role, triggerId } = inject(DROPDOWN_INJECTION_KEY, undefined)!
+    const { contentRef, role, triggerId } = inject(
+      DROPDOWN_INJECTION_KEY,
+      undefined,
+    )!;
 
     const { collectionRef: dropdownCollectionRef, getItems } = inject(
       DROPDOWN_COLLECTION_INJECTION_KEY,
-      undefined
-    )!
+      undefined,
+    )!;
 
     const {
       rovingFocusGroupRef,
@@ -54,58 +64,63 @@ export default defineComponent({
       tabIndex,
       onBlur,
       onFocus,
-      onMousedown
-    } = inject(ROVING_FOCUS_GROUP_INJECTION_KEY, undefined)!
+      onMousedown,
+    } = inject(ROVING_FOCUS_GROUP_INJECTION_KEY, undefined)!;
 
     const { collectionRef: rovingFocusGroupCollectionRef } = inject(
       ROVING_FOCUS_COLLECTION_INJECTION_KEY,
-      undefined
-    )!
+      undefined,
+    )!;
 
     const dropdownKls = computed(() => {
-      return [ns.b('menu')]
-    })
+      return [ns.b('menu')];
+    });
 
     const dropdownListWrapperRef = composeRefs(
       contentRef,
       dropdownCollectionRef,
       focusTrapRef,
       rovingFocusGroupRef,
-      rovingFocusGroupCollectionRef
-    )
+      rovingFocusGroupCollectionRef,
+    );
 
     const composedKeydown = composeEventHandlers(
       (e: KeyboardEvent) => {
-        props.onKeydown?.(e)
+        props.onKeydown?.(e);
       },
-      (e) => {
-        const { currentTarget, code, target } = e
-        const isKeydownContained = (currentTarget as Node).contains(target as Node)
+      e => {
+        const { currentTarget, code, target } = e;
+        const isKeydownContained = (currentTarget as Node).contains(
+          target as Node,
+        );
 
         if (isKeydownContained) {
           // TODO: implement typeahead search
         }
 
         if (EVENT_CODE.tab === code) {
-          e.stopImmediatePropagation()
+          e.stopImmediatePropagation();
         }
 
-        e.preventDefault()
+        e.preventDefault();
 
-        if (target !== unref(contentRef) || !FIRST_LAST_KEYS.includes(code)) return
-        const items = getItems<{ disabled: boolean }>().filter((item) => !item.disabled)
-        const targets = items.map((item) => item.ref!)
+        if (target !== unref(contentRef) || !FIRST_LAST_KEYS.includes(code))
+          return;
+        const items = getItems<{ disabled: boolean }>().filter(
+          item => !item.disabled,
+        );
+        const targets = items.map(item => item.ref!);
         if (LAST_KEYS.includes(code)) {
-          targets.reverse()
+          targets.reverse();
         }
-        focusFirst(targets)
-      }
-    )
+        focusFirst(targets);
+      },
+    );
 
     const handleKeydown = (e: KeyboardEvent) => {
-      composedKeydown(e)
-      onKeydown(e)
-    }
+      composedKeydown(e);
+      onKeydown(e);
+    };
 
     return {
       rovingFocusGroupRootStyle,
@@ -117,8 +132,8 @@ export default defineComponent({
       handleKeydown,
       onBlur,
       onFocus,
-      onMousedown
-    }
-  }
-})
+      onMousedown,
+    };
+  },
+});
 </script>

@@ -3,6 +3,7 @@ import {
   NOOP,
   isFunction,
   composeEventHandlers,
+  whenMouse,
 } from '../../src/utils/function.util';
 
 describe('NOOP', () => {
@@ -59,5 +60,31 @@ describe('composeEventHandlers', () => {
   it('tolerates missing handlers', () => {
     const handler = composeEventHandlers<Event>(undefined, undefined);
     expect(() => handler({} as Event)).not.toThrow();
+  });
+});
+
+describe('whenMouse', () => {
+  it('invokes the handler for mouse pointer events', () => {
+    const inner = vi.fn(() => 'ok');
+    const wrapped = whenMouse(inner);
+    const event = { pointerType: 'mouse' } as PointerEvent;
+    const result = wrapped(event);
+    expect(inner).toHaveBeenCalledWith(event);
+    expect(result).toBe('ok');
+  });
+
+  it('ignores touch pointer events (returns undefined, does not call the handler)', () => {
+    const inner = vi.fn();
+    const wrapped = whenMouse(inner);
+    const result = wrapped({ pointerType: 'touch' } as PointerEvent);
+    expect(inner).not.toHaveBeenCalled();
+    expect(result).toBeUndefined();
+  });
+
+  it('ignores pen pointer events', () => {
+    const inner = vi.fn();
+    const wrapped = whenMouse(inner);
+    wrapped({ pointerType: 'pen' } as PointerEvent);
+    expect(inner).not.toHaveBeenCalled();
   });
 });
