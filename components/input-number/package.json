@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-input-number",
   "author": "Global66",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -30,11 +30,11 @@
   },
   "dependencies": {
     "@flash-global66/g-config-provider": "^0.0.8",
-    "@flash-global66/g-form": "^0.2.17",
-    "@flash-global66/g-hooks": "^0.11.5",
-    "@flash-global66/g-icon-font": "^0.25.16",
-    "@flash-global66/g-input": "^0.3.21",
-    "@flash-global66/g-utils": "^0.13.0"
+    "@flash-global66/g-form": "^0.2.18",
+    "@flash-global66/g-hooks": "^0.11.6",
+    "@flash-global66/g-icon-font": "^0.25.17",
+    "@flash-global66/g-input": "^0.3.22",
+    "@flash-global66/g-utils": "^0.13.1"
   },
   "peerDependencies": {
     "element-plus": "^2.9.0",
