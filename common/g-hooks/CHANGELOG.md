@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.10.0...@flash-global66/g-hooks@0.10.1) (2026-07-12)
+
+### Bug Fixes
+
+- **g-hooks,components:** use Symbol.for for cross-package injection keys ([af11601](https://github.com/Flash-Global66/global-design-system/commit/af116010dab0f7b80d77023285c5d9479dcbea6f))
+
 # [0.10.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.9.0...@flash-global66/g-hooks@0.10.0) (2026-07-11)
 
 ### Features

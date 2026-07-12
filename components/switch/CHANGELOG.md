@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-switch@1.1.10...@flash-global66/g-switch@1.1.11) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-switch
+
 ## [1.1.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-switch@1.1.9...@flash-global66/g-switch@1.1.10) (2026-07-11)
 
 **Note:** Version bump only for package @flash-global66/g-switch

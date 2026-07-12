@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-date-picker@0.3.2...@flash-global66/g-date-picker@0.3.3) (2026-07-12)
+
+### Bug Fixes
+
+- **g-hooks,components:** use Symbol.for for cross-package injection keys ([af11601](https://github.com/Flash-Global66/global-design-system/commit/af116010dab0f7b80d77023285c5d9479dcbea6f))
+
 ## [0.3.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-date-picker@0.3.1...@flash-global66/g-date-picker@0.3.2) (2026-07-08)
 
 ### Bug Fixes
