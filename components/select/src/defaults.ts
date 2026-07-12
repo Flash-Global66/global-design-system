@@ -1,22 +1,24 @@
-import { placements } from '@popperjs/core'
-import { useAriaProps, useEmptyValuesProps } from 'element-plus'
+import type { Options, Placement } from '@popperjs/core';
+import { placements } from '@popperjs/core';
+import { useAriaProps, useEmptyValuesProps } from '@flash-global66/g-hooks';
 import {
   buildProps,
+  CHANGE_EVENT,
   definePropType,
   isBoolean,
-  isNumber
-} from 'element-plus/es/utils/index.mjs'
-import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from 'element-plus/es/constants/index.mjs'
-import { useTooltipContentProps } from 'element-plus'
-import { tagProps } from '@flash-global66/g-tag'
-import { defaultProps } from './hooks/use-props'
+  isNumber,
+  UPDATE_MODEL_EVENT,
+} from '@flash-global66/g-utils';
+import { useTooltipContentProps } from '@flash-global66/g-tooltip';
+import type { PopperEffect } from '@flash-global66/g-popper';
+import { tagProps } from '@flash-global66/g-tag';
+import { defaultProps } from './hooks/use-props';
 
-import type { Option, OptionType } from './types/select.types'
-import type { Props } from './hooks/use-props'
-import type { EmitFn } from 'element-plus/es/utils/vue/typescript'
-import type { ExtractPropTypes } from 'vue'
-import type { Options, Placement, PopperEffect } from 'element-plus/es/components/popper'
-import { IconString } from '@flash-global66/g-icon-font'
+import type { Option, OptionType } from './types/select.types';
+import type { Props } from './hooks/use-props';
+import type { EmitFn } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import { IconString } from '@flash-global66/g-icon-font';
 
 export const SelectProps = buildProps({
   /**
@@ -28,7 +30,7 @@ export const SelectProps = buildProps({
    */
   autocomplete: {
     type: definePropType<'none' | 'both' | 'list' | 'inline'>(String),
-    default: 'none'
+    default: 'none',
   },
   /**
    * @description for non-filterable Select, this prop decides if the option menu pops up when the input is focused
@@ -43,14 +45,14 @@ export const SelectProps = buildProps({
    */
   clearIcon: {
     type: definePropType<IconString>(String),
-    default: 'regular circle-xmark'
+    default: 'regular circle-xmark',
   },
   /**
    * @description tooltip theme, built-in theme: `dark` / `light`
    */
   effect: {
     type: definePropType<PopperEffect>(String),
-    default: 'light'
+    default: 'light',
   },
   /**
    * @description label text
@@ -73,7 +75,7 @@ export const SelectProps = buildProps({
    */
   maxCollapseTags: {
     type: Number,
-    default: 1
+    default: 1,
   },
   /**
    * @description
@@ -88,7 +90,7 @@ export const SelectProps = buildProps({
    */
   estimatedOptionHeight: {
     type: Number,
-    default: undefined
+    default: undefined,
   },
   /**
    * @description is filterable
@@ -103,14 +105,14 @@ export const SelectProps = buildProps({
    */
   height: {
     type: Number,
-    default: 274 // same as select dropdown menu
+    default: 274, // same as select dropdown menu
   },
   /**
    * @description The height of the dropdown item
    */
   itemHeight: {
     type: Number,
-    default: 55
+    default: 55,
   },
   /**
    * @description Maximum number of lines for item title (0 = unlimited)
@@ -118,7 +120,7 @@ export const SelectProps = buildProps({
   titleLines: {
     type: Number,
     default: 1,
-    validator: (val: number) => val >= 0 && val <= 2
+    validator: (val: number) => val >= 0 && val <= 2,
   },
   /**
    * @description Maximum number of lines for item description (0 = unlimited)
@@ -126,7 +128,7 @@ export const SelectProps = buildProps({
   descriptionLines: {
     type: Number,
     default: 0,
-    validator: (val: number) => val >= 0 && val <= 2
+    validator: (val: number) => val >= 0 && val <= 2,
   },
   /**
    * @description
@@ -144,13 +146,9 @@ export const SelectProps = buildProps({
    * @description biding value
    */
   modelValue: {
-    type: definePropType<any[] | string | number | boolean | Record<string, any> | any>([
-      Array,
-      String,
-      Number,
-      Boolean,
-      Object
-    ])
+    type: definePropType<
+      any[] | string | number | boolean | Record<string, any> | any
+    >([Array, String, Number, Boolean, Object]),
   },
   /**
    * @description is multiple
@@ -161,7 +159,7 @@ export const SelectProps = buildProps({
    */
   multipleLimit: {
     type: Number,
-    default: 0
+    default: 0,
   },
   /**
    * @description the name attribute of select input
@@ -184,7 +182,7 @@ export const SelectProps = buildProps({
    */
   reserveKeyword: {
     type: Boolean,
-    default: true
+    default: true,
   },
   /**
    * @description data of the options, the key of `value` and `label` can be customize by `props`
@@ -192,20 +190,20 @@ export const SelectProps = buildProps({
   options: {
     type: definePropType<OptionType[]>(Array),
     required: true,
-    default: () => []
+    default: () => [],
   },
   /**
    * @description placeholder, the default is 'Please select'
    */
   placeholder: {
-    type: String
+    type: String,
   },
   /**
    * help text for input
    */
   helpText: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   /**
    * @description whether select dropdown is teleported, if `true` it will be teleported to where `append-to` sets
@@ -216,21 +214,21 @@ export const SelectProps = buildProps({
    */
   persistent: {
     type: Boolean,
-    default: true
+    default: true,
   },
   /**
    * @description custom class name for Select's dropdown
    */
   popperClass: {
     type: String,
-    default: ''
+    default: '',
   },
   /**
    * @description [popper.js](https://popper.js.org/docs/v2/) parameters
    */
   popperOptions: {
     type: definePropType<Partial<Options>>(Object),
-    default: () => ({} as Partial<Options>)
+    default: () => ({}) as Partial<Options>,
   },
   /**
    * @description whether search data from server
@@ -241,14 +239,14 @@ export const SelectProps = buildProps({
    */
   props: {
     type: definePropType<Props>(Object),
-    default: () => defaultProps
+    default: () => defaultProps,
   },
   /**
    * @description unique identity key name for value, required when value is an object
    */
   valueKey: {
     type: String,
-    default: 'value'
+    default: 'value',
   },
   /**
    * @description Controls whether the scrollbar is always displayed
@@ -259,21 +257,21 @@ export const SelectProps = buildProps({
    */
   validateEvent: {
     type: Boolean,
-    default: true
+    default: true,
   },
   /**
    * @description offset of the dropdown
    */
   offset: {
     type: Number,
-    default: 12
+    default: 12,
   },
   /**
    * @description Determines whether the arrow is displayed
    */
   showArrow: {
     type: Boolean,
-    default: true
+    default: true,
   },
   /**
    * @description position of dropdown
@@ -281,14 +279,14 @@ export const SelectProps = buildProps({
   placement: {
     type: definePropType<Placement>(String),
     values: placements,
-    default: 'bottom-start'
+    default: 'bottom-start',
   },
   /**
    * @description list of possible positions for dropdown
    */
   fallbackPlacements: {
     type: definePropType<Placement[]>(Array),
-    default: ['bottom-start', 'top-start', 'right', 'left']
+    default: ['bottom-start', 'top-start', 'right', 'left'],
   },
   /**
    * @description tag type
@@ -307,7 +305,7 @@ export const SelectProps = buildProps({
    */
   tabindex: {
     type: [String, Number],
-    default: 0
+    default: 0,
   },
   /**
    * @description message error
@@ -321,7 +319,7 @@ export const SelectProps = buildProps({
    */
   prefixIcon: {
     type: definePropType<IconString>(String),
-    default: ''
+    default: '',
   },
   /**
    * @description which element the select dropdown appends to
@@ -335,13 +333,17 @@ export const SelectProps = buildProps({
   fitInputWidth: {
     type: [Boolean, Number],
     default: true,
-    validator(val) {
-      return isBoolean(val) || isNumber(val)
-    }
+    // Anotación explícita de `val`: a diferencia del `buildProps` de
+    // element-plus, la implementación de g-utils no narrowea el tipo del
+    // parámetro del `validator` desde `type` (misma simplificación
+    // pre-existente documentada en la migración de `dialog`, WU-7).
+    validator(val: unknown) {
+      return isBoolean(val) || isNumber(val);
+    },
   },
   ...useEmptyValuesProps,
-  ...useAriaProps(['ariaLabel'])
-} as const)
+  ...useAriaProps(['ariaLabel']),
+} as const);
 
 export const OptionProps = buildProps({
   data: Array,
@@ -349,7 +351,7 @@ export const OptionProps = buildProps({
   hovering: Boolean,
   item: {
     type: definePropType<Option>(Object),
-    required: true
+    required: true,
   },
   index: Number,
   style: Object,
@@ -357,19 +359,19 @@ export const OptionProps = buildProps({
   created: Boolean,
   measureElement: {
     type: definePropType<(el: HTMLElement | null) => void>(Function),
-    default: undefined
+    default: undefined,
   },
   titleLines: {
     type: Number,
     default: 1,
-    validator: (val: number) => val >= 0 && val <= 2
+    validator: (val: number) => val >= 0 && val <= 2,
   },
   descriptionLines: {
     type: Number,
     default: 0,
-    validator: (val: number) => val >= 0 && val <= 2
-  }
-} as const)
+    validator: (val: number) => val >= 0 && val <= 2,
+  },
+} as const);
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const selectEmits = {
@@ -379,16 +381,16 @@ export const selectEmits = {
   'visible-change': (visible: boolean) => true,
   focus: (evt: FocusEvent) => evt instanceof FocusEvent,
   blur: (evt: FocusEvent) => evt instanceof FocusEvent,
-  clear: () => true
-}
+  clear: () => true,
+};
 export const optionEmits = {
   hover: (index?: number) => isNumber(index),
   select: (val: Option, index?: number) => true,
-  resize: (index: number, height: number) => true
-}
+  resize: (index: number, height: number) => true,
+};
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-export type ISelectProps = ExtractPropTypes<typeof SelectProps>
-export type IOptionProps = ExtractPropTypes<typeof OptionProps>
-export type SelectEmitFn = EmitFn<typeof selectEmits>
-export type OptionEmitFn = EmitFn<typeof optionEmits>
+export type ISelectProps = ExtractPropTypes<typeof SelectProps>;
+export type IOptionProps = ExtractPropTypes<typeof OptionProps>;
+export type SelectEmitFn = EmitFn<typeof selectEmits>;
+export type OptionEmitFn = EmitFn<typeof optionEmits>;

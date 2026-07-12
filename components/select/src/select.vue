@@ -3,10 +3,7 @@
     <div
       ref="selectRef"
       v-click-outside:[popperRef]="handleClickOutside"
-      :class="[
-        nsSelect.b(),
-        nsSelect.is('error', isErrorKls),
-      ]"
+      :class="[nsSelect.b(), nsSelect.is('error', isErrorKls)]"
       @mouseenter="states.inputHovering = true"
       @mouseleave="states.inputHovering = false"
     >
@@ -65,7 +62,10 @@
                 nsSelect.e('selection'),
                 nsSelect.is(
                   'near',
-                  multiple && !emptyDisplay && !$slots.prefix && !!modelValue.length
+                  multiple &&
+                    !emptyDisplay &&
+                    !$slots.prefix &&
+                    !!modelValue.length,
                 ),
               ]"
             >
@@ -213,7 +213,7 @@
                   nsSelect.e('placeholder'),
                   nsSelect.is(
                     'transparent',
-                    !hasModelValue || (expanded && !states.inputValue)
+                    !hasModelValue || (expanded && !states.inputValue),
                   ),
                   'dynamic-label-select',
                 ]"
@@ -318,20 +318,19 @@ import {
   reactive,
   toRefs,
   useSlots,
-} from "vue";
-import { isArray } from "element-plus/es/utils/index.mjs";
-import { ClickOutside } from "element-plus";
-import { GTooltip } from "@flash-global66/g-tooltip";
-import { GTag } from "@flash-global66/g-tag";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { useCalcInputWidth } from "element-plus";
-import GSelectMenu from "./select-dropdown";
-import useSelect from "./hooks/use-select";
-import { SelectProps, selectEmits } from "./defaults";
-import { selectV2InjectionKey } from "./types/token";
+} from 'vue';
+import { ClickOutside, isArray } from '@flash-global66/g-utils';
+import { useCalcInputWidth } from '@flash-global66/g-hooks';
+import { GTooltip } from '@flash-global66/g-tooltip';
+import { GTag } from '@flash-global66/g-tag';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import GSelectMenu from './select-dropdown';
+import useSelect from './hooks/use-select';
+import { SelectProps, selectEmits } from './defaults';
+import { selectV2InjectionKey } from './types/token';
 
 export default defineComponent({
-  name: "GSelect",
+  name: 'GSelect',
   components: {
     GSelectMenu,
     GTag,
@@ -359,7 +358,7 @@ export default defineComponent({
         modelValue,
         slots: useSlots(),
       }),
-      emit
+      emit,
     );
     const { calculatorRef, inputStyle } = useCalcInputWidth();
 
@@ -381,7 +380,7 @@ export default defineComponent({
       if (!props.multiple) {
         return API.states.selectedLabel;
       }
-      return API.states.cachedOptions.map((i) => i.label as string);
+      return API.states.cachedOptions.map(i => i.label as string);
     });
 
     return {
