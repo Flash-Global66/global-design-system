@@ -1080,12 +1080,15 @@ __metadata:
 "@flash-global66/g-date-picker@workspace:components/date-picker":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-date-picker@workspace:components/date-picker"
+  dependencies:
+    "@flash-global66/g-button": "npm:^0.5.10"
+    "@flash-global66/g-hooks": "npm:^0.11.1"
+    "@flash-global66/g-icon-font": "npm:^0.25.12"
+    "@flash-global66/g-input": "npm:^0.3.17"
+    "@flash-global66/g-time-picker": "npm:^0.3.2"
+    "@flash-global66/g-tooltip": "npm:^0.1.6"
+    "@flash-global66/g-utils": "npm:^0.9.0"
   peerDependencies:
-    "@flash-global66/g-button": ^0.3.0
-    "@flash-global66/g-icon-font": ^0.0.8
-    "@flash-global66/g-input": ^0.3.1
-    "@flash-global66/g-time-picker": ^0.1.3
-    "@flash-global66/g-tooltip": ^0.0.5
     dayjs: ^1.11.13
     element-plus: ^2.9.0
     vue: ^3.2.0
@@ -1300,7 +1303,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-input@workspace:components/input":
+"@flash-global66/g-input@npm:^0.3.17, @flash-global66/g-input@workspace:components/input":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-input@workspace:components/input"
   dependencies:
@@ -1586,7 +1589,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-time-picker@workspace:components/time-picker":
+"@flash-global66/g-time-picker@npm:^0.3.2, @flash-global66/g-time-picker@workspace:components/time-picker":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-time-picker@workspace:components/time-picker"
   peerDependencies:
