@@ -1053,7 +1053,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-config-provider@workspace:components/config-provider":
+"@flash-global66/g-config-provider@npm:^0.0.8, @flash-global66/g-config-provider@workspace:components/config-provider":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-config-provider@workspace:components/config-provider"
   languageName: unknown
@@ -1282,10 +1282,14 @@ __metadata:
 "@flash-global66/g-input-number@workspace:components/input-number":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-input-number@workspace:components/input-number"
+  dependencies:
+    "@flash-global66/g-config-provider": "npm:^0.0.8"
+    "@flash-global66/g-form": "npm:^0.2.16"
+    "@flash-global66/g-hooks": "npm:^0.11.4"
+    "@flash-global66/g-icon-font": "npm:^0.25.15"
+    "@flash-global66/g-input": "npm:^0.3.20"
+    "@flash-global66/g-utils": "npm:^0.12.0"
   peerDependencies:
-    "@flash-global66/g-config-provider": ^0.0.8
-    "@flash-global66/g-form": ^0.1.0
-    "@flash-global66/g-input": ^0.1.0
     element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
