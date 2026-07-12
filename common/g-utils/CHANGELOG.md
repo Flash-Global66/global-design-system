@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.11.0...@flash-global66/g-utils@0.12.0) (2026-07-12)
+
+### Features
+
+- **input-tag:** migrate off element-plus internals, add INPUT_EVENT constant ([89e8fc8](https://github.com/Flash-Global66/global-design-system/commit/89e8fc8286de7034bd39f53b10fa8e903be8adda))
+
 # [0.11.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.10.0...@flash-global66/g-utils@0.11.0) (2026-07-12)
 
 ### Features

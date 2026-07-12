@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.3.18...@flash-global66/g-checkbox@0.3.19) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-checkbox
+
 ## [0.3.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-checkbox@0.3.17...@flash-global66/g-checkbox@0.3.18) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-checkbox

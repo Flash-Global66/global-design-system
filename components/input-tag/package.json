@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-input-tag",
   "author": "Global66",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,13 +29,13 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-form": "^0.2.15",
-    "@flash-global66/g-hooks": "^0.11.3",
-    "@flash-global66/g-icon-font": "^0.25.14",
-    "@flash-global66/g-popper": "^0.0.20",
-    "@flash-global66/g-tag": "^0.2.14",
-    "@flash-global66/g-tooltip": "^0.1.8",
-    "@flash-global66/g-utils": "^0.11.0"
+    "@flash-global66/g-form": "^0.2.16",
+    "@flash-global66/g-hooks": "^0.11.4",
+    "@flash-global66/g-icon-font": "^0.25.15",
+    "@flash-global66/g-popper": "^0.0.21",
+    "@flash-global66/g-tag": "^0.2.15",
+    "@flash-global66/g-tooltip": "^0.1.9",
+    "@flash-global66/g-utils": "^0.12.0"
   },
   "peerDependencies": {
     "@vueuse/core": "^13.0.0",
