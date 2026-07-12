@@ -18,4 +18,4 @@ export type GTooltipInjectionContext = {
 };
 
 export const TOOLTIP_INJECTION_KEY: InjectionKey<GTooltipInjectionContext> =
-  Symbol('elTooltip');
+  Symbol.for('elTooltip');

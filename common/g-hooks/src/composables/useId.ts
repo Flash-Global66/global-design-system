@@ -26,7 +26,7 @@ export interface IdInjectionContext {
  * generando exactamente los mismos IDs.
  */
 export const idInjectionKey: InjectionKey<IdInjectionContext> =
-  Symbol('gIdInjection');
+  Symbol.for('gIdInjection');
 
 const defaultIdInjection: IdInjectionContext = {
   prefix: Math.floor(Math.random() * 1e4),

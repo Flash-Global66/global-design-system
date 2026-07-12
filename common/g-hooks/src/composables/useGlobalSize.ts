@@ -14,7 +14,7 @@ export interface SizeInjectionContext {
  * Copiado del algoritmo `SIZE_INJECTION_KEY` de element-plus.
  */
 export const sizeInjectionKey: InjectionKey<SizeInjectionContext> =
-  Symbol('gSizeInjection');
+  Symbol.for('gSizeInjection');
 
 /**
  * Lee el tamaño global inyectado por el proveedor más cercano.

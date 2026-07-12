@@ -14,4 +14,4 @@ export type DialogContext = {
 };
 
 export const dialogInjectionKey: InjectionKey<DialogContext> =
-  Symbol('dialogInjectionKey');
+  Symbol.for('dialogInjectionKey');

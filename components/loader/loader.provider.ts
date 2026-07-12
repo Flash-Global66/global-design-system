@@ -1,4 +1,4 @@
-import { InjectionKey, Ref, ref } from "vue";
+import { InjectionKey, Ref, ref } from 'vue';
 
 export type LoaderProviderType = {
   isLoading: Ref<boolean>;
@@ -7,7 +7,7 @@ export type LoaderProviderType = {
 };
 
 const showLoader: Ref<boolean> = ref(false);
-const loaderMessage: Ref<string> = ref("");
+const loaderMessage: Ref<string> = ref('');
 const intervalId: Ref<number | undefined> = ref();
 
 const initialValues: LoaderProviderType = {
@@ -20,6 +20,6 @@ const initialValues: LoaderProviderType = {
   },
 };
 
-const LoaderProvider: InjectionKey<LoaderProviderType> = Symbol("loader");
+const LoaderProvider: InjectionKey<LoaderProviderType> = Symbol.for('loader');
 
 export { LoaderProvider, initialValues, showLoader, loaderMessage, intervalId };

@@ -27,7 +27,7 @@ export interface GlobalConfigContext {
 }
 
 export const gConfigProviderContextKey: InjectionKey<Ref<GlobalConfigContext>> =
-  Symbol('gConfigProviderContextKey');
+  Symbol.for('gConfigProviderContextKey');
 
 // Ref de módulo, fiel al fallback de element-plus (`const globalConfig = ref()`).
 const globalConfig = ref<GlobalConfigContext>({});
