@@ -343,19 +343,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@element-plus/utils@npm:0.0.5":
-  version: 0.0.5
-  resolution: "@element-plus/utils@npm:0.0.5"
-  dependencies:
-    lodash: "npm:^4.17.20"
-    normalize-wheel: "npm:^1.0.1"
-    resize-observer-polyfill: "npm:^1.5.1"
-  peerDependencies:
-    vue: 3.1.1
-  checksum: 10c0/e330db8621d71c063a8a1208388203d4002fb994637b28cc9328cbe7c3163b2fb6f39de4f0a0c7b1175330050fd77cf8580bc395e460a398cb6a3295892c94f4
-  languageName: node
-  linkType: hard
-
 "@emnapi/core@npm:^1.1.0":
   version: 1.7.1
   resolution: "@emnapi/core@npm:1.7.1"
@@ -1030,7 +1017,6 @@ __metadata:
   dependencies:
     "@flash-global66/g-utils": "npm:^0.13.0"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1345,7 +1331,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-loader@workspace:components/loader"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1471,7 +1456,6 @@ __metadata:
   peerDependencies:
     "@flash-global66/g-collection": ^0.1.1
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1631,8 +1615,12 @@ __metadata:
 "@flash-global66/g-toast@workspace:components/toast":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-toast@workspace:components/toast"
+  dependencies:
+    "@flash-global66/g-config-provider": "npm:^0.0.8"
+    "@flash-global66/g-hooks": "npm:^0.11.5"
+    "@flash-global66/g-icon-font": "npm:^0.25.16"
+    "@flash-global66/g-utils": "npm:^0.13.0"
   peerDependencies:
-    "@flash-global66/g-icon-font": ^0.10.0
     "@vueuse/core": ^12.4.0
     element-plus: ^2.9.0
     vue: ^3.2.0
@@ -1672,7 +1660,6 @@ __metadata:
   resolution: "@flash-global66/global-design-system@workspace:."
   dependencies:
     "@babel/core": "npm:7.28.3"
-    "@element-plus/utils": "npm:0.0.5"
     "@fortawesome/fontawesome-common-types": "npm:6.7.2"
     "@fortawesome/fontawesome-svg-core": "npm:6.7.2"
     "@fortawesome/vue-fontawesome": "npm:3.1.1"
@@ -8897,7 +8884,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.20, lodash@npm:^4.17.21":
+"lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
@@ -9694,13 +9681,6 @@ __metadata:
   version: 1.2.0
   resolution: "normalize-wheel-es@npm:1.2.0"
   checksum: 10c0/48b5961f3f2fb902213ae8b4389fa043a134b3f15415e58f170aa414ba205896ba03410f457812baaaf50bd0a4a2899f35a390315163c1b2f24dddacffbdc89f
-  languageName: node
-  linkType: hard
-
-"normalize-wheel@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "normalize-wheel@npm:1.0.1"
-  checksum: 10c0/5daf4c97e39f36658a5263a6499bbc148676ae2bd85f12c8d03c46ffe7bc3c68d44564c00413d88d0457ac0d94450559bb1c24c2ce7ae0c107031f82d093ac06
   languageName: node
   linkType: hard
 
@@ -11144,13 +11124,6 @@ __metadata:
   version: 2.0.2
   resolution: "require-from-string@npm:2.0.2"
   checksum: 10c0/aaa267e0c5b022fc5fd4eef49d8285086b15f2a1c54b28240fdf03599cbd9c26049fee3eab894f2e1f6ca65e513b030a7c264201e3f005601e80c49fb2937ce2
-  languageName: node
-  linkType: hard
-
-"resize-observer-polyfill@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "resize-observer-polyfill@npm:1.5.1"
-  checksum: 10c0/5e882475067f0b97dc07e0f37c3e335ac5bc3520d463f777cec7e894bb273eddbfecb857ae668e6fb6881fd6f6bb7148246967172139302da50fa12ea3a15d95
   languageName: node
   linkType: hard
 

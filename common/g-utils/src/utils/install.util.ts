@@ -48,6 +48,28 @@ export const withInstall = <T, E extends Record<string, unknown>>(
 };
 
 /**
+ * Adjunta un método `install` a una función-componente (ej. un servicio tipo
+ * `toast`/`message`), exponiéndola en `app.config.globalProperties[name]` para
+ * poder registrarla como plugin (`app.use(...)`).
+ *
+ * Copiado del algoritmo `withInstallFunction` de element-plus.
+ *
+ * @param fn - La función-componente que recibirá el método `install`.
+ * @param name - Clave bajo la cual se expone en las propiedades globales.
+ * @returns La misma función, tipada como `SFCWithInstall<T>`.
+ */
+export const withInstallFunction = <T>(
+  fn: T,
+  name: string,
+): SFCWithInstall<T> => {
+  (fn as any).install = (app: App): void => {
+    (fn as any)._context = app._context;
+    app.config.globalProperties[name] = fn;
+  };
+  return fn as SFCWithInstall<T>;
+};
+
+/**
  * Adjunta un método `install` vacío (no-op) a un componente.
  *
  * Útil para subcomponentes que no deben registrarse de forma independiente
