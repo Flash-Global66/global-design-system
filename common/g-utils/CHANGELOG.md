@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.9.0...@flash-global66/g-utils@0.10.0) (2026-07-12)
+
+### Features
+
+- **date-picker:** migrate off element-plus internals, add castArray ([72b9b3a](https://github.com/Flash-Global66/global-design-system/commit/72b9b3aa864a02a0560a467af078c61754cb7632))
+
 # [0.9.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.8.0...@flash-global66/g-utils@0.9.0) (2026-07-12)
 
 ### Features
