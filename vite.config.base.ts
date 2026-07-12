@@ -3,9 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [
-    vue(),
-  ],
+  plugins: [vue()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './'),
@@ -16,38 +14,36 @@ export default defineConfig({
     lib: {
       entry: resolve(process.cwd(), 'index.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'js'}`
+      fileName: format => `index.${format === 'es' ? 'mjs' : 'js'}`,
     },
     rollupOptions: {
       external: [
         // Dependencias externas
-        'vue', 
-        'lodash-unified', 
-        '@vueuse/core', 
-        '@element-plus/utils',
+        'vue',
+        'lodash-unified',
+        '@vueuse/core',
         'element-plus',
         'dayjs',
         'dayjs/plugin/localeData',
         // Componentes propios
-        /^@flash-global66\/g-/
+        /^@flash-global66\/g-/,
       ],
       output: {
         globals: {
           vue: 'Vue',
           'lodash-unified': 'lodashUnified',
           '@vueuse/core': 'VueUse',
-          '@element-plus/utils': 'ElementPlusUtils',
           'element-plus': 'ElementPlus',
-          'dayjs': 'dayjs',
-          'dayjs/plugin/localeData': 'dayjsPluginLocaleData'
-        }
-      }
+          dayjs: 'dayjs',
+          'dayjs/plugin/localeData': 'dayjsPluginLocaleData',
+        },
+      },
     },
     commonjsOptions: {
       transformMixedEsModules: false,
     },
     target: 'esnext',
     minify: 'esbuild',
-    chunkSizeWarningLimit: 2000,  }
-  }
-);
+    chunkSizeWarningLimit: 2000,
+  },
+});

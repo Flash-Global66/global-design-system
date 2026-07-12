@@ -39,10 +39,6 @@ module.exports = {
         'components/form-item/**',
         'components/skeleton/**',
         'components/infinite-scroll/**',
-        // Not yet migrated off element-plus internals; the guard stays
-        // lifted until it is ported. (ep-extraction-v5 migrated pagination,
-        // input-number, collapse and table — now guarded above.)
-        'components/toast/**',
       ],
       rules: {
         'no-restricted-imports': [
