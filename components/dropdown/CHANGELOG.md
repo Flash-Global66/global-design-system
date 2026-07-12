@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dropdown@0.1.5...@flash-global66/g-dropdown@0.2.0) (2026-07-12)
+
+### Features
+
+- **dropdown:** migrate off element-plus internals, add whenMouse ([a2cf05a](https://github.com/Flash-Global66/global-design-system/commit/a2cf05ad95a367a3dc2ca68bee00c8192c447ef4))
+
 ## [0.1.5](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dropdown@0.1.4...@flash-global66/g-dropdown@0.1.5) (2026-07-12)
 
 ### Bug Fixes

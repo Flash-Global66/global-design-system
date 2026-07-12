@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-dropdown",
   "author": "Global66",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -24,15 +24,15 @@
   },
   "dependencies": {
     "@flash-global66/g-collection": "^0.1.4",
-    "@flash-global66/g-focus-trap": "^0.1.9",
-    "@flash-global66/g-hooks": "^0.11.0",
-    "@flash-global66/g-icon-font": "^0.25.11",
-    "@flash-global66/g-popper": "^0.0.17",
-    "@flash-global66/g-roving-focus-group": "^0.1.17",
-    "@flash-global66/g-scrollbar": "^0.1.6",
-    "@flash-global66/g-slot": "^0.0.11",
-    "@flash-global66/g-tooltip": "^0.1.5",
-    "@flash-global66/g-utils": "^0.8.0"
+    "@flash-global66/g-focus-trap": "^0.1.10",
+    "@flash-global66/g-hooks": "^0.11.1",
+    "@flash-global66/g-icon-font": "^0.25.12",
+    "@flash-global66/g-popper": "^0.0.18",
+    "@flash-global66/g-roving-focus-group": "^0.1.18",
+    "@flash-global66/g-scrollbar": "^0.1.7",
+    "@flash-global66/g-slot": "^0.0.12",
+    "@flash-global66/g-tooltip": "^0.1.6",
+    "@flash-global66/g-utils": "^0.9.0"
   },
   "peerDependencies": {
     "@popperjs/core": "^2.11.6",
