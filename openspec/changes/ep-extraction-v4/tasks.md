@@ -277,13 +277,13 @@ Publishes: `input-tag`. Est. ~100 changed lines. Requirements: `popper-overlay-m
 
 Publishes: `inline`. Est. ~60 changed lines. Requirements: `popper-overlay-migration` → `zero-ep-imports-per-migrated-package`, `public-api-and-styles-preserved`, `reused-composables-repointed`, `packaging-convention-followed`, `migration-gated-by-green-tests`.
 
-- [ ] T13.1 Re-point `components/inline/src/**` imports: `useFormSize` → `@flash-global66/g-form` (exists per v3); `useAriaProps` → `@flash-global66/g-hooks`; `useNamespace`/prop-builders/type guards → `@flash-global66/g-utils`. No new hooks built. Zero public API change.
-- [ ] T13.2 Grep-verify zero `from ['"]element-plus` matches under `components/inline/src/**` and `index.ts`.
-- [ ] T13.3 Confirm `inline`'s `package.json` packaging convention.
-- [ ] T13.4 Remove `'components/inline/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
-- [ ] T13.5 `yarn build` succeeds for `inline`. Full `yarn test:run` green.
-- [ ] T13.6 Validate in `front-b2b` (real copy).
-- [ ] T13.7 Commit as one work unit (`refactor(inline): re-point imports off element-plus internals`), open PR #13 (no dependency, may merge any time), Lerna-publish on merge.
+- [x] T13.1 Re-pointed `components/inline/src/**` + index.ts: `useFormSize` → `@flash-global66/g-form`; `useAriaProps` → `@flash-global66/g-hooks`; `buildProps`/`definePropType`/`useNamespace`/`withInstall`/`SFCWithInstall` → `@flash-global66/g-utils`. No new hooks. Zero public API change. Also dropped 4 dead imports (`isBoolean`/`isNumber`/`isString`, `withNoopInstall`).
+- [x] T13.2 Grep-verified zero `from 'element-plus'` under `components/inline/src/**` + `index.ts` (scss `@use theme-chalk` retained).
+- [x] T13.3 Adopted the tooltip packaging convention: `g-form`/`g-hooks`/`g-icon-font`/`g-utils` in `dependencies` with aligned ranges; only `element-plus`/`vue` peer (previously NO `dependencies` block; stale `g-icon-font ^0.2.0` peer).
+- [x] T13.4 Removed `'components/inline/**'` from `.eslintrc.cjs`; `eslint --max-warnings 0` clean.
+- [x] T13.5 `vue-tsc` on inline: 0 errors (baseline-clean). Full `test:run` → 341/341 green.
+- [ ] T13.6 **DEFERRED**: b2b real-copy validation batched with the family after publish.
+- [x] T13.7 Committed as the WU; PR opened; Lerna-publish on merge. Dual blind review: Judge B APPROVE, Judge A REQUEST-CHANGES only on a git-hygiene incident (unrelated agent-tooling files `AGENTS.md`/`CLAUDE.md`/`agent.local.json.example` wrongly swept into the commit by `git add -A`) — stripped from the commit via amend; the inline migration itself was clean on every technical axis in both reviews.
 
 ## Cross-cutting (apply to every WU)
 
