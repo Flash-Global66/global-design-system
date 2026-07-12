@@ -1,5 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { useSizeProp, type ComponentSize } from 'element-plus'
+import type { ComponentSize } from '@flash-global66/g-utils'
 import type {
   CSSProperties,
   ComponentInternalInstance,
@@ -7,7 +8,7 @@ import type {
   Ref,
   VNode,
 } from 'vue'
-import type { Nullable } from 'element-plus/es/utils'
+import type { Nullable } from '@flash-global66/g-utils'
 import type { Store } from '../store'
 import type { TableColumnCtx } from '../table-column/defaults'
 import type TableLayout from '../table-layout'

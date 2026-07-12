@@ -1,6 +1,6 @@
 import { inject } from 'vue'
-import { useNamespace } from 'element-plus'
-import { isFunction, isString } from 'element-plus/es/utils/index'
+import { useNamespace } from '@flash-global66/g-utils'
+import { isFunction, isString } from '@flash-global66/g-utils'
 
 import {
   ensurePosition,

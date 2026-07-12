@@ -1,6 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { computed, getCurrentInstance, ref, unref, watch } from 'vue'
-import { isArray, isUndefined } from 'element-plus/es/utils/index'
+import { isArray, isUndefined } from '@flash-global66/g-utils'
 import { getRowIdentity, walkTreeNode } from '../util'
 
 import type { WatcherPropsData } from '.'

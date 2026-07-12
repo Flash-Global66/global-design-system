@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { h, inject, ref } from 'vue'
 import { debounce } from 'lodash-unified'
-import { addClass, hasClass, removeClass } from 'element-plus/es/utils/index'
+import { addClass, hasClass, removeClass } from '@flash-global66/g-utils'
 import {
   createTablePopper,
   getCell,

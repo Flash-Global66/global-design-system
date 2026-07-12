@@ -995,7 +995,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-checkbox@workspace:components/checkbox":
+"@flash-global66/g-checkbox@npm:^0.3.19, @flash-global66/g-checkbox@workspace:components/checkbox":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-checkbox@workspace:components/checkbox"
   dependencies:
@@ -1512,7 +1512,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-select@workspace:components/select":
+"@flash-global66/g-select@npm:^0.4.7, @flash-global66/g-select@workspace:components/select":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-select@workspace:components/select"
   dependencies:
@@ -1565,13 +1565,17 @@ __metadata:
 "@flash-global66/g-table@workspace:components/table":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-table@workspace:components/table"
+  dependencies:
+    "@flash-global66/g-checkbox": "npm:^0.3.19"
+    "@flash-global66/g-hooks": "npm:^0.11.4"
+    "@flash-global66/g-icon-font": "npm:^0.25.15"
+    "@flash-global66/g-input": "npm:^0.3.20"
+    "@flash-global66/g-popper": "npm:^0.0.21"
+    "@flash-global66/g-scrollbar": "npm:^0.1.10"
+    "@flash-global66/g-select": "npm:^0.4.7"
+    "@flash-global66/g-tooltip": "npm:^0.1.9"
+    "@flash-global66/g-utils": "npm:^0.12.0"
   peerDependencies:
-    "@flash-global66/g-checkbox": ^0.2.1
-    "@flash-global66/g-icon-font": ^0.0.8
-    "@flash-global66/g-input": ^0.3.0
-    "@flash-global66/g-scrollbar": ^0.1.0
-    "@flash-global66/g-select": ^0.3.4
-    "@flash-global66/g-tooltip": ^0.1.0
     async-validator: ^4.2.5
     element-plus: ^2.9.0
     lodash-unified: ^1.0.3
@@ -1651,6 +1655,7 @@ __metadata:
   resolution: "@flash-global66/g-utils@workspace:common/g-utils"
   dependencies:
     lodash-unified: "npm:1.0.3"
+    normalize-wheel-es: "npm:1.2.0"
   peerDependencies:
     vue: ^3.2.0
   languageName: unknown
@@ -9679,7 +9684,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"normalize-wheel-es@npm:^1.2.0":
+"normalize-wheel-es@npm:1.2.0, normalize-wheel-es@npm:^1.2.0":
   version: 1.2.0
   resolution: "normalize-wheel-es@npm:1.2.0"
   checksum: 10c0/48b5961f3f2fb902213ae8b4389fa043a134b3f15415e58f170aa414ba205896ba03410f457812baaaf50bd0a4a2899f35a390315163c1b2f24dddacffbdc89f

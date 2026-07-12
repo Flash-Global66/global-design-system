@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { getCurrentInstance, nextTick, unref } from 'vue'
 import { isNull } from 'lodash-unified'
-import { useNamespace } from 'element-plus'
+import { useNamespace } from '@flash-global66/g-utils'
 import useWatcher from './watcher'
 
 import type { Ref } from 'vue'

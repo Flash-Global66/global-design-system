@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import {
   Fragment,
@@ -11,7 +12,7 @@ import {
   ref,
 } from 'vue'
 import GCheckbox from '@flash-global66/g-checkbox'
-import { isArray, isString, isUndefined } from 'element-plus/es/utils/index'
+import { isArray, isString, isUndefined } from '@flash-global66/g-utils'
 import { cellStarts } from '../config'
 import { compose, mergeOptions } from '../util'
 import useWatcher from './watcher-helper'

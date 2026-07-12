@@ -1,7 +1,7 @@
-import { withInstall, withNoopInstall } from 'element-plus/es/utils/index'
+import { withInstall, withNoopInstall } from '@flash-global66/g-utils'
 import Table from './src/table.vue'
 import TableColumn from './src/tableColumn'
-import type { SFCWithInstall } from 'element-plus/es/utils/index'
+import type { SFCWithInstall } from '@flash-global66/g-utils'
 
 export const GTable: SFCWithInstall<typeof Table> & {
   TableColumn: typeof TableColumn

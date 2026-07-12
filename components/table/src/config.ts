@@ -1,6 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { h } from 'vue'
-import { getProp, isBoolean, isFunction, isNumber } from 'element-plus/es/utils/index'
+import { getProp, isBoolean, isFunction, isNumber } from '@flash-global66/g-utils'
 import { GCheckbox } from '@flash-global66/g-checkbox'
 import { GIconFont } from '@flash-global66/g-icon-font'
 

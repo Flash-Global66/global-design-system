@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import {
   Comment,
@@ -10,8 +11,8 @@ import {
   unref,
   watchEffect,
 } from 'vue'
-import { debugWarn, isArray, isUndefined } from 'element-plus/es/utils/index'
-import { useNamespace } from 'element-plus'
+import { debugWarn, isArray, isUndefined } from '@flash-global66/g-utils'
+import { useNamespace } from '@flash-global66/g-utils'
 import {
   cellForced,
   defaultRenderCell,

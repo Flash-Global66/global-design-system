@@ -153,11 +153,13 @@
 </template>
 
 <script lang="ts">
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, provide } from 'vue'
 import { debounce } from 'lodash-unified'
-import { Mousewheel } from 'element-plus/es/directives/index'
-import { useLocale, useNamespace } from 'element-plus'
+import { Mousewheel } from '@flash-global66/g-utils'
+import { useLocale } from '@flash-global66/g-hooks'
+import { useNamespace } from '@flash-global66/g-utils'
 import GScrollbar from '@flash-global66/g-scrollbar'
 import { createStore } from './store/helper'
 import TableLayout from './table-layout'

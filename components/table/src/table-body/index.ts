@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import {
   defineComponent,
@@ -7,8 +8,8 @@ import {
   onUnmounted,
   watch,
 } from 'vue'
-import { addClass, isClient, rAF, removeClass } from 'element-plus/es/utils/index'
-import { useNamespace } from 'element-plus'
+import { addClass, isClient, rAF, removeClass } from '@flash-global66/g-utils'
+import { useNamespace } from '@flash-global66/g-utils'
 import useLayoutObserver from '../layout-observer'
 import { removePopper } from '../util'
 import { TABLE_INJECTION_KEY } from '../tokens'
