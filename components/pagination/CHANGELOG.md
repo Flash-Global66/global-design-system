@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-pagination@0.1.2...@flash-global66/g-pagination@0.2.0) (2026-07-12)
+
+### Features
+
+- **pagination:** migrate off element-plus internals to g-utils ([1815db0](https://github.com/Flash-Global66/global-design-system/commit/1815db0e1f341c415df24b25a41f316428969058))
+
 ## [0.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-pagination@0.1.1...@flash-global66/g-pagination@0.1.2) (2026-07-12)
 
 ### Bug Fixes
