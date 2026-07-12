@@ -264,14 +264,14 @@ Publishes: `time-picker`. Est. ~220 changed lines. Requirements: `popper-overlay
 
 Publishes: `input-tag`. Est. ~100 changed lines. Requirements: `popper-overlay-migration` → `zero-ep-imports-per-migrated-package`, `public-api-and-styles-preserved`, `reused-composables-repointed`, `packaging-convention-followed`, `migration-gated-by-green-tests`.
 
-- [ ] T12.1 Confirm PR #8 (select) is merged before starting — this WU re-points `useCalcInputWidth` from `select`'s new export.
-- [ ] T12.2 Re-point `components/input-tag/src/**` imports: `useCalcInputWidth` → `@flash-global66/g-hooks` (built in WU-8); `useComposition`/`useFocusController` → `@flash-global66/g-hooks` (already exist per v3); `useNamespace`/`NOOP`/`isUndefined` → `@flash-global66/g-utils`. No new hooks built. Zero public API change.
-- [ ] T12.3 Grep-verify zero `from ['"]element-plus` matches under `components/input-tag/src/**` and `index.ts`.
-- [ ] T12.4 Confirm `input-tag`'s `package.json` packaging convention.
-- [ ] T12.5 Remove `'components/input-tag/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
-- [ ] T12.6 `yarn build` succeeds for `input-tag`. Full `yarn test:run` green.
-- [ ] T12.7 Validate in `front-b2b` (real copy).
-- [ ] T12.8 Commit as one work unit (`refactor(input-tag): re-point imports off element-plus internals`), open PR #12 (depends on PR #8 merged), Lerna-publish on merge.
+- [x] T12.1 Confirmed WU-8 (select) merged + published before starting; branch off current `main`.
+- [x] T12.2 Re-pointed `components/input-tag/src/**` + index.ts (6 files): `useComposition`/`useFocusController`/`useCalcInputWidth` → g-hooks; `buildProps`/`definePropType`/`isArray`/`isNumber`/`isString`/`isUndefined`/`NOOP`/`withInstall`/`SFCWithInstall`/`useNamespace`/`CHANGE_EVENT`/`EVENT_CODE`/`INPUT_EVENT`/`UPDATE_MODEL_EVENT` → g-utils; `PopperEffect` (type) → `@flash-global66/g-popper`. No new hooks. Zero public API change. **Brief gap**: `INPUT_EVENT` was missing from g-utils → ported byte-exact into `event.constant.ts` (beside UPDATE_MODEL_EVENT/CHANGE_EVENT). `PopperEffect`/g-popper dep also not in the brief.
+- [x] T12.3 Grep-verified zero `from 'element-plus'` under `components/input-tag/src/**` + `index.ts` (scss `@use theme-chalk` retained).
+- [x] T12.4 Adopted the tooltip packaging convention: all 7 imported `@flash-global66/*` (g-form/g-hooks/g-icon-font/g-popper/g-tag/g-tooltip/g-utils) in `dependencies` with aligned ranges; only `@vueuse/core`/`element-plus`/`lodash-unified`/`vue` peer (previously NO `dependencies` block, stale peer ranges).
+- [x] T12.5 Removed `'components/input-tag/**'` from `.eslintrc.cjs`; fixed 2 lint errors (unused `InputTagEmits` type import; unused `event` param in `handleInput` — verified callback-only, safe). `eslint --max-warnings 0` clean.
+- [x] T12.6 `vue-tsc` on input-tag: 0 errors (clean, no regression). Full `test:run` → 341/341 green.
+- [ ] T12.7 **DEFERRED**: b2b real-copy validation batched with the family after publish.
+- [x] T12.8 Committed as the WU; PR opened; Lerna-publish on merge. Dual blind review: **both judges APPROVE** (zero CRITICAL/MAJOR/MINOR).
 
 ## WU-13 — `inline` (pure re-point, smallest; no dependencies, fully independent of the popper chain)
 
