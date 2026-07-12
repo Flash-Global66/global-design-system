@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.12.0...@flash-global66/g-utils@0.13.0) (2026-07-12)
+
+### Features
+
+- **collapse:** migrate off element-plus internals; add Awaitable to g-utils ([0ee53f4](https://github.com/Flash-Global66/global-design-system/commit/0ee53f4bb00350ac2603024b02b6ee38bf373c72))
+- **table:** migrate off element-plus internals; port Mousewheel to g-utils ([0d86312](https://github.com/Flash-Global66/global-design-system/commit/0d86312777ff907b12da4eab1d55dd0dc6b971bd))
+
 # [0.12.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.11.0...@flash-global66/g-utils@0.12.0) (2026-07-12)
 
 ### Features

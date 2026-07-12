@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.4.2...@flash-global66/g-collapse@0.5.0) (2026-07-12)
+
+### Features
+
+- **collapse:** migrate off element-plus internals; add Awaitable to g-utils ([0ee53f4](https://github.com/Flash-Global66/global-design-system/commit/0ee53f4bb00350ac2603024b02b6ee38bf373c72))
+
 ## [0.4.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.4.1...@flash-global66/g-collapse@0.4.2) (2026-07-12)
 
 ### Bug Fixes

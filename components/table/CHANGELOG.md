@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.2.6...@flash-global66/g-table@0.3.0) (2026-07-12)
+
+### Features
+
+- **table:** migrate off element-plus internals; port Mousewheel to g-utils ([0d86312](https://github.com/Flash-Global66/global-design-system/commit/0d86312777ff907b12da4eab1d55dd0dc6b971bd))
+
 ## [0.2.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.2.5...@flash-global66/g-table@0.2.6) (2026-07-12)
 
 ### Bug Fixes

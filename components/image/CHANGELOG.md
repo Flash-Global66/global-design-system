@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.14...@flash-global66/g-image@0.4.15) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
 ## [0.4.14](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.13...@flash-global66/g-image@0.4.14) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-image
