@@ -1,17 +1,27 @@
-import { StoryObj } from '@storybook/vue3'
-import { ref } from 'vue'
+import { StoryObj } from '@storybook/vue3';
+import { ref } from 'vue';
 
 // COMPONENTS
-import { GDropdown, GDropdownInstance, type actionType } from '@flash-global66/g-dropdown/index.ts'
-import { GButton } from '@flash-global66/g-button'
-import { GIconButton } from '@flash-global66/g-icon-button/index.ts'
-import { GRadioGroup } from '@flash-global66/g-radio/index.ts'
-import GTag from '@flash-global66/g-tag/index.ts'
+import {
+  GDropdown,
+  GDropdownInstance,
+  type actionType,
+} from '@flash-global66/g-dropdown/index.ts';
+import { GButton } from '@flash-global66/g-button';
+import { GIconButton } from '@flash-global66/g-icon-button/index.ts';
+import { GRadioGroup } from '@flash-global66/g-radio/index.ts';
+import GTag from '@flash-global66/g-tag/index.ts';
 
 // CONFIG
-import { GConfigProvider } from '../components/config-provider/index.ts'
-import { version, peerDependencies } from '@flash-global66/g-dropdown/package.json'
-import { generatePeerDepsInstalls, generatePeerDepsList } from '../helper/documentation-stories'
+import { GConfigProvider } from '../components/config-provider/index.ts';
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-dropdown/package.json';
+import {
+  generatePeerDepsInstalls,
+  generatePeerDepsList,
+} from '../helper/documentation-stories';
 
 const meta = {
   title: 'Data/Dropdown',
@@ -90,7 +100,7 @@ const actions: actionType[] = [
   },
   {
     title: 'Buscar',
-    icon: 'regular magnifying-glass',
+    icon: 'regular search',
     description: 'Esta acción te permite buscar un elemento',
     action: () => {
       console.log('Buscar')
@@ -109,9 +119,9 @@ const actions: actionType[] = [
 ]
 </script>
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     // 1. Apariencia y Dimensiones
@@ -122,19 +132,26 @@ const actions: actionType[] = [
       table: {
         category: 'Apariencia y Dimensiones',
         type: { summary: 'string | number' },
-        defaultValue: { summary: '100%' }
-      }
+        defaultValue: { summary: '100%' },
+      },
     },
     placement: {
       name: 'placement',
       description: 'Ubicación del drawer',
       control: 'select',
-      options: ['top', 'bottom', 'top-start', 'top-end', 'bottom-start', 'bottom-end'],
+      options: [
+        'top',
+        'bottom',
+        'top-start',
+        'top-end',
+        'bottom-start',
+        'bottom-end',
+      ],
       table: {
         category: 'Apariencia y Dimensiones',
         type: { summary: 'string' },
-        defaultValue: { summary: 'top' }
-      }
+        defaultValue: { summary: 'top' },
+      },
     },
     role: {
       description: 'Rol del drawer',
@@ -142,8 +159,8 @@ const actions: actionType[] = [
       table: {
         category: 'Apariencia y Dimensiones',
         type: { summary: 'string' },
-        defaultValue: { summary: 'menu' }
-      }
+        defaultValue: { summary: 'menu' },
+      },
     },
     tabindex: {
       description: 'Tabindex del drawer',
@@ -151,8 +168,8 @@ const actions: actionType[] = [
       table: {
         category: 'Apariencia y Dimensiones',
         type: { summary: 'number' },
-        defaultValue: { summary: '0' }
-      }
+        defaultValue: { summary: '0' },
+      },
     },
 
     // 2. Comportamiento y Activación
@@ -162,8 +179,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     actions: {
       description: 'Array de acciones personalizadas para el drawer',
@@ -180,10 +197,10 @@ const actions: actionType[] = [
   disabled?: boolean
   action?: () => void
   divider?: boolean
-}`
+}`,
         },
-        defaultValue: { summary: '[]' }
-      }
+        defaultValue: { summary: '[]' },
+      },
     },
     trigger: {
       description: 'Tipo de disparador del drawer',
@@ -192,8 +209,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'string' },
-        defaultValue: { summary: 'hover' }
-      }
+        defaultValue: { summary: 'hover' },
+      },
     },
     triggerKeys: {
       name: 'trigger-keys',
@@ -202,8 +219,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'string[]' },
-        defaultValue: { summary: '[]' }
-      }
+        defaultValue: { summary: '[]' },
+      },
     },
     hideOnClick: {
       name: 'hide-on-click',
@@ -212,8 +229,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     showTimeout: {
       name: 'show-timeout',
@@ -222,8 +239,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'number' },
-        defaultValue: { summary: '150' }
-      }
+        defaultValue: { summary: '150' },
+      },
     },
     hideTimeout: {
       name: 'hide-timeout',
@@ -232,8 +249,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'number' },
-        defaultValue: { summary: '150' }
-      }
+        defaultValue: { summary: '150' },
+      },
     },
     teleported: {
       description: 'Teletransporta el dropdown al elemento append-to',
@@ -241,8 +258,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     persistent: {
       description: 'Tooltip persistente',
@@ -250,8 +267,8 @@ const actions: actionType[] = [
       table: {
         category: 'Comportamiento y Activación',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
 
     // 3. Eventos y Métodos
@@ -260,32 +277,32 @@ const actions: actionType[] = [
       description: 'Se activa al ejecutar un comando en el drawer',
       table: {
         category: 'Eventos y Métodos',
-        type: { summary: '(...args: any[]) => void' }
-      }
+        type: { summary: '(...args: any[]) => void' },
+      },
     },
     visibleChange: {
       name: 'visible-change',
       description: 'Se activa al cambiar la visibilidad del drawer',
       table: {
         category: 'Eventos y Métodos',
-        type: { summary: '(visible: boolean) => void' }
-      }
+        type: { summary: '(visible: boolean) => void' },
+      },
     },
     handleClose: {
       name: 'handle-close',
       description: 'Método para cerrar el dropdown',
       table: {
         category: 'Eventos y Métodos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     handleOpen: {
       name: 'handle-open',
       description: 'Método para abrir el dropdown',
       table: {
         category: 'Eventos y Métodos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
 
     // 4. Configuración Avanzada
@@ -296,8 +313,8 @@ const actions: actionType[] = [
       table: {
         category: 'Configuración Avanzada',
         type: { summary: 'object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
 
     // 5. Slots
@@ -305,10 +322,10 @@ const actions: actionType[] = [
       description: 'Disparador del dropdown',
       table: {
         category: 'Slot',
-        type: { summary: 'Slot' }
+        type: { summary: 'Slot' },
       },
-      control: false
-    }
+      control: false,
+    },
   },
   args: {
     maxHeight: '100%',
@@ -329,43 +346,43 @@ const actions: actionType[] = [
         title: 'Abrir',
         icon: 'regular arrow-up-right-from-square',
         action: () => {
-          console.log('Abrir')
-        }
+          console.log('Abrir');
+        },
       },
       {
         title: 'Editar',
         icon: 'regular pen',
         action: () => {
-          console.log('Editar')
-        }
+          console.log('Editar');
+        },
       },
       {
         title: 'Eliminar',
         icon: 'regular trash',
         action: () => {
-          console.log('Eliminar')
-        }
+          console.log('Eliminar');
+        },
       },
       {
         title: 'Actualizar',
         icon: 'regular arrows-rotate',
         disabled: true,
         action: () => {
-          console.log('Actualizar')
-        }
-      }
-    ]
-  }
-}
-export default meta
-type Story = StoryObj<GDropdownInstance>
+          console.log('Actualizar');
+        },
+      },
+    ],
+  },
+};
+export default meta;
+type Story = StoryObj<GDropdownInstance>;
 
 export const Basic: Story = {
   name: 'Básico',
-  render: (args) => ({
+  render: args => ({
     components: { GDropdown, GConfigProvider, GIconButton },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
       <g-config-provider>
@@ -373,9 +390,9 @@ export const Basic: Story = {
           <g-icon-button icon="regular plus-circle" />
         </g-dropdown>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const allTypesOfTriggers: Story = {
   name: 'Todos los tipos de disparadores',
@@ -385,20 +402,20 @@ export const allTypesOfTriggers: Story = {
         story: `Este ejemplo muestra cómo se ven los diferentes tipos de disparadores.
 - Disparador de clic
 - Disparador de desplazamiento
-- Disparador de enfoque`
-      }
-    }
+- Disparador de enfoque`,
+      },
+    },
   },
   render: () => ({
     components: { GDropdown, GConfigProvider, GRadioGroup, GTag },
     setup() {
-      const trigger = ref<string>('click')
+      const trigger = ref<string>('click');
 
       const triggers = [
         { value: 'click', label: 'Click' },
         { value: 'hover', label: 'Hover' },
-        { value: 'contextmenu', label: 'Context Menu' }
-      ]
+        { value: 'contextmenu', label: 'Context Menu' },
+      ];
 
       const actions: actionType[] = [
         {
@@ -406,31 +423,31 @@ export const allTypesOfTriggers: Story = {
           icon: 'regular envelope',
           description: 'Esta acción te permite enviar un correo electrónico',
           action: () => {
-            console.log('Enviar correo')
+            console.log('Enviar correo');
           },
-          'data-test': 'send-email'
+          'data-test': 'send-email',
         },
         {
           title: 'Buscar',
-          icon: 'regular magnifying-glass',
+          icon: 'regular search',
           description: 'Esta acción te permite buscar un elemento',
           action: () => {
-            console.log('Buscar')
+            console.log('Buscar');
           },
-          'data-test': 'search'
+          'data-test': 'search',
         },
         {
           title: 'Exportar',
           icon: 'regular arrow-up-from-bracket',
           description: 'Esta acción te permite exportar un elemento',
           action: () => {
-            console.log('Exportar')
+            console.log('Exportar');
           },
-          'data-test': 'export'
-        }
-      ]
+          'data-test': 'export',
+        },
+      ];
 
-      return { actions, triggers, trigger }
+      return { actions, triggers, trigger };
     },
     template: `
       <g-config-provider>
@@ -445,9 +462,9 @@ export const allTypesOfTriggers: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const commandEvent: Story = {
   name: 'Manejo de la opción de comando',
@@ -456,14 +473,14 @@ export const commandEvent: Story = {
       description: {
         story: `Este ejemplo muestra cómo manejar el evento de comando.
 - Se utiliza un botón para abrir el menú desplegable.
-- Al hacer clic en una opción, se muestra un mensaje en la consola con el nombre de la opción seleccionada.`
-      }
-    }
+- Al hacer clic en una opción, se muestra un mensaje en la consola con el nombre de la opción seleccionada.`,
+      },
+    },
   },
   render: () => ({
     components: { GDropdown, GConfigProvider, GButton, GTag },
     setup() {
-      const commandClicked = ref<string>('')
+      const commandClicked = ref<string>('');
       const actions: actionType[] = [
         {
           title: 'Enviar correo',
@@ -471,19 +488,19 @@ export const commandEvent: Story = {
           command: 'send-email',
           description: 'Esta acción te permite enviar un correo electrónico',
           action: () => {
-            console.log('Enviar correo')
+            console.log('Enviar correo');
           },
-          'data-test': 'send-email'
+          'data-test': 'send-email',
         },
         {
           title: 'Buscar',
-          icon: 'regular magnifying-glass',
+          icon: 'regular search',
           command: 'search',
           description: 'Esta acción te permite buscar un elemento',
           action: () => {
-            console.log('Buscar')
+            console.log('Buscar');
           },
-          'data-test': 'search'
+          'data-test': 'search',
         },
         {
           title: 'Exportar',
@@ -491,17 +508,17 @@ export const commandEvent: Story = {
           command: 'export',
           description: 'Esta acción te permite exportar un elemento',
           action: () => {
-            console.log('Exportar')
+            console.log('Exportar');
           },
-          'data-test': 'export'
-        }
-      ]
+          'data-test': 'export',
+        },
+      ];
 
       const handleCommand = (command: string) => {
-        commandClicked.value = command
-      }
+        commandClicked.value = command;
+      };
 
-      return { actions, handleCommand, commandClicked }
+      return { actions, handleCommand, commandClicked };
     },
     template: `
       <g-config-provider>
@@ -532,9 +549,9 @@ export const commandEvent: Story = {
         </div>
 
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const dropdownMethods: Story = {
   name: 'Métodos del dropdown',
@@ -544,50 +561,58 @@ export const dropdownMethods: Story = {
         story: `Este ejemplo muestra cómo usar los métodos del dropdown.
 
 - Se utiliza un botón para abrir el menú desplegable.
-- Se utiliza un botón para cerrar el menú desplegable.`
-      }
-    }
+- Se utiliza un botón para cerrar el menú desplegable.`,
+      },
+    },
   },
   render: () => ({
     components: { GDropdown, GConfigProvider, GButton, GIconButton },
     setup() {
-      const dropdownRef = ref<GDropdownInstance | null>(null)
-      const countries = ref<actionType[]>([])
-      const svgCurrentCountry = ref<string>('')
+      const dropdownRef = ref<GDropdownInstance | null>(null);
+      const countries = ref<actionType[]>([]);
+      const svgCurrentCountry = ref<string>('');
 
       const getCountries = async () => {
         try {
-          const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags')
-          const data = await response.json()
+          const response = await fetch(
+            'https://restcountries.com/v3.1/all?fields=name,flags',
+          );
+          const data = await response.json();
 
-          const limitedData = data.slice(0, 25)
+          const limitedData = data.slice(0, 25);
 
-          const countries = limitedData.map((country) => ({
+          const countries = limitedData.map(country => ({
             icon: country.flags.svg,
             title: country.name.common,
-            command: country.flags.svg
-          }))
+            command: country.flags.svg,
+          }));
 
-          return countries
+          return countries;
         } catch (error) {
-          console.error('Error fetching data:', error)
-          return []
+          console.error('Error fetching data:', error);
+          return [];
         }
-      }
+      };
 
       const handleVisibleChange = (visible: boolean) => {
         if (visible && countries.value.length === 0) {
-          getCountries().then((data) => {
-            countries.value = data
-          })
+          getCountries().then(data => {
+            countries.value = data;
+          });
         }
-      }
+      };
 
       const handleCommand = (command: string) => {
-        svgCurrentCountry.value = command
-      }
+        svgCurrentCountry.value = command;
+      };
 
-      return { dropdownRef, handleVisibleChange, countries, handleCommand, svgCurrentCountry }
+      return {
+        dropdownRef,
+        handleVisibleChange,
+        countries,
+        handleCommand,
+        svgCurrentCountry,
+      };
     },
     template: `
       <g-config-provider>
@@ -621,6 +646,6 @@ export const dropdownMethods: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
