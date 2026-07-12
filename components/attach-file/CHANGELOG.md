@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-attach-file@1.4.11...@flash-global66/g-attach-file@1.4.12) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-attach-file
+
 ## [1.4.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-attach-file@1.4.10...@flash-global66/g-attach-file@1.4.11) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-attach-file

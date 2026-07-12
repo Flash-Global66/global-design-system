@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.10.0...@flash-global66/g-utils@0.11.0) (2026-07-12)
+
+### Features
+
+- **time-picker:** migrate off element-plus internals, add vRepeatClick/isDate/isEmpty ([7ad4a55](https://github.com/Flash-Global66/global-design-system/commit/7ad4a555d49f8e0bd63be298398ab9eec0149741))
+
 # [0.10.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.9.0...@flash-global66/g-utils@0.10.0) (2026-07-12)
 
 ### Features
