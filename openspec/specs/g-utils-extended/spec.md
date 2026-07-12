@@ -1,7 +1,7 @@
 # Spec: g-utils Extended Utilities
 
-> Artifact store: hybrid. Implemented in changes `ep-extraction-v2` and `ep-extraction-v3`. Branches: `feat/ds-ep-extraction-v2`, `feat/ds-ep-extraction-v3-wu1`.
-> This spec documents the extended g-utils package (v0.2.0+, source-only) as implemented and verified.
+> Artifact store: hybrid. Implemented in changes `ep-extraction-v2`, `ep-extraction-v3`, and `ep-extraction-v4`. Branches: `feat/ds-ep-extraction-v2`, `feat/ds-ep-extraction-v3-wu1`, `feat/ds-ep-extraction-v4-wu*`.
+> This spec documents the extended g-utils package (v0.12.0+, source-only) as implemented and verified.
 
 ## Purpose
 
@@ -172,17 +172,45 @@ Every symbol added in `ep-extraction-v3` (`componentSizes`, `isValidComponentSiz
 - WHEN `yarn test:run` executes
 - THEN all tests pass, including the new utility tests
 
+### Requirement: popper-overlay-utils-added
+
+`g-utils` MUST export the following pure helpers/types/directives, added in `ep-extraction-v4`, each replicating its element-plus algorithm exactly: `castArray`, `getStyle`, `composeRefs`, `isFocusable`, `iconPropType`, `PatchFlags`, and the `ClickOutside` directive.
+
+#### Scenario: new utils resolve and behave identically to EP
+
+- GIVEN a consumer importing one of the new v4 utilities from `@flash-global66/g-utils`
+- WHEN called with the same inputs as its pre-migration element-plus call
+- THEN it resolves without a build step and returns/behaves identically
+
+#### Scenario: ClickOutside directive fires on outside interaction only
+
+- GIVEN `ClickOutside` bound to an element inside a mounted component
+- WHEN a click occurs outside the bound element versus inside it
+- THEN the directive's callback fires only for the outside click
+
+### Requirement: v4-utils-unit-tested
+
+Every utility/directive added in `ep-extraction-v4` MUST ship a Vitest unit test file. Tests MUST be unit-only (no DOM/integration beyond directive-local assertions), and the full suite MUST pass via `yarn test:run`.
+
+#### Scenario: full suite green after additions
+
+- GIVEN all v4 utilities implemented with unit tests
+- WHEN `yarn test:run` executes
+- THEN all tests pass, including the new v4 utility tests
+
 ## Non-Goals
 
 - Building/bundling g-utils as a distributable artifact (stays source-only)
-- Depending on g-hooks or any external packages (pure utilities only)
+- Depending on g-hooks or g-form from g-utils (unchanged from base spec)
 - Reimplementing whole components or design patterns
 - `ValidateComponentsMap` — not hosted here; it maps to `@element-plus/icons-vue` in EP and must be re-authored against `@flash-global66/g-icon-font`; it is `input`-local (see `form-control-migration` spec) to avoid `g-utils` depending on an icon package
-- `INPUT_EVENT` — consumed only by `input-number` (deferred to `ep-extraction-v4`); `switch` imports it from its own local `./constants`
+- `INPUT_EVENT` — consumed only by `input-number` (deferred to `ep-extraction-v5`); `switch` imports it from its own local `./constants`
 - Adding a `g-icon-font` dependency to `g-utils`
+- Table-family utilities — deferred to `ep-extraction-v5`
 
 ## References
 
 - Change: `ep-extraction-v2` (proposal #239, spec #240, design #241, tasks #242, verify-report #247)
 - Change: `ep-extraction-v3` (proposal #252, spec #257, design #258, tasks #260, verify-report #268)
+- Change: `ep-extraction-v4` (proposal obs #275, spec obs #276, design obs #277, tasks obs #279, verify-report obs #297)
 - Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`, `openspec/archive/2026-07-10-ep-extraction-v3/`
