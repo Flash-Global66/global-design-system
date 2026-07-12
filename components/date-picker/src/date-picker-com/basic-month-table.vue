@@ -11,7 +11,9 @@
         <td
           v-for="(cell, key_) in row"
           :key="key_"
-          :ref="(el) => isSelectedCell(cell) && (currentCellRef = el as HTMLElement)"
+          :ref="
+            el => isSelectedCell(cell) && (currentCellRef = el as HTMLElement)
+          "
           :class="getCellStyle(cell)"
           :aria-selected="`${isSelectedCell(cell)}`"
           :aria-label="t(`el.datepicker.month${+cell.text + 1}`)"
@@ -32,13 +34,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch } from "vue";
-import dayjs from "dayjs";
-import { useLocale, useNamespace } from "element-plus";
-import { castArray, hasClass } from "element-plus/es/utils/index.mjs";
-import { basicMonthTableProps } from "../props/basic-month-table";
-import { datesInMonth, getValidDateOfMonth } from "../utils";
-import GDatePickerCell from "./basic-cell-render.vue";
+import { computed, nextTick, ref, watch } from 'vue';
+import dayjs from 'dayjs';
+import { useLocale } from '@flash-global66/g-hooks';
+import { castArray, hasClass, useNamespace } from '@flash-global66/g-utils';
+import { basicMonthTableProps } from '../props/basic-month-table';
+import { datesInMonth, getValidDateOfMonth } from '../utils';
+import GDatePickerCell from './basic-cell-render.vue';
 
 type MonthCell = {
   column: number;
@@ -47,14 +49,14 @@ type MonthCell = {
   start: boolean;
   end: boolean;
   text: number;
-  type: "normal" | "today";
+  type: 'normal' | 'today';
   inRange: boolean;
 };
 
 const props = defineProps(basicMonthTableProps);
-const emit = defineEmits(["changerange", "pick", "select"]);
+const emit = defineEmits(['changerange', 'pick', 'select']);
 
-const ns = useNamespace("month-table");
+const ns = useNamespace('month-table');
 
 const { t, lang } = useLocale();
 
@@ -62,10 +64,10 @@ const tbodyRef = ref<HTMLElement>();
 const currentCellRef = ref<HTMLElement>();
 const months = ref(
   props.date
-    .locale("en")
+    .locale('en')
     .localeData()
     .monthsShort()
-    .map((_) => _.toLowerCase())
+    .map(_ => _.toLowerCase()),
 );
 const tableRows = ref<MonthCell[][]>([
   [] as MonthCell[],
@@ -77,7 +79,7 @@ const lastColumn = ref<number>();
 const rows = computed<MonthCell[][]>(() => {
   const rows = tableRows.value;
 
-  const now = dayjs().locale(lang.value).startOf("month");
+  const now = dayjs().locale(lang.value).startOf('month');
 
   for (let i = 0; i < 3; i++) {
     const row = rows[i];
@@ -85,7 +87,7 @@ const rows = computed<MonthCell[][]>(() => {
       const cell = (row[j] ||= {
         row: i,
         column: j,
-        type: "normal",
+        type: 'normal',
         inRange: false,
         start: false,
         end: false,
@@ -93,10 +95,10 @@ const rows = computed<MonthCell[][]>(() => {
         disabled: false,
       });
 
-      cell.type = "normal";
+      cell.type = 'normal';
 
       const index = i * 4 + j;
-      const calTime = props.date.startOf("year").month(index);
+      const calTime = props.date.startOf('year').month(index);
 
       const calEndDate =
         props.rangeState.endDate ||
@@ -107,30 +109,30 @@ const rows = computed<MonthCell[][]>(() => {
       cell.inRange =
         !!(
           props.minDate &&
-          calTime.isSameOrAfter(props.minDate, "month") &&
+          calTime.isSameOrAfter(props.minDate, 'month') &&
           calEndDate &&
-          calTime.isSameOrBefore(calEndDate, "month")
+          calTime.isSameOrBefore(calEndDate, 'month')
         ) ||
         !!(
           props.minDate &&
-          calTime.isSameOrBefore(props.minDate, "month") &&
+          calTime.isSameOrBefore(props.minDate, 'month') &&
           calEndDate &&
-          calTime.isSameOrAfter(calEndDate, "month")
+          calTime.isSameOrAfter(calEndDate, 'month')
         );
 
       if (props.minDate?.isSameOrAfter(calEndDate)) {
-        cell.start = !!(calEndDate && calTime.isSame(calEndDate, "month"));
-        cell.end = props.minDate && calTime.isSame(props.minDate, "month");
+        cell.start = !!(calEndDate && calTime.isSame(calEndDate, 'month'));
+        cell.end = props.minDate && calTime.isSame(props.minDate, 'month');
       } else {
         cell.start = !!(
-          props.minDate && calTime.isSame(props.minDate, "month")
+          props.minDate && calTime.isSame(props.minDate, 'month')
         );
-        cell.end = !!(calEndDate && calTime.isSame(calEndDate, "month"));
+        cell.end = !!(calEndDate && calTime.isSame(calEndDate, 'month'));
       }
 
       const isToday = now.isSame(calTime);
       if (isToday) {
-        cell.type = "today";
+        cell.type = 'today';
       }
 
       cell.text = index;
@@ -155,20 +157,20 @@ const getCellStyle = (cell: MonthCell) => {
     : false;
   style.current =
     castArray(props.parsedValue).findIndex(
-      (date) =>
-        dayjs.isDayjs(date) && date.year() === year && date.month() === month
+      date =>
+        dayjs.isDayjs(date) && date.year() === year && date.month() === month,
     ) >= 0;
   style.today = today.getFullYear() === year && today.getMonth() === month;
 
   if (cell.inRange) {
-    style["in-range"] = true;
+    style['in-range'] = true;
 
     if (cell.start) {
-      style["start-date"] = true;
+      style['start-date'] = true;
     }
 
     if (cell.end) {
-      style["end-date"] = true;
+      style['end-date'] = true;
     }
   }
   return style;
@@ -179,7 +181,7 @@ const isSelectedCell = (cell: MonthCell) => {
   const month = cell.text;
   return (
     castArray(props.date).findIndex(
-      (date) => date.year() === year && date.month() === month
+      date => date.year() === year && date.month() === month,
     ) >= 0
   );
 };
@@ -188,13 +190,13 @@ const handleMouseMove = (event: MouseEvent) => {
   if (!props.rangeState.selecting) return;
 
   let target = event.target as HTMLElement;
-  if (target.tagName === "SPAN") {
+  if (target.tagName === 'SPAN') {
     target = target.parentNode?.parentNode as HTMLElement;
   }
-  if (target.tagName === "DIV") {
+  if (target.tagName === 'DIV') {
     target = target.parentNode as HTMLElement;
   }
-  if (target.tagName !== "TD") return;
+  if (target.tagName !== 'TD') return;
 
   const row = (target.parentNode as HTMLTableRowElement).rowIndex;
   const column = (target as HTMLTableCellElement).cellIndex;
@@ -206,53 +208,53 @@ const handleMouseMove = (event: MouseEvent) => {
   if (row !== lastRow.value || column !== lastColumn.value) {
     lastRow.value = row;
     lastColumn.value = column;
-    emit("changerange", {
+    emit('changerange', {
       selecting: true,
-      endDate: props.date.startOf("year").month(row * 4 + column),
+      endDate: props.date.startOf('year').month(row * 4 + column),
     });
   }
 };
 const handleMonthTableClick = (event: MouseEvent | KeyboardEvent) => {
   const target = (event.target as HTMLElement)?.closest(
-    "td"
+    'td',
   ) as HTMLTableCellElement;
-  if (target?.tagName !== "TD") return;
-  if (hasClass(target, "disabled")) return;
+  if (target?.tagName !== 'TD') return;
+  if (hasClass(target, 'disabled')) return;
   const column = target.cellIndex;
   const row = (target.parentNode as HTMLTableRowElement).rowIndex;
   const month = row * 4 + column;
-  const newDate = props.date.startOf("year").month(month);
-  if (props.selectionMode === "months") {
-    if (event.type === "keydown") {
-      emit("pick", castArray(props.parsedValue), false);
+  const newDate = props.date.startOf('year').month(month);
+  if (props.selectionMode === 'months') {
+    if (event.type === 'keydown') {
+      emit('pick', castArray(props.parsedValue), false);
       return;
     }
     const newMonth = getValidDateOfMonth(
       props.date.year(),
       month,
       lang.value,
-      props.disabledDate
+      props.disabledDate,
     );
-    const newValue = hasClass(target, "current")
+    const newValue = hasClass(target, 'current')
       ? castArray(props.parsedValue).filter(
-          (d) => d?.month() !== newMonth.month()
+          d => d?.month() !== newMonth.month(),
         )
       : castArray(props.parsedValue).concat([dayjs(newMonth)]);
-    emit("pick", newValue);
-  } else if (props.selectionMode === "range") {
+    emit('pick', newValue);
+  } else if (props.selectionMode === 'range') {
     if (!props.rangeState.selecting) {
-      emit("pick", { minDate: newDate, maxDate: null });
-      emit("select", true);
+      emit('pick', { minDate: newDate, maxDate: null });
+      emit('select', true);
     } else {
       if (props.minDate && newDate >= props.minDate) {
-        emit("pick", { minDate: props.minDate, maxDate: newDate });
+        emit('pick', { minDate: props.minDate, maxDate: newDate });
       } else {
-        emit("pick", { minDate: newDate, maxDate: props.minDate });
+        emit('pick', { minDate: newDate, maxDate: props.minDate });
       }
-      emit("select", false);
+      emit('select', false);
     }
   } else {
-    emit("pick", month);
+    emit('pick', month);
   }
 };
 
@@ -263,7 +265,7 @@ watch(
       await nextTick();
       currentCellRef.value?.focus();
     }
-  }
+  },
 );
 
 defineExpose({

@@ -1,26 +1,26 @@
-import { getCurrentInstance, inject, ref, unref, watch } from "vue";
-import { useLocale, useNamespace } from "element-plus";
-import { isArray } from "element-plus/es/utils/index.mjs";
-import { getDefaultValue, isValidRange } from "../utils";
-import { ROOT_PICKER_INJECTION_KEY } from "../constants";
-import { useShortcut } from "./use-shortcut";
+import { getCurrentInstance, inject, ref, unref, watch } from 'vue';
+import { useLocale } from '@flash-global66/g-hooks';
+import { isArray, useNamespace } from '@flash-global66/g-utils';
+import { getDefaultValue, isValidRange } from '../utils';
+import { ROOT_PICKER_INJECTION_KEY } from '../constants';
+import { useShortcut } from './use-shortcut';
 
-import type { Ref } from "vue";
-import type { Dayjs } from "dayjs";
-import type { PanelRangeSharedProps, RangeState } from "../props/shared";
-import type { DefaultValue } from "../utils";
+import type { Ref } from 'vue';
+import type { Dayjs } from 'dayjs';
+import type { PanelRangeSharedProps, RangeState } from '../props/shared';
+import type { DefaultValue } from '../utils';
 
-import es from "../lang/es";
+import es from '../lang/es';
 
 type UseRangePickerProps = {
   onParsedValueChanged: (
     minDate: Dayjs | undefined,
-    maxDate: Dayjs | undefined
+    maxDate: Dayjs | undefined,
   ) => void;
   defaultValue: Ref<DefaultValue>;
   leftDate: Ref<Dayjs>;
   rightDate: Ref<Dayjs>;
-  unit: "month" | "year";
+  unit: 'month' | 'year';
 };
 
 export const useRangePicker = (
@@ -32,12 +32,12 @@ export const useRangePicker = (
     unit,
 
     onParsedValueChanged,
-  }: UseRangePickerProps
+  }: UseRangePickerProps,
 ) => {
   const { emit } = getCurrentInstance()!;
 
   const { pickerNs } = inject(ROOT_PICKER_INJECTION_KEY)!;
-  const drpNs = useNamespace("date-range-picker");
+  const drpNs = useNamespace('date-range-picker');
   const { t, lang } = useLocale(ref(es));
   const handleShortcutClick = useShortcut(lang);
   const minDate = ref<Dayjs>();
@@ -56,7 +56,7 @@ export const useRangePicker = (
     const _maxDate = unref(maxDate);
 
     if (isValidRange([_minDate, _maxDate])) {
-      emit("pick", [_minDate, _maxDate], visible);
+      emit('pick', [_minDate, _maxDate], visible);
     }
   };
 
@@ -67,7 +67,7 @@ export const useRangePicker = (
     }
   };
 
-  const onReset = (parsedValue: PanelRangeSharedProps["parsedValue"]) => {
+  const onReset = (parsedValue: PanelRangeSharedProps['parsedValue']) => {
     if (isArray(parsedValue) && parsedValue.length === 2) {
       const [start, end] = parsedValue;
       minDate.value = start;
@@ -93,12 +93,12 @@ export const useRangePicker = (
 
   watch(
     defaultValue,
-    (val) => {
+    val => {
       if (val) {
         restoreDefault();
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 
   watch(() => props.parsedValue, onReset, { immediate: true });

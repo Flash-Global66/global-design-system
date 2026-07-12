@@ -11,7 +11,9 @@
         <td
           v-for="(cell, cellKey) in row"
           :key="`${rowKey}_${cellKey}`"
-          :ref="(el) => isSelectedCell(cell) && (currentCellRef = el as HTMLElement)"
+          :ref="
+            el => isSelectedCell(cell) && (currentCellRef = el as HTMLElement)
+          "
           class="available"
           :class="getCellKls(cell)"
           :aria-selected="isSelectedCell(cell)"
@@ -28,14 +30,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch } from "vue";
-import dayjs from "dayjs";
-import { useLocale, useNamespace } from "element-plus";
-import { castArray, hasClass } from "element-plus/es/utils/index.mjs";
-import { rangeArr } from "@flash-global66/g-time-picker";
-import { basicYearTableProps } from "../props/basic-year-table";
-import { getValidDateOfYear } from "../utils";
-import GDatePickerCell from "./basic-cell-render.vue";
+import { computed, nextTick, ref, watch } from 'vue';
+import dayjs from 'dayjs';
+import { useLocale } from '@flash-global66/g-hooks';
+import { castArray, hasClass, useNamespace } from '@flash-global66/g-utils';
+import { rangeArr } from '@flash-global66/g-time-picker';
+import { basicYearTableProps } from '../props/basic-year-table';
+import { getValidDateOfYear } from '../utils';
+import GDatePickerCell from './basic-cell-render.vue';
 
 type YearCell = {
   column: number;
@@ -44,21 +46,21 @@ type YearCell = {
   start: boolean;
   end: boolean;
   text: number;
-  type: "normal" | "today";
+  type: 'normal' | 'today';
   inRange: boolean;
 };
 
 const datesInYear = (year: number, lang: string) => {
-  const firstDay = dayjs(String(year)).locale(lang).startOf("year");
-  const lastDay = firstDay.endOf("year");
+  const firstDay = dayjs(String(year)).locale(lang).startOf('year');
+  const lastDay = firstDay.endOf('year');
   const numOfDays = lastDay.dayOfYear();
-  return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
+  return rangeArr(numOfDays).map(n => firstDay.add(n, 'day').toDate());
 };
 
 const props = defineProps(basicYearTableProps);
-const emit = defineEmits(["changerange", "pick", "select"]);
+const emit = defineEmits(['changerange', 'pick', 'select']);
 
-const ns = useNamespace("year-table");
+const ns = useNamespace('year-table');
 
 const { t, lang } = useLocale();
 const tbodyRef = ref<HTMLElement>();
@@ -72,7 +74,7 @@ const lastRow = ref<number>();
 const lastColumn = ref<number>();
 const rows = computed(() => {
   const rows = tableRows.value;
-  const now = dayjs().locale(lang.value).startOf("year");
+  const now = dayjs().locale(lang.value).startOf('year');
 
   for (let i = 0; i < 3; i++) {
     const row = rows[i];
@@ -85,7 +87,7 @@ const rows = computed(() => {
         cell = {
           row: i,
           column: j,
-          type: "normal",
+          type: 'normal',
           inRange: false,
           start: false,
           end: false,
@@ -93,7 +95,7 @@ const rows = computed(() => {
           disabled: false,
         };
       }
-      cell.type = "normal";
+      cell.type = 'normal';
       const index = i * 4 + j + startYear.value;
       const calTime = dayjs().year(index);
 
@@ -106,28 +108,28 @@ const rows = computed(() => {
       cell.inRange =
         !!(
           props.minDate &&
-          calTime.isSameOrAfter(props.minDate, "year") &&
+          calTime.isSameOrAfter(props.minDate, 'year') &&
           calEndDate &&
-          calTime.isSameOrBefore(calEndDate, "year")
+          calTime.isSameOrBefore(calEndDate, 'year')
         ) ||
         !!(
           props.minDate &&
-          calTime.isSameOrBefore(props.minDate, "year") &&
+          calTime.isSameOrBefore(props.minDate, 'year') &&
           calEndDate &&
-          calTime.isSameOrAfter(calEndDate, "year")
+          calTime.isSameOrAfter(calEndDate, 'year')
         );
 
       if (props.minDate?.isSameOrAfter(calEndDate)) {
-        cell.start = !!(calEndDate && calTime.isSame(calEndDate, "year"));
-        cell.end = !!(props.minDate && calTime.isSame(props.minDate, "year"));
+        cell.start = !!(calEndDate && calTime.isSame(calEndDate, 'year'));
+        cell.end = !!(props.minDate && calTime.isSame(props.minDate, 'year'));
       } else {
-        cell.start = !!(props.minDate && calTime.isSame(props.minDate, "year"));
-        cell.end = !!(calEndDate && calTime.isSame(calEndDate, "year"));
+        cell.start = !!(props.minDate && calTime.isSame(props.minDate, 'year'));
+        cell.end = !!(calEndDate && calTime.isSame(calEndDate, 'year'));
       }
 
       const isToday = now.isSame(calTime);
       if (isToday) {
-        cell.type = "today";
+        cell.type = 'today';
       }
       cell.text = index;
       const cellDate = calTime.toDate();
@@ -154,17 +156,17 @@ const getCellKls = (cell: YearCell) => {
 
   kls.today = today.year() === year;
   kls.current =
-    castArray(props.parsedValue).findIndex((d) => d!.year() === year) >= 0;
+    castArray(props.parsedValue).findIndex(d => d!.year() === year) >= 0;
 
   if (cell.inRange) {
-    kls["in-range"] = true;
+    kls['in-range'] = true;
 
     if (cell.start) {
-      kls["start-date"] = true;
+      kls['start-date'] = true;
     }
 
     if (cell.end) {
-      kls["end-date"] = true;
+      kls['end-date'] = true;
     }
   }
   return kls;
@@ -172,54 +174,54 @@ const getCellKls = (cell: YearCell) => {
 
 const isSelectedCell = (cell: YearCell) => {
   const year = cell.text;
-  return castArray(props.date).findIndex((date) => date.year() === year) >= 0;
+  return castArray(props.date).findIndex(date => date.year() === year) >= 0;
 };
 
 const handleYearTableClick = (event: MouseEvent | KeyboardEvent) => {
   const target = (event.target as HTMLElement)?.closest(
-    "td"
+    'td',
   ) as HTMLTableCellElement;
-  if (!target || !target.textContent || hasClass(target, "disabled")) return;
+  if (!target || !target.textContent || hasClass(target, 'disabled')) return;
 
   const column = target.cellIndex;
   const row = (target.parentNode as HTMLTableRowElement).rowIndex;
   const selectedYear = row * 4 + column + startYear.value;
   const newDate = dayjs().year(selectedYear);
-  if (props.selectionMode === "range") {
+  if (props.selectionMode === 'range') {
     if (!props.rangeState.selecting) {
-      emit("pick", { minDate: newDate, maxDate: null });
-      emit("select", true);
+      emit('pick', { minDate: newDate, maxDate: null });
+      emit('select', true);
     } else {
       if (props.minDate && newDate >= props.minDate) {
-        emit("pick", { minDate: props.minDate, maxDate: newDate });
+        emit('pick', { minDate: props.minDate, maxDate: newDate });
       } else {
-        emit("pick", { minDate: newDate, maxDate: props.minDate });
+        emit('pick', { minDate: newDate, maxDate: props.minDate });
       }
-      emit("select", false);
+      emit('select', false);
     }
-  } else if (props.selectionMode === "years") {
-    if (event.type === "keydown") {
-      emit("pick", castArray(props.parsedValue), false);
+  } else if (props.selectionMode === 'years') {
+    if (event.type === 'keydown') {
+      emit('pick', castArray(props.parsedValue), false);
       return;
     }
     const vaildYear = getValidDateOfYear(
-      newDate.startOf("year"),
+      newDate.startOf('year'),
       lang.value,
-      props.disabledDate
+      props.disabledDate,
     );
-    const newValue = hasClass(target, "current")
-      ? castArray(props.parsedValue).filter((d) => d?.year() !== selectedYear)
+    const newValue = hasClass(target, 'current')
+      ? castArray(props.parsedValue).filter(d => d?.year() !== selectedYear)
       : castArray(props.parsedValue).concat([vaildYear]);
-    emit("pick", newValue);
+    emit('pick', newValue);
   } else {
-    emit("pick", selectedYear);
+    emit('pick', selectedYear);
   }
 };
 
 const handleMouseMove = (event: MouseEvent) => {
   if (!props.rangeState.selecting) return;
   const target = (event.target as HTMLElement)?.closest(
-    "td"
+    'td',
   ) as HTMLTableCellElement;
   if (!target) return;
 
@@ -234,11 +236,11 @@ const handleMouseMove = (event: MouseEvent) => {
   if (row !== lastRow.value || column !== lastColumn.value) {
     lastRow.value = row;
     lastColumn.value = column;
-    emit("changerange", {
+    emit('changerange', {
       selecting: true,
       endDate: dayjs()
         .year(startYear.value)
-        .add(row * 4 + column, "year"),
+        .add(row * 4 + column, 'year'),
     });
   }
 };
@@ -250,7 +252,7 @@ watch(
       await nextTick();
       currentCellRef.value?.focus();
     }
-  }
+  },
 );
 
 defineExpose({

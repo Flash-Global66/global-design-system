@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isArray, ensureArray } from '../../src/utils/array.util';
+import { isArray, ensureArray, castArray } from '../../src/utils/array.util';
 
 describe('isArray', () => {
   it('returns true for arrays', () => {
@@ -31,5 +31,28 @@ describe('ensureArray', () => {
 
   it('returns an empty array for null', () => {
     expect(ensureArray(null)).toEqual([]);
+  });
+});
+
+describe('castArray', () => {
+  it('wraps a scalar value in a single-element array', () => {
+    expect(castArray(1)).toEqual([1]);
+    expect(castArray('a')).toEqual(['a']);
+  });
+
+  it('returns array input unchanged', () => {
+    const input = [1, 2, 3];
+    expect(castArray(input)).toBe(input);
+  });
+
+  it('wraps 0 (a falsy value that is explicitly kept)', () => {
+    expect(castArray(0)).toEqual([0]);
+  });
+
+  it('returns an empty array for falsy values other than 0', () => {
+    expect(castArray(null)).toEqual([]);
+    expect(castArray(undefined)).toEqual([]);
+    expect(castArray('')).toEqual([]);
+    expect(castArray(false)).toEqual([]);
   });
 });
