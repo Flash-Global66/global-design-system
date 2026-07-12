@@ -55,3 +55,22 @@ export const composeEventHandlers = <E>(
   };
   return handleEvent;
 };
+
+/** Manejador de eventos de puntero envuelto por `whenMouse`. */
+type WhenMouseHandler = (e: PointerEvent) => unknown;
+
+/**
+ * Envuelve un manejador de `PointerEvent` para que solo se ejecute cuando el
+ * puntero es un mouse (`pointerType === 'mouse'`). Para punteros táctiles o de
+ * lápiz (`touch`/`pen`) el handler se ignora y retorna `undefined`.
+ *
+ * Copiado del algoritmo exacto de element-plus para mantener paridad de
+ * comportamiento con los consumidores migrados (ej: `dropdown`).
+ *
+ * @param handler - Handler a ejecutar únicamente para eventos de mouse.
+ * @returns Un manejador de `PointerEvent` con el filtrado aplicado.
+ */
+export const whenMouse = (handler: WhenMouseHandler): WhenMouseHandler => {
+  return (e: PointerEvent) =>
+    e.pointerType === 'mouse' ? handler(e) : undefined;
+};

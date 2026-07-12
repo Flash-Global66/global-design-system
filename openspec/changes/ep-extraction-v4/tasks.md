@@ -209,22 +209,19 @@ Publishes: `select`. Est. ~380 changed lines (watch budget). Requirements: `popp
 
 Publishes: `dropdown`. Est. ~400 changed lines (widest internal dependency surface in the slice per design §3/§6 — treat as the review-budget risk item). Requirements: `popper-overlay-migration` full set; `g-hooks-package` → `popper-overlay-composables-added`, `shared-hook-single-ownership` (owns `useLocale`, shared with WU-10 date-picker + WU-11 time-picker), `v4-hooks-unit-tested`.
 
-- [ ] T9.1 Confirm PR #6 (tooltip), PR #4 (scrollbar), and PR #7 (dialog) are merged before starting — `dropdown`'s fan-out touches focus-trap, roving-focus-group, collection, tooltip, scrollbar, icon-font, slot, popper (per design §3, most already clean or migrated by this point).
-- [ ] T9.2 Read EP's `whenMouse` from `node_modules/element-plus/es/components/dropdown/src/utils.mjs` (or wherever the 2.9.7 compiled path places it — confirm exact module). Cross-check sibling `../element-plus/packages/components/dropdown/src/utils.ts`.
-- [ ] T9.3 Write failing unit test for `whenMouse` (wraps a handler so it only fires for `PointerEvent`s where `pointerType === 'mouse'`; touch/pen pointer events are ignored) — new `common/g-hooks/tests/composables/whenMouse.spec.ts`.
-- [ ] T9.4 Implement `whenMouse` in `common/g-hooks/src/composables/whenMouse.ts` — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T9.5 Read EP's `useLocale` from `node_modules/element-plus/es/hooks/use-locale/index.mjs` (2.9.7). Cross-check sibling.
-- [ ] T9.6 Write failing unit test for `useLocale` (returns `{ lang, locale, t }`; `locale` reflects an ancestor-provided override when present; falls back to a default locale/translation table when no override exists; `t()` resolves a translation key against the resolved locale) — new `common/g-hooks/tests/composables/useLocale.spec.ts`.
-- [ ] T9.7 Implement `useLocale` in `common/g-hooks/src/composables/useLocale.ts` — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T9.8 Update `common/g-hooks/src/index.ts` barrel for `whenMouse`, `useLocale`.
-- [ ] T9.9 Migrate `components/dropdown/src/**`: re-point `composeRefs` from WU-7 (`@flash-global66/g-utils`); `composeEventHandlers`/`useId`/`addUnit`/`ensureArray`/`EVENT_CODE` → `@flash-global66/g-utils`/`g-hooks`; re-point remaining focus-trap/roving-focus-group/collection/tooltip/scrollbar/icon-font/slot/popper imports to their DS packages; wire `whenMouse`/`useLocale`. Zero public API change.
-- [ ] T9.10 Grep-verify zero `from ['"]element-plus` matches under `components/dropdown/src/**` and `index.ts`.
-- [ ] T9.11 Confirm `dropdown`'s `package.json` packaging convention across its wide dependency set.
-- [ ] T9.12 Remove `'components/dropdown/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
-- [ ] T9.13 `yarn build` succeeds for `dropdown`. Full `yarn test:run` green.
-- [ ] T9.14 Validate in `front-b2b` (real copy).
-- [ ] T9.15 **Line-budget checkpoint (high-probability trigger)**: given the widest fan-out in the slice, this WU is the most likely to exceed 400 lines. If so, split into sequential commits by concern (hook additions first, then package re-point wiring) within the same PR — do NOT bundle any part of this WU with `select`'s PR (design/proposal explicit constraint).
-- [ ] T9.16 Commit as one work unit or the split from T9.15 (`feat(dropdown): migrate off element-plus internals, add whenMouse/useLocale`), open PR #9 (depends on PR #6 + PR #4 + PR #7 merged; its own dedicated PR), Lerna-publish on merge.
+- [x] T9.1 Confirmed WU-6/WU-4/WU-7 merged (and WU-5 popper, WU-8 select) before starting; branch rebased on current `main`.
+- [x] T9.2 Read EP's `whenMouse` — actual 2.9.7 path is `node_modules/element-plus/es/utils/dom/event.mjs` (co-located with `composeEventHandlers`, NOT `components/dropdown/src/utils`). Cross-checked sibling `../element-plus/packages/utils/dom/event.ts`.
+- [x] T9.3/T9.4 **Brief drift (placement)**: `whenMouse` is a pure function (no Vue reactivity), so ported into `common/g-utils/src/utils/function.util.ts` beside `composeEventHandlers` (mirrors EP's own `dom/event.ts` co-location), NOT `g-hooks/composables`. Failing test then green in `common/g-utils/tests/utils/function.util.spec.ts` (3 whenMouse cases; EP `any`→`unknown` per no-`any` mandate). Also ported `Nullable` type into `g-utils/types/utils.type.ts` (dropdown is first g-utils consumer).
+- [x] T9.5/T9.6/T9.7 **Superseded by WU-8**: `useLocale` (+ `en` lang pack, `gLocaleContextKey`) was already ported to `g-hooks` in WU-8 (select was the real first consumer). No re-port — dropdown just consumes it.
+- [x] T9.8 Barrel: `whenMouse`/`Nullable` auto-exported via `g-utils`'s `export *`; `useLocale` already in `g-hooks` barrel (WU-8).
+- [x] T9.9 Migrated 6 files (`dropdown.ts`, `dropdown.vue`, `dropdown-item.vue`, `dropdown-item-impl.vue`, `dropdown-menu.vue`, `index.ts`): `buildProps`/`definePropType`/`EVENT_CODE`/`composeEventHandlers`/`composeRefs`/`whenMouse`/`addUnit`/`ensureArray`/`useNamespace`/`withInstall`/`withNoopInstall`/`Nullable`/`SFCWithInstall` → g-utils; `useId`/`useLocale` → g-hooks. Zero public API change **except** the approved `actionType.icon: string → IconString` tightening (aligns the exported type with the already-existing `dropdown-item` `icon: PropType<IconString>` contract; cross-package to g-chip, verified no g-chip regression).
+- [x] T9.10 Grep-verified zero `from 'element-plus'` under `components/dropdown/src/**` + `index.ts` (scss `@use "element-plus/theme-chalk/..."` correctly retained).
+- [x] T9.11 Adopted the **tooltip packaging convention**: all 10 directly-imported `@flash-global66/*` in `dependencies` with ranges aligned to current workspace versions; only `@popperjs/core`/`element-plus`/`vue` as peers. Fixed the recurring bug (previously missing g-hooks/g-utils, stale peer ranges).
+- [x] T9.12 Removed `'components/dropdown/**'` from `.eslintrc.cjs`; fixed the 2 lint errors it surfaced (dead `GIconFont` registration in `dropdown.vue`; `Function` type → callable signature in `actionType` index signature). `eslint --max-warnings 0` clean.
+- [x] T9.13 `vue-tsc` on dropdown + g-chip: identical error profile to `origin/main` baseline (only environmental TS7016 from unbuilt local `dist/`, which CI resolves via build-before-typecheck). Full `test:run` → 324/324 green.
+- [ ] T9.14 **DEFERRED**: b2b real-copy validation batched with the popper family (tooltip+select+dropdown) after all three publish, per the agreed plan.
+- [x] T9.15 Line-budget: WU came in via re-points (no re-implementation, since useLocale pre-existed); split into a feature commit + a small stories-icon-fix commit. Not bundled with select's PR.
+- [x] T9.16 Committed (`feat(dropdown): migrate off element-plus internals, add whenMouse`); PR #264-follow (WU-9) opened as its own dedicated PR; Lerna-publish on merge. Dual blind review: both judges APPROVE-WITH-NITS.
 
 ## WU-10 — `date-picker` (deep migration + in-place lint-debt fix; depends on WU-9, WU-8)
 

@@ -28,6 +28,13 @@ export type EmitFn<E extends EmitsOptions> = SetupContext<E>['emit'];
 export type Arrayable<T> = T | T[];
 
 /**
+ * Representa un valor que puede ser `T` o `null`.
+ *
+ * Copiado del tipo `Nullable<T>` de element-plus (`packages/utils/typescript`).
+ */
+export type Nullable<T> = T | null;
+
+/**
  * Elimina el modificador `readonly` de todas las propiedades de `T`.
  *
  * Copiado del tipo helper `Mutable<T>` de element-plus.
