@@ -1,4 +1,4 @@
-import { castArray } from 'lodash-unified';
+import { castArray as lodashCastArray } from 'lodash-unified';
 
 /**
  * Comprueba si un valor es un array nativo.
@@ -40,5 +40,29 @@ export const isArray = (val: unknown): val is unknown[] => Array.isArray(val);
  */
 export const ensureArray = <T>(val?: T | T[] | null): T[] => {
   if (val === undefined || val === null) return [];
-  return castArray(val);
+  return lodashCastArray(val);
+};
+
+/**
+ * Convierte un valor en array, tratando los valores "falsy" (excepto `0`) como
+ * un array vacío.
+ *
+ * A diferencia de `ensureArray` (que delega en `lodash`), este helper replica
+ * el `castArray` interno de element-plus: `null`/`undefined`/`''`/`false`
+ * retornan `[]`, mientras que `0` sí se envuelve en `[0]`. Copiado byte a byte
+ * del algoritmo de element-plus para mantener paridad con los consumidores
+ * migrados (ej: `date-picker`).
+ *
+ * @param arr - El valor a convertir en array.
+ * @returns Un array con `arr`, `arr` mismo si ya era array, o `[]` si es falsy (salvo `0`).
+ *
+ * @example
+ * castArray(1) // [1]
+ * castArray(0) // [0]
+ * castArray('') // []
+ * castArray(null) // []
+ */
+export const castArray = <T>(arr: T | T[]): T[] => {
+  if (!arr && arr !== 0) return [];
+  return isArray(arr) ? (arr as T[]) : [arr];
 };

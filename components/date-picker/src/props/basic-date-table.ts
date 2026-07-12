@@ -1,8 +1,8 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
-import { datePickerSharedProps, selectionModeWithDefault } from "./shared";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { datePickerSharedProps, selectionModeWithDefault } from './shared';
 
-import type { ExtractPropTypes } from "vue";
-import type { Dayjs } from "dayjs";
+import type { ExtractPropTypes } from 'vue';
+import type { Dayjs } from 'dayjs';
 
 export const basicDateTableProps = buildProps({
   ...datePickerSharedProps,
@@ -10,10 +10,10 @@ export const basicDateTableProps = buildProps({
     type: definePropType<(date: Date) => string>(Function),
   },
   showWeekNumber: Boolean,
-  selectionMode: selectionModeWithDefault("date"),
+  selectionMode: selectionModeWithDefault('date'),
 } as const);
 
-export const basicDateTableEmits = ["changerange", "pick", "select"];
+export const basicDateTableEmits = ['changerange', 'pick', 'select'];
 
 export type BasicDateTableProps = ExtractPropTypes<typeof basicDateTableProps>;
 export type BasicDateTableEmits = typeof basicDateTableEmits;

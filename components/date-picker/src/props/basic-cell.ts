@@ -1,7 +1,7 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
 
-import type { ExtractPropTypes } from "vue";
-import type { DateCell } from "../date-picker.type";
+import type { ExtractPropTypes } from 'vue';
+import type { DateCell } from '../date-picker.type';
 
 export const basicCellProps = buildProps({
   cell: {

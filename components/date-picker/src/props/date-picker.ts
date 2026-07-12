@@ -1,8 +1,8 @@
-import { timePickerDefaultProps } from "@flash-global66/g-time-picker";
-import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
+import { timePickerDefaultProps } from '@flash-global66/g-time-picker';
+import { buildProps, definePropType } from '@flash-global66/g-utils';
 
-import type { ExtractPropTypes } from "vue";
-import type { IDatePickerType } from "../date-picker.type";
+import type { ExtractPropTypes } from 'vue';
+import type { IDatePickerType } from '../date-picker.type';
 
 export const datePickerProps = buildProps({
   ...timePickerDefaultProps,
@@ -11,7 +11,7 @@ export const datePickerProps = buildProps({
    */
   type: {
     type: definePropType<IDatePickerType>(String),
-    default: "date",
+    default: 'date',
   },
 } as const);
 

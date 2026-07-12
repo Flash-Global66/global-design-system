@@ -1,28 +1,28 @@
 /** @jsx h */
-import { defineComponent, provide, reactive, ref, toRef, h } from "vue";
-import dayjs from "dayjs";
-import "dayjs/locale/es";
-import customParseFormat from "dayjs/plugin/customParseFormat.js";
-import advancedFormat from "dayjs/plugin/advancedFormat.js";
-import localeData from "dayjs/plugin/localeData.js";
-import weekOfYear from "dayjs/plugin/weekOfYear.js";
-import weekYear from "dayjs/plugin/weekYear.js";
-import dayOfYear from "dayjs/plugin/dayOfYear.js";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
-import { useNamespace } from "element-plus";
+import { defineComponent, provide, reactive, ref, toRef, h } from 'vue';
+import dayjs from 'dayjs';
+import 'dayjs/locale/es';
+import customParseFormat from 'dayjs/plugin/customParseFormat.js';
+import advancedFormat from 'dayjs/plugin/advancedFormat.js';
+import localeData from 'dayjs/plugin/localeData.js';
+import weekOfYear from 'dayjs/plugin/weekOfYear.js';
+import weekYear from 'dayjs/plugin/weekYear.js';
+import dayOfYear from 'dayjs/plugin/dayOfYear.js';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter.js';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore.js';
+import { useNamespace } from '@flash-global66/g-utils';
 import {
   CommonPicker,
   DEFAULT_FORMATS_DATE,
   DEFAULT_FORMATS_DATEPICKER,
   type DateModelType,
   type SingleOrRange,
-} from "@flash-global66/g-time-picker";
-import { ROOT_PICKER_INJECTION_KEY } from "./constants";
+} from '@flash-global66/g-time-picker';
+import { ROOT_PICKER_INJECTION_KEY } from './constants';
 
-import { datePickerProps } from "./props/date-picker";
-import { getPanel } from "./panel-utils";
-import type { DatePickerExpose } from "./instance";
+import { datePickerProps } from './props/date-picker';
+import { getPanel } from './panel-utils';
+import type { DatePickerExpose } from './instance';
 
 dayjs.extend(localeData);
 dayjs.extend(advancedFormat);
@@ -34,14 +34,14 @@ dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
 export default defineComponent({
-  name: "GDatePicker",
+  name: 'GDatePicker',
   install: null,
   props: datePickerProps,
-  emits: ["update:modelValue"],
+  emits: ['update:modelValue'],
   setup(props, { expose, emit, slots }) {
-    const ns = useNamespace("picker-panel");
+    const ns = useNamespace('picker-panel');
 
-    provide("ElPopperOptions", reactive(toRef(props, "popperOptions")));
+    provide('ElPopperOptions', reactive(toRef(props, 'popperOptions')));
     provide(ROOT_PICKER_INJECTION_KEY, {
       slots,
       pickerNs: ns,
@@ -66,7 +66,7 @@ export default defineComponent({
     expose(refProps);
 
     const onModelValueUpdated = (val: SingleOrRange<DateModelType> | null) => {
-      emit("update:modelValue", val);
+      emit('update:modelValue', val);
     };
 
     return () => {
@@ -90,16 +90,16 @@ export default defineComponent({
             default: (scopedProps: /**FIXME: remove any type */ any) => (
               <Component {...scopedProps}>
                 {{
-                  "prev-month": slots["prev-month"],
-                  "next-month": slots["next-month"],
-                  "prev-year": slots["prev-year"],
-                  "next-year": slots["next-year"],
+                  'prev-month': slots['prev-month'],
+                  'next-month': slots['next-month'],
+                  'prev-year': slots['prev-year'],
+                  'next-year': slots['next-year'],
                 }}
               </Component>
             ),
-            "range-separator": slots["range-separator"],
+            'range-separator': slots['range-separator'],
           }}
-        </CommonPicker>
+        </CommonPicker>,
       );
     };
   },

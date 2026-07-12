@@ -32,8 +32,8 @@
                 :class="drpNs.e('editor')"
                 :model-value="minVisibleDate"
                 :validate-event="false"
-                @input="(val) => handleDateInput(val, 'min')"
-                @change="(val) => handleDateChange(val, 'min')"
+                @input="val => handleDateInput(val, 'min')"
+                @change="val => handleDateChange(val, 'min')"
               />
             </span>
             <span
@@ -47,8 +47,8 @@
                 :model-value="minVisibleTime"
                 :validate-event="false"
                 @focus="minTimePickerVisible = true"
-                @input="(val) => handleTimeInput(val, 'min')"
-                @change="(val) => handleTimeChange(val, 'min')"
+                @input="val => handleTimeInput(val, 'min')"
+                @change="val => handleTimeChange(val, 'min')"
               />
               <time-pick-panel
                 :visible="minTimePickerVisible"
@@ -71,8 +71,8 @@
                 :model-value="maxVisibleDate"
                 :readonly="!minDate"
                 :validate-event="false"
-                @input="(val) => handleDateInput(val, 'max')"
-                @change="(val) => handleDateChange(val, 'max')"
+                @input="val => handleDateInput(val, 'max')"
+                @change="val => handleDateChange(val, 'max')"
               />
             </span>
             <span
@@ -87,8 +87,8 @@
                 :readonly="!minDate"
                 :validate-event="false"
                 @focus="minDate && (maxTimePickerVisible = true)"
-                @input="(val) => handleTimeInput(val, 'max')"
-                @change="(val) => handleTimeChange(val, 'max')"
+                @input="val => handleTimeInput(val, 'max')"
+                @change="val => handleTimeChange(val, 'max')"
               />
               <time-pick-panel
                 datetime-role="end"
@@ -224,7 +224,7 @@
         :class="ppNs.e('link-btn')"
         @click="handleClear"
       >
-        {{ t("el.datepicker.clear") }}
+        {{ t('el.datepicker.clear') }}
       </g-button>
       <g-button
         plain
@@ -233,36 +233,38 @@
         :disabled="btnDisabled"
         @click="handleRangeConfirm(false)"
       >
-        {{ t("el.datepicker.confirm") }}
+        {{ t('el.datepicker.confirm') }}
       </g-button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, ref, toRef, unref, watch } from "vue";
-import dayjs from "dayjs";
-import { ClickOutside as vClickoutside } from "element-plus";
-import { useLocale } from "element-plus";
-import { isArray } from "element-plus/es/utils/index.mjs";
-import { GButton } from "@flash-global66/g-button";
-import { GInput } from "@flash-global66/g-input";
+import { computed, inject, ref, toRef, unref, watch } from 'vue';
+import dayjs from 'dayjs';
+import { useLocale } from '@flash-global66/g-hooks';
+import {
+  ClickOutside as vClickoutside,
+  isArray,
+} from '@flash-global66/g-utils';
+import { GButton } from '@flash-global66/g-button';
+import { GInput } from '@flash-global66/g-input';
 import {
   TimePickPanel,
   extractDateFormat,
   extractTimeFormat,
-} from "@flash-global66/g-time-picker";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { panelDateRangeProps } from "../props/panel-date-range";
-import { useRangePicker } from "../composables/use-range-picker";
-import { getDefaultValue, isValidRange } from "../utils";
-import DateTable from "./basic-date-table.vue";
+} from '@flash-global66/g-time-picker';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { panelDateRangeProps } from '../props/panel-date-range';
+import { useRangePicker } from '../composables/use-range-picker';
+import { getDefaultValue, isValidRange } from '../utils';
+import DateTable from './basic-date-table.vue';
 
-import type { Dayjs } from "dayjs";
+import type { Dayjs } from 'dayjs';
 
-import es from "../lang/es";
+import es from '../lang/es';
 
-type ChangeType = "min" | "max";
+type ChangeType = 'min' | 'max';
 type UserInput = {
   min: string | null;
   max: string | null;
@@ -270,20 +272,20 @@ type UserInput = {
 
 const props = defineProps(panelDateRangeProps);
 const emit = defineEmits([
-  "pick",
-  "set-picker-option",
-  "calendar-change",
-  "panel-change",
+  'pick',
+  'set-picker-option',
+  'calendar-change',
+  'panel-change',
 ]);
 
-const unit = "month";
+const unit = 'month';
 // FIXME: fix the type for ep picker
-const pickerBase = inject("EP_PICKER_BASE") as any;
+const pickerBase = inject('EP_PICKER_BASE') as any;
 const { disabledDate, cellClassName, defaultTime, clearable } =
   pickerBase.props;
-const format = toRef(pickerBase.props, "format");
-const shortcuts = toRef(pickerBase.props, "shortcuts");
-const defaultValue = toRef(pickerBase.props, "defaultValue");
+const format = toRef(pickerBase.props, 'format');
+const shortcuts = toRef(pickerBase.props, 'shortcuts');
+const defaultValue = toRef(pickerBase.props, 'defaultValue');
 const { lang } = useLocale(ref(es));
 const leftDate = ref<Dayjs>(dayjs().locale(lang.value));
 const rightDate = ref<Dayjs>(dayjs().locale(lang.value).add(1, unit));
@@ -311,12 +313,12 @@ const {
 
 watch(
   () => props.visible,
-  (visible) => {
+  visible => {
     if (!visible && rangeState.value.selecting) {
       onReset(props.parsedValue);
       onSelect(false);
     }
-  }
+  },
 );
 
 const dateUserInput = ref<UserInput>({
@@ -330,14 +332,14 @@ const timeUserInput = ref<UserInput>({
 });
 
 const leftLabel = computed(() => {
-  return `${leftDate.value.year()} ${t("el.datepicker.year")} ${t(
-    `el.datepicker.month${leftDate.value.month() + 1}`
+  return `${leftDate.value.year()} ${t('el.datepicker.year')} ${t(
+    `el.datepicker.month${leftDate.value.month() + 1}`,
   )}`;
 });
 
 const rightLabel = computed(() => {
-  return `${rightDate.value.year()} ${t("el.datepicker.year")} ${t(
-    `el.datepicker.month${rightDate.value.month() + 1}`
+  return `${rightDate.value.year()} ${t('el.datepicker.year')} ${t(
+    `el.datepicker.month${rightDate.value.month() + 1}`,
   )}`;
 });
 
@@ -362,27 +364,27 @@ const hasShortcuts = computed(() => !!shortcuts.value.length);
 const minVisibleDate = computed(() => {
   if (dateUserInput.value.min !== null) return dateUserInput.value.min;
   if (minDate.value) return minDate.value.format(dateFormat.value);
-  return "";
+  return '';
 });
 
 const maxVisibleDate = computed(() => {
   if (dateUserInput.value.max !== null) return dateUserInput.value.max;
   if (maxDate.value || minDate.value)
     return (maxDate.value || minDate.value)!.format(dateFormat.value);
-  return "";
+  return '';
 });
 
 const minVisibleTime = computed(() => {
   if (timeUserInput.value.min !== null) return timeUserInput.value.min;
   if (minDate.value) return minDate.value.format(timeFormat.value);
-  return "";
+  return '';
 });
 
 const maxVisibleTime = computed(() => {
   if (timeUserInput.value.max !== null) return timeUserInput.value.max;
   if (maxDate.value || minDate.value)
     return (maxDate.value || minDate.value)!.format(timeFormat.value);
-  return "";
+  return '';
 });
 
 const timeFormat = computed(() => {
@@ -402,67 +404,49 @@ const isValidValue = (date: [Dayjs, Dayjs]) => {
   );
 };
 
-const leftPrevYear = () => {
-  leftDate.value = leftDate.value.subtract(1, "year");
-  if (!props.unlinkPanels) {
-    rightDate.value = leftDate.value.add(1, "month");
-  }
-  handlePanelChange("year");
-};
-
 const leftPrevMonth = () => {
-  leftDate.value = leftDate.value.subtract(1, "month");
+  leftDate.value = leftDate.value.subtract(1, 'month');
   if (!props.unlinkPanels) {
-    rightDate.value = leftDate.value.add(1, "month");
+    rightDate.value = leftDate.value.add(1, 'month');
   }
-  handlePanelChange("month");
-};
-
-const rightNextYear = () => {
-  if (!props.unlinkPanels) {
-    leftDate.value = leftDate.value.add(1, "year");
-    rightDate.value = leftDate.value.add(1, "month");
-  } else {
-    rightDate.value = rightDate.value.add(1, "year");
-  }
-  handlePanelChange("year");
+  handlePanelChange('month');
 };
 
 const rightNextMonth = () => {
   if (!props.unlinkPanels) {
-    leftDate.value = leftDate.value.add(1, "month");
-    rightDate.value = leftDate.value.add(1, "month");
+    leftDate.value = leftDate.value.add(1, 'month');
+    rightDate.value = leftDate.value.add(1, 'month');
   } else {
-    rightDate.value = rightDate.value.add(1, "month");
+    rightDate.value = rightDate.value.add(1, 'month');
   }
-  handlePanelChange("month");
+  handlePanelChange('month');
 };
 
 const leftNextYear = () => {
-  leftDate.value = leftDate.value.add(1, "year");
-  handlePanelChange("year");
+  leftDate.value = leftDate.value.add(1, 'year');
+  handlePanelChange('year');
 };
 
 const leftNextMonth = () => {
-  leftDate.value = leftDate.value.add(1, "month");
-  handlePanelChange("month");
+  leftDate.value = leftDate.value.add(1, 'month');
+  handlePanelChange('month');
 };
 
 const rightPrevYear = () => {
-  rightDate.value = rightDate.value.subtract(1, "year");
-  handlePanelChange("year");
+  rightDate.value = rightDate.value.subtract(1, 'year');
+  handlePanelChange('year');
 };
 
 const rightPrevMonth = () => {
-  rightDate.value = rightDate.value.subtract(1, "month");
-  handlePanelChange("month");
+  rightDate.value = rightDate.value.subtract(1, 'month');
+  handlePanelChange('month');
 };
 
-const handlePanelChange = (mode: "month" | "year") => {
+const handlePanelChange = (mode: 'month' | 'year') => {
   emit(
-    "panel-change",
+    'panel-change',
     [leftDate.value.toDate(), rightDate.value.toDate()],
-    mode
+    mode,
   );
 };
 
@@ -496,14 +480,14 @@ const btnDisabled = computed(() => {
 });
 
 const showTime = computed(
-  () => props.type === "datetime" || props.type === "datetimerange"
+  () => props.type === 'datetime' || props.type === 'datetimerange',
 );
 
 const formatEmit = (emitDayjs: Dayjs | null, index?: number) => {
   if (!emitDayjs) return;
   if (defaultTime) {
     const defaultTimeD = dayjs(
-      defaultTime[index as number] || defaultTime
+      defaultTime[index as number] || defaultTime,
     ).locale(lang.value);
     return defaultTimeD
       .year(emitDayjs.year())
@@ -518,7 +502,7 @@ const handleRangePick = (
     minDate: Dayjs;
     maxDate: Dayjs | null;
   },
-  close = true
+  close = true,
 ) => {
   const min_ = val.minDate;
   const max_ = val.maxDate;
@@ -528,17 +512,17 @@ const handleRangePick = (
   if (maxDate.value === maxDate_ && minDate.value === minDate_) {
     return;
   }
-  emit("calendar-change", [min_.toDate(), max_ && max_.toDate()]);
+  emit('calendar-change', [min_.toDate(), max_ && max_.toDate()]);
   maxDate.value = maxDate_;
   minDate.value = minDate_;
 
   if (!maxDate_) {
-    emit("set-picker-option", [
-      "intermediateValue",
-      [minDate_ ? minDate_.format(format.value) : "", ""],
+    emit('set-picker-option', [
+      'intermediateValue',
+      [minDate_ ? minDate_.format(format.value) : '', ''],
     ]);
   } else {
-    emit("set-picker-option", ["intermediateValue", null]);
+    emit('set-picker-option', ['intermediateValue', null]);
   }
 
   if (!close || showTime.value) return;
@@ -563,7 +547,7 @@ const handleDateInput = (value: string | null, type: ChangeType) => {
     if (disabledDate && disabledDate(parsedValueD.toDate())) {
       return;
     }
-    if (type === "min") {
+    if (type === 'min') {
       leftDate.value = parsedValueD;
       minDate.value = (minDate.value || leftDate.value)
         .year(parsedValueD.year())
@@ -573,8 +557,8 @@ const handleDateInput = (value: string | null, type: ChangeType) => {
         !props.unlinkPanels &&
         (!maxDate.value || maxDate.value.isBefore(minDate.value))
       ) {
-        rightDate.value = parsedValueD.add(1, "month");
-        maxDate.value = minDate.value.add(1, "month");
+        rightDate.value = parsedValueD.add(1, 'month');
+        maxDate.value = minDate.value.add(1, 'month');
       }
     } else {
       rightDate.value = parsedValueD;
@@ -586,8 +570,8 @@ const handleDateInput = (value: string | null, type: ChangeType) => {
         !props.unlinkPanels &&
         (!minDate.value || minDate.value.isAfter(maxDate.value))
       ) {
-        leftDate.value = parsedValueD.subtract(1, "month");
-        minDate.value = maxDate.value.subtract(1, "month");
+        leftDate.value = parsedValueD.subtract(1, 'month');
+        minDate.value = maxDate.value.subtract(1, 'month');
       }
     }
   }
@@ -602,7 +586,7 @@ const handleTimeInput = (value: string | null, type: ChangeType) => {
   const parsedValueD = dayjs(value, timeFormat.value).locale(lang.value);
 
   if (parsedValueD.isValid()) {
-    if (type === "min") {
+    if (type === 'min') {
       minTimePickerVisible.value = true;
       minDate.value = (minDate.value || leftDate.value)
         .hour(parsedValueD.hour())
@@ -621,7 +605,7 @@ const handleTimeInput = (value: string | null, type: ChangeType) => {
 
 const handleTimeChange = (value: string | null, type: ChangeType) => {
   timeUserInput.value[type] = null;
-  if (type === "min") {
+  if (type === 'min') {
     leftDate.value = minDate.value!;
     minTimePickerVisible.value = false;
     if (!maxDate.value || maxDate.value.isBefore(minDate.value)) {
@@ -659,7 +643,7 @@ const handleMinTimePick = (value: Dayjs, visible: boolean, first: boolean) => {
 const handleMaxTimePick = (
   value: Dayjs | null,
   visible: boolean,
-  first: boolean
+  first: boolean,
 ) => {
   if (timeUserInput.value.max) return;
   if (value) {
@@ -682,30 +666,30 @@ const handleMaxTimePick = (
 const handleClear = () => {
   leftDate.value = getDefaultValue(unref(defaultValue), {
     lang: unref(lang),
-    unit: "month",
+    unit: 'month',
     unlinkPanels: props.unlinkPanels,
   })[0];
-  rightDate.value = leftDate.value.add(1, "month");
+  rightDate.value = leftDate.value.add(1, 'month');
   maxDate.value = undefined;
   minDate.value = undefined;
-  emit("pick", null);
+  emit('pick', null);
 };
 
 const formatToString = (value: Dayjs | Dayjs[]) => {
   return isArray(value)
-    ? value.map((_) => _.format(format.value))
+    ? value.map(_ => _.format(format.value))
     : value.format(format.value);
 };
 
 const parseUserInput = (value: Dayjs | Dayjs[]) => {
   return isArray(value)
-    ? value.map((_) => dayjs(_, format.value).locale(lang.value))
+    ? value.map(_ => dayjs(_, format.value).locale(lang.value))
     : dayjs(value, format.value).locale(lang.value);
 };
 
 function onParsedValueChanged(
   minDate: Dayjs | undefined,
-  maxDate: Dayjs | undefined
+  maxDate: Dayjs | undefined,
 ) {
   if (props.unlinkPanels && maxDate) {
     const minDateYear = minDate?.year() || 0;
@@ -727,8 +711,8 @@ function onParsedValueChanged(
   }
 }
 
-emit("set-picker-option", ["isValidValue", isValidValue]);
-emit("set-picker-option", ["parseUserInput", parseUserInput]);
-emit("set-picker-option", ["formatToString", formatToString]);
-emit("set-picker-option", ["handleClear", handleClear]);
+emit('set-picker-option', ['isValidValue', isValidValue]);
+emit('set-picker-option', ['parseUserInput', parseUserInput]);
+emit('set-picker-option', ['formatToString', formatToString]);
+emit('set-picker-option', ['handleClear', handleClear]);
 </script>

@@ -1,9 +1,9 @@
 import type { InjectionKey, SetupContext } from 'vue';
-import type { UseNamespaceReturn } from 'element-plus';
+import type { NamespaceHelpers } from '@flash-global66/g-utils';
 
 interface DatePickerContext {
   slots: SetupContext['slots'];
-  pickerNs: UseNamespaceReturn;
+  pickerNs: NamespaceHelpers;
 }
 
 export const ROOT_PICKER_INJECTION_KEY: InjectionKey<DatePickerContext> =

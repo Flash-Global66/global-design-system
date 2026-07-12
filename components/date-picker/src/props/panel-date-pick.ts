@@ -1,8 +1,8 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
-import { panelSharedProps } from "./shared";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { panelSharedProps } from './shared';
 
-import type { ExtractPropTypes } from "vue";
-import type { Dayjs } from "dayjs";
+import type { ExtractPropTypes } from 'vue';
+import type { Dayjs } from 'dayjs';
 
 export const panelDatePickProps = buildProps({
   ...panelSharedProps,
@@ -14,7 +14,7 @@ export const panelDatePickProps = buildProps({
   },
   format: {
     type: String,
-    default: "",
+    default: '',
   },
 } as const);
 
