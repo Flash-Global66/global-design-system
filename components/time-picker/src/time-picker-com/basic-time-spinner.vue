@@ -24,11 +24,11 @@
           @click="handleClick(item, { value: key, disabled })"
         >
           <template v-if="item === 'hours'">
-            {{ ("0" + (amPmMode ? key % 12 || 12 : key)).slice(-2)
+            {{ ('0' + (amPmMode ? key % 12 || 12 : key)).slice(-2)
             }}{{ getAmPmFlag(key) }}
           </template>
           <template v-else>
-            {{ ("0" + key).slice(-2) }}
+            {{ ('0' + key).slice(-2) }}
           </template>
         </li>
       </g-scrollbar>
@@ -54,11 +54,11 @@
           >
             <template v-if="isNumber(time)">
               <template v-if="item === 'hours'">
-                {{ ("0" + (amPmMode ? time % 12 || 12 : time)).slice(-2)
+                {{ ('0' + (amPmMode ? time % 12 || 12 : time)).slice(-2)
                 }}{{ getAmPmFlag(time) }}
               </template>
               <template v-else>
-                {{ ("0" + time).slice(-2) }}
+                {{ ('0' + time).slice(-2) }}
               </template>
             </template>
           </li>
@@ -68,34 +68,37 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { computed, inject, nextTick, onMounted, ref, unref, watch } from "vue";
-import { debounce } from "lodash-unified";
-import { vRepeatClick } from "element-plus";
-import GScrollbar from "@flash-global66/g-scrollbar";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { useNamespace } from "element-plus";
-import { getStyle, isNumber } from "element-plus/es/utils/index.mjs";
-import { timeUnits } from "../constants";
-import { buildTimeList } from "../utils";
-import { basicTimeSpinnerProps } from "../props/basic-time-spinner";
-import { getTimeLists } from "../composables/use-time-picker";
+import { computed, inject, nextTick, onMounted, ref, unref, watch } from 'vue';
+import { debounce } from 'lodash-unified';
+import GScrollbar from '@flash-global66/g-scrollbar';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import {
+  vRepeatClick,
+  useNamespace,
+  getStyle,
+  isNumber,
+} from '@flash-global66/g-utils';
+import { timeUnits } from '../constants';
+import { buildTimeList } from '../utils';
+import { basicTimeSpinnerProps } from '../props/basic-time-spinner';
+import { getTimeLists } from '../composables/use-time-picker';
 
-import type { Ref } from "vue";
-import type { ScrollbarInstance } from "@flash-global66/g-scrollbar";
-import type { TimeUnit } from "../constants";
-import type { TimeList } from "../utils";
+import type { Ref } from 'vue';
+import type { ScrollbarInstance } from '@flash-global66/g-scrollbar';
+import type { TimeUnit } from '../constants';
+import type { TimeList } from '../utils';
 
 const props = defineProps(basicTimeSpinnerProps);
-const pickerBase = inject("EP_PICKER_BASE") as any;
+const pickerBase = inject('EP_PICKER_BASE') as any;
 const { isRange } = pickerBase.props;
-const emit = defineEmits(["change", "select-range", "set-option"]);
+const emit = defineEmits(['change', 'select-range', 'set-option']);
 
-const ns = useNamespace("time");
+const ns = useNamespace('time');
 
 const { getHoursList, getMinutesList, getSecondsList } = getTimeLists(
   props.disabledHours,
   props.disabledMinutes,
-  props.disabledSeconds
+  props.disabledSeconds,
 );
 
 // data
@@ -145,17 +148,17 @@ const arrowControlTimeList = computed<Record<TimeUnit, TimeList>>(() => {
   };
 });
 
-const debouncedResetScroll = debounce((type) => {
+const debouncedResetScroll = debounce(type => {
   isScrolling = false;
   adjustCurrentSpinner(type);
 }, 200);
 
 const getAmPmFlag = (hour: number) => {
   const shouldShowAmPm = !!props.amPmMode;
-  if (!shouldShowAmPm) return "";
-  const isCapital = props.amPmMode === "A";
+  if (!shouldShowAmPm) return '';
+  const isCapital = props.amPmMode === 'A';
   // todo locale
-  let content = hour < 12 ? " am" : " pm";
+  let content = hour < 12 ? ' am' : ' pm';
   if (isCapital) content = content.toUpperCase();
   return content;
 };
@@ -164,19 +167,19 @@ const emitSelectRange = (type: TimeUnit) => {
   let range;
 
   switch (type) {
-    case "hours":
+    case 'hours':
       range = [0, 2];
       break;
-    case "minutes":
+    case 'minutes':
       range = [3, 5];
       break;
-    case "seconds":
+    case 'seconds':
       range = [6, 8];
       break;
   }
   const [left, right] = range;
 
-  emit("select-range", left, right);
+  emit('select-range', left, right);
   currentScrollbar.value = type;
 };
 
@@ -185,9 +188,9 @@ const adjustCurrentSpinner = (type: TimeUnit) => {
 };
 
 const adjustSpinners = () => {
-  adjustCurrentSpinner("hours");
-  adjustCurrentSpinner("minutes");
-  adjustCurrentSpinner("seconds");
+  adjustCurrentSpinner('hours');
+  adjustCurrentSpinner('minutes');
+  adjustCurrentSpinner('seconds');
 };
 
 const getScrollbarElement = (el: HTMLElement) =>
@@ -199,16 +202,16 @@ const adjustSpinner = (type: TimeUnit, value: number) => {
   if (scrollbar && scrollbar.$el) {
     getScrollbarElement(scrollbar.$el).scrollTop = Math.max(
       0,
-      value * typeItemHeight(type)
+      value * typeItemHeight(type),
     );
   }
 };
 
 const typeItemHeight = (type: TimeUnit): number => {
   const scrollbar = unref(listRefsMap[type]);
-  const listItem = scrollbar?.$el.querySelector("li");
+  const listItem = scrollbar?.$el.querySelector('li');
   if (listItem) {
-    return Number.parseFloat(getStyle(listItem, "height")) || 0;
+    return Number.parseFloat(getStyle(listItem, 'height')) || 0;
   }
   return 0;
 };
@@ -223,12 +226,12 @@ const onDecrement = () => {
 
 const scrollDown = (step: number) => {
   if (!currentScrollbar.value) {
-    emitSelectRange("hours");
+    emitSelectRange('hours');
   }
 
   const label = currentScrollbar.value!;
   const now = unref(timePartials)[label];
-  const total = currentScrollbar.value === "hours" ? 24 : 60;
+  const total = currentScrollbar.value === 'hours' ? 24 : 60;
   const next = findNextUnDisabled(label, now, step, total);
 
   modifyDateField(label, next);
@@ -240,7 +243,7 @@ const findNextUnDisabled = (
   type: TimeUnit,
   now: number,
   step: number,
-  total: number
+  total: number,
 ) => {
   let next = (now + step + total) % total;
   const list = unref(timeList)[type];
@@ -259,22 +262,22 @@ const modifyDateField = (type: TimeUnit, value: number) => {
 
   let changeTo;
   switch (type) {
-    case "hours":
+    case 'hours':
       changeTo = props.spinnerDate.hour(value).minute(minutes).second(seconds);
       break;
-    case "minutes":
+    case 'minutes':
       changeTo = props.spinnerDate.hour(hours).minute(value).second(seconds);
       break;
-    case "seconds":
+    case 'seconds':
       changeTo = props.spinnerDate.hour(hours).minute(minutes).second(value);
       break;
   }
-  emit("change", changeTo);
+  emit('change', changeTo);
 };
 
 const handleClick = (
   type: TimeUnit,
-  { value, disabled }: { value: number; disabled: boolean }
+  { value, disabled }: { value: number; disabled: boolean },
 ) => {
   if (!disabled) {
     modifyDateField(type, value);
@@ -294,9 +297,9 @@ const handleScroll = (type: TimeUnit) => {
       (getScrollbarElement(scrollbar.$el).scrollTop -
         (scrollBarHeight(type) * 0.5 - 10) / typeItemHeight(type) +
         3) /
-        typeItemHeight(type)
+        typeItemHeight(type),
     ),
-    type === "hours" ? 23 : 59
+    type === 'hours' ? 23 : 59,
   );
   modifyDateField(type, value);
 };
@@ -316,9 +319,9 @@ const bindScrollEvent = () => {
       };
     }
   };
-  bindFunction("hours");
-  bindFunction("minutes");
-  bindFunction("seconds");
+  bindFunction('hours');
+  bindFunction('minutes');
+  bindFunction('seconds');
 };
 
 onMounted(() => {
@@ -326,7 +329,7 @@ onMounted(() => {
     !props.arrowControl && bindScrollEvent();
     adjustSpinners();
     // set selection on the first hour part
-    if (props.role === "start") emitSelectRange("hours");
+    if (props.role === 'start') emitSelectRange('hours');
   });
 });
 
@@ -334,14 +337,14 @@ const setRef = (scrollbar: ScrollbarInstance | null, type: TimeUnit) => {
   listRefsMap[type].value = scrollbar ?? undefined;
 };
 
-emit("set-option", [`${props.role}_scrollDown`, scrollDown]);
-emit("set-option", [`${props.role}_emitSelectRange`, emitSelectRange]);
+emit('set-option', [`${props.role}_scrollDown`, scrollDown]);
+emit('set-option', [`${props.role}_emitSelectRange`, emitSelectRange]);
 
 watch(
   () => props.spinnerDate,
   () => {
     if (isScrolling) return;
     adjustSpinners();
-  }
+  },
 );
 </script>

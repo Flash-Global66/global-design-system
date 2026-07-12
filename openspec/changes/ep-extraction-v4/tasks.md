@@ -245,21 +245,20 @@ Publishes: `date-picker`. Est. ~250 changed lines (includes the lint-debt cleanu
 
 Publishes: `time-picker`. Est. ~220 changed lines. Requirements: `popper-overlay-migration` full set; `g-utils-extended` → `popper-overlay-utils-added`, `v4-utils-unit-tested`.
 
-- [ ] T11.1 Confirm PR #6 (tooltip), PR #9 (dropdown), and PR #8 (select) are merged before starting.
-- [ ] T11.2 Read EP's `getStyle` from `node_modules/element-plus/es/utils/dom/style.mjs` (2.9.7). Cross-check sibling.
-- [ ] T11.3 Write failing unit test for `getStyle` (reads a computed style property from an element via `getComputedStyle`, with the same fallback/normalization EP applies for cross-browser `float`/vendor-prefixed properties) — new `common/g-utils/tests/utils/dom.util.spec.ts` (extend WU-1's file if already created).
-- [ ] T11.4 Implement `getStyle` in `common/g-utils/src/utils/dom.util.ts` — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T11.5 Read EP's `vRepeatClick` directive from `node_modules/element-plus/es/directives/repeat-click/index.mjs` (2.9.7). Cross-check sibling. Note per design §4 this directive is also needed by `input-number` in the deferred v5 slice — build it EP-faithful so v5 can re-point cleanly.
-- [ ] T11.6 Write failing unit test for `vRepeatClick` (mousedown starts a repeating interval invoking the bound handler after an initial delay; mouseup/mouseleave clears the interval; single click without hold still fires once) — new `common/g-utils/tests/directives/repeatClick.directive.spec.ts`.
-- [ ] T11.7 Implement `vRepeatClick` in `common/g-utils/src/directives/repeatClick.directive.ts` — byte-exact copy. Run `yarn test:run` → green.
-- [ ] T11.8 Update `common/g-utils/src/index.ts` barrel for `getStyle`, `vRepeatClick`.
-- [ ] T11.9 Migrate `components/time-picker/src/**`: re-point `useEmptyValues` from WU-8, `useLocale` from WU-9, `useFocusController` (already exists in g-hooks per v3 — currently `time-picker` still imports it straight from EP per obs #269, per the proposal's "already-extracted hooks not auto-consumed" risk); wire `getStyle`/`vRepeatClick`. Zero public API change.
-- [ ] T11.10 Grep-verify zero `from ['"]element-plus` matches under `components/time-picker/src/**` and `index.ts`, including confirming `useFocusController` now resolves from `@flash-global66/g-hooks`, not EP.
-- [ ] T11.11 Confirm `time-picker`'s `package.json` packaging convention, including `g-form`/`g-input`/`g-icon-font`/`g-tooltip` as real dependencies where used per design §3.
-- [ ] T11.12 Remove `'components/time-picker/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes.
-- [ ] T11.13 `yarn build` succeeds for `time-picker`. Full `yarn test:run` green.
-- [ ] T11.14 Validate in `front-b2b` (real copy).
-- [ ] T11.15 Commit as one work unit (`feat(time-picker): migrate off element-plus internals, add getStyle/vRepeatClick, re-point useFocusController`), open PR #11 (depends on PR #6 + PR #9 + PR #8 merged), Lerna-publish on merge.
+- [x] T11.1 Confirmed WU-6/WU-9/WU-8 (+ all prior) merged + published before starting; branch off current `main`.
+- [x] T11.2/T11.3/T11.4 **Superseded**: `getStyle` was already ported to `common/g-utils/src/utils/dom.util.ts` in WU-7 (dialog). No re-port — time-picker re-points to it.
+- [x] T11.5 Read EP's `vRepeatClick` from `node_modules/element-plus/es/directives/repeat-click/index.mjs`. Cross-checked sibling.
+- [x] T11.6 Failing unit test in `common/g-utils/tests/directives/repeatClick.directive.spec.ts` (immediate fire on left mousedown; ignores non-left; delay→interval repeat; mouseup clears; function-or-options value).
+- [x] T11.7 Implemented `vRepeatClick` in `common/g-utils/src/directives/repeatClick.directive.ts` byte-exact (typed as `ObjectDirective`, EP `any`→typed, no `any`). Green (5/5).
+- [x] T11.8 Barrel: `vRepeatClick`/`REPEAT_INTERVAL`/`REPEAT_DELAY` via `export * from './directives/repeatClick.directive'`; `getStyle` already exported.
+- [x] **Brief gap (like WU-10)**: `isDate` + `isEmpty` were also imported from EP by `time-picker/src/utils.ts` — not in the brief. Ported byte-exact into `common/g-utils/src/utils/validators.util.ts` (TDD, +8 tests).
+- [x] T11.9 Migrated 12 files: `useLocale`/`useFocusController`/`useAttrs`/`useEmptyValues(Props)`/`useAriaProps` → g-hooks; `isArray`/`isNumber`/`isUndefined`/`isDate`/`isEmpty`/`buildProps`/`definePropType`/`NOOP`/`debugWarn`/`EVENT_CODE`/`useNamespace`/`withInstall`/`getStyle`/`vRepeatClick`/`SFCWithInstall` → g-utils. Zero public API change. Two type-only casts for g-utils' stricter `isArray` (`_ as Dayjs`, `d as Date`).
+- [x] T11.10 Grep-verified zero `from 'element-plus'` under `src/**` + `index.ts`; `useFocusController` resolves from g-hooks.
+- [x] T11.11 Adopted the tooltip packaging convention: all 8 directly-imported `@flash-global66/*` (incl. `g-form` via `useFormItem`) in `dependencies` with aligned ranges; only `dayjs`/`element-plus`/`vue` peer (previously NO `dependencies` block, stale peer ranges).
+- [x] T11.12 Removed `'components/time-picker/**'` from `.eslintrc.cjs`; fixed lint debt (4 dead `@ts-ignore` removed; 2 unused `t` removed). **Post-review fix**: dual blind review caught 3 CI-blocking `vue/no-deprecated-filter` errors — prettier stripped the parens around union-typed template casts (`id as string | undefined`), making `vue-eslint-parser` read the `|` as a Vue-2 filter. Fixed by hoisting the unions into `MaybeString`/`MaybeStringArray` type aliases (no bare `|` in template → prettier-safe). `eslint --max-warnings 0` clean.
+- [x] T11.13 `vue-tsc` on time-picker: identical error profile to baseline (2 TS7016 environmental). Full `test:run` → 341/341 green.
+- [ ] T11.14 **DEFERRED**: b2b real-copy validation batched with the popper/picker family after publish.
+- [x] T11.15 Committed as the WU; PR opened as its own dedicated PR; Lerna-publish on merge. Dual blind review: both judges REQUEST-CHANGES on the paren regression → fixed → clean.
 
 ## WU-12 — `input-tag` (pure re-point; depends on WU-8)
 

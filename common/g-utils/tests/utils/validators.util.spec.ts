@@ -4,6 +4,8 @@ import {
   isString,
   isValidComponentSize,
   isPromise,
+  isDate,
+  isEmpty,
 } from '../../src/utils/validators.util';
 import type { ComponentSize } from '../../src/types/component.type';
 
@@ -124,5 +126,48 @@ describe('isPromise', () => {
 
   it('returns false for an object missing catch', () => {
     expect(isPromise({ then: () => {} })).toBe(false);
+  });
+});
+
+describe('isDate', () => {
+  it('returns true for a Date instance', () => {
+    expect(isDate(new Date())).toBe(true);
+  });
+
+  it('returns false for a date-like string', () => {
+    expect(isDate('2020-01-01')).toBe(false);
+  });
+
+  it('returns false for a timestamp number', () => {
+    expect(isDate(1577836800000)).toBe(false);
+  });
+
+  it('returns false for null and plain objects', () => {
+    expect(isDate(null)).toBe(false);
+    expect(isDate({})).toBe(false);
+  });
+});
+
+describe('isEmpty', () => {
+  it('treats falsy values other than 0 as empty', () => {
+    expect(isEmpty('')).toBe(true);
+    expect(isEmpty(null)).toBe(true);
+    expect(isEmpty(undefined)).toBe(true);
+    expect(isEmpty(false)).toBe(true);
+  });
+
+  it('treats 0 as NOT empty', () => {
+    expect(isEmpty(0)).toBe(false);
+  });
+
+  it('treats an empty array/object as empty and a populated one as not', () => {
+    expect(isEmpty([])).toBe(true);
+    expect(isEmpty({})).toBe(true);
+    expect(isEmpty([1])).toBe(false);
+    expect(isEmpty({ a: 1 })).toBe(false);
+  });
+
+  it('treats a non-empty string as not empty', () => {
+    expect(isEmpty('x')).toBe(false);
   });
 });
