@@ -1,20 +1,19 @@
-import { buildProps, iconPropType } from 'element-plus/es/utils/index.mjs'
-import type { ExtractPropTypes, PropType } from 'vue'
-import type Prev from './prev.vue'
-import { IconString } from '@flash-global66/g-icon-font';
+import { buildProps } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import type Prev from './prev.vue';
 
 export const paginationPrevProps = buildProps({
   disabled: Boolean,
   currentPage: {
     type: Number,
     default: 1,
-  }
-} as const)
+  },
+} as const);
 
 export const paginationPrevEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
-}
+};
 
-export type PaginationPrevProps = ExtractPropTypes<typeof paginationPrevProps>
+export type PaginationPrevProps = ExtractPropTypes<typeof paginationPrevProps>;
 
-export type PrevInstance = InstanceType<typeof Prev> & unknown
+export type PrevInstance = InstanceType<typeof Prev> & unknown;
