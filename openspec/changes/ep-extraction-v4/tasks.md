@@ -227,19 +227,19 @@ Publishes: `dropdown`. Est. ~400 changed lines (widest internal dependency surfa
 
 Publishes: `date-picker`. Est. ~250 changed lines (includes the lint-debt cleanup — scope it to touched files, per proposal decision 3). Requirements: `popper-overlay-migration` full set plus `date-picker-lint-debt-resolved`; `g-utils-extended` → `popper-overlay-utils-added`, `v4-utils-unit-tested`.
 
-- [ ] T10.1 Confirm PR #9 (dropdown) and PR #8 (select) are merged before starting.
-- [ ] T10.2 Read EP's `castArray` from `node_modules/element-plus/es/utils/arrays.mjs` (2.9.7). Cross-check sibling. Confirm its semantics on `null`/`undefined` differ from the existing `ensureArray` (per design §4 — distinct symbol, not a rename).
-- [ ] T10.3 Write failing unit test for `castArray` (wraps a non-array value in a single-element array; returns an array input unchanged; explicitly assert the `null`/`undefined` edge-case behavior that differs from `ensureArray`) — new `common/g-utils/tests/utils/arrays.util.spec.ts` (or extend existing).
-- [ ] T10.4 Implement `castArray` in `common/g-utils/src/utils/arrays.util.ts` — byte-exact copy, do not conflate with `ensureArray`. Run `yarn test:run` → green.
-- [ ] T10.5 Update `common/g-utils/src/index.ts` barrel to export `castArray`.
-- [ ] T10.6 Migrate `components/date-picker/src/**`: re-point `useLocale` from WU-9, `ClickOutside` from WU-8, `isArray`/`isFunction`/`useNamespace`/`EVENT_CODE` → `@flash-global66/g-utils`/`g-hooks`; wire `castArray`. Zero public API change.
-- [ ] T10.7 **In the same touched files**, fix the pre-existing `no-unused-vars` lint debt (proposal decision 3) — remove genuinely-dead imports/bindings discovered while migrating; do NOT widen the diff beyond files this migration already touches, and do NOT open a separate tracked chore for it.
-- [ ] T10.8 Grep-verify zero `from ['"]element-plus` matches under `components/date-picker/src/**` and `index.ts`.
-- [ ] T10.9 Confirm `date-picker`'s `package.json` packaging convention.
-- [ ] T10.10 Remove `'components/date-picker/**'` from `excludedFiles` in `.eslintrc.cjs`. `yarn lint --max-warnings 0` passes (this is the requirement gating T10.7 — the lint-debt fix must land in the same WU for this to be achievable).
-- [ ] T10.11 `yarn build` succeeds for `date-picker`. Full `yarn test:run` green.
-- [ ] T10.12 Validate in `front-b2b` (real copy).
-- [ ] T10.13 Commit as one work unit (`feat(date-picker): migrate off element-plus internals, add castArray, fix pre-existing no-unused-vars debt`), open PR #10 (depends on PR #9 + PR #8 merged), Lerna-publish on merge.
+- [x] T10.1 Confirmed PR #9 (dropdown) and PR #8 (select) merged + published before starting; branch off current `main`.
+- [x] T10.2 Read EP's `castArray` from `node_modules/element-plus/es/utils/arrays.mjs`. Cross-checked sibling. Confirmed distinct from `ensureArray`: EP's `castArray` returns `[]` for falsy-except-`0` (`''`/`false`/`null`/`undefined` → `[]`), whereas `ensureArray` (lodash-backed) wraps `''`/`false`. **Note**: the DS placed it in the existing `array.util.ts` (not a new `arrays.util.ts`), beside `ensureArray`/`isArray`.
+- [x] T10.3 Failing unit test added to `common/g-utils/tests/utils/array.util.spec.ts` (wraps scalar; array unchanged; wraps `0`; `''`/`false`/`null`/`undefined` → `[]`).
+- [x] T10.4 Implemented `castArray` in `common/g-utils/src/utils/array.util.ts` byte-exact; aliased the lodash import to `lodashCastArray` to avoid collision; `ensureArray` untouched. Tests green (10/10).
+- [x] T10.5 `castArray` auto-exported via the barrel's `export * from './utils/array.util'`.
+- [x] T10.6 Migrated 25 files: `useLocale` → g-hooks; `ClickOutside`/`isArray`/`isFunction`/`useNamespace`/`EVENT_CODE`/`buildProps`/`definePropType`/`hasClass`/`withInstall`/`SFCWithInstall`/`castArray` → g-utils. **Two brief gaps resolved**: `UseNamespaceReturn` → `NamespaceHelpers` (g-utils); `datePickTypes`/`DatePickType` inlined byte-exact in new `src/constants/date.constant.ts` (component-specific). Zero public API change. Two pure type-level accommodations for g-hooks/g-utils stricter types (no runtime change): `es.ts` cast `as Language` (date-picker only reads `el.datepicker.*`); `panel-year-range.vue` cast `as DefaultValue`.
+- [x] T10.7 Fixed the 6 pre-existing lint errors in touched files (5 `no-unused-vars`, 1 `prefer-const` in `utils.ts` restructured behavior-identically). Dead no-op `inject()` in `basic-cell-render.vue` (surfaced by dual review) also removed.
+- [x] T10.8 Grep-verified zero `from 'element-plus'` under `components/date-picker/src/**` + `index.ts` (scss `@use theme-chalk` retained, correct).
+- [x] T10.9 Adopted the tooltip packaging convention: all 7 directly-imported `@flash-global66/*` in `dependencies` with ranges aligned to current workspace versions; only `dayjs`/`element-plus`/`vue` peer (previously had NO `dependencies` block).
+- [x] T10.10 Removed `'components/date-picker/**'` from `.eslintrc.cjs`; `eslint --max-warnings 0` clean.
+- [x] T10.11 `vue-tsc` on date-picker: identical error profile to `origin/main` baseline (26=26, only environmental TS7016 + pre-existing dayjs/vue looseness). Full `test:run` → 328/328 green.
+- [ ] T10.12 **DEFERRED**: b2b real-copy validation batched with the popper/picker family after publish.
+- [x] T10.13 Committed as the WU (`feat(date-picker): migrate off element-plus internals, add castArray`); PR opened as its own dedicated PR; Lerna-publish on merge. Dual blind review: Judge A APPROVE, Judge B APPROVE-WITH-NITS (only actionable MINOR — the dead inject — fixed).
 
 ## WU-11 — `time-picker` (deep migration; depends on WU-6, WU-9, WU-8)
 
