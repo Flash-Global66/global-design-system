@@ -40,15 +40,16 @@ module.exports = {
         'components/skeleton/**',
         'components/infinite-scroll/**',
         // Deferred: need hooks/utilities outside this change's scope
-        // (useAriaProps, useLocale, usePopper*, useSizeProp, useFormSize,
+        // (useAriaProps, usePopper*, useSizeProp, useFormSize,
         // useSameTarget, useEscapeKeydown, iconPropType) or embed a real
-        // element-plus component.
+        // element-plus component. (useLocale ported in WU-8/select —
+        // dropdown/date-picker/time-picker/table should re-point to
+        // @flash-global66/g-hooks instead of re-implementing.)
         'components/inline/**',
         'components/input-tag/**',
         'components/toast/**',
         'components/time-picker/**',
         'components/table/**',
-        'components/select/**',
         'components/pagination/**',
         'components/input-number/**',
         'components/dropdown/**',

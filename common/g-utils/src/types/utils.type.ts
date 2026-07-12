@@ -6,8 +6,18 @@
  * única fuente de verdad y facilita el tree-shaking.
  */
 
+import type { EmitsOptions, SetupContext } from 'vue';
+
 export type { SFCWithInstall } from '../utils/install.util';
 export type { NamespaceHelpers } from '../composables/useNamespace';
+
+/**
+ * Tipo del `emit` de un componente, derivado de sus `emits` declarados.
+ *
+ * Copiado del tipo `EmitFn<E>` de element-plus (`es/utils/vue/typescript`),
+ * puramente a nivel de tipos (sin código en runtime).
+ */
+export type EmitFn<E extends EmitsOptions> = SetupContext<E>['emit'];
 
 /**
  * Representa un valor que puede ser `T` o un array de `T`.

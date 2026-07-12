@@ -1,7 +1,7 @@
 <template>
   <li
     :data-index="index"
-    :ref="(el) => measureElement?.(el as HTMLElement | null)"
+    :ref="el => measureElement?.(el as HTMLElement | null)"
     :aria-selected="selected"
     :data-test="`item:${getTitle(item)}`"
     :style="style"
@@ -23,19 +23,14 @@
           :class="ns.bem('dropdown', 'item', 'icon')"
         />
         <div :class="ns.bem('dropdown', 'item', 'content')">
-          <span
-            :class="[
-              ns.bem('dropdown', 'item', 'title'),
-              titleClampClass
-            ]"
-          >
+          <span :class="[ns.bem('dropdown', 'item', 'title'), titleClampClass]">
             {{ getTitle(item) }}
           </span>
           <span
             v-if="Boolean(getDescription(item))"
             :class="[
               ns.bem('dropdown', 'item', 'description'),
-              descriptionClampClass
+              descriptionClampClass,
             ]"
           >
             {{ getDescription(item) }}
@@ -54,13 +49,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
-import { useNamespace } from "element-plus";
-import { useOption } from "./hooks/use-option";
-import { useProps } from "./hooks/use-props";
-import { OptionProps, optionEmits } from "./defaults";
-import { selectV2InjectionKey } from "./types/token";
-import { GIconFont } from "@flash-global66/g-icon-font";
+import { defineComponent, inject } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { useOption } from './hooks/use-option';
+import { useProps } from './hooks/use-props';
+import { OptionProps, optionEmits } from './defaults';
+import { selectV2InjectionKey } from './types/token';
+import { GIconFont } from '@flash-global66/g-icon-font';
 
 export default defineComponent({
   props: OptionProps,
@@ -68,7 +63,7 @@ export default defineComponent({
   components: { GIconFont },
   setup(props, { emit }) {
     const select = inject(selectV2InjectionKey)!;
-    const ns = useNamespace("select");
+    const ns = useNamespace('select');
     const {
       hoverItem,
       selectOptionClick,

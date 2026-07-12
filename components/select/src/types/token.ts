@@ -1,7 +1,7 @@
 import type { IOptionProps, ISelectProps } from '../defaults';
 import type { InjectionKey, Ref } from 'vue';
 import type { Option } from './select.types';
-import type { TooltipInstance } from 'element-plus';
+import type { TooltipInstance } from '@flash-global66/g-tooltip';
 
 export interface SelectV2Context {
   props: ISelectProps;

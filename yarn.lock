@@ -1197,6 +1197,7 @@ __metadata:
     "@popperjs/core": "npm:^2.11.6"
     lodash-unified: "npm:^1.0.3"
   peerDependencies:
+    "@vueuse/core": ^13.0.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1499,12 +1500,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-select@workspace:components/select"
   dependencies:
+    "@flash-global66/g-hooks": "npm:^0.10.1"
+    "@flash-global66/g-tooltip": "npm:^0.1.4"
+    "@flash-global66/g-utils": "npm:^0.7.1"
     "@tanstack/vue-virtual": "npm:3.13.23"
   peerDependencies:
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.0.8
     "@flash-global66/g-tag": ^0.1.2
-    "@flash-global66/g-tooltip": ^0.0.1
+    "@popperjs/core": ^2.11.6
+    "@vueuse/core": ^13.0.0
     element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
@@ -1604,7 +1609,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-tooltip@workspace:components/tooltip":
+"@flash-global66/g-tooltip@npm:^0.1.4, @flash-global66/g-tooltip@workspace:components/tooltip":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-tooltip@workspace:components/tooltip"
   dependencies:

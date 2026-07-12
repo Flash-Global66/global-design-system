@@ -18,6 +18,7 @@
     "lodash-unified": "^1.0.3"
   },
   "peerDependencies": {
+    "@vueuse/core": "^13.0.0",
     "vue": "^3.2.0"
   },
   "publishConfig": {
