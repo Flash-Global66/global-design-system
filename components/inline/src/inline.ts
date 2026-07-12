@@ -1,10 +1,15 @@
-import type { ExtractPropTypes } from "vue";
-import type Inline from "./inline.vue";
-import { useAriaProps} from "element-plus";
-import { buildProps, definePropType, isBoolean, isNumber, isString } from "element-plus/es/utils/index.mjs";
+import type { ExtractPropTypes } from 'vue';
+import type Inline from './inline.vue';
+import { useAriaProps } from '@flash-global66/g-hooks';
+import { buildProps, definePropType } from '@flash-global66/g-utils';
 
-import { InlineEnum, InlineIconAlign, InlineLinks, InlineSize } from "./inline.type";
-import { IconString } from "@flash-global66/g-icon-font";
+import {
+  InlineEnum,
+  InlineIconAlign,
+  InlineLinks,
+  InlineSize,
+} from './inline.type';
+import { IconString } from '@flash-global66/g-icon-font';
 
 export const inlineProps = buildProps({
   /**
@@ -12,14 +17,14 @@ export const inlineProps = buildProps({
    */
   title: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description description text
-  */
+   */
   description: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description show close button
@@ -33,7 +38,7 @@ export const inlineProps = buildProps({
    * */
   icon: {
     type: definePropType<IconString>(String),
-    default: "",
+    default: '',
   },
   /**
    * @description type of inline
@@ -44,14 +49,14 @@ export const inlineProps = buildProps({
   },
   /**
    * @description size of inline
-  */
+   */
   size: {
     type: definePropType<InlineSize>(String),
     default: 'md',
   },
   /**
    * @description inline links
-  */
+   */
   links: {
     type: definePropType<InlineLinks[]>(Array),
     default: () => [],
@@ -91,7 +96,7 @@ export const inlineProps = buildProps({
     type: Boolean,
     default: true,
   },
-  ...useAriaProps(["ariaLabel"]),
+  ...useAriaProps(['ariaLabel']),
 });
 
 export const inlineEmits = {

@@ -1,9 +1,6 @@
-import Inline from "./src/inline.vue";
-import {
-  withInstall,
-  withNoopInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
+import Inline from './src/inline.vue';
+import { withInstall } from '@flash-global66/g-utils';
+import type { SFCWithInstall } from '@flash-global66/g-utils';
 export const GInline: SFCWithInstall<typeof Inline> & {
   Inline: typeof Inline;
 } = withInstall(Inline, {
@@ -11,7 +8,7 @@ export const GInline: SFCWithInstall<typeof Inline> & {
 });
 export default GInline;
 
-export * from "./src/inline.type";
-export * from "./src/inline";
+export * from './src/inline.type';
+export * from './src/inline';
 
 export type InlineInstance = InstanceType<typeof Inline>;

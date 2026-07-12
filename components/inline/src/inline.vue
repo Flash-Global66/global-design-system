@@ -1,18 +1,19 @@
 <script lang="ts" setup>
-import { useFormSize, useNamespace } from "element-plus";
-import { computed, ref } from "vue";
+import { useNamespace } from '@flash-global66/g-utils';
+import { useFormSize } from '@flash-global66/g-form';
+import { computed, ref } from 'vue';
 import { GIconFont } from '@flash-global66/g-icon-font';
-import { inlineEmits, inlineProps } from "./inline";
+import { inlineEmits, inlineProps } from './inline';
 
-const props = defineProps(inlineProps)
-const emits = defineEmits(inlineEmits)
+const props = defineProps(inlineProps);
+const emits = defineEmits(inlineEmits);
 
 const visible = ref(true);
 
-const ns = useNamespace('inline')
-const inlineSize = useFormSize()
+const ns = useNamespace('inline');
+const inlineSize = useFormSize();
 
-const inlineRef = ref<HTMLElement | null>(null)
+const inlineRef = ref<HTMLElement | null>(null);
 
 const inlineClass = computed(() => [
   ns.b(),
@@ -21,14 +22,13 @@ const inlineClass = computed(() => [
   props.shadow && ns.m('shadow'),
   !props.border && ns.m('no-border'),
   ns.m(`icon-align-${props.iconAlign}`),
-])
+]);
 
 function onClose(event: MouseEvent) {
   visible.value = false;
-  emits('close', event)
+  emits('close', event);
 }
 </script>
-
 
 <template>
   <transition :name="ns.m('fade')">
@@ -52,17 +52,13 @@ function onClose(event: MouseEvent) {
         :name="icon"
       />
       <div>
-        <h3 v-if="title" :class="[ns.e('title')]"> {{ title }} </h3>
+        <h3 v-if="title" :class="[ns.e('title')]">{{ title }}</h3>
         <p :class="[ns.e('description')]">
           <slot name="default">
             {{ description }}
           </slot>
         </p>
-        <div
-          v-if="links.length"
-          role="group"
-          :class="[ns.e('links')]"
-        >
+        <div v-if="links.length" role="group" :class="[ns.e('links')]">
           <button
             v-for="(link, idx) in links"
             :key="idx"
