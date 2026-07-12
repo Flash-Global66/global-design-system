@@ -1,14 +1,14 @@
-import { isNil } from 'lodash-unified'
-import { isNumber } from 'element-plus/es/utils/index.mjs'
+import { isNil } from 'lodash-unified';
 import {
+  isNumber,
   CHANGE_EVENT,
   INPUT_EVENT,
   UPDATE_MODEL_EVENT,
-} from 'element-plus/es/constants/index.mjs'
+} from '@flash-global66/g-utils';
 
-import type { HTMLAttributes } from 'vue'
-import type { ComponentSize } from 'element-plus/es/constants/index.mjs'
-import type InputNumber from './input-number.vue'
+import type { HTMLAttributes } from 'vue';
+import type { ComponentSize } from '@flash-global66/g-utils';
+import type InputNumber from './input-number.vue';
 
 /**
  * @description input-number component props
@@ -17,83 +17,83 @@ export interface InputNumberProps {
   /**
    * @description same as `id` in native input
    */
-  id?: string
+  id?: string;
   /**
    * @description incremental step
    */
-  step?: number
+  step?: number;
   /**
    * @description whether input value can only be multiple of step
    */
-  stepStrictly?: boolean
+  stepStrictly?: boolean;
   /**
    * @description the maximum allowed value
    */
-  max?: number
+  max?: number;
   /**
    * @description the minimum allowed value
    */
-  min?: number
+  min?: number;
   /**
    * @description binding value
    */
-  modelValue?: number | null
+  modelValue?: number | null;
   /**
    * @description same as `readonly` in native input
    */
-  readonly?: boolean
+  readonly?: boolean;
   /**
    * @description whether the component is disabled
    */
-  disabled?: boolean
+  disabled?: boolean;
   /**
    * @description size of the component
    */
-  size?: ComponentSize
+  size?: ComponentSize;
   /**
    * @description whether to enable the control buttons
    */
-  controls?: boolean
+  controls?: boolean;
   /**
    * @description position of the control buttons
    */
-  controlsPosition?: '' | 'right'
+  controlsPosition?: '' | 'right';
   /**
    * @description value should be set when input box is cleared
    */
-  valueOnClear?: 'min' | 'max' | number | null
+  valueOnClear?: 'min' | 'max' | number | null;
   /**
    * @description same as `name` in native input
    */
-  name?: string
+  name?: string;
   /**
    * @description same as `placeholder` in native input
    */
-  placeholder?: string
+  placeholder?: string;
   /**
    * @description precision of input value
    */
-  precision?: number
+  precision?: number;
   /**
    * @description whether to trigger form validation
    */
-  validateEvent?: boolean
+  validateEvent?: boolean;
   /**
    * @description native aria-label attribute
    */
-  ariaLabel?: string
+  ariaLabel?: string;
   /**
    * @description native input mode for virtual keyboards
    */
-  inputmode?: HTMLAttributes['inputmode']
+  inputmode?: HTMLAttributes['inputmode'];
   /**
    * @description alignment for the inner input text
    */
-  align?: 'left' | 'right' | 'center'
+  align?: 'left' | 'right' | 'center';
   /**
    * @description whether to disable scientific notation input (e.g. 'e', 'E')
    */
-  disabledScientific?: boolean
+  disabledScientific?: boolean;
 }
 
 export const inputNumberEmits = {
@@ -105,7 +105,7 @@ export const inputNumberEmits = {
     isNumber(val) || isNil(val),
   [UPDATE_MODEL_EVENT]: (val: number | undefined) =>
     isNumber(val) || isNil(val),
-}
-export type InputNumberEmits = typeof inputNumberEmits
+};
+export type InputNumberEmits = typeof inputNumberEmits;
 
-export type InputNumberInstance = InstanceType<typeof InputNumber> & unknown
+export type InputNumberInstance = InstanceType<typeof InputNumber> & unknown;
