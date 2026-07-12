@@ -4,7 +4,6 @@ import { StoryObj } from '@storybook/vue3'
 // COMPONENTS
 import {
   GTable,
-  TableInstance,
   GTableColumn,
   useTableCellSelect,
   useTableCellInput,
@@ -1443,7 +1442,7 @@ Utilice row-class-name en el-table para agregar clases personalizadas a una fila
         }
       ]
 
-      const tableRowClassName = ({ row, rowIndex }: { row: any; rowIndex: number }) => {
+      const tableRowClassName = ({ rowIndex }: { row: any; rowIndex: number }) => {
         if (rowIndex === 1) return '!bg-error-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
         if (rowIndex === 3)
           return '!bg-success-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
@@ -1454,8 +1453,6 @@ Utilice row-class-name en el-table para agregar clases personalizadas a una fila
       }
 
       const cellClassName = ({
-        row,
-        column,
         rowIndex
       }: {
         row: any
@@ -2442,7 +2439,7 @@ export const TableCellSelect: Story = {
       description: {
         story: `**Cuándo usar:** columna que debe mostrar y editar un valor desde una lista fija (estado, categoría, rol). No requiere template ni slot.
 
-**Pasos:** (1) Definir opciones \`{ value, title }\` (o \`label\`). (2) \`useTableCellSelect(tableData, { options, useRowIndex: true })\` → \`cellOptions\`. (3) En la columna: \`cell-type="select"\` y \`:cell-options="cellOptions"\`. Click en la celda abre el select; blur o Enter cierra.
+**Pasos:** (1) Definir opciones \`{ value, title }\` (o \`label\`). (2) \`useTableCellSelect(tableData, { options, useRowIndex: true })\` → \`cellOptions\`. (3) En la columna: \`cell-type="select"\` y \`:cell-options="cellOptions"\`. Click en la celda abre el select; seleccionar una opción, blur o Enter cierra.
 
 **Label:** \`input-label\` en \`GTableColumn\` o \`label\` en \`cellOptions\`; se muestra sobre el select en modo edición.
 
