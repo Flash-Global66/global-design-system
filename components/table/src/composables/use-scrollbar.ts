@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { isNumber } from 'element-plus/es/utils/index'
+import { isNumber } from '@flash-global66/g-utils'
 
 export const useScrollbar = () => {
   const scrollBarRef = ref()

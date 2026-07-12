@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import {
   defineComponent,
@@ -11,7 +12,7 @@ import {
   watch,
 } from 'vue'
 import GCheckbox from '@flash-global66/g-checkbox'
-import { useNamespace } from 'element-plus'
+import { useNamespace } from '@flash-global66/g-utils'
 import FilterPanel from '../filter-panel.vue'
 import useLayoutObserver from '../layout-observer'
 import { TABLE_INJECTION_KEY } from '../tokens'

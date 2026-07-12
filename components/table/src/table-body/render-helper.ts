@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import { computed, h, inject } from 'vue'
 import { merge } from 'lodash-unified'
-import { useNamespace } from 'element-plus'
-import { isBoolean, isPropAbsent } from 'element-plus/es/utils/index'
+import { useNamespace } from '@flash-global66/g-utils'
+import { isBoolean, isPropAbsent } from '@flash-global66/g-utils'
 import { getRowIdentity } from '../util'
 import { TABLE_INJECTION_KEY } from '../tokens'
 import useEvents from './events-helper'

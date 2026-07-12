@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { isRef, nextTick, ref } from 'vue'
 import { isNull } from 'lodash-unified'
-import { hasOwn, isClient, isNumber, isString } from 'element-plus/es/utils/index'
+import { hasOwn, isClient, isNumber, isString } from '@flash-global66/g-utils'
 import { parseHeight } from './util'
 
 import type { Ref } from 'vue'

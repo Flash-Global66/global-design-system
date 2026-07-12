@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { getCurrentInstance, inject, ref } from 'vue'
 import { isNull } from 'lodash-unified'
@@ -7,7 +8,7 @@ import {
   isClient,
   isElement,
   removeClass,
-} from 'element-plus/es/utils/index'
+} from '@flash-global66/g-utils'
 import { TABLE_INJECTION_KEY } from '../tokens'
 import type { TableHeaderProps } from '.'
 import type { TableColumnCtx } from '../table-column/defaults'

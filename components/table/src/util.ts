@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { createVNode, isVNode, render } from 'vue'
 import { flatMap, get, isNull, merge } from 'lodash-unified'
@@ -12,7 +13,7 @@ import {
   isString,
   isUndefined,
   throwError,
-} from 'element-plus/es/utils/index'
+} from '@flash-global66/g-utils'
 import GTooltip, {
   type GTooltipProps,
 } from '@flash-global66/g-tooltip'

@@ -1,6 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { h } from 'vue'
-import { isUndefined } from 'element-plus/es/utils/index'
+import { isUndefined } from '@flash-global66/g-utils'
 
 export function hColgroup(props) {
   const isAuto = props.tableLayout === 'auto'

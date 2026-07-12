@@ -89,19 +89,20 @@
 </template>
 
 <script lang="ts">
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { computed, defineComponent, getCurrentInstance, ref, watch } from 'vue'
 import GCheckbox from '@flash-global66/g-checkbox'
 // import { ElIcon } from '@element-plus/components/icon'
 // import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
-import { ClickOutside } from 'element-plus/es/directives/index'
-import { useLocale, useNamespace } from 'element-plus'
+import { ClickOutside } from '@flash-global66/g-utils'
+import { useLocale } from '@flash-global66/g-hooks'
+import { useNamespace } from '@flash-global66/g-utils'
 import GTooltip, {
-  type GTooltipProps,
   useTooltipContentProps,
 } from '@flash-global66/g-tooltip'
 import GScrollbar from '@flash-global66/g-scrollbar'
-import { isPropAbsent } from 'element-plus/es/utils/index'
+import { isPropAbsent } from '@flash-global66/g-utils'
 
 import type { TooltipInstance } from '@flash-global66/g-tooltip'
 import type { Placement } from '@flash-global66/g-popper'

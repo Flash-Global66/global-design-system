@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { watch } from 'vue'
 import { debounce } from 'lodash-unified'
-import { isObject } from 'element-plus/es/utils/index'
+import { isObject } from '@flash-global66/g-utils'
 import useStore from '.'
 
 import type { Store } from '.'

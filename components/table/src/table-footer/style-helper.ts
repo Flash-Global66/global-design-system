@@ -1,4 +1,4 @@
-import { useNamespace } from 'element-plus'
+import { useNamespace } from '@flash-global66/g-utils'
 import {
   ensurePosition,
   getFixedColumnOffset,

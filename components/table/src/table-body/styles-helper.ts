@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { inject } from 'vue'
-import { useNamespace } from 'element-plus'
-import { isArray, isFunction, isObject, isString } from 'element-plus/es/utils/index'
+import { useNamespace } from '@flash-global66/g-utils'
+import { isArray, isFunction, isObject, isString } from '@flash-global66/g-utils'
 import {
   ensurePosition,
   getFixedColumnOffset,

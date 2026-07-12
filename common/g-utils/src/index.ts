@@ -18,6 +18,7 @@ export * from './utils/dom.util';
 export * from './utils/refs.util';
 export * from './utils/string.util';
 export { default as ClickOutside } from './directives/clickOutside.directive';
+export { default as Mousewheel } from './directives/mousewheel.directive';
 export * from './directives/repeatClick.directive';
 export * from './composables/useNamespace';
 export * from './constants/event.constant';

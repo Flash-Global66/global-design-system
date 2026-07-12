@@ -20,7 +20,8 @@
     "styles"
   ],
   "dependencies": {
-    "lodash-unified": "1.0.3"
+    "lodash-unified": "1.0.3",
+    "normalize-wheel-es": "1.2.0"
   },
   "peerDependencies": {
     "vue": "^3.2.0"

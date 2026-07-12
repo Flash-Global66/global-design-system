@@ -1,6 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { getCurrentInstance, watch } from 'vue'
-import { hasOwn } from 'element-plus/es/utils/index'
+import { hasOwn } from '@flash-global66/g-utils'
 import { parseMinWidth, parseWidth } from '../util'
 
 import type { ComputedRef } from 'vue'
