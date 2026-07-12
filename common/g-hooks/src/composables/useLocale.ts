@@ -72,7 +72,7 @@ export const buildLocaleContext = (
 };
 
 export const gLocaleContextKey: InjectionKey<Ref<Language | undefined>> =
-  Symbol('gLocaleContextKey');
+  Symbol.for('gLocaleContextKey');
 
 export const useLocale = (
   localeOverrides?: Ref<Language | undefined>,

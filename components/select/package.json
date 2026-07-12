@@ -29,9 +29,9 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.10.0",
-    "@flash-global66/g-tooltip": "^0.1.3",
-    "@flash-global66/g-utils": "^0.7.0",
+    "@flash-global66/g-hooks": "^0.10.1",
+    "@flash-global66/g-tooltip": "^0.1.4",
+    "@flash-global66/g-utils": "^0.7.1",
     "@tanstack/vue-virtual": "3.13.23"
   },
   "peerDependencies": {

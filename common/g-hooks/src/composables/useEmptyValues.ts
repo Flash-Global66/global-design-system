@@ -23,7 +23,7 @@ import type { ExtractPropTypes, InjectionKey, Ref } from 'vue';
  * caso caería al default en lugar de heredar ese valor.
  */
 export const gEmptyValuesContextKey: InjectionKey<Ref<EmptyValuesContext>> =
-  Symbol('gEmptyValuesContextKey');
+  Symbol.for('gEmptyValuesContextKey');
 
 export const SCOPE = 'use-empty-values';
 export const DEFAULT_EMPTY_VALUES = ['', undefined, null];
