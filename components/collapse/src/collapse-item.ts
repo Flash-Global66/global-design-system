@@ -1,6 +1,6 @@
-import { buildProps, definePropType, iconPropType } from 'element-plus/es/utils/index'
-import type { ExtractPropTypes } from 'vue'
-import type { CollapseActiveName, IconsType } from './collapse'
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import type { CollapseActiveName, IconsType } from './collapse';
 
 export const collapseItemProps = buildProps({
   /**
@@ -26,14 +26,14 @@ export const collapseItemProps = buildProps({
    */
   iconsRight: {
     type: definePropType<IconsType[]>(Array),
-    default: () => ([] as IconsType[]),
+    default: () => [] as IconsType[],
   },
   /**
    * @description icons to be displayed on the left side of the collapse item
    */
   iconsLeft: {
     type: definePropType<IconsType[]>(Array),
-    default: () => ([] as IconsType[]),
+    default: () => [] as IconsType[],
   },
   /**
    * @description description of the collapse item
@@ -69,6 +69,6 @@ export const collapseItemProps = buildProps({
   hideIcon: {
     type: Boolean,
     default: false,
-  }
-} as const)
-export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>
+  },
+} as const);
+export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>;

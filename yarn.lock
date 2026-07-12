@@ -1024,7 +1024,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-collapse-transition@workspace:components/collapse-transition":
+"@flash-global66/g-collapse-transition@npm:^0.2.13, @flash-global66/g-collapse-transition@workspace:components/collapse-transition":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-collapse-transition@workspace:components/collapse-transition"
   dependencies:
@@ -1038,11 +1038,13 @@ __metadata:
 "@flash-global66/g-collapse@workspace:components/collapse":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-collapse@workspace:components/collapse"
+  dependencies:
+    "@flash-global66/g-collapse-transition": "npm:^0.2.13"
+    "@flash-global66/g-hooks": "npm:^0.11.4"
+    "@flash-global66/g-icon-font": "npm:^0.25.15"
+    "@flash-global66/g-utils": "npm:^0.12.0"
   peerDependencies:
-    "@flash-global66/g-collapse-transition": ^0.0.1
-    "@flash-global66/g-icon-font": ^0.10.0
     element-plus: ^2.9.0
-    lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
   linkType: soft

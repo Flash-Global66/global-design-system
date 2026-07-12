@@ -28,6 +28,15 @@ export type EmitFn<E extends EmitsOptions> = SetupContext<E>['emit'];
 export type Arrayable<T> = T | T[];
 
 /**
+ * Representa un valor que puede resolverse de forma síncrona (`T`) o
+ * asíncrona (`Promise<T>`).
+ *
+ * Copiado del tipo `Awaitable<T>` de element-plus (`es/utils/typescript`),
+ * usado por hooks como `beforeCollapse` que aceptan un retorno sync o async.
+ */
+export type Awaitable<T> = Promise<T> | T;
+
+/**
  * Representa un valor que puede ser `T` o `null`.
  *
  * Copiado del tipo `Nullable<T>` de element-plus (`packages/utils/typescript`).
