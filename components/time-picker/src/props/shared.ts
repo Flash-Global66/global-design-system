@@ -1,12 +1,12 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
 
-import type { ExtractPropTypes } from "vue";
+import type { ExtractPropTypes } from 'vue';
 
 import type {
   GetDisabledHours,
   GetDisabledMinutes,
   GetDisabledSeconds,
-} from "../common/props";
+} from '../common/props';
 
 export const disabledTimeListsProps = buildProps({
   /**
@@ -41,7 +41,7 @@ export const timePanelSharedProps = buildProps({
   },
   format: {
     type: String,
-    default: "",
+    default: '',
   },
 } as const);
 

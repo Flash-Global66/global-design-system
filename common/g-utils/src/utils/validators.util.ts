@@ -1,5 +1,6 @@
 import { componentSizes, ComponentSize } from '../types/component.type';
 import { isFunction } from './function.util';
+import { isArray } from './array.util';
 
 /**
  * Comprueba si un valor es de tipo `boolean`.
@@ -50,6 +51,33 @@ export const isString = (val: unknown): val is string =>
  */
 export const isObject = (val: unknown): val is Record<string, unknown> =>
   val !== null && typeof val === 'object';
+
+/**
+ * Comprueba si un valor es una instancia de `Date`.
+ *
+ * Actúa como type guard de TypeScript. Replica el algoritmo de `@vue/shared`
+ * (reexportado por element-plus) basado en `Object.prototype.toString`.
+ *
+ * @param val - El valor a verificar.
+ * @returns `true` si `val` es un `Date`.
+ */
+export const isDate = (val: unknown): val is Date =>
+  Object.prototype.toString.call(val) === '[object Date]';
+
+/**
+ * Comprueba si un valor está "vacío".
+ *
+ * Copiado byte a byte del `isEmpty` interno de element-plus: son vacíos los
+ * valores "falsy" (excepto `0`), los arrays sin elementos y los objetos sin
+ * claves propias.
+ *
+ * @param val - El valor a verificar.
+ * @returns `true` si `val` se considera vacío.
+ */
+export const isEmpty = (val: unknown): boolean =>
+  (!val && val !== 0) ||
+  (isArray(val) && val.length === 0) ||
+  (isObject(val) && !Object.keys(val).length);
 
 /**
  * Comprueba si un valor es un tamaño de componente válido.

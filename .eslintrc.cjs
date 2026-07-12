@@ -48,7 +48,6 @@ module.exports = {
         'components/inline/**',
         'components/input-tag/**',
         'components/toast/**',
-        'components/time-picker/**',
         'components/table/**',
         'components/pagination/**',
         'components/input-number/**',

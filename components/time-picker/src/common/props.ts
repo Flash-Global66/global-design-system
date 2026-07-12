@@ -1,14 +1,14 @@
-import { placements } from "@popperjs/core";
-import { buildProps, definePropType } from "element-plus/es/utils/index";
-import { useAriaProps, useEmptyValuesProps } from "element-plus";
-import { CircleClose } from "@element-plus/icons-vue";
-import { disabledTimeListsProps } from "../props/shared";
-import { IconString } from "@flash-global66/g-icon-font";
+import { placements } from '@popperjs/core';
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { useAriaProps, useEmptyValuesProps } from '@flash-global66/g-hooks';
+import { CircleClose } from '@element-plus/icons-vue';
+import { disabledTimeListsProps } from '../props/shared';
+import { IconString } from '@flash-global66/g-icon-font';
 
-import type { Component, ExtractPropTypes } from "vue";
-import type { Options } from "@popperjs/core";
-import type { Dayjs } from "dayjs";
-import type { Placement } from "@flash-global66/g-popper";
+import type { Component, ExtractPropTypes } from 'vue';
+import type { Options } from '@popperjs/core';
+import type { Dayjs } from 'dayjs';
+import type { Placement } from '@flash-global66/g-popper';
 
 export type SingleOrRange<T> = T | [T, T];
 export type DateModelType = number | string | Date;
@@ -18,18 +18,18 @@ export type DateOrDates = SingleOrRange<Date>;
 export type UserInput = SingleOrRange<string | null>;
 export type GetDisabledHours = (
   role: string,
-  comparingDate?: Dayjs
+  comparingDate?: Dayjs,
 ) => number[];
 export type GetDisabledMinutes = (
   hour: number,
   role: string,
-  comparingDate?: Dayjs
+  comparingDate?: Dayjs,
 ) => number[];
 export type GetDisabledSeconds = (
   hour: number,
   minute: number,
   role: string,
-  comparingDate?: Dayjs
+  comparingDate?: Dayjs,
 ) => number[];
 
 export const timePickerDefaultProps = buildProps({
@@ -50,7 +50,7 @@ export const timePickerDefaultProps = buildProps({
    */
   popperClass: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description format of the displayed value in the input box
@@ -73,7 +73,7 @@ export const timePickerDefaultProps = buildProps({
    */
   type: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description whether to show clear button
@@ -101,7 +101,7 @@ export const timePickerDefaultProps = buildProps({
    */
   prefixIcon: {
     type: definePropType<IconString>(String),
-    default: "",
+    default: '',
   },
   /**
    * @description whether TimePicker is read only
@@ -116,21 +116,21 @@ export const timePickerDefaultProps = buildProps({
    */
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description label in non-range mode
    */
   helpText: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description label in non-range mode
    */
   messageError: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description [popper.js](https://popper.js.org/docs/v2/) parameters
@@ -144,14 +144,14 @@ export const timePickerDefaultProps = buildProps({
    */
   modelValue: {
     type: definePropType<ModelValueType>([Date, Array, String, Number]),
-    default: "",
+    default: '',
   },
   /**
    * @description range separator
    */
   rangeSeparator: {
     type: String,
-    default: "-",
+    default: '-',
   },
   /**
    * @description placeholder for the start date in range mode
@@ -225,17 +225,17 @@ export const timePickerDefaultProps = buildProps({
   placement: {
     type: definePropType<Placement>(String),
     values: placements,
-    default: "bottom",
+    default: 'bottom',
   },
   /**
    * @description list of possible positions for dropdown
    */
   fallbackPlacements: {
     type: definePropType<Placement[]>(Array),
-    default: ["bottom", "top", "right", "left"],
+    default: ['bottom', 'top', 'right', 'left'],
   },
   ...useEmptyValuesProps,
-  ...useAriaProps(["ariaLabel"]),
+  ...useAriaProps(['ariaLabel']),
   /**
    * @description whether to show the now button
    */
