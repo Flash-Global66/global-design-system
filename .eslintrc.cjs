@@ -39,17 +39,10 @@ module.exports = {
         'components/form-item/**',
         'components/skeleton/**',
         'components/infinite-scroll/**',
-        // Deferred: need hooks/utilities outside this change's scope
-        // (useAriaProps, usePopper*, useSizeProp, useFormSize,
-        // useSameTarget, useEscapeKeydown, iconPropType) or embed a real
-        // element-plus component. (useLocale ported in WU-8/select —
-        // dropdown/date-picker/time-picker/table should re-point to
-        // @flash-global66/g-hooks instead of re-implementing.)
+        // Not yet migrated off element-plus internals; the guard stays
+        // lifted until it is ported. (ep-extraction-v5 migrated pagination,
+        // input-number, collapse and table — now guarded above.)
         'components/toast/**',
-        'components/table/**',
-        'components/pagination/**',
-        'components/input-number/**',
-        'components/collapse/**',
       ],
       rules: {
         'no-restricted-imports': [
