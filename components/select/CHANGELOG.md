@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.4.2...@flash-global66/g-select@0.4.3) (2026-07-12)
+
+### Bug Fixes
+
+- **g-hooks,select:** use Symbol.for for new injection keys and align dep ranges ([7d5c245](https://github.com/Flash-Global66/global-design-system/commit/7d5c245914617343a448eb5efaf95344ca32abfe))
+
 ## [0.4.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.4.1...@flash-global66/g-select@0.4.2) (2026-07-12)
 
 ### Bug Fixes

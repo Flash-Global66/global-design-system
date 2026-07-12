@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.10.1...@flash-global66/g-hooks@0.11.0) (2026-07-12)
+
+### Bug Fixes
+
+- **g-hooks,select:** use Symbol.for for new injection keys and align dep ranges ([7d5c245](https://github.com/Flash-Global66/global-design-system/commit/7d5c245914617343a448eb5efaf95344ca32abfe))
+
+### Features
+
+- **g-hooks:** add useEmptyValues/useCalcInputWidth/useLocale ported from element-plus ([6feecef](https://github.com/Flash-Global66/global-design-system/commit/6feecef830030aa72a8607e01172cc115337e9bc)), closes [#3](https://github.com/Flash-Global66/global-design-system/issues/3)
+
 ## [0.10.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-hooks@0.10.0...@flash-global66/g-hooks@0.10.1) (2026-07-12)
 
 ### Bug Fixes

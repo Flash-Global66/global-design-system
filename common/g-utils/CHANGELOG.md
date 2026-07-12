@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.7.1...@flash-global66/g-utils@0.8.0) (2026-07-12)
+
+### Features
+
+- **g-utils:** add ClickOutside directive + escapeStringRegexp + EmitFn type ported from element-plus ([5de58d5](https://github.com/Flash-Global66/global-design-system/commit/5de58d51b5707adf1d75ace60ac5e8d094db8a72))
+
 ## [0.7.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.7.0...@flash-global66/g-utils@0.7.1) (2026-07-12)
 
 ### Bug Fixes
