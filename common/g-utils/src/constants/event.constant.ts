@@ -10,6 +10,9 @@ export const UPDATE_MODEL_EVENT = 'update:modelValue';
 /** Nombre del evento estándar para cambios confirmados de valor. */
 export const CHANGE_EVENT = 'change';
 
+/** Nombre del evento estándar de entrada (mientras el usuario escribe). */
+export const INPUT_EVENT = 'input';
+
 /**
  * Mapa de códigos de tecla (`KeyboardEvent.code`) usados en interacciones de teclado.
  *
