@@ -26,10 +26,10 @@ export const defaultInitialZIndex = 2000;
 
 // Para SSR.
 export const ZINDEX_INJECTION_KEY: InjectionKey<ElZIndexInjectionContext> =
-  Symbol('elZIndexContextKey');
+  Symbol.for('elZIndexContextKey');
 
 export const zIndexContextKey: InjectionKey<Ref<number | undefined>> =
-  Symbol('zIndexContextKey');
+  Symbol.for('zIndexContextKey');
 
 export const useZIndex = (zIndexOverrides?: Ref<number>) => {
   const increasingInjection = getCurrentInstance()

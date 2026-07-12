@@ -39,4 +39,4 @@ export interface DialogContext {
 }
 
 export const dialogInjectionKey: InjectionKey<DialogContext> =
-  Symbol('dialogInjectionKey');
+  Symbol.for('dialogInjectionKey');

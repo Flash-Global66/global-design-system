@@ -17,7 +17,7 @@ const statePrefix = 'is-';
  * // En el componente proveedor:
  * provide(namespaceContextKey, ref('gui'))
  */
-export const namespaceContextKey: InjectionKey<Ref<string>> = Symbol(
+export const namespaceContextKey: InjectionKey<Ref<string>> = Symbol.for(
   'namespaceContextKey',
 );
 
