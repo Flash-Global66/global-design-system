@@ -45,7 +45,6 @@ module.exports = {
         // element-plus component. (useLocale ported in WU-8/select —
         // dropdown/date-picker/time-picker/table should re-point to
         // @flash-global66/g-hooks instead of re-implementing.)
-        'components/input-tag/**',
         'components/toast/**',
         'components/table/**',
         'components/pagination/**',

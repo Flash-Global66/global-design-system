@@ -5,18 +5,16 @@ import {
   isNumber,
   isString,
   isUndefined,
-} from 'element-plus/es/utils/index.mjs'
-import { tagProps } from '@flash-global66/g-tag'
-import {
   CHANGE_EVENT,
   EVENT_CODE,
   INPUT_EVENT,
   UPDATE_MODEL_EVENT,
-} from 'element-plus/es/constants/index.mjs'
-import { IconString } from '@flash-global66/g-icon-font'
+} from '@flash-global66/g-utils';
+import { tagProps } from '@flash-global66/g-tag';
+import { IconString } from '@flash-global66/g-icon-font';
 
-import type { ExtractPropTypes } from 'vue'
-import type { PopperEffect } from 'element-plus/es/components/popper'
+import type { ExtractPropTypes } from 'vue';
+import type { PopperEffect } from '@flash-global66/g-popper';
 
 export const inputTagProps = buildProps({
   /**
@@ -174,7 +172,7 @@ export const inputTagProps = buildProps({
    * @description native `aria-label` attribute
    */
   ariaLabel: String,
-} as const)
+} as const);
 
 export const inputTagEmits = {
   [UPDATE_MODEL_EVENT]: (value?: string[] | string) =>
@@ -190,7 +188,7 @@ export const inputTagEmits = {
   focus: (evt: FocusEvent) => evt instanceof FocusEvent,
   blur: (evt: FocusEvent) => evt instanceof FocusEvent,
   clear: () => true,
-}
+};
 
-export type InputTagProps = ExtractPropTypes<typeof inputTagProps>
-export type InputTagEmits = typeof inputTagEmits
+export type InputTagProps = ExtractPropTypes<typeof inputTagProps>;
+export type InputTagEmits = typeof inputTagEmits;

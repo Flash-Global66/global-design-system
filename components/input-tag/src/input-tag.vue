@@ -2,7 +2,10 @@
   <div :class="ns.e('container')">
     <div
       ref="wrapperRef"
-      :class="[containerKls, ns.is('error', isError || formItem?.shouldShowError)]"
+      :class="[
+        containerKls,
+        ns.is('error', isError || formItem?.shouldShowError),
+      ]"
       :style="containerStyle"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
@@ -14,7 +17,10 @@
         <div
           v-for="(item, index) in showTagList"
           :key="`${index}-${item}`"
-          :class="[ns.e('tag-wrapper'), closable && draggable ? ns.is('draggable', true) : '']"
+          :class="[
+            ns.e('tag-wrapper'),
+            closable && draggable ? ns.is('draggable', true) : '',
+          ]"
           :draggable="closable && draggable ? true : undefined"
           @dragstart="(event: DragEvent) => handleDragStart(event, index)"
           @dragover="(event: DragEvent) => handleDragOver(event, index)"
@@ -36,7 +42,9 @@
           </g-tag>
         </div>
         <g-tooltip
-          v-if="collapseTags && modelValue && modelValue.length > maxCollapseTags"
+          v-if="
+            collapseTags && modelValue && modelValue.length > maxCollapseTags
+          "
           ref="tagTooltipRef"
           :disabled="!collapseTagsTooltip"
           :fallback-placements="['bottom', 'top', 'right', 'left']"
@@ -138,36 +146,36 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useCalcInputWidth } from 'element-plus'
-import { GTag } from '@flash-global66/g-tag'
-import { GTooltip } from '@flash-global66/g-tooltip'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { useFormItem, useFormItemInputId } from '@flash-global66/g-form'
+import { computed } from 'vue';
+import { useCalcInputWidth } from '@flash-global66/g-hooks';
+import { GTag } from '@flash-global66/g-tag';
+import { GTooltip } from '@flash-global66/g-tooltip';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { useFormItem, useFormItemInputId } from '@flash-global66/g-form';
 
-import { inputTagEmits, inputTagProps } from './input-tag'
+import { inputTagEmits, inputTagProps } from './input-tag';
 import {
   useDragTag,
   useHovering,
   useInputTag,
   useInputTagDom,
-} from './composables'
+} from './composables';
 
 defineOptions({
   name: 'GInputTag',
   inheritAttrs: false,
-})
+});
 
-const props = defineProps(inputTagProps)
-const emit = defineEmits(inputTagEmits)
+const props = defineProps(inputTagProps);
+const emit = defineEmits(inputTagEmits);
 
 // `useInputTag` expects a generic emit signature; widen the typed defineEmits fn.
-const emitFn = emit as unknown as (event: string, ...args: unknown[]) => void
+const emitFn = emit as unknown as (event: string, ...args: unknown[]) => void;
 
-const { formItem } = useFormItem()
+const { formItem } = useFormItem();
 const { inputId } = useFormItemInputId(props, {
   formItemContext: formItem,
-})
+});
 
 const {
   inputRef,
@@ -196,10 +204,10 @@ const {
   handleBlur,
   focus,
   blur,
-} = useInputTag({ props, emit: emitFn, formItem })
+} = useInputTag({ props, emit: emitFn, formItem });
 
-const { hovering, handleMouseEnter, handleMouseLeave } = useHovering()
-const { calculatorRef, inputStyle } = useCalcInputWidth()
+const { hovering, handleMouseEnter, handleMouseLeave } = useHovering();
+const { calculatorRef, inputStyle } = useCalcInputWidth();
 
 const {
   dropIndicatorRef,
@@ -207,7 +215,7 @@ const {
   handleDragStart,
   handleDragOver,
   handleDragEnd,
-} = useDragTag({ wrapperRef, handleDragged, afterDragged: focus })
+} = useDragTag({ wrapperRef, handleDragged, afterDragged: focus });
 
 const {
   ns,
@@ -227,30 +235,31 @@ const {
   disabled,
   inputValue,
   size,
-})
+});
 
 const isError = computed(() => {
   return Boolean(
     formItem?.shouldShowErrorChild ||
-      (formItem?.showMessage === 'child' && formItem?.validateState === 'error')
-  )
-})
+      (formItem?.showMessage === 'child' &&
+        formItem?.validateState === 'error'),
+  );
+});
 
-const error = computed(() => formItem?.validateMessage)
+const error = computed(() => formItem?.validateMessage);
 
 const helpTextKls = computed(() => [
   ns.e('help-text'),
   {
     [ns.e('help-error')]: isError.value,
   },
-])
+]);
 
 const hasHelpInfo = computed(() => {
-  return error.value || props.helpText || formItem?.$el
-})
+  return error.value || props.helpText || formItem?.$el;
+});
 
 defineExpose({
   focus,
   blur,
-})
+});
 </script>
