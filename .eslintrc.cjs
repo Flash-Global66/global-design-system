@@ -42,7 +42,6 @@ module.exports = {
         'components/menu/**',
         'components/config-provider/**',
         'components/popover/**',
-        'components/radio-group/**',
         'components/form-item/**',
         'components/skeleton/**',
         'components/infinite-scroll/**',
