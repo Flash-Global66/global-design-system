@@ -1232,6 +1232,8 @@ __metadata:
 "@flash-global66/g-infinite-scroll@workspace:components/infinite-scroll":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-infinite-scroll@workspace:components/infinite-scroll"
+  dependencies:
+    "@flash-global66/g-utils": "npm:^0.15.5"
   languageName: unknown
   linkType: soft
 
