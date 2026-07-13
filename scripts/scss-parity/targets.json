@@ -30,5 +30,13 @@
   "g-utils-tooltip-v2": "common/g-utils/styles/tooltip-v2.scss",
   "g-utils-option": "common/g-utils/styles/option.scss",
   "g-utils-virtual-list": "common/g-utils/styles/virtual-list.scss",
-  "g-utils-overlay-theme": "common/g-utils/styles/overlay.scss"
+  "g-utils-overlay-theme": "common/g-utils/styles/overlay.scss",
+  "tag-theme": "components/tag/src/styles/tag.scss",
+  "tag": "components/tag/src/tag.styles.scss",
+  "progress-theme": "components/progress/src/styles/progress.scss",
+  "progress": "components/progress/src/progress.styles.scss",
+  "collapse-theme": "components/collapse/src/styles/collapse.scss",
+  "collapse": "components/collapse/src/collapse.styles.scss",
+  "segmented-theme": "components/segmented/src/styles/segmented.scss",
+  "segmented": "components/segmented/src/segmented.styles.scss"
 }

@@ -1,0 +1,249 @@
+/* Element Chalk Variables */
+.gui-tag {
+  --gui-tag-font-size: 12px;
+  --gui-tag-border-radius: 4px;
+  --gui-tag-border-radius-rounded: 9999px;
+}
+
+.gui-tag {
+  background-color: var(--gui-tag-bg-color);
+  border-color: var(--gui-tag-border-color);
+  color: var(--gui-tag-text-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  height: 24px;
+  padding: 0 9px;
+  font-size: var(--gui-tag-font-size);
+  line-height: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--gui-tag-border-radius);
+  box-sizing: border-box;
+  white-space: nowrap;
+  --gui-icon-size: 14px;
+  --gui-tag-bg-color: var(--gui-color-primary-light-9);
+  --gui-tag-border-color: var(--gui-color-primary-light-8);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-color-primary-light-9);
+  --gui-tag-border-color: var(--gui-color-primary-light-8);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-color-success-light-9);
+  --gui-tag-border-color: var(--gui-color-success-light-8);
+  --gui-tag-hover-color: var(--gui-color-success);
+}
+.gui-tag.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-color-warning-light-9);
+  --gui-tag-border-color: var(--gui-color-warning-light-8);
+  --gui-tag-hover-color: var(--gui-color-warning);
+}
+.gui-tag.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-color-danger-light-9);
+  --gui-tag-border-color: var(--gui-color-danger-light-8);
+  --gui-tag-hover-color: var(--gui-color-danger);
+}
+.gui-tag.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-color-error-light-9);
+  --gui-tag-border-color: var(--gui-color-error-light-8);
+  --gui-tag-hover-color: var(--gui-color-error);
+}
+.gui-tag.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-color-info-light-9);
+  --gui-tag-border-color: var(--gui-color-info-light-8);
+  --gui-tag-hover-color: var(--gui-color-info);
+}
+.gui-tag.is-hit {
+  border-color: var(--gui-color-primary);
+}
+
+.gui-tag.is-round {
+  border-radius: var(--gui-tag-border-radius-rounded);
+}
+
+.gui-tag .gui-tag__close {
+  flex-shrink: 0;
+  color: var(--gui-tag-text-color);
+}
+.gui-tag .gui-tag__close:hover {
+  color: var(--gui-color-white);
+  background-color: var(--gui-tag-hover-color);
+}
+.gui-tag.gui-tag--primary {
+  --gui-tag-text-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--success {
+  --gui-tag-text-color: var(--gui-color-success);
+}
+.gui-tag.gui-tag--warning {
+  --gui-tag-text-color: var(--gui-color-warning);
+}
+.gui-tag.gui-tag--danger {
+  --gui-tag-text-color: var(--gui-color-danger);
+}
+.gui-tag.gui-tag--error {
+  --gui-tag-text-color: var(--gui-color-error);
+}
+.gui-tag.gui-tag--info {
+  --gui-tag-text-color: var(--gui-color-info);
+}
+.gui-tag .gui-icon {
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: calc(var(--gui-icon-size) - 2px);
+  height: var(--gui-icon-size);
+  width: var(--gui-icon-size);
+}
+.gui-tag .gui-tag__close {
+  margin-left: 6px;
+}
+.gui-tag--dark {
+  --gui-tag-text-color: var(--gui-color-white);
+  --gui-tag-bg-color: var(--gui-color-primary);
+  --gui-tag-border-color: var(--gui-color-primary);
+  --gui-tag-hover-color: var(--gui-color-primary-light-3);
+}
+.gui-tag--dark.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-color-primary);
+  --gui-tag-border-color: var(--gui-color-primary);
+  --gui-tag-hover-color: var(--gui-color-primary-light-3);
+}
+.gui-tag--dark.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-color-success);
+  --gui-tag-border-color: var(--gui-color-success);
+  --gui-tag-hover-color: var(--gui-color-success-light-3);
+}
+.gui-tag--dark.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-color-warning);
+  --gui-tag-border-color: var(--gui-color-warning);
+  --gui-tag-hover-color: var(--gui-color-warning-light-3);
+}
+.gui-tag--dark.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-color-danger);
+  --gui-tag-border-color: var(--gui-color-danger);
+  --gui-tag-hover-color: var(--gui-color-danger-light-3);
+}
+.gui-tag--dark.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-color-error);
+  --gui-tag-border-color: var(--gui-color-error);
+  --gui-tag-hover-color: var(--gui-color-error-light-3);
+}
+.gui-tag--dark.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-color-info);
+  --gui-tag-border-color: var(--gui-color-info);
+  --gui-tag-hover-color: var(--gui-color-info-light-3);
+}
+.gui-tag--dark.gui-tag--primary {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--success {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--warning {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--danger {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--error {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--info {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+
+.gui-tag--plain {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-primary-light-5);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag--plain.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-primary-light-5);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag--plain.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-success-light-5);
+  --gui-tag-hover-color: var(--gui-color-success);
+}
+.gui-tag--plain.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-warning-light-5);
+  --gui-tag-hover-color: var(--gui-color-warning);
+}
+.gui-tag--plain.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-danger-light-5);
+  --gui-tag-hover-color: var(--gui-color-danger);
+}
+.gui-tag--plain.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-error-light-5);
+  --gui-tag-hover-color: var(--gui-color-error);
+}
+.gui-tag--plain.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-info-light-5);
+  --gui-tag-hover-color: var(--gui-color-info);
+}
+
+.gui-tag.is-closable {
+  padding-right: 5px;
+}
+.gui-tag--large {
+  padding: 0 11px;
+  height: 32px;
+  --gui-icon-size: 16px;
+}
+.gui-tag--large .gui-tag__close {
+  margin-left: 8px;
+}
+.gui-tag--large.is-closable {
+  padding-right: 7px;
+}
+
+.gui-tag--small {
+  padding: 0 7px;
+  height: 20px;
+  --gui-icon-size: 12px;
+}
+.gui-tag--small .gui-tag__close {
+  margin-left: 4px;
+}
+.gui-tag--small.is-closable {
+  padding-right: 3px;
+}
+
+.gui-tag--small .gui-icon-close {
+  transform: scale(0.8);
+}
+
+.gui-tag.gui-tag--primary.is-hit {
+  border-color: var(--gui-color-primary);
+}
+
+.gui-tag.gui-tag--success.is-hit {
+  border-color: var(--gui-color-success);
+}
+
+.gui-tag.gui-tag--warning.is-hit {
+  border-color: var(--gui-color-warning);
+}
+
+.gui-tag.gui-tag--danger.is-hit {
+  border-color: var(--gui-color-danger);
+}
+
+.gui-tag.gui-tag--error.is-hit {
+  border-color: var(--gui-color-error);
+}
+
+.gui-tag.gui-tag--info.is-hit {
+  border-color: var(--gui-color-info);
+}
