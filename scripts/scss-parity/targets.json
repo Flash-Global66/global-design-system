@@ -14,5 +14,6 @@
   "input": "components/input/src/input.styles.scss",
   "form": "components/form/src/form.styles.scss",
   "search-input": "components/search-input/src/search-input.styles.scss",
-  "switch": "components/switch/src/switch.styles.scss"
+  "switch": "components/switch/src/switch.styles.scss",
+  "input-number": "components/input-number/src/input-number.styles.scss"
 }
