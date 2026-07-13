@@ -67,5 +67,6 @@
   "time-spinner-theme": "components/time-picker/src/styles/time-spinner.scss",
   "time-picker-theme": "components/time-picker/src/styles/time-picker.scss",
   "time-range-picker-theme": "components/time-picker/src/styles/time-range-picker.scss",
-  "time-picker": "components/time-picker/src/time-picker.styles.scss"
+  "time-picker": "components/time-picker/src/time-picker.styles.scss",
+  "tooltip": "components/tooltip/src/tooltip.styles.scss"
 }
