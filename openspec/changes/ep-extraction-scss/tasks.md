@@ -50,14 +50,14 @@ Chain strategy: stacked-to-main
 
 ## Phase 2: config-provider Vertical Slice (WU2 / PR1b, base = PR1a)
 
-- [ ] 2.1 Capture golden pre-migration baseline of compiled `config.styles.scss` CSS into `scripts/scss-parity/baseline/config-provider.css`
-- [ ] 2.2 Modify `components/config-provider/config.styles.scss` — add DS-owned bootstrap (`@forward '@flash-global66/g-utils/tokens' with ($colors:(brand))`; `@use '.../base'`) AND KEEP the element-plus `@forward '.../mixins/config.scss' with ($namespace:'gui')` bridge so not-yet-migrated legacy files still resolve `.gui-*` during the incremental rollout. Do NOT remove the EP `@forward` here (see task 4.5)
-- [ ] 2.3 Run `yarn scss:parity` on config-provider — confirm empty diff vs baseline
-- [ ] 2.4 Modify `common/g-utils/src/composables/useNamespace.ts` — export `defaultNamespace`
-- [ ] 2.5 Modify `components/config-provider/ConfigProvider.vue` — DS-native `<section><slot/></section>`; no `ElConfigProvider`; `ns = ref(defaultNamespace)`; call EP public `provideGlobalConfig({...props, namespace: ns.value})`; `provide(namespaceContextKey, ns)`; preserve props/emits/slots/attrs fallthrough; no `any`; comments/JSDoc in neutral Spanish
+- [x] 2.1 Capture golden pre-migration baseline of compiled `config.styles.scss` CSS into `scripts/scss-parity/baseline/config-provider.css`
+- [x] 2.2 Modify `components/config-provider/config.styles.scss` — add DS-owned bootstrap (`@forward '@flash-global66/g-utils/tokens' with ($colors:(brand))`; `@use '.../base'`) AND KEEP the element-plus `@forward '.../mixins/config.scss' with ($namespace:'gui')` bridge so not-yet-migrated legacy files still resolve `.gui-*` during the incremental rollout. Do NOT remove the EP `@forward` here (see task 4.5)
+- [x] 2.3 Run `yarn scss:parity` on config-provider — confirm empty diff vs baseline
+- [x] 2.4 Modify `common/g-utils/src/composables/useNamespace.ts` — export `defaultNamespace`
+- [x] 2.5 Modify `components/config-provider/ConfigProvider.vue` — DS-native `<section><slot/></section>`; no `ElConfigProvider`; `ns = ref(defaultNamespace)`; call EP public `provideGlobalConfig({...props, namespace: ns.value})`; `provide(namespaceContextKey, ns)`; preserve props/emits/slots/attrs fallthrough; no `any`; comments/JSDoc in neutral Spanish
 - [x] 2.6 **GATE (blocking) — DONE/VERIFIED GREEN**: front-b2b's committed `dist/` emits `.gui-*` exclusively (0 `.el-*`); mechanism = `ui-framework-b2b/index.scss` `@use`s config-provider FIRST, then all 48 legacy `styles.scss`, in one Sass compilation (`App.vue:104`). Verified 2026-07-12 (engram #314). Conclusion: the EP `@forward` bridge in config-provider (task 2.2) is a REQUIRED part of the incremental path, removed only in task 4.5
-- [ ] 2.7 Write Vitest test: ConfigProvider provides `gui` to DS `namespaceContextKey` AND spies EP `provideGlobalConfig` call; descendant `useNamespace()` resolves `gui`
-- [ ] 2.8 Verify: `yarn scss:parity` clean; `yarn test:run` green; CI `verify` lint clean on changed files
+- [x] 2.7 Write Vitest test: ConfigProvider provides `gui` to DS `namespaceContextKey` AND spies EP `provideGlobalConfig` call; descendant `useNamespace()` resolves `gui`
+- [x] 2.8 Verify: `yarn scss:parity` clean; `yarn test:run` green; CI `verify` lint clean on changed files
 
 ## Phase 3: Shared-Mixin Repoint (WU3 / PR2.x, chained per component group, base = PR1b)
 

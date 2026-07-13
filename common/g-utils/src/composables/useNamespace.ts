@@ -2,7 +2,7 @@ import { computed, getCurrentInstance, inject, ref, unref } from 'vue';
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
 
 /** Espacio de nombres del Global Design System. */
-const defaultNamespace = 'gui';
+export const defaultNamespace = 'gui';
 
 /** Prefijo fijo para clases de estado BEM (ej: `is-disabled`). */
 const statePrefix = 'is-';
