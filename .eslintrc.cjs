@@ -43,7 +43,6 @@ module.exports = {
         'components/config-provider/**',
         'components/popover/**',
         'components/form-item/**',
-        'components/skeleton/**',
         'components/infinite-scroll/**',
       ],
       rules: {
