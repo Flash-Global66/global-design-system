@@ -2,7 +2,7 @@
   "name": "@flash-global66/g-roving-focus-group",
   "description": "A roving focus group component for accessibility",
   "author": "Global66",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -26,8 +26,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.12",
-    "@flash-global66/g-utils": "^0.15.4"
+    "@flash-global66/g-hooks": "^0.11.13",
+    "@flash-global66/g-utils": "^0.15.5"
   },
   "peerDependencies": {
     "@flash-global66/g-collection": "^0.1.1",
