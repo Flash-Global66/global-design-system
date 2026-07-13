@@ -1,0 +1,124 @@
+/* Element Chalk Variables */
+.gui-icon-button {
+  @apply rounded-full h-12 w-12 duration-200 relative;
+}
+.gui-icon-button.is-disabled {
+  @apply cursor-not-allowed;
+}
+
+.gui-icon-button--variant-grey {
+  @apply bg-transparent text-grey-500;
+}
+.gui-icon-button--variant-grey:hover:not(.is-disabled) .hover-effect {
+  @apply bg-grey-100;
+}
+.gui-icon-button--variant-grey:active:not(.is-disabled) .hover-effect {
+  @apply bg-grey-400;
+}
+.gui-icon-button--variant-grey.is-disabled {
+  @apply bg-transparent text-disabled-txt;
+}
+.gui-icon-button--variant-grey.gui-icon-button--border {
+  --color-border: theme(colors.grey.500);
+  border-color: var(--color-border);
+}
+
+.gui-icon-button--variant-black {
+  @apply bg-transparent text-grey-700;
+}
+.gui-icon-button--variant-black:hover:not(.is-disabled) .hover-effect {
+  @apply bg-grey-100;
+}
+.gui-icon-button--variant-black:active:not(.is-disabled) .hover-effect {
+  @apply bg-grey-400;
+}
+.gui-icon-button--variant-black.is-disabled {
+  @apply bg-transparent text-disabled-txt;
+}
+.gui-icon-button--variant-black.gui-icon-button--border {
+  --color-border: theme(colors.grey.700);
+  border-color: var(--color-border);
+}
+
+.gui-icon-button--variant-blue {
+  @apply bg-transparent text-primary-def;
+}
+.gui-icon-button--variant-blue:hover:not(.is-disabled) .hover-effect {
+  @apply bg-nightBlue-400;
+}
+.gui-icon-button--variant-blue:active:not(.is-disabled) .hover-effect {
+  @apply bg-nightBlue-700;
+}
+.gui-icon-button--variant-blue.is-disabled {
+  @apply bg-transparent text-disabled-txt;
+}
+.gui-icon-button--variant-blue.gui-icon-button--border {
+  --color-border: theme(colors.primary-def);
+  border-color: var(--color-border);
+}
+
+.gui-icon-button--border {
+  @apply rounded-sm border;
+}
+.gui-icon-button--border.is-disabled {
+  --color-border-disabled: theme(colors.grey.300);
+  border-color: var(--color-border-disabled);
+}
+.gui-icon-button--border .hover-effect {
+  @apply rounded-sm;
+}
+
+.gui-icon-button--rounded {
+  @apply rounded-full;
+}
+.gui-icon-button--rounded .hover-effect {
+  @apply rounded-full;
+}
+
+.gui-icon-button--small {
+  @apply h-8 w-8;
+}
+.gui-icon-button--small .gui-icon-button__icon {
+  height: 1em;
+  vertical-align: -0.2em;
+}
+
+.gui-icon-button--medium .gui-icon-button__icon {
+  height: 1.25em;
+  vertical-align: -0.3em;
+}
+
+.gui-icon-button:active .hover-effect {
+  @apply bg-primary-def-press;
+}
+.gui-icon-button:hover .hover-effect {
+  @apply w-full h-full;
+}
+
+.hover-effect {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-center bg-opacity-20 opacity-20 ease-out;
+  transition: background 0.8s, width 0.4s, height 0.4s;
+}
+.gui-icon-button__ripple {
+  @apply absolute rounded-full pointer-events-none z-10 bg-white;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  transform-origin: center;
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.ripple-enter-active,
+.ripple-leave-active {
+  animation: ripple-effect 0.6s ease-out forwards;
+}

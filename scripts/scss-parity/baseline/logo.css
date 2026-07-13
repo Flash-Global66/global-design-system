@@ -1,0 +1,30 @@
+/* Element Chalk Variables */
+.gui-logo {
+  @apply block object-contain max-w-full max-h-full;
+}
+.gui-logo__container {
+  @apply flex items-center justify-center box-border;
+}
+
+.gui-logo__color {
+  @apply inline-block shrink-0;
+}
+
+.gui-logo__placeholder {
+  @apply flex items-center justify-center bg-primary-bg rounded-sm w-full h-full text-center p-2 text-terciary-txt font-medium leading-none;
+}
+.gui-logo__placeholder.text-size-2xs {
+  @apply text-1 p-0.5;
+}
+.gui-logo__placeholder.text-size-xs, .gui-logo__placeholder.text-size-sm {
+  @apply text-2;
+}
+.gui-logo__placeholder.text-size-md {
+  @apply text-3;
+}
+.gui-logo__placeholder.text-size-lg, .gui-logo__placeholder.text-size-xl {
+  @apply text-4;
+}
+.gui-logo__placeholder.text-size-2xl, .gui-logo__placeholder.text-size-3xl {
+  @apply text-10;
+}
