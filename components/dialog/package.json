@@ -32,7 +32,6 @@
     "@flash-global66/g-utils": "^0.15.5"
   },
   "peerDependencies": {
-    "element-plus": "^2.9.7",
     "vue": "^3.2.0"
   },
   "publishConfig": {

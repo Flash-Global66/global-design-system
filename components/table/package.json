@@ -41,7 +41,6 @@
   },
   "peerDependencies": {
     "async-validator": "^4.2.5",
-    "element-plus": "^2.9.0",
     "lodash-unified": "^1.0.3",
     "vue": "^3.2.0"
   },
