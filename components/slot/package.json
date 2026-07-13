@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-slot",
   "author": "Global66",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -31,7 +31,7 @@
     "vue": "^3.2.0"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.10",
-    "@flash-global66/g-utils": "^0.15.2"
+    "@flash-global66/g-hooks": "^0.11.11",
+    "@flash-global66/g-utils": "^0.15.3"
   }
 }
