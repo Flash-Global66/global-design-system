@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-dialog",
   "author": "Global66",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -23,13 +23,13 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@flash-global66/g-button": "^0.5.16",
-    "@flash-global66/g-focus-trap": "^0.1.16",
-    "@flash-global66/g-hooks": "^0.11.7",
-    "@flash-global66/g-icon-font": "^0.25.18",
-    "@flash-global66/g-overlay": "^0.0.21",
-    "@flash-global66/g-teleport": "^0.0.23",
-    "@flash-global66/g-utils": "^0.14.0"
+    "@flash-global66/g-button": "^0.5.17",
+    "@flash-global66/g-focus-trap": "^0.1.17",
+    "@flash-global66/g-hooks": "^0.11.8",
+    "@flash-global66/g-icon-font": "^0.25.19",
+    "@flash-global66/g-overlay": "^0.0.22",
+    "@flash-global66/g-teleport": "^0.0.24",
+    "@flash-global66/g-utils": "^0.15.0"
   },
   "peerDependencies": {
     "element-plus": "^2.9.7",

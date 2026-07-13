@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-drawer",
   "author": "Global66",
-  "version": "0.3.16",
+  "version": "0.3.17",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -23,7 +23,7 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@flash-global66/g-utils": "^0.14.0"
+    "@flash-global66/g-utils": "^0.15.0"
   },
   "peerDependencies": {
     "@flash-global66/g-button": "^0.1.0",

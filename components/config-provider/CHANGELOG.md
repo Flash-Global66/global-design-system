@@ -3,72 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 0.0.8 (2025-03-31)
-
+# [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-config-provider@0.0.8...@flash-global66/g-config-provider@0.1.0) (2026-07-13)
 
 ### Bug Fixes
 
-* change name config provider ([e58e32c](https://github.com/Flash-Global66/global-design-system/commit/e58e32c585522cabb96588fe88adffa1bea7ed80))
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
+- **config-provider:** defer DS-owned token emission to final slice ([825e695](https://github.com/Flash-Global66/global-design-system/commit/825e6953931c622657b419ba4998fbbb7532aab9)), closes [#409](https://github.com/Flash-Global66/global-design-system/issues/409) [#203478](https://github.com/Flash-Global66/global-design-system/issues/203478)
 
+### Features
 
+- **config-provider:** DS-native provider + DS-owned SCSS bootstrap ([d862a0f](https://github.com/Flash-Global66/global-design-system/commit/d862a0fe361ac0e77239e23e356989ccb6379804))
 
+## 0.0.8 (2025-03-31)
 
+### Bug Fixes
+
+- change name config provider ([e58e32c](https://github.com/Flash-Global66/global-design-system/commit/e58e32c585522cabb96588fe88adffa1bea7ed80))
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.7 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.6 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.5 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.4 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## [0.0.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-config-element@0.0.2...@flash-global66/g-config-element@0.0.3) (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.2 (2025-03-28)
 
