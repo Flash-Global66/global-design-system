@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-form",
   "author": "Global66",
-  "version": "0.2.23",
+  "version": "0.2.25",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,8 +29,8 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.10",
-    "@flash-global66/g-utils": "^0.15.2"
+    "@flash-global66/g-hooks": "^0.11.12",
+    "@flash-global66/g-utils": "^0.15.4"
   },
   "peerDependencies": {
     "element-plus": "^2.9.0",

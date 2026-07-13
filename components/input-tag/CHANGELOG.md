@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-input-tag@0.3.8...@flash-global66/g-input-tag@0.3.9) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-input-tag
+
+## [0.3.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-input-tag@0.3.7...@flash-global66/g-input-tag@0.3.8) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-input-tag
+
 ## [0.3.7](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-input-tag@0.3.6...@flash-global66/g-input-tag@0.3.7) (2026-07-13)
 
 **Note:** Version bump only for package @flash-global66/g-input-tag

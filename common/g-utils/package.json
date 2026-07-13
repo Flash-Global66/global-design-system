@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-utils",
-  "version": "0.15.2",
+  "version": "0.15.4",
   "author": "Global66",
   "license": "MIT",
   "buildable": false,
@@ -17,7 +17,12 @@
     "./transition": "./styles/transition.scss",
     "./icon": "./styles/icon.scss",
     "./popup": "./styles/popup.scss",
-    "./popper": "./styles/popper.scss"
+    "./popper": "./styles/popper.scss",
+    "./scrollbar": "./styles/scrollbar.scss",
+    "./tooltip-v2": "./styles/tooltip-v2.scss",
+    "./option": "./styles/option.scss",
+    "./virtual-list": "./styles/virtual-list.scss",
+    "./overlay": "./styles/overlay.scss"
   },
   "sideEffects": [
     "**/*.scss",
