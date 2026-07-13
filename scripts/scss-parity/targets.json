@@ -15,5 +15,13 @@
   "form": "components/form/src/form.styles.scss",
   "search-input": "components/search-input/src/search-input.styles.scss",
   "switch": "components/switch/src/switch.styles.scss",
-  "input-number": "components/input-number/src/input-number.styles.scss"
+  "input-number": "components/input-number/src/input-number.styles.scss",
+  "g-utils-popup": "common/g-utils/styles/popup.scss",
+  "dialog": "components/dialog/src/dialog.styles.scss",
+  "dialog-alert": "components/dialog-alert/src/dialog-alert.styles.scss",
+  "overlay": "components/overlay/overlay.styles.scss",
+  "scrollbar": "components/scrollbar/src/scrollbar.styles.scss",
+  "pagination": "components/pagination/src/pagination.styles.scss",
+  "quote": "components/quote/src/quote.styles.scss",
+  "toast": "components/toast/src/toast.styles.scss"
 }
