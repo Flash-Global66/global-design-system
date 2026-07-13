@@ -38,5 +38,17 @@
   "collapse-theme": "components/collapse/src/styles/collapse.scss",
   "collapse": "components/collapse/src/collapse.styles.scss",
   "segmented-theme": "components/segmented/src/styles/segmented.scss",
-  "segmented": "components/segmented/src/segmented.styles.scss"
+  "segmented": "components/segmented/src/segmented.styles.scss",
+  "checkbox-theme": "components/checkbox/src/styles/checkbox.scss",
+  "checkbox": "components/checkbox/src/checkbox.styles.scss",
+  "radio-theme": "components/radio/src/styles/radio.scss",
+  "radio": "components/radio/src/radio.styles.scss",
+  "drawer-theme": "components/drawer/src/styles/drawer.scss",
+  "drawer": "components/drawer/src/drawer.styles.scss",
+  "dropdown-theme": "components/dropdown/src/styles/dropdown.scss",
+  "dropdown": "components/dropdown/src/dropdown.styles.scss",
+  "input-tag-theme": "components/input-tag/src/styles/input-tag.scss",
+  "input-tag": "components/input-tag/src/input-tag.styles.scss",
+  "g-utils-button-mixins": "common/g-utils/styles/button-mixins.scss",
+  "g-utils-radio-group": "common/g-utils/styles/radio-group.scss"
 }

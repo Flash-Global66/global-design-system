@@ -1,12 +1,12 @@
 @use "sass:map";
 
-@use "element-plus/theme-chalk/src/input-tag.scss" as *;
+@use "./styles/input-tag.scss" as *;
 @use "@flash-global66/g-tag/src/tag.styles.scss" as *;
 @use "@flash-global66/g-tooltip/styles.scss" as *;
-@use "element-plus/theme-chalk/src/mixins/mixins" as *;
-@use "element-plus/theme-chalk/src/mixins/utils" as *;
-@use "element-plus/theme-chalk/src/mixins/var" as *;
-@use "element-plus/theme-chalk/src/common/var" as *;
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
 
 @include b("input-tag") {
   @apply relative flex items-center bg-white py-sm px-xs border border-disabled-bd rounded-md min-h-12 gap-xs shadow-none text-primary-txt font-medium text-4 transition-all duration-200 ease-in;

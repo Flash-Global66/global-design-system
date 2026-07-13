@@ -1,3 +1,4 @@
+/* Element Chalk Variables */
 .gui-quote {
   @apply flex flex-col gap-xs;
 }
