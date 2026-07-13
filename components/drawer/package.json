@@ -32,7 +32,6 @@
     "@flash-global66/g-icon-font": "^0.0.8",
     "@flash-global66/g-overlay": "^0.0.7",
     "@flash-global66/g-teleport": "^0.0.6",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "publishConfig": {

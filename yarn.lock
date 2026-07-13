@@ -945,7 +945,6 @@ __metadata:
     "@flash-global66/g-icon-button": 0.2.2
     "@flash-global66/g-icon-font": 0.6.0
     "@flash-global66/g-progress": 0.2.0
-    element-plus: 2.9.0
     vue: 3.2.0
   languageName: unknown
   linkType: soft
@@ -991,7 +990,6 @@ __metadata:
   peerDependencies:
     "@flash-global66/g-form": ^0.2.0
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
@@ -1006,7 +1004,6 @@ __metadata:
     "@flash-global66/g-dropdown": ^0.1.0
     "@flash-global66/g-icon-font": ^0.11.0
     "@flash-global66/g-popover": ^0.0.7
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1030,7 +1027,6 @@ __metadata:
     "@flash-global66/g-icon-font": "npm:^0.25.24"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1060,7 +1056,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@vueuse/core": ^13.0.0
-    element-plus: ^2.0.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1078,7 +1073,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     dayjs: ^1.11.13
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1093,7 +1087,6 @@ __metadata:
     "@flash-global66/g-config-provider": 0.0.8
     "@flash-global66/g-dialog": 0.0.8
     "@flash-global66/g-image": 0.0.3
-    element-plus: ^2.9.7
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1110,7 +1103,6 @@ __metadata:
     "@flash-global66/g-teleport": "npm:^0.0.29"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.7
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1127,7 +1119,6 @@ __metadata:
     "@flash-global66/g-icon-font": ^0.0.8
     "@flash-global66/g-overlay": ^0.0.7
     "@flash-global66/g-teleport": ^0.0.6
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1148,7 +1139,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@popperjs/core": ^2.11.6
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1178,7 +1168,6 @@ __metadata:
     "@flash-global66/g-hooks": "npm:^0.11.13"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1204,7 +1193,6 @@ __metadata:
   peerDependencies:
     "@flash-global66/g-form": ^0.1.0
     "@flash-global66/g-icon-font": ^0.24.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1254,7 +1242,6 @@ __metadata:
     "@flash-global66/g-icon-font": "npm:^0.25.24"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1278,7 +1265,6 @@ __metadata:
     "@flash-global66/g-input": "npm:^0.3.30"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
@@ -1297,7 +1283,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@vueuse/core": ^13.0.0
-    element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
@@ -1313,7 +1298,6 @@ __metadata:
     "@flash-global66/g-form": ^0.2.0
     "@flash-global66/g-icon-font": ^0.0.8
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
@@ -1342,7 +1326,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@vueuse/core": ^13.0.0
-    element-plus: ^2.0.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1360,7 +1343,6 @@ __metadata:
     "@flash-global66/g-hooks": "npm:^0.11.13"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1372,7 +1354,6 @@ __metadata:
     "@flash-global66/g-icon-font": "npm:^0.25.24"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1395,7 +1376,6 @@ __metadata:
     "@flash-global66/g-slot": ^0.0.2
     "@popperjs/core": ^2.11.6
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
@@ -1408,7 +1388,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@flash-global66/g-icon-font": ^0.5.8
-    element-plus: ^2.9.7
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1442,7 +1421,6 @@ __metadata:
   peerDependencies:
     "@flash-global66/g-form": ^0.2.0
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1468,7 +1446,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1484,7 +1461,6 @@ __metadata:
     "@flash-global66/g-input": 0.3.0
     "@flash-global66/g-skeleton": 0.0.7
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.7
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1497,7 +1473,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@flash-global66/g-form": ^0.2.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1516,7 +1491,6 @@ __metadata:
     "@flash-global66/g-tag": ^0.1.2
     "@popperjs/core": ^2.11.6
     "@vueuse/core": ^13.0.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1547,7 +1521,6 @@ __metadata:
   peerDependencies:
     "@flash-global66/g-form": ^0.2.0
     "@flash-global66/g-icon-font": ^0.10.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1567,7 +1540,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     async-validator: ^4.2.5
-    element-plus: ^2.9.0
     lodash-unified: ^1.0.3
     vue: ^3.2.0
   languageName: unknown
@@ -1580,7 +1552,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@flash-global66/g-icon-font": ^0.0.8
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1607,7 +1578,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     dayjs: ^1.11.13
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1622,7 +1592,6 @@ __metadata:
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@vueuse/core": ^12.4.0
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -1639,7 +1608,6 @@ __metadata:
     "@flash-global66/g-teleport": "npm:^0.0.29"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
-    element-plus: ^2.9.0
     vue: ^3.2.0
   languageName: unknown
   linkType: soft
