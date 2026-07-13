@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-select",
   "author": "Global66",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,9 +29,9 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.8",
-    "@flash-global66/g-tooltip": "^0.1.13",
-    "@flash-global66/g-utils": "^0.15.0",
+    "@flash-global66/g-hooks": "^0.11.9",
+    "@flash-global66/g-tooltip": "^0.1.14",
+    "@flash-global66/g-utils": "^0.15.1",
     "@tanstack/vue-virtual": "3.13.23"
   },
   "peerDependencies": {
