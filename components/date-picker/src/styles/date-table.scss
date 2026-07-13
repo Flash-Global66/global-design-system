@@ -1,5 +1,5 @@
-@use "element-plus/theme-chalk/src/common/var" as *;
-@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+@use "@flash-global66/g-utils/mixins" as *;
 
 @include b(date-table) {
   font-size: 12px;

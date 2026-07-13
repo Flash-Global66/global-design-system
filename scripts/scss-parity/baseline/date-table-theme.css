@@ -1,0 +1,136 @@
+/* Element Chalk Variables */
+.gui-date-table {
+  font-size: 12px;
+  user-select: none;
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover td.available:hover {
+  color: var(--gui-datepicker-text-color);
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover td:first-child .gui-date-table-cell {
+  margin-left: 5px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover td:last-child .gui-date-table-cell {
+  margin-right: 5px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.gui-date-table.is-week-mode .gui-date-table__row.current .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+
+.gui-date-table .gui-date-table__row {
+  margin-top: 10px;
+}
+.gui-date-table {
+  /* Para evitar que se aplique a las siguientes ocurrencias */
+}
+.gui-date-table .gui-date-table__row ~ .gui-date-table__row {
+  margin-top: initial;
+}
+.gui-date-table td {
+  @apply text-nightBlue-900;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.gui-date-table td .gui-date-table-cell {
+  height: 44px;
+  box-sizing: border-box;
+}
+.gui-date-table td .gui-date-table-cell .gui-date-table-cell__text {
+  width: 44px;
+  height: 44px;
+  display: block;
+  margin: 0 auto;
+  line-height: 44px;
+  position: absolute;
+  font-weight: 500;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: 1;
+}
+.gui-date-table td.next-month, .gui-date-table td.prev-month {
+  color: var(--gui-datepicker-off-text-color);
+}
+.gui-date-table td.today {
+  position: relative;
+}
+.gui-date-table td.today .gui-date-table-cell__text {
+  @apply text-nightBlue-900;
+  font-weight: bold;
+}
+.gui-date-table td.today.start-date .gui-date-table-cell__text, .gui-date-table td.today.end-date .gui-date-table-cell__text {
+  color: #ffffff;
+}
+.gui-date-table td.available:hover {
+  @apply bg-everBlue-50 bg-opacity-60;
+  border-radius: 50%;
+}
+.gui-date-table td.in-range .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+.gui-date-table td.in-range .gui-date-table-cell:hover {
+  background-color: var(--gui-datepicker-inrange-hover-bg-color);
+}
+.gui-date-table td.current:not(.disabled) .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-date-table td.current:not(.disabled):focus-visible .gui-date-table-cell__text {
+  outline: 2px solid var(--gui-datepicker-active-color);
+  outline-offset: 1px;
+}
+.gui-date-table td.start-date .gui-date-table-cell, .gui-date-table td.end-date .gui-date-table-cell {
+  color: #ffffff;
+}
+.gui-date-table td.start-date .gui-date-table-cell__text, .gui-date-table td.end-date .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+}
+.gui-date-table td.start-date .gui-date-table-cell {
+  margin-left: 5px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.gui-date-table td.end-date .gui-date-table-cell {
+  margin-right: 5px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.gui-date-table td.disabled .gui-date-table-cell {
+  background-color: var(--gui-fill-color-light);
+  opacity: 1;
+  cursor: not-allowed;
+  color: var(--gui-text-color-placeholder);
+}
+.gui-date-table td.selected .gui-date-table-cell {
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 15px;
+}
+.gui-date-table td.selected .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+  border-radius: 15px;
+}
+.gui-date-table td.week {
+  font-size: 80%;
+  color: var(--gui-datepicker-header-text-color);
+}
+.gui-date-table td:focus {
+  outline: none;
+}
+.gui-date-table th {
+  @apply text-grey-500;
+  padding: 5px;
+  font-weight: 500;
+  border-bottom: solid 1px #949aab;
+}
