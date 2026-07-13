@@ -25,5 +25,13 @@
   "quote": "components/quote/src/quote.styles.scss",
   "toast": "components/toast/src/toast.styles.scss",
   "g-utils-popper": "common/g-utils/styles/popper.scss",
-  "popper": "components/popper/src/popper.styles.scss"
+  "popper": "components/popper/src/popper.styles.scss",
+  "tag-theme": "components/tag/src/styles/tag.scss",
+  "tag": "components/tag/src/tag.styles.scss",
+  "progress-theme": "components/progress/src/styles/progress.scss",
+  "progress": "components/progress/src/progress.styles.scss",
+  "collapse-theme": "components/collapse/src/styles/collapse.scss",
+  "collapse": "components/collapse/src/collapse.styles.scss",
+  "segmented-theme": "components/segmented/src/styles/segmented.scss",
+  "segmented": "components/segmented/src/segmented.styles.scss"
 }

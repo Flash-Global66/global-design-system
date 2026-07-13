@@ -1,0 +1,350 @@
+/* Element Chalk Variables */
+.gui-tag {
+  --gui-tag-font-size: 12px;
+  --gui-tag-border-radius: 4px;
+  --gui-tag-border-radius-rounded: 9999px;
+}
+
+.gui-tag {
+  background-color: var(--gui-tag-bg-color);
+  border-color: var(--gui-tag-border-color);
+  color: var(--gui-tag-text-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  height: 24px;
+  padding: 0 9px;
+  font-size: var(--gui-tag-font-size);
+  line-height: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--gui-tag-border-radius);
+  box-sizing: border-box;
+  white-space: nowrap;
+  --gui-icon-size: 14px;
+  --gui-tag-bg-color: var(--gui-color-primary-light-9);
+  --gui-tag-border-color: var(--gui-color-primary-light-8);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-color-primary-light-9);
+  --gui-tag-border-color: var(--gui-color-primary-light-8);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-color-success-light-9);
+  --gui-tag-border-color: var(--gui-color-success-light-8);
+  --gui-tag-hover-color: var(--gui-color-success);
+}
+.gui-tag.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-color-warning-light-9);
+  --gui-tag-border-color: var(--gui-color-warning-light-8);
+  --gui-tag-hover-color: var(--gui-color-warning);
+}
+.gui-tag.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-color-danger-light-9);
+  --gui-tag-border-color: var(--gui-color-danger-light-8);
+  --gui-tag-hover-color: var(--gui-color-danger);
+}
+.gui-tag.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-color-error-light-9);
+  --gui-tag-border-color: var(--gui-color-error-light-8);
+  --gui-tag-hover-color: var(--gui-color-error);
+}
+.gui-tag.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-color-info-light-9);
+  --gui-tag-border-color: var(--gui-color-info-light-8);
+  --gui-tag-hover-color: var(--gui-color-info);
+}
+.gui-tag.is-hit {
+  border-color: var(--gui-color-primary);
+}
+
+.gui-tag.is-round {
+  border-radius: var(--gui-tag-border-radius-rounded);
+}
+
+.gui-tag .gui-tag__close {
+  flex-shrink: 0;
+  color: var(--gui-tag-text-color);
+}
+.gui-tag .gui-tag__close:hover {
+  color: var(--gui-color-white);
+  background-color: var(--gui-tag-hover-color);
+}
+.gui-tag.gui-tag--primary {
+  --gui-tag-text-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--success {
+  --gui-tag-text-color: var(--gui-color-success);
+}
+.gui-tag.gui-tag--warning {
+  --gui-tag-text-color: var(--gui-color-warning);
+}
+.gui-tag.gui-tag--danger {
+  --gui-tag-text-color: var(--gui-color-danger);
+}
+.gui-tag.gui-tag--error {
+  --gui-tag-text-color: var(--gui-color-error);
+}
+.gui-tag.gui-tag--info {
+  --gui-tag-text-color: var(--gui-color-info);
+}
+.gui-tag .gui-icon {
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: calc(var(--gui-icon-size) - 2px);
+  height: var(--gui-icon-size);
+  width: var(--gui-icon-size);
+}
+.gui-tag .gui-tag__close {
+  margin-left: 6px;
+}
+.gui-tag--dark {
+  --gui-tag-text-color: var(--gui-color-white);
+  --gui-tag-bg-color: var(--gui-color-primary);
+  --gui-tag-border-color: var(--gui-color-primary);
+  --gui-tag-hover-color: var(--gui-color-primary-light-3);
+}
+.gui-tag--dark.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-color-primary);
+  --gui-tag-border-color: var(--gui-color-primary);
+  --gui-tag-hover-color: var(--gui-color-primary-light-3);
+}
+.gui-tag--dark.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-color-success);
+  --gui-tag-border-color: var(--gui-color-success);
+  --gui-tag-hover-color: var(--gui-color-success-light-3);
+}
+.gui-tag--dark.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-color-warning);
+  --gui-tag-border-color: var(--gui-color-warning);
+  --gui-tag-hover-color: var(--gui-color-warning-light-3);
+}
+.gui-tag--dark.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-color-danger);
+  --gui-tag-border-color: var(--gui-color-danger);
+  --gui-tag-hover-color: var(--gui-color-danger-light-3);
+}
+.gui-tag--dark.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-color-error);
+  --gui-tag-border-color: var(--gui-color-error);
+  --gui-tag-hover-color: var(--gui-color-error-light-3);
+}
+.gui-tag--dark.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-color-info);
+  --gui-tag-border-color: var(--gui-color-info);
+  --gui-tag-hover-color: var(--gui-color-info-light-3);
+}
+.gui-tag--dark.gui-tag--primary {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--success {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--warning {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--danger {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--error {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--info {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+
+.gui-tag--plain {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-primary-light-5);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag--plain.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-primary-light-5);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag--plain.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-success-light-5);
+  --gui-tag-hover-color: var(--gui-color-success);
+}
+.gui-tag--plain.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-warning-light-5);
+  --gui-tag-hover-color: var(--gui-color-warning);
+}
+.gui-tag--plain.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-danger-light-5);
+  --gui-tag-hover-color: var(--gui-color-danger);
+}
+.gui-tag--plain.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-error-light-5);
+  --gui-tag-hover-color: var(--gui-color-error);
+}
+.gui-tag--plain.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-info-light-5);
+  --gui-tag-hover-color: var(--gui-color-info);
+}
+
+.gui-tag.is-closable {
+  padding-right: 5px;
+}
+.gui-tag--large {
+  padding: 0 11px;
+  height: 32px;
+  --gui-icon-size: 16px;
+}
+.gui-tag--large .gui-tag__close {
+  margin-left: 8px;
+}
+.gui-tag--large.is-closable {
+  padding-right: 7px;
+}
+
+.gui-tag--small {
+  padding: 0 7px;
+  height: 20px;
+  --gui-icon-size: 12px;
+}
+.gui-tag--small .gui-tag__close {
+  margin-left: 4px;
+}
+.gui-tag--small.is-closable {
+  padding-right: 3px;
+}
+
+.gui-tag--small .gui-icon-close {
+  transform: scale(0.8);
+}
+
+.gui-tag.gui-tag--primary.is-hit {
+  border-color: var(--gui-color-primary);
+}
+
+.gui-tag.gui-tag--success.is-hit {
+  border-color: var(--gui-color-success);
+}
+
+.gui-tag.gui-tag--warning.is-hit {
+  border-color: var(--gui-color-warning);
+}
+
+.gui-tag.gui-tag--danger.is-hit {
+  border-color: var(--gui-color-danger);
+}
+
+.gui-tag.gui-tag--error.is-hit {
+  border-color: var(--gui-color-error);
+}
+
+.gui-tag.gui-tag--info.is-hit {
+  border-color: var(--gui-color-info);
+}
+
+.gui-tag {
+  @apply rounded-full flex items-center justify-center text-primary-txt w-min;
+}
+.gui-tag__xs {
+  @apply h-4 p-xxs text-1 font-medium gap-xxs;
+}
+.gui-tag__xs--prefix-icon {
+  @apply w-[10px] h-[10px] flex justify-center items-center;
+}
+.gui-tag__xs--prefix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__xs--suffix-icon {
+  @apply w-[10px] h-[10px] flex justify-center items-center;
+}
+.gui-tag__xs--suffix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__sm {
+  @apply h-[22px] py-xxs px-xs text-2 font-medium gap-xxs;
+}
+.gui-tag__sm--prefix-icon {
+  @apply w-3 h-3 flex justify-center items-center;
+}
+.gui-tag__sm--prefix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__sm--suffix-icon {
+  @apply w-3 h-3 flex justify-center items-center;
+}
+.gui-tag__sm--suffix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__md {
+  @apply h-[30px] py-xxs px-xs text-2 font-medium gap-xxs;
+}
+.gui-tag__md--prefix-icon {
+  @apply w-[14px] h-[14px] flex justify-center items-center;
+}
+.gui-tag__md--prefix-icon svg {
+  @apply text-2 align-super;
+}
+
+.gui-tag__md--suffix-icon {
+  @apply w-[14px] h-[14px] flex justify-center items-center;
+}
+.gui-tag__md--suffix-icon svg {
+  @apply text-2 align-super;
+}
+
+.gui-tag__light--success {
+  @apply border-success-bd bg-success-bg;
+}
+
+.gui-tag__light--info {
+  @apply border-info-bd bg-info-bg;
+}
+
+.gui-tag__light--warning {
+  @apply border-warning-bd bg-warning-bg;
+}
+
+.gui-tag__light--error {
+  @apply border-error-bd bg-error-bg;
+}
+
+.gui-tag__light--grey {
+  @apply border-disabled-bd bg-grey-50;
+}
+
+.gui-tag__dark--success {
+  @apply border-success-bd bg-success-def text-inverse-txt;
+}
+
+.gui-tag__dark--info {
+  @apply border-info-bd bg-info-def text-inverse-txt;
+}
+
+.gui-tag__dark--warning {
+  @apply border-warning-bd bg-warning-def text-inverse-txt;
+}
+
+.gui-tag__dark--error {
+  @apply border-error-bd bg-error-def text-inverse-txt;
+}
+
+.gui-tag__dark--grey {
+  @apply border-grey-500 bg-grey-500 text-inverse-txt;
+}
+
+.gui-tag__close {
+  @apply m-0 ml-0 cursor-pointer !important;
+}
+.gui-tag__close:hover {
+  @apply bg-inherit text-inherit !important;
+}
