@@ -1292,7 +1292,7 @@ __metadata:
     "@flash-global66/g-hooks": "npm:^0.11.12"
     "@flash-global66/g-icon-font": "npm:^0.25.23"
     "@flash-global66/g-popper": "npm:^0.0.29"
-    "@flash-global66/g-tag": "npm:^0.2.23"
+    "@flash-global66/g-tag": "npm:^0.2.24"
     "@flash-global66/g-tooltip": "npm:^0.1.17"
     "@flash-global66/g-utils": "npm:^0.15.4"
   peerDependencies:
@@ -1573,7 +1573,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-tag@npm:^0.2.23, @flash-global66/g-tag@workspace:components/tag":
+"@flash-global66/g-tag@npm:^0.2.24, @flash-global66/g-tag@workspace:components/tag":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-tag@workspace:components/tag"
   dependencies:
