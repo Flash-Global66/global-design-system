@@ -50,14 +50,14 @@ Chain strategy: stacked-to-main
 
 ## Phase 2: config-provider Vertical Slice (WU2 / PR1b, base = PR1a)
 
-- [ ] 2.1 Capture golden pre-migration baseline of compiled `config.styles.scss` CSS into `scripts/scss-parity/baseline/config-provider.css`
-- [ ] 2.2 Modify `components/config-provider/config.styles.scss` — add DS-owned bootstrap (`@forward '@flash-global66/g-utils/tokens' with ($colors:(brand))`; `@use '.../base'`) AND KEEP the element-plus `@forward '.../mixins/config.scss' with ($namespace:'gui')` bridge so not-yet-migrated legacy files still resolve `.gui-*` during the incremental rollout. Do NOT remove the EP `@forward` here (see task 4.5)
-- [ ] 2.3 Run `yarn scss:parity` on config-provider — confirm empty diff vs baseline
-- [ ] 2.4 Modify `common/g-utils/src/composables/useNamespace.ts` — export `defaultNamespace`
-- [ ] 2.5 Modify `components/config-provider/ConfigProvider.vue` — DS-native `<section><slot/></section>`; no `ElConfigProvider`; `ns = ref(defaultNamespace)`; call EP public `provideGlobalConfig({...props, namespace: ns.value})`; `provide(namespaceContextKey, ns)`; preserve props/emits/slots/attrs fallthrough; no `any`; comments/JSDoc in neutral Spanish
+- [x] 2.1 Capture golden pre-migration baseline of compiled `config.styles.scss` CSS into `scripts/scss-parity/baseline/config-provider.css`
+- [x] 2.2 `components/config-provider/config.styles.scss` — **DS-owned token EMISSION DEFERRED to the final slice (task 4.5).** b2b local-link validation (engram #317) proved config-provider cannot emit tokens via `@flash-global66/g-utils/base` yet: it is the single configurator of element-plus's `common/var`/`base` singletons for every not-yet-migrated EP-base consumer (e.g. `g-time-picker/src/time-picker.styles.scss:4` `@use "element-plus/theme-chalk/src/base.scss"`). Switching emission to g-utils base left EP `common/var` unconfigured → time-picker re-loaded EP base with DEFAULT colors → a second `:root{--gui-* #409eff}` overrode brand `#203478`. So during the transition config.styles.scss KEEPS the full element-plus bootstrap unchanged from production: `@forward mixins/config with ($namespace:'gui')` + `@forward common/var with ($colors: brand)` + `@use base`. Byte-identical to production; time-picker etc. reuse the brand-configured singletons.
+- [x] 2.3 Run `yarn scss:parity` on config-provider — empty diff vs the golden pre-migration baseline (config.styles.scss stays production-identical, so trivially byte-exact)
+- [x] 2.4 Modify `common/g-utils/src/composables/useNamespace.ts` — export `defaultNamespace`
+- [x] 2.5 Modify `components/config-provider/ConfigProvider.vue` — DS-native `<section><slot/></section>`; no `ElConfigProvider`; `ns = ref(defaultNamespace)`; call EP public `provideGlobalConfig({...props, namespace: ns.value})`; `provide(namespaceContextKey, ns)`; preserve props/emits/slots/attrs fallthrough; no `any`; comments/JSDoc in neutral Spanish
 - [x] 2.6 **GATE (blocking) — DONE/VERIFIED GREEN**: front-b2b's committed `dist/` emits `.gui-*` exclusively (0 `.el-*`); mechanism = `ui-framework-b2b/index.scss` `@use`s config-provider FIRST, then all 48 legacy `styles.scss`, in one Sass compilation (`App.vue:104`). Verified 2026-07-12 (engram #314). Conclusion: the EP `@forward` bridge in config-provider (task 2.2) is a REQUIRED part of the incremental path, removed only in task 4.5
-- [ ] 2.7 Write Vitest test: ConfigProvider provides `gui` to DS `namespaceContextKey` AND spies EP `provideGlobalConfig` call; descendant `useNamespace()` resolves `gui`
-- [ ] 2.8 Verify: `yarn scss:parity` clean; `yarn test:run` green; CI `verify` lint clean on changed files
+- [x] 2.7 Write Vitest test: ConfigProvider provides `gui` to DS `namespaceContextKey` AND spies EP `provideGlobalConfig` call; descendant `useNamespace()` resolves `gui`
+- [x] 2.8 Verify: `yarn scss:parity` clean; `yarn test:run` green; CI `verify` lint clean on changed files
 
 ## Phase 3: Shared-Mixin Repoint (WU3 / PR2.x, chained per component group, base = PR1b)
 
@@ -73,7 +73,7 @@ Chain strategy: stacked-to-main
 - [ ] 4.2 Repoint each, grouped logically, byte-diffed via `yarn scss:parity`
 - [ ] 4.3 Explicitly skip the 6 entangled islands' full-component stylesheets (badge, menu, popover, radio-group, form-item, skeleton) — leave untouched until their JS-island migration
 - [ ] 4.4 Verify per group: `yarn scss:parity` clean; `yarn test:run` green; CI `verify` lint clean
-- [ ] 4.5 **Bridge teardown (final, conditional)** — ONLY once no DS `.scss` `@use`s element-plus mixins anymore (i.e. every non-deferred file migrated AND the 6 deferred islands no longer import EP mixins/tokens), remove the EP `@forward '.../mixins/config.scss' with ($namespace:'gui')` bridge from config-provider `config.styles.scss`. If any deferred island still imports EP mixins, the bridge STAYS. Gate with `yarn scss:parity` (empty diff) + full `yarn test:run`
+- [ ] 4.5 **Switch config-provider to DS-owned emission + bridge teardown (final, conditional)** — ONLY once NO DS `.scss` (incl. the deferred islands and any full-component sheet) `@use`s element-plus `mixins`, `common/var`, or `base` anymore: rewrite `config.styles.scss` to emit via `@forward '@flash-global66/g-utils/tokens' with ($colors: brand)` + `@use '@flash-global66/g-utils/base'`, and REMOVE both element-plus bridges (`@forward mixins/config with ($namespace:'gui')` AND `@forward common/var with ($colors: brand)` + `@use base`). While ANY EP-base/common-var/mixins consumer remains, config-provider MUST keep the full EP bootstrap (it is the shared singleton configurator — see task 2.2 / engram #317). Gate with `yarn scss:parity` (empty diff) + full `yarn test:run` + a b2b link re-validation (brand `--gui-*` single emission, 0 `.el-*`).
 
 ## Cross-Cutting Acceptance Gate (every slice)
 
