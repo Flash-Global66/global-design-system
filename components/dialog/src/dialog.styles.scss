@@ -1,10 +1,10 @@
 @use 'sass:map';
 
-@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
-@use 'element-plus/theme-chalk/src/mixins/utils' as *;
-@use 'element-plus/theme-chalk/src/mixins/var' as *;
-@use 'element-plus/theme-chalk/src/common/var' as *;
-@use 'element-plus/theme-chalk/src/common/popup' as *;
+@use '@flash-global66/g-utils/mixins' as *;
+@use '@flash-global66/g-utils/utils' as *;
+@use '@flash-global66/g-utils/var-mixins' as *;
+@use '@flash-global66/g-utils/tokens' as *;
+@use '@flash-global66/g-utils/popup' as *;
 
 @include b('dialog') {
   @apply relative bg-sec-def-bg rounded-lg shadow-lg box-border p-8 break-words mx-auto;

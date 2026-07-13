@@ -1,0 +1,109 @@
+/* Element Chalk Variables */
+.gui-pagination {
+  @apply flex items-center gap-xxs text-primary-txt whitespace-nowrap text-2 font-medium;
+}
+.gui-pagination__btn-prev {
+  @apply flex justify-center items-center text-2 font-medium leading-none border-none rounded-md cursor-pointer text-center box-border text-primary-txt p-1;
+  min-width: 32px;
+  height: 32px;
+}
+.gui-pagination__btn-prev * {
+  @apply pointer-events-none;
+}
+.gui-pagination__btn-prev:focus {
+  @apply outline-none;
+}
+.gui-pagination__btn-prev:hover {
+  @apply text-everBlue-400;
+}
+.gui-pagination__btn-prev.is-active {
+  @apply text-everBlue-500 underline cursor-default font-semibold;
+}
+.gui-pagination__btn-prev.is-active.is-disabled {
+  @apply text-disabled-txt font-bold;
+}
+.gui-pagination__btn-prev:disabled, .gui-pagination__btn-prev.is-disabled {
+  @apply text-disabled-txt;
+  cursor: not-allowed;
+}
+.gui-pagination__btn-prev:focus-visible {
+  @apply outline-primary-def outline;
+  outline-offset: -1px;
+}
+.gui-pagination__btn-prev {
+  @apply text-5;
+}
+
+.gui-pagination__btn-next {
+  @apply flex justify-center items-center text-2 font-medium leading-none border-none rounded-md cursor-pointer text-center box-border text-primary-txt p-1;
+  min-width: 32px;
+  height: 32px;
+}
+.gui-pagination__btn-next * {
+  @apply pointer-events-none;
+}
+.gui-pagination__btn-next:focus {
+  @apply outline-none;
+}
+.gui-pagination__btn-next:hover {
+  @apply text-everBlue-400;
+}
+.gui-pagination__btn-next.is-active {
+  @apply text-everBlue-500 underline cursor-default font-semibold;
+}
+.gui-pagination__btn-next.is-active.is-disabled {
+  @apply text-disabled-txt font-bold;
+}
+.gui-pagination__btn-next:disabled, .gui-pagination__btn-next.is-disabled {
+  @apply text-disabled-txt;
+  cursor: not-allowed;
+}
+.gui-pagination__btn-next:focus-visible {
+  @apply outline-primary-def outline;
+  outline-offset: -1px;
+}
+.gui-pagination__btn-next {
+  @apply text-5;
+}
+
+.gui-pagination--right {
+  @apply justify-end;
+}
+
+.gui-pagination--center {
+  @apply justify-center;
+}
+
+.gui-pager {
+  @apply select-none list-none p-0 m-0 flex items-center gap-xxs;
+  list-style: none;
+  font-size: 0;
+}
+.gui-pager li {
+  @apply flex justify-center items-center text-2 font-medium leading-none border-none rounded-md cursor-pointer text-center box-border text-primary-txt p-1;
+  min-width: 32px;
+  height: 32px;
+}
+.gui-pager li * {
+  @apply pointer-events-none;
+}
+.gui-pager li:focus {
+  @apply outline-none;
+}
+.gui-pager li:hover {
+  @apply text-everBlue-400;
+}
+.gui-pager li.is-active {
+  @apply text-everBlue-500 underline cursor-default font-semibold;
+}
+.gui-pager li.is-active.is-disabled {
+  @apply text-disabled-txt font-bold;
+}
+.gui-pager li:disabled, .gui-pager li.is-disabled {
+  @apply text-disabled-txt;
+  cursor: not-allowed;
+}
+.gui-pager li:focus-visible {
+  @apply outline-primary-def outline;
+  outline-offset: -1px;
+}
