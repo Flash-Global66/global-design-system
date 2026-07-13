@@ -1,3 +1,18 @@
+// Bootstrap de estilos del Design System.
+//
+// NOTA (ep-extraction-scss): durante la transición, la EMISIÓN de tokens
+// (`:root { --gui-* }`) sigue haciéndose con el `base`/`common/var` de
+// element-plus, NO con el `base` propio de g-utils. Motivo: config-provider es
+// el ÚNICO lugar que configura los singletons `mixins/config` (namespace) y
+// `common/var` (colores de marca) de element-plus para TODA la app. Mientras
+// exista cualquier paquete no migrado que haga `@use
+// "element-plus/theme-chalk/src/base"` o `common/var` (ej. g-time-picker),
+// esos módulos deben quedar ya configurados con marca por este archivo; si
+// config-provider emitiera vía g-utils base y dejara el `common/var` de EP sin
+// configurar, esos paquetes re-cargarían `base` con los colores por defecto de
+// EP y emitirían un segundo `:root` que pisaría la marca. El g-utils base/tokens
+// (portado byte-exact en WU1) se cablea aquí en el slice final, junto con el
+// retiro de estos puentes (ver tarea 4.5).
 @forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
   $namespace: 'gui'
 );
@@ -25,4 +40,4 @@
   )
 );
 
-@use "element-plus/theme-chalk/src/base.scss";
+@use 'element-plus/theme-chalk/src/base.scss';

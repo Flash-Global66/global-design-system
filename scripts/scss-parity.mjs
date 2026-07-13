@@ -17,7 +17,7 @@
 // aquí sus propios slices (config-provider, grupos de componentes, etc.).
 
 import { compile } from 'sass';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
@@ -25,6 +25,41 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
 const baselineDir = join(__dirname, 'scss-parity', 'baseline');
 const targetsPath = join(__dirname, 'scss-parity', 'targets.json');
+const nodeModulesDir = join(repoRoot, 'node_modules');
+const scopePrefix = '@flash-global66/';
+
+// Resuelve un specifier `@scope/paquete[/subpath]` contra el mapa `exports`
+// del `package.json` del paquete instalado en node_modules, igual que lo
+// haría el bundler del consumidor (Vite) al resolver imports de paquete.
+function resolvePackageExport(pkgName, subpath) {
+  const pkgJsonPath = join(nodeModulesDir, pkgName, 'package.json');
+  if (!existsSync(pkgJsonPath)) return null;
+  const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
+  const exportsMap = pkgJson.exports || {};
+  const key = subpath ? `./${subpath}` : '.';
+  const target = exportsMap[key];
+  if (!target) return null;
+  return resolve(join(nodeModulesDir, pkgName), target);
+}
+
+// Importer dart-sass (`FileImporter`) que intercepta specifiers `bare` con
+// prefijo `@flash-global66/` (ej. `@flash-global66/g-utils/base`) y los
+// resuelve vía el `exports` map del paquete, en vez de depender de
+// `loadPaths` (que solo resuelve paths relativos a una carpeta, no el
+// `exports` map de un paquete npm).
+const flashPackageImporter = {
+  findFileUrl(url) {
+    if (!url.startsWith(scopePrefix)) return null;
+    const rest = url.slice(scopePrefix.length);
+    const slashIdx = rest.indexOf('/');
+    const pkgSuffix = slashIdx === -1 ? rest : rest.slice(0, slashIdx);
+    const subpath = slashIdx === -1 ? '' : rest.slice(slashIdx + 1);
+    const pkgName = `${scopePrefix}${pkgSuffix}`;
+    const filePath = resolvePackageExport(pkgName, subpath);
+    if (!filePath || !existsSync(filePath)) return null;
+    return pathToFileURL(filePath);
+  },
+};
 
 function loadTargets() {
   if (!existsSync(targetsPath)) {
@@ -49,7 +84,16 @@ function compileTarget(entryRelPath) {
   if (!existsSync(entryAbsPath)) {
     throw new Error(`entry no encontrado: ${entryRelPath}`);
   }
-  const result = compile(entryAbsPath, { style: 'expanded', sourceMap: false });
+  const result = compile(entryAbsPath, {
+    style: 'expanded',
+    sourceMap: false,
+    // `loadPaths` resuelve paths relativos a node_modules/repoRoot (ej.
+    // `element-plus/theme-chalk/src/...`); el importer cubre el `exports`
+    // map de paquetes `@flash-global66/*` que node_modules resuelve por
+    // subpath export, no por path de archivo literal.
+    loadPaths: [nodeModulesDir, repoRoot],
+    importers: [flashPackageImporter],
+  });
   return normalize(result.css);
 }
 
