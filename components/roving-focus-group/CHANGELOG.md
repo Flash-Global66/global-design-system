@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.29](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-roving-focus-group@0.1.28...@flash-global66/g-roving-focus-group@0.1.29) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-roving-focus-group
+
 ## [0.1.28](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-roving-focus-group@0.1.27...@flash-global66/g-roving-focus-group@0.1.28) (2026-07-13)
 
 **Note:** Version bump only for package @flash-global66/g-roving-focus-group

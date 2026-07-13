@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-scrollbar@0.1.17...@flash-global66/g-scrollbar@0.1.18) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-scrollbar
+
 ## [0.1.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-scrollbar@0.1.16...@flash-global66/g-scrollbar@0.1.17) (2026-07-13)
 
 **Note:** Version bump only for package @flash-global66/g-scrollbar

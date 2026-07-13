@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-input",
   "author": "Global66",
-  "version": "0.3.28",
+  "version": "0.3.29",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -38,7 +38,7 @@
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad",
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.11",
-    "@flash-global66/g-utils": "^0.15.3"
+    "@flash-global66/g-hooks": "^0.11.12",
+    "@flash-global66/g-utils": "^0.15.4"
   }
 }
