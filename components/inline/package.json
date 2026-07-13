@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-inline",
   "author": "Global66",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,7 +29,7 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-form": "^0.2.21",
+    "@flash-global66/g-form": "^0.2.22",
     "@flash-global66/g-hooks": "^0.11.9",
     "@flash-global66/g-icon-font": "^0.25.20",
     "@flash-global66/g-utils": "^0.15.1"

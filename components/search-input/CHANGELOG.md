@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-search-input@1.2.18...@flash-global66/g-search-input@1.2.19) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-search-input
+
 ## [1.2.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-search-input@1.2.17...@flash-global66/g-search-input@1.2.18) (2026-07-13)
 
 **Note:** Version bump only for package @flash-global66/g-search-input

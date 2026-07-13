@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-table",
   "author": "Global66",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -32,7 +32,7 @@
     "@flash-global66/g-checkbox": "^0.3.24",
     "@flash-global66/g-hooks": "^0.11.9",
     "@flash-global66/g-icon-font": "^0.25.20",
-    "@flash-global66/g-input": "^0.3.25",
+    "@flash-global66/g-input": "^0.3.26",
     "@flash-global66/g-popper": "^0.0.26",
     "@flash-global66/g-scrollbar": "^0.1.15",
     "@flash-global66/g-select": "^0.4.12",
