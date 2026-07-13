@@ -43,7 +43,6 @@ module.exports = {
         'components/config-provider/**',
         'components/popover/**',
         'components/form-item/**',
-        'components/infinite-scroll/**',
       ],
       rules: {
         'no-restricted-imports': [
