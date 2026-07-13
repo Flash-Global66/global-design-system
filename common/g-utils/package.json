@@ -22,7 +22,9 @@
     "./tooltip-v2": "./styles/tooltip-v2.scss",
     "./option": "./styles/option.scss",
     "./virtual-list": "./styles/virtual-list.scss",
-    "./overlay": "./styles/overlay.scss"
+    "./overlay": "./styles/overlay.scss",
+    "./button-mixins": "./styles/button-mixins.scss",
+    "./radio-group": "./styles/radio-group.scss"
   },
   "sideEffects": [
     "**/*.scss",
