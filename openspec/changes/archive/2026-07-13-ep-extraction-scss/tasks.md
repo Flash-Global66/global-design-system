@@ -61,22 +61,22 @@ Chain strategy: stacked-to-main
 
 ## Phase 3: Shared-Mixin Repoint (WU3 / PR2.x, chained per component group, base = PR1b)
 
-- [ ] 3.1 Enumerate repoint targets: grep DS components for `@use element-plus/theme-chalk/src/mixins/{mixins,function,utils}`, `mixins/var|_var`, `common/var`, `common/transition`; group by component cluster
-- [ ] 3.2 Per group: repoint imports (`mixins/function/utils`→g-utils equivalents; `var|_var`→`var-mixins`; `common/var`→`tokens`; `common/transition`→`transition`)
-- [ ] 3.3 Modify `components/badge/badge.styles.scss` — replace hardcoded `.gui-badge__content` with `bem()`/mixin-generated selector (keep deferred `@use` of EP `badge.scss` untouched)
-- [ ] 3.4 Per group: run `yarn scss:parity`, confirm empty diff
-- [ ] 3.5 Verify per group: `yarn test:run` green; CI `verify` lint clean; each group merged/reviewed before next group starts
+- [x] 3.1 Enumerate repoint targets: grep DS components for `@use element-plus/theme-chalk/src/mixins/{mixins,function,utils}`, `mixins/var|_var`, `common/var`, `common/transition`; group by component cluster
+- [x] 3.2 Per group: repoint imports (`mixins/function/utils`→g-utils equivalents; `var|_var`→`var-mixins`; `common/var`→`tokens`; `common/transition`→`transition`)
+- [x] 3.3 Modify `components/badge/badge.styles.scss` — replace hardcoded `.gui-badge__content` with `bem()`/mixin-generated selector (keep deferred `@use` of EP `badge.scss` untouched)
+- [x] 3.4 Per group: run `yarn scss:parity`, confirm empty diff
+- [x] 3.5 Verify per group: `yarn test:run` green; CI `verify` lint clean; each group merged/reviewed before next group starts
 
 ## Phase 4: Non-Entangled Full-Component Repoint (WU4 / PR3.x, base = last WU3 branch)
 
-- [ ] 4.1 Identify non-entangled full-component stylesheets not tied to an unmigrated JS island (e.g. dropdown, scrollbar, table, collapse, drawer, tag, progress, segmented, select-v2)
-- [ ] 4.2 Repoint each, grouped logically, byte-diffed via `yarn scss:parity`
-- [ ] 4.3 Explicitly skip the 6 entangled islands' full-component stylesheets (badge, menu, popover, radio-group, form-item, skeleton) — leave untouched until their JS-island migration
-- [ ] 4.4 Verify per group: `yarn scss:parity` clean; `yarn test:run` green; CI `verify` lint clean
-- [ ] 4.5 **Switch config-provider to DS-owned emission + bridge teardown (final, conditional)** — ONLY once NO DS `.scss` (incl. the deferred islands and any full-component sheet) `@use`s element-plus `mixins`, `common/var`, or `base` anymore: rewrite `config.styles.scss` to emit via `@forward '@flash-global66/g-utils/tokens' with ($colors: brand)` + `@use '@flash-global66/g-utils/base'`, and REMOVE both element-plus bridges (`@forward mixins/config with ($namespace:'gui')` AND `@forward common/var with ($colors: brand)` + `@use base`). While ANY EP-base/common-var/mixins consumer remains, config-provider MUST keep the full EP bootstrap (it is the shared singleton configurator — see task 2.2 / engram #317). Gate with `yarn scss:parity` (empty diff) + full `yarn test:run` + a b2b link re-validation (brand `--gui-*` single emission, 0 `.el-*`).
+- [x] 4.1 Identify non-entangled full-component stylesheets not tied to an unmigrated JS island (e.g. dropdown, scrollbar, table, collapse, drawer, tag, progress, segmented, select-v2)
+- [x] 4.2 Repoint each, grouped logically, byte-diffed via `yarn scss:parity`
+- [x] 4.3 Explicitly skip the 6 entangled islands' full-component stylesheets (badge, menu, popover, radio-group, form-item, skeleton) — leave untouched until their JS-island migration
+- [x] 4.4 Verify per group: `yarn scss:parity` clean; `yarn test:run` green; CI `verify` lint clean
+- [ ] 4.5 **Switch config-provider to DS-owned emission + bridge teardown (final, conditional)** — DEFERRED, NOT FAILED. Intentionally blocked pending JS-island migration of the 6 entangled islands (badge, menu, popover, radio-group, skeleton, form-item). See discovery #321 for detailed analysis. Task 4.5 cannot proceed until `grep -rnE "^\s*@(use|forward)[^;]*element-plus/theme-chalk/src/(mixins/mixins|mixins/utils|mixins/var|common/var|base\.scss)" components common --include='*.scss'` returns ONLY config-provider's own bridge lines (and time-picker's, per discovery #320). When that dependency clears (JS-island migration completes), reopen as a NEW SDD change rather than reopening this one.
 
 ## Cross-Cutting Acceptance Gate (every slice)
 
-- [ ] G.1 Parity harness clean for every changed `.scss` file
-- [ ] G.2 `yarn test:run` green
-- [ ] G.3 CI `verify` lint clean on changed files (`--max-warnings 0`)
+- [x] G.1 Parity harness clean for every changed `.scss` file
+- [x] G.2 `yarn test:run` green
+- [x] G.3 CI `verify` lint clean on changed files (`--max-warnings 0`)
