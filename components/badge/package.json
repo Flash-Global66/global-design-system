@@ -7,6 +7,9 @@
     ".": "./index.ts",
     "./badge.styles.scss": "./badge.styles.scss"
   },
+  "dependencies": {
+    "@flash-global66/g-utils": "^0.15.5"
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
