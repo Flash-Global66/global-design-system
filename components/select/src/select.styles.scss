@@ -1,15 +1,15 @@
 @use "sass:map";
 
-@use "element-plus/theme-chalk/src/select-v2.scss" as *;
-@use "element-plus/theme-chalk/src/scrollbar.scss" as *;
-@use "element-plus/theme-chalk/src/virtual-list.scss" as *;
-@use "element-plus/theme-chalk/src/option.scss" as *;
-@use "element-plus/theme-chalk/src/tooltip-v2.scss" as *;
-@use "element-plus/theme-chalk/src/popper.scss" as *;
-@use "element-plus/theme-chalk/src/mixins/mixins" as *;
-@use "element-plus/theme-chalk/src/mixins/utils" as *;
-@use "element-plus/theme-chalk/src/mixins/var" as *;
-@use "element-plus/theme-chalk/src/common/var" as *;
+@use "./styles/select-v2.scss" as *;
+@use "@flash-global66/g-utils/scrollbar" as *;
+@use "@flash-global66/g-utils/virtual-list" as *;
+@use "@flash-global66/g-utils/option" as *;
+@use "@flash-global66/g-utils/tooltip-v2" as *;
+@use "@flash-global66/g-utils/popper" as *;
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
 
 .selectContainer {
   @apply flex flex-col gap-xxs;

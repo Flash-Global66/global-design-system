@@ -1,0 +1,574 @@
+/* Element Chalk Variables */
+.gui-table {
+  --gui-table-border-color: var(--gui-border-color-lighter);
+  --gui-table-border: 1px solid var(--gui-table-border-color);
+  --gui-table-text-color: var(--gui-text-color-regular);
+  --gui-table-header-text-color: var(--gui-text-color-secondary);
+  --gui-table-row-hover-bg-color: var(--gui-fill-color-light);
+  --gui-table-current-row-bg-color: var(--gui-color-primary-light-9);
+  --gui-table-header-bg-color: var(--gui-bg-color);
+  --gui-table-fixed-box-shadow: var(--gui-box-shadow-light);
+  --gui-table-bg-color: var(--gui-fill-color-blank);
+  --gui-table-tr-bg-color: var(--gui-bg-color);
+  --gui-table-expanded-cell-bg-color: var(--gui-fill-color-blank);
+  --gui-table-fixed-left-column: inset 10px 0 10px -10px rgba(0, 0, 0, 0.15);
+  --gui-table-fixed-right-column: inset -10px 0 10px -10px rgba(0, 0, 0, 0.15);
+  --gui-table-index: var(--gui-index-normal);
+}
+
+.gui-table {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: fit-content;
+  width: 100%;
+  max-width: 100%;
+  background-color: var(--gui-table-bg-color);
+  font-size: var(--gui-font-size-base);
+  color: var(--gui-table-text-color);
+}
+.gui-table__inner-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.gui-table__inner-wrapper::before {
+  left: 0;
+  bottom: 0;
+  height: 1px;
+}
+
+.gui-table tbody:focus-visible {
+  outline: none;
+}
+.gui-table.has-footer.gui-table--scrollable-y tr:last-child td.gui-table__cell, .gui-table.has-footer.gui-table--fluid-height tr:last-child td.gui-table__cell {
+  border-bottom-color: transparent;
+}
+.gui-table__empty-block {
+  position: sticky;
+  left: 0;
+  min-height: 60px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gui-table__empty-text {
+  line-height: 60px;
+  width: 50%;
+  color: var(--gui-text-color-secondary);
+}
+
+.gui-table__expand-column .cell {
+  padding: 0;
+  text-align: center;
+  user-select: none;
+}
+
+.gui-table__expand-icon {
+  position: relative;
+  cursor: pointer;
+  color: var(--gui-text-color-regular);
+  font-size: 12px;
+  transition: transform var(--gui-transition-duration-fast) ease-in-out;
+  height: 20px;
+}
+.gui-table__expand-icon--expanded {
+  transform: rotate(90deg);
+}
+
+.gui-table__expand-icon > .gui-icon {
+  font-size: 12px;
+}
+
+.gui-table__expanded-cell {
+  background-color: var(--gui-table-expanded-cell-bg-color);
+}
+.gui-table__expanded-cell[class*=cell] {
+  padding: 20px 50px;
+}
+.gui-table__expanded-cell:hover {
+  background-color: transparent !important;
+}
+
+.gui-table__placeholder {
+  display: inline-block;
+  width: 20px;
+}
+
+.gui-table__append-wrapper {
+  overflow: hidden;
+}
+
+.gui-table--fit {
+  border-right: 0;
+  border-bottom: 0;
+}
+.gui-table--fit .gui-table__cell.gutter {
+  border-right-width: 1px;
+}
+.gui-table--fit .gui-table__inner-wrapper::before {
+  width: 100%;
+}
+
+.gui-table thead {
+  color: var(--gui-table-header-text-color);
+}
+.gui-table thead th {
+  font-weight: 600;
+}
+.gui-table thead.is-group th.gui-table__cell {
+  background: var(--gui-fill-color-light);
+}
+.gui-table .gui-table__cell {
+  padding: 8px 0;
+  min-width: 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  position: relative;
+  text-align: left;
+  z-index: var(--gui-table-index);
+}
+.gui-table .gui-table__cell.is-center {
+  text-align: center;
+}
+
+.gui-table .gui-table__cell.is-right {
+  text-align: right;
+}
+
+.gui-table .gui-table__cell.gutter {
+  width: 15px;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  padding: 0;
+}
+.gui-table .gui-table__cell.is-hidden > * {
+  visibility: hidden;
+}
+.gui-table .cell {
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 23px;
+  padding: 0 12px;
+}
+.gui-table .cell.gui-tooltip {
+  white-space: nowrap;
+  min-width: 50px;
+}
+.gui-table--large {
+  font-size: var(--gui-font-size-base);
+}
+.gui-table--large .gui-table__cell {
+  padding: 12px 0;
+}
+.gui-table--large .cell {
+  padding: 0 16px;
+}
+
+.gui-table--default {
+  font-size: var(--gui-font-size-base);
+}
+.gui-table--default .gui-table__cell {
+  padding: 8px 0;
+}
+.gui-table--default .cell {
+  padding: 0 12px;
+}
+
+.gui-table--small {
+  font-size: var(--gui-font-size-extra-small);
+}
+.gui-table--small .gui-table__cell {
+  padding: 4px 0;
+}
+.gui-table--small .cell {
+  padding: 0 8px;
+}
+
+.gui-table tr {
+  background-color: var(--gui-table-tr-bg-color);
+}
+.gui-table tr input[type=checkbox] {
+  margin: 0;
+}
+.gui-table th.gui-table__cell.is-leaf,
+.gui-table td.gui-table__cell {
+  border-bottom: var(--gui-table-border);
+}
+.gui-table th.gui-table__cell.is-sortable {
+  cursor: pointer;
+}
+.gui-table th.gui-table__cell {
+  background-color: var(--gui-table-header-bg-color);
+}
+.gui-table th.gui-table__cell > .cell.highlight {
+  color: var(--gui-color-primary);
+}
+.gui-table th.gui-table__cell.required > div::before {
+  display: inline-block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff4d51;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.gui-table td.gui-table__cell div {
+  box-sizing: border-box;
+}
+.gui-table td.gui-table__cell.gutter {
+  width: 0;
+}
+.gui-table--border::after, .gui-table--border::before, .gui-table--border .gui-table__inner-wrapper::after, .gui-table__inner-wrapper::before {
+  content: "";
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table--border .gui-table__inner-wrapper::after {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table--border::before {
+  top: -1px;
+  left: 0;
+  width: 1px;
+  height: 100%;
+}
+.gui-table--border::after {
+  top: -1px;
+  right: 0;
+  width: 1px;
+  height: 100%;
+}
+.gui-table--border .gui-table__inner-wrapper {
+  border-right: none;
+  border-bottom: none;
+}
+
+.gui-table--border .gui-table__footer-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.gui-table--border .gui-table__cell {
+  border-right: var(--gui-table-border);
+}
+.gui-table--border th.gui-table__cell.gutter:last-of-type {
+  border-bottom: var(--gui-table-border);
+  border-bottom-width: 1px;
+}
+.gui-table--border th.gui-table__cell {
+  border-bottom: var(--gui-table-border);
+}
+
+.gui-table--hidden {
+  visibility: hidden;
+}
+
+.gui-table__header-wrapper, .gui-table__body-wrapper, .gui-table__footer-wrapper {
+  width: 100%;
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left, .gui-table__header-wrapper tr td.gui-table-fixed-column--right,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right, .gui-table__body-wrapper tr td.gui-table-fixed-column--left, .gui-table__body-wrapper tr td.gui-table-fixed-column--right,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right {
+  position: sticky !important;
+  background: inherit;
+  z-index: calc(var(--gui-table-index) + 1);
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-first-column::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  width: 10px;
+  bottom: -1px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-shadow: none;
+  touch-action: none;
+  pointer-events: none;
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-first-column::before {
+  left: -10px;
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-last-column::before {
+  right: -10px;
+  box-shadow: none;
+}
+.gui-table__header-wrapper tr td.gui-table__fixed-right-patch,
+.gui-table__header-wrapper tr th.gui-table__fixed-right-patch, .gui-table__body-wrapper tr td.gui-table__fixed-right-patch,
+.gui-table__body-wrapper tr th.gui-table__fixed-right-patch, .gui-table__footer-wrapper tr td.gui-table__fixed-right-patch,
+.gui-table__footer-wrapper tr th.gui-table__fixed-right-patch {
+  position: sticky !important;
+  z-index: calc(var(--gui-table-index) + 1);
+  background: #fff;
+  right: 0;
+}
+
+.gui-table__header-wrapper {
+  flex-shrink: 0;
+}
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left, .gui-table__header-wrapper tr th.gui-table-fixed-column--right {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table__header, .gui-table__body, .gui-table__footer {
+  table-layout: fixed;
+  border-collapse: separate;
+}
+
+.gui-table__header-wrapper {
+  overflow: hidden;
+}
+.gui-table__header-wrapper tbody td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+  color: var(--gui-table-text-color);
+}
+
+.gui-table__footer-wrapper {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.gui-table__footer-wrapper tfoot td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+  color: var(--gui-table-text-color);
+}
+
+.gui-table__header-wrapper .gui-table-column--selection > .cell, .gui-table__body-wrapper .gui-table-column--selection > .cell {
+  display: inline-flex;
+  align-items: center;
+  height: 23px;
+}
+.gui-table__header-wrapper .gui-table-column--selection .gui-checkbox, .gui-table__body-wrapper .gui-table-column--selection .gui-checkbox {
+  height: unset;
+}
+
+.gui-table.is-scrolling-left .gui-table-fixed-column--right.is-first-column::before {
+  box-shadow: var(--gui-table-fixed-right-column);
+}
+.gui-table.is-scrolling-left.gui-table--border .gui-table-fixed-column--left.is-last-column.gui-table__cell {
+  border-right: var(--gui-table-border);
+}
+.gui-table.is-scrolling-left th.gui-table-fixed-column--left {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table.is-scrolling-right .gui-table-fixed-column--left.is-last-column::before {
+  box-shadow: var(--gui-table-fixed-left-column);
+}
+.gui-table.is-scrolling-right .gui-table-fixed-column--left.is-last-column.gui-table__cell {
+  border-right: none;
+}
+.gui-table.is-scrolling-right th.gui-table-fixed-column--right {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table.is-scrolling-middle .gui-table-fixed-column--left.is-last-column.gui-table__cell {
+  border-right: none;
+}
+.gui-table.is-scrolling-middle .gui-table-fixed-column--right.is-first-column::before {
+  box-shadow: var(--gui-table-fixed-right-column);
+}
+.gui-table.is-scrolling-middle .gui-table-fixed-column--left.is-last-column::before {
+  box-shadow: var(--gui-table-fixed-left-column);
+}
+
+.gui-table.is-scrolling-none .gui-table-fixed-column--left.is-first-column::before, .gui-table.is-scrolling-none .gui-table-fixed-column--left.is-last-column::before,
+.gui-table.is-scrolling-none .gui-table-fixed-column--right.is-first-column::before,
+.gui-table.is-scrolling-none .gui-table-fixed-column--right.is-last-column::before {
+  box-shadow: none;
+}
+.gui-table.is-scrolling-none th.gui-table-fixed-column--left,
+.gui-table.is-scrolling-none th.gui-table-fixed-column--right {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table__body-wrapper {
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+}
+.gui-table__body-wrapper .gui-scrollbar__bar {
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table .caret-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  height: 14px;
+  width: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: initial;
+  position: relative;
+}
+.gui-table .sort-caret {
+  width: 0;
+  height: 0;
+  border: solid 5px transparent;
+  position: absolute;
+  left: 7px;
+}
+.gui-table .sort-caret.ascending {
+  border-bottom-color: var(--gui-text-color-placeholder);
+  top: -5px;
+}
+.gui-table .sort-caret.descending {
+  border-top-color: var(--gui-text-color-placeholder);
+  bottom: -3px;
+}
+.gui-table .ascending .sort-caret.ascending {
+  border-bottom-color: var(--gui-color-primary);
+}
+.gui-table .descending .sort-caret.descending {
+  border-top-color: var(--gui-color-primary);
+}
+.gui-table .hidden-columns {
+  visibility: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.gui-table--striped .gui-table__body tr.gui-table__row--striped td.gui-table__cell {
+  background: var(--gui-fill-color-lighter);
+}
+.gui-table--striped .gui-table__body tr.gui-table__row--striped.current-row td.gui-table__cell {
+  background-color: var(--gui-table-current-row-bg-color);
+}
+
+.gui-table__body tr.hover-row > td.gui-table__cell, .gui-table__body tr.hover-row.current-row > td.gui-table__cell, .gui-table__body tr.hover-row.gui-table__row--striped > td.gui-table__cell, .gui-table__body tr.hover-row.gui-table__row--striped.current-row > td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+}
+.gui-table__body tr > td.hover-cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+}
+.gui-table__body tr.current-row > td.gui-table__cell {
+  background-color: var(--gui-table-current-row-bg-color);
+}
+
+.gui-table.gui-table--scrollable-y .gui-table__body-header {
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table.gui-table--scrollable-y .gui-table__body-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table__column-resize-proxy {
+  position: absolute;
+  left: 200px;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: var(--gui-table-border);
+  z-index: calc(var(--gui-table-index) + 9);
+}
+
+.gui-table__column-filter-trigger {
+  display: inline-block;
+  cursor: pointer;
+}
+.gui-table__column-filter-trigger i {
+  color: var(--gui-color-info);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.gui-table__border-left-patch {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  z-index: calc(var(--gui-table-index) + 2);
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+}
+
+.gui-table__border-bottom-patch {
+  left: 0;
+  height: 1px;
+  z-index: calc(var(--gui-table-index) + 2);
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+}
+
+.gui-table__border-right-patch {
+  top: 0;
+  height: 100%;
+  width: 1px;
+  z-index: calc(var(--gui-table-index) + 2);
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+}
+
+.gui-table--enable-row-transition .gui-table__body td.gui-table__cell {
+  transition: background-color 0.25s ease;
+}
+
+.gui-table--enable-row-hover .gui-table__body tr:hover > td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+}
+
+.gui-table [class*=gui-table__row--level] .gui-table__expand-icon {
+  display: inline-block;
+  width: 12px;
+  line-height: 12px;
+  height: 12px;
+  text-align: center;
+  margin-right: 8px;
+}
+.gui-table .gui-table.gui-table--border .gui-table__cell {
+  border-right: var(--gui-table-border);
+}
+.gui-table:not(.gui-table--border) .gui-table__cell {
+  border-right: none;
+}
+.gui-table:not(.gui-table--border) > .gui-table__inner-wrapper::after {
+  content: none;
+}
