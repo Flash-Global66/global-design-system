@@ -37,7 +37,8 @@
     "lint:fix": "eslint . --ext .vue,.ts,.js --fix",
     "test": "vitest run",
     "test:run": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "scss:parity": "node scripts/scss-parity.mjs"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

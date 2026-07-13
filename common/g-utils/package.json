@@ -8,7 +8,13 @@
   "exports": {
     ".": "./index.ts",
     "./mixins": "./styles/mixins.scss",
-    "./config": "./styles/config.scss"
+    "./config": "./styles/config.scss",
+    "./tokens": "./styles/tokens.scss",
+    "./base": "./styles/base.scss",
+    "./function": "./styles/function.scss",
+    "./utils": "./styles/utils.scss",
+    "./transition": "./styles/transition.scss",
+    "./icon": "./styles/icon.scss"
   },
   "sideEffects": [
     "**/*.scss",
