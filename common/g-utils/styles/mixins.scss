@@ -3,6 +3,9 @@
 @use 'function' as *;
 // Forward config so consumers can do @forward '@flash-global66/g-utils/config' with ($namespace: 'gui')
 @forward 'config';
+// Forward function so `@use 'mixins' as *;` also exposes getCssVar/getCssVarName/
+// joinVarName/getCssVarWithDefault (mirrors element-plus/theme-chalk/src/mixins/mixins.scss).
+@forward 'function';
 @use 'config' as *;
 @use 'sass:string';
 @use 'sass:map';

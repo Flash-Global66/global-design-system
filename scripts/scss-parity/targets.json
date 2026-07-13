@@ -1,0 +1,5 @@
+{
+  "g-utils-base": "common/g-utils/styles/base.scss",
+  "g-utils-utils": "common/g-utils/styles/utils.scss",
+  "g-utils-tokens": "common/g-utils/styles/tokens.scss"
+}
