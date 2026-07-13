@@ -26,12 +26,19 @@ module.exports = {
       // never re-introduce a direct dependency on it. Covers nested-layout
       // implementations (components/*/src/**, common/*/src/**) AND flat-layout
       // package roots + barrels (components/*/*.ts, e.g. overlay/overlay.ts,
-      // overlay/index.ts). The flat-layout glob is required because packages
-      // like `overlay` ship implementation at the package root, not under src/.
-      files: ['components/*/src/**', 'common/*/src/**', 'components/*/*.ts'],
+      // overlay/index.ts; components/*/*.vue, e.g. badge/Badge.vue,
+      // config-provider/ConfigProvider.vue). The flat-layout globs are
+      // required because packages like `overlay`, `badge`, and
+      // `config-provider` ship implementation at the package root, not
+      // under src/.
+      files: [
+        'components/*/src/**',
+        'common/*/src/**',
+        'components/*/*.ts',
+        'components/*/*.vue',
+      ],
       excludedFiles: [
         // Islands: intentionally wrap/re-export a real element-plus component.
-        'components/badge/**',
         'components/menu/**',
         'components/config-provider/**',
         'components/popover/**',
