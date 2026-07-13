@@ -1,3 +1,3 @@
-import { ElInfiniteScroll as GInfiniteScroll } from 'element-plus';
+import GInfiniteScroll from './src/infinite-scroll.directive';
 
 export { GInfiniteScroll };
