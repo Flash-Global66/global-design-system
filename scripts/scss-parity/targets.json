@@ -10,5 +10,9 @@
   "inline": "components/inline/src/inline.styles.scss",
   "image": "components/image/src/image.styles.scss",
   "icon-button": "components/icon-button/src/icon-button.styles.scss",
-  "attach-file": "components/attach-file/src/attach-file.styles.scss"
+  "attach-file": "components/attach-file/src/attach-file.styles.scss",
+  "input": "components/input/src/input.styles.scss",
+  "form": "components/form/src/form.styles.scss",
+  "search-input": "components/search-input/src/search-input.styles.scss",
+  "switch": "components/switch/src/switch.styles.scss"
 }
