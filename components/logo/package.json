@@ -1,6 +1,6 @@
 {
   "name": "@flash-global66/g-logo",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Logos de Global66 y, progresivamente, de aliados y proveedores (PSE, Bancolombia, Bre-B, etc.) con tamaños y filtros CSS",
   "author": "Global66",
   "main": "dist/index.js",

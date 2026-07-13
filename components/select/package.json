@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-select",
   "author": "Global66",
-  "version": "0.4.18",
+  "version": "0.4.19",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@flash-global66/g-hooks": "^0.11.13",
-    "@flash-global66/g-tooltip": "^0.1.19",
+    "@flash-global66/g-tooltip": "^0.1.20",
     "@flash-global66/g-utils": "^0.15.5",
     "@tanstack/vue-virtual": "3.13.23"
   },
