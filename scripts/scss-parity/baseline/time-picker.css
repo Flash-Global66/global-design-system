@@ -1,133 +1,134 @@
 @charset "UTF-8";
 /* Element Chalk Variables */
+/* Element Chalk Variables */
 :root {
-  --gui-color-white: #ffffff;
-  --gui-color-black: #000000;
-  --gui-color-primary-rgb: 64, 158, 255;
-  --gui-color-success-rgb: 103, 194, 58;
-  --gui-color-warning-rgb: 230, 162, 60;
-  --gui-color-danger-rgb: 245, 108, 108;
-  --gui-color-error-rgb: 245, 108, 108;
-  --gui-color-info-rgb: 144, 147, 153;
-  --gui-font-size-extra-large: 20px;
-  --gui-font-size-large: 18px;
-  --gui-font-size-medium: 16px;
-  --gui-font-size-base: 14px;
-  --gui-font-size-small: 13px;
-  --gui-font-size-extra-small: 12px;
-  --gui-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
-  --gui-font-weight-primary: 500;
-  --gui-font-line-height-primary: 24px;
-  --gui-index-normal: 1;
-  --gui-index-top: 1000;
-  --gui-index-popper: 2000;
-  --gui-border-radius-base: 4px;
-  --gui-border-radius-small: 2px;
-  --gui-border-radius-round: 20px;
-  --gui-border-radius-circle: 100%;
-  --gui-transition-duration: 0.3s;
-  --gui-transition-duration-fast: 0.2s;
-  --gui-transition-function-ease-in-out-bezier: cubic-bezier(0.645, 0.045, 0.355, 1);
-  --gui-transition-function-fast-bezier: cubic-bezier(0.23, 1, 0.32, 1);
-  --gui-transition-all: all var(--gui-transition-duration) var(--gui-transition-function-ease-in-out-bezier);
-  --gui-transition-fade: opacity var(--gui-transition-duration) var(--gui-transition-function-fast-bezier);
-  --gui-transition-md-fade: transform var(--gui-transition-duration) var(--gui-transition-function-fast-bezier), opacity var(--gui-transition-duration) var(--gui-transition-function-fast-bezier);
-  --gui-transition-fade-linear: opacity var(--gui-transition-duration-fast) linear;
-  --gui-transition-border: border-color var(--gui-transition-duration-fast) var(--gui-transition-function-ease-in-out-bezier);
-  --gui-transition-box-shadow: box-shadow var(--gui-transition-duration-fast) var(--gui-transition-function-ease-in-out-bezier);
-  --gui-transition-color: color var(--gui-transition-duration-fast) var(--gui-transition-function-ease-in-out-bezier);
-  --gui-component-size-large: 40px;
-  --gui-component-size: 32px;
-  --gui-component-size-small: 24px;
+  --el-color-white: #ffffff;
+  --el-color-black: #000000;
+  --el-color-primary-rgb: 64, 158, 255;
+  --el-color-success-rgb: 103, 194, 58;
+  --el-color-warning-rgb: 230, 162, 60;
+  --el-color-danger-rgb: 245, 108, 108;
+  --el-color-error-rgb: 245, 108, 108;
+  --el-color-info-rgb: 144, 147, 153;
+  --el-font-size-extra-large: 20px;
+  --el-font-size-large: 18px;
+  --el-font-size-medium: 16px;
+  --el-font-size-base: 14px;
+  --el-font-size-small: 13px;
+  --el-font-size-extra-small: 12px;
+  --el-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  --el-font-weight-primary: 500;
+  --el-font-line-height-primary: 24px;
+  --el-index-normal: 1;
+  --el-index-top: 1000;
+  --el-index-popper: 2000;
+  --el-border-radius-base: 4px;
+  --el-border-radius-small: 2px;
+  --el-border-radius-round: 20px;
+  --el-border-radius-circle: 100%;
+  --el-transition-duration: 0.3s;
+  --el-transition-duration-fast: 0.2s;
+  --el-transition-function-ease-in-out-bezier: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --el-transition-function-fast-bezier: cubic-bezier(0.23, 1, 0.32, 1);
+  --el-transition-all: all var(--el-transition-duration) var(--el-transition-function-ease-in-out-bezier);
+  --el-transition-fade: opacity var(--el-transition-duration) var(--el-transition-function-fast-bezier);
+  --el-transition-md-fade: transform var(--el-transition-duration) var(--el-transition-function-fast-bezier), opacity var(--el-transition-duration) var(--el-transition-function-fast-bezier);
+  --el-transition-fade-linear: opacity var(--el-transition-duration-fast) linear;
+  --el-transition-border: border-color var(--el-transition-duration-fast) var(--el-transition-function-ease-in-out-bezier);
+  --el-transition-box-shadow: box-shadow var(--el-transition-duration-fast) var(--el-transition-function-ease-in-out-bezier);
+  --el-transition-color: color var(--el-transition-duration-fast) var(--el-transition-function-ease-in-out-bezier);
+  --el-component-size-large: 40px;
+  --el-component-size: 32px;
+  --el-component-size-small: 24px;
 }
 
 :root {
   color-scheme: light;
-  --gui-color-primary: #409eff;
-  --gui-color-primary-light-3: rgb(121.3, 187.1, 255);
-  --gui-color-primary-light-5: rgb(159.5, 206.5, 255);
-  --gui-color-primary-light-7: rgb(197.7, 225.9, 255);
-  --gui-color-primary-light-8: rgb(216.8, 235.6, 255);
-  --gui-color-primary-light-9: rgb(235.9, 245.3, 255);
-  --gui-color-primary-dark-2: rgb(51.2, 126.4, 204);
-  --gui-color-success: #67c23a;
-  --gui-color-success-light-3: rgb(148.6, 212.3, 117.1);
-  --gui-color-success-light-5: rgb(179, 224.5, 156.5);
-  --gui-color-success-light-7: rgb(209.4, 236.7, 195.9);
-  --gui-color-success-light-8: rgb(224.6, 242.8, 215.6);
-  --gui-color-success-light-9: rgb(239.8, 248.9, 235.3);
-  --gui-color-success-dark-2: rgb(82.4, 155.2, 46.4);
-  --gui-color-warning: #e6a23c;
-  --gui-color-warning-light-3: rgb(237.5, 189.9, 118.5);
-  --gui-color-warning-light-5: rgb(242.5, 208.5, 157.5);
-  --gui-color-warning-light-7: rgb(247.5, 227.1, 196.5);
-  --gui-color-warning-light-8: rgb(250, 236.4, 216);
-  --gui-color-warning-light-9: rgb(252.5, 245.7, 235.5);
-  --gui-color-warning-dark-2: rgb(184, 129.6, 48);
-  --gui-color-danger: #f56c6c;
-  --gui-color-danger-light-3: rgb(248, 152.1, 152.1);
-  --gui-color-danger-light-5: rgb(250, 181.5, 181.5);
-  --gui-color-danger-light-7: rgb(252, 210.9, 210.9);
-  --gui-color-danger-light-8: rgb(253, 225.6, 225.6);
-  --gui-color-danger-light-9: rgb(254, 240.3, 240.3);
-  --gui-color-danger-dark-2: rgb(196, 86.4, 86.4);
-  --gui-color-error: #f56c6c;
-  --gui-color-error-light-3: rgb(248, 152.1, 152.1);
-  --gui-color-error-light-5: rgb(250, 181.5, 181.5);
-  --gui-color-error-light-7: rgb(252, 210.9, 210.9);
-  --gui-color-error-light-8: rgb(253, 225.6, 225.6);
-  --gui-color-error-light-9: rgb(254, 240.3, 240.3);
-  --gui-color-error-dark-2: rgb(196, 86.4, 86.4);
-  --gui-color-info: #909399;
-  --gui-color-info-light-3: rgb(177.3, 179.4, 183.6);
-  --gui-color-info-light-5: rgb(199.5, 201, 204);
-  --gui-color-info-light-7: rgb(221.7, 222.6, 224.4);
-  --gui-color-info-light-8: rgb(232.8, 233.4, 234.6);
-  --gui-color-info-light-9: rgb(243.9, 244.2, 244.8);
-  --gui-color-info-dark-2: rgb(115.2, 117.6, 122.4);
-  --gui-bg-color: #ffffff;
-  --gui-bg-color-page: #f2f3f5;
-  --gui-bg-color-overlay: #ffffff;
-  --gui-text-color-primary: #303133;
-  --gui-text-color-regular: #606266;
-  --gui-text-color-secondary: #909399;
-  --gui-text-color-placeholder: #a8abb2;
-  --gui-text-color-disabled: #c0c4cc;
-  --gui-border-color: #dcdfe6;
-  --gui-border-color-light: #e4e7ed;
-  --gui-border-color-lighter: #ebeef5;
-  --gui-border-color-extra-light: #f2f6fc;
-  --gui-border-color-dark: #d4d7de;
-  --gui-border-color-darker: #cdd0d6;
-  --gui-fill-color: #f0f2f5;
-  --gui-fill-color-light: #f5f7fa;
-  --gui-fill-color-lighter: #fafafa;
-  --gui-fill-color-extra-light: #fafcff;
-  --gui-fill-color-dark: #ebedf0;
-  --gui-fill-color-darker: #e6e8eb;
-  --gui-fill-color-blank: #ffffff;
-  --gui-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px rgba(0, 0, 0, 0.08);
-  --gui-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
-  --gui-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
-  --gui-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12), 0px 8px 16px -8px rgba(0, 0, 0, 0.16);
-  --gui-disabled-bg-color: var(--gui-fill-color-light);
-  --gui-disabled-text-color: var(--gui-text-color-placeholder);
-  --gui-disabled-border-color: var(--gui-border-color-light);
-  --gui-overlay-color: rgba(0, 0, 0, 0.8);
-  --gui-overlay-color-light: rgba(0, 0, 0, 0.7);
-  --gui-overlay-color-lighter: rgba(0, 0, 0, 0.5);
-  --gui-mask-color: rgba(255, 255, 255, 0.9);
-  --gui-mask-color-extra-light: rgba(255, 255, 255, 0.3);
-  --gui-border-width: 1px;
-  --gui-border-style: solid;
-  --gui-border-color-hover: var(--gui-text-color-disabled);
-  --gui-border: var(--gui-border-width) var(--gui-border-style) var(--gui-border-color);
-  --gui-svg-monochrome-grey: var(--gui-border-color);
+  --el-color-primary: #409eff;
+  --el-color-primary-light-3: rgb(121.3, 187.1, 255);
+  --el-color-primary-light-5: rgb(159.5, 206.5, 255);
+  --el-color-primary-light-7: rgb(197.7, 225.9, 255);
+  --el-color-primary-light-8: rgb(216.8, 235.6, 255);
+  --el-color-primary-light-9: rgb(235.9, 245.3, 255);
+  --el-color-primary-dark-2: rgb(51.2, 126.4, 204);
+  --el-color-success: #67c23a;
+  --el-color-success-light-3: rgb(148.6, 212.3, 117.1);
+  --el-color-success-light-5: rgb(179, 224.5, 156.5);
+  --el-color-success-light-7: rgb(209.4, 236.7, 195.9);
+  --el-color-success-light-8: rgb(224.6, 242.8, 215.6);
+  --el-color-success-light-9: rgb(239.8, 248.9, 235.3);
+  --el-color-success-dark-2: rgb(82.4, 155.2, 46.4);
+  --el-color-warning: #e6a23c;
+  --el-color-warning-light-3: rgb(237.5, 189.9, 118.5);
+  --el-color-warning-light-5: rgb(242.5, 208.5, 157.5);
+  --el-color-warning-light-7: rgb(247.5, 227.1, 196.5);
+  --el-color-warning-light-8: rgb(250, 236.4, 216);
+  --el-color-warning-light-9: rgb(252.5, 245.7, 235.5);
+  --el-color-warning-dark-2: rgb(184, 129.6, 48);
+  --el-color-danger: #f56c6c;
+  --el-color-danger-light-3: rgb(248, 152.1, 152.1);
+  --el-color-danger-light-5: rgb(250, 181.5, 181.5);
+  --el-color-danger-light-7: rgb(252, 210.9, 210.9);
+  --el-color-danger-light-8: rgb(253, 225.6, 225.6);
+  --el-color-danger-light-9: rgb(254, 240.3, 240.3);
+  --el-color-danger-dark-2: rgb(196, 86.4, 86.4);
+  --el-color-error: #f56c6c;
+  --el-color-error-light-3: rgb(248, 152.1, 152.1);
+  --el-color-error-light-5: rgb(250, 181.5, 181.5);
+  --el-color-error-light-7: rgb(252, 210.9, 210.9);
+  --el-color-error-light-8: rgb(253, 225.6, 225.6);
+  --el-color-error-light-9: rgb(254, 240.3, 240.3);
+  --el-color-error-dark-2: rgb(196, 86.4, 86.4);
+  --el-color-info: #909399;
+  --el-color-info-light-3: rgb(177.3, 179.4, 183.6);
+  --el-color-info-light-5: rgb(199.5, 201, 204);
+  --el-color-info-light-7: rgb(221.7, 222.6, 224.4);
+  --el-color-info-light-8: rgb(232.8, 233.4, 234.6);
+  --el-color-info-light-9: rgb(243.9, 244.2, 244.8);
+  --el-color-info-dark-2: rgb(115.2, 117.6, 122.4);
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #f2f3f5;
+  --el-bg-color-overlay: #ffffff;
+  --el-text-color-primary: #303133;
+  --el-text-color-regular: #606266;
+  --el-text-color-secondary: #909399;
+  --el-text-color-placeholder: #a8abb2;
+  --el-text-color-disabled: #c0c4cc;
+  --el-border-color: #dcdfe6;
+  --el-border-color-light: #e4e7ed;
+  --el-border-color-lighter: #ebeef5;
+  --el-border-color-extra-light: #f2f6fc;
+  --el-border-color-dark: #d4d7de;
+  --el-border-color-darker: #cdd0d6;
+  --el-fill-color: #f0f2f5;
+  --el-fill-color-light: #f5f7fa;
+  --el-fill-color-lighter: #fafafa;
+  --el-fill-color-extra-light: #fafcff;
+  --el-fill-color-dark: #ebedf0;
+  --el-fill-color-darker: #e6e8eb;
+  --el-fill-color-blank: #ffffff;
+  --el-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px rgba(0, 0, 0, 0.08);
+  --el-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --el-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --el-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12), 0px 8px 16px -8px rgba(0, 0, 0, 0.16);
+  --el-disabled-bg-color: var(--el-fill-color-light);
+  --el-disabled-text-color: var(--el-text-color-placeholder);
+  --el-disabled-border-color: var(--el-border-color-light);
+  --el-overlay-color: rgba(0, 0, 0, 0.8);
+  --el-overlay-color-light: rgba(0, 0, 0, 0.7);
+  --el-overlay-color-lighter: rgba(0, 0, 0, 0.5);
+  --el-mask-color: rgba(255, 255, 255, 0.9);
+  --el-mask-color-extra-light: rgba(255, 255, 255, 0.3);
+  --el-border-width: 1px;
+  --el-border-style: solid;
+  --el-border-color-hover: var(--el-text-color-disabled);
+  --el-border: var(--el-border-width) var(--el-border-style) var(--el-border-color);
+  --el-svg-monochrome-grey: var(--el-border-color);
 }
 
 .fade-in-linear-enter-active,
 .fade-in-linear-leave-active {
-  transition: var(--gui-transition-fade-linear);
+  transition: var(--el-transition-fade-linear);
 }
 
 .fade-in-linear-enter-from,
@@ -135,124 +136,124 @@
   opacity: 0;
 }
 
-.gui-fade-in-linear-enter-active,
-.gui-fade-in-linear-leave-active {
-  transition: var(--gui-transition-fade-linear);
+.el-fade-in-linear-enter-active,
+.el-fade-in-linear-leave-active {
+  transition: var(--el-transition-fade-linear);
 }
 
-.gui-fade-in-linear-enter-from,
-.gui-fade-in-linear-leave-to {
+.el-fade-in-linear-enter-from,
+.el-fade-in-linear-leave-to {
   opacity: 0;
 }
 
-.gui-fade-in-enter-active,
-.gui-fade-in-leave-active {
-  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+.el-fade-in-enter-active,
+.el-fade-in-leave-active {
+  transition: all var(--el-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
 }
 
-.gui-fade-in-enter-from,
-.gui-fade-in-leave-active {
+.el-fade-in-enter-from,
+.el-fade-in-leave-active {
   opacity: 0;
 }
 
-.gui-zoom-in-center-enter-active,
-.gui-zoom-in-center-leave-active {
-  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+.el-zoom-in-center-enter-active,
+.el-zoom-in-center-leave-active {
+  transition: all var(--el-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
 }
 
-.gui-zoom-in-center-enter-from,
-.gui-zoom-in-center-leave-active {
+.el-zoom-in-center-enter-from,
+.el-zoom-in-center-leave-active {
   opacity: 0;
   transform: scaleX(0);
 }
 
-.gui-zoom-in-top-enter-active,
-.gui-zoom-in-top-leave-active {
+.el-zoom-in-top-enter-active,
+.el-zoom-in-top-leave-active {
   opacity: 1;
   transform: scaleY(1);
-  transition: var(--gui-transition-md-fade);
+  transition: var(--el-transition-md-fade);
   transform-origin: center top;
 }
-.gui-zoom-in-top-enter-active[data-popper-placement^=top],
-.gui-zoom-in-top-leave-active[data-popper-placement^=top] {
+.el-zoom-in-top-enter-active[data-popper-placement^=top],
+.el-zoom-in-top-leave-active[data-popper-placement^=top] {
   transform-origin: center bottom;
 }
 
-.gui-zoom-in-top-enter-from,
-.gui-zoom-in-top-leave-active {
+.el-zoom-in-top-enter-from,
+.el-zoom-in-top-leave-active {
   opacity: 0;
   transform: scaleY(0);
 }
 
-.gui-zoom-in-bottom-enter-active,
-.gui-zoom-in-bottom-leave-active {
+.el-zoom-in-bottom-enter-active,
+.el-zoom-in-bottom-leave-active {
   opacity: 1;
   transform: scaleY(1);
-  transition: var(--gui-transition-md-fade);
+  transition: var(--el-transition-md-fade);
   transform-origin: center bottom;
 }
 
-.gui-zoom-in-bottom-enter-from,
-.gui-zoom-in-bottom-leave-active {
+.el-zoom-in-bottom-enter-from,
+.el-zoom-in-bottom-leave-active {
   opacity: 0;
   transform: scaleY(0);
 }
 
-.gui-zoom-in-left-enter-active,
-.gui-zoom-in-left-leave-active {
+.el-zoom-in-left-enter-active,
+.el-zoom-in-left-leave-active {
   opacity: 1;
   transform: scale(1, 1);
-  transition: var(--gui-transition-md-fade);
+  transition: var(--el-transition-md-fade);
   transform-origin: top left;
 }
 
-.gui-zoom-in-left-enter-from,
-.gui-zoom-in-left-leave-active {
+.el-zoom-in-left-enter-from,
+.el-zoom-in-left-leave-active {
   opacity: 0;
   transform: scale(0.45, 0.45);
 }
 
 .collapse-transition {
-  transition: var(--gui-transition-duration) height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+  transition: var(--el-transition-duration) height ease-in-out, var(--el-transition-duration) padding-top ease-in-out, var(--el-transition-duration) padding-bottom ease-in-out;
 }
 
-.gui-collapse-transition-leave-active,
-.gui-collapse-transition-enter-active {
-  transition: var(--gui-transition-duration) max-height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+.el-collapse-transition-leave-active,
+.el-collapse-transition-enter-active {
+  transition: var(--el-transition-duration) max-height ease-in-out, var(--el-transition-duration) padding-top ease-in-out, var(--el-transition-duration) padding-bottom ease-in-out;
 }
 
 .horizontal-collapse-transition {
-  transition: var(--gui-transition-duration) width ease-in-out, var(--gui-transition-duration) padding-left ease-in-out, var(--gui-transition-duration) padding-right ease-in-out;
+  transition: var(--el-transition-duration) width ease-in-out, var(--el-transition-duration) padding-left ease-in-out, var(--el-transition-duration) padding-right ease-in-out;
 }
 
-.gui-list-enter-active,
-.gui-list-leave-active {
+.el-list-enter-active,
+.el-list-leave-active {
   transition: all 1s;
 }
 
-.gui-list-enter-from,
-.gui-list-leave-to {
+.el-list-enter-from,
+.el-list-leave-to {
   opacity: 0;
   transform: translateY(-30px);
 }
 
-.gui-list-leave-active {
+.el-list-leave-active {
   position: absolute !important;
 }
 
-.gui-opacity-transition {
-  transition: opacity var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+.el-opacity-transition {
+  transition: opacity var(--el-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
 }
 
-.gui-icon-loading {
+.el-icon-loading {
   animation: rotating 2s linear infinite;
 }
 
-.gui-icon--right {
+.el-icon--right {
   margin-left: 5px;
 }
 
-.gui-icon--left {
+.el-icon--left {
   margin-right: 5px;
 }
 
@@ -264,7 +265,7 @@
     transform: rotateZ(360deg);
   }
 }
-.gui-icon {
+.el-icon {
   --color: inherit;
   height: 1em;
   width: 1em;
@@ -277,11 +278,11 @@
   color: var(--color);
   font-size: inherit;
 }
-.gui-icon.is-loading {
+.el-icon.is-loading {
   animation: rotating 2s linear infinite;
 }
 
-.gui-icon svg {
+.el-icon svg {
   height: 1em;
   width: 1em;
 }
@@ -593,6 +594,125 @@
 .gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
   border-right-color: transparent !important;
   border-top-color: transparent !important;
+}
+
+.fade-in-linear-enter-active,
+.fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.fade-in-linear-enter-from,
+.fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-linear-enter-active,
+.gui-fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.gui-fade-in-linear-enter-from,
+.gui-fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-enter-active,
+.gui-fade-in-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-fade-in-enter-from,
+.gui-fade-in-leave-active {
+  opacity: 0;
+}
+
+.gui-zoom-in-center-enter-active,
+.gui-zoom-in-center-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-zoom-in-center-enter-from,
+.gui-zoom-in-center-leave-active {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.gui-zoom-in-top-enter-active,
+.gui-zoom-in-top-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center top;
+}
+.gui-zoom-in-top-enter-active[data-popper-placement^=top],
+.gui-zoom-in-top-leave-active[data-popper-placement^=top] {
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-top-enter-from,
+.gui-zoom-in-top-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-bottom-enter-active,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-bottom-enter-from,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-left-enter-active,
+.gui-zoom-in-left-leave-active {
+  opacity: 1;
+  transform: scale(1, 1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: top left;
+}
+
+.gui-zoom-in-left-enter-from,
+.gui-zoom-in-left-leave-active {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+}
+
+.collapse-transition {
+  transition: var(--gui-transition-duration) height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.gui-collapse-transition-leave-active,
+.gui-collapse-transition-enter-active {
+  transition: var(--gui-transition-duration) max-height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.horizontal-collapse-transition {
+  transition: var(--gui-transition-duration) width ease-in-out, var(--gui-transition-duration) padding-left ease-in-out, var(--gui-transition-duration) padding-right ease-in-out;
+}
+
+.gui-list-enter-active,
+.gui-list-leave-active {
+  transition: all 1s;
+}
+
+.gui-list-enter-from,
+.gui-list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.gui-list-leave-active {
+  position: absolute !important;
+}
+
+.gui-opacity-transition {
+  transition: opacity var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 .gui-picker__popper {

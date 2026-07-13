@@ -1,7 +1,7 @@
 @use "sass:map" as *;
 @use "@flash-global66/g-utils/mixins" as *;
 @use "@flash-global66/g-utils/tokens" as *;
-@use "@flash-global66/g-utils/base" as *;
+@use "element-plus/theme-chalk/src/base.scss" as *;
 
 @use "@flash-global66/g-input/src/input.styles.scss" as *;
 @use "@flash-global66/g-scrollbar/src/scrollbar.styles.scss" as *;
