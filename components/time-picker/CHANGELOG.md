@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-time-picker@0.4.11...@flash-global66/g-time-picker@0.4.12) (2026-07-13)
+
+### Bug Fixes
+
+- **styles:** keep time-picker on element-plus base.scss until config-provider owns brand emission ([e08b7f0](https://github.com/Flash-Global66/global-design-system/commit/e08b7f006315b70836ac8c6646981745d1b8bd18)), closes [#203478](https://github.com/Flash-Global66/global-design-system/issues/203478) [#409](https://github.com/Flash-Global66/global-design-system/issues/409)
+
 ## [0.4.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-time-picker@0.4.10...@flash-global66/g-time-picker@0.4.11) (2026-07-13)
 
 **Note:** Version bump only for package @flash-global66/g-time-picker

@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-time-picker",
   "author": "Global66",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "license": "MIT",
   "buildable": true,
   "exports": {
