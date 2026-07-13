@@ -1,0 +1,72 @@
+/* Element Chalk Variables */
+.gui-scrollbar {
+  --gui-scrollbar-opacity: 0.3;
+  --gui-scrollbar-bg-color: var(--gui-text-color-secondary);
+  --gui-scrollbar-hover-opacity: 0.5;
+  --gui-scrollbar-hover-bg-color: var(--gui-text-color-secondary);
+}
+
+.gui-scrollbar {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+.gui-scrollbar__wrap {
+  overflow: auto;
+  height: 100%;
+}
+.gui-scrollbar__wrap--hidden-default {
+  scrollbar-width: none;
+}
+.gui-scrollbar__wrap--hidden-default::-webkit-scrollbar {
+  display: none;
+}
+
+.gui-scrollbar__thumb {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: var(--gui-scrollbar-bg-color, var(--gui-text-color-secondary));
+  transition: var(--gui-transition-duration) background-color;
+  opacity: var(--gui-scrollbar-opacity, 0.3);
+}
+.gui-scrollbar__thumb:hover {
+  background-color: var(--gui-scrollbar-hover-bg-color, var(--gui-text-color-secondary));
+  opacity: var(--gui-scrollbar-hover-opacity, 0.5);
+}
+
+.gui-scrollbar__bar {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  z-index: 1;
+  border-radius: 4px;
+}
+.gui-scrollbar__bar.is-vertical {
+  width: 6px;
+  top: 2px;
+}
+.gui-scrollbar__bar.is-vertical > div {
+  width: 100%;
+}
+
+.gui-scrollbar__bar.is-horizontal {
+  height: 6px;
+  left: 2px;
+}
+.gui-scrollbar__bar.is-horizontal > div {
+  height: 100%;
+}
+
+.gui-scrollbar-fade-enter-active {
+  transition: opacity 340ms ease-out;
+}
+.gui-scrollbar-fade-leave-active {
+  transition: opacity 120ms ease-out;
+}
+.gui-scrollbar-fade-enter-from, .gui-scrollbar-fade-leave-active {
+  opacity: 0;
+}
