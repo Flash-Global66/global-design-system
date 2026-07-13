@@ -16,7 +16,8 @@
     "./var-mixins": "./styles/var-mixins.scss",
     "./transition": "./styles/transition.scss",
     "./icon": "./styles/icon.scss",
-    "./popup": "./styles/popup.scss"
+    "./popup": "./styles/popup.scss",
+    "./popper": "./styles/popper.scss"
   },
   "sideEffects": [
     "**/*.scss",

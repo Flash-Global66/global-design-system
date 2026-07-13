@@ -1,0 +1,98 @@
+/* Element Chalk Variables */
+.gui-popper {
+  --gui-popper-border-radius: var(--gui-popover-border-radius, 4px);
+}
+
+.gui-popper {
+  position: absolute;
+  border-radius: var(--gui-popper-border-radius);
+  padding: 5px 11px;
+  z-index: 2000;
+  font-size: 12px;
+  line-height: 20px;
+  min-width: 10px;
+  overflow-wrap: break-word;
+  visibility: visible;
+}
+.gui-popper.is-dark {
+  color: var(--gui-bg-color);
+  background: var(--gui-text-color-primary);
+  border: 1px solid var(--gui-text-color-primary);
+}
+.gui-popper.is-dark > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-text-color-primary);
+  background: var(--gui-text-color-primary);
+  right: 0;
+}
+
+.gui-popper.is-light {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-border-color-light);
+}
+.gui-popper.is-light > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-border-color-light);
+  background: var(--gui-bg-color-overlay);
+  right: 0;
+}
+
+.gui-popper.is-pure {
+  padding: 0;
+}
+
+.gui-popper__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+}
+.gui-popper__arrow::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+  content: " ";
+  transform: rotate(45deg);
+  background: var(--gui-text-color-primary);
+  box-sizing: border-box;
+}
+
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow {
+  bottom: -5px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-bottom-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow {
+  top: -5px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-top-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow {
+  right: -5px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-top-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow {
+  left: -5px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-bottom-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+}
