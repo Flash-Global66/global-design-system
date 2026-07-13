@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-table",
   "author": "Global66",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,15 +29,15 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-checkbox": "^0.3.24",
-    "@flash-global66/g-hooks": "^0.11.9",
-    "@flash-global66/g-icon-font": "^0.25.20",
-    "@flash-global66/g-input": "^0.3.26",
-    "@flash-global66/g-popper": "^0.0.26",
-    "@flash-global66/g-scrollbar": "^0.1.15",
-    "@flash-global66/g-select": "^0.4.12",
-    "@flash-global66/g-tooltip": "^0.1.14",
-    "@flash-global66/g-utils": "^0.15.1"
+    "@flash-global66/g-checkbox": "^0.3.25",
+    "@flash-global66/g-hooks": "^0.11.10",
+    "@flash-global66/g-icon-font": "^0.25.21",
+    "@flash-global66/g-input": "^0.3.27",
+    "@flash-global66/g-popper": "^0.0.27",
+    "@flash-global66/g-scrollbar": "^0.1.16",
+    "@flash-global66/g-select": "^0.4.13",
+    "@flash-global66/g-tooltip": "^0.1.15",
+    "@flash-global66/g-utils": "^0.15.2"
   },
   "peerDependencies": {
     "async-validator": "^4.2.5",

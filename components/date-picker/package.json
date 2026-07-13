@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-date-picker",
   "author": "Global66",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,13 +29,13 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-button": "^0.5.18",
-    "@flash-global66/g-hooks": "^0.11.9",
-    "@flash-global66/g-icon-font": "^0.25.20",
-    "@flash-global66/g-input": "^0.3.26",
-    "@flash-global66/g-time-picker": "^0.4.7",
-    "@flash-global66/g-tooltip": "^0.1.14",
-    "@flash-global66/g-utils": "^0.15.1"
+    "@flash-global66/g-button": "^0.5.19",
+    "@flash-global66/g-hooks": "^0.11.10",
+    "@flash-global66/g-icon-font": "^0.25.21",
+    "@flash-global66/g-input": "^0.3.27",
+    "@flash-global66/g-time-picker": "^0.4.8",
+    "@flash-global66/g-tooltip": "^0.1.15",
+    "@flash-global66/g-utils": "^0.15.2"
   },
   "peerDependencies": {
     "dayjs": "^1.11.13",

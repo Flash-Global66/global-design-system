@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-collapse",
   "author": "Global66",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,10 +29,10 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-collapse-transition": "^0.2.18",
-    "@flash-global66/g-hooks": "^0.11.9",
-    "@flash-global66/g-icon-font": "^0.25.20",
-    "@flash-global66/g-utils": "^0.15.1"
+    "@flash-global66/g-collapse-transition": "^0.2.19",
+    "@flash-global66/g-hooks": "^0.11.10",
+    "@flash-global66/g-icon-font": "^0.25.21",
+    "@flash-global66/g-utils": "^0.15.2"
   },
   "peerDependencies": {
     "element-plus": "^2.9.0",
