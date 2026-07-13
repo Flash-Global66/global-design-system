@@ -23,5 +23,7 @@
   "scrollbar": "components/scrollbar/src/scrollbar.styles.scss",
   "pagination": "components/pagination/src/pagination.styles.scss",
   "quote": "components/quote/src/quote.styles.scss",
-  "toast": "components/toast/src/toast.styles.scss"
+  "toast": "components/toast/src/toast.styles.scss",
+  "g-utils-popper": "common/g-utils/styles/popper.scss",
+  "popper": "components/popper/src/popper.styles.scss"
 }
