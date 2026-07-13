@@ -1,0 +1,1344 @@
+/* Element Chalk Variables */
+.gui-table {
+  --gui-table-border-color: var(--gui-border-color-lighter);
+  --gui-table-border: 1px solid var(--gui-table-border-color);
+  --gui-table-text-color: var(--gui-text-color-regular);
+  --gui-table-header-text-color: var(--gui-text-color-secondary);
+  --gui-table-row-hover-bg-color: var(--gui-fill-color-light);
+  --gui-table-current-row-bg-color: var(--gui-color-primary-light-9);
+  --gui-table-header-bg-color: var(--gui-bg-color);
+  --gui-table-fixed-box-shadow: var(--gui-box-shadow-light);
+  --gui-table-bg-color: var(--gui-fill-color-blank);
+  --gui-table-tr-bg-color: var(--gui-bg-color);
+  --gui-table-expanded-cell-bg-color: var(--gui-fill-color-blank);
+  --gui-table-fixed-left-column: inset 10px 0 10px -10px rgba(0, 0, 0, 0.15);
+  --gui-table-fixed-right-column: inset -10px 0 10px -10px rgba(0, 0, 0, 0.15);
+  --gui-table-index: var(--gui-index-normal);
+}
+
+.gui-table {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: fit-content;
+  width: 100%;
+  max-width: 100%;
+  background-color: var(--gui-table-bg-color);
+  font-size: var(--gui-font-size-base);
+  color: var(--gui-table-text-color);
+}
+.gui-table__inner-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.gui-table__inner-wrapper::before {
+  left: 0;
+  bottom: 0;
+  height: 1px;
+}
+
+.gui-table tbody:focus-visible {
+  outline: none;
+}
+.gui-table.has-footer.gui-table--scrollable-y tr:last-child td.gui-table__cell, .gui-table.has-footer.gui-table--fluid-height tr:last-child td.gui-table__cell {
+  border-bottom-color: transparent;
+}
+.gui-table__empty-block {
+  position: sticky;
+  left: 0;
+  min-height: 60px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gui-table__empty-text {
+  line-height: 60px;
+  width: 50%;
+  color: var(--gui-text-color-secondary);
+}
+
+.gui-table__expand-column .cell {
+  padding: 0;
+  text-align: center;
+  user-select: none;
+}
+
+.gui-table__expand-icon {
+  position: relative;
+  cursor: pointer;
+  color: var(--gui-text-color-regular);
+  font-size: 12px;
+  transition: transform var(--gui-transition-duration-fast) ease-in-out;
+  height: 20px;
+}
+.gui-table__expand-icon--expanded {
+  transform: rotate(90deg);
+}
+
+.gui-table__expand-icon > .gui-icon {
+  font-size: 12px;
+}
+
+.gui-table__expanded-cell {
+  background-color: var(--gui-table-expanded-cell-bg-color);
+}
+.gui-table__expanded-cell[class*=cell] {
+  padding: 20px 50px;
+}
+.gui-table__expanded-cell:hover {
+  background-color: transparent !important;
+}
+
+.gui-table__placeholder {
+  display: inline-block;
+  width: 20px;
+}
+
+.gui-table__append-wrapper {
+  overflow: hidden;
+}
+
+.gui-table--fit {
+  border-right: 0;
+  border-bottom: 0;
+}
+.gui-table--fit .gui-table__cell.gutter {
+  border-right-width: 1px;
+}
+.gui-table--fit .gui-table__inner-wrapper::before {
+  width: 100%;
+}
+
+.gui-table thead {
+  color: var(--gui-table-header-text-color);
+}
+.gui-table thead th {
+  font-weight: 600;
+}
+.gui-table thead.is-group th.gui-table__cell {
+  background: var(--gui-fill-color-light);
+}
+.gui-table .gui-table__cell {
+  padding: 8px 0;
+  min-width: 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  position: relative;
+  text-align: left;
+  z-index: var(--gui-table-index);
+}
+.gui-table .gui-table__cell.is-center {
+  text-align: center;
+}
+
+.gui-table .gui-table__cell.is-right {
+  text-align: right;
+}
+
+.gui-table .gui-table__cell.gutter {
+  width: 15px;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  padding: 0;
+}
+.gui-table .gui-table__cell.is-hidden > * {
+  visibility: hidden;
+}
+.gui-table .cell {
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 23px;
+  padding: 0 12px;
+}
+.gui-table .cell.gui-tooltip {
+  white-space: nowrap;
+  min-width: 50px;
+}
+.gui-table--large {
+  font-size: var(--gui-font-size-base);
+}
+.gui-table--large .gui-table__cell {
+  padding: 12px 0;
+}
+.gui-table--large .cell {
+  padding: 0 16px;
+}
+
+.gui-table--default {
+  font-size: var(--gui-font-size-base);
+}
+.gui-table--default .gui-table__cell {
+  padding: 8px 0;
+}
+.gui-table--default .cell {
+  padding: 0 12px;
+}
+
+.gui-table--small {
+  font-size: var(--gui-font-size-extra-small);
+}
+.gui-table--small .gui-table__cell {
+  padding: 4px 0;
+}
+.gui-table--small .cell {
+  padding: 0 8px;
+}
+
+.gui-table tr {
+  background-color: var(--gui-table-tr-bg-color);
+}
+.gui-table tr input[type=checkbox] {
+  margin: 0;
+}
+.gui-table th.gui-table__cell.is-leaf,
+.gui-table td.gui-table__cell {
+  border-bottom: var(--gui-table-border);
+}
+.gui-table th.gui-table__cell.is-sortable {
+  cursor: pointer;
+}
+.gui-table th.gui-table__cell {
+  background-color: var(--gui-table-header-bg-color);
+}
+.gui-table th.gui-table__cell > .cell.highlight {
+  color: var(--gui-color-primary);
+}
+.gui-table th.gui-table__cell.required > div::before {
+  display: inline-block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff4d51;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.gui-table td.gui-table__cell div {
+  box-sizing: border-box;
+}
+.gui-table td.gui-table__cell.gutter {
+  width: 0;
+}
+.gui-table--border::after, .gui-table--border::before, .gui-table--border .gui-table__inner-wrapper::after, .gui-table__inner-wrapper::before {
+  content: "";
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table--border .gui-table__inner-wrapper::after {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table--border::before {
+  top: -1px;
+  left: 0;
+  width: 1px;
+  height: 100%;
+}
+.gui-table--border::after {
+  top: -1px;
+  right: 0;
+  width: 1px;
+  height: 100%;
+}
+.gui-table--border .gui-table__inner-wrapper {
+  border-right: none;
+  border-bottom: none;
+}
+
+.gui-table--border .gui-table__footer-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.gui-table--border .gui-table__cell {
+  border-right: var(--gui-table-border);
+}
+.gui-table--border th.gui-table__cell.gutter:last-of-type {
+  border-bottom: var(--gui-table-border);
+  border-bottom-width: 1px;
+}
+.gui-table--border th.gui-table__cell {
+  border-bottom: var(--gui-table-border);
+}
+
+.gui-table--hidden {
+  visibility: hidden;
+}
+
+.gui-table__header-wrapper, .gui-table__body-wrapper, .gui-table__footer-wrapper {
+  width: 100%;
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left, .gui-table__header-wrapper tr td.gui-table-fixed-column--right,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right, .gui-table__body-wrapper tr td.gui-table-fixed-column--left, .gui-table__body-wrapper tr td.gui-table-fixed-column--right,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right {
+  position: sticky !important;
+  background: inherit;
+  z-index: calc(var(--gui-table-index) + 1);
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-first-column::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  width: 10px;
+  bottom: -1px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-shadow: none;
+  touch-action: none;
+  pointer-events: none;
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-first-column::before {
+  left: -10px;
+}
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-last-column::before {
+  right: -10px;
+  box-shadow: none;
+}
+.gui-table__header-wrapper tr td.gui-table__fixed-right-patch,
+.gui-table__header-wrapper tr th.gui-table__fixed-right-patch, .gui-table__body-wrapper tr td.gui-table__fixed-right-patch,
+.gui-table__body-wrapper tr th.gui-table__fixed-right-patch, .gui-table__footer-wrapper tr td.gui-table__fixed-right-patch,
+.gui-table__footer-wrapper tr th.gui-table__fixed-right-patch {
+  position: sticky !important;
+  z-index: calc(var(--gui-table-index) + 1);
+  background: #fff;
+  right: 0;
+}
+
+.gui-table__header-wrapper {
+  flex-shrink: 0;
+}
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left, .gui-table__header-wrapper tr th.gui-table-fixed-column--right {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table__header, .gui-table__body, .gui-table__footer {
+  table-layout: fixed;
+  border-collapse: separate;
+}
+
+.gui-table__header-wrapper {
+  overflow: hidden;
+}
+.gui-table__header-wrapper tbody td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+  color: var(--gui-table-text-color);
+}
+
+.gui-table__footer-wrapper {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.gui-table__footer-wrapper tfoot td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+  color: var(--gui-table-text-color);
+}
+
+.gui-table__header-wrapper .gui-table-column--selection > .cell, .gui-table__body-wrapper .gui-table-column--selection > .cell {
+  display: inline-flex;
+  align-items: center;
+  height: 23px;
+}
+.gui-table__header-wrapper .gui-table-column--selection .gui-checkbox, .gui-table__body-wrapper .gui-table-column--selection .gui-checkbox {
+  height: unset;
+}
+
+.gui-table.is-scrolling-left .gui-table-fixed-column--right.is-first-column::before {
+  box-shadow: var(--gui-table-fixed-right-column);
+}
+.gui-table.is-scrolling-left.gui-table--border .gui-table-fixed-column--left.is-last-column.gui-table__cell {
+  border-right: var(--gui-table-border);
+}
+.gui-table.is-scrolling-left th.gui-table-fixed-column--left {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table.is-scrolling-right .gui-table-fixed-column--left.is-last-column::before {
+  box-shadow: var(--gui-table-fixed-left-column);
+}
+.gui-table.is-scrolling-right .gui-table-fixed-column--left.is-last-column.gui-table__cell {
+  border-right: none;
+}
+.gui-table.is-scrolling-right th.gui-table-fixed-column--right {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table.is-scrolling-middle .gui-table-fixed-column--left.is-last-column.gui-table__cell {
+  border-right: none;
+}
+.gui-table.is-scrolling-middle .gui-table-fixed-column--right.is-first-column::before {
+  box-shadow: var(--gui-table-fixed-right-column);
+}
+.gui-table.is-scrolling-middle .gui-table-fixed-column--left.is-last-column::before {
+  box-shadow: var(--gui-table-fixed-left-column);
+}
+
+.gui-table.is-scrolling-none .gui-table-fixed-column--left.is-first-column::before, .gui-table.is-scrolling-none .gui-table-fixed-column--left.is-last-column::before,
+.gui-table.is-scrolling-none .gui-table-fixed-column--right.is-first-column::before,
+.gui-table.is-scrolling-none .gui-table-fixed-column--right.is-last-column::before {
+  box-shadow: none;
+}
+.gui-table.is-scrolling-none th.gui-table-fixed-column--left,
+.gui-table.is-scrolling-none th.gui-table-fixed-column--right {
+  background-color: var(--gui-table-header-bg-color);
+}
+
+.gui-table__body-wrapper {
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+}
+.gui-table__body-wrapper .gui-scrollbar__bar {
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table .caret-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  height: 14px;
+  width: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: initial;
+  position: relative;
+}
+.gui-table .sort-caret {
+  width: 0;
+  height: 0;
+  border: solid 5px transparent;
+  position: absolute;
+  left: 7px;
+}
+.gui-table .sort-caret.ascending {
+  border-bottom-color: var(--gui-text-color-placeholder);
+  top: -5px;
+}
+.gui-table .sort-caret.descending {
+  border-top-color: var(--gui-text-color-placeholder);
+  bottom: -3px;
+}
+.gui-table .ascending .sort-caret.ascending {
+  border-bottom-color: var(--gui-color-primary);
+}
+.gui-table .descending .sort-caret.descending {
+  border-top-color: var(--gui-color-primary);
+}
+.gui-table .hidden-columns {
+  visibility: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.gui-table--striped .gui-table__body tr.gui-table__row--striped td.gui-table__cell {
+  background: var(--gui-fill-color-lighter);
+}
+.gui-table--striped .gui-table__body tr.gui-table__row--striped.current-row td.gui-table__cell {
+  background-color: var(--gui-table-current-row-bg-color);
+}
+
+.gui-table__body tr.hover-row > td.gui-table__cell, .gui-table__body tr.hover-row.current-row > td.gui-table__cell, .gui-table__body tr.hover-row.gui-table__row--striped > td.gui-table__cell, .gui-table__body tr.hover-row.gui-table__row--striped.current-row > td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+}
+.gui-table__body tr > td.hover-cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+}
+.gui-table__body tr.current-row > td.gui-table__cell {
+  background-color: var(--gui-table-current-row-bg-color);
+}
+
+.gui-table.gui-table--scrollable-y .gui-table__body-header {
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table.gui-table--scrollable-y .gui-table__body-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: calc(var(--gui-table-index) + 2);
+}
+
+.gui-table__column-resize-proxy {
+  position: absolute;
+  left: 200px;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: var(--gui-table-border);
+  z-index: calc(var(--gui-table-index) + 9);
+}
+
+.gui-table__column-filter-trigger {
+  display: inline-block;
+  cursor: pointer;
+}
+.gui-table__column-filter-trigger i {
+  color: var(--gui-color-info);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.gui-table__border-left-patch {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  z-index: calc(var(--gui-table-index) + 2);
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+}
+
+.gui-table__border-bottom-patch {
+  left: 0;
+  height: 1px;
+  z-index: calc(var(--gui-table-index) + 2);
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+}
+
+.gui-table__border-right-patch {
+  top: 0;
+  height: 100%;
+  width: 1px;
+  z-index: calc(var(--gui-table-index) + 2);
+  position: absolute;
+  background-color: var(--gui-table-border-color);
+}
+
+.gui-table--enable-row-transition .gui-table__body td.gui-table__cell {
+  transition: background-color 0.25s ease;
+}
+
+.gui-table--enable-row-hover .gui-table__body tr:hover > td.gui-table__cell {
+  background-color: var(--gui-table-row-hover-bg-color);
+}
+
+.gui-table [class*=gui-table__row--level] .gui-table__expand-icon {
+  display: inline-block;
+  width: 12px;
+  line-height: 12px;
+  height: 12px;
+  text-align: center;
+  margin-right: 8px;
+}
+.gui-table .gui-table.gui-table--border .gui-table__cell {
+  border-right: var(--gui-table-border);
+}
+.gui-table:not(.gui-table--border) .gui-table__cell {
+  border-right: none;
+}
+.gui-table:not(.gui-table--border) > .gui-table__inner-wrapper::after {
+  content: none;
+}
+
+.gui-table-column--selection .cell {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.gui-table-filter {
+  border: solid 1px var(--gui-border-color-lighter);
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: var(--gui-box-shadow-light);
+  box-sizing: border-box;
+  /** used for dropdown mode */
+}
+.gui-table-filter__list {
+  padding: 5px 0;
+  margin: 0;
+  list-style: none;
+  min-width: 100px;
+}
+
+.gui-table-filter__list-item {
+  line-height: 36px;
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: var(--gui-font-size-base);
+}
+.gui-table-filter__list-item:hover {
+  background-color: var(--gui-color-primary-light-9);
+  color: var(--gui-color-primary);
+}
+.gui-table-filter__list-item.is-active {
+  background-color: var(--gui-color-primary);
+  color: #ffffff;
+}
+
+.gui-table-filter__content {
+  min-width: 100px;
+}
+
+.gui-table-filter__bottom {
+  border-top: 1px solid var(--gui-border-color-lighter);
+  padding: 8px;
+}
+.gui-table-filter__bottom button {
+  background: transparent;
+  border: none;
+  color: var(--gui-text-color-regular);
+  cursor: pointer;
+  font-size: var(--gui-font-size-small);
+  padding: 0 3px;
+}
+.gui-table-filter__bottom button:hover {
+  color: var(--gui-color-primary);
+}
+.gui-table-filter__bottom button:focus {
+  outline: none;
+}
+.gui-table-filter__bottom button.is-disabled {
+  color: var(--gui-disabled-text-color);
+  cursor: not-allowed;
+}
+
+.gui-table-filter__wrap {
+  max-height: 280px;
+}
+
+.gui-table-filter__checkbox-group {
+  padding: 10px;
+}
+.gui-table-filter__checkbox-group label.gui-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-bottom: 12px;
+  margin-left: 5px;
+  height: unset;
+}
+.gui-table-filter__checkbox-group .gui-checkbox:last-child {
+  margin-bottom: 0;
+}
+
+.gui-tooltip-v2__content {
+  --gui-tooltip-v2-padding: 5px 10px;
+  --gui-tooltip-v2-border-radius: 4px;
+  --gui-tooltip-v2-border-color: var(--gui-border-color);
+  border-radius: var(--gui-tooltip-v2-border-radius);
+  color: var(--gui-color-black);
+  background-color: var(--gui-color-white);
+  padding: var(--gui-tooltip-v2-padding);
+  border: 1px solid var(--gui-border-color);
+}
+.gui-tooltip-v2__arrow {
+  position: absolute;
+  color: var(--gui-color-white);
+  width: var(--gui-tooltip-v2-arrow-width);
+  height: var(--gui-tooltip-v2-arrow-height);
+  pointer-events: none;
+  left: var(--gui-tooltip-v2-arrow-x);
+  top: var(--gui-tooltip-v2-arrow-y);
+}
+.gui-tooltip-v2__arrow::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__arrow::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow {
+  bottom: 0;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::before {
+  border-top-color: var(--gui-color-white);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::after {
+  border-top-color: var(--gui-border-color);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow {
+  top: 0;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::before {
+  border-bottom-color: var(--gui-color-white);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::after {
+  border-bottom-color: var(--gui-border-color);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow {
+  right: 0;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::before {
+  border-left-color: var(--gui-color-white);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::after {
+  border-left-color: var(--gui-border-color);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow {
+  left: 0;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::before {
+  border-right-color: var(--gui-color-white);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::after {
+  border-right-color: var(--gui-border-color);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: 100%;
+  z-index: -1;
+}
+
+.gui-tooltip-v2__content.is-dark {
+  --gui-tooltip-v2-border-color: transparent;
+  background-color: var(--gui-color-black);
+  color: var(--gui-color-white);
+  border-color: transparent;
+}
+.gui-tooltip-v2__content.is-dark .gui-tooltip-v2__arrow {
+  background-color: var(--gui-color-black);
+  border-color: transparent;
+}
+
+.gui-popper {
+  --gui-popper-border-radius: var(--gui-popover-border-radius, 4px);
+}
+
+.gui-popper {
+  position: absolute;
+  border-radius: var(--gui-popper-border-radius);
+  padding: 5px 11px;
+  z-index: 2000;
+  font-size: 12px;
+  line-height: 20px;
+  min-width: 10px;
+  overflow-wrap: break-word;
+  visibility: visible;
+}
+.gui-popper.is-dark {
+  color: var(--gui-bg-color);
+  background: var(--gui-text-color-primary);
+  border: 1px solid var(--gui-text-color-primary);
+}
+.gui-popper.is-dark > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-text-color-primary);
+  background: var(--gui-text-color-primary);
+  right: 0;
+}
+
+.gui-popper.is-light {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-border-color-light);
+}
+.gui-popper.is-light > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-border-color-light);
+  background: var(--gui-bg-color-overlay);
+  right: 0;
+}
+
+.gui-popper.is-pure {
+  padding: 0;
+}
+
+.gui-popper__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+}
+.gui-popper__arrow::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+  content: " ";
+  transform: rotate(45deg);
+  background: var(--gui-text-color-primary);
+  box-sizing: border-box;
+}
+
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow {
+  bottom: -5px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-bottom-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow {
+  top: -5px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-top-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow {
+  right: -5px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-top-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow {
+  left: -5px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-bottom-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+}
+
+.gui-checkbox {
+  --gui-checkbox-font-size: 14px;
+  --gui-checkbox-font-weight: var(--gui-font-weight-primary);
+  --gui-checkbox-text-color: var(--gui-text-color-regular);
+  --gui-checkbox-input-height: 14px;
+  --gui-checkbox-input-width: 14px;
+  --gui-checkbox-border-radius: var(--gui-border-radius-small);
+  --gui-checkbox-bg-color: var(--gui-fill-color-blank);
+  --gui-checkbox-input-border: var(--gui-border);
+  --gui-checkbox-disabled-border-color: var(--gui-border-color);
+  --gui-checkbox-disabled-input-fill: var(--gui-fill-color-light);
+  --gui-checkbox-disabled-icon-color: var(--gui-text-color-placeholder);
+  --gui-checkbox-disabled-checked-input-fill: var(--gui-border-color-extra-light);
+  --gui-checkbox-disabled-checked-input-border-color: var(--gui-border-color);
+  --gui-checkbox-disabled-checked-icon-color: var(--gui-text-color-placeholder);
+  --gui-checkbox-checked-text-color: var(--gui-color-primary);
+  --gui-checkbox-checked-input-border-color: var(--gui-color-primary);
+  --gui-checkbox-checked-bg-color: var(--gui-color-primary);
+  --gui-checkbox-checked-icon-color: var(--gui-color-white);
+  --gui-checkbox-input-border-color-hover: var(--gui-color-primary);
+}
+
+.gui-checkbox {
+  color: var(--gui-checkbox-text-color);
+  font-weight: var(--gui-checkbox-font-weight);
+  font-size: var(--gui-font-size-base);
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  user-select: none;
+  margin-right: 30px;
+  height: var(--gui-checkbox-height, 32px);
+}
+.gui-checkbox.is-disabled {
+  cursor: not-allowed;
+}
+
+.gui-checkbox.is-bordered {
+  padding: 0 15px 0 9px;
+  border-radius: var(--gui-border-radius-base);
+  border: var(--gui-border);
+  box-sizing: border-box;
+}
+.gui-checkbox.is-bordered.is-checked {
+  border-color: var(--gui-color-primary);
+}
+.gui-checkbox.is-bordered.is-disabled {
+  border-color: var(--gui-border-color-lighter);
+}
+.gui-checkbox.is-bordered.gui-checkbox--large {
+  padding: 0 19px 0 11px;
+  border-radius: var(--gui-border-radius-base);
+}
+.gui-checkbox.is-bordered.gui-checkbox--large .gui-checkbox__label {
+  font-size: var(--gui-font-size-base);
+}
+.gui-checkbox.is-bordered.gui-checkbox--large .gui-checkbox__inner {
+  height: 14px;
+  width: 14px;
+}
+.gui-checkbox.is-bordered.gui-checkbox--small {
+  padding: 0 11px 0 7px;
+  border-radius: calc(var(--gui-border-radius-base) - 1px);
+}
+.gui-checkbox.is-bordered.gui-checkbox--small .gui-checkbox__label {
+  font-size: 12px;
+}
+.gui-checkbox.is-bordered.gui-checkbox--small .gui-checkbox__inner {
+  height: 12px;
+  width: 12px;
+}
+.gui-checkbox.is-bordered.gui-checkbox--small .gui-checkbox__inner::after {
+  height: 6px;
+  width: 2px;
+}
+
+.gui-checkbox input:focus-visible + .gui-checkbox__inner {
+  outline: 2px solid var(--gui-checkbox-input-border-color-hover);
+  outline-offset: 1px;
+  border-radius: var(--gui-checkbox-border-radius);
+}
+.gui-checkbox__input {
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  position: relative;
+}
+.gui-checkbox__input.is-disabled .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-disabled-input-fill);
+  border-color: var(--gui-checkbox-disabled-border-color);
+  cursor: not-allowed;
+}
+.gui-checkbox__input.is-disabled .gui-checkbox__inner::after {
+  cursor: not-allowed;
+  border-color: var(--gui-checkbox-disabled-icon-color);
+}
+.gui-checkbox__input.is-disabled.is-checked .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-disabled-checked-input-fill);
+  border-color: var(--gui-checkbox-disabled-checked-input-border-color);
+}
+.gui-checkbox__input.is-disabled.is-checked .gui-checkbox__inner::after {
+  border-color: var(--gui-checkbox-disabled-checked-icon-color);
+}
+.gui-checkbox__input.is-disabled.is-indeterminate .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-disabled-checked-input-fill);
+  border-color: var(--gui-checkbox-disabled-checked-input-border-color);
+}
+.gui-checkbox__input.is-disabled.is-indeterminate .gui-checkbox__inner::before {
+  background-color: var(--gui-checkbox-disabled-checked-icon-color);
+  border-color: var(--gui-checkbox-disabled-checked-icon-color);
+}
+.gui-checkbox__input.is-disabled + span.gui-checkbox__label {
+  color: var(--gui-disabled-text-color);
+  cursor: not-allowed;
+}
+
+.gui-checkbox__input.is-checked .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-checked-bg-color);
+  border-color: var(--gui-checkbox-checked-input-border-color);
+}
+.gui-checkbox__input.is-checked .gui-checkbox__inner::after {
+  transform: rotate(45deg) scaleY(1);
+  border-color: var(--gui-checkbox-checked-icon-color);
+}
+.gui-checkbox__input.is-checked + .gui-checkbox__label {
+  color: var(--gui-checkbox-checked-text-color);
+}
+
+.gui-checkbox__input.is-focus:not(.is-checked) .gui-checkbox__original:not(:focus-visible) {
+  border-color: var(--gui-checkbox-input-border-color-hover);
+}
+
+.gui-checkbox__input.is-indeterminate .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-checked-bg-color);
+  border-color: var(--gui-checkbox-checked-input-border-color);
+}
+.gui-checkbox__input.is-indeterminate .gui-checkbox__inner::before {
+  content: "";
+  position: absolute;
+  display: block;
+  background-color: var(--gui-checkbox-checked-icon-color);
+  height: 2px;
+  transform: scale(0.5);
+  left: 0;
+  right: 0;
+  top: 5px;
+}
+.gui-checkbox__input.is-indeterminate .gui-checkbox__inner::after {
+  display: none;
+}
+
+.gui-checkbox__inner {
+  display: inline-block;
+  position: relative;
+  border: var(--gui-checkbox-input-border);
+  border-radius: var(--gui-checkbox-border-radius);
+  box-sizing: border-box;
+  width: var(--gui-checkbox-input-width);
+  height: var(--gui-checkbox-input-height);
+  background-color: var(--gui-checkbox-bg-color);
+  z-index: var(--gui-index-normal);
+  transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46), background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46), outline 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
+}
+.gui-checkbox__inner:hover {
+  border-color: var(--gui-checkbox-input-border-color-hover);
+}
+.gui-checkbox__inner::after {
+  box-sizing: content-box;
+  content: "";
+  border: 1px solid transparent;
+  border-left: 0;
+  border-top: 0;
+  height: 7px;
+  left: 4px;
+  position: absolute;
+  top: 1px;
+  transform: rotate(45deg) scaleY(0);
+  width: 3px;
+  transition: transform 0.15s ease-in 0.05s;
+  transform-origin: center;
+}
+
+.gui-checkbox__original {
+  opacity: 0;
+  outline: none;
+  position: absolute;
+  margin: 0;
+  width: 0;
+  height: 0;
+  z-index: -1;
+}
+
+.gui-checkbox__label {
+  display: inline-block;
+  padding-left: 8px;
+  line-height: 1;
+  font-size: var(--gui-checkbox-font-size);
+}
+
+.gui-checkbox.gui-checkbox--large {
+  height: 40px;
+}
+.gui-checkbox.gui-checkbox--large .gui-checkbox__label {
+  font-size: 14px;
+}
+
+.gui-checkbox.gui-checkbox--large .gui-checkbox__inner {
+  width: 14px;
+  height: 14px;
+}
+
+.gui-checkbox.gui-checkbox--small {
+  height: 24px;
+}
+.gui-checkbox.gui-checkbox--small .gui-checkbox__label {
+  font-size: 12px;
+}
+
+.gui-checkbox.gui-checkbox--small .gui-checkbox__inner {
+  width: 12px;
+  height: 12px;
+}
+
+.gui-checkbox.gui-checkbox--small .gui-checkbox__input.is-indeterminate .gui-checkbox__inner::before {
+  top: 4px;
+}
+
+.gui-checkbox.gui-checkbox--small .gui-checkbox__inner::after {
+  width: 2px;
+  height: 6px;
+}
+
+.gui-checkbox:last-of-type {
+  margin-right: 0;
+}
+
+.gui-table tbody:has(.gui-table-cell-input-editing), .gui-table tbody:has(.gui-table-cell-select-editing) {
+  overflow: visible !important;
+}
+.gui-table__header thead.is-group .gui-table__cell {
+  @apply bg-everBlue-50 border-everBlue-100 !important;
+}
+
+.gui-table__header tr th .cell {
+  @apply text-primary-txt font-semibold !important;
+}
+
+.gui-table--group::after {
+  @apply w-0;
+}
+.gui-table--group .gui-table__header-wrapper {
+  @apply border-t border-l-0 border-everBlue-100;
+}
+.gui-table--group .gui-table__header {
+  @apply relative;
+}
+.gui-table--group .gui-table__header::before {
+  @apply content-[''] absolute top-0 left-0 w-[1px] h-full bg-everBlue-100;
+}
+.gui-table--group.gui-table--border .gui-table__inner-wrapper::after {
+  @apply h-0;
+}
+.gui-table--group.gui-table--border::before {
+  @apply w-0;
+}
+
+.gui-table tr {
+  @apply bg-sec-def-bg;
+}
+.gui-table__cell {
+  @apply border-b border-gray-100 !important;
+  position: relative;
+}
+.gui-table__cell:has(.gui-table-cell-edit-wrapper), .gui-table__cell:has(.gui-table-cell-input-wrapper) {
+  @apply p-0 !important;
+}
+.gui-table__cell:has(.gui-table-cell-edit-wrapper) .cell, .gui-table__cell:has(.gui-table-cell-input-wrapper) .cell {
+  position: static !important;
+}
+.gui-table__cell:has(.gui-table-cell-input-reading):hover {
+  @apply bg-everBlue-100 bg-opacity-30;
+}
+.gui-table__cell:has(.gui-table-cell-input-editing), .gui-table__cell:has(.gui-table-cell-select-editing) {
+  overflow: visible !important;
+}
+.gui-table__cell:has(.gui-table-cell-input-editing) .cell, .gui-table__cell:has(.gui-table-cell-select-editing) .cell {
+  overflow: visible !important;
+}
+.gui-table__cell:has(.gui-table-cell-input-editing) .gui-table-cell-edit-wrapper, .gui-table__cell:has(.gui-table-cell-select-editing) .gui-table-cell-edit-wrapper {
+  @apply bg-white;
+}
+.gui-table__cell .cell {
+  @apply text-primary-txt font-medium text-3 !important;
+  position: relative;
+  min-height: 3.8rem;
+  display: flex;
+  align-items: center;
+}
+.gui-table__cell .cell:not(:has(.gui-table-cell-edit-wrapper)):not(:has(.gui-table-cell-input-wrapper)) {
+  @apply px-xs;
+}
+.gui-table__cell:has(.absolute.items-start) {
+  height: auto;
+}
+.gui-table__cell:has(.absolute.items-start) .cell {
+  height: auto;
+  min-height: auto;
+}
+.gui-table__cell .gui-table-cell-select {
+  @apply w-full min-w-0 py-xxs px-xs text-3 border border-transparent rounded bg-transparent outline-none;
+  min-height: 3.8rem;
+}
+.gui-table__cell .gui-table-cell-select:focus {
+  @apply border-everBlue-200;
+}
+.gui-table__cell .gui-table-cell-select-read {
+  @apply w-full h-full min-h-0 max-w-full flex items-center justify-start cursor-pointer outline-none py-0 px-xs rounded;
+}
+.gui-table__cell .gui-table-cell-select-read:focus {
+  @apply ring-1 ring-everBlue-200 ring-offset-0;
+}
+.gui-table__cell .gui-table-cell-select-inner {
+  @apply min-w-0 w-full h-full flex items-center justify-start;
+}
+.gui-table__cell .gui-table-cell-edit-wrapper:has(.gui-table-cell-select-inner) {
+  justify-content: flex-start;
+}
+.gui-table__cell.is-center:has(.gui-table-cell-select-inner) {
+  text-align: left;
+}
+.gui-table__cell.is-center:has(.gui-table-cell-select-inner) .cell {
+  justify-content: flex-start;
+}
+.gui-table__cell .gui-table-cell-input {
+  @apply w-full min-w-0 py-xxs px-xs text-3 border border-transparent rounded bg-transparent outline-none;
+  min-height: 3.8rem;
+}
+.gui-table__cell .gui-table-cell-input:focus {
+  @apply border-everBlue-200;
+}
+.gui-table__cell .gui-table-cell-input-read {
+  @apply w-full flex items-center justify-center cursor-pointer outline-none py-xxs px-xs rounded;
+  min-height: 3.8rem;
+}
+.gui-table__cell .gui-table-cell-input-read:focus {
+  @apply ring-1 ring-everBlue-200 ring-offset-0;
+}
+.gui-table__cell .gui-table-cell-edit-wrapper {
+  @apply w-full flex items-center bg-white;
+  min-height: 3.8rem;
+}
+.gui-table__cell .gui-table-cell-edit-wrapper:hover {
+  @apply bg-everBlue-100 !important;
+}
+.gui-table__cell .gui-table-cell-edit-wrapper.has-textarea {
+  @apply items-start;
+  align-items: flex-start;
+  min-height: auto;
+  height: auto;
+}
+.gui-table__cell .gui-table-cell-input-textarea-wrapper {
+  @apply w-full flex flex-col gap-xxs;
+  min-width: 0;
+  width: 100%;
+  position: relative;
+}
+.gui-table__cell .gui-table-cell-input-label {
+  @apply text-3 font-medium text-primary-txt mb-xxs;
+}
+.gui-table__cell .gui-table-cell-input-textarea {
+  @apply w-full min-w-0 py-xxs px-xs text-3 border border-transparent rounded bg-transparent outline-none resize-none;
+  font-family: inherit;
+  line-height: 1.5;
+  min-height: auto;
+}
+.gui-table__cell .gui-table-cell-input-textarea:focus {
+  @apply border-everBlue-200;
+}
+.gui-table__cell .gui-table-cell-input-textarea::placeholder {
+  @apply text-terciary-txt;
+}
+.gui-table__cell .gui-table-cell-input-error {
+  @apply text-2 text-error-def mt-xxs;
+}
+.gui-table__cell .gui-table-cell-input-textarea--error {
+  border-color: var(--color-error);
+}
+.gui-table__cell .gui-table-cell-input-textarea--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 1px var(--color-error);
+}
+.gui-table__cell .gui-table-cell-input-textarea--validating {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.gui-table__cell .gui-table-cell-input-textarea-loading {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top-color: var(--color-everBlue-200, #60a5fa);
+  border-radius: 50%;
+  animation: gui-table-cell-textarea-spin 0.6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes gui-table-cell-textarea-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.gui-table__cell .gui-table-cell-edit-enter-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gui-table__cell .gui-table-cell-edit-enter-from {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+.gui-table__cell .gui-table-cell-edit-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+.gui-table__cell .gui-table-cell-edit-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gui-table__cell .gui-table-cell-edit-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+.gui-table__cell .gui-table-cell-edit-leave-to {
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.gui-table__expanded-cell.gui-table__cell {
+  @apply p-7 !important;
+}
+
+.gui-table__row {
+  @apply transition-colors duration-200 ease-in;
+  /* &:has(.is-checked) {
+    @apply bg-everBlue-50 border-everBlue-100 !important;
+  } */
+}
+.gui-table__row:hover .gui-table__cell {
+  @apply bg-everBlue-50 !important;
+}
+.gui-table__row:hover .gui-table-cell-edit-wrapper {
+  @apply bg-everBlue-50;
+}
+.gui-table__row--striped .gui-table__cell {
+  @apply bg-everBlue-50 bg-opacity-50 !important;
+}
+
+.gui-table .gui-table-column--selection .cell {
+  @apply flex items-center justify-center h-9;
+}
+.gui-table__body-wrapper .gui-scrollbar__wrap {
+  scroll-behavior: auto;
+}
+
+.gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__header-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__header-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__body-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__body-wrapper tr th.gui-table-fixed-column--right.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--left.is-first-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-last-column::before, .gui-table__footer-wrapper tr td.gui-table-fixed-column--right.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--left.is-first-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-last-column::before,
+.gui-table__footer-wrapper tr th.gui-table-fixed-column--right.is-first-column::before {
+  transition: none;
+}

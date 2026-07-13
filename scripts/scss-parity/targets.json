@@ -50,5 +50,10 @@
   "input-tag-theme": "components/input-tag/src/styles/input-tag.scss",
   "input-tag": "components/input-tag/src/input-tag.styles.scss",
   "g-utils-button-mixins": "common/g-utils/styles/button-mixins.scss",
-  "g-utils-radio-group": "common/g-utils/styles/radio-group.scss"
+  "g-utils-radio-group": "common/g-utils/styles/radio-group.scss",
+  "select-v2-theme": "components/select/src/styles/select-v2.scss",
+  "select": "components/select/src/select.styles.scss",
+  "table-theme": "components/table/src/styles/table.scss",
+  "table-column-theme": "components/table/src/styles/table-column.scss",
+  "table": "components/table/src/table.styles.scss"
 }
