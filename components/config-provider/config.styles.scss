@@ -1,8 +1,23 @@
+// Bootstrap de estilos del Design System (DS-owned).
+//
+// Se mantiene el puente de namespace de element-plus (`@forward
+// mixins/config with ($namespace:'gui')`): mientras existan hojas de
+// estilo legacy no migradas que aún usen los mixins de element-plus
+// (`element-plus/theme-chalk/src/mixins/mixins`), este forward es lo que
+// hace que esos archivos resuelvan el namespace `gui` en lugar del `el`
+// por defecto de EP, siempre que config-provider se cargue primero en la
+// misma compilación de Sass del consumidor (verificado en front-b2b). Este
+// puente solo se retira cuando ya no quede ningún `.scss` del DS que use
+// mixins de element-plus (ver tarea 4.5).
 @forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
   $namespace: 'gui'
 );
 
-@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+// Emisión de tokens propia del DS (reemplaza el `@forward common/var` +
+// `@use base` de element-plus). El orden importa: `tokens` se configura
+// ANTES de `@use base` para que `base` reutilice la misma instancia de
+// tokens ya configurada con los colores de marca.
+@forward '@flash-global66/g-utils/tokens' with (
   $colors: (
     'primary': (
       'base': #203478,
@@ -25,4 +40,4 @@
   )
 );
 
-@use "element-plus/theme-chalk/src/base.scss";
+@use '@flash-global66/g-utils/base';
