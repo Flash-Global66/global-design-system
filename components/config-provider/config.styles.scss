@@ -1,23 +1,23 @@
-// Bootstrap de estilos del Design System (DS-owned).
+// Bootstrap de estilos del Design System.
 //
-// Se mantiene el puente de namespace de element-plus (`@forward
-// mixins/config with ($namespace:'gui')`): mientras existan hojas de
-// estilo legacy no migradas que aún usen los mixins de element-plus
-// (`element-plus/theme-chalk/src/mixins/mixins`), este forward es lo que
-// hace que esos archivos resuelvan el namespace `gui` en lugar del `el`
-// por defecto de EP, siempre que config-provider se cargue primero en la
-// misma compilación de Sass del consumidor (verificado en front-b2b). Este
-// puente solo se retira cuando ya no quede ningún `.scss` del DS que use
-// mixins de element-plus (ver tarea 4.5).
+// NOTA (ep-extraction-scss): durante la transición, la EMISIÓN de tokens
+// (`:root { --gui-* }`) sigue haciéndose con el `base`/`common/var` de
+// element-plus, NO con el `base` propio de g-utils. Motivo: config-provider es
+// el ÚNICO lugar que configura los singletons `mixins/config` (namespace) y
+// `common/var` (colores de marca) de element-plus para TODA la app. Mientras
+// exista cualquier paquete no migrado que haga `@use
+// "element-plus/theme-chalk/src/base"` o `common/var` (ej. g-time-picker),
+// esos módulos deben quedar ya configurados con marca por este archivo; si
+// config-provider emitiera vía g-utils base y dejara el `common/var` de EP sin
+// configurar, esos paquetes re-cargarían `base` con los colores por defecto de
+// EP y emitirían un segundo `:root` que pisaría la marca. El g-utils base/tokens
+// (portado byte-exact en WU1) se cablea aquí en el slice final, junto con el
+// retiro de estos puentes (ver tarea 4.5).
 @forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
   $namespace: 'gui'
 );
 
-// Emisión de tokens propia del DS (reemplaza el `@forward common/var` +
-// `@use base` de element-plus). El orden importa: `tokens` se configura
-// ANTES de `@use base` para que `base` reutilice la misma instancia de
-// tokens ya configurada con los colores de marca.
-@forward '@flash-global66/g-utils/tokens' with (
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
   $colors: (
     'primary': (
       'base': #203478,
@@ -40,4 +40,4 @@
   )
 );
 
-@use '@flash-global66/g-utils/base';
+@use 'element-plus/theme-chalk/src/base.scss';
