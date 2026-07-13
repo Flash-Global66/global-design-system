@@ -1073,8 +1073,8 @@ __metadata:
     "@flash-global66/g-hooks": "npm:^0.11.13"
     "@flash-global66/g-icon-font": "npm:^0.25.24"
     "@flash-global66/g-input": "npm:^0.3.30"
-    "@flash-global66/g-time-picker": "npm:^0.4.12"
-    "@flash-global66/g-tooltip": "npm:^0.1.18"
+    "@flash-global66/g-time-picker": "npm:^0.4.13"
+    "@flash-global66/g-tooltip": "npm:^0.1.19"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     dayjs: ^1.11.13
@@ -1144,7 +1144,7 @@ __metadata:
     "@flash-global66/g-roving-focus-group": "npm:^0.1.30"
     "@flash-global66/g-scrollbar": "npm:^0.1.19"
     "@flash-global66/g-slot": "npm:^0.0.24"
-    "@flash-global66/g-tooltip": "npm:^0.1.18"
+    "@flash-global66/g-tooltip": "npm:^0.1.19"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@popperjs/core": ^2.11.6
@@ -1293,7 +1293,7 @@ __metadata:
     "@flash-global66/g-icon-font": "npm:^0.25.24"
     "@flash-global66/g-popper": "npm:^0.0.30"
     "@flash-global66/g-tag": "npm:^0.2.25"
-    "@flash-global66/g-tooltip": "npm:^0.1.18"
+    "@flash-global66/g-tooltip": "npm:^0.1.19"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     "@vueuse/core": ^13.0.0
@@ -1502,12 +1502,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-select@npm:^0.4.17, @flash-global66/g-select@workspace:components/select":
+"@flash-global66/g-select@npm:^0.4.18, @flash-global66/g-select@workspace:components/select":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-select@workspace:components/select"
   dependencies:
     "@flash-global66/g-hooks": "npm:^0.11.13"
-    "@flash-global66/g-tooltip": "npm:^0.1.18"
+    "@flash-global66/g-tooltip": "npm:^0.1.19"
     "@flash-global66/g-utils": "npm:^0.15.5"
     "@tanstack/vue-virtual": "npm:3.13.23"
   peerDependencies:
@@ -1562,8 +1562,8 @@ __metadata:
     "@flash-global66/g-input": "npm:^0.3.30"
     "@flash-global66/g-popper": "npm:^0.0.30"
     "@flash-global66/g-scrollbar": "npm:^0.1.19"
-    "@flash-global66/g-select": "npm:^0.4.17"
-    "@flash-global66/g-tooltip": "npm:^0.1.18"
+    "@flash-global66/g-select": "npm:^0.4.18"
+    "@flash-global66/g-tooltip": "npm:^0.1.19"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     async-validator: ^4.2.5
@@ -1593,7 +1593,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-time-picker@npm:^0.4.12, @flash-global66/g-time-picker@workspace:components/time-picker":
+"@flash-global66/g-time-picker@npm:^0.4.13, @flash-global66/g-time-picker@workspace:components/time-picker":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-time-picker@workspace:components/time-picker"
   dependencies:
@@ -1603,7 +1603,7 @@ __metadata:
     "@flash-global66/g-input": "npm:^0.3.30"
     "@flash-global66/g-popper": "npm:^0.0.30"
     "@flash-global66/g-scrollbar": "npm:^0.1.19"
-    "@flash-global66/g-tooltip": "npm:^0.1.18"
+    "@flash-global66/g-tooltip": "npm:^0.1.19"
     "@flash-global66/g-utils": "npm:^0.15.5"
   peerDependencies:
     dayjs: ^1.11.13
@@ -1627,7 +1627,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-tooltip@npm:^0.1.18, @flash-global66/g-tooltip@workspace:components/tooltip":
+"@flash-global66/g-tooltip@npm:^0.1.19, @flash-global66/g-tooltip@workspace:components/tooltip":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-tooltip@workspace:components/tooltip"
   dependencies:

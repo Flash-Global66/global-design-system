@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-input-tag",
   "author": "Global66",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -34,7 +34,7 @@
     "@flash-global66/g-icon-font": "^0.25.24",
     "@flash-global66/g-popper": "^0.0.30",
     "@flash-global66/g-tag": "^0.2.25",
-    "@flash-global66/g-tooltip": "^0.1.18",
+    "@flash-global66/g-tooltip": "^0.1.19",
     "@flash-global66/g-utils": "^0.15.5"
   },
   "peerDependencies": {
