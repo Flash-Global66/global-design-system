@@ -13,6 +13,7 @@
     "./base": "./styles/base.scss",
     "./function": "./styles/function.scss",
     "./utils": "./styles/utils.scss",
+    "./var-mixins": "./styles/var-mixins.scss",
     "./transition": "./styles/transition.scss",
     "./icon": "./styles/icon.scss"
   },
