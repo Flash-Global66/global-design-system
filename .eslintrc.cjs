@@ -39,7 +39,6 @@ module.exports = {
       ],
       excludedFiles: [
         // Islands: intentionally wrap/re-export a real element-plus component.
-        'components/menu/**',
         'components/config-provider/**',
       ],
       rules: {
