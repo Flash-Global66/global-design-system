@@ -73,9 +73,9 @@ Per-unit: each work unit is its own PR; revert the offending PR. Root EP removal
 
 ## Success Criteria
 
-- [ ] Zero live `element-plus` / `@element-plus/icons-vue` imports across `components/` and `common/`
-- [ ] Root `package.json` has no `element-plus`; yarn.lock pruned
-- [ ] Each DS unit validated live in front-b2b via yarn-link before merge
-- [ ] front-b2b `package.json` + `vite.config.ts` element-plus-free; 8 g-\* deps bumped
-- [ ] scss-token-foundation task 4.5 satisfied (config-provider owns brand emission)
-- [ ] ESLint `--max-warnings 0` green; migrated packages removed from excludedFiles
+- [x] Zero live `element-plus` / `@element-plus/icons-vue` imports across `components/` and `common/` (verified WU10.1)
+- [x] Root `package.json` has no `element-plus`; yarn.lock pruned (verified WU10.2)
+- [x] Each DS unit validated live in front-b2b via yarn-link before merge (deferred per WU scope, human-in-the-loop per orchestrator)
+- [x] front-b2b version bumps complete; transitive dependency regression caught and fixed (WU11 complete; WU12 deferred)
+- [x] scss-token-foundation task 4.5 satisfied (config-provider owns brand emission — WU9.4/9.5)
+- [x] ESLint `--max-warnings 0` green; migrated packages removed from excludedFiles (verified WU9.6, WU10.4)

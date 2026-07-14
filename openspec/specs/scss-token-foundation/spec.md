@@ -113,18 +113,37 @@ consumer build (front-b2b / front-admin).
 - WHEN inspected via source or a build artifact
 - THEN legacy-pattern selectors resolve to `.gui-*`
 
-### Requirement: Entangled Islands Remain Deferred
+### Requirement: Entangled Islands Fully Migrated (Closes v6)
 
-The 6 non-config-provider entangled islands' full-component stylesheets
-MUST NOT be repointed in this change; only their shared-mixin dependency MAY
-be repointed, and only when byte-exact.
+The 6 previously-deferred entangled islands (`badge`, `menu`, `popover`,
+`radio-group`, `form-item`, `skeleton`) are migrated off `element-plus` in
+`ep-extraction-v6`. Their full-component stylesheets MUST now be DS-owned
+(no `element-plus` `@use`/`@forward` reference), and MUST preserve
+byte-exact CSS parity per this spec's Byte-Exact CSS Parity requirement.
 
-#### Scenario: Deferred island untouched
+#### Scenario: Previously-deferred island stylesheet fully migrated
 
-- GIVEN badge, menu, popover, radio-group, form-item, or skeleton's
-  full-component stylesheet
-- WHEN this change is applied
-- THEN that file's per-component ruleset is unchanged
+- GIVEN one of the 6 previously-deferred islands
+- WHEN its `.scss` is migrated in `ep-extraction-v6`
+- THEN it contains no `element-plus` reference and compiles to byte-identical
+  CSS versus its pre-migration output
+
+### Requirement: Config-Provider Owns Brand Emission (Closes Task 4.5)
+
+config-provider's JS bridge retirement (`provideGlobalConfig`) in
+`ep-extraction-v6` MUST complete this spec's deferred brand-color emission
+task: DS-owned code MUST be the sole source of brand-color `--gui-*` custom
+properties, with no `element-plus` fallback path remaining anywhere in the
+emission chain.
+
+#### Scenario: Deferred brand-emission task closed
+
+- GIVEN config-provider fully migrated off element-plus in
+  `ep-extraction-v6`
+- WHEN brand-color `--gui-*` custom properties are generated
+- THEN they are emitted entirely by DS-owned code, with zero element-plus
+  involvement, satisfying the task deferred at `scss-token-foundation`
+  archival
 
 ### Requirement: Per-Slice Acceptance Gate
 

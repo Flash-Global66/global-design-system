@@ -44,11 +44,11 @@ Fifth JS-migration in the `ep-extraction-vN` series; follow the **v4/v5 pattern 
 
 ## Work-unit sequencing (WHY)
 
-1. badge → 2. radio-group → 3. skeleton → 4. infinite-scroll (small, independent, prove provide/inject) → 5. form-item → 6. popover → 7. **menu** (highest, pattern proven) → 8. time-picker icon → 9. **config-provider (LAST DS unit)** → 10. root `package.json`/`yarn.lock` removal + g-hooks EP test-import cleanup → 11. front-b2b 8× g-\* version bumps → 12. front-b2b EP removal (`package.json:110`, `vite.config.ts:102`).
+1. badge → 2. radio-group → 3. skeleton → 4. infinite-scroll (small, independent, prove provide/inject) → 5. form-item → 6. popover → 7. **menu** (highest, pattern proven) → 8. time-picker icon → 9. **config-provider (LAST DS unit)** → 10. root `package.json`/`yarn.lock` removal + g-hooks EP test-import cleanup → 11. front-b2b 8× g-\* version bumps → 12. front-b2b EP removal (DEFERRED).
 
-- **config-provider last** on the DS side: it gates root removal — once it stops importing EP, nothing in `components/` imports EP; it also satisfies scss-token-foundation **task 4.5** (DS-owned brand emission), which lets time-picker drop `@use "element-plus/theme-chalk/src/base.scss"`. This design formally **reverses** scss-token-foundation's "Entangled Islands Remain Deferred" for config-provider only.
-- **front-b2b bumps last of all**: they pin post-migration versions that only exist after each DS package is Lerna-published; bumping earlier points at unpublished versions.
-- **front-b2b EP removal final**: safe only once every consumed g-\* package is EP-free.
+- **config-provider last** on the DS side: it gates root removal — once it stops importing EP, nothing in `components/` imports EP; it also satisfies scss-token-foundation **task 4.5** (DS-owned brand emission), which lets time-picker drop `@use "element-plus/theme-chalk/src/base.scss"`. This design formally **reverses** scss-token-foundation's "Entangled Islands Remain Deferred" for config-provider.
+- **front-b2b bumps complete**: all 8 affected packages bumped to published post-migration versions.
+- **front-b2b EP removal deferred**: a systematic SCSS-bridge audit discovered that 32 DS packages still import element-plus at front-b2b's current pins, making full removal impossible without bumping all 32 — a much larger, methodical follow-up initiative separate from v6.
 
 ## Testing Strategy
 
@@ -60,8 +60,12 @@ Fifth JS-migration in the `ep-extraction-vN` series; follow the **v4/v5 pattern 
 
 ## Migration / Rollout
 
-Per-unit PRs; revert the offending PR to roll back. Root removal and both front-b2b units are separate final PRs, revertable without touching migrated islands (restore the two b2b lines / the root dep).
+Per-unit PRs; revert the offending PR to roll back. Root removal and front-b2b version bumps are separate final PRs, revertable without touching migrated islands (restore the root dep / the bumped versions).
+
+## Results
+
+All 12 WUs planned; WU1–WU11 fully complete and merged to main (PRs #294–#303); WU12 deferred to ep-extraction-v7 with full root-cause analysis documented in tasks.md.
 
 ## Open Questions
 
-- None blocking. Popover's native path assumes EP's popover→tooltip composition maps cleanly onto `g-tooltip`; confirm slot/reference forwarding during the popover WU.
+- None blocking. Popover's native path assumes EP's popover→tooltip composition maps cleanly onto `g-tooltip`; confirmed via WU6 slot/reference forwarding tests.
