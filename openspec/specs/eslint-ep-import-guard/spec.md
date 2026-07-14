@@ -24,7 +24,6 @@ The ESLint `no-restricted-imports` guard prevents new direct imports from `eleme
 
 **Excluded Packages (No Guard Applied)**
 
-- **8 Island packages** (permanent — wrap real element-plus components): `badge`, `menu`, `config-provider`, `popover`, `radio-group`, `form-item`, `skeleton`, `infinite-scroll`
 - **5 Deferred packages + `toast`** (need hooks/utilities not yet extracted; target of `ep-extraction-v5` and beyond): `table`, `pagination`, `collapse`, `input-number`, `toast`
 
 **Migrated Packages (guard active, no longer excluded)**
@@ -46,13 +45,7 @@ ESLint MUST error on any import specifier matching `element-plus` or `element-pl
 
 ### Requirement: island-override-exclusion
 
-The rule MUST include exclusions for the 8 permanent island packages and the packages not yet migrated off element-plus internals, so their legitimate element-plus imports are not blocked. As of `ep-extraction-v4`, `focus-trap`, `slot`, `overlay`, `scrollbar`, `popper`, `tooltip`, `select`, `dropdown`, `dialog`, `date-picker`, `time-picker`, `input-tag`, and `inline` are migrated and MUST NO LONGER appear in `excludedFiles` — they are guarded like any other component source path. `toast`, `table`, `pagination`, `collapse`, and `input-number` remain excluded (deferred to `ep-extraction-v5` or beyond).
-
-#### Scenario: island import not blocked
-
-- GIVEN the guard active and exclusions configured for island/deferred packages
-- WHEN a file in `components/badge/index.ts` (island) imports `from 'element-plus'`
-- THEN ESLint reports no error
+The rule MUST include exclusions only for packages not yet migrated off element-plus internals, so their legitimate element-plus imports are not blocked. As of `ep-extraction-v4`, `focus-trap`, `slot`, `overlay`, `scrollbar`, `popper`, `tooltip`, `select`, `dropdown`, `dialog`, `date-picker`, `time-picker`, `input-tag`, and `inline` are migrated and MUST NO LONGER appear in `excludedFiles`. As of `ep-extraction-v6`, the former "8 permanent islands" — `badge`, `menu`, `config-provider`, `popover`, `radio-group`, `form-item`, `skeleton`, `infinite-scroll` — are ALSO migrated and MUST NO LONGER appear in `excludedFiles`; no package retains a "permanent island" classification after this change. `toast`, `table`, `pagination`, `collapse`, and `input-number` remain excluded (still deferred, out of scope for `ep-extraction-v6`).
 
 #### Scenario: v4-migrated packages are no longer excluded
 
@@ -60,13 +53,19 @@ The rule MUST include exclusions for the 8 permanent island packages and the pac
 - WHEN a file under `components/dropdown/src/**` (or any of the other 12) imports `from 'element-plus'`
 - THEN ESLint reports error `'element-plus' import is restricted`
 
+#### Scenario: v6-migrated packages are no longer excluded
+
+- GIVEN the 8 former "permanent island" packages removed from `excludedFiles`
+- WHEN a file under `components/badge/src/**` (or any of the other 7) imports `from 'element-plus'`
+- THEN ESLint reports error `'element-plus' import is restricted`
+
 #### Scenario: remaining deferred packages stay excluded
 
-- GIVEN `table`, `pagination`, `collapse`, and `input-number` are deferred to `ep-extraction-v5`, and `toast` remains unscheduled
+- GIVEN `table`, `pagination`, `collapse`, `input-number`, and `toast` remain deferred
 - WHEN a file under any of their `src/**` imports `from 'element-plus'`
 - THEN ESLint reports no error
 
-### Requirement: exclude-removed-per-work-unit
+### Requirement: v4-exclude-removed-per-work-unit
 
 Each of the 13 v4-migrated packages' `excludedFiles` entries MUST be removed individually, at that package's own migration work unit boundary, not batched into one edit at the end of the slice.
 
@@ -75,6 +74,22 @@ Each of the 13 v4-migrated packages' `excludedFiles` entries MUST be removed ind
 - GIVEN one of the 13 v4 packages finishes migration and its unit tests are green
 - WHEN `.eslintrc.cjs` is updated to remove that package's exclude
 - THEN `yarn lint --max-warnings 0` passes immediately after that update, before the next package's work unit starts
+
+### Requirement: v6-exclude-removed-per-work-unit
+
+Each of the 8 v6-migrated packages' `excludedFiles` entries MUST be removed individually, at that package's own migration work unit boundary, not batched. `config-provider`'s entry MUST be the last one removed, after every other v6 island's entry, matching the proposal's sequencing (config-provider gates root EP removal).
+
+#### Scenario: lint passes at each package's guard update
+
+- GIVEN one of the 8 v6 packages finishes migration and its unit tests are green
+- WHEN `.eslintrc.cjs` is updated to remove that package's exclude
+- THEN `yarn lint --max-warnings 0` passes immediately after that update, before the next package's work unit starts
+
+#### Scenario: config-provider exclude removed last
+
+- GIVEN the other 7 v6 packages already removed from `excludedFiles`
+- WHEN `config-provider`'s exclude entry is removed
+- THEN it is the final `excludedFiles` edit among the 8, immediately preceding root `element-plus` removal
 
 ### Requirement: guard-lands-after-migration
 
@@ -98,15 +113,6 @@ The rule is configured in `.eslintrc.cjs` under `overrides`:
     'components/*/index.ts'
   ],
   excludedFiles: [
-    // 8 islands (wrap real EP components) — permanent
-    'components/badge/**',
-    'components/menu/**',
-    'components/config-provider/**',
-    'components/popover/**',
-    'components/radio-group/**',
-    'components/form-item/**',
-    'components/skeleton/**',
-    'components/infinite-scroll/**',
     // 5 deferred packages + toast (need hooks/utilities not built yet — target of ep-extraction-v5+)
     'components/table/**',
     'components/pagination/**',
@@ -115,6 +121,7 @@ The rule is configured in `.eslintrc.cjs` under `overrides`:
     'components/toast/**',
     // checkbox, radio, switch, segmented, input REMOVED as of ep-extraction-v3 — now guarded
     // focus-trap, slot, overlay, scrollbar, popper, tooltip, select, dropdown, dialog, date-picker, time-picker, input-tag, inline REMOVED as of ep-extraction-v4 — now guarded
+    // badge, menu, config-provider, popover, radio-group, form-item, skeleton, infinite-scroll REMOVED as of ep-extraction-v6 — now guarded
   ],
   rules: {
     'no-restricted-imports': [
@@ -149,5 +156,6 @@ The rule is configured in `.eslintrc.cjs` under `overrides`:
 - Change: `ep-extraction-v2` (proposal #239, spec #240, design #241, tasks #242, verify-report #247)
 - Change: `ep-extraction-v3` (proposal #252, spec #257, design #258, tasks #260, verify-report #268) — removed `checkbox`/`radio`/`switch`/`segmented`/`input` from `excludedFiles`
 - Change: `ep-extraction-v4` (proposal obs #275, spec obs #276, design obs #277, tasks obs #279, verify-report obs #297) — removed the 13 v4 packages from `excludedFiles`
-- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`, `openspec/archive/2026-07-10-ep-extraction-v3/`
+- Change: `ep-extraction-v6` (proposal obs #328, spec obs #329, design obs #330, tasks obs #331, verify-report obs #332, archive obs #333) — removed the 8 v6 packages from `excludedFiles`
+- Archive: `openspec/archive/2026-07-08-ep-extraction-v2/`, `openspec/archive/2026-07-10-ep-extraction-v3/`, `openspec/archive/2026-07-14-ep-extraction-v6/`
 - Configuration file: `.eslintrc.cjs`
