@@ -42,7 +42,6 @@ module.exports = {
         'components/menu/**',
         'components/config-provider/**',
         'components/popover/**',
-        'components/form-item/**',
       ],
       rules: {
         'no-restricted-imports': [
