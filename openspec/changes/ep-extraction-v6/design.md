@@ -34,7 +34,7 @@ Fifth JS-migration in the `ep-extraction-vN` series; follow the **v4/v5 pattern 
 
 ### Decision 3 — clearIcon is a dead-weight prop, not an icon swap
 
-**Choice**: `clearIcon`'s type stays `string | Component` (no breaking prop-type change), but its default becomes `true` and the `CircleClose` import is deleted. Verified in `common/picker.vue:77` and `:129` — the prop is only ever read as `v-if="clearIcon"` (a truthy check); the actual glyph is already hardcoded as `<g-icon-font name="regular times">`, unconditionally rendered, unrelated to this prop's value. There is no component to swap.
+**Choice**: `clearIcon`'s type widens additively to `string | Component | boolean` (was `string | Component`) so its new `true` default doesn't trigger a Vue dev-mode prop-type warning — empirically confirmed necessary (WU8 judgment-day: reverting the widening reproduces the warning on every mount). No breaking change for existing consumers, since none pass a custom icon component/string today. The `CircleClose` import is deleted. Verified in `common/picker.vue:77` and `:129` — the prop is only ever read as `v-if="clearIcon"` (a truthy check); the actual glyph is already hardcoded as `<g-icon-font name="regular times">`, unconditionally rendered, unrelated to this prop's value. There is no component to swap.
 **Sequencing**: still done BEFORE the root EP-removal WU — root removal also drops transitive `@element-plus/icons-vue`; a live `CircleClose` import would break the build. Root WU asserts zero live imports of BOTH `element-plus` and `@element-plus/icons-vue`.
 
 ### Decision 4 — fix the radio-group latent bug in-WU
