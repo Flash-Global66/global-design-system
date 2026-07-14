@@ -1,23 +1,24 @@
 // Bootstrap de estilos del Design System.
 //
-// NOTA (ep-extraction-scss): durante la transición, la EMISIÓN de tokens
-// (`:root { --gui-* }`) sigue haciéndose con el `base`/`common/var` de
-// element-plus, NO con el `base` propio de g-utils. Motivo: config-provider es
-// el ÚNICO lugar que configura los singletons `mixins/config` (namespace) y
-// `common/var` (colores de marca) de element-plus para TODA la app. Mientras
-// exista cualquier paquete no migrado que haga `@use
-// "element-plus/theme-chalk/src/base"` o `common/var` (ej. g-time-picker),
-// esos módulos deben quedar ya configurados con marca por este archivo; si
-// config-provider emitiera vía g-utils base y dejara el `common/var` de EP sin
-// configurar, esos paquetes re-cargarían `base` con los colores por defecto de
-// EP y emitirían un segundo `:root` que pisaría la marca. El g-utils base/tokens
-// (portado byte-exact en WU1) se cablea aquí en el slice final, junto con el
-// retiro de estos puentes (ver tarea 4.5).
-@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
-  $namespace: 'gui'
-);
-
-@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+// task 4.5 (scss-token-foundation, cerrada por ep-extraction-v6 WU9): la
+// EMISIÓN de tokens (`:root { --gui-* }`) ahora se hace 100% con módulos
+// DS-owned de `@flash-global66/g-utils` (portados byte-exact desde
+// element-plus en `ep-extraction-scss` WU1). Ya no se importa NADA de
+// `element-plus/theme-chalk` — precondición verificada empíricamente antes
+// de este cambio: `grep -rnE "@(use|forward)[^;]*element-plus" components
+// common --include='*.scss'` solo devolvía las líneas de este archivo y la
+// de `time-picker` (retirada en el mismo WU, ver su propio archivo). Config-
+// provider sigue siendo el ÚNICO lugar que configura el namespace y los
+// colores de marca — sigue siendo la primera carga de
+// `@flash-global66/g-utils/tokens` en la compilación agregada de la app
+// (front-b2b `index.scss` la importa primero), así que el resto de paquetes
+// que hacen `@use '@flash-global66/g-utils/tokens'` sin configurar (badge,
+// skeleton, menu, popover, radio-group, form-item, time-picker) reutilizan
+// esta MISMA instancia ya configurada con marca, nunca la default de g-utils
+// (#409eff). Byte-exact vs el bootstrap anterior (verificado con
+// `yarn scss:parity config-provider` — diff vacío contra el baseline
+// preexistente).
+@forward '@flash-global66/g-utils/tokens' with (
   $colors: (
     'primary': (
       'base': #203478,
@@ -40,4 +41,4 @@
   )
 );
 
-@use 'element-plus/theme-chalk/src/base.scss';
+@use '@flash-global66/g-utils/base';
