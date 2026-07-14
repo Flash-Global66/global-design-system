@@ -39,7 +39,10 @@ module.exports = {
       ],
       excludedFiles: [
         // Islands: intentionally wrap/re-export a real element-plus component.
-        'components/config-provider/**',
+        // (empty — config-provider was the last entry; ep-extraction-v6 WU9
+        // migrated it off element-plus, so no package needs this exclusion
+        // anymore. Left as an empty array rather than removed to preserve the
+        // override block shape for any future entry.)
       ],
       rules: {
         'no-restricted-imports': [
