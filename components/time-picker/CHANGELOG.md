@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-time-picker@0.4.14...@flash-global66/g-time-picker@0.4.15) (2026-07-14)
+
+### Bug Fixes
+
+- **time-picker:** default clearIcon to true, drop dead CircleClose import (ep-extraction-v6 WU8) ([3ca8f2e](https://github.com/Flash-Global66/global-design-system/commit/3ca8f2ec60702000270befc309d6484f98112c94))
+
 ## [0.4.14](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-time-picker@0.4.13...@flash-global66/g-time-picker@0.4.14) (2026-07-13)
 
 **Note:** Version bump only for package @flash-global66/g-time-picker
