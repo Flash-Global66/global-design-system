@@ -36,7 +36,8 @@
     "@flash-global66/g-popper": "^0.0.31",
     "@flash-global66/g-scrollbar": "^0.1.20",
     "@flash-global66/g-tooltip": "^0.1.20",
-    "@flash-global66/g-utils": "^0.15.5"
+    "@flash-global66/g-utils": "^0.15.5",
+    "dayjs": "^1.11.13"
   },
   "peerDependencies": {
     "dayjs": "^1.11.13",

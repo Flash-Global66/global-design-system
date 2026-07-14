@@ -59,7 +59,7 @@
     "@vueuse/core": "13.0.0",
     "async-validator": "4.2.5",
     "autoprefixer": "10.4.21",
-    "element-plus": "2.9.7",
+    "lodash-es": "^4.17.21",
     "lodash-unified": "1.0.3",
     "vue-router": "4.5.1"
   },
@@ -79,6 +79,7 @@
     "@storybook/vue3-vite": "8.4.7",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/vue": "^8.1.0",
+    "@types/lodash-es": "^4.17.6",
     "@vitejs/plugin-vue": "5.2.4",
     "@vue/eslint-config-typescript": "^13",
     "babel-loader": "8.4.1",
