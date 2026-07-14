@@ -1,7 +1,6 @@
 import { placements } from '@popperjs/core';
 import { buildProps, definePropType } from '@flash-global66/g-utils';
 import { useAriaProps, useEmptyValuesProps } from '@flash-global66/g-hooks';
-import { CircleClose } from '@element-plus/icons-vue';
 import { disabledTimeListsProps } from '../props/shared';
 import { IconString } from '@flash-global66/g-icon-font';
 
@@ -86,8 +85,12 @@ export const timePickerDefaultProps = buildProps({
    * @description Custom clear icon component
    */
   clearIcon: {
-    type: definePropType<string | Component>([String, Object]),
-    default: CircleClose,
+    type: definePropType<string | Component | boolean>([
+      String,
+      Object,
+      Boolean,
+    ]),
+    default: true,
   },
   /**
    * @description whether the input is editable
