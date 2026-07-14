@@ -41,7 +41,6 @@ module.exports = {
         // Islands: intentionally wrap/re-export a real element-plus component.
         'components/menu/**',
         'components/config-provider/**',
-        'components/popover/**',
       ],
       rules: {
         'no-restricted-imports': [

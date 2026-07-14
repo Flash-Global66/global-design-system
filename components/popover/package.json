@@ -7,6 +7,11 @@
     ".": "./index.ts",
     "./*": "./*"
   },
+  "dependencies": {
+    "@flash-global66/g-dropdown": "^0.2.14",
+    "@flash-global66/g-tooltip": "^0.1.20",
+    "@flash-global66/g-utils": "^0.15.5"
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
