@@ -1,8 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { createApp, defineComponent, h, provide, ref } from 'vue';
-// Se importa la clave real de element-plus solo para probar que el hook
-// DS-nativo NUNCA la reutiliza (mismo patrón de test que useGlobalConfig).
-import { localeContextKey } from 'element-plus';
 import {
   useLocale,
   gLocaleContextKey,
@@ -127,6 +124,16 @@ describe('useLocale', () => {
   it('la clave de inyección DS-nativa es distinta a la de element-plus (no debe existir acoplamiento)', () => {
     expect(typeof gLocaleContextKey).toBe('symbol');
     expect(gLocaleContextKey.toString()).toContain('gLocaleContextKey');
-    expect(gLocaleContextKey).not.toBe(localeContextKey);
+    // No es necesario importar `element-plus` en runtime para probar la
+    // no-coincidencia (mismo razonamiento que `useGlobalConfig.spec.ts`): su
+    // `localeContextKey` (`es/hooks/use-locale/index.mjs`) se crea con
+    // `Symbol("localeContextKey")` — registro LOCAL (no `Symbol.for`) —
+    // mientras que esta clave DS-nativa usa `Symbol.for(...)` (registro
+    // global). Por especificación de ECMAScript, un símbolo del registro
+    // global jamás es idéntico a uno creado con el constructor `Symbol()`
+    // plano, sin importar la descripción. Confirmar que esta clave resuelve
+    // al símbolo del registro global bajo su propia descripción basta para
+    // garantizar la no-coincidencia con la de EP.
+    expect(gLocaleContextKey).toBe(Symbol.for('gLocaleContextKey'));
   });
 });

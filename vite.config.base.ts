@@ -22,7 +22,6 @@ export default defineConfig({
         'vue',
         'lodash-unified',
         '@vueuse/core',
-        'element-plus',
         'dayjs',
         'dayjs/plugin/localeData',
         // Componentes propios
@@ -33,7 +32,6 @@ export default defineConfig({
           vue: 'Vue',
           'lodash-unified': 'lodashUnified',
           '@vueuse/core': 'VueUse',
-          'element-plus': 'ElementPlus',
           dayjs: 'dayjs',
           'dayjs/plugin/localeData': 'dayjsPluginLocaleData',
         },
