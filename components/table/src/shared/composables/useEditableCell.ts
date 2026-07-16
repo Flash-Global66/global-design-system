@@ -23,7 +23,7 @@ export function useEditableCell<T extends Record<string, unknown>>(
   options: UseEditableCellOptions = {}
 ): EditableCellApi {
   const editingCell = ref<string | null>(null)
-  const { useRowIndex = true, rowKey } = options
+  const { rowKey } = options
 
   const getKey = (row: unknown, prop: string, index?: number): string => {
     if (rowKey && row && typeof row === 'object' && rowKey in row) {
