@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.3.14...@flash-global66/g-table@0.3.15) (2026-07-16)
+
+### Bug Fixes
+
+- **table:** correct Table/ directory casing for case-sensitive CI ([e837d13](https://github.com/Flash-Global66/global-design-system/commit/e837d136c22847113294866bac0a71ce6e43475a))
+- **table:** resolve lint debt from archetype migration (drop dead var, scope ts-nocheck override) ([9e88ac7](https://github.com/Flash-Global66/global-design-system/commit/9e88ac717b7810de787b0dc73757a1b163c68499))
+
 ## [0.3.14](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-table@0.3.13...@flash-global66/g-table@0.3.14) (2026-07-16)
 
 ### Bug Fixes
