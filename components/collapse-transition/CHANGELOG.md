@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.23](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.22...@flash-global66/g-collapse-transition@0.2.23) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.22](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.21...@flash-global66/g-collapse-transition@0.2.22) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.21](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.20...@flash-global66/g-collapse-transition@0.2.21) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.20](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.19...@flash-global66/g-collapse-transition@0.2.20) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.18...@flash-global66/g-collapse-transition@0.2.19) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.17...@flash-global66/g-collapse-transition@0.2.18) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.16...@flash-global66/g-collapse-transition@0.2.17) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.16](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.15...@flash-global66/g-collapse-transition@0.2.16) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
+## [0.2.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.14...@flash-global66/g-collapse-transition@0.2.15) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-collapse-transition
+
 ## [0.2.14](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse-transition@0.2.13...@flash-global66/g-collapse-transition@0.2.14) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-collapse-transition

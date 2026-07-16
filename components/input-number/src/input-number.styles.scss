@@ -1,7 +1,6 @@
 @use "sass:map";
 
-@use "@flash-global66/g-config-provider/config.styles.scss" as *;
-@use "element-plus/theme-chalk/src/mixins/mixins" as *;
+@use "@flash-global66/g-utils/mixins" as *;
 
 
 @include b("input-number") {

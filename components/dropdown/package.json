@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-dropdown",
   "author": "Global66",
-  "version": "0.2.4",
+  "version": "0.2.15",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -24,19 +24,18 @@
   },
   "dependencies": {
     "@flash-global66/g-collection": "^0.1.4",
-    "@flash-global66/g-focus-trap": "^0.1.14",
-    "@flash-global66/g-hooks": "^0.11.5",
-    "@flash-global66/g-icon-font": "^0.25.16",
-    "@flash-global66/g-popper": "^0.0.22",
-    "@flash-global66/g-roving-focus-group": "^0.1.22",
-    "@flash-global66/g-scrollbar": "^0.1.11",
-    "@flash-global66/g-slot": "^0.0.16",
-    "@flash-global66/g-tooltip": "^0.1.10",
-    "@flash-global66/g-utils": "^0.13.0"
+    "@flash-global66/g-focus-trap": "^0.1.23",
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-icon-font": "^0.25.25",
+    "@flash-global66/g-popper": "^0.0.32",
+    "@flash-global66/g-roving-focus-group": "^0.1.31",
+    "@flash-global66/g-scrollbar": "^0.1.21",
+    "@flash-global66/g-slot": "^0.0.25",
+    "@flash-global66/g-tooltip": "^0.1.21",
+    "@flash-global66/g-utils": "^0.15.6"
   },
   "peerDependencies": {
     "@popperjs/core": "^2.11.6",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "publishConfig": {

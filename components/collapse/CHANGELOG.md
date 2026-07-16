@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.10...@flash-global66/g-collapse@0.5.11) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.9...@flash-global66/g-collapse@0.5.10) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.8...@flash-global66/g-collapse@0.5.9) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.7...@flash-global66/g-collapse@0.5.8) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.7](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.6...@flash-global66/g-collapse@0.5.7) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.5...@flash-global66/g-collapse@0.5.6) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.5](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.4...@flash-global66/g-collapse@0.5.5) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.3...@flash-global66/g-collapse@0.5.4) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.2...@flash-global66/g-collapse@0.5.3) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.1...@flash-global66/g-collapse@0.5.2) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
+## [0.5.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.0...@flash-global66/g-collapse@0.5.1) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-collapse
+
 # [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.4.2...@flash-global66/g-collapse@0.5.0) (2026-07-12)
 
 ### Features

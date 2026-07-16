@@ -1,1 +1,50 @@
-@use "element-plus/theme-chalk/src/skeleton.scss" as *;
+// Port byte-exact de element-plus/theme-chalk/src/skeleton.scss
+// Único cambio respecto al original: los `@use` internos se reenrutan a los
+// módulos planos ya portados de @flash-global66/g-utils (mixins, var-mixins,
+// tokens), en lugar de los mixins/vars propios de element-plus. El resto del
+// contenido (selectores, mapa `$skeleton`, keyframes de animación) se
+// preserva byte a byte.
+@use '@flash-global66/g-utils/mixins' as *;
+@use '@flash-global66/g-utils/var-mixins' as *;
+@use '@flash-global66/g-utils/tokens' as *;
+
+@include b(skeleton) {
+  @include set-component-css-var('skeleton', $skeleton);
+}
+
+@mixin skeleton-color() {
+  background: linear-gradient(
+    90deg,
+    getCssVar('skeleton-color') 25%,
+    getCssVar('skeleton-to-color') 37%,
+    getCssVar('skeleton-color') 63%
+  );
+  background-size: 400% 100%;
+  animation: #{$namespace}-skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes #{$namespace}-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@include b(skeleton) {
+  width: 100%;
+  @each $unit in (first-line, paragraph) {
+    @include e($unit) {
+      height: 16px;
+      margin-top: 16px;
+      background: getCssVar('skeleton-color');
+    }
+  }
+
+  @include when(animated) {
+    .#{$namespace}-skeleton__item {
+      @include skeleton-color();
+    }
+  }
+}

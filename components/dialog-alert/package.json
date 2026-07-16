@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-dialog-alert",
   "author": "Global66",
-  "version": "0.3.14",
+  "version": "0.3.24",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -23,14 +23,13 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@flash-global66/g-utils": "^0.13.0"
+    "@flash-global66/g-utils": "^0.15.6"
   },
   "peerDependencies": {
     "@flash-global66/g-checkbox": "^0.2.1",
     "@flash-global66/g-config-provider": "0.0.8",
     "@flash-global66/g-dialog": "0.0.8",
     "@flash-global66/g-image": "0.0.3",
-    "element-plus": "^2.9.7",
     "vue": "^3.2.0"
   },
   "publishConfig": {

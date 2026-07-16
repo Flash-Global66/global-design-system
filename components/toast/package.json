@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-toast",
   "author": "Global66",
-  "version": "1.1.0",
+  "version": "1.1.11",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -28,10 +28,14 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
+  "dependencies": {
+    "@flash-global66/g-config-provider": "^0.1.2",
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-icon-font": "^0.25.25",
+    "@flash-global66/g-utils": "^0.15.6"
+  },
   "peerDependencies": {
-    "@flash-global66/g-icon-font": "^0.10.0",
     "@vueuse/core": "^12.4.0",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   }
 }

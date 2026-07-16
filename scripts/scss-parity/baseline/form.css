@@ -1,0 +1,8 @@
+/* Element Chalk Variables */
+.gui-form-item__content-error {
+  min-height: 18px;
+}
+
+.gui-form-item__error {
+  @apply flex text-error-txt font-medium text-2 px-xs;
+}

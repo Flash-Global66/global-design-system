@@ -1,0 +1,141 @@
+/* Element Chalk Variables */
+.gui-input {
+  @apply flex flex-col gap-xxs;
+}
+.gui-input__wrapper {
+  @apply relative flex bg-white py-sm px-xs border border-disabled-bd rounded-md h-12;
+}
+
+.gui-input__label {
+  @apply absolute text-terciary-txt text-4 transition-all duration-200 ease-in font-medium;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gui-input__prefix-icon {
+  @apply pr-2;
+}
+
+.gui-input__sufix-icon {
+  @apply pl-2;
+}
+
+.gui-input.is-focus .gui-input__label {
+  @apply text-2 font-medium;
+  background: linear-gradient(180deg, transparent 40%, white 0);
+  top: 0;
+  transform: translateY(-50%);
+  padding: 0 2px;
+  left: 5px;
+}
+
+.gui-input.is-focus .gui-input__inner::placeholder {
+  @apply opacity-100;
+}
+
+.gui-input.is-complete .gui-input__label {
+  @apply text-2 font-medium;
+  background: linear-gradient(180deg, transparent 40%, white 0);
+  top: 0;
+  transform: translateY(-50%);
+  padding: 0 2px;
+  left: 5px;
+}
+
+.gui-input.is-complete .gui-input__inner::placeholder {
+  @apply opacity-100;
+}
+
+.gui-input.is-focus .gui-input__label {
+  @apply text-everBlue-500;
+}
+
+.gui-input.is-focus .gui-input__wrapper {
+  @apply border-everBlue-500;
+}
+
+.gui-input.is-focus .gui-input__inner {
+  @apply caret-everBlue-500;
+}
+
+.gui-input.is-complete .gui-input__label {
+  @apply text-secondary-txt;
+}
+
+.gui-input.is-complete .gui-input__wrapper {
+  @apply border-secondary-bd;
+}
+
+.gui-input.is-disabled .gui-input__label {
+  @apply text-disabled-txt;
+  background: linear-gradient(180deg, transparent 40%, #eff0f2 0);
+}
+
+.gui-input.is-disabled .gui-input__wrapper {
+  @apply bg-primary-def-disabled border-grey-400;
+}
+
+.gui-input.is-disabled .gui-input__inner {
+  @apply text-disabled-txt;
+}
+
+.gui-input.is-error .gui-input__label {
+  @apply text-error-txt;
+}
+
+.gui-input.is-error .gui-input__wrapper {
+  @apply border-error-bd;
+}
+
+.gui-input.is-error .gui-input__help {
+  @apply text-error-txt;
+}
+
+.gui-input.is-exceed .gui-input__help-count {
+  @apply text-error-txt;
+}
+
+.gui-input.is-event {
+  @apply cursor-pointer;
+}
+.gui-input.is-event .gui-input__inner {
+  @apply cursor-pointer;
+}
+
+.gui-input:not(.is-focus):not(.is-complete) .gui-input__inner::placeholder {
+  @apply opacity-0;
+}
+
+.gui-input:not(.is-focus):not(.is-complete):not(.is-label) .gui-input__inner::placeholder {
+  @apply opacity-100;
+}
+
+.gui-input__inner {
+  @apply w-full text-primary-txt font-medium text-4 appearance-none outline-none relative;
+}
+.gui-input__inner:focus {
+  @apply outline-none;
+}
+.gui-input__inner[type=password]::-ms-reveal {
+  @apply hidden;
+}
+.gui-input__inner::placeholder {
+  @apply transition-all duration-200 ease-in text-terciary-txt;
+}
+
+.gui-input__icon {
+  @apply text-6 text-grey-500 select-none w-5;
+}
+
+.gui-input__icon-password {
+  @apply cursor-pointer;
+}
+
+.gui-input__help {
+  @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
+  min-height: 18px;
+}
+
+.gui-input__help-text {
+  @apply line-clamp-2;
+}

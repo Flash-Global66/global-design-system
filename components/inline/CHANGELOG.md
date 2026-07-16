@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.13](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.12...@flash-global66/g-inline@0.6.13) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.11...@flash-global66/g-inline@0.6.12) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.10...@flash-global66/g-inline@0.6.11) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.9...@flash-global66/g-inline@0.6.10) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.8...@flash-global66/g-inline@0.6.9) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.7...@flash-global66/g-inline@0.6.8) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.7](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.6...@flash-global66/g-inline@0.6.7) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.5...@flash-global66/g-inline@0.6.6) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.5](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.4...@flash-global66/g-inline@0.6.5) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.3...@flash-global66/g-inline@0.6.4) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
+## [0.6.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.2...@flash-global66/g-inline@0.6.3) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-inline
+
 ## [0.6.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-inline@0.6.1...@flash-global66/g-inline@0.6.2) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-inline

@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-switch",
   "author": "Global66",
-  "version": "1.1.17",
+  "version": "1.1.28",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -25,7 +25,6 @@
   "peerDependencies": {
     "@flash-global66/g-form": "^0.2.0",
     "@flash-global66/g-icon-font": "^0.10.0",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "publishConfig": {
@@ -36,7 +35,7 @@
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad",
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.5",
-    "@flash-global66/g-utils": "^0.13.0"
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-utils": "^0.15.6"
   }
 }

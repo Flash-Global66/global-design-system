@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.23](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.22...@flash-global66/g-button@0.5.23) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.22](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.21...@flash-global66/g-button@0.5.22) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.21](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.20...@flash-global66/g-button@0.5.21) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.20](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.19...@flash-global66/g-button@0.5.20) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.18...@flash-global66/g-button@0.5.19) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.17...@flash-global66/g-button@0.5.18) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.16...@flash-global66/g-button@0.5.17) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.16](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.15...@flash-global66/g-button@0.5.16) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
+## [0.5.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.14...@flash-global66/g-button@0.5.15) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-button
+
 ## [0.5.14](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-button@0.5.13...@flash-global66/g-button@0.5.14) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-button

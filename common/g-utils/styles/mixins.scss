@@ -1,8 +1,13 @@
 // BEM mixins — mirrors element-plus/theme-chalk/src/mixins/mixins.scss
 // b/e/m/when produce CSS output IDENTICAL to element-plus theme-chalk.
 @use 'function' as *;
+@use 'tokens' as *;
 // Forward config so consumers can do @forward '@flash-global66/g-utils/config' with ($namespace: 'gui')
 @forward 'config';
+// Forward function so `@use 'mixins' as *;` also exposes getCssVar/getCssVarName/
+// joinVarName/getCssVarWithDefault (mirrors element-plus/theme-chalk/src/mixins/mixins.scss).
+@forward 'function';
+@forward 'var-mixins';
 @use 'config' as *;
 @use 'sass:string';
 @use 'sass:map';
@@ -75,5 +80,157 @@ $E: null !default;
     &.#{$state-prefix + $state} {
       @content;
     }
+  }
+}
+// Break-points
+@mixin res($key, $map: $breakpoints) {
+  // loop breakpoint Map, return if present
+  @if map.has-key($map, $key) {
+    @media only screen and #{string.unquote(map.get($map, $key))} {
+      @content;
+    }
+  } @else {
+    @warn "Undefined points: `#{$map}`";
+  }
+}
+// Scrollbar
+@mixin scroll-bar {
+  $scrollbar-thumb-background: getCssVar('text-color', 'disabled');
+  $scrollbar-track-background: getCssVar('fill-color', 'blank');
+
+  &::-webkit-scrollbar {
+    z-index: 11;
+    width: 6px;
+
+    &:horizontal {
+      height: 6px;
+    }
+
+    &-thumb {
+      border-radius: 5px;
+      width: 6px;
+      background: $scrollbar-thumb-background;
+    }
+
+    &-corner {
+      background: $scrollbar-track-background;
+    }
+
+    &-track {
+      background: $scrollbar-track-background;
+
+      &-piece {
+        background: $scrollbar-track-background;
+        width: 6px;
+      }
+    }
+  }
+}
+@mixin configurable-m($modifier, $E-flag: false) {
+  $selector: &;
+  $interpolation: '';
+
+  @if $E-flag {
+    $interpolation: $element-separator + $E-flag;
+  }
+
+  @at-root {
+    #{$selector} {
+      .#{$B + $interpolation + $modifier-separator + $modifier} {
+        @content;
+      }
+    }
+  }
+}
+@mixin spec-selector(
+  $specSelector: '',
+  $element: $E,
+  $modifier: false,
+  $block: $B
+) {
+  $modifierCombo: '';
+
+  @if $modifier {
+    $modifierCombo: $modifier-separator + $modifier;
+  }
+
+  @at-root {
+    #{&}#{$specSelector}.#{$block
+      + $element-separator
+      + $element
+      + $modifierCombo} {
+      @content;
+    }
+  }
+}
+@mixin meb($modifier: false, $element: $E, $block: $B) {
+  $selector: &;
+  $modifierCombo: '';
+
+  @if $modifier {
+    $modifierCombo: $modifier-separator + $modifier;
+  }
+
+  @at-root {
+    #{$selector} {
+      .#{$block + $element-separator + $element + $modifierCombo} {
+        @content;
+      }
+    }
+  }
+}
+@mixin extend-rule($name) {
+  @extend #{'%shared-' + $name} !optional;
+}
+@mixin share-rule($name) {
+  $rule-name: '%shared-' + $name;
+
+  @at-root #{$rule-name} {
+    @content;
+  }
+}
+@mixin pseudo($pseudo) {
+  @at-root #{&}#{':#{$pseudo}'} {
+    @content;
+  }
+}
+@mixin picker-popper($background, $border, $box-shadow) {
+  &.#{$namespace}-popper {
+    background: $background;
+    border: $border;
+    box-shadow: $box-shadow;
+
+    .#{$namespace}-popper__arrow {
+      &::before {
+        border: $border;
+      }
+    }
+
+    @each $placement,
+      $adjacency
+        in ('top': 'left', 'bottom': 'right', 'left': 'bottom', 'right': 'top')
+    {
+      &[data-popper-placement^='#{$placement}'] {
+        .#{$namespace}-popper__arrow::before {
+          border-#{$placement}-color: transparent;
+          border-#{$adjacency}-color: transparent;
+        }
+      }
+    }
+  }
+}
+// dark
+@mixin dark($block) {
+  html.dark {
+    @include b($block) {
+      @content;
+    }
+  }
+}
+@mixin inset-input-border($color, $important: false) {
+  @if $important == true {
+    box-shadow: 0 0 0 1px $color inset !important;
+  } @else {
+    box-shadow: 0 0 0 1px $color inset;
   }
 }

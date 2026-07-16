@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.28](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.27...@flash-global66/g-segmented@0.4.28) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.27](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.26...@flash-global66/g-segmented@0.4.27) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.26](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.25...@flash-global66/g-segmented@0.4.26) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.24...@flash-global66/g-segmented@0.4.25) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.24](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.23...@flash-global66/g-segmented@0.4.24) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.23](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.22...@flash-global66/g-segmented@0.4.23) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.22](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.21...@flash-global66/g-segmented@0.4.22) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.21](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.20...@flash-global66/g-segmented@0.4.21) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.20](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.19...@flash-global66/g-segmented@0.4.20) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.18...@flash-global66/g-segmented@0.4.19) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
+## [0.4.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.17...@flash-global66/g-segmented@0.4.18) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-segmented
+
 ## [0.4.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-segmented@0.4.16...@flash-global66/g-segmented@0.4.17) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-segmented

@@ -1,11 +1,15 @@
 {
   "name": "@flash-global66/g-radio-group",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
     "./*": "./*"
+  },
+  "dependencies": {
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-utils": "^0.15.6"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

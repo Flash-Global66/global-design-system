@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.24](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.23...@flash-global66/g-image@0.4.24) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.23](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.22...@flash-global66/g-image@0.4.23) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.22](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.21...@flash-global66/g-image@0.4.22) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.21](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.20...@flash-global66/g-image@0.4.21) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.20](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.19...@flash-global66/g-image@0.4.20) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.18...@flash-global66/g-image@0.4.19) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.17...@flash-global66/g-image@0.4.18) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.16...@flash-global66/g-image@0.4.17) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
+## [0.4.16](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.15...@flash-global66/g-image@0.4.16) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-image
+
 ## [0.4.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.14...@flash-global66/g-image@0.4.15) (2026-07-12)
 
 **Note:** Version bump only for package @flash-global66/g-image

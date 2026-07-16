@@ -1,0 +1,156 @@
+/* Element Chalk Variables */
+.gui-link {
+  @apply inline-flex flex-row items-center justify-center;
+  @apply relative no-underline outline-none;
+  @apply cursor-pointer p-0;
+  @apply font-semibold;
+  /* Size variations */
+}
+.gui-link.gui-link--sm {
+  @apply text-2;
+}
+.gui-link.gui-link--sm .gui-link__icon-right {
+  @apply text-3;
+}
+
+.gui-link.gui-link--md {
+  @apply text-3;
+}
+.gui-link.gui-link--md .gui-link__icon-right {
+  @apply text-3;
+}
+
+.gui-link.gui-link--lg {
+  @apply text-4;
+}
+.gui-link.gui-link--lg .gui-link__icon-right {
+  @apply text-7;
+}
+
+.gui-link__icon-left {
+  @apply flex items-center justify-center mr-xxs;
+}
+
+.gui-link__icon-right {
+  @apply flex items-center justify-center ml-xxs;
+}
+
+.gui-link__inner {
+  @apply inline-flex justify-center items-center;
+  @apply relative;
+}
+
+.gui-link.is-disabled {
+  @apply text-disabled-txt cursor-not-allowed;
+}
+.gui-link.is-disabled .gui-link__inner:after {
+  @apply border-disabled-bd;
+}
+
+.gui-link {
+  /* Primary link - everBlue color palette */
+}
+.gui-link.gui-link--primary {
+  @apply text-everBlue-500;
+}
+.gui-link.gui-link--primary:not(.is-disabled):hover {
+  @apply text-everBlue-700;
+}
+.gui-link.gui-link--primary:active {
+  @apply text-everBlue-400;
+}
+.gui-link.gui-link--primary {
+  /* Underline styles for primary links */
+}
+.gui-link.gui-link--primary.is-underline .gui-link__inner:after {
+  content: "";
+  @apply absolute left-0 right-0 h-0 bottom-0;
+  @apply border-b border-everBlue-500;
+}
+.gui-link.gui-link--primary.is-underline:hover .gui-link__inner:after {
+  @apply border-everBlue-700;
+}
+.gui-link.gui-link--primary.is-underline:active .gui-link__inner:after {
+  @apply border-everBlue-400;
+}
+
+.gui-link {
+  /* Secondary link - grey color palette */
+}
+.gui-link.gui-link--secondary {
+  @apply text-grey-700;
+}
+.gui-link.gui-link--secondary:not(.is-disabled):hover {
+  @apply text-grey-900;
+}
+.gui-link.gui-link--secondary:active {
+  @apply text-grey-500;
+}
+.gui-link.gui-link--secondary {
+  /* Underline styles for secondary links */
+}
+.gui-link.gui-link--secondary.is-underline .gui-link__inner:after {
+  content: "";
+  @apply absolute left-0 right-0 h-0 bottom-0;
+  @apply border-b border-grey-700;
+}
+.gui-link.gui-link--secondary.is-underline:hover .gui-link__inner:after {
+  @apply border-grey-900;
+}
+.gui-link.gui-link--secondary.is-underline:active .gui-link__inner:after {
+  @apply border-grey-500;
+}
+
+.gui-link {
+  /* Tertiary link - white color palette */
+}
+.gui-link.gui-link--tertiary {
+  @apply text-white;
+}
+.gui-link.gui-link--tertiary:not(.is-disabled):hover {
+  @apply text-nightBlue-200;
+}
+.gui-link.gui-link--tertiary:active {
+  @apply text-white;
+}
+.gui-link.gui-link--tertiary {
+  /* Underline styles for tertiary links */
+}
+.gui-link.gui-link--tertiary.is-underline .gui-link__inner:after {
+  content: "";
+  @apply absolute left-0 right-0 h-0 bottom-0;
+  @apply border-b border-white;
+}
+.gui-link.gui-link--tertiary.is-underline:hover .gui-link__inner:after {
+  @apply border-nightBlue-200;
+}
+.gui-link.gui-link--tertiary.is-underline:active .gui-link__inner:after {
+  @apply border-white;
+}
+
+.gui-link {
+  /* Inline status - For links within text */
+}
+.gui-link.gui-link--inline {
+  @apply text-secondary-txt;
+}
+.gui-link.gui-link--inline:hover {
+  @apply text-grey-400;
+}
+.gui-link.gui-link--inline:active {
+  @apply text-grey-600;
+}
+.gui-link.gui-link--inline {
+  /* Underline styles for inline links */
+}
+.gui-link.gui-link--inline.is-underline .gui-link__inner:after {
+  content: "";
+  @apply absolute left-0 right-0 h-0 bottom-0;
+  @apply border-b border-grey-700;
+}
+.gui-link.gui-link--inline.is-underline:hover .gui-link__inner:after {
+  @apply border-grey-400;
+}
+.gui-link.gui-link--inline.is-underline:active .gui-link__inner:after {
+  @apply border-grey-600;
+}

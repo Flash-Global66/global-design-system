@@ -1,11 +1,16 @@
 {
   "name": "@flash-global66/g-popover",
   "author": "Global66",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
     "./*": "./*"
+  },
+  "dependencies": {
+    "@flash-global66/g-dropdown": "^0.2.15",
+    "@flash-global66/g-tooltip": "^0.1.21",
+    "@flash-global66/g-utils": "^0.15.6"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

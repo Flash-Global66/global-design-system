@@ -26,30 +26,23 @@ module.exports = {
       // never re-introduce a direct dependency on it. Covers nested-layout
       // implementations (components/*/src/**, common/*/src/**) AND flat-layout
       // package roots + barrels (components/*/*.ts, e.g. overlay/overlay.ts,
-      // overlay/index.ts). The flat-layout glob is required because packages
-      // like `overlay` ship implementation at the package root, not under src/.
-      files: ['components/*/src/**', 'common/*/src/**', 'components/*/*.ts'],
+      // overlay/index.ts; components/*/*.vue, e.g. badge/Badge.vue,
+      // config-provider/ConfigProvider.vue). The flat-layout globs are
+      // required because packages like `overlay`, `badge`, and
+      // `config-provider` ship implementation at the package root, not
+      // under src/.
+      files: [
+        'components/*/src/**',
+        'common/*/src/**',
+        'components/*/*.ts',
+        'components/*/*.vue',
+      ],
       excludedFiles: [
         // Islands: intentionally wrap/re-export a real element-plus component.
-        'components/badge/**',
-        'components/menu/**',
-        'components/config-provider/**',
-        'components/popover/**',
-        'components/radio-group/**',
-        'components/form-item/**',
-        'components/skeleton/**',
-        'components/infinite-scroll/**',
-        // Deferred: need hooks/utilities outside this change's scope
-        // (useAriaProps, usePopper*, useSizeProp, useFormSize,
-        // useSameTarget, useEscapeKeydown, iconPropType) or embed a real
-        // element-plus component. (useLocale ported in WU-8/select —
-        // dropdown/date-picker/time-picker/table should re-point to
-        // @flash-global66/g-hooks instead of re-implementing.)
-        'components/toast/**',
-        'components/table/**',
-        'components/pagination/**',
-        'components/input-number/**',
-        'components/collapse/**',
+        // (empty — config-provider was the last entry; ep-extraction-v6 WU9
+        // migrated it off element-plus, so no package needs this exclusion
+        // anymore. Left as an empty array rather than removed to preserve the
+        // override block shape for any future entry.)
       ],
       rules: {
         'no-restricted-imports': [

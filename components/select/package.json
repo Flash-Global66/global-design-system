@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-select",
   "author": "Global66",
-  "version": "0.4.8",
+  "version": "0.4.20",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -29,9 +29,9 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.5",
-    "@flash-global66/g-tooltip": "^0.1.10",
-    "@flash-global66/g-utils": "^0.13.0",
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-tooltip": "^0.1.21",
+    "@flash-global66/g-utils": "^0.15.6",
     "@tanstack/vue-virtual": "3.13.23"
   },
   "peerDependencies": {
@@ -40,7 +40,6 @@
     "@flash-global66/g-tag": "^0.1.2",
     "@popperjs/core": "^2.11.6",
     "@vueuse/core": "^13.0.0",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"

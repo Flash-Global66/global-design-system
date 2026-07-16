@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-form-item",
   "author": "Global66",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
@@ -12,6 +12,17 @@
   },
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "dependencies": {
+    "@flash-global66/g-form": "^0.2.28",
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-utils": "^0.15.6",
+    "@vueuse/core": "^13.0.0",
+    "async-validator": "^4.2.5",
+    "lodash-unified": "^1.0.3"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }

@@ -1,8 +1,6 @@
 import { Meta, StoryFn } from '@storybook/vue3';
-import { ref, unref } from 'vue';
-import { ClickOutside } from 'element-plus'
 import { action } from '@storybook/addon-actions';
-import { fn } from "@storybook/test";
+import { fn } from '@storybook/test';
 
 // COMPONENTS
 import { GPopover } from '../components/popover';
@@ -16,7 +14,20 @@ export default {
   component: GPopover,
   argTypes: {
     placement: {
-      options: ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end'],
+      options: [
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'left',
+        'left-start',
+        'left-end',
+        'right',
+        'right-start',
+        'right-end',
+      ],
       defaultValue: 'top-start',
     },
     trigger: {
@@ -40,11 +51,10 @@ export default {
   },
 } as Meta<typeof GPopover>;
 
-const Template: StoryFn<typeof GPopover> = (args) => {
+const Template: StoryFn<typeof GPopover> = args => {
   return {
     components: { GPopover, GConfigProvider, GButton },
     setup() {
-
       return {
         args,
         onChange: fn(action('change')),
@@ -63,8 +73,7 @@ const Template: StoryFn<typeof GPopover> = (args) => {
         </div>
       </g-config-provider>
     `,
-  }
+  };
 };
-
 
 export const Default = Template.bind({});

@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.15.5...@flash-global66/g-utils@0.15.6) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-utils
+
+## [0.15.5](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.15.4...@flash-global66/g-utils@0.15.5) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-utils
+
+## [0.15.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.15.3...@flash-global66/g-utils@0.15.4) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-utils
+
+## [0.15.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.15.2...@flash-global66/g-utils@0.15.3) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-utils
+
+## [0.15.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.15.1...@flash-global66/g-utils@0.15.2) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-utils
+
+## [0.15.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.15.0...@flash-global66/g-utils@0.15.1) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-utils
+
+# [0.15.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.14.0...@flash-global66/g-utils@0.15.0) (2026-07-13)
+
+### Features
+
+- **config-provider:** DS-native provider + DS-owned SCSS bootstrap ([d862a0f](https://github.com/Flash-Global66/global-design-system/commit/d862a0fe361ac0e77239e23e356989ccb6379804))
+
+# [0.14.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.13.1...@flash-global66/g-utils@0.14.0) (2026-07-13)
+
+### Features
+
+- **g-utils:** port element-plus theme-chalk token foundation ([3fb9881](https://github.com/Flash-Global66/global-design-system/commit/3fb98817de39bb14c6ca9bbe8e3b7285ca54c5b1))
+
+## [0.13.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.13.0...@flash-global66/g-utils@0.13.1) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-utils
+
 # [0.13.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-utils@0.12.0...@flash-global66/g-utils@0.13.0) (2026-07-12)
 
 ### Features

@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-overlay",
   "author": "Global66",
-  "version": "0.0.19",
+  "version": "0.0.29",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
@@ -14,12 +14,11 @@
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
   "peerDependencies": {
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "dependencies": {
-    "@flash-global66/g-hooks": "^0.11.5",
-    "@flash-global66/g-utils": "^0.13.0"
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-utils": "^0.15.6"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }

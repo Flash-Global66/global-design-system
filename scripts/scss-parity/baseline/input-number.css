@@ -1,0 +1,358 @@
+/* Element Chalk Variables */
+.gui-input-number {
+  @apply inline-flex relative w-fit border border-grey-100 rounded-md h-10;
+  overflow: hidden;
+  background: white;
+  min-width: 120px;
+}
+@media (max-width: 640px) {
+  .gui-input-number {
+    @apply w-full min-w-10;
+  }
+}
+.gui-input-number .gui-input {
+  @apply w-full flex-1;
+}
+.gui-input-number .gui-input__wrapper {
+  @apply relative h-10 flex items-center py-0;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+@media (max-width: 640px) {
+  .gui-input-number .gui-input__wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+.gui-input-number .gui-input__inner {
+  @apply text-center text-terciary-txt text-4 font-medium p-2 outline-none my-auto;
+  border: none;
+  background: transparent;
+  -moz-appearance: textfield;
+  width: 100%;
+}
+.gui-input-number .gui-input__inner::-webkit-inner-spin-button, .gui-input-number .gui-input__inner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .gui-input-number .gui-input__inner {
+    @apply text-3 px-1 min-w-10;
+  }
+}
+.gui-input-number.is-disabled {
+  @apply text-disabled-txt opacity-50;
+}
+
+.gui-input-number__prefix {
+  @apply pl-2;
+}
+@media (max-width: 640px) {
+  .gui-input-number__prefix {
+    @apply pl-1;
+  }
+}
+
+.gui-input-number__suffix {
+  @apply pr-2;
+}
+@media (max-width: 640px) {
+  .gui-input-number__suffix {
+    @apply pr-1;
+  }
+}
+
+.gui-input-number__decrease {
+  @apply absolute z-10 cursor-pointer flex items-center justify-center h-full;
+  @apply bg-grey-50 text-terciary-txt transition-colors duration-200 text-everBlue-900 text-2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2.5rem;
+  min-width: 2rem;
+  border-right: 1px solid;
+  @apply border-grey-100;
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+@media (max-width: 640px) {
+  .gui-input-number__decrease {
+    width: 2rem;
+    min-width: 1.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .gui-input-number__decrease {
+    width: 1.75rem;
+    min-width: 1.5rem;
+  }
+}
+.gui-input-number__decrease:hover:not(.is-disabled) {
+  @apply bg-grey-200;
+}
+.gui-input-number__decrease.is-disabled {
+  @apply cursor-not-allowed text-disabled-txt opacity-50;
+}
+
+.gui-input-number__increase {
+  @apply absolute z-10 cursor-pointer flex items-center justify-center h-full;
+  @apply bg-grey-50 text-terciary-txt transition-colors duration-200 text-everBlue-900 text-2;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 2.5rem;
+  min-width: 2rem;
+  border-left: 1px solid;
+  @apply border-grey-100;
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+@media (max-width: 640px) {
+  .gui-input-number__increase {
+    width: 2rem;
+    min-width: 1.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .gui-input-number__increase {
+    width: 1.75rem;
+    min-width: 1.5rem;
+  }
+}
+.gui-input-number__increase:hover:not(.is-disabled) {
+  @apply bg-grey-200;
+}
+.gui-input-number__increase.is-disabled {
+  @apply cursor-not-allowed text-disabled-txt opacity-50;
+}
+
+.gui-input-number.is-controls-right .gui-input__wrapper {
+  padding-left: 0rem;
+  padding-right: 5rem;
+}
+@media (max-width: 640px) {
+  .gui-input-number.is-controls-right .gui-input__wrapper {
+    padding-right: 4rem;
+  }
+}
+@media (max-width: 480px) {
+  .gui-input-number.is-controls-right .gui-input__wrapper {
+    padding-right: 3.5rem;
+  }
+}
+.gui-input-number.is-controls-right .gui-input__wrapper {
+  padding-right: 2.4rem;
+}
+@media (max-width: 640px) {
+  .gui-input-number.is-controls-right .gui-input__wrapper {
+    padding-right: 0.5rem;
+  }
+}
+.gui-input-number.is-controls-right .gui-input-number__decrease {
+  left: auto;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  height: 50%;
+  width: 2.5rem;
+  min-width: 2rem;
+  border-right: none;
+  border-left: 1px solid;
+  border-top: 1px solid;
+  @apply border-grey-100;
+  border-radius: 0 0 0.375rem 0;
+}
+@media (max-width: 640px) {
+  .gui-input-number.is-controls-right .gui-input-number__decrease {
+    width: 2rem;
+    min-width: 1.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .gui-input-number.is-controls-right .gui-input-number__decrease {
+    width: 1.75rem;
+    min-width: 1.5rem;
+  }
+}
+
+.gui-input-number.is-controls-right .gui-input-number__increase {
+  right: 0;
+  top: 0;
+  bottom: 50%;
+  height: 50%;
+  width: 2.5rem;
+  min-width: 2rem;
+  border-left: 1px solid;
+  border-right: none;
+  @apply border-grey-100;
+  border-radius: 0 0.375rem 0 0;
+}
+@media (max-width: 640px) {
+  .gui-input-number.is-controls-right .gui-input-number__increase {
+    width: 2rem;
+    min-width: 1.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .gui-input-number.is-controls-right .gui-input-number__increase {
+    width: 1.75rem;
+    min-width: 1.5rem;
+  }
+}
+
+.gui-input-number.is-without-controls .gui-input__wrapper {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.gui-input-number.is-left .gui-input__inner {
+  @apply text-left;
+}
+
+.gui-input-number.is-right .gui-input__inner {
+  @apply text-right;
+}
+
+.gui-input-number.is-center .gui-input__inner {
+  @apply text-center;
+}
+
+.gui-input-number.is-disabled .gui-input-number__decrease, .gui-input-number.is-disabled .gui-input-number__increase {
+  @apply cursor-not-allowed text-disabled-txt bg-grey-50;
+}
+
+.gui-input-number.is-disabled .gui-input__inner {
+  @apply text-disabled-txt;
+}
+
+.gui-input-number--small {
+  @apply h-8;
+}
+@media (max-width: 640px) {
+  .gui-input-number--small {
+    min-width: 100px;
+  }
+}
+.gui-input-number--small .gui-input__wrapper {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  @apply h-full;
+}
+@media (max-width: 640px) {
+  .gui-input-number--small .gui-input__wrapper {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+}
+.gui-input-number--small .gui-input__inner {
+  @apply text-3 py-1;
+}
+@media (max-width: 640px) {
+  .gui-input-number--small .gui-input__inner {
+    @apply px-1;
+  }
+}
+.gui-input-number--small .gui-input-number__decrease, .gui-input-number--small .gui-input-number__increase {
+  width: 2rem;
+  @apply h-full;
+}
+@media (max-width: 640px) {
+  .gui-input-number--small .gui-input-number__decrease, .gui-input-number--small .gui-input-number__increase {
+    width: 1.75rem;
+  }
+}
+
+.gui-input-number--small.is-controls-right .gui-input__wrapper {
+  padding-left: 0rem;
+  padding-right: 2.5rem;
+}
+@media (max-width: 640px) {
+  .gui-input-number--small.is-controls-right .gui-input__wrapper {
+    padding-left: 0rem;
+    padding-right: 7rem;
+  }
+}
+.gui-input-number--small.is-controls-right .gui-input-number__decrease {
+  top: 50%;
+  bottom: 0;
+  height: 50%;
+  right: 0;
+}
+
+.gui-input-number--small.is-controls-right .gui-input-number__increase {
+  top: 0;
+  bottom: 50%;
+  height: 50%;
+  right: 0;
+}
+
+.gui-input-number--large {
+  @apply h-14;
+}
+@media (max-width: 640px) {
+  .gui-input-number--large {
+    @apply h-12;
+  }
+}
+.gui-input-number--large .gui-input__wrapper {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  @apply h-full;
+}
+@media (max-width: 640px) {
+  .gui-input-number--large .gui-input__wrapper {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+.gui-input-number--large .gui-input__inner {
+  @apply text-5 py-3;
+}
+@media (max-width: 640px) {
+  .gui-input-number--large .gui-input__inner {
+    @apply text-4 py-2;
+  }
+}
+.gui-input-number--large .gui-input-number__decrease, .gui-input-number--large .gui-input-number__increase {
+  @apply h-full text-2;
+  width: 3rem;
+}
+@media (max-width: 640px) {
+  .gui-input-number--large .gui-input-number__decrease, .gui-input-number--large .gui-input-number__increase {
+    width: 2.5rem;
+  }
+}
+
+.gui-input-number--large.is-controls-right .gui-input__wrapper {
+  padding-left: 0rem;
+  padding-right: 6rem;
+}
+@media (max-width: 640px) {
+  .gui-input-number--large.is-controls-right .gui-input__wrapper {
+    padding-right: 5rem;
+  }
+}
+.gui-input-number--large.is-controls-right .gui-input__wrapper {
+  padding-right: 2.5rem;
+}
+.gui-input-number--large.is-controls-right .gui-input-number__decrease {
+  top: 50%;
+  bottom: 0;
+  height: 50%;
+  right: 0;
+  border-left: 1px solid;
+  border-right: none;
+  border-top: 1px solid;
+  @apply border-grey-100;
+}
+
+.gui-input-number--large.is-controls-right .gui-input-number__increase {
+  top: 0;
+  bottom: 50%;
+  height: 50%;
+  right: 0;
+  border-left: 1px solid;
+  border-right: none;
+  @apply border-grey-100;
+}

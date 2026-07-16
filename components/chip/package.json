@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-chip",
   "author": "Global66",
-  "version": "1.1.14",
+  "version": "1.1.24",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -23,13 +23,12 @@
     "build:types": "vue-tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@flash-global66/g-utils": "^0.13.0"
+    "@flash-global66/g-utils": "^0.15.6"
   },
   "peerDependencies": {
     "@flash-global66/g-dropdown": "^0.1.0",
     "@flash-global66/g-icon-font": "^0.11.0",
     "@flash-global66/g-popover": "^0.0.7",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "publishConfig": {

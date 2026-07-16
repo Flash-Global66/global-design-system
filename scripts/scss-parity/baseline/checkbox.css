@@ -1,0 +1,333 @@
+/* Element Chalk Variables */
+.gui-checkbox {
+  --gui-checkbox-font-size: 14px;
+  --gui-checkbox-font-weight: var(--gui-font-weight-primary);
+  --gui-checkbox-text-color: var(--gui-text-color-regular);
+  --gui-checkbox-input-height: 14px;
+  --gui-checkbox-input-width: 14px;
+  --gui-checkbox-border-radius: var(--gui-border-radius-small);
+  --gui-checkbox-bg-color: var(--gui-fill-color-blank);
+  --gui-checkbox-input-border: var(--gui-border);
+  --gui-checkbox-disabled-border-color: var(--gui-border-color);
+  --gui-checkbox-disabled-input-fill: var(--gui-fill-color-light);
+  --gui-checkbox-disabled-icon-color: var(--gui-text-color-placeholder);
+  --gui-checkbox-disabled-checked-input-fill: var(--gui-border-color-extra-light);
+  --gui-checkbox-disabled-checked-input-border-color: var(--gui-border-color);
+  --gui-checkbox-disabled-checked-icon-color: var(--gui-text-color-placeholder);
+  --gui-checkbox-checked-text-color: var(--gui-color-primary);
+  --gui-checkbox-checked-input-border-color: var(--gui-color-primary);
+  --gui-checkbox-checked-bg-color: var(--gui-color-primary);
+  --gui-checkbox-checked-icon-color: var(--gui-color-white);
+  --gui-checkbox-input-border-color-hover: var(--gui-color-primary);
+}
+
+.gui-checkbox {
+  color: var(--gui-checkbox-text-color);
+  font-weight: var(--gui-checkbox-font-weight);
+  font-size: var(--gui-font-size-base);
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  user-select: none;
+  margin-right: 30px;
+  height: var(--gui-checkbox-height, 32px);
+}
+.gui-checkbox.is-disabled {
+  cursor: not-allowed;
+}
+
+.gui-checkbox.is-bordered {
+  padding: 0 15px 0 9px;
+  border-radius: var(--gui-border-radius-base);
+  border: var(--gui-border);
+  box-sizing: border-box;
+}
+.gui-checkbox.is-bordered.is-checked {
+  border-color: var(--gui-color-primary);
+}
+.gui-checkbox.is-bordered.is-disabled {
+  border-color: var(--gui-border-color-lighter);
+}
+.gui-checkbox.is-bordered.gui-checkbox--large {
+  padding: 0 19px 0 11px;
+  border-radius: var(--gui-border-radius-base);
+}
+.gui-checkbox.is-bordered.gui-checkbox--large .gui-checkbox__label {
+  font-size: var(--gui-font-size-base);
+}
+.gui-checkbox.is-bordered.gui-checkbox--large .gui-checkbox__inner {
+  height: 14px;
+  width: 14px;
+}
+.gui-checkbox.is-bordered.gui-checkbox--small {
+  padding: 0 11px 0 7px;
+  border-radius: calc(var(--gui-border-radius-base) - 1px);
+}
+.gui-checkbox.is-bordered.gui-checkbox--small .gui-checkbox__label {
+  font-size: 12px;
+}
+.gui-checkbox.is-bordered.gui-checkbox--small .gui-checkbox__inner {
+  height: 12px;
+  width: 12px;
+}
+.gui-checkbox.is-bordered.gui-checkbox--small .gui-checkbox__inner::after {
+  height: 6px;
+  width: 2px;
+}
+
+.gui-checkbox input:focus-visible + .gui-checkbox__inner {
+  outline: 2px solid var(--gui-checkbox-input-border-color-hover);
+  outline-offset: 1px;
+  border-radius: var(--gui-checkbox-border-radius);
+}
+.gui-checkbox__input {
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  position: relative;
+}
+.gui-checkbox__input.is-disabled .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-disabled-input-fill);
+  border-color: var(--gui-checkbox-disabled-border-color);
+  cursor: not-allowed;
+}
+.gui-checkbox__input.is-disabled .gui-checkbox__inner::after {
+  cursor: not-allowed;
+  border-color: var(--gui-checkbox-disabled-icon-color);
+}
+.gui-checkbox__input.is-disabled.is-checked .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-disabled-checked-input-fill);
+  border-color: var(--gui-checkbox-disabled-checked-input-border-color);
+}
+.gui-checkbox__input.is-disabled.is-checked .gui-checkbox__inner::after {
+  border-color: var(--gui-checkbox-disabled-checked-icon-color);
+}
+.gui-checkbox__input.is-disabled.is-indeterminate .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-disabled-checked-input-fill);
+  border-color: var(--gui-checkbox-disabled-checked-input-border-color);
+}
+.gui-checkbox__input.is-disabled.is-indeterminate .gui-checkbox__inner::before {
+  background-color: var(--gui-checkbox-disabled-checked-icon-color);
+  border-color: var(--gui-checkbox-disabled-checked-icon-color);
+}
+.gui-checkbox__input.is-disabled + span.gui-checkbox__label {
+  color: var(--gui-disabled-text-color);
+  cursor: not-allowed;
+}
+
+.gui-checkbox__input.is-checked .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-checked-bg-color);
+  border-color: var(--gui-checkbox-checked-input-border-color);
+}
+.gui-checkbox__input.is-checked .gui-checkbox__inner::after {
+  transform: rotate(45deg) scaleY(1);
+  border-color: var(--gui-checkbox-checked-icon-color);
+}
+.gui-checkbox__input.is-checked + .gui-checkbox__label {
+  color: var(--gui-checkbox-checked-text-color);
+}
+
+.gui-checkbox__input.is-focus:not(.is-checked) .gui-checkbox__original:not(:focus-visible) {
+  border-color: var(--gui-checkbox-input-border-color-hover);
+}
+
+.gui-checkbox__input.is-indeterminate .gui-checkbox__inner {
+  background-color: var(--gui-checkbox-checked-bg-color);
+  border-color: var(--gui-checkbox-checked-input-border-color);
+}
+.gui-checkbox__input.is-indeterminate .gui-checkbox__inner::before {
+  content: "";
+  position: absolute;
+  display: block;
+  background-color: var(--gui-checkbox-checked-icon-color);
+  height: 2px;
+  transform: scale(0.5);
+  left: 0;
+  right: 0;
+  top: 5px;
+}
+.gui-checkbox__input.is-indeterminate .gui-checkbox__inner::after {
+  display: none;
+}
+
+.gui-checkbox__inner {
+  display: inline-block;
+  position: relative;
+  border: var(--gui-checkbox-input-border);
+  border-radius: var(--gui-checkbox-border-radius);
+  box-sizing: border-box;
+  width: var(--gui-checkbox-input-width);
+  height: var(--gui-checkbox-input-height);
+  background-color: var(--gui-checkbox-bg-color);
+  z-index: var(--gui-index-normal);
+  transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46), background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46), outline 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
+}
+.gui-checkbox__inner:hover {
+  border-color: var(--gui-checkbox-input-border-color-hover);
+}
+.gui-checkbox__inner::after {
+  box-sizing: content-box;
+  content: "";
+  border: 1px solid transparent;
+  border-left: 0;
+  border-top: 0;
+  height: 7px;
+  left: 4px;
+  position: absolute;
+  top: 1px;
+  transform: rotate(45deg) scaleY(0);
+  width: 3px;
+  transition: transform 0.15s ease-in 0.05s;
+  transform-origin: center;
+}
+
+.gui-checkbox__original {
+  opacity: 0;
+  outline: none;
+  position: absolute;
+  margin: 0;
+  width: 0;
+  height: 0;
+  z-index: -1;
+}
+
+.gui-checkbox__label {
+  display: inline-block;
+  padding-left: 8px;
+  line-height: 1;
+  font-size: var(--gui-checkbox-font-size);
+}
+
+.gui-checkbox.gui-checkbox--large {
+  height: 40px;
+}
+.gui-checkbox.gui-checkbox--large .gui-checkbox__label {
+  font-size: 14px;
+}
+
+.gui-checkbox.gui-checkbox--large .gui-checkbox__inner {
+  width: 14px;
+  height: 14px;
+}
+
+.gui-checkbox.gui-checkbox--small {
+  height: 24px;
+}
+.gui-checkbox.gui-checkbox--small .gui-checkbox__label {
+  font-size: 12px;
+}
+
+.gui-checkbox.gui-checkbox--small .gui-checkbox__inner {
+  width: 12px;
+  height: 12px;
+}
+
+.gui-checkbox.gui-checkbox--small .gui-checkbox__input.is-indeterminate .gui-checkbox__inner::before {
+  top: 4px;
+}
+
+.gui-checkbox.gui-checkbox--small .gui-checkbox__inner::after {
+  width: 2px;
+  height: 6px;
+}
+
+.gui-checkbox:last-of-type {
+  margin-right: 0;
+}
+
+.gui-checkbox {
+  @apply text-3 gap-xxs m-0 h-fit items-center;
+}
+.gui-checkbox.is-checked:not(.is-disabled) .gui-checkbox__label {
+  @apply text-secondary-txt;
+}
+
+.gui-checkbox.is-checked:not(.is-disabled) .gui-checkbox__inner {
+  @apply border-primary-bd bg-primary-def;
+}
+
+.gui-checkbox.is-checked.is-disabled .gui-checkbox__inner {
+  @apply border-disab-lt-bd bg-disab-lt-bg;
+}
+.gui-checkbox.is-checked.is-disabled .gui-checkbox__inner:after {
+  @apply border-white;
+}
+
+.gui-checkbox.is-disabled {
+  @apply cursor-not-allowed;
+}
+.gui-checkbox.is-disabled .gui-checkbox__label {
+  @apply text-disab-lt-txt !important;
+}
+
+.gui-checkbox.is-border {
+  @apply justify-between p-xs border border-disab-lt-bd rounded-md min-h-12 h-fit;
+}
+
+.gui-checkbox.is-invert {
+  @apply flex flex-row-reverse gap-xxs;
+}
+.gui-checkbox.is-invert .gui-checkbox__inner {
+  @apply ml-xs;
+}
+
+.gui-checkbox__label {
+  @apply p-0 text-secondary-txt text-pretty leading-snug;
+}
+
+.gui-checkbox__input {
+  @apply self-center;
+}
+.gui-checkbox__input.is-indeterminate .gui-checkbox__inner {
+  @apply border-primary-bd;
+}
+
+.gui-checkbox__input.is-indeterminate.is-disabled .gui-checkbox__inner {
+  @apply border-disab-lt-bd bg-disab-lt-bg;
+}
+.gui-checkbox__input.is-indeterminate.is-disabled .gui-checkbox__inner:before {
+  @apply bg-white top-[7px];
+}
+
+.gui-checkbox__input.is-disabled {
+  @apply cursor-not-allowed;
+}
+.gui-checkbox__input.is-disabled .gui-checkbox__inner {
+  @apply bg-transparent border-disab-lt-bd;
+}
+.gui-checkbox__input.is-disabled .gui-checkbox__inner .hover-effect {
+  @apply invisible;
+}
+
+.gui-checkbox__input:not(.is-error):not(.is-disabled) .gui-checkbox__inner::before {
+  @apply top-[7px];
+}
+
+.gui-checkbox__inner {
+  @apply w-[18px] h-[18px] border-disabled-bd border rounded mr-xs bg-transparent;
+}
+.gui-checkbox__inner::after {
+  @apply w-[3px] h-2 top-0.5 left-1.5 absolute;
+}
+.gui-checkbox__inner:active .hover-effect {
+  @apply bg-primary-def-press;
+}
+.gui-checkbox__inner .hover-effect {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-0 h-0 rounded-full bg-primary-def-hover bg-center bg-opacity-20 opacity-20 ease-out;
+  transition: background 0.8s, width 0.4s, height 0.4s;
+}
+.gui-checkbox__inner .hover-effect .ripple {
+  @apply absolute w-full h-full bg-white/80 rounded-full scale-0 opacity-100 pointer-events-none;
+}
+.gui-checkbox__inner .hover-effect .ripple.expand {
+  @apply animate-ripple-expand;
+}
+.gui-checkbox__inner .hover-effect .ripple.contract {
+  @apply animate-ripple-contract;
+}
+.gui-checkbox__inner:hover .hover-effect {
+  @apply w-8 h-8;
+}
