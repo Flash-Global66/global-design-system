@@ -7,7 +7,7 @@
   "country-flag": "components/country-flag/src/country-flag.styles.scss",
   "link": "components/link/src/link.styles.scss",
   "logo": "components/logo/src/logo.styles.scss",
-  "inline": "components/inline/src/inline.styles.scss",
+  "inline": "components/inline/src/Inline/inline.style.scss",
   "image": "components/image/src/image.styles.scss",
   "icon-button": "components/icon-button/src/icon-button.styles.scss",
   "attach-file": "components/attach-file/src/attach-file.styles.scss",

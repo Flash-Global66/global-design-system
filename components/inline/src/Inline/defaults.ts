@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
-import type Inline from './inline.vue';
+import type Inline from './index.vue';
 import { useAriaProps } from '@flash-global66/g-hooks';
 import { buildProps, definePropType } from '@flash-global66/g-utils';
 
@@ -8,7 +8,7 @@ import {
   InlineIconAlign,
   InlineLinks,
   InlineSize,
-} from './inline.type';
+} from '../types/inline.type';
 import { IconString } from '@flash-global66/g-icon-font';
 
 export const inlineProps = buildProps({
