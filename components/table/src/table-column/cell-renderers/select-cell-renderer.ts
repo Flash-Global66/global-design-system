@@ -101,6 +101,11 @@ export function renderSelectCell(
       if (table?.emit && column) {
         table.emit('cell-edit-change', row, column, v, oldValue)
       }
+      // Single-select cells close as soon as an option is picked. GSelect closes
+      // its own dropdown on select but does not emit blur, so relying on onBlur
+      // alone leaves the cell stuck in edit mode. Defer to nextTick so the value
+      // update settles before setEditing(null) unmounts the editor.
+      nextTick(close)
     }
     const close = () => {
       if (table?.emit && column) {
