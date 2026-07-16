@@ -9,14 +9,14 @@ import {
   getRowIdentity,
   orderBy,
   toggleRowStatus,
-} from '../util'
+} from '../utils/table.util'
 import useExpand from './expand'
 import useCurrent from './current'
 import useTree from './tree'
 
 import type { Ref } from 'vue'
-import type { TableColumnCtx } from '../table-column/defaults'
-import type { DefaultRow, Table, TableRefs } from '../table/defaults'
+import type { TableColumnCtx } from '../components/TableColumn/defaults'
+import type { DefaultRow, Table, TableRefs } from '../Table/defaults'
 import type { StoreFilter } from '.'
 
 const sortData = (data, states) => {

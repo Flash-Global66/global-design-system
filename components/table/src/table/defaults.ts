@@ -10,12 +10,12 @@ import type {
 } from 'vue'
 import type { Nullable } from '@flash-global66/g-utils'
 import type { Store } from '../store'
-import type { TableColumnCtx } from '../table-column/defaults'
-import type TableLayout from '../table-layout'
+import type { TableColumnCtx } from '../components/TableColumn/defaults'
+import type TableLayout from '../composables/table-layout'
 import type {
   TableOverflowTooltipFormatter,
   TableOverflowTooltipOptions,
-} from '../util'
+} from '../utils/table.util'
 
 export type DefaultRow = any
 

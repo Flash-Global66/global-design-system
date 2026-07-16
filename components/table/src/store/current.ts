@@ -1,10 +1,10 @@
 // @ts-nocheck
 import { getCurrentInstance, ref, unref } from 'vue'
 import { isNull } from 'lodash-unified'
-import { getRowIdentity } from '../util'
+import { getRowIdentity } from '../utils/table.util'
 
 import type { Ref } from 'vue'
-import type { Table } from '../table/defaults'
+import type { Table } from '../Table/defaults'
 import type { WatcherPropsData } from '.'
 
 function useCurrent<T>(watcherData: WatcherPropsData<T>) {

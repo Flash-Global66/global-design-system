@@ -12,9 +12,9 @@ import { useEventListener, useResizeObserver } from '@vueuse/core'
 
 import type { Table, TableProps } from './defaults'
 import type { Store } from '../store'
-import type TableLayout from '../table-layout'
-import type { TableColumnCtx } from '../table-column/defaults'
-import { parseWidth } from '../util'
+import type TableLayout from '../composables/table-layout'
+import type { TableColumnCtx } from '../components/TableColumn/defaults'
+import { parseWidth } from '../utils/table.util'
 
 function useStyle<T>(
   props: TableProps<T>,

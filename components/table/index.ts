@@ -1,6 +1,6 @@
 import { withInstall, withNoopInstall } from '@flash-global66/g-utils'
-import Table from './src/table.vue'
-import TableColumn from './src/tableColumn'
+import Table from './src/Table/index.vue'
+import TableColumn from './src/components/TableColumn'
 import type { SFCWithInstall } from '@flash-global66/g-utils'
 
 export const GTable: SFCWithInstall<typeof Table> & {
@@ -31,7 +31,7 @@ export type {
   Filter,
   TableColumnCtx,
   TableTooltipData,
-} from './src/table/defaults'
+} from './src/Table/defaults'
 
 export { useTableCellSelect } from './src/composables/useTableCellSelect'
 export type {
@@ -57,7 +57,7 @@ export type {
   TableCellValidationApi,
 } from './src/composables/useTableCellValidation'
 
-import GCellEdit from './src/cell-edit/GCellEdit.vue'
+import GCellEdit from './src/components/CellEdit/index.vue'
 export { GCellEdit }
 
-export { clearExpansionCacheForTable } from './src/table-column/cell-renderers/cell-expansion-utils'
+export { clearExpansionCacheForTable } from './src/components/TableColumn/cell-renderers/cell-expansion-utils'
