@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-table",
   "author": "Global66",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "license": "MIT",
   "buildable": true,
   "exports": {
