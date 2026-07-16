@@ -6,9 +6,9 @@ import { GCheckbox } from '@flash-global66/g-checkbox'
 import { GIconFont } from '@flash-global66/g-icon-font'
 
 import type { VNode } from 'vue'
-import type { TableColumnCtx } from '../components/TableColumn/defaults'
+import type { TableColumnCtx } from '../../components/TableColumn/defaults'
 import type { Store } from '../store'
-import type { TreeNode } from '../Table/defaults'
+import type { TreeNode } from '../../Table/defaults'
 
 const defaultClassNames = {
   selection: 'table-column--selection',

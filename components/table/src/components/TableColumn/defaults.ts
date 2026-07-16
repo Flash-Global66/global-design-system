@@ -4,7 +4,7 @@ import type { DefaultRow, Table } from '../../Table/defaults'
 import type {
   TableOverflowTooltipFormatter,
   TableOverflowTooltipOptions,
-} from '../../utils/table.util'
+} from '../../shared/utils/table.util'
 
 type CI<T> = { column: TableColumnCtx<T>; $index: number }
 

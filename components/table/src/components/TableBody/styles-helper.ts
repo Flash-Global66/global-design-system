@@ -7,8 +7,8 @@ import {
   ensurePosition,
   getFixedColumnOffset,
   getFixedColumnsClass,
-} from '../../utils/table.util'
-import { TABLE_INJECTION_KEY } from '../../constants/token.constant'
+} from '../../shared/utils/table.util'
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
 import type { TableColumnCtx } from '../TableColumn/defaults'
 import type { TableBodyProps } from './defaults'
 

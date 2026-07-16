@@ -3,7 +3,7 @@ import {
   ensurePosition,
   getFixedColumnOffset,
   getFixedColumnsClass,
-} from '../../utils/table.util'
+} from '../../shared/utils/table.util'
 import useMapState from './mapState-helper'
 import type { TableColumnCtx } from '../TableColumn/defaults'
 import type { TableFooter } from '.'

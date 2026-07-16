@@ -3,7 +3,7 @@ import { getKeysMap, getRowIdentity, toggleRowStatus } from '../utils/table.util
 
 import type { Ref } from 'vue'
 import type { WatcherPropsData } from '.'
-import type { Table } from '../Table/defaults'
+import type { Table } from '../../Table/defaults'
 
 function useExpand<T>(watcherData: WatcherPropsData<T>) {
   const instance = getCurrentInstance() as Table<T>

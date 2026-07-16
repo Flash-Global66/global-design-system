@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import { computed, inject, ref, watch, nextTick, onUnmounted } from 'vue'
 import { GIconFont } from '@flash-global66/g-icon-font'
-import { TABLE_INJECTION_KEY } from '../../constants/token.constant'
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
 import {
   calculateExpandedWidthSync,
   calculateLeftOffset,

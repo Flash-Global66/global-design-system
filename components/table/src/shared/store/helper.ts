@@ -6,7 +6,7 @@ import { isObject } from '@flash-global66/g-utils'
 import useStore from '.'
 
 import type { Store } from '.'
-import type { Table, TableProps } from '../Table/defaults'
+import type { Table, TableProps } from '../../Table/defaults'
 
 const InitialStateMap = {
   rowKey: 'rowKey',

@@ -109,7 +109,7 @@ import type { Placement } from '@flash-global66/g-popper'
 import type { PropType, WritableComputedRef } from 'vue'
 import type { TableColumnCtx } from '../TableColumn/defaults'
 import type { TableHeader } from '../TableHeader'
-import type { Store } from '../../store'
+import type { Store } from '../../shared/store'
 
 const { CheckboxGroup: GCheckboxGroup } = GCheckbox
 

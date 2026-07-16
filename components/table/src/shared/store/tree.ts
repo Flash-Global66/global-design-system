@@ -5,7 +5,7 @@ import { isArray, isUndefined } from '@flash-global66/g-utils'
 import { getRowIdentity, walkTreeNode } from '../utils/table.util'
 
 import type { WatcherPropsData } from '.'
-import type { Table, TableProps } from '../Table/defaults'
+import type { Table, TableProps } from '../../Table/defaults'
 
 function useTree<T>(watcherData: WatcherPropsData<T>) {
   const expandRowKeys = ref<string[]>([])

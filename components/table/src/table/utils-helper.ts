@@ -1,5 +1,5 @@
 // @ts-nocheck
-import type { Store } from '../store'
+import type { Store } from '../shared/store'
 
 function useUtils<T>(store: Store<T>) {
   const setCurrentRow = (row: T) => {

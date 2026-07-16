@@ -1,5 +1,5 @@
 import { computed, inject } from 'vue'
-import { TABLE_INJECTION_KEY } from '../../constants/token.constant'
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
 
 function useMapState() {
   const table = inject(TABLE_INJECTION_KEY)

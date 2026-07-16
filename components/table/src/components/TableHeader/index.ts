@@ -14,14 +14,14 @@ import {
 import GCheckbox from '@flash-global66/g-checkbox'
 import { useNamespace } from '@flash-global66/g-utils'
 import FilterPanel from '../FilterPanel/index.vue'
-import useLayoutObserver from '../../composables/useLayoutObserver'
-import { TABLE_INJECTION_KEY } from '../../constants/token.constant'
+import useLayoutObserver from '../../shared/composables/useLayoutObserver'
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
 import useEvent from './event-helper'
 import useStyle from './style.helper'
 import useUtils from './utils-helper'
 import type { ComponentInternalInstance, PropType, Ref } from 'vue'
 import type { DefaultRow, Sort } from '../../Table/defaults'
-import type { Store } from '../../store'
+import type { Store } from '../../shared/store'
 
 export interface TableHeader extends ComponentInternalInstance {
   state: {

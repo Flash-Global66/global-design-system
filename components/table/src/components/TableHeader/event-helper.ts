@@ -9,7 +9,7 @@ import {
   isElement,
   removeClass,
 } from '@flash-global66/g-utils'
-import { TABLE_INJECTION_KEY } from '../../constants/token.constant'
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
 import type { TableHeaderProps } from '.'
 import type { TableColumnCtx } from '../TableColumn/defaults'
 

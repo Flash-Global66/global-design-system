@@ -8,11 +8,11 @@ import {
   getCell,
   getColumnByCell,
   removePopper,
-} from '../../utils/table.util'
-import { TABLE_INJECTION_KEY } from '../../constants/token.constant'
+} from '../../shared/utils/table.util'
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
 import type { TableColumnCtx } from '../TableColumn/defaults'
 import type { TableBodyProps } from './defaults'
-import type { TableOverflowTooltipOptions } from '../../utils/table.util'
+import type { TableOverflowTooltipOptions } from '../../shared/utils/table.util'
 
 function isGreaterThan(a: number, b: number, epsilon = 0.03) {
   return a - b > epsilon

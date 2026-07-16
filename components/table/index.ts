@@ -33,21 +33,21 @@ export type {
   TableTooltipData,
 } from './src/Table/defaults'
 
-export { useTableCellSelect } from './src/composables/useTableCellSelect'
+export { useTableCellSelect } from './src/shared/composables/useTableCellSelect'
 export type {
   TableCellSelectOption,
   TableCellSelectGetOptions,
   TableCellSelectCellOptions,
   UseTableCellSelectOptions,
-} from './src/composables/useTableCellSelect'
+} from './src/shared/composables/useTableCellSelect'
 
-export { useTableCellInput } from './src/composables/useTableCellInput'
+export { useTableCellInput } from './src/shared/composables/useTableCellInput'
 export type {
   TableCellInputCellOptions,
   UseTableCellInputOptions,
-} from './src/composables/useTableCellInput'
+} from './src/shared/composables/useTableCellInput'
 
-export { useTableCellValidation } from './src/composables/useTableCellValidation'
+export { useTableCellValidation } from './src/shared/composables/useTableCellValidation'
 export type {
   TableCellRule,
   TableCellValidateState,
@@ -55,7 +55,7 @@ export type {
   CellValidationState,
   UseTableCellValidationOptions,
   TableCellValidationApi,
-} from './src/composables/useTableCellValidation'
+} from './src/shared/composables/useTableCellValidation'
 
 import GCellEdit from './src/components/CellEdit/index.vue'
 export { GCellEdit }

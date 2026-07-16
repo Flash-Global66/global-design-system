@@ -1,13 +1,13 @@
 // @ts-nocheck
 import type { PropType } from 'vue'
-import type { Store } from '../../store'
+import type { Store } from '../../shared/store'
 import type {
   ColumnCls,
   ColumnStyle,
   DefaultRow,
   Table,
 } from '../../Table/defaults'
-import type { TableOverflowTooltipOptions } from '../../utils/table.util'
+import type { TableOverflowTooltipOptions } from '../../shared/utils/table.util'
 
 interface TableBodyProps<T> {
   store: Store<T>

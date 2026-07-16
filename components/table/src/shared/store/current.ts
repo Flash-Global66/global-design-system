@@ -4,7 +4,7 @@ import { isNull } from 'lodash-unified'
 import { getRowIdentity } from '../utils/table.util'
 
 import type { Ref } from 'vue'
-import type { Table } from '../Table/defaults'
+import type { Table } from '../../Table/defaults'
 import type { WatcherPropsData } from '.'
 
 function useCurrent<T>(watcherData: WatcherPropsData<T>) {

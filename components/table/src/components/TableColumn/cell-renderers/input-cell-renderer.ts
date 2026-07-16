@@ -3,7 +3,7 @@ import { GInput } from '@flash-global66/g-input'
 import { GIconFont } from '@flash-global66/g-icon-font'
 import type { TableColumnCtx } from '../defaults'
 import type { RenderCellData } from './types'
-import type { TableCellValidationApi } from '../../../composables/useTableCellValidation'
+import type { TableCellValidationApi } from '../../../shared/composables/useTableCellValidation'
 import {
   calculateExpandedWidthSync,
   calculateLeftOffset,

@@ -6,8 +6,8 @@ import { useNamespace } from '@flash-global66/g-utils'
 import useWatcher from './watcher'
 
 import type { Ref } from 'vue'
-import type { TableColumnCtx } from '../components/TableColumn/defaults'
-import type { Filter, Sort, Table } from '../Table/defaults'
+import type { TableColumnCtx } from '../../components/TableColumn/defaults'
+import type { Filter, Sort, Table } from '../../Table/defaults'
 
 interface WatcherPropsData<T> {
   data: Ref<T[]>

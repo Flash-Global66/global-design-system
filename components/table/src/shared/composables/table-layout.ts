@@ -6,9 +6,9 @@ import { hasOwn, isClient, isNumber, isString } from '@flash-global66/g-utils'
 import { parseHeight } from '../utils/table.util'
 
 import type { Ref } from 'vue'
-import type { TableColumnCtx } from '../components/TableColumn/defaults'
-import type { TableHeader } from '../components/TableHeader'
-import type { Table } from '../Table/defaults'
+import type { TableColumnCtx } from '../../components/TableColumn/defaults'
+import type { TableHeader } from '../../components/TableHeader'
+import type { Table } from '../../Table/defaults'
 import type { Store } from '../store'
 
 class TableLayout<T> {

@@ -10,9 +10,9 @@ import {
 } from 'vue'
 import { addClass, isClient, rAF, removeClass } from '@flash-global66/g-utils'
 import { useNamespace } from '@flash-global66/g-utils'
-import useLayoutObserver from '../../composables/useLayoutObserver'
-import { removePopper } from '../../utils/table.util'
-import { TABLE_INJECTION_KEY } from '../../constants/token.constant'
+import useLayoutObserver from '../../shared/composables/useLayoutObserver'
+import { removePopper } from '../../shared/utils/table.util'
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
 import useRender from './render-helper'
 import defaultProps from './defaults'
 

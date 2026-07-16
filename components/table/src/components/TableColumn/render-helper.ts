@@ -18,8 +18,8 @@ import {
   defaultRenderCell,
   getDefaultClassName,
   treeCellPrefix,
-} from '../../constants/renderer.constant'
-import { parseMinWidth, parseWidth } from '../../utils/table.util'
+} from '../../shared/constants/renderer.constant'
+import { parseMinWidth, parseWidth } from '../../shared/utils/table.util'
 import type { ComputedRef } from 'vue'
 import type { TableColumn, TableColumnCtx } from './defaults'
 import { renderCellByType } from './cell-renderers'

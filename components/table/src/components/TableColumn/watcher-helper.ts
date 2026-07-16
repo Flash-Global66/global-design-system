@@ -2,7 +2,7 @@
 // @ts-nocheck
 import { getCurrentInstance, watch } from 'vue'
 import { hasOwn } from '@flash-global66/g-utils'
-import { parseMinWidth, parseWidth } from '../../utils/table.util'
+import { parseMinWidth, parseWidth } from '../../shared/utils/table.util'
 
 import type { ComputedRef } from 'vue'
 import type { TableColumn, TableColumnCtx, ValueOf } from './defaults'

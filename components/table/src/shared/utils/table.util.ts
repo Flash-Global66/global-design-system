@@ -17,8 +17,8 @@ import {
 import GTooltip, {
   type GTooltipProps,
 } from '@flash-global66/g-tooltip'
-import type { Table, TreeProps } from '../Table/defaults'
-import type { TableColumnCtx } from '../components/TableColumn/defaults'
+import type { Table, TreeProps } from '../../Table/defaults'
+import type { TableColumnCtx } from '../../components/TableColumn/defaults'
 import type { VNode } from 'vue'
 
 export type TableOverflowTooltipOptions = Partial<

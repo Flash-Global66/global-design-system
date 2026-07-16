@@ -9,13 +9,13 @@ import type {
   VNode,
 } from 'vue'
 import type { Nullable } from '@flash-global66/g-utils'
-import type { Store } from '../store'
+import type { Store } from '../shared/store'
 import type { TableColumnCtx } from '../components/TableColumn/defaults'
-import type TableLayout from '../composables/table-layout'
+import type TableLayout from '../shared/composables/table-layout'
 import type {
   TableOverflowTooltipFormatter,
   TableOverflowTooltipOptions,
-} from '../utils/table.util'
+} from '../shared/utils/table.util'
 
 export type DefaultRow = any
 
