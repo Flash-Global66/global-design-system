@@ -1,33 +1,12 @@
 <script lang="ts" setup>
-import { useNamespace } from '@flash-global66/g-utils';
-import { useFormSize } from '@flash-global66/g-form';
-import { computed, ref } from 'vue';
 import { GIconFont } from '@flash-global66/g-icon-font';
-import { inlineEmits, inlineProps } from './inline';
+import { inlineEmits, inlineProps } from './defaults';
+import { useInline } from './useInline';
 
 const props = defineProps(inlineProps);
 const emits = defineEmits(inlineEmits);
 
-const visible = ref(true);
-
-const ns = useNamespace('inline');
-const inlineSize = useFormSize();
-
-const inlineRef = ref<HTMLElement | null>(null);
-
-const inlineClass = computed(() => [
-  ns.b(),
-  ns.m(inlineSize.value),
-  ns.m(props.type),
-  props.shadow && ns.m('shadow'),
-  !props.border && ns.m('no-border'),
-  ns.m(`icon-align-${props.iconAlign}`),
-]);
-
-function onClose(event: MouseEvent) {
-  visible.value = false;
-  emits('close', event);
-}
+const { visible, ns, inlineRef, inlineClass, onClose } = useInline(props, emits);
 </script>
 
 <template>
