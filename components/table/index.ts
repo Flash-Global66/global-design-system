@@ -1,6 +1,6 @@
 import { withInstall, withNoopInstall } from '@flash-global66/g-utils'
-import Table from './src/table.vue'
-import TableColumn from './src/tableColumn'
+import Table from './src/Table/index.vue'
+import TableColumn from './src/components/TableColumn'
 import type { SFCWithInstall } from '@flash-global66/g-utils'
 
 export const GTable: SFCWithInstall<typeof Table> & {
@@ -31,23 +31,23 @@ export type {
   Filter,
   TableColumnCtx,
   TableTooltipData,
-} from './src/table/defaults'
+} from './src/Table/defaults'
 
-export { useTableCellSelect } from './src/composables/useTableCellSelect'
+export { useTableCellSelect } from './src/shared/composables/useTableCellSelect'
 export type {
   TableCellSelectOption,
   TableCellSelectGetOptions,
   TableCellSelectCellOptions,
   UseTableCellSelectOptions,
-} from './src/composables/useTableCellSelect'
+} from './src/shared/composables/useTableCellSelect'
 
-export { useTableCellInput } from './src/composables/useTableCellInput'
+export { useTableCellInput } from './src/shared/composables/useTableCellInput'
 export type {
   TableCellInputCellOptions,
   UseTableCellInputOptions,
-} from './src/composables/useTableCellInput'
+} from './src/shared/composables/useTableCellInput'
 
-export { useTableCellValidation } from './src/composables/useTableCellValidation'
+export { useTableCellValidation } from './src/shared/composables/useTableCellValidation'
 export type {
   TableCellRule,
   TableCellValidateState,
@@ -55,9 +55,9 @@ export type {
   CellValidationState,
   UseTableCellValidationOptions,
   TableCellValidationApi,
-} from './src/composables/useTableCellValidation'
+} from './src/shared/composables/useTableCellValidation'
 
-import GCellEdit from './src/cell-edit/GCellEdit.vue'
+import GCellEdit from './src/components/CellEdit/index.vue'
 export { GCellEdit }
 
-export { clearExpansionCacheForTable } from './src/table-column/cell-renderers/cell-expansion-utils'
+export { clearExpansionCacheForTable } from './src/components/TableColumn/cell-renderers/cell-expansion-utils'

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { nextTick, isVNode, type VNode } from 'vue';
-import { renderSelectCell } from '../src/table-column/cell-renderers/select-cell-renderer';
+import { renderSelectCell } from '../src/components/TableColumn/cell-renderers/select-cell-renderer';
 
 /**
  * Walks a render output collecting every VNode, resolving slot functions so
