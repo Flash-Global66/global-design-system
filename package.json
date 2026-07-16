@@ -22,6 +22,7 @@
   },
   "scripts": {
     "prepare": "simple-git-hooks",
+    "install-skills": "node ../ai-context/install-skills.mjs",
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
     "diff": "npx lerna diff",
