@@ -4,7 +4,7 @@ import {
   getFixedColumnOffset,
   getFixedColumnsClass,
 } from '../../shared/utils/table.util'
-import useMapState from './mapState-helper'
+import useMapState from './useMapState'
 import type { TableColumnCtx } from '../TableColumn/defaults'
 import type { TableFooter } from '.'
 
