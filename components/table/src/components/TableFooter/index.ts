@@ -4,7 +4,7 @@ import { defineComponent, h, inject } from 'vue'
 import { useNamespace } from '@flash-global66/g-utils'
 import useLayoutObserver from '../../shared/composables/useLayoutObserver'
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
-import useStyle from './style-helper'
+import useStyle from './useStyle'
 import type { Store } from '../../shared/store'
 
 import type { PropType } from 'vue'
