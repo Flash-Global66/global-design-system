@@ -101,6 +101,25 @@ export const SelectProps = buildProps({
    */
   filterMethod: Function,
   /**
+   * @description shows a search field inside the dropdown panel (independent from `filterable`,
+   * which shows the search field in the closed trigger instead). Matches against both title and
+   * description of each option.
+   */
+  searchable: Boolean,
+  /**
+   * @description placeholder for the internal search field shown when `searchable` is true
+   */
+  searchPlaceholder: {
+    type: String,
+    default: 'Buscar',
+  },
+  /**
+   * @description removes the trigger's border across all states (default, hover, focused,
+   * complete), for embedding the select inside containers that already provide their own
+   * border/outline treatment
+   */
+  borderless: Boolean,
+  /**
    * @description The height of the dropdown panel, 34px for each item
    */
   height: {
