@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.4.20...@flash-global66/g-select@0.5.0) (2026-07-28)
+
+### Features
+
+- **select:** add searchable and borderless variants ([#310](https://github.com/Flash-Global66/global-design-system/issues/310)) ([50ad95d](https://github.com/Flash-Global66/global-design-system/commit/50ad95d4d867a442c95432fb377177a788efde02))
+
 ## [0.4.20](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-select@0.4.19...@flash-global66/g-select@0.4.20) (2026-07-14)
 
 **Note:** Version bump only for package @flash-global66/g-select
