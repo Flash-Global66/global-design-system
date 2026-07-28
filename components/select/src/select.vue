@@ -39,6 +39,7 @@
               nsSelect.is('filterable', filterable),
               nsSelect.is('disabled', selectDisabled),
               nsSelect.is('complete', !isFocused && Boolean(hasModelValue)),
+              nsSelect.is('borderless', borderless),
             ]"
             @click.prevent="toggleMenu"
           >
@@ -257,8 +258,14 @@
             :hovering-index="states.hoveringIndex"
             :scrollbar-always-on="scrollbarAlwaysOn"
           >
-            <template v-if="$slots.header" #header>
+            <template v-if="searchable || $slots.header" #header>
               <div :class="nsSelect.be('dropdown', 'header')">
+                <g-search-input
+                  v-if="searchable"
+                  v-model="searchQuery"
+                  :placeholder="searchPlaceholder"
+                  :class="nsSelect.be('dropdown', 'search')"
+                />
                 <slot name="header" />
               </div>
             </template>
@@ -324,6 +331,7 @@ import { useCalcInputWidth } from '@flash-global66/g-hooks';
 import { GTooltip } from '@flash-global66/g-tooltip';
 import { GTag } from '@flash-global66/g-tag';
 import { GIconFont } from '@flash-global66/g-icon-font';
+import { GSearchInput } from '@flash-global66/g-search-input';
 import GSelectMenu from './select-dropdown';
 import useSelect from './hooks/use-select';
 import { SelectProps, selectEmits } from './defaults';
@@ -336,6 +344,7 @@ export default defineComponent({
     GTag,
     GTooltip,
     GIconFont,
+    GSearchInput,
   },
   directives: { ClickOutside },
   props: SelectProps,

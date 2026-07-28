@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-search-input": "1.2.25",
     "@flash-global66/g-tooltip": "^0.1.21",
     "@flash-global66/g-utils": "^0.15.6",
     "@tanstack/vue-virtual": "3.13.23"

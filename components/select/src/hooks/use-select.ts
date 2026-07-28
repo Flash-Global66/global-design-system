@@ -58,6 +58,7 @@ type useSelectReturnType = (
   debounce: ComputedRef<0 | 300>;
   allOptions: Ref<OptionType[]>;
   filteredOptions: Ref<OptionType[]>;
+  searchQuery: Ref<string>;
   iconComponent: ComputedRef<any>;
   iconReverse: ComputedRef<any>;
   tagStyle: ComputedRef<{ maxWidth: string }>;
@@ -149,8 +150,14 @@ const useSelect: useSelectReturnType = (
   const { inputId } = useFormItemInputId(props, {
     formItemContext: elFormItem,
   });
-  const { aliasProps, getTitle, getValue, getDisabled, getOptions } =
-    useProps(props);
+  const {
+    aliasProps,
+    getTitle,
+    getDescription,
+    getValue,
+    getDisabled,
+    getOptions,
+  } = useProps(props);
   const { valueOnClear, isEmptyValue } = useEmptyValues(props);
 
   const states: SelectStates = reactive({
@@ -216,6 +223,7 @@ const useSelect: useSelectReturnType = (
 
   const allOptions = ref<OptionType[]>([]);
   const filteredOptions = ref<OptionType[]>([]);
+  const searchQuery = ref('');
   // the controller of the expanded popup
   const expanded = ref(false);
   const leftPrefixSelect = ref<string | undefined>(undefined);
@@ -284,8 +292,8 @@ const useSelect: useSelectReturnType = (
       if (props.remote && !states.inputValue && allOptions.value.length === 0)
         return false;
       if (
-        props.filterable &&
-        states.inputValue &&
+        ((props.filterable && states.inputValue) ||
+          (props.searchable && searchQuery.value)) &&
         allOptions.value.length > 0 &&
         filteredOptions.value.length === 0
       ) {
@@ -304,8 +312,14 @@ const useSelect: useSelectReturnType = (
       if (props.filterable && props.remote && isFunction(props.remoteMethod))
         return true;
       // when query was given, we should test on the label see whether the label contains the given query
+      if (!query) return true;
       const regexp = new RegExp(escapeStringRegexp(query), 'i');
-      return query ? regexp.test(getTitle(o) || '') : true;
+      if (props.searchable) {
+        return (
+          regexp.test(getTitle(o) || '') || regexp.test(getDescription(o) || '')
+        );
+      }
+      return regexp.test(getTitle(o) || '');
     };
     if (props.loading) {
       return [];
@@ -340,7 +354,9 @@ const useSelect: useSelectReturnType = (
 
   const updateOptions = () => {
     allOptions.value = filterOptions('');
-    filteredOptions.value = filterOptions(states.inputValue);
+    filteredOptions.value = filterOptions(
+      props.searchable ? searchQuery.value : states.inputValue,
+    );
   };
 
   const allOptionsValueMap = computed(() => {
@@ -1105,6 +1121,7 @@ const useSelect: useSelectReturnType = (
     debounce,
     allOptions,
     filteredOptions,
+    searchQuery,
     iconComponent,
     iconReverse,
     prefixIcon,

@@ -47,8 +47,7 @@
 }
 
 @include b(select-dropdown__header) {
-  padding: map.get($select-dropdown, 'header-padding');
-  border-bottom: map.get($select-dropdown, 'border');
+  padding: 0 map.get($select-dropdown, 'header-padding') map.get($select-dropdown, 'header-padding');
 }
 
 @include b(select-dropdown__footer) {
