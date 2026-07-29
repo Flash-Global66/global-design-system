@@ -50,6 +50,7 @@ export const IMAGE_NAMES = [
   "vault",
   "usdt-usdc",
   "code",
+  "wallet",
 ] as const;
 
 export const IMAGE_SIZES = {
