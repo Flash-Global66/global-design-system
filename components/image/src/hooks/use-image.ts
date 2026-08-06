@@ -97,6 +97,7 @@ export const useImage = (props: ImageProps): ImageState => {
     () => {
       isLoaded.value = false;
       imageSrc.value = '';
+      hasError.value = false;
       setupObserver();
     },
   );
