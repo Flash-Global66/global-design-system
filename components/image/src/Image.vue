@@ -10,20 +10,22 @@
     }"
   >
     <img
-      v-if="isLoaded && !hasError"
+      v-if="imageSrc && !hasError"
+      v-show="isLoaded"
       :src="imageSrc"
       :alt="name"
       :class="ns.b()"
+      @load="handleImageLoad"
       @error="handleImageError"
     />
     <div
-      v-else-if="!hasError"
+      v-if="!isLoaded && !hasError"
       :class="ns.e('placeholder')"
       role="img"
       :aria-label="`Cargando imagen: ${name}`"
     />
     <div
-      v-else
+      v-if="hasError"
       :class="[ns.e('placeholder'), `text-size-${size}`]"
       role="img"
       aria-label="Error al cargar la imagen"
@@ -49,6 +51,7 @@ const {
   isLoaded,
   imageSrc,
   imageContainer,
+  handleImageLoad,
   handleImageError,
   hasError,
 } = useImage(props);
