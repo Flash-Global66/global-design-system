@@ -28,7 +28,10 @@ export const useImage = (props: ImageProps): ImageState => {
   const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
   const imageSrc = ref<string>('');
-  const baseUrl = inject(imageBaseUrlKey, IMAGE_BASE_URL_DEFAULT);
+  const baseUrl = inject(imageBaseUrlKey, IMAGE_BASE_URL_DEFAULT).replace(
+    /\/+$/,
+    '',
+  );
   let stopObserver: (() => void) | null = null;
 
   const sizeValue = computed<string>(
