@@ -44,6 +44,29 @@ describe('GImage', () => {
     expect(screen.queryByAltText('document')).not.toBeInTheDocument();
   });
 
+  it('reserva el espacio del contenedor antes y después de cargar', async () => {
+    const { container } = await renderImage({ size: 'xl' });
+    const figure = container.querySelector('figure');
+    const reservedBox = { width: '160px', height: '160px' };
+
+    expect(figure).toHaveStyle(reservedBox);
+
+    await fireEvent.load(screen.getByAltText('document'));
+
+    expect(figure).toHaveStyle(reservedBox);
+  });
+
+  it('reserva el espacio del contenedor aunque la imagen falle', async () => {
+    const { container } = await renderImage({ size: 'xl' });
+
+    await fireEvent.error(screen.getByAltText('document'));
+
+    expect(container.querySelector('figure')).toHaveStyle({
+      width: '160px',
+      height: '160px',
+    });
+  });
+
   it('muestra el placeholder de error si el nombre no existe', async () => {
     await renderImage({ name: 'no-existe' });
 
