@@ -11,6 +11,11 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
   },
+  // ESLint ignora los dotfolders por defecto y emite "File ignored by default"
+  // cuando se le pasa uno explícitamente, lo que rompe el gate de lint del PR
+  // (corre sobre los archivos del diff con --max-warnings 0). Al destildar
+  // .storybook sus archivos se lintean como cualquier otro.
+  ignorePatterns: ['!.storybook'],
   rules: {
     'linebreak-style': ['error', 'unix'],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
