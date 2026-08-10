@@ -1,11 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref, computed, onMounted } from 'vue';
-import { GImage, IMAGE_NAMES, IMAGE_SIZES } from '@flash-global66/g-image/index.ts';
+import {
+  GImage,
+  IMAGE_NAMES,
+  IMAGE_SIZES,
+} from '@flash-global66/g-image/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
 import { GInput } from '@flash-global66/g-input';
 import { GButton } from '@flash-global66/g-button';
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { GConfigProvider } from "../components/config-provider";
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GConfigProvider } from '../components/config-provider';
 
 const meta: Meta<typeof GImage> = {
   title: 'Basic/Image',
@@ -28,6 +32,47 @@ El componente Image proporciona una manera sencilla y optimizada de mostrar ilus
 
 \`\`\`bash
 yarn add @flash-global66/g-image
+\`\`\`
+
+### Servir las ilustraciones (requerido)
+
+Las ilustraciones viven en el paquete (\`dist/illustrations/\`) y el componente las carga por URL
+(\`/illustrations/{name}.webp\`). La app debe exponerlas en esa ruta copiándolas desde
+\`node_modules\` en el build — por ejemplo con \`vite-plugin-static-copy\`:
+
+\`\`\`bash
+yarn add -D vite-plugin-static-copy@^3.4.0
+\`\`\`
+
+\`\`\`ts
+// vite.config.ts
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+
+export default defineConfig({
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'node_modules/@flash-global66/g-image/dist/illustrations/*',
+          dest: 'illustrations',
+        },
+      ],
+    }),
+  ],
+});
+\`\`\`
+
+Sin este paso las ilustraciones muestran el placeholder de error (404).
+
+### URL base personalizada (opcional)
+
+Si las ilustraciones se sirven desde otra ruta (CDN, app bajo subpath), inyecta la base
+con \`imageBaseUrlKey\` (sin slash final):
+
+\`\`\`ts
+import { imageBaseUrlKey } from '@flash-global66/g-image';
+
+app.provide(imageBaseUrlKey, 'https://cdn.example.com/illustrations');
 \`\`\`
 
 ## Dependencias
@@ -87,9 +132,9 @@ El componente utiliza TypeScript para proporcionar tipado estricto, lo que permi
 - Autocompletado de nombres de ilustraciones en tu editor
 - Validación en tiempo de compilación para evitar errores
 - Advertencias si se usa un nombre que no existe en el conjunto de ilustraciones
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   argTypes: {
     name: {
@@ -99,7 +144,7 @@ El componente utiliza TypeScript para proporcionar tipado estricto, lo que permi
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'document' },
-      }
+      },
     },
     size: {
       description: 'Tamaño de la ilustración',
@@ -108,7 +153,7 @@ El componente utiliza TypeScript para proporcionar tipado estricto, lo que permi
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'md' },
-      }
+      },
     },
     lazyLoad: {
       description: 'Activar carga diferida de imágenes',
@@ -116,14 +161,14 @@ El componente utiliza TypeScript para proporcionar tipado estricto, lo que permi
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
-      }
-    }
+      },
+    },
   },
   args: {
     name: 'document',
     size: 'md',
-    lazyLoad: true
-  }
+    lazyLoad: true,
+  },
 } as Meta;
 
 export default meta;
@@ -131,7 +176,7 @@ type Story = StoryObj<typeof GImage>;
 
 export const Primary: Story = {
   name: 'Uso básico',
-  render: (args) => ({
+  render: args => ({
     components: { GImage, GConfigProvider },
     setup() {
       return { args };
@@ -142,7 +187,7 @@ export const Primary: Story = {
           <g-image v-bind="args" />
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
@@ -157,22 +202,22 @@ export const Primary: Story = {
 import { GImage } from '@flash-global66/g-image';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const Sizes: Story = {
   name: 'Tamaños disponibles',
-  render: (args) => ({
+  render: args => ({
     components: { GImage, GConfigProvider },
     setup() {
       const sizes = Object.keys(IMAGE_SIZES);
-      return { 
-        args, 
+      return {
+        args,
         sizes,
-        IMAGE_SIZES
+        IMAGE_SIZES,
       };
     },
     template: `
@@ -188,7 +233,7 @@ export const Sizes: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
@@ -222,10 +267,10 @@ export const Sizes: Story = {
 import { GImage } from '@flash-global66/g-image';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const Gallery: Story = {
@@ -233,7 +278,8 @@ export const Gallery: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Galería completa de ilustraciones disponibles en el sistema. Haz clic en cualquier ilustración para copiar su nombre. 📋'
+        story:
+          'Galería completa de ilustraciones disponibles en el sistema. Haz clic en cualquier ilustración para copiar su nombre. 📋',
       },
       source: {
         code: `
@@ -279,28 +325,35 @@ import { GImage } from '@flash-global66/g-image';
 }
 </style>
 `,
-        language: 'html'
-      }
-    }
+        language: 'html',
+      },
+    },
   },
   render: () => ({
-    components: { GImage, GConfigProvider, GSegmented, GInput, GButton, GIconFont },
+    components: {
+      GImage,
+      GConfigProvider,
+      GSegmented,
+      GInput,
+      GButton,
+      GIconFont,
+    },
     setup() {
       const selectedSize = ref('md');
       const searchTerm = ref('');
       const copiedImage = ref<string | null>(null);
-      
+
       const sizeOptions = Object.keys(IMAGE_SIZES).map(size => ({
         label: size.toUpperCase(),
-        value: size
+        value: size,
       }));
 
       const filteredImages = ref<string[]>([...IMAGE_NAMES]);
-      
+
       const gridColumns = computed(() => {
-        switch(selectedSize.value) {
+        switch (selectedSize.value) {
           case 'xs':
-          case 'sm': 
+          case 'sm':
             return 'grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8';
           case 'md':
             return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6';
@@ -322,10 +375,10 @@ import { GImage } from '@flash-global66/g-image';
           filteredImages.value = [...IMAGE_NAMES];
           return;
         }
-        
+
         const searchTermLower = searchTerm.value.toLowerCase().trim();
-        filteredImages.value = IMAGE_NAMES.filter(name => 
-          name.toLowerCase().includes(searchTermLower)
+        filteredImages.value = IMAGE_NAMES.filter(name =>
+          name.toLowerCase().includes(searchTermLower),
         );
       };
 
@@ -335,7 +388,8 @@ import { GImage } from '@flash-global66/g-image';
       };
 
       const copyImageName = (imageName: string) => {
-        navigator.clipboard.writeText(imageName)
+        navigator.clipboard
+          .writeText(imageName)
           .then(() => {
             copiedImage.value = imageName;
             setTimeout(() => {
@@ -370,7 +424,7 @@ import { GImage } from '@flash-global66/g-image';
           }
         `;
         document.head.appendChild(styleElement);
-        
+
         return () => {
           if (styleElement.parentNode) {
             styleElement.parentNode.removeChild(styleElement);
@@ -389,7 +443,7 @@ import { GImage } from '@flash-global66/g-image';
         filteredImages,
         updateFilteredImages,
         copiedImage,
-        gridColumns
+        gridColumns,
       };
     },
     template: `
@@ -454,8 +508,8 @@ import { GImage } from '@flash-global66/g-image';
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const ErrorHandling: Story = {
@@ -463,7 +517,8 @@ export const ErrorHandling: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Demostración de cómo el componente maneja los errores cuando una imagen no puede cargarse.'
+        story:
+          'Demostración de cómo el componente maneja los errores cuando una imagen no puede cargarse.',
       },
       source: {
         code: `
@@ -476,16 +531,15 @@ export const ErrorHandling: Story = {
 import { GImage } from '@flash-global66/g-image';
 </script>
 `,
-        language: 'html'
-      }
-    }
+        language: 'html',
+      },
+    },
   },
   render: () => ({
     components: { GImage, GConfigProvider },
     setup() {
-      
       return {
-        IMAGE_SIZES
+        IMAGE_SIZES,
       };
     },
     template: `
@@ -530,6 +584,6 @@ import { GImage } from '@flash-global66/g-image';
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
