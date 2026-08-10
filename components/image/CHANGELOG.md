@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.5.0...@flash-global66/g-image@0.6.0) (2026-08-10)
+
+### Bug Fixes
+
+- **build:** exclude the image specs from the type build ([280f998](https://github.com/Flash-Global66/global-design-system/commit/280f9983e6f9c5acd1fd07cc7214e74b1bd369ff))
+- **image:** reset error state when the illustration name changes ([dff6296](https://github.com/Flash-Global66/global-design-system/commit/dff6296971560c2488e47d31222f54be48dfcaf3))
+- **image:** serve illustrations as static assets with stable URLs ([d2aeacf](https://github.com/Flash-Global66/global-design-system/commit/d2aeacfc0e16b3bde1e2fb46a63cd7de1aaaf14d))
+- **image:** strip trailing slashes from the injected base URL ([c6a5eb9](https://github.com/Flash-Global66/global-design-system/commit/c6a5eb9a6569bddd2b601e1b51a2f519cda83f6b))
+
+### BREAKING CHANGES
+
+- **image:** consumers must serve the illustration webp files at
+  /illustrations — e.g. copy node_modules/@flash-global66/g-image/dist/illustrations
+  into the build output with vite-plugin-static-copy — or provide a custom
+  base URL via imageBaseUrlKey.
+
 # [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.4.24...@flash-global66/g-image@0.5.0) (2026-07-29)
 
 ### Features
