@@ -33,3 +33,12 @@ storybook-static/
 # Claude/agents local config (skills, settings) — generado por install-skills
 .claude/
 .agents/
+
+# Agent local configuration — credenciales del dev (ver agent.local.json.example)
+agent.local.json
+
+# MCP servers — generado por `yarn install-skills` desde ai-context. No editar a mano.
+.mcp.json
+
+# agent-browser — config, secrets y evidencia generados por resolve-config.mjs
+.agent/

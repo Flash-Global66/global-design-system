@@ -1,0 +1,13 @@
+{
+  "agents": ["claude-code"],
+  "editor": "cursor",
+  "browser": {
+    "headless": false,
+    "viewport": { "width": 1280, "height": 800 },
+    "timeout": 30000,
+    "recordVideo": false
+  },
+  "humanReview": {
+    "autoPauseOnFailure": true
+  }
+}
