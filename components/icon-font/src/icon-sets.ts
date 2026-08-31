@@ -122,6 +122,8 @@ export const ICON_SETS = {
     "user-group",
     "shield-check",
     "arrow-trend-up",
+    "chart-simple",
+    "money-bills-simple",
   ] as const,
 
   regular: [
