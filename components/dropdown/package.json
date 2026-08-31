@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-dropdown",
   "author": "Global66",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -26,7 +26,7 @@
     "@flash-global66/g-collection": "^0.1.4",
     "@flash-global66/g-focus-trap": "^0.1.23",
     "@flash-global66/g-hooks": "^0.11.14",
-    "@flash-global66/g-icon-font": "^0.25.25",
+    "@flash-global66/g-icon-font": "^0.26.0",
     "@flash-global66/g-popper": "^0.0.32",
     "@flash-global66/g-roving-focus-group": "^0.1.31",
     "@flash-global66/g-scrollbar": "^0.1.21",

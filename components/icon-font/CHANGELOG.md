@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.25.25...@flash-global66/g-icon-font@0.26.0) (2026-08-31)
+
+### Features
+
+- **icon-font:** add chart-simple and money-bills-simple solid icons ([#313](https://github.com/Flash-Global66/global-design-system/issues/313)) ([c47fd0c](https://github.com/Flash-Global66/global-design-system/commit/c47fd0cd3e5981ae2fbaf1e16c1cc341a9413e03))
+
 ## [0.25.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.25.24...@flash-global66/g-icon-font@0.25.25) (2026-07-14)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font
