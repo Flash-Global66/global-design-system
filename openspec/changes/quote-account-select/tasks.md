@@ -14,7 +14,7 @@ del ítem va con `text-grey-500`, **no** con `text-terciary-txt` — son colores
 
 ---
 
-- [ ] **1 · Tipo `QuoteAccount` y props del selector**
+- [x] **1 · Tipo `QuoteAccount` y props del selector**
   - archivos: `components/quote/src/quote.type.ts`, `components/quote/src/components/quote-account-select.ts`, `components/quote/tests/props/quote-account-select.props.spec.ts`
   - depende de: ninguna
   - listo cuando: `QuoteAccount` declara `id`, `name`, `description`, `currencyCode`, `flagCountryCode`, `isPrimary?` y `badgeLabel?`, y sale del barrel `components/quote/index.ts` sin tocarlo (ya hace `export * from './src/quote.type'`); `quoteAccountSelectProps` declara `accounts`, `accountId`, `currencyCode`, `flagCode`, `isDisabled`, `searchPlaceholder` (default `'Buscar'`), `primaryAccountLabel` (default `'Cuenta principal'`) y `emptyResultsText` (default `'Sin resultados'`); `quoteAccountSelectEmits` declara `account-change`; el spec verifica cada default y que `accounts` arranque en `[]`
