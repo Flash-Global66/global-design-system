@@ -44,7 +44,7 @@ del ítem va con `text-grey-500`, **no** con `text-terciary-txt` — son colores
   - listo cuando: `quoteProps` suma `fromAccounts`, `toAccounts`, `fromAccountId`, `toAccountId`, `accountSearchPlaceholder` y `primaryAccountLabel`, y `quoteEmits` suma `from-account-change` y `to-account-change`; cada grupo llega al `quote-input` que le corresponde y el `account-change` de cada uno se re-emite con la cuenta; las **26** props que `quote.ts` declara hoy siguen existiendo con el mismo default y los **10** emits actuales siguen declarados; el spec incluye un caso de retrocompatibilidad que compara las listas de props y emits contra las de hoy, y un caso que confirma que sin `fromAccounts`/`toAccounts` la card renderiza los dos dropdowns de moneda
   - commit: `feat(quote): props y emits del modo entre cuentas en GQuote`
 
-- [ ] **6 · Declarar `g-input` como peer del paquete**
+- [x] **6 · Declarar `g-input` como peer del paquete**
   - archivos: `components/quote/package.json`
   - depende de: 5
   - listo cuando: `@flash-global66/g-input` figura en `peerDependencies` con `^0.3.32`, junto a los cuatro peers que ya están; `version` y `dependencies` quedan sin tocar porque los mueve `lerna version --conventional-commits`
