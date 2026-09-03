@@ -26,7 +26,20 @@
           @focus="handleFocus"
         />
       </div>
+      <quote-account-select
+        v-if="accounts.length"
+        :accounts="accounts"
+        :account-id="accountId"
+        :currency-code="currencyCode"
+        :flag-code="flagCode"
+        :is-disabled="isDisabled || disableSelect"
+        :search-placeholder="searchPlaceholder"
+        :primary-account-label="primaryAccountLabel"
+        :empty-results-text="emptyResultsText"
+        @account-change="emit('account-change', $event)"
+      />
       <g-dropdown
+        v-else
         ref="dropdownRef"
         trigger="click"
         placement="bottom-end"
@@ -130,6 +143,7 @@ import {
 import { GCountryFlag } from '@flash-global66/g-country-flag';
 import { quoteInputProps, quoteInputEmits } from './quote-input';
 import { useQuoteInput } from './use-quote-input';
+import QuoteAccountSelect from './quote-account-select.vue';
 
 defineOptions({ name: 'GQuoteInput' });
 

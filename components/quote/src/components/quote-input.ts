@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType } from '@flash-global66/g-utils';
 import type { FlagCode } from '@flash-global66/g-country-flag';
-import type { Currency } from '../quote.type';
+import type { Currency, QuoteAccount } from '../quote.type';
 
 export const quoteInputProps = buildProps({
   currencies: { type: definePropType<Currency[]>(Array), default: () => [] },
@@ -20,6 +20,10 @@ export const quoteInputProps = buildProps({
   isFading: { type: Boolean, default: false },
   placeholder: { type: String, default: '0,00' },
   emptyResultsText: { type: String, default: 'Sin resultados' },
+  accounts: { type: definePropType<QuoteAccount[]>(Array), default: () => [] },
+  accountId: { type: String, default: '' },
+  searchPlaceholder: { type: String, default: 'Buscar' },
+  primaryAccountLabel: { type: String, default: 'Cuenta principal' },
 } as const);
 
 export type QuoteInputProps = ExtractPropTypes<typeof quoteInputProps>;
@@ -29,4 +33,5 @@ export const quoteInputEmits = {
   blur: (value: string) => typeof value === 'string',
   focus: () => true,
   'currency-change': (currency: Currency) => !!currency,
+  'account-change': (account: QuoteAccount) => Boolean(account),
 };
