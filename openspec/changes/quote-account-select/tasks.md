@@ -38,7 +38,7 @@ del ítem va con `text-grey-500`, **no** con `text-terciary-txt` — son colores
   - listo cuando: `quoteInputProps` suma `accounts`, `accountId`, `searchPlaceholder` y `primaryAccountLabel` con sus defaults, y `quoteInputEmits` suma `account-change`; con `accounts` no vacío se renderiza `quote-account-select` y **no** el `g-dropdown` de monedas; con `accounts` vacío el árbol del dropdown de monedas es el de hoy —mismas clases, mismo buscador en el trigger— y ninguna de las 16 props existentes cambió de default; el spec monta los dos modos y afirma la ausencia del otro en cada uno
   - commit: `feat(quote): quote-input alterna entre selector de moneda y de cuenta`
 
-- [ ] **5 · Exponer el modo cuentas en `GQuote`**
+- [x] **5 · Exponer el modo cuentas en `GQuote`**
   - archivos: `components/quote/src/quote.ts`, `components/quote/src/quote.vue`, `components/quote/tests/Quote.spec.ts`
   - depende de: 4
   - listo cuando: `quoteProps` suma `fromAccounts`, `toAccounts`, `fromAccountId`, `toAccountId`, `accountSearchPlaceholder` y `primaryAccountLabel`, y `quoteEmits` suma `from-account-change` y `to-account-change`; cada grupo llega al `quote-input` que le corresponde y el `account-change` de cada uno se re-emite con la cuenta; las **26** props que `quote.ts` declara hoy siguen existiendo con el mismo default y los **10** emits actuales siguen declarados; el spec incluye un caso de retrocompatibilidad que compara las listas de props y emits contra las de hoy, y un caso que confirma que sin `fromAccounts`/`toAccounts` la card renderiza los dos dropdowns de moneda

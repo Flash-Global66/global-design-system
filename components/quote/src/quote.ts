@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType } from '@flash-global66/g-utils';
 import type { FlagCode } from '@flash-global66/g-country-flag';
-import type { Currency, QuoteAction } from './quote.type';
+import type { Currency, QuoteAccount, QuoteAction } from './quote.type';
 
 export const quoteProps = buildProps({
   fromCurrency: { type: String, required: true },
@@ -33,6 +33,12 @@ export const quoteProps = buildProps({
   showAction: { type: definePropType<boolean | null>(null), default: null },
   fromFlagCode: { type: definePropType<FlagCode>(String), default: undefined },
   toFlagCode: { type: definePropType<FlagCode>(String), default: undefined },
+  fromAccounts: { type: definePropType<QuoteAccount[]>(Array), default: () => [] },
+  toAccounts: { type: definePropType<QuoteAccount[]>(Array), default: () => [] },
+  fromAccountId: { type: String, default: '' },
+  toAccountId: { type: String, default: '' },
+  accountSearchPlaceholder: { type: String, default: 'Buscar' },
+  primaryAccountLabel: { type: String, default: 'Cuenta principal' },
 } as const);
 
 export type QuoteProps = ExtractPropTypes<typeof quoteProps>;
@@ -59,4 +65,6 @@ export const quoteEmits = {
   'from-focus': () => true,
   'to-focus': () => true,
   'action-click': () => true,
+  'from-account-change': (account: QuoteAccount) => Boolean(account),
+  'to-account-change': (account: QuoteAccount) => Boolean(account),
 };
