@@ -254,3 +254,85 @@
     @apply text-secondary-txt;
   }
 }
+
+// ─── Quote Account Select ───────────────────────────────────────────────────
+
+@include b("quote-account-select") {
+  @include e("trigger") {
+    @apply flex flex-col items-end justify-center gap-xs;
+  }
+
+  @include e("trigger-row") {
+    @apply flex items-center gap-xxs;
+  }
+
+  @include e("code") {
+    @apply text-4 font-semibold text-primary-txt;
+  }
+
+  @include e("badge") {
+    @apply inline-flex items-center justify-center h-md px-xs rounded-xl
+      text-1 font-semibold bg-blue-50 text-everBlue-500;
+
+    @include when(primary) {
+      @apply bg-success-bg text-success-txt;
+    }
+  }
+
+  @include e("dropdown-popper") {
+    @apply rounded-md shadow-md;
+  }
+
+  @include e("panel") {
+    @apply flex flex-col bg-white rounded-md pt-sm pb-xs gap-xxs;
+  }
+
+  @include e("search") {
+    @apply px-xs;
+  }
+
+  @include e("list") {
+    @apply flex flex-col gap-xxs max-h-60 overflow-y-auto;
+
+    &::-webkit-scrollbar {
+      @apply w-1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-grey-200 rounded-2xl;
+    }
+
+    .gui-dropdown-menu__item {
+      padding: 0;
+      min-height: unset;
+    }
+  }
+
+  @include e("group-header") {
+    @apply pt-xs px-md text-3 font-semibold text-primary-txt;
+  }
+
+  @include e("item") {
+    @apply flex items-center gap-xs px-lg py-xs cursor-pointer;
+
+    @include when(selected) {
+      @apply bg-everBlue-50;
+    }
+  }
+
+  @include e("item-body") {
+    @apply flex flex-col gap-xxs min-w-0;
+  }
+
+  @include e("item-title") {
+    @apply text-4 font-medium text-secondary-txt truncate;
+  }
+
+  @include e("item-description") {
+    @apply text-2 text-grey-500;
+  }
+
+  @include e("empty") {
+    @apply px-md py-sm text-3 text-terciary-txt text-center;
+  }
+}
