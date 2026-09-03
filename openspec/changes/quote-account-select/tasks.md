@@ -20,7 +20,7 @@ del ítem va con `text-grey-500`, **no** con `text-terciary-txt` — son colores
   - listo cuando: `QuoteAccount` declara `id`, `name`, `description`, `currencyCode`, `flagCountryCode`, `isPrimary?` y `badgeLabel?`, y sale del barrel `components/quote/index.ts` sin tocarlo (ya hace `export * from './src/quote.type'`); `quoteAccountSelectProps` declara `accounts`, `accountId`, `currencyCode`, `flagCode`, `isDisabled`, `searchPlaceholder` (default `'Buscar'`), `primaryAccountLabel` (default `'Cuenta principal'`) y `emptyResultsText` (default `'Sin resultados'`); `quoteAccountSelectEmits` declara `account-change`; el spec verifica cada default y que `accounts` arranque en `[]`
   - commit: `feat(quote): tipo QuoteAccount y props del selector de cuentas`
 
-- [ ] **2 · Agrupación por moneda, búsqueda y badge**
+- [x] **2 · Agrupación por moneda, búsqueda y badge**
   - archivos: `components/quote/src/components/use-quote-account-select.ts`, `components/quote/tests/composables/use-quote-account-select.spec.ts`
   - depende de: 1
   - listo cuando: `groupedAccounts` agrupa por `currencyCode` en **un solo pase con `Map`** y preserva el orden de aparición de `accounts` (sin ordenar alfabéticamente); `filteredGroups` filtra sin distinguir mayúsculas por `name` y `description` y **descarta los grupos que quedan vacíos**; `selectedAccount` resuelve la cuenta por `accountId` y devuelve `null` si no está; `badgeLabel` devuelve `primaryAccountLabel` cuando `isPrimary` y el `badgeLabel` de la cuenta si no; `isPrimarySelected` distingue las dos formas del badge; el spec cubre dos monedas, búsqueda que deja un grupo vacío, búsqueda sin resultados y `accountId` inexistente
