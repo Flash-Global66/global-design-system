@@ -50,7 +50,7 @@ del ítem va con `text-grey-500`, **no** con `text-terciary-txt` — son colores
   - listo cuando: `@flash-global66/g-input` figura en `peerDependencies` con `^0.3.32`, junto a los cuatro peers que ya están; `version` y `dependencies` quedan sin tocar porque los mueve `lerna version --conventional-commits`
   - commit: `feat(quote): g-input como peerDependency del selector de cuentas`
 
-- [ ] **7 · Story y documentación en Storybook**
+- [x] **7 · Story y documentación en Storybook**
   - archivos: `stories/quote.stories.ts`
   - depende de: 6
   - listo cuando: hay una story `EntreCuentas` con nombre `'Entre cuentas'` que pasa cuentas CLP y COP —una principal por moneda y al menos dos adicionales— y mantiene los dos montos con swap; el bloque de docs del `meta` documenta la interfaz `QuoteAccount` campo por campo, las seis props nuevas con su default y los dos emits nuevos; las **seis** stories existentes (`Basic`, `WithAvailableBalance`, `InsufficientBalance`, `Disabled`, `SingleInput`, `NoSwap`) siguen declaradas y sin cambios en sus `args`

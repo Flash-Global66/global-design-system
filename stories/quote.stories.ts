@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { GQuote, type QuoteInstance } from '../components/quote'
 import { GConfigProvider } from '../components/config-provider'
-import type { Currency } from '../components/quote'
+import type { Currency, QuoteAccount } from '../components/quote'
 import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories'
 import { version, peerDependencies } from '../components/quote/package.json'
 
@@ -87,6 +87,54 @@ const RATES: Record<string, number> = {
   BRL_COP: 800,
   BRL_PEN: 0.735,
 }
+
+const ACCOUNTS_CLP: QuoteAccount[] = [
+  {
+    id: 'clp-principal',
+    name: 'Cuenta Principal - Peso Chileno',
+    description: 'Cuenta electrónica...0061',
+    currencyCode: 'CLP',
+    flagCountryCode: 'CL',
+    isPrimary: true,
+  },
+  {
+    id: 'clp-marketing-ads',
+    name: 'Marketing Ads',
+    description: 'Cuenta electrónica...0128',
+    currencyCode: 'CLP',
+    flagCountryCode: 'CL',
+    badgeLabel: 'Marketing Ads',
+  },
+  {
+    id: 'clp-presupuesto-viajes',
+    name: 'Presupuesto Viajes',
+    description: 'Cuenta electrónica...0347',
+    currencyCode: 'CLP',
+    flagCountryCode: 'CL',
+    badgeLabel: 'Presupuesto Viajes',
+  },
+]
+
+const ACCOUNTS_COP: QuoteAccount[] = [
+  {
+    id: 'cop-principal',
+    name: 'Cuenta Principal - Peso Colombiano',
+    description: 'Cuenta electrónica...4521',
+    currencyCode: 'COP',
+    flagCountryCode: 'CO',
+    isPrimary: true,
+  },
+  {
+    id: 'cop-nomina',
+    name: 'Nómina',
+    description: 'Cuenta electrónica...7789',
+    currencyCode: 'COP',
+    flagCountryCode: 'CO',
+    badgeLabel: 'Nómina',
+  },
+]
+
+const ACCOUNTS: QuoteAccount[] = [...ACCOUNTS_CLP, ...ACCOUNTS_COP]
 
 // ─── Composable reutilizable para la lógica de simulación ────────────────────
 
@@ -243,6 +291,46 @@ interface Currency {
   alwaysVisible?: boolean // Siempre visible en búsqueda
 }
 \`\`\`
+
+### Selección entre cuentas
+
+Cuando el consumidor pasa \`fromAccounts\` y/o \`toAccounts\` con datos, el selector de moneda del
+input correspondiente cambia a un selector de cuentas: agrupa las opciones por \`currencyCode\`, con
+un encabezado por grupo, y agrega un buscador dentro del panel. Con los arrays vacíos (el default),
+el input se comporta igual que hoy: selector de monedas.
+
+> \`GQuote\` es controlado: al elegir una cuenta, el componente solo emite \`from-account-change\` /
+> \`to-account-change\` con la cuenta elegida. **No** actualiza \`fromCurrency\`/\`toCurrency\` por su
+> cuenta — el consumidor tiene que escuchar el evento y sincronizar la moneda con
+> \`account.currencyCode\` para que la cotización recalcule contra la moneda correcta.
+
+### Tipo QuoteAccount
+
+\`\`\`typescript
+interface QuoteAccount {
+  id: string              // Identificador único de la cuenta
+  name: string             // Nombre visible de la cuenta
+  description: string      // Texto secundario bajo el nombre (ej: número de cuenta)
+  currencyCode: string      // Agrupa las opciones y titula el encabezado del grupo
+  flagCountryCode: string  // Código de bandera de la cuenta (ej: 'CL')
+  isPrimary?: boolean       // Muestra el badge verde de cuenta principal
+  badgeLabel?: string       // Texto del badge azul cuando la cuenta es adicional (una cuenta no principal)
+}
+\`\`\`
+
+### Props de selección de cuentas
+
+- fromAccounts: cuentas del selector de origen (\`QuoteAccount[]\`, default: \`[]\`)
+- toAccounts: cuentas del selector de destino (\`QuoteAccount[]\`, default: \`[]\`)
+- fromAccountId: id de la cuenta de origen seleccionada (\`string\`, default: \`''\`)
+- toAccountId: id de la cuenta de destino seleccionada (\`string\`, default: \`''\`)
+- accountSearchPlaceholder: placeholder del buscador dentro del panel de cuentas (\`string\`, default: \`'Buscar'\`)
+- primaryAccountLabel: texto del badge de cuenta principal (\`string\`, default: \`'Cuenta principal'\`)
+
+### Eventos de selección de cuentas
+
+- from-account-change: se emite al elegir una cuenta de origen, con la \`QuoteAccount\` elegida como payload
+- to-account-change: se emite al elegir una cuenta de destino, con la \`QuoteAccount\` elegida como payload
 `,
       },
     },
@@ -599,6 +687,64 @@ export const NoSwap: Story = {
             @to-input="handleToInput"
             @from-currency-change="handleFromCurrencyChange"
             @to-currency-change="handleToCurrencyChange"
+          />
+        </div>
+      </g-config-provider>
+    `,
+  }),
+}
+
+// ─── Entre cuentas ─────────────────────────────────────────────────────────────
+
+export const EntreCuentas: Story = {
+  name: 'Entre cuentas',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Con `from-accounts`/`to-accounts` el consumidor elige cuenta de origen y cuenta de destino en vez de solo moneda. El selector agrupa las cuentas por `currencyCode` con un encabezado por grupo y un buscador dentro del panel. `GQuote` no sincroniza `from-currency`/`to-currency` por sí solo: los handlers de `from-account-change`/`to-account-change` actualizan también la moneda para que la cotización recalcule con `RATES`.',
+      },
+    },
+  },
+  render: (args) => ({
+    components: { GQuote, GConfigProvider },
+    setup() {
+      const sim = useQuoteSimulator('CLP', 'COP')
+      const fromAccountId = ref(ACCOUNTS_CLP[0].id)
+      const toAccountId = ref(ACCOUNTS_COP[0].id)
+
+      function handleFromAccountChange(account: QuoteAccount) {
+        fromAccountId.value = account.id
+        const currency = CURRENCIES.find((c) => c.code === account.currencyCode)
+        if (currency) sim.handleFromCurrencyChange(currency)
+      }
+
+      function handleToAccountChange(account: QuoteAccount) {
+        toAccountId.value = account.id
+        const currency = CURRENCIES.find((c) => c.code === account.currencyCode)
+        if (currency) sim.handleToCurrencyChange(currency)
+      }
+
+      return { args, ACCOUNTS, fromAccountId, toAccountId, handleFromAccountChange, handleToAccountChange, ...sim }
+    },
+    template: `
+      <g-config-provider>
+        <div style="width: 460px">
+          <g-quote
+            v-bind="args"
+            :from-accounts="ACCOUNTS"
+            :to-accounts="ACCOUNTS"
+            :from-account-id="fromAccountId"
+            :to-account-id="toAccountId"
+            :from-currency="fromCurrency"
+            :to-currency="toCurrency"
+            :from-amount="fromAmount"
+            :to-amount="toAmount"
+            :is-loading="isLoading"
+            @from-input="handleFromInput"
+            @to-input="handleToInput"
+            @swap="handleSwap"
+            @from-account-change="handleFromAccountChange"
+            @to-account-change="handleToAccountChange"
           />
         </div>
       </g-config-provider>
