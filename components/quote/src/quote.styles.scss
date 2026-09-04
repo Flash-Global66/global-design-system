@@ -301,11 +301,6 @@
     &::-webkit-scrollbar-thumb {
       @apply bg-grey-200 rounded-2xl;
     }
-
-    .gui-dropdown-menu__item {
-      padding: 0;
-      min-height: unset;
-    }
   }
 
   @include e("group-header") {
@@ -313,7 +308,14 @@
   }
 
   @include e("item") {
-    @apply flex items-center gap-xs px-lg py-xs cursor-pointer;
+    @apply flex items-center gap-xs cursor-pointer;
+
+    // g-dropdown aplica `p-md ... !important` sobre .gui-dropdown-menu__item
+    // (dropdown.styles.scss:29), y el ítem lleva las dos clases. El padding del
+    // diseño solo gana subiendo la especificidad y repitiendo el !important.
+    &.gui-dropdown-menu__item {
+      padding: theme('spacing.xs') theme('spacing.lg') !important;
+    }
 
     @include when(selected) {
       @apply bg-everBlue-50;
