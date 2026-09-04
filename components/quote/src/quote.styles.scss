@@ -267,7 +267,7 @@
   }
 
   @include e("code") {
-    @apply text-4 font-semibold text-primary-txt;
+    @apply text-4 font-semibold text-everBlue-900;
   }
 
   @include e("badge") {
@@ -309,7 +309,7 @@
   }
 
   @include e("group-header") {
-    @apply pt-xs px-md text-3 font-semibold text-primary-txt;
+    @apply pt-xs px-md text-3 font-semibold text-everBlue-900;
   }
 
   @include e("item") {
