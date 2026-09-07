@@ -133,7 +133,7 @@
 }
 
 .gui-drawer__header {
-  @apply flex flex-col items-start px-lg pt-lg gap-4 mb-4;
+  @apply flex flex-col items-start px-lg pt-lg gap-4 mb-xxs;
 }
 .gui-drawer__header--container-close {
   @apply self-end;
@@ -156,7 +156,7 @@
 }
 
 .gui-drawer__body {
-  @apply px-lg py-0;
+  @apply px-lg pt-sm pb-0;
 }
 
 .gui-drawer__footer {
