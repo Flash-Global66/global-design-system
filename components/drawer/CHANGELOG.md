@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.3.24...@flash-global66/g-drawer@0.3.25) (2026-09-07)
+
+### Bug Fixes
+
+- **drawer:** give the body room for floating input labels ([#315](https://github.com/Flash-Global66/global-design-system/issues/315)) ([2cc6cca](https://github.com/Flash-Global66/global-design-system/commit/2cc6cca701533c2babbaae1a8b4de9409647e028))
+
 ## [0.3.24](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.3.23...@flash-global66/g-drawer@0.3.24) (2026-07-14)
 
 **Note:** Version bump only for package @flash-global66/g-drawer
