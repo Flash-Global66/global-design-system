@@ -35,6 +35,7 @@
     "@flash-global66/g-country-flag": "^0.0.2",
     "@flash-global66/g-dropdown": "^0.1.4",
     "@flash-global66/g-icon-font": "^0.20.0",
+    "@flash-global66/g-input": "^0.3.32",
     "vue": "^3.2.0",
     "vue-currency-input": "^3.2.0"
   }

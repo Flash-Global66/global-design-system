@@ -29,10 +29,15 @@
             :is-disabled="isDisabled"
             :disable-select="disableOriginSelect"
             :disable-input="disableOriginInput"
+            :accounts="fromAccounts"
+            :account-id="fromAccountId"
+            :search-placeholder="accountSearchPlaceholder"
+            :primary-account-label="primaryAccountLabel"
             @input="onFromInput"
             @blur="emit('from-blur', $event)"
             @focus="onFromFocus"
             @currency-change="emit('from-currency-change', $event)"
+            @account-change="emit('from-account-change', $event)"
           />
         </div>
 
@@ -70,10 +75,15 @@
             :is-disabled="isDisabled"
             :disable-select="disableDestinationSelect"
             :disable-input="disableDestinationInput"
+            :accounts="toAccounts"
+            :account-id="toAccountId"
+            :search-placeholder="accountSearchPlaceholder"
+            :primary-account-label="primaryAccountLabel"
             @input="onToInput"
             @blur="emit('to-blur', $event)"
             @focus="onToFocus"
             @currency-change="emit('to-currency-change', $event)"
+            @account-change="emit('to-account-change', $event)"
           />
         </div>
       </div>

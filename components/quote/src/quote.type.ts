@@ -12,6 +12,18 @@ export interface Currency {
   alwaysVisible?: boolean
 }
 
+export interface QuoteAccount {
+  id: string
+  name: string
+  /** Texto secundario mostrado bajo el nombre de la cuenta, p. ej. el número de cuenta. */
+  description: string
+  currencyCode: string
+  flagCountryCode: FlagCode
+  isPrimary?: boolean
+  /** Etiqueta del badge que se muestra junto a la cuenta cuando está definida. */
+  badgeLabel?: string
+}
+
 export type QuoteAction =
   | 'Default'
   | 'NoValue'
