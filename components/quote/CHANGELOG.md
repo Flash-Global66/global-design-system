@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.3.24...@flash-global66/g-quote@0.3.25) (2026-09-15)
+
+### Bug Fixes
+
+- **quote:** el buscador de cuentas filtra también por código de moneda ([#317](https://github.com/Flash-Global66/global-design-system/issues/317)) ([a39e234](https://github.com/Flash-Global66/global-design-system/commit/a39e2344292614f78e0d3c131da687dcc9e95625))
+
 ## [0.3.24](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.3.23...@flash-global66/g-quote@0.3.24) (2026-09-07)
 
 **Note:** Version bump only for package @flash-global66/g-quote
