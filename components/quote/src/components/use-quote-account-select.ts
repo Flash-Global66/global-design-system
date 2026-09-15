@@ -64,7 +64,8 @@ export function useQuoteAccountSelect(
         accounts: group.accounts.filter(
           (account) =>
             account.name.toLowerCase().includes(query) ||
-            account.description.toLowerCase().includes(query)
+            account.description.toLowerCase().includes(query) ||
+            account.currencyCode.toLowerCase().includes(query)
         ),
       }))
       .filter((group) => group.accounts.length > 0)

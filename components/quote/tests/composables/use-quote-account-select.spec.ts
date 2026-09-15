@@ -79,6 +79,24 @@ describe('useQuoteAccountSelect', () => {
     ]);
   });
 
+  it('la búsqueda matchea por currencyCode y devuelve el grupo completo', () => {
+    const result = useQuoteAccountSelect(makeProps(), vi.fn());
+
+    result.searchQuery.value = 'COP';
+
+    expect(result.filteredGroups.value).toEqual([{ currencyCode: 'COP', accounts: [COP_ACCOUNT] }]);
+  });
+
+  it('la búsqueda por currencyCode alcanza cuentas cuyo nombre no menciona la moneda', () => {
+    const result = useQuoteAccountSelect(makeProps(), vi.fn());
+
+    result.searchQuery.value = 'clp';
+
+    expect(result.filteredGroups.value).toEqual([
+      { currencyCode: 'CLP', accounts: [CLP_PRIMARY, CLP_SECONDARY] },
+    ]);
+  });
+
   it('una búsqueda sin resultados devuelve una lista de grupos vacía', () => {
     const result = useQuoteAccountSelect(makeProps(), vi.fn());
 

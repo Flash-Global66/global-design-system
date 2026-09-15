@@ -20,9 +20,17 @@ orden en que las cuentas fueron provistas.
 - **THEN** el encabezado `COP` desaparece junto con sus cuentas, y el encabezado `CLP` queda con
   las cuentas que coinciden
 
+#### Scenario: La búsqueda por código de moneda alcanza todo el grupo
+- **GIVEN** el panel abierto con cuentas `CLP` y `COP`, algunas con alias propio que no menciona su
+  divisa
+- **WHEN** se escribe en el buscador el código de una moneda
+- **THEN** el grupo de esa moneda queda completo, incluidas las cuentas con alias propio, y los
+  grupos de las demás monedas desaparecen
+
 #### Scenario: La búsqueda no coincide con ninguna cuenta
 - **GIVEN** el panel abierto con cuentas de dos monedas
-- **WHEN** se escribe en el buscador un texto que no coincide con ningún nombre ni descripción
+- **WHEN** se escribe en el buscador un texto que no coincide con ningún nombre, descripción ni
+  código de moneda
 - **THEN** no se muestra ningún encabezado ni ninguna cuenta, y en su lugar se muestra el texto de
   `emptyResultsText`
 
