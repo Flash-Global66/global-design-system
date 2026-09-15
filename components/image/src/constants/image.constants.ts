@@ -29,6 +29,7 @@ export const IMAGE_NAMES = [
   'id-card-back',
   'id-card-front',
   'information',
+  'key',
   'location-pin',
   'lock',
   'magnifying-glass',
