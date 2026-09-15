@@ -1,8 +1,16 @@
-import * as jest from "jest-mock";
+import * as jest from 'jest-mock';
+import { setup } from '@storybook/vue3';
+import { imageBaseUrlKey } from '@flash-global66/g-image/index.ts';
 window.jest = jest;
 
 import '../assets/scss/index.scss';
 import '../stories/assets/styles/tailwind.css';
+
+const illustrationsBaseUrl = new URL('illustrations', document.baseURI).href;
+
+setup(app => {
+  app.provide(imageBaseUrlKey, illustrationsBaseUrl);
+});
 
 export const parameters = {
   controls: {
@@ -12,10 +20,10 @@ export const parameters = {
     },
     expanded: true,
   },
-  viewMode: "docs",
+  viewMode: 'docs',
   previewTabs: {
-    "storybook/docs/panel": {
-      index: -1
+    'storybook/docs/panel': {
+      index: -1,
     },
   },
   backgrounds: {
@@ -23,7 +31,7 @@ export const parameters = {
       { name: 'Gray', value: '#FAFBFF' },
       { name: 'White', value: '#FFF' },
     ],
-    default: "Gray",
+    default: 'Gray',
   },
 };
 
