@@ -361,9 +361,9 @@ import { GImage } from '@flash-global66/g-image';
             return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
           case 'xl':
             return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
-          case 'xxl':
+          case '2xl':
             return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
-          case 'xxxl':
+          case '3xl':
             return 'grid-cols-1 sm:grid-cols-2';
           default:
             return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6';
@@ -459,19 +459,15 @@ import { GImage } from '@flash-global66/g-image';
           <div class="flex items-center gap-2">
             <g-input
               v-model="searchTerm"
-              placeholder="Buscar ilustración..."
+              label="Buscar ilustración"
+              prefix-icon="solid magnifying-glass"
               class="w-full max-w-md"
-              inputSize="small"
               @input="updateFilteredImages"
-            >
-              <template #prefix>
-                <g-icon-font name="solid magnifying-glass" size="sm" />
-              </template>
-            </g-input>
-            <g-button 
+            />
+            <g-button
               v-if="searchTerm"
+              variant="secondary"
               @click="clearSearch"
-              size="small"
             >
               Limpiar
             </g-button>
