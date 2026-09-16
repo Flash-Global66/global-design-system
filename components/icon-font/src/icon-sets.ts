@@ -295,6 +295,7 @@ export const ICON_SETS = {
     "key-skeleton",
     "mobile",
     "qrcode",
+    "fingerprint",
   ] as const,
 
   brands: ["whatsapp", "apple-pay", "google-pay"] as const,

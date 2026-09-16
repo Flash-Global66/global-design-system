@@ -6,3 +6,6 @@ dist/
 node_modules/
 *.min.js
 *.min.css
+
+components/icon-font/src/icon-sets.ts
+components/icon-font/src/lib/
