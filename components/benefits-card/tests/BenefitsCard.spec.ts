@@ -38,6 +38,36 @@ describe('GBenefitsCard', () => {
     ).toBeInTheDocument();
   });
 
+  it('expone la tarjeta como región nombrada por su título', () => {
+    renderCard();
+
+    const region = screen.getByRole('region', {
+      name: 'Entra en segundos, sin escribir contraseñas',
+    });
+    const heading = screen.getByRole('heading', { level: 2 });
+
+    expect(region).toHaveAttribute('aria-labelledby', heading.id);
+    expect(heading.id).not.toBe('');
+    expect(region).not.toHaveAttribute('aria-label');
+  });
+
+  it('nombra la región con ariaLabel cuando no hay título', () => {
+    renderCard({ title: '', ariaLabel: 'Beneficios de la llave de acceso' });
+
+    expect(
+      screen.getByRole('region', { name: 'Beneficios de la llave de acceso' }),
+    ).toBeInTheDocument();
+  });
+
+  it('no declara nombre accesible si no hay título ni ariaLabel', () => {
+    const { container } = renderCard({ title: '' });
+    const section = container.querySelector('section');
+
+    expect(screen.queryByRole('region')).not.toBeInTheDocument();
+    expect(section).not.toHaveAttribute('aria-labelledby');
+    expect(section).not.toHaveAttribute('aria-label');
+  });
+
   it('usa el nivel de encabezado indicado', () => {
     renderCard({ headingLevel: 3 });
 

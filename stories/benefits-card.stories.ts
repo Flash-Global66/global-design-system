@@ -134,6 +134,11 @@ diseño y la tarjeta crece en alto. Ver la story "Responsive".
 ## Accesibilidad
 - El título es un encabezado real (\`h2\` por defecto, configurable con \`headingLevel\`)
 - Los beneficios son una lista (\`ul\`/\`li\`); los íconos son decorativos (\`aria-hidden\`)
+- La tarjeta es una región con nombre accesible, así que un lector de pantalla
+  la anuncia y la lista entre los puntos de referencia de la página. Con título
+  el nombre sale del encabezado (\`aria-labelledby\`); sin título, de la prop
+  \`ariaLabel\`. Si no hay ninguno de los dos, el \`section\` queda sin nombre y
+  el lector no lo anuncia como región.
         `,
       },
     },
@@ -162,6 +167,12 @@ diseño y la tarjeta crece en alto. Ver la story "Responsive".
         },
         defaultValue: { summary: '[]' },
       },
+    },
+    ariaLabel: {
+      description:
+        'Nombre accesible de la región. Solo se usa cuando no hay título',
+      control: 'text',
+      table: { type: { summary: 'string' }, defaultValue: { summary: "''" } },
     },
     headingLevel: {
       description: 'Nivel del encabezado usado para el título',
