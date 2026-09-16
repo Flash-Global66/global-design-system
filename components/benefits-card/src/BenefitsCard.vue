@@ -1,9 +1,10 @@
 <template>
-  <section :class="ns.b()">
+  <section :class="ns.b()" :aria-labelledby="labelledBy" :aria-label="label">
     <div :class="ns.e('body')">
       <component
         :is="headingTag"
-        v-if="title || $slots.title"
+        v-if="hasTitle"
+        :id="titleId"
         :class="ns.e('title')"
       >
         <slot name="title">{{ title }}</slot>
@@ -38,7 +39,8 @@ defineOptions({
 
 const props = defineProps(benefitsCardProps);
 
-const { ns, headingTag } = useBenefitsCard(props);
+const { ns, headingTag, titleId, hasTitle, labelledBy, label } =
+  useBenefitsCard(props);
 </script>
 
 <style lang="scss" src="./styles/benefits-card.style.scss"></style>

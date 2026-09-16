@@ -34,6 +34,14 @@ export const benefitsCardProps = buildProps({
     default: () => [],
   },
   /**
+   * Nombre accesible de la tarjeta para lectores de pantalla. Solo se usa
+   * cuando no hay título: con título, la región toma su nombre del encabezado.
+   */
+  ariaLabel: {
+    type: String,
+    default: '',
+  },
+  /**
    * Nivel del encabezado del título, para respetar el outline de la página.
    */
   headingLevel: {
