@@ -1,9 +1,13 @@
 <template>
-  <section :class="ns.b()" :aria-labelledby="labelledBy" :aria-label="label">
+  <section
+    :class="ns.b()"
+    :aria-labelledby="labelledBy()"
+    :aria-label="label()"
+  >
     <div :class="ns.e('body')">
       <component
         :is="headingTag"
-        v-if="hasTitle"
+        v-if="hasTitle()"
         :id="titleId"
         :class="ns.e('title')"
       >

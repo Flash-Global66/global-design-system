@@ -8,9 +8,9 @@ interface BenefitsCardState {
   ns: ReturnType<typeof useNamespace>;
   headingTag: ComputedRef<string>;
   titleId: ComputedRef<string>;
-  hasTitle: ComputedRef<boolean>;
-  labelledBy: ComputedRef<string | undefined>;
-  label: ComputedRef<string | undefined>;
+  hasTitle: () => boolean;
+  labelledBy: () => string | undefined;
+  label: () => string | undefined;
 }
 
 /**
@@ -31,13 +31,16 @@ export function useBenefitsCard(props: BenefitsCardProps): BenefitsCardState {
   const titleId = useId();
 
   const headingTag = computed(() => `h${props.headingLevel}`);
-  const hasTitle = computed(() => Boolean(props.title || slots.title));
-  const labelledBy = computed(() =>
-    hasTitle.value ? titleId.value : undefined,
-  );
-  const label = computed(() =>
-    hasTitle.value ? undefined : props.ariaLabel || undefined,
-  );
+
+  // Los tres de abajo son funciones y no `computed` a propósito: el objeto que
+  // devuelve `useSlots()` no es reactivo, Vue lo muta en su lugar sin disparar
+  // ningún efecto. Dentro de un `computed` el valor queda cacheado y el
+  // encabezado no aparece ni desaparece cuando el consumidor provee el slot
+  // `title` de forma condicional, y con él se cae el nombre accesible de la
+  // región. Como funciones se evalúan en cada render, que es lo que hace falta.
+  const hasTitle = () => Boolean(props.title || slots.title);
+  const labelledBy = () => (hasTitle() ? titleId.value : undefined);
+  const label = () => (hasTitle() ? undefined : props.ariaLabel || undefined);
 
   return { ns, headingTag, titleId, hasTitle, labelledBy, label };
 }

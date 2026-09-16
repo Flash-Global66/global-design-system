@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { render, screen, within } from '@testing-library/vue';
 import BenefitsCard from '../src/BenefitsCard.vue';
 import type { BenefitsCardItem } from '../src/types/benefits-card.type';
@@ -66,6 +67,36 @@ describe('GBenefitsCard', () => {
     expect(screen.queryByRole('region')).not.toBeInTheDocument();
     expect(section).not.toHaveAttribute('aria-labelledby');
     expect(section).not.toHaveAttribute('aria-label');
+  });
+
+  it('muestra y oculta el encabezado cuando el slot title es condicional', async () => {
+    const showSlot = ref(false);
+    const Host = defineComponent({
+      setup() {
+        return () =>
+          h(
+            BenefitsCard,
+            { benefits },
+            showSlot.value ? { title: () => 'Título por slot' } : {},
+          );
+      },
+    });
+
+    render(Host);
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument();
+
+    showSlot.value = true;
+    await nextTick();
+
+    const heading = screen.getByRole('heading', { name: 'Título por slot' });
+    expect(
+      screen.getByRole('region', { name: 'Título por slot' }),
+    ).toHaveAttribute('aria-labelledby', heading.id);
+
+    showSlot.value = false;
+    await nextTick();
+
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument();
   });
 
   it('usa el nivel de encabezado indicado', () => {
