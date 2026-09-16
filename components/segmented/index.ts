@@ -1,8 +1,5 @@
-import Segmented from "./src/Segmented.vue";
-import {
-  withInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
+import Segmented from './src/Segmented.vue';
+import { withInstall, SFCWithInstall } from '@flash-global66/g-utils';
 
 export const GSegmented: SFCWithInstall<typeof Segmented> & {
   Segmented: typeof Segmented;
@@ -11,4 +8,4 @@ export const GSegmented: SFCWithInstall<typeof Segmented> & {
 });
 export default GSegmented;
 
-export * from "./src/segmented.type";
+export * from './src/segmented.type';

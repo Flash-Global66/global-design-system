@@ -1,0 +1,29 @@
+/* Element Chalk Variables */
+.gui-vl__wrapper {
+  position: relative;
+}
+.gui-vl__wrapper:hover .gui-virtual-scrollbar {
+  opacity: 1;
+}
+.gui-vl__wrapper.always-on .gui-virtual-scrollbar {
+  opacity: 1;
+}
+
+.gui-vl__window {
+  scrollbar-width: none;
+}
+.gui-vl__window::-webkit-scrollbar {
+  display: none;
+}
+
+.gui-virtual-scrollbar {
+  opacity: 0;
+  transition: opacity 340ms ease-out;
+}
+.gui-virtual-scrollbar.always-on {
+  opacity: 1;
+}
+
+.gui-vg__wrapper {
+  position: relative;
+}

@@ -1,0 +1,105 @@
+/* Element Chalk Variables */
+.gui-date-range-picker {
+  --gui-datepicker-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-off-text-color: var(--gui-text-color-placeholder);
+  --gui-datepicker-header-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-icon-color: var(--gui-text-color-primary);
+  --gui-datepicker-border-color: var(--gui-disabled-border-color);
+  --gui-datepicker-inner-border-color: var(--gui-border-color-light);
+  --gui-datepicker-inrange-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-inrange-hover-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-active-color: var(--gui-color-primary);
+  --gui-datepicker-hover-text-color: var(--gui-color-primary);
+}
+
+.gui-date-range-picker {
+  width: 646px;
+}
+.gui-date-range-picker.has-sidebar {
+  width: 756px;
+}
+.gui-date-range-picker.has-time .gui-picker-panel__body-wrapper {
+  position: relative;
+}
+.gui-date-range-picker table {
+  table-layout: fixed;
+  width: 100%;
+}
+.gui-date-range-picker .gui-picker-panel__body {
+  min-width: 513px;
+}
+.gui-date-range-picker .gui-picker-panel__content {
+  margin: 0;
+}
+.gui-date-range-picker__header {
+  position: relative;
+  text-align: center;
+  height: 28px;
+}
+.gui-date-range-picker__header [class*=arrow-left] {
+  float: left;
+}
+.gui-date-range-picker__header [class*=arrow-right] {
+  float: right;
+}
+.gui-date-range-picker__header div {
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 50px;
+}
+
+.gui-date-range-picker__content {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 16px;
+}
+.gui-date-range-picker__content.is-left {
+  border-right: 1px solid var(--gui-datepicker-inner-border-color);
+}
+
+.gui-date-range-picker__content .gui-date-range-picker__header div {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.gui-date-range-picker__editors-wrap {
+  box-sizing: border-box;
+  display: table-cell;
+}
+.gui-date-range-picker__editors-wrap.is-right {
+  text-align: right;
+}
+
+.gui-date-range-picker__time-header {
+  position: relative;
+  border-bottom: 1px solid var(--gui-datepicker-inner-border-color);
+  font-size: 12px;
+  padding: 8px 5px 5px 5px;
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+}
+.gui-date-range-picker__time-header > .gui-icon-arrow-right {
+  font-size: 20px;
+  vertical-align: middle;
+  display: table-cell;
+  color: var(--gui-datepicker-icon-color);
+}
+
+.gui-date-range-picker__time-picker-wrap {
+  position: relative;
+  display: table-cell;
+  padding: 0 5px;
+}
+.gui-date-range-picker__time-picker-wrap .gui-picker-panel {
+  position: absolute;
+  top: 13px;
+  right: 0;
+  z-index: 1;
+  background: #ffffff;
+}
+.gui-date-range-picker__time-picker-wrap .gui-time-panel {
+  position: absolute;
+}

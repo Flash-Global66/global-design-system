@@ -29,17 +29,24 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "element-plus";
-import { flagProps, validateFlagProps } from "./country-flag.props";
-import { useCountryFlag } from "./hooks/use-country-flag";
+import { useNamespace } from '@flash-global66/g-utils';
+import { flagProps, validateFlagProps } from './country-flag.props';
+import { useCountryFlag } from './hooks/use-country-flag';
 
-defineOptions({ name: 'GCountryFlag' })
+defineOptions({ name: 'GCountryFlag' });
 
 const props = defineProps(flagProps);
 
 validateFlagProps(props);
 
-const ns = useNamespace("country-flag");
+const ns = useNamespace('country-flag');
 
-const { containerStyle, isLoaded, imageSrc, imageContainer, handleImageError, hasError } = useCountryFlag(props);
+const {
+  containerStyle,
+  isLoaded,
+  imageSrc,
+  imageContainer,
+  handleImageError,
+  hasError,
+} = useCountryFlag(props);
 </script>

@@ -8,23 +8,16 @@
     @close="handleClose"
   >
     <template #image>
-      <g-image 
-        v-if="computedImageName" 
-        :name="computedImageName" 
-        :size="computedImageSize" 
+      <g-image
+        v-if="computedImageName"
+        :name="computedImageName"
+        :size="computedImageSize"
       />
     </template>
 
-    <div
-      v-if="description"
-      :class="ns.e('description')"
-      v-html="description"
-    />
+    <div v-if="description" :class="ns.e('description')" v-html="description" />
 
-    <div
-      v-if="checkboxes?.length"
-      :class="ns.e('checkboxes')"
-    >
+    <div v-if="checkboxes?.length" :class="ns.e('checkboxes')">
       <g-checkbox
         v-for="(item, index) in checkboxes"
         :key="index"
@@ -40,18 +33,18 @@
 import { GImage } from '@flash-global66/g-image';
 import { GDialog } from '@flash-global66/g-dialog';
 import { GCheckbox } from '@flash-global66/g-checkbox';
-import { useNamespace } from "element-plus";
+import { useNamespace } from '@flash-global66/g-utils';
 import { dialogAlertProps, useDialogAlert } from './dialog-alert';
 import type { AlertEmits } from './dialog.type';
 
 const props = defineProps(dialogAlertProps);
 const emit = defineEmits<AlertEmits>();
-const ns = useNamespace("dialog-alert");
+const ns = useNamespace('dialog-alert');
 
-const { 
-  computedImageName, 
-  computedImageSize, 
-  footerButtons, 
+const {
+  computedImageName,
+  computedImageSize,
+  footerButtons,
   handleClose,
   checkboxStates,
   onCheckboxModelUpdate,

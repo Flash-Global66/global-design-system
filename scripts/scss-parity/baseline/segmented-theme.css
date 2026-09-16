@@ -1,0 +1,152 @@
+/* Element Chalk Variables */
+.gui-segmented--vertical {
+  flex-direction: column;
+}
+.gui-segmented--vertical .gui-segmented__item {
+  padding: 11px 11px;
+}
+
+.gui-segmented {
+  --gui-segmented-color: var(--gui-text-color-regular);
+  --gui-segmented-bg-color: var(--gui-fill-color-light);
+  --gui-segmented-padding: 2px;
+  --gui-segmented-item-selected-color: var(--gui-color-white);
+  --gui-segmented-item-selected-bg-color: var(--gui-color-primary);
+  --gui-segmented-item-selected-disabled-bg-color: var(--gui-color-primary-light-5);
+  --gui-segmented-item-hover-color: var(--gui-text-color-primary);
+  --gui-segmented-item-hover-bg-color: var(--gui-fill-color-dark);
+  --gui-segmented-item-active-bg-color: var(--gui-fill-color-darker);
+  --gui-segmented-item-disabled-color: var(--gui-text-color-placeholder);
+}
+
+.gui-segmented {
+  display: inline-flex;
+  align-items: stretch;
+  min-height: 32px;
+  background: var(--gui-segmented-bg-color);
+  padding: var(--gui-segmented-padding);
+  border-radius: var(--gui-border-radius-base);
+  font-size: 14px;
+  color: var(--gui-segmented-color);
+  box-sizing: border-box;
+}
+.gui-segmented__group {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  width: 100%;
+}
+
+.gui-segmented__item-selected {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--gui-segmented-item-selected-bg-color);
+  height: 100%;
+  width: 10px;
+  border-radius: calc(var(--gui-border-radius-base) - 2px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.gui-segmented__item-selected.is-disabled {
+  background: var(--gui-segmented-item-selected-disabled-bg-color);
+}
+
+.gui-segmented__item-selected.is-focus-visible:before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  border-radius: inherit;
+  outline: 2px solid var(--gui-segmented-item-selected-bg-color);
+  outline-offset: 1px;
+}
+
+.gui-segmented__item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  border-radius: calc(var(--gui-border-radius-base) - 2px);
+  padding: 0 11px;
+}
+.gui-segmented__item:not(.is-disabled):not(.is-selected):hover {
+  color: var(--gui-segmented-item-hover-color);
+  background: var(--gui-segmented-item-hover-bg-color);
+}
+.gui-segmented__item:not(.is-disabled):not(.is-selected):active {
+  background: var(--gui-segmented-item-active-bg-color);
+}
+.gui-segmented__item.is-selected {
+  color: var(--gui-segmented-item-selected-color);
+}
+.gui-segmented__item.is-selected.is-disabled {
+  color: var(--gui-segmented-item-selected-color);
+}
+
+.gui-segmented__item.is-disabled {
+  cursor: not-allowed;
+  color: var(--gui-segmented-item-disabled-color);
+}
+
+.gui-segmented__item-input {
+  position: absolute;
+  margin: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gui-segmented__item-label {
+  flex: 1;
+  text-align: center;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.3s;
+  z-index: 1;
+}
+
+.gui-segmented.is-block {
+  display: flex;
+}
+.gui-segmented.is-block .gui-segmented__item {
+  min-width: 0;
+}
+
+.gui-segmented--large {
+  min-height: 40px;
+  border-radius: var(--gui-border-radius-base);
+  font-size: 16px;
+}
+.gui-segmented--large .gui-segmented__item-selected {
+  border-radius: calc(var(--gui-border-radius-base) - 2px);
+}
+
+.gui-segmented--large .gui-segmented--vertical .gui-segmented__item {
+  padding: 11px 11px;
+}
+
+.gui-segmented--large .gui-segmented__item {
+  border-radius: calc(var(--gui-border-radius-base) - 2px);
+  padding: 0 11px;
+}
+
+.gui-segmented--small {
+  min-height: 24px;
+  border-radius: calc(var(--gui-border-radius-base) - 1px);
+  font-size: 14px;
+}
+.gui-segmented--small .gui-segmented__item-selected {
+  border-radius: calc(calc(var(--gui-border-radius-base) - 1px) - 2px);
+}
+
+.gui-segmented--small .gui-segmented--vertical .gui-segmented__item {
+  padding: 7px 7px;
+}
+
+.gui-segmented--small .gui-segmented__item {
+  border-radius: calc(calc(var(--gui-border-radius-base) - 1px) - 2px);
+  padding: 0 7px;
+}

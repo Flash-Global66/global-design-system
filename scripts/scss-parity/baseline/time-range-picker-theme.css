@@ -1,0 +1,30 @@
+/* Element Chalk Variables */
+.gui-time-range-picker {
+  width: 354px;
+  overflow: visible;
+}
+.gui-time-range-picker__content {
+  position: relative;
+  text-align: center;
+  padding: 10px;
+  z-index: 1;
+}
+
+.gui-time-range-picker__cell {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px 7px 7px;
+  width: 50%;
+  display: inline-block;
+}
+
+.gui-time-range-picker__header {
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.gui-time-range-picker__body {
+  border-radius: 2px;
+  border: 1px solid #fff;
+}

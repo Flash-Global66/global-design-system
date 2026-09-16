@@ -1,14 +1,81 @@
-@use "element-plus/theme-chalk/src/popover.scss" as *;
+// Ported byte-exact off element-plus/theme-chalk/src/popover.scss (2.9.7).
+// The only change vs the original: internal `@use`s are re-pointed to the
+// already-ported flat modules of @flash-global66/g-utils (mixins,
+// var-mixins, tokens) instead of element-plus's own mixins/vars — same
+// technique WU1/WU3/WU5 already used. Selectors/values preserved byte-exact;
+// `$popover` token map already existed in g-utils/styles/tokens.scss.
+@use '@flash-global66/g-utils/mixins' as *;
+@use '@flash-global66/g-utils/var-mixins' as *;
+@use '@flash-global66/g-utils/tokens' as *;
 
-// .gui-popover-wrapper {
-// }
-.gui-popper.is-light {
- &.is-light {
-   @apply bg-white rounded-md border-none shadow-sm;
-  .gui-popper__arrow {
-    @apply shadow-sm border-none;
+@include b(popover) {
+  @include set-component-css-var('popover', $popover);
+
+  &.#{$namespace}-popper {
+    background: getCssVar('popover-bg-color');
+    min-width: 150px;
+    border-radius: getCssVar('popover-border-radius');
+    border: 1px solid getCssVar('popover-border-color');
+    padding: getCssVar('popover-padding');
+    z-index: getCssVar('index-popper');
+    color: getCssVar('text-color', 'regular');
+    line-height: 1.4;
+    font-size: getCssVar('popover-font-size');
+    box-shadow: getCssVar('box-shadow-light');
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+
+    @include m(plain) {
+      padding: getCssVar('popover-padding-large');
+    }
+
+    @include e(title) {
+      color: getCssVar('popover-title-text-color');
+      font-size: getCssVar('popover-title-font-size');
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    @include e(reference) {
+      &:focus:not(.focusing),
+      &:focus:hover {
+        outline-width: 0;
+      }
+    }
+
+    @include when(dark) {
+      @include set-css-var-value(
+        ('popover', 'bg-color'),
+        var(#{getCssVarName('text-color', 'primary')})
+      );
+      @include set-css-var-value(
+        ('popover', 'border-color'),
+        var(#{getCssVarName('text-color', 'primary')})
+      );
+      @include set-css-var-value(
+        ('popover', 'title-text-color'),
+        var(#{getCssVarName('bg-color')})
+      );
+      color: getCssVar('bg-color');
+    }
+
+    &:focus:active,
+    &:focus {
+      outline-width: 0;
+    }
   }
- }
+}
+
+// Retained DS-specific overrides that pre-dated the element-plus removal
+// (not part of EP's own popover.scss): the `is-light` effect variant used
+// across front-b2b popover consumers, and the popover title's DS font.
+.gui-popper.is-light {
+  &.is-light {
+    @apply bg-white rounded-md border-none shadow-sm;
+    .gui-popper__arrow {
+      @apply shadow-sm border-none;
+    }
+  }
 }
 
 .gui-popover__title {

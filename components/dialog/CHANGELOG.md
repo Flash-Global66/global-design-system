@@ -3,136 +3,155 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.4...@flash-global66/g-dialog@1.2.0) (2026-04-13)
+## [1.2.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.18...@flash-global66/g-dialog@1.2.19) (2026-08-31)
 
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.17...@flash-global66/g-dialog@1.2.18) (2026-07-14)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.16...@flash-global66/g-dialog@1.2.17) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.16](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.15...@flash-global66/g-dialog@1.2.16) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.14...@flash-global66/g-dialog@1.2.15) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.14](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.13...@flash-global66/g-dialog@1.2.14) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.13](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.12...@flash-global66/g-dialog@1.2.13) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.11...@flash-global66/g-dialog@1.2.12) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.10...@flash-global66/g-dialog@1.2.11) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.9...@flash-global66/g-dialog@1.2.10) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.8...@flash-global66/g-dialog@1.2.9) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.7...@flash-global66/g-dialog@1.2.8) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.7](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.6...@flash-global66/g-dialog@1.2.7) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.6](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.5...@flash-global66/g-dialog@1.2.6) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.5](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.4...@flash-global66/g-dialog@1.2.5) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.3...@flash-global66/g-dialog@1.2.4) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.2...@flash-global66/g-dialog@1.2.3) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+## [1.2.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.1...@flash-global66/g-dialog@1.2.2) (2026-07-12)
+
+### Bug Fixes
+
+- **g-hooks,components:** use Symbol.for for cross-package injection keys ([af11601](https://github.com/Flash-Global66/global-design-system/commit/af116010dab0f7b80d77023285c5d9479dcbea6f))
+
+## [1.2.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.2.0...@flash-global66/g-dialog@1.2.1) (2026-07-11)
+
+**Note:** Version bump only for package @flash-global66/g-dialog
+
+# [1.2.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.4...@flash-global66/g-dialog@1.2.0) (2026-04-13)
 
 ### Features
 
-* **dialog-alert:** add checkbox support to dialog alert component ([f65c591](https://github.com/Flash-Global66/global-design-system/commit/f65c5919823c339eb9c206f2a7e375743105b079))
-
-
-
-
+- **dialog-alert:** add checkbox support to dialog alert component ([f65c591](https://github.com/Flash-Global66/global-design-system/commit/f65c5919823c339eb9c206f2a7e375743105b079))
 
 ## [1.1.4](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.3...@flash-global66/g-dialog@1.1.4) (2025-10-15)
 
-
 ### Bug Fixes
 
-* remove width setting for default dialog style ([#148](https://github.com/Flash-Global66/global-design-system/issues/148)) ([0b87fdb](https://github.com/Flash-Global66/global-design-system/commit/0b87fdbc9eb1a36cc12e192fb0f7d5cbb7b7d164))
-
-
-
-
+- remove width setting for default dialog style ([#148](https://github.com/Flash-Global66/global-design-system/issues/148)) ([0b87fdb](https://github.com/Flash-Global66/global-design-system/commit/0b87fdbc9eb1a36cc12e192fb0f7d5cbb7b7d164))
 
 ## [1.1.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.2...@flash-global66/g-dialog@1.1.3) (2025-10-01)
 
-
 ### Bug Fixes
 
-* add slot header to component dialog ([#145](https://github.com/Flash-Global66/global-design-system/issues/145)) ([31dee7b](https://github.com/Flash-Global66/global-design-system/commit/31dee7b5340703cb7ce730b897eb3f65c41d92f4))
-
-
-
-
+- add slot header to component dialog ([#145](https://github.com/Flash-Global66/global-design-system/issues/145)) ([31dee7b](https://github.com/Flash-Global66/global-design-system/commit/31dee7b5340703cb7ce730b897eb3f65c41d92f4))
 
 ## [1.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.1...@flash-global66/g-dialog@1.1.2) (2025-05-06)
 
-
 ### Bug Fixes
 
-* **dialog:** update import path for hooks from 'element-plus' ([#71](https://github.com/Flash-Global66/global-design-system/issues/71)) ([cbad1ca](https://github.com/Flash-Global66/global-design-system/commit/cbad1ca1670507cb472eec84107d152a90d2d932))
-
-
-
-
+- **dialog:** update import path for hooks from 'element-plus' ([#71](https://github.com/Flash-Global66/global-design-system/issues/71)) ([cbad1ca](https://github.com/Flash-Global66/global-design-system/commit/cbad1ca1670507cb472eec84107d152a90d2d932))
 
 ## [1.1.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@1.1.0...@flash-global66/g-dialog@1.1.1) (2025-05-06)
 
-
 ### Bug Fixes
 
-* **dialog:** update focus trap injection and change default name ([9eb223f](https://github.com/Flash-Global66/global-design-system/commit/9eb223febee7c2a9e5e17fb121f3d2aaa952c131))
-
-
-
-
+- **dialog:** update focus trap injection and change default name ([9eb223f](https://github.com/Flash-Global66/global-design-system/commit/9eb223febee7c2a9e5e17fb121f3d2aaa952c131))
 
 # [1.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@0.0.8...@flash-global66/g-dialog@1.1.0) (2025-04-23)
 
-
 ### Features
 
-* **alert:** set default alert type and image name in provider state ([c1ccd95](https://github.com/Flash-Global66/global-design-system/commit/c1ccd95943f99f87c02f8977cca92cb4a5a415eb))
-* **dialog-alert:** refactor alert dialog component and implement programmatic alert functionality ([e38c886](https://github.com/Flash-Global66/global-design-system/commit/e38c88601803f24b4dce5da13043a61a9bd7f281))
-* **dialog:** update dialog component with alert functionality ([6bb80ae](https://github.com/Flash-Global66/global-design-system/commit/6bb80ae0d33ca40a0a214d2a073a5d6191eca8aa))
-
-
-
-
+- **alert:** set default alert type and image name in provider state ([c1ccd95](https://github.com/Flash-Global66/global-design-system/commit/c1ccd95943f99f87c02f8977cca92cb4a5a415eb))
+- **dialog-alert:** refactor alert dialog component and implement programmatic alert functionality ([e38c886](https://github.com/Flash-Global66/global-design-system/commit/e38c88601803f24b4dce5da13043a61a9bd7f281))
+- **dialog:** update dialog component with alert functionality ([6bb80ae](https://github.com/Flash-Global66/global-design-system/commit/6bb80ae0d33ca40a0a214d2a073a5d6191eca8aa))
 
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@0.0.7...@flash-global66/g-dialog@0.0.8) (2025-03-31)
 
 **Note:** Version bump only for package @flash-global66/g-dialog
 
-
-
-
-
 ## 0.0.7 (2025-03-28)
-
 
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.6 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.5 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.4 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## [0.0.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-dialog@0.0.2...@flash-global66/g-dialog@0.0.3) (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.2 (2025-03-28)
 

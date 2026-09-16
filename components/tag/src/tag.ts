@@ -1,7 +1,7 @@
-import { buildProps, definePropType } from 'element-plus/es/utils/index'
-import type Tag from './tag.vue'
-import { IconString } from '@flash-global66/g-icon-font'
-import type { ExtractPropTypes } from 'vue'
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import type Tag from './tag.vue';
+import { IconString } from '@flash-global66/g-icon-font';
+import type { ExtractPropTypes } from 'vue';
 
 export const tagProps = buildProps({
   /**
@@ -10,7 +10,7 @@ export const tagProps = buildProps({
   type: {
     type: String,
     values: ['success', 'info', 'warning', 'error', 'grey'],
-    default: 'grey'
+    default: 'grey',
   },
   /**
    * @description whether Tag can be removed
@@ -26,7 +26,7 @@ export const tagProps = buildProps({
   size: {
     type: String,
     values: ['xs', 'sm', 'md'],
-    default: 'sm'
+    default: 'sm',
   },
   /**
    * @description prefix icon
@@ -35,7 +35,7 @@ export const tagProps = buildProps({
    */
   prefixIcon: {
     type: definePropType<IconString>(String),
-    default: undefined
+    default: undefined,
   },
   /**
    * @description suffix icon
@@ -44,7 +44,7 @@ export const tagProps = buildProps({
    */
   suffixIcon: {
     type: definePropType<IconString>(String),
-    default: undefined
+    default: undefined,
   },
   /**
    * @description theme of Tag
@@ -52,7 +52,7 @@ export const tagProps = buildProps({
   effect: {
     type: String,
     values: ['dark', 'light'],
-    default: 'light'
+    default: 'light',
   },
   /**
    * @description text content in Tag
@@ -61,15 +61,15 @@ export const tagProps = buildProps({
    */
   text: {
     type: String,
-    default: undefined
-  }
-} as const)
-export type TagProps = ExtractPropTypes<typeof tagProps>
+    default: undefined,
+  },
+} as const);
+export type TagProps = ExtractPropTypes<typeof tagProps>;
 
 export const tagEmits = {
   close: (evt: MouseEvent) => evt instanceof MouseEvent,
-  click: (evt: MouseEvent) => evt instanceof MouseEvent
-}
-export type TagEmits = typeof tagEmits
+  click: (evt: MouseEvent) => evt instanceof MouseEvent,
+};
+export type TagEmits = typeof tagEmits;
 
-export type TagInstance = InstanceType<typeof Tag>
+export type TagInstance = InstanceType<typeof Tag>;

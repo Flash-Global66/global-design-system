@@ -1,37 +1,37 @@
-import { unrefElement } from '@vueuse/core'
-import { isClient } from 'element-plus/es/utils/index'
+import { unrefElement } from '@vueuse/core';
+import { isClient } from '@flash-global66/g-utils';
 
-import type { ComponentPublicInstance } from 'vue'
-import type { MaybeRef } from '@vueuse/core'
-import type { Modifier } from '@popperjs/core'
-import type { Measurable } from './constants'
-import type { PopperCoreConfigProps } from './content'
+import type { ComponentPublicInstance } from 'vue';
+import type { MaybeRef } from '@vueuse/core';
+import type { Modifier } from '@popperjs/core';
+import type { Measurable } from './constants';
+import type { PopperCoreConfigProps } from './content';
 
 export const buildPopperOptions = (
   props: PopperCoreConfigProps,
-  modifiers: Modifier<any, any>[] = []
+  modifiers: Modifier<any, any>[] = [],
 ) => {
-  const { placement, strategy, popperOptions } = props
+  const { placement, strategy, popperOptions } = props;
   const options = {
     placement,
     strategy,
     ...popperOptions,
     modifiers: [...genModifiers(props), ...modifiers],
-  }
+  };
 
-  deriveExtraModifiers(options, popperOptions?.modifiers)
-  return options
-}
+  deriveExtraModifiers(options, popperOptions?.modifiers);
+  return options;
+};
 
 export const unwrapMeasurableEl = (
-  $el: MaybeRef<Measurable | undefined | ComponentPublicInstance>
+  $el: MaybeRef<Measurable | undefined | ComponentPublicInstance>,
 ) => {
-  if (!isClient) return
-  return unrefElement($el as HTMLElement)
-}
+  if (!isClient) return;
+  return unrefElement($el as HTMLElement);
+};
 
 function genModifiers(options: PopperCoreConfigProps) {
-  const { offset, gpuAcceleration, fallbackPlacements } = options
+  const { offset, gpuAcceleration, fallbackPlacements } = options;
   return [
     {
       name: 'offset',
@@ -63,14 +63,14 @@ function genModifiers(options: PopperCoreConfigProps) {
         gpuAcceleration,
       },
     },
-  ]
+  ];
 }
 
 function deriveExtraModifiers(
   options: any,
-  modifiers: PopperCoreConfigProps['popperOptions']['modifiers']
+  modifiers: PopperCoreConfigProps['popperOptions']['modifiers'],
 ) {
   if (modifiers) {
-    options.modifiers = [...options.modifiers, ...(modifiers ?? [])]
+    options.modifiers = [...options.modifiers, ...(modifiers ?? [])];
   }
 }

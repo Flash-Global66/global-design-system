@@ -1,0 +1,6 @@
+// Port byte-exact de element-plus/theme-chalk/src/base.scss
+// Agrega los tres módulos que en EP emiten el CSS base: el bloque :root con
+// los custom properties, las transiciones globales y el icono base.
+@use 'root-vars';
+@use 'transition';
+@use 'icon';

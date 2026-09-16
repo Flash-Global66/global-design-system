@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-drawer",
   "author": "Global66",
-  "version": "0.3.0",
+  "version": "0.3.25",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -22,6 +22,9 @@
     "build": "vite build",
     "build:types": "vue-tsc --project tsconfig.json"
   },
+  "dependencies": {
+    "@flash-global66/g-utils": "^0.15.6"
+  },
   "peerDependencies": {
     "@flash-global66/g-button": "^0.1.0",
     "@flash-global66/g-dialog": "^0.0.8",
@@ -29,7 +32,6 @@
     "@flash-global66/g-icon-font": "^0.0.8",
     "@flash-global66/g-overlay": "^0.0.7",
     "@flash-global66/g-teleport": "^0.0.6",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "publishConfig": {

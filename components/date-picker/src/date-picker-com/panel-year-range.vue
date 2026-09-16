@@ -91,28 +91,29 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { computed, inject, ref, toRef, useSlots, watch } from "vue";
-import dayjs from "dayjs";
-import { isArray } from "element-plus/es/utils/index.mjs";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { useLocale, useNamespace } from "element-plus";
+import { computed, inject, ref, toRef, useSlots, watch } from 'vue';
+import dayjs from 'dayjs';
+import { isArray, useNamespace } from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { useLocale } from '@flash-global66/g-hooks';
 import {
   panelYearRangeEmits,
   panelYearRangeProps,
-} from "../props/panel-year-range";
-import { useShortcut } from "../composables/use-shortcut";
-import { useYearRangeHeader } from "../composables/use-year-range-header";
-import { isValidRange } from "../utils";
-import { ROOT_PICKER_INJECTION_KEY } from "../constants";
-import YearTable from "./basic-year-table.vue";
+} from '../props/panel-year-range';
+import { useShortcut } from '../composables/use-shortcut';
+import { useYearRangeHeader } from '../composables/use-year-range-header';
+import { isValidRange } from '../utils';
+import { ROOT_PICKER_INJECTION_KEY } from '../constants';
+import YearTable from './basic-year-table.vue';
 
-import type { Dayjs } from "dayjs";
-import type { RangeState } from "../props/shared";
+import type { Dayjs } from 'dayjs';
+import type { RangeState } from '../props/shared';
+import type { DefaultValue } from '../utils';
 
-import es from "../lang/es";
+import es from '../lang/es';
 
 defineOptions({
-  name: "DatePickerYearRange",
+  name: 'DatePickerYearRange',
 });
 
 const props = defineProps(panelYearRangeProps);
@@ -120,9 +121,9 @@ const emit = defineEmits(panelYearRangeEmits);
 
 const { lang } = useLocale(ref(es));
 const leftDate = ref(dayjs().locale(lang.value));
-const rightDate = ref(leftDate.value.add(10, "year"));
+const rightDate = ref(leftDate.value.add(10, 'year'));
 const { pickerNs: ppNs } = inject(ROOT_PICKER_INJECTION_KEY)!;
-const drpNs = useNamespace("date-range-picker");
+const drpNs = useNamespace('date-range-picker');
 
 const hasShortcuts = computed(() => !!shortcuts.length);
 
@@ -130,31 +131,31 @@ const panelKls = computed(() => [
   ppNs.b(),
   drpNs.b(),
   {
-    "has-sidebar": Boolean(useSlots().sidebar) || hasShortcuts.value,
+    'has-sidebar': Boolean(useSlots().sidebar) || hasShortcuts.value,
   },
 ]);
 
 const leftPanelKls = computed(() => {
   return {
-    content: [ppNs.e("content"), drpNs.e("content"), "is-left"],
-    arrowLeftBtn: [ppNs.e("icon-btn"), "d-arrow-left"],
+    content: [ppNs.e('content'), drpNs.e('content'), 'is-left'],
+    arrowLeftBtn: [ppNs.e('icon-btn'), 'd-arrow-left'],
     arrowRightBtn: [
-      ppNs.e("icon-btn"),
-      { [ppNs.is("disabled")]: !enableYearArrow.value },
-      "d-arrow-right",
+      ppNs.e('icon-btn'),
+      { [ppNs.is('disabled')]: !enableYearArrow.value },
+      'd-arrow-right',
     ],
   };
 });
 
 const rightPanelKls = computed(() => {
   return {
-    content: [ppNs.e("content"), drpNs.e("content"), "is-right"],
+    content: [ppNs.e('content'), drpNs.e('content'), 'is-right'],
     arrowLeftBtn: [
-      ppNs.e("icon-btn"),
-      { "is-disabled": !enableYearArrow.value },
-      "d-arrow-left",
+      ppNs.e('icon-btn'),
+      { 'is-disabled': !enableYearArrow.value },
+      'd-arrow-left',
     ],
-    arrowRightBtn: [ppNs.e("icon-btn"), "d-arrow-right"],
+    arrowRightBtn: [ppNs.e('icon-btn'), 'd-arrow-right'],
   };
 });
 
@@ -170,7 +171,7 @@ const {
   leftYear,
   rightYear,
 } = useYearRangeHeader({
-  unlinkPanels: toRef(props, "unlinkPanels"),
+  unlinkPanels: toRef(props, 'unlinkPanels'),
   leftDate,
   rightDate,
 });
@@ -201,17 +202,17 @@ const handleRangePick = (val: RangePickValue, close = true) => {
   if (maxDate.value === maxDate_ && minDate.value === minDate_) {
     return;
   }
-  emit("calendar-change", [minDate_.toDate(), maxDate_ && maxDate_.toDate()]);
+  emit('calendar-change', [minDate_.toDate(), maxDate_ && maxDate_.toDate()]);
   maxDate.value = maxDate_;
   minDate.value = minDate_;
 
   if (!maxDate_) {
-    emit("set-picker-option", [
-      "intermediateValue",
-      [minDate_ ? minDate_.format(format.value) : "", ""],
+    emit('set-picker-option', [
+      'intermediateValue',
+      [minDate_ ? minDate_.format(format.value) : '', ''],
     ]);
   } else {
-    emit("set-picker-option", ["intermediateValue", null]);
+    emit('set-picker-option', ['intermediateValue', null]);
   }
 
   if (!close) return;
@@ -220,7 +221,7 @@ const handleRangePick = (val: RangePickValue, close = true) => {
 
 const handleConfirm = (visible = false) => {
   if (isValidRange([minDate.value, maxDate.value])) {
-    emit("pick", [minDate.value, maxDate.value], visible);
+    emit('pick', [minDate.value, maxDate.value], visible);
   }
 };
 
@@ -231,23 +232,24 @@ const onSelect = (selecting: boolean) => {
   }
 };
 
-const pickerBase = inject("EP_PICKER_BASE") as any;
+const pickerBase = inject('EP_PICKER_BASE') as any;
 const { shortcuts, disabledDate } = pickerBase.props;
-const format = toRef(pickerBase.props, "format");
-const defaultValue = toRef(pickerBase.props, "defaultValue");
-const unit = "year";
+const format = toRef(pickerBase.props, 'format');
+const defaultValue = toRef(pickerBase.props, 'defaultValue');
+const unit = 'year';
 
 const getDefaultValue = () => {
   let start: Dayjs;
-  if (isArray(defaultValue.value)) {
-    const left = dayjs(defaultValue.value[0]);
-    let right = dayjs(defaultValue.value[1]);
+  const currentDefaultValue = defaultValue.value as DefaultValue;
+  if (isArray(currentDefaultValue)) {
+    const left = dayjs(currentDefaultValue[0]);
+    let right = dayjs(currentDefaultValue[1]);
     if (!props.unlinkPanels) {
       right = left.add(10, unit);
     }
     return [left, right];
-  } else if (defaultValue.value) {
-    start = dayjs(defaultValue.value);
+  } else if (currentDefaultValue) {
+    start = dayjs(currentDefaultValue);
   } else {
     start = dayjs();
   }
@@ -257,19 +259,19 @@ const getDefaultValue = () => {
 
 watch(
   () => defaultValue.value,
-  (val) => {
+  val => {
     if (val) {
       const defaultArr = getDefaultValue();
       leftDate.value = defaultArr[0];
       rightDate.value = defaultArr[1];
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
   () => props.parsedValue,
-  (newVal) => {
+  newVal => {
     if (newVal && newVal.length === 2) {
       minDate.value = newVal[0];
       maxDate.value = newVal[1];
@@ -279,10 +281,10 @@ watch(
         const maxDateYear = maxDate.value.year();
         rightDate.value =
           minDateYear === maxDateYear
-            ? maxDate.value.add(10, "year")
+            ? maxDate.value.add(10, 'year')
             : maxDate.value;
       } else {
-        rightDate.value = leftDate.value.add(10, "year");
+        rightDate.value = leftDate.value.add(10, 'year');
       }
     } else {
       const defaultArr = getDefaultValue();
@@ -292,18 +294,18 @@ watch(
       rightDate.value = defaultArr[1];
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const parseUserInput = (value: Dayjs | Dayjs[]) => {
   return isArray(value)
-    ? value.map((_) => dayjs(_, format.value).locale(lang.value))
+    ? value.map(_ => dayjs(_, format.value).locale(lang.value))
     : dayjs(value, format.value).locale(lang.value);
 };
 
 const formatToString = (value: Dayjs[] | Dayjs) => {
   return isArray(value)
-    ? value.map((day) => day.format(format.value))
+    ? value.map(day => day.format(format.value))
     : value.format(format.value);
 };
 
@@ -322,11 +324,11 @@ const handleClear = () => {
   rightDate.value = defaultArr[1];
   maxDate.value = undefined;
   minDate.value = undefined;
-  emit("pick", null);
+  emit('pick', null);
 };
 
-emit("set-picker-option", ["isValidValue", isValidValue]);
-emit("set-picker-option", ["parseUserInput", parseUserInput]);
-emit("set-picker-option", ["formatToString", formatToString]);
-emit("set-picker-option", ["handleClear", handleClear]);
+emit('set-picker-option', ['isValidValue', isValidValue]);
+emit('set-picker-option', ['parseUserInput', parseUserInput]);
+emit('set-picker-option', ['formatToString', formatToString]);
+emit('set-picker-option', ['handleClear', handleClear]);
 </script>

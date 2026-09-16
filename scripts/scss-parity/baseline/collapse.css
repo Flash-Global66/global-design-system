@@ -1,0 +1,238 @@
+/* Element Chalk Variables */
+.fade-in-linear-enter-active,
+.fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.fade-in-linear-enter-from,
+.fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-linear-enter-active,
+.gui-fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.gui-fade-in-linear-enter-from,
+.gui-fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-enter-active,
+.gui-fade-in-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-fade-in-enter-from,
+.gui-fade-in-leave-active {
+  opacity: 0;
+}
+
+.gui-zoom-in-center-enter-active,
+.gui-zoom-in-center-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-zoom-in-center-enter-from,
+.gui-zoom-in-center-leave-active {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.gui-zoom-in-top-enter-active,
+.gui-zoom-in-top-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center top;
+}
+.gui-zoom-in-top-enter-active[data-popper-placement^=top],
+.gui-zoom-in-top-leave-active[data-popper-placement^=top] {
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-top-enter-from,
+.gui-zoom-in-top-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-bottom-enter-active,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-bottom-enter-from,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-left-enter-active,
+.gui-zoom-in-left-leave-active {
+  opacity: 1;
+  transform: scale(1, 1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: top left;
+}
+
+.gui-zoom-in-left-enter-from,
+.gui-zoom-in-left-leave-active {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+}
+
+.collapse-transition {
+  transition: var(--gui-transition-duration) height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.gui-collapse-transition-leave-active,
+.gui-collapse-transition-enter-active {
+  transition: var(--gui-transition-duration) max-height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.horizontal-collapse-transition {
+  transition: var(--gui-transition-duration) width ease-in-out, var(--gui-transition-duration) padding-left ease-in-out, var(--gui-transition-duration) padding-right ease-in-out;
+}
+
+.gui-list-enter-active,
+.gui-list-leave-active {
+  transition: all 1s;
+}
+
+.gui-list-enter-from,
+.gui-list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.gui-list-leave-active {
+  position: absolute !important;
+}
+
+.gui-opacity-transition {
+  transition: opacity var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-collapse {
+  --gui-collapse-border-color: var(--gui-border-color-lighter);
+  --gui-collapse-header-height: 48px;
+  --gui-collapse-header-bg-color: var(--gui-fill-color-blank);
+  --gui-collapse-header-text-color: var(--gui-text-color-primary);
+  --gui-collapse-header-font-size: 13px;
+  --gui-collapse-content-bg-color: var(--gui-fill-color-blank);
+  --gui-collapse-content-font-size: 13px;
+  --gui-collapse-content-text-color: var(--gui-text-color-primary);
+  border-top: 1px solid var(--gui-collapse-border-color);
+  border-bottom: 1px solid var(--gui-collapse-border-color);
+}
+
+.gui-collapse-item.is-disabled .gui-collapse-item__header {
+  color: var(--gui-text-color-disabled);
+  cursor: not-allowed;
+}
+
+.gui-collapse-item__header {
+  width: 100%;
+  padding: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  height: var(--gui-collapse-header-height);
+  line-height: var(--gui-collapse-header-height);
+  background-color: var(--gui-collapse-header-bg-color);
+  color: var(--gui-collapse-header-text-color);
+  cursor: pointer;
+  border-bottom: 1px solid var(--gui-collapse-border-color);
+  font-size: var(--gui-collapse-header-font-size);
+  font-weight: 500;
+  transition: border-bottom-color var(--gui-transition-duration);
+  outline: none;
+}
+.gui-collapse-item__arrow {
+  margin: 0 8px 0 auto;
+  transition: transform var(--gui-transition-duration);
+  font-weight: 300;
+}
+.gui-collapse-item__arrow.is-active {
+  transform: rotate(90deg);
+}
+
+.gui-collapse-item__header.focusing:focus:not(:hover) {
+  color: var(--gui-color-primary);
+}
+.gui-collapse-item__header.is-active {
+  border-bottom-color: transparent;
+}
+
+.gui-collapse-item__wrap {
+  will-change: height;
+  background-color: var(--gui-collapse-content-bg-color);
+  overflow: hidden;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--gui-collapse-border-color);
+}
+
+.gui-collapse-item__content {
+  padding-bottom: 25px;
+  font-size: var(--gui-collapse-content-font-size);
+  color: var(--gui-collapse-content-text-color);
+  line-height: 1.7692307692;
+}
+
+.gui-collapse-item:last-child {
+  margin-bottom: -1px;
+}
+
+.gui-collapse {
+  @apply rounded-md border-none flex flex-col gap-md;
+}
+
+.gui-collapse-item__header {
+  @apply flex px-lg py-md justify-between items-center h-auto rounded-md border-none transition-colors duration-500 ease-in-out;
+}
+.gui-collapse-item__header.is-active {
+  @apply bg-everBlue-50 rounded-bl-none rounded-br-none;
+}
+
+.gui-collapse-item__header--content {
+  @apply flex gap-xs items-center justify-center;
+}
+
+.gui-collapse-item__header--icon-left {
+  @apply flex items-center justify-center gap-xs;
+}
+.gui-collapse-item__header--icon-left svg {
+  @apply h-5 w-5 text-icon-primary;
+}
+
+.gui-collapse-item__header--text {
+  @apply flex flex-col items-start justify-center;
+}
+
+.gui-collapse-item__header--icon-right {
+  @apply flex items-center justify-center gap-xs;
+}
+.gui-collapse-item__header--icon-right svg {
+  @apply h-5 w-5 text-icon-primary;
+}
+
+.gui-collapse-item__title {
+  @apply text-6 font-semibold text-primary-txt line-clamp-2 overflow-hidden text-ellipsis;
+}
+
+.gui-collapse-item__description {
+  @apply text-2 font-medium text-secondary-txt line-clamp-1 overflow-hidden text-ellipsis;
+}
+
+.gui-collapse-item__wrap {
+  @apply border-none rounded-bl-md rounded-br-md;
+}
+
+.gui-collapse-item__content {
+  @apply px-lg py-md;
+}

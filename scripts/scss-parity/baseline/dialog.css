@@ -1,0 +1,235 @@
+/* Element Chalk Variables */
+:root {
+  --gui-popup-modal-bg-color: var(--gui-color-black);
+  --gui-popup-modal-opacity: 0.5;
+}
+
+.v-modal-enter {
+  animation: v-modal-in var(--gui-transition-duration-fast) ease;
+}
+
+.v-modal-leave {
+  animation: v-modal-out var(--gui-transition-duration-fast) ease forwards;
+}
+
+@keyframes v-modal-in {
+  0% {
+    opacity: 0;
+  }
+}
+@keyframes v-modal-out {
+  100% {
+    opacity: 0;
+  }
+}
+.v-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: var(--gui-popup-modal-opacity);
+  background: var(--gui-popup-modal-bg-color);
+}
+
+.gui-popup-parent--hidden {
+  overflow: hidden;
+}
+
+.gui-dialog {
+  @apply relative bg-sec-def-bg rounded-lg shadow-lg box-border p-8 break-words mx-auto;
+}
+.gui-dialog.is-fullscreen {
+  @apply w-full h-full m-0 rounded-none overflow-auto;
+}
+
+.gui-dialog.is-default {
+  @apply max-w-md;
+}
+
+.gui-dialog.is-fixed {
+  width: var(--gui-dialog-width);
+  max-width: none;
+}
+
+.gui-dialog.is-adaptive {
+  width: fit-content;
+  min-width: min(theme("maxWidth.sm"), 100vw - 32px);
+  max-width: min(theme("maxWidth.4xl"), 100vw - 32px);
+}
+
+@media (max-width: theme("screens.sm")) {
+  .gui-dialog {
+    @apply mt-4 mb-4 mx-4 p-6 rounded-lg;
+  }
+  .gui-dialog.is-default {
+    width: calc(100% - 2rem);
+    max-width: none;
+    min-width: 0;
+  }
+  .gui-dialog.is-fixed {
+    width: calc(100% - 2rem);
+    max-width: none;
+    min-width: 0;
+  }
+  .gui-dialog.is-adaptive {
+    width: calc(100% - 2rem);
+    max-width: none;
+    min-width: 0;
+  }
+}
+.gui-dialog:focus {
+  @apply outline-none;
+}
+.gui-dialog.is-align-center {
+  @apply m-auto;
+}
+
+.gui-dialog__wrapper {
+  @apply fixed inset-0 overflow-auto m-0;
+}
+
+.gui-dialog.is-draggable {
+  @apply cursor-move relative;
+}
+.gui-dialog.is-draggable .gui-dialog__header {
+  @apply select-none;
+}
+
+.gui-dialog.is-dragging {
+  @apply cursor-move m-0;
+  transform: none;
+}
+.gui-dialog__header {
+  @apply relative;
+}
+.gui-dialog__header .header-content {
+  @apply absolute top-0 left-0 -translate-y-4;
+}
+.gui-dialog__header.show-close {
+  @apply pr-0;
+}
+
+.gui-dialog__headerbtn {
+  @apply absolute top-0 right-0 p-0 w-lg h-lg bg-transparent border-none outline-none
+      cursor-pointer flex items-center justify-center translate-x-4 -translate-y-4;
+}
+.gui-dialog__headerbtn .gui-dialog__close {
+  @apply text-terciary-txt text-6;
+}
+.gui-dialog__headerbtn:focus, .gui-dialog__headerbtn:hover {
+  @apply text-grey-100;
+}
+
+.gui-dialog__body {
+  @apply w-full mx-auto text-center;
+}
+.gui-dialog__body .content-wrapper {
+  @apply max-w-sm mx-auto;
+}
+
+.gui-dialog__footer {
+  @apply w-full mx-auto;
+}
+.gui-dialog__footer-buttons {
+  @apply w-full;
+}
+.gui-dialog__footer-buttons.layout-dual-row {
+  @apply grid gap-xs grid-cols-2;
+}
+.gui-dialog__footer-buttons.layout-dual-row > button:nth-child(3) {
+  @apply mt-xs mx-auto col-span-2 col-start-1;
+  max-width: 50%;
+}
+@media (max-width: theme("screens.sm")) {
+  .gui-dialog__footer-buttons.layout-dual-row {
+    @apply flex flex-col;
+  }
+  .gui-dialog__footer-buttons.layout-dual-row > button:nth-child(3) {
+    @apply max-w-full mx-0 mt-xxs;
+  }
+}
+.gui-dialog__footer-buttons.layout-single-column {
+  @apply flex flex-col gap-xs;
+}
+
+.gui-dialog__title {
+  @apply font-semibold text-8 text-primary-txt block mb-md;
+}
+
+.gui-dialog__image {
+  @apply mx-auto mb-lg flex flex-col items-center;
+}
+.is-adaptive .gui-dialog__image img {
+  @apply max-w-full h-auto w-auto;
+}
+
+.gui-dialog--center {
+  text-align: center;
+}
+.gui-dialog--center .gui-dialog__body {
+  text-align: center;
+}
+
+.gui-dialog--center .gui-dialog__footer {
+  text-align: center;
+}
+
+.gui-dialog__content {
+  @apply w-full text-center mb-lg text-secondary-txt;
+}
+
+.gui-overlay-dialog {
+  @apply fixed inset-0 overflow-auto flex items-center justify-center;
+}
+
+.dialog-fade-enter-active {
+  animation: modal-fade-in var(--gui-transition-duration);
+}
+.dialog-fade-enter-active .gui-overlay-dialog {
+  animation: dialog-fade-in var(--gui-transition-duration);
+}
+
+.dialog-fade-leave-active {
+  animation: modal-fade-out var(--gui-transition-duration);
+}
+.dialog-fade-leave-active .gui-overlay-dialog {
+  animation: dialog-fade-out var(--gui-transition-duration);
+}
+
+@keyframes dialog-fade-in {
+  0% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes dialog-fade-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+}
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes modal-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

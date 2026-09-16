@@ -5,10 +5,12 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
 
-const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const ICON_SETS_PATH = join(ROOT, 'src/icon-sets.ts');
+// FA source packages live in the gitignored .fa-vendor dir (see ensure-fa.mjs),
+// not in the workspace — CI must never depend on npm.fontawesome.com.
+const require = createRequire(join(ROOT, '.fa-vendor', 'package.json'));
 
 const WEIGHT_TO_PKG = {
   solid:   '@fortawesome/pro-solid-svg-icons',
@@ -53,7 +55,7 @@ function iconExistsInPackage(weight, iconName) {
   try {
     mod = require(pkg);
   } catch (err) {
-    throw new Error(`Cannot resolve "${pkg}". Install it locally with \`yarn add -D ${pkg}\` before running this command.`);
+    throw new Error(`Cannot resolve "${pkg}" in .fa-vendor. Run \`node scripts/ensure-fa.mjs\` first (requires FONT_AWESOME_TOKEN).`);
   }
   const lookup = weight === 'kit' ? mod.fak : mod;
   const exportName = toExportName(iconName);

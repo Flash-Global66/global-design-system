@@ -1,0 +1,5 @@
+/* Element Chalk Variables */
+.gui-overlay {
+  @apply fixed inset-0 overflow-auto bg-grey-800/80;
+  pointer-events: auto;
+}

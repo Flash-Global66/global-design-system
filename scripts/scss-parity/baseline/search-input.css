@@ -1,0 +1,34 @@
+/* Element Chalk Variables */
+.gui-search-input {
+  @apply w-full;
+}
+.gui-search-input__input .gui-input__icon {
+  @apply cursor-pointer;
+}
+
+.gui-search-input__icon-container {
+  @apply flex items-center justify-center w-5 h-5 cursor-pointer;
+}
+
+.gui-search-input__icon {
+  @apply text-grey-500;
+}
+
+.gui-search-input.is-preloading {
+  @apply pointer-events-none;
+}
+
+.gui-search-input.is-disabled {
+  @apply cursor-not-allowed;
+}
+.gui-search-input.is-disabled .gui-search-input__icon {
+  @apply cursor-not-allowed;
+}
+
+.gui-search-input.is-disabled .gui-input__inner {
+  @apply cursor-not-allowed;
+}
+
+.gui-search-input.is-loading .gui-input__inner {
+  @apply cursor-wait;
+}

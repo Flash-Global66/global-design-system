@@ -1,25 +1,24 @@
 <script lang="ts" setup>
-import { computed, CSSProperties } from "vue";
-import GIconFont from "@flash-global66/g-icon-font";
-import { useNamespace } from "element-plus";
-import { isFunction, isString } from "element-plus/es/utils/index.mjs";
-import { progressProps } from "./progress";
-import type { ProgressColor } from "./progress";
+import { computed, CSSProperties } from 'vue';
+import GIconFont from '@flash-global66/g-icon-font';
+import { useNamespace } from '@flash-global66/g-utils';
+import { progressProps } from './progress';
 
 defineOptions({
-  name: "Progress",
+  // eslint-disable-next-line vue/no-reserved-component-names -- "Progress" is the established public component name, kept as-is (pre-existing, out of migration scope)
+  name: 'Progress',
 });
 
 const STATUS_COLOR_MAP: Record<string, string> = {
-  primary: "--color-progress-primary",
-  success: "--color-progress-success",
-  error: "--color-progress-error",
-  warning: "--color-progress-warning",
+  primary: '--color-progress-primary',
+  success: '--color-progress-success',
+  error: '--color-progress-error',
+  warning: '--color-progress-warning',
 };
 
 const props = defineProps(progressProps);
 
-const ns = useNamespace("progress");
+const ns = useNamespace('progress');
 
 const barStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {
@@ -34,14 +33,14 @@ const barStyle = computed<CSSProperties>(() => {
 });
 
 const relativeStrokeWidth = computed(() =>
-  ((props.strokeWidth / props.width) * 100).toFixed(1)
+  ((props.strokeWidth / props.width) * 100).toFixed(1),
 );
 
 const radius = computed(() => {
-  if (["circle", "dashboard"].includes(props.type)) {
+  if (['circle', 'dashboard'].includes(props.type)) {
     return Number.parseInt(
       `${50 - Number.parseFloat(relativeStrokeWidth.value) / 2}`,
-      10
+      10,
     );
   }
   return 0;
@@ -49,18 +48,18 @@ const radius = computed(() => {
 
 const trackPath = computed(() => {
   const r = radius.value;
-  const isDashboard = props.type === "dashboard";
+  const isDashboard = props.type === 'dashboard';
   return `
             M 50 50
-            m 0 ${isDashboard ? "" : "-"}${r}
-            a ${r} ${r} 0 1 1 0 ${isDashboard ? "-" : ""}${r * 2}
-            a ${r} ${r} 0 1 1 0 ${isDashboard ? "" : "-"}${r * 2}
+            m 0 ${isDashboard ? '' : '-'}${r}
+            a ${r} ${r} 0 1 1 0 ${isDashboard ? '-' : ''}${r * 2}
+            a ${r} ${r} 0 1 1 0 ${isDashboard ? '' : '-'}${r * 2}
             `;
 });
 
 const perimeter = computed(() => 2 * Math.PI * radius.value);
 
-const rate = computed(() => (props.type === "dashboard" ? 0.75 : 1));
+const rate = computed(() => (props.type === 'dashboard' ? 0.75 : 1));
 
 const strokeDashoffset = computed(() => {
   const offset = (-1 * perimeter.value * (1 - rate.value)) / 2;
@@ -78,32 +77,31 @@ const circlePathStyle = computed<CSSProperties>(() => ({
   }px, ${perimeter.value}px`,
   strokeDashoffset: strokeDashoffset.value,
   transition:
-    "stroke-dasharray 0.6s ease 0s, stroke 0.6s ease, opacity ease 0.6s",
+    'stroke-dasharray 0.6s ease 0s, stroke 0.6s ease, opacity ease 0.6s',
 }));
 
 const stroke = computed(() => {
-  let ret: string;
   const colorName = STATUS_COLOR_MAP[props.status] || STATUS_COLOR_MAP.primary;
-  ret = `var(${colorName})`;
+  const ret = `var(${colorName})`;
 
   return ret;
 });
 
 const statusIcon = computed(() => {
-  if (props.status === "warning") {
-    return "solid exclamation-circle";
+  if (props.status === 'warning') {
+    return 'solid exclamation-circle';
   }
-  if (props.type === "line") {
-    return props.status === "success"
-      ? "regular check-circle"
-      : "regular circle-xmark";
+  if (props.type === 'line') {
+    return props.status === 'success'
+      ? 'regular check-circle'
+      : 'regular circle-xmark';
   } else {
-    return props.status === "success" ? "regular check" : "regular times";
+    return props.status === 'success' ? 'regular check' : 'regular times';
   }
 });
 
 const progressTextSize = computed(() => {
-  return props.type === "line"
+  return props.type === 'line'
     ? 12 + props.strokeWidth * 0.4
     : props.width * 0.111111 + 2;
 });

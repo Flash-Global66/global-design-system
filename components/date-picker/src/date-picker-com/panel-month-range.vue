@@ -107,37 +107,37 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, ref, toRef, unref } from "vue";
-import dayjs from "dayjs";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { isArray } from "element-plus/es/utils/index.mjs";
-import { useLocale } from "element-plus";
-import { getDefaultValue, isValidRange } from "../utils";
+import { computed, inject, ref, toRef, unref } from 'vue';
+import dayjs from 'dayjs';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { isArray } from '@flash-global66/g-utils';
+import { useLocale } from '@flash-global66/g-hooks';
+import { getDefaultValue, isValidRange } from '../utils';
 import {
   panelMonthRangeEmits,
   panelMonthRangeProps,
-} from "../props/panel-month-range";
-import { useMonthRangeHeader } from "../composables/use-month-range-header";
-import { useRangePicker } from "../composables/use-range-picker";
-import MonthTable from "./basic-month-table.vue";
+} from '../props/panel-month-range';
+import { useMonthRangeHeader } from '../composables/use-month-range-header';
+import { useRangePicker } from '../composables/use-range-picker';
+import MonthTable from './basic-month-table.vue';
 
-import type { Dayjs } from "dayjs";
+import type { Dayjs } from 'dayjs';
 
-import es from "../lang/es";
+import es from '../lang/es';
 
 defineOptions({
-  name: "DatePickerMonthRange",
+  name: 'DatePickerMonthRange',
 });
 
 const props = defineProps(panelMonthRangeProps);
 const emit = defineEmits(panelMonthRangeEmits);
-const unit = "year";
+const unit = 'year';
 
 const { lang } = useLocale(ref(es));
-const pickerBase = inject("EP_PICKER_BASE") as any;
+const pickerBase = inject('EP_PICKER_BASE') as any;
 const { shortcuts, disabledDate } = pickerBase.props;
-const format = toRef(pickerBase.props, "format");
-const defaultValue = toRef(pickerBase.props, "defaultValue");
+const format = toRef(pickerBase.props, 'format');
+const defaultValue = toRef(pickerBase.props, 'defaultValue');
 const leftDate = ref(dayjs().locale(lang.value));
 const rightDate = ref(dayjs().locale(lang.value).add(1, unit));
 
@@ -172,7 +172,7 @@ const {
   leftYear,
   rightYear,
 } = useMonthRangeHeader({
-  unlinkPanels: toRef(props, "unlinkPanels"),
+  unlinkPanels: toRef(props, 'unlinkPanels'),
   leftDate,
   rightDate,
 });
@@ -196,17 +196,17 @@ const handleRangePick = (val: RangePickValue, close = true) => {
   if (maxDate.value === maxDate_ && minDate.value === minDate_) {
     return;
   }
-  emit("calendar-change", [minDate_.toDate(), maxDate_ && maxDate_.toDate()]);
+  emit('calendar-change', [minDate_.toDate(), maxDate_ && maxDate_.toDate()]);
   maxDate.value = maxDate_;
   minDate.value = minDate_;
 
   if (!maxDate_) {
-    emit("set-picker-option", [
-      "intermediateValue",
-      [minDate_ ? minDate_.format(format.value) : "", ""],
+    emit('set-picker-option', [
+      'intermediateValue',
+      [minDate_ ? minDate_.format(format.value) : '', ''],
     ]);
   } else {
-    emit("set-picker-option", ["intermediateValue", null]);
+    emit('set-picker-option', ['intermediateValue', null]);
   }
 
   if (!close) return;
@@ -216,28 +216,28 @@ const handleRangePick = (val: RangePickValue, close = true) => {
 const handleClear = () => {
   leftDate.value = getDefaultValue(unref(defaultValue), {
     lang: unref(lang),
-    unit: "year",
+    unit: 'year',
     unlinkPanels: props.unlinkPanels,
   })[0];
-  rightDate.value = leftDate.value.add(1, "year");
-  emit("pick", null);
+  rightDate.value = leftDate.value.add(1, 'year');
+  emit('pick', null);
 };
 
 const formatToString = (value: Dayjs | Dayjs[]) => {
   return isArray(value)
-    ? value.map((_) => _.format(format.value))
+    ? value.map(_ => _.format(format.value))
     : value.format(format.value);
 };
 
 const parseUserInput = (value: Dayjs | Dayjs[]) => {
   return isArray(value)
-    ? value.map((_) => dayjs(_, format.value).locale(lang.value))
+    ? value.map(_ => dayjs(_, format.value).locale(lang.value))
     : dayjs(value, format.value).locale(lang.value);
 };
 
 function onParsedValueChanged(
   minDate: Dayjs | undefined,
-  maxDate: Dayjs | undefined
+  maxDate: Dayjs | undefined,
 ) {
   if (props.unlinkPanels && maxDate) {
     const minDateYear = minDate?.year() || 0;
@@ -249,8 +249,8 @@ function onParsedValueChanged(
   }
 }
 
-emit("set-picker-option", ["isValidValue", isValidRange]);
-emit("set-picker-option", ["formatToString", formatToString]);
-emit("set-picker-option", ["parseUserInput", parseUserInput]);
-emit("set-picker-option", ["handleClear", handleClear]);
+emit('set-picker-option', ['isValidValue', isValidRange]);
+emit('set-picker-option', ['formatToString', formatToString]);
+emit('set-picker-option', ['parseUserInput', parseUserInput]);
+emit('set-picker-option', ['handleClear', handleClear]);
 </script>

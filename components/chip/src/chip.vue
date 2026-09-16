@@ -25,12 +25,25 @@
         <span v-if="text">{{ text }}</span>
         <slot v-else />
       </span>
-      <slot name="suffix" v-if="$slots.suffix || iconRight || closable || dropdownEnabled">
-        <span v-if="iconRight && !closable && !dropdownEnabled" :class="ns.em(size, 'suffix-icon')">
+      <slot
+        name="suffix"
+        v-if="$slots.suffix || iconRight || closable || dropdownEnabled"
+      >
+        <span
+          v-if="iconRight && !closable && !dropdownEnabled"
+          :class="ns.em(size, 'suffix-icon')"
+        >
           <g-icon-font :name="iconRight" />
         </span>
-        <span v-else-if="dropdownEnabled && !closable" :class="[ns.em(size, 'suffix-icon'), ns.e('dropdown-icon')]">
-          <g-icon-font :name="dropdownVisible ? 'regular chevron-up' : 'regular chevron-down'" />
+        <span
+          v-else-if="dropdownEnabled && !closable"
+          :class="[ns.em(size, 'suffix-icon'), ns.e('dropdown-icon')]"
+        >
+          <g-icon-font
+            :name="
+              dropdownVisible ? 'regular chevron-up' : 'regular chevron-down'
+            "
+          />
         </span>
         <span
           v-else-if="closable"
@@ -49,59 +62,69 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { useNamespace } from 'element-plus'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { GDropdown } from '@flash-global66/g-dropdown'
-import { chipEmits, chipProps, type DropdownCommand } from './chip'
+import { computed, ref } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GDropdown } from '@flash-global66/g-dropdown';
+import { chipEmits, chipProps, type DropdownCommand } from './chip';
 
 defineOptions({
-  name: 'GChip'
-})
+  name: 'GChip',
+});
 
-const props = defineProps(chipProps)
-const emit = defineEmits(chipEmits)
+const props = defineProps(chipProps);
+const emit = defineEmits(chipEmits);
 
-const ns = useNamespace('chip')
-const dropdownVisible = ref(false)
+const ns = useNamespace('chip');
+const dropdownVisible = ref(false);
 
 const dropdownProps = computed(() => {
+  /* eslint-disable @typescript-eslint/no-unused-vars -- extracted only to exclude them via the rest spread below */
   const {
-    type, variant, size, iconLeft, iconRight, closable,
-    text, selected, disabled, dropdownEnabled,
+    type,
+    variant,
+    size,
+    iconLeft,
+    iconRight,
+    closable,
+    text,
+    selected,
+    disabled,
+    dropdownEnabled,
     ...dropdownProps
-  } = props
-  
-  return dropdownProps
-})
+  } = props;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
+
+  return dropdownProps;
+});
 
 const containerKls = computed(() => {
-  const { variant, size, selected, disabled, type } = props
-  
+  const { variant, size, selected, disabled, type } = props;
+
   return [
     ns.b(),
     ns.m(type),
     ns.m(variant),
     ns.e(size),
     ns.is('selected', selected),
-    ns.is('disabled', disabled)
-  ]
-})
+    ns.is('disabled', disabled),
+  ];
+});
 
 const handleClose = (event: MouseEvent) => {
-  emit('close', event)
-}
+  emit('close', event);
+};
 
 const handleClick = (event: MouseEvent | KeyboardEvent) => {
-  if (!props.disabled) emit('click', event)
-}
+  if (!props.disabled) emit('click', event);
+};
 
 const handleCommand = (command: DropdownCommand) => {
-  emit('command', command)
-}
+  emit('command', command);
+};
 
 const handleDropdownVisibleChange = (visible: boolean) => {
-  dropdownVisible.value = visible
-  emit('visible-change', visible)
-}
+  dropdownVisible.value = visible;
+  emit('visible-change', visible);
+};
 </script>

@@ -1,5 +1,5 @@
-import { buildProps } from 'element-plus/es/utils/index.mjs'
-import type { ExtractPropTypes } from 'vue'
+import { buildProps } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
 
 export const searchInputProps = buildProps({
   /**
@@ -56,26 +56,28 @@ export const searchInputProps = buildProps({
     type: Number,
     default: 300,
   },
-} as const)
+} as const);
 
 export const searchInputEmits = {
   /**
    * @description Emitted when the input value changes
    * @param {string} value - Updated value
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- param kept for emit payload type inference
   'update:modelValue': (value: string) => true,
 
   /**
    * @description Emitted when a search is performed (after debounce or on Enter key)
    * @param {string} value - Search query
    */
-  'search': (value: string) => true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- param kept for emit payload type inference
+  search: (value: string) => true,
 
   /**
    * @description Emitted when the input is cleared
    */
-  'clear': () => true,
-}
+  clear: () => true,
+};
 
-export type SearchInputProps = ExtractPropTypes<typeof searchInputProps>
-export type SearchInputEmits = typeof searchInputEmits
+export type SearchInputProps = ExtractPropTypes<typeof searchInputProps>;
+export type SearchInputEmits = typeof searchInputEmits;

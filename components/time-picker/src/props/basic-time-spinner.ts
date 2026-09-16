@@ -1,8 +1,8 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index";
-import { disabledTimeListsProps } from "../props/shared";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { disabledTimeListsProps } from '../props/shared';
 
-import type { ExtractPropTypes } from "vue";
-import type { Dayjs } from "dayjs";
+import type { ExtractPropTypes } from 'vue';
+import type { Dayjs } from 'dayjs';
 
 export const basicTimeSpinnerProps = buildProps({
   role: {
@@ -20,8 +20,8 @@ export const basicTimeSpinnerProps = buildProps({
   arrowControl: Boolean,
   amPmMode: {
     // 'a': am/pm; 'A': AM/PM
-    type: definePropType<"a" | "A" | "">(String),
-    default: "",
+    type: definePropType<'a' | 'A' | ''>(String),
+    default: '',
   },
   ...disabledTimeListsProps,
 } as const);

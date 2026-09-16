@@ -1,9 +1,9 @@
 @use "sass:map";
 
-@use "element-plus/theme-chalk/src/mixins/mixins" as *;
-@use "element-plus/theme-chalk/src/mixins/utils" as *;
-@use "element-plus/theme-chalk/src/mixins/var" as *;
-@use "element-plus/theme-chalk/src/segmented.scss" as *;
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "./styles/segmented.scss" as *;
 
 
 @mixin disabled-bg {

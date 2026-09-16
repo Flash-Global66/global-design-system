@@ -1,0 +1,51 @@
+{
+  "name": "@flash-global66/g-utils",
+  "version": "0.15.6",
+  "author": "Global66",
+  "license": "MIT",
+  "buildable": false,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./mixins": "./styles/mixins.scss",
+    "./config": "./styles/config.scss",
+    "./tokens": "./styles/tokens.scss",
+    "./base": "./styles/base.scss",
+    "./function": "./styles/function.scss",
+    "./utils": "./styles/utils.scss",
+    "./var-mixins": "./styles/var-mixins.scss",
+    "./transition": "./styles/transition.scss",
+    "./icon": "./styles/icon.scss",
+    "./popup": "./styles/popup.scss",
+    "./popper": "./styles/popper.scss",
+    "./scrollbar": "./styles/scrollbar.scss",
+    "./tooltip-v2": "./styles/tooltip-v2.scss",
+    "./option": "./styles/option.scss",
+    "./virtual-list": "./styles/virtual-list.scss",
+    "./overlay": "./styles/overlay.scss",
+    "./button-mixins": "./styles/button-mixins.scss",
+    "./radio-group": "./styles/radio-group.scss"
+  },
+  "sideEffects": [
+    "**/*.scss",
+    "**/*.css"
+  ],
+  "files": [
+    "index.ts",
+    "src",
+    "styles"
+  ],
+  "dependencies": {
+    "lodash-unified": "1.0.3",
+    "normalize-wheel-es": "1.2.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  }
+}

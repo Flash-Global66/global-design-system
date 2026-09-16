@@ -1,0 +1,233 @@
+/* Element Chalk Variables */
+.gui-progress {
+  position: relative;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+.gui-progress__text {
+  font-size: 14px;
+  color: var(--gui-text-color-regular);
+  margin-left: 5px;
+  min-width: 50px;
+  line-height: 1;
+}
+.gui-progress__text i {
+  vertical-align: middle;
+  display: block;
+}
+
+.gui-progress--circle, .gui-progress--dashboard {
+  display: inline-block;
+}
+.gui-progress--circle .gui-progress__text, .gui-progress--dashboard .gui-progress__text {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  transform: translate(0, -50%);
+}
+.gui-progress--circle .gui-progress__text i, .gui-progress--dashboard .gui-progress__text i {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.gui-progress--without-text .gui-progress__text {
+  display: none;
+}
+.gui-progress--without-text .gui-progress-bar {
+  padding-right: 0;
+  margin-right: 0;
+  display: block;
+}
+
+.gui-progress--text-inside .gui-progress-bar {
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.gui-progress.is-success .gui-progress-bar__inner {
+  background-color: var(--gui-color-success);
+}
+.gui-progress.is-success .gui-progress__text {
+  color: var(--gui-color-success);
+}
+
+.gui-progress.is-warning .gui-progress-bar__inner {
+  background-color: var(--gui-color-warning);
+}
+.gui-progress.is-warning .gui-progress__text {
+  color: var(--gui-color-warning);
+}
+
+.gui-progress.is-exception .gui-progress-bar__inner {
+  background-color: var(--gui-color-danger);
+}
+.gui-progress.is-exception .gui-progress__text {
+  color: var(--gui-color-danger);
+}
+
+.gui-progress-bar {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+.gui-progress-bar__outer {
+  height: 6px;
+  border-radius: 100px;
+  background-color: var(--gui-border-color-lighter);
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+}
+
+.gui-progress-bar__inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: var(--gui-color-primary);
+  text-align: right;
+  border-radius: 100px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: width 0.6s ease;
+}
+.gui-progress-bar__inner::after {
+  display: inline-block;
+  content: "";
+  height: 100%;
+  vertical-align: middle;
+}
+
+.gui-progress-bar__inner--indeterminate {
+  transform: translateZ(0);
+  animation: indeterminate 3s infinite;
+}
+
+.gui-progress-bar__inner--striped {
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent);
+  background-size: 1.25em 1.25em;
+}
+.gui-progress-bar__inner--striped.gui-progress-bar__inner--striped-flow {
+  animation: striped-flow 3s linear infinite;
+}
+
+.gui-progress-bar__innerText {
+  display: inline-block;
+  vertical-align: middle;
+  color: #ffffff;
+  font-size: 12px;
+  margin: 0 5px;
+}
+
+@keyframes progress {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 32px 0;
+  }
+}
+@keyframes indeterminate {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes striped-flow {
+  0% {
+    background-position: -100%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+.gui-progress {
+  @apply relative leading-none flex items-center;
+}
+.gui-progress__text {
+  @apply text-2 text-gray-700 ml-xs min-w-[50px] leading-none;
+}
+.gui-progress__text i {
+  @apply align-middle block;
+}
+
+.gui-progress--circle, .gui-progress--dashboard {
+  display: inline-block;
+}
+.gui-progress--circle .gui-progress__text, .gui-progress--dashboard .gui-progress__text {
+  @apply absolute top-1/2 left-0 w-full text-center m-0 -translate-y-1/2;
+}
+.gui-progress--circle .gui-progress__text i, .gui-progress--dashboard .gui-progress__text i {
+  @apply align-middle inline-block;
+}
+
+.gui-progress--without-text .gui-progress__text {
+  @apply hidden;
+}
+.gui-progress--without-text .gui-progress-bar {
+  @apply pr-0 mr-0 block;
+}
+
+.gui-progress--text-inside .gui-progress-bar {
+  @apply pr-0 mr-0;
+}
+
+.gui-progress.is-success .gui-progress-bar__inner {
+  @apply bg-success-bg;
+}
+.gui-progress.is-success .gui-progress__text {
+  @apply text-success-txt;
+}
+
+.gui-progress.is-warning .gui-progress-bar__inner {
+  @apply bg-warning-bg;
+}
+.gui-progress.is-warning .gui-progress__text {
+  @apply text-warning-txt;
+}
+
+.gui-progress.is-error .gui-progress-bar__inner {
+  @apply bg-error-bg;
+}
+.gui-progress.is-error .gui-progress__text {
+  @apply text-error-txt;
+}
+
+.gui-progress-bar {
+  @apply grow box-border;
+}
+.gui-progress-bar__outer {
+  @apply h-[6px] rounded-full bg-gray-200 overflow-hidden relative align-middle;
+}
+
+.gui-progress-bar__inner {
+  @apply absolute left-0 top-0 h-full bg-primary-bg text-right rounded-full leading-none whitespace-nowrap transition-[width] duration-500 ease-linear;
+}
+.gui-progress-bar__inner::after {
+  display: inline-block;
+  content: "";
+  height: 100%;
+  vertical-align: middle;
+}
+
+.gui-progress-bar__inner--indeterminate {
+  transform: translateZ(0);
+  @apply animate-progress-indeterminate;
+}
+
+.gui-progress-bar__inner--striped {
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent);
+  @apply bg-[length:1.25em_1.25em];
+}
+.gui-progress-bar__inner--striped.gui-progress-bar__inner--striped-flow {
+  @apply animate-progress-striped-flow;
+}
+
+.gui-progress-bar__innerText {
+  @apply inline-block align-middle text-white text-xs mx-[5px];
+}

@@ -27,7 +27,10 @@
     />
     <div
       v-else
-      :class="[ns.e('placeholder'), `text-size-${sizeCustom?.trim() || !size ? 'md' : size}`]"
+      :class="[
+        ns.e('placeholder'),
+        `text-size-${sizeCustom?.trim() || !size ? 'md' : size}`,
+      ]"
       role="img"
       :aria-label="`Error al cargar el logo: ${name}`"
     >
@@ -37,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from 'element-plus';
+import { useNamespace } from '@flash-global66/g-utils';
 import { logoProps, validateLogoProps } from './logo.props';
 import { useLogo } from './hooks/use-logo';
 

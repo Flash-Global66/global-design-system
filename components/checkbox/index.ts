@@ -1,21 +1,21 @@
 import {
   withInstall,
   withNoopInstall,
-  SFCWithInstall
-} from 'element-plus/es/utils/index.mjs'
+  SFCWithInstall,
+} from '@flash-global66/g-utils';
 
-import Checkbox from './src/checkbox.vue'
-import CheckboxGroup from './src/checkbox-group.vue'
+import Checkbox from './src/checkbox.vue';
+import CheckboxGroup from './src/checkbox-group.vue';
 
 export const GCheckbox: SFCWithInstall<typeof Checkbox> & {
-  CheckboxGroup: typeof CheckboxGroup
+  CheckboxGroup: typeof CheckboxGroup;
 } = withInstall(Checkbox, {
   CheckboxGroup,
-})
-export default GCheckbox
+});
+export default GCheckbox;
 export const GCheckboxGroup: SFCWithInstall<typeof CheckboxGroup> =
-  withNoopInstall(CheckboxGroup)
+  withNoopInstall(CheckboxGroup);
 
-export * from './src/checkbox'
-export * from './src/checkbox-group'
-export * from './src/constants'
+export * from './src/checkbox';
+export * from './src/checkbox-group';
+export * from './src/constants';

@@ -1,9 +1,9 @@
-import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue'
-import type { Instance } from '@popperjs/core'
+import type { CSSProperties, ComputedRef, InjectionKey, Ref } from 'vue';
+import type { Instance } from '@popperjs/core';
 
 export type Measurable = {
-  getBoundingClientRect: () => DOMRect
-}
+  getBoundingClientRect: () => DOMRect;
+};
 
 /**
  * triggerRef indicates the element that triggers popper
@@ -11,21 +11,21 @@ export type Measurable = {
  * referenceRef indicates the element that popper content relative with
  */
 export type GPopperInjectionContext = {
-  triggerRef: Ref<Measurable | undefined>
-  contentRef: Ref<HTMLElement | undefined>
-  popperInstanceRef: Ref<Instance | undefined>
-  referenceRef: Ref<Measurable | undefined>
-  role: ComputedRef<string>
-}
+  triggerRef: Ref<Measurable | undefined>;
+  contentRef: Ref<HTMLElement | undefined>;
+  popperInstanceRef: Ref<Instance | undefined>;
+  referenceRef: Ref<Measurable | undefined>;
+  role: ComputedRef<string>;
+};
 
 export type GPopperContentInjectionContext = {
-  arrowRef: Ref<HTMLElement | undefined>
-  arrowOffset: Ref<number | undefined>
-  arrowStyle: ComputedRef<CSSProperties>
-}
+  arrowRef: Ref<HTMLElement | undefined>;
+  arrowOffset: Ref<number | undefined>;
+  arrowStyle: ComputedRef<CSSProperties>;
+};
 
 export const POPPER_INJECTION_KEY: InjectionKey<GPopperInjectionContext> =
-  Symbol('popper')
+  Symbol.for('popper');
 
 export const POPPER_CONTENT_INJECTION_KEY: InjectionKey<GPopperContentInjectionContext> =
-  Symbol('popperContent')
+  Symbol.for('popperContent');

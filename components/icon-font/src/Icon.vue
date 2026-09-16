@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { debugWarn, isString } from "element-plus/es/utils/index.mjs";
+import { debugWarn, isString } from '@flash-global66/g-utils';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -31,23 +31,20 @@ import * as KitIcons from './lib/fa-kit';
 import { iconProps } from './icon';
 
 // Registro de iconos
-library.add(
-  SolidPro,
-  RegularPro,
-  LightPro,
-  BrandsFree,
-  DuotonePro,
-  KitIcons
-);
+library.add(SolidPro, RegularPro, LightPro, BrandsFree, DuotonePro, KitIcons);
 
 const props = defineProps(iconProps);
 
 const selectedIcon = computed(() => {
-  if(!isString(props.name)) {
+  if (!isString(props.name)) {
     return debugWarn('IconFont', 'Icon name is invalid');
-  };
+  }
   const [weight, iconName] = props.name.split(' ');
-  if (!iconName) return debugWarn('IconFont', 'Icon name has to be in the format: "weight icon-name"');
+  if (!iconName)
+    return debugWarn(
+      'IconFont',
+      'Icon name has to be in the format: "weight icon-name"',
+    );
 
   const prefix = {
     solid: 'fas',
@@ -55,7 +52,7 @@ const selectedIcon = computed(() => {
     light: 'fal',
     brands: 'fab',
     duotone: 'fad',
-    kit: 'fak'
+    kit: 'fak',
   }[weight];
 
   return [prefix, iconName];

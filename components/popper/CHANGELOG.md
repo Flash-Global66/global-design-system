@@ -3,116 +3,150 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.0.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.11...@flash-global66/g-popper@0.0.12) (2026-03-25)
+## [0.0.32](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.31...@flash-global66/g-popper@0.0.32) (2026-07-14)
 
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.31](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.30...@flash-global66/g-popper@0.0.31) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.30](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.29...@flash-global66/g-popper@0.0.30) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.29](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.28...@flash-global66/g-popper@0.0.29) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.28](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.27...@flash-global66/g-popper@0.0.28) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.27](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.26...@flash-global66/g-popper@0.0.27) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.26](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.25...@flash-global66/g-popper@0.0.26) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.24...@flash-global66/g-popper@0.0.25) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.24](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.23...@flash-global66/g-popper@0.0.24) (2026-07-13)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.23](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.22...@flash-global66/g-popper@0.0.23) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.22](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.21...@flash-global66/g-popper@0.0.22) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.21](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.20...@flash-global66/g-popper@0.0.21) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.20](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.19...@flash-global66/g-popper@0.0.20) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.19](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.18...@flash-global66/g-popper@0.0.19) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.18](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.17...@flash-global66/g-popper@0.0.18) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.16...@flash-global66/g-popper@0.0.17) (2026-07-12)
+
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.16](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.15...@flash-global66/g-popper@0.0.16) (2026-07-12)
 
 ### Bug Fixes
 
-* add validation to dont close edit in table ([#184](https://github.com/Flash-Global66/global-design-system/issues/184)) ([aa3b8e3](https://github.com/Flash-Global66/global-design-system/commit/aa3b8e33a2bdf697c50e51352fa8b0b4e25f666e))
+- **g-hooks,components:** use Symbol.for for cross-package injection keys ([af11601](https://github.com/Flash-Global66/global-design-system/commit/af116010dab0f7b80d77023285c5d9479dcbea6f))
 
+## [0.0.15](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.14...@flash-global66/g-popper@0.0.15) (2026-07-11)
 
+**Note:** Version bump only for package @flash-global66/g-popper
 
+## [0.0.14](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.13...@flash-global66/g-popper@0.0.14) (2026-07-11)
 
+**Note:** Version bump only for package @flash-global66/g-popper
+
+## [0.0.13](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.12...@flash-global66/g-popper@0.0.13) (2026-07-11)
+
+### Bug Fixes
+
+- **popper:** type usePopper options with @popperjs/core Placement/Options ([9890d79](https://github.com/Flash-Global66/global-design-system/commit/9890d7967e1b768fa4e42434440e4e2d7bc10448))
+
+## [0.0.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.11...@flash-global66/g-popper@0.0.12) (2026-03-25)
+
+### Bug Fixes
+
+- add validation to dont close edit in table ([#184](https://github.com/Flash-Global66/global-design-system/issues/184)) ([aa3b8e3](https://github.com/Flash-Global66/global-design-system/commit/aa3b8e33a2bdf697c50e51352fa8b0b4e25f666e))
 
 ## [0.0.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.10...@flash-global66/g-popper@0.0.11) (2025-08-14)
 
-
 ### Bug Fixes
 
-* add peer depencies missings ([892626b](https://github.com/Flash-Global66/global-design-system/commit/892626b15ca0667435622926012c0b7e988e22f0))
-
-
-
-
+- add peer depencies missings ([892626b](https://github.com/Flash-Global66/global-design-system/commit/892626b15ca0667435622926012c0b7e988e22f0))
 
 ## [0.0.10](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.9...@flash-global66/g-popper@0.0.10) (2025-04-08)
 
-
 ### Bug Fixes
 
-* update peerDependencies of popper and tooltip ([f177e55](https://github.com/Flash-Global66/global-design-system/commit/f177e55c9ed5c9e1e37a2ffaaa307724775e8603))
-
-
-
-
+- update peerDependencies of popper and tooltip ([f177e55](https://github.com/Flash-Global66/global-design-system/commit/f177e55c9ed5c9e1e37a2ffaaa307724775e8603))
 
 ## [0.0.9](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.8...@flash-global66/g-popper@0.0.9) (2025-04-08)
 
-
 ### Bug Fixes
 
-* update peerDependencies and stories ([76c0178](https://github.com/Flash-Global66/global-design-system/commit/76c0178ac1561a1b658f32256df61152c5a8dda7))
-
-
-
-
+- update peerDependencies and stories ([76c0178](https://github.com/Flash-Global66/global-design-system/commit/76c0178ac1561a1b658f32256df61152c5a8dda7))
 
 ## [0.0.8](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.7...@flash-global66/g-popper@0.0.8) (2025-04-07)
 
-
 ### Bug Fixes
 
-* add improvements in components tooltip and dropdown ([b2a19da](https://github.com/Flash-Global66/global-design-system/commit/b2a19dae828782f9dc4d1a56fbb02888d1354d85))
-* add slot to package.json of popper ([05e477d](https://github.com/Flash-Global66/global-design-system/commit/05e477d018a0ea3de8ea77788a7ffb1063257b70))
-
-
-
-
+- add improvements in components tooltip and dropdown ([b2a19da](https://github.com/Flash-Global66/global-design-system/commit/b2a19dae828782f9dc4d1a56fbb02888d1354d85))
+- add slot to package.json of popper ([05e477d](https://github.com/Flash-Global66/global-design-system/commit/05e477d018a0ea3de8ea77788a7ffb1063257b70))
 
 ## 0.0.7 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.6 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.5 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.4 (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## [0.0.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popper@0.0.2...@flash-global66/g-popper@0.0.3) (2025-03-28)
 
-
 ### Bug Fixes
 
-* update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
-
-
-
-
+- update changes ([d1884de](https://github.com/Flash-Global66/global-design-system/commit/d1884de11e4e9522c2d6912d932122a75aabf9e7))
 
 ## 0.0.2 (2025-03-28)
 

@@ -43,7 +43,11 @@
           {{ props.uploadText }}
         </p>
         <p
-          v-if="props.restrictionText || props.acceptExtNames.length || effectiveMaxSize"
+          v-if="
+            props.restrictionText ||
+            props.acceptExtNames.length ||
+            effectiveMaxSize
+          "
           :class="ns.e('restriction-text')"
           :id="`${props.id || 'drag-drop'}-restriction`"
         >
@@ -90,7 +94,11 @@
               />
               <div :class="ns.e('file-item-info')">
                 <span :class="ns.e('file-item-name')">{{ file.name }}</span>
-                <span v-if="props.showFileSize" :class="ns.e('file-item-size')">{{ formatFileSize(file.size) }}</span>
+                <span
+                  v-if="props.showFileSize"
+                  :class="ns.e('file-item-size')"
+                  >{{ formatFileSize(file.size) }}</span
+                >
               </div>
             </div>
           </template>
@@ -99,12 +107,18 @@
           <template v-else>
             <div :class="ns.e('file-status-icon')">
               <g-icon-font
-                :name="getFileStatusForIndex(index) === FILE_STATUS.ERROR ? 'solid times' : 'solid check'"
+                :name="
+                  getFileStatusForIndex(index) === FILE_STATUS.ERROR
+                    ? 'solid times'
+                    : 'solid check'
+                "
                 :class="[
                   ns.e('icon'),
                   {
-                    [ns.is('success')]: getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
-                    [ns.is('error')]: getFileStatusForIndex(index) === FILE_STATUS.ERROR,
+                    [ns.is('success')]:
+                      getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
+                    [ns.is('error')]:
+                      getFileStatusForIndex(index) === FILE_STATUS.ERROR,
                   },
                 ]"
               />
@@ -113,8 +127,10 @@
               :class="[
                 ns.e('file-name'),
                 {
-                  [ns.is('error')]: getFileStatusForIndex(index) === FILE_STATUS.ERROR,
-                  [ns.is('success')]: getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
+                  [ns.is('error')]:
+                    getFileStatusForIndex(index) === FILE_STATUS.ERROR,
+                  [ns.is('success')]:
+                    getFileStatusForIndex(index) !== FILE_STATUS.ERROR,
                 },
               ]"
             >
@@ -126,7 +142,9 @@
         <div :class="ns.e('item-actions')">
           <!-- Normal state: show file size and delete button -->
           <template v-if="!isLoading">
-            <span v-if="props.showFileSize" :class="ns.e('file-size')">{{ formatFileSize(file.size) }}</span>
+            <span v-if="props.showFileSize" :class="ns.e('file-size')">{{
+              formatFileSize(file.size)
+            }}</span>
             <g-icon-button
               v-if="props.showRemoveButton"
               icon="solid trash-alt"
@@ -150,23 +168,30 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from "vue";
-import { useNamespace } from "element-plus";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { GIconButton } from "@flash-global66/g-icon-button";
-import { GProgress } from "@flash-global66/g-progress";
-import { FILE_STATUS } from "./attach-file.type";
-import type { FileStatus, DragDropTypeProps } from "./attach-file.type";
-import { formatFileSize, parseSizeString, getFileStatus, openFileDialogHelper, createRemoveFileHandler, getPrimaryError } from "./attach-file-helpers";
+import { ref, computed } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GIconButton } from '@flash-global66/g-icon-button';
+import { GProgress } from '@flash-global66/g-progress';
+import { FILE_STATUS } from './attach-file.type';
+import type { FileStatus, DragDropTypeProps } from './attach-file.type';
+import {
+  formatFileSize,
+  parseSizeString,
+  getFileStatus,
+  openFileDialogHelper,
+  createRemoveFileHandler,
+  getPrimaryError,
+} from './attach-file-helpers';
 
-const ns = useNamespace("attach-file");
+const ns = useNamespace('attach-file');
 
 const props = withDefaults(defineProps<DragDropTypeProps>(), {
   id: undefined,
-  restrictionText: "",
-  maxSize: "",
+  restrictionText: '',
+  maxSize: '',
   maxFiles: undefined,
-  fileStatuses: () => ({} as Record<number, FileStatus>),
+  fileStatuses: () => ({}) as Record<number, FileStatus>,
   loadingState: false,
   uploading: false,
   uploadProgress: 0,
@@ -174,12 +199,12 @@ const props = withDefaults(defineProps<DragDropTypeProps>(), {
 });
 
 const emit = defineEmits([
-  "update:modelValue",
-  "change", 
-  "error",
-  "onRetry",
-  "file-input-change",
-  "files-drop"
+  'update:modelValue',
+  'change',
+  'error',
+  'onRetry',
+  'file-input-change',
+  'files-drop',
 ]);
 
 const fileInput = ref<HTMLInputElement>();
@@ -190,24 +215,35 @@ const dragCounter = ref(0);
 
 const safeModelValue = computed(() => props.modelValue || []);
 const isLoading = computed(() => props.loadingState || props.uploading);
-const effectiveMaxSize = computed(() => props.maxSize ? parseSizeString(props.maxSize) : 0);
+const effectiveMaxSize = computed(() =>
+  props.maxSize ? parseSizeString(props.maxSize) : 0,
+);
 
 const defaultRestrictionText = computed(() => {
-  return props.restrictionText || "";
+  return props.restrictionText || '';
 });
 
 const primaryError = computed(() => getPrimaryError(props.errors));
 
-const removeFile = computed(() => createRemoveFileHandler(safeModelValue.value, emit, true, isLoading.value));
+const removeFile = computed(() =>
+  createRemoveFileHandler(safeModelValue.value, emit, true, isLoading.value),
+);
 
-const getFileStatusForIndex = (index: number) => getFileStatus(index, props.fileErrors, false, props.uploading, props.fileProgress);
+const getFileStatusForIndex = (index: number) =>
+  getFileStatus(
+    index,
+    props.fileErrors,
+    false,
+    props.uploading,
+    props.fileProgress,
+  );
 
 function openFileDialog() {
   openFileDialogHelper(fileInput, props.disabled, isLoading.value);
 }
 
 function onFileInputChange(event: Event) {
-  emit("file-input-change", event as Event);
+  emit('file-input-change', event as Event);
 }
 
 function onDragEnter(event: DragEvent) {
@@ -232,12 +268,12 @@ function onDrop(event: DragEvent) {
   event.preventDefault();
   dragCounter.value = 0;
   isDragging.value = false;
-  
+
   if (props.disabled || isLoading.value) return;
-  
+
   const files = event.dataTransfer?.files;
   if (files && files.length > 0) {
-    emit("files-drop", files as FileList);
+    emit('files-drop', files as FileList);
   }
 }
 
@@ -249,9 +285,9 @@ const handleKeySpace = (event: KeyboardEvent) => {
 };
 const handleButtonClick = (event: MouseEvent) => {
   event.stopPropagation();
-  
+
   if (Object.keys(props.fileErrors).length > 0 || props.errors.length > 0) {
-    emit("onRetry");
+    emit('onRetry');
   } else {
     openFileDialog();
   }
@@ -267,4 +303,3 @@ defineExpose({
   openFileDialog,
 });
 </script>
-

@@ -1,6 +1,6 @@
-import { buildProps } from "element-plus/es/utils/index";
-import type { ExtractPropTypes } from "vue";
-import type Thumb from "./thumb.vue";
+import { buildProps } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import type Thumb from './thumb.vue';
 
 export const thumbProps = buildProps({
   vertical: Boolean,

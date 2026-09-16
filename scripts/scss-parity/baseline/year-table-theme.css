@@ -1,0 +1,85 @@
+/* Element Chalk Variables */
+.gui-year-table {
+  font-size: 12px;
+  margin: -1px;
+  border-collapse: collapse;
+}
+.gui-year-table .gui-icon {
+  color: var(--gui-datepicker-icon-color);
+}
+.gui-year-table td {
+  width: 68px;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.gui-year-table td .gui-date-table-cell {
+  height: 44px;
+  box-sizing: border-box;
+}
+.gui-year-table td.today .gui-date-table-cell__text {
+  color: var(--gui-color-primary);
+  font-weight: bold;
+}
+.gui-year-table td.today.start-date .gui-date-table-cell__text, .gui-year-table td.today.end-date .gui-date-table-cell__text {
+  color: #ffffff;
+}
+.gui-year-table td.disabled .gui-date-table-cell__text {
+  background-color: var(--gui-fill-color-light);
+  cursor: not-allowed;
+  color: var(--gui-text-color-placeholder);
+}
+.gui-year-table td.disabled .gui-date-table-cell__text:hover {
+  color: var(--gui-text-color-placeholder);
+}
+.gui-year-table td .gui-date-table-cell__text {
+  width: 80px;
+  height: 44px;
+  display: block;
+  line-height: 44px;
+  color: var(--gui-datepicker-text-color);
+  border-radius: 18px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 500;
+  z-index: 1;
+}
+.gui-year-table td .gui-date-table-cell__text:hover {
+  @apply bg-everBlue-50 bg-opacity-60;
+  border-radius: 18px;
+}
+.gui-year-table td.in-range .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+.gui-year-table td.in-range .gui-date-table-cell:hover {
+  background-color: var(--gui-datepicker-inrange-hover-bg-color);
+}
+.gui-year-table td.start-date .gui-date-table-cell, .gui-year-table td.end-date .gui-date-table-cell {
+  color: #ffffff;
+}
+.gui-year-table td.start-date .gui-date-table-cell__text, .gui-year-table td.end-date .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-year-table td.start-date .gui-date-table-cell {
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+.gui-year-table td.end-date .gui-date-table-cell {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.gui-year-table td.current:not(.disabled) .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-year-table td:focus-visible {
+  outline: none;
+}
+.gui-year-table td:focus-visible .gui-date-table-cell__text {
+  outline: 2px solid var(--gui-datepicker-active-color);
+  outline-offset: 1px;
+}

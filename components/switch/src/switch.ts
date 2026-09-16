@@ -5,17 +5,13 @@ import {
   isNumber,
   isString,
   isValidComponentSize,
-} from 'element-plus/es/utils/index'
-import {
-  CHANGE_EVENT,
-  INPUT_EVENT,
-  UPDATE_MODEL_EVENT,
-} from './constants'
-import { useAriaProps } from 'element-plus'
-import { IconString } from '@flash-global66/g-icon-font'
-import type { DefineComponent, ExtractPropTypes, PropType } from 'vue'
-import type Switch from './switch.vue'
-import type { ComponentSize } from 'element-plus/es/constants'
+} from '@flash-global66/g-utils';
+import { CHANGE_EVENT, INPUT_EVENT, UPDATE_MODEL_EVENT } from './constants';
+import { useAriaProps } from '@flash-global66/g-hooks';
+import { IconString } from '@flash-global66/g-icon-font';
+import type { ExtractPropTypes, PropType } from 'vue';
+import type Switch from './switch.vue';
+import type { ComponentSize } from '@flash-global66/g-utils';
 
 export const switchProps = buildProps({
   /**
@@ -134,9 +130,9 @@ export const switchProps = buildProps({
     type: [String, Number],
   },
   ...useAriaProps(['ariaLabel']),
-} as const)
+});
 
-export type SwitchProps = ExtractPropTypes<typeof switchProps>
+export type SwitchProps = ExtractPropTypes<typeof switchProps>;
 
 export const switchEmits = {
   [UPDATE_MODEL_EVENT]: (val: boolean | string | number) =>
@@ -145,7 +141,7 @@ export const switchEmits = {
     isBoolean(val) || isString(val) || isNumber(val),
   [INPUT_EVENT]: (val: boolean | string | number) =>
     isBoolean(val) || isString(val) || isNumber(val),
-}
-export type SwitchEmits = typeof switchEmits
+};
+export type SwitchEmits = typeof switchEmits;
 
-export type SwitchInstance = InstanceType<typeof Switch>
+export type SwitchInstance = InstanceType<typeof Switch>;

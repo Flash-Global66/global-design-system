@@ -107,12 +107,38 @@ import { GInline } from '@flash-global66/g-inline';
     type: {
       description: "Tipo de mensaje a mostrar. Colores de fondo y estilo de texto.",
       control: "select",
-      options: ["success", "info", "warning", "error"],
+      options: ["success", "info", "warning", "error", "card"],
       defaultValue: "success",
     },
     links: {
       description: "Lista de enlaces interactivos con etiquetas y acciones.",
       control: "object",
+    },
+    shadow: {
+      description: "Activa el sombreado del componente.",
+      control: "boolean",
+      defaultValue: false,
+    },
+    border: {
+      description: "Muestra u oculta el borde del componente.",
+      control: "boolean",
+      defaultValue: true,
+    },
+    iconAlign: {
+      description: "Alineación vertical del ícono izquierdo.",
+      control: "select",
+      options: ["top", "medium", "bottom"],
+      defaultValue: "medium",
+    },
+    iconFill: {
+      description: "Agrega un fondo detrás del ícono izquierdo.",
+      control: "boolean",
+      defaultValue: false,
+    },
+    showArrow: {
+      description: "Muestra u oculta el ícono de flecha en cada enlace.",
+      control: "boolean",
+      defaultValue: true,
     },
     ariaLabel: {
       description: "Etiqueta ARIA para accesibilidad.",
@@ -150,6 +176,11 @@ import { GInline } from '@flash-global66/g-inline';
         action: () => alert("Acción 2"),
       },
     ],
+    shadow: false,
+    border: true,
+    iconAlign: "medium",
+    iconFill: false,
+    showArrow: true,
     ariaLabel: "inline",
   },
 };
@@ -305,6 +336,74 @@ export const WithoutIcon: Story = {
           title="Sin ícono"
           description="Este mensaje no tiene ícono"
         />
+      </g-config-provider>
+    `
+  })
+};
+
+// Variante card
+export const Card: Story = {
+  name: 'Card',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Variante card: fondo blanco, sin borde y con sombra. Ideal para destacar información dentro de un panel o sección.'
+      }
+    }
+  },
+  render: () => ({
+    components: { GInline, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <g-inline
+          type="card"
+          title="Más información"
+          description="Consulta los detalles de tu transacción en el historial."
+          icon="solid info-circle"
+          icon-align="top"
+          :icon-fill="true"
+          :links="[{ label: 'Ver detalle', action: () => {} }]"
+          :show-arrow="true"
+          :hide-close="true"
+        />
+      </g-config-provider>
+    `
+  })
+};
+
+// Icon fill y shadow
+export const WithIconFillAndShadow: Story = {
+  name: 'Con fill y sombra',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Combinación de icon-fill y shadow para dar mayor énfasis visual al componente.'
+      }
+    }
+  },
+  render: () => ({
+    components: { GInline, GConfigProvider },
+    template: `
+      <g-config-provider>
+        <div class="space-y-4">
+          <g-inline
+            type="info"
+            title="Con fill y sombra"
+            description="El ícono tiene fondo y el componente tiene sombra."
+            icon="solid info-circle"
+            :icon-fill="true"
+            :shadow="true"
+            :links="[{ label: 'Más información', action: () => {} }]"
+          />
+          <g-inline
+            type="warning"
+            title="Alineación superior"
+            description="Cuando el contenido es largo, el ícono se alinea al tope del componente para mantener la jerarquía visual."
+            icon="solid triangle-exclamation"
+            :icon-fill="true"
+            icon-align="top"
+          />
+        </div>
       </g-config-provider>
     `
   })

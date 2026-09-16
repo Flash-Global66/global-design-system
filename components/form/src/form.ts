@@ -4,18 +4,24 @@ import {
   isArray,
   isBoolean,
   isString,
-} from "element-plus/es/utils/index.mjs";
+} from '@flash-global66/g-utils';
 
-import type { ExtractPropTypes } from "vue";
-import type { FormItemProp } from "./form-item";
-import type { FormRules } from "./types";
+import type { ExtractPropTypes } from 'vue';
+import type { FormItemProp } from './form-item';
+import type { FormRules } from './types';
 
+// NOTE: no `as const` here — `@flash-global66/g-utils`'s `buildProps` is a
+// simple identity passthrough (unlike element-plus's, which has generic
+// machinery to narrow literal unions from a `readonly` input). Keeping
+// `as const` would make prop definitions like `scrollIntoViewOptions`'s
+// `[Object, Boolean]` a `readonly` tuple, which is incompatible with Vue's
+// mutable `PropType` overloads for `defineProps`.
 export const formMetaProps = buildProps({
   /**
    * @description Whether to disable all components in this form. If set to `true`, it will override the `disabled` prop of the inner component.
    */
   disabled: Boolean,
-} as const);
+});
 
 export const formProps = buildProps({
   ...formMetaProps,
@@ -49,7 +55,7 @@ export const formProps = buildProps({
   scrollIntoViewOptions: {
     type: [Object, Boolean],
   },
-} as const);
+});
 export type FormProps = ExtractPropTypes<typeof formProps>;
 export type FormMetaProps = ExtractPropTypes<typeof formMetaProps>;
 

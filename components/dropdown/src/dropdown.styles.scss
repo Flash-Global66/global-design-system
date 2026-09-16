@@ -1,10 +1,10 @@
-@use "element-plus/theme-chalk/src/dropdown.scss" as *;
-@use "element-plus/theme-chalk/src/scrollbar.scss" as *;
-@use "element-plus/theme-chalk/src/popper.scss" as *;
-@use 'element-plus/theme-chalk/src/mixins/mixins' as *;
-@use 'element-plus/theme-chalk/src/mixins/utils' as *;
-@use 'element-plus/theme-chalk/src/mixins/var' as *;
-@use 'element-plus/theme-chalk/src/common/var' as *;
+@use "./styles/dropdown.scss" as *;
+@use "@flash-global66/g-utils/scrollbar" as *;
+@use "@flash-global66/g-utils/popper" as *;
+@use '@flash-global66/g-utils/mixins' as *;
+@use '@flash-global66/g-utils/utils' as *;
+@use '@flash-global66/g-utils/var-mixins' as *;
+@use '@flash-global66/g-utils/tokens' as *;
 
 @include b('dropdown') {
   @include e("popper") {

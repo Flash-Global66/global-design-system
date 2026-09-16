@@ -1,16 +1,21 @@
-import { computed, ref } from "vue";
-import type { SetupContext } from "vue";
-import { useFormItem } from "element-plus";
-import { IconButtonEmits, IconButtonProps } from "./icon-button";
-import { useRipple } from "./use-ripple";
+import { computed, ref } from 'vue';
+import type { SetupContext } from 'vue';
+import { useFormItem } from '@flash-global66/g-form';
+import { IconButtonEmits, IconButtonProps } from './icon-button';
+import { useRipple } from './use-ripple';
 
-export const useIconButton = (props: IconButtonProps, emit: SetupContext<IconButtonEmits>["emit"]) => {
-  const _disabled = computed(() => props.disabled);
+export const useIconButton = (
+  props: IconButtonProps,
+  emit: SetupContext<IconButtonEmits>['emit'],
+) => {
   const _ref = ref<HTMLElement>();
   const { form } = useFormItem();
-  const { ripples, handleRipple, removeRipple } = useRipple(() => _disabled.value);
+  const _disabled = computed(() => props.disabled || form?.disabled || false);
+  const { ripples, handleRipple, removeRipple } = useRipple(
+    () => _disabled.value,
+  );
 
-  const componentId = computed(() => (!props.href ? "button" : "a"));
+  const componentId = computed(() => (!props.href ? 'button' : 'a'));
 
   const _props = computed(() => {
     if (!props.href) {
@@ -25,8 +30,8 @@ export const useIconButton = (props: IconButtonProps, emit: SetupContext<IconBut
 
   const allAttrs = computed(() => ({
     ..._props.value,
-    "aria-disabled": props.disabled,
-    role: props.href ? "link" : "button",
+    'aria-disabled': props.disabled,
+    role: props.href ? 'link' : 'button',
     ...(props.href
       ? { href: props.href, target: props.target, download: props.download }
       : { autofocus: props.autofocus }),
@@ -34,8 +39,10 @@ export const useIconButton = (props: IconButtonProps, emit: SetupContext<IconBut
     onMousedown: handleMouseDown,
     onPointerdown: handleRipple,
     onKeydown: [
-      (e: KeyboardEvent) => e.key === " " && (e.preventDefault(), handleClick(e as any)),
-      (e: KeyboardEvent) => e.key === "Enter" && (e.preventDefault(), handleClick(e as any)),
+      (e: KeyboardEvent) =>
+        e.key === ' ' && (e.preventDefault(), handleClick(e as any)),
+      (e: KeyboardEvent) =>
+        e.key === 'Enter' && (e.preventDefault(), handleClick(e as any)),
     ],
   }));
 
@@ -45,7 +52,7 @@ export const useIconButton = (props: IconButtonProps, emit: SetupContext<IconBut
       evt.stopPropagation();
       return;
     }
-    emit("click", evt);
+    emit('click', evt);
   };
 
   const handleMouseDown = (evt: MouseEvent) => {
@@ -53,7 +60,7 @@ export const useIconButton = (props: IconButtonProps, emit: SetupContext<IconBut
       evt.preventDefault();
       return;
     }
-    emit("mousedown", evt);
+    emit('mousedown', evt);
   };
 
   return {
@@ -69,4 +76,3 @@ export const useIconButton = (props: IconButtonProps, emit: SetupContext<IconBut
     allAttrs,
   };
 };
-

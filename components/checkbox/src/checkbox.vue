@@ -55,13 +55,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, useSlots } from "vue";
-import { useNamespace } from "element-plus";
-import { checkboxEmits, checkboxProps } from "./checkbox";
-import { useCheckbox } from "./composables";
+import { computed, useSlots } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { checkboxEmits, checkboxProps } from './checkbox';
+import { useCheckbox } from './composables';
 
 defineOptions({
-  name: "GuiCheckbox",
+  name: 'GuiCheckbox',
 });
 
 const props = defineProps(checkboxProps);
@@ -82,29 +82,29 @@ const {
   onClickRoot,
 } = useCheckbox(props, slots);
 
-const ns = useNamespace("checkbox");
+const ns = useNamespace('checkbox');
 
 const baseComponent = computed(() => {
-  return !hasOwnLabel.value && isLabeledByFormItem ? "span" : "label";
+  return !hasOwnLabel.value && isLabeledByFormItem ? 'span' : 'label';
 });
 
 const compKls = computed(() => {
   return [
     ns.b(),
-    ns.is("disabled", isDisabled.value),
-    ns.is("checked", isChecked.value),
-    ns.is("border", props.border),
-    ns.is("invert", props.invert),
+    ns.is('disabled', isDisabled.value),
+    ns.is('checked', isChecked.value),
+    ns.is('border', props.border),
+    ns.is('invert', props.invert),
   ];
 });
 
 const spanKls = computed(() => {
   return [
-    ns.e("input"),
-    ns.is("disabled", isDisabled.value),
-    ns.is("checked", isChecked.value),
-    ns.is("indeterminate", props.indeterminate),
-    ns.is("focus", isFocused.value),
+    ns.e('input'),
+    ns.is('disabled', isDisabled.value),
+    ns.is('checked', isChecked.value),
+    ns.is('indeterminate', props.indeterminate),
+    ns.is('focus', isFocused.value),
   ];
 });
 </script>

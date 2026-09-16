@@ -6,12 +6,12 @@ import {
   ref,
   toRef,
   watch,
-} from "vue";
-import { useId } from "element-plus";
-import { formContextKey, formItemContextKey } from "../constants";
+} from 'vue';
+import { useId } from '@flash-global66/g-hooks';
+import { formContextKey, formItemContextKey } from '../constants';
 
-import type { ComputedRef, Ref, WatchStopHandle } from "vue";
-import type { FormItemContext } from "../types";
+import type { ComputedRef, Ref, WatchStopHandle } from 'vue';
+import type { FormItemContext } from '../types';
 
 export const useFormItem = () => {
   const form = inject(formContextKey, undefined);
@@ -38,7 +38,7 @@ export const useFormItemInputId = (
     formItemContext?: FormItemContext;
     disableIdGeneration?: ComputedRef<boolean> | Ref<boolean>;
     disableIdManagement?: ComputedRef<boolean> | Ref<boolean>;
-  }
+  },
 ) => {
   if (!disableIdGeneration) {
     disableIdGeneration = ref<boolean>(false);
@@ -62,7 +62,7 @@ export const useFormItemInputId = (
   // Generate id for ElFormItem label if not provided as prop
   onMounted(() => {
     idUnwatch = watch(
-      [toRef(props, "id"), disableIdGeneration] as any,
+      [toRef(props, 'id'), disableIdGeneration] as any,
       ([id, disableIdGeneration]: [string, boolean]) => {
         const newId = id ?? (!disableIdGeneration ? useId().value : undefined);
         if (newId !== inputId.value) {
@@ -75,7 +75,7 @@ export const useFormItemInputId = (
           inputId.value = newId;
         }
       },
-      { immediate: true }
+      { immediate: true },
     );
   });
 

@@ -3,24 +3,23 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, provide, reactive, toRefs, watch } from "vue";
-import { debugWarn, isFunction } from "element-plus/es/utils/index.mjs";
-import { useNamespace } from "element-plus";
-import { formContextKey } from "./constants";
-import { formEmits, formProps } from "./form";
-import { filterFields } from "./utils";
+import { computed, provide, reactive, toRefs, watch } from 'vue';
+import { debugWarn, isFunction, useNamespace } from '@flash-global66/g-utils';
+import { formContextKey } from './constants';
+import { formEmits, formProps } from './form';
+import { filterFields } from './utils';
 
-import type { ValidateFieldsError } from "async-validator";
-import type { Arrayable } from "element-plus/es/utils/index.mjs";
+import type { ValidateFieldsError } from 'async-validator';
+import type { Arrayable } from '@flash-global66/g-utils';
 import type {
   FormContext,
   FormItemContext,
   FormValidateCallback,
   FormValidationResult,
-} from "./types";
-import type { FormItemProp } from "./form-item";
+} from './types';
+import type { FormItemProp } from './form-item';
 
-const COMPONENT_NAME = "GForm";
+const COMPONENT_NAME = 'GForm';
 defineOptions({
   name: COMPONENT_NAME,
 });
@@ -29,38 +28,38 @@ const emit = defineEmits(formEmits);
 
 const fields: FormItemContext[] = [];
 
-const ns = useNamespace("form");
+const ns = useNamespace('form');
 
-const getField: FormContext["getField"] = (prop) => {
-  return fields.find((field) => field.prop === prop);
+const getField: FormContext['getField'] = prop => {
+  return fields.find(field => field.prop === prop);
 };
 
-const addField: FormContext["addField"] = (field) => {
+const addField: FormContext['addField'] = field => {
   fields.push(field);
 };
 
-const removeField: FormContext["removeField"] = (field) => {
+const removeField: FormContext['removeField'] = field => {
   if (field.prop) {
     fields.splice(fields.indexOf(field), 1);
   }
 };
 
-const resetFields: FormContext["resetFields"] = (properties = []) => {
+const resetFields: FormContext['resetFields'] = (properties = []) => {
   if (!props.model) {
-    debugWarn(COMPONENT_NAME, "model is required for resetFields to work.");
+    debugWarn(COMPONENT_NAME, 'model is required for resetFields to work.');
     return;
   }
-  filterFields(fields, properties).forEach((field) => field.resetField());
+  filterFields(fields, properties).forEach(field => field.resetField());
 };
 
-const clearValidate: FormContext["clearValidate"] = (props = []) => {
-  filterFields(fields, props).forEach((field) => field.clearValidate());
+const clearValidate: FormContext['clearValidate'] = (props = []) => {
+  filterFields(fields, props).forEach(field => field.clearValidate());
 };
 
 const isValidatable = computed(() => {
   const hasModel = !!props.model;
   if (!hasModel) {
-    debugWarn(COMPONENT_NAME, "model is required for validate to work.");
+    debugWarn(COMPONENT_NAME, 'model is required for validate to work.');
   }
   return hasModel;
 });
@@ -70,18 +69,18 @@ const obtainValidateFields = (props: Arrayable<FormItemProp>) => {
 
   const filteredFields = filterFields(fields, props);
   if (!filteredFields.length) {
-    debugWarn(COMPONENT_NAME, "please pass correct props!");
+    debugWarn(COMPONENT_NAME, 'please pass correct props!');
     return [];
   }
   return filteredFields;
 };
 
 const validate = async (
-  callback?: FormValidateCallback
+  callback?: FormValidateCallback,
 ): FormValidationResult => validateField(undefined, callback);
 
 const doValidateField = async (
-  props: Arrayable<FormItemProp> = []
+  props: Arrayable<FormItemProp> = [],
 ): Promise<boolean> => {
   if (!isValidatable.value) return false;
 
@@ -91,8 +90,8 @@ const doValidateField = async (
   let validationErrors: ValidateFieldsError = {};
   for (const field of fields) {
     try {
-      await field.validate("");
-      if (field.validateState === "error") field.resetField();
+      await field.validate('');
+      if (field.validateState === 'error') field.resetField();
     } catch (fields) {
       validationErrors = {
         ...validationErrors,
@@ -105,9 +104,9 @@ const doValidateField = async (
   return Promise.reject(validationErrors);
 };
 
-const validateField: FormContext["validateField"] = async (
+const validateField: FormContext['validateField'] = async (
   modelProps = [],
-  callback
+  callback,
 ) => {
   const shouldThrow = !isFunction(callback);
   try {
@@ -141,10 +140,10 @@ watch(
   () => props.rules,
   () => {
     if (props.validateOnRuleChange) {
-      validate().catch((err) => debugWarn(err));
+      validate().catch(err => debugWarn(err));
     }
   },
-  { deep: true, flush: "post" }
+  { deep: true, flush: 'post' },
 );
 
 provide(
@@ -159,7 +158,7 @@ provide(
     getField,
     addField,
     removeField,
-  })
+  }),
 );
 
 defineExpose({

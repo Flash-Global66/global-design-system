@@ -1,10 +1,10 @@
-import dayjs from "dayjs";
-import { isArray } from "element-plus/es/utils/index.mjs";
-import { rangeArr } from "@flash-global66/g-time-picker";
+import dayjs from 'dayjs';
+import { isArray } from '@flash-global66/g-utils';
+import { rangeArr } from '@flash-global66/g-time-picker';
 
-import type { Dayjs } from "dayjs";
-import type { DateCell } from "./date-picker.type";
-import type { DisabledDateType } from "./props/shared";
+import type { Dayjs } from 'dayjs';
+import type { DateCell } from './date-picker.type';
+import type { DisabledDateType } from './props/shared';
 
 type DayRange = [Dayjs | undefined, Dayjs | undefined];
 
@@ -20,7 +20,7 @@ export const isValidRange = (range: DayRange): boolean => {
 
 type GetDefaultValueParams = {
   lang: string;
-  unit: "month" | "year";
+  unit: 'month' | 'year';
   unlinkPanels: boolean;
 };
 
@@ -28,15 +28,13 @@ export type DefaultValue = [Date, Date] | Date | undefined;
 
 export const getDefaultValue = (
   defaultValue: DefaultValue,
-  { lang, unit, unlinkPanels }: GetDefaultValueParams
+  { lang, unit, unlinkPanels }: GetDefaultValueParams,
 ) => {
   let start: Dayjs;
 
   if (isArray(defaultValue)) {
-    let [left, right] = defaultValue.map((d) => dayjs(d).locale(lang));
-    if (!unlinkPanels) {
-      right = left.add(1, unit);
-    }
+    const [left, initialRight] = defaultValue.map(d => dayjs(d).locale(lang));
+    const right = unlinkPanels ? initialRight : left.add(1, unit);
     return [left, right];
   } else if (defaultValue) {
     start = dayjs(defaultValue);
@@ -54,14 +52,14 @@ type Dimension = {
 
 type BuildPickerTableMetadata = {
   startDate?: Dayjs | null;
-  unit: "month" | "day";
+  unit: 'month' | 'day';
   columnIndexOffset: number;
   now: Dayjs;
   nextEndDate: Dayjs | null;
   relativeDateGetter: (index: number) => Dayjs;
   setCellMetadata?: (
     cell: DateCell,
-    dimension: { rowIndex: number; columnIndex: number }
+    dimension: { rowIndex: number; columnIndex: number },
   ) => void;
   setRowMetadata?: (row: DateCell[]) => void;
 };
@@ -78,7 +76,7 @@ export const buildPickerTable = (
     relativeDateGetter,
     setCellMetadata,
     setRowMetadata,
-  }: BuildPickerTableMetadata
+  }: BuildPickerTableMetadata,
 ) => {
   for (let rowIndex = 0; rowIndex < dimension.row; rowIndex++) {
     const row = rows[rowIndex];
@@ -88,7 +86,7 @@ export const buildPickerTable = (
         cell = {
           row: rowIndex,
           column: columnIndex,
-          type: "normal",
+          type: 'normal',
           inRange: false,
           start: false,
           end: false,
@@ -99,7 +97,7 @@ export const buildPickerTable = (
       cell.dayjs = nextStartDate;
       cell.date = nextStartDate.toDate();
       cell.timestamp = nextStartDate.valueOf();
-      cell.type = "normal";
+      cell.type = 'normal';
 
       cell.inRange =
         !!(
@@ -126,7 +124,7 @@ export const buildPickerTable = (
       const isToday = nextStartDate.isSame(now, unit);
 
       if (isToday) {
-        cell.type = "today";
+        cell.type = 'today';
       }
       setCellMetadata?.(cell, { rowIndex, columnIndex });
       row[columnIndex + columnIndexOffset] = cell;
@@ -138,21 +136,21 @@ export const buildPickerTable = (
 export const datesInMonth = (year: number, month: number, lang: string) => {
   const firstDay = dayjs()
     .locale(lang)
-    .startOf("month")
+    .startOf('month')
     .month(month)
     .year(year);
   const numOfDays = firstDay.daysInMonth();
-  return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
+  return rangeArr(numOfDays).map(n => firstDay.add(n, 'day').toDate());
 };
 
 export const getValidDateOfMonth = (
   year: number,
   month: number,
   lang: string,
-  disabledDate?: DisabledDateType
+  disabledDate?: DisabledDateType,
 ) => {
-  const _value = dayjs().year(year).month(month).startOf("month");
-  const _date = datesInMonth(year, month, lang).find((date) => {
+  const _value = dayjs().year(year).month(month).startOf('month');
+  const _date = datesInMonth(year, month, lang).find(date => {
     return !disabledDate?.(date);
   });
   if (_date) {
@@ -164,7 +162,7 @@ export const getValidDateOfMonth = (
 export const getValidDateOfYear = (
   value: Dayjs,
   lang: string,
-  disabledDate?: DisabledDateType
+  disabledDate?: DisabledDateType,
 ) => {
   const year = value.year();
   if (!disabledDate?.(value.toDate())) {

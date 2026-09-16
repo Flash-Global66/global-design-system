@@ -1,14 +1,10 @@
-import { computed, getCurrentInstance, inject, nextTick, watch } from 'vue'
-import { useFormItem, useFormItemInputId } from '@flash-global66/g-form'
-import { debugWarn } from 'element-plus/es/utils/index.mjs'
-import { checkboxGroupContextKey } from '../constants'
+import { computed, getCurrentInstance, inject, nextTick, watch } from 'vue';
+import { useFormItem, useFormItemInputId } from '@flash-global66/g-form';
+import { debugWarn } from '@flash-global66/g-utils';
+import { checkboxGroupContextKey } from '../constants';
 
-import type { CheckboxProps } from '../checkbox'
-import type {
-  CheckboxDisabled,
-  CheckboxModel,
-  CheckboxStatus,
-} from './index'
+import type { CheckboxProps } from '../checkbox';
+import type { CheckboxDisabled, CheckboxModel, CheckboxStatus } from './index';
 
 export const useCheckboxEvent = (
   props: CheckboxProps,
@@ -21,66 +17,66 @@ export const useCheckboxEvent = (
   }: Pick<CheckboxModel, 'model' | 'isLimitExceeded'> &
     Pick<CheckboxStatus, 'hasOwnLabel'> &
     Pick<CheckboxDisabled, 'isDisabled'> &
-    Pick<ReturnType<typeof useFormItemInputId>, 'isLabeledByFormItem'>
+    Pick<ReturnType<typeof useFormItemInputId>, 'isLabeledByFormItem'>,
 ) => {
-  const checkboxGroup = inject(checkboxGroupContextKey, undefined)
-  const { formItem } = useFormItem()
-  const { emit } = getCurrentInstance()!
+  const checkboxGroup = inject(checkboxGroupContextKey, undefined);
+  const { formItem } = useFormItem();
+  const { emit } = getCurrentInstance()!;
 
   function getLabeledValue(value: string | number | boolean) {
     return [true, props.trueValue].includes(value)
-      ? props.trueValue ?? true
-      : props.falseValue ?? false
+      ? (props.trueValue ?? true)
+      : (props.falseValue ?? false);
   }
 
   function emitChangeEvent(
     checked: string | number | boolean,
-    e: InputEvent | MouseEvent
+    e: InputEvent | MouseEvent,
   ) {
-    emit('change', getLabeledValue(checked), e)
+    emit('change', getLabeledValue(checked), e);
   }
 
   function handleChange(e: Event) {
-    if (isLimitExceeded.value) return
+    if (isLimitExceeded.value) return;
 
-    const target = e.target as HTMLInputElement
-    emit('change', getLabeledValue(target.checked), e)
+    const target = e.target as HTMLInputElement;
+    emit('change', getLabeledValue(target.checked), e);
   }
 
   async function onClickRoot(e: MouseEvent) {
-    if (isLimitExceeded.value) return
+    if (isLimitExceeded.value) return;
 
     if (!hasOwnLabel.value && !isDisabled.value && isLabeledByFormItem.value) {
       // fix: https://github.com/element-plus/element-plus/issues/9981
-      const eventTargets: EventTarget[] = e.composedPath()
+      const eventTargets: EventTarget[] = e.composedPath();
       const hasLabel = eventTargets.some(
-        (item) => (item as HTMLElement).tagName === 'LABEL'
-      )
+        item => (item as HTMLElement).tagName === 'LABEL',
+      );
       if (!hasLabel) {
         model.value = getLabeledValue(
-          [false, props.falseValue].includes(model.value)
-        )
-        await nextTick()
-        emitChangeEvent(model.value, e)
+          [false, props.falseValue].includes(model.value),
+        );
+        await nextTick();
+        emitChangeEvent(model.value, e);
       }
     }
   }
 
   const validateEvent = computed(
-    () => checkboxGroup?.validateEvent || props.validateEvent
-  )
+    () => checkboxGroup?.validateEvent || props.validateEvent,
+  );
 
   watch(
     () => props.modelValue,
     () => {
       if (validateEvent.value) {
-        formItem?.validate('change').catch((err) => debugWarn(err))
+        formItem?.validate('change').catch(err => debugWarn(err));
       }
-    }
-  )
+    },
+  );
 
   return {
     handleChange,
     onClickRoot,
-  }
-}
+  };
+};

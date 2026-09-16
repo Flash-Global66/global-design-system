@@ -29,7 +29,12 @@
       @before-hide="handleBeforeHideTooltip"
     >
       <template #content>
-        <g-scrollbar ref="scrollbar" :wrap-style="wrapStyle" tag="div" :view-class="ns.e('list')">
+        <g-scrollbar
+          ref="scrollbar"
+          :wrap-style="wrapStyle"
+          tag="div"
+          :view-class="ns.e('list')"
+        >
           <slot name="dropdown-additional-top" />
           <g-roving-focus-group
             :loop="loop"
@@ -57,7 +62,12 @@
         </g-scrollbar>
       </template>
       <template #default>
-        <g-only-child :id="triggerId" ref="triggeringElementRef" role="button" :tabindex="tabindex">
+        <g-only-child
+          :id="triggerId"
+          ref="triggeringElementRef"
+          role="button"
+          :tabindex="tabindex"
+        >
           <slot name="default" />
         </g-only-child>
       </template>
@@ -76,22 +86,21 @@ import {
   ref,
   toRef,
   unref,
-  watch
-} from 'vue'
-import GTooltip from '@flash-global66/g-tooltip'
-import GScrollbar from '@flash-global66/g-scrollbar'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import GRovingFocusGroup from '@flash-global66/g-roving-focus-group'
-import { GOnlyChild } from '@flash-global66/g-slot'
-import { addUnit, ensureArray } from 'element-plus/es/utils/index'
-import GDropdownMenu from './dropdown-menu.vue'
-import GDropdownItem from './dropdown-item.vue'
-import { useId, useLocale, useNamespace } from 'element-plus'
-import { GCollection as GDropdownCollection, dropdownProps } from './dropdown'
-import { DROPDOWN_INJECTION_KEY } from './tokens'
+  watch,
+} from 'vue';
+import GTooltip from '@flash-global66/g-tooltip';
+import GScrollbar from '@flash-global66/g-scrollbar';
+import GRovingFocusGroup from '@flash-global66/g-roving-focus-group';
+import { GOnlyChild } from '@flash-global66/g-slot';
+import { addUnit, ensureArray, useNamespace } from '@flash-global66/g-utils';
+import GDropdownMenu from './dropdown-menu.vue';
+import GDropdownItem from './dropdown-item.vue';
+import { useId, useLocale } from '@flash-global66/g-hooks';
+import { GCollection as GDropdownCollection, dropdownProps } from './dropdown';
+import { DROPDOWN_INJECTION_KEY } from './tokens';
 
-import type { TooltipInstance } from '@flash-global66/g-tooltip'
-import type { CSSProperties } from 'vue'
+import type { TooltipInstance } from '@flash-global66/g-tooltip';
+import type { CSSProperties } from 'vue';
 
 export default defineComponent({
   name: 'GDropdown',
@@ -103,30 +112,29 @@ export default defineComponent({
     GTooltip,
     GRovingFocusGroup,
     GOnlyChild,
-    GIconFont
   },
   props: dropdownProps,
   emits: ['visible-change', 'click', 'command'],
   setup(props, { emit }) {
-    const _instance = getCurrentInstance()
-    const ns = useNamespace('dropdown')
-    const { t } = useLocale()
+    const _instance = getCurrentInstance();
+    const ns = useNamespace('dropdown');
+    const { t } = useLocale();
 
-    const triggeringElementRef = ref()
-    const referenceElementRef = ref()
-    const popperRef = ref<TooltipInstance>()
-    const contentRef = ref<HTMLElement>()
-    const scrollbar = ref(null)
-    const currentTabId = ref<string | null>(null)
-    const isUsingKeyboard = ref(false)
+    const triggeringElementRef = ref();
+    const referenceElementRef = ref();
+    const popperRef = ref<TooltipInstance>();
+    const contentRef = ref<HTMLElement>();
+    const scrollbar = ref(null);
+    const currentTabId = ref<string | null>(null);
+    const isUsingKeyboard = ref(false);
 
     const wrapStyle = computed<CSSProperties>(() => ({
-      maxHeight: addUnit(props.maxHeight)
-    }))
-    const trigger = computed(() => ensureArray(props.trigger))
+      maxHeight: addUnit(props.maxHeight),
+    }));
+    const trigger = computed(() => ensureArray(props.trigger));
 
-    const defaultTriggerId = useId().value
-    const triggerId = computed<string>(() => props.id || defaultTriggerId)
+    const defaultTriggerId = useId().value;
+    const triggerId = computed<string>(() => props.id || defaultTriggerId);
 
     // The goal of this code is to focus on the tooltip triggering element when it is hovered.
     // This is a temporary fix for where closing the dropdown through pointerleave event focuses on a
@@ -136,42 +144,57 @@ export default defineComponent({
       [triggeringElementRef, trigger],
       ([triggeringElement, trigger], [prevTriggeringElement]) => {
         if (prevTriggeringElement?.$el?.removeEventListener) {
-          prevTriggeringElement.$el.removeEventListener('pointerenter', onAutofocusTriggerEnter)
+          prevTriggeringElement.$el.removeEventListener(
+            'pointerenter',
+            onAutofocusTriggerEnter,
+          );
         }
         if (triggeringElement?.$el?.removeEventListener) {
-          triggeringElement.$el.removeEventListener('pointerenter', onAutofocusTriggerEnter)
+          triggeringElement.$el.removeEventListener(
+            'pointerenter',
+            onAutofocusTriggerEnter,
+          );
         }
-        if (triggeringElement?.$el?.addEventListener && trigger.includes('hover')) {
-          triggeringElement.$el.addEventListener('pointerenter', onAutofocusTriggerEnter)
+        if (
+          triggeringElement?.$el?.addEventListener &&
+          trigger.includes('hover')
+        ) {
+          triggeringElement.$el.addEventListener(
+            'pointerenter',
+            onAutofocusTriggerEnter,
+          );
         }
       },
-      { immediate: true, flush: 'post' }
-    )
+      { immediate: true, flush: 'post' },
+    );
 
     onBeforeUnmount(() => {
       if (triggeringElementRef.value?.$el?.removeEventListener) {
-        triggeringElementRef.value.$el.removeEventListener('pointerenter', onAutofocusTriggerEnter)
+        triggeringElementRef.value.$el.removeEventListener(
+          'pointerenter',
+          onAutofocusTriggerEnter,
+        );
       }
-    })
+    });
 
     function handleClick() {
-      handleClose()
+      handleClose();
     }
 
     function handleClose() {
-      popperRef.value?.onClose()
+      popperRef.value?.onClose();
     }
 
     function handleOpen() {
-      popperRef.value?.onOpen()
+      popperRef.value?.onOpen();
     }
 
     function commandHandler(...args: any[]) {
-      emit('command', ...args)
+      emit('command', ...args);
     }
 
     function onAutofocusTriggerEnter() {
-      triggeringElementRef?.value?.$el?.focus()
+      triggeringElementRef?.value?.$el?.focus();
     }
 
     function onItemEnter() {
@@ -179,45 +202,45 @@ export default defineComponent({
     }
 
     function onItemLeave() {
-      const contentEl = unref(contentRef)
+      const contentEl = unref(contentRef);
 
       if (trigger.value.includes('hover') && contentEl) {
         // Use nextTick to avoid recursive updates
         nextTick(() => {
-          contentEl?.focus()
-        })
+          contentEl?.focus();
+        });
       }
-      currentTabId.value = null
+      currentTabId.value = null;
     }
 
     function handleCurrentTabIdChange(id: string) {
       // Use nextTick to avoid recursive updates
       nextTick(() => {
-        currentTabId.value = id
-      })
+        currentTabId.value = id;
+      });
     }
 
     function handleEntryFocus(e: Event) {
       if (!isUsingKeyboard.value) {
-        e.preventDefault()
-        e.stopImmediatePropagation()
+        e.preventDefault();
+        e.stopImmediatePropagation();
       }
     }
 
     function handleBeforeShowTooltip() {
-      emit('visible-change', true)
+      emit('visible-change', true);
     }
 
     function handleShowTooltip(event?: Event) {
       if (event?.type === 'keydown' && contentRef?.value) {
         nextTick(() => {
-          contentRef?.value?.focus()
-        })
+          contentRef?.value?.focus();
+        });
       }
     }
 
     function handleBeforeHideTooltip() {
-      emit('visible-change', false)
+      emit('visible-change', false);
     }
 
     provide(DROPDOWN_INJECTION_KEY, {
@@ -226,32 +249,32 @@ export default defineComponent({
       triggerId,
       isUsingKeyboard,
       onItemEnter,
-      onItemLeave
-    })
+      onItemLeave,
+    });
 
     provide('gDropdown', {
       instance: _instance,
       handleClick,
       commandHandler,
       trigger: toRef(props, 'trigger'),
-      hideOnClick: toRef(props, 'hideOnClick')
-    })
+      hideOnClick: toRef(props, 'hideOnClick'),
+    });
 
     const onFocusAfterTrapped = (e: Event) => {
-      e.preventDefault()
+      e.preventDefault();
       if (contentRef?.value?.focus) {
         // Use nextTick to avoid recursive updates
         nextTick(() => {
           contentRef.value?.focus({
-            preventScroll: true
-          })
-        })
+            preventScroll: true,
+          });
+        });
       }
-    }
+    };
 
     const handlerMainButtonClick = (event: MouseEvent) => {
-      emit('click', event)
-    }
+      emit('click', event);
+    };
 
     return {
       t,
@@ -273,8 +296,8 @@ export default defineComponent({
       contentRef,
       triggeringElementRef,
       referenceElementRef,
-      actions: computed(() => props.actions)
-    }
-  }
-})
+      actions: computed(() => props.actions),
+    };
+  },
+});
 </script>

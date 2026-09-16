@@ -2,7 +2,7 @@
   <div
     ref="wrapperRef"
     :class="[nsDate.is('active', isFocused), $attrs.class]"
-    :style="($attrs.style as CSSProperties)"
+    :style="$attrs.style as CSSProperties"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -40,36 +40,37 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from "vue";
-import { useAttrs, useFocusController, useNamespace } from "element-plus";
-import { timePickerRangeTriggerProps } from "./props";
-import type { CSSProperties } from "vue";
-import { useResizeObserver } from "@vueuse/core";
-import { isNil } from "lodash-unified";
+import { ref, computed } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { useAttrs, useFocusController } from '@flash-global66/g-hooks';
+import { timePickerRangeTriggerProps } from './props';
+import type { CSSProperties } from 'vue';
+import { useResizeObserver } from '@vueuse/core';
+import { isNil } from 'lodash-unified';
 
 defineOptions({
-  name: "PickerRangeTrigger",
+  name: 'PickerRangeTrigger',
   inheritAttrs: false,
 });
 
 const props = defineProps(timePickerRangeTriggerProps);
 const emit = defineEmits([
-  "mouseenter",
-  "mouseleave",
-  "click",
-  "touchstart",
-  "focus",
-  "blur",
-  "startInput",
-  "endInput",
-  "startChange",
-  "endChange",
+  'mouseenter',
+  'mouseleave',
+  'click',
+  'touchstart',
+  'focus',
+  'blur',
+  'startInput',
+  'endInput',
+  'startChange',
+  'endChange',
 ]);
 
 const attrs = useAttrs();
-const nsInput = useNamespace("input");
-const nsDate = useNamespace("date");
-const nsRange = useNamespace("range");
+const nsInput = useNamespace('input');
+const nsDate = useNamespace('date');
+const nsRange = useNamespace('range');
 const leftPrefix = ref<string | undefined>(undefined);
 const prefixRef = ref<HTMLElement | null>(null);
 
@@ -79,35 +80,35 @@ const endInputRef = ref<HTMLInputElement>();
 const { wrapperRef, isFocused } = useFocusController(inputRef);
 
 const handleClick = (evt: MouseEvent) => {
-  emit("click", evt);
+  emit('click', evt);
 };
 
 const handleMouseEnter = (evt: MouseEvent) => {
-  emit("mouseenter", evt);
+  emit('mouseenter', evt);
 };
 
 const handleMouseLeave = (evt: MouseEvent) => {
-  emit("mouseleave", evt);
+  emit('mouseleave', evt);
 };
 
 const handleTouchStart = (evt: TouchEvent) => {
-  emit("mouseenter", evt);
+  emit('mouseenter', evt);
 };
 
 const handleStartInput = (evt: Event) => {
-  emit("startInput", evt);
+  emit('startInput', evt);
 };
 
 const handleEndInput = (evt: Event) => {
-  emit("endInput", evt);
+  emit('endInput', evt);
 };
 
 const handleStartChange = (evt: Event) => {
-  emit("startChange", evt);
+  emit('startChange', evt);
 };
 
 const handleEndChange = (evt: Event) => {
-  emit("endChange", evt);
+  emit('endChange', evt);
 };
 
 const focus = () => {
@@ -128,7 +129,7 @@ const labelStyle = computed(() => {
 });
 
 const nativeInputValue = computed(() =>
-  isNil(props.modelValue) ? "" : String(props.modelValue)
+  isNil(props.modelValue) ? '' : String(props.modelValue),
 );
 
 const updatePrefixPosition = () => {

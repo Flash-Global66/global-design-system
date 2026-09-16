@@ -1,25 +1,34 @@
-import type { ExtractPropTypes } from "vue";
-import type { OptionSegmented, RoundedSegmented, SizeSegmented, VariantSegmented } from "./segmented.type";
-import type Segmented from "./Segmented.vue";
+import type { ExtractPropTypes } from 'vue';
+import type {
+  OptionSegmented,
+  RoundedSegmented,
+  SizeSegmented,
+  VariantSegmented,
+} from './segmented.type';
+import type Segmented from './Segmented.vue';
 import {
   CHANGE_EVENT,
   UPDATE_MODEL_EVENT,
-  useAriaProps,
-} from "element-plus";
-import { buildProps, definePropType, isBoolean, isNumber, isString } from "element-plus/es/utils/index.mjs";
+  buildProps,
+  definePropType,
+  isBoolean,
+  isNumber,
+  isString,
+} from '@flash-global66/g-utils';
+import { useAriaProps } from '@flash-global66/g-hooks';
 
 export const segmentedProps = buildProps({
   variant: {
     type: definePropType<VariantSegmented>(String),
-    default: "default",
+    default: 'default',
   },
   rounded: {
     type: definePropType<RoundedSegmented>(String),
-    default: "md",
+    default: 'md',
   },
   classItem: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description options of segmented
@@ -44,7 +53,7 @@ export const segmentedProps = buildProps({
    */
   size: {
     type: definePropType<SizeSegmented>(String),
-    default: "md",
+    default: 'md',
   },
   /**
    * @description whether segmented is disabled
@@ -59,11 +68,11 @@ export const segmentedProps = buildProps({
   },
   messageError: {
     type: String,
-    default: ""
+    default: '',
   },
   helpText: {
     type: String,
-    default: ""
+    default: '',
   },
   /**
    * @description native input id
@@ -73,7 +82,7 @@ export const segmentedProps = buildProps({
    * @description native `name` attribute
    */
   name: String,
-  ...useAriaProps(["ariaLabel"]),
+  ...useAriaProps(['ariaLabel']),
 });
 
 export type SegmentedProps = ExtractPropTypes<typeof segmentedProps>;

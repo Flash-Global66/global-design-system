@@ -1,7 +1,11 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps, definePropType, debugWarn } from 'element-plus/es/utils/index.mjs';
+import { buildProps, definePropType, debugWarn } from '@flash-global66/g-utils';
 import type { LogoFilter, LogoName, LogoSize } from './types/logo.types';
-import { LOGO_FILTER_OPTIONS, LOGO_FILTERS, LOGO_NAMES, LOGO_SIZES } from './constants/logo.constants';
+import {
+  LOGO_FILTER_OPTIONS,
+  LOGO_NAMES,
+  LOGO_SIZES,
+} from './constants/logo.constants';
 
 export const logoProps = buildProps({
   name: {
@@ -36,19 +40,22 @@ export function validateLogoProps(props: LogoProps) {
   if (props.name && !LOGO_NAMES.includes(props.name as LogoName)) {
     debugWarn(
       'GLogo',
-      `Invalid logo name: "${props.name}". Available logos: ${LOGO_NAMES.join(', ')}`
+      `Invalid logo name: "${props.name}". Available logos: ${LOGO_NAMES.join(', ')}`,
     );
   }
   if (props.size && !(props.size in LOGO_SIZES)) {
     debugWarn(
       'GLogo',
-      `Invalid size: "${props.size}". Available sizes: ${Object.keys(LOGO_SIZES).join(', ')}`
+      `Invalid size: "${props.size}". Available sizes: ${Object.keys(LOGO_SIZES).join(', ')}`,
     );
   }
-  if (props.filter && !LOGO_FILTER_OPTIONS.includes(props.filter as LogoFilter)) {
+  if (
+    props.filter &&
+    !LOGO_FILTER_OPTIONS.includes(props.filter as LogoFilter)
+  ) {
     debugWarn(
       'GLogo',
-      `Invalid filter: "${props.filter}". Available filters: ${LOGO_FILTER_OPTIONS.join(', ')}`
+      `Invalid filter: "${props.filter}". Available filters: ${LOGO_FILTER_OPTIONS.join(', ')}`,
     );
   }
 }

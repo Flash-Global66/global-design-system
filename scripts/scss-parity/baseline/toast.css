@@ -1,0 +1,169 @@
+/* Element Chalk Variables */
+.gui-toast {
+  @apply flex items-center gap-xs px-sm rounded-md border w-96 box-border fixed overflow-hidden;
+  overflow-wrap: break-word;
+  z-index: 9999;
+  transition: top 300ms ease-out;
+}
+.gui-toast.right {
+  @apply right-4;
+}
+.gui-toast.left {
+  @apply left-4;
+}
+.gui-toast__group {
+  @apply flex-1 min-w-0 mx-0;
+}
+
+.gui-toast__content {
+  @apply leading-6 m-0 font-medium text-secondary-txt;
+}
+.gui-toast__content p {
+  @apply m-0;
+}
+
+.gui-toast__icon {
+  @apply shrink-0;
+}
+
+.gui-toast__closeBtn {
+  @apply cursor-pointer text-icon-secondary flex-shrink-0 ml-xs;
+}
+.gui-toast__closeBtn:hover {
+  @apply text-primary-def-hover;
+}
+
+.gui-toast__progress {
+  @apply absolute bottom-0 left-0 right-0 h-1 overflow-hidden;
+}
+
+.gui-toast__progress-bar {
+  @apply h-full w-0;
+  animation: progressFill linear forwards;
+}
+
+.gui-toast--success {
+  @apply border-success-bd bg-success-bg;
+}
+.gui-toast--success .gui-toast__icon {
+  @apply text-success-txt;
+}
+
+.gui-toast--success .gui-toast__progress {
+  @apply text-success-txt;
+}
+
+.gui-toast--success .gui-toast__progress-bar {
+  @apply bg-success-def;
+}
+
+.gui-toast--info {
+  @apply border-info-bd bg-info-bg;
+}
+.gui-toast--info .gui-toast__icon {
+  @apply text-info-txt;
+}
+
+.gui-toast--info .gui-toast__progress {
+  @apply text-info-txt;
+}
+
+.gui-toast--info .gui-toast__progress-bar {
+  @apply bg-info-def;
+}
+
+.gui-toast--warning {
+  @apply border-warning-bd bg-warning-bg;
+}
+.gui-toast--warning .gui-toast__icon {
+  @apply text-warning-txt;
+}
+
+.gui-toast--warning .gui-toast__progress {
+  @apply text-warning-txt;
+}
+
+.gui-toast--warning .gui-toast__progress-bar {
+  @apply bg-warning-def;
+}
+
+.gui-toast--error {
+  @apply border-error-bd bg-error-bg;
+}
+.gui-toast--error .gui-toast__icon {
+  @apply text-error-txt;
+}
+
+.gui-toast--error .gui-toast__progress {
+  @apply text-error-txt;
+}
+
+.gui-toast--error .gui-toast__progress-bar {
+  @apply bg-error-def;
+}
+
+.gui-toast--sm {
+  @apply min-h-14 py-2;
+}
+.gui-toast--sm .gui-toast__content {
+  @apply text-2;
+}
+
+.gui-toast--sm .gui-toast__icon {
+  @apply w-5 h-5 text-9;
+}
+
+.gui-toast--sm .gui-toast__closeBtn {
+  @apply w-4 h-4;
+}
+
+.gui-toast--md {
+  @apply min-h-16 py-3;
+}
+.gui-toast--md .gui-toast__content {
+  @apply text-4;
+}
+
+.gui-toast--md .gui-toast__icon {
+  @apply w-6 h-6 text-10;
+}
+
+.gui-toast--md .gui-toast__closeBtn {
+  @apply w-5 h-5;
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+.gui-toast-fade-enter-active {
+  @apply transition-all ease-out duration-300;
+}
+
+.gui-toast-fade-leave-active {
+  @apply transition-all ease-in duration-300;
+}
+
+.gui-toast-fade-enter-from {
+  @apply opacity-0;
+}
+.gui-toast-fade-enter-from.right {
+  @apply translate-x-5;
+}
+.gui-toast-fade-enter-from.left {
+  @apply -translate-x-5;
+}
+
+.gui-toast-fade-leave-to {
+  @apply opacity-0;
+}
+.gui-toast-fade-leave-to.right {
+  @apply translate-x-5;
+}
+.gui-toast-fade-leave-to.left {
+  @apply -translate-x-5;
+}

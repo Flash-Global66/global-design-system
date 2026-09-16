@@ -27,7 +27,12 @@
           <slot name="image" />
         </div>
 
-        <span v-if="title" :class="ns.e('title')" role="heading" :aria-level="ariaLevel">
+        <span
+          v-if="title"
+          :class="ns.e('title')"
+          role="heading"
+          :aria-level="ariaLevel"
+        >
           {{ title }}
         </span>
 
@@ -61,51 +66,67 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject } from 'vue'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { GButton } from '@flash-global66/g-button'
-import { FOCUS_TRAP_INJECTION_KEY } from '@flash-global66/g-focus-trap'
-import { composeRefs } from 'element-plus/es/utils/index'
-import { useDraggable } from 'element-plus/es/hooks/index'
-import { dialogInjectionKey } from './constants'
-import { dialogContentEmits, dialogContentProps, validateDialogProps } from './dialog-content'
+import { computed, inject } from 'vue';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GButton } from '@flash-global66/g-button';
+import { FOCUS_TRAP_INJECTION_KEY } from '@flash-global66/g-focus-trap';
+import { composeRefs } from '@flash-global66/g-utils';
+import { useDraggable } from '@flash-global66/g-hooks';
+import { dialogInjectionKey } from './constants';
+import {
+  dialogContentEmits,
+  dialogContentProps,
+  validateDialogProps,
+} from './dialog-content';
 
-const props = defineProps(dialogContentProps)
-const emit = defineEmits(dialogContentEmits)
+const props = defineProps(dialogContentProps);
+const emit = defineEmits(dialogContentEmits);
 
-validateDialogProps(props)
+validateDialogProps(props);
 
-const { dialogRef, headerRef, bodyId, ns, style, displayButtons, buttonLayoutClass } =
-  inject(dialogInjectionKey)!
+const {
+  dialogRef,
+  headerRef,
+  bodyId,
+  ns,
+  style,
+  displayButtons,
+  buttonLayoutClass,
+} = inject(dialogInjectionKey)!;
 const { focusTrapRef } = inject(FOCUS_TRAP_INJECTION_KEY, {
   focusTrapRef: dialogRef,
-  onKeydown: () => {}
-})!
+  onKeydown: () => {},
+})!;
 
 const dialogKls = computed(() => {
-  const mode = props.fullscreen ? 'fullscreen' : props.sizeMode || 'default'
+  const mode = props.fullscreen ? 'fullscreen' : props.sizeMode || 'default';
 
   const cls = [
     ns.b(),
     ns.is('draggable', props.draggable),
     ns.is('align-center', props.alignCenter),
-    ns.is(mode)
-  ]
-  return cls
-})
+    ns.is(mode),
+  ];
+  return cls;
+});
 
-const composedDialogRef = composeRefs(focusTrapRef, dialogRef)
+const composedDialogRef = composeRefs(focusTrapRef, dialogRef);
 
-const draggable = computed(() => props.draggable && !props.fullscreen)
-const overflow = computed(() => props.overflow)
+const draggable = computed(() => props.draggable && !props.fullscreen);
+const overflow = computed(() => props.overflow);
 
-const { resetPosition } = useDraggable(dialogRef, dialogRef, draggable, overflow)
+const { resetPosition } = useDraggable(
+  dialogRef,
+  dialogRef,
+  draggable,
+  overflow,
+);
 
 defineExpose({
-  resetPosition
-})
+  resetPosition,
+});
 
 const handleClose = () => {
-  emit('close')
-}
+  emit('close');
+};
 </script>

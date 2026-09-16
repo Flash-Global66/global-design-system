@@ -1,0 +1,193 @@
+@charset "UTF-8";
+/* Element Chalk Variables */
+.gui-radio {
+  --gui-radio-font-size: var(--gui-font-size-base);
+  --gui-radio-text-color: var(--gui-text-color-regular);
+  --gui-radio-font-weight: var(--gui-font-weight-primary);
+  --gui-radio-input-height: 14px;
+  --gui-radio-input-width: 14px;
+  --gui-radio-input-border-radius: var(--gui-border-radius-circle);
+  --gui-radio-input-bg-color: var(--gui-fill-color-blank);
+  --gui-radio-input-border: var(--gui-border);
+  --gui-radio-input-border-color: var(--gui-border-color);
+  --gui-radio-input-border-color-hover: var(--gui-color-primary);
+}
+
+.gui-radio {
+  color: var(--gui-radio-text-color);
+  font-weight: var(--gui-radio-font-weight);
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  outline: none;
+  font-size: var(--gui-font-size-base);
+  user-select: none;
+  margin-right: 30px;
+  height: 32px;
+}
+.gui-radio.gui-radio--large {
+  height: 40px;
+}
+.gui-radio.gui-radio--small {
+  height: 24px;
+}
+.gui-radio.is-bordered {
+  padding: 0 15px 0 9px;
+  border-radius: var(--gui-border-radius-base);
+  border: var(--gui-border);
+  box-sizing: border-box;
+}
+.gui-radio.is-bordered.is-checked {
+  border-color: var(--gui-color-primary);
+}
+.gui-radio.is-bordered.is-disabled {
+  cursor: not-allowed;
+  border-color: var(--gui-border-color-lighter);
+}
+.gui-radio.is-bordered.gui-radio--large {
+  padding: 0 19px 0 11px;
+  border-radius: var(--gui-border-radius-base);
+}
+.gui-radio.is-bordered.gui-radio--large .gui-radio__label {
+  font-size: var(--gui-font-size-base);
+}
+.gui-radio.is-bordered.gui-radio--large .gui-radio__inner {
+  height: 14px;
+  width: 14px;
+}
+.gui-radio.is-bordered.gui-radio--small {
+  padding: 0 11px 0 7px;
+  border-radius: var(--gui-border-radius-base);
+}
+.gui-radio.is-bordered.gui-radio--small .gui-radio__label {
+  font-size: 12px;
+}
+.gui-radio.is-bordered.gui-radio--small .gui-radio__inner {
+  height: 12px;
+  width: 12px;
+}
+
+.gui-radio:last-child {
+  margin-right: 0;
+}
+.gui-radio__input {
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+}
+.gui-radio__input.is-disabled .gui-radio__inner {
+  background-color: var(--gui-disabled-bg-color);
+  border-color: var(--gui-disabled-border-color);
+  cursor: not-allowed;
+}
+.gui-radio__input.is-disabled .gui-radio__inner::after {
+  cursor: not-allowed;
+  background-color: var(--gui-disabled-bg-color);
+}
+.gui-radio__input.is-disabled .gui-radio__inner + .gui-radio__label {
+  cursor: not-allowed;
+}
+.gui-radio__input.is-disabled.is-checked .gui-radio__inner {
+  background-color: var(--gui-disabled-bg-color);
+  border-color: var(--gui-disabled-border-color);
+}
+.gui-radio__input.is-disabled.is-checked .gui-radio__inner::after {
+  background-color: var(--gui-text-color-placeholder);
+}
+.gui-radio__input.is-disabled + span.gui-radio__label {
+  color: var(--gui-text-color-placeholder);
+  cursor: not-allowed;
+}
+
+.gui-radio__input.is-checked .gui-radio__inner {
+  border-color: var(--gui-color-primary);
+  background: var(--gui-color-primary);
+}
+.gui-radio__input.is-checked .gui-radio__inner::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+.gui-radio__input.is-checked + .gui-radio__label {
+  color: var(--gui-color-primary);
+}
+
+.gui-radio__input.is-focus .gui-radio__inner {
+  border-color: var(--gui-radio-input-border-color-hover);
+}
+
+.gui-radio__inner {
+  border: var(--gui-radio-input-border);
+  border-radius: var(--gui-radio-input-border-radius);
+  width: var(--gui-radio-input-width);
+  height: var(--gui-radio-input-height);
+  background-color: var(--gui-radio-input-bg-color);
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.gui-radio__inner:hover {
+  border-color: var(--gui-radio-input-border-color-hover);
+}
+.gui-radio__inner::after {
+  width: 4px;
+  height: 4px;
+  border-radius: var(--gui-radio-input-border-radius);
+  background-color: var(--gui-color-white);
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.15s ease-in;
+}
+
+.gui-radio__original {
+  opacity: 0;
+  outline: none;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+}
+.gui-radio__original:focus-visible + .gui-radio__inner {
+  outline: 2px solid var(--gui-radio-input-border-color-hover);
+  outline-offset: 1px;
+  border-radius: var(--gui-radio-input-border-radius);
+}
+
+.gui-radio:focus:not(:focus-visible):not(.is-focus):not(:active):not(.is-disabled) {
+  /*获得焦点时 样式提醒*/
+}
+.gui-radio:focus:not(:focus-visible):not(.is-focus):not(:active):not(.is-disabled) .gui-radio__inner {
+  box-shadow: 0 0 2px 2px var(--gui-radio-input-border-color-hover);
+}
+.gui-radio__label {
+  font-size: var(--gui-radio-font-size);
+  padding-left: 8px;
+}
+
+.gui-radio.gui-radio--large .gui-radio__label {
+  font-size: 14px;
+}
+
+.gui-radio.gui-radio--large .gui-radio__inner {
+  width: 14px;
+  height: 14px;
+}
+
+.gui-radio.gui-radio--small .gui-radio__label {
+  font-size: 12px;
+}
+
+.gui-radio.gui-radio--small .gui-radio__inner {
+  width: 12px;
+  height: 12px;
+}

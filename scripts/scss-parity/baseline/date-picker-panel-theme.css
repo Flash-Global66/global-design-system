@@ -1,0 +1,230 @@
+/* Element Chalk Variables */
+.gui-picker-panel {
+  color: var(--gui-text-color-regular);
+  background: var(--gui-bg-color-overlay);
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.1607843137);
+  line-height: 30px;
+}
+.gui-picker-panel .gui-time-panel {
+  margin: 5px 0;
+  border: solid 1px var(--gui-datepicker-border-color);
+  background-color: var(--gui-bg-color-overlay);
+  box-shadow: var(--gui-box-shadow-light);
+}
+.gui-picker-panel__body::after, .gui-picker-panel__body-wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.gui-picker-panel__content {
+  position: relative;
+  margin: 8px 15px 15px 15px;
+}
+
+.gui-picker-panel__footer {
+  border-top: 1px solid var(--gui-datepicker-inner-border-color);
+  padding: 4px 12px;
+  text-align: right;
+  background-color: var(--gui-bg-color-overlay);
+  position: relative;
+  font-size: 0;
+}
+
+.gui-picker-panel__shortcut {
+  @apply text-grey-700;
+  display: block;
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  line-height: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  padding-left: 16px;
+  padding-bottom: 10px;
+  text-align: left;
+  outline: none;
+  cursor: pointer;
+}
+.gui-picker-panel__shortcut:hover {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__shortcut.active {
+  background-color: #e6f1fe;
+  color: var(--gui-datepicker-active-color);
+}
+
+.gui-picker-panel__btn {
+  border: 1px solid var(--gui-fill-color-darker);
+  color: var(--gui-text-color-primary);
+  line-height: 24px;
+  border-radius: 2px;
+  padding: 0 20px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  font-size: 12px;
+}
+.gui-picker-panel__btn[disabled] {
+  color: var(--gui-text-color-disabled);
+  cursor: not-allowed;
+}
+
+.gui-picker-panel__icon-btn {
+  @apply text-terciary-txt;
+  width: 1.25rem;
+  font-size: 16px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+.gui-picker-panel__icon-btn:hover {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__icon-btn:focus-visible {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__icon-btn.is-disabled {
+  color: var(--gui-text-color-disabled);
+}
+.gui-picker-panel__icon-btn.is-disabled:hover {
+  cursor: not-allowed;
+}
+
+.gui-picker-panel__icon-btn .gui-icon {
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.gui-picker-panel__link-btn {
+  vertical-align: middle;
+}
+
+.gui-picker-panel *[slot=sidebar],
+.gui-picker-panel__sidebar {
+  position: absolute;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  top: 0;
+  bottom: 0;
+  width: 110px;
+  border-right: 1px solid #949aab;
+  box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: var(--gui-bg-color-overlay);
+  overflow: auto;
+}
+
+.gui-picker-panel *[slot=sidebar] + .gui-picker-panel__body,
+.gui-picker-panel__sidebar + .gui-picker-panel__body {
+  margin-left: 110px;
+}
+
+.gui-date-picker {
+  --gui-datepicker-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-off-text-color: var(--gui-text-color-placeholder);
+  --gui-datepicker-header-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-icon-color: var(--gui-text-color-primary);
+  --gui-datepicker-border-color: var(--gui-disabled-border-color);
+  --gui-datepicker-inner-border-color: var(--gui-border-color-light);
+  --gui-datepicker-inrange-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-inrange-hover-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-active-color: var(--gui-color-primary);
+  --gui-datepicker-hover-text-color: var(--gui-color-primary);
+}
+
+.gui-date-picker {
+  width: 322px;
+}
+.gui-date-picker.has-sidebar.has-time {
+  width: 434px;
+}
+.gui-date-picker.has-sidebar {
+  width: 438px;
+}
+.gui-date-picker.has-time .gui-picker-panel__body-wrapper {
+  position: relative;
+}
+.gui-date-picker .gui-picker-panel__content {
+  width: 292px;
+}
+.gui-date-picker table {
+  table-layout: fixed;
+  width: 100%;
+}
+.gui-date-picker__editor-wrap {
+  position: relative;
+  display: table-cell;
+  padding: 0 5px;
+}
+
+.gui-date-picker__time-header {
+  position: relative;
+  border-bottom: 1px solid var(--gui-datepicker-inner-border-color);
+  font-size: 12px;
+  padding: 8px 5px 5px;
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gui-date-picker__header {
+  padding: 12px 12px 0;
+  text-align: center;
+}
+.gui-date-picker__header--bordered {
+  margin-bottom: 0;
+  padding-bottom: 12px;
+  border-bottom: solid 1px #949aab;
+  margin-bottom: 14px;
+}
+.gui-date-picker__header--bordered + .gui-picker-panel__content {
+  margin-top: 0;
+}
+
+.gui-date-picker__header-label {
+  @apply text-grey-700;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 5px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+.gui-date-picker__header-label:hover {
+  @apply text-nightBlue-500;
+}
+.gui-date-picker__header-label:focus-visible {
+  @apply text-nightBlue-500;
+  outline: none;
+}
+.gui-date-picker__header-label.active {
+  color: var(--gui-datepicker-active-color);
+}
+
+.gui-date-picker__prev-btn {
+  float: left;
+}
+
+.gui-date-picker__next-btn {
+  float: right;
+}
+
+.gui-date-picker__time-wrap {
+  padding: 10px;
+  text-align: center;
+}
+
+.gui-date-picker__time-label {
+  float: left;
+  cursor: pointer;
+  line-height: 30px;
+  margin-left: 10px;
+}
+
+.gui-date-picker .gui-time-panel {
+  position: absolute;
+}

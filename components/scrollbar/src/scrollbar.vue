@@ -36,22 +36,22 @@ import {
   reactive,
   ref,
   watch,
-} from "vue";
-import { useEventListener, useResizeObserver } from "@vueuse/core";
+} from 'vue';
+import { useEventListener, useResizeObserver } from '@vueuse/core';
 import {
   addUnit,
   debugWarn,
   isNumber,
   isObject,
-} from "element-plus/es/utils/index.mjs";
-import { useNamespace } from "element-plus";
-import Bar from "./bar.vue";
-import { scrollbarContextKey } from "./constants";
-import { scrollbarEmits, scrollbarProps } from "./scrollbar";
-import type { BarInstance } from "./bar";
-import type { CSSProperties, StyleValue } from "vue";
+  useNamespace,
+} from '@flash-global66/g-utils';
+import Bar from './bar.vue';
+import { scrollbarContextKey } from './constants';
+import { scrollbarEmits, scrollbarProps } from './scrollbar';
+import type { BarInstance } from './bar';
+import type { CSSProperties, StyleValue } from 'vue';
 
-const COMPONENT_NAME = "GScrollbar";
+const COMPONENT_NAME = 'GScrollbar';
 
 defineOptions({
   name: COMPONENT_NAME,
@@ -60,7 +60,7 @@ defineOptions({
 const props = defineProps(scrollbarProps);
 const emit = defineEmits(scrollbarEmits);
 
-const ns = useNamespace("scrollbar");
+const ns = useNamespace('scrollbar');
 
 let stopResizeObserver: (() => void) | undefined = undefined;
 let stopResizeListener: (() => void) | undefined = undefined;
@@ -82,13 +82,13 @@ const wrapStyle = computed<StyleValue>(() => {
 const wrapKls = computed(() => {
   return [
     props.wrapClass,
-    ns.e("wrap"),
-    { [ns.em("wrap", "hidden-default")]: !props.native },
+    ns.e('wrap'),
+    { [ns.em('wrap', 'hidden-default')]: !props.native },
   ];
 });
 
 const resizeKls = computed(() => {
-  return [ns.e("view"), props.viewClass];
+  return [ns.e('view'), props.viewClass];
 });
 
 const handleScroll = () => {
@@ -97,7 +97,7 @@ const handleScroll = () => {
     wrapScrollTop = wrapRef.value.scrollTop;
     wrapScrollLeft = wrapRef.value.scrollLeft;
 
-    emit("scroll", {
+    emit('scroll', {
       scrollTop: wrapRef.value.scrollTop,
       scrollLeft: wrapRef.value.scrollLeft,
     });
@@ -105,6 +105,7 @@ const handleScroll = () => {
 };
 
 // TODO: refactor method overrides, due to script setup dts
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 function scrollTo(xCord: number, yCord?: number): void;
 function scrollTo(options: ScrollToOptions): void;
@@ -118,7 +119,7 @@ function scrollTo(arg1: unknown, arg2?: number) {
 
 const setScrollTop = (value: number) => {
   if (!isNumber(value)) {
-    debugWarn(COMPONENT_NAME, "value must be a number");
+    debugWarn(COMPONENT_NAME, 'value must be a number');
     return;
   }
   wrapRef.value!.scrollTop = value;
@@ -126,7 +127,7 @@ const setScrollTop = (value: number) => {
 
 const setScrollLeft = (value: number) => {
   if (!isNumber(value)) {
-    debugWarn(COMPONENT_NAME, "value must be a number");
+    debugWarn(COMPONENT_NAME, 'value must be a number');
     return;
   }
   wrapRef.value!.scrollLeft = value;
@@ -138,16 +139,16 @@ const update = () => {
 
 watch(
   () => props.noresize,
-  (noresize) => {
+  noresize => {
     if (noresize) {
       stopResizeObserver?.();
       stopResizeListener?.();
     } else {
       ({ stop: stopResizeObserver } = useResizeObserver(resizeRef, update));
-      stopResizeListener = useEventListener("resize", update);
+      stopResizeListener = useEventListener('resize', update);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
@@ -160,7 +161,7 @@ watch(
           barRef.value?.handleScroll(wrapRef.value);
         }
       });
-  }
+  },
 );
 
 provide(
@@ -168,7 +169,7 @@ provide(
   reactive({
     scrollbarElement: scrollbarRef,
     wrapElement: wrapRef,
-  })
+  }),
 );
 
 onActivated(() => {

@@ -1,11 +1,11 @@
-import { computed, ref, unref } from 'vue'
-import { useNamespace, useZIndex } from 'element-plus'
-import { isNumber } from 'element-plus/es/utils/index'
+import { computed, ref, unref } from 'vue';
+import { useZIndex } from '@flash-global66/g-hooks';
+import { isNumber, useNamespace } from '@flash-global66/g-utils';
 
-import type { CSSProperties, StyleValue } from 'vue'
-import type { UsePopperReturn } from 'element-plus'
-import type { UsePopperContentReturn } from './use-content'
-import type { PopperContentProps } from '../content'
+import type { CSSProperties, StyleValue } from 'vue';
+import type { UsePopperReturn } from '@flash-global66/g-hooks';
+import type { UsePopperContentReturn } from './use-content';
+import type { PopperContentProps } from '../content';
 
 export const usePopperContentDOM = (
   props: PopperContentProps,
@@ -14,38 +14,38 @@ export const usePopperContentDOM = (
     styles,
     role,
   }: Pick<UsePopperReturn, 'attributes' | 'styles'> &
-    Pick<UsePopperContentReturn, 'role'>
+    Pick<UsePopperContentReturn, 'role'>,
 ) => {
-  const { nextZIndex } = useZIndex()
-  const ns = useNamespace('popper')
+  const { nextZIndex } = useZIndex();
+  const ns = useNamespace('popper');
 
-  const contentAttrs = computed(() => unref(attributes).popper)
+  const contentAttrs = computed(() => unref(attributes).popper);
   const contentZIndex = ref<number>(
-    isNumber(props.zIndex) ? props.zIndex : nextZIndex()
-  )
+    isNumber(props.zIndex) ? props.zIndex : nextZIndex(),
+  );
   const contentClass = computed(() => [
     ns.b(),
     ns.is('pure', props.pure),
     ns.is(props.effect),
     props.popperClass,
-  ])
+  ]);
   const contentStyle = computed<StyleValue[]>(() => {
     return [
       { zIndex: unref(contentZIndex) } as CSSProperties,
       unref(styles).popper as CSSProperties,
       props.popperStyle || {},
-    ]
-  })
+    ];
+  });
   const ariaModal = computed<string | undefined>(() =>
-    role.value === 'dialog' ? 'false' : undefined
-  )
+    role.value === 'dialog' ? 'false' : undefined,
+  );
   const arrowStyle = computed(
-    () => (unref(styles).arrow || {}) as CSSProperties
-  )
+    () => (unref(styles).arrow || {}) as CSSProperties,
+  );
 
   const updateZIndex = () => {
-    contentZIndex.value = isNumber(props.zIndex) ? props.zIndex : nextZIndex()
-  }
+    contentZIndex.value = isNumber(props.zIndex) ? props.zIndex : nextZIndex();
+  };
 
   return {
     ariaModal,
@@ -56,7 +56,7 @@ export const usePopperContentDOM = (
     contentZIndex,
 
     updateZIndex,
-  }
-}
+  };
+};
 
-export type UsePopperContentDOMReturn = ReturnType<typeof usePopperContentDOM>
+export type UsePopperContentDOMReturn = ReturnType<typeof usePopperContentDOM>;

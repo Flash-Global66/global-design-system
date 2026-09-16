@@ -1,5 +1,5 @@
 import Logo from './src/Logo.vue';
-import { withInstall, SFCWithInstall } from 'element-plus/es/utils/index.mjs';
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
 
 export const GLogo: SFCWithInstall<typeof Logo> & {
   Logo: typeof Logo;

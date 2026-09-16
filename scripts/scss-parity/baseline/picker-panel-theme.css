@@ -1,0 +1,124 @@
+/* Element Chalk Variables */
+.gui-picker-panel {
+  color: var(--gui-text-color-regular);
+  background: var(--gui-bg-color-overlay);
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.1607843137);
+  line-height: 30px;
+}
+.gui-picker-panel .gui-time-panel {
+  margin: 5px 0;
+  border: solid 1px var(--gui-datepicker-border-color);
+  background-color: var(--gui-bg-color-overlay);
+  box-shadow: var(--gui-box-shadow-light);
+}
+.gui-picker-panel__body::after, .gui-picker-panel__body-wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.gui-picker-panel__content {
+  position: relative;
+  margin: 8px 15px 15px 15px;
+}
+
+.gui-picker-panel__footer {
+  border-top: 1px solid var(--gui-datepicker-inner-border-color);
+  padding: 4px 12px;
+  text-align: right;
+  background-color: var(--gui-bg-color-overlay);
+  position: relative;
+  font-size: 0;
+}
+
+.gui-picker-panel__shortcut {
+  @apply text-grey-700;
+  display: block;
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  line-height: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  padding-left: 16px;
+  padding-bottom: 10px;
+  text-align: left;
+  outline: none;
+  cursor: pointer;
+}
+.gui-picker-panel__shortcut:hover {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__shortcut.active {
+  background-color: #e6f1fe;
+  color: var(--gui-datepicker-active-color);
+}
+
+.gui-picker-panel__btn {
+  border: 1px solid var(--gui-fill-color-darker);
+  color: var(--gui-text-color-primary);
+  line-height: 24px;
+  border-radius: 2px;
+  padding: 0 20px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  font-size: 12px;
+}
+.gui-picker-panel__btn[disabled] {
+  color: var(--gui-text-color-disabled);
+  cursor: not-allowed;
+}
+
+.gui-picker-panel__icon-btn {
+  @apply text-terciary-txt;
+  width: 1.25rem;
+  font-size: 16px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+.gui-picker-panel__icon-btn:hover {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__icon-btn:focus-visible {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__icon-btn.is-disabled {
+  color: var(--gui-text-color-disabled);
+}
+.gui-picker-panel__icon-btn.is-disabled:hover {
+  cursor: not-allowed;
+}
+
+.gui-picker-panel__icon-btn .gui-icon {
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.gui-picker-panel__link-btn {
+  vertical-align: middle;
+}
+
+.gui-picker-panel *[slot=sidebar],
+.gui-picker-panel__sidebar {
+  position: absolute;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  top: 0;
+  bottom: 0;
+  width: 110px;
+  border-right: 1px solid #949aab;
+  box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: var(--gui-bg-color-overlay);
+  overflow: auto;
+}
+
+.gui-picker-panel *[slot=sidebar] + .gui-picker-panel__body,
+.gui-picker-panel__sidebar + .gui-picker-panel__body {
+  margin-left: 110px;
+}

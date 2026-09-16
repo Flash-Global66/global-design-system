@@ -1,7 +1,7 @@
-import { buildProps } from "element-plus/es/utils/index.mjs";
-import { panelRangeSharedProps, panelSharedProps } from "./shared";
+import { buildProps } from '@flash-global66/g-utils';
+import { panelRangeSharedProps, panelSharedProps } from './shared';
 
-import type { ExtractPropTypes } from "vue";
+import type { ExtractPropTypes } from 'vue';
 
 export const panelDateRangeProps = buildProps({
   ...panelSharedProps,

@@ -64,14 +64,14 @@
 </template>
 
 <script lang="ts" setup>
-import { useNamespace } from "element-plus";
-import { attachFileProps, attachFileEmits } from "./attach-file";
-import { useAttachFile } from "./useAttachFile";
-import DefaultType from "./default-type.vue";
-import DragDropType from "./drag-drop-type.vue";
+import { useNamespace } from '@flash-global66/g-utils';
+import { attachFileProps, attachFileEmits } from './attach-file';
+import { useAttachFile } from './useAttachFile';
+import DefaultType from './default-type.vue';
+import DragDropType from './drag-drop-type.vue';
 
 defineOptions({
-  name: "GAttachFile",
+  name: 'GAttachFile',
 });
 
 const props = defineProps(attachFileProps);
@@ -94,7 +94,7 @@ const {
   openFilePicker,
 } = useAttachFile(props, emit);
 
-const ns = useNamespace("attach-file");
+const ns = useNamespace('attach-file');
 
 defineExpose({
   addFiles,

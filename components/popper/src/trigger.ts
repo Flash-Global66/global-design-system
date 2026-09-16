@@ -1,7 +1,7 @@
-import { buildProps, definePropType } from 'element-plus/es/utils/index'
+import { buildProps, definePropType } from '@flash-global66/g-utils';
 
-import type { Measurable } from './constants'
-import type Trigger from './trigger.vue'
+import type { Measurable } from './constants';
+import type Trigger from './trigger.vue';
 
 export const popperTriggerProps = buildProps({
   virtualRef: {
@@ -31,14 +31,14 @@ export const popperTriggerProps = buildProps({
   },
   id: String,
   open: Boolean,
-} as const)
+} as const);
 
-export type PopperTriggerProps = typeof popperTriggerProps
+export type PopperTriggerProps = typeof popperTriggerProps;
 
-export type PopperTriggerInstance = InstanceType<typeof Trigger> & unknown
+export type PopperTriggerInstance = InstanceType<typeof Trigger> & unknown;
 
 /** @deprecated use `popperTriggerProps` instead, and it will be deprecated in the next major version */
-export const usePopperTriggerProps = popperTriggerProps
+export const usePopperTriggerProps = popperTriggerProps;
 
 /** @deprecated use `PopperTriggerInstance` instead, and it will be deprecated in the next major version */
-export type GPopperArrowTrigger = PopperTriggerInstance
+export type GPopperArrowTrigger = PopperTriggerInstance;

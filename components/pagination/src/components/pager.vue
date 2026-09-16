@@ -23,7 +23,10 @@
       @focus="onFocus(true)"
       @blur="quickPrevFocus = false"
     >
-      <g-icon-font name="regular angles-left" v-if="(quickPrevHover || quickPrevFocus) && !disabled" />
+      <g-icon-font
+        name="regular angles-left"
+        v-if="(quickPrevHover || quickPrevFocus) && !disabled"
+      />
       <g-icon-font name="regular ellipsis" v-else />
     </li>
     <li
@@ -50,7 +53,10 @@
       @focus="onFocus()"
       @blur="quickNextFocus = false"
     >
-      <g-icon-font v-if="(quickNextHover || quickNextFocus) && !disabled" name="regular angles-right" />
+      <g-icon-font
+        v-if="(quickNextHover || quickNextFocus) && !disabled"
+        name="regular angles-right"
+      />
       <g-icon-font v-else name="regular ellipsis" />
     </li>
     <li
@@ -70,148 +76,148 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watchEffect } from 'vue'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { useNamespace, CHANGE_EVENT } from 'element-plus'
-import { paginationPagerProps } from './pager'
+import { computed, ref, watchEffect } from 'vue';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { useNamespace, CHANGE_EVENT } from '@flash-global66/g-utils';
+import { paginationPagerProps } from './pager';
 
 defineOptions({
   name: 'GPaginationPager',
-})
-const props = defineProps(paginationPagerProps)
-const emit = defineEmits([CHANGE_EVENT])
-const nsPager = useNamespace('pager')
-const nsIcon = useNamespace('icon')
+});
+const props = defineProps(paginationPagerProps);
+const emit = defineEmits([CHANGE_EVENT]);
+const nsPager = useNamespace('pager');
+const nsIcon = useNamespace('icon');
 
-const showPrevMore = ref(false)
-const showNextMore = ref(false)
-const quickPrevHover = ref(false)
-const quickNextHover = ref(false)
-const quickPrevFocus = ref(false)
-const quickNextFocus = ref(false)
+const showPrevMore = ref(false);
+const showNextMore = ref(false);
+const quickPrevHover = ref(false);
+const quickNextHover = ref(false);
+const quickPrevFocus = ref(false);
+const quickNextFocus = ref(false);
 const pagers = computed(() => {
-  const pagerCount = props.pagerCount
-  const halfPagerCount = (pagerCount - 1) / 2
-  const currentPage = Number(props.currentPage)
-  const pageCount = Number(props.pageCount)
-  let showPrevMore = false
-  let showNextMore = false
+  const pagerCount = props.pagerCount;
+  const halfPagerCount = (pagerCount - 1) / 2;
+  const currentPage = Number(props.currentPage);
+  const pageCount = Number(props.pageCount);
+  let showPrevMore = false;
+  let showNextMore = false;
   if (pageCount > pagerCount) {
     if (currentPage > pagerCount - halfPagerCount) {
-      showPrevMore = true
+      showPrevMore = true;
     }
     if (currentPage < pageCount - halfPagerCount) {
-      showNextMore = true
+      showNextMore = true;
     }
   }
-  const array: number[] = []
+  const array: number[] = [];
   if (showPrevMore && !showNextMore) {
-    const startPage = pageCount - (pagerCount - 2)
+    const startPage = pageCount - (pagerCount - 2);
     for (let i = startPage; i < pageCount; i++) {
-      array.push(i)
+      array.push(i);
     }
   } else if (!showPrevMore && showNextMore) {
     for (let i = 2; i < pagerCount; i++) {
-      array.push(i)
+      array.push(i);
     }
   } else if (showPrevMore && showNextMore) {
-    const offset = Math.floor(pagerCount / 2) - 1
+    const offset = Math.floor(pagerCount / 2) - 1;
     for (let i = currentPage - offset; i <= currentPage + offset; i++) {
-      array.push(i)
+      array.push(i);
     }
   } else {
     for (let i = 2; i < pageCount; i++) {
-      array.push(i)
+      array.push(i);
     }
   }
-  return array
-})
+  return array;
+});
 
 const prevMoreKls = computed(() => [
   'more',
   'btn-quickprev',
   nsIcon.b(),
   nsPager.is('disabled', props.disabled),
-])
+]);
 const nextMoreKls = computed(() => [
   'more',
   'btn-quicknext',
   nsIcon.b(),
   nsPager.is('disabled', props.disabled),
-])
+]);
 
-const tabindex = computed(() => (props.disabled ? -1 : 0))
+const tabindex = computed(() => (props.disabled ? -1 : 0));
 watchEffect(() => {
-  const halfPagerCount = (props.pagerCount - 1) / 2
-  showPrevMore.value = false
-  showNextMore.value = false
+  const halfPagerCount = (props.pagerCount - 1) / 2;
+  showPrevMore.value = false;
+  showNextMore.value = false;
   if (props.pageCount! > props.pagerCount) {
     if (props.currentPage > props.pagerCount - halfPagerCount) {
-      showPrevMore.value = true
+      showPrevMore.value = true;
     }
     if (props.currentPage < props.pageCount! - halfPagerCount) {
-      showNextMore.value = true
+      showNextMore.value = true;
     }
   }
-})
+});
 function onMouseEnter(forward = false) {
-  if (props.disabled) return
+  if (props.disabled) return;
   if (forward) {
-    quickPrevHover.value = true
+    quickPrevHover.value = true;
   } else {
-    quickNextHover.value = true
+    quickNextHover.value = true;
   }
 }
 function onFocus(forward = false) {
   if (forward) {
-    quickPrevFocus.value = true
+    quickPrevFocus.value = true;
   } else {
-    quickNextFocus.value = true
+    quickNextFocus.value = true;
   }
 }
 function onEnter(e: UIEvent) {
-  const target = e.target as HTMLElement
+  const target = e.target as HTMLElement;
   if (
     target.tagName.toLowerCase() === 'li' &&
     Array.from(target.classList).includes('number')
   ) {
-    const newPage = Number(target.textContent)
+    const newPage = Number(target.textContent);
     if (newPage !== props.currentPage) {
-      emit(CHANGE_EVENT, newPage)
+      emit(CHANGE_EVENT, newPage);
     }
   } else if (
     target.tagName.toLowerCase() === 'li' &&
     Array.from(target.classList).includes('more')
   ) {
-    onPagerClick(e)
+    onPagerClick(e);
   }
 }
 function onPagerClick(event: UIEvent) {
-  const target = event.target as HTMLElement
+  const target = event.target as HTMLElement;
   if (target.tagName.toLowerCase() === 'ul' || props.disabled) {
-    return
+    return;
   }
-  let newPage = Number(target.textContent)
-  const pageCount = props.pageCount!
-  const currentPage = props.currentPage
-  const pagerCountOffset = props.pagerCount - 2
+  let newPage = Number(target.textContent);
+  const pageCount = props.pageCount!;
+  const currentPage = props.currentPage;
+  const pagerCountOffset = props.pagerCount - 2;
   if (target.className.includes('more')) {
     if (target.className.includes('quickprev')) {
-      newPage = currentPage - pagerCountOffset
+      newPage = currentPage - pagerCountOffset;
     } else if (target.className.includes('quicknext')) {
-      newPage = currentPage + pagerCountOffset
+      newPage = currentPage + pagerCountOffset;
     }
   }
   if (!Number.isNaN(+newPage)) {
     if (newPage < 1) {
-      newPage = 1
+      newPage = 1;
     }
     if (newPage > pageCount) {
-      newPage = pageCount
+      newPage = pageCount;
     }
   }
   if (newPage !== currentPage) {
-    emit(CHANGE_EVENT, newPage)
+    emit(CHANGE_EVENT, newPage);
   }
 }
 </script>

@@ -1,6 +1,6 @@
-import { buildProps } from 'element-plus/es/utils/index'
-import { dialogEmits, dialogProps } from '@flash-global66/g-dialog'
-import type { ExtractPropTypes, PropType } from 'vue'
+import { buildProps } from '@flash-global66/g-utils';
+import { dialogEmits, dialogProps } from '@flash-global66/g-dialog';
+import type { ExtractPropTypes, PropType } from 'vue';
 
 export interface ResponsiveSizeDrawer {
   sm?: string;
@@ -42,17 +42,17 @@ export const drawerProps = buildProps({
   responsiveSize: {
     type: [Object, Boolean] as PropType<ResponsiveSizeDrawer | boolean>,
     default: false,
-    validator: (val) => {
+    validator: (val: ResponsiveSizeDrawer | boolean) => {
       if (typeof val === 'boolean') return true;
       if (typeof val === 'object') {
         const validKeys = ['sm', 'md', 'lg'];
         return Object.keys(val).every(key => validKeys.includes(key));
       }
       return false;
-    }
+    },
   },
-} as const)
+});
 
-export type DrawerProps = ExtractPropTypes<typeof drawerProps>
+export type DrawerProps = ExtractPropTypes<typeof drawerProps>;
 
-export const drawerEmits = dialogEmits
+export const drawerEmits = dialogEmits;

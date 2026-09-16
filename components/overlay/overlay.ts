@@ -1,9 +1,14 @@
-import { createVNode, defineComponent, h, renderSlot } from 'vue'
-import { PatchFlags, buildProps, definePropType } from "element-plus/es/utils/index";
-import { useNamespace, useSameTarget } from "element-plus/es/hooks/index";
+import { createVNode, defineComponent, h, renderSlot } from 'vue';
+import {
+  PatchFlags,
+  buildProps,
+  definePropType,
+  useNamespace,
+} from '@flash-global66/g-utils';
+import { useSameTarget } from '@flash-global66/g-hooks';
 
-import type { CSSProperties, ExtractPropTypes } from 'vue'
-import type { Property } from 'csstype'
+import type { CSSProperties, ExtractPropTypes } from 'vue';
+import type { Property } from 'csstype';
 
 export const overlayProps = buildProps({
   mask: {
@@ -21,15 +26,15 @@ export const overlayProps = buildProps({
   zIndex: {
     type: definePropType<Property.ZIndex>([String, Number]),
   },
-} as const)
-export type OverlayProps = ExtractPropTypes<typeof overlayProps>
+} as const);
+export type OverlayProps = ExtractPropTypes<typeof overlayProps>;
 
 export const overlayEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
-}
-export type OverlayEmits = typeof overlayEmits
+};
+export type OverlayEmits = typeof overlayEmits;
 
-const BLOCK = 'overlay'
+const BLOCK = 'overlay';
 
 export default defineComponent({
   name: 'GOverlay',
@@ -38,22 +43,23 @@ export default defineComponent({
   emits: overlayEmits,
 
   setup(props, { slots, emit }) {
-    // No reactivity on this prop because when its rendering with a global
-    // component, this will be a constant flag.
-    const ns = useNamespace(BLOCK)
+    // Sin reactividad en esta prop porque, al renderizarse como componente
+    // global, este flag se mantiene constante.
+    const ns = useNamespace(BLOCK);
 
     const onMaskClick = (e: MouseEvent) => {
-      emit('click', e)
-    }
+      emit('click', e);
+    };
 
     const { onClick, onMousedown, onMouseup } = useSameTarget(
-      props.customMaskEvent ? undefined : onMaskClick
-    )
+      props.customMaskEvent ? undefined : onMaskClick,
+    );
 
-    // init here
+    // Inicialización del render.
     return () => {
-      // when the vnode meets the same structure but with different change trigger
-      // it will not automatically update, thus we simply use h function to manage updating
+      // Cuando el vnode mantiene la misma estructura pero cambia el trigger,
+      // no se actualiza automáticamente; por eso usamos `h`/`createVNode`
+      // directamente para gestionar la actualización.
       return props.mask
         ? createVNode(
             'div',
@@ -68,7 +74,7 @@ export default defineComponent({
             },
             [renderSlot(slots, 'default')],
             PatchFlags.STYLE | PatchFlags.CLASS | PatchFlags.PROPS,
-            ['onClick', 'onMouseup', 'onMousedown']
+            ['onClick', 'onMouseup', 'onMousedown'],
           )
         : h(
             'div',
@@ -83,10 +89,8 @@ export default defineComponent({
                 left: '0px',
               } as CSSProperties,
             },
-            [renderSlot(slots, 'default')]
-          )
-    }
+            [renderSlot(slots, 'default')],
+          );
+    };
   },
-})
-
-
+});

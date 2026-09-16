@@ -3,10 +3,7 @@
     <div
       ref="selectRef"
       v-click-outside:[popperRef]="handleClickOutside"
-      :class="[
-        nsSelect.b(),
-        nsSelect.is('error', isErrorKls),
-      ]"
+      :class="[nsSelect.b(), nsSelect.is('error', isErrorKls)]"
       @mouseenter="states.inputHovering = true"
       @mouseleave="states.inputHovering = false"
     >
@@ -42,6 +39,7 @@
               nsSelect.is('filterable', filterable),
               nsSelect.is('disabled', selectDisabled),
               nsSelect.is('complete', !isFocused && Boolean(hasModelValue)),
+              nsSelect.is('borderless', borderless),
             ]"
             @click.prevent="toggleMenu"
           >
@@ -65,7 +63,10 @@
                 nsSelect.e('selection'),
                 nsSelect.is(
                   'near',
-                  multiple && !emptyDisplay && !$slots.prefix && !!modelValue.length
+                  multiple &&
+                    !emptyDisplay &&
+                    !$slots.prefix &&
+                    !!modelValue.length,
                 ),
               ]"
             >
@@ -213,7 +214,7 @@
                   nsSelect.e('placeholder'),
                   nsSelect.is(
                     'transparent',
-                    !hasModelValue || (expanded && !states.inputValue)
+                    !hasModelValue || (expanded && !states.inputValue),
                   ),
                   'dynamic-label-select',
                 ]"
@@ -257,8 +258,14 @@
             :hovering-index="states.hoveringIndex"
             :scrollbar-always-on="scrollbarAlwaysOn"
           >
-            <template v-if="$slots.header" #header>
+            <template v-if="searchable || $slots.header" #header>
               <div :class="nsSelect.be('dropdown', 'header')">
+                <g-search-input
+                  v-if="searchable"
+                  v-model="searchQuery"
+                  :placeholder="searchPlaceholder"
+                  :class="nsSelect.be('dropdown', 'search')"
+                />
                 <slot name="header" />
               </div>
             </template>
@@ -318,25 +325,26 @@ import {
   reactive,
   toRefs,
   useSlots,
-} from "vue";
-import { isArray } from "element-plus/es/utils/index.mjs";
-import { ClickOutside } from "element-plus";
-import { GTooltip } from "@flash-global66/g-tooltip";
-import { GTag } from "@flash-global66/g-tag";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { useCalcInputWidth } from "element-plus";
-import GSelectMenu from "./select-dropdown";
-import useSelect from "./hooks/use-select";
-import { SelectProps, selectEmits } from "./defaults";
-import { selectV2InjectionKey } from "./types/token";
+} from 'vue';
+import { ClickOutside, isArray } from '@flash-global66/g-utils';
+import { useCalcInputWidth } from '@flash-global66/g-hooks';
+import { GTooltip } from '@flash-global66/g-tooltip';
+import { GTag } from '@flash-global66/g-tag';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GSearchInput } from '@flash-global66/g-search-input';
+import GSelectMenu from './select-dropdown';
+import useSelect from './hooks/use-select';
+import { SelectProps, selectEmits } from './defaults';
+import { selectV2InjectionKey } from './types/token';
 
 export default defineComponent({
-  name: "GSelect",
+  name: 'GSelect',
   components: {
     GSelectMenu,
     GTag,
     GTooltip,
     GIconFont,
+    GSearchInput,
   },
   directives: { ClickOutside },
   props: SelectProps,
@@ -359,7 +367,7 @@ export default defineComponent({
         modelValue,
         slots: useSlots(),
       }),
-      emit
+      emit,
     );
     const { calculatorRef, inputStyle } = useCalcInputWidth();
 
@@ -381,7 +389,7 @@ export default defineComponent({
       if (!props.multiple) {
         return API.states.selectedLabel;
       }
-      return API.states.cachedOptions.map((i) => i.label as string);
+      return API.states.cachedOptions.map(i => i.label as string);
     });
 
     return {

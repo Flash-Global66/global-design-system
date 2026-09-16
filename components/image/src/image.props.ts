@@ -1,7 +1,7 @@
-import type { ExtractPropTypes, PropType } from "vue";
-import { buildProps, debugWarn } from "element-plus/es/utils/index";
-import type { ImageName, ImageSize, ImageLazyLoad } from "./types/image.types";
-import { IMAGE_NAMES } from "./constants/image.constants";
+import type { ExtractPropTypes, PropType } from 'vue';
+import { buildProps, debugWarn } from '@flash-global66/g-utils';
+import type { ImageName, ImageSize, ImageLazyLoad } from './types/image.types';
+import { IMAGE_NAMES } from './constants/image.constants';
 
 /**
  * Props definition for the Image component
@@ -42,8 +42,8 @@ export type ImageProps = ExtractPropTypes<typeof imageProps>;
 export function validateImageProps(props: ImageProps) {
   if (props.name && !IMAGE_NAMES.includes(props.name as ImageName)) {
     debugWarn(
-      "Image",
-      `Invalid image name: "${props.name}". Available image names: ${IMAGE_NAMES.join(', ')}`
+      'Image',
+      `Invalid image name: "${props.name}". Available image names: ${IMAGE_NAMES.join(', ')}`,
     );
   }
 }

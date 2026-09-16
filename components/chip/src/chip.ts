@@ -1,34 +1,34 @@
-import type { ExtractPropTypes } from 'vue'
-import type Chip from './chip.vue'
-import { buildProps, definePropType } from 'element-plus/es/utils/index'
-import { IconString } from '@flash-global66/g-icon-font'
-import { type actionType } from '@flash-global66/g-dropdown'
-import { 
-  CHIP_TYPES, 
-  CHIP_VARIANTS, 
-  CHIP_SIZES, 
+import type { ExtractPropTypes } from 'vue';
+import type Chip from './chip.vue';
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { IconString } from '@flash-global66/g-icon-font';
+import { type actionType } from '@flash-global66/g-dropdown';
+import {
+  CHIP_TYPES,
+  CHIP_VARIANTS,
+  CHIP_SIZES,
   CLOSE_EVENT,
   CLICK_EVENT,
   COMMAND_EVENT,
-  VISIBLE_CHANGE_EVENT
-} from './constants'
-import type { ChipType, ChipVariant, ChipSize } from './chip.types'
+  VISIBLE_CHANGE_EVENT,
+} from './constants';
+import type { ChipType, ChipVariant, ChipSize } from './chip.types';
 
-export type DropdownCommand = string | number | Record<string, any>
-export type DropdownTriggerType = 'hover' | 'focus' | 'click' | 'contextmenu'
-export type DropdownPlacement = 
-  | 'top' 
-  | 'top-start' 
-  | 'top-end' 
-  | 'bottom' 
-  | 'bottom-start' 
-  | 'bottom-end' 
-  | 'left' 
-  | 'left-start' 
-  | 'left-end' 
-  | 'right' 
-  | 'right-start' 
-  | 'right-end'
+export type DropdownCommand = string | number | Record<string, any>;
+export type DropdownTriggerType = 'hover' | 'focus' | 'click' | 'contextmenu';
+export type DropdownPlacement =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left'
+  | 'left-start'
+  | 'left-end'
+  | 'right'
+  | 'right-start'
+  | 'right-end';
 
 export const chipProps = buildProps({
   /**
@@ -37,17 +37,17 @@ export const chipProps = buildProps({
   type: {
     type: definePropType<ChipType>(String),
     values: CHIP_TYPES,
-    default: 'primary'
+    default: 'primary',
   },
   /**
    * @description visual variant (controls color)
    * solid has grey-100 background
    * outline has only ever-blue-200 border
-   */ 
+   */
   variant: {
     type: definePropType<ChipVariant>(String),
     values: CHIP_VARIANTS,
-    default: 'solid'
+    default: 'solid',
   },
   /**
    * @description chip size
@@ -55,7 +55,7 @@ export const chipProps = buildProps({
   size: {
     type: definePropType<ChipSize>(String),
     values: CHIP_SIZES,
-    default: 'md'
+    default: 'md',
   },
   /**
    * @description prefix icon
@@ -64,7 +64,7 @@ export const chipProps = buildProps({
    */
   iconLeft: {
     type: definePropType<IconString>(String),
-    default: undefined
+    default: undefined,
   },
   /**
    * @description suffix icon
@@ -73,7 +73,7 @@ export const chipProps = buildProps({
    */
   iconRight: {
     type: definePropType<IconString>(String),
-    default: undefined
+    default: undefined,
   },
   /**
    * @description shows close button
@@ -86,7 +86,7 @@ export const chipProps = buildProps({
    */
   text: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   /**
    * @description selected chip
@@ -110,7 +110,7 @@ export const chipProps = buildProps({
    */
   actions: {
     type: definePropType<actionType[]>(Array),
-    default: undefined
+    default: undefined,
   },
 
   /**
@@ -119,7 +119,7 @@ export const chipProps = buildProps({
    */
   trigger: {
     type: definePropType<DropdownTriggerType>(String),
-    default: 'click'
+    default: 'click',
   },
 
   /**
@@ -128,21 +128,21 @@ export const chipProps = buildProps({
    */
   placement: {
     type: definePropType<DropdownPlacement>(String),
-    default: 'bottom-start'
+    default: 'bottom-start',
   },
-} as const)
+} as const);
 
-export type ChipProps = ExtractPropTypes<typeof chipProps>
+export type ChipProps = ExtractPropTypes<typeof chipProps>;
 
 export const chipEmits = {
   [CLOSE_EVENT]: (evt: MouseEvent) => evt instanceof MouseEvent,
   [CLICK_EVENT]: (evt: MouseEvent | KeyboardEvent) => evt instanceof Event,
-  [COMMAND_EVENT]: (command: DropdownCommand) => 
-    typeof command === 'string' || 
-    typeof command === 'number' || 
+  [COMMAND_EVENT]: (command: DropdownCommand) =>
+    typeof command === 'string' ||
+    typeof command === 'number' ||
     (typeof command === 'object' && command !== null),
-  [VISIBLE_CHANGE_EVENT]: (visible: boolean) => typeof visible === 'boolean'
-}
-export type ChipEmits = typeof chipEmits
+  [VISIBLE_CHANGE_EVENT]: (visible: boolean) => typeof visible === 'boolean',
+};
+export type ChipEmits = typeof chipEmits;
 
-export type ChipInstance = InstanceType<typeof Chip>
+export type ChipInstance = InstanceType<typeof Chip>;

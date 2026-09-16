@@ -1,0 +1,304 @@
+/* Element Chalk Variables */
+.fade-in-linear-enter-active,
+.fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.fade-in-linear-enter-from,
+.fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-linear-enter-active,
+.gui-fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.gui-fade-in-linear-enter-from,
+.gui-fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-enter-active,
+.gui-fade-in-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-fade-in-enter-from,
+.gui-fade-in-leave-active {
+  opacity: 0;
+}
+
+.gui-zoom-in-center-enter-active,
+.gui-zoom-in-center-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-zoom-in-center-enter-from,
+.gui-zoom-in-center-leave-active {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.gui-zoom-in-top-enter-active,
+.gui-zoom-in-top-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center top;
+}
+.gui-zoom-in-top-enter-active[data-popper-placement^=top],
+.gui-zoom-in-top-leave-active[data-popper-placement^=top] {
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-top-enter-from,
+.gui-zoom-in-top-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-bottom-enter-active,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-bottom-enter-from,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-left-enter-active,
+.gui-zoom-in-left-leave-active {
+  opacity: 1;
+  transform: scale(1, 1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: top left;
+}
+
+.gui-zoom-in-left-enter-from,
+.gui-zoom-in-left-leave-active {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+}
+
+.collapse-transition {
+  transition: var(--gui-transition-duration) height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.gui-collapse-transition-leave-active,
+.gui-collapse-transition-enter-active {
+  transition: var(--gui-transition-duration) max-height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.horizontal-collapse-transition {
+  transition: var(--gui-transition-duration) width ease-in-out, var(--gui-transition-duration) padding-left ease-in-out, var(--gui-transition-duration) padding-right ease-in-out;
+}
+
+.gui-list-enter-active,
+.gui-list-leave-active {
+  transition: all 1s;
+}
+
+.gui-list-enter-from,
+.gui-list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.gui-list-leave-active {
+  position: absolute !important;
+}
+
+.gui-opacity-transition {
+  transition: opacity var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-picker__popper {
+  --gui-datepicker-border-color: var(--gui-disabled-border-color);
+}
+.gui-picker__popper.gui-popper {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-datepicker-border-color);
+  box-shadow: var(--gui-box-shadow-light);
+}
+.gui-picker__popper.gui-popper .gui-popper__arrow::before {
+  border: 1px solid var(--gui-datepicker-border-color);
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=top] .gui-popper__arrow::before {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=bottom] .gui-popper__arrow::before {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=left] .gui-popper__arrow::before {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=right] .gui-popper__arrow::before {
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+
+.gui-date-editor {
+  --gui-date-editor-width: 220px;
+  --gui-date-editor-monthrange-width: 300px;
+  --gui-date-editor-daterange-width: 350px;
+  --gui-date-editor-datetimerange-width: 400px;
+  --gui-input-text-color: var(--gui-text-color-regular);
+  --gui-input-border: var(--gui-border);
+  --gui-input-hover-border: var(--gui-border-color-hover);
+  --gui-input-focus-border: var(--gui-color-primary);
+  --gui-input-transparent-border: 0 0 0 1px transparent inset;
+  --gui-input-border-color: var(--gui-border-color);
+  --gui-input-border-radius: var(--gui-border-radius-base);
+  --gui-input-bg-color: var(--gui-fill-color-blank);
+  --gui-input-icon-color: var(--gui-text-color-placeholder);
+  --gui-input-placeholder-color: var(--gui-text-color-placeholder);
+  --gui-input-hover-border-color: var(--gui-border-color-hover);
+  --gui-input-clear-hover-color: var(--gui-text-color-secondary);
+  --gui-input-focus-border-color: var(--gui-color-primary);
+  --gui-input-width: 100%;
+  position: relative;
+  text-align: left;
+  vertical-align: middle;
+}
+.gui-date-editor.gui-input__wrapper {
+  box-shadow: 0 0 0 1px var(--gui-input-border-color, var(--gui-border-color)) inset;
+}
+.gui-date-editor.gui-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--gui-input-hover-border-color) inset;
+}
+.gui-date-editor--monthrange {
+  --gui-date-editor-width: var(--gui-date-editor-monthrange-width);
+}
+
+.gui-date-editor--daterange, .gui-date-editor--timerange {
+  --gui-date-editor-width: var(--gui-date-editor-daterange-width);
+}
+
+.gui-date-editor--datetimerange {
+  --gui-date-editor-width: var(--gui-date-editor-datetimerange-width);
+}
+
+.gui-date-editor--dates .gui-input__wrapper {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gui-date-editor .close-icon {
+  cursor: pointer;
+}
+.gui-date-editor .clear-icon {
+  cursor: pointer;
+}
+.gui-date-editor .clear-icon:hover {
+  color: var(--gui-text-color-secondary);
+}
+.gui-date-editor .gui-range-input {
+  appearance: none;
+  border: none;
+  outline: none;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0;
+  width: 39%;
+  text-align: center;
+  font-size: var(--gui-font-size-base);
+  color: var(--gui-text-color-regular);
+  background-color: transparent;
+}
+.gui-date-editor .gui-range-input::placeholder {
+  color: var(--gui-text-color-placeholder);
+}
+.gui-date-editor .gui-range-separator {
+  flex: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 5px;
+  margin: 0;
+  font-size: 14px;
+  overflow-wrap: break-word;
+  color: var(--gui-text-color-primary);
+}
+.gui-date-editor .gui-range__close-icon--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gui-range-editor.gui-input__wrapper {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  vertical-align: middle;
+}
+.gui-range-editor.is-active {
+  box-shadow: 0 0 0 1px var(--gui-input-focus-border-color) inset;
+}
+.gui-range-editor.is-active:hover {
+  box-shadow: 0 0 0 1px var(--gui-input-focus-border-color) inset;
+}
+
+.gui-range-editor--large {
+  line-height: var(--gui-component-size-large);
+}
+.gui-range-editor--large.gui-input__wrapper {
+  height: var(--gui-component-size-large);
+}
+.gui-range-editor--large .gui-range-separator {
+  line-height: 40px;
+  font-size: 14px;
+}
+.gui-range-editor--large .gui-range-input {
+  height: 38px;
+  line-height: 38px;
+  font-size: 14px;
+}
+
+.gui-range-editor--small {
+  line-height: var(--gui-component-size-small);
+}
+.gui-range-editor--small.gui-input__wrapper {
+  height: var(--gui-component-size-small);
+}
+.gui-range-editor--small .gui-range-separator {
+  line-height: 24px;
+  font-size: 12px;
+}
+.gui-range-editor--small .gui-range-input {
+  height: 22px;
+  line-height: 22px;
+  font-size: 12px;
+}
+
+.gui-range-editor.is-disabled {
+  background-color: var(--gui-disabled-bg-color);
+  border-color: var(--gui-disabled-border-color);
+  color: var(--gui-disabled-text-color);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.gui-range-editor.is-disabled:hover, .gui-range-editor.is-disabled:focus {
+  border-color: var(--gui-disabled-border-color);
+}
+.gui-range-editor.is-disabled input {
+  background-color: var(--gui-disabled-bg-color);
+  color: var(--gui-disabled-text-color);
+  cursor: not-allowed;
+}
+.gui-range-editor.is-disabled input::placeholder {
+  color: var(--gui-text-color-placeholder);
+}
+.gui-range-editor.is-disabled .gui-range-separator {
+  color: var(--gui-disabled-text-color);
+}

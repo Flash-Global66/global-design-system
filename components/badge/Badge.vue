@@ -1,22 +1,30 @@
 <template>
-  <el-badge v-bind="filteredAttrs">
+  <div :class="ns.b()">
     <slot />
-  </el-badge>
+    <transition :name="`${ns.namespace.value}-zoom-in-center`">
+      <sup
+        v-show="!hidden && (content || isDot || !!$slots.content)"
+        :class="contentClasses"
+        :style="contentStyle"
+      >
+        <slot name="content" :value="content">{{ content }}</slot>
+      </sup>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, computed, StyleValue } from 'vue';
-import { ElBadge } from 'element-plus';
+import { useNamespace } from '@flash-global66/g-utils';
 
 // TYPES
 import { BadgeType } from './badge.type';
 
+const addUnit = (value: number, defaultUnit = 'px'): string =>
+  value ? `${value}${defaultUnit}` : '';
 
 export default defineComponent({
   name: 'GBadge',
-  components: {
-    ElBadge,
-  },
   props: {
     /**
      * @description display value.
@@ -63,14 +71,14 @@ export default defineComponent({
      */
     badgeStyle: {
       type: [String, Object, Array] as PropType<StyleValue>,
-      default: () => ({})
+      default: () => ({}),
     },
     /**
      * @description set offset of the badge
      */
     offset: {
       type: Array as unknown as PropType<[number, number]>,
-      default: () => [0, 0]
+      default: () => [0, 0],
     },
     /**
      * @description custom class name of badge
@@ -90,18 +98,51 @@ export default defineComponent({
     'blur',
     'focus',
   ],
-  setup(props, { emit, slots, attrs }) {
-    const filteredAttrs = computed(() => {
-      const result = { ...props, ...attrs } as Record<string, unknown>;
-      const excludeKeys = [];
+  setup(props, { slots }) {
+    const ns = useNamespace('badge');
 
-      excludeKeys.forEach(key => delete result[key]);
+    const content = computed(() => {
+      if (props.isDot) return '';
 
-      return result;
+      const { value, max } = props;
+      const isNumericValue = typeof value === 'number';
+      const isNumericMax = typeof max === 'number';
+
+      if (isNumericValue && isNumericMax) {
+        return max < value ? `${max}+` : `${value}`;
+      }
+
+      return `${value}`;
+    });
+
+    const contentClasses = computed(() => [
+      ns.e('content'),
+      ns.em('content', props.type),
+      ns.is('fixed', !!slots.default),
+      ns.is('dot', props.isDot),
+      ns.is('hide-zero', !props.showZero && props.value === 0),
+      props.badgeClass,
+    ]);
+
+    const contentStyle = computed(() => {
+      const [offsetX, offsetY] = props.offset;
+
+      return [
+        {
+          backgroundColor: props.color,
+          marginRight: addUnit(-offsetX),
+          marginTop: addUnit(offsetY),
+        },
+        props.badgeStyle ?? {},
+      ];
     });
 
     return {
-      filteredAttrs,
-    }
-  }
-});</script>
+      ns,
+      content,
+      contentClasses,
+      contentStyle,
+    };
+  },
+});
+</script>

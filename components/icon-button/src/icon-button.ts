@@ -1,12 +1,17 @@
-import type { ExtractPropTypes, PropType } from "vue";
-import { buildProps, debugWarn, isBoolean, isString } from "element-plus/es/utils/index";
+import type { ExtractPropTypes, PropType } from 'vue';
+import {
+  buildProps,
+  debugWarn,
+  isBoolean,
+  isString,
+} from '@flash-global66/g-utils';
 import type {
   IconButtonSize,
   IconButtonVariant,
   IconBorder,
-  IconRounded
-} from "./icon-button.type";
-import { IconString } from '@flash-global66/g-icon-font'
+  IconRounded,
+} from './icon-button.type';
+import { IconString } from '@flash-global66/g-icon-font';
 
 export const iconButtonProps = buildProps({
   /**
@@ -56,7 +61,7 @@ export const iconButtonProps = buildProps({
    */
   variant: {
     type: String as PropType<IconButtonVariant>,
-    default: "grey",
+    default: 'grey',
   },
   /**
    * Left icon rendered using the IconFont component.
@@ -70,22 +75,22 @@ export const iconButtonProps = buildProps({
    */
   icon: {
     type: String as PropType<IconString>,
-    default: "solid check",
+    default: 'solid check',
   },
   /**
    * Acceptable sizes are: "medium" or "small".
    */
   size: {
     type: String as PropType<IconButtonSize>,
-    default: "medium",
+    default: 'medium',
   },
   border: {
     type: Boolean as PropType<IconBorder>,
-    default: false
+    default: false,
   },
   rounded: {
     type: Boolean as PropType<IconRounded>,
-    default: false
+    default: false,
   },
   /**
    * Specifies the type of button (only when not using href).
@@ -93,8 +98,8 @@ export const iconButtonProps = buildProps({
    */
   type: {
     type: String as PropType<'button' | 'submit' | 'reset'>,
-    default: 'button'
-  }
+    default: 'button',
+  },
 });
 export const iconButtonEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
@@ -105,23 +110,25 @@ export type IconButtonProps = ExtractPropTypes<typeof iconButtonProps>;
 export type IconButtonEmits = typeof iconButtonEmits;
 
 export function validateIconButtonProps(props: IconButtonProps) {
-  const allowedVariants = ["grey", "black", "blue"];
+  const allowedVariants = ['grey', 'black', 'blue'];
   if (!isString(props.variant) || !allowedVariants.includes(props.variant)) {
     debugWarn(
-      "Icon Button",
-      `Invalid prop "variant": expected one of ${allowedVariants.join(", ")}, but received "${props.variant}".`
+      'Icon Button',
+      `Invalid prop "variant": expected one of ${allowedVariants.join(', ')}, but received "${props.variant}".`,
     );
   }
 
   if (!isBoolean(props.disabled)) {
-    debugWarn("Button", `Invalid prop "disabled": expected a boolean, but received "${typeof props.disabled}".`);
+    debugWarn(
+      'Button',
+      `Invalid prop "disabled": expected a boolean, but received "${typeof props.disabled}".`,
+    );
   }
 
   if (props.icon && !isString(props.icon)) {
     debugWarn(
-      "Icon Button",
-      `Invalid prop "icon": expected a string for icon name, but received "${typeof props.icon}".`
+      'Icon Button',
+      `Invalid prop "icon": expected a string for icon name, but received "${typeof props.icon}".`,
     );
   }
 }
-

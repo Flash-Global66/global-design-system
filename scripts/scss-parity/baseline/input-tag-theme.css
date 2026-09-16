@@ -1,0 +1,171 @@
+/* Element Chalk Variables */
+.gui-input-tag {
+  --gui-input-tag-border-color-hover: var(--gui-border-color-hover);
+  --gui-input-tag-placeholder-color: var(--gui-text-color-placeholder);
+  --gui-input-tag-disabled-color: var(--gui-disabled-text-color);
+  --gui-input-tag-disabled-border: var(--gui-disabled-border-color);
+  --gui-input-tag-font-size: var(--gui-font-size-base);
+  --gui-input-tag-close-hover-color: var(--gui-text-color-secondary);
+  --gui-input-tag-text-color: var(--gui-text-color-regular);
+  --gui-input-tag-input-focus-border-color: var(--gui-color-primary);
+  --gui-input-tag-width: 100%;
+  --gui-input-tag-mini-height: var(--gui-component-size);
+  --gui-input-tag-gap: 6px;
+  --gui-input-tag-padding: 4px;
+  --gui-input-tag-inner-padding: 8px;
+  --gui-input-tag-line-height: 24px;
+}
+
+.gui-input-tag {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: var(--gui-input-tag-font-size);
+  padding: var(--gui-input-tag-padding);
+  width: var(--gui-input-tag-width);
+  min-height: var(--gui-input-tag-mini-height);
+  line-height: var(--gui-input-tag-line-height);
+  border-radius: var(--gui-border-radius-base);
+  background-color: var(--gui-fill-color-blank);
+  transition: var(--gui-transition-duration);
+  transform: translate3d(0, 0, 0);
+  box-shadow: 0 0 0 1px var(--gui-border-color) inset;
+}
+.gui-input-tag.is-focused {
+  box-shadow: 0 0 0 1px var(--gui-color-primary) inset;
+}
+
+.gui-input-tag.is-hovering:not(.is-focused) {
+  box-shadow: 0 0 0 1px var(--gui-border-color-hover) inset;
+}
+
+.gui-input-tag.is-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: var(--gui-fill-color-light);
+  box-shadow: 0 0 0 1px var(--gui-input-tag-disabled-border) inset;
+}
+.gui-input-tag.is-disabled:hover {
+  box-shadow: 0 0 0 1px var(--gui-input-tag-disabled-border) inset;
+}
+.gui-input-tag.is-disabled.is-focus {
+  box-shadow: 0 0 0 1px var(--gui-input-focus-border-color) inset;
+}
+.gui-input-tag.is-disabled .gui-input-tag__inner .gui-input-tag__input {
+  cursor: not-allowed;
+}
+
+.gui-input-tag.is-disabled .gui-input-tag__inner .gui-tag {
+  cursor: not-allowed;
+}
+
+.gui-input-tag__prefix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 var(--gui-input-tag-inner-padding);
+  color: var(--gui-input-icon-color, var(--gui-text-color-placeholder));
+}
+
+.gui-input-tag__suffix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 var(--gui-input-tag-inner-padding);
+  gap: 8px;
+  color: var(--gui-input-icon-color, var(--gui-text-color-placeholder));
+}
+
+.gui-input-tag__inner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  max-width: 100%;
+  min-width: 0;
+  gap: var(--gui-input-tag-gap);
+}
+.gui-input-tag__inner.is-left-space {
+  margin-left: var(--gui-input-tag-inner-padding);
+}
+
+.gui-input-tag__inner.is-right-space {
+  margin-right: var(--gui-input-tag-inner-padding);
+}
+
+.gui-input-tag__inner.is-draggable .gui-tag {
+  cursor: move;
+  user-select: none;
+}
+
+.gui-input-tag__drop-indicator {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: var(--el-input-tag-line-height);
+  background-color: var(--gui-color-primary);
+}
+
+.gui-input-tag__inner .gui-tag {
+  max-width: 100%;
+  cursor: pointer;
+  border-color: transparent;
+}
+.gui-input-tag__inner .gui-tag.gui-tag--plain {
+  border-color: var(--gui-tag-border-color);
+}
+.gui-input-tag__inner .gui-tag .gui-tag__content {
+  min-width: 0;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gui-input-tag__input-wrapper {
+  flex: 1;
+}
+
+.gui-input-tag__input {
+  border: none;
+  outline: none;
+  padding: 0;
+  color: var(--gui-input-tag-text-color);
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  appearance: none;
+  width: 100%;
+  background-color: transparent;
+}
+.gui-input-tag__input::placeholder {
+  color: var(--gui-input-tag-placeholder-color);
+}
+
+.gui-input-tag__input-calculator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 100%;
+  visibility: hidden;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.gui-input-tag--large {
+  --gui-input-tag-gap: 6px;
+  --gui-input-tag-padding: 8px;
+  --gui-input-tag-padding-left: 8px;
+  --gui-input-tag-font-size: 14px;
+}
+
+.gui-input-tag--small {
+  --gui-input-tag-gap: 4px;
+  --gui-input-tag-padding: 2px;
+  --gui-input-tag-padding-left: 6px;
+  --gui-input-tag-font-size: 12px;
+  --gui-input-tag-line-height: 20px;
+  --gui-input-tag-mini-height: var(--gui-component-size-small);
+}

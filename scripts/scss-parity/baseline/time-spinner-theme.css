@@ -1,0 +1,89 @@
+/* Element Chalk Variables */
+.gui-time-spinner.has-seconds .gui-time-spinner__wrapper {
+  width: 33.3%;
+}
+.gui-time-spinner__wrapper {
+  max-height: 192px;
+  overflow: auto;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  position: relative;
+}
+.gui-time-spinner__wrapper.gui-scrollbar__wrap:not(.gui-scrollbar__wrap--hidden-default) {
+  padding-bottom: 15px;
+}
+.gui-time-spinner__wrapper.is-arrow {
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+}
+.gui-time-spinner__wrapper.is-arrow .gui-time-spinner__list {
+  transform: translateY(-32px);
+}
+.gui-time-spinner__wrapper.is-arrow .gui-time-spinner__item:hover:not(.is-disabled):not(.is-active) {
+  background: var(--gui-fill-color-light);
+  cursor: default;
+}
+
+.gui-time-spinner__arrow {
+  font-size: 12px;
+  color: var(--gui-text-color-secondary);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: var(--gui-index-normal);
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+}
+.gui-time-spinner__arrow:hover {
+  color: var(--gui-color-primary);
+}
+.gui-time-spinner__arrow.arrow-up {
+  top: 10px;
+}
+.gui-time-spinner__arrow.arrow-down {
+  bottom: 10px;
+}
+
+.gui-time-spinner__input.gui-input {
+  width: 70%;
+}
+.gui-time-spinner__input.gui-input .gui-input__inner {
+  padding: 0;
+  text-align: center;
+}
+
+.gui-time-spinner__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+.gui-time-spinner__list::after, .gui-time-spinner__list::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+.gui-time-spinner__item {
+  height: 32px;
+  line-height: 32px;
+  font-size: 12px;
+  color: var(--gui-text-color-regular);
+}
+.gui-time-spinner__item:hover:not(.is-disabled):not(.is-active) {
+  background: var(--gui-fill-color-light);
+  cursor: pointer;
+}
+.gui-time-spinner__item.is-active:not(.is-disabled) {
+  color: var(--gui-text-color-primary);
+  font-weight: bold;
+}
+.gui-time-spinner__item.is-disabled {
+  color: var(--gui-text-color-placeholder);
+  cursor: not-allowed;
+}

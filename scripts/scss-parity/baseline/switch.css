@@ -1,0 +1,165 @@
+/* Element Chalk Variables */
+.gui-switch {
+  --gui-switch-on-color: var(--gui-color-primary);
+  --gui-switch-off-color: var(--gui-border-color);
+}
+
+.gui-switch {
+  @apply inline-flex items-center relative text-3;
+  height: 30px;
+  vertical-align: middle;
+}
+.gui-switch__label {
+  @apply inline-block font-medium cursor-pointer text-secondary-txt;
+  transition: var(--gui-transition-duration-fast);
+  vertical-align: middle;
+}
+.gui-switch__label.is-active {
+  @apply text-primary-def;
+}
+
+.gui-switch__label--left {
+  @apply mr-2;
+}
+
+.gui-switch__label--right {
+  @apply ml-2;
+}
+
+.gui-switch__label * {
+  line-height: 1;
+  @apply inline-block;
+}
+.gui-switch__label .gui-icon {
+  height: inherit;
+}
+.gui-switch__label .gui-icon svg {
+  vertical-align: middle;
+}
+
+.gui-switch__input {
+  @apply absolute opacity-0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+.gui-switch__input:focus-visible ~ .gui-switch__core {
+  @apply outline-2 outline-primary-def outline-offset-1;
+  outline-style: solid;
+}
+
+.gui-switch__core {
+  @apply inline-flex relative items-center border border-solid cursor-pointer;
+  border-radius: 15px;
+  min-width: 56px;
+  height: 30px;
+  border-color: var(--gui-switch-border-color, var(--gui-switch-off-color));
+  outline: none;
+  box-sizing: border-box;
+  background: var(--gui-switch-off-color);
+  @apply border-disab-lt-bd bg-disab-lt-bg;
+  transition: border-color var(--gui-transition-duration), background-color var(--gui-transition-duration);
+}
+.gui-switch__core .gui-switch__inner {
+  @apply w-full h-full flex justify-center items-center overflow-hidden;
+  transition: all var(--gui-transition-duration);
+  padding: 0 4px 0 calc(24px + 2px);
+}
+.gui-switch__core .gui-switch__inner .is-icon,
+.gui-switch__core .gui-switch__inner .is-text {
+  @apply text-xs text-white flex items-center justify-center;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex-shrink: 1;
+}
+.gui-switch__core .gui-switch__action {
+  @apply absolute flex justify-center items-center bg-white;
+  left: 3px;
+  border-radius: var(--gui-border-radius-circle);
+  transition: all var(--gui-transition-duration);
+  width: 24px;
+  height: 24px;
+  @apply text-disab-lt-txt;
+}
+
+.gui-switch.is-checked .gui-switch__core {
+  @apply border-primary-bd bg-primary-def;
+}
+.gui-switch.is-checked .gui-switch__core .gui-switch__action {
+  left: calc(100% - 27px);
+  @apply text-primary-def;
+}
+.gui-switch.is-checked .gui-switch__core .gui-switch__inner {
+  padding: 0 calc(24px + 2px) 0 4px;
+}
+
+.gui-switch.is-disabled .gui-switch__core, .gui-switch.is-disabled .gui-switch__label {
+  @apply cursor-not-allowed;
+}
+.gui-switch.is-disabled .gui-switch__core {
+  @apply bg-grey-200 border-grey-200;
+}
+.gui-switch.is-disabled .gui-switch__action {
+  @apply bg-grey-100;
+}
+
+.gui-switch--wide .gui-switch__label.gui-switch__label--left span {
+  left: 10px;
+}
+.gui-switch--wide .gui-switch__label.gui-switch__label--right span {
+  right: 10px;
+}
+
+.gui-switch .label-fade-enter-from, .gui-switch .label-fade-leave-active {
+  opacity: 0;
+}
+.gui-switch--large {
+  height: 36px;
+}
+.gui-switch--large .gui-switch__core {
+  min-width: 67px;
+  height: 36px;
+  border-radius: 18px;
+}
+.gui-switch--large .gui-switch__core .gui-switch__inner {
+  padding: 0 6px 0 calc(30px + 2px);
+}
+.gui-switch--large .gui-switch__core .gui-switch__action {
+  width: 30px;
+  height: 30px;
+  left: 4px;
+}
+
+.gui-switch--large.is-checked .gui-switch__core .gui-switch__action {
+  left: calc(100% - 33px);
+}
+.gui-switch--large.is-checked .gui-switch__core .gui-switch__inner {
+  padding: 0 calc(30px + 2px) 0 6px;
+}
+
+.gui-switch--small {
+  height: 24px;
+}
+.gui-switch--small .gui-switch__core {
+  min-width: 45px;
+  height: 24px;
+  border-radius: 12px;
+}
+.gui-switch--small .gui-switch__core .gui-switch__inner {
+  padding: 0 2px 0 calc(18px + 2px);
+}
+.gui-switch--small .gui-switch__core .gui-switch__action {
+  width: 18px;
+  height: 18px;
+  left: 2px;
+}
+
+.gui-switch--small.is-checked .gui-switch__core .gui-switch__action {
+  left: calc(100% - 21px);
+}
+.gui-switch--small.is-checked .gui-switch__core .gui-switch__inner {
+  padding: 0 calc(18px + 2px) 0 2px;
+}

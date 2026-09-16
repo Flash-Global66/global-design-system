@@ -1,8 +1,7 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
 
-import type { VNode } from 'vue'
-import { toastTypes, toastSizes } from './toast.types'
-
+import type { VNode } from 'vue';
+import { toastTypes, toastSizes } from './toast.types';
 
 export const toastProps = buildProps({
   /**
@@ -10,7 +9,7 @@ export const toastProps = buildProps({
    */
   customClass: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description whether `message` is treated as HTML string
@@ -28,14 +27,18 @@ export const toastProps = buildProps({
    */
   id: {
     type: String,
-    default: "",
+    default: '',
   },
   /**
    * @description description text
    */
   message: {
-    type: definePropType<string | VNode | (() => VNode)>([String, Object, Function]),
-    default: "",
+    type: definePropType<string | VNode | (() => VNode)>([
+      String,
+      Object,
+      Function,
+    ]),
+    default: '',
   },
   /**
    * @description offset from the top edge of the screen. Every Toast instance of the same moment should have the same offset
@@ -63,8 +66,8 @@ export const toastProps = buildProps({
    */
   position: {
     type: String,
-    values: ["top-right", "top-left", "bottom-right", "bottom-left"],
-    default: "top-right",
+    values: ['top-right', 'top-left', 'bottom-right', 'bottom-left'],
+    default: 'top-right',
   },
   /**
    * @description whether to show a close button
@@ -86,7 +89,7 @@ export const toastProps = buildProps({
   size: {
     type: String,
     values: toastSizes,
-    default: "md",
+    default: 'md',
   } as const,
   /**
    * @description toast type - required and determines the icon
@@ -104,7 +107,4 @@ export const toastProps = buildProps({
 
 export const toastEmits = {
   destroy: () => true,
-}
-
-
-
+};

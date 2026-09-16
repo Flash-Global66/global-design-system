@@ -1,0 +1,1473 @@
+/* Element Chalk Variables */
+.gui-scrollbar {
+  --gui-scrollbar-opacity: 0.3;
+  --gui-scrollbar-bg-color: var(--gui-text-color-secondary);
+  --gui-scrollbar-hover-opacity: 0.5;
+  --gui-scrollbar-hover-bg-color: var(--gui-text-color-secondary);
+}
+
+.gui-scrollbar {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+.gui-scrollbar__wrap {
+  overflow: auto;
+  height: 100%;
+}
+.gui-scrollbar__wrap--hidden-default {
+  scrollbar-width: none;
+}
+.gui-scrollbar__wrap--hidden-default::-webkit-scrollbar {
+  display: none;
+}
+
+.gui-scrollbar__thumb {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: var(--gui-scrollbar-bg-color, var(--gui-text-color-secondary));
+  transition: var(--gui-transition-duration) background-color;
+  opacity: var(--gui-scrollbar-opacity, 0.3);
+}
+.gui-scrollbar__thumb:hover {
+  background-color: var(--gui-scrollbar-hover-bg-color, var(--gui-text-color-secondary));
+  opacity: var(--gui-scrollbar-hover-opacity, 0.5);
+}
+
+.gui-scrollbar__bar {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  z-index: 1;
+  border-radius: 4px;
+}
+.gui-scrollbar__bar.is-vertical {
+  width: 6px;
+  top: 2px;
+}
+.gui-scrollbar__bar.is-vertical > div {
+  width: 100%;
+}
+
+.gui-scrollbar__bar.is-horizontal {
+  height: 6px;
+  left: 2px;
+}
+.gui-scrollbar__bar.is-horizontal > div {
+  height: 100%;
+}
+
+.gui-scrollbar-fade-enter-active {
+  transition: opacity 340ms ease-out;
+}
+.gui-scrollbar-fade-leave-active {
+  transition: opacity 120ms ease-out;
+}
+.gui-scrollbar-fade-enter-from, .gui-scrollbar-fade-leave-active {
+  opacity: 0;
+}
+
+.gui-select-dropdown__item {
+  font-size: var(--gui-font-size-base);
+  padding: 0 32px 0 20px;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--gui-text-color-regular);
+  height: 34px;
+  line-height: 34px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.gui-select-dropdown__item.is-hovering {
+  background-color: var(--gui-fill-color-light);
+}
+
+.gui-select-dropdown__item.is-selected {
+  color: var(--gui-color-primary);
+  font-weight: bold;
+}
+
+.gui-select-dropdown__item.is-disabled {
+  color: var(--gui-text-color-placeholder);
+  cursor: not-allowed;
+  background-color: unset;
+}
+
+.gui-select-dropdown.is-multiple .gui-select-dropdown__item.is-selected::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border-top: none;
+  border-right: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--gui-color-primary);
+  mask: url("data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='200' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='currentColor' d='M406.656 706.944L195.84 496.256a32 32 0 10-45.248 45.248l256 256 512-512a32 32 0 00-45.248-45.248L406.592 706.944z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask: url("data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='200' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='currentColor' d='M406.656 706.944L195.84 496.256a32 32 0 10-45.248 45.248l256 256 512-512a32 32 0 00-45.248-45.248L406.592 706.944z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  -webkit-mask-size: 100% 100%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+}
+.gui-select-dropdown.is-multiple .gui-select-dropdown__item.is-disabled::after {
+  background-color: var(--gui-text-color-placeholder);
+}
+
+.gui-tooltip-v2__content {
+  --gui-tooltip-v2-padding: 5px 10px;
+  --gui-tooltip-v2-border-radius: 4px;
+  --gui-tooltip-v2-border-color: var(--gui-border-color);
+  border-radius: var(--gui-tooltip-v2-border-radius);
+  color: var(--gui-color-black);
+  background-color: var(--gui-color-white);
+  padding: var(--gui-tooltip-v2-padding);
+  border: 1px solid var(--gui-border-color);
+}
+.gui-tooltip-v2__arrow {
+  position: absolute;
+  color: var(--gui-color-white);
+  width: var(--gui-tooltip-v2-arrow-width);
+  height: var(--gui-tooltip-v2-arrow-height);
+  pointer-events: none;
+  left: var(--gui-tooltip-v2-arrow-x);
+  top: var(--gui-tooltip-v2-arrow-y);
+}
+.gui-tooltip-v2__arrow::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__arrow::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow {
+  bottom: 0;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::before {
+  border-top-color: var(--gui-color-white);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::after {
+  border-top-color: var(--gui-border-color);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow {
+  top: 0;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::before {
+  border-bottom-color: var(--gui-color-white);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::after {
+  border-bottom-color: var(--gui-border-color);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow {
+  right: 0;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::before {
+  border-left-color: var(--gui-color-white);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::after {
+  border-left-color: var(--gui-border-color);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow {
+  left: 0;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::before {
+  border-right-color: var(--gui-color-white);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::after {
+  border-right-color: var(--gui-border-color);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: 100%;
+  z-index: -1;
+}
+
+.gui-tooltip-v2__content.is-dark {
+  --gui-tooltip-v2-border-color: transparent;
+  background-color: var(--gui-color-black);
+  color: var(--gui-color-white);
+  border-color: transparent;
+}
+.gui-tooltip-v2__content.is-dark .gui-tooltip-v2__arrow {
+  background-color: var(--gui-color-black);
+  border-color: transparent;
+}
+
+.gui-popper {
+  --gui-popper-border-radius: var(--gui-popover-border-radius, 4px);
+}
+
+.gui-popper {
+  position: absolute;
+  border-radius: var(--gui-popper-border-radius);
+  padding: 5px 11px;
+  z-index: 2000;
+  font-size: 12px;
+  line-height: 20px;
+  min-width: 10px;
+  overflow-wrap: break-word;
+  visibility: visible;
+}
+.gui-popper.is-dark {
+  color: var(--gui-bg-color);
+  background: var(--gui-text-color-primary);
+  border: 1px solid var(--gui-text-color-primary);
+}
+.gui-popper.is-dark > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-text-color-primary);
+  background: var(--gui-text-color-primary);
+  right: 0;
+}
+
+.gui-popper.is-light {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-border-color-light);
+}
+.gui-popper.is-light > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-border-color-light);
+  background: var(--gui-bg-color-overlay);
+  right: 0;
+}
+
+.gui-popper.is-pure {
+  padding: 0;
+}
+
+.gui-popper__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+}
+.gui-popper__arrow::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+  content: " ";
+  transform: rotate(45deg);
+  background: var(--gui-text-color-primary);
+  box-sizing: border-box;
+}
+
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow {
+  bottom: -5px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-bottom-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow {
+  top: -5px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-top-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow {
+  right: -5px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-top-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow {
+  left: -5px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-bottom-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+}
+
+.fade-in-linear-enter-active,
+.fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.fade-in-linear-enter-from,
+.fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-linear-enter-active,
+.gui-fade-in-linear-leave-active {
+  transition: var(--gui-transition-fade-linear);
+}
+
+.gui-fade-in-linear-enter-from,
+.gui-fade-in-linear-leave-to {
+  opacity: 0;
+}
+
+.gui-fade-in-enter-active,
+.gui-fade-in-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-fade-in-enter-from,
+.gui-fade-in-leave-active {
+  opacity: 0;
+}
+
+.gui-zoom-in-center-enter-active,
+.gui-zoom-in-center-leave-active {
+  transition: all var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-zoom-in-center-enter-from,
+.gui-zoom-in-center-leave-active {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.gui-zoom-in-top-enter-active,
+.gui-zoom-in-top-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center top;
+}
+.gui-zoom-in-top-enter-active[data-popper-placement^=top],
+.gui-zoom-in-top-leave-active[data-popper-placement^=top] {
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-top-enter-from,
+.gui-zoom-in-top-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-bottom-enter-active,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: center bottom;
+}
+
+.gui-zoom-in-bottom-enter-from,
+.gui-zoom-in-bottom-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.gui-zoom-in-left-enter-active,
+.gui-zoom-in-left-leave-active {
+  opacity: 1;
+  transform: scale(1, 1);
+  transition: var(--gui-transition-md-fade);
+  transform-origin: top left;
+}
+
+.gui-zoom-in-left-enter-from,
+.gui-zoom-in-left-leave-active {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+}
+
+.collapse-transition {
+  transition: var(--gui-transition-duration) height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.gui-collapse-transition-leave-active,
+.gui-collapse-transition-enter-active {
+  transition: var(--gui-transition-duration) max-height ease-in-out, var(--gui-transition-duration) padding-top ease-in-out, var(--gui-transition-duration) padding-bottom ease-in-out;
+}
+
+.horizontal-collapse-transition {
+  transition: var(--gui-transition-duration) width ease-in-out, var(--gui-transition-duration) padding-left ease-in-out, var(--gui-transition-duration) padding-right ease-in-out;
+}
+
+.gui-list-enter-active,
+.gui-list-leave-active {
+  transition: all 1s;
+}
+
+.gui-list-enter-from,
+.gui-list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.gui-list-leave-active {
+  position: absolute !important;
+}
+
+.gui-opacity-transition {
+  transition: opacity var(--gui-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.gui-picker__popper {
+  --gui-datepicker-border-color: var(--gui-disabled-border-color);
+}
+.gui-picker__popper.gui-popper {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-datepicker-border-color);
+  box-shadow: var(--gui-box-shadow-light);
+}
+.gui-picker__popper.gui-popper .gui-popper__arrow::before {
+  border: 1px solid var(--gui-datepicker-border-color);
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=top] .gui-popper__arrow::before {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=bottom] .gui-popper__arrow::before {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=left] .gui-popper__arrow::before {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+.gui-picker__popper.gui-popper[data-popper-placement^=right] .gui-popper__arrow::before {
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+
+.gui-date-editor {
+  --gui-date-editor-width: 220px;
+  --gui-date-editor-monthrange-width: 300px;
+  --gui-date-editor-daterange-width: 350px;
+  --gui-date-editor-datetimerange-width: 400px;
+  --gui-input-text-color: var(--gui-text-color-regular);
+  --gui-input-border: var(--gui-border);
+  --gui-input-hover-border: var(--gui-border-color-hover);
+  --gui-input-focus-border: var(--gui-color-primary);
+  --gui-input-transparent-border: 0 0 0 1px transparent inset;
+  --gui-input-border-color: var(--gui-border-color);
+  --gui-input-border-radius: var(--gui-border-radius-base);
+  --gui-input-bg-color: var(--gui-fill-color-blank);
+  --gui-input-icon-color: var(--gui-text-color-placeholder);
+  --gui-input-placeholder-color: var(--gui-text-color-placeholder);
+  --gui-input-hover-border-color: var(--gui-border-color-hover);
+  --gui-input-clear-hover-color: var(--gui-text-color-secondary);
+  --gui-input-focus-border-color: var(--gui-color-primary);
+  --gui-input-width: 100%;
+  position: relative;
+  text-align: left;
+  vertical-align: middle;
+}
+.gui-date-editor.gui-input__wrapper {
+  box-shadow: 0 0 0 1px var(--gui-input-border-color, var(--gui-border-color)) inset;
+}
+.gui-date-editor.gui-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--gui-input-hover-border-color) inset;
+}
+.gui-date-editor--monthrange {
+  --gui-date-editor-width: var(--gui-date-editor-monthrange-width);
+}
+
+.gui-date-editor--daterange, .gui-date-editor--timerange {
+  --gui-date-editor-width: var(--gui-date-editor-daterange-width);
+}
+
+.gui-date-editor--datetimerange {
+  --gui-date-editor-width: var(--gui-date-editor-datetimerange-width);
+}
+
+.gui-date-editor--dates .gui-input__wrapper {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gui-date-editor .close-icon {
+  cursor: pointer;
+}
+.gui-date-editor .clear-icon {
+  cursor: pointer;
+}
+.gui-date-editor .clear-icon:hover {
+  color: var(--gui-text-color-secondary);
+}
+.gui-date-editor .gui-range-input {
+  appearance: none;
+  border: none;
+  outline: none;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0;
+  width: 39%;
+  text-align: center;
+  font-size: var(--gui-font-size-base);
+  color: var(--gui-text-color-regular);
+  background-color: transparent;
+}
+.gui-date-editor .gui-range-input::placeholder {
+  color: var(--gui-text-color-placeholder);
+}
+.gui-date-editor .gui-range-separator {
+  flex: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 5px;
+  margin: 0;
+  font-size: 14px;
+  overflow-wrap: break-word;
+  color: var(--gui-text-color-primary);
+}
+.gui-date-editor .gui-range__close-icon--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gui-range-editor.gui-input__wrapper {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  vertical-align: middle;
+}
+.gui-range-editor.is-active {
+  box-shadow: 0 0 0 1px var(--gui-input-focus-border-color) inset;
+}
+.gui-range-editor.is-active:hover {
+  box-shadow: 0 0 0 1px var(--gui-input-focus-border-color) inset;
+}
+
+.gui-range-editor--large {
+  line-height: var(--gui-component-size-large);
+}
+.gui-range-editor--large.gui-input__wrapper {
+  height: var(--gui-component-size-large);
+}
+.gui-range-editor--large .gui-range-separator {
+  line-height: 40px;
+  font-size: 14px;
+}
+.gui-range-editor--large .gui-range-input {
+  height: 38px;
+  line-height: 38px;
+  font-size: 14px;
+}
+
+.gui-range-editor--small {
+  line-height: var(--gui-component-size-small);
+}
+.gui-range-editor--small.gui-input__wrapper {
+  height: var(--gui-component-size-small);
+}
+.gui-range-editor--small .gui-range-separator {
+  line-height: 24px;
+  font-size: 12px;
+}
+.gui-range-editor--small .gui-range-input {
+  height: 22px;
+  line-height: 22px;
+  font-size: 12px;
+}
+
+.gui-range-editor.is-disabled {
+  background-color: var(--gui-disabled-bg-color);
+  border-color: var(--gui-disabled-border-color);
+  color: var(--gui-disabled-text-color);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.gui-range-editor.is-disabled:hover, .gui-range-editor.is-disabled:focus {
+  border-color: var(--gui-disabled-border-color);
+}
+.gui-range-editor.is-disabled input {
+  background-color: var(--gui-disabled-bg-color);
+  color: var(--gui-disabled-text-color);
+  cursor: not-allowed;
+}
+.gui-range-editor.is-disabled input::placeholder {
+  color: var(--gui-text-color-placeholder);
+}
+.gui-range-editor.is-disabled .gui-range-separator {
+  color: var(--gui-disabled-text-color);
+}
+
+.gui-time-range-picker {
+  width: 354px;
+  overflow: visible;
+}
+.gui-time-range-picker__content {
+  position: relative;
+  text-align: center;
+  padding: 10px;
+  z-index: 1;
+}
+
+.gui-time-range-picker__cell {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px 7px 7px;
+  width: 50%;
+  display: inline-block;
+}
+
+.gui-time-range-picker__header {
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.gui-time-range-picker__body {
+  border-radius: 2px;
+  border: 1px solid #fff;
+}
+
+.gui-time-panel {
+  background: var(--gui-bg-color-overlay);
+  border-radius: 0.5rem;
+  border: solid 1px var(--gui-datepicker-border-color);
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.1607843137);
+  border-radius: 2px;
+  position: relative;
+  width: 180px;
+  left: 0;
+  z-index: var(--gui-index-top);
+  user-select: none;
+  box-sizing: content-box;
+}
+.gui-time-panel__content {
+  font-size: 0;
+  position: relative;
+  overflow: hidden;
+}
+.gui-time-panel__content::after, .gui-time-panel__content::before {
+  content: "";
+  top: 50%;
+  position: absolute;
+  margin-top: -16px;
+  height: 32px;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding-top: 6px;
+  text-align: left;
+}
+.gui-time-panel__content::after {
+  left: 50%;
+  margin-left: 12%;
+  margin-right: 12%;
+}
+.gui-time-panel__content::before {
+  padding-left: 50%;
+  margin-right: 12%;
+  margin-left: 12%;
+  border-top: 1px solid var(--gui-border-color-light);
+  border-bottom: 1px solid var(--gui-border-color-light);
+}
+.gui-time-panel__content.has-seconds::after {
+  left: 66.6666666667%;
+}
+.gui-time-panel__content.has-seconds::before {
+  padding-left: 33.3333333333%;
+}
+
+.gui-time-panel__footer {
+  border-top: 1px solid var(--gui-timepicker-inner-border-color, var(--gui-border-color-light));
+  padding: 4px;
+  height: 36px;
+  line-height: 25px;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.gui-time-panel__btn {
+  border: none;
+  line-height: 28px;
+  padding: 0 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  font-size: 12px;
+  color: var(--gui-text-color-primary);
+}
+.gui-time-panel__btn.confirm {
+  font-weight: 800;
+  color: var(--gui-timepicker-active-color, var(--gui-color-primary));
+}
+
+.gui-time-spinner.has-seconds .gui-time-spinner__wrapper {
+  width: 33.3%;
+}
+.gui-time-spinner__wrapper {
+  max-height: 192px;
+  overflow: auto;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  position: relative;
+}
+.gui-time-spinner__wrapper.gui-scrollbar__wrap:not(.gui-scrollbar__wrap--hidden-default) {
+  padding-bottom: 15px;
+}
+.gui-time-spinner__wrapper.is-arrow {
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+}
+.gui-time-spinner__wrapper.is-arrow .gui-time-spinner__list {
+  transform: translateY(-32px);
+}
+.gui-time-spinner__wrapper.is-arrow .gui-time-spinner__item:hover:not(.is-disabled):not(.is-active) {
+  background: var(--gui-fill-color-light);
+  cursor: default;
+}
+
+.gui-time-spinner__arrow {
+  font-size: 12px;
+  color: var(--gui-text-color-secondary);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: var(--gui-index-normal);
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+}
+.gui-time-spinner__arrow:hover {
+  color: var(--gui-color-primary);
+}
+.gui-time-spinner__arrow.arrow-up {
+  top: 10px;
+}
+.gui-time-spinner__arrow.arrow-down {
+  bottom: 10px;
+}
+
+.gui-time-spinner__input.gui-input {
+  width: 70%;
+}
+.gui-time-spinner__input.gui-input .gui-input__inner {
+  padding: 0;
+  text-align: center;
+}
+
+.gui-time-spinner__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+.gui-time-spinner__list::after, .gui-time-spinner__list::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+.gui-time-spinner__item {
+  height: 32px;
+  line-height: 32px;
+  font-size: 12px;
+  color: var(--gui-text-color-regular);
+}
+.gui-time-spinner__item:hover:not(.is-disabled):not(.is-active) {
+  background: var(--gui-fill-color-light);
+  cursor: pointer;
+}
+.gui-time-spinner__item.is-active:not(.is-disabled) {
+  color: var(--gui-text-color-primary);
+  font-weight: bold;
+}
+.gui-time-spinner__item.is-disabled {
+  color: var(--gui-text-color-placeholder);
+  cursor: not-allowed;
+}
+
+.gui-picker-panel {
+  color: var(--gui-text-color-regular);
+  background: var(--gui-bg-color-overlay);
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.1607843137);
+  line-height: 30px;
+}
+.gui-picker-panel .gui-time-panel {
+  margin: 5px 0;
+  border: solid 1px var(--gui-datepicker-border-color);
+  background-color: var(--gui-bg-color-overlay);
+  box-shadow: var(--gui-box-shadow-light);
+}
+.gui-picker-panel__body::after, .gui-picker-panel__body-wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.gui-picker-panel__content {
+  position: relative;
+  margin: 8px 15px 15px 15px;
+}
+
+.gui-picker-panel__footer {
+  border-top: 1px solid var(--gui-datepicker-inner-border-color);
+  padding: 4px 12px;
+  text-align: right;
+  background-color: var(--gui-bg-color-overlay);
+  position: relative;
+  font-size: 0;
+}
+
+.gui-picker-panel__shortcut {
+  @apply text-grey-700;
+  display: block;
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  line-height: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  padding-left: 16px;
+  padding-bottom: 10px;
+  text-align: left;
+  outline: none;
+  cursor: pointer;
+}
+.gui-picker-panel__shortcut:hover {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__shortcut.active {
+  background-color: #e6f1fe;
+  color: var(--gui-datepicker-active-color);
+}
+
+.gui-picker-panel__btn {
+  border: 1px solid var(--gui-fill-color-darker);
+  color: var(--gui-text-color-primary);
+  line-height: 24px;
+  border-radius: 2px;
+  padding: 0 20px;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  font-size: 12px;
+}
+.gui-picker-panel__btn[disabled] {
+  color: var(--gui-text-color-disabled);
+  cursor: not-allowed;
+}
+
+.gui-picker-panel__icon-btn {
+  @apply text-terciary-txt;
+  width: 1.25rem;
+  font-size: 16px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+.gui-picker-panel__icon-btn:hover {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__icon-btn:focus-visible {
+  @apply text-everBlue-500;
+}
+.gui-picker-panel__icon-btn.is-disabled {
+  color: var(--gui-text-color-disabled);
+}
+.gui-picker-panel__icon-btn.is-disabled:hover {
+  cursor: not-allowed;
+}
+
+.gui-picker-panel__icon-btn .gui-icon {
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.gui-picker-panel__link-btn {
+  vertical-align: middle;
+}
+
+.gui-picker-panel *[slot=sidebar],
+.gui-picker-panel__sidebar {
+  position: absolute;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  top: 0;
+  bottom: 0;
+  width: 110px;
+  border-right: 1px solid #949aab;
+  box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: var(--gui-bg-color-overlay);
+  overflow: auto;
+}
+
+.gui-picker-panel *[slot=sidebar] + .gui-picker-panel__body,
+.gui-picker-panel__sidebar + .gui-picker-panel__body {
+  margin-left: 110px;
+}
+
+.gui-date-picker {
+  --gui-datepicker-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-off-text-color: var(--gui-text-color-placeholder);
+  --gui-datepicker-header-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-icon-color: var(--gui-text-color-primary);
+  --gui-datepicker-border-color: var(--gui-disabled-border-color);
+  --gui-datepicker-inner-border-color: var(--gui-border-color-light);
+  --gui-datepicker-inrange-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-inrange-hover-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-active-color: var(--gui-color-primary);
+  --gui-datepicker-hover-text-color: var(--gui-color-primary);
+}
+
+.gui-date-picker {
+  width: 322px;
+}
+.gui-date-picker.has-sidebar.has-time {
+  width: 434px;
+}
+.gui-date-picker.has-sidebar {
+  width: 438px;
+}
+.gui-date-picker.has-time .gui-picker-panel__body-wrapper {
+  position: relative;
+}
+.gui-date-picker .gui-picker-panel__content {
+  width: 292px;
+}
+.gui-date-picker table {
+  table-layout: fixed;
+  width: 100%;
+}
+.gui-date-picker__editor-wrap {
+  position: relative;
+  display: table-cell;
+  padding: 0 5px;
+}
+
+.gui-date-picker__time-header {
+  position: relative;
+  border-bottom: 1px solid var(--gui-datepicker-inner-border-color);
+  font-size: 12px;
+  padding: 8px 5px 5px;
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gui-date-picker__header {
+  padding: 12px 12px 0;
+  text-align: center;
+}
+.gui-date-picker__header--bordered {
+  margin-bottom: 0;
+  padding-bottom: 12px;
+  border-bottom: solid 1px #949aab;
+  margin-bottom: 14px;
+}
+.gui-date-picker__header--bordered + .gui-picker-panel__content {
+  margin-top: 0;
+}
+
+.gui-date-picker__header-label {
+  @apply text-grey-700;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 5px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+.gui-date-picker__header-label:hover {
+  @apply text-nightBlue-500;
+}
+.gui-date-picker__header-label:focus-visible {
+  @apply text-nightBlue-500;
+  outline: none;
+}
+.gui-date-picker__header-label.active {
+  color: var(--gui-datepicker-active-color);
+}
+
+.gui-date-picker__prev-btn {
+  float: left;
+}
+
+.gui-date-picker__next-btn {
+  float: right;
+}
+
+.gui-date-picker__time-wrap {
+  padding: 10px;
+  text-align: center;
+}
+
+.gui-date-picker__time-label {
+  float: left;
+  cursor: pointer;
+  line-height: 30px;
+  margin-left: 10px;
+}
+
+.gui-date-picker .gui-time-panel {
+  position: absolute;
+}
+
+.gui-date-table {
+  font-size: 12px;
+  user-select: none;
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover td.available:hover {
+  color: var(--gui-datepicker-text-color);
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover td:first-child .gui-date-table-cell {
+  margin-left: 5px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.gui-date-table.is-week-mode .gui-date-table__row:hover td:last-child .gui-date-table-cell {
+  margin-right: 5px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.gui-date-table.is-week-mode .gui-date-table__row.current .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+
+.gui-date-table .gui-date-table__row {
+  margin-top: 10px;
+}
+.gui-date-table {
+  /* Para evitar que se aplique a las siguientes ocurrencias */
+}
+.gui-date-table .gui-date-table__row ~ .gui-date-table__row {
+  margin-top: initial;
+}
+.gui-date-table td {
+  @apply text-nightBlue-900;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.gui-date-table td .gui-date-table-cell {
+  height: 44px;
+  box-sizing: border-box;
+}
+.gui-date-table td .gui-date-table-cell .gui-date-table-cell__text {
+  width: 44px;
+  height: 44px;
+  display: block;
+  margin: 0 auto;
+  line-height: 44px;
+  position: absolute;
+  font-weight: 500;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: 1;
+}
+.gui-date-table td.next-month, .gui-date-table td.prev-month {
+  color: var(--gui-datepicker-off-text-color);
+}
+.gui-date-table td.today {
+  position: relative;
+}
+.gui-date-table td.today .gui-date-table-cell__text {
+  @apply text-nightBlue-900;
+  font-weight: bold;
+}
+.gui-date-table td.today.start-date .gui-date-table-cell__text, .gui-date-table td.today.end-date .gui-date-table-cell__text {
+  color: #ffffff;
+}
+.gui-date-table td.available:hover {
+  @apply bg-everBlue-50 bg-opacity-60;
+  border-radius: 50%;
+}
+.gui-date-table td.in-range .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+.gui-date-table td.in-range .gui-date-table-cell:hover {
+  background-color: var(--gui-datepicker-inrange-hover-bg-color);
+}
+.gui-date-table td.current:not(.disabled) .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-date-table td.current:not(.disabled):focus-visible .gui-date-table-cell__text {
+  outline: 2px solid var(--gui-datepicker-active-color);
+  outline-offset: 1px;
+}
+.gui-date-table td.start-date .gui-date-table-cell, .gui-date-table td.end-date .gui-date-table-cell {
+  color: #ffffff;
+}
+.gui-date-table td.start-date .gui-date-table-cell__text, .gui-date-table td.end-date .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+}
+.gui-date-table td.start-date .gui-date-table-cell {
+  margin-left: 5px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.gui-date-table td.end-date .gui-date-table-cell {
+  margin-right: 5px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.gui-date-table td.disabled .gui-date-table-cell {
+  background-color: var(--gui-fill-color-light);
+  opacity: 1;
+  cursor: not-allowed;
+  color: var(--gui-text-color-placeholder);
+}
+.gui-date-table td.selected .gui-date-table-cell {
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 15px;
+}
+.gui-date-table td.selected .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+  border-radius: 15px;
+}
+.gui-date-table td.week {
+  font-size: 80%;
+  color: var(--gui-datepicker-header-text-color);
+}
+.gui-date-table td:focus {
+  outline: none;
+}
+.gui-date-table th {
+  @apply text-grey-500;
+  padding: 5px;
+  font-weight: 500;
+  border-bottom: solid 1px #949aab;
+}
+
+.gui-date-range-picker {
+  --gui-datepicker-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-off-text-color: var(--gui-text-color-placeholder);
+  --gui-datepicker-header-text-color: var(--gui-text-color-regular);
+  --gui-datepicker-icon-color: var(--gui-text-color-primary);
+  --gui-datepicker-border-color: var(--gui-disabled-border-color);
+  --gui-datepicker-inner-border-color: var(--gui-border-color-light);
+  --gui-datepicker-inrange-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-inrange-hover-bg-color: var(--gui-border-color-extra-light);
+  --gui-datepicker-active-color: var(--gui-color-primary);
+  --gui-datepicker-hover-text-color: var(--gui-color-primary);
+}
+
+.gui-date-range-picker {
+  width: 646px;
+}
+.gui-date-range-picker.has-sidebar {
+  width: 756px;
+}
+.gui-date-range-picker.has-time .gui-picker-panel__body-wrapper {
+  position: relative;
+}
+.gui-date-range-picker table {
+  table-layout: fixed;
+  width: 100%;
+}
+.gui-date-range-picker .gui-picker-panel__body {
+  min-width: 513px;
+}
+.gui-date-range-picker .gui-picker-panel__content {
+  margin: 0;
+}
+.gui-date-range-picker__header {
+  position: relative;
+  text-align: center;
+  height: 28px;
+}
+.gui-date-range-picker__header [class*=arrow-left] {
+  float: left;
+}
+.gui-date-range-picker__header [class*=arrow-right] {
+  float: right;
+}
+.gui-date-range-picker__header div {
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 50px;
+}
+
+.gui-date-range-picker__content {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 16px;
+}
+.gui-date-range-picker__content.is-left {
+  border-right: 1px solid var(--gui-datepicker-inner-border-color);
+}
+
+.gui-date-range-picker__content .gui-date-range-picker__header div {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.gui-date-range-picker__editors-wrap {
+  box-sizing: border-box;
+  display: table-cell;
+}
+.gui-date-range-picker__editors-wrap.is-right {
+  text-align: right;
+}
+
+.gui-date-range-picker__time-header {
+  position: relative;
+  border-bottom: 1px solid var(--gui-datepicker-inner-border-color);
+  font-size: 12px;
+  padding: 8px 5px 5px 5px;
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+}
+.gui-date-range-picker__time-header > .gui-icon-arrow-right {
+  font-size: 20px;
+  vertical-align: middle;
+  display: table-cell;
+  color: var(--gui-datepicker-icon-color);
+}
+
+.gui-date-range-picker__time-picker-wrap {
+  position: relative;
+  display: table-cell;
+  padding: 0 5px;
+}
+.gui-date-range-picker__time-picker-wrap .gui-picker-panel {
+  position: absolute;
+  top: 13px;
+  right: 0;
+  z-index: 1;
+  background: #ffffff;
+}
+.gui-date-range-picker__time-picker-wrap .gui-time-panel {
+  position: absolute;
+}
+
+.gui-month-table {
+  font-size: 12px;
+  margin: -1px;
+  border-collapse: collapse;
+}
+.gui-month-table td {
+  width: 68px;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.gui-month-table td .gui-date-table-cell {
+  height: 44px;
+  box-sizing: border-box;
+}
+.gui-month-table td.today .gui-date-table-cell__text {
+  color: var(--gui-color-primary);
+  font-weight: bold;
+}
+.gui-month-table td.today.start-date .gui-date-table-cell__text, .gui-month-table td.today.end-date .gui-date-table-cell__text {
+  color: #ffffff;
+}
+.gui-month-table td.disabled .gui-date-table-cell__text {
+  background-color: var(--gui-fill-color-light);
+  cursor: not-allowed;
+  color: var(--gui-text-color-placeholder);
+}
+.gui-month-table td.disabled .gui-date-table-cell__text:hover {
+  color: var(--gui-text-color-placeholder);
+}
+.gui-month-table td .gui-date-table-cell__text {
+  @apply text-nightBlue-900;
+  width: 80px;
+  height: 44px;
+  display: block;
+  line-height: 44px;
+  color: var(--gui-datepicker-text-color);
+  margin: 0 auto;
+  border-radius: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 500;
+  z-index: 1;
+}
+.gui-month-table td .gui-date-table-cell__text:hover {
+  @apply bg-everBlue-50 bg-opacity-60;
+  border-radius: 18px;
+}
+.gui-month-table td.in-range .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+.gui-month-table td.in-range .gui-date-table-cell:hover {
+  background-color: var(--gui-datepicker-inrange-hover-bg-color);
+}
+.gui-month-table td.start-date .gui-date-table-cell, .gui-month-table td.end-date .gui-date-table-cell {
+  color: #ffffff;
+}
+.gui-month-table td.start-date .gui-date-table-cell__text, .gui-month-table td.end-date .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-month-table td.start-date .gui-date-table-cell {
+  margin-left: 3px;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+.gui-month-table td.end-date .gui-date-table-cell {
+  margin-right: 3px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.gui-month-table td.current:not(.disabled) .gui-date-table-cell {
+  border-radius: 24px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.gui-month-table td.current:not(.disabled) .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-month-table td:focus-visible {
+  outline: none;
+}
+.gui-month-table td:focus-visible .gui-date-table-cell__text {
+  outline: 2px solid var(--gui-datepicker-active-color);
+  outline-offset: 1px;
+}
+
+.gui-year-table {
+  font-size: 12px;
+  margin: -1px;
+  border-collapse: collapse;
+}
+.gui-year-table .gui-icon {
+  color: var(--gui-datepicker-icon-color);
+}
+.gui-year-table td {
+  width: 68px;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.gui-year-table td .gui-date-table-cell {
+  height: 44px;
+  box-sizing: border-box;
+}
+.gui-year-table td.today .gui-date-table-cell__text {
+  color: var(--gui-color-primary);
+  font-weight: bold;
+}
+.gui-year-table td.today.start-date .gui-date-table-cell__text, .gui-year-table td.today.end-date .gui-date-table-cell__text {
+  color: #ffffff;
+}
+.gui-year-table td.disabled .gui-date-table-cell__text {
+  background-color: var(--gui-fill-color-light);
+  cursor: not-allowed;
+  color: var(--gui-text-color-placeholder);
+}
+.gui-year-table td.disabled .gui-date-table-cell__text:hover {
+  color: var(--gui-text-color-placeholder);
+}
+.gui-year-table td .gui-date-table-cell__text {
+  width: 80px;
+  height: 44px;
+  display: block;
+  line-height: 44px;
+  color: var(--gui-datepicker-text-color);
+  border-radius: 18px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 500;
+  z-index: 1;
+}
+.gui-year-table td .gui-date-table-cell__text:hover {
+  @apply bg-everBlue-50 bg-opacity-60;
+  border-radius: 18px;
+}
+.gui-year-table td.in-range .gui-date-table-cell {
+  background-color: var(--gui-datepicker-inrange-bg-color);
+}
+.gui-year-table td.in-range .gui-date-table-cell:hover {
+  background-color: var(--gui-datepicker-inrange-hover-bg-color);
+}
+.gui-year-table td.start-date .gui-date-table-cell, .gui-year-table td.end-date .gui-date-table-cell {
+  color: #ffffff;
+}
+.gui-year-table td.start-date .gui-date-table-cell__text, .gui-year-table td.end-date .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-year-table td.start-date .gui-date-table-cell {
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+.gui-year-table td.end-date .gui-date-table-cell {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.gui-year-table td.current:not(.disabled) .gui-date-table-cell__text {
+  @apply bg-nightBlue-500;
+  color: #ffffff;
+}
+.gui-year-table td:focus-visible {
+  outline: none;
+}
+.gui-year-table td:focus-visible .gui-date-table-cell__text {
+  outline: 2px solid var(--gui-datepicker-active-color);
+  outline-offset: 1px;
+}

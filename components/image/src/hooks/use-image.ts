@@ -1,8 +1,22 @@
-import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import {
+  computed,
+  inject,
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  watch,
+  readonly,
+} from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
-import { ImageProps } from '../image.props';
-import { IMAGE_SIZES } from '../constants/image.constants';
-import { ImageState } from '../types/image.types';
+import type { ImageProps } from '../image.props';
+import {
+  ILLUSTRATION_EXTENSION,
+  IMAGE_BASE_URL_DEFAULT,
+  IMAGE_NAMES,
+  IMAGE_SIZES,
+  imageBaseUrlKey,
+} from '../constants/image.constants';
+import type { ImageName, ImageState } from '../types/image.types';
 
 /**
  * Hook to handle the functionality of the Image component
@@ -13,27 +27,34 @@ export const useImage = (props: ImageProps): ImageState => {
   const isLoaded = ref<boolean>(false);
   const hasError = ref<boolean>(false);
   const imageContainer = ref<HTMLElement | null>(null);
-  let stopObserver: Function | null = null;
-  
-  const sizeValue = computed<string>(() => IMAGE_SIZES[props.size as keyof typeof IMAGE_SIZES]);
-  
-  const imageSrc = computed<string>(() => {
-    try {
-      return new URL(`../assets/illustrations/${props.name}.webp`, import.meta.url).href;
-    } catch (error) {
-      hasError.value = true;
-      return '';
-    }
-  });
+  const imageSrc = ref<string>('');
+  const baseUrl = inject(imageBaseUrlKey, IMAGE_BASE_URL_DEFAULT).replace(
+    /\/+$/,
+    '',
+  );
+  let stopObserver: (() => void) | null = null;
+
+  const sizeValue = computed<string>(
+    () => IMAGE_SIZES[props.size as keyof typeof IMAGE_SIZES],
+  );
+
+  const handleImageLoad = (): void => {
+    isLoaded.value = true;
+  };
 
   const handleImageError = (): void => {
     hasError.value = true;
   };
 
   const loadImage = (): void => {
-    isLoaded.value = true;
+    if (!IMAGE_NAMES.includes(props.name as ImageName)) {
+      hasError.value = true;
+      return;
+    }
+
+    imageSrc.value = `${baseUrl}/${props.name}.${ILLUSTRATION_EXTENSION}`;
   };
-  
+
   const setupObserver = (): void => {
     if (!props.lazyLoad) {
       loadImage();
@@ -57,9 +78,9 @@ export const useImage = (props: ImageProps): ImageState => {
         {
           threshold: 0.1,
           rootMargin: '50px',
-        }
+        },
       );
-      
+
       stopObserver = stop;
     }
   };
@@ -73,18 +94,24 @@ export const useImage = (props: ImageProps): ImageState => {
       stopObserver();
     }
   });
-  
-  watch(() => props.name, () => {
-    isLoaded.value = false;
-    setupObserver();
-  });
+
+  watch(
+    () => props.name,
+    () => {
+      isLoaded.value = false;
+      imageSrc.value = '';
+      hasError.value = false;
+      setupObserver();
+    },
+  );
 
   return {
     sizeValue,
     isLoaded,
     hasError,
-    imageSrc,
+    imageSrc: readonly(imageSrc),
     imageContainer,
-    handleImageError
+    handleImageLoad,
+    handleImageError,
   };
 };

@@ -1,8 +1,8 @@
-import { buildProps, definePropType } from "element-plus/es/utils/index";
-import { timePanelSharedProps } from "./shared";
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { timePanelSharedProps } from './shared';
 
-import type { ExtractPropTypes } from "vue";
-import type { Dayjs } from "dayjs";
+import type { ExtractPropTypes } from 'vue';
+import type { Dayjs } from 'dayjs';
 
 export const panelTimePickerProps = buildProps({
   ...timePanelSharedProps,

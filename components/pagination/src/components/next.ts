@@ -1,7 +1,6 @@
-import { buildProps, iconPropType } from 'element-plus/es/utils/index.mjs'
-import type { ExtractPropTypes, PropType } from 'vue'
-import type Next from './next.vue'
-import { IconString } from '@flash-global66/g-icon-font';
+import { buildProps } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import type Next from './next.vue';
 
 export const paginationNextProps = buildProps({
   disabled: Boolean,
@@ -12,9 +11,9 @@ export const paginationNextProps = buildProps({
   pageCount: {
     type: Number,
     default: 50,
-  }
-} as const)
+  },
+} as const);
 
-export type PaginationNextProps = ExtractPropTypes<typeof paginationNextProps>
+export type PaginationNextProps = ExtractPropTypes<typeof paginationNextProps>;
 
-export type NextInstance = InstanceType<typeof Next> & unknown
+export type NextInstance = InstanceType<typeof Next> & unknown;

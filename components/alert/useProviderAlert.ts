@@ -1,6 +1,11 @@
 import { InjectionKey, reactive, inject, provide, nextTick } from 'vue';
 
-import { IAlertButton, IAlertProvider, IAlert, IAlertAttributesProvider } from './alert.type';
+import {
+  IAlertButton,
+  IAlertProvider,
+  IAlert,
+  IAlertAttributesProvider,
+} from './alert.type';
 
 const defaultValuesAttributes: IAlertAttributesProvider = {
   showAlert: false,
@@ -16,12 +21,12 @@ const defaultValuesAttributes: IAlertAttributesProvider = {
 
 const defaultValuesProvider: IAlertProvider = {
   ...defaultValuesAttributes,
-  onNext: async (action: IAlertButton) => {},
+  onNext: async () => {},
   hideAlert: () => {},
-  openAlert: (params: IAlert, method?: (action: IAlertButton) => Promise<void>) => {},
+  openAlert: () => {},
 };
 
-const alertProvider: InjectionKey<IAlertProvider> = Symbol('alertProvider');
+const alertProvider: InjectionKey<IAlertProvider> = Symbol.for('alertProvider');
 
 export function useAlertProvider() {
   const state = reactive<IAlertProvider>({ ...defaultValuesProvider });
@@ -31,7 +36,10 @@ export function useAlertProvider() {
   }
   state.hideAlert = hideAlert;
 
-  async function openAlert(params: IAlert, method?: (action: IAlertButton) => Promise<void>) {
+  async function openAlert(
+    params: IAlert,
+    method?: (action: IAlertButton) => Promise<void>,
+  ) {
     hideAlert();
 
     await nextTick();

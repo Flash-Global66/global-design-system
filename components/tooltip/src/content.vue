@@ -43,29 +43,29 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, onBeforeUnmount, ref, unref, watch } from 'vue'
-import { onClickOutside } from '@vueuse/core'
-import { useNamespace, usePopperContainerId } from 'element-plus'
-import { composeEventHandlers } from 'element-plus/es/utils/index'
-import { GPopperContent } from '@flash-global66/g-popper'
-import GTeleport from '@flash-global66/g-teleport'
-import { tryFocus } from '@flash-global66/g-focus-trap'
-import { TOOLTIP_INJECTION_KEY } from './constants'
-import { useTooltipContentProps } from './content'
-import type { PopperContentInstance } from '@flash-global66/g-popper'
+import { computed, inject, onBeforeUnmount, ref, unref, watch } from 'vue';
+import { onClickOutside } from '@vueuse/core';
+import { composeEventHandlers, useNamespace } from '@flash-global66/g-utils';
+import { usePopperContainerId } from '@flash-global66/g-hooks';
+import { GPopperContent } from '@flash-global66/g-popper';
+import GTeleport from '@flash-global66/g-teleport';
+import { tryFocus } from '@flash-global66/g-focus-trap';
+import { TOOLTIP_INJECTION_KEY } from './constants';
+import { useTooltipContentProps } from './content';
+import type { PopperContentInstance } from '@flash-global66/g-popper';
 
 defineOptions({
   name: 'GTooltipContent',
   inheritAttrs: false,
-})
+});
 
-const props = defineProps(useTooltipContentProps)
+const props = defineProps(useTooltipContentProps);
 
-const { selector } = usePopperContainerId()
-const ns = useNamespace('tooltip')
+const { selector } = usePopperContainerId();
+const ns = useNamespace('tooltip');
 
-const contentRef = ref<PopperContentInstance>()
-let stopHandle: ReturnType<typeof onClickOutside>
+const contentRef = ref<PopperContentInstance>();
+let stopHandle: ReturnType<typeof onClickOutside>;
 const {
   controlled,
   id,
@@ -77,117 +77,118 @@ const {
   onHide,
   onBeforeShow,
   onBeforeHide,
-} = inject(TOOLTIP_INJECTION_KEY, undefined)!
+} = inject(TOOLTIP_INJECTION_KEY, undefined)!;
 const transitionClass = computed(() => {
-  return props.transition || `${ns.namespace.value}-fade-in-linear`
-})
+  return props.transition || `${ns.namespace.value}-fade-in-linear`;
+});
 const persistentRef = computed(() => {
   // For testing, we would always want the content to be rendered
   // to the DOM, so we need to return true here.
-  return props.persistent
-})
+  return props.persistent;
+});
 
 onBeforeUnmount(() => {
-  stopHandle?.()
-})
+  stopHandle?.();
+});
 
 const shouldRender = computed(() => {
-  return unref(persistentRef) ? true : unref(open)
-})
+  return unref(persistentRef) ? true : unref(open);
+});
 
 const shouldShow = computed(() => {
-  return props.disabled ? false : unref(open)
-})
+  return props.disabled ? false : unref(open);
+});
 
 const appendTo = computed(() => {
-  return props.appendTo || selector.value
-})
+  return props.appendTo || selector.value;
+});
 
-const contentStyle = computed(() => (props.style ?? {}) as any)
+const contentStyle = computed(() => (props.style ?? {}) as any);
 
-const ariaHidden = ref(true)
+const ariaHidden = ref(true);
 
 const onTransitionLeave = () => {
-  onHide()
-  isFocusInsideContent() && tryFocus(document.body)
-  ariaHidden.value = true
-}
+  onHide();
+  isFocusInsideContent() && tryFocus(document.body);
+  ariaHidden.value = true;
+};
 
 const stopWhenControlled = () => {
-  if (unref(controlled)) return true
-}
+  if (unref(controlled)) return true;
+};
 
 const onContentEnter = composeEventHandlers(stopWhenControlled, () => {
   if (props.enterable && unref(trigger) === 'hover') {
-    onOpen()
+    onOpen();
   }
-})
+});
 
 const onContentLeave = composeEventHandlers(stopWhenControlled, () => {
   if (unref(trigger) === 'hover') {
-    onClose()
+    onClose();
   }
-})
+});
 
 const onBeforeEnter = () => {
-  contentRef.value?.updatePopper?.()
-  onBeforeShow?.()
-}
+  contentRef.value?.updatePopper?.();
+  onBeforeShow?.();
+};
 
 const onBeforeLeave = () => {
-  onBeforeHide?.()
-}
+  onBeforeHide?.();
+};
 
 const onAfterShow = () => {
-  onShow()
+  onShow();
   stopHandle = onClickOutside(
     computed(() => {
-      return contentRef.value?.popperContentRef
+      return contentRef.value?.popperContentRef;
     }),
     () => {
-      if (unref(controlled)) return
-      const $trigger = unref(trigger)
+      if (unref(controlled)) return;
+      const $trigger = unref(trigger);
       if ($trigger !== 'hover') {
-        onClose()
+        onClose();
       }
-    }
-  )
-}
+    },
+  );
+};
 
 const onBlur = () => {
   if (!props.virtualTriggering) {
-    onClose()
+    onClose();
   }
-}
+};
 
 const isFocusInsideContent = (event?: FocusEvent) => {
   const popperContent: HTMLElement | undefined =
-    contentRef.value?.popperContentRef
-  const activeElement = (event?.relatedTarget as Node) || document.activeElement
+    contentRef.value?.popperContentRef;
+  const activeElement =
+    (event?.relatedTarget as Node) || document.activeElement;
 
-  return popperContent?.contains(activeElement)
-}
+  return popperContent?.contains(activeElement);
+};
 
 watch(
   () => unref(open),
-  (val) => {
+  val => {
     if (!val) {
-      stopHandle?.()
+      stopHandle?.();
     } else {
-      ariaHidden.value = false
+      ariaHidden.value = false;
     }
   },
   {
     flush: 'post',
-  }
-)
+  },
+);
 
 watch(
   () => props.content,
   () => {
-    contentRef.value?.updatePopper?.()
-  }
-)
+    contentRef.value?.updatePopper?.();
+  },
+);
 
 defineExpose({
   /**
@@ -198,5 +199,5 @@ defineExpose({
    * @description validate current focus event is trigger inside el-popper-content
    */
   isFocusInsideContent,
-})
+});
 </script>

@@ -56,16 +56,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-import { useNamespace } from "element-plus";
-import { GInput } from "@flash-global66/g-input";
-import { GSkeleton, GSkeletonItem } from "@flash-global66/g-skeleton";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { useSearchInput } from "./use-search-input";
-import { searchInputEmits, searchInputProps } from "./search-input";
+import { computed, useAttrs } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { GInput } from '@flash-global66/g-input';
+import { GSkeleton, GSkeletonItem } from '@flash-global66/g-skeleton';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { useSearchInput } from './use-search-input';
+import { searchInputEmits, searchInputProps } from './search-input';
 
 defineOptions({
-  name: "GSearchInput",
+  name: 'GSearchInput',
   inheritAttrs: false,
 });
 
@@ -73,14 +73,14 @@ const props = defineProps(searchInputProps);
 const emit = defineEmits(searchInputEmits);
 const attrs = useAttrs();
 
-const ns = useNamespace("search-input");
+const ns = useNamespace('search-input');
 
 const wrapperClass = computed(() => [
   {
-    [ns.is("disabled")]: props.disabled,
-    [ns.is("searching")]: props.searchingLoading,
-    [ns.is("loading")]: props.initialLoading,
-    [ns.is("error")]: !!props.messageError,
+    [ns.is('disabled')]: props.disabled,
+    [ns.is('searching')]: props.searchingLoading,
+    [ns.is('loading')]: props.initialLoading,
+    [ns.is('error')]: !!props.messageError,
   },
 ]);
 

@@ -1,0 +1,279 @@
+/* Element Chalk Variables */
+.gui-attach-file {
+  @apply w-full;
+}
+.gui-attach-file__drop-zone {
+  @apply relative border-2 border-dashed border-secondary-bd rounded-lg p-2xl text-center transition-colors duration-200;
+}
+.gui-attach-file__drop-zone:hover:not(.gui-attach-file__drop-zone.is-disabled):not(.gui-attach-file__drop-zone.is-dragging) {
+  @apply border-primary-bd;
+}
+.gui-attach-file__drop-zone.is-dragging {
+  @apply border-primary-def bg-sec-def-bg shadow-lg;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.gui-attach-file__drop-zone.is-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.gui-attach-file__text-content {
+  @apply space-y-xs;
+}
+
+.gui-attach-file__main-text {
+  @apply text-secondary-txt;
+}
+
+.gui-attach-file__file-input {
+  @apply hidden;
+}
+
+.gui-attach-file__file-list {
+  @apply space-y-xs bg-sec-def-bg rounded-sm;
+}
+.gui-attach-file__item {
+  @apply flex items-center gap-xs;
+}
+.gui-attach-file__item:last-child {
+  @apply mb-0;
+}
+
+.gui-attach-file__item-content {
+  @apply flex items-center flex-1 gap-xs min-w-0;
+}
+
+.gui-attach-file__file-status-icon {
+  @apply w-lg h-lg flex items-center justify-center;
+}
+.gui-attach-file__icon {
+  @apply flex-shrink-0 text-3;
+}
+.gui-attach-file__icon.is-success {
+  @apply text-success-def;
+}
+
+.gui-attach-file__icon.is-error {
+  @apply text-error-def;
+}
+
+.gui-attach-file__icon.is-loading {
+  @apply text-primary-def;
+}
+
+.gui-attach-file__file-name {
+  @apply truncate flex-1 text-secondary-txt text-2;
+}
+.gui-attach-file__file-name.is-error {
+  @apply text-error-def;
+}
+
+.gui-attach-file__file-name.is-success {
+  @apply text-secondary-txt;
+}
+
+.gui-attach-file__item-actions {
+  @apply flex items-center gap-xs;
+}
+
+.gui-attach-file__file-size {
+  @apply text-disab-lt-txt text-2;
+}
+
+.gui-attach-file__file-list--clean {
+  @apply mt-xs;
+}
+.gui-attach-file__file-list--boxed {
+  @apply bg-sec-def-bg rounded-sm mt-lg py-sm px-md;
+}
+
+.gui-attach-file__default-state {
+  @apply flex w-full items-center py-sm px-md rounded-sm border border-grey-50 bg-sec-def-bg;
+}
+.gui-attach-file__content {
+  @apply flex flex-col flex-1 min-w-0;
+}
+
+.gui-attach-file__title {
+  @apply text-3 font-semibold leading-snug text-secondary-txt;
+}
+
+.gui-attach-file__info-text {
+  @apply text-2 font-medium text-disab-lt-txt;
+}
+
+.gui-attach-file__hidden-input {
+  @apply hidden;
+}
+
+.gui-attach-file__default-type {
+  @apply w-full;
+}
+
+.gui-attach-file__drag-drop-type {
+  @apply w-full;
+}
+.gui-attach-file__drop-zone {
+  @apply relative border-2 border-dashed border-primary-def rounded-lg p-2xl text-center transition-colors duration-200 bg-sec-def-bg;
+}
+.gui-attach-file__drop-zone.is-dragging {
+  @apply border-primary-def bg-sec-def-bg;
+}
+
+.gui-attach-file__drop-zone.is-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.gui-attach-file__drop-zone:hover:not(.is-disabled):not(.is-dragging):not(.is-error) {
+  @apply border-primary-bd;
+}
+
+.gui-attach-file__text-content {
+  @apply space-y-xs;
+}
+
+.gui-attach-file__main-text {
+  @apply text-secondary-txt text-5 font-medium;
+}
+
+.gui-attach-file__upload-button {
+  @apply text-primary-def hover:text-primary-def-hover font-bold focus:outline-none underline;
+}
+.gui-attach-file__upload-button:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+.gui-attach-file__restriction-text {
+  @apply text-3 text-terciary-txt;
+}
+
+.gui-attach-file__hidden-input {
+  @apply hidden;
+}
+
+.gui-attach-file__loading-state {
+  @apply flex w-full items-start py-sm px-md gap-md rounded-sm border border-grey-50 bg-sec-def-bg;
+}
+.gui-attach-file__content {
+  @apply flex flex-col flex-1 min-w-0;
+}
+
+.gui-attach-file__title {
+  @apply text-secondary-txt font-semibold text-3;
+}
+
+.gui-attach-file__info-text {
+  @apply text-disab-lt-txt text-2;
+}
+
+.gui-attach-file__progress-wrapper {
+  @apply pt-xs;
+}
+
+.gui-attach-file__file-info {
+  @apply flex items-center justify-between text-disab-lt-txt text-2 pt-xxs;
+}
+
+.gui-attach-file__file-name {
+  @apply truncate text-disab-lt-txt;
+}
+
+.gui-attach-file__file-size {
+  @apply ml-auto text-disab-lt-txt;
+}
+
+.gui-attach-file__files-list {
+  @apply pt-xxs;
+}
+
+.gui-attach-file__files-container {
+  @apply space-y-xs;
+}
+
+.gui-attach-file__file-item {
+  @apply flex items-center gap-xs;
+}
+
+.gui-attach-file__file-item-content {
+  @apply flex-1 min-w-0;
+}
+
+.gui-attach-file__file-item-progress {
+  @apply pt-xs;
+}
+
+.gui-attach-file__file-item-info {
+  @apply flex justify-between items-center text-disab-lt-txt text-2 pt-xxs;
+}
+
+.gui-attach-file__file-item-name {
+  @apply truncate;
+}
+
+.gui-attach-file__file-item-size {
+  @apply flex-shrink-0;
+}
+
+.gui-attach-file__content {
+  @apply w-full rounded-sm py-sm px-md border border-grey-50 bg-sec-def-bg;
+}
+.gui-attach-file__header {
+  @apply flex items-center justify-between gap-md;
+}
+
+.gui-attach-file__header-content {
+  @apply flex flex-col flex-1;
+}
+
+.gui-attach-file__title {
+  @apply text-secondary-txt text-3 font-semibold;
+}
+
+.gui-attach-file__info-text {
+  @apply text-disab-lt-txt text-2;
+}
+
+.gui-attach-file__download-link {
+  @apply text-everBlue-500 font-montserrat text-2 font-bold underline;
+}
+
+.gui-attach-file__extra-content {
+  @apply mt-sm;
+}
+
+.gui-attach-file__validation-errors {
+  @apply mt-xs;
+}
+.gui-attach-file__error-text {
+  @apply text-1 text-error-def font-medium;
+}
+
+.gui-attach-file__file-item {
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 640px) {
+  .gui-attach-file__drop-zone {
+    @apply p-6;
+  }
+  .gui-attach-file__upload-icon {
+    @apply h-10 w-10;
+  }
+  .gui-attach-file__file-item {
+    @apply p-xxs;
+  }
+  .gui-attach-file__file-actions {
+    @apply space-x-xxs;
+  }
+}

@@ -12,51 +12,51 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, onBeforeUnmount, onMounted, watch } from 'vue'
-import { isNil } from 'lodash-unified'
-import { unrefElement } from '@vueuse/core'
-import { GOnlyChild } from '@flash-global66/g-slot'
-import { useForwardRef } from 'element-plus'
-import { isElement, isFocusable } from 'element-plus/es/utils/index'
-import { POPPER_INJECTION_KEY } from './constants'
-import { popperTriggerProps } from './trigger'
+import { computed, inject, onBeforeUnmount, onMounted, watch } from 'vue';
+import { isNil } from 'lodash-unified';
+import { unrefElement } from '@vueuse/core';
+import { GOnlyChild } from '@flash-global66/g-slot';
+import { useForwardRef } from '@flash-global66/g-hooks';
+import { isElement, isFocusable } from '@flash-global66/g-utils';
+import { POPPER_INJECTION_KEY } from './constants';
+import { popperTriggerProps } from './trigger';
 
-import type { WatchStopHandle } from 'vue'
+import type { WatchStopHandle } from 'vue';
 
 defineOptions({
   name: 'GPopperTrigger',
   inheritAttrs: false,
-})
+});
 
-const props = defineProps(popperTriggerProps)
+const props = defineProps(popperTriggerProps);
 
-const { role, triggerRef } = inject(POPPER_INJECTION_KEY, undefined)!
+const { role, triggerRef } = inject(POPPER_INJECTION_KEY, undefined)!;
 
-useForwardRef(triggerRef)
+useForwardRef(triggerRef);
 
 const ariaControls = computed<string | undefined>(() => {
-  return ariaHaspopup.value ? props.id : undefined
-})
+  return ariaHaspopup.value ? props.id : undefined;
+});
 
 const ariaDescribedby = computed<string | undefined>(() => {
   if (role && role.value === 'tooltip') {
-    return props.open && props.id ? props.id : undefined
+    return props.open && props.id ? props.id : undefined;
   }
-  return undefined
-})
+  return undefined;
+});
 
 const ariaHaspopup = computed<string | undefined>(() => {
   if (role && role.value !== 'tooltip') {
-    return role.value
+    return role.value;
   }
-  return undefined
-})
+  return undefined;
+});
 
 const ariaExpanded = computed<string | undefined>(() => {
-  return ariaHaspopup.value ? `${props.open}` : undefined
-})
+  return ariaHaspopup.value ? `${props.open}` : undefined;
+});
 
-let virtualTriggerAriaStopWatch: WatchStopHandle | undefined = undefined
+let virtualTriggerAriaStopWatch: WatchStopHandle | undefined = undefined;
 
 const TRIGGER_ELE_EVENTS = [
   'onMouseenter',
@@ -66,45 +66,45 @@ const TRIGGER_ELE_EVENTS = [
   'onFocus',
   'onBlur',
   'onContextmenu',
-] as const
+] as const;
 
 onMounted(() => {
   watch(
     () => props.virtualRef,
-    (virtualEl) => {
+    virtualEl => {
       if (virtualEl) {
-        triggerRef.value = unrefElement(virtualEl as HTMLElement)
+        triggerRef.value = unrefElement(virtualEl as HTMLElement);
       }
     },
     {
       immediate: true,
-    }
-  )
+    },
+  );
 
   watch(
     triggerRef,
     (el, prevEl) => {
-      virtualTriggerAriaStopWatch?.()
-      virtualTriggerAriaStopWatch = undefined
+      virtualTriggerAriaStopWatch?.();
+      virtualTriggerAriaStopWatch = undefined;
       if (isElement(el)) {
-        TRIGGER_ELE_EVENTS.forEach((eventName) => {
-          const handler = props[eventName]
+        TRIGGER_ELE_EVENTS.forEach(eventName => {
+          const handler = props[eventName];
           if (handler) {
-            ;(el as HTMLElement).addEventListener(
+            (el as HTMLElement).addEventListener(
               eventName.slice(2).toLowerCase(),
-              handler
-            )
-            ;(prevEl as HTMLElement)?.removeEventListener?.(
+              handler,
+            );
+            (prevEl as HTMLElement)?.removeEventListener?.(
               eventName.slice(2).toLowerCase(),
-              handler
-            )
+              handler,
+            );
           }
-        })
+        });
         if (isFocusable(el as HTMLElement)) {
           virtualTriggerAriaStopWatch = watch(
             [ariaControls, ariaDescribedby, ariaHaspopup, ariaExpanded],
-            (watches) => {
-              ;[
+            watches => {
+              [
                 'aria-controls',
                 'aria-describedby',
                 'aria-haspopup',
@@ -112,47 +112,47 @@ onMounted(() => {
               ].forEach((key, idx) => {
                 isNil(watches[idx])
                   ? el.removeAttribute(key)
-                  : el.setAttribute(key, watches[idx]!)
-              })
+                  : el.setAttribute(key, watches[idx]!);
+              });
             },
-            { immediate: true }
-          )
+            { immediate: true },
+          );
         }
       }
       if (isElement(prevEl) && isFocusable(prevEl as HTMLElement)) {
-        ;[
+        [
           'aria-controls',
           'aria-describedby',
           'aria-haspopup',
           'aria-expanded',
-        ].forEach((key) => prevEl.removeAttribute(key))
+        ].forEach(key => prevEl.removeAttribute(key));
       }
     },
     {
       immediate: true,
-    }
-  )
-})
+    },
+  );
+});
 
 onBeforeUnmount(() => {
-  virtualTriggerAriaStopWatch?.()
-  virtualTriggerAriaStopWatch = undefined
+  virtualTriggerAriaStopWatch?.();
+  virtualTriggerAriaStopWatch = undefined;
   if (triggerRef.value && isElement(triggerRef.value)) {
-    const el = triggerRef.value as HTMLElement
-    TRIGGER_ELE_EVENTS.forEach((eventName) => {
-      const handler = props[eventName]
+    const el = triggerRef.value as HTMLElement;
+    TRIGGER_ELE_EVENTS.forEach(eventName => {
+      const handler = props[eventName];
       if (handler) {
-        el.removeEventListener(eventName.slice(2).toLowerCase(), handler)
+        el.removeEventListener(eventName.slice(2).toLowerCase(), handler);
       }
-    })
-    triggerRef.value = undefined
+    });
+    triggerRef.value = undefined;
   }
-})
+});
 
 defineExpose({
   /**
    * @description trigger element
    */
   triggerRef,
-})
+});
 </script>

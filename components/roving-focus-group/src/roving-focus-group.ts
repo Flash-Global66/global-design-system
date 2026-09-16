@@ -1,6 +1,6 @@
-import { buildProps, definePropType } from 'element-plus/es/utils/index'
-import { createCollectionWithScope } from '@flash-global66/g-collection'
-import type { ExtractPropTypes, HTMLAttributes, StyleValue } from 'vue'
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import { createCollectionWithScope } from '@flash-global66/g-collection';
+import type { ExtractPropTypes, HTMLAttributes, StyleValue } from 'vue';
 
 export const rovingFocusGroupProps = buildProps({
   style: { type: definePropType<StyleValue>([String, Array, Object]) },
@@ -22,22 +22,22 @@ export const rovingFocusGroupProps = buildProps({
   onBlur: Function,
   onFocus: Function,
   onMousedown: Function,
-})
+});
 
 export type GRovingFocusGroupProps = ExtractPropTypes<
   typeof rovingFocusGroupProps
->
+>;
 
 const {
   GCollection,
   GCollectionItem,
   COLLECTION_INJECTION_KEY,
   COLLECTION_ITEM_INJECTION_KEY,
-} = createCollectionWithScope('RovingFocusGroup')
+} = createCollectionWithScope('RovingFocusGroup');
 
 export {
   GCollection,
   GCollectionItem,
   COLLECTION_INJECTION_KEY as ROVING_FOCUS_COLLECTION_INJECTION_KEY,
   COLLECTION_ITEM_INJECTION_KEY as ROVING_FOCUS_ITEM_COLLECTION_INJECTION_KEY,
-}
+};

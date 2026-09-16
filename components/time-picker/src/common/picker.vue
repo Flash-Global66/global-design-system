@@ -23,10 +23,10 @@
     <template #default>
       <g-input
         v-if="!isRangeInput"
-        :id="(id as string | undefined)"
+        :id="id as MaybeString"
         ref="inputRef"
         container-role="combobox"
-        :model-value="(displayValue as string)"
+        :model-value="displayValue as string"
         :name="name"
         :disabled="pickerDisabled"
         :label="label"
@@ -84,10 +84,10 @@
       </g-input>
       <picker-range-trigger
         v-else
-        :id="(id as string[] | undefined)"
+        :id="id as MaybeStringArray"
         ref="inputRef"
         :model-value="displayValue"
-        :name="(name as string[] | undefined)"
+        :name="name as MaybeStringArray"
         :disabled="pickerDisabled"
         :readonly="!editable || readonly"
         :label="label"
@@ -169,31 +169,35 @@ import {
   unref,
   useAttrs,
   watch,
-} from "vue";
-import { isEqual } from "lodash-unified";
-import { onClickOutside, unrefElement } from "@vueuse/core";
+} from 'vue';
+import { isEqual } from 'lodash-unified';
+import { onClickOutside, unrefElement } from '@vueuse/core';
+import {
+  NOOP,
+  debugWarn,
+  isArray,
+  EVENT_CODE,
+  useNamespace,
+} from '@flash-global66/g-utils';
 import {
   useEmptyValues,
   useFocusController,
   useLocale,
-  useNamespace,
-} from "element-plus";
-import { useFormItem } from "@flash-global66/g-form";
-import GInput from "@flash-global66/g-input";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import GTooltip from "@flash-global66/g-tooltip";
-import { NOOP, debugWarn, isArray } from "element-plus/es/utils/index";
-import { EVENT_CODE } from "element-plus/es/constants/index.mjs";
-import { isNil } from "lodash-unified";
-import { dayOrDaysToDate, formatter, parseDate, valueEquals } from "../utils";
-import { timePickerDefaultProps } from "./props";
-import PickerRangeTrigger from "./picker-range-trigger.vue";
-import type { InputInstance } from "@flash-global66/g-input";
+} from '@flash-global66/g-hooks';
+import { useFormItem } from '@flash-global66/g-form';
+import GInput from '@flash-global66/g-input';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import GTooltip from '@flash-global66/g-tooltip';
+import { isNil } from 'lodash-unified';
+import { dayOrDaysToDate, formatter, parseDate, valueEquals } from '../utils';
+import { timePickerDefaultProps } from './props';
+import PickerRangeTrigger from './picker-range-trigger.vue';
+import type { InputInstance } from '@flash-global66/g-input';
 
-import type { Dayjs } from "dayjs";
-import type { ComponentPublicInstance, Ref } from "vue";
-import { useResizeObserver } from "@vueuse/core";
-import type { Options } from "@popperjs/core";
+import type { Dayjs } from 'dayjs';
+import type { ComponentPublicInstance, Ref } from 'vue';
+import { useResizeObserver } from '@vueuse/core';
+import type { Options } from '@popperjs/core';
 import type {
   DateModelType,
   DayOrDays,
@@ -201,44 +205,53 @@ import type {
   SingleOrRange,
   TimePickerDefaultProps,
   UserInput,
-} from "./props";
-import type { TooltipInstance } from "@flash-global66/g-tooltip";
+} from './props';
+import type { TooltipInstance } from '@flash-global66/g-tooltip';
+
+/**
+ * Alias para castear `id`/`name` en las bindings del template sin exponer una
+ * unión con `|` a nivel superior: `vue-eslint-parser` la interpretaría como el
+ * operador de filtros (Vue 2) y `prettier` elimina los paréntesis que la
+ * desambiguarían. El alias evita ambos problemas sin cambiar el tipo.
+ */
+type MaybeString = string | undefined;
+type MaybeStringArray = string[] | undefined;
 
 defineOptions({
-  name: "Picker",
+  name: 'Picker',
 });
 
 const props = defineProps(timePickerDefaultProps);
 const emit = defineEmits([
-  "update:modelValue",
-  "change",
-  "focus",
-  "blur",
-  "clear",
-  "calendar-change",
-  "panel-change",
-  "visible-change",
-  "keydown",
+  'update:modelValue',
+  'change',
+  'focus',
+  'blur',
+  'clear',
+  'calendar-change',
+  'panel-change',
+  'visible-change',
+  'keydown',
 ]);
 const attrs = useAttrs();
 
 const { lang } = useLocale();
 
-const nsDate = useNamespace("date");
-const nsInput = useNamespace("input");
-const nsRange = useNamespace("range");
+const nsDate = useNamespace('date');
+const nsInput = useNamespace('input');
+const nsRange = useNamespace('range');
 const leftPrefix = ref<string | undefined>(undefined);
 const prefixRef = ref<HTMLElement | null>(null);
 
 const { form, formItem } = useFormItem();
-const elPopperOptions = inject("ElPopperOptions", {} as Options);
+const elPopperOptions = inject('ElPopperOptions', {} as Options);
 const { valueOnClear } = useEmptyValues(props, null);
 
 const refPopper = ref<TooltipInstance>();
 const inputRef = ref<InputInstance>();
 const pickerVisible = ref(false);
 const pickerActualVisible = ref(false);
-const valueOnOpen = ref<TimePickerDefaultProps["modelValue"] | null>(null);
+const valueOnOpen = ref<TimePickerDefaultProps['modelValue'] | null>(null);
 let hasJustTabExitedInput = false;
 
 const { isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
@@ -258,7 +271,7 @@ const { isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
     pickerVisible.value = false;
     hasJustTabExitedInput = false;
     props.validateEvent &&
-      formItem?.validate("blur").catch((err) => debugWarn(err));
+      formItem?.validate('blur').catch(err => debugWarn(err));
   },
 });
 
@@ -271,12 +284,12 @@ const labelStyle = computed(() => {
 });
 
 const nativeInputValue = computed(() =>
-  isNil(props.modelValue) ? "" : String(props.modelValue)
+  isNil(props.modelValue) ? '' : String(props.modelValue),
 );
 
 const updatePrefixPosition = () => {
   if (!props.prefixIcon) {
-    leftPrefix.value = "0";
+    leftPrefix.value = '0';
     return;
   }
 
@@ -287,22 +300,22 @@ const updatePrefixPosition = () => {
 };
 
 const rangeInputKls = computed(() => [
-  nsDate.b("editor"),
-  nsDate.bm("editor", props.type),
-  nsInput.e("wrapper"),
-  nsDate.is("disabled", pickerDisabled.value),
-  nsDate.is("active", pickerVisible.value),
-  nsRange.b("editor"),
+  nsDate.b('editor'),
+  nsDate.bm('editor', props.type),
+  nsInput.e('wrapper'),
+  nsDate.is('disabled', pickerDisabled.value),
+  nsDate.is('active', pickerVisible.value),
+  nsRange.b('editor'),
   attrs.class,
 ]);
 
 const clearIconKls = computed(() => [
-  nsInput.e("icon"),
-  nsRange.e("close-icon"),
-  !showClose.value ? nsRange.e("close-icon--hidden") : "",
+  nsInput.e('icon'),
+  nsRange.e('close-icon'),
+  !showClose.value ? nsRange.e('close-icon--hidden') : '',
 ]);
 
-watch(pickerVisible, (val) => {
+watch(pickerVisible, val => {
   if (!val) {
     userInput.value = null;
     pickerOptions.value.intermediateValue = null;
@@ -318,60 +331,59 @@ watch(pickerVisible, (val) => {
   }
 });
 const emitChange = (
-  val: TimePickerDefaultProps["modelValue"] | null,
-  isClear?: boolean
+  val: TimePickerDefaultProps['modelValue'] | null,
+  isClear?: boolean,
 ) => {
   // determine user real change only
   if (isClear || !valueEquals(val, valueOnOpen.value)) {
-    emit("change", val);
+    emit('change', val);
     props.validateEvent &&
-      formItem?.validate("change").catch((err) => debugWarn(err));
+      formItem?.validate('change').catch(err => debugWarn(err));
   }
 };
 const emitInput = (input: SingleOrRange<DateModelType> | null) => {
   if (!valueEquals(props.modelValue, input)) {
     let formatted;
     if (isArray(input)) {
-      formatted = input.map((item) =>
-        formatter(item, props.valueFormat, lang.value)
+      formatted = input.map(item =>
+        formatter(item, props.valueFormat, lang.value),
       );
     } else if (input) {
       formatted = formatter(input, props.valueFormat, lang.value);
     }
-    emit("update:modelValue", input ? formatted : input, lang.value);
+    emit('update:modelValue', input ? formatted : input, lang.value);
   }
 };
 const emitKeydown = (e: KeyboardEvent) => {
-  emit("keydown", e);
+  emit('keydown', e);
 };
 
 const refInput = computed<HTMLInputElement[]>(() => {
   if (inputRef.value) {
     return Array.from<HTMLInputElement>(
-      inputRef.value.$el.querySelectorAll("input")
+      inputRef.value.$el.querySelectorAll('input'),
     );
   }
   return [];
 });
 
-// @ts-ignore
-const setSelectionRange = (start: number, end: number, pos?: "min" | "max") => {
+const setSelectionRange = (start: number, end: number, pos?: 'min' | 'max') => {
   const _inputs = refInput.value;
   if (!_inputs.length) return;
-  if (!pos || pos === "min") {
+  if (!pos || pos === 'min') {
     _inputs[0].setSelectionRange(start, end);
     _inputs[0].focus();
-  } else if (pos === "max") {
+  } else if (pos === 'max') {
     _inputs[1].setSelectionRange(start, end);
     _inputs[1].focus();
   }
 };
 
-const onPick = (date: any = "", visible = false) => {
+const onPick = (date: any = '', visible = false) => {
   pickerVisible.value = visible;
   let result;
   if (isArray(date)) {
-    result = date.map((_) => _.toDate());
+    result = date.map(_ => (_ as Dayjs).toDate());
   } else {
     // clear btn emit null
     result = date ? date.toDate() : date;
@@ -386,13 +398,13 @@ const onBeforeShow = () => {
 };
 
 const onShow = () => {
-  emit("visible-change", true);
+  emit('visible-change', true);
 };
 
 const onHide = () => {
   pickerActualVisible.value = false;
   pickerVisible.value = false;
-  emit("visible-change", false);
+  emit('visible-change', false);
 };
 
 const handleOpen = () => {
@@ -415,8 +427,8 @@ const parsedValue = computed(() => {
     }
   } else {
     if (isArray(props.modelValue)) {
-      dayOrDays = props.modelValue.map((d) =>
-        parseDate(d, props.valueFormat, lang.value)
+      dayOrDays = props.modelValue.map(d =>
+        parseDate(d, props.valueFormat, lang.value),
       ) as [Dayjs, Dayjs];
     } else {
       dayOrDays = parseDate(props.modelValue, props.valueFormat, lang.value)!;
@@ -425,7 +437,7 @@ const parsedValue = computed(() => {
 
   if (pickerOptions.value.getRangeAvailableTime) {
     const availableResult = pickerOptions.value.getRangeAvailableTime(
-      dayOrDays!
+      dayOrDays!,
     );
     if (!isEqual(availableResult, dayOrDays!)) {
       dayOrDays = availableResult;
@@ -436,19 +448,19 @@ const parsedValue = computed(() => {
       }
     }
   }
-  if (isArray(dayOrDays!) && dayOrDays.some((day) => !day)) {
+  if (isArray(dayOrDays!) && dayOrDays.some(day => !day)) {
     dayOrDays = [] as unknown as DayOrDays;
   }
   return dayOrDays!;
 });
 
 const displayValue = computed<UserInput>(() => {
-  if (!pickerOptions.value.panelReady) return "";
+  if (!pickerOptions.value.panelReady) return '';
   const formattedValue = formatDayjsToString(parsedValue.value);
   if (isArray(userInput.value)) {
     return [
-      userInput.value[0] || (formattedValue && formattedValue[0]) || "",
-      userInput.value[1] || (formattedValue && formattedValue[1]) || "",
+      userInput.value[0] || (formattedValue && formattedValue[0]) || '',
+      userInput.value[1] || (formattedValue && formattedValue[1]) || '',
     ];
   } else if (userInput.value !== null) {
     return userInput.value;
@@ -459,30 +471,30 @@ const displayValue = computed<UserInput>(() => {
     return intermediateValue;
   }
 
-  if (!isTimePicker.value && valueIsEmpty.value) return "";
-  if (!pickerVisible.value && valueIsEmpty.value) return "";
+  if (!isTimePicker.value && valueIsEmpty.value) return '';
+  if (!pickerVisible.value && valueIsEmpty.value) return '';
   if (formattedValue) {
     return isDatesPicker.value || isMonthsPicker.value || isYearsPicker.value
-      ? (formattedValue as Array<string>).join(", ")
+      ? (formattedValue as Array<string>).join(', ')
       : formattedValue;
   }
-  return "";
+  return '';
 });
 
-const isTimeLikePicker = computed(() => props.type.includes("time"));
+const isTimeLikePicker = computed(() => props.type.includes('time'));
 
-const isTimePicker = computed(() => props.type.startsWith("time"));
+const isTimePicker = computed(() => props.type.startsWith('time'));
 
-const isDatesPicker = computed(() => props.type === "dates");
+const isDatesPicker = computed(() => props.type === 'dates');
 
-const isMonthsPicker = computed(() => props.type === "months");
+const isMonthsPicker = computed(() => props.type === 'months');
 
-const isYearsPicker = computed(() => props.type === "years");
+const isYearsPicker = computed(() => props.type === 'years');
 
 const triggerIcon = computed(
   () =>
     props.prefixIcon ||
-    (isTimeLikePicker.value ? "regular clock" : "regular calendar")
+    (isTimeLikePicker.value ? 'regular clock' : 'regular calendar'),
 );
 
 const showClose = ref(false);
@@ -502,7 +514,7 @@ const onClearIconClick = (event: MouseEvent) => {
     showClose.value = false;
     onHide();
   }
-  emit("clear");
+  emit('clear');
 };
 
 const valueIsEmpty = computed(() => {
@@ -514,7 +526,7 @@ const valueIsEmpty = computed(() => {
 
 const onMouseDownInput = async (event: MouseEvent) => {
   if (props.readonly || pickerDisabled.value) return;
-  if ((event.target as HTMLElement)?.tagName !== "INPUT" || isFocused.value) {
+  if ((event.target as HTMLElement)?.tagName !== 'INPUT' || isFocused.value) {
     pickerVisible.value = true;
   }
 };
@@ -531,7 +543,7 @@ const onMouseLeave = () => {
 const onTouchStartInput = (event: TouchEvent) => {
   if (props.readonly || pickerDisabled.value) return;
   if (
-    (event.touches[0].target as HTMLElement)?.tagName !== "INPUT" ||
+    (event.touches[0].target as HTMLElement)?.tagName !== 'INPUT' ||
     isFocused.value
   ) {
     pickerVisible.value = true;
@@ -539,7 +551,7 @@ const onTouchStartInput = (event: TouchEvent) => {
 };
 
 const isRangeInput = computed(() => {
-  return props.type.includes("range");
+  return props.type.includes('range');
 });
 
 const popperEl = computed(() => unref(refPopper)?.popperRef?.contentRef);
@@ -558,7 +570,7 @@ const stophandle = onClickOutside(
     )
       return;
     pickerVisible.value = false;
-  }
+  },
 );
 
 onBeforeUnmount(() => {
@@ -579,7 +591,7 @@ const handleChange = () => {
       }
     }
   }
-  if (userInput.value === "") {
+  if (userInput.value === '') {
     emitInput(valueOnClear.value);
     emitChange(valueOnClear.value);
     userInput.value = null;
@@ -637,7 +649,7 @@ const handleKeydownInput = async (event: Event | KeyboardEvent) => {
   if (code === EVENT_CODE.enter || code === EVENT_CODE.numpadEnter) {
     if (
       userInput.value === null ||
-      userInput.value === "" ||
+      userInput.value === '' ||
       isValidValue(parseUserInputToDayjs(displayValue.value) as DayOrDays)
     ) {
       handleChange();
@@ -718,26 +730,23 @@ const handleEndChange = () => {
 };
 
 const pickerOptions = ref<Partial<PickerOptions>>({});
-// @ts-ignore
 const onSetPickerOption = <T extends keyof PickerOptions>(
-  e: [T, PickerOptions[T]]
+  e: [T, PickerOptions[T]],
 ) => {
   pickerOptions.value[e[0]] = e[1];
   pickerOptions.value.panelReady = true;
 };
 
-// @ts-ignore
 const onCalendarChange = (e: [Date, null | Date]) => {
-  emit("calendar-change", e);
+  emit('calendar-change', e);
 };
 
-// @ts-ignore
 const onPanelChange = (
   value: [Dayjs, Dayjs],
-  mode: "month" | "year",
-  view: unknown
+  mode: 'month' | 'year',
+  view: unknown,
 ) => {
-  emit("panel-change", value, mode, view);
+  emit('panel-change', value, mode, view);
 };
 
 const focus = () => {
@@ -748,7 +757,7 @@ const blur = () => {
   inputRef.value?.blur();
 };
 
-provide("EP_PICKER_BASE", {
+provide('EP_PICKER_BASE', {
   props,
 });
 

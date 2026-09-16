@@ -1,19 +1,18 @@
-import { ref, shallowRef } from 'vue'
-import { useNamespace } from 'element-plus'
-import { isUndefined } from 'element-plus/es/utils/index.mjs'
+import { ref, shallowRef } from 'vue';
+import { isUndefined, useNamespace } from '@flash-global66/g-utils';
 
-import type { ShallowRef } from 'vue'
+import type { ShallowRef } from 'vue';
 
-type DropType = 'before' | 'after'
+type DropType = 'before' | 'after';
 
 interface UseDragTagOptions {
-  wrapperRef: ShallowRef<HTMLElement | undefined>
+  wrapperRef: ShallowRef<HTMLElement | undefined>;
   handleDragged: (
     draggingIndex: number,
     dropIndex: number,
-    type: DropType
-  ) => void
-  afterDragged?: () => void
+    type: DropType,
+  ) => void;
+  afterDragged?: () => void;
 }
 
 export function useDragTag({
@@ -21,94 +20,95 @@ export function useDragTag({
   handleDragged,
   afterDragged,
 }: UseDragTagOptions) {
-  const ns = useNamespace('input-tag')
-  const dropIndicatorRef: ShallowRef<HTMLElement | undefined> = shallowRef()
-  const showDropIndicator = ref(false)
+  const ns = useNamespace('input-tag');
+  const dropIndicatorRef: ShallowRef<HTMLElement | undefined> = shallowRef();
+  const showDropIndicator = ref(false);
 
-  let draggingIndex: number | undefined
-  let draggingTag: HTMLElement | null
-  let dropIndex: number | undefined
-  let dropType: DropType | undefined
+  let draggingIndex: number | undefined;
+  let draggingTag: HTMLElement | null;
+  let dropIndex: number | undefined;
+  let dropType: DropType | undefined;
 
   function getTagClassName(index: number) {
-    return `.${ns.e('inner')} > .${ns.e('tag-wrapper')}:nth-child(${index + 1})`
+    return `.${ns.e('inner')} > .${ns.e('tag-wrapper')}:nth-child(${index + 1})`;
   }
 
   function handleDragStart(event: DragEvent, index: number) {
-    draggingIndex = index
+    draggingIndex = index;
     draggingTag = wrapperRef.value!.querySelector<HTMLElement>(
-      getTagClassName(index)
-    )
+      getTagClassName(index),
+    );
 
     if (draggingTag) {
-      draggingTag.style.opacity = '0.5'
+      draggingTag.style.opacity = '0.5';
     }
     if (event.dataTransfer) {
-      event.dataTransfer.effectAllowed = 'move'
+      event.dataTransfer.effectAllowed = 'move';
     }
   }
 
   function handleDragOver(event: DragEvent, index: number) {
-    dropIndex = index
-    event.preventDefault()
+    dropIndex = index;
+    event.preventDefault();
     if (event.dataTransfer) {
-      event.dataTransfer.dropEffect = 'move'
+      event.dataTransfer.dropEffect = 'move';
     }
 
     if (isUndefined(draggingIndex) || draggingIndex === index) {
-      showDropIndicator.value = false
-      return
+      showDropIndicator.value = false;
+      return;
     }
 
     const dropPosition = wrapperRef
       .value!.querySelector<HTMLElement>(getTagClassName(index))!
-      .getBoundingClientRect()
-    const dropPrev = !(draggingIndex! + 1 === index)
-    const dropNext = !(draggingIndex! - 1 === index)
-    const distance = event.clientX - dropPosition.left
-    const prevPercent = dropPrev ? (dropNext ? 0.5 : 1) : -1
-    const nextPercent = dropNext ? (dropPrev ? 0.5 : 0) : 1
+      .getBoundingClientRect();
+    const dropPrev = !(draggingIndex! + 1 === index);
+    const dropNext = !(draggingIndex! - 1 === index);
+    const distance = event.clientX - dropPosition.left;
+    const prevPercent = dropPrev ? (dropNext ? 0.5 : 1) : -1;
+    const nextPercent = dropNext ? (dropPrev ? 0.5 : 0) : 1;
 
     if (distance <= dropPosition.width * prevPercent) {
-      dropType = 'before'
+      dropType = 'before';
     } else if (distance > dropPosition.width * nextPercent) {
-      dropType = 'after'
+      dropType = 'after';
     } else {
-      dropType = undefined
+      dropType = undefined;
     }
 
     const innerEl = wrapperRef.value!.querySelector<HTMLElement>(
-      `.${ns.e('inner')}`
-    )!
-    const innerPosition = innerEl.getBoundingClientRect()
-    const gap = Number.parseFloat(window.getComputedStyle(innerEl).gap || '6') / 2
+      `.${ns.e('inner')}`,
+    )!;
+    const innerPosition = innerEl.getBoundingClientRect();
+    const gap =
+      Number.parseFloat(window.getComputedStyle(innerEl).gap || '6') / 2;
 
-    const indicatorTop = dropPosition.top - innerPosition.top
-    let indicatorLeft = -9999
+    const indicatorTop = dropPosition.top - innerPosition.top;
+    let indicatorLeft = -9999;
 
     if (dropType === 'before') {
       indicatorLeft = Math.max(
         dropPosition.left - innerPosition.left - gap,
-        Math.floor(-gap / 2)
-      )
+        Math.floor(-gap / 2),
+      );
     } else if (dropType === 'after') {
-      const left = dropPosition.right - innerPosition.left
+      const left = dropPosition.right - innerPosition.left;
       indicatorLeft =
-        left + (innerPosition.width === left ? Math.floor(gap / 2) : gap)
+        left + (innerPosition.width === left ? Math.floor(gap / 2) : gap);
     }
 
     if (dropIndicatorRef.value) {
-      dropIndicatorRef.value.style.top = `${indicatorTop}px`
-      dropIndicatorRef.value.style.left = `${indicatorLeft}px`
+      dropIndicatorRef.value.style.top = `${indicatorTop}px`;
+      dropIndicatorRef.value.style.left = `${indicatorLeft}px`;
     }
-    showDropIndicator.value = Boolean(dropType)
+    showDropIndicator.value = Boolean(dropType);
   }
 
   function handleDragEnd(event: DragEvent) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (draggingTag) {
-      draggingTag.style.opacity = ''
+      draggingTag.style.opacity = '';
     }
 
     if (
@@ -117,15 +117,15 @@ export function useDragTag({
       !isUndefined(dropIndex) &&
       draggingIndex !== dropIndex
     ) {
-      handleDragged(draggingIndex, dropIndex, dropType)
+      handleDragged(draggingIndex, dropIndex, dropType);
     }
 
-    showDropIndicator.value = false
-    draggingIndex = undefined
-    draggingTag = null
-    dropIndex = undefined
-    dropType = undefined
-    afterDragged?.()
+    showDropIndicator.value = false;
+    draggingIndex = undefined;
+    draggingTag = null;
+    dropIndex = undefined;
+    dropType = undefined;
+    afterDragged?.();
   }
 
   return {
@@ -134,5 +134,5 @@ export function useDragTag({
     handleDragStart,
     handleDragOver,
     handleDragEnd,
-  }
+  };
 }

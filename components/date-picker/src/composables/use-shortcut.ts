@@ -1,19 +1,19 @@
-import { getCurrentInstance, useAttrs, useSlots } from "vue";
-import dayjs from "dayjs";
-import { isFunction } from "element-plus/es/utils/index.mjs";
+import { getCurrentInstance, useAttrs, useSlots } from 'vue';
+import dayjs from 'dayjs';
+import { isFunction } from '@flash-global66/g-utils';
 
-import type { SetupContext } from "vue";
-import { useLocale } from "element-plus";
-import type { RangePickerSharedEmits } from "../props/shared";
+import type { SetupContext } from 'vue';
+import { useLocale } from '@flash-global66/g-hooks';
+import type { RangePickerSharedEmits } from '../props/shared';
 
 // FIXME: extract this to `date-picker.ts`
 export type Shortcut = {
   text: string;
   value: [Date, Date] | (() => [Date, Date]);
-  onClick?: (ctx: Omit<SetupContext<RangePickerSharedEmits>, "expose">) => void;
+  onClick?: (ctx: Omit<SetupContext<RangePickerSharedEmits>, 'expose'>) => void;
 };
 
-export const useShortcut = (lang: ReturnType<typeof useLocale>["lang"]) => {
+export const useShortcut = (lang: ReturnType<typeof useLocale>['lang']) => {
   const { emit } = getCurrentInstance()!;
   const attrs = useAttrs();
   const slots = useSlots();
@@ -24,7 +24,7 @@ export const useShortcut = (lang: ReturnType<typeof useLocale>["lang"]) => {
       : shortcut.value;
 
     if (shortcutValues) {
-      emit("pick", [
+      emit('pick', [
         dayjs(shortcutValues[0]).locale(lang.value),
         dayjs(shortcutValues[1]).locale(lang.value),
       ]);

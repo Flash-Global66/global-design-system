@@ -1,0 +1,8 @@
+/* Element Chalk Variables */
+.gui-dialog-alert__description {
+  @apply text-center text-4 font-normal text-secondary-txt hyphens-manual;
+}
+
+.gui-dialog-alert__checkboxes {
+  @apply mt-4 flex w-full flex-col gap-3 text-left text-3;
+}

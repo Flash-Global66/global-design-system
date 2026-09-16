@@ -5,8 +5,8 @@
     :style="contentStyle"
     :class="contentClass"
     tabindex="-1"
-    @mouseenter="(e) => $emit('mouseenter', e)"
-    @mouseleave="(e) => $emit('mouseleave', e)"
+    @mouseenter="e => $emit('mouseenter', e)"
+    @mouseleave="e => $emit('mouseleave', e)"
   >
     <g-focus-trap
       :trapped="trapped"
@@ -33,28 +33,28 @@ import {
   ref,
   unref,
   watch,
-} from 'vue'
-import { isNil } from 'lodash-unified'
-import { NOOP, isElement } from 'element-plus/es/utils/index'
-import GFocusTrap from '@flash-global66/g-focus-trap'
-import { formItemContextKey } from '@flash-global66/g-form'
-import { POPPER_CONTENT_INJECTION_KEY } from './constants'
-import { popperContentEmits, popperContentProps } from './content'
+} from 'vue';
+import { isNil } from 'lodash-unified';
+import { NOOP, isElement } from '@flash-global66/g-utils';
+import GFocusTrap from '@flash-global66/g-focus-trap';
+import { formItemContextKey } from '@flash-global66/g-form';
+import { POPPER_CONTENT_INJECTION_KEY } from './constants';
+import { popperContentEmits, popperContentProps } from './content';
 import {
   usePopperContent,
   usePopperContentDOM,
   usePopperContentFocusTrap,
-} from './composables'
+} from './composables';
 
-import type { WatchStopHandle } from 'vue'
+import type { WatchStopHandle } from 'vue';
 
 defineOptions({
   name: 'GPopperContent',
-})
+});
 
-const emit = defineEmits(popperContentEmits)
+const emit = defineEmits(popperContentEmits);
 
-const props = defineProps(popperContentProps)
+const props = defineProps(popperContentProps);
 
 const {
   focusStartRef,
@@ -65,10 +65,10 @@ const {
   onFocusInTrap,
   onFocusoutPrevented,
   onReleaseRequested,
-} = usePopperContentFocusTrap(props, emit)
+} = usePopperContentFocusTrap(props, emit);
 
 const { attributes, arrowRef, contentRef, styles, instanceRef, role, update } =
-  usePopperContent(props)
+  usePopperContent(props);
 
 const {
   ariaModal,
@@ -81,16 +81,16 @@ const {
   styles,
   attributes,
   role,
-})
+});
 
-const formItemContext = inject(formItemContextKey, undefined)
-const arrowOffset = ref<number>()
+const formItemContext = inject(formItemContextKey, undefined);
+const arrowOffset = ref<number>();
 
 provide(POPPER_CONTENT_INJECTION_KEY, {
   arrowStyle,
   arrowRef,
   arrowOffset,
-})
+});
 
 if (formItemContext) {
   // disallow auto-id from inside popper content
@@ -98,64 +98,64 @@ if (formItemContext) {
     ...formItemContext,
     addInputId: NOOP,
     removeInputId: NOOP,
-  })
+  });
 }
 
-let triggerTargetAriaStopWatch: WatchStopHandle | undefined = undefined
+let triggerTargetAriaStopWatch: WatchStopHandle | undefined = undefined;
 
 const updatePopper = (shouldUpdateZIndex = true) => {
-  update()
-  shouldUpdateZIndex && updateZIndex()
-}
+  update();
+  shouldUpdateZIndex && updateZIndex();
+};
 
 const togglePopperAlive = () => {
-  updatePopper(false)
+  updatePopper(false);
   if (props.visible && props.focusOnShow) {
-    trapped.value = true
+    trapped.value = true;
   } else if (props.visible === false) {
-    trapped.value = false
+    trapped.value = false;
   }
-}
+};
 
 onMounted(() => {
   watch(
     () => props.triggerTargetEl,
     (triggerTargetEl, prevTriggerTargetEl) => {
-      triggerTargetAriaStopWatch?.()
-      triggerTargetAriaStopWatch = undefined
+      triggerTargetAriaStopWatch?.();
+      triggerTargetAriaStopWatch = undefined;
 
-      const el = unref(triggerTargetEl || contentRef.value)
-      const prevEl = unref(prevTriggerTargetEl || contentRef.value)
+      const el = unref(triggerTargetEl || contentRef.value);
+      const prevEl = unref(prevTriggerTargetEl || contentRef.value);
 
       if (isElement(el)) {
         triggerTargetAriaStopWatch = watch(
           [role, () => props.ariaLabel, ariaModal, () => props.id],
-          (watches) => {
-            ;['role', 'aria-label', 'aria-modal', 'id'].forEach((key, idx) => {
+          watches => {
+            ['role', 'aria-label', 'aria-modal', 'id'].forEach((key, idx) => {
               isNil(watches[idx])
                 ? el.removeAttribute(key)
-                : el.setAttribute(key, watches[idx]!)
-            })
+                : el.setAttribute(key, watches[idx]!);
+            });
           },
-          { immediate: true }
-        )
+          { immediate: true },
+        );
       }
       if (prevEl !== el && isElement(prevEl)) {
-        ;['role', 'aria-label', 'aria-modal', 'id'].forEach((key) => {
-          prevEl.removeAttribute(key)
-        })
+        ['role', 'aria-label', 'aria-modal', 'id'].forEach(key => {
+          prevEl.removeAttribute(key);
+        });
       }
     },
-    { immediate: true }
-  )
+    { immediate: true },
+  );
 
-  watch(() => props.visible, togglePopperAlive, { immediate: true })
-})
+  watch(() => props.visible, togglePopperAlive, { immediate: true });
+});
 
 onBeforeUnmount(() => {
-  triggerTargetAriaStopWatch?.()
-  triggerTargetAriaStopWatch = undefined
-})
+  triggerTargetAriaStopWatch?.();
+  triggerTargetAriaStopWatch = undefined;
+});
 
 defineExpose({
   /**
@@ -175,5 +175,5 @@ defineExpose({
    * @description content style
    */
   contentStyle,
-})
+});
 </script>

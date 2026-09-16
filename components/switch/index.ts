@@ -1,9 +1,5 @@
-import Switch from "./src/switch.vue";
-import {
-  withInstall,
-  withNoopInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
+import Switch from './src/switch.vue';
+import { withInstall, SFCWithInstall } from '@flash-global66/g-utils';
 
 export const GSwitch: SFCWithInstall<typeof Switch> & {
   Switch: typeof Switch;

@@ -1,102 +1,117 @@
-import { computed, provide, ref, watch } from 'vue'
+import { computed, provide, ref, watch } from 'vue';
 import {
   debugWarn,
   ensureArray,
   isBoolean,
   isPromise,
-  throwError
-} from 'element-plus/es/utils/index'
-import { useNamespace, CHANGE_EVENT, UPDATE_MODEL_EVENT } from 'element-plus'
-import { collapseContextKey } from './constants'
+  throwError,
+  useNamespace,
+  CHANGE_EVENT,
+  UPDATE_MODEL_EVENT,
+} from '@flash-global66/g-utils';
+import { collapseContextKey } from './constants';
 
-import type { SetupContext } from 'vue'
-import type { CollapseActiveName, CollapseEmits, CollapseProps } from './collapse'
+import type { SetupContext } from 'vue';
+import type {
+  CollapseActiveName,
+  CollapseEmits,
+  CollapseProps,
+} from './collapse';
 
-const SCOPE = 'GCollapse'
-export const useCollapse = (props: CollapseProps, emit: SetupContext<CollapseEmits>['emit']) => {
-  const activeNames = ref(ensureArray(props.modelValue))
+const SCOPE = 'GCollapse';
+export const useCollapse = (
+  props: CollapseProps,
+  emit: SetupContext<CollapseEmits>['emit'],
+) => {
+  const activeNames = ref(ensureArray(props.modelValue));
 
   const setActiveNames = (_activeNames: CollapseActiveName[]) => {
-    activeNames.value = _activeNames
-    const value = props.accordion ? activeNames.value[0] : activeNames.value
-    emit(UPDATE_MODEL_EVENT, value)
-    emit(CHANGE_EVENT, value)
-  }
+    activeNames.value = _activeNames;
+    const value = props.accordion ? activeNames.value[0] : activeNames.value;
+    emit(UPDATE_MODEL_EVENT, value);
+    emit(CHANGE_EVENT, value);
+  };
 
   const handleChange = (name: CollapseActiveName) => {
     if (props.accordion) {
-      setActiveNames([activeNames.value[0] === name ? '' : name])
+      setActiveNames([activeNames.value[0] === name ? '' : name]);
     } else {
-      const _activeNames = [...activeNames.value]
-      const index = _activeNames.indexOf(name)
+      const _activeNames = [...activeNames.value];
+      const index = _activeNames.indexOf(name);
 
       if (index > -1) {
-        _activeNames.splice(index, 1)
+        _activeNames.splice(index, 1);
       } else {
-        _activeNames.push(name)
+        _activeNames.push(name);
       }
-      setActiveNames(_activeNames)
+      setActiveNames(_activeNames);
     }
-  }
+  };
 
   const handleItemClick = async (name: CollapseActiveName) => {
-    const { beforeCollapse } = props
+    const { beforeCollapse } = props;
     if (!beforeCollapse) {
-      handleChange(name)
-      return
+      handleChange(name);
+      return;
     }
 
-    const shouldChange = beforeCollapse(name)
-    const isPromiseOrBool = [isPromise(shouldChange), isBoolean(shouldChange)].includes(true)
+    const shouldChange = beforeCollapse(name);
+    const isPromiseOrBool = [
+      isPromise(shouldChange),
+      isBoolean(shouldChange),
+    ].includes(true);
     if (!isPromiseOrBool) {
-      throwError(SCOPE, 'beforeCollapse must return type `Promise<boolean>` or `boolean`')
+      throwError(
+        SCOPE,
+        'beforeCollapse must return type `Promise<boolean>` or `boolean`',
+      );
     }
 
     if (isPromise(shouldChange)) {
       shouldChange
-        .then((result) => {
+        .then(result => {
           if (result !== false) {
-            handleChange(name)
+            handleChange(name);
           }
         })
-        .catch((e) => {
-          debugWarn(SCOPE, `some error occurred: ${e}`)
-        })
+        .catch(e => {
+          debugWarn(SCOPE, `some error occurred: ${e}`);
+        });
     } else if (shouldChange) {
-      handleChange(name)
+      handleChange(name);
     }
-  }
+  };
 
   const handleHeaderOnlyClick = (name: CollapseActiveName) => {
-    emit('header-click', name)
-  }
+    emit('header-click', name);
+  };
 
   watch(
     () => props.modelValue,
     () => (activeNames.value = ensureArray(props.modelValue)),
-    { deep: true }
-  )
+    { deep: true },
+  );
 
   provide(collapseContextKey, {
     activeNames,
     handleItemClick,
-    handleHeaderOnlyClick
-  })
+    handleHeaderOnlyClick,
+  });
   return {
     activeNames,
-    setActiveNames
-  }
-}
+    setActiveNames,
+  };
+};
 
 export const useCollapseDOM = (props: CollapseProps) => {
-  const ns = useNamespace('collapse')
+  const ns = useNamespace('collapse');
 
-  const rootKls = computed(() => [ns.b()])
+  const rootKls = computed(() => [ns.b()]);
 
   return {
     rootKls,
     expandIconPosition: computed(() => {
-      return props.expandIconPosition
-    })
-  }
-}
+      return props.expandIconPosition;
+    }),
+  };
+};

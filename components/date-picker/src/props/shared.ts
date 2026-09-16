@@ -1,23 +1,19 @@
-import {
-  buildProps,
-  definePropType,
-  isArray,
-} from "element-plus/es/utils/index.mjs";
-import { datePickTypes } from "element-plus/es/constants/index.mjs";
+import { buildProps, definePropType, isArray } from '@flash-global66/g-utils';
+import { datePickTypes } from '../constants/date.constant';
 
-import type { ExtractPropTypes } from "vue";
-import type { Dayjs } from "dayjs";
-import type { DatePickType } from "element-plus/es/constants/index.mjs";
+import type { ExtractPropTypes } from 'vue';
+import type { Dayjs } from 'dayjs';
+import type { DatePickType } from '../constants/date.constant';
 
 const selectionModes = [
-  "date",
-  "dates",
-  "year",
-  "years",
-  "month",
-  "months",
-  "week",
-  "range",
+  'date',
+  'dates',
+  'year',
+  'years',
+  'month',
+  'months',
+  'week',
+  'range',
 ];
 
 export type RangeState = {
@@ -75,7 +71,7 @@ export const panelRangeSharedProps = buildProps({
 } as const);
 
 export const selectionModeWithDefault = (
-  mode: (typeof selectionModes)[number]
+  mode: (typeof selectionModes)[number],
 ) => {
   return {
     type: String,

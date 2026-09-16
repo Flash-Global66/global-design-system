@@ -12,21 +12,21 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { GIconFont } from "@flash-global66/g-icon-font";
-import { paginationPrevEmits, paginationPrevProps } from "./prev";
-import { useNamespace } from "element-plus";
+import { computed } from 'vue';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { paginationPrevEmits, paginationPrevProps } from './prev';
+import { useNamespace } from '@flash-global66/g-utils';
 
 defineOptions({
-  name: "GPaginationPrev",
+  name: 'GPaginationPrev',
 });
 
 const props = defineProps(paginationPrevProps);
 defineEmits(paginationPrevEmits);
 
-const ns = useNamespace("pagination");
+const ns = useNamespace('pagination');
 
 const internalDisabled = computed(
-  () => props.disabled || props.currentPage <= 1
+  () => props.disabled || props.currentPage <= 1,
 );
 </script>

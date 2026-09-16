@@ -1,9 +1,5 @@
-import {
-  withInstall,
-  withNoopInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
-import Input from "./src/input.vue";
+import { withInstall, SFCWithInstall } from '@flash-global66/g-utils';
+import Input from './src/input.vue';
 export const GInput: SFCWithInstall<typeof Input> & {
   Input: typeof Input;
 } = withInstall(Input, {
@@ -11,6 +7,6 @@ export const GInput: SFCWithInstall<typeof Input> & {
 });
 export default GInput;
 
-export * from "./src/input.type";
+export * from './src/input.type';
 
 export type InputInstance = InstanceType<typeof Input>;

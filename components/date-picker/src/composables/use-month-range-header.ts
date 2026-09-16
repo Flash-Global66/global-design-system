@@ -1,7 +1,7 @@
-import { computed } from "vue";
-import { useLocale } from "element-plus/es/hooks/index";
-import type { Ref, ToRef } from "vue";
-import type { Dayjs } from "dayjs";
+import { computed } from 'vue';
+import { useLocale } from '@flash-global66/g-hooks';
+import type { Ref, ToRef } from 'vue';
+import type { Dayjs } from 'dayjs';
 
 export const useMonthRangeHeader = ({
   unlinkPanels,
@@ -14,32 +14,32 @@ export const useMonthRangeHeader = ({
 }) => {
   const { t } = useLocale();
   const leftPrevYear = () => {
-    leftDate.value = leftDate.value.subtract(1, "year");
+    leftDate.value = leftDate.value.subtract(1, 'year');
     if (!unlinkPanels.value) {
-      rightDate.value = rightDate.value.subtract(1, "year");
+      rightDate.value = rightDate.value.subtract(1, 'year');
     }
   };
 
   const rightNextYear = () => {
     if (!unlinkPanels.value) {
-      leftDate.value = leftDate.value.add(1, "year");
+      leftDate.value = leftDate.value.add(1, 'year');
     }
-    rightDate.value = rightDate.value.add(1, "year");
+    rightDate.value = rightDate.value.add(1, 'year');
   };
 
   const leftNextYear = () => {
-    leftDate.value = leftDate.value.add(1, "year");
+    leftDate.value = leftDate.value.add(1, 'year');
   };
 
   const rightPrevYear = () => {
-    rightDate.value = rightDate.value.subtract(1, "year");
+    rightDate.value = rightDate.value.subtract(1, 'year');
   };
   const leftLabel = computed(() => {
-    return `${leftDate.value.year()} ${t("el.datepicker.year")}`;
+    return `${leftDate.value.year()} ${t('el.datepicker.year')}`;
   });
 
   const rightLabel = computed(() => {
-    return `${rightDate.value.year()} ${t("el.datepicker.year")}`;
+    return `${rightDate.value.year()} ${t('el.datepicker.year')}`;
   });
 
   const leftYear = computed(() => {

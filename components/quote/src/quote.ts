@@ -1,12 +1,15 @@
-import type { ExtractPropTypes } from 'vue'
-import { buildProps, definePropType } from 'element-plus/es/utils/index.mjs'
-import type { FlagCode } from '@flash-global66/g-country-flag'
-import type { Currency, QuoteAction } from './quote.type'
+import type { ExtractPropTypes } from 'vue';
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import type { FlagCode } from '@flash-global66/g-country-flag';
+import type { Currency, QuoteAccount, QuoteAction } from './quote.type';
 
 export const quoteProps = buildProps({
   fromCurrency: { type: String, required: true },
   toCurrency: { type: String, required: true },
-  fromCurrencies: { type: definePropType<Currency[]>(Array), default: () => [] },
+  fromCurrencies: {
+    type: definePropType<Currency[]>(Array),
+    default: () => [],
+  },
   toCurrencies: { type: definePropType<Currency[]>(Array), default: () => [] },
   fromAmount: { type: String, default: '' },
   toAmount: { type: String, default: '' },
@@ -18,6 +21,10 @@ export const quoteProps = buildProps({
   fromLabel: { type: String, default: 'Tú envías' },
   toLabel: { type: String, default: 'Tu contacto recibe' },
   isDisabled: { type: Boolean, default: false },
+  disableOriginSelect: { type: Boolean, default: false },
+  disableOriginInput: { type: Boolean, default: false },
+  disableDestinationSelect: { type: Boolean, default: false },
+  disableDestinationInput: { type: Boolean, default: false },
   showSwap: { type: Boolean, default: true },
   availableLabel: { type: String, default: 'Disponible' },
   swapAriaLabel: { type: String, default: 'Intercambiar monedas' },
@@ -26,9 +33,15 @@ export const quoteProps = buildProps({
   showAction: { type: definePropType<boolean | null>(null), default: null },
   fromFlagCode: { type: definePropType<FlagCode>(String), default: undefined },
   toFlagCode: { type: definePropType<FlagCode>(String), default: undefined },
-} as const)
+  fromAccounts: { type: definePropType<QuoteAccount[]>(Array), default: () => [] },
+  toAccounts: { type: definePropType<QuoteAccount[]>(Array), default: () => [] },
+  fromAccountId: { type: String, default: '' },
+  toAccountId: { type: String, default: '' },
+  accountSearchPlaceholder: { type: String, default: 'Buscar' },
+  primaryAccountLabel: { type: String, default: 'Cuenta principal' },
+} as const);
 
-export type QuoteProps = ExtractPropTypes<typeof quoteProps>
+export type QuoteProps = ExtractPropTypes<typeof quoteProps>;
 
 export const quoteEmits = {
   'from-input': (value: string) => typeof value === 'string',
@@ -37,9 +50,21 @@ export const quoteEmits = {
   'to-blur': (value: string) => typeof value === 'string',
   'from-currency-change': (currency: Currency) => !!currency,
   'to-currency-change': (currency: Currency) => !!currency,
-  swap: (payload: { from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode; toFlagCode?: FlagCode }) =>
-    typeof payload.from === 'string' && typeof payload.to === 'string' && typeof payload.fromAmount === 'string' && typeof payload.toAmount === 'string',
+  swap: (payload: {
+    from: string;
+    to: string;
+    fromAmount: string;
+    toAmount: string;
+    fromFlagCode?: FlagCode;
+    toFlagCode?: FlagCode;
+  }) =>
+    typeof payload.from === 'string' &&
+    typeof payload.to === 'string' &&
+    typeof payload.fromAmount === 'string' &&
+    typeof payload.toAmount === 'string',
   'from-focus': () => true,
   'to-focus': () => true,
   'action-click': () => true,
-}
+  'from-account-change': (account: QuoteAccount) => Boolean(account),
+  'to-account-change': (account: QuoteAccount) => Boolean(account),
+};

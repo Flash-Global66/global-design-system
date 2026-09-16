@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-inline",
   "author": "Global66",
-  "version": "0.3.1",
+  "version": "0.6.15",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -10,7 +10,7 @@
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/inline.styles.scss",
+    "./styles.scss": "./src/Inline/inline.style.scss",
     "./*": "./*"
   },
   "files": [
@@ -28,9 +28,13 @@
   "repository": {
     "url": "https://github.com/Flash-Global66/global-design-system.git"
   },
+  "dependencies": {
+    "@flash-global66/g-form": "^0.2.28",
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-icon-font": "^0.26.0",
+    "@flash-global66/g-utils": "^0.15.6"
+  },
   "peerDependencies": {
-    "@flash-global66/g-icon-font": "^0.2.0",
-    "element-plus": "^2.9.0",
     "vue": "^3.2.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"

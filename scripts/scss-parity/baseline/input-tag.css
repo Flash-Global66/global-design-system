@@ -1,0 +1,881 @@
+/* Element Chalk Variables */
+.gui-input-tag {
+  --gui-input-tag-border-color-hover: var(--gui-border-color-hover);
+  --gui-input-tag-placeholder-color: var(--gui-text-color-placeholder);
+  --gui-input-tag-disabled-color: var(--gui-disabled-text-color);
+  --gui-input-tag-disabled-border: var(--gui-disabled-border-color);
+  --gui-input-tag-font-size: var(--gui-font-size-base);
+  --gui-input-tag-close-hover-color: var(--gui-text-color-secondary);
+  --gui-input-tag-text-color: var(--gui-text-color-regular);
+  --gui-input-tag-input-focus-border-color: var(--gui-color-primary);
+  --gui-input-tag-width: 100%;
+  --gui-input-tag-mini-height: var(--gui-component-size);
+  --gui-input-tag-gap: 6px;
+  --gui-input-tag-padding: 4px;
+  --gui-input-tag-inner-padding: 8px;
+  --gui-input-tag-line-height: 24px;
+}
+
+.gui-input-tag {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: var(--gui-input-tag-font-size);
+  padding: var(--gui-input-tag-padding);
+  width: var(--gui-input-tag-width);
+  min-height: var(--gui-input-tag-mini-height);
+  line-height: var(--gui-input-tag-line-height);
+  border-radius: var(--gui-border-radius-base);
+  background-color: var(--gui-fill-color-blank);
+  transition: var(--gui-transition-duration);
+  transform: translate3d(0, 0, 0);
+  box-shadow: 0 0 0 1px var(--gui-border-color) inset;
+}
+.gui-input-tag.is-focused {
+  box-shadow: 0 0 0 1px var(--gui-color-primary) inset;
+}
+
+.gui-input-tag.is-hovering:not(.is-focused) {
+  box-shadow: 0 0 0 1px var(--gui-border-color-hover) inset;
+}
+
+.gui-input-tag.is-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: var(--gui-fill-color-light);
+  box-shadow: 0 0 0 1px var(--gui-input-tag-disabled-border) inset;
+}
+.gui-input-tag.is-disabled:hover {
+  box-shadow: 0 0 0 1px var(--gui-input-tag-disabled-border) inset;
+}
+.gui-input-tag.is-disabled.is-focus {
+  box-shadow: 0 0 0 1px var(--gui-input-focus-border-color) inset;
+}
+.gui-input-tag.is-disabled .gui-input-tag__inner .gui-input-tag__input {
+  cursor: not-allowed;
+}
+
+.gui-input-tag.is-disabled .gui-input-tag__inner .gui-tag {
+  cursor: not-allowed;
+}
+
+.gui-input-tag__prefix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 var(--gui-input-tag-inner-padding);
+  color: var(--gui-input-icon-color, var(--gui-text-color-placeholder));
+}
+
+.gui-input-tag__suffix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 var(--gui-input-tag-inner-padding);
+  gap: 8px;
+  color: var(--gui-input-icon-color, var(--gui-text-color-placeholder));
+}
+
+.gui-input-tag__inner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  max-width: 100%;
+  min-width: 0;
+  gap: var(--gui-input-tag-gap);
+}
+.gui-input-tag__inner.is-left-space {
+  margin-left: var(--gui-input-tag-inner-padding);
+}
+
+.gui-input-tag__inner.is-right-space {
+  margin-right: var(--gui-input-tag-inner-padding);
+}
+
+.gui-input-tag__inner.is-draggable .gui-tag {
+  cursor: move;
+  user-select: none;
+}
+
+.gui-input-tag__drop-indicator {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: var(--el-input-tag-line-height);
+  background-color: var(--gui-color-primary);
+}
+
+.gui-input-tag__inner .gui-tag {
+  max-width: 100%;
+  cursor: pointer;
+  border-color: transparent;
+}
+.gui-input-tag__inner .gui-tag.gui-tag--plain {
+  border-color: var(--gui-tag-border-color);
+}
+.gui-input-tag__inner .gui-tag .gui-tag__content {
+  min-width: 0;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gui-input-tag__input-wrapper {
+  flex: 1;
+}
+
+.gui-input-tag__input {
+  border: none;
+  outline: none;
+  padding: 0;
+  color: var(--gui-input-tag-text-color);
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  appearance: none;
+  width: 100%;
+  background-color: transparent;
+}
+.gui-input-tag__input::placeholder {
+  color: var(--gui-input-tag-placeholder-color);
+}
+
+.gui-input-tag__input-calculator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 100%;
+  visibility: hidden;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.gui-input-tag--large {
+  --gui-input-tag-gap: 6px;
+  --gui-input-tag-padding: 8px;
+  --gui-input-tag-padding-left: 8px;
+  --gui-input-tag-font-size: 14px;
+}
+
+.gui-input-tag--small {
+  --gui-input-tag-gap: 4px;
+  --gui-input-tag-padding: 2px;
+  --gui-input-tag-padding-left: 6px;
+  --gui-input-tag-font-size: 12px;
+  --gui-input-tag-line-height: 20px;
+  --gui-input-tag-mini-height: var(--gui-component-size-small);
+}
+
+.gui-tag {
+  --gui-tag-font-size: 12px;
+  --gui-tag-border-radius: 4px;
+  --gui-tag-border-radius-rounded: 9999px;
+}
+
+.gui-tag {
+  background-color: var(--gui-tag-bg-color);
+  border-color: var(--gui-tag-border-color);
+  color: var(--gui-tag-text-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  height: 24px;
+  padding: 0 9px;
+  font-size: var(--gui-tag-font-size);
+  line-height: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--gui-tag-border-radius);
+  box-sizing: border-box;
+  white-space: nowrap;
+  --gui-icon-size: 14px;
+  --gui-tag-bg-color: var(--gui-color-primary-light-9);
+  --gui-tag-border-color: var(--gui-color-primary-light-8);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-color-primary-light-9);
+  --gui-tag-border-color: var(--gui-color-primary-light-8);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-color-success-light-9);
+  --gui-tag-border-color: var(--gui-color-success-light-8);
+  --gui-tag-hover-color: var(--gui-color-success);
+}
+.gui-tag.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-color-warning-light-9);
+  --gui-tag-border-color: var(--gui-color-warning-light-8);
+  --gui-tag-hover-color: var(--gui-color-warning);
+}
+.gui-tag.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-color-danger-light-9);
+  --gui-tag-border-color: var(--gui-color-danger-light-8);
+  --gui-tag-hover-color: var(--gui-color-danger);
+}
+.gui-tag.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-color-error-light-9);
+  --gui-tag-border-color: var(--gui-color-error-light-8);
+  --gui-tag-hover-color: var(--gui-color-error);
+}
+.gui-tag.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-color-info-light-9);
+  --gui-tag-border-color: var(--gui-color-info-light-8);
+  --gui-tag-hover-color: var(--gui-color-info);
+}
+.gui-tag.is-hit {
+  border-color: var(--gui-color-primary);
+}
+
+.gui-tag.is-round {
+  border-radius: var(--gui-tag-border-radius-rounded);
+}
+
+.gui-tag .gui-tag__close {
+  flex-shrink: 0;
+  color: var(--gui-tag-text-color);
+}
+.gui-tag .gui-tag__close:hover {
+  color: var(--gui-color-white);
+  background-color: var(--gui-tag-hover-color);
+}
+.gui-tag.gui-tag--primary {
+  --gui-tag-text-color: var(--gui-color-primary);
+}
+.gui-tag.gui-tag--success {
+  --gui-tag-text-color: var(--gui-color-success);
+}
+.gui-tag.gui-tag--warning {
+  --gui-tag-text-color: var(--gui-color-warning);
+}
+.gui-tag.gui-tag--danger {
+  --gui-tag-text-color: var(--gui-color-danger);
+}
+.gui-tag.gui-tag--error {
+  --gui-tag-text-color: var(--gui-color-error);
+}
+.gui-tag.gui-tag--info {
+  --gui-tag-text-color: var(--gui-color-info);
+}
+.gui-tag .gui-icon {
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: calc(var(--gui-icon-size) - 2px);
+  height: var(--gui-icon-size);
+  width: var(--gui-icon-size);
+}
+.gui-tag .gui-tag__close {
+  margin-left: 6px;
+}
+.gui-tag--dark {
+  --gui-tag-text-color: var(--gui-color-white);
+  --gui-tag-bg-color: var(--gui-color-primary);
+  --gui-tag-border-color: var(--gui-color-primary);
+  --gui-tag-hover-color: var(--gui-color-primary-light-3);
+}
+.gui-tag--dark.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-color-primary);
+  --gui-tag-border-color: var(--gui-color-primary);
+  --gui-tag-hover-color: var(--gui-color-primary-light-3);
+}
+.gui-tag--dark.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-color-success);
+  --gui-tag-border-color: var(--gui-color-success);
+  --gui-tag-hover-color: var(--gui-color-success-light-3);
+}
+.gui-tag--dark.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-color-warning);
+  --gui-tag-border-color: var(--gui-color-warning);
+  --gui-tag-hover-color: var(--gui-color-warning-light-3);
+}
+.gui-tag--dark.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-color-danger);
+  --gui-tag-border-color: var(--gui-color-danger);
+  --gui-tag-hover-color: var(--gui-color-danger-light-3);
+}
+.gui-tag--dark.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-color-error);
+  --gui-tag-border-color: var(--gui-color-error);
+  --gui-tag-hover-color: var(--gui-color-error-light-3);
+}
+.gui-tag--dark.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-color-info);
+  --gui-tag-border-color: var(--gui-color-info);
+  --gui-tag-hover-color: var(--gui-color-info-light-3);
+}
+.gui-tag--dark.gui-tag--primary {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--success {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--warning {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--danger {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--error {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+.gui-tag--dark.gui-tag--info {
+  --gui-tag-text-color: var(--gui-color-white);
+}
+
+.gui-tag--plain {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-primary-light-5);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag--plain.gui-tag--primary {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-primary-light-5);
+  --gui-tag-hover-color: var(--gui-color-primary);
+}
+.gui-tag--plain.gui-tag--success {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-success-light-5);
+  --gui-tag-hover-color: var(--gui-color-success);
+}
+.gui-tag--plain.gui-tag--warning {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-warning-light-5);
+  --gui-tag-hover-color: var(--gui-color-warning);
+}
+.gui-tag--plain.gui-tag--danger {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-danger-light-5);
+  --gui-tag-hover-color: var(--gui-color-danger);
+}
+.gui-tag--plain.gui-tag--error {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-error-light-5);
+  --gui-tag-hover-color: var(--gui-color-error);
+}
+.gui-tag--plain.gui-tag--info {
+  --gui-tag-bg-color: var(--gui-fill-color-blank);
+  --gui-tag-border-color: var(--gui-color-info-light-5);
+  --gui-tag-hover-color: var(--gui-color-info);
+}
+
+.gui-tag.is-closable {
+  padding-right: 5px;
+}
+.gui-tag--large {
+  padding: 0 11px;
+  height: 32px;
+  --gui-icon-size: 16px;
+}
+.gui-tag--large .gui-tag__close {
+  margin-left: 8px;
+}
+.gui-tag--large.is-closable {
+  padding-right: 7px;
+}
+
+.gui-tag--small {
+  padding: 0 7px;
+  height: 20px;
+  --gui-icon-size: 12px;
+}
+.gui-tag--small .gui-tag__close {
+  margin-left: 4px;
+}
+.gui-tag--small.is-closable {
+  padding-right: 3px;
+}
+
+.gui-tag--small .gui-icon-close {
+  transform: scale(0.8);
+}
+
+.gui-tag.gui-tag--primary.is-hit {
+  border-color: var(--gui-color-primary);
+}
+
+.gui-tag.gui-tag--success.is-hit {
+  border-color: var(--gui-color-success);
+}
+
+.gui-tag.gui-tag--warning.is-hit {
+  border-color: var(--gui-color-warning);
+}
+
+.gui-tag.gui-tag--danger.is-hit {
+  border-color: var(--gui-color-danger);
+}
+
+.gui-tag.gui-tag--error.is-hit {
+  border-color: var(--gui-color-error);
+}
+
+.gui-tag.gui-tag--info.is-hit {
+  border-color: var(--gui-color-info);
+}
+
+.gui-tag {
+  @apply rounded-full flex items-center justify-center text-primary-txt w-min;
+}
+.gui-tag__xs {
+  @apply h-4 p-xxs text-1 font-medium gap-xxs;
+}
+.gui-tag__xs--prefix-icon {
+  @apply w-[10px] h-[10px] flex justify-center items-center;
+}
+.gui-tag__xs--prefix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__xs--suffix-icon {
+  @apply w-[10px] h-[10px] flex justify-center items-center;
+}
+.gui-tag__xs--suffix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__sm {
+  @apply h-[22px] py-xxs px-xs text-2 font-medium gap-xxs;
+}
+.gui-tag__sm--prefix-icon {
+  @apply w-3 h-3 flex justify-center items-center;
+}
+.gui-tag__sm--prefix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__sm--suffix-icon {
+  @apply w-3 h-3 flex justify-center items-center;
+}
+.gui-tag__sm--suffix-icon svg {
+  @apply text-1 align-super;
+}
+
+.gui-tag__md {
+  @apply h-[30px] py-xxs px-xs text-2 font-medium gap-xxs;
+}
+.gui-tag__md--prefix-icon {
+  @apply w-[14px] h-[14px] flex justify-center items-center;
+}
+.gui-tag__md--prefix-icon svg {
+  @apply text-2 align-super;
+}
+
+.gui-tag__md--suffix-icon {
+  @apply w-[14px] h-[14px] flex justify-center items-center;
+}
+.gui-tag__md--suffix-icon svg {
+  @apply text-2 align-super;
+}
+
+.gui-tag__light--success {
+  @apply border-success-bd bg-success-bg;
+}
+
+.gui-tag__light--info {
+  @apply border-info-bd bg-info-bg;
+}
+
+.gui-tag__light--warning {
+  @apply border-warning-bd bg-warning-bg;
+}
+
+.gui-tag__light--error {
+  @apply border-error-bd bg-error-bg;
+}
+
+.gui-tag__light--grey {
+  @apply border-disabled-bd bg-grey-50;
+}
+
+.gui-tag__dark--success {
+  @apply border-success-bd bg-success-def text-inverse-txt;
+}
+
+.gui-tag__dark--info {
+  @apply border-info-bd bg-info-def text-inverse-txt;
+}
+
+.gui-tag__dark--warning {
+  @apply border-warning-bd bg-warning-def text-inverse-txt;
+}
+
+.gui-tag__dark--error {
+  @apply border-error-bd bg-error-def text-inverse-txt;
+}
+
+.gui-tag__dark--grey {
+  @apply border-grey-500 bg-grey-500 text-inverse-txt;
+}
+
+.gui-tag__close {
+  @apply m-0 ml-0 cursor-pointer !important;
+}
+.gui-tag__close:hover {
+  @apply bg-inherit text-inherit !important;
+}
+
+.gui-tooltip-v2__content {
+  --gui-tooltip-v2-padding: 5px 10px;
+  --gui-tooltip-v2-border-radius: 4px;
+  --gui-tooltip-v2-border-color: var(--gui-border-color);
+  border-radius: var(--gui-tooltip-v2-border-radius);
+  color: var(--gui-color-black);
+  background-color: var(--gui-color-white);
+  padding: var(--gui-tooltip-v2-padding);
+  border: 1px solid var(--gui-border-color);
+}
+.gui-tooltip-v2__arrow {
+  position: absolute;
+  color: var(--gui-color-white);
+  width: var(--gui-tooltip-v2-arrow-width);
+  height: var(--gui-tooltip-v2-arrow-height);
+  pointer-events: none;
+  left: var(--gui-tooltip-v2-arrow-x);
+  top: var(--gui-tooltip-v2-arrow-y);
+}
+.gui-tooltip-v2__arrow::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__arrow::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow {
+  bottom: 0;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::before {
+  border-top-color: var(--gui-color-white);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::after {
+  border-top-color: var(--gui-border-color);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow {
+  top: 0;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::before {
+  border-bottom-color: var(--gui-color-white);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::after {
+  border-bottom-color: var(--gui-border-color);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow {
+  right: 0;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::before {
+  border-left-color: var(--gui-color-white);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::after {
+  border-left-color: var(--gui-border-color);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow {
+  left: 0;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::before {
+  border-right-color: var(--gui-color-white);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::after {
+  border-right-color: var(--gui-border-color);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: 100%;
+  z-index: -1;
+}
+
+.gui-tooltip-v2__content.is-dark {
+  --gui-tooltip-v2-border-color: transparent;
+  background-color: var(--gui-color-black);
+  color: var(--gui-color-white);
+  border-color: transparent;
+}
+.gui-tooltip-v2__content.is-dark .gui-tooltip-v2__arrow {
+  background-color: var(--gui-color-black);
+  border-color: transparent;
+}
+
+.gui-popper {
+  --gui-popper-border-radius: var(--gui-popover-border-radius, 4px);
+}
+
+.gui-popper {
+  position: absolute;
+  border-radius: var(--gui-popper-border-radius);
+  padding: 5px 11px;
+  z-index: 2000;
+  font-size: 12px;
+  line-height: 20px;
+  min-width: 10px;
+  overflow-wrap: break-word;
+  visibility: visible;
+}
+.gui-popper.is-dark {
+  color: var(--gui-bg-color);
+  background: var(--gui-text-color-primary);
+  border: 1px solid var(--gui-text-color-primary);
+}
+.gui-popper.is-dark > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-text-color-primary);
+  background: var(--gui-text-color-primary);
+  right: 0;
+}
+
+.gui-popper.is-light {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-border-color-light);
+}
+.gui-popper.is-light > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-border-color-light);
+  background: var(--gui-bg-color-overlay);
+  right: 0;
+}
+
+.gui-popper.is-pure {
+  padding: 0;
+}
+
+.gui-popper__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+}
+.gui-popper__arrow::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+  content: " ";
+  transform: rotate(45deg);
+  background: var(--gui-text-color-primary);
+  box-sizing: border-box;
+}
+
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow {
+  bottom: -5px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-bottom-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow {
+  top: -5px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-top-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow {
+  right: -5px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-top-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow {
+  left: -5px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-bottom-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+}
+
+.gui-popper.gui-popper__tooltip {
+  @apply p-md bg-everBlue-50 border-none rounded-md max-w-56 pt-sm shadow-md !important;
+}
+.gui-popper__container {
+  @apply flex flex-col gap-xxs;
+}
+
+.gui-popper__header {
+  @apply flex items-center justify-between;
+}
+.gui-popper__header h6 {
+  @apply text-2 font-semibold text-primary-txt line-clamp-2;
+}
+
+.gui-popper__description {
+  @apply text-2 font-medium text-secondary-txt text-pretty;
+}
+
+.gui-popper__content {
+  @apply text-2 font-medium text-secondary-txt text-pretty;
+}
+
+.gui-popper__arrow::before {
+  @apply bg-everBlue-50 border-none !important;
+}
+
+.gui-input-tag {
+  @apply relative flex items-center bg-white py-sm px-xs border border-disabled-bd rounded-md min-h-12 gap-xs shadow-none text-primary-txt font-medium text-4 transition-all duration-200 ease-in;
+  box-shadow: none !important;
+  border-width: 1px;
+}
+.gui-input-tag__container {
+  @apply flex flex-col gap-xxs;
+}
+
+.gui-input-tag.is-focused {
+  @apply border-everBlue-500;
+  box-shadow: none !important;
+}
+
+.gui-input-tag.is-complete {
+  @apply border-secondary-bd;
+  box-shadow: none !important;
+}
+
+.gui-input-tag.is-disabled {
+  @apply bg-primary-def-disabled border-grey-400 text-disabled-txt cursor-not-allowed shadow-none;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+.gui-input-tag.is-disabled .gui-tag {
+  @apply cursor-not-allowed;
+}
+
+.gui-input-tag.is-error {
+  @apply border-error-bd;
+}
+
+.gui-input-tag__help {
+  @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
+  min-height: 18px;
+}
+
+.gui-input-tag__help-text {
+  @apply line-clamp-2;
+}
+
+.gui-input-tag__help-error {
+  @apply text-error-txt;
+}
+
+.gui-input-tag__wrapper {
+  @apply w-full;
+}
+
+.gui-input-tag__inner {
+  @apply flex flex-wrap items-center gap-xs w-full;
+  min-height: 1.5rem;
+}
+.gui-input-tag__inner.is-left-space {
+  @apply pl-xxs;
+}
+
+.gui-input-tag__inner.is-right-space {
+  @apply pr-xxs;
+}
+
+.gui-input-tag__inner.is-draggable .gui-input-tag__tag-wrapper {
+  @apply cursor-move;
+}
+
+.gui-input-tag__tag-wrapper {
+  @apply inline-flex max-w-full;
+}
+
+.gui-input-tag__input-wrapper {
+  @apply flex-1 min-w-[80px];
+}
+
+.gui-input-tag__input {
+  @apply w-full bg-transparent border-0 outline-none text-primary-txt text-4 font-medium p-0 caret-everBlue-500;
+  appearance: none;
+}
+.gui-input-tag__input::placeholder {
+  @apply text-terciary-txt transition-all duration-200 ease-in;
+}
+
+.gui-input-tag__input-calculator {
+  @apply absolute left-0 top-0 max-w-full invisible whitespace-pre overflow-hidden;
+}
+
+.gui-input-tag__prefix {
+  @apply inline-flex items-center flex-shrink-0 pr-2 text-terciary-txt;
+}
+
+.gui-input-tag__suffix {
+  @apply inline-flex items-center flex-shrink-0 pl-2 gap-xxs text-terciary-txt;
+}
+
+.gui-input-tag__icon {
+  @apply text-6 text-grey-500 cursor-pointer select-none w-5 transition-colors duration-200;
+}
+
+.gui-input-tag__clear:hover {
+  @apply text-secondary-txt;
+}
+
+.gui-input-tag__drop-indicator {
+  @apply absolute w-px bg-everBlue-500;
+  top: 0;
+  height: 1.25rem;
+}
+
+.gui-input-tag__collapse-tag {
+  @apply inline-flex max-w-full;
+}
+
+.gui-input-tag__input-tag-list {
+  @apply flex flex-col gap-xs;
+  max-width: 16rem;
+}
+
+.gui-input-tag--small {
+  @apply min-h-10 text-3 px-xs py-xs;
+}
+.gui-input-tag--small .gui-input-tag__input {
+  @apply text-3;
+}
+
+.gui-input-tag--large {
+  @apply min-h-12 text-4 px-xs py-sm;
+}

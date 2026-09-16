@@ -1,17 +1,17 @@
-import type { ComputedRef, Ref, SetupContext, UnwrapRef } from "vue";
+import type { SetupContext, UnwrapRef } from 'vue';
 import type {
   RuleItem,
   ValidateError,
   ValidateFieldsError,
-} from "async-validator";
-import type { Arrayable } from "element-plus/es/utils/index.mjs";
-import type { MaybeRef } from "@vueuse/core";
+} from 'async-validator';
+import type { Arrayable } from '@flash-global66/g-utils';
+import type { MaybeRef } from '@vueuse/core';
 import type {
   FormItemProp,
   FormItemProps,
   FormItemValidateState,
-} from "./form-item";
-import type { FormEmits, FormProps } from "./form";
+} from './form-item';
+import type { FormEmits, FormProps } from './form';
 
 export interface FormItemRule extends RuleItem {
   trigger?: Arrayable<string>;
@@ -28,7 +28,7 @@ type BrowserNativeObject = Date | FileList | File | Blob | RegExp;
  * IsTuple<[1, 2, 3]> => true
  * IsTuple<Array[number]> => false
  */
-type IsTuple<T extends ReadonlyArray<any>> = number extends T["length"]
+type IsTuple<T extends ReadonlyArray<any>> = number extends T['length']
   ? false
   : true;
 /**
@@ -69,15 +69,16 @@ type PathImpl<K extends string | number, V> = V extends
  *
  * @see {@link FieldPath}
  */
-type Path<T> = T extends ReadonlyArray<infer V>
-  ? IsTuple<T> extends true
-    ? {
-        [K in TupleKey<T>]-?: PathImpl<Exclude<K, symbol>, T[K]>;
-      }[TupleKey<T>] // tuple
-    : PathImpl<ArrayKey, V> // array
-  : {
-      [K in keyof T]-?: PathImpl<Exclude<K, symbol>, T[K]>;
-    }[keyof T]; // object
+type Path<T> =
+  T extends ReadonlyArray<infer V>
+    ? IsTuple<T> extends true
+      ? {
+          [K in TupleKey<T>]-?: PathImpl<Exclude<K, symbol>, T[K]>;
+        }[TupleKey<T>] // tuple
+      : PathImpl<ArrayKey, V> // array
+    : {
+        [K in keyof T]-?: PathImpl<Exclude<K, symbol>, T[K]>;
+      }[keyof T]; // object
 /**
  * Type which collects all paths through a type
  *
@@ -88,7 +89,7 @@ type Path<T> = T extends ReadonlyArray<infer V>
  */
 type FieldPath<T> = T extends object ? Path<T> : never;
 export type FormRules<
-  T extends MaybeRef<Record<string, any> | string> = string
+  T extends MaybeRef<Record<string, any> | string> = string,
 > = Partial<
   Record<
     UnwrapRef<T> extends string ? UnwrapRef<T> : FieldPath<UnwrapRef<T>>,
@@ -96,31 +97,30 @@ export type FormRules<
   >
 >;
 
-export type ShowMessage = "parent" | "child" | "none";
+export type ShowMessage = 'parent' | 'child' | 'none';
 
 export type FormValidationResult = Promise<boolean>;
 export type FormValidateCallback = (
   isValid: boolean,
-  invalidFields?: ValidateFieldsError
+  invalidFields?: ValidateFieldsError,
 ) => Promise<void> | void;
 export interface FormValidateFailure {
   errors: ValidateError[] | null;
   fields: ValidateFieldsError;
 }
 
-export type FormContext = FormProps &
-  {
-    emit: SetupContext<FormEmits>["emit"];
-    getField: (prop: string) => FormItemContext | undefined;
-    addField: (field: FormItemContext) => void;
-    removeField: (field: FormItemContext) => void;
-    resetFields: (props?: Arrayable<FormItemProp>) => void;
-    clearValidate: (props?: Arrayable<FormItemProp>) => void;
-    validateField: (
-      props?: Arrayable<FormItemProp>,
-      callback?: FormValidateCallback
-    ) => FormValidationResult;
-  };
+export type FormContext = FormProps & {
+  emit: SetupContext<FormEmits>['emit'];
+  getField: (prop: string) => FormItemContext | undefined;
+  addField: (field: FormItemContext) => void;
+  removeField: (field: FormItemContext) => void;
+  resetFields: (props?: Arrayable<FormItemProp>) => void;
+  clearValidate: (props?: Arrayable<FormItemProp>) => void;
+  validateField: (
+    props?: Arrayable<FormItemProp>,
+    callback?: FormValidateCallback,
+  ) => FormValidationResult;
+};
 
 export interface FormItemContext extends FormItemProps {
   $el: HTMLDivElement | undefined;
@@ -135,7 +135,7 @@ export interface FormItemContext extends FormItemProps {
   removeInputId: (id: string) => void;
   validate: (
     trigger: string,
-    callback?: FormValidateCallback
+    callback?: FormValidateCallback,
   ) => FormValidationResult;
   resetField(): void;
   clearValidate(): void;

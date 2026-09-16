@@ -1,5 +1,5 @@
-@use "element-plus/theme-chalk/src/mixins/mixins" as *;
-@use "element-plus/theme-chalk/src/common/var" as *;
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
 
 @include b(time-spinner) {
   &.has-seconds {

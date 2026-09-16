@@ -1,6 +1,6 @@
-import { buildProps } from 'element-plus/es/utils/index.mjs'
-import type { ExtractPropTypes } from 'vue'
-import type Pager from './pager.vue'
+import { buildProps } from '@flash-global66/g-utils';
+import type { ExtractPropTypes } from 'vue';
+import type Pager from './pager.vue';
 
 export const paginationPagerProps = buildProps({
   currentPage: {
@@ -16,8 +16,10 @@ export const paginationPagerProps = buildProps({
     default: 7,
   },
   disabled: Boolean,
-} as const)
+} as const);
 
-export type PaginationPagerProps = ExtractPropTypes<typeof paginationPagerProps>
+export type PaginationPagerProps = ExtractPropTypes<
+  typeof paginationPagerProps
+>;
 
-export type PagerInstance = InstanceType<typeof Pager> & unknown
+export type PagerInstance = InstanceType<typeof Pager> & unknown;

@@ -1,27 +1,27 @@
-import { computed, nextTick, ref, unref, watch } from "vue";
-import dayjs from "dayjs";
-import { flatten } from "lodash-unified";
-import { useLocale, useNamespace } from "element-plus";
-import { castArray, isArray } from "element-plus/es/utils/index.mjs";
-import { buildPickerTable } from "../utils";
+import { computed, nextTick, ref, unref, watch } from 'vue';
+import dayjs from 'dayjs';
+import { flatten } from 'lodash-unified';
+import { useLocale } from '@flash-global66/g-hooks';
+import { castArray, isArray, useNamespace } from '@flash-global66/g-utils';
+import { buildPickerTable } from '../utils';
 
-import type { SetupContext } from "vue";
-import type { Dayjs } from "dayjs";
-import type { DateCell } from "../date-picker.type";
+import type { SetupContext } from 'vue';
+import type { Dayjs } from 'dayjs';
+import type { DateCell } from '../date-picker.type';
 import type {
   BasicDateTableEmits,
   BasicDateTableProps,
-} from "../props/basic-date-table";
+} from '../props/basic-date-table';
 
-import es from "../lang/es";
+import es from '../lang/es';
 
-const isNormalDay = (type = "") => {
-  return ["normal", "today"].includes(type);
+const isNormalDay = (type = '') => {
+  return ['normal', 'today'].includes(type);
 };
 
 export const useBasicDateTable = (
   props: BasicDateTableProps,
-  emit: SetupContext<BasicDateTableEmits>["emit"]
+  emit: SetupContext<BasicDateTableEmits>['emit'],
 ) => {
   const { lang } = useLocale(ref(es));
   const tbodyRef = ref<HTMLElement>();
@@ -36,10 +36,10 @@ export const useBasicDateTable = (
   // todo better way to get Day.js locale object
   const firstDayOfWeek = (props.date as any).$locale().weekStart || 7;
   const WEEKS_CONSTANT = props.date
-    .locale("en")
+    .locale('en')
     .localeData()
     .weekdaysShort()
-    .map((_) => _.toLowerCase());
+    .map(_ => _.toLowerCase());
 
   const offsetDay = computed(() => {
     // Sunday 7(0), cal the left and right offset days, 3217654, such as Monday is -1, the is to adjust the position of the first two rows of dates
@@ -47,30 +47,30 @@ export const useBasicDateTable = (
   });
 
   const startDate = computed(() => {
-    const startDayOfMonth = props.date.startOf("month");
-    return startDayOfMonth.subtract(startDayOfMonth.day() || 7, "day");
+    const startDayOfMonth = props.date.startOf('month');
+    return startDayOfMonth.subtract(startDayOfMonth.day() || 7, 'day');
   });
 
   const WEEKS = computed(() => {
     return WEEKS_CONSTANT.concat(WEEKS_CONSTANT).slice(
       firstDayOfWeek,
-      firstDayOfWeek + 7
+      firstDayOfWeek + 7,
     );
   });
 
   const hasCurrent = computed<boolean>(() => {
-    return flatten(unref(rows)).some((row) => {
+    return flatten(unref(rows)).some(row => {
       return row.isCurrent;
     });
   });
 
   const days = computed(() => {
-    const startOfMonth = props.date.startOf("month");
+    const startOfMonth = props.date.startOf('month');
     const startOfMonthDay = startOfMonth.day() || 7; // day of first day
     const dateCountOfMonth = startOfMonth.daysInMonth();
 
     const dateCountOfLastMonth = startOfMonth
-      .subtract(1, "month")
+      .subtract(1, 'month')
       .daysInMonth();
 
     return {
@@ -81,7 +81,7 @@ export const useBasicDateTable = (
   });
 
   const selectedDate = computed(() => {
-    return props.selectionMode === "dates"
+    return props.selectionMode === 'dates'
       ? (castArray(props.parsedValue) as Dayjs[])
       : ([] as Dayjs[]);
   });
@@ -93,7 +93,7 @@ export const useBasicDateTable = (
   };
   const setDateText = (
     cell: DateCell,
-    { count, rowIndex, columnIndex }: CellMeta
+    { count, rowIndex, columnIndex }: CellMeta,
   ): boolean => {
     const { startOfMonthDay, dateCountOfMonth, dateCountOfLastMonth } =
       unref(days);
@@ -113,14 +113,14 @@ export const useBasicDateTable = (
           (numberOfDaysFromPreviousMonth - (columnIndex % 7)) +
           1 +
           rowIndex * 7;
-        cell.type = "prev-month";
+        cell.type = 'prev-month';
       }
     } else {
       if (count <= dateCountOfMonth) {
         cell.text = count;
       } else {
         cell.text = count - dateCountOfMonth;
-        cell.type = "next-month";
+        cell.type = 'next-month';
       }
       return true;
     }
@@ -130,14 +130,14 @@ export const useBasicDateTable = (
   const setCellMetadata = (
     cell: DateCell,
     { columnIndex, rowIndex }: CellCoordinate,
-    count: number
+    count: number,
   ) => {
     const { disabledDate, cellClassName } = props;
     const _selectedDate = unref(selectedDate);
     const shouldIncrement = setDateText(cell, { count, rowIndex, columnIndex });
 
     const cellDate = cell.dayjs!.toDate();
-    cell.selected = _selectedDate.find((d) => d.isSame(cell.dayjs, "day"));
+    cell.selected = _selectedDate.find(d => d.isSame(cell.dayjs, 'day'));
     cell.isSelected = !!cell.selected;
     cell.isCurrent = isCurrent(cell);
     cell.disabled = disabledDate?.(cellDate);
@@ -146,7 +146,7 @@ export const useBasicDateTable = (
   };
 
   const setRowMetadata = (row: DateCell[]) => {
-    if (props.selectionMode === "week") {
+    if (props.selectionMode === 'week') {
       const [start, end] = props.showWeekNumber ? [1, 7] : [0, 6];
       const isActive = isWeekActive(row[start + 1]);
       row[start].inRange = isActive;
@@ -161,14 +161,14 @@ export const useBasicDateTable = (
 
     const offset = unref(offsetDay);
     const rows_ = unref(tableRows);
-    const dateUnit = "day";
+    const dateUnit = 'day';
     let count = 1;
 
     if (showWeekNumber) {
       for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
         if (!rows_[rowIndex][0]) {
           rows_[rowIndex][0] = {
-            type: "week",
+            type: 'week',
             text: unref(startDate)
               .add(rowIndex * 7 + 1, dateUnit)
               .week(),
@@ -209,14 +209,14 @@ export const useBasicDateTable = (
         await focus();
         // currentCellRef.value?.focus()
       }
-    }
+    },
   );
 
   const focus = async () => unref(currentCellRef)?.focus();
 
   const isCurrent = (cell: DateCell): boolean => {
     return (
-      props.selectionMode === "date" &&
+      props.selectionMode === 'date' &&
       isNormalDay(cell.type) &&
       cellMatchesDate(cell, props.parsedValue as Dayjs)
     );
@@ -226,26 +226,26 @@ export const useBasicDateTable = (
     if (!date) return false;
     return dayjs(date)
       .locale(unref(lang))
-      .isSame(props.date.date(Number(cell.text)), "day");
+      .isSame(props.date.date(Number(cell.text)), 'day');
   };
 
   const getDateOfCell = (row: number, column: number) => {
     const offsetFromStart =
       row * 7 + (column - (props.showWeekNumber ? 1 : 0)) - unref(offsetDay);
-    return unref(startDate).add(offsetFromStart, "day");
+    return unref(startDate).add(offsetFromStart, 'day');
   };
 
   const handleMouseMove = (event: MouseEvent) => {
     if (!props.rangeState.selecting) return;
 
     let target = event.target as HTMLElement;
-    if (target.tagName === "SPAN") {
+    if (target.tagName === 'SPAN') {
       target = target.parentNode?.parentNode as HTMLElement;
     }
-    if (target.tagName === "DIV") {
+    if (target.tagName === 'DIV') {
       target = target.parentNode as HTMLElement;
     }
-    if (target.tagName !== "TD") return;
+    if (target.tagName !== 'TD') return;
 
     const row = (target.parentNode as HTMLTableRowElement).rowIndex - 1;
     const column = (target as HTMLTableCellElement).cellIndex;
@@ -258,7 +258,7 @@ export const useBasicDateTable = (
     if (row !== unref(lastRow) || column !== unref(lastColumn)) {
       lastRow.value = row;
       lastColumn.value = column;
-      emit("changerange", {
+      emit('changerange', {
         selecting: true,
         endDate: getDateOfCell(row, column),
       });
@@ -267,68 +267,68 @@ export const useBasicDateTable = (
 
   const isSelectedCell = (cell: DateCell) => {
     return (
-      (!unref(hasCurrent) && cell?.text === 1 && cell.type === "normal") ||
+      (!unref(hasCurrent) && cell?.text === 1 && cell.type === 'normal') ||
       cell.isCurrent
     );
   };
 
   const handleFocus = (event: FocusEvent) => {
-    if (focusWithClick || unref(hasCurrent) || props.selectionMode !== "date")
+    if (focusWithClick || unref(hasCurrent) || props.selectionMode !== 'date')
       return;
     handlePickDate(event, true);
   };
 
   const handleMouseDown = (event: MouseEvent) => {
-    const target = (event.target as HTMLElement).closest("td");
+    const target = (event.target as HTMLElement).closest('td');
     if (!target) return;
     focusWithClick = true;
   };
 
   const handleMouseUp = (event: MouseEvent) => {
-    const target = (event.target as HTMLElement).closest("td");
+    const target = (event.target as HTMLElement).closest('td');
     if (!target) return;
     focusWithClick = false;
   };
 
   const handleRangePick = (newDate: Dayjs) => {
     if (!props.rangeState.selecting || !props.minDate) {
-      emit("pick", { minDate: newDate, maxDate: null });
-      emit("select", true);
+      emit('pick', { minDate: newDate, maxDate: null });
+      emit('select', true);
     } else {
       if (newDate >= props.minDate) {
-        emit("pick", { minDate: props.minDate, maxDate: newDate });
+        emit('pick', { minDate: props.minDate, maxDate: newDate });
       } else {
-        emit("pick", { minDate: newDate, maxDate: props.minDate });
+        emit('pick', { minDate: newDate, maxDate: props.minDate });
       }
-      emit("select", false);
+      emit('select', false);
     }
   };
 
   const handleWeekPick = (newDate: Dayjs) => {
     const weekNumber = newDate.week();
     const value = `${newDate.year()}w${weekNumber}`;
-    emit("pick", {
+    emit('pick', {
       year: newDate.year(),
       week: weekNumber,
       value,
-      date: newDate.startOf("week"),
+      date: newDate.startOf('week'),
     });
   };
 
   const handleDatesPick = (newDate: Dayjs, selected: boolean) => {
     const newValue = selected
       ? castArray(props.parsedValue).filter(
-          (d) => d?.valueOf() !== newDate.valueOf()
+          d => d?.valueOf() !== newDate.valueOf(),
         )
       : castArray(props.parsedValue).concat([newDate]);
-    emit("pick", newValue);
+    emit('pick', newValue);
   };
 
   const handlePickDate = (
     event: FocusEvent | MouseEvent,
-    isKeyboardMovement = false
+    isKeyboardMovement = false,
   ) => {
-    const target = (event.target as HTMLElement).closest("td");
+    const target = (event.target as HTMLElement).closest('td');
 
     if (!target) return;
 
@@ -336,24 +336,24 @@ export const useBasicDateTable = (
     const column = (target as HTMLTableCellElement).cellIndex;
     const cell = unref(rows)[row][column];
 
-    if (cell.disabled || cell.type === "week") return;
+    if (cell.disabled || cell.type === 'week') return;
 
     const newDate = getDateOfCell(row, column);
 
     switch (props.selectionMode) {
-      case "range": {
+      case 'range': {
         handleRangePick(newDate);
         break;
       }
-      case "date": {
-        emit("pick", newDate, isKeyboardMovement);
+      case 'date': {
+        emit('pick', newDate, isKeyboardMovement);
         break;
       }
-      case "week": {
+      case 'week': {
         handleWeekPick(newDate);
         break;
       }
-      case "dates": {
+      case 'dates': {
         handleDatesPick(newDate, !!cell.selected);
         break;
       }
@@ -364,15 +364,15 @@ export const useBasicDateTable = (
   };
 
   const isWeekActive = (cell: DateCell) => {
-    if (props.selectionMode !== "week") return false;
-    let newDate = props.date.startOf("day");
+    if (props.selectionMode !== 'week') return false;
+    let newDate = props.date.startOf('day');
 
-    if (cell.type === "prev-month") {
-      newDate = newDate.subtract(1, "month");
+    if (cell.type === 'prev-month') {
+      newDate = newDate.subtract(1, 'month');
     }
 
-    if (cell.type === "next-month") {
-      newDate = newDate.add(1, "month");
+    if (cell.type === 'next-month') {
+      newDate = newDate.add(1, 'month');
     }
 
     newDate = newDate.date(Number.parseInt(cell.text as any, 10));
@@ -380,8 +380,8 @@ export const useBasicDateTable = (
     if (props.parsedValue && !isArray(props.parsedValue)) {
       const dayOffset =
         ((props.parsedValue.day() - firstDayOfWeek + 7) % 7) - 1;
-      const weekDate = props.parsedValue.subtract(dayOffset, "day");
-      return weekDate.isSame(newDate, "day");
+      const weekDate = props.parsedValue.subtract(dayOffset, 'day');
+      return weekDate.isSame(newDate, 'day');
     }
     return false;
   };
@@ -412,66 +412,66 @@ export const useBasicDateTableDOM = (
   {
     isCurrent,
     isWeekActive,
-  }: Pick<ReturnType<typeof useBasicDateTable>, "isCurrent" | "isWeekActive">
+  }: Pick<ReturnType<typeof useBasicDateTable>, 'isCurrent' | 'isWeekActive'>,
 ) => {
-  const ns = useNamespace("date-table");
+  const ns = useNamespace('date-table');
   const { t } = useLocale(ref(es));
 
   const tableKls = computed(() => [
     ns.b(),
-    { "is-week-mode": props.selectionMode === "week" },
+    { 'is-week-mode': props.selectionMode === 'week' },
   ]);
 
-  const tableLabel = computed(() => t("el.datepicker.dateTablePrompt"));
-  const weekLabel = computed(() => t("el.datepicker.week"));
+  const tableLabel = computed(() => t('el.datepicker.dateTablePrompt'));
+  const weekLabel = computed(() => t('el.datepicker.week'));
 
   const getCellClasses = (cell: DateCell) => {
     const classes: string[] = [];
     if (isNormalDay(cell.type) && !cell.disabled) {
-      classes.push("available");
-      if (cell.type === "today") {
-        classes.push("today");
+      classes.push('available');
+      if (cell.type === 'today') {
+        classes.push('today');
       }
     } else {
       classes.push(cell.type!);
     }
 
     if (isCurrent(cell)) {
-      classes.push("current");
+      classes.push('current');
     }
 
     if (
       cell.inRange &&
-      (isNormalDay(cell.type) || props.selectionMode === "week")
+      (isNormalDay(cell.type) || props.selectionMode === 'week')
     ) {
-      classes.push("in-range");
+      classes.push('in-range');
 
       if (cell.start) {
-        classes.push("start-date");
+        classes.push('start-date');
       }
 
       if (cell.end) {
-        classes.push("end-date");
+        classes.push('end-date');
       }
     }
 
     if (cell.disabled) {
-      classes.push("disabled");
+      classes.push('disabled');
     }
 
     if (cell.selected) {
-      classes.push("selected");
+      classes.push('selected');
     }
 
     if (cell.customClass) {
       classes.push(cell.customClass);
     }
 
-    return classes.join(" ");
+    return classes.join(' ');
   };
 
   const getRowKls = (cell: DateCell) => [
-    ns.e("row"),
+    ns.e('row'),
     { current: isWeekActive(cell) },
   ];
 

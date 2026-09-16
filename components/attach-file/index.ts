@@ -1,8 +1,5 @@
-import AttachFile from "./src/attach-file.vue";
-import {
-  withInstall,
-  SFCWithInstall,
-} from "element-plus/es/utils/index.mjs";
+import AttachFile from './src/attach-file.vue';
+import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
 
 export const GAttachFile: SFCWithInstall<typeof AttachFile> & {
   AttachFile: typeof AttachFile;
@@ -12,10 +9,10 @@ export const GAttachFile: SFCWithInstall<typeof AttachFile> & {
 
 export default GAttachFile;
 
-export * from "./src/attach-file.type";
-export * from "./src/attach-file";
-export * from "./src/constants";
+export * from './src/attach-file.type';
+export * from './src/attach-file';
+export * from './src/constants';
 
-export { useAttachFile } from "./src/useAttachFile";
+export { useAttachFile } from './src/useAttachFile';
 
 export type AttachFileInstance = InstanceType<typeof AttachFile>;

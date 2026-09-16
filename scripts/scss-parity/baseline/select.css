@@ -1,0 +1,983 @@
+/* Element Chalk Variables */
+.gui-select-dropdown {
+  z-index: calc(var(--gui-index-top) + 1);
+  border-radius: var(--gui-border-radius-base);
+  box-sizing: border-box;
+}
+.gui-select-dropdown .gui-scrollbar.is-empty .gui-select-dropdown__list {
+  padding: 0;
+}
+
+.gui-select-dropdown__loading {
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
+  color: var(--gui-text-color-secondary);
+  font-size: var(--gui-select-font-size);
+}
+
+.gui-select-dropdown__empty {
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
+  color: var(--gui-text-color-secondary);
+  font-size: var(--gui-select-font-size);
+}
+
+.gui-select-dropdown__wrap {
+  max-height: 274px;
+}
+
+.gui-select-dropdown__list {
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.gui-select-dropdown__list.gui-vl__window {
+  margin: 6px 0;
+  padding: 0;
+}
+
+.gui-select-dropdown__header {
+  padding: 10px;
+  border-bottom: 1px solid var(--gui-border-color-light);
+}
+
+.gui-select-dropdown__footer {
+  padding: 10px;
+  border-top: 1px solid var(--gui-border-color-light);
+}
+
+.gui-select-dropdown__item {
+  font-size: var(--gui-font-size-base);
+  padding: 0 32px 0 20px;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--gui-text-color-regular);
+  height: 34px;
+  line-height: 34px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.gui-select-dropdown__item.is-hovering {
+  background-color: var(--gui-fill-color-light);
+}
+
+.gui-select-dropdown__item.is-selected {
+  color: var(--gui-color-primary);
+  font-weight: bold;
+}
+
+.gui-select-dropdown__item.is-disabled {
+  color: var(--gui-text-color-placeholder);
+  cursor: not-allowed;
+  background-color: unset;
+}
+
+.gui-select-dropdown.is-multiple .gui-select-dropdown__item.is-selected::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border-top: none;
+  border-right: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--gui-color-primary);
+  mask: url("data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='200' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='currentColor' d='M406.656 706.944L195.84 496.256a32 32 0 10-45.248 45.248l256 256 512-512a32 32 0 00-45.248-45.248L406.592 706.944z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask: url("data:image/svg+xml;utf8,%3Csvg class='icon' width='200' height='200' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='currentColor' d='M406.656 706.944L195.84 496.256a32 32 0 10-45.248 45.248l256 256 512-512a32 32 0 00-45.248-45.248L406.592 706.944z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  -webkit-mask-size: 100% 100%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+}
+.gui-select-dropdown.is-multiple .gui-select-dropdown__item.is-disabled::after {
+  background-color: var(--gui-text-color-placeholder);
+}
+
+.gui-select-group {
+  margin: 0;
+  padding: 0;
+}
+.gui-select-group__wrap {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gui-select-group__title {
+  box-sizing: border-box;
+  padding: 0 20px;
+  font-size: 12px;
+  color: var(--gui-color-info);
+  line-height: 34px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gui-select-group .gui-select-dropdown__item {
+  padding-left: 20px;
+}
+
+.gui-select {
+  --gui-select-border-color-hover: var(--gui-border-color-hover);
+  --gui-select-disabled-color: var(--gui-disabled-text-color);
+  --gui-select-disabled-border: var(--gui-disabled-border-color);
+  --gui-select-font-size: var(--gui-font-size-base);
+  --gui-select-close-hover-color: var(--gui-text-color-secondary);
+  --gui-select-input-color: var(--gui-text-color-placeholder);
+  --gui-select-multiple-input-color: var(--gui-text-color-regular);
+  --gui-select-input-focus-border-color: var(--gui-color-primary);
+  --gui-select-input-font-size: 14px;
+  --gui-select-width: 100%;
+}
+
+.gui-select {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: var(--gui-select-width);
+}
+.gui-select__wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+  padding: 4px 12px;
+  gap: 6px;
+  min-height: 32px;
+  line-height: 24px;
+  border-radius: var(--gui-border-radius-base);
+  background-color: var(--gui-fill-color-blank);
+  transition: var(--gui-transition-duration);
+  transform: translate3d(0, 0, 0);
+  box-shadow: 0 0 0 1px var(--gui-border-color) inset;
+}
+.gui-select__wrapper.is-filterable {
+  cursor: text;
+}
+
+.gui-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px var(--gui-color-primary) inset;
+}
+
+.gui-select__wrapper.is-hovering:not(.is-focused) {
+  box-shadow: 0 0 0 1px var(--gui-border-color-hover) inset;
+}
+
+.gui-select__wrapper.is-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: var(--gui-fill-color-light);
+  color: var(--gui-text-color-placeholder);
+  box-shadow: 0 0 0 1px var(--gui-select-disabled-border) inset;
+}
+.gui-select__wrapper.is-disabled:hover {
+  box-shadow: 0 0 0 1px var(--gui-select-disabled-border) inset;
+}
+.gui-select__wrapper.is-disabled.is-focus {
+  box-shadow: 0 0 0 1px var(--gui-input-focus-border-color) inset;
+}
+.gui-select__wrapper.is-disabled .gui-select__selected-item {
+  color: var(--gui-select-disabled-color);
+}
+
+.gui-select__wrapper.is-disabled .gui-select__caret {
+  cursor: not-allowed;
+}
+
+.gui-select__wrapper.is-disabled .gui-tag {
+  cursor: not-allowed;
+}
+
+.gui-select__prefix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 6px;
+  color: var(--gui-input-icon-color, var(--gui-text-color-placeholder));
+}
+
+.gui-select__suffix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 6px;
+  color: var(--gui-input-icon-color, var(--gui-text-color-placeholder));
+}
+
+.gui-select__caret {
+  color: var(--gui-select-input-color);
+  font-size: var(--gui-select-input-font-size);
+  transition: var(--gui-transition-duration);
+  transform: rotateZ(0deg);
+  cursor: pointer;
+}
+.gui-select__caret.is-reverse {
+  transform: rotateZ(180deg);
+}
+
+.gui-select__clear {
+  cursor: pointer;
+}
+.gui-select__clear:hover {
+  color: var(--gui-select-close-hover-color);
+}
+
+.gui-select__selection {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 6px;
+}
+.gui-select__selection.is-near {
+  margin-left: -8px;
+}
+
+.gui-select__selection .gui-tag {
+  cursor: pointer;
+  border-color: transparent;
+}
+.gui-select__selection .gui-tag.gui-tag--plain {
+  border-color: var(--gui-tag-border-color);
+}
+.gui-select__selection .gui-tag .gui-tag__content {
+  min-width: 0;
+}
+
+.gui-select__selected-item {
+  display: flex;
+  flex-wrap: wrap;
+  user-select: none;
+}
+
+.gui-select__tags-text {
+  display: block;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gui-select__placeholder {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--gui-input-text-color, var(--gui-text-color-regular));
+}
+.gui-select__placeholder.is-transparent {
+  user-select: none;
+  color: var(--gui-text-color-placeholder);
+}
+
+.gui-select__popper.gui-popper {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-border-color-light);
+  box-shadow: var(--gui-box-shadow-light);
+}
+.gui-select__popper.gui-popper .gui-popper__arrow::before {
+  border: 1px solid var(--gui-border-color-light);
+}
+.gui-select__popper.gui-popper[data-popper-placement^=top] .gui-popper__arrow::before {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.gui-select__popper.gui-popper[data-popper-placement^=bottom] .gui-popper__arrow::before {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+.gui-select__popper.gui-popper[data-popper-placement^=left] .gui-popper__arrow::before {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+.gui-select__popper.gui-popper[data-popper-placement^=right] .gui-popper__arrow::before {
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+
+.gui-select__input-wrapper {
+  flex: 1;
+}
+.gui-select__input-wrapper.is-hidden {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.gui-select__input {
+  border: none;
+  outline: none;
+  padding: 0;
+  color: var(--gui-select-multiple-input-color);
+  font-size: inherit;
+  font-family: inherit;
+  appearance: none;
+  height: 24px;
+  width: 100%;
+  background-color: transparent;
+}
+.gui-select__input.is-disabled {
+  cursor: not-allowed;
+}
+
+.gui-select__input-calculator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 100%;
+  visibility: hidden;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.gui-select--large .gui-select__wrapper {
+  gap: 6px;
+  padding: 8px 16px;
+  min-height: 40px;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.gui-select--large .gui-select__selection {
+  gap: 6px;
+}
+.gui-select--large .gui-select__selection.is-near {
+  margin-left: -8px;
+}
+
+.gui-select--large .gui-select__prefix {
+  gap: 6px;
+}
+
+.gui-select--large .gui-select__suffix {
+  gap: 6px;
+}
+
+.gui-select--large .gui-select__input {
+  height: 24px;
+}
+
+.gui-select--small .gui-select__wrapper {
+  gap: 4px;
+  padding: 2px 8px;
+  min-height: 24px;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+.gui-select--small .gui-select__selection {
+  gap: 4px;
+}
+.gui-select--small .gui-select__selection.is-near {
+  margin-left: -6px;
+}
+
+.gui-select--small .gui-select__prefix {
+  gap: 4px;
+}
+
+.gui-select--small .gui-select__suffix {
+  gap: 4px;
+}
+
+.gui-select--small .gui-select__input {
+  height: 20px;
+}
+
+.gui-scrollbar {
+  --gui-scrollbar-opacity: 0.3;
+  --gui-scrollbar-bg-color: var(--gui-text-color-secondary);
+  --gui-scrollbar-hover-opacity: 0.5;
+  --gui-scrollbar-hover-bg-color: var(--gui-text-color-secondary);
+}
+
+.gui-scrollbar {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+.gui-scrollbar__wrap {
+  overflow: auto;
+  height: 100%;
+}
+.gui-scrollbar__wrap--hidden-default {
+  scrollbar-width: none;
+}
+.gui-scrollbar__wrap--hidden-default::-webkit-scrollbar {
+  display: none;
+}
+
+.gui-scrollbar__thumb {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: var(--gui-scrollbar-bg-color, var(--gui-text-color-secondary));
+  transition: var(--gui-transition-duration) background-color;
+  opacity: var(--gui-scrollbar-opacity, 0.3);
+}
+.gui-scrollbar__thumb:hover {
+  background-color: var(--gui-scrollbar-hover-bg-color, var(--gui-text-color-secondary));
+  opacity: var(--gui-scrollbar-hover-opacity, 0.5);
+}
+
+.gui-scrollbar__bar {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  z-index: 1;
+  border-radius: 4px;
+}
+.gui-scrollbar__bar.is-vertical {
+  width: 6px;
+  top: 2px;
+}
+.gui-scrollbar__bar.is-vertical > div {
+  width: 100%;
+}
+
+.gui-scrollbar__bar.is-horizontal {
+  height: 6px;
+  left: 2px;
+}
+.gui-scrollbar__bar.is-horizontal > div {
+  height: 100%;
+}
+
+.gui-scrollbar-fade-enter-active {
+  transition: opacity 340ms ease-out;
+}
+.gui-scrollbar-fade-leave-active {
+  transition: opacity 120ms ease-out;
+}
+.gui-scrollbar-fade-enter-from, .gui-scrollbar-fade-leave-active {
+  opacity: 0;
+}
+
+.gui-vl__wrapper {
+  position: relative;
+}
+.gui-vl__wrapper:hover .gui-virtual-scrollbar {
+  opacity: 1;
+}
+.gui-vl__wrapper.always-on .gui-virtual-scrollbar {
+  opacity: 1;
+}
+
+.gui-vl__window {
+  scrollbar-width: none;
+}
+.gui-vl__window::-webkit-scrollbar {
+  display: none;
+}
+
+.gui-virtual-scrollbar {
+  opacity: 0;
+  transition: opacity 340ms ease-out;
+}
+.gui-virtual-scrollbar.always-on {
+  opacity: 1;
+}
+
+.gui-vg__wrapper {
+  position: relative;
+}
+
+.gui-tooltip-v2__content {
+  --gui-tooltip-v2-padding: 5px 10px;
+  --gui-tooltip-v2-border-radius: 4px;
+  --gui-tooltip-v2-border-color: var(--gui-border-color);
+  border-radius: var(--gui-tooltip-v2-border-radius);
+  color: var(--gui-color-black);
+  background-color: var(--gui-color-white);
+  padding: var(--gui-tooltip-v2-padding);
+  border: 1px solid var(--gui-border-color);
+}
+.gui-tooltip-v2__arrow {
+  position: absolute;
+  color: var(--gui-color-white);
+  width: var(--gui-tooltip-v2-arrow-width);
+  height: var(--gui-tooltip-v2-arrow-height);
+  pointer-events: none;
+  left: var(--gui-tooltip-v2-arrow-x);
+  top: var(--gui-tooltip-v2-arrow-y);
+}
+.gui-tooltip-v2__arrow::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__arrow::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: var(--gui-tooltip-v2-arrow-border-width) solid transparent;
+  position: absolute;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow {
+  bottom: 0;
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::before {
+  border-top-color: var(--gui-color-white);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=top] .gui-tooltip-v2__arrow::after {
+  border-top-color: var(--gui-border-color);
+  border-top-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-bottom: 0;
+  top: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow {
+  top: 0;
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::before {
+  border-bottom-color: var(--gui-color-white);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=bottom] .gui-tooltip-v2__arrow::after {
+  border-bottom-color: var(--gui-border-color);
+  border-bottom-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-top: 0;
+  bottom: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow {
+  right: 0;
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::before {
+  border-left-color: var(--gui-color-white);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=left] .gui-tooltip-v2__arrow::after {
+  border-left-color: var(--gui-border-color);
+  border-left-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-right: 0;
+  left: 100%;
+  z-index: -1;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow {
+  left: 0;
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::before {
+  border-right-color: var(--gui-color-white);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: calc(100% - 1px);
+}
+.gui-tooltip-v2__content[data-side^=right] .gui-tooltip-v2__arrow::after {
+  border-right-color: var(--gui-border-color);
+  border-right-width: var(--gui-tooltip-v2-arrow-border-width);
+  border-left: 0;
+  right: 100%;
+  z-index: -1;
+}
+
+.gui-tooltip-v2__content.is-dark {
+  --gui-tooltip-v2-border-color: transparent;
+  background-color: var(--gui-color-black);
+  color: var(--gui-color-white);
+  border-color: transparent;
+}
+.gui-tooltip-v2__content.is-dark .gui-tooltip-v2__arrow {
+  background-color: var(--gui-color-black);
+  border-color: transparent;
+}
+
+.gui-popper {
+  --gui-popper-border-radius: var(--gui-popover-border-radius, 4px);
+}
+
+.gui-popper {
+  position: absolute;
+  border-radius: var(--gui-popper-border-radius);
+  padding: 5px 11px;
+  z-index: 2000;
+  font-size: 12px;
+  line-height: 20px;
+  min-width: 10px;
+  overflow-wrap: break-word;
+  visibility: visible;
+}
+.gui-popper.is-dark {
+  color: var(--gui-bg-color);
+  background: var(--gui-text-color-primary);
+  border: 1px solid var(--gui-text-color-primary);
+}
+.gui-popper.is-dark > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-text-color-primary);
+  background: var(--gui-text-color-primary);
+  right: 0;
+}
+
+.gui-popper.is-light {
+  background: var(--gui-bg-color-overlay);
+  border: 1px solid var(--gui-border-color-light);
+}
+.gui-popper.is-light > .gui-popper__arrow::before {
+  border: 1px solid var(--gui-border-color-light);
+  background: var(--gui-bg-color-overlay);
+  right: 0;
+}
+
+.gui-popper.is-pure {
+  padding: 0;
+}
+
+.gui-popper__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+}
+.gui-popper__arrow::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+  content: " ";
+  transform: rotate(45deg);
+  background: var(--gui-text-color-primary);
+  box-sizing: border-box;
+}
+
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow {
+  bottom: -5px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-bottom-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow {
+  top: -5px;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-top-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow {
+  right: -5px;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-top-right-radius: 2px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow {
+  left: -5px;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-bottom-left-radius: 2px;
+}
+.gui-popper[data-popper-placement^=top] > .gui-popper__arrow::before {
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=bottom] > .gui-popper__arrow::before {
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=left] > .gui-popper__arrow::before {
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+.gui-popper[data-popper-placement^=right] > .gui-popper__arrow::before {
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+}
+
+.selectContainer {
+  @apply flex flex-col gap-xxs;
+}
+
+.gui-select__wrapper {
+  @apply h-fit py-sm px-xs rounded-md gap-xs border-disabled-bd border relative shadow-none;
+}
+.gui-select__label {
+  @apply absolute text-terciary-txt text-4 transition-all duration-200 ease-in font-medium;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gui-select__input {
+  @apply text-secondary-txt text-4 font-medium caret-everBlue-500;
+}
+
+.gui-select__wrapper.is-hovering:not(.is-focused) {
+  @apply shadow-none;
+}
+
+.gui-select__wrapper.is-complete {
+  @apply border-secondary-bd;
+}
+
+.gui-select__wrapper.is-focused {
+  @apply shadow-none border-everBlue-500;
+}
+.gui-select__wrapper.is-focused .gui-select__label {
+  @apply text-everBlue-500 !important;
+}
+
+.gui-select__wrapper.is-focused .gui-select__label {
+  @apply text-2 font-medium text-secondary-txt;
+  background: linear-gradient(180deg, transparent 40%, white 0);
+  top: 0;
+  transform: translateY(-50%);
+  padding: 0 2px;
+  left: 5px;
+}
+
+.gui-select__wrapper.is-focused .gui-select__selected-item.is-transparent {
+  @apply opacity-100;
+}
+
+.gui-select__wrapper.is-complete .gui-select__label {
+  @apply text-2 font-medium text-secondary-txt;
+  background: linear-gradient(180deg, transparent 40%, white 0);
+  top: 0;
+  transform: translateY(-50%);
+  padding: 0 2px;
+  left: 5px;
+}
+
+.gui-select__wrapper.is-complete .gui-select__selected-item.is-transparent {
+  @apply opacity-100;
+}
+
+.gui-select__wrapper.is-disabled {
+  @apply shadow-none cursor-not-allowed bg-primary-def-disabled border-grey-400;
+}
+.gui-select__wrapper.is-disabled:hover {
+  @apply shadow-none;
+}
+.gui-select__wrapper.is-disabled .gui-select__label {
+  @apply text-disabled-txt;
+  background: linear-gradient(180deg, transparent 40%, #eff0f2 0);
+}
+
+.gui-select__wrapper.is-disabled .gui-select__inner {
+  @apply text-disabled-txt;
+}
+
+.gui-select__wrapper.is-disabled .gui-select__selected-item {
+  @apply text-disabled-txt;
+}
+
+.gui-select.is-error .gui-select__label {
+  @apply text-error-txt !important;
+}
+
+.gui-select.is-error .gui-select__wrapper {
+  @apply border-error-bd;
+}
+
+.gui-select__selection {
+  @apply static;
+}
+.gui-select__selection.is-near {
+  @apply flex flex-wrap items-center gap-xxs m-0;
+  min-height: 1.5rem;
+}
+
+.gui-select__prefix svg {
+  @apply text-7 text-gray-500 w-5;
+}
+
+.gui-select__suffix svg {
+  @apply text-7 text-gray-500;
+}
+
+.gui-select__help {
+  @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
+  min-height: 18px;
+}
+
+.gui-select__help-text {
+  @apply line-clamp-2;
+}
+
+.gui-select__help-error {
+  @apply text-error-txt;
+}
+
+.gui-select__selected-item {
+  @apply text-4 text-primary-txt font-medium transition-all duration-200 ease-in w-auto flex-shrink-0;
+}
+.gui-select__selected-item.is-transparent {
+  @apply text-terciary-txt text-4 font-medium opacity-0;
+}
+
+.gui-select__input-wrapper {
+  @apply w-9/12;
+}
+
+.gui-select__placeholder {
+  @apply w-9/12;
+}
+
+.gui-select__tags-text {
+  @apply inline-block max-w-full truncate align-middle;
+}
+
+.gui-select__popper--is-light {
+  @apply bg-white !important;
+}
+
+.gui-popper.gui-select__popper.is-light.is-light {
+  @apply bg-white !important;
+}
+.gui-popper.gui-select__popper.is-light.is-light .gui-popper__arrow {
+  @apply shadow-none !important;
+}
+.gui-popper.gui-select__popper.is-light.is-light .gui-popper__arrow::before {
+  @apply bg-white !important;
+}
+
+.gui-popper__arrow {
+  @apply shadow-none !important;
+}
+.gui-popper__arrow::before {
+  @apply bg-white !important;
+}
+
+.gui-select__input-wrapper:not(.withIcon) {
+  @apply relative right-[7px] left-0;
+}
+.gui-select__input-wrapper:not(.withIcon).is-withIcon {
+  @apply right-0;
+}
+
+.gui-select-dropdown {
+  @apply my-xs;
+}
+.gui-select-dropdown__item {
+  @apply flex items-start justify-between gap-xs transition-all duration-200 px-2 ease-in !important;
+  min-height: unset !important;
+  line-height: normal !important;
+  height: unset !important;
+}
+.gui-select-dropdown__item--inner {
+  @apply flex items-center justify-between gap-xs w-full min-w-0 px-sm py-md;
+}
+.gui-select-dropdown__item--inner:hover {
+  @apply bg-everBlue-50 bg-opacity-60;
+}
+.gui-select-dropdown__item--inner:active {
+  @apply bg-everBlue-50;
+}
+
+.gui-select-dropdown__item--content {
+  @apply flex items-start justify-start flex-col flex-1 min-w-0;
+}
+
+.gui-select-dropdown__item--icon {
+  @apply text-7 text-secondary-txt mr-md shrink-0;
+}
+
+.gui-select-dropdown__item--check {
+  @apply text-everBlue-500 shrink-0;
+}
+
+.gui-select-dropdown__item--title {
+  @apply text-4 text-secondary-txt font-medium w-full whitespace-normal break-words;
+}
+
+.gui-select-dropdown__item--description {
+  @apply text-2 text-terciary-txt font-medium text-wrap;
+}
+
+.gui-select-dropdown__item.is-hovering {
+  @apply bg-transparent;
+}
+
+.gui-select-dropdown__item.is-selected {
+  @apply bg-transparent;
+}
+.gui-select-dropdown__item.is-selected::after {
+  display: none;
+}
+.gui-select-dropdown__item.is-selected .gui-select-dropdown__item--inner {
+  @apply bg-everBlue-50;
+}
+
+.gui-select-dropdown__item:active {
+  @apply bg-transparent;
+}
+.gui-select-dropdown__item.is-disabled {
+  @apply cursor-not-allowed;
+}
+.gui-select-dropdown__item.is-disabled:hover {
+  @apply bg-transparent;
+}
+.gui-select-dropdown__item.is-disabled--icon, .gui-select-dropdown__item.is-disabled--title, .gui-select-dropdown__item.is-disabled--description {
+  @apply text-grey-300;
+}
+
+.gui-select-group__title {
+  @apply text-2 text-ellipsis text-terciary-txt font-medium cursor-default pointer-events-none pb-xs pt-sm flex items-center px-xs first:pb-2 first:pt-2;
+  line-height: 1.25rem;
+  min-height: unset;
+}
+.gui-select-group__title ~ .gui-select-group__title {
+  position: relative;
+}
+.gui-select-group__title ~ .gui-select-group__title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 0.5rem);
+  height: 1px;
+  background: #eff0f2;
+  z-index: 1;
+}
+
+.gui-select-group__loading svg {
+  @apply text-7 text-gray-500;
+}
+
+.gui-select-group__empty {
+  @apply flex items-center justify-center flex-col py-md px-sm gap-xxs;
+}
+.gui-select-group__empty--title {
+  @apply text-4 text-secondary-txt font-semibold;
+}
+
+.gui-select-group__empty--description {
+  @apply text-3 text-terciary-txt font-medium text-pretty;
+}
+
+.gui-select-group__list.is-scrollbar-always-on {
+  overflow-y: scroll;
+}
+.gui-select-group__list.is-scrollbar-always-on::-webkit-scrollbar {
+  width: 6px;
+}
+.gui-select-group__list.is-scrollbar-always-on::-webkit-scrollbar-thumb {
+  @apply bg-grey-300 rounded-full;
+}

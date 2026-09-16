@@ -1,10 +1,6 @@
 <template>
   <div
-    :class="[
-      ns.b(),
-      ns.is('disabled', isDisabled),
-      ns.is('error', hasError),
-    ]"
+    :class="[ns.b(), ns.is('disabled', isDisabled), ns.is('error', hasError)]"
   >
     <label :for="inputId" :class="ns.e('label')">{{ label }}</label>
 
@@ -18,24 +14,37 @@
             ns.is('empty', isEmptyValue && numberValue === null),
             ns.is('big', isBig),
             ns.is('error', hasError),
-            ns.is('disabled', isDisabled),
+            ns.is('disabled', isDisabled || disableInput),
           ]"
           type="text"
           inputmode="decimal"
           :placeholder="placeholder"
-          :disabled="isDisabled"
+          :disabled="isDisabled || disableInput"
           :aria-invalid="hasError"
           autocomplete="off"
           @blur="handleBlur"
           @focus="handleFocus"
         />
       </div>
+      <quote-account-select
+        v-if="accounts.length"
+        :accounts="accounts"
+        :account-id="accountId"
+        :currency-code="currencyCode"
+        :flag-code="flagCode"
+        :is-disabled="isDisabled || disableSelect"
+        :search-placeholder="searchPlaceholder"
+        :primary-account-label="primaryAccountLabel"
+        :empty-results-text="emptyResultsText"
+        @account-change="emit('account-change', $event)"
+      />
       <g-dropdown
+        v-else
         ref="dropdownRef"
         trigger="click"
         placement="bottom-end"
         :popper-class="`${ns.e('dropdown-popper')} ${dropdownPopperId}`"
-        :disabled="isDisabled || !hasCurrencyOptions"
+        :disabled="isDisabled || disableSelect || !hasCurrencyOptions"
         @command="handleCurrencySelect"
         @visible-change="onDropdownVisibleChange"
       >
@@ -43,7 +52,7 @@
           :class="[
             ns.e('currency'),
             ns.is('open', isDropdownOpen),
-            ns.is('disabled', isDisabled),
+            ns.is('disabled', isDisabled || disableSelect),
           ]"
           :aria-label="`Seleccionar moneda ${currencyCode}`"
         >
@@ -62,14 +71,11 @@
             <input
               ref="searchInputRef"
               v-model="searchQuery"
-              :class="[
-                ns.e('currency-code'),
-                ns.is('disabled', isDisabled),
-              ]"
+              :class="[ns.e('currency-code'), ns.is('disabled', isDisabled)]"
               :aria-label="`Buscar moneda, seleccionada: ${currencyCode}`"
               :placeholder="currencyCode"
               :size="((searchQuery || currencyCode).length || 3) + 1"
-              :disabled="isDisabled || !hasCurrencyOptions"
+              :disabled="isDisabled || disableSelect || !hasCurrencyOptions"
               autocomplete="off"
               @click="handleInputClick"
               @input="handleSearchInput"
@@ -80,7 +86,7 @@
             v-if="showArrow && hasCurrencyOptions"
             :class="[
               ns.e('arrow'),
-              ns.is('disabled', isDisabled),
+              ns.is('disabled', isDisabled || disableSelect),
               ns.is('open', isDropdownOpen),
             ]"
             aria-hidden="true"
@@ -106,12 +112,17 @@
                   aria-hidden="true"
                 />
                 <span :class="ns.e('dropdown-label')">
-                  <span :class="ns.e('dropdown-code')">({{ currency.code }})</span>
+                  <span :class="ns.e('dropdown-code')"
+                    >({{ currency.code }})</span
+                  >
                   {{ currency.name }}
                 </span>
               </span>
             </g-dropdown-item>
-            <div v-if="filteredCurrencies.length === 0" :class="ns.e('dropdown-empty')">
+            <div
+              v-if="filteredCurrencies.length === 0"
+              :class="ns.e('dropdown-empty')"
+            >
               {{ emptyResultsText }}
             </div>
           </g-dropdown-menu>
@@ -122,18 +133,23 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from 'element-plus'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { GDropdown, GDropdownMenu, GDropdownItem } from '@flash-global66/g-dropdown'
-import { GCountryFlag } from '@flash-global66/g-country-flag'
-import { quoteInputProps, quoteInputEmits } from './quote-input'
-import { useQuoteInput } from './use-quote-input'
+import { useNamespace } from '@flash-global66/g-utils';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import {
+  GDropdown,
+  GDropdownMenu,
+  GDropdownItem,
+} from '@flash-global66/g-dropdown';
+import { GCountryFlag } from '@flash-global66/g-country-flag';
+import { quoteInputProps, quoteInputEmits } from './quote-input';
+import { useQuoteInput } from './use-quote-input';
+import QuoteAccountSelect from './quote-account-select.vue';
 
-defineOptions({ name: 'GQuoteInput' })
+defineOptions({ name: 'GQuoteInput' });
 
-const ns = useNamespace('quote-input')
-const props = defineProps(quoteInputProps)
-const emit = defineEmits(quoteInputEmits)
+const ns = useNamespace('quote-input');
+const props = defineProps(quoteInputProps);
+const emit = defineEmits(quoteInputEmits);
 
 const {
   inputRef,
@@ -154,5 +170,5 @@ const {
   onDropdownVisibleChange,
   handleInputClick,
   handleSearchInput,
-} = useQuoteInput(props, emit)
+} = useQuoteInput(props, emit);
 </script>

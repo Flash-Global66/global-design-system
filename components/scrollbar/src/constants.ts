@@ -1,10 +1,10 @@
-import type { InjectionKey } from "vue";
+import type { InjectionKey } from 'vue';
 
 export interface ScrollbarContext {
   scrollbarElement: HTMLDivElement;
   wrapElement: HTMLDivElement;
 }
 
-export const scrollbarContextKey: InjectionKey<ScrollbarContext> = Symbol(
-  "scrollbarContextKey"
+export const scrollbarContextKey: InjectionKey<ScrollbarContext> = Symbol.for(
+  'scrollbarContextKey',
 );

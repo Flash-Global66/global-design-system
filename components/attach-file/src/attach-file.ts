@@ -1,6 +1,10 @@
-import type { ExtractPropTypes, PropType } from "vue";
-import { buildProps, definePropType } from "element-plus/es/utils/index.mjs";
-import { ATTACH_FILE_MODES, type AttachFileMode, type ValidationError } from "./attach-file.type";
+import type { ExtractPropTypes, PropType } from 'vue';
+import { buildProps, definePropType } from '@flash-global66/g-utils';
+import {
+  ATTACH_FILE_MODES,
+  type AttachFileMode,
+  type ValidationError,
+} from './attach-file.type';
 
 export const attachFileProps = buildProps({
   modelValue: {
@@ -8,9 +12,9 @@ export const attachFileProps = buildProps({
     default: () => [],
   },
   type: {
-    type: String as PropType<"default" | "drag-drop">,
-    values: ["default", "drag-drop"],
-    default: "default",
+    type: String as PropType<'default' | 'drag-drop'>,
+    values: ['default', 'drag-drop'],
+    default: 'default',
   },
   mode: {
     type: String as PropType<AttachFileMode>,
@@ -27,7 +31,7 @@ export const attachFileProps = buildProps({
   },
   maxSize: {
     type: String as PropType<string>,
-    default: "10MB",
+    default: '10MB',
   },
   multiple: {
     type: Boolean as PropType<boolean>,
@@ -47,31 +51,31 @@ export const attachFileProps = buildProps({
   },
   uploadButtonText: {
     type: String as PropType<string>,
-    default: "",
+    default: '',
   },
   title: {
     type: String as PropType<string>,
-    default: "",
+    default: '',
   },
   uploadText: {
     type: String as PropType<string>,
-    default: "",
+    default: '',
   },
   restrictionText: {
     type: String as PropType<string>,
-    default: "",
+    default: '',
   },
   infoText: {
     type: String as PropType<string>,
-    default: "",
+    default: '',
   },
   downloadUrl: {
     type: String as PropType<string>,
-    default: "",
+    default: '',
   },
   downloadLinkText: {
     type: String as PropType<string>,
-    default: "",
+    default: '',
   },
   uploading: {
     type: Boolean as PropType<boolean>,
@@ -108,10 +112,14 @@ export const attachFileProps = buildProps({
 } as const);
 
 export const attachFileEmits = {
-  "update:modelValue": (files: File[]) => true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- param kept for emit payload type inference
+  'update:modelValue': (files: File[]) => true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- param kept for emit payload type inference
   change: (files: File[]) => true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- param kept for emit payload type inference
   error: (errors: string[]) => true,
-  "validation-error": (errors: ValidationError[]) => true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- param kept for emit payload type inference
+  'validation-error': (errors: ValidationError[]) => true,
   onRetry: () => true,
   download: () => true,
   clearProgress: () => true,

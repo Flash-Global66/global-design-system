@@ -1,1 +1,114 @@
-@use "element-plus/theme-chalk/src/form-item.scss" as *;
+@use "sass:map";
+
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+// Ported off element-plus/theme-chalk/src/form-item.scss. Deep selectors that
+// targeted EP's own input-family classes (.el-input__wrapper, etc. — used to
+// force a red box-shadow on nested inputs during validation) were dropped:
+// every already-migrated DS input owns its OWN `is-error` visual state via
+// `useFormItem()` (see components/input/src/input.vue), so form-item no
+// longer needs to reach into descendant markup.
+$form-item-margin-bottom: (
+  'large': 22px,
+  'default': 18px,
+  'small': 18px,
+);
+
+$form-item-line-height: (
+  'large': 40px,
+  'default': 32px,
+  'small': 24px,
+);
+
+@include b("form-item") {
+  display: flex;
+  margin-bottom: map.get($form-item-margin-bottom, "default");
+
+  @each $size in (large, default, small) {
+    @include m($size) {
+      margin-bottom: map.get($form-item-margin-bottom, $size);
+
+      @include e("label") {
+        height: map.get($form-item-line-height, $size);
+        line-height: map.get($form-item-line-height, $size);
+      }
+
+      @include e("content") {
+        line-height: map.get($form-item-line-height, $size);
+      }
+    }
+  }
+
+  @include m("label-left") {
+    @include e("label") {
+      text-align: left;
+      justify-content: flex-start;
+    }
+  }
+
+  @include m("label-right") {
+    @include e("label") {
+      text-align: right;
+      justify-content: flex-end;
+    }
+  }
+
+  @include m("label-top") {
+    display: block;
+
+    @include e("label") {
+      display: block;
+      width: fit-content;
+      height: auto;
+      text-align: left;
+      margin-bottom: 8px;
+      padding-right: 0;
+    }
+  }
+
+  @include e("label") {
+    display: inline-flex;
+    align-items: flex-start;
+    flex: 0 0 auto;
+
+    height: map.get($form-item-line-height, "default");
+    line-height: map.get($form-item-line-height, "default");
+
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+  }
+
+  @include e("content") {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    line-height: map.get($form-item-line-height, "default");
+    position: relative;
+    min-width: 0;
+  }
+
+  @include e("content-error") {
+    min-height: 18px;
+  }
+
+  @include e("error") {
+    @apply flex text-error-txt font-medium text-2 px-xs;
+
+    &--inline {
+      @apply inline-block;
+      margin-left: 10px;
+    }
+  }
+
+  @include when("required") {
+    > .gui-form-item__label:before {
+      content: "*";
+      @apply text-error-txt;
+      margin-right: 4px;
+    }
+  }
+}
