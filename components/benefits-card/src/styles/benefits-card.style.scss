@@ -1,18 +1,14 @@
 @use 'sass:math';
 @use '@flash-global66/g-utils/mixins' as *;
 
-// La tarjeta es un contenedor de consulta y todas las medidas del diseño
-// (469px de ancho) se expresan en `cqw`, así que por debajo de ese ancho todo
-// escala en proporción, como lo hacía el PNG. Cada propiedad se declara dos
-// veces: primero en píxeles, que es lo que queda en navegadores sin container
-// queries, y después en `cqw`. La única excepción es la variable del radio de
-// la píldora: una custom property acepta cualquier valor al parsear, así que
-// su versión en `cqw` va dentro de `@supports (width: 1cqw)`. Los textos
-// llevan un piso de legibilidad.
-$benefits-card-design-width: 469px;
+// Contenedor de consulta: cada medida va en px (navegadores sin container
+// queries) y después en `cqw`, así la tarjeta escala entera con el ancho del
+// padre. 469px no es un ancho objetivo: es el ancho al que se midió el diseño
+// y el denominador de la escala; cambiarlo desfasa todas las medidas de abajo.
+$benefits-card-reference-width: 469px;
 
 @function benefits-card-cq($px) {
-  @return math.div($px, $benefits-card-design-width) * 100cqw;
+  @return math.div($px, $benefits-card-reference-width) * 100cqw;
 }
 
 @mixin benefits-card-scaled($prop, $px, $min: null) {
@@ -25,46 +21,52 @@ $benefits-card-design-width: 469px;
   }
 }
 
-// Medidas del diseño original (469×560). Los colores son literales
-// porque no existen como token: la tarjeta es más oscura que cualquier azul
-// del theme y los contornos van sobre ese fondo, no sobre superficies claras.
-$benefits-card-radius: 11.63px;
+// El fondo no existe como token: es más azul que `inverse-bg` y todos los
+// contornos de abajo se midieron sobre él.
 $benefits-card-color: #05133c;
+$benefits-card-radius: 11.63px;
 $benefits-card-padding-top: 80.5px;
 $benefits-card-padding-bottom: 70.4px;
 $benefits-card-padding-inline: 31.5px;
+
+$benefits-card-title-font-size: 32px;
+$benefits-card-title-font-size-min: 20px;
+$benefits-card-title-line-height: math.div(37.508px, 32px);
 $benefits-card-title-max-width: 380px;
+
+$benefits-card-description-font-size: 16px;
+$benefits-card-description-font-size-min: 12px;
+$benefits-card-description-line-height: math.div(22px, 16px);
 $benefits-card-description-max-width: 361.62px;
 $benefits-card-description-gap: 17.5px;
-$benefits-card-benefits-gap: 37.5px;
 
+$benefits-card-benefits-gap: 37.5px;
 $benefits-card-benefit-gap: 14px;
 $benefits-card-benefit-min-height: 69.03px;
 $benefits-card-benefit-padding-block: 14.95px;
 $benefits-card-benefit-padding-inline: 17px;
 $benefits-card-benefit-radius: 23.419px;
+$benefits-card-pill-radius-var: getCssVarName('benefits-card', 'pill-radius');
+
+$benefits-card-benefit-text-font-size: 14px;
+$benefits-card-benefit-text-font-size-min: 11px;
+$benefits-card-benefit-text-line-height: math.div(18px, 14px);
 $benefits-card-benefit-text-max-width: 336px;
 $benefits-card-benefit-text-color: rgb(255 255 255 / 96%);
-$benefits-card-pill-radius-var: getCssVarName('benefits-card', 'pill-radius');
 
 $benefits-card-icon-size: 39.12px;
 $benefits-card-icon-color: rgb(4 33 106 / 24%);
-// El ícono del diseño es un glifo Font Awesome de 512 unidades escalado a 2/3
-// de su caja de 26.08px: 17.39px es la altura del glifo, que es lo que
-// `svg-inline--fa` toma como 1em.
+// Glifo Font Awesome a 2/3 de su caja de 26.08px; `svg-inline--fa` toma la
+// altura del glifo como 1em.
 $benefits-card-icon-font-size: 17.39px;
 
-// Contorno de 1px medido en el diseño de referencia. La luz sigue el mismo patrón
-// que el anillo del ícono: encendido arriba a la izquierda y abajo a la
-// derecha, apagado en las otras dos esquinas. Cada esquina lleva un degradado
-// cónico centrado en su propio centro de curvatura que pinta solo su arco; los
-// cuatro tramos rectos van en capas lineales propias, colocadas entre los
-// centros de las esquinas, así el contorno no depende de la altura de la
-// píldora (crece con el texto) ni de su ancho. Los ángulos van en sentido
-// horario desde arriba y los valores salen de la referencia. El anillo suave
-// de 2px reutiliza las mismas capas con `opacity`, que para un degradado de un
-// solo color equivale a escalar cada parada.
+// Contorno de 1px del diseño: luz arriba a la izquierda y abajo a la derecha,
+// como en el anillo del ícono. Cada esquina es un degradado cónico y cada
+// tramo recto una capa lineal, así no depende del alto ni del ancho.
 $benefits-card-rim-color: #baccfa;
+$benefits-card-ring-width: 1px;
+$benefits-card-soft-ring-width: 2px;
+$benefits-card-rim-soft-opacity: 0.22;
 
 @function benefits-card-rim-stop($alpha) {
   @return rgba($benefits-card-rim-color, $alpha);
@@ -133,16 +135,17 @@ $benefits-card-rim-color: #baccfa;
   );
 }
 
-// Tamaño y posición de cada capa: cuatro esquinas a lienzo completo, la banda
-// central para los tramos horizontales y una franja de ancho `radio` a cada
-// lado, entre los centros de las esquinas, para los tramos verticales. Las
-// capas rectas se pasan 1px por cada extremo: el navegador redondea el
-// rectángulo de cada capa al píxel y, sin ese margen, la última media columna o
-// fila del contorno queda sin pintar en los empalmes con las esquinas.
+// Las capas rectas se pasan 1px por cada extremo: el navegador redondea el
+// rectángulo de cada capa al píxel y sin ese margen queda una columna o fila
+// sin pintar en los empalmes con las esquinas.
+$benefits-card-rim-run-overshoot: 1px;
 $benefits-card-rim-run-length: calc(
-  100% - 2 * var(#{$benefits-card-pill-radius-var}) + 2px
+  100% - 2 * var(#{$benefits-card-pill-radius-var}) +
+    #{2 * $benefits-card-rim-run-overshoot}
 );
-$benefits-card-rim-run-width: calc(var(#{$benefits-card-pill-radius-var}) + 1px);
+$benefits-card-rim-run-width: calc(
+  var(#{$benefits-card-pill-radius-var}) + #{$benefits-card-rim-run-overshoot}
+);
 $benefits-card-rim-layer-sizes:
   100% 100%,
   100% 100%,
@@ -157,20 +160,20 @@ $benefits-card-rim-layer-positions:
   0 0,
   0 0,
   center,
-  left -1px center,
-  right -1px center;
-$benefits-card-rim-soft-opacity: 0.22;
+  left (-$benefits-card-rim-run-overshoot) center,
+  right (-$benefits-card-rim-run-overshoot) center;
 
-// En pantallas retina la imagen de referencia (un ráster de 1x) se escala al doble y su trazo
-// pasa a ser un degradado de ~4px de pantalla. Un anillo de 1px nítido se lee
-// como un hilo al lado; en esas pantallas el anillo se monta medio píxel sobre
-// el borde y el anillo suave sube de intensidad para dar el mismo hombro.
+// En retina la referencia (un ráster de 1x) se ve al doble y su trazo pasa a
+// ser un degradado de ~4px; un anillo nítido de 1px se lee como un hilo al
+// lado. Se monta medio píxel afuera y el anillo suave sube de intensidad.
 $benefits-card-retina: '(min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5)';
-$benefits-card-rim-soft-opacity-retina: 0.45;
+$benefits-card-retina-ring-outset: 0.5px;
+$benefits-card-retina-ring-opacity: 0.75;
+$benefits-card-retina-soft-ring-width: 1.5px;
+$benefits-card-retina-soft-ring-opacity: 0.45;
 
-// El círculo del ícono no lleva un anillo uniforme: en la referencia el trazo está
-// centrado en el borde y solo se ve arriba a la izquierda, y por dentro, abajo a
-// la derecha, hay un arco de luz de casi 2px. Dos anillos con degradado cónico.
+// En la referencia el trazo del círculo solo se ve arriba a la izquierda y,
+// por dentro, abajo a la derecha hay un arco de luz de casi 2px.
 $benefits-card-icon-rim-outer: conic-gradient(
   from 0deg,
   rgba($benefits-card-rim-color, 0.15) 0deg,
@@ -187,14 +190,14 @@ $benefits-card-icon-rim-inner: conic-gradient(
   rgba($benefits-card-rim-color, 0.4) 165deg,
   rgba($benefits-card-rim-color, 0) 195deg
 );
-// Halo exterior del círculo, desplazado hacia abajo: medido de la referencia.
+$benefits-card-icon-rim-inner-width: 1.75px;
+$benefits-card-icon-rim-inner-outset: 0.5px;
+$benefits-card-icon-retina-ring-width: 2px;
+$benefits-card-icon-retina-ring-opacity: 0.6;
 $benefits-card-icon-glow-shadow: 0 3px 12px rgba($benefits-card-rim-color, 0.22);
 
-// Relleno de la píldora, medido de la referencia (no aparece en el código que
-// exporta la herramienta de diseño): una sombra desde la esquina superior
-// izquierda que se apaga hacia la
-// derecha, una banda oscura pegada al borde izquierdo en la mitad superior y
-// una luz suave en el borde inferior.
+// Relleno de la píldora medido de la referencia; el código que exporta la
+// herramienta de diseño no lo incluye.
 $benefits-card-benefit-fill-corner: radial-gradient(
   60px 30px at 0 25%,
   rgb(2 8 30 / 30%),
@@ -214,31 +217,32 @@ $benefits-card-benefit-inner-shadow:
   inset 3px 1px 8px rgb(5 19 60 / 35%),
   inset 0 -3px 8px rgb(255 255 255 / 4%);
 
-// Destello del diseño original. En el diseño queda pasado el borde derecho de la
-// píldora y solo se ve la cola de su desenfoque, así que el lienzo del SVG se
-// extiende 60px a la izquierda del vector original (viewBox -60) para que esa
-// cola no quede recortada. El desenfoque del diseño (radio 18.32) cae como una
-// gaussiana de sigma 13, no 9.16 como lo exporta la herramienta, y con eso la
-// cola coincide con la referencia. El offset va desde el borde derecho para que el destello sea
-// igual con cualquier ancho de texto.
+// Destello del diseño. Queda pasado el borde derecho y solo se ve la cola de
+// su desenfoque: el lienzo se extiende 60px a la izquierda (viewBox -60) para
+// no recortarla y el desenfoque va con sigma 13, que es lo que coincide con la
+// referencia, no el 9.16 del export. El offset se mide desde el borde derecho.
 $benefits-card-glow-width: 263.648px;
 $benefits-card-glow-height: 107.406px;
 $benefits-card-glow-offset-right: -192.5px;
 $benefits-card-glow-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='263.648' height='107.406' viewBox='-60 0 263.648 107.406'%3E%3Cdefs%3E%3Cfilter id='b' x='-60' y='0' width='263.648' height='107.406' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='13'/%3E%3C/filter%3E%3CradialGradient id='g' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(101.824 53.703) rotate(90) scale(35.3791 83.5)'%3E%3Cstop stop-color='%23041936'/%3E%3Cstop offset='0.711538' stop-color='%23205EDB'/%3E%3Cstop offset='1' stop-color='%2365AAFF'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg opacity='0.4' filter='url(%23b)'%3E%3Cpath d='M104.558 59.3598C51.9426 59.3598 22.3336 32.0026 18.3239 18.3239V89.0821H185.324V18.3239C177.513 32.0026 157.173 59.3598 104.558 59.3598Z' fill='url(%23g)'/%3E%3C/g%3E%3C/svg%3E");
 
-// Los anillos existen solo donde el navegador sabe recortar una máscara por
-// exclusión y pintar degradados cónicos; sin eso el pseudoelemento sería un
-// rectángulo de luz encima del contenido, así que se omite entero.
+// Sin máscara por exclusión y degradados cónicos el pseudoelemento sería un
+// rectángulo de luz sobre el contenido, así que se omite entero.
 $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-composite: xor)) and (background-image: conic-gradient(red, blue))';
+
+@mixin benefits-card-ring-outset($outset) {
+  top: -$outset;
+  right: -$outset;
+  bottom: -$outset;
+  left: -$outset;
+}
 
 @mixin benefits-card-ring($width, $outset: 0px) {
   @supports #{$benefits-card-supports-ring} {
+    @include benefits-card-ring-outset($outset);
+
     content: '';
     position: absolute;
-    top: -$outset;
-    right: -$outset;
-    bottom: -$outset;
-    left: -$outset;
     padding: $width;
     border-radius: inherit;
     -webkit-mask:
@@ -262,17 +266,30 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
   background-repeat: no-repeat;
 }
 
-// Un contenedor de consulta no aporta ancho intrínseco, así que dentro de un
-// padre que se ajusta al contenido (un flex item, una celda, un `inline-block`)
-// `width: 100%` daría cero. Por eso la tarjeta declara su ancho de diseño y se
-// achica al del contenedor cuando este es más angosto.
+@mixin benefits-card-benefit-backgrounds($glow-width, $glow-height, $glow-offset) {
+  background-size:
+    $glow-width $glow-height,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  background-position:
+    right $glow-offset center,
+    0 0,
+    0 0,
+    0 0;
+}
+
+// Un contenedor de consulta no aporta ancho intrínseco y en un padre que se
+// ajusta al contenido daría cero; `contain-intrinsic-inline-size` le devuelve
+// el del diseño. Con un padre de ancho definido llena el 100%, como una imagen.
 @include b(benefits-card) {
+  @apply text-inverse-txt;
+
   box-sizing: border-box;
-  width: $benefits-card-design-width;
-  max-width: 100%;
-  color: #fff;
+  width: 100%;
   text-align: center;
   container-type: inline-size;
+  contain-intrinsic-inline-size: $benefits-card-reference-width;
 
   @include e(body) {
     box-sizing: border-box;
@@ -292,24 +309,34 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
   }
 
   @include e(title) {
+    @apply font-semibold;
+
     margin: 0;
-    line-height: math.div(37.508, 32);
-    font-weight: 600;
+    line-height: $benefits-card-title-line-height;
     overflow-wrap: break-word;
 
     @include benefits-card-scaled(max-width, $benefits-card-title-max-width);
-    @include benefits-card-scaled(font-size, 32px, 20px);
+    @include benefits-card-scaled(
+      font-size,
+      $benefits-card-title-font-size,
+      $benefits-card-title-font-size-min
+    );
   }
 
   @include e(description) {
+    @apply font-normal;
+
     margin: 0;
-    line-height: math.div(22, 16);
-    font-weight: 400;
+    line-height: $benefits-card-description-line-height;
     overflow-wrap: break-word;
 
     @include benefits-card-scaled(max-width, $benefits-card-description-max-width);
     @include benefits-card-scaled(margin-top, $benefits-card-description-gap);
-    @include benefits-card-scaled(font-size, 16px, 12px);
+    @include benefits-card-scaled(
+      font-size,
+      $benefits-card-description-font-size,
+      $benefits-card-description-font-size-min
+    );
   }
 
   @include e(benefits) {
@@ -325,6 +352,8 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
   }
 
   @include e(benefit) {
+    // Una custom property no descarta valores al parsear, así que el `cqw` no
+    // puede ir como segunda declaración: necesita el `@supports`.
     #{$benefits-card-pill-radius-var}: $benefits-card-benefit-radius;
 
     @supports (width: 1cqw) {
@@ -343,29 +372,18 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
       $benefits-card-benefit-fill-shade,
       $benefits-card-benefit-fill-light;
     background-repeat: no-repeat;
-    background-size:
-      $benefits-card-glow-width $benefits-card-glow-height,
-      100% 100%,
-      100% 100%,
-      100% 100%;
-    background-size:
-      benefits-card-cq($benefits-card-glow-width)
-        benefits-card-cq($benefits-card-glow-height),
-      100% 100%,
-      100% 100%,
-      100% 100%;
-    background-position:
-      right $benefits-card-glow-offset-right center,
-      0 0,
-      0 0,
-      0 0;
-    background-position:
-      right benefits-card-cq($benefits-card-glow-offset-right) center,
-      0 0,
-      0 0,
-      0 0;
     box-shadow: $benefits-card-benefit-inner-shadow;
 
+    @include benefits-card-benefit-backgrounds(
+      $benefits-card-glow-width,
+      $benefits-card-glow-height,
+      $benefits-card-glow-offset-right
+    );
+    @include benefits-card-benefit-backgrounds(
+      benefits-card-cq($benefits-card-glow-width),
+      benefits-card-cq($benefits-card-glow-height),
+      benefits-card-cq($benefits-card-glow-offset-right)
+    );
     @include benefits-card-scaled(gap, $benefits-card-benefit-gap);
     @include benefits-card-scaled(min-height, $benefits-card-benefit-min-height);
     @include benefits-card-scaled(padding-top, $benefits-card-benefit-padding-block);
@@ -374,13 +392,13 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
     @include benefits-card-scaled(padding-left, $benefits-card-benefit-padding-inline);
 
     &::before {
-      @include benefits-card-ring(1px) {
+      @include benefits-card-ring($benefits-card-ring-width) {
         @include benefits-card-pill-ring-layers;
       }
     }
 
     &::after {
-      @include benefits-card-ring(2px) {
+      @include benefits-card-ring($benefits-card-soft-ring-width) {
         @include benefits-card-pill-ring-layers;
 
         opacity: $benefits-card-rim-soft-opacity;
@@ -389,21 +407,21 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
 
     @media #{$benefits-card-retina} {
       &::before {
-        top: -0.5px;
-        right: -0.5px;
-        bottom: -0.5px;
-        left: -0.5px;
-        opacity: 0.75;
+        @include benefits-card-ring-outset($benefits-card-retina-ring-outset);
+
+        opacity: $benefits-card-retina-ring-opacity;
       }
 
       &::after {
-        padding: 1.5px;
-        opacity: $benefits-card-rim-soft-opacity-retina;
+        padding: $benefits-card-retina-soft-ring-width;
+        opacity: $benefits-card-retina-soft-ring-opacity;
       }
     }
   }
 
   @include e(benefit-icon) {
+    @apply text-inverse-txt;
+
     position: relative;
     flex: none;
     display: flex;
@@ -411,7 +429,6 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
     justify-content: center;
     border-radius: 50%;
     line-height: 1;
-    color: #fff;
     background-color: $benefits-card-icon-color;
     box-shadow: $benefits-card-icon-glow-shadow;
 
@@ -420,36 +437,42 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
     @include benefits-card-scaled(font-size, $benefits-card-icon-font-size);
 
     &::before {
-      @include benefits-card-ring(1px) {
+      @include benefits-card-ring($benefits-card-ring-width) {
         background: $benefits-card-icon-rim-outer;
       }
     }
 
     &::after {
-      @include benefits-card-ring(1.75px, 0.5px) {
+      @include benefits-card-ring(
+        $benefits-card-icon-rim-inner-width,
+        $benefits-card-icon-rim-inner-outset
+      ) {
         background: $benefits-card-icon-rim-inner;
       }
     }
 
     @media #{$benefits-card-retina} {
       &::before {
-        top: -0.5px;
-        right: -0.5px;
-        bottom: -0.5px;
-        left: -0.5px;
-        padding: 2px;
-        opacity: 0.6;
+        @include benefits-card-ring-outset($benefits-card-retina-ring-outset);
+
+        padding: $benefits-card-icon-retina-ring-width;
+        opacity: $benefits-card-icon-retina-ring-opacity;
       }
     }
   }
 
   @include e(benefit-text) {
-    line-height: math.div(18, 14);
-    font-weight: 500;
+    @apply font-medium;
+
+    line-height: $benefits-card-benefit-text-line-height;
     color: $benefits-card-benefit-text-color;
     overflow-wrap: break-word;
 
     @include benefits-card-scaled(max-width, $benefits-card-benefit-text-max-width);
-    @include benefits-card-scaled(font-size, 14px, 11px);
+    @include benefits-card-scaled(
+      font-size,
+      $benefits-card-benefit-text-font-size,
+      $benefits-card-benefit-text-font-size-min
+    );
   }
 }

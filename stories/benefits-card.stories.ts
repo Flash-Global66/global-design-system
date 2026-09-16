@@ -116,14 +116,15 @@ reemplaza al prop:
 
 ## Tamaño y responsive
 
-La tarjeta mide 469px (el ancho del diseño) y se achica al ancho del contenedor
-cuando este es más angosto. Por debajo de 469px escala en proporción, como lo
-hacía la imagen: es un contenedor de consulta (\`container-type: inline-size\`)
-y todas las medidas del diseño están en \`cqw\`, con un piso de legibilidad para
-los textos (título 20px, bajada 12px, beneficios 11px). En navegadores sin
-container queries quedan los tamaños fijos del diseño y la tarjeta crece en
-alto. Para otro ancho, envolverla en un contenedor con el ancho deseado o
-sobreescribir \`width\`. Ver la story "Responsive".
+La tarjeta ocupa el ancho de su contenedor, como una imagen con \`width: 100%\`,
+y escala en proporción: es un contenedor de consulta (\`container-type:
+inline-size\`) y todas las medidas del diseño están en \`cqw\`. El diseño está
+medido a 469px; a otro ancho todo crece o se achica en la misma proporción, con
+un piso de legibilidad para los textos (título 20px, bajada 12px, beneficios
+11px). Para acotarla, darle \`max-width\` al componente o ancho al contenedor.
+En un padre que se ajusta al contenido (un flex sin ancho, un \`inline-block\`)
+mide 469px. En navegadores sin container queries quedan los tamaños fijos del
+diseño y la tarjeta crece en alto. Ver la story "Responsive".
 
 ## Accesibilidad
 - El título es un encabezado real (\`h2\` por defecto, configurable con \`headingLevel\`)
@@ -186,7 +187,7 @@ const render: Story['render'] = args => ({
   },
   template: `
     <g-config-provider>
-      <g-benefits-card v-bind="args" />
+      <g-benefits-card v-bind="args" style="max-width: 469px" />
     </g-config-provider>
   `,
 });
@@ -258,7 +259,7 @@ export const Responsive: Story = {
   render: args => ({
     components: { GBenefitsCard, GConfigProvider },
     setup() {
-      const widths = [469, 360, 300];
+      const widths = [560, 469, 360, 300];
       return { args, widths };
     },
     template: `
@@ -280,7 +281,7 @@ export const Responsive: Story = {
     docs: {
       description: {
         story:
-          'La tarjeta escala en proporción al ancho de su contenedor gracias a container queries, con un piso de legibilidad en los textos. El último ejemplo se puede redimensionar arrastrando la esquina.',
+          'La tarjeta ocupa el ancho de su contenedor y escala en proporción, hacia arriba y hacia abajo, gracias a container queries; los textos tienen un piso de legibilidad. El último ejemplo se puede redimensionar arrastrando la esquina.',
       },
     },
   },
