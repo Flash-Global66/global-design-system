@@ -1,0 +1,46 @@
+{
+  "name": "@flash-global66/g-benefits-card",
+  "version": "0.0.1",
+  "description": "Tarjeta oscura de beneficios: título, bajada y lista de beneficios con ícono",
+  "author": "Global66",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "buildable": true,
+  "sideEffects": [
+    "**/*.scss"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/styles/benefits-card.style.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/Flash-Global66/global-design-system.git"
+  },
+  "dependencies": {
+    "@flash-global66/g-hooks": "^0.11.14",
+    "@flash-global66/g-icon-font": "^0.26.0",
+    "@flash-global66/g-utils": "^0.15.6"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}

@@ -947,6 +947,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@flash-global66/g-benefits-card@workspace:components/benefits-card":
+  version: 0.0.0-use.local
+  resolution: "@flash-global66/g-benefits-card@workspace:components/benefits-card"
+  dependencies:
+    "@flash-global66/g-hooks": "npm:^0.11.14"
+    "@flash-global66/g-icon-font": "npm:^0.26.0"
+    "@flash-global66/g-utils": "npm:^0.15.6"
+  peerDependencies:
+    vue: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
 "@flash-global66/g-button-card@workspace:components/button-card":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-button-card@workspace:components/button-card"
@@ -1195,7 +1207,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flash-global66/g-icon-font@npm:^0.26.1, @flash-global66/g-icon-font@workspace:components/icon-font":
+"@flash-global66/g-icon-font@npm:^0.26.0, @flash-global66/g-icon-font@npm:^0.26.1, @flash-global66/g-icon-font@workspace:components/icon-font":
   version: 0.0.0-use.local
   resolution: "@flash-global66/g-icon-font@workspace:components/icon-font"
   dependencies:
