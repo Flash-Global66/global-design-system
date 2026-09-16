@@ -1,0 +1,1 @@
+import{c as r,s,g as a,u as c}from"./vue.esm-bundler-C6DRpX4R.js";import{a as i}from"./useNamespace-D200ZTkz.js";const u=Symbol.for("gIdInjection"),n={prefix:Math.floor(Math.random()*1e4),current:0},d=()=>a()?s(u,n):n,f=t=>{const e=d(),o=i();return r(()=>c(t)||`${o.value}-id-${e.prefix}-${e.current++}`)};export{d as a,f as u};
