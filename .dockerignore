@@ -23,7 +23,7 @@
 !assets/
 !assets/**
 !postcss.config.cjs
-!tailwind.config.ts
+!tailwind.config.cjs
 !vite.config.ts
 !tsconfig.json
 !vite.config.base.ts
