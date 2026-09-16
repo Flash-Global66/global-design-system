@@ -57,7 +57,7 @@ seleccionable, traducible, escalable con el zoom y legible por lectores de panta
 - Fondo, contornos y destellos fieles al diseño original
 - Íconos del catálogo de \`g-icon-font\` (\`"weight name"\`), sin exports de diseño
 - Nivel de encabezado configurable para respetar el outline de la página
-- Pensada para 3 a 5 beneficios; fuera de ese rango Vue avisa en desarrollo
+- Acepta la cantidad de beneficios que haga falta; la tarjeta crece en alto
 
 ## Instalación
 
@@ -144,7 +144,7 @@ sobreescribir \`width\`. Ver la story "Responsive".
       table: { type: { summary: 'string' }, defaultValue: { summary: "''" } },
     },
     benefits: {
-      description: 'Beneficios (de 3 a 5), cada uno con `icon` y `text`',
+      description: 'Beneficios, cada uno con `icon` y `text`',
       control: 'object',
       table: {
         type: {
