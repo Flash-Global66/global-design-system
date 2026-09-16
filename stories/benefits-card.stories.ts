@@ -116,12 +116,17 @@ reemplaza al prop:
 
 ## Tamaño y responsive
 
-La tarjeta ocupa el ancho de su contenedor, como una imagen con \`width: 100%\`,
-y escala en proporción: es un contenedor de consulta (\`container-type:
-inline-size\`) y todas las medidas del diseño están en \`cqw\`. El diseño está
-medido a 469px; a otro ancho todo crece o se achica en la misma proporción, con
-un piso de legibilidad para los textos (título 20px, bajada 12px, beneficios
-11px). Para acotarla, darle \`max-width\` al componente o ancho al contenedor.
+La tarjeta ocupa el ancho de su contenedor hasta un máximo de 469px, el ancho
+del diseño, y escala en proporción: es un contenedor de consulta
+(\`container-type: inline-size\`) y todas las medidas del diseño están en \`cqw\`,
+con un piso de legibilidad para los textos (título 20px, bajada 12px,
+beneficios 11px). Para dejarla crecer, subir el tope con la variable
+\`--gui-benefits-card-max-width\` en el componente o en un ancestro:
+
+\`\`\`vue
+<g-benefits-card :benefits="benefits" style="--gui-benefits-card-max-width: 560px" />
+\`\`\`
+
 En un padre que se ajusta al contenido (un flex sin ancho, un \`inline-block\`)
 mide 469px. En navegadores sin container queries quedan los tamaños fijos del
 diseño y la tarjeta crece en alto. Ver la story "Responsive".
@@ -187,7 +192,7 @@ const render: Story['render'] = args => ({
   },
   template: `
     <g-config-provider>
-      <g-benefits-card v-bind="args" style="max-width: 469px" />
+      <g-benefits-card v-bind="args" />
     </g-config-provider>
   `,
 });
@@ -265,13 +270,13 @@ export const Responsive: Story = {
     template: `
       <g-config-provider>
         <div class="flex flex-wrap gap-6 items-start">
-          <figure v-for="width in widths" :key="width" class="m-0 flex flex-col gap-2" :style="{ width: width + 'px' }">
+          <figure v-for="width in widths" :key="width" class="m-0 flex flex-col gap-2" :style="{ width: width + 'px', '--gui-benefits-card-max-width': width + 'px' }">
             <g-benefits-card v-bind="args" />
-            <figcaption class="text-2 text-secondary-txt">Contenedor de {{ width }}px</figcaption>
+            <figcaption class="text-2 text-secondary-txt">Contenedor de {{ width }}px<template v-if="width > 469"> · --gui-benefits-card-max-width: {{ width }}px</template></figcaption>
           </figure>
         </div>
         <p class="text-2 text-secondary-txt mt-8 mb-2">Arrastra la esquina inferior derecha para redimensionar</p>
-        <div class="resize-x overflow-auto rounded-md border border-dashed border-grey-500 p-3" style="width: 469px; max-width: 100%">
+        <div class="resize-x overflow-auto rounded-md border border-dashed border-grey-500 p-3" style="width: 469px; max-width: 100%; --gui-benefits-card-max-width: 100%">
           <g-benefits-card v-bind="args" />
         </div>
       </g-config-provider>
@@ -281,7 +286,7 @@ export const Responsive: Story = {
     docs: {
       description: {
         story:
-          'La tarjeta ocupa el ancho de su contenedor y escala en proporción, hacia arriba y hacia abajo, gracias a container queries; los textos tienen un piso de legibilidad. El último ejemplo se puede redimensionar arrastrando la esquina.',
+          'La tarjeta ocupa el ancho de su contenedor hasta 469px y escala en proporción gracias a container queries; los textos tienen un piso de legibilidad. El ejemplo de 560px sube el tope con `--gui-benefits-card-max-width`. El último se puede redimensionar arrastrando la esquina.',
       },
     },
   },

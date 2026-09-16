@@ -281,12 +281,17 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
 
 // Un contenedor de consulta no aporta ancho intrínseco y en un padre que se
 // ajusta al contenido daría cero; `contain-intrinsic-inline-size` le devuelve
-// el del diseño. Con un padre de ancho definido llena el 100%, como una imagen.
+// el del diseño. Con un padre de ancho definido llena el 100% hasta su
+// `max-width`, que el consumidor sube con la variable si la quiere más grande.
 @include b(benefits-card) {
   @apply text-inverse-txt;
 
   box-sizing: border-box;
   width: 100%;
+  max-width: getCssVarWithDefault(
+    ('benefits-card', 'max-width'),
+    $benefits-card-reference-width
+  );
   text-align: center;
   container-type: inline-size;
   contain-intrinsic-inline-size: $benefits-card-reference-width;
