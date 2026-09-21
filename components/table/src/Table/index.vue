@@ -15,12 +15,12 @@
         [ns.m('enable-row-transition')]:
           (store.states.data.value || []).length !== 0 &&
           (store.states.data.value || []).length < 100,
-        'has-footer': showSummary
+        'has-footer': showSummary,
       },
       ns.m(tableSize),
       className,
       ns.b(),
-      ns.m(`layout-${tableLayout}`)
+      ns.m(`layout-${tableLayout}`),
     ]"
     :style="style"
     :data-prefix="ns.namespace.value"
@@ -44,7 +44,10 @@
           cellpadding="0"
           cellspacing="0"
         >
-          <hColgroup :columns="store.states.columns.value" :table-layout="tableLayout" />
+          <hColgroup
+            :columns="store.states.columns.value"
+            :table-layout="tableLayout"
+          />
           <table-header
             ref="tableHeaderRef"
             :border="border"
@@ -73,10 +76,13 @@
             border="0"
             :style="{
               width: bodyWidth,
-              tableLayout
+              tableLayout,
             }"
           >
-            <hColgroup :columns="store.states.columns.value" :table-layout="tableLayout" />
+            <hColgroup
+              :columns="store.states.columns.value"
+              :table-layout="tableLayout"
+            />
             <table-header
               v-if="showHeader && tableLayout === 'auto'"
               ref="tableHeaderRef"
@@ -117,7 +123,11 @@
               <slot name="empty">{{ computedEmptyText }}</slot>
             </span>
           </div>
-          <div v-if="$slots.append" ref="appendWrapper" :class="ns.e('append-wrapper')">
+          <div
+            v-if="$slots.append"
+            ref="appendWrapper"
+            :class="ns.e('append-wrapper')"
+          >
             <slot name="append" />
           </div>
         </g-scrollbar>
@@ -136,7 +146,10 @@
           border="0"
           :style="tableBodyStyles"
         >
-          <hColgroup :columns="store.states.columns.value" :table-layout="tableLayout" />
+          <hColgroup
+            :columns="store.states.columns.value"
+            :table-layout="tableLayout"
+          />
           <table-footer
             :border="border"
             :default-sort="defaultSort"
@@ -148,37 +161,41 @@
       </div>
       <div v-if="border || isGroup" :class="ns.e('border-left-patch')" />
     </div>
-    <div v-show="resizeProxyVisible" ref="resizeProxy" :class="ns.e('column-resize-proxy')" />
+    <div
+      v-show="resizeProxyVisible"
+      ref="resizeProxy"
+      :class="ns.e('column-resize-proxy')"
+    />
   </div>
 </template>
 
 <script lang="ts">
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { defineComponent } from 'vue'
-import { Mousewheel } from '@flash-global66/g-utils'
-import GScrollbar from '@flash-global66/g-scrollbar'
-import TableHeader from '../components/TableHeader'
-import TableBody from '../components/TableBody'
-import TableFooter from '../components/TableFooter'
-import defaultProps from './defaults'
-import { hColgroup } from '../shared/utils/render.util'
-import { useTable } from './useTable'
+import { defineComponent } from 'vue';
+import { Mousewheel } from '@flash-global66/g-utils';
+import GScrollbar from '@flash-global66/g-scrollbar';
+import TableHeader from '../components/TableHeader';
+import TableBody from '../components/TableBody';
+import TableFooter from '../components/TableFooter';
+import { tableProps } from './defaults';
+import { hColgroup } from '../shared/utils/render.util';
+import { useTable } from './useTable';
 
 export default defineComponent({
   name: 'GTable',
   directives: {
-    Mousewheel
+    Mousewheel,
   },
   components: {
     TableHeader,
     TableBody,
     TableFooter,
     GScrollbar,
-    hColgroup
+    hColgroup,
   },
-  props: defaultProps,
-    emits: [
+  props: tableProps,
+  emits: [
     'select',
     'select-all',
     'selection-change',
@@ -201,10 +218,10 @@ export default defineComponent({
     'cell-edit-open',
     'cell-edit-close',
     'cell-edit-change',
-    'cell-edit-validate'
+    'cell-edit-validate',
   ],
   setup(props) {
-    return useTable(props)
-  }
-})
+    return useTable(props);
+  },
+});
 </script>
