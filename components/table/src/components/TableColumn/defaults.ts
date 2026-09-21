@@ -1,96 +1,96 @@
 // @ts-nocheck
-import type { ComponentInternalInstance, PropType, Ref, VNode } from 'vue'
-import type { DefaultRow, Table } from '../../Table/defaults'
+import type { ComponentInternalInstance, PropType, Ref, VNode } from 'vue';
+import type { DefaultRow, Table } from '../../Table/defaults';
 import type {
   TableOverflowTooltipFormatter,
   TableOverflowTooltipOptions,
-} from '../../shared/utils/table.util'
+} from '../../shared/utils/table.util';
 
-type CI<T> = { column: TableColumnCtx<T>; $index: number }
+type CI<T> = { column: TableColumnCtx<T>; $index: number };
 
 type Filters = {
-  text: string
-  value: string
-}[]
+  text: string;
+  value: string;
+}[];
 
-type FilterMethods<T> = (value, row: T, column: TableColumnCtx<T>) => void
+type FilterMethods<T> = (value, row: T, column: TableColumnCtx<T>) => void;
 
-type ValueOf<T> = T[keyof T]
+type ValueOf<T> = T[keyof T];
 
 interface TableColumnCtx<T> {
-  id: string
-  realWidth: number
-  type: string
-  label: string
-  className: string
-  labelClassName: string
-  property: string
-  prop: string
-  width: string | number
-  minWidth: string | number
-  renderHeader: (data: CI<T>) => VNode
-  sortable: boolean | string
-  sortMethod: (a: T, b: T) => number
-  sortBy: string | ((row: T, index: number) => string) | string[]
-  resizable: boolean
-  columnKey: string
-  rawColumnKey: string
-  align: string
-  headerAlign: string
-  showOverflowTooltip?: boolean | TableOverflowTooltipOptions
-  tooltipFormatter?: TableOverflowTooltipFormatter<T>
-  fixed: boolean | string
+  id: string;
+  realWidth: number;
+  type: string;
+  label: string;
+  className: string;
+  labelClassName: string;
+  property: string;
+  prop: string;
+  width: string | number;
+  minWidth: string | number;
+  renderHeader: (data: CI<T>) => VNode;
+  sortable: boolean | string;
+  sortMethod: (a: T, b: T) => number;
+  sortBy: string | ((row: T, index: number) => string) | string[];
+  resizable: boolean;
+  columnKey: string;
+  rawColumnKey: string;
+  align: string;
+  headerAlign: string;
+  showOverflowTooltip?: boolean | TableOverflowTooltipOptions;
+  tooltipFormatter?: TableOverflowTooltipFormatter<T>;
+  fixed: boolean | string;
   formatter: (
     row: T,
     column: TableColumnCtx<T>,
     cellValue,
-    index: number
-  ) => VNode | string
-  selectable: (row: T, index: number) => boolean
-  reserveSelection: boolean
-  filterMethod: FilterMethods<T>
-  filteredValue: string[]
-  filters: Filters
-  filterPlacement: string
-  filterMultiple: boolean
-  filterClassName: string
-  index: number | ((index: number) => number)
-  sortOrders: ('ascending' | 'descending' | null)[]
-  renderCell: (data: any) => void
-  colSpan: number
-  rowSpan: number
-  children: TableColumnCtx<T>[]
-  level: number
-  filterable: boolean | FilterMethods<T> | Filters
-  order: string
-  isColumnGroup: boolean
-  isSubColumn: boolean
-  columns: TableColumnCtx<T>[]
-  getColumnIndex: () => number
-  no: number
-  filterOpened?: boolean
+    index: number,
+  ) => VNode | string;
+  selectable: (row: T, index: number) => boolean;
+  reserveSelection: boolean;
+  filterMethod: FilterMethods<T>;
+  filteredValue: string[];
+  filters: Filters;
+  filterPlacement: string;
+  filterMultiple: boolean;
+  filterClassName: string;
+  index: number | ((index: number) => number);
+  sortOrders: ('ascending' | 'descending' | null)[];
+  renderCell: (data: any) => void;
+  colSpan: number;
+  rowSpan: number;
+  children: TableColumnCtx<T>[];
+  level: number;
+  filterable: boolean | FilterMethods<T> | Filters;
+  order: string;
+  isColumnGroup: boolean;
+  isSubColumn: boolean;
+  columns: TableColumnCtx<T>[];
+  getColumnIndex: () => number;
+  no: number;
+  filterOpened?: boolean;
   /** Tipo de celda: 'select' pinta un select cuando no hay slot default */
-  cellType?: string
+  cellType?: string;
   /** Opciones por tipo; para 'select': { options: { value, title }[] } */
-  cellOptions?: Record<string, unknown>
+  cellOptions?: Record<string, unknown>;
   /** Número de columnas que abarca el overlay al expandir (celdas editables); >= 1 */
-  expandColspan?: number
+  expandColspan?: number;
   /** Dirección de expansión del overlay: 'left' | 'right' */
-  expandDirection?: 'left' | 'right'
+  expandDirection?: 'left' | 'right';
 }
 
 interface TableColumn<T> extends ComponentInternalInstance {
   vnode: {
-    vParent: TableColumn<T> | Table<T>
-  } & VNode
-  vParent: TableColumn<T> | Table<T>
-  columnId: string
-  columnConfig: Ref<Partial<TableColumnCtx<T>>>
+    vParent: TableColumn<T> | Table<T>;
+  } & VNode;
+  vParent: TableColumn<T> | Table<T>;
+  columnId: string;
+  columnConfig: Ref<Partial<TableColumnCtx<T>>>;
 }
 
-export type { Filters, FilterMethods, TableColumnCtx, TableColumn, ValueOf }
+export type { Filters, FilterMethods, TableColumnCtx, TableColumn, ValueOf };
 
-export default {
+export const tableColumnProps = {
   /**
    * @description type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon
    */
@@ -244,12 +244,12 @@ export default {
   sortOrders: {
     type: Array as PropType<TableColumnCtx<DefaultRow>['sortOrders']>,
     default: () => {
-      return ['ascending', 'descending', null]
+      return ['ascending', 'descending', null];
     },
     validator: (val: TableColumnCtx<unknown>['sortOrders']) => {
       return val.every((order: string) =>
-        ['ascending', 'descending', null].includes(order)
-      )
+        ['ascending', 'descending', null].includes(order),
+      );
     },
   },
   /**
@@ -277,6 +277,7 @@ export default {
    */
   expandDirection: {
     type: String,
-    validator: (val: string) => val == null || val === '' || ['left', 'right'].includes(val),
+    validator: (val: string) =>
+      val == null || val === '' || ['left', 'right'].includes(val),
   },
-}
+};
