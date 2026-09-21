@@ -1,6 +1,6 @@
 # Arquitectura Canónica de Componentes
 
-**Última actualización:** Junio 2026
+**Última actualización:** Septiembre 2026
 **Responsable:** Equipo de Diseño y Desarrollo
 
 ---
@@ -9,183 +9,246 @@
 
 El Design System es una **librería publicable** (`@flash-global66/g-*`), no una aplicación. Eso impone restricciones distintas a las de un proyecto Vue normal:
 
-- El barrel `index.ts` es **obligatorio**: es el contrato de entrada del paquete npm.
-- Los estilos se distribuyen como **SCSS fuente**: el `<style lang="scss">` en el SFC conecta los estilos al pipeline de compilación del consumidor (Vite los procesa directamente, sin paso de build previo en el DS).
+- El barrel `index.ts` es **obligatorio**: es el contrato de entrada del paquete npm. Mover archivos internos de `src/` nunca es un breaking change mientras `index.ts` mantenga sus exports.
+- Los estilos se distribuyen como **SCSS fuente**: el `<style lang="scss" src="...">` en el SFC conecta los estilos al pipeline de compilación del consumidor (Vite los procesa directamente, sin paso de build previo en el DS).
 - Las **clases CSS** (`gui-button`, `gui-button--variant-primary`, `is-disabled`) son un contrato con los consumidores en producción y no pueden cambiar sin una migración coordinada.
+- Cada paquete se publica y versiona **por su cuenta** (versionado independiente vía Conventional Commits) — un cambio en un paquete no obliga a re-versionar los demás.
 
 ---
 
 ## 2. Estructura canónica de carpetas
 
+Un paquete es **simple** (un solo elemento visual, ej. `g-inline`) o **complejo** (un elemento raíz con familia de subcomponentes, ej. `g-table`). La pregunta que decide cuál es: ¿el paquete tiene más de un elemento visual, o algún estado que dos o más de sus elementos necesitan compartir?
+
+### Simple — un solo elemento
+
 ```
-components/<Name>/
+components/inline/
 ├── index.ts                         # barrel público obligatorio
 ├── package.json
 ├── vite.config.ts
 ├── tsconfig.json
 ├── CHANGELOG.md
 ├── src/
-│   ├── <Name>.vue                   # PascalCase — template puro + <style>
-│   ├── components/                  # sub-componentes (solo para componentes complejos)
-│   │   └── <SubName>.vue            # ej: TableColumn.vue, FormItem.vue, SelectOption.vue
-│   ├── composables/
-│   │   ├── use<Name>.ts             # lógica principal del componente
-│   │   └── use<SubFeature>.ts       # sub-lógica extraída si amerita
-│   ├── props/
-│   │   └── <name>.props.ts         # props + emits + validadores
-│   ├── constants/
-│   │   └── <name>.constant.ts      # arrays as const — fuente de verdad de variantes
-│   ├── types/
-│   │   └── <name>.type.ts          # tipos derivados + interfaces del componente
-│   └── styles/
-│       └── <name>.style.scss       # estilos BEM — importado via <style> en el SFC
-└── tests/                           # espeja la estructura de src/
-    ├── <Name>.spec.ts
-    ├── composables/
-    │   └── use<Name>.spec.ts
-    └── props/
-        └── <name>.props.spec.ts
+│   ├── Inline/                      # PascalCase — carpeta del elemento
+│   │   ├── index.vue                # template puro + <style src="...">
+│   │   ├── useInline.ts             # lógica reactiva del elemento
+│   │   └── inline.style.scss        # estilos BEM (si el elemento tiene <style>)
+│   └── types/
+│       └── inline.type.ts           # tipos con nombre del paquete
+└── tests/                           # espeja src/, en la raíz del paquete
+    └── Inline/
+        └── useInline.spec.ts
 ```
 
-La carpeta `src/components/` es **opcional** — solo aparece cuando el componente tiene sub-componentes propios (ej: `g-table` tiene `TableColumn.vue`, `g-form` tiene `FormItem.vue`, `g-select` tiene `SelectOption.vue`). Un componente simple como `g-button` no la necesita.
+### Complejo — elemento raíz + familia de subcomponentes
 
-El componente `components/button/` es el ejemplo canónico completo de esta estructura.
+```
+components/table/
+├── index.ts
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+├── CHANGELOG.md
+├── src/
+│   ├── Table/                       # elemento raíz — mismo trío que un simple
+│   │   ├── index.vue
+│   │   ├── useTable.ts
+│   │   └── table.style.scss
+│   ├── components/                  # subcomponentes — solo si el paquete es complejo
+│   │   ├── TableHeader/
+│   │   ├── TableBody/
+│   │   └── TableColumn/
+│   └── shared/                      # reutilizable entre el raíz y los subcomponentes
+│       ├── composables/             # use<Ctx>.ts — especializados, reusados por 2+ piezas
+│       ├── constants/               # <ctx>.constant.ts
+│       ├── types/                   # <ctx>.type.ts
+│       ├── utils/                   # <ctx>.util.ts — funciones puras, sin reactividad
+│       └── store/                   # solo si hay estado compartido con provide/inject
+└── tests/                           # espeja src/ capa por capa, en la raíz del paquete
+    ├── Table/
+    ├── components/
+    │   └── TableHeader/
+    └── shared/
+        └── composables/
+```
+
+Un paquete con un solo elemento visual **siempre** es simple, sin importar cuánta lógica interna
+tenga ese elemento — la lógica va en su propio `use<Nombre>.ts`, eso no lo convierte en complejo.
+`shared/` es cerrado a esas 5 subcarpetas: no hay `shared/helpers/` ni `shared/hooks/`.
+
+Los ejemplos canónicos completos de esta estructura son `components/inline/` (simple) y
+`components/table/` (complejo).
 
 ---
 
 ## 3. Convenciones de naming
 
-| Elemento                 | Convención                             | Ejemplo              |
-| ------------------------ | -------------------------------------- | -------------------- |
-| Carpeta del paquete      | kebab-case (nombre npm)                | `g-button/`          |
-| Archivo `.vue` principal | PascalCase                             | `Button.vue`         |
-| Sub-componentes          | PascalCase                             | `TableColumn.vue`    |
-| Composables              | `use<Name>.ts` camelCase               | `useButton.ts`       |
-| Props                    | `<name>.props.ts`                      | `button.props.ts`    |
-| Constantes               | `<name>.constant.ts`                   | `button.constant.ts` |
-| Tipos e interfaces       | `<name>.type.ts`                       | `button.type.ts`     |
-| Estilos                  | `<name>.style.scss` (singular)         | `button.style.scss`  |
-| Tests                    | `<Name>.spec.ts` / `use<Name>.spec.ts` | `Button.spec.ts`     |
+| Elemento                   | Convención                                 | Ejemplo                  |
+| -------------------------- | ------------------------------------------ | ------------------------ |
+| Carpeta del paquete        | kebab-case (nombre npm)                    | `table/`, `date-picker/` |
+| Carpeta de elemento visual | PascalCase                                 | `Table/`, `TableHeader/` |
+| Archivo `index.vue`        | siempre `index.vue`, nunca `<Name>.vue`    | `Table/index.vue`        |
+| Composables                | `use<Nombre>.ts` camelCase                 | `useTable.ts`            |
+| Constantes                 | `<contexto>.constant.ts`                   | `token.constant.ts`      |
+| Tipos e interfaces         | `<contexto>.type.ts`                       | `cellRenderer.type.ts`   |
+| Utils (función pura)       | `<contexto>.util.ts`                       | `table.util.ts`          |
+| Estilos                    | `<nombre>.style.scss` (singular)           | `table.style.scss`       |
+| Tests                      | `<Nombre>.spec.ts` / `use<Nombre>.spec.ts` | `useTable.spec.ts`       |
 
-**NUNCA** kebab-case en archivos fuente (`.vue`, `.ts`, `.scss`). Los nombres de paquete npm son la única excepción.
+**NUNCA** kebab-case en archivos fuente (`.vue`, `.ts`, `.scss`), y **nunca** `helper` en un nombre
+de archivo — un archivo `*-helper.ts` casi siempre resulta ser dos cosas mezcladas: una función
+reactiva (composable) y una función pura (util), que se separan cada una a su capa. El nombre del
+paquete npm en kebab-case es la única excepción de casing.
 
 ---
 
 ## 4. Separación de responsabilidades
 
-### 4.1 `<Name>.vue` — Template puro
+### 4.1 `index.vue` — Template puro
 
-El componente Vue es una **capa delgada de presentación**. Solo declara props/emits, instancia el composable principal y renderiza. Toda la reactividad, los event handlers y el cálculo de clases viven en el composable.
+El componente Vue es una **capa delgada de presentación**. Solo declara props/emits, instancia el
+composable principal y renderiza. Toda la reactividad, los event handlers y el cálculo de clases
+viven en `use<Nombre>.ts`.
 
-El bloque `<style>` conecta el SCSS al pipeline de Vite — es obligatorio para que el consumidor reciba los estilos:
+El bloque `<style>` conecta el SCSS al pipeline de Vite mediante el atributo nativo `src` — nunca
+con reglas CSS escritas adentro del bloque:
 
 ```vue
-<style lang="scss" src="./styles/button.style.scss"></style>
+<style lang="scss" src="./inline.style.scss"></style>
 ```
 
-### 4.2 `composables/use<Name>.ts` — Lógica
+El `.style.scss` de un elemento existe si ese elemento necesita CSS propio, sin relación con si el
+`.vue` tiene o no un bloque `<style>` — la entrega al consumidor siempre pasa por el subpath
+`"./styles.scss"` del `package.json` del paquete (ver sección 5), apunte o no el `.vue` a su propio
+archivo internamente.
 
-Toda la lógica reactiva y los event handlers van aquí. El composable recibe `props` y `emit`, retorna el estado que necesita el template. Incluye el cálculo de clases BEM via `useNamespace`.
+### 4.2 `use<Nombre>.ts` — Composables: orquestador, especializado, o util
 
-### 4.3 `props/<name>.props.ts` — Props, emits y validadores
+Hay tres clases de lógica, y la pregunta que las distingue es siempre la misma: **¿la función
+necesita `ref`, `computed`, `watch` o un hook de ciclo de vida?**
 
-Usa `buildProps` de `@flash-global66/g-utils`. Los tipos vienen de `../types/<name>.type`, los valores permitidos de `../constants/<name>.constant`.
+- **Orquestador**: co-localizado junto a su elemento (`Table/useTable.ts`), es dueño del estado
+  principal de ese elemento y coordina. Uno por elemento.
+- **Especializado**: en `shared/composables/` (solo en paquetes complejos), resuelve una
+  responsabilidad reactiva reusada por 2+ piezas del paquete.
+- **Util**: si la función no necesita reactividad, no es un composable — es
+  `shared/utils/<contexto>.util.ts` (o `utils/` a secas en un paquete simple).
 
-### 4.4 `constants/<name>.constant.ts` — Fuente de verdad
+### 4.3 Tipos y constantes
 
-Arrays `as const` de los que se derivan los tipos TypeScript y los validadores en runtime.
+Un tipo con nombre (`interface`/`type`) va a `types/<contexto>.type.ts`; una constante de módulo o
+un schema de props (`buildProps()`) va a `constants/<contexto>.constant.ts`. Ninguno de los dos se
+declara inline en un `.vue`, un composable o un util.
+
+**Excepción `defaults.ts`**: en un elemento derivado de element-plus, su `interface <Nombre>Props`
+y el objeto de props runtime se co-localizan en `<Nombre>/defaults.ts`, dentro de la carpeta del
+elemento — evita duplicar contrato y tipos al portar un componente. Es la única excepción de
+co-localización, y solo aplica a elementos derivados de EP; un componente nuevo no la usa.
 
 ```ts
-export const BUTTON_VARIANTS = ['primary', 'secondary', 'tertiary'] as const;
-export const BUTTON_SIZES = ['sm', 'md'] as const;
+// Table/defaults.ts
+export interface TableProps {
+  data: unknown[];
+  rowKey?: string;
+}
+
+export const tableProps = {
+  // export con nombre — nunca `export default`
+  data: { type: Array as PropType<DefaultRow[]>, default: () => [] },
+};
 ```
 
-### 4.5 `types/<name>.type.ts` — Tipos e interfaces
+### 4.4 Estilos BEM
 
-Este archivo concentra **todo el contrato de tipos** del componente: tipos derivados de constantes e interfaces que describen estructuras de datos. Nada vive en archivos de tipos separados.
+Todo `.scss` de un elemento usa los mixins BEM de `@flash-global66/g-utils/mixins` (`b`/`e`/`m`/`when`)
+— nunca un selector escrito a mano. El bloque que recibe `@include b("<block>")` en el `.scss` tiene
+que ser exactamente el mismo string que recibe `useNamespace('<block>')` en el composable del mismo
+elemento: son las dos mitades de un mismo contrato.
 
 ```ts
-// Tipos derivados de constants
-export type ButtonVariant = (typeof BUTTON_VARIANTS)[number];
-export type ButtonSize = (typeof BUTTON_SIZES)[number];
-
-// Interfaces — para componentes complejos con estructuras de datos propias
-export interface TableColumn {
-  key: string;
-  label: string;
-  sortable?: boolean;
-  width?: string | number;
-}
-
-export interface SelectOption {
-  value: string | number;
-  label: string;
-  disabled?: boolean;
-}
+// useInline.ts
+const ns = useNamespace('inline');
 ```
-
-Los tipos simples derivados de constantes van primero. Las interfaces del dominio van debajo.
-
-### 4.6 `styles/<name>.style.scss` — Estilos BEM
 
 ```scss
-@use 'sass:map';
+// inline.style.scss
 @use '@flash-global66/g-utils/mixins' as *;
+@use '@flash-global66/g-utils/var-mixins' as *;
+@use '@flash-global66/g-utils/tokens' as *;
 
-@include b('button') {
-  @include m('variant-primary') {
-    /* ... */
+@include b('inline') {
+  @include m('shadow') {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
-  @include when(disabled) {
-    /* ... */
+  @include when('disabled') {
+    opacity: 0.5;
   }
 }
 ```
 
-Genera clases `gui-button`, `gui-button--variant-primary`, `is-disabled`. No se declara `$namespace` explícitamente — el default `gui` viene del sistema de módulos de Sass (ver [`docs/architecture/utils-package.md`](utils-package.md)).
+Las clases en el template/composable salen de `useNamespace()` (`ns.b()`, `ns.e()`, `ns.m()`,
+`ns.is()`), nunca de un string armado a mano — no se puede cruzar `.style.scss` con `.vue`/`.ts` en
+ningún build para avisar si el bloque de uno cambió y el otro no.
 
-El SCSS se importa en el SFC via `<style lang="scss" src="...">` — no via import en JS. Esto garantiza que Vite lo procese como parte del pipeline del componente.
-
-### 4.7 `index.ts` — Barrel público
+### 4.5 `index.ts` — Barrel público
 
 ```ts
 import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
-import Button from './src/Button.vue';
+import Table from './src/Table/index.vue';
 
-export const GButton: SFCWithInstall<typeof Button> & {
-  Button: typeof Button;
-} = withInstall(Button, { Button });
+export const GTable: SFCWithInstall<typeof Table> & {
+  Table: typeof Table;
+} = withInstall(Table, { Table });
 
-export default GButton;
-export * from './src/types/button.type';
-export type ButtonInstance = InstanceType<typeof Button>;
+export default GTable;
+export * from './src/shared/types/table.type';
+export type TableInstance = InstanceType<typeof Table>;
 ```
 
-`withInstall` adjunta el método `install(app)` para uso global con `app.use(GButton)`.
+`withInstall` adjunta el método `install(app)` para uso global con `app.use(GTable)`. Este barrel es
+el único permitido en el paquete — un `index.ts` **dentro** de una capa (`components/index.ts`,
+`shared/utils/index.ts`) sigue prohibido, porque oculta el archivo real.
+
+### 4.6 Caso especial — elemento en `h()`/JSX en vez de `.vue`
+
+El shell de un elemento puede ser `defineComponent({ setup, render() })` en vez de `index.vue`
+**solo** cuando hay una de tres razones técnicas reales: factory de identidad dinámica en runtime,
+virtualización real de listas, o composición de hijos cuyo orden depende de config en runtime. Un
+componente nuevo del DS arranca siempre en SFC — `h()` no es una alternativa de igual peso, es la
+excepción que se justifica caso por caso, y el archivo se nombra `.tsx` aunque no tenga JSX literal.
+Los subcomponentes de un elemento en `h()` no heredan la excepción: si renderizan markup fijo, van a
+SFC igual.
 
 ---
 
-## 5. Campos de package.json
+## 5. Campos de `package.json`
 
 ```json
 {
-  "name": "@flash-global66/g-<name>",
+  "name": "@flash-global66/g-<nombre>",
+  "author": "Global66",
+  "license": "MIT",
   "buildable": true,
-  "sideEffects": ["**/*.scss"],
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./styles.scss": "./src/styles/<name>.style.scss",
+    "./styles.scss": "./src/<Nombre>/<nombre>.style.scss",
     "./*": "./*"
   },
+  "files": ["dist", "src", "index.ts"],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
-    "@flash-global66/g-utils": "^0.1.0"
+    "@flash-global66/g-utils": "^0.15.6"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
@@ -195,30 +258,44 @@ export type ButtonInstance = InstanceType<typeof Button>;
 
 Reglas clave:
 
-- `sideEffects: ["**/*.scss"]` — solo SCSS. El CSS no existe en source; el `<style>` block del SFC conecta el SCSS al bundler del consumidor.
-- `exports["./styles.scss"]` apunta al SCSS fuente — para consumidores que quieran acceder directamente.
-- Las dependencias internas `@flash-global66/g-*` van en `dependencies`, no en `peerDependencies`.
+- `exports["./styles.scss"]` apunta siempre al `.style.scss` del **elemento raíz** — en un paquete
+  complejo, ese archivo agrega los estilos de sus subcomponentes con `@use`, pero el paquete sigue
+  exportando un único subpath.
+- `vue` siempre va en `peerDependencies`.
+- **Un `@flash-global66/g-*` va en `peerDependencies` si el paquete lo renderiza como hijo visible
+  en su `<template>`** — evita que el consumidor termine con dos instancias del mismo componente en
+  su árbol. Si solo se usa por dentro (una función, un tipo, sin renderizarlo), va en
+  `dependencies` normal. `components/button/` es el ejemplo que cumple esto: `g-form` y
+  `g-icon-font` están en `peerDependencies` porque `Button.vue` los renderiza directo; `g-utils`
+  queda en `dependencies` porque solo resuelve funciones internas.
+- El `vite.config.ts` de cada paquete es mínimo (`entry` + `name`); los formatos de salida y los
+  `externals` viven en `vite.config.base.ts` de la raíz y no se redeclaran por paquete.
 
 ---
 
 ## 6. Tests
 
-La suite de tests espeja la estructura de `src/`:
+La suite de tests espeja la estructura de `src/`, **en la raíz del paquete, fuera de `src/`**:
 
 ```
 tests/
-├── <Name>.spec.ts           # mount() + toHaveClass para clases exactas
-├── composables/
-│   └── use<Name>.spec.ts    # withSetup() desde tests/utils/withSetup.ts
-└── props/
-    └── <name>.props.spec.ts # validateX → spy sobre debugWarn
+├── Table/
+│   └── useTable.spec.ts
+├── components/
+│   └── TableHeader/
+│       └── useTableHeader.spec.ts
+└── shared/
+    └── composables/
+        └── useTableCellSelect.spec.ts
 ```
+
+`common/g-utils` es hoy la referencia de cumplimiento más completa de este espejo — mirar ahí ante
+la duda antes que en un paquete legacy sin migrar.
 
 Ejecutar desde la raíz del monorepo:
 
 ```bash
-export PATH="$HOME/.nvm/versions/node/v20.19.3/bin:$PATH"
-./node_modules/.bin/vitest run
+yarn test
 ```
 
 ---
@@ -229,18 +306,19 @@ Toda la API pública se documenta en **español**. Los nombres de código perman
 
 ```ts
 /**
- * Lógica del componente Button: estado reactivo, atributos derivados
- * y manejadores de interacción.
+ * Genera clases BEM combinando namespace, bloque, elemento y modificador.
  *
- * @param props - Props resueltas del componente.
- * @param emit - Función emit del componente.
+ * @param block - Nombre del bloque BEM del componente (ej: `'button'`).
+ * @returns Objeto con todos los métodos de generación BEM y el namespace activo.
  */
-export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['emit']) => { ... }
+export const useNamespace = (block: string): NamespaceHelpers => { ... }
 ```
 
 ---
 
 ## Recursos relacionados
 
-- [`docs/architecture/utils-package.md`](utils-package.md) — convención de paquetes utilitarios
-- Ejemplo canónico completo: `components/button/` en este repositorio
+- [`docs/architecture/utils-package.md`](utils-package.md) — convención de paquetes utilitarios (`common/*`)
+- Ejemplo canónico simple: `components/inline/`
+- Ejemplo canónico complejo: `components/table/`
+- Ejemplo canónico de `package.json` (peer vs. dependency): `components/button/`
