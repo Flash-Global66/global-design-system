@@ -23,7 +23,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     `export default` (el objeto de props pasa a `export const tableProps`, con el mismo contenido)
   - commit: `refactor(table): eliminar scss duplicado y export default en Table/defaults.ts`
 
-- [ ] **3 · Migrar `TableHeader` a SFC**
+- [x] **3 · Migrar `TableHeader` a SFC**
   - archivos: `components/table/src/components/TableHeader/index.ts` (→ `index.vue`),
     `useEvent.ts`, `useStyle.ts`, `useUtils.ts` (se separa: `convertToRows`/`getAllColumns` pasan a
     `components/table/src/shared/utils/tableColumn.util.ts`, la parte reactiva pasa a un
