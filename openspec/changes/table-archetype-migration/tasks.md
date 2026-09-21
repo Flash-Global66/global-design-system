@@ -55,7 +55,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     `shared/types/cellRenderer.type.ts` exporta `RenderCellData` y `CellRenderer`
   - commit: `refactor(table): migrar TableColumn a SFC y relocar cellRenderer.type.ts`
 
-- [ ] **6 · Migrar `TableFooter` a SFC**
+- [x] **6 · Migrar `TableFooter` a SFC**
   - archivos: `components/table/src/components/TableFooter/index.ts` (→ `index.vue`),
     `useMapState.ts`, `useStyle.ts`
   - depende de: ninguna
