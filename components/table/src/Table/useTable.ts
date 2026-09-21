@@ -7,7 +7,7 @@ import { useNamespace } from '@flash-global66/g-utils';
 import { createStore } from '../shared/store/table.store';
 import TableLayout from '../shared/composables/tableLayout';
 import useUtils from './useUtils';
-import { convertToRows } from '../components/TableHeader/useUtils';
+import { convertToRows } from '../shared/utils/tableColumn.util';
 import useStyle from './useStyle';
 import useKeyRender from './useKeyRender';
 import { TABLE_INJECTION_KEY } from '../shared/constants/token.constant';

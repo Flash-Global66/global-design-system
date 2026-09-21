@@ -1,7 +1,7 @@
 @use 'sass:map';
 
 @use './styles/table.scss' as *;
-@use '../components/TableColumn/styles/table-column.scss' as *;
+@use '../components/TableColumn/tableColumn.style.scss' as *;
 @use '@flash-global66/g-utils/tooltip-v2' as *;
 @use '@flash-global66/g-utils/popper' as *;
 @use '@flash-global66/g-checkbox/src/styles/checkbox.scss' as *;

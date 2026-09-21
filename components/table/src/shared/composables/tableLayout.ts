@@ -7,7 +7,7 @@ import { parseHeight } from '../utils/table.util';
 
 import type { Ref } from 'vue';
 import type { TableColumnCtx } from '../../components/TableColumn/defaults';
-import type { TableHeader } from '../../components/TableHeader';
+import type { TableHeader } from '../types/tableHeader.type';
 import type { Table } from '../../Table/defaults';
 import type { Store } from '../store';
 

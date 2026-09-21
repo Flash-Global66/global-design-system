@@ -175,9 +175,9 @@
 import { defineComponent } from 'vue';
 import { Mousewheel } from '@flash-global66/g-utils';
 import GScrollbar from '@flash-global66/g-scrollbar';
-import TableHeader from '../components/TableHeader';
-import TableBody from '../components/TableBody';
-import TableFooter from '../components/TableFooter';
+import TableHeader from '../components/TableHeader/index.vue';
+import TableBody from '../components/TableBody/index.vue';
+import TableFooter from '../components/TableFooter/index.vue';
 import { tableProps } from './defaults';
 import { hColgroup } from '../shared/utils/render.util';
 import { useTable } from './useTable';

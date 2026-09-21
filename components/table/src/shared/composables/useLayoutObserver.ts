@@ -8,7 +8,7 @@ import {
   onUpdated,
 } from 'vue';
 
-import type { TableHeader } from '../../components/TableHeader';
+import type { TableHeader } from '../types/tableHeader.type';
 import type TableLayout from './tableLayout';
 import type { Table } from '../../Table/defaults';
 

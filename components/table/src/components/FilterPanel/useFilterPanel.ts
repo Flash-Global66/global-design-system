@@ -7,7 +7,7 @@ import { isPropAbsent } from '@flash-global66/g-utils';
 
 import type { TooltipInstance } from '@flash-global66/g-tooltip';
 import type { WritableComputedRef } from 'vue';
-import type { TableHeader } from '../TableHeader';
+import type { TableHeader } from '../../shared/types/tableHeader.type';
 
 export function useFilterPanel(props) {
   const instance = getCurrentInstance();
