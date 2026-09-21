@@ -70,7 +70,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     Tailwind del template no se tocan (fuera de alcance, ver `proposal.md`)
   - commit: `refactor(table): separar lógica de CellEdit a composable`
 
-- [ ] **8 · Migrar `FilterPanel` a `<script setup>` con composable**
+- [x] **8 · Migrar `FilterPanel` a `<script setup>` con composable**
   - archivos: `components/table/src/components/FilterPanel/index.vue`, nuevo `useFilterPanel.ts`
   - depende de: ninguna
   - listo cuando: `FilterPanel` ya no usa `defineComponent`/`export default`/Options API; la lógica
