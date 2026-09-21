@@ -34,7 +34,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     reactivo en el mismo archivo
   - commit: `refactor(table): migrar TableHeader a SFC`
 
-- [ ] **4 · Migrar `TableBody` a SFC y separar `TdWrapper`**
+- [x] **4 · Migrar `TableBody` a SFC y separar `TdWrapper`**
   - archivos: `components/table/src/components/TableBody/index.ts` (→ `index.vue`), `useEvents.ts`,
     `useRender.ts`, `useStyles.ts`, `defaults.ts`, `td-wrapper.vue` (→
     `components/table/src/components/TdWrapper/index.vue`)
