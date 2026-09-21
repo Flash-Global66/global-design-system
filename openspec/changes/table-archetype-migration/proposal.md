@@ -2,6 +2,7 @@
 
 > **Rama:** `refactor/table-archetype-migration`
 > **Base:** `def7f4c8`
+> **HU:** pendiente
 
 El diff desde `Base` incluye este `proposal.md` y su `tasks.md`: son el cambio, no trabajo de más.
 
