@@ -42,7 +42,8 @@
     "scss:parity": "node scripts/scss-parity.mjs"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx lint-staged",
+    "pre-push": "yarn test:run"
   },
   "lint-staged": {
     "*.{vue,ts,js,jsx,tsx}": [
