@@ -1,79 +1,79 @@
-import { inject } from 'vue'
-import { useNamespace } from '@flash-global66/g-utils'
-import { isFunction, isString } from '@flash-global66/g-utils'
+import { inject } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import { isFunction, isString } from '@flash-global66/g-utils';
 
 import {
   ensurePosition,
   getFixedColumnOffset,
   getFixedColumnsClass,
-} from '../../shared/utils/table.util'
-import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant'
-import type { TableColumnCtx } from '../TableColumn/defaults'
-import type { TableHeaderProps } from '.'
+} from '../../shared/utils/table.util';
+import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
+import type { TableColumnCtx } from '../TableColumn/defaults';
+import type { TableHeaderProps } from '../../shared/types/tableHeader.type';
 
 function useStyle<T>(props: TableHeaderProps<T>) {
-  const parent = inject(TABLE_INJECTION_KEY)
-  const ns = useNamespace('table')
+  const parent = inject(TABLE_INJECTION_KEY);
+  const ns = useNamespace('table');
 
   const getHeaderRowStyle = (rowIndex: number) => {
-    const headerRowStyle = parent?.props.headerRowStyle
+    const headerRowStyle = parent?.props.headerRowStyle;
     if (isFunction(headerRowStyle)) {
-      return headerRowStyle.call(null, { rowIndex })
+      return headerRowStyle.call(null, { rowIndex });
     }
-    return headerRowStyle
-  }
+    return headerRowStyle;
+  };
 
   const getHeaderRowClass = (rowIndex: number): string => {
-    const classes: string[] = []
-    const headerRowClassName = parent?.props.headerRowClassName
+    const classes: string[] = [];
+    const headerRowClassName = parent?.props.headerRowClassName;
     if (isString(headerRowClassName)) {
-      classes.push(headerRowClassName)
+      classes.push(headerRowClassName);
     } else if (isFunction(headerRowClassName)) {
-      classes.push(headerRowClassName.call(null, { rowIndex }))
+      classes.push(headerRowClassName.call(null, { rowIndex }));
     }
 
-    return classes.join(' ')
-  }
+    return classes.join(' ');
+  };
 
   const getHeaderCellStyle = (
     rowIndex: number,
     columnIndex: number,
     row: T,
-    column: TableColumnCtx<T>
+    column: TableColumnCtx<T>,
   ) => {
-    let headerCellStyles = parent?.props.headerCellStyle ?? {}
+    let headerCellStyles = parent?.props.headerCellStyle ?? {};
     if (isFunction(headerCellStyles)) {
       headerCellStyles = headerCellStyles.call(null, {
         rowIndex,
         columnIndex,
         row,
         column,
-      })
+      });
     }
     const fixedStyle = getFixedColumnOffset<T>(
       columnIndex,
       column.fixed,
       props.store,
-      row as unknown as TableColumnCtx<T>[]
-    )
-    ensurePosition(fixedStyle, 'left')
-    ensurePosition(fixedStyle, 'right')
-    return Object.assign({}, headerCellStyles, fixedStyle)
-  }
+      row as unknown as TableColumnCtx<T>[],
+    );
+    ensurePosition(fixedStyle, 'left');
+    ensurePosition(fixedStyle, 'right');
+    return Object.assign({}, headerCellStyles, fixedStyle);
+  };
 
   const getHeaderCellClass = (
     rowIndex: number,
     columnIndex: number,
     row: T,
-    column: TableColumnCtx<T>
+    column: TableColumnCtx<T>,
   ) => {
     const fixedClasses = getFixedColumnsClass<T>(
       ns.b(),
       columnIndex,
       column.fixed,
       props.store,
-      row as unknown as TableColumnCtx<T>[]
-    )
+      row as unknown as TableColumnCtx<T>[],
+    );
     const classes = [
       column.id,
       column.order,
@@ -81,19 +81,19 @@ function useStyle<T>(props: TableHeaderProps<T>) {
       column.className,
       column.labelClassName,
       ...fixedClasses,
-    ]
+    ];
 
     if (!column.children) {
-      classes.push('is-leaf')
+      classes.push('is-leaf');
     }
 
     if (column.sortable) {
-      classes.push('is-sortable')
+      classes.push('is-sortable');
     }
 
-    const headerCellClassName = parent?.props.headerCellClassName
+    const headerCellClassName = parent?.props.headerCellClassName;
     if (isString(headerCellClassName)) {
-      classes.push(headerCellClassName)
+      classes.push(headerCellClassName);
     } else if (isFunction(headerCellClassName)) {
       classes.push(
         headerCellClassName.call(null, {
@@ -101,21 +101,21 @@ function useStyle<T>(props: TableHeaderProps<T>) {
           columnIndex,
           row,
           column,
-        })
-      )
+        }),
+      );
     }
 
-    classes.push(ns.e('cell'))
+    classes.push(ns.e('cell'));
 
-    return classes.filter((className) => Boolean(className)).join(' ')
-  }
+    return classes.filter(className => Boolean(className)).join(' ');
+  };
 
   return {
     getHeaderRowStyle,
     getHeaderRowClass,
     getHeaderCellStyle,
     getHeaderCellClass,
-  }
+  };
 }
 
-export default useStyle
+export default useStyle;
