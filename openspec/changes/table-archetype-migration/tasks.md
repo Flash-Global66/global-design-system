@@ -2,7 +2,7 @@
 
 Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es estructural.
 
-- [ ] **1 · Renombrar `table-layout.ts` y `store/helper.ts` (ds-naming)**
+- [x] **1 · Renombrar `table-layout.ts` y `store/helper.ts` (ds-naming)**
   - archivos: `components/table/src/shared/composables/table-layout.ts` (→ `tableLayout.ts`),
     `components/table/src/shared/store/helper.ts` (→ `table.store.ts`),
     `components/table/src/shared/store/index.ts`,
@@ -14,7 +14,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     cambiar su lógica
   - commit: `refactor(table): renombrar table-layout y store helper a ds-naming`
 
-- [ ] **2 · Limpiar `Table/`: scss duplicado y `export default`**
+- [x] **2 · Limpiar `Table/`: scss duplicado y `export default`**
   - archivos: `components/table/src/Table/table.style.scss`,
     `components/table/src/Table/styles/table.scss` (eliminar carpeta `styles/`),
     `components/table/src/Table/defaults.ts`
@@ -78,7 +78,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     no cambian
   - commit: `refactor(table): migrar FilterPanel a script setup con composable`
 
-- [ ] **9 · Corregir `dependencies`→`peerDependencies` en package.json**
+- [x] **9 · Corregir `dependencies`→`peerDependencies` en package.json**
   - archivos: `components/table/package.json`
   - depende de: ninguna
   - listo cuando: `@flash-global66/g-checkbox`, `g-icon-font`, `g-scrollbar`, `g-tooltip`, `g-select`,
