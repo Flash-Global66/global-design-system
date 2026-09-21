@@ -1,12 +1,12 @@
 name: PR Checks
 
-# Runs lint + unit tests + full component build on every PR to main.
+# Runs lint + unit tests + full component build on every PR to release.
 # Rationale: the Publish Packages / deploy workflows only trigger `on: push`
-# to main/develop, so build/type errors (e.g. a `build:types` failure) used to
-# reach main undetected and break publishing. This gate catches them in the PR.
+# to release/develop, so build/type errors (e.g. a `build:types` failure) used to
+# reach release undetected and break publishing. This gate catches them in the PR.
 on:
   pull_request:
-    branches: [main]
+    branches: [release]
 
 concurrency:
   group: pr-checks-${{ github.ref }}
