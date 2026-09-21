@@ -318,7 +318,7 @@ export const useNamespace = (block: string): NamespaceHelpers => { ... }
 
 ## Recursos relacionados
 
-- [`docs/architecture/utils-package.md`](utils-package.md) — convención de paquetes utilitarios (`common/*`)
+- [`docs/architecture/common-package-architecture.md`](common-package-architecture.md) — convención de paquetes utilitarios (`common/*`)
 - Ejemplo canónico simple: `components/inline/`
 - Ejemplo canónico complejo: `components/table/`
 - Ejemplo canónico de `package.json` (peer vs. dependency): `components/button/`
