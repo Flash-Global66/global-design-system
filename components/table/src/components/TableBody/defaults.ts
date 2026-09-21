@@ -1,27 +1,27 @@
 // @ts-nocheck
-import type { PropType } from 'vue'
-import type { Store } from '../../shared/store'
+import type { PropType } from 'vue';
+import type { Store } from '../../shared/store';
 import type {
   ColumnCls,
   ColumnStyle,
   DefaultRow,
   Table,
-} from '../../Table/defaults'
-import type { TableOverflowTooltipOptions } from '../../shared/utils/table.util'
+} from '../../Table/defaults';
+import type { TableOverflowTooltipOptions } from '../../shared/utils/table.util';
 
 interface TableBodyProps<T> {
-  store: Store<T>
-  stripe?: boolean
-  context: Table<T>
-  rowClassName: ColumnCls<T>
-  rowStyle: ColumnStyle<T>
-  fixed: string
-  highlight: boolean
-  tooltipEffect?: string
-  tooltipOptions?: TableOverflowTooltipOptions
+  store: Store<T>;
+  stripe?: boolean;
+  context: Table<T>;
+  rowClassName: ColumnCls<T>;
+  rowStyle: ColumnStyle<T>;
+  fixed: string;
+  highlight: boolean;
+  tooltipEffect?: string;
+  tooltipOptions?: TableOverflowTooltipOptions;
 }
 
-const defaultProps = {
+const tableBodyProps = {
   store: {
     required: true,
     type: Object as PropType<TableBodyProps<DefaultRow>['store']>,
@@ -46,7 +46,7 @@ const defaultProps = {
     default: '',
   },
   highlight: Boolean,
-}
+};
 
-export { TableBodyProps }
-export default defaultProps
+export type { TableBodyProps };
+export { tableBodyProps };

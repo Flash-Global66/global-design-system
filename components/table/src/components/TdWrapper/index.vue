@@ -5,7 +5,7 @@
 <script setup lang="ts">
 defineOptions({
   name: 'TableTdWrapper',
-})
+});
 
 defineProps({
   colspan: {
@@ -16,5 +16,5 @@ defineProps({
     type: Number,
     default: 1,
   },
-})
+});
 </script>
