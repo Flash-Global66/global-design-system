@@ -7,91 +7,91 @@ import {
   unref,
   watch,
   watchEffect,
-} from 'vue'
-import { useEventListener, useResizeObserver } from '@vueuse/core'
+} from 'vue';
+import { useEventListener, useResizeObserver } from '@vueuse/core';
 
-import type { Table, TableProps } from './defaults'
-import type { Store } from '../shared/store'
-import type TableLayout from '../shared/composables/table-layout'
-import type { TableColumnCtx } from '../components/TableColumn/defaults'
-import { parseWidth } from '../shared/utils/table.util'
+import type { Table, TableProps } from './defaults';
+import type { Store } from '../shared/store';
+import type TableLayout from '../shared/composables/tableLayout';
+import type { TableColumnCtx } from '../components/TableColumn/defaults';
+import { parseWidth } from '../shared/utils/table.util';
 
 function useStyle<T>(
   props: TableProps<T>,
   layout: TableLayout<T>,
   store: Store<T>,
-  table: Table<T>
+  table: Table<T>,
 ) {
-  const isHidden = ref(false)
-  const renderExpanded = ref(null)
-  const resizeProxyVisible = ref(false)
+  const isHidden = ref(false);
+  const renderExpanded = ref(null);
+  const resizeProxyVisible = ref(false);
   const setDragVisible = (visible: boolean) => {
-    resizeProxyVisible.value = visible
-  }
+    resizeProxyVisible.value = visible;
+  };
   const resizeState = ref<{
-    width: null | number
-    height: null | number
-    headerHeight: null | number
+    width: null | number;
+    height: null | number;
+    headerHeight: null | number;
   }>({
     width: null,
     height: null,
     headerHeight: null,
-  })
-  const isGroup = ref(false)
+  });
+  const isGroup = ref(false);
   const scrollbarViewStyle = {
     display: 'inline-block',
     verticalAlign: 'middle',
-  }
-  const tableWidth = ref()
-  const tableScrollHeight = ref(0)
-  const bodyScrollHeight = ref(0)
-  const headerScrollHeight = ref(0)
-  const footerScrollHeight = ref(0)
-  const appendScrollHeight = ref(0)
+  };
+  const tableWidth = ref();
+  const tableScrollHeight = ref(0);
+  const bodyScrollHeight = ref(0);
+  const headerScrollHeight = ref(0);
+  const footerScrollHeight = ref(0);
+  const appendScrollHeight = ref(0);
 
   watchEffect(() => {
-    layout.setHeight(props.height)
-  })
+    layout.setHeight(props.height);
+  });
   watchEffect(() => {
-    layout.setMaxHeight(props.maxHeight)
-  })
+    layout.setMaxHeight(props.maxHeight);
+  });
   watch(
     () => [props.currentRowKey, store.states.rowKey],
     ([currentRowKey, rowKey]) => {
-      if (!unref(rowKey) || !unref(currentRowKey)) return
-      store.setCurrentRowKey(`${currentRowKey}`)
+      if (!unref(rowKey) || !unref(currentRowKey)) return;
+      store.setCurrentRowKey(`${currentRowKey}`);
     },
     {
       immediate: true,
-    }
-  )
+    },
+  );
   watch(
     () => props.data,
-    (data) => {
-      table.store.commit('setData', data)
+    data => {
+      table.store.commit('setData', data);
     },
     {
       immediate: true,
       deep: true,
-    }
-  )
+    },
+  );
   watchEffect(() => {
     if (props.expandRowKeys) {
-      store.setExpandRowKeysAdapter(props.expandRowKeys)
+      store.setExpandRowKeysAdapter(props.expandRowKeys);
     }
-  })
+  });
 
   const handleMouseLeave = () => {
-    table.store.commit('setHoverRow', null)
-    if (table.hoverState) table.hoverState = null
-  }
+    table.store.commit('setHoverRow', null);
+    if (table.hoverState) table.hoverState = null;
+  };
 
   const handleHeaderFooterMousewheel = (event, data) => {
-    const { pixelX, pixelY } = data
+    const { pixelX, pixelY } = data;
     if (Math.abs(pixelX) >= Math.abs(pixelY)) {
-      table.refs.bodyWrapper.scrollLeft += data.pixelX / 5
+      table.refs.bodyWrapper.scrollLeft += data.pixelX / 5;
     }
-  }
+  };
 
   const shouldUpdateHeight = computed(() => {
     return (
@@ -99,62 +99,62 @@ function useStyle<T>(
       props.maxHeight ||
       store.states.fixedColumns.value.length > 0 ||
       store.states.rightFixedColumns.value.length > 0
-    )
-  })
+    );
+  });
 
   const tableBodyStyles = computed(() => {
     return {
       width: layout.bodyWidth.value ? `${layout.bodyWidth.value}px` : '',
-    }
-  })
+    };
+  });
 
   function applyScrollMinWidth() {
-    const raw = props.scrollMinWidth
-    if (raw === undefined || raw === null || raw === '') return
-    const parsed = parseWidth(raw)
-    if (parsed === '') return
-    const minW = Number(parsed)
-    if (!Number.isFinite(minW) || minW <= 0) return
-    const el = table.vnode.el as HTMLElement | undefined
-    if (!el) return
-    const current = Number(layout.bodyWidth.value) || 0
-    const nextWidth = Math.max(current, minW)
-    layout.bodyWidth.value = nextWidth
-    layout.scrollX.value = nextWidth > el.clientWidth
+    const raw = props.scrollMinWidth;
+    if (raw === undefined || raw === null || raw === '') return;
+    const parsed = parseWidth(raw);
+    if (parsed === '') return;
+    const minW = Number(parsed);
+    if (!Number.isFinite(minW) || minW <= 0) return;
+    const el = table.vnode.el as HTMLElement | undefined;
+    if (!el) return;
+    const current = Number(layout.bodyWidth.value) || 0;
+    const nextWidth = Math.max(current, minW);
+    layout.bodyWidth.value = nextWidth;
+    layout.scrollX.value = nextWidth > el.clientWidth;
   }
 
   const doLayout = () => {
     if (shouldUpdateHeight.value) {
-      layout.updateElsHeight()
+      layout.updateElsHeight();
     }
-    layout.updateColumnsWidth()
-    applyScrollMinWidth()
+    layout.updateColumnsWidth();
+    applyScrollMinWidth();
 
     // When the test case is running, the context environment simulated by jsdom may have been destroyed,
     // and window.requestAnimationFrame does not exist at this time.
-    if (typeof window === 'undefined') return
-    requestAnimationFrame(syncPosition)
-  }
+    if (typeof window === 'undefined') return;
+    requestAnimationFrame(syncPosition);
+  };
 
   watch(
     () => props.scrollMinWidth,
     () => {
-      nextTick(() => doLayout())
-    }
-  )
+      nextTick(() => doLayout());
+    },
+  );
 
   onMounted(async () => {
-    await nextTick()
-    store.updateColumns()
-    bindEvents()
-    requestAnimationFrame(doLayout)
+    await nextTick();
+    store.updateColumns();
+    bindEvents();
+    requestAnimationFrame(doLayout);
 
-    const el: HTMLElement = table.vnode.el as HTMLElement
-    const tableHeader: HTMLElement = table.refs.headerWrapper
+    const el: HTMLElement = table.vnode.el as HTMLElement;
+    const tableHeader: HTMLElement = table.refs.headerWrapper;
     if (props.flexible && el && el.parentElement) {
       // Automatic minimum size of flex-items
       // Ensure that the main axis does not follow the width of the items
-      el.parentElement.style.minWidth = '0'
+      el.parentElement.style.minWidth = '0';
     }
 
     resizeState.value = {
@@ -162,7 +162,7 @@ function useStyle<T>(
       height: el.offsetHeight,
       headerHeight:
         props.showHeader && tableHeader ? tableHeader.offsetHeight : null,
-    }
+    };
 
     // init filters
     store.states.columns.value.forEach((column: TableColumnCtx<T>) => {
@@ -171,54 +171,54 @@ function useStyle<T>(
           column,
           values: column.filteredValue,
           silent: true,
-        })
+        });
       }
-    })
-    table.$ready = true
-  })
+    });
+    table.$ready = true;
+  });
   const setScrollClassByEl = (el: HTMLElement, className: string) => {
-    if (!el) return
+    if (!el) return;
     const classList = Array.from(el.classList).filter(
-      (item) => !item.startsWith('is-scrolling-')
-    )
-    classList.push(layout.scrollX.value ? className : 'is-scrolling-none')
-    el.className = classList.join(' ')
-  }
+      item => !item.startsWith('is-scrolling-'),
+    );
+    classList.push(layout.scrollX.value ? className : 'is-scrolling-none');
+    el.className = classList.join(' ');
+  };
   const setScrollClass = (className: string) => {
-    const { tableWrapper } = table.refs
-    setScrollClassByEl(tableWrapper, className)
-  }
+    const { tableWrapper } = table.refs;
+    setScrollClassByEl(tableWrapper, className);
+  };
   const hasScrollClass = (className: string) => {
-    const { tableWrapper } = table.refs
-    return !!(tableWrapper && tableWrapper.classList.contains(className))
-  }
+    const { tableWrapper } = table.refs;
+    return !!(tableWrapper && tableWrapper.classList.contains(className));
+  };
   const syncPosition = function () {
-    if (!table.refs.scrollBarRef) return
+    if (!table.refs.scrollBarRef) return;
     if (!layout.scrollX.value) {
-      const scrollingNoneClass = 'is-scrolling-none'
+      const scrollingNoneClass = 'is-scrolling-none';
       if (!hasScrollClass(scrollingNoneClass)) {
-        setScrollClass(scrollingNoneClass)
+        setScrollClass(scrollingNoneClass);
       }
-      return
+      return;
     }
-    const scrollContainer = table.refs.scrollBarRef.wrapRef
-    if (!scrollContainer) return
-    const { scrollLeft, offsetWidth, scrollWidth } = scrollContainer
-    const { headerWrapper, footerWrapper } = table.refs
-    if (headerWrapper) headerWrapper.scrollLeft = scrollLeft
-    if (footerWrapper) footerWrapper.scrollLeft = scrollLeft
-    const maxScrollLeftPosition = scrollWidth - offsetWidth - 1
+    const scrollContainer = table.refs.scrollBarRef.wrapRef;
+    if (!scrollContainer) return;
+    const { scrollLeft, offsetWidth, scrollWidth } = scrollContainer;
+    const { headerWrapper, footerWrapper } = table.refs;
+    if (headerWrapper) headerWrapper.scrollLeft = scrollLeft;
+    if (footerWrapper) footerWrapper.scrollLeft = scrollLeft;
+    const maxScrollLeftPosition = scrollWidth - offsetWidth - 1;
     if (scrollLeft >= maxScrollLeftPosition) {
-      setScrollClass('is-scrolling-right')
+      setScrollClass('is-scrolling-right');
     } else if (scrollLeft === 0) {
-      setScrollClass('is-scrolling-left')
+      setScrollClass('is-scrolling-left');
     } else {
-      setScrollClass('is-scrolling-middle')
+      setScrollClass('is-scrolling-middle');
     }
-  }
+  };
 
   const bindEvents = () => {
-    if (!table.refs.scrollBarRef) return
+    if (!table.refs.scrollBarRef) return;
     if (table.refs.scrollBarRef.wrapRef) {
       useEventListener(
         table.refs.scrollBarRef.wrapRef,
@@ -226,99 +226,99 @@ function useStyle<T>(
         syncPosition,
         {
           passive: true,
-        }
-      )
+        },
+      );
     }
     if (props.fit) {
-      useResizeObserver(table.vnode.el as HTMLElement, resizeListener)
+      useResizeObserver(table.vnode.el as HTMLElement, resizeListener);
     } else {
-      useEventListener(window, 'resize', resizeListener)
+      useEventListener(window, 'resize', resizeListener);
     }
 
     useResizeObserver(table.refs.bodyWrapper, () => {
-      resizeListener()
-      table.refs?.scrollBarRef?.update()
-    })
-  }
+      resizeListener();
+      table.refs?.scrollBarRef?.update();
+    });
+  };
   const resizeListener = () => {
-    const el = table.vnode.el
-    if (!table.$ready || !el) return
+    const el = table.vnode.el;
+    if (!table.$ready || !el) return;
 
-    let shouldUpdateLayout = false
+    let shouldUpdateLayout = false;
     const {
       width: oldWidth,
       height: oldHeight,
       headerHeight: oldHeaderHeight,
-    } = resizeState.value
+    } = resizeState.value;
 
-    const width = (tableWidth.value = el.offsetWidth)
+    const width = (tableWidth.value = el.offsetWidth);
     if (oldWidth !== width) {
-      shouldUpdateLayout = true
+      shouldUpdateLayout = true;
     }
 
-    const height = el.offsetHeight
+    const height = el.offsetHeight;
     if ((props.height || shouldUpdateHeight.value) && oldHeight !== height) {
-      shouldUpdateLayout = true
+      shouldUpdateLayout = true;
     }
 
     const tableHeader: HTMLElement =
       props.tableLayout === 'fixed'
         ? table.refs.headerWrapper
-        : table.refs.tableHeaderRef?.$el
+        : table.refs.tableHeaderRef?.$el;
     if (props.showHeader && tableHeader?.offsetHeight !== oldHeaderHeight) {
-      shouldUpdateLayout = true
+      shouldUpdateLayout = true;
     }
 
-    tableScrollHeight.value = table.refs.tableWrapper?.scrollHeight || 0
-    headerScrollHeight.value = tableHeader?.scrollHeight || 0
-    footerScrollHeight.value = table.refs.footerWrapper?.offsetHeight || 0
-    appendScrollHeight.value = table.refs.appendWrapper?.offsetHeight || 0
+    tableScrollHeight.value = table.refs.tableWrapper?.scrollHeight || 0;
+    headerScrollHeight.value = tableHeader?.scrollHeight || 0;
+    footerScrollHeight.value = table.refs.footerWrapper?.offsetHeight || 0;
+    appendScrollHeight.value = table.refs.appendWrapper?.offsetHeight || 0;
     bodyScrollHeight.value =
       tableScrollHeight.value -
       headerScrollHeight.value -
       footerScrollHeight.value -
-      appendScrollHeight.value
+      appendScrollHeight.value;
 
     if (shouldUpdateLayout) {
       resizeState.value = {
         width,
         height,
         headerHeight: (props.showHeader && tableHeader?.offsetHeight) || 0,
-      }
-      doLayout()
+      };
+      doLayout();
     }
-  }
-  const tableSize = 'default'
+  };
+  const tableSize = 'default';
   const bodyWidth = computed(() => {
-    const { bodyWidth: bodyWidth_, scrollY, gutterWidth } = layout
+    const { bodyWidth: bodyWidth_, scrollY, gutterWidth } = layout;
     return bodyWidth_.value
       ? `${(bodyWidth_.value as number) - (scrollY.value ? gutterWidth : 0)}px`
-      : ''
-  })
+      : '';
+  });
 
   const tableLayout = computed(() => {
-    if (props.maxHeight) return 'fixed'
-    return props.tableLayout
-  })
+    if (props.maxHeight) return 'fixed';
+    return props.tableLayout;
+  });
 
   const emptyBlockStyle = computed(() => {
-    if (props.data && props.data.length) return null
-    let height = '100%'
+    if (props.data && props.data.length) return null;
+    let height = '100%';
     if (props.height && bodyScrollHeight.value) {
-      height = `${bodyScrollHeight.value}px`
+      height = `${bodyScrollHeight.value}px`;
     }
-    const width = tableWidth.value
+    const width = tableWidth.value;
     return {
       width: width ? `${width}px` : '',
       height,
-    }
-  })
+    };
+  });
 
   const scrollbarStyle = computed(() => {
     if (props.height) {
       return {
         height: '100%',
-      }
+      };
     }
     if (props.maxHeight) {
       if (!Number.isNaN(Number(props.maxHeight))) {
@@ -328,40 +328,40 @@ function useStyle<T>(
             headerScrollHeight.value -
             footerScrollHeight.value
           }px`,
-        }
+        };
       } else {
         return {
           maxHeight: `calc(${props.maxHeight} - ${
             headerScrollHeight.value + footerScrollHeight.value
           }px)`,
-        }
+        };
       }
     }
 
-    return {}
-  })
+    return {};
+  });
 
   /**
    * fix layout
    */
   const handleFixedMousewheel = (event, data) => {
-    const bodyWrapper = table.refs.bodyWrapper
+    const bodyWrapper = table.refs.bodyWrapper;
     if (Math.abs(data.spinY) > 0) {
-      const currentScrollTop = bodyWrapper.scrollTop
+      const currentScrollTop = bodyWrapper.scrollTop;
       if (data.pixelY < 0 && currentScrollTop !== 0) {
-        event.preventDefault()
+        event.preventDefault();
       }
       if (
         data.pixelY > 0 &&
         bodyWrapper.scrollHeight - bodyWrapper.clientHeight > currentScrollTop
       ) {
-        event.preventDefault()
+        event.preventDefault();
       }
-      bodyWrapper.scrollTop += Math.ceil(data.pixelY / 5)
+      bodyWrapper.scrollTop += Math.ceil(data.pixelY / 5);
     } else {
-      bodyWrapper.scrollLeft += Math.ceil(data.pixelX / 5)
+      bodyWrapper.scrollLeft += Math.ceil(data.pixelX / 5);
     }
-  }
+  };
 
   return {
     isHidden,
@@ -381,7 +381,7 @@ function useStyle<T>(
     tableLayout,
     scrollbarViewStyle,
     scrollbarStyle,
-  }
+  };
 }
 
-export default useStyle
+export default useStyle;

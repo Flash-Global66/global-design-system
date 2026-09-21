@@ -11,7 +11,7 @@ import type {
 import type { Nullable } from '@flash-global66/g-utils';
 import type { Store } from '../shared/store';
 import type { TableColumnCtx } from '../components/TableColumn/defaults';
-import type TableLayout from '../shared/composables/table-layout';
+import type TableLayout from '../shared/composables/tableLayout';
 import type {
   TableOverflowTooltipFormatter,
   TableOverflowTooltipOptions,
