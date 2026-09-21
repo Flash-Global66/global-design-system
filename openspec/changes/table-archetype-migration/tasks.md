@@ -62,7 +62,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
   - listo cuando: `TableFooter/index.vue` existe con el mismo comportamiento
   - commit: `refactor(table): migrar TableFooter a SFC`
 
-- [ ] **7 · Separar lógica de `CellEdit` a composable**
+- [x] **7 · Separar lógica de `CellEdit` a composable**
   - archivos: `components/table/src/components/CellEdit/index.vue`, nuevo `useCellEdit.ts`
   - depende de: ninguna
   - listo cuando: toda la lógica reactiva (`ref`/`computed`/`watch`/handlers) vive en `useCellEdit.ts`;
