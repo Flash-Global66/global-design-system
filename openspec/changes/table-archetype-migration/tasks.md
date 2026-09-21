@@ -87,7 +87,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     renderiza directo) queda en `dependencies`
   - commit: `fix(table): mover dependencias renderizadas a peerDependencies`
 
-- [ ] **10 · Espejar el test existente**
+- [x] **10 · Espejar el test existente**
   - archivos: `components/table/tests/select-cell-renderer.spec.ts` (→
     `components/table/tests/components/TableColumn/cell-renderers/select-cell-renderer.spec.ts`)
   - depende de: 5 (para no mover el spec dos veces si el import que testea cambia de ruta)
