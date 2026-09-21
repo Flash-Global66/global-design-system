@@ -43,7 +43,7 @@ Este cambio no altera comportamiento — no hay `specs/` delta. El criterio es e
     vive dentro de `TableBody/`, sino en su propia carpeta `TdWrapper/` (PascalCase, trío completo)
   - commit: `refactor(table): migrar TableBody a SFC y separar TdWrapper`
 
-- [ ] **5 · Migrar `TableColumn` a SFC y relocar `cellRenderer.type.ts`**
+- [x] **5 · Migrar `TableColumn` a SFC y relocar `cellRenderer.type.ts`**
   - archivos: `components/table/src/components/TableColumn/index.ts` (→ `index.vue`), `defaults.ts`,
     `useRender.ts`, `useWatcher.ts`, `styles/table-column.scss` (→ `tableColumn.style.scss` junto a
     `index.vue`, eliminando la carpeta `styles/`), `cell-renderers/types.ts` (→
