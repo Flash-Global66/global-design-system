@@ -9,7 +9,10 @@
   @include e('header') {
     @apply flex flex-col items-start px-lg pt-lg gap-4 mb-xxs;
     @include m('container-close') {
-      @apply self-end;
+      @apply w-full flex items-center;
+    }
+    @include m('close') {
+      @apply ml-auto;
     }
     @include m('container-title') {
       @apply flex flex-col gap-md w-full;

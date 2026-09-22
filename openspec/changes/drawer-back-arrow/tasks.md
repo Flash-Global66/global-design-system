@@ -11,7 +11,7 @@
     en verde
   - commit: `feat(drawer): optional back arrow that emits back`
 
-- [ ] **2 · Layout de la fila superior del header**
+- [x] **2 · Layout de la fila superior del header**
   - archivos: `components/drawer/src/drawer.styles.scss`, `scripts/scss-parity/baseline/drawer.css`
   - depende de: ninguna
   - listo cuando: `container-close` deja de ser `self-end` y pasa a ser una fila completa alineada al
