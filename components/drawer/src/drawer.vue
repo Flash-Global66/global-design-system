@@ -46,10 +46,20 @@
               :class="[ns.e('header'), headerClass]"
             >
               <div
-                v-if="props.showClose"
+                v-if="props.showClose || props.showBack"
                 :class="ns.em('header', 'container-close')"
               >
-                <g-icon-button icon="regular times" @click="handleClose" />
+                <g-icon-button
+                  v-if="props.showBack"
+                  icon="regular arrow-left"
+                  @click="handleBack"
+                />
+                <g-icon-button
+                  v-if="props.showClose"
+                  icon="regular times"
+                  :class="ns.em('header', 'close')"
+                  @click="handleClose"
+                />
               </div>
               <div
                 v-if="$slots.customHeader || title || description"
@@ -128,7 +138,7 @@ defineOptions({
 });
 
 const props = defineProps(drawerProps);
-defineEmits(drawerEmits);
+const emit = defineEmits(drawerEmits);
 
 const drawerRef = ref<HTMLElement>();
 const focusStartRef = ref<HTMLElement>();
@@ -205,6 +215,10 @@ const {
   closeOnClickModal,
   closeOnPressEscape,
 });
+
+function handleBack(): void {
+  emit('back');
+}
 
 defineExpose({
   handleClose,

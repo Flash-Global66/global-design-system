@@ -1,6 +1,6 @@
 # Tareas
 
-- [ ] **1 · Prop `showBack`, emit `back` y la flecha en el header**
+- [x] **1 · Prop `showBack`, emit `back` y la flecha en el header**
   - archivos: `components/drawer/src/drawer.ts`, `components/drawer/src/drawer.vue`, `components/drawer/tests/Drawer.spec.ts`
   - depende de: ninguna
   - listo cuando: con `show-back` el header renderiza un `g-icon-button` con icono
