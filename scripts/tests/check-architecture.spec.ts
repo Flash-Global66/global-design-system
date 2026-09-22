@@ -1,5 +1,5 @@
 /**
- * Unit tests de los predicados deterministas de scripts/check-architecture.js —
+ * Unit tests de los predicados deterministas de scripts/check-architecture.mjs —
  * las 5 reglas mecánicas del arquetipo (docs/architecture/component-architecture.md
  * + rules ds-*.md) que un ESLint genérico no atrapa sin una regla local propia.
  */
@@ -10,7 +10,7 @@ import {
   hasHelperInName,
   findExportDefaultLines,
   findHandWrittenGuiClassLines,
-} from '../check-architecture.js';
+} from '../check-architecture.mjs';
 
 describe('isNestedBarrelFile', () => {
   it('flags any index.ts (el único permitido vive en la raíz del paquete, fuera de src/)', () => {

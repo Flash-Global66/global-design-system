@@ -86,7 +86,7 @@ jobs:
           fi
           echo "Checking architecture on files changed in this PR:"
           echo "$FILES"
-          node scripts/check-architecture.js $FILES --ci
+          node scripts/check-architecture.mjs $FILES --ci
 
       # Build BEFORE tests. Several packages are `buildable` and expose their
       # entry via `exports` → `dist/` (e.g. g-form, g-icon-font). The unit tests

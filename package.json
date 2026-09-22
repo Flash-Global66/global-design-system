@@ -40,8 +40,8 @@
     "test:run": "vitest run",
     "test:watch": "vitest",
     "scss:parity": "node scripts/scss-parity.mjs",
-    "arch:check": "node scripts/check-architecture.js",
-    "arch:check:ci": "node scripts/check-architecture.js --ci"
+    "arch:check": "node scripts/check-architecture.mjs",
+    "arch:check:ci": "node scripts/check-architecture.mjs --ci"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
@@ -51,7 +51,7 @@
     "*.{vue,ts,js,jsx,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "node scripts/check-architecture.js --ci"
+      "node scripts/check-architecture.mjs --ci"
     ],
     "*.{md,json,yaml,yml}": [
       "prettier --write"
