@@ -71,6 +71,23 @@ jobs:
           echo "$FILES"
           yarn eslint $FILES --max-warnings 0
 
+      # Arquetipo de componente (docs/architecture/component-architecture.md + rules
+      # ds-*.md): barrels dentro de una capa, `export default` fuera de un .vue,
+      # `types.ts`/`*helper*` como nombre de archivo, clases `gui-*` escritas a mano
+      # en vez de useNamespace(). Mismo criterio de scoping que el lint de arriba —
+      # solo los archivos que este PR cambió, para no bloquear por deuda preexistente.
+      - name: Architecture check (changed files)
+        run: |
+          git fetch origin "$GITHUB_BASE_REF" --quiet
+          FILES=$(git diff --name-only --diff-filter=ACMR "origin/$GITHUB_BASE_REF"...HEAD -- 'components/*/src/**' 'common/*/src/**')
+          if [ -z "$FILES" ]; then
+            echo "No changed files under a package src/ — skipping architecture check."
+            exit 0
+          fi
+          echo "Checking architecture on files changed in this PR:"
+          echo "$FILES"
+          node scripts/check-architecture.js $FILES --ci
+
       # Build BEFORE tests. Several packages are `buildable` and expose their
       # entry via `exports` → `dist/` (e.g. g-form, g-icon-font). The unit tests
       # import those packages by their bare specifier, so `dist/` must exist
