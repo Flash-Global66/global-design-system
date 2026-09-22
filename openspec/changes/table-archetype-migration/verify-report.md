@@ -2,12 +2,12 @@
 
 ```yaml
 veredicto: pasa
-ronda: 2
+ronda: 3
 fecha: 2026-09-21
 tareas_a_medias: []
 cumplidas: 10/10
 a_medias: 0
-de_mas: 4
+de_mas: 5
 comandos:
   - cmd: 'find components/table/src -iname "*helper*" | wc -l'
     exit: 0
@@ -62,7 +62,7 @@ comandos:
   - cmd: 'GBP_PACKAGE_TOKEN=dummy yarn vitest run components/table/tests --reporter=basic'
     exit: 0
     esperado: '1 archivo, 2 tests passed'
-    obtenido: '1 archivo, 2 tests passed (working tree == HEAD para components/table)'
+    obtenido: '2 archivos, 3 tests passed — el archivo y los 2 tests declarados pasan verbatim; el 3º es el test de regresión del fix 610de344 ("de más"), el número declarado quedó desactualizado'
     coincide: true
   - cmd: 'verificación visual en Storybook (pasos 1-3)'
     exit: null
@@ -70,69 +70,80 @@ comandos:
     obtenido: 'no ejecutable: exige una captura tomada antes de migrar, que ya no se puede reproducir'
     coincide: no_verificado
   - cmd: 'calcifer check'
-    exit: 1
+    exit: 0
     esperado: 'no declarado por el plan'
-    obtenido: 'eslint limpio; el paso test no corrió por falta de GBP_PACKAGE_TOKEN en el entorno de calcifer, no por el diff'
+    obtenido: 'eslint limpio; el paso test no corrió por falta de GBP_PACKAGE_TOKEN en el arnés de calcifer'
+    coincide: no_verificado
+  - cmd: 'GBP_PACKAGE_TOKEN=dummy yarn vitest run (suite completa, extra)'
+    exit: 0
+    esperado: 'no declarado por el plan'
+    obtenido: '77 archivos, 552 tests passed'
+    coincide: no_verificado
+  - cmd: 'repro propia de la regresión de TableColumn (extra)'
+    exit: 0
+    esperado: 'no declarado por el plan'
+    obtenido: '3/3: acceso anidado + columna plana → 2 th; columna agrupada descubre Grupo/A/B; sin slot no tira. El spec permanente falla con el TypeError original si se restaura el index.vue pre-fix'
     coincide: no_verificado
   - cmd: 'vue-tsc --noEmit -p tsconfig.json (extra, no declarado por el plan)'
     exit: 2
     esperado: 'no declarado por el plan'
-    obtenido: '218 errores, 0 en components/table; todos son matchers de jest-dom en tests de otros 14 componentes que este diff no toca'
+    obtenido: '0 errores en components/table; el resto son matchers de jest-dom en tests de otros componentes fuera del diff'
     coincide: no_verificado
 ```
 
+Sin `specs/` en el change: la línea de escenarios se omite.
+
 ## Qué se cumplió
 
-| #   | Tarea                                                       | Evidencia                                                                                                                                                                                |
-| --- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Renombrar `table-layout.ts`/`store/helper.ts`               | `shared/composables/tableLayout.ts` y `shared/store/table.store.ts` existen; `table-layout.ts` no; `find -iname "*helper*"` = 0                                                          |
-| 2   | Limpiar `Table/`: scss duplicado y `export default`         | `Table/styles/` no existe; `Table/defaults.ts:202` es `export const tableProps`; 0 `export default`                                                                                      |
-| 3   | Migrar `TableHeader` a SFC                                  | `index.vue` + `useEvent.ts` + `useStyle.ts` + `useTableHeader.ts`; `index.ts`/`useUtils.ts` borrados; puras en `shared/utils/tableColumn.util.ts`                                        |
-| 4   | Migrar `TableBody` a SFC y separar `TdWrapper`              | `TableBody/index.vue` + `useTableBody.ts`; `td-wrapper.vue` → `TdWrapper/index.vue`                                                                                                      |
-| 5   | Migrar `TableColumn` a SFC y relocar `cellRenderer.type.ts` | `TableColumn/index.vue` + `tableColumn.style.scss`; `cell-renderers/types.ts` borrado; `shared/types/cellRenderer.type.ts` existe                                                        |
-| 6   | Migrar `TableFooter` a SFC                                  | `index.vue` + `useTableFooter.ts` + `defaults.ts`                                                                                                                                        |
-| 7   | Separar lógica de `CellEdit` a composable                   | `useCellEdit.ts` existe; `index.vue` sin `ref(`/`computed(`/`watch(`                                                                                                                     |
-| 8   | Migrar `FilterPanel` a `<script setup>` con composable      | `index.vue` sin `defineComponent`/`export default`; `useFilterPanel.ts` existe                                                                                                           |
-| 9   | Corregir `dependencies`→`peerDependencies`                  | Los 6 renderizados en `peerDependencies`; `dependencies` solo `g-hooks`/`g-popper`/`g-utils`                                                                                             |
-| 10  | Espejar el test existente                                   | `git show HEAD:...select-cell-renderer.spec.ts` trae el import correcto (`'../../../../src/...'`); diff del spec es un rename con una sola línea cambiada; suite verde en HEAD (2 tests) |
+Las 10 evidencias de la ronda 2 se revalidaron y siguen en pie. Sobre la tarea 5, que es la que
+toca el fix de esta ronda: su `listo cuando` es puramente estructural y los tres puntos siguen
+cumplidos — `TableColumn/index.vue` existe y sigue siendo SFC con `<script setup>`,
+`cell-renderers/types.ts` está borrado, y `shared/types/cellRenderer.type.ts` exporta
+`RenderCellData` y `CellRenderer`. El fix de `610de344` cambió el **contenido** del render, no
+ninguno de los tres hechos que el criterio declara — no reabre la tarea 5.
 
 ## Qué quedó a medias
 
-Ninguna. La tarea 10 (única en el `tareas_a_medias` de la ronda 1) quedó cumplida en `4498168b`.
+Ninguna.
 
 ## Qué se hizo de más
 
-Los mismos 4 de la ronda 1 — nada nuevo se sumó (`4498168b` es la propia tarea 10, `00b76800` es el
-registro del reporte de la ronda 1):
+Los 4 ya juzgados legítimos en la ronda 2 (`shared/types/tableHeader.type.ts`,
+`shared/types/cellEdit.type.ts`, `TableFooter/defaults.ts`, el `:key` de `TableFooter/index.vue`, y
+el commit de integración `cf902d5d`), más uno nuevo:
 
-1. **Commit `cf902d5d`** — 7 imports/paths de integración entre las 4 migraciones paralelas de la
-   ola 1, que ningún ítem del plan pidió explícitamente pero eran necesarios para que quedaran
-   integradas.
-2. **Pasada de prettier** sobre `components/table/index.ts` y los 4 archivos de `cell-renderers/`
-   que el plan solo iba a tocar por una ruta de import — sin cambios semánticos.
-3. **Archivos fuera del `archivos:` declarado**: `shared/types/tableHeader.type.ts` y
-   `shared/types/cellEdit.type.ts` (exigidos por `ds-types-location.md`, desvío legítimo) y
-   `TableFooter/defaults.ts` (sin rule que lo fuerce, sin criterio explícito que lo cubra).
-4. **`:key` del `v-for` en `TableFooter/index.vue`**: de `cellIndex` a `column.id` — gobernado por
-   `render-performance.md`, no toca contrato público, pero el plan no lo pidió.
-
-No se cuentan los restos sin commitear en el working tree de la sesión ajena (`.storybook/*`,
-`package.json` raíz, `stories/button.stories.ts`, `.codegraph/`, `.cursor/`): confirmado que no
-aparecen en `git diff def7f4c8..HEAD`.
+5. **Commit `610de344`** — `TableColumn/index.vue` (restaura el try/catch + filtrado de hijos que
+   `TableColumn/index.ts` tenía antes de la migración, vía `<component :is="renderColumnChildren" />`
+   dentro de `<script setup>`) y `components/table/tests/components/TableColumn/index.spec.ts`
+   (test de regresión nuevo). Ningún ítem del plan lo pidió — salió de `/calcifer:review`, que
+   encontró y reprodujo una regresión real de comportamiento (un `TypeError` no capturado en
+   cualquier cell template con acceso anidado a la fila). Es "de más" legítimo: tiene justificación
+   en el commit, un comentario en el código, y su propio test — verificado de forma independiente
+   por el subagente de review (4/4 casos) y por esta ronda (repro propia: 3/3, más restaurar el
+   `index.vue` pre-fix y confirmar que el spec permanente sí falla con el `TypeError` original).
 
 ## Con qué se probó
 
-- **`calcifer check`**: exit 1, pero no por el diff — eslint limpio, y el paso `test` no corrió por
-  falta de `GBP_PACKAGE_TOKEN` en el arnés de `calcifer` (la misma suite corre verde con el token).
-- **Comandos del plan**: los 10 del checklist estructural coinciden; el vitest funcional coincide.
-- **`vue-tsc --noEmit`** (extra, no declarado por el plan): 218 errores, 0 en `components/table` —
-  todos matchers de `jest-dom` en tests de otros 14 componentes fuera de este diff.
+- **`calcifer check`**: exit 0, eslint limpio sobre los 54 archivos del diff. El paso `test` no
+  corrió por `GBP_PACKAGE_TOKEN` ausente en el arnés — se suplió corriendo la suite completa con el
+  token: 77 archivos, 552 tests passed.
+- **Repro propia de la regresión, no solo lo reportado**: se restauró el `index.vue` pre-fix
+  (`git show 610de344^:...`) sobre el working tree y se corrió el spec permanente — **falla** con
+  el mismo `TypeError` que encontró el review. Se restauró el fix (`git checkout --`) y se confirmó
+  `git status` limpio. Además, una spec temporal propia (acceso anidado, columna agrupada, sin
+  slot) dio 3/3 en verde.
+- **`vue-tsc --noEmit`**: 0 errores en `components/table`.
 
 ## Observaciones para el plan (no bloquean este veredicto)
 
-1. La verificación visual en Storybook es inverificable por construcción: su paso 1 exige una
-   captura tomada _antes_ de migrar, que nadie tomó y ya no se puede reproducir.
-2. `ds-types-location.md` prohíbe `export default` también en `use*.ts`; quedan 16 en
-   `components/table/src`, incluidos dos tocados por la tarea 3 y uno creado por la tarea 5.
-   Ninguna tarea lo declaró como criterio — no es incumplimiento, es una brecha entre lo que
-   `proposal.md` promete y lo que `tasks.md` pidió verificar.
+1. El `listo cuando` de tareas que migran un render a SFC (3, 4, 5, 6) es puramente estructural
+   ("existe `index.vue`", "mismo comportamiento" sin nada que lo mida) — por eso la ronda 2 dio
+   `pasa` con la regresión de `TableColumn` adentro. Un criterio de comportamiento (un test, o al
+   menos "la story monta sin errores en consola") habría atrapado esto antes del review.
+2. La verificación visual en Storybook sigue siendo inverificable por construcción (exige una
+   captura previa a la migración que nadie tomó) — es la tercera ronda que va `no_verificado` por
+   el mismo motivo, y es justo el hueco por donde pasó la regresión.
+3. El número declarado del vitest (`1 archivo, 2 tests`) quedó desactualizado en cuanto se agregó
+   el test de regresión — un criterio con conteo exacto se rompe con cualquier test nuevo legítimo.
+4. Sigue en pie la observación de la ronda 2 sobre `export default` en `use*.ts` (`ds-types-location.md`),
+   incluido `TableColumn/useTableColumn.ts:185` — ninguna tarea lo declaró como criterio.
