@@ -20,7 +20,7 @@
     baseline de `drawer` con `--update`; y `drawer-theme` no cambia
   - commit: `style(drawer): header top row hosts back and close`
 
-- [ ] **3 · Documentar la prop en Storybook**
+- [x] **3 · Documentar la prop en Storybook**
   - archivos: `stories/drawer.stories.ts`
   - depende de: 1
   - listo cuando: `showBack` aparece en `argTypes` con su control booleano y su descripción, junto a
