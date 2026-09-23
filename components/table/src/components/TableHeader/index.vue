@@ -28,15 +28,14 @@
           ]"
         >
           <template v-if="column.renderHeader">
-            <component
-              :is="
-                () =>
-                  column.renderHeader({
-                    column,
-                    $index: cellIndex,
-                    store,
-                    _self: parent?.proxy,
-                  })
+            <VNodeRenderer
+              :vnode="
+                column.renderHeader({
+                  column,
+                  $index: cellIndex,
+                  store,
+                  _self: parent?.proxy,
+                })
               "
             />
           </template>
@@ -68,13 +67,12 @@
             "
           >
             <template #filter-icon>
-              <component
+              <VNodeRenderer
                 v-if="column.renderFilterIcon"
-                :is="
-                  () =>
-                    column.renderFilterIcon({
-                      filterOpened: column.filterOpened,
-                    })
+                :vnode="
+                  column.renderFilterIcon({
+                    filterOpened: column.filterOpened,
+                  })
                 "
               />
             </template>
@@ -89,6 +87,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import FilterPanel from '../FilterPanel/index.vue';
+import { VNodeRenderer } from '../../shared/utils/render.util';
 import { useTableHeader } from './useTableHeader';
 import type { PropType } from 'vue';
 import type { DefaultRow } from '../../Table/defaults';

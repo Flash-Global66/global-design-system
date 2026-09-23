@@ -21,12 +21,12 @@
           @mouseenter="cell.onMouseenter"
           @mouseleave="cell.onMouseleave"
         >
-          <component :is="cell.render" />
+          <VNodeRenderer :vnode="cell.render()" />
         </TdWrapper>
       </tr>
       <tr v-else :style="trDescriptor.style">
         <td :colspan="trDescriptor.colspan" :class="trDescriptor.cellClass">
-          <component :is="trDescriptor.render" />
+          <VNodeRenderer :vnode="trDescriptor.render()" />
         </td>
       </tr>
     </template>
@@ -37,6 +37,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import TdWrapper from '../TdWrapper/index.vue';
+import { VNodeRenderer } from '../../shared/utils/render.util';
 import { tableBodyProps } from './defaults';
 import { useTableBody } from './useTableBody';
 

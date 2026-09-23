@@ -10,7 +10,7 @@
         :style="getCellStyles(column, cellIndex)"
       >
         <div :class="['cell', column.labelClassName]">
-          {{ sums[cellIndex] }}
+          <VNodeRenderer :vnode="sums[cellIndex]" />
         </div>
       </td>
     </tr>
@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import { VNodeRenderer } from '../../shared/utils/render.util';
 import { tableFooterProps } from './defaults';
 import { useTableFooter } from './useTableFooter';
 
