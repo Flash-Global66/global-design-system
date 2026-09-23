@@ -3,7 +3,7 @@ import type { VNode } from 'vue';
 import type {
   TableOverflowTooltipFormatter,
   TableOverflowTooltipOptions,
-} from '../utils/table.util';
+} from './tableOverflowTooltip.type';
 
 type CI<T> = { column: TableColumnCtx<T>; $index: number };
 

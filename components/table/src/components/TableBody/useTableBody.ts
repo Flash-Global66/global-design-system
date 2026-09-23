@@ -29,52 +29,19 @@ import {
 } from '../../shared/utils/table.util';
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
 
-import type { VNode } from 'vue';
 import type { TableColumnCtx } from '../../shared/types/tableColumn.type';
-import type { TableBodyProps } from './types/tableBody.type';
+import type {
+  TableBodyCellDescriptor,
+  TableBodyProps,
+  TableBodyRowDescriptor,
+  TableBodyTrDescriptor,
+} from './types/tableBody.type';
 import type {
   RenderRowData,
   TableProps,
   TreeNode,
 } from '../../shared/types/table.type';
-import type { TableOverflowTooltipOptions } from '../../shared/utils/table.util';
-
-interface TableBodyCellDescriptor {
-  key: string;
-  style: Record<string, unknown>;
-  class: string;
-  rowspan: number;
-  colspan: number;
-  onMouseenter: (event: MouseEvent) => void;
-  onMouseleave: (event: MouseEvent) => void;
-  render: () => VNode;
-}
-
-interface TableBodyRowDescriptor {
-  type: 'row';
-  key: string | number;
-  style: unknown;
-  class: string[];
-  onDblclick: (event: Event) => void;
-  onClick: (event: Event) => void;
-  onContextmenu: (event: Event) => void;
-  onMouseenter: () => void;
-  onMouseleave: () => void;
-  cells: TableBodyCellDescriptor[];
-}
-
-interface TableBodyExpandedRowDescriptor {
-  type: 'expanded';
-  key: string;
-  style: Record<string, string>;
-  colspan: number;
-  cellClass: string;
-  render: () => VNode;
-}
-
-type TableBodyTrDescriptor =
-  | TableBodyRowDescriptor
-  | TableBodyExpandedRowDescriptor;
+import type { TableOverflowTooltipOptions } from '../../shared/types/tableOverflowTooltip.type';
 
 function isGreaterThan(a: number, b: number, epsilon = 0.03): boolean {
   return a - b > epsilon;

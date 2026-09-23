@@ -1,7 +1,5 @@
 import { computed, inject, nextTick, onUnmounted, ref, watch } from 'vue';
-import type { ComputedRef, Ref, WritableComputedRef } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
-import type { NamespaceHelpers } from '@flash-global66/g-utils';
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
 import {
   calculateExpandedWidthSync,
@@ -9,43 +7,17 @@ import {
   setActiveTableFromEvent,
   setCellOverflow,
 } from '../../shared/utils/cellExpansion.util';
-import type { GCellEditProps } from './types/cellEdit.type';
+import type {
+  CellEditEmit,
+  GCellEditProps,
+  UseCellEditReturn,
+} from './types/cellEdit.type';
 
 const FOCUSABLE_SELECTOR =
   'input:not([type="hidden"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const POPPER_SELECTORS =
   '.el-popper, .el-select-dropdown, .gui-select-dropdown, .el-date-picker, .el-picker-panel';
-
-type CellEditEmit = {
-  (e: 'update:modelValue', value: boolean): void;
-  (e: 'toggle', value: boolean): void;
-  (e: 'close'): void;
-  (
-    e: 'cell-edit-open',
-    row: Record<string, unknown>,
-    column: Record<string, unknown>,
-  ): void;
-  (
-    e: 'cell-edit-close',
-    row: Record<string, unknown>,
-    column: Record<string, unknown>,
-  ): void;
-};
-
-type UseCellEditReturn = {
-  ns: NamespaceHelpers;
-  isEditing: WritableComputedRef<boolean>;
-  wrapperClass: ComputedRef<string>;
-  editWrapperClass: ComputedRef<string>;
-  wrapperStyle: ComputedRef<Record<string, string>>;
-  toggleEdit: (e?: Event) => void;
-  closeEdit: () => void;
-  handleClick: (e: Event) => void;
-  handleKeydown: (e: KeyboardEvent) => void;
-  cellRef: Ref<HTMLElement | undefined>;
-  editWrapperRef: Ref<HTMLElement | undefined>;
-};
 
 function focusFirstInput(el: HTMLElement | null | undefined): void {
   if (!el) return;

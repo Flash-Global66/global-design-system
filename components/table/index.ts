@@ -39,13 +39,13 @@ export type {
   TableCellSelectGetOptions,
   TableCellSelectCellOptions,
   UseTableCellSelectOptions,
-} from './src/shared/composables/useTableCellSelect';
+} from './src/shared/types/tableCellSelect.type';
 
 export { useTableCellInput } from './src/shared/composables/useTableCellInput';
 export type {
   TableCellInputCellOptions,
   UseTableCellInputOptions,
-} from './src/shared/composables/useTableCellInput';
+} from './src/shared/types/tableCellInput.type';
 
 export { useTableCellValidation } from './src/shared/composables/useTableCellValidation';
 export type {
@@ -55,7 +55,7 @@ export type {
   CellValidationState,
   UseTableCellValidationOptions,
   TableCellValidationApi,
-} from './src/shared/composables/useTableCellValidation';
+} from './src/shared/types/tableCellValidation.type';
 
 import GCellEdit from './src/components/CellEdit/index.vue';
 export { GCellEdit };

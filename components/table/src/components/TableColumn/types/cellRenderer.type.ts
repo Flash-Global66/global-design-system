@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, VNode } from 'vue';
 import type { TableColumnCtx } from '../../../shared/types/tableColumn.type';
-import type { TableCellValidationApi } from '../../../shared/composables/useTableCellValidation';
+import type { TableCellValidationApi } from '../../../shared/types/tableCellValidation.type';
 
 export interface RenderCellData {
   row: unknown;

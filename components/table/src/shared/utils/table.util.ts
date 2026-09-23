@@ -14,33 +14,11 @@ import {
   isUndefined,
   throwError,
 } from '@flash-global66/g-utils';
-import GTooltip, { type GTooltipProps } from '@flash-global66/g-tooltip';
+import GTooltip from '@flash-global66/g-tooltip';
 import type { Table, TreeProps } from '../types/table.type';
 import type { TableColumnCtx } from '../types/tableColumn.type';
 import type { VNode } from 'vue';
-
-export type TableOverflowTooltipOptions = Partial<
-  Pick<
-    GTooltipProps,
-    | 'appendTo'
-    | 'effect'
-    | 'enterable'
-    | 'hideAfter'
-    | 'offset'
-    | 'placement'
-    | 'popperClass'
-    | 'popperOptions'
-    | 'showAfter'
-    | 'showArrow'
-    | 'transition'
-  >
->;
-
-export type TableOverflowTooltipFormatter<T = any> = (data: {
-  row: T;
-  column: TableColumnCtx<T>;
-  cellValue;
-}) => VNode | string;
+import type { TableOverflowTooltipOptions } from '../types/tableOverflowTooltip.type';
 
 type RemovePopperFn = (() => void) & {
   trigger?: HTMLElement;

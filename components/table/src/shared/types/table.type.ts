@@ -9,7 +9,7 @@ import type { TableLayout } from '../store/tableLayout.store';
 import type {
   TableOverflowTooltipFormatter,
   TableOverflowTooltipOptions,
-} from '../utils/table.util';
+} from './tableOverflowTooltip.type';
 
 export type DefaultRow = any;
 

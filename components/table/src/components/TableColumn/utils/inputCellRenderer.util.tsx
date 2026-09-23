@@ -8,7 +8,7 @@ import type {
   RenderCellData,
   TableEmit,
 } from '../types/cellRenderer.type';
-import type { TableCellValidationApi } from '../../../shared/composables/useTableCellValidation';
+import type { TableCellValidationApi } from '../../../shared/types/tableCellValidation.type';
 import {
   calculateExpandedWidthSync,
   calculateLeftOffset,
