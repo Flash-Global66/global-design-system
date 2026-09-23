@@ -5,6 +5,7 @@
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
+    "./styles.scss": "./overlay.styles.scss",
     "./*": "./*"
   },
   "publishConfig": {
