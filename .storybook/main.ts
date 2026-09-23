@@ -18,7 +18,13 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-docs',
     '@storybook/addon-vitest',
+    '@storybook/addon-mcp',
   ],
+
+  features: {
+    componentsManifest: true,
+    experimentalDocgenServer: true,
+  },
 };
 
 export default config;

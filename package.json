@@ -22,8 +22,8 @@
   "scripts": {
     "prepare": "simple-git-hooks",
     "install-skills": "node ../ai-context/install-skills.mjs",
-    "storybook": "storybook dev -p 6006 --ci",
-    "build-storybook": "storybook build",
+    "storybook": "NODE_OPTIONS=--max-old-space-size=8192 storybook dev -p 6006 --ci",
+    "build-storybook": "NODE_OPTIONS=--max-old-space-size=8192 storybook build",
     "diff": "npx lerna diff",
     "compare-versions": "bash ./scripts-terminal/generate-versions-local.sh && bash ./scripts-terminal/compare-versions.sh",
     "sync-versions": "bash ./scripts-terminal/sync-versions.sh",
@@ -73,6 +73,7 @@
     "@fortawesome/vue-fontawesome": "3.1.1",
     "@storybook/addon-docs": "10.6.0",
     "@storybook/addon-links": "10.6.0",
+    "@storybook/addon-mcp": "10.6.0",
     "@storybook/addon-vitest": "10.6.0",
     "@storybook/vue3-vite": "10.6.0",
     "@testing-library/jest-dom": "^6.9.1",
