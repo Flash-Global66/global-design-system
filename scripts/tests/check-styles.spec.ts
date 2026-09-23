@@ -1,7 +1,8 @@
 /**
  * Unit tests de la lógica pura de scripts/check-styles.mjs: qué `@use` registra el index de
- * estilos de Storybook, qué paquetes con `exports["./styles.scss"]` quedan afuera, y cómo se
- * reporta un error de sass. La compilación real no se testea acá: la cubre el propio script.
+ * estilos de Storybook, qué paquetes con `exports["./styles.scss"]` quedan afuera, qué paquetes con
+ * SCSS propio no lo exportan, y cómo se reporta un error de sass. La compilación real no se testea
+ * acá: la cubre el propio script.
  */
 import { describe, it, expect } from 'vitest';
 import {
@@ -10,6 +11,10 @@ import {
   findRegisteredPackageNames,
   findUnregisteredPackages,
   getStylesExportTarget,
+  isOwnStylesPath,
+  findPackagesMissingStylesExport,
+  findStaleAllowlistEntries,
+  MISSING_STYLES_EXPORT_ALLOWLIST,
   formatSassError,
   isKnownNoiseWarning,
 } from '../check-styles.mjs';
@@ -174,6 +179,139 @@ describe('getStylesExportTarget', () => {
     };
 
     expect(getStylesExportTarget(packageJson)).toBeNull();
+  });
+});
+
+describe('isOwnStylesPath', () => {
+  it('accepts a .scss at the package root (legacy layout)', () => {
+    expect(isOwnStylesPath('badge.styles.scss')).toBe(true);
+  });
+
+  it('accepts a .scss anywhere under src/ (archetype layout)', () => {
+    expect(isOwnStylesPath('src/Table/table.style.scss')).toBe(true);
+  });
+
+  it('rejects the shared partials a package publishes under styles/', () => {
+    expect(isOwnStylesPath('styles/mixins.scss')).toBe(false);
+  });
+
+  it('rejects files under node_modules or dist, and non-scss files', () => {
+    expect(isOwnStylesPath('src/node_modules/lib/a.scss')).toBe(false);
+    expect(isOwnStylesPath('src/dist/a.scss')).toBe(false);
+    expect(isOwnStylesPath('src/Table/Table.vue')).toBe(false);
+  });
+});
+
+const TABLE_PACKAGE = {
+  name: '@flash-global66/g-table',
+  stylesTarget: './src/Table/table.style.scss',
+  ownStylesFiles: ['src/Table/table.style.scss'],
+};
+const BADGE_PACKAGE = {
+  name: '@flash-global66/g-badge',
+  stylesTarget: undefined,
+  ownStylesFiles: ['badge.styles.scss'],
+};
+const HOOKS_PACKAGE = {
+  name: '@flash-global66/g-hooks',
+  stylesTarget: undefined,
+  ownStylesFiles: [],
+};
+const BADGE_ALLOWLIST_ENTRY = {
+  name: '@flash-global66/g-badge',
+  reason: 'expone sus estilos como ./badge.styles.scss',
+};
+
+describe('findPackagesMissingStylesExport', () => {
+  it('flags a package with its own scss and no styles export', () => {
+    expect(
+      findPackagesMissingStylesExport({
+        packages: [TABLE_PACKAGE, BADGE_PACKAGE],
+        allowlist: [],
+      }),
+    ).toEqual([BADGE_PACKAGE]);
+  });
+
+  it('does not flag an allowlisted package', () => {
+    expect(
+      findPackagesMissingStylesExport({
+        packages: [BADGE_PACKAGE],
+        allowlist: [BADGE_ALLOWLIST_ENTRY],
+      }),
+    ).toEqual([]);
+  });
+
+  it('ignores a package without scss of its own', () => {
+    expect(
+      findPackagesMissingStylesExport({
+        packages: [HOOKS_PACKAGE],
+        allowlist: [],
+      }),
+    ).toEqual([]);
+  });
+
+  it('does not flag a package with a conditional styles export', () => {
+    const conditionalPackage = { ...BADGE_PACKAGE, stylesTarget: null };
+
+    expect(
+      findPackagesMissingStylesExport({
+        packages: [conditionalPackage],
+        allowlist: [],
+      }),
+    ).toEqual([]);
+  });
+});
+
+describe('findStaleAllowlistEntries', () => {
+  it('keeps quiet while the allowlisted package still lacks the export', () => {
+    expect(
+      findStaleAllowlistEntries({
+        packages: [BADGE_PACKAGE],
+        allowlist: [BADGE_ALLOWLIST_ENTRY],
+      }),
+    ).toEqual([]);
+  });
+
+  it('reports an entry whose package already declares the styles export', () => {
+    const standardizedBadge = {
+      ...BADGE_PACKAGE,
+      stylesTarget: './badge.styles.scss',
+    };
+
+    expect(
+      findStaleAllowlistEntries({
+        packages: [standardizedBadge],
+        allowlist: [BADGE_ALLOWLIST_ENTRY],
+      }),
+    ).toEqual([BADGE_ALLOWLIST_ENTRY]);
+  });
+
+  it('reports an entry whose package no longer exists or has no scss', () => {
+    const badgeWithoutScss = { ...BADGE_PACKAGE, ownStylesFiles: [] };
+
+    expect(
+      findStaleAllowlistEntries({
+        packages: [badgeWithoutScss],
+        allowlist: [BADGE_ALLOWLIST_ENTRY],
+      }),
+    ).toEqual([BADGE_ALLOWLIST_ENTRY]);
+    expect(
+      findStaleAllowlistEntries({
+        packages: [],
+        allowlist: [BADGE_ALLOWLIST_ENTRY],
+      }),
+    ).toEqual([BADGE_ALLOWLIST_ENTRY]);
+  });
+});
+
+describe('MISSING_STYLES_EXPORT_ALLOWLIST', () => {
+  it('lists each package once and says why it is there', () => {
+    const names = MISSING_STYLES_EXPORT_ALLOWLIST.map(({ name }) => name);
+
+    expect(new Set(names).size).toBe(names.length);
+    for (const { reason } of MISSING_STYLES_EXPORT_ALLOWLIST) {
+      expect(reason.trim()).not.toBe('');
+    }
   });
 });
 

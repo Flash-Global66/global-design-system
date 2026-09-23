@@ -90,12 +90,14 @@ jobs:
 
       # Estilos entregados: cada `exports["./styles.scss"]` compila con el resolver de
       # Vite (el de Storybook), está registrado en assets/scss/index.scss, y ese index
-      # compila completo. Ningún otro gate compila el SCSS fuente que publican los
-      # paquetes (`yarn build` solo compila los <style> de los .vue). A diferencia de
-      # los dos steps de arriba, NO se scopea al diff: un `@use` roto en un parcial
-      # compartido (p. ej. de common/g-utils) rompe paquetes que el PR no tocó, y no
-      # hay deuda preexistente que filtrar — un entry que no compila está roto. No
-      # necesita build previo: compila SCSS fuente.
+      # compila completo; además, todo paquete con SCSS propio declara ese export. Ningún
+      # otro gate compila el SCSS fuente que publican los paquetes (`yarn build` solo
+      # compila los <style> de los .vue). A diferencia de los dos steps de arriba, NO se
+      # scopea al diff: un `@use` roto en un parcial compartido (p. ej. de common/g-utils)
+      # rompe paquetes que el PR no tocó, y un entry que no compila está roto. La única
+      # deuda preexistente —paquetes legacy sin `./styles.scss`— vive en una allowlist
+      # explícita del script, que avisa cuando una entrada sobra. No necesita build
+      # previo: compila SCSS fuente.
       - name: Styles check (all packages)
         run: yarn styles:check
 
