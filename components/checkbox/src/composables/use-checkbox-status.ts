@@ -9,7 +9,7 @@ import {
 
 import type { ComponentInternalInstance } from 'vue';
 import type { CheckboxProps } from '../checkbox';
-import type { CheckboxModel } from './index';
+import type { CheckboxModel } from './use-checkbox-model';
 
 export const useCheckboxStatus = (
   props: CheckboxProps,

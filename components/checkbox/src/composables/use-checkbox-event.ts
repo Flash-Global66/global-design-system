@@ -4,7 +4,9 @@ import { debugWarn } from '@flash-global66/g-utils';
 import { checkboxGroupContextKey } from '../constants';
 
 import type { CheckboxProps } from '../checkbox';
-import type { CheckboxDisabled, CheckboxModel, CheckboxStatus } from './index';
+import type { CheckboxDisabled } from './use-checkbox-disabled';
+import type { CheckboxModel } from './use-checkbox-model';
+import type { CheckboxStatus } from './use-checkbox-status';
 
 export const useCheckboxEvent = (
   props: CheckboxProps,
