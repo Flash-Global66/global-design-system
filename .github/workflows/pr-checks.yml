@@ -1,6 +1,6 @@
 name: PR Checks
 
-# Runs lint + unit tests + full component build on every PR to release.
+# Runs lint + styles check + unit tests + full component build on every PR to release.
 # Rationale: the Publish Packages / deploy workflows only trigger `on: push`
 # to release/develop, so build/type errors (e.g. a `build:types` failure) used to
 # reach release undetected and break publishing. This gate catches them in the PR.
@@ -87,6 +87,17 @@ jobs:
           echo "Checking architecture on files changed in this PR:"
           echo "$FILES"
           node scripts/check-architecture.mjs $FILES --ci
+
+      # Estilos entregados: cada `exports["./styles.scss"]` compila con el resolver de
+      # Vite (el de Storybook), está registrado en assets/scss/index.scss, y ese index
+      # compila completo. Ningún otro gate compila el SCSS fuente que publican los
+      # paquetes (`yarn build` solo compila los <style> de los .vue). A diferencia de
+      # los dos steps de arriba, NO se scopea al diff: un `@use` roto en un parcial
+      # compartido (p. ej. de common/g-utils) rompe paquetes que el PR no tocó, y no
+      # hay deuda preexistente que filtrar — un entry que no compila está roto. No
+      # necesita build previo: compila SCSS fuente.
+      - name: Styles check (all packages)
+        run: yarn styles:check
 
       # Build BEFORE tests. Several packages are `buildable` and expose their
       # entry via `exports` → `dist/` (e.g. g-form, g-icon-font). The unit tests
