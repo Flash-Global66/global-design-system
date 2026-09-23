@@ -3,7 +3,8 @@ import { useFormDisabled } from '@flash-global66/g-form';
 import { isUndefined } from '@flash-global66/g-utils';
 import { checkboxGroupContextKey } from '../constants';
 
-import type { CheckboxModel, CheckboxStatus } from './index';
+import type { CheckboxModel } from './use-checkbox-model';
+import type { CheckboxStatus } from './use-checkbox-status';
 
 export const useCheckboxDisabled = ({
   model,

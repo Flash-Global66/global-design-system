@@ -40,11 +40,9 @@ import GFocusTrap from '@flash-global66/g-focus-trap';
 import { formItemContextKey } from '@flash-global66/g-form';
 import { POPPER_CONTENT_INJECTION_KEY } from './constants';
 import { popperContentEmits, popperContentProps } from './content';
-import {
-  usePopperContent,
-  usePopperContentDOM,
-  usePopperContentFocusTrap,
-} from './composables';
+import { usePopperContent } from './composables/use-content';
+import { usePopperContentDOM } from './composables/use-content-dom';
+import { usePopperContentFocusTrap } from './composables/use-focus-trap';
 
 import type { WatchStopHandle } from 'vue';
 
