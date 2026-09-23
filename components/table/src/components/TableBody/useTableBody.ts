@@ -16,7 +16,7 @@ import {
   removeClass,
   useNamespace,
 } from '@flash-global66/g-utils';
-import useLayoutObserver from '../../shared/composables/useLayoutObserver';
+import { useLayoutObserver } from '../../shared/composables/useLayoutObserver';
 import {
   createTablePopper,
   ensurePosition,
@@ -30,9 +30,13 @@ import {
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
 
 import type { VNode } from 'vue';
-import type { TableColumnCtx } from '../TableColumn/defaults';
-import type { TableBodyProps } from './defaults';
-import type { RenderRowData, TableProps, TreeNode } from '../../Table/defaults';
+import type { TableColumnCtx } from '../../shared/types/tableColumn.type';
+import type { TableBodyProps } from './types/tableBody.type';
+import type {
+  RenderRowData,
+  TableProps,
+  TreeNode,
+} from '../../shared/types/table.type';
 import type { TableOverflowTooltipOptions } from '../../shared/utils/table.util';
 
 interface TableBodyCellDescriptor {

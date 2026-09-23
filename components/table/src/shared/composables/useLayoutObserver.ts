@@ -9,10 +9,10 @@ import {
 } from 'vue';
 
 import type { TableHeader } from '../types/tableHeader.type';
-import type TableLayout from './tableLayout';
-import type { Table } from '../../Table/defaults';
+import type { TableLayout } from '../store/tableLayout.store';
+import type { Table } from '../types/table.type';
 
-function useLayoutObserver<T>(root: Table<T>) {
+export function useLayoutObserver<T>(root: Table<T>) {
   const instance = getCurrentInstance() as TableHeader;
   onBeforeMount(() => {
     tableLayout.value.addObserver(instance);
@@ -77,5 +77,3 @@ function useLayoutObserver<T>(root: Table<T>) {
     onScrollableChange,
   };
 }
-
-export default useLayoutObserver;

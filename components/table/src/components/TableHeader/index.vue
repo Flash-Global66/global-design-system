@@ -90,7 +90,7 @@ import FilterPanel from '../FilterPanel/index.vue';
 import { VNodeRenderer } from '../../shared/utils/render.util';
 import { useTableHeader } from './useTableHeader';
 import type { PropType } from 'vue';
-import type { DefaultRow } from '../../Table/defaults';
+import type { DefaultRow } from '../../shared/types/table.type';
 import type { TableHeaderProps } from '../../shared/types/tableHeader.type';
 
 defineOptions({

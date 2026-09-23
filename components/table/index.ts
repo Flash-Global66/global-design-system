@@ -29,9 +29,9 @@ export type {
   RenderRowData,
   Sort,
   Filter,
-  TableColumnCtx,
   TableTooltipData,
-} from './src/Table/defaults';
+} from './src/shared/types/table.type';
+export type { TableColumnCtx } from './src/shared/types/tableColumn.type';
 
 export { useTableCellSelect } from './src/shared/composables/useTableCellSelect';
 export type {
@@ -60,4 +60,4 @@ export type {
 import GCellEdit from './src/components/CellEdit/index.vue';
 export { GCellEdit };
 
-export { clearExpansionCacheForTable } from './src/components/TableColumn/cell-renderers/cell-expansion-utils';
+export { clearExpansionCacheForTable } from './src/shared/utils/cellExpansion.util';

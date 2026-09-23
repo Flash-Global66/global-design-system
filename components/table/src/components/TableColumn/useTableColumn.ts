@@ -9,12 +9,13 @@ import {
   ref,
 } from 'vue';
 import { isUndefined } from '@flash-global66/g-utils';
-import { cellStarts } from '../../shared/constants/renderer.constant';
+import { cellStarts } from './constants/renderer.constant';
 import { compose, mergeOptions } from '../../shared/utils/table.util';
-import useWatcher from './useWatcher';
-import useRender from './useRender';
-import type { TableColumn, TableColumnCtx } from './defaults';
-import type { DefaultRow } from '../../Table/defaults';
+import { useWatcher } from './composables/useWatcher';
+import { useRender } from './composables/useRender';
+import type { TableColumn } from './types/tableColumnInstance.type';
+import type { TableColumnCtx } from '../../shared/types/tableColumn.type';
+import type { DefaultRow } from '../../shared/types/table.type';
 
 let columnIdSeed = 1;
 

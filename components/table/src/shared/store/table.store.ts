@@ -3,10 +3,10 @@
 import { watch } from 'vue';
 import { debounce } from 'lodash-unified';
 import { isObject } from '@flash-global66/g-utils';
-import useStore from '.';
+import { useStore } from './mutations.store';
 
-import type { Store } from '.';
-import type { Table, TableProps } from '../../Table/defaults';
+import type { Store } from './mutations.store';
+import type { Table, TableProps } from '../types/table.type';
 
 const InitialStateMap = {
   rowKey: 'rowKey',

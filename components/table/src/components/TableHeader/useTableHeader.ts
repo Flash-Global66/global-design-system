@@ -11,16 +11,16 @@ import {
   watch,
 } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
-import useLayoutObserver from '../../shared/composables/useLayoutObserver';
+import { useLayoutObserver } from '../../shared/composables/useLayoutObserver';
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
 import { convertToRows } from '../../shared/utils/tableColumn.util';
-import useEvent from './useEvent';
-import useStyle from './useStyle';
+import { useEvent } from './composables/useEvent';
+import { useStyle } from './composables/useStyle';
 import type {
   TableHeader,
   TableHeaderProps,
 } from '../../shared/types/tableHeader.type';
-import type { TableColumnCtx } from '../TableColumn/defaults';
+import type { TableColumnCtx } from '../../shared/types/tableColumn.type';
 
 export function useTableHeader<T>(props: TableHeaderProps<T>, emit) {
   const instance = getCurrentInstance() as TableHeader;

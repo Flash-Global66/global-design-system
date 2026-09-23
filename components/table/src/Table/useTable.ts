@@ -5,16 +5,16 @@ import { debounce } from 'lodash-unified';
 import { useLocale } from '@flash-global66/g-hooks';
 import { useNamespace } from '@flash-global66/g-utils';
 import { createStore } from '../shared/store/table.store';
-import TableLayout from '../shared/composables/tableLayout';
-import useUtils from './useUtils';
+import { TableLayout } from '../shared/store/tableLayout.store';
+import { createTableMethods } from './utils/tableMethods.util';
 import { convertToRows } from '../shared/utils/tableColumn.util';
-import useStyle from './useStyle';
-import useKeyRender from './useKeyRender';
+import { useStyle } from './composables/useStyle';
+import { useKeyRender } from './composables/useKeyRender';
 import { TABLE_INJECTION_KEY } from '../shared/constants/token.constant';
-import { useScrollbar } from '../shared/composables/useScrollbar';
-import { clearExpansionCacheForTable } from '../components/TableColumn/cell-renderers/cell-expansion-utils';
+import { useScrollbar } from './composables/useScrollbar';
+import { clearExpansionCacheForTable } from '../shared/utils/cellExpansion.util';
 
-import type { Table } from './defaults';
+import type { Table } from '../shared/types/table.type';
 
 let tableIdSeed = 1;
 
@@ -50,7 +50,7 @@ export function useTable(props) {
     clearSort,
     sort,
     updateKeyChildren,
-  } = useUtils<Row>(store);
+  } = createTableMethods<Row>(store);
   const {
     isHidden,
     renderExpanded,

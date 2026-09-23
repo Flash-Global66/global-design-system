@@ -21,7 +21,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { VNodeRenderer } from '../../shared/utils/render.util';
-import { tableFooterProps } from './defaults';
+import { tableFooterProps } from './constants/tableFooter.constant';
 import { useTableFooter } from './useTableFooter';
 
 defineOptions({

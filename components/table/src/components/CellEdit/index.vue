@@ -7,7 +7,7 @@
       outsideCloseScope === 'amountRowPeer' ? '' : undefined
     "
   >
-    <transition name="gui-table-cell-edit" mode="out-in">
+    <transition :name="ns.b('cell-edit')" mode="out-in">
       <div v-if="isEditing" ref="editWrapperRef" :class="editWrapperClass">
         <slot name="edit" :close="closeEdit"></slot>
       </div>
@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { useCellEdit } from './useCellEdit';
-import type { GCellEditProps } from '../../shared/types/cellEdit.type';
+import type { GCellEditProps } from './types/cellEdit.type';
 
 const props = withDefaults(defineProps<GCellEditProps>(), {
   modelValue: false,
@@ -74,6 +74,7 @@ const emit = defineEmits<{
 }>();
 
 const {
+  ns,
   isEditing,
   wrapperClass,
   editWrapperClass,

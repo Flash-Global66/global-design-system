@@ -2,16 +2,16 @@
 // @ts-nocheck
 import { computed, inject } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
-import useLayoutObserver from '../../shared/composables/useLayoutObserver';
+import { useLayoutObserver } from '../../shared/composables/useLayoutObserver';
 import {
   ensurePosition,
   getFixedColumnOffset,
   getFixedColumnsClass,
 } from '../../shared/utils/table.util';
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
-import type { TableColumnCtx } from '../TableColumn/defaults';
-import type { DefaultRow } from '../../Table/defaults';
-import type { TableFooterProps } from './defaults';
+import type { TableColumnCtx } from '../../shared/types/tableColumn.type';
+import type { DefaultRow } from '../../shared/types/table.type';
+import type { TableFooterProps } from './types/tableFooter.type';
 
 export function useTableFooter(props: TableFooterProps<DefaultRow>) {
   const parent = inject(TABLE_INJECTION_KEY);

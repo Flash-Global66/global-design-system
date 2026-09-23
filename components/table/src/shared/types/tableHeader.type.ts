@@ -1,6 +1,6 @@
 import type { ComponentInternalInstance, Ref } from 'vue';
-import type { Sort } from '../../Table/defaults';
-import type { Store } from '../store';
+import type { Sort } from './table.type';
+import type { Store } from '../store/mutations.store';
 
 export interface TableHeader extends ComponentInternalInstance {
   state: {

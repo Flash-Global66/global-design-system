@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import type { TableColumnCtx } from '../../components/TableColumn/defaults';
+import type { TableColumnCtx } from '../types/tableColumn.type';
 
 export const getAllColumns = <T>(
   columns: TableColumnCtx<T>[],

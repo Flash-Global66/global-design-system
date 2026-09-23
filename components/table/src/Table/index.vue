@@ -178,7 +178,7 @@ import GScrollbar from '@flash-global66/g-scrollbar';
 import TableHeader from '../components/TableHeader/index.vue';
 import TableBody from '../components/TableBody/index.vue';
 import TableFooter from '../components/TableFooter/index.vue';
-import { tableProps } from './defaults';
+import { tableProps } from './constants/table.constant';
 import { hColgroup } from '../shared/utils/render.util';
 import { useTable } from './useTable';
 

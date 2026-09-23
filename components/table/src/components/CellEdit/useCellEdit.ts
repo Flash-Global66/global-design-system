@@ -1,13 +1,15 @@
 import { computed, inject, nextTick, onUnmounted, ref, watch } from 'vue';
 import type { ComputedRef, Ref, WritableComputedRef } from 'vue';
+import { useNamespace } from '@flash-global66/g-utils';
+import type { NamespaceHelpers } from '@flash-global66/g-utils';
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
 import {
   calculateExpandedWidthSync,
   calculateLeftOffset,
   setActiveTableFromEvent,
   setCellOverflow,
-} from '../TableColumn/cell-renderers/cell-expansion-utils';
-import type { GCellEditProps } from '../../shared/types/cellEdit.type';
+} from '../../shared/utils/cellExpansion.util';
+import type { GCellEditProps } from './types/cellEdit.type';
 
 const FOCUSABLE_SELECTOR =
   'input:not([type="hidden"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -32,6 +34,7 @@ type CellEditEmit = {
 };
 
 type UseCellEditReturn = {
+  ns: NamespaceHelpers;
   isEditing: WritableComputedRef<boolean>;
   wrapperClass: ComputedRef<string>;
   editWrapperClass: ComputedRef<string>;
@@ -66,6 +69,7 @@ export function useCellEdit(
   emit: CellEditEmit,
 ): UseCellEditReturn {
   const table = inject(TABLE_INJECTION_KEY);
+  const ns = useNamespace('table');
 
   const cellRef = ref<HTMLElement>();
   const editWrapperRef = ref<HTMLElement>();
@@ -202,9 +206,9 @@ export function useCellEdit(
     const base =
       'group absolute top-0 left-0 h-full w-full flex items-center justify-center transition-all duration-200 ease-in';
     if (isEditing.value) {
-      return `${base} gui-table-cell-edit-wrapper hover:bg-everBlue-100 hover:bg-opacity-30 z-10`;
+      return `${base} ${ns.b('cell-edit-wrapper')} hover:bg-everBlue-100 hover:bg-opacity-30 z-10`;
     }
-    return `${base} gui-table-cell-edit-wrapper hover:bg-everBlue-100 hover:bg-opacity-30`;
+    return `${base} ${ns.b('cell-edit-wrapper')} hover:bg-everBlue-100 hover:bg-opacity-30`;
   });
 
   const editWrapperClass = computed(() => {
@@ -256,6 +260,7 @@ export function useCellEdit(
   }
 
   return {
+    ns,
     isEditing,
     wrapperClass,
     editWrapperClass,

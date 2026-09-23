@@ -8,7 +8,7 @@
 import { Fragment, h, useSlots } from 'vue';
 import { isArray, isString } from '@flash-global66/g-utils';
 import { useTableColumn } from './useTableColumn';
-import { tableColumnProps } from './defaults';
+import { tableColumnProps } from './constants/tableColumn.constant';
 
 defineOptions({
   name: 'GTableColumn',

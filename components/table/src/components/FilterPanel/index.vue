@@ -98,8 +98,8 @@ import { useFilterPanel } from './useFilterPanel';
 
 import type { Placement } from '@flash-global66/g-popper';
 import type { PropType } from 'vue';
-import type { TableColumnCtx } from '../TableColumn/defaults';
-import type { Store } from '../../shared/store';
+import type { TableColumnCtx } from '../../shared/types/tableColumn.type';
+import type { Store } from '../../shared/store/mutations.store';
 
 const { CheckboxGroup: GCheckboxGroup } = GCheckbox;
 

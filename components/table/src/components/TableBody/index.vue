@@ -38,7 +38,7 @@
 // @ts-nocheck
 import TdWrapper from '../TdWrapper/index.vue';
 import { VNodeRenderer } from '../../shared/utils/render.util';
-import { tableBodyProps } from './defaults';
+import { tableBodyProps } from './constants/tableBody.constant';
 import { useTableBody } from './useTableBody';
 
 defineOptions({
