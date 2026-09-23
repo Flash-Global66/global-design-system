@@ -98,8 +98,7 @@ mismas cuatro del complejo (`composables/`, `utils/`, `types/`, `constants/`), d
 `shared/`, y en un paquete simple no hay nada que compartir entre 2+ elementos porque hay uno solo.
 
 Los ejemplos canónicos de esta estructura son `components/inline/` (simple) y `components/table/`
-(complejo). `table` ya sigue esta estructura; `inline` todavía tiene `Inline/defaults.ts` (su
-destino es el `constants/` + `types/` del árbol de arriba) y queda pendiente de migrar.
+(complejo). Los dos ya siguen esta estructura.
 
 ---
 
