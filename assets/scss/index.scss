@@ -1,17 +1,18 @@
-@use "../../components/config-provider/config.styles.scss" as *;
-@use "../../components/radio-group/radio-group.styles.scss" as *;
-@use "../../components/badge/badge.styles.scss" as *;
-@use "../../components/popover/popover.styles.scss" as *;
-@use "../../components/skeleton/skeleton.styles.scss" as *;
-@use "../../components/skeleton/skeleton-item.styles.scss" as *;
-@use "../../components/input-code/input-code.styles.scss" as *;
-@use "../../components/input-number/src/input-number.styles.scss" as *;
-@use "../../components/overlay/overlay.styles.scss" as *;
-@use "../../components/menu/menu.styles.scss" as *;
-@use "../../components/link/src/link.styles.scss" as *;
-@use "../../components/scrollbar/src/scrollbar.styles.scss" as *;
-
 // new imports
+// g-config-provider va primero: configura `@flash-global66/g-utils/tokens`
+// con `@forward ... with`, y Sass solo acepta esa configuración en la primera
+// carga del módulo. El orden del resto fija el orden del CSS global.
+@use "@flash-global66/g-config-provider/styles.scss" as *;
+@use "@flash-global66/g-radio-group/styles.scss" as *;
+@use "@flash-global66/g-badge/styles.scss" as *;
+@use "@flash-global66/g-popover/styles.scss" as *;
+@use "@flash-global66/g-skeleton/styles.scss" as *;
+@use "@flash-global66/g-input-code/styles.scss" as *;
+@use "@flash-global66/g-input-number/styles.scss" as *;
+@use "@flash-global66/g-overlay/styles.scss" as *;
+@use "@flash-global66/g-menu/styles.scss" as *;
+@use "@flash-global66/g-link/styles.scss" as *;
+@use "@flash-global66/g-scrollbar/styles.scss" as *;
 @use "@flash-global66/g-checkbox/styles.scss" as *;
 @use "@flash-global66/g-radio/styles.scss" as *;
 @use "@flash-global66/g-input/styles.scss" as *;
