@@ -76,9 +76,10 @@ la izquierda. La solución que funciona en los cuatro casos es **`ml-auto` en el
 
 ## Cómo se verifica
 
-**Ninguno de estos comandos se pudo correr en la fase de plan:** el worktree no tiene `node_modules`
-y enlazarlo es una escritura, que el modo plan bloquea. Los criterios son de **forma e invariante**;
-los marcados `provisional` los reemplaza la ronda 1 del verify.
+**Estos comandos no se pudieron correr en la fase de plan** (el worktree no tiene `node_modules` y
+enlazarlo es una escritura, que el modo plan bloquea), así que se escribieron como **forma e
+invariante**. Los que dependían de un valor se midieron durante el apply y ya están pegados acá: no
+queda ninguna expectativa provisional.
 
 ### 0 · Preparar el entorno (el `rm -rf` es parte del comando)
 
@@ -112,12 +113,30 @@ Esperado: `exit=0` y **cero fallidos**, con los cuatro casos del `listo cuando` 
 presentes como tests. El criterio vinculante es el `0 failed` y que
 `components/drawer/tests/Drawer.spec.ts` exista y corra — no el conteo, que crece.
 
+La suite completa es otra pregunta, y **su criterio NO es «cero fallidos»**: el repo ya viene con un
+archivo en rojo desde `Base`. Medido con el mismo comando en los dos lados —
+`1 failed | 75 passed (76)` en `ee000ea6` y `1 failed | 76 passed (77)` en HEAD, con el drawer
+sumando su archivo:
+
 ```bash
-node node_modules/vitest/vitest.mjs run; echo "exit=$?"
+node node_modules/vitest/vitest.mjs run 2>&1 | rg -o "FAIL\s+\S+\.spec\.ts" | sd 'FAIL\s+' '' | sort -u
 ```
 
-Esperado: `exit=0`, cero fallidos, y **más archivos de test que antes del cambio** (el drawer suma
-el suyo) _(provisional — el verify pega el número real)_.
+Esperado: exactamente esta línea y ninguna otra —
+
+```
+components/benefits-card/tests/BenefitsCard.spec.ts
+```
+
+**La invariante, que es el criterio vinculante:** en esa lista no aparece ningún archivo que no
+estuviera ya fallando en `Base`. La lista puede _encogerse_ sin romper nada; lo que la rompe es un
+nombre nuevo. El run completo sale `exit=1` y **ese es el valor correcto**, igual que en `Base`.
+
+Ese único fallo es **ambiental y ajeno a este cambio**: `GIconFont` renderiza
+`<font-awesome-icon v-if="selectedIcon">` y el glifo no resuelve —
+`Could not find one or more icon(s) { prefix: 'fal', iconName: 'fingerprint' }`—, porque los sets
+Pro de FontAwesome vienen del registry privado que gatea `GBP_PACKAGE_TOKEN`. CI tiene el token y lo
+ve verde.
 
 ### 3 · El layout, resuelto por Tailwind y no leído del config
 
