@@ -1,7 +1,5 @@
-import * as jest from 'jest-mock';
 import { setup } from '@storybook/vue3-vite';
 import { imageBaseUrlKey } from '@flash-global66/g-image/index.ts';
-window.jest = jest;
 
 import '../assets/scss/index.scss';
 import '../stories/assets/styles/tailwind.css';

@@ -14,11 +14,7 @@ const config: StorybookConfig = {
     },
   ],
 
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-jest',
-    '@storybook/addon-docs',
-  ],
+  addons: ['@storybook/addon-links', '@storybook/addon-docs'],
 };
 
 export default config;
