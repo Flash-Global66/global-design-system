@@ -1,19 +1,23 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { ref, reactive, computed, watch } from "vue";
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { ref, reactive, computed, watch } from 'vue';
 // Para poder hacer cambios en el form se debe hacer build porque se usa provider
-import { FormInstance, GForm, GFormItem } from "@flash-global66/g-form/index.ts";
-import { GInput } from "@flash-global66/g-input/index.ts";
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
-import { GButton } from "@flash-global66/g-button/index.ts";
-import { GSelect } from "@flash-global66/g-select/index.ts";
-import { GRadio } from "@flash-global66/g-radio/index.ts";
-import { GCheckbox } from "@flash-global66/g-checkbox/index.ts";
-import { GSegmented } from "@flash-global66/g-segmented/index.ts";
-import { GDatePicker } from "@flash-global66/g-date-picker/index.ts";
-import { GTimePicker } from "@flash-global66/g-time-picker/index.ts";
+import {
+  FormInstance,
+  GForm,
+  GFormItem,
+} from '@flash-global66/g-form/index.ts';
+import { GInput } from '@flash-global66/g-input/index.ts';
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
+import { GSelect } from '@flash-global66/g-select/index.ts';
+import { GRadio } from '@flash-global66/g-radio/index.ts';
+import { GCheckbox } from '@flash-global66/g-checkbox/index.ts';
+import { GSegmented } from '@flash-global66/g-segmented/index.ts';
+import { GDatePicker } from '@flash-global66/g-date-picker/index.ts';
+import { GTimePicker } from '@flash-global66/g-time-picker/index.ts';
 
 const meta: Meta<FormInstance> = {
-  title: "Form/Form",
+  title: 'Form/Form',
   component: GForm,
   parameters: {
     docs: {
@@ -52,79 +56,85 @@ import '@flash-global66/g-form/form.styles.scss'
 \`\`\`
 
 ### Dependencias
-Este componente trabaja en conjunto con el componente \`FormItem\` para proporcionar una experiencia completa de formularios. Para más detalles sobre FormItem consulta la [documentación de FormItem](/docs/form-form-item--docs).`
-      }
-    }
+Este componente trabaja en conjunto con el componente \`FormItem\` para proporcionar una experiencia completa de formularios. Para más detalles sobre FormItem consulta la [documentación de FormItem](/docs/form-form-item--docs).`,
+      },
+    },
   },
   argTypes: {
     model: {
-      description: "Objeto de datos del formulario",
-      control: "object",
+      description: 'Objeto de datos del formulario',
+      control: 'object',
       table: {
-        type: { summary: "object" },
+        type: { summary: 'object' },
       },
     },
     rules: {
-      description: "Reglas de validación para los campos del formulario",
-      control: "object",
+      description: 'Reglas de validación para los campos del formulario',
+      control: 'object',
     },
     disabled: {
-      description: "Deshabilita todos los campos del formulario",
-      control: "boolean",
+      description: 'Deshabilita todos los campos del formulario',
+      control: 'boolean',
       defaultValue: false,
     },
     validateOnRuleChange: {
-      description: "Validar cuando cambian las reglas",
-      control: "boolean",
+      description: 'Validar cuando cambian las reglas',
+      control: 'boolean',
       defaultValue: true,
     },
     validate: {
-      description: "Valida el formulario completo. Recibe un callback o retorna una Promise",
+      description:
+        'Valida el formulario completo. Recibe un callback o retorna una Promise',
       table: {
-        category: "Expuesto",
-        type: { summary: "() => Promise<boolean>" }
-      }
+        category: 'Expuesto',
+        type: { summary: '() => Promise<boolean>' },
+      },
     },
     validateField: {
-      description: "Valida campos específicos del formulario",
+      description: 'Valida campos específicos del formulario',
       table: {
-        category: "Expuesto",
-        type: { summary: "(props?: Arrayable<FormItemProp>, callback?: FormValidateCallback) => FormValidationResult" }
-      }
+        category: 'Expuesto',
+        type: {
+          summary:
+            '(props?: Arrayable<FormItemProp>, callback?: FormValidateCallback) => FormValidationResult',
+        },
+      },
     },
     resetFields: {
-      description: "Reinicia los campos especificados y elimina los resultados de validación",
+      description:
+        'Reinicia los campos especificados y elimina los resultados de validación',
       table: {
-        category: "Expuesto",
-        type: { summary: "(props?: Arrayable<FormItemProp>) => void" }
-      }
+        category: 'Expuesto',
+        type: { summary: '(props?: Arrayable<FormItemProp>) => void' },
+      },
     },
     clearValidate: {
-      description: "Limpia los mensajes de validación para los campos especificados",
+      description:
+        'Limpia los mensajes de validación para los campos especificados',
       table: {
-        category: "Expuesto",
-        type: { summary: "(props?: Arrayable<FormItemProp>) => void" }
-      }
+        category: 'Expuesto',
+        type: { summary: '(props?: Arrayable<FormItemProp>) => void' },
+      },
     },
     scrollToField: {
-      description: "Desplaza la vista hacia el campo especificado",
+      description: 'Desplaza la vista hacia el campo especificado',
       table: {
-        category: "Expuesto",
-        type: { summary: "(prop: FormItemProp) => void" }
-      }
+        category: 'Expuesto',
+        type: { summary: '(prop: FormItemProp) => void' },
+      },
     },
     fields: {
-      description: "Contexto de todos los campos del formulario",
+      description: 'Contexto de todos los campos del formulario',
       table: {
-        category: "Expuesto",
-        type: { summary: "FormItemContext[]" }
-      }
-    }
+        category: 'Expuesto',
+        type: { summary: 'FormItemContext[]' },
+      },
+    },
   },
-
 };
 
-export default meta;type Story = StoryObj<FormInstance>;
+export default meta;
+type Story = StoryObj<FormInstance>;
 
 // Historia Principal
 export const CompleteForm: Story = {
@@ -132,23 +142,23 @@ export const CompleteForm: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Este ejemplo muestra un formulario completo que integra todos los componentes de formulario con validaciones.`
-      }
-    }
+        story: `Este ejemplo muestra un formulario completo que integra todos los componentes de formulario con validaciones.`,
+      },
+    },
   },
   render: () => ({
-    components: { 
-      GForm, 
-      GFormItem, 
-      GInput, 
-      GConfigProvider, 
+    components: {
+      GForm,
+      GFormItem,
+      GInput,
+      GConfigProvider,
       GButton,
       GSelect,
       GRadio,
       GCheckbox,
       GSegmented,
       GDatePicker,
-      GTimePicker
+      GTimePicker,
     },
     setup() {
       const formRef = ref<FormInstance>();
@@ -162,13 +172,13 @@ export const CompleteForm: Story = {
         preferredContact: '',
         birthDate: '',
         appointmentDate: '',
-        appointmentTime: ''
+        appointmentTime: '',
       });
 
       const contactOptions = [
         { label: 'Email', value: 'email' },
         { label: 'Teléfono', value: 'phone' },
-        { label: 'WhatsApp', value: 'whatsapp' }
+        { label: 'WhatsApp', value: 'whatsapp' },
       ];
 
       // Lista de países
@@ -178,7 +188,7 @@ export const CompleteForm: Story = {
         { value: 'ar', title: 'Argentina' },
         { value: 'cl', title: 'Chile' },
         { value: 'pe', title: 'Perú' },
-        { value: 'es', title: 'España' }
+        { value: 'es', title: 'España' },
       ];
 
       // Mapa de ciudades por país
@@ -186,45 +196,51 @@ export const CompleteForm: Story = {
         mx: [
           { value: 'mx-cdmx', title: 'Ciudad de México' },
           { value: 'mx-gdl', title: 'Guadalajara' },
-          { value: 'mx-mty', title: 'Monterrey' }
+          { value: 'mx-mty', title: 'Monterrey' },
         ],
         co: [
           { value: 'co-bog', title: 'Bogotá' },
           { value: 'co-med', title: 'Medellín' },
-          { value: 'co-cal', title: 'Cali' }
+          { value: 'co-cal', title: 'Cali' },
         ],
         ar: [
           { value: 'ar-bue', title: 'Buenos Aires' },
           { value: 'ar-cor', title: 'Córdoba' },
-          { value: 'ar-ros', title: 'Rosario' }
+          { value: 'ar-ros', title: 'Rosario' },
         ],
         cl: [
           { value: 'cl-san', title: 'Santiago' },
           { value: 'cl-val', title: 'Valparaíso' },
-          { value: 'cl-con', title: 'Concepción' }
+          { value: 'cl-con', title: 'Concepción' },
         ],
         pe: [
           { value: 'pe-lim', title: 'Lima' },
           { value: 'pe-are', title: 'Arequipa' },
-          { value: 'pe-tru', title: 'Trujillo' }
+          { value: 'pe-tru', title: 'Trujillo' },
         ],
         es: [
           { value: 'es-mad', title: 'Madrid' },
           { value: 'es-bcn', title: 'Barcelona' },
-          { value: 'es-val', title: 'Valencia' }
-        ]
+          { value: 'es-val', title: 'Valencia' },
+        ],
       };
 
       // Ciudades disponibles basadas en el país seleccionado
       const availableCities = computed(() => {
         if (!formData.country) return [];
-        return citiesByCountry[formData.country as keyof typeof citiesByCountry] || [];
+        return (
+          citiesByCountry[formData.country as keyof typeof citiesByCountry] ||
+          []
+        );
       });
 
       // Limpiar ciudad cuando cambia el país
-      watch(() => formData.country, () => {
-        formData.city = '';
-      });
+      watch(
+        () => formData.country,
+        () => {
+          formData.city = '';
+        },
+      );
 
       const disableFutureDates = (time: Date) => {
         return time.getTime() > Date.now();
@@ -237,62 +253,90 @@ export const CompleteForm: Story = {
       // Reglas de validación
       const rules = {
         fullName: [
-          { required: true, message: 'El nombre completo es requerido', trigger: 'blur' },
-          { min: 3, message: 'El nombre debe tener al menos 3 caracteres', trigger: 'blur' }
+          {
+            required: true,
+            message: 'El nombre completo es requerido',
+            trigger: 'blur',
+          },
+          {
+            min: 3,
+            message: 'El nombre debe tener al menos 3 caracteres',
+            trigger: 'blur',
+          },
         ],
         email: [
-          { required: true, message: 'El correo electrónico es requerido', trigger: 'blur' },
-          { type: 'email', message: 'Por favor ingrese un correo electrónico válido', trigger: 'blur' }
+          {
+            required: true,
+            message: 'El correo electrónico es requerido',
+            trigger: 'blur',
+          },
+          {
+            type: 'email',
+            message: 'Por favor ingrese un correo electrónico válido',
+            trigger: 'blur',
+          },
         ],
-        country: [
-          { required: true, message: 'Por favor seleccione un país' }
-        ],
-        city: [
-          { required: true, message: 'Por favor seleccione una ciudad' }
-        ],
-        gender: [
-          { required: true, message: 'Por favor seleccione su género' }
-        ],
+        country: [{ required: true, message: 'Por favor seleccione un país' }],
+        city: [{ required: true, message: 'Por favor seleccione una ciudad' }],
+        gender: [{ required: true, message: 'Por favor seleccione su género' }],
         termsAccepted: [
-          { 
+          {
             validator: (rule: any, value: boolean, callback: any) => {
               if (value === true) {
                 callback();
               } else {
-                callback(new Error('Debe aceptar los términos y condiciones para continuar'));
+                callback(
+                  new Error(
+                    'Debe aceptar los términos y condiciones para continuar',
+                  ),
+                );
               }
             },
             type: 'boolean',
-            trigger: 'change' 
-          }
+            trigger: 'change',
+          },
         ],
         preferredContact: [
-          { 
+          {
             validator: (rule: any, value: boolean, callback: any) => {
               if (!value) {
-                callback(new Error('Debe seleccionar un método de contacto preferido'));
+                callback(
+                  new Error('Debe seleccionar un método de contacto preferido'),
+                );
               }
               callback();
             },
             type: 'boolean',
-            trigger: 'change' 
-          }
+            trigger: 'change',
+          },
         ],
         birthDate: [
-          { required: true, message: 'La fecha de nacimiento es requerida', trigger: 'change' }
+          {
+            required: true,
+            message: 'La fecha de nacimiento es requerida',
+            trigger: 'change',
+          },
         ],
         appointmentDate: [
-          { required: true, message: 'La fecha de cita es requerida', trigger: 'change' }
+          {
+            required: true,
+            message: 'La fecha de cita es requerida',
+            trigger: 'change',
+          },
         ],
         appointmentTime: [
-          { required: true, message: 'La hora de cita es requerida', trigger: 'change' }
-        ]
+          {
+            required: true,
+            message: 'La hora de cita es requerida',
+            trigger: 'change',
+          },
+        ],
       };
 
       // Manejar envío del formulario
       async function handleSubmit() {
         if (!formRef.value) return;
-        
+
         try {
           const valid = await formRef.value.validate();
           if (valid) {
@@ -313,18 +357,18 @@ export const CompleteForm: Story = {
         formRef.value.resetFields();
       }
 
-      return { 
-        formRef, 
-        formData, 
-        countries, 
+      return {
+        formRef,
+        formData,
+        countries,
         availableCities,
         rules,
         contactOptions,
         disableFutureDates,
         disablePastDates,
         GSegmented,
-        handleSubmit, 
-        handleReset 
+        handleSubmit,
+        handleReset,
       };
     },
     template: `
@@ -472,16 +516,16 @@ export const CompleteForm: Story = {
           </div>
         </g-form>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const Primary: Story = {
-  name: "Básico",
+  name: 'Básico',
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo básico del formulario con validaciones.",
+        story: 'Ejemplo básico del formulario con validaciones.',
       },
     },
   },
@@ -490,22 +534,22 @@ export const Primary: Story = {
     setup() {
       const formRef = ref();
       const formData = reactive({
-        nombre: "",
-        email: "",
+        nombre: '',
+        email: '',
       });
 
       const rules = {
         nombre: [
           {
             required: true,
-            message: "El nombre es requerido",
-            trigger: "blur",
+            message: 'El nombre es requerido',
+            trigger: 'blur',
           },
-          { min: 3, message: "Mínimo 3 caracteres", trigger: "blur" },
+          { min: 3, message: 'Mínimo 3 caracteres', trigger: 'blur' },
         ],
         email: [
-          { required: true, message: "El email es requerido", trigger: "blur" },
-          { type: "email", message: "Email inválido", trigger: "blur" },
+          { required: true, message: 'El email es requerido', trigger: 'blur' },
+          { type: 'email', message: 'Email inválido', trigger: 'blur' },
         ],
       };
 
@@ -513,9 +557,9 @@ export const Primary: Story = {
         if (!formRef.value) return;
         await formRef.value.validate((valid, fields) => {
           if (valid) {
-            console.log("submit!", fields);
+            console.log('submit!', fields);
           } else {
-            console.log("error submit!" + fields);
+            console.log('error submit!' + fields);
           }
         });
       }
@@ -581,36 +625,36 @@ const rules = {
 </g-form>
 \`\`\`
 
-La validación se ejecutará cuando el campo pierda el foco (trigger: "blur") y mostrará los mensajes de error correspondientes.`
-      }
-    }
+La validación se ejecutará cuando el campo pierda el foco (trigger: "blur") y mostrará los mensajes de error correspondientes.`,
+      },
+    },
   },
   render: () => ({
     components: { GForm, GFormItem, GInput, GConfigProvider, GButton },
     setup() {
       const formRef = ref<FormInstance>();
       const formData = reactive({
-        pass: "",
-        checkPass: "",
-        age: "",
+        pass: '',
+        checkPass: '',
+        age: '',
       });
 
       const validatePass = (rule: any, value: any, callback: any) => {
-        if (value === "") {
-          callback(new Error("Ingrese una contraseña"));
+        if (value === '') {
+          callback(new Error('Ingrese una contraseña'));
         } else {
-          if (formData.checkPass !== "") {
-            formRef.value?.validateField("checkPass");
+          if (formData.checkPass !== '') {
+            formRef.value?.validateField('checkPass');
           }
           callback();
         }
       };
 
       const validatePass2 = (rule: any, value: any, callback: any) => {
-        if (value === "") {
-          callback(new Error("Confirme su contraseña"));
+        if (value === '') {
+          callback(new Error('Confirme su contraseña'));
         } else if (value !== formData.pass) {
-          callback(new Error("Las contraseñas no coinciden"));
+          callback(new Error('Las contraseñas no coinciden'));
         } else {
           callback();
         }
@@ -618,13 +662,13 @@ La validación se ejecutará cuando el campo pierda el foco (trigger: "blur") y 
 
       const checkAge = (rule: any, value: any, callback: any) => {
         if (!value) {
-          return callback(new Error("La edad es requerida"));
+          return callback(new Error('La edad es requerida'));
         }
         setTimeout(() => {
           if (!Number.isInteger(Number(value))) {
-            callback(new Error("Ingrese solo números"));
+            callback(new Error('Ingrese solo números'));
           } else if (Number(value) < 18) {
-            callback(new Error("La edad debe ser mayor a 18"));
+            callback(new Error('La edad debe ser mayor a 18'));
           } else {
             callback();
           }
@@ -632,18 +676,18 @@ La validación se ejecutará cuando el campo pierda el foco (trigger: "blur") y 
       };
 
       const rules = {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
-        age: [{ validator: checkAge, trigger: "blur" }],
+        pass: [{ validator: validatePass, trigger: 'blur' }],
+        checkPass: [{ validator: validatePass2, trigger: 'blur' }],
+        age: [{ validator: checkAge, trigger: 'blur' }],
       };
 
       async function handleSubmit() {
         if (!formRef.value) return;
         await formRef.value.validate((valid, fields) => {
           if (valid) {
-            console.log("submit!", formData);
+            console.log('submit!', formData);
           } else {
-            console.log("error submit!", fields);
+            console.log('error submit!', fields);
           }
         });
       }
@@ -696,10 +740,9 @@ La validación se ejecutará cuando el campo pierda el foco (trigger: "blur") y 
   }),
 };
 
-
 // Validación en Tiempo Real
 export const TriggerValidation: Story = {
-  name: "Tipo de ejecución",
+  name: 'Tipo de ejecución',
   parameters: {
     docs: {
       description: {
@@ -730,33 +773,33 @@ En este ejemplo, el email se valida en tiempo real mientras el usuario escribe, 
     setup() {
       const formRef = ref();
       const formData = reactive({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
       });
 
       const rules = {
         email: [
           {
             required: true,
-            message: "El email es requerido",
-            trigger: "change",
+            message: 'El email es requerido',
+            trigger: 'change',
           },
           {
-            type: "email",
-            message: "Ingrese un email válido",
-            trigger: "change",
+            type: 'email',
+            message: 'Ingrese un email válido',
+            trigger: 'change',
           },
         ],
         password: [
           {
             required: true,
-            message: "La contraseña es requerida",
-            trigger: "blur",
+            message: 'La contraseña es requerida',
+            trigger: 'blur',
           },
           {
             min: 6,
-            message: "La contraseña debe tener al menos 6 caracteres",
-            trigger: "blur",
+            message: 'La contraseña debe tener al menos 6 caracteres',
+            trigger: 'blur',
           },
         ],
       };
@@ -765,9 +808,9 @@ En este ejemplo, el email se valida en tiempo real mientras el usuario escribe, 
         if (!formRef.value) return;
         await formRef.value.validate((valid, fields) => {
           if (valid) {
-            console.log("submit!", fields);
+            console.log('submit!', fields);
           } else {
-            console.log("error submit!" + fields);
+            console.log('error submit!' + fields);
           }
         });
       }
@@ -809,12 +852,12 @@ En este ejemplo, el email se valida en tiempo real mientras el usuario escribe, 
 
 // Formulario Deshabilitado
 export const DisabledForm: Story = {
-  name: "Formulario Deshabilitado",
+  name: 'Formulario Deshabilitado',
   parameters: {
     docs: {
       description: {
         story:
-          "Ejemplo de un formulario completamente deshabilitado con múltiples campos.",
+          'Ejemplo de un formulario completamente deshabilitado con múltiples campos.',
       },
     },
   },
@@ -822,12 +865,12 @@ export const DisabledForm: Story = {
     components: { GForm, GFormItem, GInput, GConfigProvider, GButton },
     setup() {
       const formData = reactive({
-        name: "Juan Pérez",
-        email: "juan@ejemplo.com",
-        phone: "+51 999888777",
-        address: "Av. Principal 123",
-        ciudad: "Lima",
-        country: "Perú",
+        name: 'Juan Pérez',
+        email: 'juan@ejemplo.com',
+        phone: '+51 999888777',
+        address: 'Av. Principal 123',
+        ciudad: 'Lima',
+        country: 'Perú',
       });
 
       return { formData };
@@ -866,7 +909,7 @@ export const DisabledForm: Story = {
 };
 
 export const PreventSubmit: Story = {
-  name: "Prevenir Submit",
+  name: 'Prevenir Submit',
   parameters: {
     docs: {
       description: {
@@ -898,20 +941,20 @@ async function handleSubmit() {
     setup() {
       const formRef = ref();
       const formData = reactive({
-        usuario: "",
-        clave: "",
+        usuario: '',
+        clave: '',
       });
 
       const rules = {
         usuario: [
           {
             required: true,
-            message: "El usuario es requerido",
-            trigger: "blur",
+            message: 'El usuario es requerido',
+            trigger: 'blur',
           },
         ],
         clave: [
-          { required: true, message: "La clave es requerida", trigger: "blur" },
+          { required: true, message: 'La clave es requerida', trigger: 'blur' },
         ],
       };
 
@@ -920,9 +963,9 @@ async function handleSubmit() {
 
         await formRef.value.validate((valid, fields) => {
           if (valid) {
-            alert("submit!");
+            alert('submit!');
           } else {
-            console.log("error submit!", fields);
+            console.log('error submit!', fields);
           }
         });
       }
@@ -977,18 +1020,18 @@ const addDomain = () => {
   })
 }
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   render: () => ({
     components: { GForm, GFormItem, GInput, GConfigProvider, GButton },
     setup() {
       const formRef = ref<FormInstance>();
-      
+
       interface DomainItem {
-        key: number
-        value: string
+        key: number;
+        value: string;
       }
 
       const formData = reactive({
@@ -1002,9 +1045,9 @@ const addDomain = () => {
       });
 
       const removeDomain = (item: DomainItem) => {
-        const index = formData.domains.indexOf(item)
+        const index = formData.domains.indexOf(item);
         if (index !== -1) {
-          formData.domains.splice(index, 1)
+          formData.domains.splice(index, 1);
         }
       };
 
@@ -1016,28 +1059,28 @@ const addDomain = () => {
       };
 
       async function handleSubmit() {
-        if (!formRef.value) return
+        if (!formRef.value) return;
         await formRef.value.validate((valid, fields) => {
           if (valid) {
-            console.log('submit!', formData)
+            console.log('submit!', formData);
           } else {
-            console.log('error submit!', fields)
+            console.log('error submit!', fields);
           }
-        })
+        });
       }
 
       async function handleReset() {
-        if (!formRef.value) return
-        formRef.value.resetFields()
+        if (!formRef.value) return;
+        formRef.value.resetFields();
       }
 
-      return { 
-        formRef, 
-        formData, 
-        handleSubmit, 
+      return {
+        formRef,
+        formData,
+        handleSubmit,
         handleReset,
         addDomain,
-        removeDomain
+        removeDomain,
       };
     },
     template: `
@@ -1094,6 +1137,6 @@ const addDomain = () => {
           </div>
         </g-form>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };

@@ -16,14 +16,15 @@ const config: StorybookConfig = {
 
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-jest',
-    '@storybook/addon-controls',
     '@storybook/addon-docs',
+    '@storybook/addon-vitest',
+    '@storybook/addon-mcp',
   ],
 
-  docs: { autodocs: 'tag' },
+  features: {
+    componentsManifest: true,
+    experimentalDocgenServer: true,
+  },
 };
 
 export default config;

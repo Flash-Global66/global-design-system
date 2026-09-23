@@ -1,21 +1,22 @@
-
 # 📘 Libreria UI para Global66
 
 Este repositorio utiliza herramientas modernas para la creación, documentación y publicación de componentes reutilizables en Vue.js. A continuación, encontrarás las instrucciones detalladas para cada sección clave.
 
-## 🧩 **Añadir Componentes**  
+## 🧩 **Añadir Componentes**
+
 **Librería utilizada:** [Lerna](https://lerna.js.org/)  
-Lerna facilita la gestión de monorepositorios, permitiéndote trabajar con múltiples paquetes en un mismo repositorio.  
+Lerna facilita la gestión de monorepositorios, permitiéndote trabajar con múltiples paquetes en un mismo repositorio.
 
 📕 **Recurso recomendado:**  
-Consulta este [artículo en Medium](https://medium.com/js-dojo/sharing-reusable-vue-js-components-with-lerna-storybook-and-npm-7dc33b38b011) para aprender cómo configurar y usar Lerna para compartir componentes Vue.js reutilizables.  
+Consulta este [artículo en Medium](https://medium.com/js-dojo/sharing-reusable-vue-js-components-with-lerna-storybook-and-npm-7dc33b38b011) para aprender cómo configurar y usar Lerna para compartir componentes Vue.js reutilizables.
 
-## 📖 **Añadir Stories**  
+## 📖 **Añadir Stories**
+
 **Librería utilizada:** [Storybook](https://storybook.js.org/)  
-Storybook permite crear una interfaz interactiva donde puedes visualizar y probar tus componentes en diferentes estados. Es ideal para documentar y demostrar cómo funcionan tus componentes.  
+Storybook permite crear una interfaz interactiva donde puedes visualizar y probar tus componentes en diferentes estados. Es ideal para documentar y demostrar cómo funcionan tus componentes.
 
 🔗 **Documentación oficial:**  
-Consulta los [docs de Storybook](https://storybook.js.org/docs/vue/writing-stories/introduction) para aprender cómo escribir y gestionar tus historias.  
+Consulta los [docs de Storybook](https://storybook.js.org/docs/vue/writing-stories/introduction) para aprender cómo escribir y gestionar tus historias.
 
 <!--## 🔑 Configurar Token para NPM-->
 
@@ -47,16 +48,17 @@ Consulta los [docs de Storybook](https://storybook.js.org/docs/vue/writing-stori
 
 ## ⚙️ Requisitos Previos
 
-- 🌐 **[NVM (Node Version Manager)](https://github.com/settings/tokens):** Utiliza una versión de Node superior a la 20.  
-- 🛠️ **[Git](https://git-scm.com/downloads):** Para el control de versiones y la gestión del repositorio.  
-- 📦 **[Yarn](https://yarnpkg.com/):** Administrador de paquetes opcional, recomendado para trabajar con este proyecto.  
-- 🔗 **[Corepack](https://nodejs.org/api/corepack.html):** Herramienta para habilitar Yarn o pnpm con versiones específicas. 
+- 🌐 **[NVM (Node Version Manager)](https://github.com/settings/tokens):** Utiliza Node 20.19+ o 22.12+ (mínimo que exige Storybook 10).
+- 🛠️ **[Git](https://git-scm.com/downloads):** Para el control de versiones y la gestión del repositorio.
+- 📦 **[Yarn](https://yarnpkg.com/):** Administrador de paquetes opcional, recomendado para trabajar con este proyecto.
+- 🔗 **[Corepack](https://nodejs.org/api/corepack.html):** Herramienta para habilitar Yarn o pnpm con versiones específicas.
 
 ## 🚀 Instalación y Uso del Proyecto
 
 ¡Sigue estos simples pasos para instalar y ejecutar el proyecto en tu máquina local! 🛠️
 
 **1. Clona este repositorio:**
+
 ```sh
 1 opción -> https://github.com/Flash-Global66/global-design-system.git
 2 opción -> gh repo clone Flash-Global66/global-design-system
@@ -71,7 +73,7 @@ I. Habilita yarn en tu versión de node actual.
 corepack enable yarn
 ```
 
-II. Usa la ultima versión de yarn. 
+II. Usa la ultima versión de yarn.
 
 ```sh
 corepack use yarn@latest
@@ -79,7 +81,7 @@ corepack use yarn@latest
 
 - ⚠️ Si ya se instalaron dependencias omite el paso III. ⚠️
 
-III. Instala las dependencias del proyecto. 
+III. Instala las dependencias del proyecto.
 
 ```sh
 yarn install
@@ -91,26 +93,81 @@ yarn install
 yarn storybook
 ```
 
+**4. (Opcional) Corre las stories como tests:**
+
+Cada story se renderiza en Chromium headless con `@storybook/addon-vitest`. La primera vez instala el navegador de Playwright:
+
+```sh
+npx playwright install chromium
+yarn test:storybook
+```
+
+`yarn test` sigue corriendo solo los unit tests (`components/**/tests`), sin navegador.
+
+## 🤖 MCP de Storybook
+
+Storybook expone un servidor [MCP](https://storybook.js.org/docs/ai/mcp/overview) (`@storybook/addon-mcp`) para que los agentes de IA (Claude Code, Cursor, Copilot…) consulten las props y los ejemplos de cada componente, escriban stories siguiendo las convenciones del proyecto y las prueben, sin tener que leer el código fuente.
+
+**1. Levanta Storybook** (el MCP vive dentro del servidor de desarrollo):
+
+```sh
+yarn storybook
+```
+
+El endpoint queda en `http://localhost:6006/mcp`. Si el puerto 6006 está ocupado, Storybook usa el siguiente libre (6007, …) y el MCP se mueve con él.
+
+**2. Regístralo en tu agente** (una sola vez):
+
+- **Claude Code**
+
+  ```sh
+  claude mcp add --transport http storybook http://localhost:6006/mcp
+  ```
+
+- **Cursor, VS Code u otros**: agrega esto a su archivo de configuración MCP (por ejemplo `.cursor/mcp.json` o `.vscode/mcp.json`):
+
+  ```json
+  {
+    "mcpServers": {
+      "storybook": {
+        "type": "http",
+        "url": "http://localhost:6006/mcp"
+      }
+    }
+  }
+  ```
+
+La configuración del MCP es personal y no se versiona en el repo.
+
+**Tools disponibles:**
+
+| Toolset    | Tools                                                                                                 | Para qué                                                                  |
+| ---------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Docs       | `docs-list`, `docs-show`, `docs-show-story`                                                           | Props, descripción y ejemplos de cada componente, leídos de los manifests |
+| Desarrollo | `get-storybook-story-instructions`, `stories-find-by-component`, `stories-changed`, `stories-preview` | Convenciones para escribir stories y links de preview de lo que se cambió |
+| Testing    | `test-run`                                                                                            | Corre las stories como tests (usa `@storybook/addon-vitest`)              |
+
+**Manifests publicados:** el build de Storybook (`yarn build-storybook`) también genera `manifests/components.json` y `manifests/docs.json`, que se publican junto con el Storybook en [GitHub Pages](https://flash-global66.github.io/global-design-system/manifests/components.json). Para verlos en un formato legible, abre `/manifests/components.html`.
+
+**¿Y un MCP remoto?** Todavía no existe. GitHub Pages solo sirve archivos estáticos y no puede alojar el endpoint `/mcp`. Un MCP remoto (que en ese caso solo tendría el toolset de docs) necesita un servidor propio con [`@storybook/mcp`](https://www.npmjs.com/package/@storybook/mcp) que lea los manifests publicados. Queda pendiente.
+
 ## 🚧 Posibles Errores de Instalación y Soluciones
+
 Si encuentras problemas durante la instalación, no te preocupes, aquí tienes una lista de los errores más comunes y cómo solucionarlos:
 
-#### 🛑 Error 1: "Error de addon controls con storybook" (Error de instalación)
-Este error ocurre porque se encuentran problemas con el yarn.lock
+#### 🛑 Error 1: `ERR_WORKER_OUT_OF_MEMORY` o "docgen worker died" al levantar Storybook
 
-<p align="center">
-  <img src="https://i.imgur.com/xXiiq6d.png" alt="Descripción de la imagen" />
-</p>
+El docgen de Storybook (`experimentalDocgenServer`, que genera las props de los manifests del MCP) necesita más memoria de la que Node trae por defecto.
 
 #### Solución:
 
-La solución es borrar el archivo yarn.lock del proyecto y volver a correr los pasos de las sección de Instalación y Uso del Proyecto.
+Los scripts `yarn storybook` y `yarn build-storybook` ya suben el heap a 8 GB (`NODE_OPTIONS=--max-old-space-size=8192`). Si corres `storybook` directamente con `npx`, pasa esa misma variable.
 
 ## 🚀 Contribuidores
 
 Agradecemos enormemente el esfuerzo y dedicación de todas las personas que han contribuido a este proyecto. 💖 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 # Contributors 👨‍💻
-
 
 <table>
   <tr>

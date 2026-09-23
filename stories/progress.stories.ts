@@ -1,26 +1,26 @@
 // external imports
-import { StoryObj } from "@storybook/vue3";
+import { StoryObj } from '@storybook/vue3-vite';
 
 // components
-import { GProgress } from "@flash-global66/g-progress/index.ts";
+import { GProgress } from '@flash-global66/g-progress/index.ts';
 
 // Config Provider
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
 
 // Version
 import {
   version,
   peerDependencies,
-} from "@flash-global66/g-progress/package.json";
+} from '@flash-global66/g-progress/package.json';
 
 // Helpers
 import {
   generatePeerDepsList,
   generatePeerDepsInstalls,
-} from "../helper/documentation-stories";
+} from '../helper/documentation-stories';
 
 const meta = {
-  title: "Data/Progress",
+  title: 'Data/Progress',
   component: GProgress,
   parameters: {
     docs: {
@@ -156,151 +156,152 @@ status="success"
   argTypes: {
     // 1. Estado y Control
     percentage: {
-      name: "percentage",
+      name: 'percentage',
       description:
-        "Porcentaje completado o largo de barra completada con la propiedad indeterminate. Siempre debe estar, a menos que se quiera mostrar la barra vacía.",
-      control: { type: "range", min: 0, max: 100 },
+        'Porcentaje completado o largo de barra completada con la propiedad indeterminate. Siempre debe estar, a menos que se quiera mostrar la barra vacía.',
+      control: { type: 'range', min: 0, max: 100 },
       table: {
-        category: "Estado y Control",
-        type: { summary: "number" },
-        defaultValue: { summary: "0" },
+        category: 'Estado y Control',
+        type: { summary: 'number' },
+        defaultValue: { summary: '0' },
       },
     },
     type: {
-      description: "Tipo de barra de progreso.",
-      control: "select",
-      options: ["line", "circle", "dashboard"],
+      description: 'Tipo de barra de progreso.',
+      control: 'select',
+      options: ['line', 'circle', 'dashboard'],
       table: {
-        category: "Estado y Control",
-        type: { summary: "string" },
-        defaultValue: { summary: "line" },
+        category: 'Estado y Control',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'line' },
       },
     },
     status: {
-      description: "Estado actual de la barra de progreso.",
-      control: "select",
-      options: ["primary", "success", "warning", "error"],
+      description: 'Estado actual de la barra de progreso.',
+      control: 'select',
+      options: ['primary', 'success', 'warning', 'error'],
       table: {
-        category: "Estado y Control",
-        type: { summary: "string" },
-        defaultValue: { summary: "primary" },
+        category: 'Estado y Control',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'primary' },
       },
     },
     loading: {
-      name: "loading",
-      description: "Indica si debe mostrarse la carga.",
-      control: "boolean",
+      name: 'loading',
+      description: 'Indica si debe mostrarse la carga.',
+      control: 'boolean',
       table: {
-        category: "Estado y Control",
-        type: { summary: "boolean" },
+        category: 'Estado y Control',
+        type: { summary: 'boolean' },
         defaultValue: { summary: false },
       },
     },
     indeterminate: {
-      name: "indeterminate",
-      description: "Establece el progreso como indeterminado. Funciona solo para la barra de tipo 'line'",
-      control: "boolean",
+      name: 'indeterminate',
+      description:
+        "Establece el progreso como indeterminado. Funciona solo para la barra de tipo 'line'",
+      control: 'boolean',
       table: {
-        category: "Estado y Control",
-        type: { summary: "boolean" },
+        category: 'Estado y Control',
+        type: { summary: 'boolean' },
         defaultValue: { summary: false },
       },
     },
     format: {
-      description: "Formato de texto personalizado.",
-      control: "string",
+      description: 'Formato de texto personalizado.',
+      control: 'string',
       table: {
-        category: "Estado y Control",
+        category: 'Estado y Control',
         type: {
-          summary: "Function (percentage: number) => string",
+          summary: 'Function (percentage: number) => string',
         },
         defaultValue: { summary: null },
       },
     },
-    "show-text": {
-      name: "show-text",
-      description: "Mostrar el porcentaje",
-      control: "boolean",
+    'show-text': {
+      name: 'show-text',
+      description: 'Mostrar el porcentaje',
+      control: 'boolean',
       table: {
-        category: "Estado y Control",
-        type: { summary: "boolean" },
+        category: 'Estado y Control',
+        type: { summary: 'boolean' },
         defaultValue: { summary: true },
       },
     },
     // 2. Estilo
-    "stroke-width": {
-      name: "stroke-width",
-      description: "Ancho de la barra de progreso.",
-      control: "number",
+    'stroke-width': {
+      name: 'stroke-width',
+      description: 'Ancho de la barra de progreso.',
+      control: 'number',
       table: {
-        category: "Estilo",
-        type: { summary: "number" },
+        category: 'Estilo',
+        type: { summary: 'number' },
         defaultValue: { summary: 6 },
       },
     },
-    "text-inside": {
-      name: "text-inside",
+    'text-inside': {
+      name: 'text-inside',
       description:
         "Colocar el porcentaje dentro de la barra de progreso (solo para type='line').",
-      control: "boolean",
+      control: 'boolean',
       table: {
-        category: "Estilo",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
-    "stroke-linecap": {
-      description: "Terminacion del cierre del estilo circulo/dashboard.",
-      control: "select",
-      options: ["butt", "round", "square"],
+    'stroke-linecap': {
+      description: 'Terminacion del cierre del estilo circulo/dashboard.',
+      control: 'select',
+      options: ['butt', 'round', 'square'],
       table: {
-        category: "Estilo",
-        type: { summary: "string" },
-        defaultValue: { summary: "round" },
+        category: 'Estilo',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'round' },
       },
     },
     duration: {
-      name: "duration",
+      name: 'duration',
       description:
-        "Controla la duracion de la animación del efecto indeterminado o progreso con rayas.",
-      control: "number",
+        'Controla la duracion de la animación del efecto indeterminado o progreso con rayas.',
+      control: 'number',
       table: {
-        category: "Estilo",
-        type: { summary: "number" },
-        defaultValue: { summary: "3" },
+        category: 'Estilo',
+        type: { summary: 'number' },
+        defaultValue: { summary: '3' },
       },
     },
     width: {
-      name: "width",
+      name: 'width',
       description:
-        "Ancho del canvas que contiene la barra de progreso circular",
-      control: "number",
+        'Ancho del canvas que contiene la barra de progreso circular',
+      control: 'number',
       table: {
-        category: "Estado y Control",
-        type: { summary: "number" },
-        defaultValue: { summary: "126" },
+        category: 'Estado y Control',
+        type: { summary: 'number' },
+        defaultValue: { summary: '126' },
       },
     },
   },
   args: {
     percentage: 75,
-    type: "line",
-    "stroke-width": 6,
+    type: 'line',
+    'stroke-width': 6,
   },
 };
 export default meta;
 type Story = StoryObj<typeof GProgress>;
 
 export const Basic: Story = {
-  name: "Básico",
+  name: 'Básico',
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo básico de barra de progreso lineal.",
+        story: 'Ejemplo básico de barra de progreso lineal.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GProgress, GConfigProvider },
     setup() {
       return { args };
@@ -314,15 +315,15 @@ export const Basic: Story = {
 };
 
 export const States: Story = {
-  name: "Diferentes estados",
+  name: 'Diferentes estados',
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo básico de barra de progreso circular.",
+        story: 'Ejemplo básico de barra de progreso circular.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GProgress, GConfigProvider },
     setup() {
       return { args };
@@ -343,15 +344,15 @@ export const States: Story = {
 };
 
 export const Types: Story = {
-  name: "Diferentes tipos",
+  name: 'Diferentes tipos',
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo básico de barra de progreso circular.",
+        story: 'Ejemplo básico de barra de progreso circular.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GProgress, GConfigProvider },
     setup() {
       return { args };
@@ -387,16 +388,16 @@ export const Types: Story = {
 };
 
 export const Ideterminate: Story = {
-  name: "Progreso indeterminado",
+  name: 'Progreso indeterminado',
   parameters: {
     docs: {
       description: {
         story:
-          "Ejemplo básico de barra de progreso con porcentaje indeterminado.",
+          'Ejemplo básico de barra de progreso con porcentaje indeterminado.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GProgress, GConfigProvider },
     setup() {
       return { args };
@@ -415,16 +416,16 @@ export const Ideterminate: Story = {
 };
 
 export const Loading: Story = {
-  name: "Progreso en carga",
+  name: 'Progreso en carga',
   parameters: {
     docs: {
       description: {
         story:
-          "Ejemplo básico de uso de barra de progreso con icono de loader.",
+          'Ejemplo básico de uso de barra de progreso con icono de loader.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GProgress, GConfigProvider },
     setup() {
       return { args };

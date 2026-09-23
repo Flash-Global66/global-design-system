@@ -1,7 +1,7 @@
 {
   "name": "@flash-global66/g-table",
   "author": "Global66",
-  "version": "0.3.20",
+  "version": "0.3.21",
   "license": "MIT",
   "buildable": true,
   "exports": {
@@ -30,16 +30,16 @@
   },
   "dependencies": {
     "@flash-global66/g-hooks": "^0.11.14",
-    "@flash-global66/g-popper": "^0.0.32",
+    "@flash-global66/g-popper": "^0.0.33",
     "@flash-global66/g-utils": "^0.15.6"
   },
   "peerDependencies": {
-    "@flash-global66/g-checkbox": "^0.3.30",
+    "@flash-global66/g-checkbox": "^0.3.31",
     "@flash-global66/g-icon-font": "^0.26.1",
     "@flash-global66/g-input": "^0.3.32",
     "@flash-global66/g-scrollbar": "^0.1.21",
-    "@flash-global66/g-select": "^0.5.0",
-    "@flash-global66/g-tooltip": "^0.1.21",
+    "@flash-global66/g-select": "^0.5.1",
+    "@flash-global66/g-tooltip": "^0.1.22",
     "async-validator": "^4.2.5",
     "lodash-unified": "^1.0.3",
     "vue": "^3.2.0"
