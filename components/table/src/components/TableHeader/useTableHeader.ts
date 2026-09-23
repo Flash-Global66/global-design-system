@@ -99,22 +99,19 @@ export function useTableHeader<T>(props: TableHeaderProps<T>, emit) {
   };
   instance.filterPanels = filterPanels;
 
-  const handleHeaderCellClick = (
-    event: MouseEvent,
-    column: TableColumnCtx<T>,
-  ) => {
+  function handleHeaderCellClick(event: MouseEvent, column: TableColumnCtx<T>) {
     if ((event.currentTarget as HTMLElement).classList.contains('noclick')) {
       return;
     }
     handleHeaderClick(event, column);
-  };
+  }
 
-  const resolveHeaderCellClass = (
+  function resolveHeaderCellClass(
     rowIndex: number,
     cellIndex: number,
     subColumns: TableColumnCtx<T>[],
     column: TableColumnCtx<T>,
-  ) => {
+  ) {
     const cellClass = getHeaderCellClass(
       rowIndex,
       cellIndex,
@@ -125,7 +122,7 @@ export function useTableHeader<T>(props: TableHeaderProps<T>, emit) {
       saveIndexSelection.set(cellClass, column);
     }
     return cellClass;
-  };
+  }
 
   return {
     ns,
