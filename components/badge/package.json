@@ -1,10 +1,11 @@
 {
   "name": "@flash-global66/g-badge",
   "author": "Global66",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
+    "./styles.scss": "./badge.styles.scss",
     "./badge.styles.scss": "./badge.styles.scss"
   },
   "dependencies": {

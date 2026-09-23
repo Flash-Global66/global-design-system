@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.12](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popover@0.0.11...@flash-global66/g-popover@0.0.12) (2026-09-23)
+
+### Bug Fixes
+
+- **styles:** exponer por ./styles.scss los estilos de 8 paquetes legacy ([#331](https://github.com/Flash-Global66/global-design-system/issues/331)) ([a1acb0f](https://github.com/Flash-Global66/global-design-system/commit/a1acb0fc9d889a97786bc19c133cd18c95c7976d))
+
 ## [0.0.11](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-popover@0.0.10...@flash-global66/g-popover@0.0.11) (2026-09-16)
 
 **Note:** Version bump only for package @flash-global66/g-popover
