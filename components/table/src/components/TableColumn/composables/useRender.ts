@@ -13,12 +13,12 @@ import {
 } from 'vue';
 import { debugWarn, isArray, isUndefined } from '@flash-global66/g-utils';
 import { useNamespace } from '@flash-global66/g-utils';
+import { getDefaultClassName } from '../constants/renderer.constant';
 import {
   cellForced,
   defaultRenderCell,
-  getDefaultClassName,
   treeCellPrefix,
-} from '../constants/renderer.constant';
+} from '../utils/renderer.util';
 import { parseMinWidth, parseWidth } from '../../../shared/utils/table.util';
 import type { ComputedRef } from 'vue';
 import type { TableColumn } from '../types/tableColumnInstance.type';
