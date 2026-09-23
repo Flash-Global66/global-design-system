@@ -19,7 +19,6 @@ import { useInputCellState } from '../composables/useInputCellState';
 
 // h() y no un .vue: el renderer lo elige `cellType` en runtime y lo consume
 // `column.renderCell(data)`, un contrato de función heredado de Element Plus.
-const { defaultEditingState, isAnyValidating } = useInputCellState();
 const ns = useNamespace('table');
 
 function getColumnIndex(
@@ -106,11 +105,11 @@ function createTextareaEditVNode(
       table.emit('cell-edit-change', config.row, column, v, oldValue);
     }
     if (config.validation) {
-      isAnyValidating.value = true;
+      config.isAnyValidating.value = true;
       config.validation
         .validate(v, config.row, config.prop, 'change', config.idx)
         .then(result => {
-          isAnyValidating.value = false;
+          config.isAnyValidating.value = false;
           if (table?.emit && column) {
             table.emit('cell-edit-validate', config.row, column, {
               valid: result.valid,
@@ -201,11 +200,11 @@ function createInputEditVNode(
       table.emit('cell-edit-change', config.row, column, v, oldValue);
     }
     if (config.validation) {
-      isAnyValidating.value = true;
+      config.isAnyValidating.value = true;
       config.validation
         .validate(v, config.row, config.prop, 'change', config.idx)
         .then(result => {
-          isAnyValidating.value = false;
+          config.isAnyValidating.value = false;
           if (table?.emit && column) {
             table.emit('cell-edit-validate', config.row, column, {
               valid: result.valid,
@@ -269,7 +268,7 @@ function createReadVNode(config: InputCellConfig): VNode {
       role: 'button',
       tabIndex: 0,
       onClick: (e: MouseEvent) => {
-        if (isAnyValidating.value) return;
+        if (config.isAnyValidating.value) return;
         setActiveTableFromEvent(e);
         config.toggle(config.row, config.prop, config.idx);
         if (table?.emit && column) {
@@ -278,7 +277,7 @@ function createReadVNode(config: InputCellConfig): VNode {
       },
       onKeydown: (e: KeyboardEvent) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          if (isAnyValidating.value) return;
+          if (config.isAnyValidating.value) return;
           e.preventDefault();
           setActiveTableFromEvent(e);
           config.toggle(config.row, config.prop, config.idx);
@@ -415,6 +414,7 @@ export function renderInputCell(
   cellOptions?: Record<string, unknown>,
   table?: { emit: TableEmit },
 ): VNode {
+  const { defaultEditingState, isAnyValidating } = useInputCellState(table);
   const co = cellOptions as Record<string, unknown> | undefined;
   const prop = column.property;
   const row = data.row as Record<string, unknown>;
@@ -533,6 +533,7 @@ export function renderInputCell(
     isValidationError,
     isValidating,
     validationMessage,
+    isAnyValidating,
     expandedWidthOption: co?.expandedWidth as
       | number
       | ((row: unknown, prop: string, index?: number) => number | undefined)

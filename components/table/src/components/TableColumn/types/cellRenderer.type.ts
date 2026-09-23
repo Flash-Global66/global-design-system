@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, VNode } from 'vue';
+import type { ComponentPublicInstance, Ref, VNode } from 'vue';
 import type { TableColumnCtx } from '../../../shared/types/tableColumn.type';
 import type { TableCellValidationApi } from '../../../shared/types/tableCellValidation.type';
 
@@ -80,4 +80,14 @@ export interface InputCellConfig {
   preventCloseOnError?: boolean;
   table?: { emit: TableEmit };
   column?: TableColumnCtx<unknown>;
+  isAnyValidating: Ref<boolean>;
+}
+
+/**
+ * Estado reactivo de las celdas `cell-type="input"`, aislado por instancia de tabla —
+ * ver `useInputCellState`.
+ */
+export interface InputCellState {
+  defaultEditingState: Ref<string | null>;
+  isAnyValidating: Ref<boolean>;
 }
