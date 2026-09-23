@@ -33,7 +33,9 @@ components/inline/
 │   ├── Inline/                      # PascalCase — carpeta del elemento
 │   │   ├── index.vue                # template puro + <style src="...">
 │   │   ├── useInline.ts             # lógica reactiva del elemento
-│   │   └── inline.style.scss        # estilos BEM (si el elemento tiene <style>)
+│   │   └── inline.style.scss        # estilos BEM (si el elemento necesita CSS propio)
+│   ├── constants/
+│   │   └── inline.constant.ts       # objeto de props y emits
 │   └── types/
 │       └── inline.type.ts           # tipos con nombre del paquete
 └── tests/                           # espeja src/, en la raíz del paquete
@@ -51,20 +53,23 @@ components/table/
 ├── tsconfig.json
 ├── CHANGELOG.md
 ├── src/
-│   ├── Table/                       # elemento raíz — mismo trío que un simple
-│   │   ├── index.vue
-│   │   ├── useTable.ts
-│   │   └── table.style.scss
+│   ├── Table/                       # elemento raíz
+│   │   ├── index.vue                # ┐
+│   │   ├── useTable.ts              # ├ en la raíz de la carpeta, solo el trío
+│   │   ├── table.style.scss         # ┘ agrega con @use los .style.scss de los subcomponentes
+│   │   ├── composables/             # use*.ts que solo usa Table (useKeyRender.ts, useStyle.ts)
+│   │   ├── constants/               # table.constant.ts — tableProps
+│   │   └── utils/                   # funciones puras que solo usa Table (+ types/ si los hubiera)
 │   ├── components/                  # subcomponentes — solo si el paquete es complejo
-│   │   ├── TableHeader/
+│   │   ├── TableHeader/             # misma forma: trío + composables/ (useEvent.ts, useStyle.ts)
 │   │   ├── TableBody/
-│   │   └── TableColumn/
-│   └── shared/                      # reutilizable entre el raíz y los subcomponentes
-│       ├── composables/             # use<Ctx>.ts — especializados, reusados por 2+ piezas
+│   │   └── TableColumn/             # trío + composables/ + constants/ + types/ + utils/
+│   └── shared/                      # solo lo que importan 2+ elementos del paquete
+│       ├── composables/             # use<Ctx>.ts — especializados
 │       ├── constants/               # <ctx>.constant.ts
 │       ├── types/                   # <ctx>.type.ts
 │       ├── utils/                   # <ctx>.util.ts — funciones puras, sin reactividad
-│       └── store/                   # solo si hay estado compartido con provide/inject
+│       └── store/                   # <ctx>.store.ts — estado compartido con mutadores
 └── tests/                           # espeja src/ capa por capa, en la raíz del paquete
     ├── Table/
     ├── components/
@@ -75,10 +80,24 @@ components/table/
 
 Un paquete con un solo elemento visual **siempre** es simple, sin importar cuánta lógica interna
 tenga ese elemento — la lógica va en su propio `use<Nombre>.ts`, eso no lo convierte en complejo.
-`shared/` es cerrado a esas 5 subcarpetas: no hay `shared/helpers/` ni `shared/hooks/`.
 
-Los ejemplos canónicos completos de esta estructura son `components/inline/` (simple) y
-`components/table/` (complejo).
+En un paquete complejo, **dónde vive una pieza lo decide cuántos elementos la importan**:
+
+- **Un solo elemento** → una subcarpeta de la carpeta de ese elemento. Hay cuatro posibles, todas
+  opcionales: `composables/`, `utils/`, `types/`, `constants/`. Ninguna otra (ni `styles/`, ni
+  `store/`, ni una carpeta por feature como `cell-renderers/`) y sin `index.ts` adentro. En la raíz
+  de la carpeta del elemento quedan solo `index.vue`, `use<Nombre>.ts` y `<nombre>.style.scss`.
+- **Dos o más elementos del paquete** → `shared/`, cerrado a esas 5 subcarpetas: no hay
+  `shared/helpers/` ni `shared/hooks/`. `store/` existe solo acá.
+- **Dos o más paquetes** → `common/` (ver `common-package-architecture.md`).
+
+Una pieza sube de nivel cuando aparece su segundo consumidor real, no por anticipado, y se mueve:
+no queda copia abajo. En un paquete simple el elemento único no tiene subcarpetas: sus tipos y
+constantes van a `src/types/` y `src/constants/`.
+
+Los ejemplos canónicos de esta estructura son `components/inline/` (simple) y `components/table/`
+(complejo). `table` ya sigue esta estructura; `inline` todavía tiene `Inline/defaults.ts` (su
+destino es el `constants/` + `types/` del árbol de arriba) y queda pendiente de migrar.
 
 ---
 
@@ -89,10 +108,12 @@ Los ejemplos canónicos completos de esta estructura son `components/inline/` (s
 | Carpeta del paquete        | kebab-case (nombre npm)                    | `table/`, `date-picker/` |
 | Carpeta de elemento visual | PascalCase                                 | `Table/`, `TableHeader/` |
 | Archivo `index.vue`        | siempre `index.vue`, nunca `<Name>.vue`    | `Table/index.vue`        |
+| Carpeta de capa            | minúscula, nombre exacto de la capa        | `composables/`, `store/` |
 | Composables                | `use<Nombre>.ts` camelCase                 | `useTable.ts`            |
 | Constantes                 | `<contexto>.constant.ts`                   | `token.constant.ts`      |
 | Tipos e interfaces         | `<contexto>.type.ts`                       | `cellRenderer.type.ts`   |
 | Utils (función pura)       | `<contexto>.util.ts`                       | `table.util.ts`          |
+| Stores                     | `<contexto>.store.ts`                      | `tableLayout.store.ts`   |
 | Estilos                    | `<nombre>.style.scss` (singular)           | `table.style.scss`       |
 | Tests                      | `<Nombre>.spec.ts` / `use<Nombre>.spec.ts` | `useTable.spec.ts`       |
 
@@ -121,7 +142,9 @@ con reglas CSS escritas adentro del bloque:
 El `.style.scss` de un elemento existe si ese elemento necesita CSS propio, sin relación con si el
 `.vue` tiene o no un bloque `<style>` — la entrega al consumidor siempre pasa por el subpath
 `"./styles.scss"` del `package.json` del paquete (ver sección 5), apunte o no el `.vue` a su propio
-archivo internamente.
+archivo internamente. Ese `.style.scss` vive siempre en la raíz de la carpeta de su elemento,
+nunca en una subcarpeta `styles/`: si un paquete legacy la trae, su contenido se fusiona en el
+`.style.scss` del elemento al migrarlo.
 
 ### 4.2 `use<Nombre>.ts` — Composables: orquestador, especializado, o util
 
@@ -130,33 +153,42 @@ necesita `ref`, `computed`, `watch` o un hook de ciclo de vida?**
 
 - **Orquestador**: co-localizado junto a su elemento (`Table/useTable.ts`), es dueño del estado
   principal de ese elemento y coordina. Uno por elemento.
-- **Especializado**: en `shared/composables/` (solo en paquetes complejos), resuelve una
-  responsabilidad reactiva reusada por 2+ piezas del paquete.
-- **Util**: si la función no necesita reactividad, no es un composable — es
-  `shared/utils/<contexto>.util.ts` (o `utils/` a secas en un paquete simple).
+- **Especializado**: resuelve una responsabilidad reactiva sin ser dueño del elemento. Vive en
+  `<Elemento>/composables/` si lo usa un solo elemento, o en `shared/composables/` si lo usan 2+.
+- **Util**: si la función no necesita reactividad, no es un composable — es `<contexto>.util.ts`,
+  en `<Elemento>/utils/` o `shared/utils/` con el mismo criterio (o `utils/` a secas en un paquete
+  simple). Una función que solo arma VNodes con `h()` también es un util.
+
+Una **clase con estado compartido** tampoco es un composable, aunque tenga `ref`s adentro. Caso real:
+`TableLayout` (refs + métodos como `setHeight`) la crea `Table` y la observan `TableHeader`,
+`TableBody` y `TableFooter`; vivía en `shared/composables/tableLayout.ts` y va a
+`shared/store/tableLayout.store.ts`, con export con nombre. Todo archivo de `composables/` empieza
+con `use` — uno que no, está en la capa equivocada.
 
 ### 4.3 Tipos y constantes
 
 Un tipo con nombre (`interface`/`type`) va a `types/<contexto>.type.ts`; una constante de módulo o
-un schema de props (`buildProps()`) va a `constants/<contexto>.constant.ts`. Ninguno de los dos se
-declara inline en un `.vue`, un composable o un util.
+el objeto de props de un elemento (`buildProps()` o un objeto plano) va a
+`constants/<contexto>.constant.ts`. Los tipos de props (`interface <Nombre>Props`,
+`ExtractPropTypes`, `InstanceType`) van a `types/`, no junto a la constante. Ninguno se declara
+inline en un `.vue`, un composable o un util, y el nivel (`<Elemento>/`, `shared/` o `src/` en un
+simple) lo decide quién los importa, como en la sección 2.
 
-**Excepción `defaults.ts`**: en un elemento derivado de element-plus, su `interface <Nombre>Props`
-y el objeto de props runtime se co-localizan en `<Nombre>/defaults.ts`, dentro de la carpeta del
-elemento — evita duplicar contrato y tipos al portar un componente. Es la única excepción de
-co-localización, y solo aplica a elementos derivados de EP; un componente nuevo no la usa.
+No hay excepción `defaults.ts`, tampoco para los elementos derivados de element-plus: el archivo que
+co-localizaba props, interface e `InstanceType` se desarma en `constants/` + `types/` al migrar.
 
 ```ts
-// Table/defaults.ts
-export interface TableProps {
-  data: unknown[];
-  rowKey?: string;
-}
-
+// src/Table/constants/table.constant.ts — solo lo importa Table
 export const tableProps = {
   // export con nombre — nunca `export default`
   data: { type: Array as PropType<DefaultRow[]>, default: () => [] },
 };
+
+// src/shared/types/table.type.ts — también lo importa TableColumn
+export interface TableProps<T> {
+  data: T[];
+  rowKey?: string | ((row: T) => string);
+}
 ```
 
 ### 4.4 Estilos BEM
