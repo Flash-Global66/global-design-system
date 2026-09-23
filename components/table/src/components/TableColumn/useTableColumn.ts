@@ -23,7 +23,7 @@ let columnIdSeed = 1;
  * columna padre), compone los defaults con las props, y sincroniza el ciclo de
  * vida del componente con el store (`insertColumn` / `removeColumn`).
  */
-function useTableColumn(props: TableColumnCtx<DefaultRow>, slots) {
+export function useTableColumn(props: TableColumnCtx<DefaultRow>, slots) {
   const instance = getCurrentInstance() as TableColumn<DefaultRow>;
   const columnConfig = ref<Partial<TableColumnCtx<DefaultRow>>>({});
   const owner = computed(() => {
@@ -181,5 +181,3 @@ function useTableColumn(props: TableColumnCtx<DefaultRow>, slots) {
 
   return { columnConfig };
 }
-
-export default useTableColumn;
