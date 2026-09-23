@@ -1,5 +1,5 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import { GConfigProvider } from '../components/config-provider'
+import { StoryFn, Meta } from '@storybook/vue3-vite';
+import { GConfigProvider } from '../components/config-provider';
 
 export default {
   title: 'Colores/Foundations',
@@ -26,11 +26,11 @@ export default {
 
 >**¡Nota!**
 Al hacer click en el color automáticamente se copia la variante de tailwind en el portapapeles. 📋
-        `
-      }
-    }
-  }
-} as Meta
+        `,
+      },
+    },
+  },
+} as Meta;
 
 const Template: StoryFn = () => ({
   components: { GConfigProvider },
@@ -382,25 +382,26 @@ const Template: StoryFn = () => ({
   `,
   setup() {
     const handleColorClick = async (event: MouseEvent) => {
-      const target = event.target as HTMLElement
+      const target = event.target as HTMLElement;
 
       // Extraer el color de las clases (ej: bg-grey-500)
       const colorClass = [...target.classList].find(
-        (className) => className.startsWith('bg-') && !className.startsWith('bg-[#')
-      )!
+        className =>
+          className.startsWith('bg-') && !className.startsWith('bg-[#'),
+      )!;
 
       // Obtener el valor final del color
-      const colorToCopy = colorClass.split('-').slice(1).join('-')
+      const colorToCopy = colorClass.split('-').slice(1).join('-');
 
       try {
-        await navigator.clipboard.writeText(colorToCopy)
+        await navigator.clipboard.writeText(colorToCopy);
       } catch (err) {
-        console.error('Error al copiar:', err)
+        console.error('Error al copiar:', err);
       }
-    }
+    };
 
-    return { handleColorClick }
-  }
-})
+    return { handleColorClick };
+  },
+});
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});

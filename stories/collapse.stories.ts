@@ -1,5 +1,5 @@
-import { ref } from "vue";
-import { StoryObj } from "@storybook/vue3";
+import { ref } from 'vue';
+import { StoryObj } from '@storybook/vue3-vite';
 
 // COMPONENTS
 import {
@@ -7,28 +7,28 @@ import {
   type CollapseInstance,
   GCollapseItem,
   type CollapseItemType,
-} from "@flash-global66/g-collapse/index.ts";
-import { GRadioGroup } from "@flash-global66/g-radio/index.ts";
-import { GForm, GFormItem } from "@flash-global66/g-form/index.ts";
-import { GInput } from "@flash-global66/g-input/index.ts";
-import { GButton } from "@flash-global66/g-button/index.ts";
-import { GTag } from "@flash-global66/g-tag/index.ts";
-import { GIconFont } from "@flash-global66/g-icon-font";
+} from '@flash-global66/g-collapse/index.ts';
+import { GRadioGroup } from '@flash-global66/g-radio/index.ts';
+import { GForm, GFormItem } from '@flash-global66/g-form/index.ts';
+import { GInput } from '@flash-global66/g-input/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
+import { GTag } from '@flash-global66/g-tag/index.ts';
+import { GIconFont } from '@flash-global66/g-icon-font';
 
 // CONFIG
-import { GConfigProvider } from "../components/config-provider";
+import { GConfigProvider } from '../components/config-provider';
 import {
   version,
   peerDependencies,
-} from "@flash-global66/g-collapse/package.json";
+} from '@flash-global66/g-collapse/package.json';
 import {
   generatePeerDepsInstalls,
   generatePeerDepsList,
-} from "../helper/documentation-stories";
-import { reactive } from "vue";
+} from '../helper/documentation-stories';
+import { reactive } from 'vue';
 
 const meta = {
-  title: "Data/Collapse",
+  title: 'Data/Collapse',
   component: GCollapse,
   parameters: {
     docs: {
@@ -122,60 +122,60 @@ const items: CollapseItemType[] = [
   },
   argTypes: {
     modelValue: {
-      name: "model-value / v-model",
+      name: 'model-value / v-model',
       description:
-        "Valor reactivo que controla qué items están abiertos. Puede ser un string, number o array.",
-      control: "object",
+        'Valor reactivo que controla qué items están abiertos. Puede ser un string, number o array.',
+      control: 'object',
       table: {
-        category: "Props (Padre)",
-        type: { summary: "string | number | array" },
-        defaultValue: { summary: "[]" },
+        category: 'Props (Padre)',
+        type: { summary: 'string | number | array' },
+        defaultValue: { summary: '[]' },
       },
     },
     accordion: {
-      name: "accordion",
+      name: 'accordion',
       description:
-        "Si se activa, solo un elemento puede estar abierto a la vez.",
-      control: "boolean",
+        'Si se activa, solo un elemento puede estar abierto a la vez.',
+      control: 'boolean',
       table: {
-        category: "Props (Padre)",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Props (Padre)',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     expandIconPosition: {
-      name: "expand-icon-position",
-      description: "Posición del icono de expansión.",
-      control: "select",
-      options: ["left", "right"],
+      name: 'expand-icon-position',
+      description: 'Posición del icono de expansión.',
+      control: 'select',
+      options: ['left', 'right'],
       table: {
-        category: "Props (Padre)",
-        type: { summary: "string" },
-        defaultValue: { summary: "right" },
+        category: 'Props (Padre)',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'right' },
       },
     },
     beforeCollapse: {
-      name: "before-collapse",
+      name: 'before-collapse',
       description:
-        "Hook que se ejecuta antes de cambiar el estado de colapso. Si se devuelve `false` o una `Promise` que se rechaza, se detendrá el colapso.",
+        'Hook que se ejecuta antes de cambiar el estado de colapso. Si se devuelve `false` o una `Promise` que se rechaza, se detendrá el colapso.',
       control: false,
       table: {
-        category: "Props (Padre)",
+        category: 'Props (Padre)',
         type: {
-          summary: "Function",
-          detail: "() => Promise<boolean> | boolean",
+          summary: 'Function',
+          detail: '() => Promise<boolean> | boolean',
         },
       },
     },
     items: {
-      name: "items",
+      name: 'items',
       description:
         'Lista de elementos del colapso. Formato: `Array<{title: string, name?: string|number, iconsRight?: IconsType[], disabled?: boolean, iconsLeft?: IconsType[], description?: string, content?: string|(()=>string), headerOnly?: boolean, expandIconPosition?: "left"|"right"}>`',
-      control: "object",
+      control: 'object',
       table: {
-        category: "Props (Padre)",
+        category: 'Props (Padre)',
         type: {
-          summary: "Array<CollapseItemType>",
+          summary: 'Array<CollapseItemType>',
           detail: `
 {
   title: string;
@@ -190,44 +190,44 @@ const items: CollapseItemType[] = [
 }
           `,
         },
-        defaultValue: { summary: "[]" },
+        defaultValue: { summary: '[]' },
       },
     },
     change: {
-      name: "change",
-      description: "Evento que se dispara cuando cambia el estado del colapso.",
+      name: 'change',
+      description: 'Evento que se dispara cuando cambia el estado del colapso.',
       control: false,
       table: {
-        category: "Eventos (Padre)",
+        category: 'Eventos (Padre)',
         type: {
-          summary: "Function",
-          detail: "(activeNames: array | string) => void",
+          summary: 'Function',
+          detail: '(activeNames: array | string) => void',
         },
       },
     },
     headerClick: {
-      name: "header-click",
+      name: 'header-click',
       description:
-        "Evento que se dispara cuando se hace click en un header con headerOnly=true.",
+        'Evento que se dispara cuando se hace click en un header con headerOnly=true.',
       control: false,
       table: {
-        category: "Eventos (Padre)",
+        category: 'Eventos (Padre)',
         type: {
-          summary: "Function",
-          detail: "(name: string | number) => void",
+          summary: 'Function',
+          detail: '(name: string | number) => void',
         },
       },
     },
 
     slotDefaultCollapse: {
-      name: "default (collapse)",
+      name: 'default (collapse)',
       description:
-        "Slot para contenido dentro de cada elemento del colapso cuando se usan items. Recibe slotData e item.",
+        'Slot para contenido dentro de cada elemento del colapso cuando se usan items. Recibe slotData e item.',
       control: false,
       table: {
-        category: "Slots (Padre)",
+        category: 'Slots (Padre)',
         type: {
-          summary: "Slot",
+          summary: 'Slot',
           detail: `
 Props disponibles:
 {
@@ -239,14 +239,14 @@ Props disponibles:
       },
     },
     slotHeaderCollapse: {
-      name: "header (collapse)",
+      name: 'header (collapse)',
       description:
-        "Slot para personalizar el header cuando se usan items. Recibe slotData e item.",
+        'Slot para personalizar el header cuando se usan items. Recibe slotData e item.',
       control: false,
       table: {
-        category: "Slots (Padre)",
+        category: 'Slots (Padre)',
         type: {
-          summary: "Slot",
+          summary: 'Slot',
           detail: `
 Props disponibles:
 {
@@ -258,153 +258,153 @@ Props disponibles:
       },
     },
     dynamic: {
-      name: "dynamic",
+      name: 'dynamic',
       description:
-        "Slot para contenido dinámico dentro del colapso general. Se usa cuando no se pasan items.",
+        'Slot para contenido dinámico dentro del colapso general. Se usa cuando no se pasan items.',
       control: false,
       table: {
-        category: "Slots (Padre)",
-        type: { summary: "Slot" },
+        category: 'Slots (Padre)',
+        type: { summary: 'Slot' },
       },
     },
 
     activeNames: {
-      name: "active-names",
+      name: 'active-names',
       description:
-        "Propiedad reactiva que contiene los nombres de los elementos activos.",
+        'Propiedad reactiva que contiene los nombres de los elementos activos.',
       control: false,
       table: {
-        category: "Métodos expuestos (Padre)",
-        type: { summary: "object", detail: "ComputedRef<(string | number)[]>" },
+        category: 'Métodos expuestos (Padre)',
+        type: { summary: 'object', detail: 'ComputedRef<(string | number)[]>' },
       },
     },
     setActiveNames: {
-      name: "set-active-names",
-      description: "Método para establecer los nombres activos del colapso.",
+      name: 'set-active-names',
+      description: 'Método para establecer los nombres activos del colapso.',
       control: false,
       table: {
-        category: "Métodos expuestos (Padre)",
+        category: 'Métodos expuestos (Padre)',
         type: {
-          summary: "Function",
-          detail: "(activeNames: (string | number)[]) => void",
+          summary: 'Function',
+          detail: '(activeNames: (string | number)[]) => void',
         },
       },
     },
     title: {
-      name: "title",
-      description: "Título del collapse item.",
+      name: 'title',
+      description: 'Título del collapse item.',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "string" },
+        category: 'Props (Hijo)',
+        type: { summary: 'string' },
       },
     },
     name: {
-      name: "name",
-      description: "Nombre único del item del collapse.",
+      name: 'name',
+      description: 'Nombre único del item del collapse.',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "string | number" },
+        category: 'Props (Hijo)',
+        type: { summary: 'string | number' },
       },
     },
     disabled: {
-      name: "disabled",
-      description: "Deshabilita el item del collapse.",
+      name: 'disabled',
+      description: 'Deshabilita el item del collapse.',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Props (Hijo)',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     iconsRight: {
-      name: "icons-right",
+      name: 'icons-right',
       description:
-        "Iconos a la derecha del item del collapse. Formato: `Array<{icon: IconString, onClick?: Function, spin?: boolean}>`",
+        'Iconos a la derecha del item del collapse. Formato: `Array<{icon: IconString, onClick?: Function, spin?: boolean}>`',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "IconsType[]" },
-        defaultValue: { summary: "[]" },
+        category: 'Props (Hijo)',
+        type: { summary: 'IconsType[]' },
+        defaultValue: { summary: '[]' },
       },
     },
     iconsLeft: {
-      name: "icons-left",
+      name: 'icons-left',
       description:
-        "Iconos a la izquierda del item del collapse. Formato: `Array<{icon: IconString, onClick?: Function, spin?: boolean}>`",
+        'Iconos a la izquierda del item del collapse. Formato: `Array<{icon: IconString, onClick?: Function, spin?: boolean}>`',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "IconsType[]" },
-        defaultValue: { summary: "[]" },
+        category: 'Props (Hijo)',
+        type: { summary: 'IconsType[]' },
+        defaultValue: { summary: '[]' },
       },
     },
     description: {
-      name: "description",
-      description: "Descripción del item del collapse.",
+      name: 'description',
+      description: 'Descripción del item del collapse.',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        category: 'Props (Hijo)',
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       },
     },
     content: {
-      name: "content",
+      name: 'content',
       description:
-        "Contenido del item del collapse, puede ser un string o una función que retorne un string.",
+        'Contenido del item del collapse, puede ser un string o una función que retorne un string.',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "string | (() => string)" },
-        defaultValue: { summary: "" },
+        category: 'Props (Hijo)',
+        type: { summary: 'string | (() => string)' },
+        defaultValue: { summary: '' },
       },
     },
     expandIconPositionItem: {
-      name: "expand-icon-position",
+      name: 'expand-icon-position',
       description:
-        "Posición del icono de expansión dentro del item del collapse.",
+        'Posición del icono de expansión dentro del item del collapse.',
       control: false,
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "string" },
-        defaultValue: { summary: "right" },
+        category: 'Props (Hijo)',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'right' },
       },
     },
     headerOnly: {
-      name: "header-only",
+      name: 'header-only',
       description:
-        "Si es true, el header solo ejecuta un evento sin abrir/cerrar el body. Útil para acciones como navegación, mostrar modales, etc.",
-      control: "boolean",
+        'Si es true, el header solo ejecuta un evento sin abrir/cerrar el body. Útil para acciones como navegación, mostrar modales, etc.',
+      control: 'boolean',
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Props (Hijo)',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     hideIcon: {
-      name: "hide-icon",
+      name: 'hide-icon',
       description:
-        "Si es true, oculta el icono de expansión/colapso (flecha). El collapse sigue funcionando normalmente, solo se oculta el indicador visual.",
-      control: "boolean",
+        'Si es true, oculta el icono de expansión/colapso (flecha). El collapse sigue funcionando normalmente, solo se oculta el indicador visual.',
+      control: 'boolean',
       table: {
-        category: "Props (Hijo)",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Props (Hijo)',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
 
     // ===== SLOTS DEL COMPONENTE HIJO (Hijo) =====
     slotHeader: {
-      name: "header",
+      name: 'header',
       description:
-        "Slot para personalizar el header del collapse item. Recibe las props del item.",
+        'Slot para personalizar el header del collapse item. Recibe las props del item.',
       control: false,
       table: {
-        category: "Slots (Hijo)",
+        category: 'Slots (Hijo)',
         type: {
-          summary: "Slot",
+          summary: 'Slot',
           detail: `
 Props disponibles:
 {
@@ -425,14 +425,14 @@ Props disponibles:
       },
     },
     slotDefaultItem: {
-      name: "default",
+      name: 'default',
       description:
-        "Slot para contenido del body del collapse item. Recibe las mismas props que el slot header.",
+        'Slot para contenido del body del collapse item. Recibe las mismas props que el slot header.',
       control: false,
       table: {
-        category: "Slots (Hijo)",
+        category: 'Slots (Hijo)',
         type: {
-          summary: "Slot",
+          summary: 'Slot',
           detail: `
 Props disponibles:
 {
@@ -455,15 +455,15 @@ Props disponibles:
   },
   args: {
     accordion: false,
-    expandIconPosition: "right",
+    expandIconPosition: 'right',
     items: [
       {
-        title: "Este es un título",
+        title: 'Este es un título',
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        iconsLeft: [{ icon: "regular tag" }],
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        iconsLeft: [{ icon: 'regular tag' }],
         content:
-          "Este es el contenido del colapso. Puedes poner cualquier cosa aquí, incluso HTML.",
+          'Este es el contenido del colapso. Puedes poner cualquier cosa aquí, incluso HTML.',
       },
     ],
   },
@@ -472,8 +472,8 @@ export default meta;
 type Story = StoryObj<CollapseInstance>;
 
 export const Basic: Story = {
-  name: "Básico",
-  render: (args) => ({
+  name: 'Básico',
+  render: args => ({
     components: { GCollapse, GConfigProvider },
     setup() {
       return { args };
@@ -487,7 +487,7 @@ export const Basic: Story = {
 };
 
 export const accordionExample: Story = {
-  name: "Acordeón",
+  name: 'Acordeón',
   parameters: {
     docs: {
       description: {
@@ -500,31 +500,31 @@ export const accordionExample: Story = {
     setup() {
       const items: CollapseItemType[] = [
         {
-          title: "Consistencia",
-          name: "1",
+          title: 'Consistencia',
+          name: '1',
           disabled: false,
           description:
-            "La consistencia es clave para una buena experiencia de usuario.",
+            'La consistencia es clave para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
         {
-          title: "Feedback",
-          name: "2",
+          title: 'Feedback',
+          name: '2',
           disabled: false,
           description:
-            "El feedback es importante para mejorar la experiencia del usuario.",
+            'El feedback es importante para mejorar la experiencia del usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
         {
-          title: "Eficiencia",
-          name: "3",
+          title: 'Eficiencia',
+          name: '3',
           disabled: false,
           description:
-            "La eficiencia es fundamental para una buena experiencia de usuario.",
+            'La eficiencia es fundamental para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
       ];
 
@@ -539,7 +539,7 @@ export const accordionExample: Story = {
 };
 
 export const CustomIcons: Story = {
-  name: "Iconos personalizados",
+  name: 'Iconos personalizados',
   parameters: {
     docs: {
       description: {
@@ -552,116 +552,116 @@ export const CustomIcons: Story = {
     setup() {
       const items: CollapseItemType[] = [
         {
-          title: "Consistencia",
-          name: "1",
+          title: 'Consistencia',
+          name: '1',
           disabled: false,
           description:
-            "La consistencia es clave para una buena experiencia de usuario.",
+            'La consistencia es clave para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
           iconsLeft: [
             {
-              icon: "regular globe",
+              icon: 'regular globe',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono izquierdo clickeado en Consistencia: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono izquierdo clickeado en Consistencia: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
           ],
           iconsRight: [
             {
-              icon: "regular heart",
+              icon: 'regular heart',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono derecho clickeado en Feedback: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono derecho clickeado en Feedback: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
           ],
         },
         {
-          title: "Feedback",
-          name: "2",
+          title: 'Feedback',
+          name: '2',
           disabled: false,
           description:
-            "El feedback es importante para mejorar la experiencia del usuario.",
+            'El feedback es importante para mejorar la experiencia del usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
           iconsLeft: [
             {
-              icon: "regular landmark",
+              icon: 'regular landmark',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono izquierdo clickeado en Feedback: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono izquierdo clickeado en Feedback: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
           ],
           iconsRight: [
             {
-              icon: "regular heart",
+              icon: 'regular heart',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono derecho clickeado en Feedback: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono derecho clickeado en Feedback: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
           ],
         },
         {
-          title: "Eficiencia",
-          name: "3",
+          title: 'Eficiencia',
+          name: '3',
           disabled: false,
           description:
-            "La eficiencia es fundamental para una buena experiencia de usuario.",
+            'La eficiencia es fundamental para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
           iconsLeft: [
             {
-              icon: "regular gear",
+              icon: 'regular gear',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono izquierdo clickeado en Eficiencia: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono izquierdo clickeado en Eficiencia: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
           ],
           iconsRight: [
             {
-              icon: "regular heart",
+              icon: 'regular heart',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono derecho clickeado en Eficiencia: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono derecho clickeado en Eficiencia: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
           ],
         },
         {
-          title: "Accesibilidad",
-          name: "4",
+          title: 'Accesibilidad',
+          name: '4',
           disabled: false,
           description:
-            "La accesibilidad es esencial para que todos los usuarios puedan interactuar con el sistema.",
+            'La accesibilidad es esencial para que todos los usuarios puedan interactuar con el sistema.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
           iconsLeft: [
             {
-              icon: "regular store",
+              icon: 'regular store',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono izquierdo clickeado en Accesibilidad: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono izquierdo clickeado en Accesibilidad: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
           ],
           iconsRight: [
             {
-              icon: "regular heart",
+              icon: 'regular heart',
               onClick: (name, icon, isActive) => {
                 console.info(
-                  `Icono derecho clickeado en Accesibilidad: ${icon}, Activo: ${isActive}, Id: ${name}`
+                  `Icono derecho clickeado en Accesibilidad: ${icon}, Activo: ${isActive}, Id: ${name}`,
                 );
               },
             },
@@ -680,7 +680,7 @@ export const CustomIcons: Story = {
 };
 
 export const positionIcon: Story = {
-  name: "Posición del icono de expansión",
+  name: 'Posición del icono de expansión',
   parameters: {
     docs: {
       description: {
@@ -691,50 +691,50 @@ export const positionIcon: Story = {
   render: () => ({
     components: { GConfigProvider, GCollapse, GCollapseItem, GRadioGroup },
     setup() {
-      const selectedValue = ref("right");
+      const selectedValue = ref('right');
 
       const items: CollapseItemType[] = [
         {
-          title: "Consistencia",
-          name: "1",
+          title: 'Consistencia',
+          name: '1',
           disabled: false,
           description:
-            "La consistencia es clave para una buena experiencia de usuario.",
+            'La consistencia es clave para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
         {
-          title: "Feedback",
-          name: "2",
+          title: 'Feedback',
+          name: '2',
           disabled: false,
           description:
-            "El feedback es importante para mejorar la experiencia del usuario.",
+            'El feedback es importante para mejorar la experiencia del usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
         {
-          title: "Eficiencia",
-          name: "3",
+          title: 'Eficiencia',
+          name: '3',
           disabled: false,
           description:
-            "La eficiencia es fundamental para una buena experiencia de usuario.",
+            'La eficiencia es fundamental para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
         {
-          title: "Accesibilidad",
-          name: "4",
+          title: 'Accesibilidad',
+          name: '4',
           disabled: false,
           description:
-            "La accesibilidad es esencial para que todos los usuarios puedan interactuar con el sistema.",
+            'La accesibilidad es esencial para que todos los usuarios puedan interactuar con el sistema.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
       ];
 
       const options = [
-        { value: "left", label: "Izquierda" },
-        { value: "right", label: "Derecha" },
+        { value: 'left', label: 'Izquierda' },
+        { value: 'right', label: 'Derecha' },
       ];
 
       return { items, options, selectedValue };
@@ -751,7 +751,7 @@ export const positionIcon: Story = {
 };
 
 export const preventCollpsing: Story = {
-  name: "Prevención de collapse",
+  name: 'Prevención de collapse',
   parameters: {
     docs: {
       description: {
@@ -762,47 +762,47 @@ export const preventCollpsing: Story = {
   render: () => ({
     components: { GConfigProvider, GCollapse, GCollapseItem },
     setup() {
-      const activeNames = ref(["1"]);
+      const activeNames = ref(['1']);
       const loading = ref(false);
 
       const items = ref<CollapseItemType[]>([
         {
-          title: "Consistencia",
-          name: "1",
+          title: 'Consistencia',
+          name: '1',
           disabled: false,
           description:
-            "La consistencia es clave para una buena experiencia de usuario.",
+            'La consistencia es clave para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
         {
-          title: "Feedback",
-          name: "2",
+          title: 'Feedback',
+          name: '2',
           disabled: false,
           description:
-            "El feedback es importante para mejorar la experiencia del usuario.",
+            'El feedback es importante para mejorar la experiencia del usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
         {
-          title: "Eficiencia",
-          name: "3",
+          title: 'Eficiencia',
+          name: '3',
           disabled: false,
           description:
-            "La eficiencia es fundamental para una buena experiencia de usuario.",
+            'La eficiencia es fundamental para una buena experiencia de usuario.',
           content:
-            "Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.",
+            'Este cliente es el representante legal de la empresa. Puede editar sus datos o eliminarlo si ya no es necesario. También puede agregar más representantes legales si es necesario.',
         },
       ]);
 
       const beforeCollapse = (name: string): Promise<boolean> => {
         items.value[parseInt(name) - 1].iconsLeft = [
           {
-            icon: "regular arrows-rotate",
+            icon: 'regular arrows-rotate',
             spin: true,
           },
         ];
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
           setTimeout(() => {
             items.value[parseInt(name) - 1].iconsLeft = [];
             return resolve(true);
@@ -821,7 +821,7 @@ export const preventCollpsing: Story = {
 };
 
 export const slotDefault: Story = {
-  name: "Slot Default",
+  name: 'Slot Default',
   parameters: {
     docs: {
       description: {
@@ -841,51 +841,51 @@ export const slotDefault: Story = {
       GTag,
     },
     setup() {
-      const activeNames = ref(["1"]);
+      const activeNames = ref(['1']);
       const formData = reactive({
-        name: "Juan Pérez",
-        email: "juan@ejemplo.com",
-        phone: "+51 999888777",
-        address: "Av. Principal 123",
-        ciudad: "Lima",
-        country: "Perú",
+        name: 'Juan Pérez',
+        email: 'juan@ejemplo.com',
+        phone: '+51 999888777',
+        address: 'Av. Principal 123',
+        ciudad: 'Lima',
+        country: 'Perú',
       });
 
-      const iconRight: CollapseItemType["iconsRight"] = [
+      const iconRight: CollapseItemType['iconsRight'] = [
         {
-          icon: "regular trash-xmark",
-          onClick: (name) => {
-            items.value = items.value.filter((item) => item.name !== name);
+          icon: 'regular trash-xmark',
+          onClick: name => {
+            items.value = items.value.filter(item => item.name !== name);
           },
         },
       ];
 
       const items = ref<CollapseItemType[]>([
         {
-          title: "Representante Legal 1",
-          name: "1",
-          iconsLeft: [{ icon: "regular user" }],
-          description: "CUIL 1902945728",
+          title: 'Representante Legal 1',
+          name: '1',
+          iconsLeft: [{ icon: 'regular user' }],
+          description: 'CUIL 1902945728',
           iconsRight: iconRight,
         },
         {
-          title: "Representante Legal 2",
-          name: "2",
-          iconsLeft: [{ icon: "regular user" }],
-          description: "CUIL 1902945728",
+          title: 'Representante Legal 2',
+          name: '2',
+          iconsLeft: [{ icon: 'regular user' }],
+          description: 'CUIL 1902945728',
           iconsRight: iconRight,
         },
         {
-          title: "Representante Legal 3",
-          name: "3",
-          iconsLeft: [{ icon: "regular user" }],
-          description: "CUIL 1902945728",
+          title: 'Representante Legal 3',
+          name: '3',
+          iconsLeft: [{ icon: 'regular user' }],
+          description: 'CUIL 1902945728',
           iconsRight: iconRight,
         },
       ]);
 
-      const handleSaveRepresentative = (item: CollapseItemType["name"]) => {
-        activeNames.value = activeNames.value.filter((name) => name !== item);
+      const handleSaveRepresentative = (item: CollapseItemType['name']) => {
+        activeNames.value = activeNames.value.filter(name => name !== item);
       };
 
       return { items, formData, activeNames, handleSaveRepresentative };
@@ -945,7 +945,7 @@ export const slotDefault: Story = {
 };
 
 export const simpleDifferentContent: Story = {
-  name: "Collapse item con formularios",
+  name: 'Collapse item con formularios',
   parameters: {
     docs: {
       description: {
@@ -965,12 +965,12 @@ export const simpleDifferentContent: Story = {
     setup() {
       const activeNames = ref(1);
       const formData = reactive({
-        name: "Pepito",
-        lastName: "Perez",
-        phone: "999888777",
-        email: "pepito@ejemplo.com",
-        city: "Lima",
-        address: "",
+        name: 'Pepito',
+        lastName: 'Perez',
+        phone: '999888777',
+        email: 'pepito@ejemplo.com',
+        city: 'Lima',
+        address: '',
       });
       return { activeNames, formData };
     },
@@ -1029,7 +1029,7 @@ export const simpleDifferentContent: Story = {
 };
 
 export const headerOnlyExample: Story = {
-  name: "Header solo click",
+  name: 'Header solo click',
   parameters: {
     docs: {
       description: {
@@ -1043,12 +1043,12 @@ export const headerOnlyExample: Story = {
   render: () => ({
     components: { GConfigProvider, GCollapse, GCollapseItem, GIconFont },
     setup() {
-      const activeNames = ref(["1"]);
-      const message = ref("");
+      const activeNames = ref(['1']);
+      const message = ref('');
 
       const handleHeaderClick = (name: string | number) => {
         message.value = `Se hizo clic en el header: ${name} a las ${new Date().toLocaleTimeString()}`;
-        console.log("Header clickeado:", name);
+        console.log('Header clickeado:', name);
       };
 
       return { activeNames, message, handleHeaderClick };
@@ -1104,7 +1104,7 @@ export const headerOnlyExample: Story = {
 };
 
 export const slotDefaultWithProps: Story = {
-  name: "Slot default con props",
+  name: 'Slot default con props',
   parameters: {
     docs: {
       description: {
@@ -1115,7 +1115,7 @@ export const slotDefaultWithProps: Story = {
   render: () => ({
     components: { GConfigProvider, GCollapse, GCollapseItem, GIconFont },
     setup() {
-      const activeNames = ref(["1"]);
+      const activeNames = ref(['1']);
 
       return { activeNames };
     },

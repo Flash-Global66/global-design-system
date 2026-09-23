@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import {
   GBenefitsCard,
   BENEFITS_CARD_HEADING_LEVELS,
