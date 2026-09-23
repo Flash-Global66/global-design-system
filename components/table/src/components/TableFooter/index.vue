@@ -1,6 +1,6 @@
 <template>
   <tfoot>
-    <tr>
+    <tr v-for="(sums, rowIndex) in [getSums()]" :key="rowIndex">
       <td
         v-for="(column, cellIndex) in columns"
         :key="column.id"
@@ -30,5 +30,6 @@ defineOptions({
 
 const props = defineProps(tableFooterProps);
 
-const { columns, getCellClasses, getCellStyles, sums } = useTableFooter(props);
+const { columns, getCellClasses, getCellStyles, getSums } =
+  useTableFooter(props);
 </script>

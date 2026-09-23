@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { nextTick, defineComponent, h } from 'vue';
+import { nextTick, defineComponent, h, ref } from 'vue';
 import Table from '../../../src/Table/index.vue';
 import TableColumn from '../../../src/components/TableColumn/index.vue';
 
@@ -32,6 +32,34 @@ describe('TableFooter — fila de resumen', () => {
     const tfoot = wrapper.find('tfoot');
     expect(tfoot.find('b.total').exists()).toBe(true);
     expect(tfoot.text()).toBe('Total3');
+    wrapper.unmount();
+  });
+
+  it('vuelve a llamar a summaryMethod en cada render del footer, aunque lea estado no reactivo', async () => {
+    let externalLabel = 'antes';
+    const Host = defineComponent({
+      components: { GTable: Table, GTableColumn: TableColumn },
+      setup() {
+        return {
+          rows: [{ a: 1 }],
+          sumText: ref('Suma'),
+          summaryMethod: () => [externalLabel],
+        };
+      },
+      template: `<g-table :data="rows" show-summary :sum-text="sumText" :summary-method="summaryMethod">
+                   <g-table-column prop="a" label="A" />
+                 </g-table>`,
+    });
+
+    const wrapper = mount(Host, { attachTo: document.body });
+    await flushRenders();
+    expect(wrapper.find('tfoot').text()).toBe('antes');
+
+    externalLabel = 'después';
+    wrapper.vm.sumText = 'Total';
+    await flushRenders();
+
+    expect(wrapper.find('tfoot').text()).toBe('después');
     wrapper.unmount();
   });
 });

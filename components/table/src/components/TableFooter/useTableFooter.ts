@@ -57,7 +57,12 @@ export function useTableFooter(props: TableFooterProps<DefaultRow>) {
     return fixedStyle;
   }
 
-  const sums = computed(() => {
+  /**
+   * No es un `computed` porque `summaryMethod` puede leer estado no reactivo que un
+   * `computed` no rastrea. El template la evalúa una vez por render con
+   * `v-for` de un solo elemento, así el resumen se recalcula en cada render del footer.
+   */
+  function getSums() {
     const data = props.store.states.data.value;
     const currentColumns = columns.value;
 
@@ -97,7 +102,7 @@ export function useTableFooter(props: TableFooterProps<DefaultRow>) {
       }
     });
     return result;
-  });
+  }
 
   return {
     ns,
@@ -106,6 +111,6 @@ export function useTableFooter(props: TableFooterProps<DefaultRow>) {
     columns,
     getCellClasses,
     getCellStyles,
-    sums,
+    getSums,
   };
 }
