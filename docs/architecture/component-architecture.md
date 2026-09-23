@@ -30,14 +30,14 @@ components/inline/
 ├── tsconfig.json
 ├── CHANGELOG.md
 ├── src/
-│   ├── Inline/                      # PascalCase — carpeta del elemento
-│   │   ├── index.vue                # template puro + <style src="...">
-│   │   ├── useInline.ts             # lógica reactiva del elemento
-│   │   └── inline.style.scss        # estilos BEM (si el elemento necesita CSS propio)
-│   ├── constants/
-│   │   └── inline.constant.ts       # objeto de props y emits
-│   └── types/
-│       └── inline.type.ts           # tipos con nombre del paquete
+│   └── Inline/                      # PascalCase — carpeta del elemento, la única de este paquete
+│       ├── index.vue                # template puro + <style src="...">
+│       ├── useInline.ts             # lógica reactiva del elemento
+│       ├── inline.style.scss        # estilos BEM (si el elemento necesita CSS propio)
+│       ├── constants/
+│       │   └── inline.constant.ts   # objeto de props y emits — solo si el elemento los tiene
+│       └── types/
+│           └── inline.type.ts       # tipos con nombre del elemento
 └── tests/                           # espeja src/, en la raíz del paquete
     └── Inline/
         └── useInline.spec.ts
@@ -92,8 +92,10 @@ En un paquete complejo, **dónde vive una pieza lo decide cuántos elementos la 
 - **Dos o más paquetes** → `common/` (ver `common-package-architecture.md`).
 
 Una pieza sube de nivel cuando aparece su segundo consumidor real, no por anticipado, y se mueve:
-no queda copia abajo. En un paquete simple el elemento único no tiene subcarpetas: sus tipos y
-constantes van a `src/types/` y `src/constants/`.
+no queda copia abajo. En un paquete simple el elemento único sí tiene subcarpetas — son las
+mismas cuatro del complejo (`composables/`, `utils/`, `types/`, `constants/`), dentro de
+`src/<Nombre>/`. Un paquete simple no tiene `src/types/` de nivel de paquete: ese nivel es
+`shared/`, y en un paquete simple no hay nada que compartir entre 2+ elementos porque hay uno solo.
 
 Los ejemplos canónicos de esta estructura son `components/inline/` (simple) y `components/table/`
 (complejo). `table` ya sigue esta estructura; `inline` todavía tiene `Inline/defaults.ts` (su
