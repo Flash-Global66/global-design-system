@@ -9,10 +9,10 @@
  *      su subpath de paquete (prueba también que el `exports` map resuelve, como en el consumidor)
  *   2. Cada uno de esos paquetes tiene su `@use` en assets/scss/index.scss
  *   3. assets/scss/index.scss compila completo (lo que Storybook hace al arrancar)
- *   4. Todo paquete con SCSS propio (en su raíz o bajo src/) declara `exports["./styles.scss"]`,
- *      salvo los de MISSING_STYLES_EXPORT_ALLOWLIST; una entrada que ya no hace falta es un aviso
+ *   4. Todo paquete con SCSS propio (en su raíz o bajo src/) declara `exports["./styles.scss"]`
  *
- * Compila con el resolver de Vite, el mismo que usa Storybook, incluido el PostCSS del repo.
+ * Compila con el resolver de Vite, el mismo que usa Storybook, incluido el PostCSS del repo. Un
+ * `@use` a un subpath que el paquete no declara en su `exports` se reporta como fallo de compilación.
  *
  * Uso:
  *   node scripts/check-styles.mjs   → exit 1 si algo no compila, falta registrar o falta exportar
@@ -32,68 +32,6 @@ const SASS_ERROR_PREFIX = '[sass] ';
 const SCSS_EXTENSION = '.scss';
 const OWN_STYLES_SOURCE_DIR = 'src';
 const NON_SOURCE_DIRS = ['node_modules', 'dist'];
-
-/**
- * Paquetes con SCSS propio que todavía no declaran `exports["./styles.scss"]`. No es para paquetes
- * nuevos: cada entrada sale cuando su paquete lo declara, y el script avisa cuando una sobra.
- */
-export const MISSING_STYLES_EXPORT_ALLOWLIST = [
-  {
-    name: '@flash-global66/g-config-provider',
-    reason:
-      'expone sus estilos como ./style (config.styles.scss); se estandariza a ./styles.scss',
-  },
-  {
-    name: '@flash-global66/g-radio-group',
-    reason:
-      'radio-group.styles.scss solo se alcanza por ./*; se estandariza a ./styles.scss',
-  },
-  {
-    name: '@flash-global66/g-badge',
-    reason:
-      'expone sus estilos como ./badge.styles.scss; se estandariza a ./styles.scss',
-  },
-  {
-    name: '@flash-global66/g-popover',
-    reason:
-      'popover.styles.scss solo se alcanza por ./*; se estandariza a ./styles.scss',
-  },
-  {
-    name: '@flash-global66/g-skeleton',
-    reason:
-      'skeleton.styles.scss y skeleton-item.styles.scss solo se alcanzan por ./*; se estandariza a un ./styles.scss que agregue ambos',
-  },
-  {
-    name: '@flash-global66/g-input-code',
-    reason:
-      'input-code.styles.scss solo se alcanza por ./*; se estandariza a ./styles.scss',
-  },
-  {
-    name: '@flash-global66/g-overlay',
-    reason:
-      'overlay.styles.scss solo se alcanza por ./*; se estandariza a ./styles.scss',
-  },
-  {
-    name: '@flash-global66/g-menu',
-    reason:
-      'menu.styles.scss solo se alcanza por ./*; se estandariza a ./styles.scss',
-  },
-  {
-    name: '@flash-global66/g-alert',
-    reason:
-      'alert.styles.scss es un placeholder sin uso (solo .prueba) que no carga nadie; hay que borrarlo o exportarlo',
-  },
-  {
-    name: '@flash-global66/g-button-card',
-    reason:
-      'button-card.styles.scss no lo carga nadie (el .vue trae su propio <style scoped>); hay que borrarlo o exportarlo',
-  },
-  {
-    name: '@flash-global66/g-form-item',
-    reason:
-      'form-item.styles.scss solo se alcanza por ./* y no está en assets/scss/index.scss; hay que exportarlo y registrarlo',
-  },
-];
 
 /**
  * Avisos de dependencias que salen en cada compilación y no dicen nada del SCSS del repo. Se
@@ -167,6 +105,48 @@ export function getStylesExportTarget(packageJson) {
 }
 
 /**
+ * Si el `exports` de un paquete declara `subpath` (`.` o `./x`), con el criterio de match de Node
+ * y Vite: clave exacta, patrón con un `*`, o carpeta legacy con `/` final. Un `exports` string, o
+ * uno de solo condiciones, declara únicamente `.`.
+ */
+export function declaresExportsSubpath(exportsField, subpath) {
+  const keys =
+    typeof exportsField === 'string' || Array.isArray(exportsField)
+      ? []
+      : Object.keys(exportsField);
+  if (!keys[0]?.startsWith('.')) return subpath === '.';
+  return keys.some(key => {
+    if (key === subpath) return true;
+    if (key.endsWith('/')) return subpath.startsWith(key);
+    const wildcardIndex = key.indexOf('*', 1);
+    if (wildcardIndex === -1) return false;
+    const prefix = key.slice(0, wildcardIndex);
+    const suffix = key.slice(wildcardIndex + 1);
+    return (
+      subpath.length > prefix.length + suffix.length &&
+      subpath.startsWith(prefix) &&
+      subpath.endsWith(suffix)
+    );
+  });
+}
+
+/**
+ * Mensaje de error de un `@use` a un paquete del repo cuyo `exports` no declara ese subpath, o
+ * `null` si el specifier no es de un paquete del repo con `exports`, o si lo declara.
+ *
+ * @param packages - `{ name, dir, exports }` con `dir` relativo a la raíz y en formato posix
+ */
+export function findUndeclaredSubpathError({ specifier, packages }) {
+  const packageName = getPackageNameFromSpecifier(specifier);
+  const owner = packages.find(({ name }) => name === packageName);
+  if (!owner?.exports) return null;
+  const subpath = `.${specifier.slice(packageName.length)}`;
+  return declaresExportsSubpath(owner.exports, subpath)
+    ? null
+    : `@use "${specifier}" no resuelve: ${owner.name} no declara exports["${subpath}"] en ${owner.dir}/package.json`;
+}
+
+/**
  * Si un `.scss` es estilo propio del paquete: está en su raíz (layout legacy) o bajo `src/`
  * (arquetipo). Deja afuera `styles/`, donde common/g-utils publica tokens y mixins por sus propios
  * subpaths, que se consumen con `@use` y no son una hoja de estilos del paquete.
@@ -182,32 +162,12 @@ export function isOwnStylesPath(relativePath) {
   return segments.length === 1 || segments[0] === OWN_STYLES_SOURCE_DIR;
 }
 
-/** Paquetes con SCSS propio que no declaran `exports["./styles.scss"]` ni están en la allowlist. */
-export function findPackagesMissingStylesExport({ packages, allowlist }) {
-  const allowlistedNames = new Set(allowlist.map(({ name }) => name));
+/** Paquetes con SCSS propio que no declaran `exports["./styles.scss"]`. */
+export function findPackagesMissingStylesExport(packages) {
   return packages.filter(
-    ({ name, stylesTarget, ownStylesFiles }) =>
-      ownStylesFiles.length > 0 &&
-      stylesTarget === undefined &&
-      !allowlistedNames.has(name),
+    ({ stylesTarget, ownStylesFiles }) =>
+      ownStylesFiles.length > 0 && stylesTarget === undefined,
   );
-}
-
-/**
- * Entradas de la allowlist que ya no hacen falta: su paquete ya declara `exports["./styles.scss"]`,
- * ya no tiene SCSS propio, o no existe.
- */
-export function findStaleAllowlistEntries({ packages, allowlist }) {
-  return allowlist.filter(({ name }) => {
-    const allowlistedPackage = packages.find(
-      stylePackage => stylePackage.name === name,
-    );
-    return (
-      !allowlistedPackage ||
-      allowlistedPackage.stylesTarget !== undefined ||
-      allowlistedPackage.ownStylesFiles.length === 0
-    );
-  });
 }
 
 /** Mensaje de sass sin el prefijo que le agrega Vite; conserva el frame con la línea del `@use`. */
@@ -265,6 +225,7 @@ function readPackages() {
         return {
           name: packageJson.name,
           dir: dir.split(path.sep).join('/'),
+          exports: packageJson.exports,
           stylesTarget: getStylesExportTarget(packageJson),
           ownStylesFiles: listOwnStylesFiles(packageDir),
         };
@@ -276,6 +237,20 @@ function toEntryLabel({ dir, stylesTarget }) {
   return stylesTarget
     ? path.posix.join(dir, stylesTarget)
     : `${dir} (exports condicional)`;
+}
+
+/**
+ * Importer de sass que responde con error los `@use` a un subpath que el paquete no declara. Sin
+ * él, el resolver de Vite lanza desde su importer, que lo invoca con `.then(done)` y sin `.catch`:
+ * queda un unhandled rejection que tumba el proceso y la compilación nunca termina, así que
+ * `compileScss` no lo ve. Vite pone los importers de `preprocessorOptions` antes del suyo; para
+ * el resto de los specifiers devuelve `null` y resuelve Vite.
+ */
+function createUndeclaredSubpathImporter(packages) {
+  return specifier => {
+    const message = findUndeclaredSubpathError({ specifier, packages });
+    return message ? new Error(message) : null;
+  };
 }
 
 async function compileScss(source, { preprocessCSS, viteConfig }) {
@@ -331,25 +306,13 @@ function checkRegistration(stylePackages, packages) {
 }
 
 function checkMissingStylesExports(packages) {
-  return findPackagesMissingStylesExport({
-    packages,
-    allowlist: MISSING_STYLES_EXPORT_ALLOWLIST,
-  }).map(({ name, dir, ownStylesFiles }) => ({
-    name,
-    entry: dir,
-    message: `tiene SCSS propio (${ownStylesFiles.join(', ')}) pero no declara exports["${STYLES_EXPORT_KEY}"]: declararlo en su package.json apuntando al .style.scss (o .styles.scss) raíz del paquete, y registrarlo en ${STORYBOOK_STYLES_ENTRY}.`,
-  }));
-}
-
-function checkStaleAllowlistEntries(packages) {
-  return findStaleAllowlistEntries({
-    packages,
-    allowlist: MISSING_STYLES_EXPORT_ALLOWLIST,
-  }).map(({ name, reason }) => ({
-    name,
-    entry: 'MISSING_STYLES_EXPORT_ALLOWLIST',
-    message: `la entrada sobra: el paquete ya declara exports["${STYLES_EXPORT_KEY}"] (o ya no tiene SCSS propio). Borrarla de scripts/check-styles.mjs.\nMotivo registrado: ${reason}`,
-  }));
+  return findPackagesMissingStylesExport(packages).map(
+    ({ name, dir, ownStylesFiles }) => ({
+      name,
+      entry: dir,
+      message: `tiene SCSS propio (${ownStylesFiles.join(', ')}) pero no declara exports["${STYLES_EXPORT_KEY}"]: declararlo en su package.json apuntando al .style.scss (o .styles.scss) raíz del paquete, y registrarlo en ${STORYBOOK_STYLES_ENTRY}.`,
+    }),
+  );
 }
 
 async function checkStorybookEntry(compiler) {
@@ -380,21 +343,16 @@ function printFindings(findings) {
   }
 }
 
-function printReport({ failures, warnings, stylePackages, elapsedMs }) {
+function printReport({ failures, stylePackages, elapsedMs }) {
   const elapsed = `${(elapsedMs / 1000).toFixed(1)} s`;
 
   if (failures.length === 0) {
     console.log(
-      `check-styles: ${stylePackages.length} paquete(s) con ${STYLES_EXPORT_KEY} compilan y están registrados; ${STORYBOOK_STYLES_ENTRY} compila; ningún paquete con SCSS propio queda sin exportarlo fuera de la allowlist (${elapsed}).`,
+      `check-styles: ${stylePackages.length} paquete(s) con ${STYLES_EXPORT_KEY} compilan y están registrados; ${STORYBOOK_STYLES_ENTRY} compila; todo paquete con SCSS propio lo exporta (${elapsed}).`,
     );
   } else {
     console.log(`check-styles: ${failures.length} fallo(s) (${elapsed})\n`);
     printFindings(failures);
-  }
-
-  if (warnings.length > 0) {
-    console.log(`\ncheck-styles: ${warnings.length} aviso(s)\n`);
-    printFindings(warnings);
   }
 }
 
@@ -402,6 +360,7 @@ async function runCli() {
   const startedAt = performance.now();
   silenceKnownNoiseWarnings();
 
+  const packages = readPackages();
   // Import diferido: esbuild (dependencia de Vite) no carga bajo el entorno jsdom de Vitest, y la
   // spec solo necesita la lógica pura de este módulo.
   const { preprocessCSS, resolveConfig } = await import('vite');
@@ -410,7 +369,10 @@ async function runCli() {
       configFile: false,
       css: {
         preprocessorOptions: {
-          scss: { silenceDeprecations: ['legacy-js-api'] },
+          scss: {
+            silenceDeprecations: ['legacy-js-api'],
+            importer: [createUndeclaredSubpathImporter(packages)],
+          },
         },
       },
     },
@@ -418,7 +380,6 @@ async function runCli() {
   );
   const compiler = { preprocessCSS, viteConfig };
 
-  const packages = readPackages();
   const stylePackages = packages.filter(
     ({ stylesTarget }) => stylesTarget !== undefined,
   );
@@ -435,7 +396,6 @@ async function runCli() {
 
   printReport({
     failures,
-    warnings: checkStaleAllowlistEntries(packages),
     stylePackages,
     elapsedMs: performance.now() - startedAt,
   });

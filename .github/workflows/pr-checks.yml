@@ -94,10 +94,8 @@ jobs:
       # otro gate compila el SCSS fuente que publican los paquetes (`yarn build` solo
       # compila los <style> de los .vue). A diferencia de los dos steps de arriba, NO se
       # scopea al diff: un `@use` roto en un parcial compartido (p. ej. de common/g-utils)
-      # rompe paquetes que el PR no tocó, y un entry que no compila está roto. La única
-      # deuda preexistente —paquetes legacy sin `./styles.scss`— vive en una allowlist
-      # explícita del script, que avisa cuando una entrada sobra. No necesita build
-      # previo: compila SCSS fuente.
+      # rompe paquetes que el PR no tocó, y un entry que no compila está roto. No hay
+      # deuda preexistente que filtrar. No necesita build previo: compila SCSS fuente.
       - name: Styles check (all packages)
         run: yarn styles:check
 
