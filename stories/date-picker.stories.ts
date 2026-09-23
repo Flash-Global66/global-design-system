@@ -1,27 +1,26 @@
-import { StoryObj } from "@storybook/vue3";
-import { ref } from "vue";
-import dayjs from "dayjs";
-import { es } from "../common/lang";
+import { StoryObj } from '@storybook/vue3';
+import { ref } from 'vue';
+import { es } from '../common/lang';
 
 // COMPONENTS
-import GDatePicker from "../components/date-picker";
+import GDatePicker from '../components/date-picker';
 
 // CONFIG
-import { GConfigProvider } from "../components/config-provider";
+import { GConfigProvider } from '../components/config-provider';
 
 // DEPENDENCIES
 import {
   version,
   peerDependencies,
-} from "@flash-global66/g-date-picker/package.json";
+} from '@flash-global66/g-date-picker/package.json';
 import {
   generatePeerDepsList,
   generateIconOptions,
   generatePeerDepsInstalls,
-} from "../helper/documentation-stories";
+} from '../helper/documentation-stories';
 
 const meta = {
-  title: "Form/Date Picker",
+  title: 'Form/Date Picker',
   component: GDatePicker,
   parameters: {
     docs: {
@@ -107,292 +106,292 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
   argTypes: {
     // 1. Enlace de Datos
     modelValue: {
-      name: "v-model",
-      description: "Valor seleccionado (v-model)",
+      name: 'v-model',
+      description: 'Valor seleccionado (v-model)',
       control: { type: undefined },
       table: {
-        category: "Enlace de Datos",
+        category: 'Enlace de Datos',
         type: {
           summary:
-            "string | Date | number | [string, string] | [Date, Date] | [number, number] | null",
+            'string | Date | number | [string, string] | [Date, Date] | [number, number] | null',
         },
       },
     },
 
     // 2. Comportamiento e Interacción
     type: {
-      description: "Tipo del selector",
-      control: "select",
+      description: 'Tipo del selector',
+      control: 'select',
       options: [
-        "date",
-        "year",
-        "month",
-        "datetime",
-        "daterange",
-        "monthrange",
-        "yearrange",
+        'date',
+        'year',
+        'month',
+        'datetime',
+        'daterange',
+        'monthrange',
+        'yearrange',
       ],
       table: {
-        category: "Comportamiento e Interacción",
-        type: { summary: "string" },
-        defaultValue: { summary: "date" },
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'date' },
       },
     },
     clearable: {
-      description: "Permite limpiar el valor seleccionado",
-      control: "boolean",
+      description: 'Permite limpiar el valor seleccionado',
+      control: 'boolean',
       table: {
-        category: "Comportamiento e Interacción",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     editable: {
-      description: "Permite edición directa en el input",
-      control: "boolean",
+      description: 'Permite edición directa en el input',
+      control: 'boolean',
       table: {
-        category: "Comportamiento e Interacción",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
 
     // 3. Apariencia y Estilos
     prefixIcon: {
-      name: "prefix-icon",
-      description: "Ícono al inicio del input",
-      control: "select",
-      options: ["", ...generateIconOptions()],
+      name: 'prefix-icon',
+      description: 'Ícono al inicio del input',
+      control: 'select',
+      options: ['', ...generateIconOptions()],
       table: {
-        category: "Apariencia y Estilos",
-        type: { summary: "string | Component" },
-        defaultValue: { summary: "" },
+        category: 'Apariencia y Estilos',
+        type: { summary: 'string | Component' },
+        defaultValue: { summary: '' },
       },
     },
     popperClass: {
-      name: "popper-class",
-      description: "Clase CSS personalizada para el popup",
-      control: "text",
+      name: 'popper-class',
+      description: 'Clase CSS personalizada para el popup',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilos",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilos',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     placement: {
-      description: "Posición del popup",
-      control: "select",
+      description: 'Posición del popup',
+      control: 'select',
       options: [
-        "top",
-        "top-start",
-        "top-end",
-        "bottom",
-        "bottom-start",
-        "bottom-end",
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
       ],
       table: {
-        category: "Apariencia y Estilos",
-        type: { summary: "string" },
-        defaultValue: { summary: "bottom" },
+        category: 'Apariencia y Estilos',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'bottom' },
       },
     },
 
     // 4. Formato de Fecha
     format: {
-      description: "Formato de visualización en el input",
-      control: "text",
+      description: 'Formato de visualización en el input',
+      control: 'text',
       table: {
-        category: "Formato de Fecha",
-        type: { summary: "string" },
-        defaultValue: { summary: "YYYY-MM-DD" },
+        category: 'Formato de Fecha',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'YYYY-MM-DD' },
       },
     },
     valueFormat: {
-      name: "value-format",
-      description: "Formato del valor vinculado (v-model)",
-      control: "text",
+      name: 'value-format',
+      description: 'Formato del valor vinculado (v-model)',
+      control: 'text',
       table: {
-        category: "Formato de Fecha",
-        type: { summary: "string" },
+        category: 'Formato de Fecha',
+        type: { summary: 'string' },
       },
     },
     dateFormat: {
-      name: "date-format",
-      description: "Formato de fecha en el popup",
-      control: "text",
+      name: 'date-format',
+      description: 'Formato de fecha en el popup',
+      control: 'text',
       table: {
-        category: "Formato de Fecha",
-        type: { summary: "string" },
+        category: 'Formato de Fecha',
+        type: { summary: 'string' },
       },
     },
     timeFormat: {
-      name: "time-format",
-      description: "Formato de hora en el popup (si aplica)",
-      control: "text",
+      name: 'time-format',
+      description: 'Formato de hora en el popup (si aplica)',
+      control: 'text',
       table: {
-        category: "Formato de Fecha",
-        type: { summary: "string" },
+        category: 'Formato de Fecha',
+        type: { summary: 'string' },
       },
     },
 
     // 5. Etiquetas y Texto
     label: {
-      description: "Label en modo simple",
-      control: "text",
+      description: 'Label en modo simple',
+      control: 'text',
       table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       },
     },
     startPlaceholder: {
-      description: "Placeholder para la fecha de inicio en modo rango",
-      control: "text",
+      description: 'Placeholder para la fecha de inicio en modo rango',
+      control: 'text',
       table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
       },
     },
     endPlaceholder: {
-      description: "Placeholder para la fecha de fin en modo rango",
-      control: "text",
+      description: 'Placeholder para la fecha de fin en modo rango',
+      control: 'text',
       table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
       },
     },
     rangeSeparator: {
-      description: "Separador para el rango de fechas",
-      control: "text",
+      description: 'Separador para el rango de fechas',
+      control: 'text',
       table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-        defaultValue: { summary: "-" },
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
+        defaultValue: { summary: '-' },
       },
     },
     helpText: {
-      description: "Texto de apoyo",
-      control: "text",
+      description: 'Texto de apoyo',
+      control: 'text',
       table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       },
     },
 
     // 6. Validación y Restricciones
     disabled: {
-      description: "Deshabilita el componente",
-      control: "boolean",
+      description: 'Deshabilita el componente',
+      control: 'boolean',
       table: {
-        category: "Validación y Restricciones",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Validación y Restricciones',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     readonly: {
-      description: "Hace el componente de solo lectura",
-      control: "boolean",
+      description: 'Hace el componente de solo lectura',
+      control: 'boolean',
       table: {
-        category: "Validación y Restricciones",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Validación y Restricciones',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     disabledDate: {
-      name: "disabled-date",
-      description: "Función para deshabilitar fechas específicas",
-      control: "function",
+      name: 'disabled-date',
+      description: 'Función para deshabilitar fechas específicas',
+      control: 'function',
       table: {
-        category: "Validación y Restricciones",
-        type: { summary: "(date: Date) => boolean" },
+        category: 'Validación y Restricciones',
+        type: { summary: '(date: Date) => boolean' },
       },
     },
 
     // 7. Métodos Expuestos
     focus: {
-      description: "Enfoca el input del date picker",
+      description: 'Enfoca el input del date picker',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
     blur: {
-      description: "Quita el foco del input",
+      description: 'Quita el foco del input',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
     handleOpen: {
-      description: "Abre el popup del date picker",
+      description: 'Abre el popup del date picker',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
     handleClose: {
-      description: "Cierra el popup del date picker",
+      description: 'Cierra el popup del date picker',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
 
     // 8. Eventos
     onChange: {
-      description: "Se dispara cuando el usuario confirma un cambio",
+      description: 'Se dispara cuando el usuario confirma un cambio',
       table: {
-        category: "Eventos",
+        category: 'Eventos',
         type: {
           summary:
-            "(value: Date | string | number | [Date | null, Date | null] | [string | null, string | null] | [number | null, number | null] | null) => void",
+            '(value: Date | string | number | [Date | null, Date | null] | [string | null, string | null] | [number | null, number | null] | null) => void',
         },
       },
     },
     onBlur: {
-      description: "Se dispara cuando el input pierde el foco",
+      description: 'Se dispara cuando el input pierde el foco',
       table: {
-        category: "Eventos",
-        type: { summary: "(event: FocusEvent) => void" },
+        category: 'Eventos',
+        type: { summary: '(event: FocusEvent) => void' },
       },
     },
     onFocus: {
-      description: "Se dispara cuando el input recibe el foco",
+      description: 'Se dispara cuando el input recibe el foco',
       table: {
-        category: "Eventos",
-        type: { summary: "(event: FocusEvent) => void" },
+        category: 'Eventos',
+        type: { summary: '(event: FocusEvent) => void' },
       },
     },
     onVisibleChange: {
-      description: "Se dispara cuando la visibilidad del popup cambia",
+      description: 'Se dispara cuando la visibilidad del popup cambia',
       table: {
-        category: "Eventos",
-        type: { summary: "(visible: boolean) => void" },
+        category: 'Eventos',
+        type: { summary: '(visible: boolean) => void' },
       },
     },
     onClear: {
-      description: "Se dispara cuando se limpia el valor",
+      description: 'Se dispara cuando se limpia el valor',
       table: {
-        category: "Eventos",
-        type: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: '() => void' },
       },
     },
   },
   args: {
-    label: "Seleccione fecha",
-    format: "YYYY-MM-DD",
-    startPlaceholder: "Fecha inicio",
-    endPlaceholder: "Fecha fin",
-    rangeSeparator: "-",
+    label: 'Seleccione fecha',
+    format: 'YYYY-MM-DD',
+    startPlaceholder: 'Fecha inicio',
+    endPlaceholder: 'Fecha fin',
+    rangeSeparator: '-',
     clearable: true,
     shortcuts: [
       {
-        text: "Hoy",
+        text: 'Hoy',
         value: new Date(),
       },
       {
-        text: "Mañana",
+        text: 'Mañana',
         value: () => {
           const date = new Date();
           date.setTime(date.getTime() - 3600 * 1000 * 24);
@@ -400,7 +399,7 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
         },
       },
       {
-        text: "Una semana atrás",
+        text: 'Una semana atrás',
         value: () => {
           const date = new Date();
           date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
@@ -414,11 +413,11 @@ export default meta;
 type Story = StoryObj<typeof GDatePicker>;
 
 export const Basic: Story = {
-  name: "Básico",
-  render: (args) => ({
+  name: 'Básico',
+  render: args => ({
     components: { GDatePicker, GConfigProvider },
     setup() {
-      const value = ref("");
+      const value = ref('');
       const lang = es;
       return { value, args, lang };
     },
@@ -434,7 +433,7 @@ export const Basic: Story = {
 };
 
 export const Range: Story = {
-  name: "Modo Rango",
+  name: 'Modo Rango',
   parameters: {
     docs: {
       description: {
@@ -474,7 +473,7 @@ export const Range: Story = {
 };
 
 export const DateTime: Story = {
-  name: "Fecha y Hora",
+  name: 'Fecha y Hora',
   parameters: {
     docs: {
       description: {
@@ -506,7 +505,7 @@ export const DateTime: Story = {
 };
 
 export const DisabledDates: Story = {
-  name: "Fechas Deshabilitadas",
+  name: 'Fechas Deshabilitadas',
   parameters: {
     docs: {
       description: {
@@ -517,7 +516,7 @@ export const DisabledDates: Story = {
   render: () => ({
     components: { GDatePicker, GConfigProvider },
     setup() {
-      const value = ref("");
+      const value = ref('');
       const disabledDate = (time: Date) => {
         return time.getTime() > Date.now(); // Deshabilitar fechas futuras
       };
@@ -542,7 +541,7 @@ export const DisabledDates: Story = {
 };
 
 export const DifferentTypes: Story = {
-  name: "Diferentes Tipos",
+  name: 'Diferentes Tipos',
   parameters: {
     docs: {
       description: {
@@ -553,9 +552,9 @@ export const DifferentTypes: Story = {
   render: () => ({
     components: { GDatePicker, GConfigProvider },
     setup() {
-      const dateValue = ref("");
-      const yearValue = ref("");
-      const monthValue = ref("");
+      const dateValue = ref('');
+      const yearValue = ref('');
+      const monthValue = ref('');
       const dateRangeValue = ref([]);
       const monthRangeValue = ref([]);
       const yearRangeValue = ref([]);

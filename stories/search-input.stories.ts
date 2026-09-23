@@ -1,14 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import { ref } from 'vue'
-import { GSearchInput } from '@flash-global66/g-search-input/index.ts'
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts"
-import { action } from '@storybook/addon-actions'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { ref } from 'vue';
+import { GSearchInput } from '@flash-global66/g-search-input/index.ts';
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
+import { action } from '@storybook/addon-actions';
 
-import { version, peerDependencies } from '@flash-global66/g-search-input/package.json'
-import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories"
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-search-input/package.json';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 const meta: Meta<typeof GSearchInput> = {
-  title: "Form/SearchInput",
+  title: 'Form/SearchInput',
   component: GSearchInput,
   parameters: {
     docs: {
@@ -85,106 +91,107 @@ const handleClear = () => {
 };
 </script>
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     modelValue: {
-      control: "text",
-      description: "Valor del input (v-model)",
+      control: 'text',
+      description: 'Valor del input (v-model)',
       table: {
-        type: { summary: "string" },
-        category: "Propiedades principales",
+        type: { summary: 'string' },
+        category: 'Propiedades principales',
       },
     },
     placeholder: {
-      control: "text",
-      description: "Texto placeholder del input",
+      control: 'text',
+      description: 'Texto placeholder del input',
       table: {
-        type: { summary: "string" },
-        category: "Contenido",
+        type: { summary: 'string' },
+        category: 'Contenido',
       },
     },
     label: {
-      control: "text",
-      description: "Etiqueta del input",
+      control: 'text',
+      description: 'Etiqueta del input',
       table: {
-        type: { summary: "string" },
-        category: "Contenido",
+        type: { summary: 'string' },
+        category: 'Contenido',
       },
     },
     helpText: {
-      control: "text",
-      description: "Texto de ayuda",
+      control: 'text',
+      description: 'Texto de ayuda',
       table: {
-        type: { summary: "string" },
-        category: "Contenido",
+        type: { summary: 'string' },
+        category: 'Contenido',
       },
     },
     messageError: {
-      control: "text",
-      description: "Mensaje de error a mostrar",
+      control: 'text',
+      description: 'Mensaje de error a mostrar',
       table: {
-        type: { summary: "string" },
-        category: "Estado y apariencia",
+        type: { summary: 'string' },
+        category: 'Estado y apariencia',
       },
     },
     disabled: {
-      control: "boolean",
-      description: "Deshabilita el input",
+      control: 'boolean',
+      description: 'Deshabilita el input',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "Estado y apariencia",
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Estado y apariencia',
       },
     },
     initialLoading: {
-      control: "boolean",
-      description: "Estado de carga inicial (skeleton)",
+      control: 'boolean',
+      description: 'Estado de carga inicial (skeleton)',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "Estado y apariencia",
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Estado y apariencia',
       },
     },
     searchingLoading: {
-      control: "boolean",
-      description: "Estado de búsqueda en progreso",
+      control: 'boolean',
+      description: 'Estado de búsqueda en progreso',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "Estado y apariencia",
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Estado y apariencia',
       },
     },
     debounceTime: {
-      control: "number",
-      description: "Tiempo de espera para el debounce (ms)",
+      control: 'number',
+      description: 'Tiempo de espera para el debounce (ms)',
       table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "300" },
-        category: "Comportamiento",
+        type: { summary: 'number' },
+        defaultValue: { summary: '300' },
+        category: 'Comportamiento',
       },
     },
-    "onUpdate:modelValue": {
-      description: "Se emite al actualizar el valor",
+    'onUpdate:modelValue': {
+      description: 'Se emite al actualizar el valor',
       table: {
-        category: "Eventos",
-        type: { summary: "(value: string) => void" },
+        category: 'Eventos',
+        type: { summary: '(value: string) => void' },
       },
     },
     onSearch: {
-      description: "Se emite al realizar una búsqueda (con debounce o al presionar Enter)",
+      description:
+        'Se emite al realizar una búsqueda (con debounce o al presionar Enter)',
       table: {
-        category: "Eventos",
-        type: { summary: "(query: string) => void" },
+        category: 'Eventos',
+        type: { summary: '(query: string) => void' },
       },
     },
     onClear: {
-      description: "Se emite al limpiar el input",
+      description: 'Se emite al limpiar el input',
       table: {
-        category: "Eventos",
-        type: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: '() => void' },
       },
     },
   },
@@ -197,7 +204,7 @@ const handleClear = () => {
     initialLoading: false,
     searchingLoading: false,
     debounceTime: 300,
-  }
+  },
 };
 
 export default meta;
@@ -208,7 +215,8 @@ export const Primary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo básico del componente SearchInput. Desde los controles puedes probar todas las propiedades disponibles.'
+        story:
+          'Ejemplo básico del componente SearchInput. Desde los controles puedes probar todas las propiedades disponibles.',
       },
       source: {
         code: `
@@ -218,20 +226,21 @@ export const Primary: Story = {
   @search="onSearch"
   @clear="onClear"
 />
-`, language: 'html'
-      }
-    }
+`,
+        language: 'html',
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GSearchInput, GConfigProvider },
     setup() {
-      const search = ref('')
-      return { 
+      const search = ref('');
+      return {
         args,
         search,
         onSearch: action('search'),
-        onClear: action('clear')
-      }
+        onClear: action('clear'),
+      };
     },
     template: `
       <g-config-provider>
@@ -242,16 +251,17 @@ export const Primary: Story = {
           @clear="onClear"
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const WithLabel: Story = {
   name: 'Con etiqueta',
   parameters: {
     docs: {
       description: {
-        story: 'El componente puede incluir una etiqueta y texto de ayuda para mejorar la comprensión del usuario.'
+        story:
+          'El componente puede incluir una etiqueta y texto de ayuda para mejorar la comprensión del usuario.',
       },
       source: {
         code: `
@@ -263,19 +273,20 @@ export const WithLabel: Story = {
   @search="onSearch"
   @clear="onClear"
 />
-`, language: "html",
+`,
+        language: 'html',
       },
     },
   },
-  render: (args) => ({
+  render: () => ({
     components: { GSearchInput, GConfigProvider },
     setup() {
-      const search = ref('')
-      return { 
+      const search = ref('');
+      return {
         search,
         onSearch: action('search'),
-        onClear: action('clear')
-      }
+        onClear: action('clear'),
+      };
     },
     template: `
       <g-config-provider>
@@ -288,16 +299,17 @@ export const WithLabel: Story = {
           @clear="onClear"
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const States: Story = {
   name: 'Estados',
   parameters: {
     docs: {
       description: {
-        story: 'El componente SearchInput tiene varios estados que representan diferentes situaciones de uso: normal, error, deshabilitado, carga de búsqueda y carga inicial.'
+        story:
+          'El componente SearchInput tiene varios estados que representan diferentes situaciones de uso: normal, error, deshabilitado, carga de búsqueda y carga inicial.',
       },
       source: {
         code: `
@@ -341,19 +353,20 @@ export const States: Story = {
   placeholder="Carga inicial"
   initial-loading
 />
-`, language: 'html'
-      }
-    }
+`,
+        language: 'html',
+      },
+    },
   },
   render: () => ({
     components: { GSearchInput, GConfigProvider },
     setup() {
-      const search = ref('')
-      return { 
+      const search = ref('');
+      return {
         search,
         onSearch: action('search'),
-        onClear: action('clear')
-      }
+        onClear: action('clear'),
+      };
     },
     template: `
       <g-config-provider>
@@ -415,16 +428,17 @@ export const States: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const WithDebounce: Story = {
   name: 'Uso de debounce',
   parameters: {
     docs: {
       description: {
-        story: 'El componente SearchInput incluye funcionalidad de debounce para optimizar las búsquedas, evitando llamadas innecesarias mientras el usuario está escribiendo.'
+        story:
+          'El componente SearchInput incluye funcionalidad de debounce para optimizar las búsquedas, evitando llamadas innecesarias mientras el usuario está escribiendo.',
       },
       source: {
         code: `
@@ -449,24 +463,25 @@ const handleSearch = (query) => {
   // Aquí realizarías la llamada a tu API de búsqueda
 };
 </script>
-`, language: 'html'
-      }
-    }
+`,
+        language: 'html',
+      },
+    },
   },
   render: () => ({
     components: { GSearchInput, GConfigProvider },
     setup() {
-      const search = ref('')
-      const lastSearch = ref('')
-      const searchCount = ref(0)
-      
+      const search = ref('');
+      const lastSearch = ref('');
+      const searchCount = ref(0);
+
       const handleSearch = (query: string) => {
-        lastSearch.value = query
-        searchCount.value++
-        action('search')(query)
-      }
-      
-      return { search, lastSearch, searchCount, handleSearch }
+        lastSearch.value = query;
+        searchCount.value++;
+        action('search')(query);
+      };
+
+      return { search, lastSearch, searchCount, handleSearch };
     },
     template: `
       <g-config-provider>
@@ -514,16 +529,17 @@ const handleSearch = (query) => {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const ApiIntegration: Story = {
   name: 'Integración con API',
   parameters: {
     docs: {
       description: {
-        story: 'Este ejemplo muestra cómo integrar el componente SearchInput con una API, manejando estados de carga, resultados y errores.'
+        story:
+          'Este ejemplo muestra cómo integrar el componente SearchInput con una API, manejando estados de carga, resultados y errores.',
       },
       source: {
         code: `
@@ -600,19 +616,20 @@ const handleClear = () => {
   errorMessage.value = '';
 };
 </script>
-`, language: 'html'
-      }
-    }
+`,
+        language: 'html',
+      },
+    },
   },
   render: () => ({
     components: { GSearchInput, GConfigProvider },
     setup() {
-      const search = ref('')
-      const isSearching = ref(false)
-      const hasError = ref(false)
-      const searchResults = ref<{ id: number; name: string; }[]>([])
-      const errorMessage = ref('')
-      
+      const search = ref('');
+      const isSearching = ref(false);
+      const hasError = ref(false);
+      const searchResults = ref<{ id: number; name: string }[]>([]);
+      const errorMessage = ref('');
+
       const mockData = [
         { id: 1, name: 'Juan Pérez' },
         { id: 2, name: 'María López' },
@@ -624,56 +641,55 @@ const handleClear = () => {
         { id: 8, name: 'Valentina Torres' },
         { id: 9, name: 'Diego Hernández' },
         { id: 10, name: 'Sofía Ramírez' },
-      ]
-      
-      const searchInApi = (query) => {
-        
-        isSearching.value = true
-        hasError.value = false
-        errorMessage.value = ''
-        searchResults.value = []
-        
+      ];
+
+      const searchInApi = query => {
+        isSearching.value = true;
+        hasError.value = false;
+        errorMessage.value = '';
+        searchResults.value = [];
+
         setTimeout(() => {
           try {
             if (Math.random() < 0.2 && query.length > 0) {
-              throw new Error('Error de conexión al servidor')
+              throw new Error('Error de conexión al servidor');
             }
-            
+
             if (query) {
-              searchResults.value = mockData.filter(item => 
-                item.name.toLowerCase().includes(query.toLowerCase())
-              )
+              searchResults.value = mockData.filter(item =>
+                item.name.toLowerCase().includes(query.toLowerCase()),
+              );
             } else {
-              searchResults.value = []
+              searchResults.value = [];
             }
-            
-            action('API search success')(searchResults.value)
+
+            action('API search success')(searchResults.value);
           } catch (error) {
-            hasError.value = true
-            errorMessage.value = error.message
-            action('API search error')(error.message)
+            hasError.value = true;
+            errorMessage.value = error.message;
+            action('API search error')(error.message);
           } finally {
-            isSearching.value = false
+            isSearching.value = false;
           }
-        }, 1000)
-      }
-      
+        }, 1000);
+      };
+
       const handleClear = () => {
-        searchResults.value = []
-        hasError.value = false
-        errorMessage.value = ''
-        action('clear')()
-      }
-      
-      return { 
-        search, 
-        isSearching, 
-        hasError, 
-        searchResults, 
-        errorMessage, 
+        searchResults.value = [];
+        hasError.value = false;
+        errorMessage.value = '';
+        action('clear')();
+      };
+
+      return {
+        search,
+        isSearching,
+        hasError,
+        searchResults,
+        errorMessage,
         searchInApi,
-        handleClear
-      }
+        handleClear,
+      };
     },
     template: `
       <g-config-provider>
@@ -725,7 +741,6 @@ const handleClear = () => {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
-
+    `,
+  }),
+};

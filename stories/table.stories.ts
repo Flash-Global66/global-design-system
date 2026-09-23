@@ -1,5 +1,5 @@
-import { h, ref } from 'vue'
-import { StoryObj } from '@storybook/vue3'
+import { h, ref } from 'vue';
+import { StoryObj } from '@storybook/vue3';
 
 // COMPONENTS
 import {
@@ -8,20 +8,20 @@ import {
   useTableCellSelect,
   useTableCellInput,
   GCellEdit,
-  type TableTooltipData
-} from '../components/table/index.ts'
-import { GButton } from '@flash-global66/g-button'
-import { GLink } from '@flash-global66/g-link'
-import { GTag } from '@flash-global66/g-tag'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { GIconButton } from '@flash-global66/g-icon-button'
-import { GSelect } from '@flash-global66/g-select'
-import { GInput } from '@flash-global66/g-input'
+  type TableTooltipData,
+} from '../components/table/index.ts';
+import { GButton } from '@flash-global66/g-button';
+import { GLink } from '@flash-global66/g-link';
+import { GTag } from '@flash-global66/g-tag';
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GIconButton } from '@flash-global66/g-icon-button';
+import { GSelect } from '@flash-global66/g-select';
+import { GInput } from '@flash-global66/g-input';
 
 // CONFIG
-import { GConfigProvider } from '../components/config-provider'
-import { version, peerDependencies } from '../components/table/package.json'
-import { generatePeerDepsInstalls } from '../helper/documentation-stories'
+import { GConfigProvider } from '../components/config-provider';
+import { version, peerDependencies } from '../components/table/package.json';
+import { generatePeerDepsInstalls } from '../helper/documentation-stories';
 
 const meta = {
   title: 'Data/Table',
@@ -116,9 +116,9 @@ Para implementar celdas editables (input, select o UI personalizada con \`GCellE
 👉 **[Guía: Celdas editables en Table](/docs/concept-guide-celdas-editables-en-table--docs)**
 
 En esta documentación de Table encontrará historias de ejemplo alineadas con el comportamiento actual: **Celda tipo select**, **Celda tipo select (con description)** (menú con descripción acotada a dos líneas; en lectura solo el título de la opción), **Celda tipo input**, **Celda personalizada con GCellEdit**, **Eventos de celdas editables** y las de expansión.
-`
-      }
-    }
+`,
+      },
+    },
   },
 
   argTypes: {
@@ -129,8 +129,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Datos y Contenido',
         type: { summary: 'Array<Object>' },
-        defaultValue: { summary: '[]' }
-      }
+        defaultValue: { summary: '[]' },
+      },
     },
     emptyText: {
       name: 'empty-text',
@@ -139,8 +139,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Datos y Contenido',
         type: { summary: 'string' },
-        defaultValue: { summary: 'No Data' }
-      }
+        defaultValue: { summary: 'No Data' },
+      },
     },
     sumText: {
       name: 'sum-text',
@@ -149,8 +149,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Datos y Contenido',
         type: { summary: 'string' },
-        defaultValue: { summary: 'Total' }
-      }
+        defaultValue: { summary: 'Total' },
+      },
     },
     load: {
       name: 'load',
@@ -159,8 +159,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Datos y Contenido',
         type: { summary: 'Function' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     treeProps: {
       name: 'tree-props',
@@ -169,8 +169,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Datos y Contenido',
         type: { summary: 'Object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
     expandRowKeys: {
       name: 'expand-row-keys',
@@ -179,8 +179,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Datos y Contenido',
         type: { summary: 'Array<string | number>' },
-        defaultValue: { summary: '[]' }
-      }
+        defaultValue: { summary: '[]' },
+      },
     },
     rowKey: {
       name: 'row-key',
@@ -190,8 +190,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Datos y Contenido',
         type: { summary: 'string | Function' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
 
     // 2. Apariencia Visual
@@ -201,8 +201,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'number' },
-        defaultValue: { summary: 'auto' }
-      }
+        defaultValue: { summary: 'auto' },
+      },
     },
     maxHeight: {
       name: 'max-height',
@@ -211,8 +211,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'number' },
-        defaultValue: { summary: 'auto' }
-      }
+        defaultValue: { summary: 'auto' },
+      },
     },
     stripe: {
       description: 'Filas con fondo alternado',
@@ -220,8 +220,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     border: {
       description: 'Mostrar bordes',
@@ -229,8 +229,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     fit: {
       description: 'Ajustar columnas al contenedor',
@@ -238,8 +238,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     showHeader: {
       name: 'show-header',
@@ -248,8 +248,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     rowClassName: {
       name: 'row-class-name',
@@ -258,8 +258,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     rowStyle: {
       name: 'row-style',
@@ -268,8 +268,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'Object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
     cellClassName: {
       name: 'cell-class-name',
@@ -278,8 +278,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     headerCellClassName: {
       name: 'header-cell-class-name',
@@ -288,8 +288,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     headerCellStyle: {
       name: 'header-cell-style',
@@ -298,8 +298,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'Object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
     headerRowClassName: {
       name: 'header-row-class-name',
@@ -308,8 +308,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     headerRowStyle: {
       name: 'header-row-style',
@@ -318,8 +318,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'Object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
     indent: {
       description: 'Indentación para filas anidadas',
@@ -327,8 +327,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'number' },
-        defaultValue: { summary: '16' }
-      }
+        defaultValue: { summary: '16' },
+      },
     },
     tableLayout: {
       name: 'table-layout',
@@ -338,8 +338,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'string' },
-        defaultValue: { summary: 'fixed' }
-      }
+        defaultValue: { summary: 'fixed' },
+      },
     },
     scrollbarTabindex: {
       name: 'scrollbar-tabindex',
@@ -348,8 +348,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Apariencia Visual',
         type: { summary: 'number' },
-        defaultValue: { summary: '0' }
-      }
+        defaultValue: { summary: '0' },
+      },
     },
 
     // 3. Comportamiento y Funcionalidad
@@ -360,8 +360,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     currentRowKey: {
       name: 'current-row-key',
@@ -370,8 +370,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     defaultExpandAll: {
       name: 'default-expand-all',
@@ -381,8 +381,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     defaultSort: {
       name: 'default-sort',
@@ -392,8 +392,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'Object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
     showSummary: {
       name: 'show-summary',
@@ -402,8 +402,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     selectOnIndeterminate: {
       name: 'select-on-indeterminate',
@@ -412,8 +412,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     lazy: {
       description: 'Usar carga perezosa',
@@ -421,8 +421,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     scrollbarAlwaysOn: {
       name: 'scrollbar-always-on',
@@ -431,8 +431,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     showOverflowTooltip: {
       name: 'show-overflow-tooltip',
@@ -441,8 +441,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     flexible: {
       name: 'flexible',
@@ -451,8 +451,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     allowDragLastColumn: {
       name: 'allow-drag-last-column',
@@ -461,8 +461,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     preserveExpandedContent: {
       name: 'preserve-expanded-content',
@@ -471,8 +471,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Comportamiento y Funcionalidad',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
 
     // 4. Herramientas Avanzadas
@@ -483,8 +483,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Herramientas Avanzadas',
         type: { summary: 'Object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
     appendFilterPanelTo: {
       name: 'append-filter-panel-to',
@@ -493,8 +493,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Herramientas Avanzadas',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     tooltipFormatter: {
       name: 'tooltip-formatter',
@@ -503,8 +503,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Herramientas Avanzadas',
         type: { summary: 'Function' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
 
     // 5. Eventos
@@ -513,8 +513,11 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Eventos',
-        type: { summary: 'Function', detail: '<T = any>(selection: T[], row: T) => void' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '<T = any>(selection: T[], row: T) => void',
+        },
+      },
     },
     selectAll: {
       name: 'select-all',
@@ -522,8 +525,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Eventos',
-        type: { summary: 'Function', detail: '(selection: any[]) => void' }
-      }
+        type: { summary: 'Function', detail: '(selection: any[]) => void' },
+      },
     },
     selectionChange: {
       name: 'selection-change',
@@ -531,8 +534,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Eventos',
-        type: { summary: 'Function', detail: '(newSelection: any[]) => void' }
-      }
+        type: { summary: 'Function', detail: '(newSelection: any[]) => void' },
+      },
     },
     cellMouseEnter: {
       name: 'cell-mouse-enter',
@@ -542,9 +545,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, cell: HTMLTableCellElement, event: Event) => void'
-        }
-      }
+          detail:
+            '(row: any, column: any, cell: HTMLTableCellElement, event: Event) => void',
+        },
+      },
     },
     cellMouseLeave: {
       name: 'cell-mouse-leave',
@@ -554,9 +558,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, cell: HTMLTableCellElement, event: Event) => void'
-        }
-      }
+          detail:
+            '(row: any, column: any, cell: HTMLTableCellElement, event: Event) => void',
+        },
+      },
     },
     cellClick: {
       name: 'cell-click',
@@ -566,9 +571,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, cell: HTMLTableCellElement, event: MouseEvent) => void'
-        }
-      }
+          detail:
+            '(row: any, column: any, cell: HTMLTableCellElement, event: MouseEvent) => void',
+        },
+      },
     },
     cellDbClick: {
       name: 'cell-bd-click',
@@ -578,9 +584,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, cell: HTMLTableCellElement, event: MouseEvent) => void'
-        }
-      }
+          detail:
+            '(row: any, column: any, cell: HTMLTableCellElement, event: MouseEvent) => void',
+        },
+      },
     },
     cellContextMenu: {
       name: 'cell-context-menu',
@@ -590,9 +597,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, cell: HTMLTableCellElement, event: MouseEvent) => void'
-        }
-      }
+          detail:
+            '(row: any, column: any, cell: HTMLTableCellElement, event: MouseEvent) => void',
+        },
+      },
     },
     rowClick: {
       name: 'row-click',
@@ -602,9 +610,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, event: Event) => void'
-        }
-      }
+          detail: '(row: any, event: Event) => void',
+        },
+      },
     },
     rowDbClick: {
       name: 'row-bd-click',
@@ -614,9 +622,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, event: Event) => void'
-        }
-      }
+          detail: '(row: any, event: Event) => void',
+        },
+      },
     },
     rowContextMenu: {
       name: 'row-context-menu',
@@ -626,9 +634,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, event: Event) => void'
-        }
-      }
+          detail: '(row: any, event: Event) => void',
+        },
+      },
     },
     headerClick: {
       name: 'header-click',
@@ -638,9 +646,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(column: any, event: MouseEvent) => void'
-        }
-      }
+          detail: '(column: any, event: MouseEvent) => void',
+        },
+      },
     },
     headerContextMenu: {
       name: 'header-context-menu',
@@ -650,9 +658,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(column: any, event: MouseEvent) => void'
-        }
-      }
+          detail: '(column: any, event: MouseEvent) => void',
+        },
+      },
     },
     sortChange: {
       name: 'sort-change',
@@ -662,9 +670,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(data: {column: any, prop: string, order: any }) => void'
-        }
-      }
+          detail: '(data: {column: any, prop: string, order: any }) => void',
+        },
+      },
     },
     currentChange: {
       name: 'current-change',
@@ -674,9 +682,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(currentRow: any, oldCurrentRow: any) => void'
-        }
-      }
+          detail: '(currentRow: any, oldCurrentRow: any) => void',
+        },
+      },
     },
     headerDragend: {
       name: 'header-dragend',
@@ -686,9 +694,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(newWidth: number, oldWidth: number, column: any, event: MouseEvent) => void'
-        }
-      }
+          detail:
+            '(newWidth: number, oldWidth: number, column: any, event: MouseEvent) => void',
+        },
+      },
     },
     expandChange: {
       name: 'expand-change',
@@ -698,9 +707,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, expandedRows: any[]) => void & (row: any, expanded: boolean) => void'
-        }
-      }
+          detail:
+            '(row: any, expandedRows: any[]) => void & (row: any, expanded: boolean) => void',
+        },
+      },
     },
     scroll: {
       description: 'Evento de desplazamiento de la tabla',
@@ -709,9 +719,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '({ scrollLeft: number, scrollTop: number }) => void'
-        }
-      }
+          detail: '({ scrollLeft: number, scrollTop: number }) => void',
+        },
+      },
     },
     cellEditOpen: {
       name: 'cell-edit-open',
@@ -719,8 +729,11 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Eventos',
-        type: { summary: 'Function', detail: '(row: any, column: any) => void' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(row: any, column: any) => void',
+        },
+      },
     },
     cellEditClose: {
       name: 'cell-edit-close',
@@ -728,8 +741,11 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Eventos',
-        type: { summary: 'Function', detail: '(row: any, column: any) => void' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(row: any, column: any) => void',
+        },
+      },
     },
     cellEditChange: {
       name: 'cell-edit-change',
@@ -739,21 +755,24 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, newValue: any, oldValue: any) => void'
-        }
-      }
+          detail:
+            '(row: any, column: any, newValue: any, oldValue: any) => void',
+        },
+      },
     },
     cellEditValidate: {
       name: 'cell-edit-validate',
-      description: 'Validación de celda editable terminó (solo columnas con validación)',
+      description:
+        'Validación de celda editable terminó (solo columnas con validación)',
       control: false,
       table: {
         category: 'Eventos',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, result: { valid: boolean, message: string }) => void'
-        }
-      }
+          detail:
+            '(row: any, column: any, result: { valid: boolean, message: string }) => void',
+        },
+      },
     },
 
     // 6. Slots
@@ -764,8 +783,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Slots',
         type: { summary: 'Slot' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     append: {
       name: 'append',
@@ -775,8 +794,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Slots',
         type: { summary: 'Slot' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     empty: {
       name: 'empty',
@@ -785,8 +804,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Slots',
         type: { summary: 'Slot' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
 
     // 8. Exposes
@@ -795,16 +814,16 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '() => void' }
-      }
+        type: { summary: 'Function', detail: '() => void' },
+      },
     },
     getSelectionRows: {
       description: 'Obtener filas seleccionadas',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '() => any[]' }
-      }
+        type: { summary: 'Function', detail: '() => any[]' },
+      },
     },
     toggleRowSelection: {
       description: 'Alternar selección de una fila',
@@ -813,65 +832,72 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Exposes',
         type: {
           summary: 'Function',
-          detail: '(row: any, selected?: boolean, ignoreSelectable = true) => void'
-        }
-      }
+          detail:
+            '(row: any, selected?: boolean, ignoreSelectable = true) => void',
+        },
+      },
     },
     toggleAllSelection: {
       description: 'Alternar selección de todas las filas',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '() => void' }
-      }
+        type: { summary: 'Function', detail: '() => void' },
+      },
     },
     toggleRowExpansion: {
       description: 'Alternar expansión de una fila',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '(row: any, expanded?: boolean) => void' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(row: any, expanded?: boolean) => void',
+        },
+      },
     },
     setCurrentRow: {
       description: 'Establecer fila actual',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '(row: any) => void' }
-      }
+        type: { summary: 'Function', detail: '(row: any) => void' },
+      },
     },
     clearSort: {
       description: 'Limpiar ordenamiento',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '() => void' }
-      }
+        type: { summary: 'Function', detail: '() => void' },
+      },
     },
     clearFilter: {
       description: 'Limpiar filtros',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '() => void' }
-      }
+        type: { summary: 'Function', detail: '() => void' },
+      },
     },
     doLayout: {
       description: 'Forzar re-diseño de la tabla',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '() => void' }
-      }
+        type: { summary: 'Function', detail: '() => void' },
+      },
     },
     sort: {
       description: 'Ordenar datos de la tabla',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '(prop: string, order?: string) => void' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(prop: string, order?: string) => void',
+        },
+      },
     },
     scrollTo: {
       description: 'Desplazar la tabla a una posición específica',
@@ -880,9 +906,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Exposes',
         type: {
           summary: 'Function',
-          detail: '(options: number | ScrollToOptions, yCoord?: number) => void'
-        }
-      }
+          detail:
+            '(options: number | ScrollToOptions, yCoord?: number) => void',
+        },
+      },
     },
     setScrollTop: {
       name: 'set-scroll-top',
@@ -890,8 +917,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '(scrollTop: number) => void' }
-      }
+        type: { summary: 'Function', detail: '(scrollTop: number) => void' },
+      },
     },
     setScrollLeft: {
       name: 'set-scroll-left',
@@ -899,24 +926,27 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '(scrollLeft: number) => void' }
-      }
+        type: { summary: 'Function', detail: '(scrollLeft: number) => void' },
+      },
     },
     columns: {
       description: 'Obtener columnas de la tabla',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Array', detail: 'TableColumnCtx<T>[]' }
-      }
+        type: { summary: 'Array', detail: 'TableColumnCtx<T>[]' },
+      },
     },
     updateKeyChildren: {
       description: 'Actualizar hijos de una clave específica',
       control: false,
       table: {
         category: 'Exposes',
-        type: { summary: 'Function', detail: '(key: string, data: T[]) => void' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(key: string, data: T[]) => void',
+        },
+      },
     },
 
     // 9. Propiedades de Columnas
@@ -925,9 +955,12 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Propiedades de Columnas',
-        type: { summary: 'enum', detail: '"selection" | "index" | "expand" | "default"' },
-        defaultValue: { summary: 'default' }
-      }
+        type: {
+          summary: 'enum',
+          detail: '"selection" | "index" | "expand" | "default"',
+        },
+        defaultValue: { summary: 'default' },
+      },
     },
     index: {
       description: 'Índice de la columna',
@@ -935,8 +968,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'number' },
-        defaultValue: { summary: 0 }
-      }
+        defaultValue: { summary: 0 },
+      },
     },
     label: {
       description: 'Etiqueta de la columna',
@@ -944,8 +977,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     columnKey: {
       name: 'column-key',
@@ -954,8 +987,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     prop: {
       description: 'Propiedad de los datos para esta columna',
@@ -963,8 +996,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     width: {
       description: 'Ancho de la columna',
@@ -972,8 +1005,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string | number' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     minWidth: {
       name: 'min-width',
@@ -982,8 +1015,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string | number' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     fixed: {
       description: 'Fijar columna a la izquierda o derecha',
@@ -992,8 +1025,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string | boolean' },
-        defaultValue: { summary: false }
-      }
+        defaultValue: { summary: false },
+      },
     },
     renderHeader: {
       name: 'render-header',
@@ -1001,9 +1034,12 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Propiedades de Columnas',
-        type: { summary: 'Function', detail: '(data: { column: any, $index: number }) => void' },
-        defaultValue: { summary: '' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(data: { column: any, $index: number }) => void',
+        },
+        defaultValue: { summary: '' },
+      },
     },
     sortable: {
       description: 'Habilitar ordenamiento para la columna',
@@ -1011,8 +1047,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'boolean' },
-        defaultValue: { summary: false }
-      }
+        defaultValue: { summary: false },
+      },
     },
     sortMethod: {
       name: 'sort-method',
@@ -1021,8 +1057,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'Function', detail: '(a: any, b: any) => number' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     sortBy: {
       name: 'sort-by',
@@ -1031,8 +1067,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string | string[]' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     sortOrders: {
       name: 'sort-orders',
@@ -1041,8 +1077,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'Array<string>' },
-        defaultValue: { summary: ['ascending', 'descending'] }
-      }
+        defaultValue: { summary: ['ascending', 'descending'] },
+      },
     },
     resizable: {
       description: 'Habilitar redimensionamiento de la columna',
@@ -1050,8 +1086,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'boolean' },
-        defaultValue: { summary: true }
-      }
+        defaultValue: { summary: true },
+      },
     },
     formatter: {
       description: 'Función para formatear el contenido de la celda',
@@ -1060,10 +1096,11 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Propiedades de Columnas',
         type: {
           summary: 'Function',
-          detail: '(row: any, column: any, cellValue: any, index: number) => VNode | string'
+          detail:
+            '(row: any, column: any, cellValue: any, index: number) => VNode | string',
         },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     showOverflowTooltipColumn: {
       name: 'show-overflow-tooltip',
@@ -1072,8 +1109,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'boolean' },
-        defaultValue: { summary: false }
-      }
+        defaultValue: { summary: false },
+      },
     },
     align: {
       description: 'Alineación del contenido de la columna',
@@ -1081,8 +1118,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'enum', detail: '"left" | "center" | "right"' },
-        defaultValue: { summary: 'left' }
-      }
+        defaultValue: { summary: 'left' },
+      },
     },
     headerAlign: {
       name: 'header-align',
@@ -1091,8 +1128,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'enum', detail: '"left" | "center" | "right"' },
-        defaultValue: { summary: 'left' }
-      }
+        defaultValue: { summary: 'left' },
+      },
     },
     className: {
       name: 'class-name',
@@ -1101,8 +1138,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     labelClassName: {
       name: 'label-class-name',
@@ -1111,8 +1148,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     selectable: {
       name: 'selectable',
@@ -1120,9 +1157,12 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Propiedades de Columnas',
-        type: { summary: 'Function', detail: '(row: any, index: number) => boolean' },
-        defaultValue: { summary: '' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(row: any, index: number) => boolean',
+        },
+        defaultValue: { summary: '' },
+      },
     },
     reserveSelection: {
       name: 'reserve-selection',
@@ -1131,8 +1171,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'boolean' },
-        defaultValue: { summary: false }
-      }
+        defaultValue: { summary: false },
+      },
     },
     filters: {
       name: 'filters',
@@ -1141,8 +1181,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'Array<{ text: string, value: any }>' },
-        defaultValue: { summary: '[]' }
-      }
+        defaultValue: { summary: '[]' },
+      },
     },
     filterPlacement: {
       name: 'filter-placement',
@@ -1153,10 +1193,10 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         type: {
           summary: 'enum',
           detail:
-            '"top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end" | "right" | "right-start" | "right-end"'
+            '"top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "left-start" | "left-end" | "right" | "right-start" | "right-end"',
         },
-        defaultValue: { summary: 'bottom-start' }
-      }
+        defaultValue: { summary: 'bottom-start' },
+      },
     },
     filterClassName: {
       name: 'filter-class-name',
@@ -1165,8 +1205,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     filterMultiple: {
       name: 'filter-multiple',
@@ -1175,8 +1215,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'boolean' },
-        defaultValue: { summary: true }
-      }
+        defaultValue: { summary: true },
+      },
     },
     filterMethod: {
       name: 'filter-method',
@@ -1185,9 +1225,12 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       control: false,
       table: {
         category: 'Propiedades de Columnas',
-        type: { summary: 'Function', detail: '(value: any, row: any, column: any) => void' },
-        defaultValue: { summary: '' }
-      }
+        type: {
+          summary: 'Function',
+          detail: '(value: any, row: any, column: any) => void',
+        },
+        defaultValue: { summary: '' },
+      },
     },
     filteredValue: {
       name: 'filtered-value',
@@ -1197,8 +1240,8 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Propiedades de Columnas',
         type: { summary: 'Array<string>' },
-        defaultValue: { summary: '[]' }
-      }
+        defaultValue: { summary: '[]' },
+      },
     },
     tooltipFormatterColumn: {
       name: 'tooltip-formatter',
@@ -1208,32 +1251,35 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
         category: 'Propiedades de Columnas',
         type: {
           summary: 'Function',
-          detail: '(data: { row: any, column: any, cellValue: any }) => VNode | string'
+          detail:
+            '(data: { row: any, column: any, cellValue: any }) => VNode | string',
         },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
 
     // 10. Slots de Columnas
     defaultColumn: {
       name: 'default',
-      description: 'Slot para contenido personalizado en las celdas de la columna',
+      description:
+        'Slot para contenido personalizado en las celdas de la columna',
       control: false,
       table: {
         category: 'Slots de Columnas',
         type: { summary: 'Slot' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     header: {
       name: 'header',
-      description: 'Slot para contenido personalizado en el encabezado de la columna',
+      description:
+        'Slot para contenido personalizado en el encabezado de la columna',
       control: false,
       table: {
         category: 'Slots de Columnas',
         type: { summary: 'Slot' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     filterIcon: {
       name: 'filter-icon',
@@ -1242,9 +1288,9 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       table: {
         category: 'Slots de Columnas',
         type: { summary: 'Slot' },
-        defaultValue: { summary: '' }
-      }
-    }
+        defaultValue: { summary: '' },
+      },
+    },
   },
 
   args: {
@@ -1252,23 +1298,23 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
       {
         date: '2016-05-03',
         name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
+        address: 'No. 189, Grove St, Los Angeles',
       },
       {
         date: '2016-05-02',
         name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
+        address: 'No. 189, Grove St, Los Angeles',
       },
       {
         date: '2016-05-04',
         name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
+        address: 'No. 189, Grove St, Los Angeles',
       },
       {
         date: '2016-05-01',
         name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }
+        address: 'No. 189, Grove St, Los Angeles',
+      },
     ],
     height: 'auto',
     maxHeight: 'auto',
@@ -1306,25 +1352,25 @@ En esta documentación de Table encontrará historias de ejemplo alineadas con e
     expandRowKeys: undefined,
     cellClassName: '',
     headerCellClassName: '',
-    headerCellStyle: {}
-  }
-}
-export default meta
-type Story = StoryObj<typeof meta>
+    headerCellStyle: {},
+  },
+};
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   name: 'Básico',
   parameters: {
     docs: {
       description: {
-        story: `Tabla básica con columnas definidas por \`prop\`, \`label\` y \`width\`. Los datos se pasan mediante la prop \`data\`.`
-      }
-    }
+        story: `Tabla básica con columnas definidas por \`prop\`, \`label\` y \`width\`. Los datos se pasan mediante la prop \`data\`.`,
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GTable, GConfigProvider, GTableColumn },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
       <g-config-provider>
@@ -1334,18 +1380,18 @@ export const Basic: Story = {
           <g-table-column prop="address" label="Address" />
         </g-table>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const prefixAndSuffix: Story = {
   name: 'Tabla con fondo y borde',
   parameters: {
     docs: {
       description: {
-        story: `Tabla con fondo y borde, con filas alternas de color diferente.`
-      }
-    }
+        story: `Tabla con fondo y borde, con filas alternas de color diferente.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn },
@@ -1354,25 +1400,25 @@ export const prefixAndSuffix: Story = {
         {
           date: '2016-05-03',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-02',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-04',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-01',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }
-      ]
-      return { tableData }
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+      ];
+      return { tableData };
     },
     template: `
     <g-config-provider>
@@ -1381,9 +1427,9 @@ export const prefixAndSuffix: Story = {
         <g-table-column prop="name" label="Name" width="180" />
         <g-table-column prop="address" label="Address" />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const withStatus: Story = {
   name: 'Tabla con estados',
@@ -1392,9 +1438,9 @@ export const withStatus: Story = {
       description: {
         story: `Puede destacar el contenido de la tabla para distinguir entre "success, information, warning, danger" y otros estados.
 
-Utilice row-class-name en el-table para agregar clases personalizadas a una fila específica. De esa manera podrá darle diseño con esas clases.`
-      }
-    }
+Utilice row-class-name en el-table para agregar clases personalizadas a una fila específica. De esa manera podrá darle diseño con esas clases.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn },
@@ -1403,70 +1449,77 @@ Utilice row-class-name en el-table para agregar clases personalizadas a una fila
         {
           date: '2016-05-03',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-02',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-04',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-01',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-05',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-06',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-07',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           date: '2016-05-08',
           name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }
-      ]
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+      ];
 
-      const tableRowClassName = ({ rowIndex }: { row: any; rowIndex: number }) => {
-        if (rowIndex === 1) return '!bg-error-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+      const tableRowClassName = ({
+        rowIndex,
+      }: {
+        row: any;
+        rowIndex: number;
+      }) => {
+        if (rowIndex === 1)
+          return '!bg-error-bg group !bg-opacity-50 opacity-75 hover:!opacity-100';
         if (rowIndex === 3)
-          return '!bg-success-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
+          return '!bg-success-bg group !bg-opacity-50 opacity-75 hover:!opacity-100';
         if (rowIndex === 5)
-          return '!bg-warning-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
-        if (rowIndex === 7) return '!bg-info-bg group !bg-opacity-50 opacity-75 hover:!opacity-100'
-        return ''
-      }
+          return '!bg-warning-bg group !bg-opacity-50 opacity-75 hover:!opacity-100';
+        if (rowIndex === 7)
+          return '!bg-info-bg group !bg-opacity-50 opacity-75 hover:!opacity-100';
+        return '';
+      };
 
       const cellClassName = ({
-        rowIndex
+        rowIndex,
       }: {
-        row: any
-        column: any
-        rowIndex: number
+        row: any;
+        column: any;
+        rowIndex: number;
       }) => {
-        if (rowIndex === 1) return 'group-hover:!bg-error-bg'
-        if (rowIndex === 3) return 'group-hover:!bg-success-bg'
-        if (rowIndex === 5) return 'group-hover:!bg-warning-bg'
-        if (rowIndex === 7) return 'group-hover:!bg-info-bg'
-        return ''
-      }
+        if (rowIndex === 1) return 'group-hover:!bg-error-bg';
+        if (rowIndex === 3) return 'group-hover:!bg-success-bg';
+        if (rowIndex === 5) return 'group-hover:!bg-warning-bg';
+        if (rowIndex === 7) return 'group-hover:!bg-info-bg';
+        return '';
+      };
 
-      return { tableData, tableRowClassName, cellClassName }
+      return { tableData, tableRowClassName, cellClassName };
     },
     template: `
     <g-config-provider>
@@ -1480,9 +1533,9 @@ Utilice row-class-name en el-table para agregar clases personalizadas a una fila
         <g-table-column prop="name" label="Name" width="180" />
         <g-table-column prop="address" label="Address" />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const withFixed: Story = {
   name: 'Tabla con columnas fijas',
@@ -1491,9 +1544,9 @@ export const withFixed: Story = {
       description: {
         story: `Cuando se tienen demasiadas columnas, puede fijar algunas de ellas.
 
-El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es true, la columna será fijada a la izquierda. También acepta dos tipos: 'left' y 'right', ambos indican donde debe ser fijada la columna.`
-      }
-    }
+El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es true, la columna será fijada a la izquierda. También acepta dos tipos: 'left' y 'right', ambos indican donde debe ser fijada la columna.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn, GIconButton },
@@ -1506,7 +1559,7 @@ El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036',
-          tag: 'Home'
+          tag: 'Home',
         },
         {
           date: '2016-05-02',
@@ -1515,7 +1568,7 @@ El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036',
-          tag: 'Office'
+          tag: 'Office',
         },
         {
           date: '2016-05-04',
@@ -1524,7 +1577,7 @@ El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036',
-          tag: 'Home'
+          tag: 'Home',
         },
         {
           date: '2016-05-01',
@@ -1533,15 +1586,15 @@ El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036',
-          tag: 'Office'
-        }
-      ]
+          tag: 'Office',
+        },
+      ];
 
       const handleClick = () => {
-        console.log('click')
-      }
+        console.log('click');
+      };
 
-      return { tableData, handleClick }
+      return { tableData, handleClick };
     },
     template: `
     <g-config-provider>
@@ -1569,9 +1622,9 @@ El atributo fixed es utilizado en el-table-column, este acepta un Boolean. Si es
           </template>
         </g-table-column>
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const withLongHeader: Story = {
   name: 'Tabla con encabezado agrupado',
@@ -1580,9 +1633,9 @@ export const withLongHeader: Story = {
       description: {
         story: `Cuando la estructura de datos es compleja, puede usar la cabecera de grupo para mostrar la jerarquía de datos.
 
-Solo necesita colocar el-table-column dentro de otro el-table-column, de esta forma logrará agruparles.`
-      }
-    }
+Solo necesita colocar el-table-column dentro de otro el-table-column, de esta forma logrará agruparles.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn, GButton },
@@ -1594,7 +1647,7 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           state: 'California',
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
+          zip: 'CA 90036',
         },
         {
           date: '2016-05-02',
@@ -1602,7 +1655,7 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           state: 'California',
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
+          zip: 'CA 90036',
         },
         {
           date: '2016-05-04',
@@ -1610,7 +1663,7 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           state: 'California',
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
+          zip: 'CA 90036',
         },
         {
           date: '2016-05-01',
@@ -1618,7 +1671,7 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           state: 'California',
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
+          zip: 'CA 90036',
         },
         {
           date: '2016-05-08',
@@ -1626,7 +1679,7 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           state: 'California',
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
+          zip: 'CA 90036',
         },
         {
           date: '2016-05-06',
@@ -1634,7 +1687,7 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           state: 'California',
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
+          zip: 'CA 90036',
         },
         {
           date: '2016-05-07',
@@ -1642,11 +1695,11 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           state: 'California',
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }
-      ]
+          zip: 'CA 90036',
+        },
+      ];
 
-      return { tableData }
+      return { tableData };
     },
     template: `
     <g-config-provider>
@@ -1660,18 +1713,18 @@ Solo necesita colocar el-table-column dentro de otro el-table-column, de esta fo
           <g-table-column prop="address" label="Address" min-width="200" />
         </g-table-column>
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const selectabale: Story = {
   name: 'Tabla con selección de filas',
   parameters: {
     docs: {
       description: {
-        story: `Tabla con selección de filas, permitiendo seleccionar múltiples filas y realizar acciones sobre ellas. Adicionalmente cuenta con la funcion de mostrar tooltips en celdas con contenido largo.`
-      }
-    }
+        story: `Tabla con selección de filas, permitiendo seleccionar múltiples filas y realizar acciones sobre ellas. Adicionalmente cuenta con la funcion de mostrar tooltips en celdas con contenido largo.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn, GButton },
@@ -1680,26 +1733,26 @@ export const selectabale: Story = {
         {
           date: '2016-05-04',
           name: 'Aleyna Kutzner',
-          address: 'Lohrbergstr. 86c, Süd Lilli, Saarland'
+          address: 'Lohrbergstr. 86c, Süd Lilli, Saarland',
         },
         {
           date: '2016-05-03',
           name: 'Helen Jacobi',
-          address: '760 A Street, South Frankfield, Illinois'
+          address: '760 A Street, South Frankfield, Illinois',
         },
         {
           date: '2016-05-02',
           name: 'Brandon Deckert',
-          address: 'Arnold-Ohletz-Str. 41a, Alt Malinascheid, Thüringen'
+          address: 'Arnold-Ohletz-Str. 41a, Alt Malinascheid, Thüringen',
         },
         {
           date: '2016-05-01',
           name: 'Margie Smith',
-          address: '23618 Windsor Drive, West Ricardoview, Idaho'
-        }
-      ]
+          address: '23618 Windsor Drive, West Ricardoview, Idaho',
+        },
+      ];
 
-      return { tableData }
+      return { tableData };
     },
     template: `
     <g-config-provider>
@@ -1717,9 +1770,9 @@ export const selectabale: Story = {
         />
         <g-table-column property="address" label="address" />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const collapse: Story = {
   name: 'Tabla con filas expandibles',
@@ -1728,9 +1781,9 @@ export const collapse: Story = {
       description: {
         story: `Cuando el contenido de la fila es demasiado largo y no quiere mostrar la barra de desplazamiento horizontal, puede usar la función de fila expandible.
 
-Puede activar la fila expandible estableciendo la propiedad type="expand" o con slots. La plantilla para el-table-column se mostrará como el contenido de la fila expandible, y puede acceder a los mismos atributos que cuando está usando slots en plantillas de columnas personalizadas.`
-      }
-    }
+Puede activar la fila expandible estableciendo la propiedad type="expand" o con slots. La plantilla para el-table-column se mostrará como el contenido de la fila expandible, y puede acceder a los mismos atributos que cuando está usando slots en plantillas de columnas personalizadas.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn, GButton },
@@ -1749,23 +1802,23 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Spike',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Tyke',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
-            }
-          ]
+              zip: 'CA 94114',
+            },
+          ],
         },
         {
           date: '2016-05-02',
@@ -1780,23 +1833,23 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Spike',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Tyke',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
-            }
-          ]
+              zip: 'CA 94114',
+            },
+          ],
         },
         {
           date: '2016-05-04',
@@ -1811,23 +1864,23 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Spike',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Tyke',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
-            }
-          ]
+              zip: 'CA 94114',
+            },
+          ],
         },
         {
           date: '2016-05-01',
@@ -1842,23 +1895,23 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Spike',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Tyke',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
-            }
-          ]
+              zip: 'CA 94114',
+            },
+          ],
         },
         {
           date: '2016-05-08',
@@ -1873,23 +1926,23 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Spike',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Tyke',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
-            }
-          ]
+              zip: 'CA 94114',
+            },
+          ],
         },
         {
           date: '2016-05-06',
@@ -1904,23 +1957,23 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Spike',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Tyke',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
-            }
-          ]
+              zip: 'CA 94114',
+            },
+          ],
         },
         {
           date: '2016-05-07',
@@ -1935,27 +1988,27 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Spike',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
+              zip: 'CA 94114',
             },
             {
               name: 'Tyke',
               state: 'California',
               city: 'San Francisco',
               address: '3650 21st St, San Francisco',
-              zip: 'CA 94114'
-            }
-          ]
-        }
-      ]
+              zip: 'CA 94114',
+            },
+          ],
+        },
+      ];
 
-      return { tableData }
+      return { tableData };
     },
     template: `
     <g-config-provider>
@@ -1985,18 +2038,18 @@ Puede activar la fila expandible estableciendo la propiedad type="expand" o con 
         <g-table-column label="Date" prop="date" />
         <g-table-column label="Name" prop="name" />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const withLazyAndLoad: Story = {
   name: 'Tabla con encabezado agrupado',
   parameters: {
     docs: {
       description: {
-        story: `Puede visualizar datos con una estructura de árbol. Cuando la fila contiene el campo children, se trata como datos anidados. Para renderizar datos anidados, la propiedad row-key es necesaria. Además, los datos de registros secundarios se pueden cargar de forma asíncrona. Establezca la propiedad lazy de la tabla a true y la función que usara a load. Especifique el atributo hasChildren en la fila para determinar qué fila contiene descendencia. Tanto children como hasChildren pueden configurarse a través de tree-props.`
-      }
-    }
+        story: `Puede visualizar datos con una estructura de árbol. Cuando la fila contiene el campo children, se trata como datos anidados. Para renderizar datos anidados, la propiedad row-key es necesaria. Además, los datos de registros secundarios se pueden cargar de forma asíncrona. Establezca la propiedad lazy de la tabla a true y la función que usara a load. Especifique el atributo hasChildren en la fila para determinar qué fila contiene descendencia. Tanto children como hasChildren pueden configurarse a través de tree-props.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn },
@@ -2006,13 +2059,13 @@ export const withLazyAndLoad: Story = {
           id: 1,
           date: '2016-05-02',
           name: 'wangxiaohu',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           id: 2,
           date: '2016-05-04',
           name: 'wangxiaohu',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           id: 3,
@@ -2024,72 +2077,76 @@ export const withLazyAndLoad: Story = {
               id: 31,
               date: '2016-05-01',
               name: 'wangxiaohu',
-              address: 'No. 189, Grove St, Los Angeles'
+              address: 'No. 189, Grove St, Los Angeles',
             },
             {
               id: 32,
               date: '2016-05-01',
               name: 'wangxiaohu',
-              address: 'No. 189, Grove St, Los Angeles'
-            }
-          ]
+              address: 'No. 189, Grove St, Los Angeles',
+            },
+          ],
         },
         {
           id: 4,
           date: '2016-05-03',
           name: 'wangxiaohu',
-          address: 'No. 189, Grove St, Los Angeles'
-        }
-      ]
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+      ];
 
       const tableData1 = [
         {
           id: 1,
           date: '2016-05-02',
           name: 'wangxiaohu',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           id: 2,
           date: '2016-05-04',
           name: 'wangxiaohu',
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           id: 3,
           date: '2016-05-01',
           name: 'wangxiaohu',
           hasChildren: true,
-          address: 'No. 189, Grove St, Los Angeles'
+          address: 'No. 189, Grove St, Los Angeles',
         },
         {
           id: 4,
           date: '2016-05-03',
           name: 'wangxiaohu',
-          address: 'No. 189, Grove St, Los Angeles'
-        }
-      ]
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+      ];
 
-      const load = (row: any, treeNode: unknown, resolve: (data: any[]) => void) => {
+      const load = (
+        row: any,
+        treeNode: unknown,
+        resolve: (data: any[]) => void,
+      ) => {
         setTimeout(() => {
           resolve([
             {
               id: 31,
               date: '2016-05-01',
               name: 'wangxiaohu',
-              address: 'No. 189, Grove St, Los Angeles'
+              address: 'No. 189, Grove St, Los Angeles',
             },
             {
               id: 32,
               date: '2016-05-01',
               name: 'wangxiaohu',
-              address: 'No. 189, Grove St, Los Angeles'
-            }
-          ])
-        }, 1000)
-      }
+              address: 'No. 189, Grove St, Los Angeles',
+            },
+          ]);
+        }, 1000);
+      };
 
-      return { tableData, load, tableData1 }
+      return { tableData, load, tableData1 };
     },
     template: `
     <g-config-provider>
@@ -2120,18 +2177,18 @@ export const withLazyAndLoad: Story = {
           <g-table-column prop="address" label="Address" />
         </g-table>
       </div>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const withTooltipFormatter: Story = {
   name: 'Tabla con formateador de tooltip',
   parameters: {
     docs: {
       description: {
-        story: `Tabla con formateador de tooltip, mostrando información adicional al pasar el cursor sobre las celdas.`
-      }
-    }
+        story: `Tabla con formateador de tooltip, mostrando información adicional al pasar el cursor sobre las celdas.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GConfigProvider, GTableColumn, GLink, GTag },
@@ -2140,40 +2197,40 @@ export const withTooltipFormatter: Story = {
         {
           address: 'Lohrbergstr. 86c, Süd Lilli, Saarland',
           tags: ['Office', 'Home', 'Park', 'Garden'],
-          url: 'https://github.com/element-plus/element-plus/issues'
+          url: 'https://github.com/element-plus/element-plus/issues',
         },
         {
           address: '760 A Street, South Frankfield, Illinois',
           tags: ['error', 'warning', 'success', 'info'],
-          url: 'https://github.com/element-plus/element-plus/pulls'
+          url: 'https://github.com/element-plus/element-plus/pulls',
         },
         {
           address: 'Arnold-Ohletz-Str. 41a, Alt Malinascheid, Thüringen',
           tags: ['one', 'two', 'three', 'four', 'five'],
-          url: 'https://github.com/element-plus/element-plus/discussions'
+          url: 'https://github.com/element-plus/element-plus/discussions',
         },
         {
           address: '23618 Windsor Drive, West Ricardoview, Idaho',
           tags: ['blue', 'white', 'dark', 'gray', 'red', 'bright'],
-          url: 'https://github.com/element-plus/element-plus/actions'
-        }
-      ]
+          url: 'https://github.com/element-plus/element-plus/actions',
+        },
+      ];
 
       const tableRowFormatter = (data: TableTooltipData<any>) => {
-        return `${data.cellValue}: table formatter`
-      }
+        return `${data.cellValue}: table formatter`;
+      };
 
       const withVNode = (data: TableTooltipData<any>) => {
         return h(GLink, { type: 'primary', href: data.cellValue }, () =>
-          h('span', null, data.cellValue)
-        )
-      }
+          h('span', null, data.cellValue),
+        );
+      };
 
       const tagsFormatter = (data: TableTooltipData<any>) => {
-        return data.row.tags.join(', ')
-      }
+        return data.row.tags.join(', ');
+      };
 
-      return { tableData, tableRowFormatter, withVNode, tagsFormatter }
+      return { tableData, tableRowFormatter, withVNode, tagsFormatter };
     },
     template: `
     <g-config-provider>
@@ -2214,21 +2271,29 @@ export const withTooltipFormatter: Story = {
           :tooltip-formatter="withVNode"
         />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const tableEditable: Story = {
   name: 'Tabla con columnas editables y eliminables',
   parameters: {
     docs: {
       description: {
-        story: `Tabla con columnas editables y eliminables, permitiendo modificar el contenido de las celdas y eliminar filas.`
-      }
-    }
+        story: `Tabla con columnas editables y eliminables, permitiendo modificar el contenido de las celdas y eliminar filas.`,
+      },
+    },
   },
   render: () => ({
-    components: { GTable, GConfigProvider, GTableColumn, GIconFont, GSelect, GInput, GIconButton },
+    components: {
+      GTable,
+      GConfigProvider,
+      GTableColumn,
+      GIconFont,
+      GSelect,
+      GInput,
+      GIconButton,
+    },
     setup() {
       const tableData = ref([
         {
@@ -2236,8 +2301,9 @@ export const tableEditable: Story = {
           currency: 'USD',
           amount: 1000,
           reason: 'initial-investment',
-          detail: 'Este es un detalle de la inversión inicial realizada en el proyecto.',
-          isEditable: false
+          detail:
+            'Este es un detalle de la inversión inicial realizada en el proyecto.',
+          isEditable: false,
         },
         {
           mode: 'receive',
@@ -2246,23 +2312,25 @@ export const tableEditable: Story = {
           reason: 'marketing-expenses',
           detail:
             'Este es una descripción detallada de los gastos de marketing asociados con el proyecto.',
-          isEditable: false
+          isEditable: false,
         },
         {
           mode: 'send',
           currency: 'GBP',
           amount: 750,
           reason: 'operational-costs',
-          detail: 'Este es una descripción detallada de los costos operativos del proyecto.',
-          isEditable: false
+          detail:
+            'Este es una descripción detallada de los costos operativos del proyecto.',
+          isEditable: false,
         },
         {
           mode: 'receive',
           currency: 'JPY',
           amount: 3000,
           reason: 'miscellaneous-expenses',
-          detail: 'Este es una descripción detallada de los gastos misceláneos del proyecto.',
-          isEditable: false
+          detail:
+            'Este es una descripción detallada de los gastos misceláneos del proyecto.',
+          isEditable: false,
         },
         {
           mode: 'send',
@@ -2271,7 +2339,7 @@ export const tableEditable: Story = {
           reason: 'travel-expenses',
           detail:
             'Este es una descripción detallada de los gastos de viaje relacionados con el proyecto.',
-          isEditable: false
+          isEditable: false,
         },
         {
           mode: 'send',
@@ -2280,26 +2348,26 @@ export const tableEditable: Story = {
           reason: 'consulting-fees',
           detail:
             'Este es una descripción detallada de los honorarios de consultoría del proyecto.',
-          isEditable: false
-        }
-      ])
+          isEditable: false,
+        },
+      ]);
 
       const handleClick = () => {
-        console.log('click')
-      }
+        console.log('click');
+      };
 
       const handleEdit = (index: number, row: any) => {
         tableData.value.splice(index, 1, {
           ...row,
-          isEditable: !row.isEditable
-        })
-      }
+          isEditable: !row.isEditable,
+        });
+      };
 
       const deleteRow = (index: number) => {
-        tableData.value.splice(index, 1)
-      }
+        tableData.value.splice(index, 1);
+      };
 
-      return { tableData, handleClick, handleEdit, deleteRow }
+      return { tableData, handleClick, handleEdit, deleteRow };
     },
     template: `
     <g-config-provider>
@@ -2426,9 +2494,9 @@ export const tableEditable: Story = {
           </template>
         </g-table-column>
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 /** Implementación de celda tipo select: useTableCellSelect + cell-type="select" + :cell-options. La UI (GSelect) está en el UI system. */
 
@@ -2485,9 +2553,9 @@ const { cellOptions } = useTableCellSelect(tableData, {
   useRowIndex: true
 })
 </script>
-\`\`\``
-      }
-    }
+\`\`\``,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
@@ -2504,7 +2572,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           location: 'Madrid',
           joinDate: '2020-01-15',
           comment:
-            'Excelente desempeño en el proyecto Q4. Lideró el desarrollo de nuevas funcionalidades y mejoró significativamente la eficiencia del equipo.'
+            'Excelente desempeño en el proyecto Q4. Lideró el desarrollo de nuevas funcionalidades y mejoró significativamente la eficiencia del equipo.',
         },
         {
           id: 2,
@@ -2516,7 +2584,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           phone: '+34 600 234 567',
           location: 'Barcelona',
           joinDate: '2021-03-20',
-          comment: ''
+          comment: '',
         },
         {
           id: 3,
@@ -2529,7 +2597,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           location: 'Valencia',
           joinDate: '2019-11-10',
           comment:
-            'Lideró la campaña de verano con resultados destacados. Incrementó el engagement en redes sociales en un 40% y generó más de 10,000 leads calificados.'
+            'Lideró la campaña de verano con resultados destacados. Incrementó el engagement en redes sociales en un 40% y generó más de 10,000 leads calificados.',
         },
         {
           id: 4,
@@ -2541,7 +2609,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           phone: '+34 600 456 789',
           location: 'Madrid',
           joinDate: '2022-05-08',
-          comment: ''
+          comment: '',
         },
         {
           id: 5,
@@ -2554,7 +2622,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           location: 'Sevilla',
           joinDate: '2020-07-12',
           comment:
-            'Coordinó exitosamente el proceso de onboarding de 25 nuevos empleados durante el último trimestre, reduciendo el tiempo de incorporación en un 30%.'
+            'Coordinó exitosamente el proceso de onboarding de 25 nuevos empleados durante el último trimestre, reduciendo el tiempo de incorporación en un 30%.',
         },
         {
           id: 6,
@@ -2566,7 +2634,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           phone: '+34 600 678 901',
           location: 'Barcelona',
           joinDate: '2021-09-25',
-          comment: ''
+          comment: '',
         },
         {
           id: 7,
@@ -2579,7 +2647,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           location: 'Valencia',
           joinDate: '2023-02-14',
           comment:
-            'Especialista en redes sociales y contenido digital. Gestiona las cuentas corporativas y desarrolla estrategias de contenido que han aumentado el alcance orgánico.'
+            'Especialista en redes sociales y contenido digital. Gestiona las cuentas corporativas y desarrolla estrategias de contenido que han aumentado el alcance orgánico.',
         },
         {
           id: 8,
@@ -2591,7 +2659,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           phone: '+34 600 890 123',
           location: 'Madrid',
           joinDate: '2018-06-30',
-          comment: ''
+          comment: '',
         },
         {
           id: 9,
@@ -2604,7 +2672,7 @@ const { cellOptions } = useTableCellSelect(tableData, {
           location: 'Barcelona',
           joinDate: '2022-11-05',
           comment:
-            'Nuevo en el equipo, mostrando gran potencial. Ha cerrado 5 deals importantes en su primer mes y demuestra excelente capacidad de comunicación con clientes.'
+            'Nuevo en el equipo, mostrando gran potencial. Ha cerrado 5 deals importantes en su primer mes y demuestra excelente capacidad de comunicación con clientes.',
         },
         {
           id: 10,
@@ -2616,58 +2684,68 @@ const { cellOptions } = useTableCellSelect(tableData, {
           phone: '+34 600 012 345',
           location: 'Valencia',
           joinDate: '2021-04-18',
-          comment: ''
-        }
-      ])
+          comment: '',
+        },
+      ]);
       const statusOptions = [
-        { value: 'active', title: 'Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo ' },
+        {
+          value: 'active',
+          title:
+            'Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo Activo ',
+        },
         { value: 'pending', title: 'Pendiente' },
-        { value: 'inactive', title: 'Inactivo' }
-      ]
+        { value: 'inactive', title: 'Inactivo' },
+      ];
       const roleOptions = [
         { value: 'admin', title: 'Administrador' },
         { value: 'editor', title: 'Editor' },
-        { value: 'user', title: 'Usuario' }
-      ]
+        { value: 'user', title: 'Usuario' },
+      ];
       const departmentOptions = [
         { value: 'IT', title: 'Tecnología' },
         { value: 'Sales', title: 'Ventas' },
         { value: 'Marketing', title: 'Marketing' },
-        { value: 'HR', title: 'Recursos Humanos' }
-      ]
+        { value: 'HR', title: 'Recursos Humanos' },
+      ];
 
       const { cellOptions: statusCellOptions } = useTableCellSelect(tableData, {
         options: statusOptions,
         label: 'Estado',
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
       const { cellOptions: roleCellOptions } = useTableCellSelect(tableData, {
         options: roleOptions,
-        useRowIndex: true
-      })
-      const { cellOptions: departmentCellOptions } = useTableCellSelect(tableData, {
-        options: departmentOptions,
-        useRowIndex: true
-      })
-      const { cellOptions: joinDateCellOptions } = useTableCellInput(tableData, {
-        label: 'Fecha Ingreso',
-        placeholder: 'YYYY-MM-DD',
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
+      const { cellOptions: departmentCellOptions } = useTableCellSelect(
+        tableData,
+        {
+          options: departmentOptions,
+          useRowIndex: true,
+        },
+      );
+      const { cellOptions: joinDateCellOptions } = useTableCellInput(
+        tableData,
+        {
+          label: 'Fecha Ingreso',
+          placeholder: 'YYYY-MM-DD',
+          useRowIndex: true,
+        },
+      );
       const { cellOptions: commentCellOptions } = useTableCellInput(tableData, {
         label: 'Detalle',
         placeholder: 'Opcional',
         rows: 3,
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
       return {
         tableData,
         statusCellOptions,
         roleCellOptions,
         departmentCellOptions,
         joinDateCellOptions,
-        commentCellOptions
-      }
+        commentCellOptions,
+      };
     },
     template: `
     <g-config-provider>
@@ -2711,9 +2789,9 @@ const { cellOptions } = useTableCellSelect(tableData, {
           input-label="Detalle"
         />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableCellSelectWithDescription: Story = {
   name: 'Celda tipo select (con description)',
@@ -2742,9 +2820,9 @@ const { cellOptions } = useTableCellSelect(tableData, {
   label: 'Motivo',
   rowKey: 'id'
 })
-\`\`\``
-      }
-    }
+\`\`\``,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
@@ -2752,34 +2830,39 @@ const { cellOptions } = useTableCellSelect(tableData, {
       const tableData = ref([
         { id: 1, name: 'Empresa Alpha', purpose: 1 },
         { id: 2, name: 'Empresa Beta', purpose: 2 },
-        { id: 3, name: 'Empresa Gamma', purpose: 3 }
-      ])
+        { id: 3, name: 'Empresa Gamma', purpose: 3 },
+      ]);
       const purposeOptions = [
         {
           value: 1,
           title: 'Pago a proveedores',
-          description: 'Transferencias a proveedores nacionales o internacionales.'
+          description:
+            'Transferencias a proveedores nacionales o internacionales.',
         },
         {
           value: 2,
           title: 'Pago de servicios digitales y plataformas',
           description:
-            'Incluye plataformas publicitarias, SaaS y otros servicios en línea.'
+            'Incluye plataformas publicitarias, SaaS y otros servicios en línea.',
         },
         {
           value: 3,
           title: 'Otros conceptos',
-          description: 'Operaciones que no encajan en las categorías anteriores.'
-        }
-      ]
-      const { cellOptions: purposeCellOptions } = useTableCellSelect(tableData, {
-        options: purposeOptions,
-        label: 'Motivo',
-        rowKey: 'id',
-        expandColspan: 2,
-        expandDirection: 'right'
-      })
-      return { tableData, purposeCellOptions }
+          description:
+            'Operaciones que no encajan en las categorías anteriores.',
+        },
+      ];
+      const { cellOptions: purposeCellOptions } = useTableCellSelect(
+        tableData,
+        {
+          options: purposeOptions,
+          label: 'Motivo',
+          rowKey: 'id',
+          expandColspan: 2,
+          expandDirection: 'right',
+        },
+      );
+      return { tableData, purposeCellOptions };
     },
     template: `
     <g-config-provider>
@@ -2798,9 +2881,9 @@ const { cellOptions } = useTableCellSelect(tableData, {
           empty-action-text="Seleccionar"
         />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableScrollMinWidth: Story = {
   name: 'Scroll horizontal (scroll-min-width)',
@@ -2819,11 +2902,18 @@ export const TableScrollMinWidth: Story = {
     components: { GTable, GTableColumn, GConfigProvider },
     setup() {
       const tableData = ref([
-        { id: 1, colA: 'Alpha', colB: 'Beta', colC: 'Gamma', colD: 'Delta', colE: 'Épsilon' },
+        {
+          id: 1,
+          colA: 'Alpha',
+          colB: 'Beta',
+          colC: 'Gamma',
+          colD: 'Delta',
+          colE: 'Épsilon',
+        },
         { id: 2, colA: 'A2', colB: 'B2', colC: 'C2', colD: 'D2', colE: 'E2' },
         { id: 3, colA: 'A3', colB: 'B3', colC: 'C3', colD: 'D3', colE: 'E3' },
-      ])
-      return { tableData }
+      ]);
+      return { tableData };
     },
     template: `
     <g-config-provider>
@@ -2850,7 +2940,7 @@ export const TableScrollMinWidth: Story = {
       </div>
     </g-config-provider>`,
   }),
-}
+};
 
 export const TableCellInput: Story = {
   name: 'Celda tipo input (cell-type)',
@@ -2863,9 +2953,9 @@ export const TableCellInput: Story = {
 
 **Opciones útiles:** \`placeholder\`, \`label\` / \`input-label\` (label sobre el input en edición), \`emptyActionText\` / \`empty-action-text\` (texto cuando está vacío; al hacer click activa edición), \`expandColspan\` / \`expand-colspan\` (columnas que abarca el overlay; por defecto 2), \`expandDirection\` (\`"left"\` | \`"right"\`), \`rules\` (validación).
 
-**Textarea:** pase \`rows\` en \`useTableCellInput\`; se renderiza un textarea y la fila puede crecer en altura. Cerrar con \`Ctrl+Enter\` o \`Cmd+Enter\`.`
-      }
-    }
+**Textarea:** pase \`rows\` en \`useTableCellInput\`; se renderiza un textarea y la fila puede crecer en altura. Cerrar con \`Ctrl+Enter\` o \`Cmd+Enter\`.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
@@ -2875,27 +2965,28 @@ export const TableCellInput: Story = {
           name: 'María',
           comment: 'Inversión inicial para el proyecto Q4',
           notes:
-            'Revisar detalles adicionales con el equipo de finanzas antes de aprobar el presupuesto completo.'
+            'Revisar detalles adicionales con el equipo de finanzas antes de aprobar el presupuesto completo.',
         },
         { name: 'Juan', comment: '', notes: '' },
         {
           name: 'Ana',
           comment: 'Gastos de marketing',
-          notes: 'Incluir campaña de redes sociales y publicidad digital para el próximo trimestre.'
-        }
-      ])
+          notes:
+            'Incluir campaña de redes sociales y publicidad digital para el próximo trimestre.',
+        },
+      ]);
       const { cellOptions } = useTableCellInput(tableData, {
         label: 'Detalle',
         placeholder: 'Opcional',
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
       const { cellOptions: notesCellOptions } = useTableCellInput(tableData, {
         label: 'Notas',
         placeholder: 'Agregar notas adicionales...',
         rows: 3,
-        useRowIndex: true
-      })
-      return { tableData, cellOptions, notesCellOptions }
+        useRowIndex: true,
+      });
+      return { tableData, cellOptions, notesCellOptions };
     },
     template: `
     <g-config-provider>
@@ -2922,9 +3013,9 @@ export const TableCellInput: Story = {
           input-label="Notas"
         />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const CustomCellEdit: Story = {
   name: 'Celda personalizada con GCellEdit',
@@ -2941,20 +3032,35 @@ export const CustomCellEdit: Story = {
 - \`#view="{ toggle }"\` — Contenido en modo solo lectura. Click o Enter/Espacio entra en edición.
 - \`#edit="{ close }"\` — Contenido en modo edición. Llame \`close()\` para cerrar (p. ej. en \`@keydown.enter\` y \`@blur\` del input). No es obligatorio poner \`autofocus\` en el input: el componente intenta enfocar el primer input/textarea/select al abrir.
 
-**Datos:** cada fila debe tener una propiedad booleana para el estado de edición (aquí \`isEditing\`).`
-      }
-    }
+**Datos:** cada fila debe tener una propiedad booleana para el estado de edición (aquí \`isEditing\`).`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider, GCellEdit, GInput },
     setup() {
       const tableData = ref([
-        { name: 'Producto A', color: '#ff0000', customValue: 'Valor 1', isEditing: false },
-        { name: 'Producto B', color: '#00ff00', customValue: 'Valor 2', isEditing: false },
-        { name: 'Producto C', color: '#0000ff', customValue: 'Valor 3', isEditing: false }
-      ])
+        {
+          name: 'Producto A',
+          color: '#ff0000',
+          customValue: 'Valor 1',
+          isEditing: false,
+        },
+        {
+          name: 'Producto B',
+          color: '#00ff00',
+          customValue: 'Valor 2',
+          isEditing: false,
+        },
+        {
+          name: 'Producto C',
+          color: '#0000ff',
+          customValue: 'Valor 3',
+          isEditing: false,
+        },
+      ]);
 
-      return { tableData }
+      return { tableData };
     },
     template: `
     <g-config-provider>
@@ -2994,9 +3100,9 @@ export const CustomCellEdit: Story = {
         
         <g-table-column prop="color" label="Otro Campo" />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 /** Casos de uso: expansión configurable (expand-colspan, expand-direction). */
 
@@ -3007,9 +3113,9 @@ export const TableCellExpandRight: Story = {
       description: {
         story: `**Cuándo usar:** cuando la celda editable está a la izquierda o en el centro y quiere que el overlay ocupe más espacio hacia la derecha (p. ej. comentarios largos).
 
-**Qué demuestra:** \`expand-direction="right"\` (por defecto) y \`expand-colspan="3"\`: al editar, el overlay abarca la celda actual y 2 columnas más a la derecha. El overlay no se desplaza (\`leftOffset\` = 0). Configure \`expandColspan\` en \`useTableCellInput\` o \`expand-colspan\` en \`GTableColumn\`.`
-      }
-    }
+**Qué demuestra:** \`expand-direction="right"\` (por defecto) y \`expand-colspan="3"\`: al editar, el overlay abarca la celda actual y 2 columnas más a la derecha. El overlay no se desplaza (\`leftOffset\` = 0). Configure \`expandColspan\` en \`useTableCellInput\` o \`expand-colspan\` en \`GTableColumn\`.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
@@ -3017,15 +3123,19 @@ export const TableCellExpandRight: Story = {
       const tableData = ref([
         { name: 'A', comment: 'Texto corto', extra: 'Col extra' },
         { name: 'B', comment: '', extra: '' },
-        { name: 'C', comment: 'Otro comentario largo para ver expansión', extra: '' }
-      ])
+        {
+          name: 'C',
+          comment: 'Otro comentario largo para ver expansión',
+          extra: '',
+        },
+      ]);
       const { cellOptions } = useTableCellInput(tableData, {
         placeholder: 'Editar...',
         useRowIndex: true,
         expandColspan: 3,
-        expandDirection: 'right'
-      })
-      return { tableData, cellOptions }
+        expandDirection: 'right',
+      });
+      return { tableData, cellOptions };
     },
     template: `
     <g-config-provider>
@@ -3043,9 +3153,9 @@ export const TableCellExpandRight: Story = {
         <g-table-column prop="extra" label="Col 4" width="120" />
         <g-table-column prop="extra" label="Col 5" width="120" />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableCellExpandLeft: Story = {
   name: 'Expansión hacia la izquierda (expand-direction="left")',
@@ -3054,9 +3164,9 @@ export const TableCellExpandLeft: Story = {
       description: {
         story: `**Cuándo usar:** cuando la celda editable está a la derecha o es una de las últimas columnas y quiere que el overlay crezca hacia la izquierda (evitar que se salga por la derecha).
 
-**Qué demuestra:** \`expand-direction="left"\` y \`expand-colspan="2"\`: al editar, el overlay abarca la columna anterior y la actual; se desplaza a la izquierda (\`leftOffset\` > 0). Configure \`expandDirection: 'left'\` y \`expandColspan\` en \`useTableCellInput\` o las props equivalentes en \`GTableColumn\`.`
-      }
-    }
+**Qué demuestra:** \`expand-direction="left"\` y \`expand-colspan="2"\`: al editar, el overlay abarca la columna anterior y la actual; se desplaza a la izquierda (\`leftOffset\` > 0). Configure \`expandDirection: 'left'\` y \`expandColspan\` en \`useTableCellInput\` o las props equivalentes en \`GTableColumn\`.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
@@ -3064,15 +3174,15 @@ export const TableCellExpandLeft: Story = {
       const tableData = ref([
         { name: 'A', comment: 'Texto', notes: 'Notas' },
         { name: 'B', comment: '', notes: '' },
-        { name: 'C', comment: 'Ver expansión a la izquierda', notes: '' }
-      ])
+        { name: 'C', comment: 'Ver expansión a la izquierda', notes: '' },
+      ]);
       const { cellOptions } = useTableCellInput(tableData, {
         placeholder: 'Editar...',
         useRowIndex: true,
         expandColspan: 2,
-        expandDirection: 'left'
-      })
-      return { tableData, cellOptions }
+        expandDirection: 'left',
+      });
+      return { tableData, cellOptions };
     },
     template: `
     <g-config-provider>
@@ -3089,9 +3199,9 @@ export const TableCellExpandLeft: Story = {
         />
         <g-table-column prop="name" label="Col 4" width="120" />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableCellExpandLastColumn: Story = {
   name: 'Última columna editable (siempre expande a la izquierda)',
@@ -3100,9 +3210,9 @@ export const TableCellExpandLastColumn: Story = {
       description: {
         story: `**Cuándo usar:** tabla donde la última columna es editable (p. ej. notas, comentarios). El componente fuerza expansión a la izquierda para no salirse del borde derecho.
 
-**Qué demuestra:** cuando la celda editable es la **última columna**, el overlay siempre expande hacia la **izquierda**; no hace falta indicar \`expand-direction\` en este caso. Combine con \`expand-colspan\` si quiere abarcar más de una columna.`
-      }
-    }
+**Qué demuestra:** cuando la celda editable es la **última columna**, el overlay siempre expande hacia la **izquierda**; no hace falta indicar \`expand-direction\` en este caso. Combine con \`expand-colspan\` si quiere abarcar más de una columna.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
@@ -3110,21 +3220,21 @@ export const TableCellExpandLastColumn: Story = {
       const tableData = ref([
         { name: 'María', status: 'active', notes: 'Revisar presupuesto Q4' },
         { name: 'Juan', status: 'pending', notes: '' },
-        { name: 'Ana', status: 'inactive', notes: 'Seguimiento con cliente' }
-      ])
+        { name: 'Ana', status: 'inactive', notes: 'Seguimiento con cliente' },
+      ]);
       const { cellOptions: statusCellOptions } = useTableCellSelect(tableData, {
         options: [
           { value: 'active', title: 'Activo' },
           { value: 'pending', title: 'Pendiente' },
-          { value: 'inactive', title: 'Inactivo' }
+          { value: 'inactive', title: 'Inactivo' },
         ],
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
       const { cellOptions: notesCellOptions } = useTableCellInput(tableData, {
         placeholder: 'Notas (última columna)...',
-        useRowIndex: true
-      })
-      return { tableData, statusCellOptions, notesCellOptions }
+        useRowIndex: true,
+      });
+      return { tableData, statusCellOptions, notesCellOptions };
     },
     template: `
     <g-config-provider>
@@ -3144,9 +3254,9 @@ export const TableCellExpandLastColumn: Story = {
           :cell-options="notesCellOptions"
         />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableCellExpandAllCases: Story = {
   name: 'Todos los casos de expansión en una tabla',
@@ -3155,9 +3265,9 @@ export const TableCellExpandAllCases: Story = {
       description: {
         story: `**Cuándo usar:** referencia rápida de los tres comportamientos de expansión en una sola tabla.
 
-**Qué demuestra:** **Col 3** — \`expand-direction="right"\` y \`expand-colspan="3"\` (overlay a la derecha). **Col 5** — \`expand-direction="left"\` y \`expand-colspan="2"\` (overlay a la izquierda). **Col 7** — última columna; siempre expande a la izquierda sin configurar \`expand-direction\`.`
-      }
-    }
+**Qué demuestra:** **Col 3** — \`expand-direction="right"\` y \`expand-colspan="3"\` (overlay a la derecha). **Col 5** — \`expand-direction="left"\` y \`expand-colspan="2"\` (overlay a la izquierda). **Col 7** — última columna; siempre expande a la izquierda sin configurar \`expand-direction\`.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
@@ -3171,7 +3281,7 @@ export const TableCellExpandAllCases: Story = {
           d: 'D1',
           commentLeft: 'Expand left 2',
           f: 'F1',
-          lastCol: 'Última col'
+          lastCol: 'Última col',
         },
         {
           id: 2,
@@ -3181,7 +3291,7 @@ export const TableCellExpandAllCases: Story = {
           d: 'D2',
           commentLeft: '',
           f: 'F2',
-          lastCol: ''
+          lastCol: '',
         },
         {
           id: 3,
@@ -3191,26 +3301,26 @@ export const TableCellExpandAllCases: Story = {
           d: 'D3',
           commentLeft: 'Overlay a la izquierda',
           f: 'F3',
-          lastCol: 'Siempre left'
-        }
-      ])
+          lastCol: 'Siempre left',
+        },
+      ]);
       const { cellOptions: rightOptions } = useTableCellInput(tableData, {
         placeholder: 'Editar (right 3)...',
         useRowIndex: true,
         expandColspan: 3,
-        expandDirection: 'right'
-      })
+        expandDirection: 'right',
+      });
       const { cellOptions: leftOptions } = useTableCellInput(tableData, {
         placeholder: 'Editar (left 2)...',
         useRowIndex: true,
         expandColspan: 2,
-        expandDirection: 'left'
-      })
+        expandDirection: 'left',
+      });
       const { cellOptions: lastOptions } = useTableCellInput(tableData, {
         placeholder: 'Última col...',
-        useRowIndex: true
-      })
-      return { tableData, rightOptions, leftOptions, lastOptions }
+        useRowIndex: true,
+      });
+      return { tableData, rightOptions, leftOptions, lastOptions };
     },
     template: `
     <g-config-provider>
@@ -3242,9 +3352,9 @@ export const TableCellExpandAllCases: Story = {
           :cell-options="lastOptions"
         />
       </g-table>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableCellValidation: Story = {
   name: 'Celda con validación (rules)',
@@ -3307,9 +3417,9 @@ const { cellOptions: emailCellOptions, validation } = useTableCellInput(tableDat
 // Limpiar validación programáticamente
 const clearAllErrors = () => validation?.clearAllValidation()
 </script>
-\`\`\``
-      }
-    }
+\`\`\``,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider, GButton },
@@ -3321,43 +3431,63 @@ const clearAllErrors = () => validation?.clearAllValidation()
           name: 'María García',
           email: 'maria@example.com',
           age: '28',
-          website: 'https://maria.dev'
+          website: 'https://maria.dev',
         },
-        { id: 3, name: 'Carlos López', email: 'carlos-invalid', age: '150', website: 'not-a-url' },
-        { id: 4, name: 'Ana Martínez', email: '', age: '', website: '' }
-      ])
-
-      const { cellOptions: emailCellOptions, validation: emailValidation } = useTableCellInput(
-        tableData,
         {
+          id: 3,
+          name: 'Carlos López',
+          email: 'carlos-invalid',
+          age: '150',
+          website: 'not-a-url',
+        },
+        { id: 4, name: 'Ana Martínez', email: '', age: '', website: '' },
+      ]);
+
+      const { cellOptions: emailCellOptions, validation: emailValidation } =
+        useTableCellInput(tableData, {
           label: 'Email',
           placeholder: 'correo@ejemplo.com',
           emptyActionText: 'Agregar email',
           rules: [
-            { required: true, message: 'El email es requerido', trigger: 'blur' },
-            { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
+            {
+              required: true,
+              message: 'El email es requerido',
+              trigger: 'blur',
+            },
+            {
+              type: 'email',
+              message: 'Ingresa un email válido',
+              trigger: 'blur',
+            },
           ],
           useRowIndex: true,
           onValidationFailed: (errors, row, prop, index) => {
-            console.log('Email validación fallida:', { errors, row, prop, index })
-          }
-        }
-      )
+            console.log('Email validación fallida:', {
+              errors,
+              row,
+              prop,
+              index,
+            });
+          },
+        });
 
-      const { cellOptions: ageCellOptions, validation: ageValidation } = useTableCellInput(
-        tableData,
-        {
+      const { cellOptions: ageCellOptions, validation: ageValidation } =
+        useTableCellInput(tableData, {
           label: 'Edad',
           placeholder: '18-120',
           emptyActionText: 'Agregar edad',
           type: 'number',
           rules: [
-            { required: true, message: 'La edad es requerida', trigger: 'blur' },
+            {
+              required: true,
+              message: 'La edad es requerida',
+              trigger: 'blur',
+            },
             {
               type: 'number',
               transform: (value: string) => Number(value),
               message: 'Debe ser un número',
-              trigger: 'blur'
+              trigger: 'blur',
             },
             {
               type: 'number',
@@ -3365,39 +3495,40 @@ const clearAllErrors = () => validation?.clearAllValidation()
               min: 18,
               max: 120,
               message: 'La edad debe estar entre 18 y 120',
-              trigger: 'blur'
-            }
+              trigger: 'blur',
+            },
           ],
-          useRowIndex: true
-        }
-      )
+          useRowIndex: true,
+        });
 
-      const { cellOptions: websiteCellOptions, validation: websiteValidation } = useTableCellInput(
-        tableData,
-        {
+      const { cellOptions: websiteCellOptions, validation: websiteValidation } =
+        useTableCellInput(tableData, {
           label: 'Sitio web',
           placeholder: 'https://ejemplo.com',
           emptyActionText: 'Agregar URL',
           rules: [
-            { type: 'url', message: 'Ingresa una URL válida (ej: https://...)', trigger: 'blur' }
+            {
+              type: 'url',
+              message: 'Ingresa una URL válida (ej: https://...)',
+              trigger: 'blur',
+            },
           ],
-          useRowIndex: true
-        }
-      )
+          useRowIndex: true,
+        });
 
       const clearAllValidations = () => {
-        emailValidation?.clearAllValidation()
-        ageValidation?.clearAllValidation()
-        websiteValidation?.clearAllValidation()
-      }
+        emailValidation?.clearAllValidation();
+        ageValidation?.clearAllValidation();
+        websiteValidation?.clearAllValidation();
+      };
 
       return {
         tableData,
         emailCellOptions,
         ageCellOptions,
         websiteCellOptions,
-        clearAllValidations
-      }
+        clearAllValidations,
+      };
     },
     template: `
     <g-config-provider>
@@ -3432,9 +3563,9 @@ const clearAllErrors = () => validation?.clearAllValidation()
         <p><strong>Instrucciones:</strong> Haz click en una celda para editarla. Al salir (blur), se validará el contenido.</p>
         <p>Prueba dejando campos vacíos, ingresando emails inválidos, edades fuera de rango, o URLs mal formadas.</p>
       </div>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableCellPreventCloseOnError: Story = {
   name: 'Celda con preventCloseOnError',
@@ -3478,18 +3609,29 @@ const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
   useRowIndex: true
 })
 </script>
-\`\`\``
-      }
-    }
+\`\`\``,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
     setup() {
       const tableData = ref([
         { id: 1, name: 'Juan Pérez', email: '', username: '' },
-        { id: 2, name: 'María García', email: 'marianombreextensoperomuyextensodemasiadodeletras@example.com', username: 'maria99' },
-        { id: 3, name: 'Carlos López', email: 'carlos-invalid', username: 'ab!' }
-      ])
+        {
+          id: 2,
+          name: 'María García',
+          email:
+            'marianombreextensoperomuyextensodemasiadodeletras@example.com',
+          username: 'maria99',
+        },
+        {
+          id: 3,
+          name: 'Carlos López',
+          email: 'carlos-invalid',
+          username: 'ab!',
+        },
+      ]);
 
       const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
         label: 'Email',
@@ -3497,46 +3639,57 @@ const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
         emptyActionText: 'Agregar email',
         rules: [
           { required: true, message: 'El email es requerido', trigger: 'blur' },
-          { type: 'email', message: 'Ingresa un email válido', trigger: 'blur' }
-        ],
-        preventCloseOnError: true,
-        useRowIndex: true
-      })
-
-      const takenUsernames = ['admin', 'root', 'superuser']
-
-      const { cellOptions: usernameCellOptions } = useTableCellInput(tableData, {
-        label: 'Usuario',
-        placeholder: 'mínimo 4 caracteres, solo letras y números',
-        emptyActionText: 'Agregar usuario',
-        rules: [
-          { required: true, message: 'El usuario es requerido', trigger: 'change' },
-          { min: 4, message: 'Mínimo 4 caracteres', trigger: 'change' },
           {
-            pattern: /^[a-zA-Z0-9]+$/,
-            message: 'Solo letras y números',
-            trigger: 'change'
+            type: 'email',
+            message: 'Ingresa un email válido',
+            trigger: 'blur',
           },
-          {
-            asyncValidator: (_rule: unknown, value: unknown) => {
-              return new Promise<void>((resolve, reject) => {
-                setTimeout(() => {
-                  if (takenUsernames.includes(String(value))) {
-                    reject(new Error(`El usuario "${value}" ya está en uso`))
-                  } else {
-                    resolve()
-                  }
-                }, 500)
-              })
-            },
-            trigger: 'blur'
-          }
         ],
         preventCloseOnError: true,
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
 
-      return { tableData, emailCellOptions, usernameCellOptions }
+      const takenUsernames = ['admin', 'root', 'superuser'];
+
+      const { cellOptions: usernameCellOptions } = useTableCellInput(
+        tableData,
+        {
+          label: 'Usuario',
+          placeholder: 'mínimo 4 caracteres, solo letras y números',
+          emptyActionText: 'Agregar usuario',
+          rules: [
+            {
+              required: true,
+              message: 'El usuario es requerido',
+              trigger: 'change',
+            },
+            { min: 4, message: 'Mínimo 4 caracteres', trigger: 'change' },
+            {
+              pattern: /^[a-zA-Z0-9]+$/,
+              message: 'Solo letras y números',
+              trigger: 'change',
+            },
+            {
+              asyncValidator: (_rule: unknown, value: unknown) => {
+                return new Promise<void>((resolve, reject) => {
+                  setTimeout(() => {
+                    if (takenUsernames.includes(String(value))) {
+                      reject(new Error(`El usuario "${value}" ya está en uso`));
+                    } else {
+                      resolve();
+                    }
+                  }, 500);
+                });
+              },
+              trigger: 'blur',
+            },
+          ],
+          preventCloseOnError: true,
+          useRowIndex: true,
+        },
+      );
+
+      return { tableData, emailCellOptions, usernameCellOptions };
     },
     template: `
     <g-config-provider>
@@ -3561,9 +3714,9 @@ const { cellOptions: emailCellOptions } = useTableCellInput(tableData, {
         <p><strong>Email</strong> — valida al salir (blur): la celda no cierra hasta que el valor sea válido.</p>
         <p><strong>Usuario</strong> — valida mientras escribe (change) con asyncValidator (500 ms de delay). Prueba con <code>admin</code>, <code>root</code> o <code>superuser</code> para ver el error de usuario en uso. El spinner aparece mientras se ejecuta la validación asíncrona.</p>
       </div>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const TableCellEditEvents: Story = {
   name: 'Eventos de celdas editables',
@@ -3581,65 +3734,78 @@ export const TableCellEditEvents: Story = {
 | \`cell-edit-change\` | El valor de la celda cambió (input o select) | \`(row, column, newValue, oldValue)\` |
 | \`cell-edit-validate\` | Terminó la validación de la celda (solo si hay reglas) | \`(row, column, result)\` con \`result.valid\` y \`result.message\` |
 
-Útil para sincronizar estado, analytics o validación externa. En esta historia se registran los últimos eventos en el panel derecho.`
-      }
-    }
+Útil para sincronizar estado, analytics o validación externa. En esta historia se registran los últimos eventos en el panel derecho.`,
+      },
+    },
   },
   render: () => ({
     components: { GTable, GTableColumn, GConfigProvider },
     setup() {
       const tableData = ref([
         { id: 1, name: 'Tom', status: 'active', note: '' },
-        { id: 2, name: 'Jane', status: 'inactive', note: '' }
-      ])
-      const eventsLog = ref<Array<{ event: string; payload: string }>>([])
-      const maxLog = 12
+        { id: 2, name: 'Jane', status: 'inactive', note: '' },
+      ]);
+      const eventsLog = ref<Array<{ event: string; payload: string }>>([]);
+      const maxLog = 12;
 
       const pushLog = (event: string, ...args: unknown[]) => {
         const payload = args
-          .map((a) =>
+          .map(a =>
             typeof a === 'object' && a !== null && 'property' in a
               ? `column.${(a as { property?: string }).property}`
-              : String(a)
+              : String(a),
           )
-          .join(', ')
-        eventsLog.value = [{ event, payload }, ...eventsLog.value].slice(0, maxLog)
-      }
+          .join(', ');
+        eventsLog.value = [{ event, payload }, ...eventsLog.value].slice(
+          0,
+          maxLog,
+        );
+      };
 
       const onCellEditOpen = (row: unknown, column: unknown) => {
-        pushLog('cell-edit-open', row, column)
-      }
+        pushLog('cell-edit-open', row, column);
+      };
       const onCellEditClose = (row: unknown, column: unknown) => {
-        pushLog('cell-edit-close', row, column)
-      }
+        pushLog('cell-edit-close', row, column);
+      };
       const onCellEditChange = (
         row: unknown,
         column: unknown,
         newVal: unknown,
-        oldVal: unknown
+        oldVal: unknown,
       ) => {
-        pushLog('cell-edit-change', row, column, String(oldVal) + ' -> ' + String(newVal))
-      }
+        pushLog(
+          'cell-edit-change',
+          row,
+          column,
+          String(oldVal) + ' -> ' + String(newVal),
+        );
+      };
       const onCellEditValidate = (
         row: unknown,
         column: unknown,
-        result: { valid: boolean; message: string }
+        result: { valid: boolean; message: string },
       ) => {
-        pushLog('cell-edit-validate', row, column, result.valid ? 'valid' : result.message)
-      }
+        pushLog(
+          'cell-edit-validate',
+          row,
+          column,
+          result.valid ? 'valid' : result.message,
+        );
+      };
 
       const statusOptions = [
         { value: 'active', title: 'Activo' },
-        { value: 'inactive', title: 'Inactivo' }
-      ]
+        { value: 'inactive', title: 'Inactivo' },
+      ];
       const { cellOptions: statusCellOptions } = useTableCellSelect(tableData, {
         options: statusOptions,
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
       const { cellOptions: noteCellOptions } = useTableCellInput(tableData, {
         placeholder: 'Nota',
-        useRowIndex: true
-      })
+        useRowIndex: true,
+      });
 
       return {
         tableData,
@@ -3649,8 +3815,8 @@ export const TableCellEditEvents: Story = {
         onCellEditChange,
         onCellEditValidate,
         statusCellOptions,
-        noteCellOptions
-      }
+        noteCellOptions,
+      };
     },
     template: `
     <g-config-provider>
@@ -3692,6 +3858,6 @@ export const TableCellEditEvents: Story = {
           </ul>
         </div>
       </div>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};

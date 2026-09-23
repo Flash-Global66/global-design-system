@@ -1,11 +1,11 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import { ref } from 'vue'
+import { StoryFn, Meta } from '@storybook/vue3';
+import { ref } from 'vue';
 
 // COMPONENTS
-import { GDialog } from '@flash-global66/g-dialog/index.ts'
-import { GButton } from '@flash-global66/g-button/index.ts'
-import { GConfigProvider } from '../components/config-provider'
-import { version } from '../components/dialog/package.json'
+import { GDialog } from '@flash-global66/g-dialog/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
+import { GConfigProvider } from '../components/config-provider';
+import { version } from '../components/dialog/package.json';
 
 export default {
   title: 'Data/Dialog',
@@ -15,22 +15,22 @@ export default {
       control: 'boolean',
       description: 'Controla la visibilidad del dialog',
       table: {
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     title: {
       control: 'text',
       description: 'Título del dialog',
       table: {
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     width: {
       control: 'text',
       description: "Ancho del dialog. Requiere size-mode='fixed'.",
       table: {
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     sizeMode: {
       control: 'select',
@@ -40,92 +40,92 @@ export default {
       - fixed: usa width prop sin max-width
       - adaptive: se adapta al contenido con restricciones min/max`,
       table: {
-        defaultValue: { summary: 'default' }
-      }
+        defaultValue: { summary: 'default' },
+      },
     },
     draggable: {
       control: 'boolean',
       description: 'Permite arrastrar el dialog. No compatible con fullscreen',
       table: {
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     fullscreen: {
       control: 'boolean',
       description: 'El dialog ocupa toda la pantalla',
       table: {
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     showClose: {
       control: 'boolean',
       description: 'Mostrar botón de cerrar',
       table: {
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     alignCenter: {
       control: 'boolean',
       description: 'Alinear el dialog horizontal y verticalmente',
       table: {
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     appendToBody: {
       control: 'boolean',
       description: 'Añadir el dialog directamente al body del documento',
       table: {
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     headerClass: {
       control: 'text',
       description: 'Clases CSS personalizadas para el header',
       table: {
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     bodyClass: {
       control: 'text',
       description: 'Clases CSS personalizadas para el body',
       table: {
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     footerClass: {
       control: 'text',
       description: 'Clases CSS personalizadas para el footer',
       table: {
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     ariaLevel: {
       control: 'text',
       description: 'Nivel de encabezado ARIA para el título',
       table: {
-        defaultValue: { summary: '2' }
-      }
+        defaultValue: { summary: '2' },
+      },
     },
     closeOnClickModal: {
       control: 'boolean',
       description: 'Si el dialog se cierra al hacer clic en el overlay',
       table: {
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     closeOnPressEscape: {
       control: 'boolean',
       description: 'Si el dialog se cierra al presionar ESC',
       table: {
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     destroyOnClose: {
       control: 'boolean',
       description: 'Destruir el contenido del dialog cuando se cierra',
       table: {
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     footerButtons: {
       control: 'object',
@@ -137,74 +137,76 @@ export default {
         defaultValue: { summary: '[]' },
         type: {
           summary:
-            "Array<{ text: string, onClick: () => void, variant: 'primary' | 'secondary' | 'tertiary' }>"
-        }
-      }
+            "Array<{ text: string, onClick: () => void, variant: 'primary' | 'secondary' | 'tertiary' }>",
+        },
+      },
     },
     'onUpdate:modelValue': {
       description: 'Se emite al actualizar la visibilidad del dialog',
       table: {
         category: 'Eventos',
-        type: { summary: '(value: boolean) => void' }
-      }
+        type: { summary: '(value: boolean) => void' },
+      },
     },
     onOpen: {
       description: 'Se emite cuando el dialog se abre',
       table: {
         category: 'Eventos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     onOpened: {
-      description: 'Se emite cuando termina la animación de apertura del dialog',
+      description:
+        'Se emite cuando termina la animación de apertura del dialog',
       table: {
         category: 'Eventos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     onClose: {
       description: 'Se emite cuando el dialog se cierra',
       table: {
         category: 'Eventos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     onClosed: {
       description: 'Se emite cuando termina la animación de cierre del dialog',
       table: {
         category: 'Eventos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     // Slots
     default: {
       description: 'Contenido principal del dialog',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     header: {
       description: 'Contenido personalizado para el encabezado del dialog',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     footer: {
       description: 'Contenido personalizado para el pie del dialog',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     image: {
-      description: 'Slot para mostrar una imagen en la parte superior del dialog',
+      description:
+        'Slot para mostrar una imagen en la parte superior del dialog',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
-      }
-    }
+        type: { summary: 'slot' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -298,19 +300,19 @@ const buttons = [
 - Con 3 botones: Se muestran 2 botones en la primera fila y 1 botón centrado debajo
 - Con 2 botones: Se muestran uno encima del otro en columna
 - Con 1 botón: Ocupa todo el ancho disponible
-      `
-      }
-    }
-  }
-} as Meta<typeof GDialog>
+      `,
+      },
+    },
+  },
+} as Meta<typeof GDialog>;
 
-const BasicTemplate: StoryFn<typeof GDialog> = (args) => ({
+const BasicTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const dialogVisible = ref(false)
+    const dialogVisible = ref(false);
     const handleClose = () => {
-      dialogVisible.value = false
-    }
+      dialogVisible.value = false;
+    };
 
     const processFooterButtons = () => {
       if (!args.footerButtons || args.footerButtons.length === 0) {
@@ -318,30 +320,30 @@ const BasicTemplate: StoryFn<typeof GDialog> = (args) => ({
           {
             text: 'Aceptar',
             onClick: handleClose,
-            variant: 'primary'
+            variant: 'primary',
           },
           {
             text: 'Cancelar',
             onClick: () => (dialogVisible.value = false),
-            variant: 'secondary'
-          }
-        ]
+            variant: 'secondary',
+          },
+        ];
       }
 
-      return args.footerButtons.map((button) => ({
+      return args.footerButtons.map(button => ({
         ...button,
         onClick: () => {
-          dialogVisible.value = false
-        }
-      }))
-    }
+          dialogVisible.value = false;
+        },
+      }));
+    };
 
     return {
       args,
       dialogVisible,
       handleClose,
-      processFooterButtons
-    }
+      processFooterButtons,
+    };
   },
   template: `
     <g-config-provider>
@@ -356,10 +358,10 @@ const BasicTemplate: StoryFn<typeof GDialog> = (args) => ({
         <p>Este es un dialog básico con contenido de texto simple.</p>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const Basic = BasicTemplate.bind({})
+export const Basic = BasicTemplate.bind({});
 Basic.args = {
   title: 'Dialog Básico',
   showClose: true,
@@ -367,19 +369,19 @@ Basic.args = {
     {
       text: 'Aceptar',
       onClick: () => {},
-      variant: 'primary'
+      variant: 'primary',
     },
     {
       text: 'Cancelar',
       onClick: () => {},
-      variant: 'secondary'
-    }
-  ]
-}
+      variant: 'secondary',
+    },
+  ],
+};
 Basic.parameters = {
   docs: {
     description: {
-      story: 'Dialog básico con contenido de texto y dos botones de acción.'
+      story: 'Dialog básico con contenido de texto y dos botones de acción.',
     },
     source: {
       code: `
@@ -413,23 +415,23 @@ const handleClose = () => {
 };
 </script>`,
       language: 'html',
-      type: 'auto'
-    }
-  }
-}
+      type: 'auto',
+    },
+  },
+};
 
-const ImageDialogTemplate: StoryFn<typeof GDialog> = (args) => ({
+const ImageDialogTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const dialogVisible = ref(false)
+    const dialogVisible = ref(false);
     const handleClose = () => {
-      dialogVisible.value = false
-    }
+      dialogVisible.value = false;
+    };
     return {
       args,
       dialogVisible,
-      handleClose
-    }
+      handleClose,
+    };
   },
   template: `
     <g-config-provider>
@@ -459,18 +461,19 @@ const ImageDialogTemplate: StoryFn<typeof GDialog> = (args) => ({
         </template>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const WithImage = ImageDialogTemplate.bind({})
+export const WithImage = ImageDialogTemplate.bind({});
 WithImage.args = {
   showClose: true,
-  sizeMode: 'default'
-}
+  sizeMode: 'default',
+};
 WithImage.parameters = {
   docs: {
     description: {
-      story: 'Dialog con imagen y botones configurados mediante la prop footerButtons.'
+      story:
+        'Dialog con imagen y botones configurados mediante la prop footerButtons.',
     },
     source: {
       code: `
@@ -510,19 +513,19 @@ const handleClose = () => {
 const handleConfirm = () => {
   dialogVisible.value = false;
 };
-</script>`
-    }
-  }
-}
+</script>`,
+    },
+  },
+};
 
-const NoCloseButtonTemplate: StoryFn<typeof GDialog> = (args) => ({
+const NoCloseButtonTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const dialogVisible = ref(false)
+    const dialogVisible = ref(false);
     const handleClose = () => {
-      dialogVisible.value = false
-    }
-    return { args, dialogVisible, handleClose }
+      dialogVisible.value = false;
+    };
+    return { args, dialogVisible, handleClose };
   },
   template: `
     <g-config-provider>
@@ -543,19 +546,19 @@ const NoCloseButtonTemplate: StoryFn<typeof GDialog> = (args) => ({
         </template>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const NoCloseButton = NoCloseButtonTemplate.bind({})
+export const NoCloseButton = NoCloseButtonTemplate.bind({});
 NoCloseButton.args = {
   title: 'Mensaje Importante',
   showClose: false,
-  sizeMode: 'default'
-}
+  sizeMode: 'default',
+};
 NoCloseButton.parameters = {
   docs: {
     description: {
-      story: 'Dialog sin botón de cerrar, con texto y un solo botón.'
+      story: 'Dialog sin botón de cerrar, con texto y un solo botón.',
     },
     source: {
       code: `
@@ -582,19 +585,19 @@ const handleClose = () => {
 };
 </script>`,
       language: 'html',
-      type: 'auto'
-    }
-  }
-}
+      type: 'auto',
+    },
+  },
+};
 
-const CustomWidthTemplate: StoryFn<typeof GDialog> = (args) => ({
+const CustomWidthTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const dialogVisible = ref(false)
+    const dialogVisible = ref(false);
     const handleClose = () => {
-      dialogVisible.value = false
-    }
-    return { args, dialogVisible, handleClose }
+      dialogVisible.value = false;
+    };
+    return { args, dialogVisible, handleClose };
   },
   template: `
     <g-config-provider>
@@ -617,20 +620,21 @@ const CustomWidthTemplate: StoryFn<typeof GDialog> = (args) => ({
         </template>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const CustomWidth = CustomWidthTemplate.bind({})
+export const CustomWidth = CustomWidthTemplate.bind({});
 CustomWidth.args = {
   title: 'Dialog con Ancho Personalizado',
   showClose: true,
   width: '800',
-  sizeMode: 'fixed'
-}
+  sizeMode: 'fixed',
+};
 CustomWidth.parameters = {
   docs: {
     description: {
-      story: "Dialog con ancho personalizado definido a 800px. Requiere size-mode='fixed'"
+      story:
+        "Dialog con ancho personalizado definido a 800px. Requiere size-mode='fixed'",
     },
     source: {
       code: `
@@ -660,19 +664,19 @@ const handleClose = () => {
 };
 </script>`,
       language: 'html',
-      type: 'auto'
-    }
-  }
-}
+      type: 'auto',
+    },
+  },
+};
 
-const LargeImageTemplate: StoryFn<typeof GDialog> = (args) => ({
+const LargeImageTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const dialogVisible = ref(false)
+    const dialogVisible = ref(false);
     const handleClose = () => {
-      dialogVisible.value = false
-    }
-    return { args, dialogVisible, handleClose }
+      dialogVisible.value = false;
+    };
+    return { args, dialogVisible, handleClose };
   },
   template: `
     <g-config-provider>
@@ -700,19 +704,20 @@ const LargeImageTemplate: StoryFn<typeof GDialog> = (args) => ({
         </template>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const WithLargeImage = LargeImageTemplate.bind({})
+export const WithLargeImage = LargeImageTemplate.bind({});
 WithLargeImage.args = {
   title: 'Dialog Adaptable',
   showClose: true,
-  sizeMode: 'adaptive'
-}
+  sizeMode: 'adaptive',
+};
 WithLargeImage.parameters = {
   docs: {
     description: {
-      story: 'Dialog que se adapta al contenido, útil para imágenes grandes o contenido variable.'
+      story:
+        'Dialog que se adapta al contenido, útil para imágenes grandes o contenido variable.',
     },
     source: {
       code: `
@@ -746,19 +751,19 @@ const handleClose = () => {
 };
 </script>`,
       language: 'html',
-      type: 'auto'
-    }
-  }
-}
+      type: 'auto',
+    },
+  },
+};
 
-const TwoButtonsTemplate: StoryFn<typeof GDialog> = (args) => ({
+const TwoButtonsTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const dialogVisible = ref(false)
+    const dialogVisible = ref(false);
     const handleClose = () => {
-      dialogVisible.value = false
-    }
-    return { args, dialogVisible, handleClose }
+      dialogVisible.value = false;
+    };
+    return { args, dialogVisible, handleClose };
   },
   template: `
     <g-config-provider>
@@ -785,18 +790,18 @@ const TwoButtonsTemplate: StoryFn<typeof GDialog> = (args) => ({
         <p>Este dialog muestra dos botones.</p>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const TwoButtonsStacked = TwoButtonsTemplate.bind({})
+export const TwoButtonsStacked = TwoButtonsTemplate.bind({});
 TwoButtonsStacked.args = {
   title: 'Dialog con Botones',
-  showClose: true
-}
+  showClose: true,
+};
 TwoButtonsStacked.parameters = {
   docs: {
     description: {
-      story: 'Dialog con dos botones.'
+      story: 'Dialog con dos botones.',
     },
     source: {
       code: `
@@ -829,24 +834,24 @@ const handleClose = () => {
 };
 </script>`,
       language: 'html',
-      type: 'auto'
-    }
-  }
-}
+      type: 'auto',
+    },
+  },
+};
 
-const ThreeButtonsTemplate: StoryFn<typeof GDialog> = (args) => ({
+const ThreeButtonsTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const dialogVisible = ref(false)
+    const dialogVisible = ref(false);
     const handleClose = () => {
-      dialogVisible.value = false
-    }
+      dialogVisible.value = false;
+    };
 
     return {
       args,
       dialogVisible,
-      handleClose
-    }
+      handleClose,
+    };
   },
   template: `
     <g-config-provider>
@@ -878,19 +883,19 @@ const ThreeButtonsTemplate: StoryFn<typeof GDialog> = (args) => ({
         <p>Este dialog muestra tres botones con distribución especial: dos en la primera fila y uno centrado abajo.</p>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const ThreeButtonsLayout = ThreeButtonsTemplate.bind({})
+export const ThreeButtonsLayout = ThreeButtonsTemplate.bind({});
 ThreeButtonsLayout.args = {
   title: 'Dialog con Tres Botones',
-  showClose: true
-}
+  showClose: true,
+};
 ThreeButtonsLayout.parameters = {
   docs: {
     description: {
       story:
-        'Dialog con tres botones: dos en la primera fila y uno centrado abajo. En móviles, todos los botones se muestran en columna.'
+        'Dialog con tres botones: dos en la primera fila y uno centrado abajo. En móviles, todos los botones se muestran en columna.',
     },
     source: {
       code: `
@@ -930,29 +935,29 @@ const handleClose = () => {
 };
 </script>`,
       language: 'html',
-      type: 'auto'
-    }
-  }
-}
+      type: 'auto',
+    },
+  },
+};
 
-const SizeModeComparisonTemplate: StoryFn<typeof GDialog> = (args) => ({
+const SizeModeComparisonTemplate: StoryFn<typeof GDialog> = args => ({
   components: { GDialog, GConfigProvider, GButton },
   setup() {
-    const defaultDialogVisible = ref(false)
-    const fixedDialogVisible = ref(false)
-    const adaptiveDialogVisible = ref(false)
+    const defaultDialogVisible = ref(false);
+    const fixedDialogVisible = ref(false);
+    const adaptiveDialogVisible = ref(false);
 
     const closeDefaultDialog = () => {
-      defaultDialogVisible.value = false
-    }
+      defaultDialogVisible.value = false;
+    };
 
     const closeFixedDialog = () => {
-      fixedDialogVisible.value = false
-    }
+      fixedDialogVisible.value = false;
+    };
 
     const closeAdaptiveDialog = () => {
-      adaptiveDialogVisible.value = false
-    }
+      adaptiveDialogVisible.value = false;
+    };
 
     return {
       args,
@@ -961,8 +966,8 @@ const SizeModeComparisonTemplate: StoryFn<typeof GDialog> = (args) => ({
       adaptiveDialogVisible,
       closeDefaultDialog,
       closeFixedDialog,
-      closeAdaptiveDialog
-    }
+      closeAdaptiveDialog,
+    };
   },
   template: `
     <g-config-provider>
@@ -1025,17 +1030,18 @@ const SizeModeComparisonTemplate: StoryFn<typeof GDialog> = (args) => ({
         <p>Este dialog utiliza el modo <strong>adaptive</strong>. Se adapta automáticamente al contenido, respetando un tamaño mínimo y máximo.</p>
       </g-dialog>
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const SizeModeComparison = SizeModeComparisonTemplate.bind({})
+export const SizeModeComparison = SizeModeComparisonTemplate.bind({});
 SizeModeComparison.args = {
-  showClose: true
-}
+  showClose: true,
+};
 SizeModeComparison.parameters = {
   docs: {
     description: {
-      story: 'Comparativa de los tres modos de tamaño disponibles: default, fixed y adaptive.'
+      story:
+        'Comparativa de los tres modos de tamaño disponibles: default, fixed y adaptive.',
     },
     source: {
       code: `
@@ -1082,7 +1088,7 @@ SizeModeComparison.parameters = {
   <p>Este dialog utiliza el modo adaptive que se adapta al contenido.</p>
 </g-dialog>`,
       language: 'html',
-      type: 'auto'
-    }
-  }
-}
+      type: 'auto',
+    },
+  },
+};

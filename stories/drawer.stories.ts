@@ -1,27 +1,27 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { ref } from "vue";
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { ref } from 'vue';
 
 // COMPONENTS
-import { GDrawer, DrawerInstance } from "@flash-global66/g-drawer/index.ts";
-import { GButton } from "@flash-global66/g-button/index.ts";
+import { GDrawer } from '@flash-global66/g-drawer/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
 
 // CONFIG
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
-import { FooterButton } from "@flash-global66/g-dialog/index.ts";
-import { GTag } from "@flash-global66/g-tag/index.ts";
-import { GRadioGroup } from "@flash-global66/g-radio/index.ts";
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
+import { FooterButton } from '@flash-global66/g-dialog/index.ts';
+import { GTag } from '@flash-global66/g-tag/index.ts';
+import { GRadioGroup } from '@flash-global66/g-radio/index.ts';
 
 import {
   version,
   peerDependencies,
-} from "@flash-global66/g-drawer/package.json";
+} from '@flash-global66/g-drawer/package.json';
 import {
   generatePeerDepsList,
   generatePeerDepsInstalls,
-} from "../helper/documentation-stories";
+} from '../helper/documentation-stories';
 
 const meta: Meta = {
-  title: "Feedback/Drawer",
+  title: 'Feedback/Drawer',
   component: GDrawer,
   parameters: {
     docs: {
@@ -115,86 +115,86 @@ const drawer = ref(false);
   argTypes: {
     // 1. Estado y Configuración Principal
     modelValue: {
-      name: "v-model",
-      description: "Estado de visibilidad del drawer",
-      control: "boolean",
+      name: 'v-model',
+      description: 'Estado de visibilidad del drawer',
+      control: 'boolean',
       table: {
-        category: "Estado y Configuración Principal",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Estado y Configuración Principal',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     lockScroll: {
-      name: "lock-scroll",
-      description: "Bloquear scroll del body",
-      control: "boolean",
+      name: 'lock-scroll',
+      description: 'Bloquear scroll del body',
+      control: 'boolean',
       table: {
-        category: "Estado y Configuración Principal",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Estado y Configuración Principal',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     destroyOnClose: {
-      name: "destroy-on-close",
-      description: "Destruir al cerrar",
-      control: "boolean",
+      name: 'destroy-on-close',
+      description: 'Destruir al cerrar',
+      control: 'boolean',
       table: {
-        category: "Estado y Configuración Principal",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Estado y Configuración Principal',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
 
     // 2. Apariencia y Estilo
     title: {
-      name: "title",
-      description: "Título del drawer",
-      control: "text",
+      name: 'title',
+      description: 'Título del drawer',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     showClose: {
-      name: "show-close",
-      description: "Mostrar botón de cierre (X) en el header",
-      control: "boolean",
+      name: 'show-close',
+      description: 'Mostrar botón de cierre (X) en el header',
+      control: 'boolean',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     withHeader: {
-      name: "with-header",
-      description: "Mostrar el header completo del drawer",
-      control: "boolean",
+      name: 'with-header',
+      description: 'Mostrar el header completo del drawer',
+      control: 'boolean',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     description: {
-      name: "description",
-      description: "Descripción del drawer",
-      control: "text",
+      name: 'description',
+      description: 'Descripción del drawer',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     footerButtons: {
-      name: "footer-buttons",
-      control: "object",
+      name: 'footer-buttons',
+      control: 'object',
       description: `Array de configuración para los botones del footer (máximo 3 botones)`,
       table: {
-        category: "Apariencia y Estilo",
-        defaultValue: { summary: "[]" },
+        category: 'Apariencia y Estilo',
+        defaultValue: { summary: '[]' },
         type: {
-          summary: "FooterButton[]",
+          summary: 'FooterButton[]',
           detail: `{
   text: string,
   onClick: () => void,
@@ -204,284 +204,284 @@ const drawer = ref(false);
       },
     },
     size: {
-      name: "size",
+      name: 'size',
       description:
-        "Ancho del drawer.\n- En pantallas grandes (≥992px) se usa este valor.\n- Para pantallas medianas (576px ≥ && ≥ 991px): 400px por defecto\n- Para pantallas pequeñas (575px≤): 100% por defecto \n si quieres que sea responsivo, usa la prop `responsive-size`",
-      control: "text",
+        'Ancho del drawer.\n- En pantallas grandes (≥992px) se usa este valor.\n- Para pantallas medianas (576px ≥ && ≥ 991px): 400px por defecto\n- Para pantallas pequeñas (575px≤): 100% por defecto \n si quieres que sea responsivo, usa la prop `responsive-size`',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "string | number" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'string | number' },
         defaultValue: { summary: "'400px'" },
       },
     },
     responsiveSize: {
-      name: "responsive-size",
-      description: "Configura tamaños diferentes según el ancho de la pantalla",
-      control: "object",
+      name: 'responsive-size',
+      description: 'Configura tamaños diferentes según el ancho de la pantalla',
+      control: 'object',
       table: {
-        category: "Apariencia y Estilo",
+        category: 'Apariencia y Estilo',
         type: {
-          summary: "ResponsiveSizeDrawer | boolean",
+          summary: 'ResponsiveSizeDrawer | boolean',
           detail: `{
             sm?: string; // Tamaño para pantallas pequeñas (576px - 767px)
             md?: string; // Tamaño para pantallas medianas (768px - 991px)
             lg?: string; // Tamaño para pantallas grandes (992px+)
           }`,
         },
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
     direction: {
-      name: "direction",
-      description: "Dirección de apertura del drawer",
-      control: "select",
-      options: ["ltr", "rtl", "ttb", "btt"],
+      name: 'direction',
+      description: 'Dirección de apertura del drawer',
+      control: 'select',
+      options: ['ltr', 'rtl', 'ttb', 'btt'],
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'string' },
         defaultValue: { summary: "'rtl'" },
       },
     },
     modalFade: {
-      name: "modalFade",
-      description: "Efecto de desvanecimiento del modal",
-      control: "boolean",
+      name: 'modalFade',
+      description: 'Efecto de desvanecimiento del modal',
+      control: 'boolean',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     modal: {
-      description: "Debe mostrar la capa de sombra",
-      control: "boolean",
+      description: 'Debe mostrar la capa de sombra',
+      control: 'boolean',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     zIndex: {
-      description: "Z-index del drawer",
-      control: "number",
+      description: 'Z-index del drawer',
+      control: 'number',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "number" },
-        defaultValue: { summary: "" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'number' },
+        defaultValue: { summary: '' },
       },
     },
     modalClass: {
-      name: "modal-class",
-      description: "Clase del modal",
-      control: "text",
+      name: 'modal-class',
+      description: 'Clase del modal',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     bodyClass: {
-      name: "body-class",
-      description: "Clase del body",
-      control: "text",
+      name: 'body-class',
+      description: 'Clase del body',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     footerClass: {
-      name: "footer-class",
-      description: "Clase del footer",
-      control: "text",
+      name: 'footer-class',
+      description: 'Clase del footer',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilo",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilo',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
 
     // 3. Comportamiento y Temporización
     closeOnClickModal: {
-      name: "close-on-click-modal",
-      description: "Cerrar al hacer clic en el modal",
-      control: "boolean",
+      name: 'close-on-click-modal',
+      description: 'Cerrar al hacer clic en el modal',
+      control: 'boolean',
       table: {
-        category: "Comportamiento y Temporización",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Comportamiento y Temporización',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     closeOnPressEscape: {
-      name: "close-on-press-escape",
-      description: "Cerrar al presionar ESC",
-      control: "boolean",
+      name: 'close-on-press-escape',
+      description: 'Cerrar al presionar ESC',
+      control: 'boolean',
       table: {
-        category: "Comportamiento y Temporización",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Comportamiento y Temporización',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     beforeClose: {
-      name: "before-close",
-      description: "Detiene el cierre si se establece",
+      name: 'before-close',
+      description: 'Detiene el cierre si se establece',
       control: false,
       table: {
-        category: "Comportamiento y Temporización",
-        type: { summary: "() => void" },
+        category: 'Comportamiento y Temporización',
+        type: { summary: '() => void' },
       },
     },
     openDelay: {
-      name: "open-delay",
-      description: "Retraso en abrir el drawer",
-      control: "number",
+      name: 'open-delay',
+      description: 'Retraso en abrir el drawer',
+      control: 'number',
       table: {
-        category: "Comportamiento y Temporización",
-        type: { summary: "number" },
-        defaultValue: { summary: "0" },
+        category: 'Comportamiento y Temporización',
+        type: { summary: 'number' },
+        defaultValue: { summary: '0' },
       },
     },
     closeDelay: {
-      name: "close-delay",
-      description: "Retraso en cerrar el drawer",
-      control: "number",
+      name: 'close-delay',
+      description: 'Retraso en cerrar el drawer',
+      control: 'number',
       table: {
-        category: "Comportamiento y Temporización",
-        type: { summary: "number" },
-        defaultValue: { summary: "0" },
+        category: 'Comportamiento y Temporización',
+        type: { summary: 'number' },
+        defaultValue: { summary: '0' },
       },
     },
 
     // 4. Ubicación en el DOM
     appendToBody: {
-      name: "append-to-body",
-      description: "Si el drawer debe ser anexado al body",
-      control: "boolean",
+      name: 'append-to-body',
+      description: 'Si el drawer debe ser anexado al body',
+      control: 'boolean',
       table: {
-        category: "Ubicación en el DOM",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Ubicación en el DOM',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     appendTo: {
-      name: "append-to",
-      description: "Elemento al que se anexa el drawer",
-      control: "text",
+      name: 'append-to',
+      description: 'Elemento al que se anexa el drawer',
+      control: 'text',
       table: {
-        category: "Ubicación en el DOM",
-        type: { summary: "string" },
-        defaultValue: { summary: "body" },
+        category: 'Ubicación en el DOM',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'body' },
       },
     },
 
     // 5. Eventos y Métodos
     open: {
-      name: "open",
-      description: "Se activa cuando se abre el drawer",
+      name: 'open',
+      description: 'Se activa cuando se abre el drawer',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     opened: {
-      description: "Se activa al finalizar la animación de apertura",
+      description: 'Se activa al finalizar la animación de apertura',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     close: {
-      name: "close",
-      description: "Se activa cuando se cierra el drawer",
+      name: 'close',
+      description: 'Se activa cuando se cierra el drawer',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     closed: {
-      description: "Se activa al finalizar la animación de cierre",
+      description: 'Se activa al finalizar la animación de cierre',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     openAutoFocus: {
-      name: "open-auto-focus",
-      description: "Enfoca contenido después de abrir",
+      name: 'open-auto-focus',
+      description: 'Enfoca contenido después de abrir',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     closeAutoFocus: {
-      name: "close-auto-focus",
-      description: "Enfoca contenido después de cerrar",
+      name: 'close-auto-focus',
+      description: 'Enfoca contenido después de cerrar',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     handleClose: {
-      name: "handle-close",
-      description: "Método para cerrar el drawer",
+      name: 'handle-close',
+      description: 'Método para cerrar el drawer',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     afterEnter: {
-      name: "after-enter",
-      description: "Evento post transición de entrada",
+      name: 'after-enter',
+      description: 'Evento post transición de entrada',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
     afterLeave: {
-      name: "after-leave",
-      description: "Evento post transición de salida",
+      name: 'after-leave',
+      description: 'Evento post transición de salida',
       table: {
-        category: "Eventos y Métodos",
-        type: { summary: "() => void" },
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
       },
     },
 
     // 6. Slots
     default: {
-      description: "Contenido principal del drawer",
+      description: 'Contenido principal del drawer',
       table: {
-        category: "Slots",
-        type: { summary: "Slot" },
+        category: 'Slots',
+        type: { summary: 'Slot' },
       },
       control: false,
     },
     customHeader: {
-      name: "custom-header",
-      description: "Header personalizado",
+      name: 'custom-header',
+      description: 'Header personalizado',
       table: {
-        category: "Slots",
-        type: { summary: "Slot" },
+        category: 'Slots',
+        type: { summary: 'Slot' },
       },
       control: false,
     },
     footer: {
-      description: "Contenido del footer",
+      description: 'Contenido del footer',
       table: {
-        category: "Slots",
-        type: { summary: "Slot" },
+        category: 'Slots',
+        type: { summary: 'Slot' },
       },
       control: false,
     },
   },
   args: {
-    title: "Title",
+    title: 'Title',
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    size: "400px",
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    size: '400px',
     modalFade: true,
-    direction: "rtl",
+    direction: 'rtl',
     appendToBody: true,
-    appendTo: "body",
+    appendTo: 'body',
     lockScroll: true,
     closeOnClickModal: true,
     closeOnPressEscape: true,
@@ -491,15 +491,15 @@ const drawer = ref(false);
     modal: true,
     showClose: true,
     withHeader: true,
-    modalClass: "",
-    bodyClass: "",
-    footerClass: "",
+    modalClass: '',
+    bodyClass: '',
+    footerClass: '',
     zIndex: 10,
     footerButtons: [
       {
-        text: "Guardar",
+        text: 'Guardar',
         onClick: () => {},
-        variant: "primary",
+        variant: 'primary',
       },
     ],
   },
@@ -509,16 +509,16 @@ export default meta;
 type Story = StoryObj;
 
 export const Primary: Story = {
-  name: "Básico",
+  name: 'Básico',
   parameters: {
     docs: {
       description: {
         story:
-          "Ejemplo básico del componente Drawer. Desde los controles puedes probar todas las propiedades disponibles.",
+          'Ejemplo básico del componente Drawer. Desde los controles puedes probar todas las propiedades disponibles.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GDrawer, GConfigProvider, GButton },
     setup() {
       const drawer = ref(false);
@@ -539,7 +539,7 @@ export const Primary: Story = {
 };
 
 export const FooterButtonsTypes: Story = {
-  name: "Botones en footer",
+  name: 'Botones en footer',
   parameters: {
     docs: {
       description: {
@@ -568,19 +568,19 @@ export const FooterButtonsTypes: Story = {
 
       const mapTypesButtons: Record<number, FooterButton> = {
         1: {
-          text: "Guardar",
+          text: 'Guardar',
           onClick: handleClose,
-          variant: "primary",
+          variant: 'primary',
         },
         2: {
-          text: "Cancelar",
+          text: 'Cancelar',
           onClick: handleClose,
-          variant: "secondary",
+          variant: 'secondary',
         },
         3: {
-          text: "Eliminar",
+          text: 'Eliminar',
           onClick: handleClose,
-          variant: "tertiary",
+          variant: 'tertiary',
         },
       };
 
@@ -624,7 +624,7 @@ export const FooterButtonsTypes: Story = {
 };
 
 export const Directions: Story = {
-  name: "Direcciones",
+  name: 'Direcciones',
   parameters: {
     docs: {
       description: {
@@ -639,12 +639,12 @@ export const Directions: Story = {
     components: { GDrawer, GConfigProvider, GButton, GRadioGroup },
     setup() {
       const drawer = ref<boolean>(false);
-      const direction = ref<string>("rtl");
+      const direction = ref<string>('rtl');
       const directions = [
-        { value: "ltr", label: "Izquierda a derecha" },
-        { value: "rtl", label: "Derecha a izquierda" },
-        { value: "ttb", label: "Arriba a abajo" },
-        { value: "btt", label: "Abajo a arriba" },
+        { value: 'ltr', label: 'Izquierda a derecha' },
+        { value: 'rtl', label: 'Derecha a izquierda' },
+        { value: 'ttb', label: 'Arriba a abajo' },
+        { value: 'btt', label: 'Abajo a arriba' },
       ];
 
       return { drawer, directions, direction };
@@ -682,7 +682,7 @@ export const Directions: Story = {
 };
 
 export const CustomHeader: Story = {
-  name: "Header personalizado",
+  name: 'Header personalizado',
   parameters: {
     docs: {
       description: {
@@ -698,8 +698,8 @@ export const CustomHeader: Story = {
     setup() {
       const drawer = ref<boolean>(false);
       const items = Array(12).fill({
-        send: "$100.000,00 CLP",
-        convert: "$87.000,00 CLP",
+        send: '$100.000,00 CLP',
+        convert: '$87.000,00 CLP',
       });
 
       return { drawer, items };
@@ -875,52 +875,53 @@ const handleCloseResponsive = () => {
   responsiveDrawer.value = false;
 };
 </script>
-`, language: 'html'
-      }
-    }
+`,
+        language: 'html',
+      },
+    },
   },
   render: () => ({
     components: { GDrawer, GConfigProvider, GButton },
     setup() {
-      const fixedDrawer = ref<boolean>(false)
-      const responsiveDrawer = ref<boolean>(false)
-      const currentWidth = ref<string | number>('30%')
-      
+      const fixedDrawer = ref<boolean>(false);
+      const responsiveDrawer = ref<boolean>(false);
+      const currentWidth = ref<string | number>('30%');
+
       const widthOptions = [
         { label: 'Pequeño (30%)', value: '30%' },
         { label: 'Medio (50%)', value: '50%' },
         { label: 'Grande (80%)', value: '80%' },
-        { label: 'Fijo (400px)', value: '400px' }
-      ]
-      
+        { label: 'Fijo (400px)', value: '400px' },
+      ];
+
       const openFixedDrawer = (size: string | number) => {
-        currentWidth.value = size
-        fixedDrawer.value = true
-      }
-      
+        currentWidth.value = size;
+        fixedDrawer.value = true;
+      };
+
       const openResponsiveDrawer = () => {
-        responsiveDrawer.value = true
-      }
-      
+        responsiveDrawer.value = true;
+      };
+
       const handleCloseFixed = () => {
-        fixedDrawer.value = false
-      }
-      
+        fixedDrawer.value = false;
+      };
+
       const handleCloseResponsive = () => {
-        responsiveDrawer.value = false
-      }
-      
-      return { 
-        fixedDrawer, 
-        responsiveDrawer, 
-        currentWidth, 
-        widthOptions, 
-        openFixedDrawer, 
-        openResponsiveDrawer, 
-        handleCloseFixed, 
+        responsiveDrawer.value = false;
+      };
+
+      return {
+        fixedDrawer,
+        responsiveDrawer,
+        currentWidth,
+        widthOptions,
+        openFixedDrawer,
+        openResponsiveDrawer,
+        handleCloseFixed,
         handleCloseResponsive,
-        window
-      }
+        window,
+      };
     },
     template: `
       <g-config-provider>
@@ -1036,17 +1037,17 @@ responsiveSize: {
           </div>
         </g-drawer>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const HeaderOptions: Story = {
-  name: "Opciones de Header",
+  name: 'Opciones de Header',
   parameters: {
     docs: {
       description: {
         story:
-          "El componente Drawer ofrece flexibilidad para personalizar el header con las propiedades `showClose` y `withHeader`. Esta historia muestra las distintas combinaciones posibles.",
+          'El componente Drawer ofrece flexibilidad para personalizar el header con las propiedades `showClose` y `withHeader`. Esta historia muestra las distintas combinaciones posibles.',
       },
       source: {
         code: `
@@ -1073,20 +1074,20 @@ export const HeaderOptions: Story = {
   />
 </template>
 `,
-        language: "html",
+        language: 'html',
       },
     },
   },
   render: () => ({
     components: { GDrawer, GConfigProvider, GButton },
     setup() {
-      const selectedOption = ref("default");
+      const selectedOption = ref('default');
       const drawer = ref<boolean>(false);
 
       const options = [
-        { value: "default", label: "Header completo (por defecto)" },
-        { value: "noClose", label: "Sin botón de cierre" },
-        { value: "noHeader", label: "Sin header" },
+        { value: 'default', label: 'Header completo (por defecto)' },
+        { value: 'noClose', label: 'Sin botón de cierre' },
+        { value: 'noHeader', label: 'Sin header' },
       ];
 
       const openDrawer = () => {

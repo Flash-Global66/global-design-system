@@ -1,13 +1,13 @@
 // external imports
-import { ref, computed } from 'vue'
-import { StoryObj } from '@storybook/vue3'
+import { ref, computed } from 'vue';
+import { StoryObj } from '@storybook/vue3';
 
 // components
-import { GPagination } from '@flash-global66/g-pagination/index.ts'
-import { GButton } from '@flash-global66/g-button/index.ts'
+import { GPagination } from '@flash-global66/g-pagination/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
 
 // config provider
-import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts'
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
 
 const meta = {
   title: 'Data/Pagination',
@@ -45,21 +45,22 @@ Este componente requiere:
 import { GPagination } from '@flash-global66/g-pagination'
 import '@flash-global66/g-pagination/styles.scss'
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     // 1. Estado y Control
     currentPage: {
       name: 'current-page / v-model:current-page',
-      description: 'Número de página actual. requiere listener (update:current-page) para cambios',
+      description:
+        'Número de página actual. requiere listener (update:current-page) para cambios',
       control: 'number',
       table: {
         category: 'Estado y Control',
         type: { summary: 'number' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     align: {
       description: 'Alineación del componente',
@@ -68,18 +69,19 @@ import '@flash-global66/g-pagination/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'string' },
-        defaultValue: { summary: 'left' }
-      }
+        defaultValue: { summary: 'left' },
+      },
     },
     pageSize: {
       name: 'page-size / v-model:page-size',
-      description: 'Número de elementos por página. requiere listener (update:current-size) para cambios',
+      description:
+        'Número de elementos por página. requiere listener (update:current-size) para cambios',
       control: 'number',
       table: {
         category: 'Estado y Control',
         type: { summary: 'number' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     disabled: {
       description: 'Deshabilita el componente de paginación',
@@ -87,8 +89,8 @@ import '@flash-global66/g-pagination/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     hideOnSinglePage: {
       name: 'hide-on-single-page',
@@ -97,8 +99,8 @@ import '@flash-global66/g-pagination/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
 
     total: {
@@ -107,70 +109,76 @@ import '@flash-global66/g-pagination/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'number' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     pageCount: {
       name: 'page-count',
-      description: 'Número total de páginas (alternativa a total). Tiene prioridad sobre total si se proporcionan ambos',
+      description:
+        'Número total de páginas (alternativa a total). Tiene prioridad sobre total si se proporcionan ambos',
       control: 'number',
       table: {
         category: 'Estado y Control',
         type: { summary: 'number' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     pagerCount: {
       name: 'pager-count',
-      description: 'Número de botones de página mostrados (debe ser impar entre 5 y 21)',
+      description:
+        'Número de botones de página mostrados (debe ser impar entre 5 y 21)',
       control: { type: 'range', min: 5, max: 21, step: 2 },
       table: {
         category: 'Estado y Control',
         type: { summary: 'number' },
-        defaultValue: { summary: '7' }
-      }
+        defaultValue: { summary: '7' },
+      },
     },
-    
+
     // 4. Eventos
     change: {
-      description: 'Se dispara cuando cambia la página actual o el tamaño de página',
+      description:
+        'Se dispara cuando cambia la página actual o el tamaño de página',
       table: {
         category: 'Eventos',
         type: { summary: 'function' },
-        defaultValue: { summary: '(currentPage: number, pageSize: number) => void' }
-      }
+        defaultValue: {
+          summary: '(currentPage: number, pageSize: number) => void',
+        },
+      },
     },
     'prev-click': {
       description: 'Se dispara cuando se hace clic en el botón anterior',
       table: {
         category: 'Eventos',
         type: { summary: 'function' },
-        defaultValue: { summary: '(currentPage: number) => void' }
-      }
+        defaultValue: { summary: '(currentPage: number) => void' },
+      },
     },
     'next-click': {
       description: 'Se dispara cuando se hace clic en el botón siguiente',
       table: {
         category: 'Eventos',
         type: { summary: 'function' },
-        defaultValue: { summary: '(currentPage: number) => void' }
-      }
+        defaultValue: { summary: '(currentPage: number) => void' },
+      },
     },
     'update:current-page': {
       description: 'Se dispara cuando cambia la página actual (para v-model)',
       table: {
         category: 'Eventos',
         type: { summary: 'function' },
-        defaultValue: { summary: '(currentPage: number) => void' }
-      }
+        defaultValue: { summary: '(currentPage: number) => void' },
+      },
     },
     'update:page-size': {
-      description: 'Se dispara cuando cambia el tamaño de página (para v-model)',
+      description:
+        'Se dispara cuando cambia el tamaño de página (para v-model)',
       table: {
         category: 'Eventos',
         type: { summary: 'function' },
-        defaultValue: { summary: '(pageSize: number) => void' }
-      }
+        defaultValue: { summary: '(pageSize: number) => void' },
+      },
     },
   },
   args: {
@@ -181,66 +189,67 @@ import '@flash-global66/g-pagination/styles.scss'
     hideOnSinglePage: true,
     currentPage: undefined,
     pageSize: undefined,
-  }
-}
-export default meta
-type Story = StoryObj<typeof GPagination>
+  },
+};
+export default meta;
+type Story = StoryObj<typeof GPagination>;
 
 export const Basic: Story = {
   name: 'Básico',
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo básico de paginación con 1000 elementos totales.'
-      }
-    }
+        story: 'Ejemplo básico de paginación con 1000 elementos totales.',
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GPagination, GConfigProvider },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
       <g-config-provider>
         <g-pagination v-bind="args" />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const LargeDataset: Story = {
   name: 'Controlado con v-model',
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo de paginación controlada con v-model, mostrando la página actual.'
-      }
-    }
+        story:
+          'Ejemplo de paginación controlada con v-model, mostrando la página actual.',
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GPagination, GConfigProvider },
     setup() {
-      const currentPage = ref(1)
-      const pageSize = 10
-      const total = 10000
-      
+      const currentPage = ref(1);
+      const pageSize = 10;
+      const total = 10000;
+
       const startItem = computed(() => {
-        return (currentPage.value - 1) * pageSize + 1
-      })
-      
+        return (currentPage.value - 1) * pageSize + 1;
+      });
+
       const endItem = computed(() => {
-        return Math.min(currentPage.value * pageSize, total)
-      })
-      
-      return { 
-        args, 
-        currentPage, 
-        pageSize, 
+        return Math.min(currentPage.value * pageSize, total);
+      });
+
+      return {
+        args,
+        currentPage,
+        pageSize,
         total,
         startItem,
         endItem,
-        totalPages: Math.ceil(total / pageSize)
-      }
+        totalPages: Math.ceil(total / pageSize),
+      };
     },
     template: `
       <g-config-provider>
@@ -261,45 +270,46 @@ export const LargeDataset: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const CardPagination: Story = {
   name: 'Paginación de tarjetas',
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo práctico de paginación aplicada a una colección de tarjetas, donde cada tarjeta muestra su número y la página actual.'
-      }
-    }
+        story:
+          'Ejemplo práctico de paginación aplicada a una colección de tarjetas, donde cada tarjeta muestra su número y la página actual.',
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GPagination, GConfigProvider, GButton },
     setup() {
-      const currentPage = ref(1)
-      const pageSize = ref(6)
-      const total = 30
-      
+      const currentPage = ref(1);
+      const pageSize = ref(6);
+      const total = 30;
+
       // Generar datos para las tarjetas
       const allCards = Array.from({ length: total }, (_, i) => ({
         id: i + 1,
-        content: `Contenido de ejemplo para la tarjeta ${i + 1}`
-      }))
-      
+        content: `Contenido de ejemplo para la tarjeta ${i + 1}`,
+      }));
+
       const visibleCards = computed(() => {
-        const startIndex = (currentPage.value - 1) * pageSize.value
-        return allCards.slice(startIndex, startIndex + pageSize.value)
-      })
-      
-      return { 
-        args, 
-        currentPage, 
-        pageSize, 
-        total, 
+        const startIndex = (currentPage.value - 1) * pageSize.value;
+        return allCards.slice(startIndex, startIndex + pageSize.value);
+      });
+
+      return {
+        args,
+        currentPage,
+        pageSize,
+        total,
         visibleCards,
-        totalPages: Math.ceil(total / pageSize.value)
-      }
+        totalPages: Math.ceil(total / pageSize.value),
+      };
     },
     template: `
       <g-config-provider>
@@ -344,8 +354,6 @@ export const CardPagination: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
-
-
+    `,
+  }),
+};

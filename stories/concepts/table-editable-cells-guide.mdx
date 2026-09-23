@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks'
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Componentes/Tablas/Celdas editables en Table" />
 
@@ -36,14 +36,31 @@ Puedes elegir entre **dos enfoques** según el grado de personalización que nec
   </thead>
   <tbody>
     <tr>
-      <td><strong>Columna con <code>cell-type</code></strong></td>
+      <td>
+        <strong>
+          Columna con <code>cell-type</code>
+        </strong>
+      </td>
       <td>Input o select estándar, sin diseño propio</td>
-      <td><code>cell-type="input"</code> o <code>cell-type="select"</code> + composable + <code>:cell-options</code></td>
+      <td>
+        <code>cell-type="input"</code> o <code>cell-type="select"</code> +
+        composable + <code>:cell-options</code>
+      </td>
     </tr>
     <tr>
-      <td><strong>Columna con <code>GCellEdit</code></strong></td>
-      <td>Vista y edición totalmente personalizadas (varios controles, otro diseño)</td>
-      <td>Slot <code>#default</code> de la columna + componente <code>GCellEdit</code> con slots <code>#view</code> y <code>#edit</code></td>
+      <td>
+        <strong>
+          Columna con <code>GCellEdit</code>
+        </strong>
+      </td>
+      <td>
+        Vista y edición totalmente personalizadas (varios controles, otro
+        diseño)
+      </td>
+      <td>
+        Slot <code>#default</code> de la columna + componente{' '}
+        <code>GCellEdit</code> con slots <code>#view</code> y <code>#edit</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -74,18 +91,22 @@ Cuando la celda solo debe mostrar y editar un valor con un **input** o un **sele
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { GTable, GTableColumn, useTableCellInput } from '@flash-global66/g-table'
+import { ref } from 'vue';
+import {
+  GTable,
+  GTableColumn,
+  useTableCellInput,
+} from '@flash-global66/g-table';
 
 const tableData = ref([
   { name: 'Fila 1', comment: 'Texto inicial' },
-  { name: 'Fila 2', comment: '' }
-])
+  { name: 'Fila 2', comment: '' },
+]);
 
 const { cellOptions } = useTableCellInput(tableData, {
   placeholder: 'Escriba un comentario...',
-  useRowIndex: true
-})
+  useRowIndex: true,
+});
 </script>
 ```
 
@@ -114,24 +135,28 @@ const { cellOptions } = useTableCellInput(tableData, {
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { GTable, GTableColumn, useTableCellSelect } from '@flash-global66/g-table'
+import { ref } from 'vue';
+import {
+  GTable,
+  GTableColumn,
+  useTableCellSelect,
+} from '@flash-global66/g-table';
 
 const tableData = ref([
   { name: 'María', status: 'active' },
-  { name: 'Juan', status: 'pending' }
-])
+  { name: 'Juan', status: 'pending' },
+]);
 
 const statusOptions = [
   { value: 'active', title: 'Activo' },
   { value: 'pending', title: 'Pendiente' },
-  { value: 'inactive', title: 'Inactivo' }
-]
+  { value: 'inactive', title: 'Inactivo' },
+];
 
 const { cellOptions } = useTableCellSelect(tableData, {
   options: statusOptions,
-  useRowIndex: true
-})
+  useRowIndex: true,
+});
 </script>
 ```
 
@@ -232,8 +257,8 @@ Cada fila debe incluir una propiedad que indique si está en modo edición. Por 
 ```ts
 const tableData = ref([
   { name: 'Producto A', miCampo: 'Valor 1', isEditing: false },
-  { name: 'Producto B', miCampo: 'Valor 2', isEditing: false }
-])
+  { name: 'Producto B', miCampo: 'Valor 2', isEditing: false },
+]);
 ```
 
 Al abrir o cerrar la edición, `row.isEditing` se actualiza automáticamente mediante el `v-model` de `GCellEdit`.
@@ -247,7 +272,7 @@ Tanto con `cell-type` como con `GCellEdit` puedes hacer que, al editar, el overl
 - **`expand-colspan`**  
   Número de columnas que abarca el overlay (incluida la actual). Por ejemplo: `2` = celda actual más una columna.
 
-- **`expand-direction`**  
+- **`expand-direction`**
   - `"right"`: el overlay crece hacia la derecha (valor por defecto cuando la columna no es la última).
   - `"left"`: el overlay crece hacia la izquierda (recomendable en las últimas columnas).
 
@@ -269,24 +294,41 @@ La tabla emite estos eventos al usar celdas editables (tanto con `cell-type` com
   </thead>
   <tbody>
     <tr>
-      <td><code>cell-edit-open</code></td>
+      <td>
+        <code>cell-edit-open</code>
+      </td>
       <td>La celda entra en modo edición (clic o foco)</td>
-      <td><code>(row, column)</code></td>
+      <td>
+        <code>(row, column)</code>
+      </td>
     </tr>
     <tr>
-      <td><code>cell-edit-close</code></td>
+      <td>
+        <code>cell-edit-close</code>
+      </td>
       <td>La celda sale de modo edición (blur, Enter o clic fuera)</td>
-      <td><code>(row, column)</code></td>
+      <td>
+        <code>(row, column)</code>
+      </td>
     </tr>
     <tr>
-      <td><code>cell-edit-change</code></td>
+      <td>
+        <code>cell-edit-change</code>
+      </td>
       <td>El valor de la celda cambió (input o select)</td>
-      <td><code>(row, column, newValue, oldValue)</code></td>
+      <td>
+        <code>(row, column, newValue, oldValue)</code>
+      </td>
     </tr>
     <tr>
-      <td><code>cell-edit-validate</code></td>
+      <td>
+        <code>cell-edit-validate</code>
+      </td>
       <td>Finalizó la validación de la celda (solo si hay reglas)</td>
-      <td><code>(row, column, result)</code> con <code>result.valid</code> y <code>result.message</code></td>
+      <td>
+        <code>(row, column, result)</code> con <code>result.valid</code> y{' '}
+        <code>result.message</code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -317,9 +359,9 @@ const { cellOptions } = useTableCellInput(tableData, {
   useRowIndex: true,
   rules: [
     { required: true, message: 'Requerido', trigger: 'blur' },
-    { type: 'email', message: 'Email inválido', trigger: 'blur' }
-  ]
-})
+    { type: 'email', message: 'Email inválido', trigger: 'blur' },
+  ],
+});
 ```
 
 Si defines reglas, al salir de la celda se ejecuta la validación y se emite `cell-edit-validate`. También puedes usar `onValidationFailed` y `onValidationSuccess` en las opciones del composable.

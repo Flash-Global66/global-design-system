@@ -1,5 +1,5 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import { GConfigProvider } from '../components/config-provider'
+import { StoryFn, Meta } from '@storybook/vue3';
+import { GConfigProvider } from '../components/config-provider';
 
 export default {
   title: 'Colores/Semantic',
@@ -81,11 +81,11 @@ export default {
 </div>
 
 > **Nota**: Click en cualquier color copia su nombre semántico al portapapeles. 📋
-        `
-      }
-    }
-  }
-} as Meta
+        `,
+      },
+    },
+  },
+} as Meta;
 
 const Template: StoryFn = () => ({
   components: { GConfigProvider },
@@ -345,14 +345,14 @@ const Template: StoryFn = () => ({
   setup() {
     const handleColorClick = async (color: string) => {
       try {
-        await navigator.clipboard.writeText(color)
+        await navigator.clipboard.writeText(color);
       } catch (err) {
-        console.error('Error al copiar:', err)
+        console.error('Error al copiar:', err);
       }
-    }
+    };
 
-    return { handleColorClick }
-  }
-})
+    return { handleColorClick };
+  },
+});
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});

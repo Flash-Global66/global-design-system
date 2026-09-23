@@ -1,140 +1,140 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
+import type { Meta, StoryObj } from '@storybook/vue3';
 
-import { GScrollbar } from "../components/scrollbar/index.ts";
-import { GConfigProvider } from "../components/config-provider";
+import { GScrollbar } from '../components/scrollbar/index.ts';
+import { GConfigProvider } from '../components/config-provider';
 
 const meta: Meta<typeof GScrollbar> = {
-  title: "Basic/Scrollbar",
+  title: 'Basic/Scrollbar',
   component: GScrollbar,
   parameters: {
     docs: {
       description: {
         component:
-          "Componente personalizado de scrollbar que proporciona una barra de desplazamiento personalizable.",
+          'Componente personalizado de scrollbar que proporciona una barra de desplazamiento personalizable.',
       },
     },
   },
   argTypes: {
     height: {
-      description: "Altura del contenedor del scrollbar",
-      control: "text",
+      description: 'Altura del contenedor del scrollbar',
+      control: 'text',
       table: {
-        type: { summary: "string | number" },
+        type: { summary: 'string | number' },
       },
     },
     maxHeight: {
-      description: "Altura máxima del contenedor del scrollbar",
-      control: "text",
+      description: 'Altura máxima del contenedor del scrollbar',
+      control: 'text',
       table: {
-        type: { summary: "string | number" },
+        type: { summary: 'string | number' },
       },
     },
     native: {
-      description: "Usa la barra de desplazamiento nativa del navegador",
-      control: "boolean",
+      description: 'Usa la barra de desplazamiento nativa del navegador',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     wrapStyle: {
-      description: "Estilos personalizados para el contenedor envolvente",
-      control: "object",
+      description: 'Estilos personalizados para el contenedor envolvente',
+      control: 'object',
       table: {
-        type: { summary: "StyleValue" },
+        type: { summary: 'StyleValue' },
       },
     },
     wrapClass: {
-      description: "Clase personalizada para el contenedor envolvente",
-      control: "text",
+      description: 'Clase personalizada para el contenedor envolvente',
+      control: 'text',
       table: {
-        type: { summary: "string" },
+        type: { summary: 'string' },
       },
     },
     viewClass: {
-      description: "Clase personalizada para la vista del contenido",
-      control: "text",
+      description: 'Clase personalizada para la vista del contenido',
+      control: 'text',
       table: {
-        type: { summary: "string" },
+        type: { summary: 'string' },
       },
     },
     noresize: {
-      description: "No responder a cambios de tamaño del contenedor",
-      control: "boolean",
+      description: 'No responder a cambios de tamaño del contenedor',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     tag: {
-      description: "Elemento HTML usado para el contenedor de la vista",
-      control: "text",
+      description: 'Elemento HTML usado para el contenedor de la vista',
+      control: 'text',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "div" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'div' },
       },
     },
     always: {
-      description: "Mostrar siempre la barra de desplazamiento",
-      control: "boolean",
+      description: 'Mostrar siempre la barra de desplazamiento',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     minSize: {
-      description: "Tamaño mínimo de la barra de desplazamiento",
-      control: "number",
+      description: 'Tamaño mínimo de la barra de desplazamiento',
+      control: 'number',
       table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "20" },
+        type: { summary: 'number' },
+        defaultValue: { summary: '20' },
       },
     },
     role: {
-      description: "Atributo ARIA role",
-      control: "text",
+      description: 'Atributo ARIA role',
+      control: 'text',
       table: {
-        type: { summary: "string" },
+        type: { summary: 'string' },
       },
     },
     ariaLabel: {
-      description: "Etiqueta ARIA para accesibilidad",
-      control: "text",
+      description: 'Etiqueta ARIA para accesibilidad',
+      control: 'text',
       table: {
-        type: { summary: "string" },
+        type: { summary: 'string' },
       },
     },
     ariaOrientation: {
-      description: "Orientación ARIA (horizontal/vertical)",
-      control: "select",
-      options: ["horizontal", "vertical", undefined],
+      description: 'Orientación ARIA (horizontal/vertical)',
+      control: 'select',
+      options: ['horizontal', 'vertical', undefined],
       table: {
-        type: { summary: "string" },
+        type: { summary: 'string' },
       },
     },
     onScroll: {
-      description: "Se emite cuando ocurre el evento de scroll",
+      description: 'Se emite cuando ocurre el evento de scroll',
       table: {
         type: {
-          summary: "{ scrollTop: number, scrollLeft: number }",
+          summary: '{ scrollTop: number, scrollLeft: number }',
         },
-        category: "events",
+        category: 'events',
       },
     },
     default: {
-      description: "Contenido dentro del scrollbar",
+      description: 'Contenido dentro del scrollbar',
       table: {
-        type: { summary: "slot" },
-        category: "slots",
+        type: { summary: 'slot' },
+        category: 'slots',
       },
     },
   },
   args: {
-    height: "",
-    maxHeight: "",
+    height: '',
+    maxHeight: '',
     native: false,
     noresize: false,
-    tag: "div",
+    tag: 'div',
     always: false,
     minSize: 20,
   },
@@ -144,7 +144,7 @@ export default meta;
 type Story = StoryObj<typeof GScrollbar>;
 
 export const Primary: Story = {
-  render: (args) => ({
+  render: args => ({
     components: { GScrollbar, GConfigProvider },
     setup() {
       return { args };
@@ -167,11 +167,11 @@ export const NativeScrollbar: Story = {
     docs: {
       description: {
         story:
-          "Usa la barra de desplazamiento nativa del navegador en lugar de la personalizada.",
+          'Usa la barra de desplazamiento nativa del navegador en lugar de la personalizada.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GScrollbar, GConfigProvider },
     setup() {
       return { args };
@@ -195,11 +195,11 @@ export const HorizontalScroll: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo de scroll horizontal con contenido ancho.",
+        story: 'Ejemplo de scroll horizontal con contenido ancho.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GScrollbar, GConfigProvider },
     setup() {
       return { args };
@@ -224,11 +224,11 @@ export const AlwaysVisible: Story = {
     docs: {
       description: {
         story:
-          "Muestra siempre las barras de desplazamiento incluso cuando no son necesarias.",
+          'Muestra siempre las barras de desplazamiento incluso cuando no son necesarias.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GScrollbar, GConfigProvider },
     setup() {
       return { args };
@@ -252,11 +252,11 @@ export const CustomHeight: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo con altura personalizada usando la prop height.",
+        story: 'Ejemplo con altura personalizada usando la prop height.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GScrollbar, GConfigProvider },
     setup() {
       return { args };
@@ -272,6 +272,6 @@ export const CustomHeight: Story = {
     `,
   }),
   args: {
-    height: "200px",
+    height: '200px',
   },
 };

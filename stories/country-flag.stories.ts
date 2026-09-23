@@ -1,13 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { GCountryFlag, ALL_FLAG_CODES, FLAG_SIZES } from '@flash-global66/g-country-flag/index.ts';
+import {
+  GCountryFlag,
+  ALL_FLAG_CODES,
+  FLAG_SIZES,
+} from '@flash-global66/g-country-flag/index.ts';
 import { GSegmented } from '@flash-global66/g-segmented';
 import { GInput } from '@flash-global66/g-input';
 import { GButton } from '@flash-global66/g-button';
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { GConfigProvider } from '../components/config-provider';
-import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories';
-import { version, peerDependencies } from '@flash-global66/g-country-flag/package.json';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-country-flag/package.json';
 
 const meta: Meta<typeof GCountryFlag> = {
   title: 'Basic/CountryFlag',
@@ -71,9 +81,9 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 1. Coloca el archivo SVG en \`components/country-flag/src/assets/flags/\` con el código ISO en minúsculas (ej: \`co.svg\`)
 2. Añade el código en \`src/constants/country-flag.constants.ts\` dentro de \`COUNTRIES_CODE\` o \`SPECIAL_CODES\`
 3. Ejecuta \`yarn build country-flag\`
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   argTypes: {
     name: {
@@ -84,7 +94,7 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
         category: 'Principal',
         type: { summary: 'FlagCode' },
         defaultValue: { summary: 'CO' },
-      }
+      },
     },
     size: {
       description: 'Tamaño de la bandera',
@@ -94,23 +104,24 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
         category: 'Apariencia',
         type: { summary: 'string' },
         defaultValue: { summary: 'md' },
-      }
+      },
     },
     lazyLoad: {
-      description: 'Activa la carga diferida: la bandera se carga solo cuando entra en el viewport',
+      description:
+        'Activa la carga diferida: la bandera se carga solo cuando entra en el viewport',
       control: 'boolean',
       table: {
         category: 'Comportamiento',
         type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
-      }
-    }
+      },
+    },
   },
   args: {
     name: 'CO',
     size: 'md',
-    lazyLoad: true
-  }
+    lazyLoad: true,
+  },
 } as Meta;
 
 export default meta;
@@ -118,7 +129,7 @@ type Story = StoryObj<typeof GCountryFlag>;
 
 export const Primary: Story = {
   name: 'Uso básico',
-  render: (args) => ({
+  render: args => ({
     components: { GCountryFlag, GConfigProvider },
     setup() {
       return { args };
@@ -129,12 +140,13 @@ export const Primary: Story = {
           <g-country-flag v-bind="args" />
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Uso básico del componente con los valores predeterminados. Permite explorar las props mediante los controles interactivos.'
+        story:
+          'Uso básico del componente con los valores predeterminados. Permite explorar las props mediante los controles interactivos.',
       },
       source: {
         code: `
@@ -146,15 +158,15 @@ export const Primary: Story = {
 import { GCountryFlag } from '@flash-global66/g-country-flag';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const Sizes: Story = {
   name: 'Tamaños disponibles',
-  render: (args) => ({
+  render: args => ({
     components: { GCountryFlag, GConfigProvider },
     setup() {
       const sizes = Object.keys(FLAG_SIZES);
@@ -174,12 +186,13 @@ export const Sizes: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'El componente ofrece siete tamaños predefinidos (xs a 3xl) para adaptarse a distintos contextos de uso.'
+        story:
+          'El componente ofrece siete tamaños predefinidos (xs a 3xl) para adaptarse a distintos contextos de uso.',
       },
       source: {
         code: `
@@ -210,10 +223,10 @@ export const Sizes: Story = {
 import { GCountryFlag } from '@flash-global66/g-country-flag';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const Gallery: Story = {
@@ -221,7 +234,8 @@ export const Gallery: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Galería completa de todas las banderas disponibles en el sistema. Haz clic en cualquier bandera para copiar su código.'
+        story:
+          'Galería completa de todas las banderas disponibles en el sistema. Haz clic en cualquier bandera para copiar su código.',
       },
       source: {
         code: `
@@ -260,12 +274,19 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
 }
 </style>
 `,
-        language: 'html'
-      }
-    }
+        language: 'html',
+      },
+    },
   },
   render: () => ({
-    components: { GCountryFlag, GConfigProvider, GSegmented, GInput, GButton, GIconFont },
+    components: {
+      GCountryFlag,
+      GConfigProvider,
+      GSegmented,
+      GInput,
+      GButton,
+      GIconFont,
+    },
     setup() {
       const selectedSize = ref('md');
       const searchTerm = ref('');
@@ -273,13 +294,15 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
 
       const sizeOptions = Object.keys(FLAG_SIZES).map(size => ({
         label: size.toUpperCase(),
-        value: size
+        value: size,
       }));
 
       const filteredFlags = ref<string[]>([...ALL_FLAG_CODES]);
 
       const gridMinWidth = computed(() => {
-        const size = parseInt(FLAG_SIZES[selectedSize.value as keyof typeof FLAG_SIZES]);
+        const size = parseInt(
+          FLAG_SIZES[selectedSize.value as keyof typeof FLAG_SIZES],
+        );
         return `${size + 32}px`;
       });
 
@@ -289,7 +312,9 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
           return;
         }
         const term = searchTerm.value.toUpperCase().trim();
-        filteredFlags.value = ALL_FLAG_CODES.filter(code => code.includes(term));
+        filteredFlags.value = ALL_FLAG_CODES.filter(code =>
+          code.includes(term),
+        );
       };
 
       const clearSearch = () => {
@@ -298,10 +323,13 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
       };
 
       const copyFlagCode = (code: string) => {
-        navigator.clipboard.writeText(code)
+        navigator.clipboard
+          .writeText(code)
           .then(() => {
             copiedCode.value = code;
-            setTimeout(() => { copiedCode.value = null; }, 1500);
+            setTimeout(() => {
+              copiedCode.value = null;
+            }, 1500);
           })
           .catch(() => {});
       };
@@ -324,7 +352,8 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
       });
 
       onUnmounted(() => {
-        if (styleElement.parentNode) styleElement.parentNode.removeChild(styleElement);
+        if (styleElement.parentNode)
+          styleElement.parentNode.removeChild(styleElement);
       });
 
       return {
@@ -338,7 +367,7 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
         copyFlagCode,
         filteredFlags,
         updateFilteredFlags,
-        copiedCode
+        copiedCode,
       };
     },
     template: `
@@ -408,8 +437,8 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
           </p>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const ErrorHandling: Story = {
@@ -417,7 +446,8 @@ export const ErrorHandling: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Demostración de cómo el componente maneja los errores cuando se pasa un código de bandera inválido.'
+        story:
+          'Demostración de cómo el componente maneja los errores cuando se pasa un código de bandera inválido.',
       },
       source: {
         code: `
@@ -428,9 +458,9 @@ export const ErrorHandling: Story = {
 import { GCountryFlag } from '@flash-global66/g-country-flag';
 </script>
 `,
-        language: 'html'
-      }
-    }
+        language: 'html',
+      },
+    },
   },
   render: () => ({
     components: { GCountryFlag, GConfigProvider },
@@ -465,6 +495,6 @@ import { GCountryFlag } from '@flash-global66/g-country-flag';
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };

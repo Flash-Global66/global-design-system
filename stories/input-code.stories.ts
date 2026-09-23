@@ -18,10 +18,10 @@ export default {
       },
       defaultValue: false,
     },
-  }
+  },
 } as Meta<typeof GInputCode>;
 
-const Template: StoryFn<typeof GInputCode> = (args, selected) => {
+const Template: StoryFn<typeof GInputCode> = args => {
   return {
     components: { GInputCode, GConfigProvider },
     setup() {
@@ -31,8 +31,8 @@ const Template: StoryFn<typeof GInputCode> = (args, selected) => {
       const status = computed(() => {
         if (!!args.textError) return 'Error';
         if (codeCompleted.value) return 'Completo';
-        return 'Incompleto'
-      })
+        return 'Incompleto';
+      });
 
       function onChangeCode(code: string) {
         codeOTP.value = code;
@@ -43,7 +43,6 @@ const Template: StoryFn<typeof GInputCode> = (args, selected) => {
         codeCompleted.value = e;
         action('complete');
       }
-
 
       return {
         codeCompleted,
@@ -66,7 +65,7 @@ const Template: StoryFn<typeof GInputCode> = (args, selected) => {
         </div>
       </g-config-provider>
     `,
-  }
+  };
 };
 
 export const Default = Template.bind({});

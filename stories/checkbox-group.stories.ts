@@ -1,30 +1,30 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { ref } from "vue";
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { ref } from 'vue';
 
 // COMPONENTS
 import {
   GCheckbox,
   GCheckboxGroup,
   CheckboxGroupProps,
-} from "@flash-global66/g-checkbox/index.ts";
+} from '@flash-global66/g-checkbox/index.ts';
 
 // CONFIG
-import { GConfigProvider } from "../components/config-provider";
+import { GConfigProvider } from '../components/config-provider';
 
 // VERSION
 import {
   version,
   peerDependencies,
-} from "@flash-global66/g-checkbox/package.json";
+} from '@flash-global66/g-checkbox/package.json';
 
 // HELPERS
 import {
   generatePeerDepsList,
   generatePeerDepsInstalls,
-} from "../helper/documentation-stories";
+} from '../helper/documentation-stories';
 
 const meta: Meta<typeof GCheckboxGroup> = {
-  title: "Form/Checkbox/Group",
+  title: 'Form/Checkbox/Group',
   component: GCheckboxGroup,
   parameters: {
     docs: {
@@ -122,22 +122,22 @@ const checkboxGroupProps = {
   argTypes: {
     // Estados
     disabled: {
-      description: "Deshabilita todo el grupo",
-      control: "boolean",
+      description: 'Deshabilita todo el grupo',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "Estados",
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Estados',
       },
     },
 
     // Principales
     options: {
-      description: "Array de opciones para construir el grupo de checkboxes",
-      control: "object",
+      description: 'Array de opciones para construir el grupo de checkboxes',
+      control: 'object',
       table: {
         type: {
-          summary: "Option[]",
+          summary: 'Option[]',
           detail: `
             type Option = {
   value: CheckboxGroupValueType
@@ -147,130 +147,130 @@ const checkboxGroupProps = {
 }
           `,
         },
-        defaultValue: { summary: "[]" },
-        category: "Principales",
+        defaultValue: { summary: '[]' },
+        category: 'Principales',
       },
     },
     modelValue: {
-      description: "Valores seleccionados (v-model)",
-      control: "object",
+      description: 'Valores seleccionados (v-model)',
+      control: 'object',
       table: {
         type: {
-          summary: "CheckboxGroupValueType",
-          detail: "Array<string | number | boolean>",
+          summary: 'CheckboxGroupValueType',
+          detail: 'Array<string | number | boolean>',
         },
-        defaultValue: { summary: "[]" },
-        category: "Principales",
+        defaultValue: { summary: '[]' },
+        category: 'Principales',
       },
     },
 
     // Validación
     min: {
-      description: "Mínimo de checkboxes seleccionados",
-      control: { type: "number", min: 0 },
+      description: 'Mínimo de checkboxes seleccionados',
+      control: { type: 'number', min: 0 },
       table: {
-        type: { summary: "number" },
-        category: "Validación",
+        type: { summary: 'number' },
+        category: 'Validación',
       },
     },
     max: {
-      description: "Máximo de checkboxes seleccionados",
-      control: { type: "number", min: 1 },
+      description: 'Máximo de checkboxes seleccionados',
+      control: { type: 'number', min: 1 },
       table: {
-        type: { summary: "number" },
-        category: "Validación",
+        type: { summary: 'number' },
+        category: 'Validación',
       },
     },
     validateEvent: {
-      description: "Activa validación de formulario",
-      control: "boolean",
+      description: 'Activa validación de formulario',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
-        category: "Validación",
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+        category: 'Validación',
       },
     },
 
     // Apariencia
     layout: {
-      description: "Diseño del grupo",
-      control: "select",
-      options: ["horizontal", "vertical"],
+      description: 'Diseño del grupo',
+      control: 'select',
+      options: ['horizontal', 'vertical'],
       table: {
-        type: { summary: "layoutType", detail: "'horizontal' | 'vertical'" },
-        defaultValue: { summary: "horizontal" },
-        category: "Apariencia",
+        type: { summary: 'layoutType', detail: "'horizontal' | 'vertical'" },
+        defaultValue: { summary: 'horizontal' },
+        category: 'Apariencia',
       },
     },
     border: {
-      description: "Indica si debe mostrarse el checkbox con borde",
-      control: "boolean",
+      description: 'Indica si debe mostrarse el checkbox con borde',
+      control: 'boolean',
       table: {
-        category: "Apariencia",
-        type: { summary: "boolean" },
+        category: 'Apariencia',
+        type: { summary: 'boolean' },
       },
     },
     invert: {
       description:
-        "Indica si debe mostrarse el checkbox con el label y el check input invertidos",
-      control: "boolean",
+        'Indica si debe mostrarse el checkbox con el label y el check input invertidos',
+      control: 'boolean',
       table: {
-        category: "Apariencia",
-        type: { summary: "boolean" },
+        category: 'Apariencia',
+        type: { summary: 'boolean' },
       },
     },
 
     // Configuración avanzada
     tag: {
-      description: "Elemento HTML contenedor",
-      control: "select",
-      options: ["div", "span", "fieldset"],
+      description: 'Elemento HTML contenedor',
+      control: 'select',
+      options: ['div', 'span', 'fieldset'],
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "div" },
-        category: "Apariencia",
+        type: { summary: 'string' },
+        defaultValue: { summary: 'div' },
+        category: 'Apariencia',
       },
     },
 
     // Accesibilidad
     ariaLabel: {
-      description: "Etiqueta ARIA para el grupo",
-      control: "text",
+      description: 'Etiqueta ARIA para el grupo',
+      control: 'text',
       table: {
-        type: { summary: "string" },
-        category: "Accesibilidad",
+        type: { summary: 'string' },
+        category: 'Accesibilidad',
       },
     },
 
     // Eventos
-    "onUpdate:modelValue": {
-      description: "Se emite al actualizar los valores",
+    'onUpdate:modelValue': {
+      description: 'Se emite al actualizar los valores',
       table: {
-        category: "Eventos",
+        category: 'Eventos',
         type: {
-          summary: "CheckboxGroupValueType",
-          detail: "Array<string | number>",
+          summary: 'CheckboxGroupValueType',
+          detail: 'Array<string | number>',
         },
       },
     },
     onChange: {
-      description: "Se emite al cambiar la selección",
+      description: 'Se emite al cambiar la selección',
       table: {
-        category: "Eventos",
+        category: 'Eventos',
         type: {
-          summary: "CheckboxGroupValueType",
-          detail: "Array<string | number>",
+          summary: 'CheckboxGroupValueType',
+          detail: 'Array<string | number>',
         },
       },
     },
 
     // Slots
     default: {
-      description: "Slot para contenido personalizado de cada checkbox",
+      description: 'Slot para contenido personalizado de cada checkbox',
       table: {
-        category: "Slots",
+        category: 'Slots',
         type: {
-          summary: "slot",
+          summary: 'slot',
         },
       },
     },
@@ -279,12 +279,12 @@ const checkboxGroupProps = {
     options: [],
     modelValue: [],
     disabled: false,
-    layout: "horizontal",
-    tag: "div",
+    layout: 'horizontal',
+    tag: 'div',
     min: undefined,
     max: undefined,
     validateEvent: true,
-    ariaLabel: "Grupo de opciones",
+    ariaLabel: 'Grupo de opciones',
   } as Partial<CheckboxGroupProps>,
 };
 export default meta;
@@ -292,16 +292,16 @@ export default meta;
 type Story = StoryObj<typeof GCheckboxGroup>;
 
 const Template: Story = {
-  render: (args) => ({
+  render: args => ({
     components: { GCheckboxGroup, GCheckbox, GConfigProvider },
     setup() {
       const selectedValues = ref([]);
       const options = [
-        { value: "Value A", label: "Importaciones" },
-        { value: "Value B", label: "Inversiones" },
-        { value: "Value C", label: "Exportaciones", checked: true },
-        { value: "Value D", label: "Transferencias", disabled: true },
-        { value: "Value E", label: "Otros" },
+        { value: 'Value A', label: 'Importaciones' },
+        { value: 'Value B', label: 'Inversiones' },
+        { value: 'Value C', label: 'Exportaciones', checked: true },
+        { value: 'Value D', label: 'Transferencias', disabled: true },
+        { value: 'Value E', label: 'Otros' },
       ];
       return { args, selectedValues, options };
     },
@@ -327,7 +327,7 @@ export const Basic: Story = {
     docs: {
       description: {
         story:
-          "Grupo de checkboxes básico. Muestra la funcionalidad principal de selección múltiple con valores en array. Los checkboxes se muestran en línea por defecto.",
+          'Grupo de checkboxes básico. Muestra la funcionalidad principal de selección múltiple con valores en array. Los checkboxes se muestran en línea por defecto.',
       },
     },
   },
@@ -337,13 +337,13 @@ export const Disabled: Story = {
   ...Template,
   args: {
     disabled: true,
-    modelValue: ["Value A"],
+    modelValue: ['Value A'],
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Grupo completo deshabilitado. Todos los checkboxes están no interactivos. Útil para estados donde la selección no está disponible temporalmente.",
+          'Grupo completo deshabilitado. Todos los checkboxes están no interactivos. Útil para estados donde la selección no está disponible temporalmente.',
       },
     },
   },
@@ -359,7 +359,7 @@ export const WithLimits: Story = {
     docs: {
       description: {
         story:
-          "Grupo con restricciones de selección. Permite definir mínimo (1) y máximo (2) de opciones seleccionables. Muestra validación automática al exceder los límites.",
+          'Grupo con restricciones de selección. Permite definir mínimo (1) y máximo (2) de opciones seleccionables. Muestra validación automática al exceder los límites.',
       },
     },
   },
@@ -368,13 +368,13 @@ export const WithLimits: Story = {
 export const VerticalLayout: Story = {
   ...Template,
   args: {
-    layout: "vertical",
+    layout: 'vertical',
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Checkboxes apilados verticalmente. Controlado mediante la propiedad `layout: vertical`. Ideal para formularios con espacio vertical limitado.",
+          'Checkboxes apilados verticalmente. Controlado mediante la propiedad `layout: vertical`. Ideal para formularios con espacio vertical limitado.',
       },
     },
   },
@@ -383,14 +383,14 @@ export const VerticalLayout: Story = {
 export const InvertedStyle: Story = {
   ...Template,
   args: {
-    layout: "vertical",
+    layout: 'vertical',
     invert: true,
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Ejemplo del componente con checkboxes con elementos invertidos, controlados mediante la propiedad `invert: true`.",
+          'Ejemplo del componente con checkboxes con elementos invertidos, controlados mediante la propiedad `invert: true`.',
       },
     },
   },
@@ -399,13 +399,14 @@ export const InvertedStyle: Story = {
 export const BorderedStyle: Story = {
   ...Template,
   args: {
-    layout: "vertical",
+    layout: 'vertical',
     border: true,
   },
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo del componente con checkboxes con bordes, controlados mediante la propiedad `border: true`.",
+        story:
+          'Ejemplo del componente con checkboxes con bordes, controlados mediante la propiedad `border: true`.',
       },
     },
   },
@@ -414,7 +415,7 @@ export const BorderedStyle: Story = {
 export const InvertedBorderedStyle: Story = {
   ...Template,
   args: {
-    layout: "vertical",
+    layout: 'vertical',
     border: true,
     invert: true,
   },
@@ -422,7 +423,7 @@ export const InvertedBorderedStyle: Story = {
     docs: {
       description: {
         story:
-          "Ejemplo del componente con checkboxes con borde y elementos invertidos para mostrar la interacción de las propiedades `border` e `invert`.",
+          'Ejemplo del componente con checkboxes con borde y elementos invertidos para mostrar la interacción de las propiedades `border` e `invert`.',
       },
     },
   },

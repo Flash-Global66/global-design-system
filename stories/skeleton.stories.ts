@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from "@storybook/vue3";
+import { StoryFn, Meta } from '@storybook/vue3';
 import { GSkeleton, GSkeletonItem } from '../components/skeleton';
 import { GConfigProvider } from '../components/config-provider';
 
@@ -26,7 +26,7 @@ export default {
   },
 } as Meta<typeof GSkeleton>;
 
-const Template: StoryFn<typeof GSkeleton> = (args) => ({
+const Template: StoryFn<typeof GSkeleton> = args => ({
   components: { GSkeleton, GConfigProvider, GSkeletonItem },
   template: `
     <g-config-provider>
@@ -73,7 +73,7 @@ Custom.parameters = {
       story: `Global66 B2B UI only provides the most common template, sometimes that could be a problem, so you have a slot named template to do that work. <br /> <br /> Also we have provided different types skeleton unit that you can choose, for more detailed info, please scroll down to the bottom of this page to see the API description. Also, when building your own customized skeleton structure, you should be structuring them as closer to the real DOM as possible, which avoiding the DOM bouncing caused by the height difference.`,
     },
   },
-}
+};
 
 const TemplateBouncing: StoryFn<typeof GSkeleton> = () => ({
   components: { GSkeleton, GConfigProvider, GSkeletonItem },
@@ -91,4 +91,4 @@ Bouncing.parameters = {
       story: `Sometimes API responds very quickly, when that happens, the skeleton just gets rendered to the DOM then it needs to switch back to real DOM, that causes the sudden flashy. To avoid such thing, you can use the \`throttle\` attribute.`,
     },
   },
-}
+};

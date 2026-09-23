@@ -1,13 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { GToast, toast } from "@flash-global66/g-toast/index.ts";
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
-import { GButton } from "@flash-global66/g-button/index.ts";
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { GToast, toast } from '@flash-global66/g-toast/index.ts';
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
 
-import { version, peerDependencies } from "@flash-global66/g-toast/package.json";
-import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories";
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-toast/package.json';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 const meta: Meta = {
-  title: "Feedback/Toast",
+  title: 'Feedback/Toast',
   component: GToast,
   parameters: {
     docs: {
@@ -119,174 +125,181 @@ toast.info('Información importante')
   argTypes: {
     // Props principales
     message: {
-      description: "Contenido del mensaje del toast.",
-      control: "text",
+      description: 'Contenido del mensaje del toast.',
+      control: 'text',
       table: {
-        category: "Props",
-        type: { summary: "string | VNode | (() => VNode)" },
+        category: 'Props',
+        type: { summary: 'string | VNode | (() => VNode)' },
       },
     },
     type: {
-      description: "Tipo de notificación (requerido). Determina el icono y estilo visual.",
-      control: "select",
-      options: ["success", "info", "warning", "error"],
+      description:
+        'Tipo de notificación (requerido). Determina el icono y estilo visual.',
+      control: 'select',
+      options: ['success', 'info', 'warning', 'error'],
       table: {
-        category: "Props",
-        type: { summary: "ToastType" },
+        category: 'Props',
+        type: { summary: 'ToastType' },
       },
     },
     size: {
-      description: "Tamaño del toast. Afecta la altura, texto e iconos.",
-      control: "select",
-      options: ["sm", "md"],
-      defaultValue: "md",
+      description: 'Tamaño del toast. Afecta la altura, texto e iconos.',
+      control: 'select',
+      options: ['sm', 'md'],
+      defaultValue: 'md',
       table: {
-        category: "Props",
-        type: { summary: "ToastSize" },
-        defaultValue: { summary: "md" },
+        category: 'Props',
+        type: { summary: 'ToastSize' },
+        defaultValue: { summary: 'md' },
       },
     },
     duration: {
-      description: "Duración en milisegundos antes del cierre automático. Si es 0, no se cierra automáticamente.",
-      control: "number",
+      description:
+        'Duración en milisegundos antes del cierre automático. Si es 0, no se cierra automáticamente.',
+      control: 'number',
       defaultValue: 5000,
       table: {
-        category: "Props",
-        type: { summary: "number" },
-        defaultValue: { summary: "5000" },
+        category: 'Props',
+        type: { summary: 'number' },
+        defaultValue: { summary: '5000' },
       },
     },
     position: {
-      description: "Posición del toast en la pantalla.",
-      control: "select",
-      options: ["top-right", "top-left", "bottom-right", "bottom-left"],
-      defaultValue: "top-right",
+      description: 'Posición del toast en la pantalla.',
+      control: 'select',
+      options: ['top-right', 'top-left', 'bottom-right', 'bottom-left'],
+      defaultValue: 'top-right',
       table: {
-        category: "Props",
-        type: { summary: "string" },
-        defaultValue: { summary: "top-right" },
+        category: 'Props',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'top-right' },
       },
     },
     showClose: {
-      description: "Si el toast puede cerrarse manualmente con el botón X.",
-      control: "boolean",
+      description: 'Si el toast puede cerrarse manualmente con el botón X.',
+      control: 'boolean',
       defaultValue: true,
       table: {
-        category: "Props",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Props',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     showProgress: {
-      description: "Si debe mostrarse la barra de progreso indicando el tiempo restante.",
-      control: "boolean",
+      description:
+        'Si debe mostrarse la barra de progreso indicando el tiempo restante.',
+      control: 'boolean',
       defaultValue: true,
       table: {
-        category: "Props",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Props',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     offset: {
-      description: "Offset en píxeles desde el borde de la pantalla.",
-      control: "number",
+      description: 'Offset en píxeles desde el borde de la pantalla.',
+      control: 'number',
       defaultValue: 0,
       table: {
-        category: "Props",
-        type: { summary: "number" },
-        defaultValue: { summary: "0" },
+        category: 'Props',
+        type: { summary: 'number' },
+        defaultValue: { summary: '0' },
       },
     },
     dangerouslyUseHTMLString: {
-      description: "Si el mensaje debe tratarse como HTML (usar con precaución).",
-      control: "boolean",
+      description:
+        'Si el mensaje debe tratarse como HTML (usar con precaución).',
+      control: 'boolean',
       defaultValue: false,
       table: {
-        category: "Props",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Props',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     customClass: {
-      description: "Clase CSS personalizada para el toast.",
-      control: "text",
+      description: 'Clase CSS personalizada para el toast.',
+      control: 'text',
       table: {
-        category: "Props",
-        type: { summary: "string" },
+        category: 'Props',
+        type: { summary: 'string' },
         defaultValue: { summary: '""' },
       },
     },
     zIndex: {
-      description: "z-index inicial del toast.",
-      control: "number",
+      description: 'z-index inicial del toast.',
+      control: 'number',
       table: {
-        category: "Props",
-        type: { summary: "number" },
+        category: 'Props',
+        type: { summary: 'number' },
       },
     },
 
     // Events
     onClick: {
-      description: "Se emite cuando se hace clic en el toast.",
-      action: "clicked",
+      description: 'Se emite cuando se hace clic en el toast.',
+      action: 'clicked',
       table: {
-        category: "Events",
-        type: { summary: "() => void" },
+        category: 'Events',
+        type: { summary: '() => void' },
       },
     },
     onClose: {
-      description: "Se emite cuando el toast se cierra (antes de la animación).",
-      action: "closed",
+      description:
+        'Se emite cuando el toast se cierra (antes de la animación).',
+      action: 'closed',
       table: {
-        category: "Events",
-        type: { summary: "() => void" },
+        category: 'Events',
+        type: { summary: '() => void' },
       },
     },
     destroy: {
-      description: "Se emite cuando el toast se destruye completamente (después de la animación).",
-      action: "destroyed",
+      description:
+        'Se emite cuando el toast se destruye completamente (después de la animación).',
+      action: 'destroyed',
       table: {
-        category: "Events",
-        type: { summary: "() => void" },
+        category: 'Events',
+        type: { summary: '() => void' },
       },
     },
 
     // Slots
     default: {
-      description: "Contenido personalizado del mensaje. Por defecto muestra el prop `message`.",
+      description:
+        'Contenido personalizado del mensaje. Por defecto muestra el prop `message`.',
       control: false,
       table: {
-        category: "Slots",
-        type: { summary: "VNode | string" },
+        category: 'Slots',
+        type: { summary: 'VNode | string' },
       },
     },
 
     // Expose
     visible: {
-      description: "Estado de visibilidad del toast (ref).",
+      description: 'Estado de visibilidad del toast (ref).',
       control: false,
       table: {
-        category: "Expose",
-        type: { summary: "Ref<boolean>" },
+        category: 'Expose',
+        type: { summary: 'Ref<boolean>' },
       },
     },
     close: {
-      description: "Método para cerrar el toast manualmente.",
+      description: 'Método para cerrar el toast manualmente.',
       control: false,
       table: {
-        category: "Expose",
-        type: { summary: "() => void" },
+        category: 'Expose',
+        type: { summary: '() => void' },
       },
     },
   },
   args: {
-    message: "Operación completada exitosamente",
-    type: "success",
+    message: 'Operación completada exitosamente',
+    type: 'success',
     duration: 5000,
-    position: "top-right",
+    position: 'top-right',
     showClose: true,
     showProgress: true,
-    size: "md",
+    size: 'md',
     offset: 0,
     dangerouslyUseHTMLString: false,
   },
@@ -296,11 +309,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
-  name: "Uso Básico",
+  name: 'Uso Básico',
   parameters: {
     docs: {
       description: {
-        story: "Usa los controles de abajo para experimentar con diferentes configuraciones del toast.",
+        story:
+          'Usa los controles de abajo para experimentar con diferentes configuraciones del toast.',
       },
       source: {
         code: `toast({
@@ -348,7 +362,7 @@ export const Playground: Story = {
 };
 
 export const Primary: Story = {
-  name: "Dos Formas de Uso",
+  name: 'Dos Formas de Uso',
   parameters: {
     docs: {
       description: {
@@ -383,26 +397,26 @@ toast.error('Error')`,
     setup() {
       const showMainMethod = () => {
         toast({
-          type: "success",
+          type: 'success',
           message: 'Método principal - toast({ type: "success" })',
           duration: 3000,
-          position: "top-right",
+          position: 'top-right',
         });
       };
 
       const showShortcuts = () => {
-        toast.success("Método de atajo - toast.success()");
+        toast.success('Método de atajo - toast.success()');
 
         setTimeout(() => {
-          toast.info("toast.info() - Información");
+          toast.info('toast.info() - Información');
         }, 500);
 
         setTimeout(() => {
-          toast.warning("toast.warning() - Advertencia");
+          toast.warning('toast.warning() - Advertencia');
         }, 1000);
 
         setTimeout(() => {
-          toast.error("toast.error() - Error");
+          toast.error('toast.error() - Error');
         }, 1500);
       };
 
@@ -427,12 +441,12 @@ toast.error('Error')`,
 };
 
 export const AllTypes: Story = {
-  name: "Tipos",
+  name: 'Tipos',
   parameters: {
     docs: {
       description: {
         story:
-          "El componente tiene 4 tipos diferentes que ayudan a transmitir el contexto del mensaje: success, info, warning y error. Los iconos se asignan automáticamente según el tipo.",
+          'El componente tiene 4 tipos diferentes que ayudan a transmitir el contexto del mensaje: success, info, warning y error. Los iconos se asignan automáticamente según el tipo.',
       },
       source: {
         code: `toast({ type: 'success', message: 'Operación exitosa' })
@@ -446,19 +460,19 @@ toast({ type: 'error', message: 'Error en la operación' })`,
     components: { GButton, GConfigProvider },
     setup() {
       const showSuccess = () => {
-        toast.success("Operación completada exitosamente");
+        toast.success('Operación completada exitosamente');
       };
 
       const showInfo = () => {
-        toast.info("Aquí tienes información útil");
+        toast.info('Aquí tienes información útil');
       };
 
       const showWarning = () => {
-        toast.warning("Por favor revisa esto cuidadosamente");
+        toast.warning('Por favor revisa esto cuidadosamente');
       };
 
       const showError = () => {
-        toast.error("Algo salió mal");
+        toast.error('Algo salió mal');
       };
 
       return {
@@ -490,12 +504,12 @@ toast({ type: 'error', message: 'Error en la operación' })`,
 };
 
 export const Positions: Story = {
-  name: "Posiciones",
+  name: 'Posiciones',
   parameters: {
     docs: {
       description: {
         story:
-          "Los toasts pueden aparecer en cualquiera de las cuatro esquinas de la pantalla. La posición se mantiene consistente para múltiples toasts.",
+          'Los toasts pueden aparecer en cualquiera de las cuatro esquinas de la pantalla. La posición se mantiene consistente para múltiples toasts.',
       },
       source: {
         code: `toast({ type: 'success', message: 'Superior derecha', position: 'top-right' })
@@ -509,15 +523,15 @@ toast({ type: 'error', message: 'Inferior izquierda', position: 'bottom-left' })
     components: { GButton, GConfigProvider },
     setup() {
       const positions = [
-        { key: "top-left", label: "Arriba Izquierda" },
-        { key: "top-right", label: "Arriba Derecha" },
-        { key: "bottom-left", label: "Abajo Izquierda" },
-        { key: "bottom-right", label: "Abajo Derecha" },
+        { key: 'top-left', label: 'Arriba Izquierda' },
+        { key: 'top-right', label: 'Arriba Derecha' },
+        { key: 'bottom-left', label: 'Abajo Izquierda' },
+        { key: 'bottom-right', label: 'Abajo Derecha' },
       ] as const;
 
-      const showToast = (position: (typeof positions)[number]["key"]) => {
+      const showToast = (position: (typeof positions)[number]['key']) => {
         toast({
-          type: "info",
+          type: 'info',
           message: `Toast desde ${position}`,
           position,
           duration: 4000,
@@ -571,12 +585,12 @@ toast({ type: 'error', message: 'Inferior izquierda', position: 'bottom-left' })
 };
 
 export const DurationControl: Story = {
-  name: "Control de Duración",
+  name: 'Control de Duración',
   parameters: {
     docs: {
       description: {
         story:
-          "Controla cuánto tiempo permanecen visibles los toasts. La duración de 0 hace que el toast permanezca hasta que el usuario lo cierre manualmente.",
+          'Controla cuánto tiempo permanecen visibles los toasts. La duración de 0 hace que el toast permanezca hasta que el usuario lo cierre manualmente.',
       },
       source: {
         code: `toast({ type: 'info', message: 'Rápido', duration: 2000 })
@@ -590,19 +604,22 @@ toast({ type: 'error', message: 'Persistente', duration: 0 })`,
     components: { GButton, GConfigProvider },
     setup() {
       const showQuick = () => {
-        toast.success({ message: "Toast rápido (2s)", duration: 2000 });
+        toast.success({ message: 'Toast rápido (2s)', duration: 2000 });
       };
 
       const showNormal = () => {
-        toast.info("Toast normal (5s por defecto)");
+        toast.info('Toast normal (5s por defecto)');
       };
 
       const showLong = () => {
-        toast.warning({ message: "Toast largo (10s)", duration: 10000 });
+        toast.warning({ message: 'Toast largo (10s)', duration: 10000 });
       };
 
       const showPersistent = () => {
-        toast.error({ message: "Toast persistente (cierre manual)", duration: 0 });
+        toast.error({
+          message: 'Toast persistente (cierre manual)',
+          duration: 0,
+        });
       };
 
       return {
@@ -634,11 +651,12 @@ toast({ type: 'error', message: 'Persistente', duration: 0 })`,
 };
 
 export const AdvancedUsage: Story = {
-  name: "Configuración Avanzada",
+  name: 'Configuración Avanzada',
   parameters: {
     docs: {
       description: {
-        story: "Opciones avanzadas: contenido HTML, offset personalizado y sin botón de cerrar.",
+        story:
+          'Opciones avanzadas: contenido HTML, offset personalizado y sin botón de cerrar.',
       },
       source: {
         code: `// Contenido HTML
@@ -669,8 +687,8 @@ toast({
     setup() {
       const showHTMLContent = () => {
         toast({
-          type: "info",
-          message: "<strong>Contenido HTML</strong> con <em>formato</em>",
+          type: 'info',
+          message: '<strong>Contenido HTML</strong> con <em>formato</em>',
           dangerouslyUseHTMLString: true,
           duration: 5000,
         });
@@ -678,8 +696,8 @@ toast({
 
       const showWithOffset = () => {
         toast({
-          type: "success",
-          message: "Toast con offset personalizado (50px)",
+          type: 'success',
+          message: 'Toast con offset personalizado (50px)',
           offset: 50,
           duration: 4000,
         });
@@ -687,8 +705,8 @@ toast({
 
       const showNonClosable = () => {
         toast({
-          type: "warning",
-          message: "Toast sin botón de cerrar (solo auto-cierre)",
+          type: 'warning',
+          message: 'Toast sin botón de cerrar (solo auto-cierre)',
           showClose: false,
           duration: 6000,
         });
@@ -719,11 +737,12 @@ toast({
 };
 
 export const Sizes: Story = {
-  name: "Tamaños",
+  name: 'Tamaños',
   parameters: {
     docs: {
       description: {
-        story: "El componente tiene dos tamaños disponibles: sm (pequeño) y md (mediano).",
+        story:
+          'El componente tiene dos tamaños disponibles: sm (pequeño) y md (mediano).',
       },
       source: {
         code: `// Tamaño pequeño
@@ -747,18 +766,18 @@ toast({
     setup() {
       const showSmallToast = () => {
         toast({
-          type: "success",
-          size: "sm",
-          message: "Toast pequeño",
+          type: 'success',
+          size: 'sm',
+          message: 'Toast pequeño',
           duration: 4000,
         });
       };
 
       const showMediumToast = () => {
         toast({
-          type: "info",
-          size: "md",
-          message: "Toast mediano",
+          type: 'info',
+          size: 'md',
+          message: 'Toast mediano',
           duration: 4000,
         });
       };

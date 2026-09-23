@@ -1,11 +1,10 @@
-import { StoryFn, Meta } from '@storybook/vue3'
-import { GButton } from '@flash-global66/g-button/index.ts'
+import { StoryFn, Meta } from '@storybook/vue3';
+import { GButton } from '@flash-global66/g-button/index.ts';
 
 // TYPES
-import { generateIconOptions } from '../helper/documentation-stories'
+import { generateIconOptions } from '../helper/documentation-stories';
 
 // CONSTANTS
-import { action } from '@storybook/addon-actions'
 
 export default {
   title: 'Basic/Button',
@@ -21,10 +20,11 @@ Ejemplo de uso básico:
 \`\`\` vue
 <g-button variant="primary" title="Primary Button"/>
 \`\`\`
-      `
-    }
-  }
-},  argTypes: {
+      `,
+      },
+    },
+  },
+  argTypes: {
     // Current Props - Variant & Style
     variant: {
       control: 'select',
@@ -32,8 +32,8 @@ Ejemplo de uso básico:
       description: 'Variante visual del botón',
       table: {
         type: { summary: 'string' },
-        category: 'Principales'
-      }
+        category: 'Principales',
+      },
     },
     size: {
       control: 'select',
@@ -42,8 +42,8 @@ Ejemplo de uso básico:
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'md' },
-        category: 'Principales'
-      }
+        category: 'Principales',
+      },
     },
     title: {
       control: 'text',
@@ -51,8 +51,8 @@ Ejemplo de uso básico:
       table: {
         category: 'Principales',
         type: { summary: 'string' },
-        defaultValue: { summary: 'Button Text' }
-      }
+        defaultValue: { summary: 'Button Text' },
+      },
     },
 
     // Behavior Props
@@ -63,24 +63,24 @@ Ejemplo de uso básico:
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'button' },
-        category: 'Comportamiento'
-      }
+        category: 'Comportamiento',
+      },
     },
     disabled: {
       control: 'boolean',
       description: 'Deshabilita el botón',
       table: {
         category: 'Comportamiento',
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
     loading: {
       control: 'boolean',
       description: 'Muestra estado de carga',
       table: {
         category: 'Comportamiento',
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
 
     // Iconos
@@ -92,7 +92,7 @@ Ejemplo de uso básico:
       table: {
         type: { summary: 'Iconos' },
         defaultValue: { summary: '' },
-      }
+      },
     },
 
     iconRight: {
@@ -103,7 +103,7 @@ Ejemplo de uso básico:
       table: {
         type: { summary: 'Iconos' },
         defaultValue: { summary: '' },
-      }
+      },
     },
 
     autofocus: {
@@ -112,8 +112,8 @@ Ejemplo de uso básico:
         'El botón obtiene el foco automáticamente al cargar la página (HTML autofocus) \n\n⚠️ **Nota:** No se puede usar con el atributo `href`',
       table: {
         category: 'Comportamiento',
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
     download: {
       control: 'text',
@@ -122,8 +122,8 @@ Ejemplo de uso básico:
       table: {
         defaultValue: { summary: 'undefined' },
         category: 'Enlaces',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
 
     // Link Props
@@ -132,24 +132,24 @@ Ejemplo de uso básico:
       description: 'Convierte el botón en un enlace',
       table: {
         category: 'Enlaces',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     target: {
       control: 'text',
       description: 'Atributo target del enlace',
       table: {
         category: 'Enlaces',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     full: {
       control: 'boolean',
       description: 'Botón de ancho completo',
       table: {
         category: 'Layout',
-        type: { summary: 'boolean' }
-      }
+        type: { summary: 'boolean' },
+      },
     },
 
     // Accesibilidad
@@ -158,8 +158,8 @@ Ejemplo de uso básico:
       description: 'Etiqueta accesible para el botón',
       table: {
         category: 'Accesibilidad',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     // Events
     onClick: {
@@ -167,59 +167,59 @@ Ejemplo de uso básico:
         'Se dispara al hacer clic en el botón. No se dispara si el botón está deshabilitado.',
       table: {
         category: 'Events',
-        type: { summary: '(event: Event) => void' }
-      }
+        type: { summary: '(event: Event) => void' },
+      },
     },
     onMousedown: {
       description:
         'Se dispara cuando se presiona el botón del mouse. No se dispara si el botón está deshabilitado.',
       table: {
         category: 'Events',
-        type: { summary: '(event: Event) => void' }
-      }
+        type: { summary: '(event: Event) => void' },
+      },
     },
     default: {
       constrol: 'text',
       description: 'Slot por defecto del botón',
       table: {
         category: 'Slots',
-        type: { summary: 'string | Component' }
-      }
+        type: { summary: 'string | Component' },
+      },
     },
-  }
-} as Meta<typeof GButton>
+  },
+} as Meta<typeof GButton>;
 
 // Base template
-const Template: StoryFn<typeof GButton> = (args) => ({
+const Template: StoryFn<typeof GButton> = args => ({
   components: { GButton },
   setup() {
     return {
       args,
-    }
+    };
   },
   template: `
     <g-button v-bind="args" />
-  `
-})
+  `,
+});
 
 // Current API Stories
-export const Primary = Template.bind({})
+export const Primary = Template.bind({});
 Primary.args = {
   variant: 'primary',
-  title: 'Primary Button prueba'
-}
+  title: 'Primary Button prueba',
+};
 
-export const Secondary = Template.bind({})
+export const Secondary = Template.bind({});
 Secondary.args = {
   variant: 'secondary',
-  title: 'Secondary Button'
-}
+  title: 'Secondary Button',
+};
 
-export const Tertiary = Template.bind({})
+export const Tertiary = Template.bind({});
 Tertiary.args = {
   variant: 'tertiary',
-  title: 'Tertiary Button'
-}
+  title: 'Tertiary Button',
+};
 
 // States Stories
 export const States = () => ({
@@ -253,8 +253,8 @@ export const States = () => ({
         </div>
       </div>
     </div>
-  `
-})
+  `,
+});
 
 // Add new story for icons
 export const WithIcons = () => ({
@@ -283,8 +283,8 @@ export const WithIcons = () => ({
           />
         </div>
       </div>
-  `
-})
+  `,
+});
 
 export const Sizes = () => ({
   components: { GButton },
@@ -306,8 +306,8 @@ export const Sizes = () => ({
         </div>
       </div>
     </div>
-  `
-})
+  `,
+});
 
 export const IconSizes = () => ({
   components: { GButton },
@@ -363,5 +363,5 @@ export const IconSizes = () => ({
         </div>
       </div>
     </div>
-  `
-})
+  `,
+});

@@ -1,97 +1,97 @@
-import { Meta, StoryObj } from "@storybook/vue3";
-import { GLink } from "../components/link";
-import { GConfigProvider } from "../components/config-provider";
+import { Meta, StoryObj } from '@storybook/vue3';
+import { GLink } from '../components/link';
+import { GConfigProvider } from '../components/config-provider';
 
 const meta: Meta<typeof GLink> = {
-  title: "Basic/Link",
+  title: 'Basic/Link',
   component: GLink,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     type: {
-      control: { type: "select" },
-      options: ["primary", "secondary", "tertiary"],
+      control: { type: 'select' },
+      options: ['primary', 'secondary', 'tertiary'],
       description:
-        "Tipo de estilo del link. Define la apariencia visual y el color del link.",
+        'Tipo de estilo del link. Define la apariencia visual y el color del link.',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "primary" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'primary' },
       },
     },
     size: {
-      control: { type: "select" },
-      options: ["sm", "md", "lg"],
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg'],
       description:
-        "Tamaño del link. Afecta tanto al tamaño del texto como de los íconos.",
+        'Tamaño del link. Afecta tanto al tamaño del texto como de los íconos.',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "md" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'md' },
       },
     },
     underline: {
-      control: { type: "boolean" },
-      description: "Define si el link muestra un underline permanente.",
+      control: { type: 'boolean' },
+      description: 'Define si el link muestra un underline permanente.',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     disabled: {
-      control: { type: "boolean" },
+      control: { type: 'boolean' },
       description:
-        "Deshabilita el link, impidiendo la interacción del usuario y aplicando estilos visuales de deshabilitado.",
+        'Deshabilita el link, impidiendo la interacción del usuario y aplicando estilos visuales de deshabilitado.',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     href: {
-      control: { type: "text" },
+      control: { type: 'text' },
       description:
-        "URL a la que apunta el link, igual que el atributo href nativo de HTML.",
+        'URL a la que apunta el link, igual que el atributo href nativo de HTML.',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       },
     },
     target: {
-      control: { type: "select" },
-      options: ["_blank", "_self", "_parent", "_top"],
+      control: { type: 'select' },
+      options: ['_blank', '_self', '_parent', '_top'],
       description:
-        "Define cómo se abre el link, igual que el atributo target nativo de HTML.",
+        'Define cómo se abre el link, igual que el atributo target nativo de HTML.',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "_self" },
+        type: { summary: 'string' },
+        defaultValue: { summary: '_self' },
       },
     },
     iconLeft: {
-      control: { type: "text" },
+      control: { type: 'text' },
       description:
         'Nombre del ícono a mostrar a la izquierda del texto. Utiliza el formato "peso nombre-del-icono" (ej: "regular chevron-left").',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       },
     },
     iconRight: {
-      control: { type: "text" },
+      control: { type: 'text' },
       description:
         'Nombre del ícono a mostrar a la derecha del texto. Utiliza el formato "peso nombre-del-icono" (ej: "regular chevron-right").',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       },
     },
     status: {
-      control: { type: "select" },
-      options: ["default", "inline"],
+      control: { type: 'select' },
+      options: ['default', 'inline'],
       description:
-        "Status del link: default (link independiente) o inline (para texto con enlaces).",
+        'Status del link: default (link independiente) o inline (para texto con enlaces).',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "default" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'default' },
       },
     },
-    onClick: { action: "clicked" },
+    onClick: { action: 'clicked' },
   },
   parameters: {
     docs: {
@@ -170,12 +170,12 @@ import { GLink } from '@flash-global66/g-link';
     },
   },
   args: {
-    type: "primary",
-    size: "md",
+    type: 'primary',
+    size: 'md',
     underline: false,
     disabled: false,
-    href: "https://empresas.global66.com/",
-    target: "_blank",
+    href: 'https://empresas.global66.com/',
+    target: '_blank',
     iconLeft: undefined,
     iconRight: undefined,
   },
@@ -185,11 +185,11 @@ export default meta;
 type Story = StoryObj<typeof GLink>;
 
 export const Default: Story = {
-  name: "Default link",
+  name: 'Default link',
   args: {
-    default: "default link",
+    default: 'default link',
   },
-  render: (args) => ({
+  render: args => ({
     components: { GLink, GConfigProvider },
     setup() {
       return { args };
@@ -203,20 +203,20 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: "link básico con estilo por defecto y configuración estándar.",
+        story: 'link básico con estilo por defecto y configuración estándar.',
       },
       source: {
         code: `
 <g-link href="https://empresas.global66.com/">link por defecto</g-link>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },
 };
 
 export const WithIcons: Story = {
-  name: "Links con íconos",
+  name: 'Links con íconos',
   render: () => ({
     components: { GLink, GConfigProvider },
     template: `
@@ -244,7 +244,7 @@ export const WithIcons: Story = {
     docs: {
       description: {
         story:
-          "links con íconos a la izquierda, derecha o ambos lados para mejorar el contexto visual.",
+          'links con íconos a la izquierda, derecha o ambos lados para mejorar el contexto visual.',
       },
       source: {
         code: `
@@ -259,15 +259,15 @@ export const WithIcons: Story = {
 <g-link href="https://empresas.global66.com/" icon-left="regular link" icon-right="regular arrow-up-right-from-square">
   link con íconos en ambos lados
 </g-link>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },
 };
 
 export const Sizes: Story = {
-  name: "Tamaños de link",
+  name: 'Tamaños de link',
   render: () => ({
     components: { GLink, GConfigProvider },
     template: `
@@ -304,7 +304,7 @@ export const Sizes: Story = {
     docs: {
       description: {
         story:
-          "links en diferentes tamaños: pequeño (sm), mediano (md) y grande (lg).",
+          'links en diferentes tamaños: pequeño (sm), mediano (md) y grande (lg).',
       },
       source: {
         code: `
@@ -313,15 +313,15 @@ export const Sizes: Story = {
 <g-link size="md" href="https://empresas.global66.com/">link mediano</g-link>
 
 <g-link size="lg" href="https://empresas.global66.com/">link grande</g-link>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },
 };
 
 export const Types: Story = {
-  name: "Tipos de link",
+  name: 'Tipos de link',
   render: () => ({
     components: { GLink, GConfigProvider },
     template: `
@@ -370,7 +370,7 @@ export const Types: Story = {
     docs: {
       description: {
         story:
-          "Links con diferentes tipos de estilo: primary y secondary, con y sin underline.",
+          'Links con diferentes tipos de estilo: primary y secondary, con y sin underline.',
       },
       source: {
         code: `
@@ -381,8 +381,8 @@ export const Types: Story = {
 <g-link type="primary" underline href="https://empresas.global66.com/">Link primario con underline</g-link>
 
 <g-link type="secondary" underline href="https://empresas.global66.com/">Link secundario con underline</g-link>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },
@@ -390,7 +390,7 @@ export const Types: Story = {
 
 // Add a new story for links with both icons and underline
 export const IconsWithUnderline: Story = {
-  name: "Links con íconos y underline",
+  name: 'Links con íconos y underline',
   render: () => ({
     components: { GLink, GConfigProvider },
     template: `
@@ -458,7 +458,7 @@ export const IconsWithUnderline: Story = {
     docs: {
       description: {
         story:
-          "Links que combinan íconos y underline permanente, mostrando diferentes variaciones.",
+          'Links que combinan íconos y underline permanente, mostrando diferentes variaciones.',
       },
       source: {
         code: `
@@ -491,21 +491,21 @@ export const IconsWithUnderline: Story = {
 >
   Link secundario con íconos y underline
 </g-link>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },
 };
 
 export const DisabledState: Story = {
-  name: "Link deshabilitado",
+  name: 'Link deshabilitado',
   args: {
     disabled: true,
-    default: "link deshabilitado",
-    iconRight: "regular chevron-right",
+    default: 'link deshabilitado',
+    iconRight: 'regular chevron-right',
   },
-  render: (args) => ({
+  render: args => ({
     components: { GLink, GConfigProvider },
     setup() {
       return { args };
@@ -519,7 +519,7 @@ export const DisabledState: Story = {
   parameters: {
     docs: {
       description: {
-        story: "links en estado deshabilitado que no permiten interacción.",
+        story: 'links en estado deshabilitado que no permiten interacción.',
       },
       source: {
         code: `
@@ -528,15 +528,15 @@ export const DisabledState: Story = {
 <g-link disabled icon-right="regular chevron-right" href="https://empresas.global66.com/">
   link deshabilitado con ícono
 </g-link>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },
 };
 
 export const ExternalLinks: Story = {
-  name: "Links externos",
+  name: 'Links externos',
   render: () => ({
     components: { GLink, GConfigProvider },
     template: `
@@ -556,7 +556,7 @@ export const ExternalLinks: Story = {
     docs: {
       description: {
         story:
-          "links que apuntan a sitios externos, con diferentes configuraciones del atributo target.",
+          'links que apuntan a sitios externos, con diferentes configuraciones del atributo target.',
       },
       source: {
         code: `
@@ -567,15 +567,15 @@ export const ExternalLinks: Story = {
 <g-link href="https://empresas.global66.com/" target="_self">
   Abre en la misma pestaña
 </g-link>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },
 };
 
 export const LinkStatus: Story = {
-  name: "Estados del link",
+  name: 'Estados del link',
   render: () => ({
     components: { GLink, GConfigProvider },
     template: `
@@ -598,7 +598,7 @@ export const LinkStatus: Story = {
     docs: {
       description: {
         story:
-          "Links con diferentes estados: default (enlaces independientes) e inline (enlaces dentro de texto).",
+          'Links con diferentes estados: default (enlaces independientes) e inline (enlaces dentro de texto).',
       },
       source: {
         code: `
@@ -607,8 +607,8 @@ export const LinkStatus: Story = {
 
 <!-- Status: Inline (para enlaces dentro de texto) -->
 <p>Este es un ejemplo de un párrafo con un <g-link status="inline" href="https://empresas.global66.com/">link inline</g-link> que está integrado dentro del texto.</p>`,
-        language: "html",
-        type: "auto",
+        language: 'html',
+        type: 'auto',
       },
     },
   },

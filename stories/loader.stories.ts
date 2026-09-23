@@ -1,9 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
+import type { Meta, StoryObj } from '@storybook/vue3';
 import { Loader } from '../components/loader';
-import { showLoader, loaderMessage } from '../components/loader/loader.provider';
+import {
+  showLoader,
+  loaderMessage,
+} from '../components/loader/loader.provider';
 import { watch } from 'vue';
 import { version, peerDependencies } from '../components/loader/package.json';
-import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories";
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 const meta: Meta<typeof Loader> = {
   title: 'Feedback/Loader',
@@ -78,9 +84,9 @@ setLoaderMessage({ messages: ['Cargando recursos', 'Ya casi', 'Estamos terminand
 // Ocultar loader
 showGLoader(false);
 \`\`\`
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   argTypes: {
     show: {
@@ -107,7 +113,7 @@ type Story = StoryObj<typeof Loader>;
 
 export const Default: Story = {
   name: 'Básico',
-  render: (args) => ({
+  render: args => ({
     components: { Loader },
     template: `
       <div class="h-[500px] w-full relative transform scale-100 border border-gray-200 rounded-lg overflow-hidden">
@@ -120,16 +126,16 @@ export const Default: Story = {
     `,
     setup() {
       return { args };
-    }
+    },
   }),
   args: {
-    show: true
-  }
+    show: true,
+  },
 };
 
 export const WithMessage: Story = {
   name: 'Con Mensaje',
-  render: (args) => ({
+  render: args => ({
     components: { Loader },
     template: `
       <div class="h-[500px] w-full relative transform scale-100 border border-gray-200 rounded-lg overflow-hidden">
@@ -142,12 +148,13 @@ export const WithMessage: Story = {
     `,
     setup() {
       return { args };
-    }
+    },
   }),
   args: {
     show: true,
-    message: 'Estamos procesando tu solicitud. Esto puede tomar unos momentos. Tomate un café'
-  }
+    message:
+      'Estamos procesando tu solicitud. Esto puede tomar unos momentos. Tomate un café',
+  },
 };
 
 export const Interactive: Story = {
@@ -155,11 +162,12 @@ export const Interactive: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Esta historia demuestra el uso interactivo del loader. Haz clic en el botón para simular una carga de 3 segundos.',
+        story:
+          'Esta historia demuestra el uso interactivo del loader. Haz clic en el botón para simular una carga de 3 segundos.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { Loader },
     template: `
       <div class="h-[500px] w-full relative transform scale-100 border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center justify-center gap-4">
@@ -174,12 +182,18 @@ export const Interactive: Story = {
       </div>
     `,
     setup() {
-      watch(() => args.show, (val) => {
-        showLoader.value = !!val;
-      });
-      watch(() => args.message, (val) => {
-        loaderMessage.value = val || '';
-      });
+      watch(
+        () => args.show,
+        val => {
+          showLoader.value = !!val;
+        },
+      );
+      watch(
+        () => args.message,
+        val => {
+          loaderMessage.value = val || '';
+        },
+      );
 
       const toggleLoader = () => {
         showLoader.value = !showLoader.value;
@@ -192,10 +206,10 @@ export const Interactive: Story = {
       };
 
       return { args, showLoader, loaderMessage, toggleLoader };
-    }
+    },
   }),
   args: {
     show: false,
-    message: 'Cargando datos...'
-  }
+    message: 'Cargando datos...',
+  },
 };

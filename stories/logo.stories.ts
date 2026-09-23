@@ -106,9 +106,9 @@ Para incorporar una marca nueva:
 
 3. **Construir el componente**
    - Ejecuta \`yarn build logo\` para actualizar el componente
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   argTypes: {
     name: {
@@ -118,24 +118,26 @@ Para incorporar una marca nueva:
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'logo-pse' },
-      }
+      },
     },
     size: {
-      description: 'Altura preset (2xs 22px, xs 44px … 3xl 260px). Vacío = tamaño original del SVG',
+      description:
+        'Altura preset (2xs 22px, xs 44px … 3xl 260px). Vacío = tamaño original del SVG',
       control: 'select',
       options: [undefined, ...Object.keys(LOGO_SIZES)],
       table: {
         type: { summary: '2xs | xs | sm | md | lg | xl | 2xl | 3xl' },
         defaultValue: { summary: 'original (SVG)' },
-      }
+      },
     },
     sizeCustom: {
-      description: 'Ancho libre. Acepta `120px`, `8rem`, `50%` o solo un número (`200` → `200px`). La altura escala sola. Excluye `size`.',
+      description:
+        'Ancho libre. Acepta `120px`, `8rem`, `50%` o solo un número (`200` → `200px`). La altura escala sola. Excluye `size`.',
       control: 'text',
       table: {
         type: { summary: 'string | number' },
         defaultValue: { summary: '' },
-      }
+      },
     },
     filter: {
       description: 'Preset de filtro CSS aplicado al logo',
@@ -144,15 +146,16 @@ Para incorporar una marca nueva:
       table: {
         type: { summary: 'LogoFilter' },
         defaultValue: { summary: 'none' },
-      }
+      },
     },
     color: {
-      description: 'Color CSS para teñir el logo (vacío = colores originales del SVG)',
+      description:
+        'Color CSS para teñir el logo (vacío = colores originales del SVG)',
       control: 'color',
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: '' },
-      }
+      },
     },
     lazyLoad: {
       description: 'Activar carga diferida del logo',
@@ -160,16 +163,16 @@ Para incorporar una marca nueva:
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
-      }
-    }
+      },
+    },
   },
   args: {
     name: DEMO_LOGO_PSE,
     filter: 'none',
     color: '',
     sizeCustom: '',
-    lazyLoad: true
-  }
+    lazyLoad: true,
+  },
 } as Meta;
 
 export default meta;
@@ -177,7 +180,7 @@ type Story = StoryObj<typeof GLogo>;
 
 export const Primary: Story = {
   name: 'Uso básico',
-  render: (args) => ({
+  render: args => ({
     components: { GLogo, GConfigProvider },
     setup() {
       return { args };
@@ -188,12 +191,13 @@ export const Primary: Story = {
           <g-logo v-bind="args" />
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Uso básico del componente. Usa los controles para explorar las props interactivamente.'
+        story:
+          'Uso básico del componente. Usa los controles para explorar las props interactivamente.',
       },
       source: {
         code: `
@@ -205,10 +209,10 @@ export const Primary: Story = {
 import { GLogo } from '@flash-global66/g-logo';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const AllLogos: Story = {
@@ -220,7 +224,10 @@ export const AllLogos: Story = {
       const selectedSize = ref(NATURAL_SIZE);
       const sizeOptions = [
         { label: 'Original', value: NATURAL_SIZE },
-        ...Object.keys(LOGO_SIZES).map(s => ({ label: s.toUpperCase(), value: s })),
+        ...Object.keys(LOGO_SIZES).map(s => ({
+          label: s.toUpperCase(),
+          value: s,
+        })),
       ];
       const isOnDark = (name: string) => name.endsWith('-on-dark');
       const logoSizeProps = (sizeKey: string) =>
@@ -270,12 +277,13 @@ export const AllLogos: Story = {
           </section>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Colección completa a tamaño original por defecto. Usa el selector para xs–3xl. Variantes `-on-dark` sobre fondo oscuro.'
+        story:
+          'Colección completa a tamaño original por defecto. Usa el selector para xs–3xl. Variantes `-on-dark` sobre fondo oscuro.',
       },
       source: {
         code: `
@@ -291,10 +299,10 @@ export const AllLogos: Story = {
 import { GLogo } from '@flash-global66/g-logo';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const Sizes: Story = {
@@ -314,12 +322,13 @@ export const Sizes: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Ocho tamaños por altura (2xs 22px … 3xl 260px). El ancho varía según la proporción del SVG.'
+        story:
+          'Ocho tamaños por altura (2xs 22px … 3xl 260px). El ancho varía según la proporción del SVG.',
       },
       source: {
         code: `
@@ -338,10 +347,10 @@ export const Sizes: Story = {
 import { GLogo } from '@flash-global66/g-logo';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const SizeCustom: Story = {
@@ -379,12 +388,13 @@ export const SizeCustom: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Define el **ancho** con `size-custom`; la altura escala automáticamente según la proporción del SVG. Puedes usar `120px`, `8rem` o solo un número (`200` → se trata como `200px`). No combines con `size`.'
+        story:
+          'Define el **ancho** con `size-custom`; la altura escala automáticamente según la proporción del SVG. Puedes usar `120px`, `8rem` o solo un número (`200` → se trata como `200px`). No combines con `size`.',
       },
       source: {
         code: `
@@ -393,10 +403,10 @@ export const SizeCustom: Story = {
 <!-- También acepta número sin unidad: -->
 <g-logo name="logo-bancolombia" size-custom="200" />
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 const DEMO_LOGOS_COLOR_COMPATIBLE = [
@@ -442,12 +452,12 @@ export const Colors: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: `Ejemplos con los logos 100% compatibles: \`icon-*\` e \`label-*\`. Son SVG vectoriales de fondo transparente donde la máscara CSS preserva la forma exacta del ícono y aplica el color elegido sin pérdida de detalle.\n\nSi necesitas adaptar el tono de logos de terceros (bancos, fintechs), usa la prop \`filter\` que funciona en los 59 logos.`
+        story: `Ejemplos con los logos 100% compatibles: \`icon-*\` e \`label-*\`. Son SVG vectoriales de fondo transparente donde la máscara CSS preserva la forma exacta del ícono y aplica el color elegido sin pérdida de detalle.\n\nSi necesitas adaptar el tono de logos de terceros (bancos, fintechs), usa la prop \`filter\` que funciona en los 59 logos.`,
       },
       source: {
         code: `<!-- ✅ Funciona perfectamente -->
@@ -458,10 +468,10 @@ export const Colors: Story = {
 <!-- ⚠️ Para logos de terceros usa filter -->
 <g-logo name="logo-bancolombia" size="md" filter="grayscale" />
 <g-logo name="logo-pse"         size="md" filter="black" />`,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const Filters: Story = {
@@ -472,7 +482,7 @@ export const Filters: Story = {
       const selectedLogo = ref(DEMO_LOGO_PSE);
       const logoOptions = [...DEMO_LOGOS_FILTER];
 
-      const filters = LOGO_FILTER_OPTIONS.map((value) => ({
+      const filters = LOGO_FILTER_OPTIONS.map(value => ({
         label: LOGO_FILTER_LABELS[value],
         value,
       }));
@@ -497,12 +507,12 @@ export const Filters: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Presets del prop `filter` con Bancolombia, PSE y Nequi.'
+        story: 'Presets del prop `filter` con Bancolombia, PSE y Nequi.',
       },
       source: {
         code: `
@@ -518,10 +528,10 @@ export const Filters: Story = {
 import { GLogo } from '@flash-global66/g-logo';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };
 
 export const ErrorHandling: Story = {
@@ -560,12 +570,13 @@ export const ErrorHandling: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
+    `,
   }),
   parameters: {
     docs: {
       description: {
-        story: 'Demostración del estado de error cuando el logo no puede cargarse.'
+        story:
+          'Demostración del estado de error cuando el logo no puede cargarse.',
       },
       source: {
         code: `
@@ -576,8 +587,8 @@ export const ErrorHandling: Story = {
 import { GLogo } from '@flash-global66/g-logo';
 </script>
 `,
-        language: 'html'
-      }
-    }
-  }
+        language: 'html',
+      },
+    },
+  },
 };

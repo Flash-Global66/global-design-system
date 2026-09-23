@@ -1,19 +1,25 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { ref, reactive } from "vue";
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { ref, reactive } from 'vue';
 import { action } from '@storybook/addon-actions';
 
-import { GAttachFile } from "@flash-global66/g-attach-file/index.ts";
-import type { ValidationError } from "@flash-global66/g-attach-file/index.ts";
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
-import { GForm, GFormItem } from "@flash-global66/g-form/index.ts";
-import { GButton } from "@flash-global66/g-button/index.ts";
-import { GInput } from "@flash-global66/g-input/index.ts";
+import { GAttachFile } from '@flash-global66/g-attach-file/index.ts';
+import type { ValidationError } from '@flash-global66/g-attach-file/index.ts';
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
+import { GForm, GFormItem } from '@flash-global66/g-form/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
+import { GInput } from '@flash-global66/g-input/index.ts';
 
-import { version, peerDependencies } from "@flash-global66/g-attach-file/package.json";
-import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories";
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-attach-file/package.json';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 const meta: Meta<typeof GAttachFile> = {
-  title: "Form/Attach File",
+  title: 'Form/Attach File',
   component: GAttachFile,
   parameters: {
     docs: {
@@ -193,323 +199,351 @@ const rules = {
   },
   argTypes: {
     modelValue: {
-      description: "Array de archivos seleccionados (v-model)",
-      control: "object",
+      description: 'Array de archivos seleccionados (v-model)',
+      control: 'object',
       table: {
-        category: "Principales",
-        type: { summary: "File[]" },
-        defaultValue: { summary: "[]" },
+        category: 'Principales',
+        type: { summary: 'File[]' },
+        defaultValue: { summary: '[]' },
       },
     },
     type: {
-      description: "Tipo de visualización del componente. Define la apariencia y comportamiento de la interfaz.",
-      control: "select",
-      options: ["default", "drag-drop"],
+      description:
+        'Tipo de visualización del componente. Define la apariencia y comportamiento de la interfaz.',
+      control: 'select',
+      options: ['default', 'drag-drop'],
       table: {
-        category: "Principales",
+        category: 'Principales',
         type: { summary: "'default' | 'drag-drop'" },
         defaultValue: { summary: "'default'" },
       },
     },
     mode: {
-      description: "Modo operacional del componente. En modo 'download' cambia el comportamiento del botón principal para emitir evento 'download' en lugar de activar selector de archivos.",
-      control: "select",
-      options: ["upload", "download"],
+      description:
+        "Modo operacional del componente. En modo 'download' cambia el comportamiento del botón principal para emitir evento 'download' en lugar de activar selector de archivos.",
+      control: 'select',
+      options: ['upload', 'download'],
       table: {
-        category: "Principales",
+        category: 'Principales',
         type: { summary: "'upload' | 'download'" },
         defaultValue: { summary: "'upload'" },
       },
     },
     multiple: {
-      description: "Permite seleccionar múltiples archivos mediante el input file.",
-      control: "boolean",
+      description:
+        'Permite seleccionar múltiples archivos mediante el input file.',
+      control: 'boolean',
       table: {
-        category: "Principales",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Principales',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
 
     acceptExtNames: {
-      description: "Array de extensiones permitidas. El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'.",
-      control: "object",
+      description:
+        "Array de extensiones permitidas. El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'.",
+      control: 'object',
       table: {
-        category: "Validación Automática",
-        type: { summary: "string[]" },
-        defaultValue: { summary: "[]" },
+        category: 'Validación Automática',
+        type: { summary: 'string[]' },
+        defaultValue: { summary: '[]' },
       },
     },
     maxSize: {
-      description: "Tamaño máximo permitido (ej: '10MB'). El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'. Para permitir cualquier tamaño, pasa undefined, null o cadena vacía ''.",
-      control: "text",
+      description:
+        "Tamaño máximo permitido (ej: '10MB'). El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'. Para permitir cualquier tamaño, pasa undefined, null o cadena vacía ''.",
+      control: 'text',
       table: {
-        category: "Validación Automática",
-        type: { summary: "string | undefined" },
+        category: 'Validación Automática',
+        type: { summary: 'string | undefined' },
         defaultValue: { summary: "'10MB'" },
       },
     },
     maxFiles: {
-      description: "Número máximo de archivos. El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'.",
-      control: "number",
+      description:
+        "Número máximo de archivos. El componente valida automáticamente y emite errores estructurados a través del evento 'onValidationError'.",
+      control: 'number',
       table: {
-        category: "Validación Automática",
-        type: { summary: "number" },
-        defaultValue: { summary: "undefined" },
+        category: 'Validación Automática',
+        type: { summary: 'number' },
+        defaultValue: { summary: 'undefined' },
       },
     },
 
     uploading: {
-      description: "Estado de carga/upload en progreso. Muestra indicadores de carga.",
-      control: "boolean",
+      description:
+        'Estado de carga/upload en progreso. Muestra indicadores de carga.',
+      control: 'boolean',
       table: {
-        category: "Estados",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Estados',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     uploadError: {
-      description: "Estado de error de carga. Valor booleano controla el estado visual; valor string proporciona mensaje específico de error.",
-      control: "select",
-      options: [false, true, "Error personalizado en la carga"],
+      description:
+        'Estado de error de carga. Valor booleano controla el estado visual; valor string proporciona mensaje específico de error.',
+      control: 'select',
+      options: [false, true, 'Error personalizado en la carga'],
       table: {
-        category: "Estados",
-        type: { summary: "boolean | string" },
-        defaultValue: { summary: "false" },
+        category: 'Estados',
+        type: { summary: 'boolean | string' },
+        defaultValue: { summary: 'false' },
       },
     },
     fileErrors: {
-      description: "Errores específicos por archivo. Índice del archivo como clave y mensaje de error como valor.",
-      control: "object",
+      description:
+        'Errores específicos por archivo. Índice del archivo como clave y mensaje de error como valor.',
+      control: 'object',
       table: {
-        category: "Estados",
-        type: { summary: "Record<number, string>" },
-        defaultValue: { summary: "{}" },
+        category: 'Estados',
+        type: { summary: 'Record<number, string>' },
+        defaultValue: { summary: '{}' },
       },
     },
     fileProgress: {
-      description: "Progreso específico por archivo. Índice del archivo como clave y porcentaje (0-100) como valor.",
-      control: "object",
+      description:
+        'Progreso específico por archivo. Índice del archivo como clave y porcentaje (0-100) como valor.',
+      control: 'object',
       table: {
-        category: "Estados",
-        type: { summary: "Record<number, number>" },
-        defaultValue: { summary: "{}" },
+        category: 'Estados',
+        type: { summary: 'Record<number, number>' },
+        defaultValue: { summary: '{}' },
       },
     },
     disabled: {
-      description: "Deshabilita el componente completamente.",
-      control: "boolean",
+      description: 'Deshabilita el componente completamente.',
+      control: 'boolean',
       table: {
-        category: "Estados",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Estados',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
 
     title: {
       description: "Título del componente. Solo visible en tipo 'default'.",
-      control: "text",
+      control: 'text',
       table: {
-        category: "Interfaz",
-        type: { summary: "string" },
+        category: 'Interfaz',
+        type: { summary: 'string' },
         defaultValue: { summary: "'Seleccionar archivo'" },
       },
     },
     uploadButtonText: {
       description: "Texto del botón de carga. Se usa en tipo 'drag-drop'.",
-      control: "text",
+      control: 'text',
       table: {
-        category: "Interfaz",
-        type: { summary: "string" },
+        category: 'Interfaz',
+        type: { summary: 'string' },
         defaultValue: { summary: "'Haz clic para cargar'" },
       },
     },
     uploadText: {
-      description: "Texto adicional junto al botón. Solo para tipo 'drag-drop'.",
-      control: "text",
+      description:
+        "Texto adicional junto al botón. Solo para tipo 'drag-drop'.",
+      control: 'text',
       table: {
-        category: "Interfaz",
-        type: { summary: "string" },
+        category: 'Interfaz',
+        type: { summary: 'string' },
         defaultValue: { summary: "'un archivo o arrástralo aquí'" },
       },
     },
     restrictionText: {
-      description: "Texto personalizado de restricciones. Solo para tipo 'drag-drop'.",
-      control: "text",
+      description:
+        "Texto personalizado de restricciones. Solo para tipo 'drag-drop'.",
+      control: 'text',
       table: {
-        category: "Interfaz",
-        type: { summary: "string" },
+        category: 'Interfaz',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     infoText: {
       description: "Texto informativo adicional. Solo para tipo 'default'.",
-      control: "text",
+      control: 'text',
       table: {
-        category: "Interfaz",
-        type: { summary: "string" },
+        category: 'Interfaz',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     downloadUrl: {
-      description: "URL del archivo para descargar. Se muestra como un link debajo del texto informativo. Solo visible en tipo 'default' cuando se proporciona junto con downloadLinkText.",
-      control: "text",
+      description:
+        "URL del archivo para descargar. Se muestra como un link debajo del texto informativo. Solo visible en tipo 'default' cuando se proporciona junto con downloadLinkText.",
+      control: 'text',
       table: {
-        category: "Interfaz",
-        type: { summary: "string" },
+        category: 'Interfaz',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     downloadLinkText: {
-      description: "Texto del enlace de descarga. Requerido junto con downloadUrl para mostrar el link. Solo visible en tipo 'default'.",
-      control: "text",
+      description:
+        "Texto del enlace de descarga. Requerido junto con downloadUrl para mostrar el link. Solo visible en tipo 'default'.",
+      control: 'text',
       table: {
-        category: "Interfaz",
-        type: { summary: "string" },
+        category: 'Interfaz',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     showFileSize: {
-      description: "Controla la visibilidad del tamaño del archivo en la lista de archivos cargados.",
-      control: "boolean",
+      description:
+        'Controla la visibilidad del tamaño del archivo en la lista de archivos cargados.',
+      control: 'boolean',
       table: {
-        category: "Interfaz",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Interfaz',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     showRemoveButton: {
-      description: "Controla la visibilidad del botón de eliminar en la lista de archivos cargados.",
-      control: "boolean",
+      description:
+        'Controla la visibilidad del botón de eliminar en la lista de archivos cargados.',
+      control: 'boolean',
       table: {
-        category: "Interfaz",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Interfaz',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     showUploadButton: {
-      description: "Controla la visibilidad del botón principal. En tipo 'default', al establecer false se oculta el ícono interno y el componente queda sin disparador de UI para abrir el selector (puede usarse openFilePicker de forma programática). Según el estado/modo, también puede ocultar acciones como reintento o descarga.",
-      control: "boolean",
+      description:
+        "Controla la visibilidad del botón principal. En tipo 'default', al establecer false se oculta el ícono interno y el componente queda sin disparador de UI para abrir el selector (puede usarse openFilePicker de forma programática). Según el estado/modo, también puede ocultar acciones como reintento o descarga.",
+      control: 'boolean',
       table: {
-        category: "Interfaz",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Interfaz',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
 
     validateEvent: {
-      description: "Activa la validación del formulario cuando se modifican los archivos.",
-      control: "boolean",
+      description:
+        'Activa la validación del formulario cuando se modifican los archivos.',
+      control: 'boolean',
       table: {
-        category: "Formularios",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Formularios',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     inputId: {
-      description: "ID único para el elemento input file interno y las asociaciones de accesibilidad (aria-describedby). Se usa principalmente para integración con formularios y etiquetas de accesibilidad. Si no se proporciona, se genera automáticamente cuando está dentro de un FormItem.",
-      control: "text",
+      description:
+        'ID único para el elemento input file interno y las asociaciones de accesibilidad (aria-describedby). Se usa principalmente para integración con formularios y etiquetas de accesibilidad. Si no se proporciona, se genera automáticamente cuando está dentro de un FormItem.',
+      control: 'text',
       table: {
-        category: "Formularios",
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        category: 'Formularios',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
 
-    "onUpdate:modelValue": {
-      description: "Evento emitido cuando cambian los archivos seleccionados.",
+    'onUpdate:modelValue': {
+      description: 'Evento emitido cuando cambian los archivos seleccionados.',
       table: {
-        category: "Eventos",
-        type: { summary: "(files: File[]) => void" },
+        category: 'Eventos',
+        type: { summary: '(files: File[]) => void' },
       },
     },
     onChange: {
-      description: "Evento emitido cuando se modifica la selección de archivos.",
+      description:
+        'Evento emitido cuando se modifica la selección de archivos.',
       table: {
-        category: "Eventos",
-        type: { summary: "(files: File[]) => void" },
+        category: 'Eventos',
+        type: { summary: '(files: File[]) => void' },
       },
     },
     onError: {
-      description: "Evento emitido cuando ocurren errores durante la validación o manipulación de archivos.",
+      description:
+        'Evento emitido cuando ocurren errores durante la validación o manipulación de archivos.',
       table: {
-        category: "Eventos",
-        type: { summary: "(error: string | Error) => void" },
+        category: 'Eventos',
+        type: { summary: '(error: string | Error) => void' },
       },
     },
     onValidationError: {
-      description: "Evento emitido con errores de validación estructurados. Recibe un array de objetos ValidationError con propiedades: type ('file-size-exceeded' | 'invalid-file-type' | 'max-files-exceeded'), file (opcional), message (opcional), y data (información adicional específica del error).",
+      description:
+        "Evento emitido con errores de validación estructurados. Recibe un array de objetos ValidationError con propiedades: type ('file-size-exceeded' | 'invalid-file-type' | 'max-files-exceeded'), file (opcional), message (opcional), y data (información adicional específica del error).",
       table: {
-        category: "Eventos",
-        type: { summary: "(errors: ValidationError[]) => void" },
+        category: 'Eventos',
+        type: { summary: '(errors: ValidationError[]) => void' },
       },
     },
     onRetry: {
-      description: "Evento emitido cuando se hace clic en reintentar después de un error.",
+      description:
+        'Evento emitido cuando se hace clic en reintentar después de un error.',
       table: {
-        category: "Eventos",
-        type: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: '() => void' },
       },
     },
     onClearProgress: {
-      description: "Evento emitido automáticamente cuando el estado 'uploading' cambia de true a false.",
+      description:
+        "Evento emitido automáticamente cuando el estado 'uploading' cambia de true a false.",
       table: {
-        category: "Eventos",
-        type: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: '() => void' },
       },
     },
     onDownload: {
-      description: "Evento emitido en modo download cuando se hace clic en el botón.",
+      description:
+        'Evento emitido en modo download cuando se hace clic en el botón.',
       table: {
-        category: "Eventos",
-        type: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: '() => void' },
       },
     },
 
     addFiles: {
-      description: "Método público para agregar archivos programáticamente. Aplica todas las validaciones automáticas del componente (tamaño, tipo, cantidad) antes de añadir los archivos válidos al modelo.",
+      description:
+        'Método público para agregar archivos programáticamente. Aplica todas las validaciones automáticas del componente (tamaño, tipo, cantidad) antes de añadir los archivos válidos al modelo.',
       table: {
-        category: "Métodos Públicos",
-        type: { summary: "(files: File[]) => void" },
+        category: 'Métodos Públicos',
+        type: { summary: '(files: File[]) => void' },
       },
     },
 
     openFilePicker: {
-      description: "Abre el diálogo de selección de archivos de forma programática. Solo disponible para type='default'.",
+      description:
+        "Abre el diálogo de selección de archivos de forma programática. Solo disponible para type='default'.",
       table: {
-        category: "Métodos Públicos",
-        type: { summary: "() => void" },
+        category: 'Métodos Públicos',
+        type: { summary: '() => void' },
       },
     },
 
-    "extra-content": {
-      description: "Slot para agregar contenido adicional debajo de la lista de archivos. Útil para mostrar mensajes de error personalizados, información adicional o validaciones externas. Solo disponible en tipo 'default'.",
+    'extra-content': {
+      description:
+        "Slot para agregar contenido adicional debajo de la lista de archivos. Útil para mostrar mensajes de error personalizados, información adicional o validaciones externas. Solo disponible en tipo 'default'.",
       table: {
-        category: "Slots",
-        type: { summary: "Slot" },
+        category: 'Slots',
+        type: { summary: 'Slot' },
       },
     },
   },
   args: {
-    type: "default",
-    mode: "upload",
+    type: 'default',
+    mode: 'upload',
     modelValue: [],
     multiple: true,
     acceptExtNames: [],
-    maxSize: "10MB",
+    maxSize: '10MB',
     maxFiles: undefined,
     uploading: false,
     uploadError: false,
     fileErrors: {},
     fileProgress: {},
     disabled: false,
-    title: "Seleccionar archivo",
-    uploadButtonText: "Haz clic para cargar",
-    uploadText: "un archivo o arrástralo aquí",
-    restrictionText: "",
-    infoText: "",
-    downloadUrl: "",
-    downloadLinkText: "",
+    title: 'Seleccionar archivo',
+    uploadButtonText: 'Haz clic para cargar',
+    uploadText: 'un archivo o arrástralo aquí',
+    restrictionText: '',
+    infoText: '',
+    downloadUrl: '',
+    downloadLinkText: '',
     showFileSize: true,
     showRemoveButton: true,
     showUploadButton: true,
@@ -522,15 +556,16 @@ export default meta;
 type Story = StoryObj<typeof GAttachFile>;
 
 export const Primary: Story = {
-  name: "Básico",
+  name: 'Básico',
   args: {
-    maxSize: "",
+    maxSize: '',
     acceptExtNames: [],
   },
   parameters: {
     docs: {
       description: {
-        story: "Implementación básica del componente con configuración estándar que acepta cualquier tipo de archivo y cualquier tamaño. Permite explorar todas las propiedades disponibles desde los controles."
+        story:
+          'Implementación básica del componente con configuración estándar que acepta cualquier tipo de archivo y cualquier tamaño. Permite explorar todas las propiedades disponibles desde los controles.',
       },
       source: {
         code: `<script setup lang="ts">
@@ -548,11 +583,11 @@ const files = ref<File[]>([])
     max-size=""
     :accept-ext-names="[]"
   />
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GAttachFile, GConfigProvider },
     setup() {
       const files = ref<File[]>([]);
@@ -566,16 +601,17 @@ const files = ref<File[]>([])
           v-model="files"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const DragDrop: Story = {
-  name: "Arrastrar y Soltar",
+  name: 'Arrastrar y Soltar',
   parameters: {
     docs: {
       description: {
-        story: "El tipo 'drag-drop' proporciona una zona de arastrar y soltar que acepta cualquier tipo de archivo y cualquier tamaño"
+        story:
+          "El tipo 'drag-drop' proporciona una zona de arastrar y soltar que acepta cualquier tipo de archivo y cualquier tamaño",
       },
       source: {
         code: `<script setup lang="ts">
@@ -595,9 +631,9 @@ const files = ref<File[]>([])
     upload-text=" o arrastra aquí"
     :multiple="true"
   />
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
   render: () => ({
     components: { GAttachFile, GConfigProvider },
@@ -634,12 +670,12 @@ const files = ref<File[]>([])
           @validation-error="handleValidationError"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const ComponentStates: Story = {
-  name: "Estados del Componente",
+  name: 'Estados del Componente',
   parameters: {
     docs: {
       description: {
@@ -653,7 +689,7 @@ Demostración completa de todos los estados visuales disponibles en ambos tipos 
 - **Deshabilitado**: Componente inactivo con indicadores apropiados
 
 Cada estado proporciona retroalimentación visual clara y acciones contextualmente apropiadas.
-        `
+        `,
       },
       source: {
         code: `<script setup lang="ts">
@@ -696,28 +732,34 @@ const handleRetry = () => {
     info-text="Este campo no está disponible"
     disabled
   />
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
   render: () => ({
     components: { GAttachFile, GConfigProvider },
     setup() {
-      const createMockFile = (name: string, size: number = 1024000, type: string = "application/pdf") => {
-        const file = new File([""], name, { type });
-        Object.defineProperty(file, "size", { value: size });
+      const createMockFile = (
+        name: string,
+        size: number = 1024000,
+        type: string = 'application/pdf',
+      ) => {
+        const file = new File([''], name, { type });
+        Object.defineProperty(file, 'size', { value: size });
         return file;
       };
 
       const normalFiles = ref<File[]>([]);
       const uploadingFiles = ref<File[]>([
-        createMockFile("documento1.pdf", 1024000),
-        createMockFile("imagen1.jpg", 2048000, "image/jpeg")
+        createMockFile('documento1.pdf', 1024000),
+        createMockFile('imagen1.jpg', 2048000, 'image/jpeg'),
       ]);
-      const errorFiles = ref<File[]>([createMockFile("documento_error.pdf")]);
+      const errorFiles = ref<File[]>([createMockFile('documento_error.pdf')]);
       const disabledFiles = ref<File[]>([]);
 
-      const fileErrors = ref<Record<number, string>>({ 0: "Error de conexión al servidor" });
+      const fileErrors = ref<Record<number, string>>({
+        0: 'Error de conexión al servidor',
+      });
 
       const handleUpdate = (filesRef: any) => (selectedFiles: File[]) => {
         filesRef.value = selectedFiles;
@@ -730,14 +772,14 @@ const handleRetry = () => {
         fileErrors.value = {};
       };
 
-      return { 
-        normalFiles, 
-        uploadingFiles, 
-        errorFiles, 
-        disabledFiles, 
+      return {
+        normalFiles,
+        uploadingFiles,
+        errorFiles,
+        disabledFiles,
         fileErrors,
         handleUpdate,
-        handleRetry 
+        handleRetry,
       };
     },
     template: `
@@ -856,12 +898,12 @@ const handleRetry = () => {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const FlujoCargaCompleto: Story = {
-  name: "Flujo de Carga Completo",
+  name: 'Flujo de Carga Completo',
   parameters: {
     docs: {
       description: {
@@ -871,138 +913,152 @@ Validaciones automáticas con manejo de mensajes de error.
 ### Pruebas sugeridas:
 - Cargar archivo > 1MB → Error de tamaño
 - Cargar más de 2 archivos → Error de cantidad
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   render: () => ({
-    components: { GAttachFile, GConfigProvider, GForm, GFormItem, GButton, GInput },
+    components: {
+      GAttachFile,
+      GConfigProvider,
+      GForm,
+      GFormItem,
+      GButton,
+      GInput,
+    },
     setup() {
-      const files = ref<File[]>([])
-      const uploading = ref(false)
-      const uploadError = ref(false)
-      const validationErrorMsg = ref('')
-      const maxFilesErrorMsg = ref('')
-      const fileProgress = ref({})
-      const fileErrors = ref({})
-      
+      const files = ref<File[]>([]);
+      const uploading = ref(false);
+      const uploadError = ref(false);
+      const validationErrorMsg = ref('');
+      const maxFilesErrorMsg = ref('');
+      const fileProgress = ref({});
+      const fileErrors = ref({});
+
       const simulateUpload = async (filesArray: File[]) => {
-        if (filesArray.length === 0) return
-        
-        uploading.value = true
-        uploadError.value = false
-        fileErrors.value = {}
-        fileProgress.value = {}
-        
+        if (filesArray.length === 0) return;
+
+        uploading.value = true;
+        uploadError.value = false;
+        fileErrors.value = {};
+        fileProgress.value = {};
+
         for (let i = 0; i < filesArray.length; i++) {
-          fileProgress.value = { ...fileProgress.value, [i]: 0 }
+          fileProgress.value = { ...fileProgress.value, [i]: 0 };
         }
-        
-       
-        const progressSteps = 20
-        const stepDelay = 150 
-        
+
+        const progressSteps = 20;
+        const stepDelay = 150;
+
         for (let step = 0; step <= progressSteps; step++) {
-          await new Promise(resolve => setTimeout(resolve, stepDelay))
-          
-          const progressPercent = Math.round((step / progressSteps) * 100)
-          
+          await new Promise(resolve => setTimeout(resolve, stepDelay));
+
+          const progressPercent = Math.round((step / progressSteps) * 100);
+
           for (let i = 0; i < filesArray.length; i++) {
-            const randomVariation = Math.random() * 10 - 5
-            const adjustedProgress = Math.min(100, Math.max(0, progressPercent + randomVariation))
-            fileProgress.value = { ...fileProgress.value, [i]: Math.round(adjustedProgress) }
+            const randomVariation = Math.random() * 10 - 5;
+            const adjustedProgress = Math.min(
+              100,
+              Math.max(0, progressPercent + randomVariation),
+            );
+            fileProgress.value = {
+              ...fileProgress.value,
+              [i]: Math.round(adjustedProgress),
+            };
           }
         }
-        
-        await new Promise(resolve => setTimeout(resolve, 500))
-        
-        const shouldFail = Math.random() < 0.6
-        
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const shouldFail = Math.random() < 0.6;
+
         if (shouldFail) {
-          const errorFileIndex = Math.floor(Math.random() * filesArray.length)
+          const errorFileIndex = Math.floor(Math.random() * filesArray.length);
           const errorMessages = [
             'Error de conexión al servidor',
             'Archivo corrupto detectado',
             'Formato no soportado por el servidor',
-            'Timeout en la carga'
-          ]
-          const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)]
-          
-          fileErrors.value = { [errorFileIndex]: randomError }
-        } 
-        
-        uploading.value = false
-      }
-      
+            'Timeout en la carga',
+          ];
+          const randomError =
+            errorMessages[Math.floor(Math.random() * errorMessages.length)];
+
+          fileErrors.value = { [errorFileIndex]: randomError };
+        }
+
+        uploading.value = false;
+      };
+
       function handleValidationError(errors: ValidationError[]) {
-        let generalMsg = ''
-        let maxFilesError = ''
-        
-        errors.forEach((error) => {
+        let generalMsg = '';
+        let maxFilesError = '';
+
+        errors.forEach(error => {
           if (!error) return;
           if (error.type === 'file-size-exceeded') {
-            const sizeMB = Math.round((error.file?.size || 0) / (1024 * 1024) * 100) / 100
-            generalMsg = `"${error.file?.name}" (${sizeMB}MB) excede el límite de ${error.data?.maxSize || '2MB'}`
+            const sizeMB =
+              Math.round(((error.file?.size || 0) / (1024 * 1024)) * 100) / 100;
+            generalMsg = `"${error.file?.name}" (${sizeMB}MB) excede el límite de ${error.data?.maxSize || '2MB'}`;
           } else if (error.type === 'invalid-file-type') {
-            generalMsg = `"${error.file?.name}" tipo no válido. Solo ${error.data?.acceptedExtensions?.join(', ') || 'tipos específicos'}`
+            generalMsg = `"${error.file?.name}" tipo no válido. Solo ${error.data?.acceptedExtensions?.join(', ') || 'tipos específicos'}`;
           } else if (error.type === 'max-files-exceeded') {
-            maxFilesError = `Máximo ${error.data?.maxFiles} archivos permitidos (intentaste subir ${error.data?.totalAttempted || 'varios'})`
+            maxFilesError = `Máximo ${error.data?.maxFiles} archivos permitidos (intentaste subir ${error.data?.totalAttempted || 'varios'})`;
           }
-        })
-        
-        validationErrorMsg.value = generalMsg
-        maxFilesErrorMsg.value = maxFilesError
+        });
+
+        validationErrorMsg.value = generalMsg;
+        maxFilesErrorMsg.value = maxFilesError;
       }
-      
+
       function handleUpdate(selectedFiles: File[]) {
-        console.log('📁 Archivos actualizados:', selectedFiles.length)
-        files.value = selectedFiles
-        
+        console.log('📁 Archivos actualizados:', selectedFiles.length);
+        files.value = selectedFiles;
+
         if (selectedFiles.length >= 0) {
-          validationErrorMsg.value = ''
-          maxFilesErrorMsg.value = ''
+          validationErrorMsg.value = '';
+          maxFilesErrorMsg.value = '';
         }
-        
+
         if (selectedFiles.length > 0 && !uploading.value) {
-          simulateUpload(selectedFiles)
+          simulateUpload(selectedFiles);
         }
       }
-      
+
       function handleRetry() {
-        uploadError.value = false
-        fileErrors.value = {}
-        fileProgress.value = {}
-        validationErrorMsg.value = ''
-        maxFilesErrorMsg.value = ''
-        
+        uploadError.value = false;
+        fileErrors.value = {};
+        fileProgress.value = {};
+        validationErrorMsg.value = '';
+        maxFilesErrorMsg.value = '';
+
         if (files.value.length > 0) {
-          simulateUpload(files.value)
+          simulateUpload(files.value);
         }
       }
-      
+
       function handleClearAll() {
-        files.value = []
-        uploading.value = false
-        uploadError.value = false
-        validationErrorMsg.value = ''
-        maxFilesErrorMsg.value = ''
-        fileProgress.value = {}
-        fileErrors.value = {}
+        files.value = [];
+        uploading.value = false;
+        uploadError.value = false;
+        validationErrorMsg.value = '';
+        maxFilesErrorMsg.value = '';
+        fileProgress.value = {};
+        fileErrors.value = {};
       }
-      
-      return { 
-        files, 
+
+      return {
+        files,
         uploading,
         uploadError,
-        validationErrorMsg, 
+        validationErrorMsg,
         maxFilesErrorMsg,
         fileProgress,
         fileErrors,
-        handleValidationError, 
-        handleUpdate, 
+        handleValidationError,
+        handleUpdate,
         handleRetry,
-        handleClearAll
-      }
+        handleClearAll,
+      };
     },
     template: `
       <g-config-provider>
@@ -1037,18 +1093,19 @@ Validaciones automáticas con manejo de mensajes de error.
         
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const DownloadMode: Story = {
-  name: "Modo Descarga",
+  name: 'Modo Descarga',
   parameters: {
     docs: {
       description: {
         story: `
 En modo descarga, el componente cambia su comportamiento para mostrar un icono de descarga y emitir un evento 'download' en lugar de abrir el selector de archivos.
- ` },
+ `,
+      },
       source: {
         code: `<script setup lang="ts">
 import { GAttachFile } from '@flash-global66/g-attach-file'
@@ -1069,18 +1126,19 @@ const handleDownload = () => {
     info-text="Haz clic para descargar el archivo de plantilla"
     @download="handleDownload"
   />
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
   render: () => ({
     components: { GAttachFile, GConfigProvider },
     setup() {
       const handleDownload = () => {
         action('download')();
-        
+
         const link = document.createElement('a');
-        link.href = 'data:text/plain;charset=utf-8,Este es un archivo de ejemplo para descarga.';
+        link.href =
+          'data:text/plain;charset=utf-8,Este es un archivo de ejemplo para descarga.';
         link.download = 'plantilla-ejemplo.txt';
         link.click();
       };
@@ -1098,12 +1156,12 @@ const handleDownload = () => {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const DownloadLink: Story = {
-  name: "Con Link de Descarga",
+  name: 'Con Link de Descarga',
   parameters: {
     docs: {
       description: {
@@ -1114,7 +1172,7 @@ Ejemplo del componente con un link de descarga integrado. Útil cuando se necesi
 - **downloadUrl**: URL del archivo a descargar
 - **downloadLinkText**: Texto del enlace (requerido si se usa downloadUrl)
 - **slot extra-content**: Permite agregar contenido adicional dentro del componente (errores, mensajes, etc.)
-        `
+        `,
       },
       source: {
         code: `<script setup lang="ts">
@@ -1158,9 +1216,9 @@ const files = ref<File[]>([])
       </div>
     </template>
   </g-attach-file>
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
   render: () => ({
     components: { GAttachFile, GConfigProvider },
@@ -1231,16 +1289,16 @@ const files = ref<File[]>([])
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const FormIntegration: Story = {
-  name: "Integración con Formularios",
+  name: 'Integración con Formularios',
   parameters: {
     docs: {
       description: {
-        story: `Integración del componente GAttachFile con GForm y validaciones de formulario.`
+        story: `Integración del componente GAttachFile con GForm y validaciones de formulario.`,
       },
       source: {
         code: `<script setup lang="ts">
@@ -1299,36 +1357,40 @@ const handleSubmit = async () => {
       Enviar Documentos
     </g-button>
   </g-form>
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
   render: () => ({
-    components: { 
-      GAttachFile, 
-      GConfigProvider, 
-      GForm, 
-      GFormItem, 
-      GButton, 
-      GInput 
+    components: {
+      GAttachFile,
+      GConfigProvider,
+      GForm,
+      GFormItem,
+      GButton,
+      GInput,
     },
     setup() {
       const formRef = ref();
       const formData = reactive({
         name: '',
-        documents: [] as File[]
+        documents: [] as File[],
       });
 
       const rules = {
         name: [
-          { required: true, message: 'El nombre es requerido', trigger: 'blur' },
-          { min: 3, message: 'Mínimo 3 caracteres', trigger: 'blur' }
+          {
+            required: true,
+            message: 'El nombre es requerido',
+            trigger: 'blur',
+          },
+          { min: 3, message: 'Mínimo 3 caracteres', trigger: 'blur' },
         ],
         documents: [
-          { 
-            required: true, 
-            message: 'Debe adjuntar al menos un documento', 
-            trigger: 'change' 
+          {
+            required: true,
+            message: 'Debe adjuntar al menos un documento',
+            trigger: 'change',
           },
           {
             validator: (rule: any, files: File[], callback: any) => {
@@ -1336,38 +1398,46 @@ const handleSubmit = async () => {
                 callback(new Error('Los documentos son obligatorios'));
                 return;
               }
-              
-              const hasPdf = files.some(file => file.name.toLowerCase().endsWith('.pdf'));
+
+              const hasPdf = files.some(file =>
+                file.name.toLowerCase().endsWith('.pdf'),
+              );
               if (!hasPdf) {
                 callback(new Error('Debe incluir al menos un documento PDF'));
                 return;
               }
-              
+
               const hasDescriptiveName = files.every(file => {
                 const name = file.name.toLowerCase();
-                return name.length > 10 || 
-                       name.includes('documento') || 
-                       name.includes('certificado') ||
-                       name.includes('comprobante');
+                return (
+                  name.length > 10 ||
+                  name.includes('documento') ||
+                  name.includes('certificado') ||
+                  name.includes('comprobante')
+                );
               });
-              
+
               if (!hasDescriptiveName) {
-                callback(new Error('Los archivos deben tener nombres descriptivos (ej: "documento_identidad.pdf")'));
+                callback(
+                  new Error(
+                    'Los archivos deben tener nombres descriptivos (ej: "documento_identidad.pdf")',
+                  ),
+                );
                 return;
               }
-              
+
               callback();
             },
-            trigger: 'change'
-          }
-        ]
+            trigger: 'change',
+          },
+        ],
       };
 
       const validationErrors = ref<string[]>([]);
 
       async function handleSubmit() {
         if (!formRef.value) return;
-        
+
         try {
           const valid = await formRef.value.validate();
           if (valid) {
@@ -1387,7 +1457,7 @@ const handleSubmit = async () => {
 
       const handleValidationError = (errors: ValidationError[]) => {
         action('validation-error')(errors);
-        
+
         const messages = errors.map(error => {
           switch (error.type) {
             case 'file-size-exceeded':
@@ -1400,19 +1470,19 @@ const handleSubmit = async () => {
               return 'Error de validación';
           }
         });
-        
+
         validationErrors.value = messages;
-        setTimeout(() => validationErrors.value = [], 5000);
+        setTimeout(() => (validationErrors.value = []), 5000);
       };
 
-      return { 
+      return {
         formRef,
-        formData, 
+        formData,
         rules,
         validationErrors,
-        handleSubmit, 
+        handleSubmit,
         handleReset,
-        handleValidationError
+        handleValidationError,
       };
     },
     template: `
@@ -1476,16 +1546,16 @@ const handleSubmit = async () => {
           </g-form>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const AddFilesMethod: Story = {
-  name: "Método addFiles",
+  name: 'Método addFiles',
   parameters: {
     docs: {
       description: {
-        story: `Método  \`addFiles\` que permite agregar archivos programáticamente al componente.`
+        story: `Método  \`addFiles\` que permite agregar archivos programáticamente al componente.`,
       },
       source: {
         code: `<script setup lang="ts">
@@ -1520,50 +1590,56 @@ const addMockFiles = () => {
   <g-button @click="addMockFiles">
     Agregar archivos de ejemplo
   </g-button>
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
   render: () => ({
     components: { GAttachFile, GConfigProvider, GButton },
     setup() {
-      const files = ref<File[]>([])
-      const attachFileRef = ref()
-      
+      const files = ref<File[]>([]);
+      const attachFileRef = ref();
+
       const addMockFiles = () => {
         const mockFiles = [
-          new File(['contenido PDF de ejemplo'], 'documento-ejemplo.pdf', { type: 'application/pdf' }),
-          new File(['contenido imagen de ejemplo'], 'imagen-ejemplo.jpg', { type: 'image/jpeg' })
-        ]
-        
-        Object.defineProperty(mockFiles[0], 'size', { value: 1024 * 500 })
-        Object.defineProperty(mockFiles[1], 'size', { value: 1024 * 800 })
-        
-        if (attachFileRef.value?.addFiles) {
-          attachFileRef.value.addFiles(mockFiles)
-        }
-      }
-      
-      const addSingleFile = () => {
-        const singleFile = new File(['contenido de texto'], 'nota.txt', { type: 'text/plain' })
-        Object.defineProperty(singleFile, 'size', { value: 1024 * 100 })
-        
-        if (attachFileRef.value?.addFiles) {
-          attachFileRef.value.addFiles([singleFile])
-        }
-      }
-      
-      const clearFiles = () => {
-        files.value = []
-      }
+          new File(['contenido PDF de ejemplo'], 'documento-ejemplo.pdf', {
+            type: 'application/pdf',
+          }),
+          new File(['contenido imagen de ejemplo'], 'imagen-ejemplo.jpg', {
+            type: 'image/jpeg',
+          }),
+        ];
 
-      return { 
-        files, 
-        attachFileRef, 
-        addMockFiles, 
+        Object.defineProperty(mockFiles[0], 'size', { value: 1024 * 500 });
+        Object.defineProperty(mockFiles[1], 'size', { value: 1024 * 800 });
+
+        if (attachFileRef.value?.addFiles) {
+          attachFileRef.value.addFiles(mockFiles);
+        }
+      };
+
+      const addSingleFile = () => {
+        const singleFile = new File(['contenido de texto'], 'nota.txt', {
+          type: 'text/plain',
+        });
+        Object.defineProperty(singleFile, 'size', { value: 1024 * 100 });
+
+        if (attachFileRef.value?.addFiles) {
+          attachFileRef.value.addFiles([singleFile]);
+        }
+      };
+
+      const clearFiles = () => {
+        files.value = [];
+      };
+
+      return {
+        files,
+        attachFileRef,
+        addMockFiles,
         addSingleFile,
-        clearFiles
-      }
+        clearFiles,
+      };
     },
     template: `
       <g-config-provider>
@@ -1601,25 +1677,27 @@ const addMockFiles = () => {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const ReadOnlySingle: Story = {
-  name: "Estado Solo Lectura (Un Archivo)",
+  name: 'Estado Solo Lectura (Un Archivo)',
   args: {
-    title: "Documento Aprobado",
-    infoText: "Este documento ya ha sido validado y no puede ser modificado.",
+    title: 'Documento Aprobado',
+    infoText: 'Este documento ya ha sido validado y no puede ser modificado.',
     showFileSize: false,
     showRemoveButton: false,
     disabled: true,
-    downloadUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-    downloadLinkText: "Ver documento",
+    downloadUrl:
+      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    downloadLinkText: 'Ver documento',
   },
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo de configuración para mostrar un único archivo en estado de solo lectura o aprobado, con enlace para visualizar el documento."
+        story:
+          'Ejemplo de configuración para mostrar un único archivo en estado de solo lectura o aprobado, con enlace para visualizar el documento.',
       },
       source: {
         code: `<script setup lang="ts">
@@ -1643,17 +1721,19 @@ const files = ref<File[]>([
     :show-remove-button="false"
     :disabled="true"
   />
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GAttachFile, GConfigProvider },
     setup() {
       const files = ref<File[]>([
-        new File(['dummy content'], 'documento_validado.pdf', { type: 'application/pdf' })
+        new File(['dummy content'], 'documento_validado.pdf', {
+          type: 'application/pdf',
+        }),
       ]);
-      
+
       return { args, files };
     },
     template: `
@@ -1663,15 +1743,16 @@ const files = ref<File[]>([
           v-model="files"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const ReadOnlyMultiple: Story = {
-  name: "Estado Solo Lectura (Múltiples Archivos)",
+  name: 'Estado Solo Lectura (Múltiples Archivos)',
   args: {
-    title: "Documentos Aprobados",
-    infoText: "Estos documentos ya han sido validados y no pueden ser modificados.",
+    title: 'Documentos Aprobados',
+    infoText:
+      'Estos documentos ya han sido validados y no pueden ser modificados.',
     showFileSize: false,
     showRemoveButton: false,
     disabled: true,
@@ -1679,7 +1760,8 @@ export const ReadOnlyMultiple: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo de configuración para mostrar múltiples archivos en estado de solo lectura o aprobados."
+        story:
+          'Ejemplo de configuración para mostrar múltiples archivos en estado de solo lectura o aprobados.',
       },
       source: {
         code: `<script setup lang="ts">
@@ -1703,19 +1785,25 @@ const files = ref<File[]>([
     :show-remove-button="false"
     :disabled="true"
   />
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GAttachFile, GConfigProvider },
     setup() {
       const files = ref<File[]>([
-        new File(['dummy content'], 'documento_validado.pdf', { type: 'application/pdf' }),
-        new File(['dummy content'], 'comprobante_pago.jpg', { type: 'image/jpeg' }),
-        new File(['dummy content'], 'identificacion_frontal.png', { type: 'image/png' })
+        new File(['dummy content'], 'documento_validado.pdf', {
+          type: 'application/pdf',
+        }),
+        new File(['dummy content'], 'comprobante_pago.jpg', {
+          type: 'image/jpeg',
+        }),
+        new File(['dummy content'], 'identificacion_frontal.png', {
+          type: 'image/png',
+        }),
       ]);
-      
+
       return { args, files };
     },
     template: `
@@ -1725,16 +1813,16 @@ const files = ref<File[]>([
           v-model="files"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const ReadOnlyDragDrop: Story = {
-  name: "Estado Solo Lectura (Drag & Drop)",
+  name: 'Estado Solo Lectura (Drag & Drop)',
   args: {
-    type: "drag-drop",
-    uploadButtonText: "Cargar archivos",
-    uploadText: "o arrastra aquí",
+    type: 'drag-drop',
+    uploadButtonText: 'Cargar archivos',
+    uploadText: 'o arrastra aquí',
     showFileSize: false,
     showRemoveButton: false,
     disabled: true,
@@ -1742,7 +1830,8 @@ export const ReadOnlyDragDrop: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo de configuración para el modo Drag & Drop en estado de solo lectura. Muestra la lista de archivos sin opciones de eliminación ni tamaño."
+        story:
+          'Ejemplo de configuración para el modo Drag & Drop en estado de solo lectura. Muestra la lista de archivos sin opciones de eliminación ni tamaño.',
       },
       source: {
         code: `<script setup lang="ts">
@@ -1763,18 +1852,22 @@ const files = ref<File[]>([
     :show-remove-button="false"
     :disabled="true"
   />
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GAttachFile, GConfigProvider },
     setup() {
       const files = ref<File[]>([
-        new File(['dummy content'], 'contrato_firmado.pdf', { type: 'application/pdf' }),
-        new File(['dummy content'], 'anexo_1.docx', { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' })
+        new File(['dummy content'], 'contrato_firmado.pdf', {
+          type: 'application/pdf',
+        }),
+        new File(['dummy content'], 'anexo_1.docx', {
+          type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        }),
       ]);
-      
+
       return { args, files };
     },
     template: `
@@ -1784,23 +1877,24 @@ const files = ref<File[]>([
           v-model="files"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const DefaultSimpleNoUploadButton: Story = {
-  name: "Default simple (sin ícono)",
+  name: 'Default simple (sin ícono)',
   args: {
-    type: "default",
+    type: 'default',
     showUploadButton: false,
-    infoText: "Usa el botón externo para abrir el selector de archivos.",
-    maxSize: "",
+    infoText: 'Usa el botón externo para abrir el selector de archivos.',
+    maxSize: '',
     acceptExtNames: [],
   },
   parameters: {
     docs: {
       description: {
-        story: "Ejemplo del modo default sin ícono de carga interno. Se utiliza un botón externo para activar el selector de archivos de forma explícita."
+        story:
+          'Ejemplo del modo default sin ícono de carga interno. Se utiliza un botón externo para activar el selector de archivos de forma explícita.',
       },
       source: {
         code: `<script setup lang="ts">
@@ -1828,11 +1922,11 @@ const handleOpenFilePicker = () => {
   <g-button @click="handleOpenFilePicker">
     Seleccionar archivo
   </g-button>
-</template>`
-      }
-    }
+</template>`,
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GAttachFile, GConfigProvider, GButton },
     setup() {
       const files = ref<File[]>([]);
@@ -1859,6 +1953,6 @@ const handleOpenFilePicker = () => {
           </g-button>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };

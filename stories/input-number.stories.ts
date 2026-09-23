@@ -1,9 +1,15 @@
-import { Meta, StoryObj } from '@storybook/vue3'
-import { ref, watch } from 'vue'
-import { GInputNumber } from '../components/input-number'
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
-import { version, peerDependencies } from '../components/input-number/package.json'
-import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories'
+import { Meta, StoryObj } from '@storybook/vue3';
+import { ref, watch } from 'vue';
+import { GInputNumber } from '../components/input-number';
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
+import {
+  version,
+  peerDependencies,
+} from '../components/input-number/package.json';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 export default {
   title: 'Form/Input Number',
@@ -54,9 +60,9 @@ yarn add ${generatePeerDepsInstalls(peerDependencies)}
 # Dependencias externas
 yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     modelValue: {
@@ -209,7 +215,7 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
     },
     disabledScientific: {
       control: 'boolean',
-      description: 'Deshabilitar notación científica (e.g. \'e\', \'E\')',
+      description: "Deshabilitar notación científica (e.g. 'e', 'E')",
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
@@ -236,7 +242,10 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
       description: 'Se dispara cuando el valor cambia',
       table: {
         category: 'Eventos',
-        type: { summary: '(cur: number | undefined, prev: number | undefined) => void' },
+        type: {
+          summary:
+            '(cur: number | undefined, prev: number | undefined) => void',
+        },
       },
     },
     onInput: {
@@ -264,35 +273,36 @@ yarn add ${generatePeerDepsInstalls(peerDependencies, true)}
       },
     },
   },
-} as Meta<typeof GInputNumber>
+} as Meta<typeof GInputNumber>;
 
-type Story = StoryObj<typeof GInputNumber>
+type Story = StoryObj<typeof GInputNumber>;
 
-const render: Story['render'] = (args) => ({
+const render: Story['render'] = args => ({
   components: { GInputNumber, GConfigProvider },
   setup() {
-    const modelValue = ref(args.modelValue ?? 1)
+    const modelValue = ref(args.modelValue ?? 1);
     watch(
       () => args.modelValue,
-      (newVal) => {
-        modelValue.value = newVal ?? 1
-      }
-    )
-    return { args, modelValue }
+      newVal => {
+        modelValue.value = newVal ?? 1;
+      },
+    );
+    return { args, modelValue };
   },
   template: `
     <g-config-provider>
       <g-input-number v-bind="args" v-model="modelValue" />
     </g-config-provider>
   `,
-})
+});
 
 export const Default: Story = {
   name: 'Por defecto',
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo de uso del componente `g-input-number` con sus propiedades por defecto.',
+        story:
+          'Ejemplo de uso del componente `g-input-number` con sus propiedades por defecto.',
       },
     },
   },
@@ -301,7 +311,7 @@ export const Default: Story = {
     modelValue: 1,
     placeholder: 'Ingresa un número',
   },
-}
+};
 
 export const Disabled: Story = {
   name: 'Deshabilitado',
@@ -318,14 +328,15 @@ export const Disabled: Story = {
     disabled: true,
     placeholder: 'Input deshabilitado',
   },
-}
+};
 
 export const Readonly: Story = {
   name: 'Solo lectura',
   parameters: {
     docs: {
       description: {
-        story: 'Si no se requiere que el valor pueda ser modificado, activa esta propiedad.',
+        story:
+          'Si no se requiere que el valor pueda ser modificado, activa esta propiedad.',
       },
     },
   },
@@ -335,14 +346,15 @@ export const Readonly: Story = {
     readonly: true,
     placeholder: 'Input solo lectura',
   },
-}
+};
 
 export const ControlsRight: Story = {
   name: 'Controles a la derecha',
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo de uso del componente `g-input-number` con los controles a la derecha.',
+        story:
+          'Ejemplo de uso del componente `g-input-number` con los controles a la derecha.',
       },
     },
   },
@@ -351,14 +363,15 @@ export const ControlsRight: Story = {
     modelValue: 1,
     controlsPosition: 'right',
   },
-}
+};
 
 export const StepStrictly: Story = {
   name: 'Paso estricto',
   parameters: {
     docs: {
       description: {
-        story: 'Si necesitas que el valor sea siempre múltiplo del paso, activa esta propiedad.',
+        story:
+          'Si necesitas que el valor sea siempre múltiplo del paso, activa esta propiedad.',
       },
     },
   },
@@ -368,14 +381,15 @@ export const StepStrictly: Story = {
     step: 2,
     stepStrictly: true,
   },
-}
+};
 
 export const MinMax: Story = {
   name: 'Min/Max',
   parameters: {
     docs: {
       description: {
-        story: 'Si necesitas limitar el valor mínimo y máximo, limita el valor con las propiedades `min` y `max`.',
+        story:
+          'Si necesitas limitar el valor mínimo y máximo, limita el valor con las propiedades `min` y `max`.',
       },
     },
   },
@@ -385,24 +399,25 @@ export const MinMax: Story = {
     min: 0,
     max: 10,
   },
-}
+};
 
 export const Size: Story = {
   name: 'Tamaño',
   parameters: {
     docs: {
       description: {
-        story: 'Usa el atributo `size` para configurar tamaños adicionales `large`, `default` o `small`.',
+        story:
+          'Usa el atributo `size` para configurar tamaños adicionales `large`, `default` o `small`.',
       },
     },
   },
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const defaultValue = ref(1)
-      const smallValue = ref(3)
-      const largeValue = ref(7)
-      return { defaultValue, smallValue, largeValue }
+      const defaultValue = ref(1);
+      const smallValue = ref(3);
+      const largeValue = ref(7);
+      return { defaultValue, smallValue, largeValue };
     },
     template: `
       <g-config-provider>
@@ -414,24 +429,25 @@ export const Size: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 export const Alignment: Story = {
   name: 'Alineación',
   parameters: {
     docs: {
       description: {
-        story: 'Usa el atributo `align` para configurar la alineación del texto con `left`, `right`, o `center`.',
+        story:
+          'Usa el atributo `align` para configurar la alineación del texto con `left`, `right`, o `center`.',
       },
     },
   },
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const leftValue = ref(123)
-      const centerValue = ref(456)
-      const rightValue = ref(789)
-      return { leftValue, centerValue, rightValue }
+      const leftValue = ref(123);
+      const centerValue = ref(456);
+      const rightValue = ref(789);
+      return { leftValue, centerValue, rightValue };
     },
     template: `
       <g-config-provider>
@@ -443,43 +459,46 @@ export const Alignment: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 export const WithoutControls: Story = {
   name: 'Sin controles',
   parameters: {
     docs: {
       description: {
-        story: 'Configura `controls` a `false` para ocultar los botones de control.',
+        story:
+          'Configura `controls` a `false` para ocultar los botones de control.',
       },
     },
   },
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const modelValue = ref(10)
-      return { modelValue }
+      const modelValue = ref(10);
+      return { modelValue };
     },
-    template: '<g-config-provider><g-input-number v-model="modelValue" :controls="false" /></g-config-provider>',
+    template:
+      '<g-config-provider><g-input-number v-model="modelValue" :controls="false" /></g-config-provider>',
   }),
-}
+};
 
 export const CustomStep: Story = {
   name: 'Paso personalizado',
   parameters: {
     docs: {
       description: {
-        story: 'Usa `step` para configurar el valor de incremento/decremento. Usa `stepStrictly` para asegurar que el valor sea siempre múltiplo del paso.',
+        story:
+          'Usa `step` para configurar el valor de incremento/decremento. Usa `stepStrictly` para asegurar que el valor sea siempre múltiplo del paso.',
       },
     },
   },
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const step2 = ref(2)
-      const step10 = ref(10)
-      const stepStrictly = ref(0)
-      return { step2, step10, stepStrictly }
+      const step2 = ref(2);
+      const step10 = ref(10);
+      const stepStrictly = ref(0);
+      return { step2, step10, stepStrictly };
     },
     template: `
       <g-config-provider>
@@ -500,24 +519,25 @@ export const CustomStep: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 export const DecimalPrecision: Story = {
   name: 'Precisión decimal',
   parameters: {
     docs: {
       description: {
-        story: 'Usa `precision` para configurar el número de decimales. Usa `step` con valores decimales para un control fino.',
+        story:
+          'Usa `precision` para configurar el número de decimales. Usa `step` con valores decimales para un control fino.',
       },
     },
   },
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const precision2 = ref(1.23)
-      const precision4 = ref(1.2345)
-      const decimalStep = ref(0.5)
-      return { precision2, precision4, decimalStep }
+      const precision2 = ref(1.23);
+      const precision4 = ref(1.2345);
+      const decimalStep = ref(0.5);
+      return { precision2, precision4, decimalStep };
     },
     template: `
       <g-config-provider>
@@ -538,26 +558,28 @@ export const DecimalPrecision: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 export const WithPlaceholder: Story = {
   name: 'Con placeholder',
   parameters: {
     docs: {
       description: {
-        story: 'Usa `placeholder` para mostrar una ayuda cuando el input está vacío.',
+        story:
+          'Usa `placeholder` para mostrar una ayuda cuando el input está vacío.',
       },
     },
   },
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const modelValue = ref(null)
-      return { modelValue }
+      const modelValue = ref(null);
+      return { modelValue };
     },
-    template: '<g-config-provider><g-input-number v-model="modelValue" placeholder="Ingresa un número" /></g-config-provider>',
+    template:
+      '<g-config-provider><g-input-number v-model="modelValue" placeholder="Ingresa un número" /></g-config-provider>',
   }),
-}
+};
 
 export const AllSizes: Story = {
   name: 'Todos los tamaños',
@@ -571,13 +593,20 @@ export const AllSizes: Story = {
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const smallDefault = ref(1)
-      const smallRight = ref(2)
-      const defaultDefault = ref(3)
-      const defaultRight = ref(4)
-      const largeDefault = ref(5)
-      const largeRight = ref(6)
-      return { smallDefault, smallRight, defaultDefault, defaultRight, largeDefault, largeRight }
+      const smallDefault = ref(1);
+      const smallRight = ref(2);
+      const defaultDefault = ref(3);
+      const defaultRight = ref(4);
+      const largeDefault = ref(5);
+      const largeRight = ref(6);
+      return {
+        smallDefault,
+        smallRight,
+        defaultDefault,
+        defaultRight,
+        largeDefault,
+        largeRight,
+      };
     },
     template: `
       <g-config-provider>
@@ -607,22 +636,23 @@ export const AllSizes: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 export const WithPrefixSuffix: Story = {
   name: 'Con Prefijo y Sufijo',
   parameters: {
     docs: {
       description: {
-        story: 'Usa los slots `prefix` y `suffix` para agregar contenido personalizado al input.',
+        story:
+          'Usa los slots `prefix` y `suffix` para agregar contenido personalizado al input.',
       },
     },
   },
   render: () => ({
     components: { GInputNumber, GConfigProvider },
     setup() {
-      const modelValue = ref(10)
-      return { modelValue }
+      const modelValue = ref(10);
+      return { modelValue };
     },
     template: `
       <g-config-provider>
@@ -637,4 +667,4 @@ export const WithPrefixSuffix: Story = {
       </g-config-provider>
     `,
   }),
-}
+};

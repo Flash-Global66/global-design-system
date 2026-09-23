@@ -1,17 +1,27 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import { reactive, ref } from 'vue'
-import { action } from '@storybook/addon-actions'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { reactive, ref } from 'vue';
+import { action } from '@storybook/addon-actions';
 
-import { GInputTag, InputTagInstance } from '@flash-global66/g-input-tag/index.ts'
-import '@flash-global66/g-input-tag/styles.scss'
-import { GInput } from '@flash-global66/g-input/index.ts'
-import '@flash-global66/g-input/styles.scss'
-import { GConfigProvider } from '../components/config-provider'
-import { GForm, GFormItem, FormInstance } from '@flash-global66/g-form/index.ts'
-import { GButton } from '@flash-global66/g-button/index.ts'
+import { GInputTag } from '@flash-global66/g-input-tag/index.ts';
+import '@flash-global66/g-input-tag/styles.scss';
+import { GInput } from '@flash-global66/g-input/index.ts';
+import '@flash-global66/g-input/styles.scss';
+import { GConfigProvider } from '../components/config-provider';
+import {
+  GForm,
+  GFormItem,
+  FormInstance,
+} from '@flash-global66/g-form/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
 
-import { version, peerDependencies } from '@flash-global66/g-input-tag/package.json'
-import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories'
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-input-tag/package.json';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 const meta: Meta<typeof GInputTag> = {
   title: 'Form/InputTag',
@@ -79,9 +89,9 @@ const onAdd = (value) => console.log('añadido', value);
 const onRemove = (value) => console.log('eliminado', value);
 </script>
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     modelValue: {
@@ -89,133 +99,133 @@ const onRemove = (value) => console.log('eliminado', value);
       description: 'Listado de tags (v-model)',
       table: {
         type: { summary: 'string[]' },
-        category: 'Datos'
-      }
+        category: 'Datos',
+      },
     },
     max: {
       control: 'number',
       description: 'Número máximo de tags permitidos',
-      table: { category: 'Comportamiento' }
+      table: { category: 'Comportamiento' },
     },
     tagType: {
       control: { type: 'select' },
       options: ['success', 'info', 'warning', 'error', 'grey'],
       description: 'Tipo de tag (color)',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     tagEffect: {
       control: { type: 'select' },
       options: ['light', 'dark'],
       description: 'Efecto visual del tag',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     effect: {
       control: { type: 'select' },
       options: ['light', 'dark'],
       description: 'Tema del tooltip de overflow',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     trigger: {
       control: { type: 'select' },
       options: ['Enter', 'Space'],
       description: 'Tecla que confirma el tag',
-      table: { category: 'Comportamiento' }
+      table: { category: 'Comportamiento' },
     },
     draggable: {
       control: 'boolean',
       description: 'Permite reordenar los tags arrastrándolos',
-      table: { category: 'Comportamiento' }
+      table: { category: 'Comportamiento' },
     },
     delimiter: {
       control: 'text',
       description: 'Carácter o expresión que separa tags (por ejemplo, ",")',
-      table: { category: 'Comportamiento' }
+      table: { category: 'Comportamiento' },
     },
     size: {
       control: { type: 'select' },
       options: ['large', 'default', 'small'],
       description: 'Tamaño del input',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     clearable: {
       control: 'boolean',
       description: 'Muestra el botón para limpiar',
-      table: { category: 'Comportamiento' }
+      table: { category: 'Comportamiento' },
     },
     clearIcon: {
       control: 'text',
       description: 'Icono de clear (IconString, p. ej. "regular circle-xmark")',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     helpText: {
       control: 'text',
       description: 'Texto de ayuda mostrado debajo del input tag',
-      table: { category: 'Contenido' }
+      table: { category: 'Contenido' },
     },
     disabled: {
       control: 'boolean',
       description: 'Deshabilita el input y la gestión de tags',
-      table: { category: 'Estado' }
+      table: { category: 'Estado' },
     },
     readonly: {
       control: 'boolean',
       description: 'Sólo lectura',
-      table: { category: 'Estado' }
+      table: { category: 'Estado' },
     },
     validateEvent: {
       control: 'boolean',
       description: 'Emite eventos de validación hacia GFormItem',
-      table: { category: 'Form' }
+      table: { category: 'Form' },
     },
     collapseTags: {
       control: 'boolean',
       description: 'Colapsa los tags en un indicador "+N"',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     collapseTagsTooltip: {
       control: 'boolean',
       description: 'Muestra tooltip con los tags colapsados',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     maxCollapseTags: {
       control: 'number',
       description: 'Cantidad de tags visibles antes de colapsar',
-      table: { category: 'Apariencia' }
+      table: { category: 'Apariencia' },
     },
     saveOnBlur: {
       control: 'boolean',
       description: 'Guarda el contenido del input al perder el foco',
-      table: { category: 'Comportamiento' }
+      table: { category: 'Comportamiento' },
     },
     placeholder: {
       control: 'text',
       description: 'Placeholder del input',
-      table: { category: 'Contenido' }
+      table: { category: 'Contenido' },
     },
     'onUpdate:modelValue': {
       description: 'Se emite al actualizar el listado de tags',
-      table: { category: 'Eventos' }
+      table: { category: 'Eventos' },
     },
     onChange: {
       description: 'Se emite cuando cambia el listado de tags',
-      table: { category: 'Eventos' }
+      table: { category: 'Eventos' },
     },
     onAddTag: {
       description: 'Se emite al añadir un nuevo tag',
-      table: { category: 'Eventos' }
+      table: { category: 'Eventos' },
     },
     onRemoveTag: {
       description: 'Se emite al eliminar un tag',
-      table: { category: 'Eventos' }
+      table: { category: 'Eventos' },
     },
     onDragTag: {
       description: 'Se emite al reordenar un tag',
-      table: { category: 'Eventos' }
+      table: { category: 'Eventos' },
     },
     onClear: {
       description: 'Se emite al limpiar todos los tags',
-      table: { category: 'Eventos' }
-    }
+      table: { category: 'Eventos' },
+    },
   },
   args: {
     modelValue: ['vue', 'typescript'],
@@ -236,27 +246,33 @@ const onRemove = (value) => console.log('eliminado', value);
     collapseTagsTooltip: false,
     maxCollapseTags: 1,
     saveOnBlur: true,
-    helpText: 'Escribe un tag y presiona Enter'
-  }
-}
+    helpText: 'Escribe un tag y presiona Enter',
+  },
+};
 
-export default meta
-type Story = StoryObj<typeof GInputTag>
+export default meta;
+type Story = StoryObj<typeof GInputTag>;
 
 export const Primary: Story = {
   name: 'Básico',
   parameters: {
     docs: {
       description: {
-        story: 'Uso básico. v-model con un array de strings. Pulsa Enter para añadir un tag.'
-      }
-    }
+        story:
+          'Uso básico. v-model con un array de strings. Pulsa Enter para añadir un tag.',
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GInputTag, GConfigProvider },
     setup() {
-      const tags = ref<string[]>(['vue', 'ts'])
-      return { args, tags, onAdd: action('add-tag'), onRemove: action('remove-tag') }
+      const tags = ref<string[]>(['vue', 'ts']);
+      return {
+        args,
+        tags,
+        onAdd: action('add-tag'),
+        onRemove: action('remove-tag'),
+      };
     },
     template: `
       <g-config-provider>
@@ -268,9 +284,9 @@ export const Primary: Story = {
         />
         <pre style="margin-top: 12px; font-size: 12px;">{{ tags }}</pre>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const LimitsAndDuplicates: Story = {
   name: 'Límite y duplicados',
@@ -278,15 +294,15 @@ export const LimitsAndDuplicates: Story = {
     docs: {
       description: {
         story:
-          'Define un máximo de tags con la prop `max`. Los tags duplicados se bloquean automáticamente al añadir con Enter.'
-      }
-    }
+          'Define un máximo de tags con la prop `max`. Los tags duplicados se bloquean automáticamente al añadir con Enter.',
+      },
+    },
   },
   render: () => ({
     components: { GInputTag, GConfigProvider },
     setup() {
-      const tags = ref<string[]>(['vue', 'ts'])
-      return { tags, onAdd: action('add-tag') }
+      const tags = ref<string[]>(['vue', 'ts']);
+      return { tags, onAdd: action('add-tag') };
     },
     template: `
       <g-config-provider>
@@ -298,9 +314,9 @@ export const LimitsAndDuplicates: Story = {
         />
         <pre style="margin-top: 12px; font-size: 12px;">{{ tags }}</pre>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const Delimiter: Story = {
   name: 'Delimitador',
@@ -308,15 +324,15 @@ export const Delimiter: Story = {
     docs: {
       description: {
         story:
-          'Con la prop `delimiter` puedes separar múltiples tags en una sola entrada (por ejemplo, con coma o Enter).'
-      }
-    }
+          'Con la prop `delimiter` puedes separar múltiples tags en una sola entrada (por ejemplo, con coma o Enter).',
+      },
+    },
   },
   render: () => ({
     components: { GInputTag, GConfigProvider },
     setup() {
-      const tags = ref<string[]>(['vue'])
-      return { tags, onAdd: action('add-tag') }
+      const tags = ref<string[]>(['vue']);
+      return { tags, onAdd: action('add-tag') };
     },
     template: `
       <g-config-provider>
@@ -328,9 +344,9 @@ export const Delimiter: Story = {
         />
         <pre style="margin-top: 12px; font-size: 12px;">{{ tags }}</pre>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const CollapsedTags: Story = {
   name: 'Tags colapsados',
@@ -338,15 +354,23 @@ export const CollapsedTags: Story = {
     docs: {
       description: {
         story:
-          'Cuando hay muchos tags, `collapseTags` muestra los primeros y un indicador "+N" con tooltip para ver el resto.'
-      }
-    }
+          'Cuando hay muchos tags, `collapseTags` muestra los primeros y un indicador "+N" con tooltip para ver el resto.',
+      },
+    },
   },
   render: () => ({
     components: { GInputTag, GConfigProvider },
     setup() {
-      const tags = ref<string[]>(['vue', 'ts', 'css', 'html', 'js', 'scss', 'tailwind'])
-      return { tags }
+      const tags = ref<string[]>([
+        'vue',
+        'ts',
+        'css',
+        'html',
+        'js',
+        'scss',
+        'tailwind',
+      ]);
+      return { tags };
     },
     template: `
       <g-config-provider>
@@ -359,24 +383,25 @@ export const CollapsedTags: Story = {
         />
         <pre style="margin-top: 12px; font-size: 12px;">{{ tags }}</pre>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const Draggable: Story = {
   name: 'Reordenable (drag & drop)',
   parameters: {
     docs: {
       description: {
-        story: 'Habilita `draggable` para permitir reordenar los tags arrastrándolos.'
-      }
-    }
+        story:
+          'Habilita `draggable` para permitir reordenar los tags arrastrándolos.',
+      },
+    },
   },
   render: () => ({
     components: { GInputTag, GConfigProvider },
     setup() {
-      const tags = ref<string[]>(['primero', 'segundo', 'tercero', 'cuarto'])
-      return { tags, onDrag: action('drag-tag') }
+      const tags = ref<string[]>(['primero', 'segundo', 'tercero', 'cuarto']);
+      return { tags, onDrag: action('drag-tag') };
     },
     template: `
       <g-config-provider>
@@ -388,9 +413,9 @@ export const Draggable: Story = {
         />
         <pre style="margin-top: 12px; font-size: 12px;">{{ tags }}</pre>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const DisabledAndReadonly: Story = {
   name: 'Disabled y Readonly',
@@ -398,16 +423,16 @@ export const DisabledAndReadonly: Story = {
     docs: {
       description: {
         story:
-          'En estado `disabled` o `readonly` no se pueden añadir ni eliminar tags. El botón de clear tampoco está disponible.'
-      }
-    }
+          'En estado `disabled` o `readonly` no se pueden añadir ni eliminar tags. El botón de clear tampoco está disponible.',
+      },
+    },
   },
   render: () => ({
     components: { GInputTag, GConfigProvider },
     setup() {
-      const tagsA = ref<string[]>(['vue', 'ts'])
-      const tagsB = ref<string[]>(['vue', 'ts'])
-      return { tagsA, tagsB }
+      const tagsA = ref<string[]>(['vue', 'ts']);
+      const tagsB = ref<string[]>(['vue', 'ts']);
+      return { tagsA, tagsB };
     },
     template: `
       <g-config-provider>
@@ -422,9 +447,9 @@ export const DisabledAndReadonly: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const FormValidation: Story = {
   name: 'Integración con GForm',
@@ -432,20 +457,20 @@ export const FormValidation: Story = {
     docs: {
       description: {
         story:
-          'Cuando el componente está dentro de un `GFormItem` con reglas, la validación se dispara al cambiar (change) y al perder el foco (blur).'
-      }
-    }
+          'Cuando el componente está dentro de un `GFormItem` con reglas, la validación se dispara al cambiar (change) y al perder el foco (blur).',
+      },
+    },
   },
   render: () => ({
     components: { GInputTag, GConfigProvider, GForm, GFormItem, GButton },
     setup() {
-      const formRef = ref<FormInstance>()
-      const model = reactive<Record<string, string[]>>({ tags: [] })
+      const formRef = ref<FormInstance>();
+      const model = reactive<Record<string, string[]>>({ tags: [] });
       const submit = async () => {
-        const valid = await formRef.value?.validate().catch(() => false)
-        action('submit')(valid ? 'valid' : 'invalid')
-      }
-      return { formRef, model, submit }
+        const valid = await formRef.value?.validate().catch(() => false);
+        action('submit')(valid ? 'valid' : 'invalid');
+      };
+      return { formRef, model, submit };
     },
     template: `
       <g-config-provider>
@@ -474,9 +499,9 @@ export const FormValidation: Story = {
           @click="submit"
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const ParentFormRules: Story = {
   name: 'Reglas desde GForm padre',
@@ -484,33 +509,54 @@ export const ParentFormRules: Story = {
     docs: {
       description: {
         story:
-          'Ejemplo comparativo con `GInput` y `GInputTag` usando reglas definidas en el `GForm` padre. `GInputTag` requiere reglas de tipo `array` para validar correctamente tags vacíos o incompletos.'
-      }
-    }
+          'Ejemplo comparativo con `GInput` y `GInputTag` usando reglas definidas en el `GForm` padre. `GInputTag` requiere reglas de tipo `array` para validar correctamente tags vacíos o incompletos.',
+      },
+    },
   },
   render: () => ({
-    components: { GInputTag, GInput, GConfigProvider, GForm, GFormItem, GButton },
+    components: {
+      GInputTag,
+      GInput,
+      GConfigProvider,
+      GForm,
+      GFormItem,
+      GButton,
+    },
     setup() {
-      const formRef = ref<FormInstance>()
+      const formRef = ref<FormInstance>();
       const model = reactive({
         name: '',
-        tags: [] as string[]
-      })
+        tags: [] as string[],
+      });
       const rules = {
         name: [
           { required: true, message: 'Ingresa un nombre', trigger: 'change' },
-          { min: 3, message: 'El nombre debe tener al menos 3 caracteres', trigger: 'change' }
+          {
+            min: 3,
+            message: 'El nombre debe tener al menos 3 caracteres',
+            trigger: 'change',
+          },
         ],
         tags: [
-          { type: 'array', required: true, message: 'Agrega al menos un tag', trigger: 'change' },
-          { type: 'array', min: 2, message: 'Necesitas al menos 2 tags', trigger: 'change' }
-        ]
-      }
+          {
+            type: 'array',
+            required: true,
+            message: 'Agrega al menos un tag',
+            trigger: 'change',
+          },
+          {
+            type: 'array',
+            min: 2,
+            message: 'Necesitas al menos 2 tags',
+            trigger: 'change',
+          },
+        ],
+      };
       const submit = async () => {
-        const valid = await formRef.value?.validate().catch(() => false)
-        action('parent-rules-submit')(valid ? 'valid' : 'invalid')
-      }
-      return { formRef, model, rules, submit }
+        const valid = await formRef.value?.validate().catch(() => false);
+        action('parent-rules-submit')(valid ? 'valid' : 'invalid');
+      };
+      return { formRef, model, rules, submit };
     },
     template: `
       <g-config-provider>
@@ -541,6 +587,6 @@ export const ParentFormRules: Story = {
         />
         <pre style="margin-top: 12px; font-size: 12px;">{{ model }}</pre>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};

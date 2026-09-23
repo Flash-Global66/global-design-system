@@ -1,39 +1,48 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
+import type { Meta, StoryObj } from '@storybook/vue3';
 
-import { GButton } from "@flash-global66/g-button/index.ts";
-import { openAlert, type DialogAlertInstance } from "@flash-global66/g-dialog-alert/index.ts";
-import type { AlertCheckboxItem } from "@flash-global66/g-dialog-alert/index.ts";
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
+import { GButton } from '@flash-global66/g-button/index.ts';
+import {
+  openAlert,
+  type DialogAlertInstance,
+} from '@flash-global66/g-dialog-alert/index.ts';
+import type { AlertCheckboxItem } from '@flash-global66/g-dialog-alert/index.ts';
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
 import { IMAGE_NAMES, IMAGE_SIZES } from '@flash-global66/g-image/index.ts';
 
-import { version, peerDependencies } from "@flash-global66/g-dialog-alert/package.json";
-import { generatePeerDepsList, generatePeerDepsInstalls } from "../helper/documentation-stories.ts";
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-dialog-alert/package.json';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories.ts';
 
 const AlertExampleWrapper = {
   name: 'AlertExampleWrapper',
   props: {
     codeExample: {
       type: String,
-      required: true
+      required: true,
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     description: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup(props, { slots }) {
-    return () => slots.default ? slots.default() : null;
-  }
+    return () => (slots.default ? slots.default() : null);
+  },
 };
 
 const meta: Meta<DialogAlertInstance> = {
-  title: "Data/Dialog Alert",
+  title: 'Data/Dialog Alert',
   decorators: [
-    (story) => ({
+    story => ({
       components: { story, GConfigProvider },
       template: `<GConfigProvider><story /></GConfigProvider>`,
     }),
@@ -112,105 +121,107 @@ openAlert({
   }
 });
 \`\`\`
-`
-      }
+`,
+      },
     },
     status: {
       type: 'stable',
-    }
+    },
   },
   argTypes: {
     type: {
-      description: "Tipo de alerta que define el ícono y estilo",
+      description: 'Tipo de alerta que define el ícono y estilo',
       control: 'select',
       options: ['success', 'error', 'warning', 'info', 'important'],
       table: {
         category: 'Principales',
-        type: { summary: "'success' | 'error' | 'warning' | 'info' | 'important'" }
-      }
+        type: {
+          summary: "'success' | 'error' | 'warning' | 'info' | 'important'",
+        },
+      },
     },
     title: {
-      description: "Título de la alerta",
+      description: 'Título de la alerta',
       control: 'text',
       table: {
         category: 'Principales',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     description: {
-      description: "Descripción o mensaje de la alerta",
+      description: 'Descripción o mensaje de la alerta',
       control: 'text',
       table: {
         category: 'Principales',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     primaryText: {
-      description: "Texto del botón primario",
+      description: 'Texto del botón primario',
       control: 'text',
       table: {
         category: 'Botones',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     secondaryText: {
-      description: "Texto del botón secundario",
+      description: 'Texto del botón secundario',
       control: 'text',
       table: {
         category: 'Botones',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     tertiaryText: {
-      description: "Texto del botón terciario",
+      description: 'Texto del botón terciario',
       control: 'text',
       table: {
         category: 'Botones',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     hideButtonClose: {
-      description: "Oculta el botón de cerrar (X)",
+      description: 'Oculta el botón de cerrar (X)',
       control: 'boolean',
       table: {
         category: 'Botones',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     imageName: {
-      description: "Nombre de la imagen personalizada",
+      description: 'Nombre de la imagen personalizada',
       control: 'select',
       options: ['', ...IMAGE_NAMES],
       table: {
         category: 'Personalización',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     imageSize: {
-      description: "Tamaño de la imagen",
+      description: 'Tamaño de la imagen',
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
       table: {
         category: 'Personalización',
         type: { summary: Object.keys(IMAGE_SIZES).join(' | ') },
-        defaultValue: { summary: 'lg' }
-      }
+        defaultValue: { summary: 'lg' },
+      },
     },
     checkboxes: {
       description:
-        "Checkbox. Puede ser uno o varios. Cada ítem debe incluir un `label`. pero también se puede indicar si es un checkbox obligatorio o no con `required` deshabilita el botón primario hasta marcarlo. `onChange` es opcional. `checked` define el estado inicial.",
+        'Checkbox. Puede ser uno o varios. Cada ítem debe incluir un `label`. pero también se puede indicar si es un checkbox obligatorio o no con `required` deshabilita el botón primario hasta marcarlo. `onChange` es opcional. `checked` define el estado inicial.',
       control: 'object',
       table: {
         category: 'Contenido',
         type: {
           summary: 'AlertCheckboxItem[]',
           detail:
-            '{ label: string; required?: boolean; checked?: boolean; onChange?: (checked: boolean) => void }[]'
+            '{ label: string; required?: boolean; checked?: boolean; onChange?: (checked: boolean) => void }[]',
         },
-        defaultValue: { summary: '[]' }
-      }
-    }
+        defaultValue: { summary: '[]' },
+      },
+    },
   },
   args: {
     type: 'info',
@@ -222,8 +233,8 @@ openAlert({
     hideButtonClose: false,
     imageName: undefined,
     imageSize: 'lg',
-    checkboxes: [] as AlertCheckboxItem[]
-  }
+    checkboxes: [] as AlertCheckboxItem[],
+  },
 };
 
 export default meta;
@@ -234,7 +245,8 @@ export const Primary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo básico del componente Dialog Alert. Desde los controles puedes probar todas las propiedades disponibles.'
+        story:
+          'Ejemplo básico del componente Dialog Alert. Desde los controles puedes probar todas las propiedades disponibles.',
       },
       source: {
         code: `
@@ -248,18 +260,18 @@ openAlert({
   description: "Esta es una descripción de ejemplo",
   primaryText: "Aceptar",
   secondaryText: "Cancelar"
-});`
-      }
-    }
+});`,
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GButton, AlertExampleWrapper },
     setup() {
       const showAlert = () => {
         openAlert({
           type: args.type,
-          title: args.title || "Título de ejemplo",
-          description: args.description || "Descripción de ejemplo",
+          title: args.title || 'Título de ejemplo',
+          description: args.description || 'Descripción de ejemplo',
           primaryText: args.primaryText,
           secondaryText: args.secondaryText,
           tertiaryText: args.tertiaryText,
@@ -277,8 +289,8 @@ import { openAlert } from '@flash-global66/g-dialog-alert';
 // Abrir una alerta con opciones personalizadas
 openAlert({
   type: "${args.type}",
-  title: "${args.title || "Título de ejemplo"}",
-  description: "${args.description || "Descripción de ejemplo"}",
+  title: "${args.title || 'Título de ejemplo'}",
+  description: "${args.description || 'Descripción de ejemplo'}",
   primaryText: "${args.primaryText}",
   secondaryText: "${args.secondaryText}",
   tertiaryText: "${args.tertiaryText}",
@@ -298,8 +310,8 @@ openAlert({
           <GButton @click="showAlert" variant="primary">Mostrar Alerta Personalizada</GButton>
         </div>
       </alert-example-wrapper>
-    `
-  })
+    `,
+  }),
 };
 
 export const WithCheckboxes: Story = {
@@ -308,7 +320,7 @@ export const WithCheckboxes: Story = {
     docs: {
       description: {
         story:
-          'Checkboxes bajo la descripción: útiles para términos, “no volver a mostrar”, etc. Si algún ítem tiene `required: true`, el botón primario permanece deshabilitado hasta marcarlo. El resultado de `openAlert` incluye `checkboxStates` en el mismo orden que el array.'
+          'Checkboxes bajo la descripción: útiles para términos, “no volver a mostrar”, etc. Si algún ítem tiene `required: true`, el botón primario permanece deshabilitado hasta marcarlo. El resultado de `openAlert` incluye `checkboxStates` en el mismo orden que el array.',
       },
       source: {
         code: `
@@ -333,9 +345,9 @@ openAlert({
   if (result.isPrimary && result.checkboxStates) {
     const [terminos, noMostrarDeNuevo] = result.checkboxStates;
   }
-});`
-      }
-    }
+});`,
+      },
+    },
   },
   render: () => ({
     components: { GButton, AlertExampleWrapper },
@@ -344,16 +356,21 @@ openAlert({
         openAlert({
           type: 'warning',
           title: 'Antes de continuar',
-          description: 'Confirma la información y acepta los términos si aplica.',
+          description:
+            'Confirma la información y acepta los términos si aplica.',
           primaryText: 'Aceptar',
           secondaryText: 'Cancelar',
           checkboxes: [
-            { label: 'Acepto los términos y condiciones', required: true, checked: false },
+            {
+              label: 'Acepto los términos y condiciones',
+              required: true,
+              checked: false,
+            },
             {
               label: 'No volver a mostrar este mensaje',
-              onChange: () => undefined
-            }
-          ]
+              onChange: () => undefined,
+            },
+          ],
         });
       };
 
@@ -383,8 +400,8 @@ openAlert({
           <GButton @click="showAlert" variant="primary">Mostrar alerta con checkboxes</GButton>
         </div>
       </alert-example-wrapper>
-    `
-  })
+    `,
+  }),
 };
 
 export const AllTypes: Story = {
@@ -392,7 +409,8 @@ export const AllTypes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente tiene 5 tipos diferentes que ayudan a transmitir el contexto del mensaje: success, error, warning, info e important.'
+        story:
+          'El componente tiene 5 tipos diferentes que ayudan a transmitir el contexto del mensaje: success, error, warning, info e important.',
       },
       source: {
         code: `
@@ -436,60 +454,61 @@ openAlert({
   description: "Debes actualizar tu contraseña antes de continuar.",
   primaryText: "Actualizar ahora",
   secondaryText: "Más tarde"
-});`
-      }
-    }
+});`,
+      },
+    },
   },
   render: () => ({
     components: { GButton, AlertExampleWrapper },
     setup() {
       const showSuccessAlert = () => {
         openAlert({
-          type: "success",
-          title: "Operación exitosa",
-          description: "Los datos se han guardado correctamente.",
-          primaryText: "Aceptar"
+          type: 'success',
+          title: 'Operación exitosa',
+          description: 'Los datos se han guardado correctamente.',
+          primaryText: 'Aceptar',
         });
       };
 
       const showErrorAlert = () => {
         openAlert({
-          type: "error",
-          title: "Error",
-          description: "No se ha podido completar la operación.",
-          primaryText: "Entendido"
+          type: 'error',
+          title: 'Error',
+          description: 'No se ha podido completar la operación.',
+          primaryText: 'Entendido',
         });
       };
 
       const showWarningAlert = () => {
         openAlert({
-          type: "warning",
-          title: "Advertencia",
-          description: "Esta acción podría tener consecuencias.",
-          primaryText: "Continuar",
-          secondaryText: "Cancelar"
+          type: 'warning',
+          title: 'Advertencia',
+          description: 'Esta acción podría tener consecuencias.',
+          primaryText: 'Continuar',
+          secondaryText: 'Cancelar',
         });
       };
 
       const showInfoAlert = () => {
         openAlert({
-          type: "info",
-          title: "Información",
-          description: "Te informamos que el sistema estará en mantenimiento mañana.",
-          primaryText: "Entendido"
+          type: 'info',
+          title: 'Información',
+          description:
+            'Te informamos que el sistema estará en mantenimiento mañana.',
+          primaryText: 'Entendido',
         });
       };
 
       const showImportantAlert = () => {
         openAlert({
-          type: "important",
-          title: "Importante",
-          description: "Debes actualizar tu contraseña antes de continuar.",
-          primaryText: "Actualizar ahora",
-          secondaryText: "Más tarde"
+          type: 'important',
+          title: 'Importante',
+          description: 'Debes actualizar tu contraseña antes de continuar.',
+          primaryText: 'Actualizar ahora',
+          secondaryText: 'Más tarde',
         });
       };
-      
+
       const codeExample = `
 // Alerta de éxito
 openAlert({
@@ -532,14 +551,14 @@ openAlert({
   primaryText: "Actualizar ahora",
   secondaryText: "Más tarde"
 });`;
-      
+
       return {
         showSuccessAlert,
         showErrorAlert,
         showWarningAlert,
         showInfoAlert,
         showImportantAlert,
-        codeExample
+        codeExample,
       };
     },
     template: `
@@ -588,8 +607,8 @@ openAlert({
           </div>
         </div>
       </alert-example-wrapper>
-    `
-  })
+    `,
+  }),
 };
 
 export const MultipleButtons: Story = {
@@ -597,7 +616,8 @@ export const MultipleButtons: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente admite hasta tres botones diferentes: primario, secundario y terciario, lo que permite opciones más detalladas de interacción.'
+        story:
+          'El componente admite hasta tres botones diferentes: primario, secundario y terciario, lo que permite opciones más detalladas de interacción.',
       },
       source: {
         code: `
@@ -626,43 +646,43 @@ openAlert({
   primaryText: "Guardar cambios",
   secondaryText: "Descartar",
   tertiaryText: "Ver detalles"
-});`
-      }
-    }
+});`,
+      },
+    },
   },
   render: () => ({
     components: { GButton, AlertExampleWrapper },
     setup() {
       const showOneButton = () => {
         openAlert({
-          type: "info",
-          title: "Un botón",
-          description: "Alerta con un solo botón de acción.",
-          primaryText: "Aceptar"
+          type: 'info',
+          title: 'Un botón',
+          description: 'Alerta con un solo botón de acción.',
+          primaryText: 'Aceptar',
         });
       };
 
       const showTwoButtons = () => {
         openAlert({
-          type: "warning",
-          title: "Dos botones",
-          description: "Alerta con dos botones de acción.",
-          primaryText: "Continuar",
-          secondaryText: "Cancelar"
+          type: 'warning',
+          title: 'Dos botones',
+          description: 'Alerta con dos botones de acción.',
+          primaryText: 'Continuar',
+          secondaryText: 'Cancelar',
         });
       };
 
       const showThreeButtons = () => {
         openAlert({
-          type: "warning",
-          title: "Tres botones",
-          description: "¿Qué acción deseas realizar?",
-          primaryText: "Guardar cambios",
-          secondaryText: "Descartar",
-          tertiaryText: "Ver detalles"
+          type: 'warning',
+          title: 'Tres botones',
+          description: '¿Qué acción deseas realizar?',
+          primaryText: 'Guardar cambios',
+          secondaryText: 'Descartar',
+          tertiaryText: 'Ver detalles',
         });
       };
-      
+
       const codeExample = `
 // Un botón
 openAlert({
@@ -690,12 +710,12 @@ openAlert({
   secondaryText: "Descartar",
   tertiaryText: "Ver detalles"
 });`;
-      
+
       return {
         showOneButton,
         showTwoButtons,
         showThreeButtons,
-        codeExample
+        codeExample,
       };
     },
     template: `
@@ -728,8 +748,8 @@ openAlert({
           </div>
         </div>
       </alert-example-wrapper>
-    `
-  })
+    `,
+  }),
 };
 
 export const WithoutCloseButton: Story = {
@@ -737,7 +757,8 @@ export const WithoutCloseButton: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Cuando necesitas que el usuario realice una acción específica, puedes ocultar el botón de cierre con la propiedad hideButtonClose.'
+        story:
+          'Cuando necesitas que el usuario realice una acción específica, puedes ocultar el botón de cierre con la propiedad hideButtonClose.',
       },
       source: {
         code: `
@@ -757,33 +778,35 @@ openAlert({
   primaryText: "Aceptar",
   secondaryText: "Cancelar",
   hideButtonClose: true
-});`
-      }
-    }
+});`,
+      },
+    },
   },
   render: () => ({
     components: { GButton, AlertExampleWrapper },
     setup() {
       const showWithCloseButton = () => {
         openAlert({
-          type: "info",
-          title: "Con botón de cierre",
-          description: "Esta alerta tiene un botón de cierre (X) en la esquina superior derecha.",
-          primaryText: "Aceptar"
+          type: 'info',
+          title: 'Con botón de cierre',
+          description:
+            'Esta alerta tiene un botón de cierre (X) en la esquina superior derecha.',
+          primaryText: 'Aceptar',
         });
       };
 
       const showWithoutCloseButton = () => {
         openAlert({
-          type: "important",
-          title: "Sin botón de cierre",
-          description: "Esta alerta no tiene botón de cierre, solo se puede cerrar usando los botones de acción.",
-          primaryText: "Aceptar",
-          secondaryText: "Cancelar",
-          hideButtonClose: true
+          type: 'important',
+          title: 'Sin botón de cierre',
+          description:
+            'Esta alerta no tiene botón de cierre, solo se puede cerrar usando los botones de acción.',
+          primaryText: 'Aceptar',
+          secondaryText: 'Cancelar',
+          hideButtonClose: true,
         });
       };
-      
+
       const codeExample = `
 // Con botón de cierre (comportamiento por defecto)
 openAlert({
@@ -802,11 +825,11 @@ openAlert({
   secondaryText: "Cancelar",
   hideButtonClose: true
 });`;
-      
+
       return {
         showWithCloseButton,
         showWithoutCloseButton,
-        codeExample
+        codeExample,
       };
     },
     template: `
@@ -831,8 +854,8 @@ openAlert({
           </div>
         </div>
       </alert-example-wrapper>
-    `
-  })
+    `,
+  }),
 };
 
 export const CustomImages: Story = {
@@ -840,7 +863,8 @@ export const CustomImages: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Puedes personalizar la imagen mostrada en la alerta, así como su tamaño.'
+        story:
+          'Puedes personalizar la imagen mostrada en la alerta, así como su tamaño.',
       },
       source: {
         code: `
@@ -867,41 +891,42 @@ openAlert({
   primaryText: "Entendido",
   imageName: "globe",
   imageSize: "3xl"
-});`
-      }
-    }
+});`,
+      },
+    },
   },
   render: () => ({
     components: { GButton, AlertExampleWrapper },
     setup() {
       const showDefaultImage = () => {
         openAlert({
-          type: "success",
-          title: "Imagen por defecto",
-          description: "Cada tipo de alerta tiene una imagen predeterminada asociada.",
-          primaryText: "Aceptar"
+          type: 'success',
+          title: 'Imagen por defecto',
+          description:
+            'Cada tipo de alerta tiene una imagen predeterminada asociada.',
+          primaryText: 'Aceptar',
         });
       };
 
       const showCustomImage = () => {
         openAlert({
-          title: "Imagen personalizada",
-          description: "Esta alerta usa una imagen personalizada.",
-          primaryText: "Entendido",
-          imageName: "globe"
+          title: 'Imagen personalizada',
+          description: 'Esta alerta usa una imagen personalizada.',
+          primaryText: 'Entendido',
+          imageName: 'globe',
         });
       };
 
       const showLargeImage = () => {
         openAlert({
-          title: "Imagen grande (3XL)",
-          description: "Esta alerta muestra una imagen con tamaño 3XL.",
-          primaryText: "Entendido",
-          imageName: "globe",
-          imageSize: "3xl"
+          title: 'Imagen grande (3XL)',
+          description: 'Esta alerta muestra una imagen con tamaño 3XL.',
+          primaryText: 'Entendido',
+          imageName: 'globe',
+          imageSize: '3xl',
         });
       };
-      
+
       const codeExample = `
 // Imagen por defecto según el tipo
 openAlert({
@@ -927,12 +952,12 @@ openAlert({
   imageName: "globe",
   imageSize: "3xl"
 });`;
-      
+
       return {
         showDefaultImage,
         showCustomImage,
         showLargeImage,
-        codeExample
+        codeExample,
       };
     },
     template: `
@@ -965,8 +990,8 @@ openAlert({
           </div>
         </div>
       </alert-example-wrapper>
-    `
-  })
+    `,
+  }),
 };
 
 export const PromiseHandling: Story = {
@@ -974,7 +999,8 @@ export const PromiseHandling: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El método openAlert devuelve una promesa que se resuelve cuando el usuario interactúa con la alerta, lo que permite encadenar operaciones.'
+        story:
+          'El método openAlert devuelve una promesa que se resuelve cuando el usuario interactúa con la alerta, lo que permite encadenar operaciones.',
       },
       source: {
         code: `
@@ -1006,41 +1032,41 @@ openAlert({
       primaryText: "Entendido"
     });
   }
-});`
-      }
-    }
+});`,
+      },
+    },
   },
   render: () => ({
     components: { GButton, AlertExampleWrapper },
     setup() {
       const showConfirmationFlow = () => {
         openAlert({
-          type: "warning",
-          title: "Confirmar operación",
-          description: "¿Estás seguro de realizar esta operación?",
-          primaryText: "Sí, continuar",
-          secondaryText: "No, cancelar"
+          type: 'warning',
+          title: 'Confirmar operación',
+          description: '¿Estás seguro de realizar esta operación?',
+          primaryText: 'Sí, continuar',
+          secondaryText: 'No, cancelar',
         }).then(result => {
           if (result.isPrimary) {
             setTimeout(() => {
               openAlert({
-                type: "success",
-                title: "Operación completada",
-                description: "La operación se ha completado correctamente.",
-                primaryText: "Aceptar"
+                type: 'success',
+                title: 'Operación completada',
+                description: 'La operación se ha completado correctamente.',
+                primaryText: 'Aceptar',
               });
             }, 1000);
           } else if (result.isSecondary || result.dismissedByClose) {
             openAlert({
-              type: "info",
-              title: "Operación cancelada",
-              description: "Has cancelado la operación.",
-              primaryText: "Entendido"
+              type: 'info',
+              title: 'Operación cancelada',
+              description: 'Has cancelado la operación.',
+              primaryText: 'Entendido',
             });
           }
         });
       };
-      
+
       const codeExample = `
 // Ejemplo de flujo de interacción usando promesas
 openAlert({
@@ -1071,10 +1097,10 @@ openAlert({
     });
   }
 });`;
-      
-      return { 
+
+      return {
         showConfirmationFlow,
-        codeExample
+        codeExample,
       };
     },
     template: `
@@ -1089,6 +1115,6 @@ openAlert({
           </div>
         </div>
       </alert-example-wrapper>
-    `
-  })
+    `,
+  }),
 };

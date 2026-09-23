@@ -6,5 +6,5 @@ export const theme = create({
   name: 'Global Business',
   brandTitle: 'Global Business',
   brandUrl: 'https://empresas.global66.com',
-  brandImage
+  brandImage,
 });

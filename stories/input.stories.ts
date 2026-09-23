@@ -1,12 +1,11 @@
-
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { GInput, InputInstance } from "../components/input";
-import { GConfigProvider } from "../components/config-provider";
-import { reactive, ref } from "vue";
-import { generateIconOptions } from "../helper/documentation-stories";
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { GInput, InputInstance } from '../components/input';
+import { GConfigProvider } from '../components/config-provider';
+import { reactive, ref } from 'vue';
+import { generateIconOptions } from '../helper/documentation-stories';
 
 const meta: Meta<InputInstance> = {
-  title: "Form/Input",
+  title: 'Form/Input',
   component: GInput,
   parameters: {
     docs: {
@@ -34,169 +33,169 @@ yarn add @flash-global66/g-input
 import { GInput } from '@flash-global66/g-input'
 import '@flash-global66/g-input/input.styles.scss'
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     modelValue: {
-      description: "Valor del input (v-model)",
+      description: 'Valor del input (v-model)',
       control: {
         type: undefined,
       },
       table: {
-        type: { summary: "string | number | null" }
-      }
+        type: { summary: 'string | number | null' },
+      },
     },
     label: {
-      description: "Etiqueta flotante del input",
-      control: "text",
+      description: 'Etiqueta flotante del input',
+      control: 'text',
     },
     prefixIcon: {
-      description: "Ícono al inicio del input",
+      description: 'Ícono al inicio del input',
       control: 'select',
       options: ['', ...generateIconOptions()],
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: '' },
-      }
+      },
     },
     suffixIcon: {
-      description: "Ícono al final del input",
+      description: 'Ícono al final del input',
       control: 'select',
       options: ['', ...generateIconOptions()],
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: '' },
-      }
+      },
     },
     showPassword: {
-      description: "Muestra/oculta el contenido del campo password",
-      control: "boolean"
+      description: 'Muestra/oculta el contenido del campo password',
+      control: 'boolean',
     },
     formatter: {
-      description: "Función para formatear el valor de entrada",
+      description: 'Función para formatear el valor de entrada',
       table: {
-        type: { summary: "(value: string) => string" }
-      }
+        type: { summary: '(value: string) => string' },
+      },
     },
     parser: {
-      description: "Función para parsear el valor antes de emitirlo",
+      description: 'Función para parsear el valor antes de emitirlo',
       table: {
-        type: { summary: "(value: string) => string" }
-      }
+        type: { summary: '(value: string) => string' },
+      },
     },
     helpText: {
-      description: "Texto de ayuda mostrado debajo del input",
-      control: "text",
+      description: 'Texto de ayuda mostrado debajo del input',
+      control: 'text',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" }
-      }
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
     loading: {
-      description: "Muestra estado de carga en el input",
-      control: "boolean",
+      description: 'Muestra estado de carga en el input',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
-      }
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     minlength: {
-      description: "Longitud mínima del valor del input. (nativo)",
-      control: "number",
+      description: 'Longitud mínima del valor del input. (nativo)',
+      control: 'number',
       table: {
-        type: { summary: "string | number" }
-      }
+        type: { summary: 'string | number' },
+      },
     },
     showWordLimit: {
-      description: "Muestra contador de caracteres",
-      control: "boolean",
+      description: 'Muestra contador de caracteres',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
-      }
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     validateEvent: {
-      description: "Activa la validación del formulario en eventos",
-      control: "boolean",
+      description: 'Activa la validación del formulario en eventos',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" }
-      }
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+      },
     },
     isEvent: {
-      description: "Indica si el input es controlado por eventos",
-      control: "boolean",
+      description: 'Indica si el input es controlado por eventos',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
-      }
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     autofocus: {
-      description: "Enfoca automáticamente el input al montar",
-      control: "boolean",
+      description: 'Enfoca automáticamente el input al montar',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
-      }
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     type: {
-      description: "Tipo de input",
-      control: "select",
-      options: ["text", "password", "email", "number", "tel", "url"],
-      defaultValue: "text"
+      description: 'Tipo de input',
+      control: 'select',
+      options: ['text', 'password', 'email', 'number', 'tel', 'url'],
+      defaultValue: 'text',
     },
     ref: {
-      description: "Referencia al elemento raíz",
+      description: 'Referencia al elemento raíz',
       table: {
-        category: "Expuesto",
-        type: { summary: "HTMLElement" }
-      }
+        category: 'Expuesto',
+        type: { summary: 'HTMLElement' },
+      },
     },
     isComposing: {
-      description: "Estado de composición del input",
+      description: 'Estado de composición del input',
       table: {
-        category: "Expuesto",
-        type: { summary: "boolean" }
-      }
+        category: 'Expuesto',
+        type: { summary: 'boolean' },
+      },
     },
     focus: {
-      description: "Enfoca el input",
+      description: 'Enfoca el input',
       table: {
-        category: "Expuesto",
-        type: { summary: "() => void" }
-      }
+        category: 'Expuesto',
+        type: { summary: '() => void' },
+      },
     },
     blur: {
-      description: "Quita el foco del input",
+      description: 'Quita el foco del input',
       table: {
-        category: "Expuesto",
-        type: { summary: "() => void" }
-      }
+        category: 'Expuesto',
+        type: { summary: '() => void' },
+      },
     },
     select: {
-      description: "Selecciona todo el texto del input",
+      description: 'Selecciona todo el texto del input',
       table: {
-        category: "Expuesto",
-        type: { summary: "() => void" }
-      }
+        category: 'Expuesto',
+        type: { summary: '() => void' },
+      },
     },
     clear: {
-      description: "Limpia el valor del input",
+      description: 'Limpia el valor del input',
       table: {
-        category: "Expuesto",
-        type: { summary: "() => void" }
-      }
+        category: 'Expuesto',
+        type: { summary: '() => void' },
+      },
     },
     messageError: {
-      description: "Mensaje de error",
-      control: "text",
+      description: 'Mensaje de error',
+      control: 'text',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" }
-      }
-    }
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
   },
   args: {
     label: 'Etiqueta',
@@ -215,20 +214,20 @@ import '@flash-global66/g-input/input.styles.scss'
     disabled: false,
     maxlength: 50,
     type: 'text',
-  }
+  },
 };
 export default meta;
 type Story = StoryObj<InputInstance>;
 
 // Ejemplo Básico
 export const Basic: Story = {
-  name: "Básico",
-  render: (args) => ({
+  name: 'Básico',
+  render: args => ({
     components: { GInput, GConfigProvider },
     setup() {
       const name = ref('');
-      
-      return { name, args }
+
+      return { name, args };
     },
     template: `
       <g-config-provider>
@@ -236,11 +235,11 @@ export const Basic: Story = {
           <g-input v-bind="args" v-model="name" />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 export const PaymentForm: Story = {
-  name: "Formulario de Pago",
+  name: 'Formulario de Pago',
   parameters: {
     docs: {
       description: {
@@ -283,9 +282,9 @@ const parseCardNumber = (value: string) => {
   return value.replace(/\s/g, '')
 }
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   render: () => ({
     components: { GInput, GConfigProvider },
@@ -294,25 +293,25 @@ const parseCardNumber = (value: string) => {
         cardNumber: '',
         titular: '',
         expDate: '',
-        cvv: ''
-      })
+        cvv: '',
+      });
 
       const formatCardNumber = (value: string) => {
-        if (!value) return ''
-        const numbers = value.replace(/\s/g, '')
-        const groups = numbers.match(/.{1,4}/g) || []
-        return groups.join(' ')
-      }
+        if (!value) return '';
+        const numbers = value.replace(/\s/g, '');
+        const groups = numbers.match(/.{1,4}/g) || [];
+        return groups.join(' ');
+      };
 
       const parseCardNumber = (value: string) => {
-        return value.replace(/\s/g, '')
-      }
-      
-      return { 
+        return value.replace(/\s/g, '');
+      };
+
+      return {
         formData,
         formatCardNumber,
-        parseCardNumber
-      }
+        parseCardNumber,
+      };
     },
     template: `
       <g-config-provider>
@@ -355,12 +354,12 @@ const parseCardNumber = (value: string) => {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const CharacterCount: Story = {
-  name: "Conteo de Caracteres",
+  name: 'Conteo de Caracteres',
   parameters: {
     docs: {
       description: {
@@ -368,17 +367,17 @@ export const CharacterCount: Story = {
 
 - Muestra el conteo actual/máximo (ej: 12/100)
 - Se actualiza en tiempo real mientras el usuario escribe
-- Útil para campos con límite como tweets, mensajes o descripciones`
-      }
-    }
+- Útil para campos con límite como tweets, mensajes o descripciones`,
+      },
+    },
   },
   render: () => ({
     components: { GInput, GConfigProvider },
     setup() {
-      const tweet = ref('')
-      const description = ref('')
-      
-      return { tweet, description }
+      const tweet = ref('');
+      const description = ref('');
+
+      return { tweet, description };
     },
     template: `
       <g-config-provider>
@@ -401,12 +400,12 @@ export const CharacterCount: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const CustomSlots: Story = {
-  name: "Slots Personalizados",
+  name: 'Slots Personalizados',
   parameters: {
     docs: {
       description: {
@@ -415,19 +414,19 @@ export const CustomSlots: Story = {
 - **slot:prefix**: Contenido al inicio del input (izquierda)
 - **slot:suffix**: Contenido al final del input (derecha)
 
-Ideal para mostrar símbolos de moneda, unidades de medida o contenido personalizado.`
-      }
-    }
+Ideal para mostrar símbolos de moneda, unidades de medida o contenido personalizado.`,
+      },
+    },
   },
   render: () => ({
     components: { GInput, GConfigProvider },
     setup() {
       const formData = reactive({
         amountCOP: '',
-        amountCLP: ''
+        amountCLP: '',
       });
-      
-      return { formData }
+
+      return { formData };
     },
     template: `
       <g-config-provider>
@@ -453,13 +452,12 @@ Ideal para mostrar símbolos de moneda, unidades de medida o contenido personali
           </g-input>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
-
 export const States: Story = {
-  name: "Estados",
+  name: 'Estados',
   parameters: {
     docs: {
       description: {
@@ -471,9 +469,9 @@ export const States: Story = {
 - **Readonly**: Permite ver pero no modificar el contenido
 - **Evento**: Input controlado por eventos externos (ej: modal)
 - **Error**: Muestra estado de error con mensaje
-- **Loading**: Estado de carga durante operaciones asíncronas`
-      }
-    }
+- **Loading**: Estado de carga durante operaciones asíncronas`,
+      },
+    },
   },
   render: () => ({
     components: { GInput, GConfigProvider },
@@ -485,14 +483,14 @@ export const States: Story = {
         readonly: 'Input readonly',
         event: '',
         error: '',
-        loading: 'Input loading'
-      })
+        loading: 'Input loading',
+      });
 
-      function handleClick(e: MouseEvent) {
-        alert('Click en el input')
+      function handleClick() {
+        alert('Click en el input');
       }
-      
-      return { states, handleClick }
+
+      return { states, handleClick };
     },
     template: `
       <g-config-provider>
@@ -541,7 +539,6 @@ export const States: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
-

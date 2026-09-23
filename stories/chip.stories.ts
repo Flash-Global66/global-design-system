@@ -1,14 +1,18 @@
-import { StoryObj } from "@storybook/vue3";
-import { reactive, ref } from "vue";
-import { GChip, ChipInstance } from "@flash-global66/g-chip/index.ts";
-import { GDropdownMenu, GDropdownItem } from "@flash-global66/g-dropdown";
-import { GConfigProvider } from "../components/config-provider";
-import { generateIconOptions, generatePeerDepsInstalls, generatePeerDepsList } from "../helper/documentation-stories";
+import { StoryObj } from '@storybook/vue3';
+import { reactive, ref } from 'vue';
+import { GChip, ChipInstance } from '@flash-global66/g-chip/index.ts';
+import { GDropdownMenu, GDropdownItem } from '@flash-global66/g-dropdown';
+import { GConfigProvider } from '../components/config-provider';
+import {
+  generateIconOptions,
+  generatePeerDepsInstalls,
+  generatePeerDepsList,
+} from '../helper/documentation-stories';
 
-import { version, peerDependencies } from "@flash-global66/g-chip/package.json";
+import { version, peerDependencies } from '@flash-global66/g-chip/package.json';
 
 const meta = {
-  title: "Data/Chip",
+  title: 'Data/Chip',
   component: GChip,
   parameters: {
     docs: {
@@ -83,229 +87,239 @@ import { GChip } from '@flash-global66/g-chip'
   },
   argTypes: {
     size: {
-      description: "Tamaño del chip: md (30px) incluye más padding, sm (26px) es más compacto",
-      control: "select",
-      options: ["sm", "md"],
+      description:
+        'Tamaño del chip: md (30px) incluye más padding, sm (26px) es más compacto',
+      control: 'select',
+      options: ['sm', 'md'],
       table: {
-        category: "Apariencia",
-        type: { summary: "string" },
-        defaultValue: { summary: "md" },
+        category: 'Apariencia',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'md' },
       },
     },
     type: {
-      description: "Tipo que controla el border radius: primary (redondeado completo), secondary (esquinas suaves)",
-      control: "select",
-      options: ["primary", "secondary"],
+      description:
+        'Tipo que controla el border radius: primary (redondeado completo), secondary (esquinas suaves)',
+      control: 'select',
+      options: ['primary', 'secondary'],
       table: {
-        category: "Apariencia",
-        type: { summary: "string" },
-        defaultValue: { summary: "primary" },
+        category: 'Apariencia',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'primary' },
       },
     },
     variant: {
-      description: "Variante visual: solid (fondo gris para tags), outline (solo borde para filtros)",
-      control: "select",
-      options: ["solid", "outline"],
+      description:
+        'Variante visual: solid (fondo gris para tags), outline (solo borde para filtros)',
+      control: 'select',
+      options: ['solid', 'outline'],
       table: {
-        category: "Apariencia",
-        type: { summary: "string" },
-        defaultValue: { summary: "solid" },
+        category: 'Apariencia',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'solid' },
       },
     },
     iconLeft: {
-      name: "icon-left",
-      description: "Ícono a la izquierda",
-      control: "select",
-      options: ["", ...generateIconOptions()],
+      name: 'icon-left',
+      description: 'Ícono a la izquierda',
+      control: 'select',
+      options: ['', ...generateIconOptions()],
       table: {
-        category: "Iconos",
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        category: 'Iconos',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     iconRight: {
-      name: "icon-right",
-      description: "Ícono a la derecha",
-      control: "select",
-      options: ["", ...generateIconOptions()],
+      name: 'icon-right',
+      description: 'Ícono a la derecha',
+      control: 'select',
+      options: ['', ...generateIconOptions()],
       table: {
-        category: "Iconos",
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        category: 'Iconos',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     text: {
-      description: "Texto a mostrar en el chip",
-      control: "text",
+      description: 'Texto a mostrar en el chip',
+      control: 'text',
       table: {
-        category: "Contenido",
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        category: 'Contenido',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     closable: {
-      description: "Habilita el botón de cerrar",
-      control: "boolean",
+      description: 'Habilita el botón de cerrar',
+      control: 'boolean',
       table: {
-        category: "Comportamiento",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Comportamiento',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     selected: {
-      description: "Estado seleccionado: para outline cambia a fondo azul, para solid mantiene apariencia",
-      control: "boolean",
+      description:
+        'Estado seleccionado: para outline cambia a fondo azul, para solid mantiene apariencia',
+      control: 'boolean',
       table: {
-        category: "Estado",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Estado',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     disabled: {
-      description: "Estado deshabilitado: evita interacciones y aplica estilos visuales de disabled",
-      control: "boolean",
+      description:
+        'Estado deshabilitado: evita interacciones y aplica estilos visuales de disabled',
+      control: 'boolean',
       table: {
-        category: "Estado",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Estado',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     dropdownEnabled: {
-      description: "Habilita el dropdown integrado. Automáticamente muestra un icono chevron-down en el sufijo cuando está habilitado. Para configurar el dropdown, usa las props estándar de GDropdown.",
-      control: "boolean",
+      description:
+        'Habilita el dropdown integrado. Automáticamente muestra un icono chevron-down en el sufijo cuando está habilitado. Para configurar el dropdown, usa las props estándar de GDropdown.',
+      control: 'boolean',
       table: {
-        category: "Dropdown",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Dropdown',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     actions: {
-      description: "Acciones del dropdown (array de objetos { title: string, command: any }). Para más opciones de configuración, consulta la documentación de GDropdown.",
-      control: "object",
+      description:
+        'Acciones del dropdown (array de objetos { title: string, command: any }). Para más opciones de configuración, consulta la documentación de GDropdown.',
+      control: 'object',
       table: {
-        category: "Dropdown",
-        type: { summary: "Array<object>" },
+        category: 'Dropdown',
+        type: { summary: 'Array<object>' },
       },
     },
     trigger: {
-      description: "Cómo se activa el dropdown: 'hover', 'click', 'contextmenu'. Para más opciones, consulta la documentación de GDropdown.",
-      control: "select",
-      options: ["hover", "click", "contextmenu"],
+      description:
+        "Cómo se activa el dropdown: 'hover', 'click', 'contextmenu'. Para más opciones, consulta la documentación de GDropdown.",
+      control: 'select',
+      options: ['hover', 'click', 'contextmenu'],
       table: {
-        category: "Dropdown",
-        type: { summary: "string" },
-        defaultValue: { summary: "hover" },
+        category: 'Dropdown',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'hover' },
       },
     },
     placement: {
-      description: "Posición del dropdown. Para todas las opciones de posicionamiento disponibles, consulta la documentación de GDropdown.",
-      control: "select",
+      description:
+        'Posición del dropdown. Para todas las opciones de posicionamiento disponibles, consulta la documentación de GDropdown.',
+      control: 'select',
       options: [
-        "top",
-        "top-start",
-        "top-end",
-        "bottom",
-        "bottom-start",
-        "bottom-end",
-        "left",
-        "left-start",
-        "left-end",
-        "right",
-        "right-start",
-        "right-end",
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'left',
+        'left-start',
+        'left-end',
+        'right',
+        'right-start',
+        'right-end',
       ],
       table: {
-        category: "Dropdown",
-        type: { summary: "string" },
-        defaultValue: { summary: "bottom" },
-        description: "**Nota:** Todas las demás props de GDropdown se pasan directamente al componente. Para configuración avanzada (triggerKeys, popperOptions, hideOnClick, timeouts, etc.), consulta la documentación de GDropdown."
+        category: 'Dropdown',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'bottom' },
+        description:
+          '**Nota:** Todas las demás props de GDropdown se pasan directamente al componente. Para configuración avanzada (triggerKeys, popperOptions, hideOnClick, timeouts, etc.), consulta la documentación de GDropdown.',
       },
     },
     close: {
-      description: "Evento emitido al cerrar",
-      action: "close",
+      description: 'Evento emitido al cerrar',
+      action: 'close',
       table: {
-        category: "Eventos",
-        type: { summary: "Event", detail: "() => void" },
-        defaultValue: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: 'Event', detail: '() => void' },
+        defaultValue: { summary: '() => void' },
       },
       control: false,
     },
     click: {
-      description: "Evento emitido al hacer clic",
-      action: "click",
+      description: 'Evento emitido al hacer clic',
+      action: 'click',
       table: {
-        category: "Eventos",
-        type: { summary: "Event", detail: "() => void" },
-        defaultValue: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: 'Event', detail: '() => void' },
+        defaultValue: { summary: '() => void' },
       },
       control: false,
     },
     command: {
-      description: "Evento emitido al seleccionar un elemento del dropdown",
-      action: "command",
+      description: 'Evento emitido al seleccionar un elemento del dropdown',
+      action: 'command',
       table: {
-        category: "Eventos",
-        type: { summary: "any", detail: "(command: any) => void" },
-        defaultValue: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: 'any', detail: '(command: any) => void' },
+        defaultValue: { summary: '() => void' },
       },
       control: false,
     },
     prefix: {
-      description: "slot para el inicio del chip",
+      description: 'slot para el inicio del chip',
       table: {
-        category: "Slots",
-        type: { summary: "slot" },
+        category: 'Slots',
+        type: { summary: 'slot' },
       },
       control: false,
     },
     default: {
-      description: "slot para el contenido del chip",
+      description: 'slot para el contenido del chip',
       table: {
-        category: "Slots",
-        type: { summary: "slot" },
+        category: 'Slots',
+        type: { summary: 'slot' },
       },
       control: false,
     },
     suffix: {
-      description: "slot para el final del chip",
+      description: 'slot para el final del chip',
       table: {
-        category: "Slots",
-        type: { summary: "slot" },
+        category: 'Slots',
+        type: { summary: 'slot' },
       },
       control: false,
     },
     dropdown: {
-      description: "slot para el contenido personalizado del dropdown",
+      description: 'slot para el contenido personalizado del dropdown',
       table: {
-        category: "Slots",
-        type: { summary: "slot" },
+        category: 'Slots',
+        type: { summary: 'slot' },
       },
       control: false,
     },
   },
   args: {
-    text: "Chip",
-    size: "md",
-    type: "primary",
-    variant: "solid",
-    iconLeft: "",
-    iconRight: "",
+    text: 'Chip',
+    size: 'md',
+    type: 'primary',
+    variant: 'solid',
+    iconLeft: '',
+    iconRight: '',
     closable: false,
     selected: false,
     disabled: false,
     dropdownEnabled: false,
     actions: [],
-    trigger: "hover",
-    placement: "bottom",
+    trigger: 'hover',
+    placement: 'bottom',
   },
 };
 export default meta;
 type Story = StoryObj<ChipInstance>;
 
 export const Basic: Story = {
-  name: "Básico",
-  render: (args) => ({
+  name: 'Básico',
+  render: args => ({
     components: { GChip, GConfigProvider },
     setup() {
       return { args };
@@ -321,14 +335,14 @@ export const Basic: Story = {
 };
 
 export const AllCombinations: Story = {
-  name: "Combinaciones de variantes y tamaños",
+  name: 'Combinaciones de variantes y tamaños',
   render: () => ({
     components: { GChip, GConfigProvider },
     setup() {
       const state = reactive({
-        types: ["primary", "secondary"],
-        sizes: ["sm", "md"],
-        variants: ["solid", "outline"],
+        types: ['primary', 'secondary'],
+        sizes: ['sm', 'md'],
+        variants: ['solid', 'outline'],
       });
       return { state };
     },
@@ -354,20 +368,29 @@ export const AllCombinations: Story = {
 };
 
 export const WithIcons: Story = {
-  name: "Chips con iconos",
+  name: 'Chips con iconos',
   render: () => ({
     components: { GChip, GConfigProvider },
     setup() {
       const iconExamples = [
-        { iconLeft: "solid check", text: "Verificado" },
-        { iconRight: "regular chevron-down", text: "Dropdown" },
-        { iconLeft: "solid user", iconRight: "solid check", text: "Usuario activo" },
-        { iconLeft: "regular heart", text: "Favorito", variant: "outline" },
-        { iconLeft: "regular bell", text: "Notificación", type: "secondary" },
-        { iconRight: "solid arrow-right", text: "Siguiente", variant: "outline", type: "secondary" },
-      ]
-      
-      return { iconExamples }
+        { iconLeft: 'solid check', text: 'Verificado' },
+        { iconRight: 'regular chevron-down', text: 'Dropdown' },
+        {
+          iconLeft: 'solid user',
+          iconRight: 'solid check',
+          text: 'Usuario activo',
+        },
+        { iconLeft: 'regular heart', text: 'Favorito', variant: 'outline' },
+        { iconLeft: 'regular bell', text: 'Notificación', type: 'secondary' },
+        {
+          iconRight: 'solid arrow-right',
+          text: 'Siguiente',
+          variant: 'outline',
+          type: 'secondary',
+        },
+      ];
+
+      return { iconExamples };
     },
     template: `
       <g-config-provider>
@@ -439,15 +462,15 @@ export const WithIcons: Story = {
 };
 
 export const ClosableDynamic: Story = {
-  name: "Chips eliminables",
+  name: 'Chips eliminables',
   render: () => ({
     components: { GChip, GConfigProvider },
     setup() {
       const initChips = [
-        { text: "Chip 1", type: "primary", variant: "solid" },
-        { text: "Chip 2", type: "secondary", variant: "solid" },
-        { text: "Chip 3", type: "primary", variant: "outline" },
-        { text: "Chip 4", type: "secondary", variant: "outline" },
+        { text: 'Chip 1', type: 'primary', variant: 'solid' },
+        { text: 'Chip 2', type: 'secondary', variant: 'solid' },
+        { text: 'Chip 3', type: 'primary', variant: 'outline' },
+        { text: 'Chip 4', type: 'secondary', variant: 'outline' },
       ];
       const dynamicChips = reactive([...initChips]);
       const handleClose = (chip: string) => {
@@ -456,8 +479,8 @@ export const ClosableDynamic: Story = {
           return;
         }
         dynamicChips.splice(
-          dynamicChips.findIndex((item) => item.text === chip),
-          1
+          dynamicChips.findIndex(item => item.text === chip),
+          1,
         );
       };
       return { dynamicChips, handleClose };
@@ -481,7 +504,7 @@ export const ClosableDynamic: Story = {
 };
 
 export const TypesWithAutomaticRadius: Story = {
-  name: "Tipos y variantes (separados)",
+  name: 'Tipos y variantes (separados)',
   render: () => ({
     components: { GChip, GConfigProvider },
     setup() {
@@ -531,17 +554,17 @@ export const TypesWithAutomaticRadius: Story = {
 
 // Tipos para el sistema de filtros
 interface MainFilter {
-  id: string
-  text: string
-  selected: boolean
-  options: string[]
+  id: string;
+  text: string;
+  selected: boolean;
+  options: string[];
 }
 
 interface AppliedFilter {
-  id: string
-  category: string
-  value: string
-  text: string
+  id: string;
+  category: string;
+  value: string;
+  text: string;
 }
 
 export const SelectableFilters: Story = {
@@ -673,89 +696,94 @@ const clearAllFilters = () => {
   </div>
 </template>`,
       },
-    }
+    },
   },
   render: () => ({
     components: { GChip, GConfigProvider },
     setup() {
       const mainFilters = reactive<MainFilter[]>([
-        { 
-          id: 'year', 
-          text: 'Año', 
+        {
+          id: 'year',
+          text: 'Año',
           selected: false,
-          options: ['2015', '2016', '2017', '2018', '2019', '2020']
+          options: ['2015', '2016', '2017', '2018', '2019', '2020'],
         },
-        { 
-          id: 'category', 
-          text: 'Categoría', 
+        {
+          id: 'category',
+          text: 'Categoría',
           selected: false,
-          options: ['Importaciones', 'Exportaciones', 'Balanza comercial']
+          options: ['Importaciones', 'Exportaciones', 'Balanza comercial'],
         },
-        { 
-          id: 'country', 
-          text: 'País', 
+        {
+          id: 'country',
+          text: 'País',
           selected: false,
-          options: ['Chile', 'Argentina', 'Brasil', 'Colombia', 'Perú']
+          options: ['Chile', 'Argentina', 'Brasil', 'Colombia', 'Perú'],
         },
-        { 
-          id: 'currency', 
-          text: 'Moneda', 
+        {
+          id: 'currency',
+          text: 'Moneda',
           selected: false,
-          options: ['USD', 'EUR', 'CLP', 'ARS']
-        }
-      ])
-      
-      const appliedFilters = ref<AppliedFilter[]>([])
-      
+          options: ['USD', 'EUR', 'CLP', 'ARS'],
+        },
+      ]);
+
+      const appliedFilters = ref<AppliedFilter[]>([]);
+
       const toggleMainFilter = (filterId: string) => {
-        const filter = mainFilters.find(f => f.id === filterId)
+        const filter = mainFilters.find(f => f.id === filterId);
         if (filter) {
-          filter.selected = !filter.selected
-          
+          filter.selected = !filter.selected;
+
           if (!filter.selected) {
-            const filteredItems = appliedFilters.value.filter(af => af.category !== filterId)
-            appliedFilters.value.splice(0, appliedFilters.value.length)
-            appliedFilters.value.push(...filteredItems)
+            const filteredItems = appliedFilters.value.filter(
+              af => af.category !== filterId,
+            );
+            appliedFilters.value.splice(0, appliedFilters.value.length);
+            appliedFilters.value.push(...filteredItems);
           }
         }
-      }
-      
-      const addAppliedFilter = (category: string, value: string, categoryText: string) => {
-        const exists = appliedFilters.value.find(af => 
-          af.category === category && af.value === value
-        )
-        
+      };
+
+      const addAppliedFilter = (
+        category: string,
+        value: string,
+        categoryText: string,
+      ) => {
+        const exists = appliedFilters.value.find(
+          af => af.category === category && af.value === value,
+        );
+
         if (!exists) {
           appliedFilters.value.push({
             id: `${category}-${value}`,
             category,
             value,
-            text: `${categoryText}: ${value}`
-          })
+            text: `${categoryText}: ${value}`,
+          });
         }
-      }
-      
-      const removeAppliedFilter = (filterId: string) => {
-        const index = appliedFilters.value.findIndex(af => af.id === filterId)
-        if (index > -1) {
-          appliedFilters.value.splice(index, 1)
-        }
-      }
-      
-      const clearAllFilters = () => {
-        appliedFilters.value.splice(0)
-        mainFilters.forEach(filter => filter.selected = false)
-      }
+      };
 
-      
-      return { 
-        mainFilters, 
-        appliedFilters, 
-        toggleMainFilter, 
-        addAppliedFilter, 
+      const removeAppliedFilter = (filterId: string) => {
+        const index = appliedFilters.value.findIndex(af => af.id === filterId);
+        if (index > -1) {
+          appliedFilters.value.splice(index, 1);
+        }
+      };
+
+      const clearAllFilters = () => {
+        appliedFilters.value.splice(0);
+        mainFilters.forEach(filter => (filter.selected = false));
+      };
+
+      return {
+        mainFilters,
+        appliedFilters,
+        toggleMainFilter,
+        addAppliedFilter,
         removeAppliedFilter,
-        clearAllFilters
-      }
+        clearAllFilters,
+      };
     },
     template: `
       <g-config-provider>
@@ -841,12 +869,12 @@ const clearAllFilters = () => {
           
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const WithIntegratedDropdown: Story = {
-  name: "Chip con dropdown integrado",
+  name: 'Chip con dropdown integrado',
   parameters: {
     docs: {
       source: {
@@ -927,18 +955,19 @@ const handleCurrencyCommand = (command) => {
     components: { GChip, GConfigProvider, GDropdownMenu, GDropdownItem },
     setup() {
       const currencies = reactive([
-        { title: "Pesos colombianos", command: "COP", flag: "🇨🇴" },
-        { title: "Dólar estadounidense", command: "USD", flag: "🇺🇸" },
-        { title: "Pesos argentinos", command: "ARS", flag: "🇦🇷" },
-        { title: "Pesos chilenos", command: "CLP", flag: "🇨🇱" },
-        { title: "Euro", command: "EUR", flag: "🇪🇺" },
-        { title: "Real brasileño", command: "BRL", flag: "🇧🇷" },
+        { title: 'Pesos colombianos', command: 'COP', flag: '🇨🇴' },
+        { title: 'Dólar estadounidense', command: 'USD', flag: '🇺🇸' },
+        { title: 'Pesos argentinos', command: 'ARS', flag: '🇦🇷' },
+        { title: 'Pesos chilenos', command: 'CLP', flag: '🇨🇱' },
+        { title: 'Euro', command: 'EUR', flag: '🇪🇺' },
+        { title: 'Real brasileño', command: 'BRL', flag: '🇧🇷' },
       ]);
 
       const selectedCurrency = ref(currencies[0]);
 
       const handleCurrencyCommand = (command: string) => {
-        selectedCurrency.value = currencies.find((c) => c.command === command) || currencies[0];
+        selectedCurrency.value =
+          currencies.find(c => c.command === command) || currencies[0];
       };
 
       return { currencies, selectedCurrency, handleCurrencyCommand };

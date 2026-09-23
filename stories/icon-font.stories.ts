@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { computed, ref } from "vue";
-import { GIconFont } from "@flash-global66/g-icon-font/index.ts";
-import { GConfigProvider } from "../components/config-provider";
-import { ICON_SETS } from "@flash-global66/g-icon-font/index.ts";
-import { GSegmented } from "@flash-global66/g-segmented/index.ts";
-import { GInput } from "@flash-global66/g-input/index.ts";
-import { GButton } from "@flash-global66/g-button/index.ts";
+import type { Meta, StoryObj } from '@storybook/vue3';
+import { computed, ref } from 'vue';
+import { GIconFont } from '@flash-global66/g-icon-font/index.ts';
+import { GConfigProvider } from '../components/config-provider';
+import { ICON_SETS } from '@flash-global66/g-icon-font/index.ts';
+import { GSegmented } from '@flash-global66/g-segmented/index.ts';
+import { GInput } from '@flash-global66/g-input/index.ts';
+import { GButton } from '@flash-global66/g-button/index.ts';
 import {
   version,
   peerDependencies,
-} from "@flash-global66/g-icon-font/package.json";
+} from '@flash-global66/g-icon-font/package.json';
 import {
   generatePeerDepsList,
   generatePeerDepsInstalls,
   generateIconOptions,
-} from "../helper/documentation-stories";
+} from '../helper/documentation-stories';
 
 const meta: Meta<typeof GIconFont> = {
-  title: "Basic/IconFont",
+  title: 'Basic/IconFont',
   component: GIconFont,
   parameters: {
     docs: {
@@ -100,166 +100,166 @@ import { GIconFont } from '@flash-global66/g-icon-font';
   },
   argTypes: {
     name: {
-      description: "Nombre completo del icono (peso + nombre)",
-      control: "select",
+      description: 'Nombre completo del icono (peso + nombre)',
+      control: 'select',
       options: generateIconOptions(),
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "solid user" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'solid user' },
       },
     },
     size: {
-      description: "Tamaño del icono",
-      control: "select",
+      description: 'Tamaño del icono',
+      control: 'select',
       options: [
-        "xs",
-        "sm",
-        "lg",
-        "xl",
-        "2xl",
-        "1x",
-        "2x",
-        "3x",
-        "4x",
-        "5x",
-        "6x",
-        "7x",
-        "8x",
-        "9x",
-        "10x",
-        "16px",
-        "24px",
-        "32px",
-        "48px",
+        'xs',
+        'sm',
+        'lg',
+        'xl',
+        '2xl',
+        '1x',
+        '2x',
+        '3x',
+        '4x',
+        '5x',
+        '6x',
+        '7x',
+        '8x',
+        '9x',
+        '10x',
+        '16px',
+        '24px',
+        '32px',
+        '48px',
       ],
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     fixedWidth: {
-      description: "Usar ancho fijo independientemente del icono",
-      control: "boolean",
+      description: 'Usar ancho fijo independientemente del icono',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     rotation: {
-      description: "Rotación del icono en grados",
-      control: "select",
+      description: 'Rotación del icono en grados',
+      control: 'select',
       options: [0, 90, 180, 270],
       table: {
-        type: { summary: "number | string" },
-        defaultValue: { summary: "undefined" },
+        type: { summary: 'number | string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     spin: {
-      description: "Aplica una animación de giro continuo",
-      control: "boolean",
+      description: 'Aplica una animación de giro continuo',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     pulse: {
-      description: "Aplica una animación de giro en 8 pasos",
-      control: "boolean",
+      description: 'Aplica una animación de giro en 8 pasos',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     pull: {
-      description: "Alineación del icono (izquierda o derecha)",
-      control: "select",
-      options: ["left", "right"],
+      description: 'Alineación del icono (izquierda o derecha)',
+      control: 'select',
+      options: ['left', 'right'],
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     bounce: {
-      description: "Aplica una animación de rebote",
-      control: "boolean",
+      description: 'Aplica una animación de rebote',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     shake: {
-      description: "Aplica una animación de sacudida",
-      control: "boolean",
+      description: 'Aplica una animación de sacudida',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     beat: {
-      description: "Aplica una animación de latido",
-      control: "boolean",
+      description: 'Aplica una animación de latido',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     fade: {
-      description: "Aplica una animación de desvanecimiento",
-      control: "boolean",
+      description: 'Aplica una animación de desvanecimiento',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     beatFade: {
-      description: "Combina las animaciones de latido y desvanecimiento",
-      control: "boolean",
+      description: 'Combina las animaciones de latido y desvanecimiento',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     title: {
-      description: "Título para el icono (útil para accesibilidad)",
-      control: "text",
+      description: 'Título para el icono (útil para accesibilidad)',
+      control: 'text',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     ariaLabel: {
-      description: "Etiqueta ARIA para el icono (accesibilidad)",
-      control: "text",
+      description: 'Etiqueta ARIA para el icono (accesibilidad)',
+      control: 'text',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "undefined" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
       },
     },
     ariaHidden: {
       description:
-        "Indica si el icono debe ser ocultado para lectores de pantalla",
-      control: "boolean",
+        'Indica si el icono debe ser ocultado para lectores de pantalla',
+      control: 'boolean',
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "undefined" },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'undefined' },
       },
     },
   },
   args: {
-    name: "solid user",
-    size: "2xl",
+    name: 'solid user',
+    size: '2xl',
   },
 } as Meta;
 
-export default meta
-type Story = StoryObj<typeof GIconFont>
+export default meta;
+type Story = StoryObj<typeof GIconFont>;
 
 export const Primary: Story = {
-  name: "Uso básico",
-  render: (args) => ({
+  name: 'Uso básico',
+  render: args => ({
     components: { GIconFont, GConfigProvider },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
       <g-config-provider>
@@ -272,46 +272,52 @@ export const Primary: Story = {
 };
 
 export const Galería: Story = {
-  name: "Galería de iconos",
+  name: 'Galería de iconos',
   parameters: {
     docs: {
       description: {
         story:
-          "Galería completa de íconos disponibles en el sistema. Haz clic en cualquier ícono para copiar su nombre. 📋",
+          'Galería completa de íconos disponibles en el sistema. Haz clic en cualquier ícono para copiar su nombre. 📋',
       },
     },
   },
   render: () => ({
     components: { GIconFont, GConfigProvider, GSegmented, GInput, GButton },
     setup() {
-      const selectedWeight = ref("regular");
-      const searchTerm = ref("");
+      const selectedWeight = ref('regular');
+      const searchTerm = ref('');
 
       const filteredIcons = computed(() => {
         if (!searchTerm.value.trim()) {
           // Ordenamos alfabéticamente todos los conjuntos de iconos
-          return Object.entries(ICON_SETS).reduce((sorted, [weight, icons]) => {
-            sorted[weight] = [...icons].sort((a, b) => a.localeCompare(b));
-            return sorted;
-          }, {} as Record<string, string[]>);
+          return Object.entries(ICON_SETS).reduce(
+            (sorted, [weight, icons]) => {
+              sorted[weight] = [...icons].sort((a, b) => a.localeCompare(b));
+              return sorted;
+            },
+            {} as Record<string, string[]>,
+          );
         }
 
         const searchTermLower = searchTerm.value.toLowerCase().trim();
 
         // Filtramos y ordenamos alfabéticamente los resultados
-        return Object.entries(ICON_SETS).reduce((filtered, [weight, icons]) => {
-          filtered[weight] = [...icons]
-            .filter((icon) => icon.toLowerCase().includes(searchTermLower))
-            .sort((a, b) => a.localeCompare(b));
-          return filtered;
-        }, {} as Record<string, string[]>);
+        return Object.entries(ICON_SETS).reduce(
+          (filtered, [weight, icons]) => {
+            filtered[weight] = [...icons]
+              .filter(icon => icon.toLowerCase().includes(searchTermLower))
+              .sort((a, b) => a.localeCompare(b));
+            return filtered;
+          },
+          {} as Record<string, string[]>,
+        );
       });
 
       const clearSearch = () => {
-        searchTerm.value = "";
+        searchTerm.value = '';
       };
 
-      const weightOptions = Object.keys(ICON_SETS).map((weight) => ({
+      const weightOptions = Object.keys(ICON_SETS).map(weight => ({
         label: weight.charAt(0).toUpperCase() + weight.slice(1),
         value: weight,
       }));
@@ -320,10 +326,10 @@ export const Galería: Story = {
         navigator.clipboard
           .writeText(iconName)
           .then(() => {
-            console.log("Nombre del icono copiado al portapapeles");
+            console.log('Nombre del icono copiado al portapapeles');
           })
           .catch(() => {
-            alert("No se pudo copiar el nombre del icono");
+            alert('No se pudo copiar el nombre del icono');
           });
       };
 
@@ -406,12 +412,12 @@ export const Galería: Story = {
 };
 
 export const Sizes: Story = {
-  name: "Tamaños",
+  name: 'Tamaños',
   parameters: {
     docs: {
       description: {
         story:
-          "El componente admite diferentes tamaños, ya sea utilizando las constantes predefinidas de Font Awesome o valores personalizados (px, em, rem). No es necesario declararlo en la propiedad size. También se puede usar la propiedad class",
+          'El componente admite diferentes tamaños, ya sea utilizando las constantes predefinidas de Font Awesome o valores personalizados (px, em, rem). No es necesario declararlo en la propiedad size. También se puede usar la propiedad class',
       },
     },
   },
@@ -471,12 +477,12 @@ export const Sizes: Story = {
 };
 
 export const Animations: Story = {
-  name: "Animaciones",
+  name: 'Animaciones',
   parameters: {
     docs: {
       description: {
         story:
-          "El componente soporta diversas animaciones incorporadas de Font Awesome. Estas animaciones se activan mediante propiedades booleanas y son útiles para indicar estados como carga, procesamiento o llamar la atención del usuario. Utiliza animaciones con moderación y propósito",
+          'El componente soporta diversas animaciones incorporadas de Font Awesome. Estas animaciones se activan mediante propiedades booleanas y son útiles para indicar estados como carga, procesamiento o llamar la atención del usuario. Utiliza animaciones con moderación y propósito',
       },
     },
   },
@@ -528,12 +534,12 @@ export const Animations: Story = {
 };
 
 export const TransformationsAndStyling: Story = {
-  name: "Transformaciones y Estilización",
+  name: 'Transformaciones y Estilización',
   parameters: {
     docs: {
       description: {
         story:
-          "El componente permite aplicar diversas transformaciones como rotación y diferentes estilos visuales.",
+          'El componente permite aplicar diversas transformaciones como rotación y diferentes estilos visuales.',
       },
     },
   },

@@ -1,11 +1,11 @@
-import { Meta, StoryFn, StoryObj } from '@storybook/vue3'
+import { Meta, StoryFn, StoryObj } from '@storybook/vue3';
 
 // COMPONENTS
-import { GRadio } from '../components/radio'
+import { GRadio } from '../components/radio';
 
 // CONFIG
-import { GConfigProvider } from '../components/config-provider'
-import { RadioProps } from '@flash-global66/g-radio/index.ts'
+import { GConfigProvider } from '../components/config-provider';
+import { RadioProps } from '@flash-global66/g-radio/index.ts';
 
 const meta: Meta<typeof GRadio> = {
   title: 'Form/Radio/Single',
@@ -22,9 +22,9 @@ Ejemplo básico:
 \`\`\`vue
 <g-radio v-model="selected" label="Opción 1" value="1" />
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     // Principales
@@ -32,24 +32,24 @@ Ejemplo básico:
       description: 'Valor del modelo (v-model)',
       table: {
         type: { summary: 'string | number | boolean' },
-        category: 'Principales'
-      }
+        category: 'Principales',
+      },
     },
     label: {
       description: 'Etiqueta visible del radio',
       control: 'text',
       table: {
         category: 'Principales',
-        type: { summary: 'string | number | boolean' }
-      }
+        type: { summary: 'string | number | boolean' },
+      },
     },
     value: {
       description: 'Valor único del radio',
       control: 'object',
       table: {
         category: 'Principales',
-        type: { summary: 'string | number | boolean' }
-      }
+        type: { summary: 'string | number | boolean' },
+      },
     },
     // Estados
     disabled: {
@@ -58,8 +58,8 @@ Ejemplo básico:
       table: {
         category: 'Estados',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
 
     // Atributos HTML
@@ -68,8 +68,8 @@ Ejemplo básico:
       control: 'text',
       table: {
         category: 'Atributos HTML',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
 
     // Eventos
@@ -77,15 +77,15 @@ Ejemplo básico:
       description: 'Se emite al actualizar la selección',
       table: {
         category: 'Eventos',
-        type: { summary: 'string | number | boolean' }
-      }
+        type: { summary: 'string | number | boolean' },
+      },
     },
     onChange: {
       description: 'Se emite al cambiar la selección',
       table: {
         category: 'Eventos',
-        type: { summary: 'string | number | boolean' }
-      }
+        type: { summary: 'string | number | boolean' },
+      },
     },
 
     // Slots
@@ -93,37 +93,37 @@ Ejemplo básico:
       description: 'Slot para contenido personalizado para radio',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
-      }
-    }
+        type: { summary: 'slot' },
+      },
+    },
   },
   args: {
     disabled: false,
     label: 'Etiqueta del radio',
     modelValue: false,
     value: 'valor-radio',
-    name: 'radio-group'
-  } as Partial<RadioProps>
-}
+    name: 'radio-group',
+  } as Partial<RadioProps>,
+};
 
-export default meta
-type Story = StoryObj<typeof GRadio>
+export default meta;
+type Story = StoryObj<typeof GRadio>;
 
 const Template: StoryFn<RadioProps> = (args: RadioProps, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { GRadio, GConfigProvider },
   setup() {
-    return { args }
+    return { args };
   },
   template: `
     <g-config-provider>
       <g-radio v-bind="args" v-model="args.modelValue" />
     </g-config-provider>
-  `
-})
+  `,
+});
 
-export const Default: Story = Template.bind({})
+export const Default: Story = Template.bind({});
 Default.args = {
   label: 'Opción predeterminada',
   // value: 'valor-radio'
-}
+};

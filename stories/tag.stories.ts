@@ -1,12 +1,12 @@
-import { StoryObj } from '@storybook/vue3'
-import { reactive } from 'vue'
+import { StoryObj } from '@storybook/vue3';
+import { reactive } from 'vue';
 
 // COMPONENTS
-import { GTag, TagInstance } from '@flash-global66/g-tag'
+import { GTag, TagInstance } from '@flash-global66/g-tag';
 
 // CONFIG
-import { GConfigProvider } from '../components/config-provider'
-import { generateIconOptions } from '../helper/documentation-stories'
+import { GConfigProvider } from '../components/config-provider';
+import { generateIconOptions } from '../helper/documentation-stories';
 
 const meta = {
   title: 'Data/Tag',
@@ -45,9 +45,9 @@ Este componente requiere:
 import { GTag } from '@flash-global66/g-tag'
 import '@flash-global66/g-tag/tag.style.scss'
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     size: {
@@ -57,8 +57,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Apariencia',
         type: { summary: 'string' },
-        defaultValue: { summary: 'sm' }
-      }
+        defaultValue: { summary: 'sm' },
+      },
     },
     type: {
       description: 'Tipo de tag',
@@ -67,8 +67,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Apariencia',
         type: { summary: 'string' },
-        defaultValue: { summary: 'grey' }
-      }
+        defaultValue: { summary: 'grey' },
+      },
     },
     effect: {
       description: 'Tema del tag',
@@ -77,8 +77,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Apariencia',
         type: { summary: 'string' },
-        defaultValue: { summary: 'light' }
-      }
+        defaultValue: { summary: 'light' },
+      },
     },
     prefixIcon: {
       name: 'prefix-icon',
@@ -88,8 +88,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Iconos',
         type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     suffixIcon: {
       name: 'suffix-icon',
@@ -99,8 +99,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Iconos',
         type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     text: {
       description: 'Texto a mostrar en el tag',
@@ -108,8 +108,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Contenido',
         type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     closable: {
       description: 'Habilita el botón de cerrar',
@@ -117,8 +117,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Comportamiento',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     disableTransitions: {
       description: 'Deshabilita las transiciones',
@@ -126,8 +126,8 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Comportamiento',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     close: {
       description: 'Evento emitido al cerrar',
@@ -135,9 +135,9 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Métodos Expuestos',
         type: { summary: 'Event', detail: '() => void' },
-        defaultValue: { summary: '() => void' }
+        defaultValue: { summary: '() => void' },
       },
-      control: false
+      control: false,
     },
     click: {
       description: 'Evento emitido al hacer clic',
@@ -145,34 +145,34 @@ import '@flash-global66/g-tag/tag.style.scss'
       table: {
         category: 'Métodos Expuestos',
         type: { summary: 'Event', detail: '() => void' },
-        defaultValue: { summary: '() => void' }
+        defaultValue: { summary: '() => void' },
       },
-      control: false
+      control: false,
     },
     prefix: {
       description: 'slot para el inicio del tag',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
+        type: { summary: 'slot' },
       },
-      control: false
+      control: false,
     },
     default: {
       description: 'slot para el contenido del tag',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
+        type: { summary: 'slot' },
       },
-      control: false
+      control: false,
     },
     suffix: {
       description: 'slot para el final del tag',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
+        type: { summary: 'slot' },
       },
-      control: false
-    }
+      control: false,
+    },
   },
   args: {
     text: 'Etiqueta',
@@ -182,18 +182,18 @@ import '@flash-global66/g-tag/tag.style.scss'
     prefixIcon: '',
     suffixIcon: '',
     closable: false,
-    disableTransitions: false
-  }
-}
-export default meta
-type Story = StoryObj<TagInstance>
+    disableTransitions: false,
+  },
+};
+export default meta;
+type Story = StoryObj<TagInstance>;
 
 export const Basic: Story = {
   name: 'Básico',
-  render: (args) => ({
+  render: args => ({
     components: { GTag, GConfigProvider },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
       <g-config-provider>
@@ -201,9 +201,9 @@ export const Basic: Story = {
           <g-tag v-bind="args" />
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const allCombination: Story = {
   name: 'Combinaciones de colores y tamaños',
@@ -212,9 +212,9 @@ export const allCombination: Story = {
       description: {
         story: `Combinaciones de todos los colores y tamaños disponibles.
 
-> - **📋 Nota**: Puedes copiar el código de cada tag haciendo clic en ellos.`
-      }
-    }
+> - **📋 Nota**: Puedes copiar el código de cada tag haciendo clic en ellos.`,
+      },
+    },
   },
   render: () => ({
     components: { GTag, GConfigProvider },
@@ -222,8 +222,8 @@ export const allCombination: Story = {
       const state = reactive({
         types: ['success', 'info', 'warning', 'error', 'grey'],
         sizes: ['xs', 'sm', 'md'],
-        effects: ['dark', 'light']
-      })
+        effects: ['dark', 'light'],
+      });
 
       const copyTag = async (type: string, size: string, effect: string) => {
         const text = `<g-tag
@@ -233,15 +233,15 @@ export const allCombination: Story = {
   text="Etiqueta"
   prefix-icon="solid check"
   suffix-icon="solid check"
-/>`
+/>`;
         try {
-          await navigator.clipboard.writeText(text)
+          await navigator.clipboard.writeText(text);
         } catch (err) {
-          console.error('Failed to copy: ', err)
+          console.error('Failed to copy: ', err);
         }
-      }
+      };
 
-      return { state, copyTag }
+      return { state, copyTag };
     },
     template: `
       <g-config-provider>
@@ -264,23 +264,23 @@ export const allCombination: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const prefixAndSuffix: Story = {
   name: 'Banderas como slots al inicio y al final',
   parameters: {
     docs: {
       description: {
-        story: `Banderas como slots al inicio y al final del tag.`
-      }
-    }
+        story: `Banderas como slots al inicio y al final del tag.`,
+      },
+    },
   },
   render: () => ({
     components: { GTag, GConfigProvider },
     setup() {
-      return {}
+      return {};
     },
     template: `
     <g-config-provider>
@@ -310,18 +310,18 @@ export const prefixAndSuffix: Story = {
           </template>
         </g-tag>
       </div>
-    </g-config-provider>`
-  })
-}
+    </g-config-provider>`,
+  }),
+};
 
 export const closableDynamic: Story = {
   name: 'Tags eliminables',
   parameters: {
     docs: {
       description: {
-        story: `Tags que se pueden eliminar al hacer clic en el botón de cerrar.`
-      }
-    }
+        story: `Tags que se pueden eliminar al hacer clic en el botón de cerrar.`,
+      },
+    },
   },
   render: () => ({
     components: { GTag, GConfigProvider },
@@ -336,23 +336,23 @@ export const closableDynamic: Story = {
         { text: 'Tag 7', type: 'grey', effect: 'dark' },
         { text: 'Tag 8', type: 'success', effect: 'dark' },
         { text: 'Tag 9', type: 'info', effect: 'dark' },
-        { text: 'Tag 10', type: 'error', effect: 'dark' }
-      ]
-      const dynamicTags = reactive([...initTags])
+        { text: 'Tag 10', type: 'error', effect: 'dark' },
+      ];
+      const dynamicTags = reactive([...initTags]);
 
       const handleClose = (tag: string) => {
         if (dynamicTags.length === 1) {
-          dynamicTags.splice(-1, 1, ...initTags)
-          return
+          dynamicTags.splice(-1, 1, ...initTags);
+          return;
         }
 
         dynamicTags.splice(
-          dynamicTags.findIndex((item) => item.text === tag),
-          1
-        )
-      }
+          dynamicTags.findIndex(item => item.text === tag),
+          1,
+        );
+      };
 
-      return { dynamicTags, handleClose }
+      return { dynamicTags, handleClose };
     },
     template: `
       <g-config-provider>
@@ -369,6 +369,6 @@ export const closableDynamic: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
