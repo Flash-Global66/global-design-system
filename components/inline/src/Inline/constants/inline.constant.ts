@@ -1,15 +1,13 @@
-import type { ExtractPropTypes } from 'vue';
-import type Inline from './index.vue';
 import { useAriaProps } from '@flash-global66/g-hooks';
 import { buildProps, definePropType } from '@flash-global66/g-utils';
+import type { IconString } from '@flash-global66/g-icon-font';
 
-import {
+import type {
   InlineEnum,
   InlineIconAlign,
   InlineLinks,
   InlineSize,
 } from '../types/inline.type';
-import { IconString } from '@flash-global66/g-icon-font';
 
 export const inlineProps = buildProps({
   /**
@@ -102,9 +100,3 @@ export const inlineProps = buildProps({
 export const inlineEmits = {
   close: (evt: MouseEvent) => evt instanceof MouseEvent,
 };
-
-export type InlineEmits = typeof inlineEmits;
-
-export type InlineProps = ExtractPropTypes<typeof inlineProps>;
-
-export type InlineInstance = InstanceType<typeof Inline>;
