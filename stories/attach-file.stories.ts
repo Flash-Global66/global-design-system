@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref, reactive } from 'vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { GAttachFile } from '@flash-global66/g-attach-file/index.ts';
 import type { ValidationError } from '@flash-global66/g-attach-file/index.ts';

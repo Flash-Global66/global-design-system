@@ -1,5 +1,5 @@
 // external imports
-import { StoryObj } from '@storybook/vue3';
+import { StoryObj } from '@storybook/vue3-vite';
 
 // components
 import { GProgress } from '@flash-global66/g-progress/index.ts';

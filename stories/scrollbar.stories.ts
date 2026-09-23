@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { GScrollbar } from '../components/scrollbar/index.ts';
 import { GConfigProvider } from '../components/config-provider';

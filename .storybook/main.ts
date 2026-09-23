@@ -16,14 +16,9 @@ const config: StorybookConfig = {
 
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/addon-jest',
-    '@storybook/addon-controls',
     '@storybook/addon-docs',
   ],
-
-  docs: { autodocs: 'tag' },
 };
 
 export default config;

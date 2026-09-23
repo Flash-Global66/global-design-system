@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { GLink } from '../components/link';
 import { GConfigProvider } from '../components/config-provider';
 

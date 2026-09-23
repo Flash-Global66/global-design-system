@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref } from 'vue';
 import { GSearchInput } from '@flash-global66/g-search-input/index.ts';
 import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import {
   version,

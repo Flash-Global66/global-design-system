@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { reactive, ref } from 'vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { GInputTag } from '@flash-global66/g-input-tag/index.ts';
 import '@flash-global66/g-input-tag/styles.scss';

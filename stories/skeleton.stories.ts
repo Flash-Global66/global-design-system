@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/vue3';
+import { StoryFn, Meta } from '@storybook/vue3-vite';
 import { GSkeleton, GSkeletonItem } from '../components/skeleton';
 import { GConfigProvider } from '../components/config-provider';
 

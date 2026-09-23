@@ -1,5 +1,5 @@
 import { ref, reactive, toRef } from 'vue';
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { GSwitch } from '@flash-global66/g-switch/index.ts';
 import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';

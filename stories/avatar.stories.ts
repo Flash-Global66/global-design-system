@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/vue3';
+import { StoryFn, Meta } from '@storybook/vue3-vite';
 import Avatar from '../components/avatar';
 
 export default {

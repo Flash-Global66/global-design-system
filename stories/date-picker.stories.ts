@@ -1,4 +1,4 @@
-import { StoryObj } from '@storybook/vue3';
+import { StoryObj } from '@storybook/vue3-vite';
 import { ref } from 'vue';
 import { es } from '../common/lang';
 

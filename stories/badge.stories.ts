@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/vue3';
+import { StoryFn, Meta } from '@storybook/vue3-vite';
 
 import { GBadge } from '../components/badge';
 import { GConfigProvider } from '../components/config-provider';

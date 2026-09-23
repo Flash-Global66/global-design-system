@@ -1,5 +1,5 @@
 import * as jest from 'jest-mock';
-import { setup } from '@storybook/vue3';
+import { setup } from '@storybook/vue3-vite';
 import { imageBaseUrlKey } from '@flash-global66/g-image/index.ts';
 window.jest = jest;
 
@@ -27,12 +27,17 @@ export const parameters = {
     },
   },
   backgrounds: {
-    values: [
-      { name: 'Gray', value: '#FAFBFF' },
-      { name: 'White', value: '#FFF' },
-    ],
-    default: 'Gray',
+    options: {
+      gray: { name: 'Gray', value: '#FAFBFF' },
+      white: { name: 'White', value: '#FFF' },
+    },
   },
 };
 
 export const tags = ['autodocs'];
+
+export const initialGlobals = {
+  backgrounds: {
+    value: 'gray',
+  },
+};

@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from '@storybook/vue3';
+import { StoryFn, Meta } from '@storybook/vue3-vite';
 import { GButton } from '@flash-global66/g-button/index.ts';
 
 // TYPES

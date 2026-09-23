@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { GQuote, type QuoteInstance } from '../components/quote';
 import { GConfigProvider } from '../components/config-provider';
 import type { Currency, QuoteAccount } from '../components/quote';

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref, watch } from 'vue';
 import { GInputNumber } from '../components/input-number';
 import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';

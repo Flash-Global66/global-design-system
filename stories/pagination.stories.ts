@@ -1,6 +1,6 @@
 // external imports
 import { ref, computed } from 'vue';
-import { StoryObj } from '@storybook/vue3';
+import { StoryObj } from '@storybook/vue3-vite';
 
 // components
 import { GPagination } from '@flash-global66/g-pagination/index.ts';

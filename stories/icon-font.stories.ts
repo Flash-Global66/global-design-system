@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { computed, ref } from 'vue';
 import { GIconFont } from '@flash-global66/g-icon-font/index.ts';
 import { GConfigProvider } from '../components/config-provider';

@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming/create';
 import brandImage from '../assets/global-business.png';
 
 export const theme = create({

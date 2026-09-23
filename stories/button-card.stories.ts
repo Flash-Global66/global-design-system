@@ -1,10 +1,10 @@
-import { StoryFn, Meta } from '@storybook/vue3';
+import { StoryFn, Meta } from '@storybook/vue3-vite';
 import { GButtonCard } from '../components/button-card';
 import { generateIconOptions } from '../helper/documentation-stories';
 
 // CONSTANTS
-import { action } from '@storybook/addon-actions';
-import { fn } from '@storybook/test';
+import { action } from 'storybook/actions';
+import { fn } from 'storybook/test';
 
 export default {
   title: 'Basic/Button Card',

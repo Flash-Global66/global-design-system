@@ -1,6 +1,6 @@
 // external imports
 import { ref } from 'vue';
-import { StoryObj } from '@storybook/vue3';
+import { StoryObj } from '@storybook/vue3-vite';
 
 // components
 import { GTooltip, TooltipInstance } from '@flash-global66/g-tooltip';

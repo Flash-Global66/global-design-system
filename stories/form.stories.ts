@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref, reactive, computed, watch } from 'vue';
 // Para poder hacer cambios en el form se debe hacer build porque se usa provider
 import {

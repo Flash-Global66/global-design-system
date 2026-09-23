@@ -1,6 +1,6 @@
-import { Meta, StoryFn } from '@storybook/vue3';
+import { Meta, StoryFn } from '@storybook/vue3-vite';
 import { computed, ref } from 'vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 // COMPONENTS
 import { GInputCode } from '../components/input-code';

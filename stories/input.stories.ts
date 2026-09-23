@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { GInput, InputInstance } from '../components/input';
 import { GConfigProvider } from '../components/config-provider';
 import { reactive, ref } from 'vue';

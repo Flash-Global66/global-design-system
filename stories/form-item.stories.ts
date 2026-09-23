@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { ref, reactive } from 'vue';
 import { GFormItem, GForm, FormItemInstance } from '@flash-global66/g-form';
 import { GInput } from '@flash-global66/g-input';

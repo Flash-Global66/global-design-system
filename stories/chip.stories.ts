@@ -1,4 +1,4 @@
-import { StoryObj } from '@storybook/vue3';
+import { StoryObj } from '@storybook/vue3-vite';
 import { reactive, ref } from 'vue';
 import { GChip, ChipInstance } from '@flash-global66/g-chip/index.ts';
 import { GDropdownMenu, GDropdownItem } from '@flash-global66/g-dropdown';

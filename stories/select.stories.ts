@@ -1,4 +1,4 @@
-import { StoryObj } from '@storybook/vue3';
+import { StoryObj } from '@storybook/vue3-vite';
 import { reactive, ref } from 'vue';
 
 // COMPONENTS
