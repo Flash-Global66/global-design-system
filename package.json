@@ -41,7 +41,8 @@
     "test:watch": "vitest",
     "scss:parity": "node scripts/scss-parity.mjs",
     "arch:check": "node scripts/check-architecture.mjs",
-    "arch:check:ci": "node scripts/check-architecture.mjs --ci"
+    "arch:check:ci": "node scripts/check-architecture.mjs --ci",
+    "styles:check": "node scripts/check-styles.mjs"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
