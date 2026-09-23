@@ -1,0 +1,51 @@
+{
+  "components": {
+    "basic-link": {
+      "id": "basic-link",
+      "name": "GLink",
+      "path": "./stories/link.stories.ts",
+      "stories": {
+        "basic-link--default": {
+          "id": "basic-link--default",
+          "name": "Default link",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "basic-link--with-icons": {
+          "id": "basic-link--with-icons",
+          "name": "Links con íconos",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLink } from '../components/link';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col space-y-4\">\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Link with right icon</h3>\n        <g-link href=\"https://empresas.global66.com/\" icon-right=\"regular chevron-right\">Next page</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Link with left icon</h3>\n        <g-link href=\"https://empresas.global66.com/\" icon-left=\"regular chevron-left\">Previous page</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Link with both icons</h3>\n        <g-link href=\"https://empresas.global66.com/\" icon-left=\"regular link\" icon-right=\"regular arrow-up-right-from-square\">External link</g-link>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-link--sizes": {
+          "id": "basic-link--sizes",
+          "name": "Tamaños de link",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLink } from '../components/link';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col space-y-4\">\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Small</h3>\n        <g-link size=\"sm\" href=\"https://empresas.global66.com/\" icon-right=\"regular chevron-right\">Small link</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Medium (Default)</h3>\n        <g-link size=\"md\" href=\"https://empresas.global66.com/\" icon-right=\"regular chevron-right\">Medium link</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Large</h3>\n        <g-link size=\"lg\" href=\"https://empresas.global66.com/\" icon-right=\"regular chevron-right\">Large link</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Todos los tamaños con íconos</h3>\n        <div class=\"flex flex-col gap-4 items-start\">\n          <g-link size=\"sm\" href=\"https://empresas.global66.com/\" icon-left=\"regular link\" icon-right=\"regular chevron-right\">Small link</g-link>\n          <g-link size=\"md\" href=\"https://empresas.global66.com/\" icon-left=\"regular link\" icon-right=\"regular chevron-right\">Medium link</g-link>\n          <g-link size=\"lg\" href=\"https://empresas.global66.com/\" icon-left=\"regular link\" icon-right=\"regular chevron-right\">Large link</g-link>\n        </div>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-link--types": {
+          "id": "basic-link--types",
+          "name": "Tipos de link",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLink } from '../components/link';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col space-y-4\">\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Primary</h3>\n        <g-link type=\"primary\" href=\"https://empresas.global66.com/\">Link primario</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Secondary</h3>\n        <g-link type=\"secondary\" href=\"https://empresas.global66.com/\">Link secundario</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Tertiary</h3>\n        <div class=\"bg-primary-def p-xs\">\n          <g-link type=\"tertiary\" href=\"https://empresas.global66.com/\">Link terciario</g-link>\n        </div>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Primary con underline</h3>\n        <g-link type=\"primary\" underline href=\"https://empresas.global66.com/\">Link primario con underline</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Secondary con underline</h3>\n        <g-link type=\"secondary\" underline href=\"https://empresas.global66.com/\">Link secundario con underline</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Tertiary con underline</h3>\n        <div class=\"bg-primary-def p-xs\">\n          <g-link type=\"tertiary\" underline href=\"https://empresas.global66.com/\">Link terciario con underline</g-link>\n        </div>\n      </div>\n\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-link--icons-with-underline": {
+          "id": "basic-link--icons-with-underline",
+          "name": "Links con íconos y underline",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLink } from '../components/link';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col space-y-4\">\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Primary con íconos y underline</h3>\n        <g-link \n          type=\"primary\" \n          underline \n          icon-left=\"regular arrow-left\" \n          icon-right=\"regular arrow-right\" \n          href=\"https://empresas.global66.com/\"\n        >\n          Link con íconos y underline\n        </g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Primary solo con ícono izquierdo y underline</h3>\n        <g-link \n          type=\"primary\" \n          underline \n          icon-left=\"regular external-link\" \n          href=\"https://empresas.global66.com/\"\n        >\n          Link con ícono izquierdo y underline\n        </g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Secondary con íconos y underline</h3>\n        <g-link \n          type=\"secondary\" \n          underline \n          icon-left=\"regular envelope\" \n          icon-right=\"regular arrow-up-right-from-square\" \n          href=\"https://empresas.global66.com/\"\n          target=\"_blank\"\n        >\n          Link secundario con íconos y underline\n        </g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Tertiary con íconos y underline</h3>\n        <div class=\"bg-primary-def p-xs\">\n          <g-link \n            type=\"tertiary\" \n            underline \n            icon-left=\"regular envelope\" \n            icon-right=\"regular arrow-up-right-from-square\" \n            href=\"https://empresas.global66.com/\"\n            target=\"_blank\"\n          >\n            Link terciario con íconos y underline\n          </g-link>\n        </div>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-link--disabled-state": {
+          "id": "basic-link--disabled-state",
+          "name": "Link deshabilitado",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "basic-link--external-links": {
+          "id": "basic-link--external-links",
+          "name": "Links externos",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLink } from '../components/link';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col space-y-4 items-start\">\n      <g-link href=\"https://empresas.global66.com/\" target=\"_blank\" icon-right=\"regular arrow-up-right-from-square\">\n        Abre en nueva pestaña\n      </g-link>\n      <g-link href=\"https://empresas.global66.com/\" target=\"_self\">\n        Abre en la misma pestaña\n      </g-link>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-link--link-status": {
+          "id": "basic-link--link-status",
+          "name": "Estados del link",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLink } from '../components/link';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col space-y-4\">\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Default Status</h3>\n        <g-link status=\"default\" href=\"https://empresas.global66.com/\">Link con status default</g-link>\n      </div>\n\n      <div>\n        <h3 class=\"mb-2 font-semibold\">Inline Status</h3>\n        <p class=\"mb-2\">Este es un ejemplo de un párrafo con un <g-link status=\"inline\" href=\"https://empresas.global66.com/\">link inline</g-link> que está integrado dentro del texto.</p>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

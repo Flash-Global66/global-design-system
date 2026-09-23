@@ -1,0 +1,1 @@
+import{G as o,r,c as s}from"./iframe-Dct5CHxr.js";import{a as c}from"./index-DWhPhD7W.js";const l=11;function d(){const t=o(),e=r(0),a=s(()=>({minWidth:`${Math.max(e.value,l)}px`}));return c(t,()=>{e.value=t.value?.getBoundingClientRect().width??0}),{calculatorRef:t,calculatorWidth:e,inputStyle:a}}export{d as u};

@@ -1,0 +1,15 @@
+{
+  "components": {
+    "feedback-menu": {
+      "id": "feedback-menu",
+      "name": "GMenu",
+      "path": "./stories/menu.stories.ts",
+      "stories": {
+        "feedback-menu--default": {
+          "id": "feedback-menu--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

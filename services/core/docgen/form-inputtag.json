@@ -1,0 +1,2470 @@
+{
+  "components": {
+    "form-inputtag": {
+      "id": "form-inputtag",
+      "name": "GInputTag",
+      "path": "./stories/input-tag.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GInputTag",
+        "displayName": "GInputTag",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "helpText",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "help text for input tag"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "modelValue",
+            "global": false,
+            "default": "[] as string[]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "binding value (array of string tags)"
+              }
+            ],
+            "required": false,
+            "type": "string[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "string[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "tagType",
+            "global": false,
+            "default": "'info'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "tag type"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "tagEffect",
+            "global": false,
+            "default": "'light'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "tag effect"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "effect",
+            "global": false,
+            "default": "'light'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "tooltip theme, built-in theme: `dark` / `light`"
+              }
+            ],
+            "required": false,
+            "type": "PopperEffect | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PopperEffect | undefined",
+              "schema": [
+                "undefined",
+                "\"light\"",
+                "\"dark\"",
+                {
+                  "kind": "object",
+                  "type": "string & {}"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "trigger",
+            "global": false,
+            "default": "EVENT_CODE.enter",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the key to trigger input tag"
+              }
+            ],
+            "required": false,
+            "type": "\"Enter\" | \"Space\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"Enter\" | \"Space\" | undefined",
+              "schema": [
+                "undefined",
+                "\"Enter\"",
+                "\"Space\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "delimiter",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "add a tag when a delimiter is matched"
+              }
+            ],
+            "required": false,
+            "type": "string | RegExp | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | RegExp | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                {
+                  "kind": "object",
+                  "type": "RegExp"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "size",
+            "global": false,
+            "default": "'default'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "input box size"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "clearIcon",
+            "global": false,
+            "default": "'regular circle-xmark'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom clear icon (DS `IconString`)"
+              }
+            ],
+            "required": false,
+            "type": "IconString | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "IconString | undefined",
+              "schema": [
+                "undefined",
+                "\"light times\"",
+                "\"light copy\"",
+                "\"light calendar-alt\"",
+                "\"light long-arrow-right\"",
+                "\"light arrow-left\"",
+                "\"light arrow-right\"",
+                "\"light cloud-download-alt\"",
+                "\"light angle-down\"",
+                "\"light clock\"",
+                "\"light minus\"",
+                "\"light equals\"",
+                "\"light divide\"",
+                "\"light exclamation\"",
+                "\"light money-bill-wave\"",
+                "\"light sync\"",
+                "\"light chevron-right\"",
+                "\"light comment\"",
+                "\"light store\"",
+                "\"light pencil\"",
+                "\"light truck-fast\"",
+                "\"light warehouse-full\"",
+                "\"light briefcase\"",
+                "\"light chart-simple\"",
+                "\"light down-to-line\"",
+                "\"light vault\"",
+                "\"light plane\"",
+                "\"light house\"",
+                "\"light bowl-chopsticks\"",
+                "\"light graduation-cap\"",
+                "\"light cart-shopping\"",
+                "\"light game-console-handheld\"",
+                "\"light trophy\"",
+                "\"light star\"",
+                "\"light flag\"",
+                "\"light heart-pulse\"",
+                "\"light circle-dollar\"",
+                "\"light circle-question\"",
+                "\"light key-skeleton\"",
+                "\"light mobile\"",
+                "\"light qrcode\"",
+                "\"light fingerprint\"",
+                "\"kit send\"",
+                "\"kit deposit\"",
+                "\"kit exchange\"",
+                "\"solid times\"",
+                "\"solid copy\"",
+                "\"solid arrow-left\"",
+                "\"solid arrow-right\"",
+                "\"solid angle-down\"",
+                "\"solid clock\"",
+                "\"solid minus\"",
+                "\"solid equals\"",
+                "\"solid divide\"",
+                "\"solid exclamation\"",
+                "\"solid money-bill-wave\"",
+                "\"solid chevron-right\"",
+                "\"solid store\"",
+                "\"solid pencil\"",
+                "\"solid chart-simple\"",
+                "\"solid circle-dollar\"",
+                "\"solid circle-question\"",
+                "\"solid key-skeleton\"",
+                "\"solid mobile\"",
+                "\"solid qrcode\"",
+                "\"solid exchange\"",
+                "\"solid user-secret\"",
+                "\"solid home\"",
+                "\"solid paper-plane\"",
+                "\"solid ticket-alt\"",
+                "\"solid wallet\"",
+                "\"solid question-circle\"",
+                "\"solid info-circle\"",
+                "\"solid user-plus\"",
+                "\"solid user-times\"",
+                "\"solid times-circle\"",
+                "\"solid check-circle\"",
+                "\"solid file-signature\"",
+                "\"solid edit\"",
+                "\"solid trash\"",
+                "\"solid plus-circle\"",
+                "\"solid minus-circle\"",
+                "\"solid chevron-left\"",
+                "\"solid long-arrow-alt-left\"",
+                "\"solid file-invoice-dollar\"",
+                "\"solid undo-alt\"",
+                "\"solid credit-card\"",
+                "\"solid ellipsis-v\"",
+                "\"solid bullhorn\"",
+                "\"solid file-alt\"",
+                "\"solid mars\"",
+                "\"solid venus\"",
+                "\"solid users\"",
+                "\"solid building\"",
+                "\"solid money-check-alt\"",
+                "\"solid lock\"",
+                "\"solid question\"",
+                "\"solid download\"",
+                "\"solid search\"",
+                "\"solid university\"",
+                "\"solid pencil-alt\"",
+                "\"solid save\"",
+                "\"solid file-excel\"",
+                "\"solid user-slash\"",
+                "\"solid exclamation-triangle\"",
+                "\"solid dollar-sign\"",
+                "\"solid hand-holding-usd\"",
+                "\"solid sort\"",
+                "\"solid trash-alt\"",
+                "\"solid caret-down\"",
+                "\"solid bars\"",
+                "\"solid arrow-up-from-bracket\"",
+                "\"solid arrow-down-to-bracket\"",
+                "\"solid usd-circle\"",
+                "\"solid user\"",
+                "\"solid sign-out\"",
+                "\"solid external-link-square-alt\"",
+                "\"solid user-edit\"",
+                "\"solid file-image\"",
+                "\"solid upload\"",
+                "\"solid file-word\"",
+                "\"solid file-pdf\"",
+                "\"solid file\"",
+                "\"solid exclamation-circle\"",
+                "\"solid check\"",
+                "\"solid sort-alt\"",
+                "\"solid lock-alt\"",
+                "\"solid long-arrow-alt-right\"",
+                "\"solid long-arrow-alt-down\"",
+                "\"solid arrow-alt-down\"",
+                "\"solid circle\"",
+                "\"solid asterisk\"",
+                "\"solid users-medical\"",
+                "\"solid hand-paper\"",
+                "\"solid camera\"",
+                "\"solid undo\"",
+                "\"solid user-cog\"",
+                "\"solid dot-circle\"",
+                "\"solid folder-download\"",
+                "\"solid filter\"",
+                "\"solid envelope\"",
+                "\"solid at\"",
+                "\"solid id-card\"",
+                "\"solid receipt\"",
+                "\"solid caret-up\"",
+                "\"solid triangle\"",
+                "\"solid lightbulb\"",
+                "\"solid sliders-simple\"",
+                "\"solid spinner\"",
+                "\"solid timer\"",
+                "\"solid gift\"",
+                "\"solid book\"",
+                "\"solid chart-mixed-up-circle-dollar\"",
+                "\"solid calendar\"",
+                "\"solid eye\"",
+                "\"solid eye-slash\"",
+                "\"solid gear\"",
+                "\"solid unlock\"",
+                "\"solid bell\"",
+                "\"solid 1\"",
+                "\"solid 2\"",
+                "\"solid 3\"",
+                "\"solid pen\"",
+                "\"solid user-group\"",
+                "\"solid shield-check\"",
+                "\"solid arrow-trend-up\"",
+                "\"solid money-bills-simple\"",
+                "\"regular times\"",
+                "\"regular copy\"",
+                "\"regular arrow-left\"",
+                "\"regular arrow-right\"",
+                "\"regular clock\"",
+                "\"regular minus\"",
+                "\"regular chevron-right\"",
+                "\"regular store\"",
+                "\"regular vault\"",
+                "\"regular plane\"",
+                "\"regular house\"",
+                "\"regular bowl-chopsticks\"",
+                "\"regular graduation-cap\"",
+                "\"regular cart-shopping\"",
+                "\"regular game-console-handheld\"",
+                "\"regular trophy\"",
+                "\"regular star\"",
+                "\"regular flag\"",
+                "\"regular heart-pulse\"",
+                "\"regular circle-dollar\"",
+                "\"regular circle-question\"",
+                "\"regular key-skeleton\"",
+                "\"regular mobile\"",
+                "\"regular qrcode\"",
+                "\"regular paper-plane\"",
+                "\"regular wallet\"",
+                "\"regular info-circle\"",
+                "\"regular user-plus\"",
+                "\"regular check-circle\"",
+                "\"regular trash\"",
+                "\"regular plus-circle\"",
+                "\"regular chevron-left\"",
+                "\"regular undo-alt\"",
+                "\"regular credit-card\"",
+                "\"regular ellipsis-v\"",
+                "\"regular file-alt\"",
+                "\"regular mars\"",
+                "\"regular venus\"",
+                "\"regular users\"",
+                "\"regular search\"",
+                "\"regular exclamation-triangle\"",
+                "\"regular dollar-sign\"",
+                "\"regular arrow-up-from-bracket\"",
+                "\"regular arrow-down-to-bracket\"",
+                "\"regular user\"",
+                "\"regular exclamation-circle\"",
+                "\"regular check\"",
+                "\"regular lock-alt\"",
+                "\"regular filter\"",
+                "\"regular envelope\"",
+                "\"regular at\"",
+                "\"regular receipt\"",
+                "\"regular lightbulb\"",
+                "\"regular sliders-simple\"",
+                "\"regular spinner\"",
+                "\"regular timer\"",
+                "\"regular gift\"",
+                "\"regular calendar\"",
+                "\"regular eye\"",
+                "\"regular eye-slash\"",
+                "\"regular gear\"",
+                "\"regular unlock\"",
+                "\"regular bell\"",
+                "\"regular pen\"",
+                "\"regular user-group\"",
+                "\"regular shield-check\"",
+                "\"regular chevron-down\"",
+                "\"regular chevron-up\"",
+                "\"regular paperclip\"",
+                "\"regular money-bill-alt\"",
+                "\"regular angle-right\"",
+                "\"regular angle-left\"",
+                "\"regular arrow-alt-to-bottom\"",
+                "\"regular sync-alt\"",
+                "\"regular link\"",
+                "\"regular plus\"",
+                "\"regular comment-alt\"",
+                "\"regular redo\"",
+                "\"regular landmark\"",
+                "\"regular globe\"",
+                "\"regular share-alt\"",
+                "\"regular heart\"",
+                "\"regular backward\"",
+                "\"regular bolt\"",
+                "\"regular arrow-down-to-line\"",
+                "\"regular repeat\"",
+                "\"regular ban\"",
+                "\"regular circle-xmark\"",
+                "\"regular arrows-rotate\"",
+                "\"regular arrow-up-right-from-square\"",
+                "\"regular lock-keyhole-open\"",
+                "\"regular shield-slash\"",
+                "\"regular shield-xmark\"",
+                "\"regular shield\"",
+                "\"regular trash-xmark\"",
+                "\"regular ellipsis\"",
+                "\"regular angles-right\"",
+                "\"regular angles-left\"",
+                "\"regular webhook\"",
+                "\"regular tag\"",
+                "\"regular sliders\"",
+                "\"regular ballot-check\"",
+                "\"regular ballot\"",
+                "\"regular circle-notch\"",
+                "\"regular id-badge\"",
+                "\"regular address-book\"",
+                "\"regular address-card\"",
+                "\"regular hashtag\"",
+                "\"regular earth-americas\"",
+                "\"regular earth-asia\"",
+                "\"regular earth-europe\"",
+                "\"regular earth-africa\"",
+                "\"regular earth-oceania\"",
+                "\"regular user-check\"",
+                "\"regular user-minus\"",
+                "\"regular envelope-open\"",
+                "\"regular arrow-left-from-bracket\"",
+                "\"regular arrow-right-from-bracket\"",
+                "\"regular badge-percent\"",
+                "\"regular clock-rotate-left\"",
+                "\"regular money-bill-transfer\"",
+                "\"regular treasure-chest\"",
+                "\"regular medal\"",
+                "\"regular ticket-perforated\"",
+                "\"regular money-bill-trend-up\"",
+                "\"brands whatsapp\"",
+                "\"brands apple-pay\"",
+                "\"brands google-pay\"",
+                "\"duotone copy\"",
+                "\"duotone store\"",
+                "\"duotone circle-dollar\"",
+                "\"duotone circle-question\"",
+                "\"duotone key-skeleton\"",
+                "\"duotone mobile\"",
+                "\"duotone qrcode\"",
+                "\"duotone users\"",
+                "\"duotone university\"",
+                "\"duotone exclamation-triangle\"",
+                "\"duotone spinner\"",
+                "\"duotone user-check\"",
+                "\"duotone user-circle\"",
+                "\"duotone cloud-upload\"",
+                "\"duotone megaphone\"",
+                "\"duotone mobile-alt\"",
+                "\"duotone envelope-open-text\"",
+                "\"duotone sparkles\"",
+                "\"duotone arrow-to-bottom\"",
+                "\"duotone arrows-repeat\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to disable input-tag"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateEvent",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to trigger form validation"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "id",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `id` in native input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "tabindex",
+            "global": false,
+            "default": "0",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `tabindex` in native input"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "autocomplete",
+            "global": false,
+            "default": "'off'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native input autocomplete"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "saveOnBlur",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to save the input value when the input loses focus"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "maxCollapseTags",
+            "global": false,
+            "default": "1",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the max tags number to be shown. Requires `collapse-tags`"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "draggable",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether tags can be dragged"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "clearable",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show clear button"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "readonly",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native input readonly"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "autofocus",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native input autofocus"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "collapseTags",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to collapse tags to a text"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "collapseTagsTooltip",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show all selected tags when hovering collapsed tag. Requires `collapse-tags`"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "maxlength",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `maxlength` in native input"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "minlength",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `minlength` in native input"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "max",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "max number of tags that can be entered"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "placeholder",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "placeholder of input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLabel",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native `aria-label` attribute"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[value?: string | string[] | undefined]",
+            "signature": "(event: \"update:modelValue\", value?: string | string[] | undefined): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "string | string[] | undefined",
+                "schema": [
+                  "undefined",
+                  "string",
+                  {
+                    "kind": "array",
+                    "type": "string[]"
+                  }
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "change",
+            "description": "",
+            "tags": [],
+            "type": "[value?: string | string[] | undefined]",
+            "signature": "(event: \"change\", value?: string | string[] | undefined): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "string | string[] | undefined",
+                "schema": [
+                  "undefined",
+                  "string",
+                  {
+                    "kind": "array",
+                    "type": "string[]"
+                  }
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "input",
+            "description": "",
+            "tags": [],
+            "type": "[value: string]",
+            "signature": "(event: \"input\", value: string): void",
+            "schema": [
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "add-tag",
+            "description": "",
+            "tags": [],
+            "type": "[value: string | string[]]",
+            "signature": "(event: \"add-tag\", value: string | string[]): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "string | string[]",
+                "schema": [
+                  "string",
+                  {
+                    "kind": "array",
+                    "type": "string[]"
+                  }
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "remove-tag",
+            "description": "",
+            "tags": [],
+            "type": "[value: string, index: number]",
+            "signature": "(event: \"remove-tag\", value: string, index: number): void",
+            "schema": [
+              "string",
+              "number"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "drag-tag",
+            "description": "",
+            "tags": [],
+            "type": "[oldIndex: number, newIndex: number, value: string]",
+            "signature": "(event: \"drag-tag\", oldIndex: number, newIndex: number, value: string): void",
+            "schema": [
+              "number",
+              "number",
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "focus",
+            "description": "",
+            "tags": [],
+            "type": "[evt: FocusEvent]",
+            "signature": "(event: \"focus\", evt: FocusEvent): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "FocusEvent"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "blur",
+            "description": "",
+            "tags": [],
+            "type": "[evt: FocusEvent]",
+            "signature": "(event: \"blur\", evt: FocusEvent): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "FocusEvent"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "clear",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"clear\"): void",
+            "schema": [],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "prefix",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "tag",
+            "type": "{ value: string; index: number; }",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{ value: string; index: number; }"
+            },
+            "declarations": []
+          },
+          {
+            "name": "suffix",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "helpText",
+            "type": "{ error: string | undefined; isError: boolean; }",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{ error: string | undefined; isError: boolean; }"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "focus",
+            "type": "() => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "blur",
+            "type": "() => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/input-tag/index.ts"
+      },
+      "argTypes": {
+        "helpText": {
+          "name": "helpText",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "defaultValue": {
+            "summary": "[] as string[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "string[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string[]"
+            },
+            "defaultValue": {
+              "summary": "[] as string[]"
+            },
+            "category": "props"
+          }
+        },
+        "tagType": {
+          "name": "tagType",
+          "description": "",
+          "defaultValue": {
+            "summary": "'info'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'info'"
+            },
+            "category": "props"
+          }
+        },
+        "tagEffect": {
+          "name": "tagEffect",
+          "description": "",
+          "defaultValue": {
+            "summary": "'light'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'light'"
+            },
+            "category": "props"
+          }
+        },
+        "effect": {
+          "name": "effect",
+          "description": "",
+          "defaultValue": {
+            "summary": "'light'"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "\"light\"",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "\"dark\"",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "PopperEffect"
+            },
+            "defaultValue": {
+              "summary": "'light'"
+            },
+            "category": "props"
+          }
+        },
+        "trigger": {
+          "name": "trigger",
+          "description": "",
+          "defaultValue": {
+            "summary": "EVENT_CODE.enter"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "Enter",
+              "Space"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"Enter\" | \"Space\""
+            },
+            "defaultValue": {
+              "summary": "EVENT_CODE.enter"
+            },
+            "category": "props"
+          }
+        },
+        "delimiter": {
+          "name": "delimiter",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | RegExp"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "size": {
+          "name": "size",
+          "description": "",
+          "defaultValue": {
+            "summary": "'default'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'default'"
+            },
+            "category": "props"
+          }
+        },
+        "clearIcon": {
+          "name": "clearIcon",
+          "description": "",
+          "defaultValue": {
+            "summary": "'regular circle-xmark'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "light times",
+              "light copy",
+              "light calendar-alt",
+              "light long-arrow-right",
+              "light arrow-left",
+              "light arrow-right",
+              "light cloud-download-alt",
+              "light angle-down",
+              "light clock",
+              "light minus",
+              "light equals",
+              "light divide",
+              "light exclamation",
+              "light money-bill-wave",
+              "light sync",
+              "light chevron-right",
+              "light comment",
+              "light store",
+              "light pencil",
+              "light truck-fast",
+              "light warehouse-full",
+              "light briefcase",
+              "light chart-simple",
+              "light down-to-line",
+              "light vault",
+              "light plane",
+              "light house",
+              "light bowl-chopsticks",
+              "light graduation-cap",
+              "light cart-shopping",
+              "light game-console-handheld",
+              "light trophy",
+              "light star",
+              "light flag",
+              "light heart-pulse",
+              "light circle-dollar",
+              "light circle-question",
+              "light key-skeleton",
+              "light mobile",
+              "light qrcode",
+              "light fingerprint",
+              "kit send",
+              "kit deposit",
+              "kit exchange",
+              "solid times",
+              "solid copy",
+              "solid arrow-left",
+              "solid arrow-right",
+              "solid angle-down",
+              "solid clock",
+              "solid minus",
+              "solid equals",
+              "solid divide",
+              "solid exclamation",
+              "solid money-bill-wave",
+              "solid chevron-right",
+              "solid store",
+              "solid pencil",
+              "solid chart-simple",
+              "solid circle-dollar",
+              "solid circle-question",
+              "solid key-skeleton",
+              "solid mobile",
+              "solid qrcode",
+              "solid exchange",
+              "solid user-secret",
+              "solid home",
+              "solid paper-plane",
+              "solid ticket-alt",
+              "solid wallet",
+              "solid question-circle",
+              "solid info-circle",
+              "solid user-plus",
+              "solid user-times",
+              "solid times-circle",
+              "solid check-circle",
+              "solid file-signature",
+              "solid edit",
+              "solid trash",
+              "solid plus-circle",
+              "solid minus-circle",
+              "solid chevron-left",
+              "solid long-arrow-alt-left",
+              "solid file-invoice-dollar",
+              "solid undo-alt",
+              "solid credit-card",
+              "solid ellipsis-v",
+              "solid bullhorn",
+              "solid file-alt",
+              "solid mars",
+              "solid venus",
+              "solid users",
+              "solid building",
+              "solid money-check-alt",
+              "solid lock",
+              "solid question",
+              "solid download",
+              "solid search",
+              "solid university",
+              "solid pencil-alt",
+              "solid save",
+              "solid file-excel",
+              "solid user-slash",
+              "solid exclamation-triangle",
+              "solid dollar-sign",
+              "solid hand-holding-usd",
+              "solid sort",
+              "solid trash-alt",
+              "solid caret-down",
+              "solid bars",
+              "solid arrow-up-from-bracket",
+              "solid arrow-down-to-bracket",
+              "solid usd-circle",
+              "solid user",
+              "solid sign-out",
+              "solid external-link-square-alt",
+              "solid user-edit",
+              "solid file-image",
+              "solid upload",
+              "solid file-word",
+              "solid file-pdf",
+              "solid file",
+              "solid exclamation-circle",
+              "solid check",
+              "solid sort-alt",
+              "solid lock-alt",
+              "solid long-arrow-alt-right",
+              "solid long-arrow-alt-down",
+              "solid arrow-alt-down",
+              "solid circle",
+              "solid asterisk",
+              "solid users-medical",
+              "solid hand-paper",
+              "solid camera",
+              "solid undo",
+              "solid user-cog",
+              "solid dot-circle",
+              "solid folder-download",
+              "solid filter",
+              "solid envelope",
+              "solid at",
+              "solid id-card",
+              "solid receipt",
+              "solid caret-up",
+              "solid triangle",
+              "solid lightbulb",
+              "solid sliders-simple",
+              "solid spinner",
+              "solid timer",
+              "solid gift",
+              "solid book",
+              "solid chart-mixed-up-circle-dollar",
+              "solid calendar",
+              "solid eye",
+              "solid eye-slash",
+              "solid gear",
+              "solid unlock",
+              "solid bell",
+              "solid 1",
+              "solid 2",
+              "solid 3",
+              "solid pen",
+              "solid user-group",
+              "solid shield-check",
+              "solid arrow-trend-up",
+              "solid money-bills-simple",
+              "regular times",
+              "regular copy",
+              "regular arrow-left",
+              "regular arrow-right",
+              "regular clock",
+              "regular minus",
+              "regular chevron-right",
+              "regular store",
+              "regular vault",
+              "regular plane",
+              "regular house",
+              "regular bowl-chopsticks",
+              "regular graduation-cap",
+              "regular cart-shopping",
+              "regular game-console-handheld",
+              "regular trophy",
+              "regular star",
+              "regular flag",
+              "regular heart-pulse",
+              "regular circle-dollar",
+              "regular circle-question",
+              "regular key-skeleton",
+              "regular mobile",
+              "regular qrcode",
+              "regular paper-plane",
+              "regular wallet",
+              "regular info-circle",
+              "regular user-plus",
+              "regular check-circle",
+              "regular trash",
+              "regular plus-circle",
+              "regular chevron-left",
+              "regular undo-alt",
+              "regular credit-card",
+              "regular ellipsis-v",
+              "regular file-alt",
+              "regular mars",
+              "regular venus",
+              "regular users",
+              "regular search",
+              "regular exclamation-triangle",
+              "regular dollar-sign",
+              "regular arrow-up-from-bracket",
+              "regular arrow-down-to-bracket",
+              "regular user",
+              "regular exclamation-circle",
+              "regular check",
+              "regular lock-alt",
+              "regular filter",
+              "regular envelope",
+              "regular at",
+              "regular receipt",
+              "regular lightbulb",
+              "regular sliders-simple",
+              "regular spinner",
+              "regular timer",
+              "regular gift",
+              "regular calendar",
+              "regular eye",
+              "regular eye-slash",
+              "regular gear",
+              "regular unlock",
+              "regular bell",
+              "regular pen",
+              "regular user-group",
+              "regular shield-check",
+              "regular chevron-down",
+              "regular chevron-up",
+              "regular paperclip",
+              "regular money-bill-alt",
+              "regular angle-right",
+              "regular angle-left",
+              "regular arrow-alt-to-bottom",
+              "regular sync-alt",
+              "regular link",
+              "regular plus",
+              "regular comment-alt",
+              "regular redo",
+              "regular landmark",
+              "regular globe",
+              "regular share-alt",
+              "regular heart",
+              "regular backward",
+              "regular bolt",
+              "regular arrow-down-to-line",
+              "regular repeat",
+              "regular ban",
+              "regular circle-xmark",
+              "regular arrows-rotate",
+              "regular arrow-up-right-from-square",
+              "regular lock-keyhole-open",
+              "regular shield-slash",
+              "regular shield-xmark",
+              "regular shield",
+              "regular trash-xmark",
+              "regular ellipsis",
+              "regular angles-right",
+              "regular angles-left",
+              "regular webhook",
+              "regular tag",
+              "regular sliders",
+              "regular ballot-check",
+              "regular ballot",
+              "regular circle-notch",
+              "regular id-badge",
+              "regular address-book",
+              "regular address-card",
+              "regular hashtag",
+              "regular earth-americas",
+              "regular earth-asia",
+              "regular earth-europe",
+              "regular earth-africa",
+              "regular earth-oceania",
+              "regular user-check",
+              "regular user-minus",
+              "regular envelope-open",
+              "regular arrow-left-from-bracket",
+              "regular arrow-right-from-bracket",
+              "regular badge-percent",
+              "regular clock-rotate-left",
+              "regular money-bill-transfer",
+              "regular treasure-chest",
+              "regular medal",
+              "regular ticket-perforated",
+              "regular money-bill-trend-up",
+              "brands whatsapp",
+              "brands apple-pay",
+              "brands google-pay",
+              "duotone copy",
+              "duotone store",
+              "duotone circle-dollar",
+              "duotone circle-question",
+              "duotone key-skeleton",
+              "duotone mobile",
+              "duotone qrcode",
+              "duotone users",
+              "duotone university",
+              "duotone exclamation-triangle",
+              "duotone spinner",
+              "duotone user-check",
+              "duotone user-circle",
+              "duotone cloud-upload",
+              "duotone megaphone",
+              "duotone mobile-alt",
+              "duotone envelope-open-text",
+              "duotone sparkles",
+              "duotone arrow-to-bottom",
+              "duotone arrows-repeat"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "IconString"
+            },
+            "defaultValue": {
+              "summary": "'regular circle-xmark'"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "validateEvent": {
+          "name": "validateEvent",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "id": {
+          "name": "id",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "tabindex": {
+          "name": "tabindex",
+          "description": "",
+          "defaultValue": {
+            "summary": "0"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "defaultValue": {
+              "summary": "0"
+            },
+            "category": "props"
+          }
+        },
+        "autocomplete": {
+          "name": "autocomplete",
+          "description": "",
+          "defaultValue": {
+            "summary": "'off'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'off'"
+            },
+            "category": "props"
+          }
+        },
+        "saveOnBlur": {
+          "name": "saveOnBlur",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "maxCollapseTags": {
+          "name": "maxCollapseTags",
+          "description": "",
+          "defaultValue": {
+            "summary": "1"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "1"
+            },
+            "category": "props"
+          }
+        },
+        "draggable": {
+          "name": "draggable",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "clearable": {
+          "name": "clearable",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "readonly": {
+          "name": "readonly",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "autofocus": {
+          "name": "autofocus",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "collapseTags": {
+          "name": "collapseTags",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "collapseTagsTooltip": {
+          "name": "collapseTagsTooltip",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "maxlength": {
+          "name": "maxlength",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "category": "props"
+          }
+        },
+        "minlength": {
+          "name": "minlength",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "category": "props"
+          }
+        },
+        "max": {
+          "name": "max",
+          "description": "",
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "category": "props"
+          }
+        },
+        "placeholder": {
+          "name": "placeholder",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLabel": {
+          "name": "ariaLabel",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value?: string | string[] | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value?: string | string[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value?: string | string[] | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value?: string | string[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "input": {
+          "name": "input",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "add-tag": {
+          "name": "add-tag",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string | string[]]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string | string[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "remove-tag": {
+          "name": "remove-tag",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string, index: number]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string, index: number]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "drag-tag": {
+          "name": "drag-tag",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[oldIndex: number, newIndex: number, value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[oldIndex: number, newIndex: number, value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "focus": {
+          "name": "focus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[evt: FocusEvent]"
+          },
+          "table": {
+            "type": {
+              "summary": "[evt: FocusEvent]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "blur": {
+          "name": "blur",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[evt: FocusEvent]"
+          },
+          "table": {
+            "type": {
+              "summary": "[evt: FocusEvent]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "clear": {
+          "name": "clear",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "prefix": {
+          "name": "prefix",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "tag": {
+          "name": "tag",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ value: string; index: number; }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ value: string; index: number; }"
+            },
+            "category": "slots"
+          }
+        },
+        "suffix": {
+          "name": "suffix",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GInputTagModels = {\n  /**\n   * @description binding value (array of string tags)\n   * @default [] as string[]\n   */\n  modelValue?: string[]; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GInputTagProps = {\n  /**\n   * @description help text for input tag\n   * @default undefined\n   */\n  helpText?: string;\n  /**\n   * @description tag type\n   * @default 'info'\n   */\n  tagType?: string;\n  /**\n   * @description tag effect\n   * @default 'light'\n   */\n  tagEffect?: string;\n  /**\n   * @description tooltip theme, built-in theme: `dark` / `light`\n   * @default 'light'\n   */\n  effect?: PopperEffect;\n  /**\n   * @description the key to trigger input tag\n   * @default EVENT_CODE.enter\n   */\n  trigger?: \"Enter\" | \"Space\";\n  /**\n   * @description add a tag when a delimiter is matched\n   * @default ''\n   */\n  delimiter?: string | RegExp;\n  /**\n   * @description input box size\n   * @default 'default'\n   */\n  size?: string;\n  /**\n   * @description custom clear icon (DS `IconString`)\n   * @default 'regular circle-xmark'\n   */\n  clearIcon?: IconString;\n  /**\n   * @description whether to disable input-tag\n   * @default undefined\n   */\n  disabled?: boolean;\n  /**\n   * @description whether to trigger form validation\n   * @default true\n   */\n  validateEvent?: boolean;\n  /**\n   * @description same as `id` in native input\n   * @default undefined\n   */\n  id?: string;\n  /**\n   * @description same as `tabindex` in native input\n   * @default 0\n   */\n  tabindex?: string | number;\n  /**\n   * @description native input autocomplete\n   * @default 'off'\n   */\n  autocomplete?: string;\n  /**\n   * @description whether to save the input value when the input loses focus\n   * @default true\n   */\n  saveOnBlur?: boolean;\n  /**\n   * @description the max tags number to be shown. Requires `collapse-tags`\n   * @default 1\n   */\n  maxCollapseTags?: number;\n  /** @description whether tags can be dragged */\n  draggable?: boolean;\n  /** @description whether to show clear button */\n  clearable?: boolean;\n  /** @description native input readonly */\n  readonly?: boolean;\n  /** @description native input autofocus */\n  autofocus?: boolean;\n  /** @description whether to collapse tags to a text */\n  collapseTags?: boolean;\n  /** @description whether to show all selected tags when hovering collapsed tag. Requires `collapse-tags` */\n  collapseTagsTooltip?: boolean;\n  /** @description same as `maxlength` in native input */\n  maxlength?: string | number;\n  /** @description same as `minlength` in native input */\n  minlength?: string | number;\n  /** @description max number of tags that can be entered */\n  max?: number;\n  /** @description placeholder of input */\n  placeholder?: string;\n  /** @description native `aria-label` attribute */\n  ariaLabel?: string;\n}\n```\n\n## Events\n\n```\nexport type GInputTagEvents = {\n  \"update:modelValue\": [value?: string | string[] | undefined];\n  change: [value?: string | string[] | undefined];\n  input: [value: string];\n  \"add-tag\": [value: string | string[]];\n  \"remove-tag\": [value: string, index: number];\n  \"drag-tag\": [oldIndex: number, newIndex: number, value: string];\n  focus: [evt: FocusEvent];\n  blur: [evt: FocusEvent];\n  clear: [];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GInputTagSlots = {\n  prefix: {};\n  tag: { value: string; index: number; };\n  suffix: {};\n  helpText: { error: string | undefined; isError: boolean; };\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GInputTagExposed = {\n  focus: () => void;\n  blur: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

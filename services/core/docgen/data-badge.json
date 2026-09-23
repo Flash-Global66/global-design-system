@@ -1,0 +1,1040 @@
+{
+  "components": {
+    "data-badge": {
+      "id": "data-badge",
+      "name": "GBadge",
+      "path": "./stories/badge.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "default",
+        "displayName": "Badge",
+        "name": "GBadge",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "type",
+            "global": false,
+            "default": "'danger'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "badge type."
+              }
+            ],
+            "required": false,
+            "type": "BadgeType | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "BadgeType | undefined",
+              "schema": [
+                "undefined",
+                "\"primary\"",
+                "\"success\"",
+                "\"warning\"",
+                "\"danger\"",
+                "\"info\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "isDot",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "if a little dot is displayed."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "hidden",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "hidden badge."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "value",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "display value."
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "max",
+            "global": false,
+            "default": "99",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "maximum value, shows `{max}+` when exceeded. Only works if value is a number."
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showZero",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show badge when value is zero."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "badgeStyle",
+            "global": false,
+            "default": "{}",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "CSS style of badge"
+              }
+            ],
+            "required": false,
+            "type": "StyleValue",
+            "schema": {
+              "kind": "enum",
+              "type": "StyleValue",
+              "schema": [
+                "undefined",
+                "null",
+                "string",
+                "false",
+                {
+                  "kind": "object",
+                  "type": "CSSProperties"
+                },
+                {
+                  "kind": "array",
+                  "type": "StyleValue[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "offset",
+            "global": false,
+            "default": "[0, 0]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set offset of the badge"
+              }
+            ],
+            "required": false,
+            "type": "[number, number] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "[number, number] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "[number, number]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "color",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "customize dot background color"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "badgeClass",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom class name of badge"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "change",
+            "description": "triggers when the bound value changes",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"change\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "visible-change",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"visible-change\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "remove-tag",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"remove-tag\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "clear",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"clear\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "blur",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"blur\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "focus",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"focus\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "description": "",
+            "type": "{}",
+            "schema": "{}",
+            "tags": []
+          },
+          {
+            "name": "content",
+            "description": "",
+            "type": "{ value: unknown }",
+            "schema": "{ value: unknown }",
+            "tags": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "ns",
+            "type": "NamespaceHelpers",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "NamespaceHelpers"
+            },
+            "declarations": []
+          },
+          {
+            "name": "content",
+            "type": "string",
+            "description": "",
+            "tags": [],
+            "schema": "string",
+            "declarations": []
+          },
+          {
+            "name": "contentClasses",
+            "type": "(string | undefined)[]",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "array",
+              "type": "(string | undefined)[]"
+            },
+            "declarations": []
+          },
+          {
+            "name": "contentStyle",
+            "type": "(string | false | CSSProperties | StyleValue[])[]",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "array",
+              "type": "(string | false | CSSProperties | StyleValue[])[]"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/badge/Badge.vue"
+      },
+      "argTypes": {
+        "type": {
+          "name": "type",
+          "description": "",
+          "defaultValue": {
+            "summary": "'danger'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "primary",
+              "success",
+              "warning",
+              "danger",
+              "info"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "BadgeType"
+            },
+            "defaultValue": {
+              "summary": "'danger'"
+            },
+            "category": "props"
+          }
+        },
+        "isDot": {
+          "name": "isDot",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "hidden": {
+          "name": "hidden",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "value": {
+          "name": "value",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "max": {
+          "name": "max",
+          "description": "",
+          "defaultValue": {
+            "summary": "99"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "99"
+            },
+            "category": "props"
+          }
+        },
+        "showZero": {
+          "name": "showZero",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "badgeStyle": {
+          "name": "badgeStyle",
+          "description": "",
+          "defaultValue": {
+            "summary": "{}"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "null",
+                "required": false
+              },
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "false",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "StyleValue[]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "StyleValue"
+            },
+            "defaultValue": {
+              "summary": "{}"
+            },
+            "category": "props"
+          }
+        },
+        "offset": {
+          "name": "offset",
+          "description": "",
+          "defaultValue": {
+            "summary": "[0, 0]"
+          },
+          "type": {
+            "name": "other",
+            "value": "[number, number] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "[number, number]"
+            },
+            "defaultValue": {
+              "summary": "[0, 0]"
+            },
+            "category": "props"
+          }
+        },
+        "color": {
+          "name": "color",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "badgeClass": {
+          "name": "badgeClass",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "triggers when the bound value changes",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "visible-change": {
+          "name": "visible-change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "remove-tag": {
+          "name": "remove-tag",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "clear": {
+          "name": "clear",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "blur": {
+          "name": "blur",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "focus": {
+          "name": "focus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "content": {
+          "name": "content",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ value: unknown }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ value: unknown }"
+            },
+            "category": "slots"
+          }
+        },
+        "ns": {
+          "name": "ns",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "NamespaceHelpers"
+          },
+          "table": {
+            "type": {
+              "summary": "NamespaceHelpers"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "contentClasses": {
+          "name": "contentClasses",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(string | undefined)[]"
+          },
+          "table": {
+            "type": {
+              "summary": "(string)[]"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "contentStyle": {
+          "name": "contentStyle",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(string | false | CSSProperties | StyleValue[])[]"
+          },
+          "table": {
+            "type": {
+              "summary": "(string | false | CSSProperties | StyleValue[])[]"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type BadgeProps = {\n  /**\n   * @description badge type.\n   * @default 'danger'\n   */\n  type?: BadgeType;\n  /** @description if a little dot is displayed. */\n  isDot?: boolean;\n  /** @description hidden badge. */\n  hidden?: boolean;\n  /**\n   * @description display value.\n   * @default ''\n   */\n  value?: string | number;\n  /**\n   * @description maximum value, shows `{max}+` when exceeded. Only works if value is a number.\n   * @default 99\n   */\n  max?: number;\n  /**\n   * @description whether to show badge when value is zero.\n   * @default true\n   */\n  showZero?: boolean;\n  /**\n   * @description CSS style of badge\n   * @default {}\n   */\n  badgeStyle?: StyleValue;\n  /**\n   * @description set offset of the badge\n   * @default [0, 0]\n   */\n  offset?: [number, number];\n  /** @description customize dot background color */\n  color?: string;\n  /** @description custom class name of badge */\n  badgeClass?: string;\n}\n```\n\n## Events\n\n```\nexport type BadgeEvents = {\n  /** triggers when the bound value changes */\n  change: any[];\n  \"visible-change\": any[];\n  \"remove-tag\": any[];\n  clear: any[];\n  blur: any[];\n  focus: any[];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type BadgeSlots = {\n  default: {};\n  content: { value: unknown };\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type BadgeExposed = {\n  ns: NamespaceHelpers;\n  content: string;\n  contentClasses: (string | undefined)[];\n  contentStyle: (string | false | CSSProperties | StyleValue[])[];\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

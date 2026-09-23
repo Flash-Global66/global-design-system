@@ -1,0 +1,26 @@
+{
+  "components": {
+    "basic-icono": {
+      "id": "basic-icono",
+      "name": "Icon",
+      "path": "./stories/icon.stories.ts",
+      "stories": {
+        "basic-icono--primary": {
+          "id": "basic-icono--primary",
+          "name": "Uso básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { Icon } from '../components/icon';\n</script>\n\n<template>\n  <g-config-provider>\n    <icon color=\"#565F75\" name=\"users\" size=\"3em\" />\n  </g-config-provider>\n</template>"
+        },
+        "basic-icono--icon-gallery": {
+          "id": "basic-icono--icon-gallery",
+          "name": "Icon Gallery",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "basic-icono--icon-troubleshooting": {
+          "id": "basic-icono--icon-troubleshooting",
+          "name": "Icon Troubleshooting",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { Icon } from '../components/icon';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex gap-4 items-center\">\n      <icon name=\"check\" size=\"24px\" class=\"text-green-500\" />\n      <span>Ejemplo de ícono correctamente optimizado</span>\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

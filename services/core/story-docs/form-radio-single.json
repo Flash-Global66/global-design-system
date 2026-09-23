@@ -1,0 +1,15 @@
+{
+  "components": {
+    "form-radio-single": {
+      "id": "form-radio-single",
+      "name": "GRadio",
+      "path": "./stories/radio.stories.ts",
+      "stories": {
+        "form-radio-single--default": {
+          "id": "form-radio-single--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

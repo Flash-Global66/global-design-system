@@ -1,0 +1,14 @@
+{
+  "components": {
+    "data-tag": {
+      "id": "data-tag",
+      "name": "GTag",
+      "path": "./stories/tag.stories.ts",
+      "jsDocTags": {},
+      "error": {
+        "name": "No docgen found",
+        "message": "vue-component-meta extracted no component metadata for the \"GTag\" export of /home/runner/work/global-design-system/global-design-system/components/tag/dist/index.mjs."
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "components": {
+    "form-inputtag": {
+      "id": "form-inputtag",
+      "name": "GInputTag",
+      "path": "./stories/input-tag.stories.ts",
+      "stories": {
+        "form-inputtag--primary": {
+          "id": "form-inputtag--primary",
+          "name": "Básico",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-inputtag--limits-and-duplicates": {
+          "id": "form-inputtag--limits-and-duplicates",
+          "name": "Límite y duplicados",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-inputtag--delimiter": {
+          "id": "form-inputtag--delimiter",
+          "name": "Delimitador",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-inputtag--collapsed-tags": {
+          "id": "form-inputtag--collapsed-tags",
+          "name": "Tags colapsados",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GInputTag } from '@flash-global66/g-input-tag/index.ts';\n\nconst tags = ref<string[]>([\n  'vue',\n  'ts',\n  'css',\n  'html',\n  'js',\n  'scss',\n  'tailwind',\n]);\n</script>\n\n<template>\n  <g-config-provider>\n    <g-input-tag\n      v-model=\"tags\"\n      collapse-tags\n      collapse-tags-tooltip\n      :max-collapse-tags=\"2\"\n      placeholder=\"Lista larga de tags\"\n    />\n    <pre style=\"margin-top: 12px; font-size: 12px;\">{{ tags }}</pre>\n  </g-config-provider>\n</template>"
+        },
+        "form-inputtag--draggable": {
+          "id": "form-inputtag--draggable",
+          "name": "Reordenable (drag & drop)",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-inputtag--disabled-and-readonly": {
+          "id": "form-inputtag--disabled-and-readonly",
+          "name": "Disabled y Readonly",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GInputTag } from '@flash-global66/g-input-tag/index.ts';\n\nconst tagsA = ref<string[]>(['vue', 'ts']);\nconst tagsB = ref<string[]>(['vue', 'ts']);\n</script>\n\n<template>\n  <g-config-provider>\n    <div style=\"display: flex; flex-direction: column; gap: 16px;\">\n      <div>\n        <strong>Disabled</strong>\n        <g-input-tag v-model=\"tagsA\" disabled />\n      </div>\n      <div>\n        <strong>Readonly</strong>\n        <g-input-tag v-model=\"tagsB\" readonly />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-inputtag--form-validation": {
+          "id": "form-inputtag--form-validation",
+          "name": "Integración con GForm",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-inputtag--parent-form-rules": {
+          "id": "form-inputtag--parent-form-rules",
+          "name": "Reglas desde GForm padre",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        }
+      }
+    }
+  }
+}

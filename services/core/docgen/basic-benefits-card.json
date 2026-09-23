@@ -1,0 +1,510 @@
+{
+  "components": {
+    "basic-benefits-card": {
+      "id": "basic-benefits-card",
+      "name": "GBenefitsCard",
+      "path": "./stories/benefits-card.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GBenefitsCard",
+        "displayName": "GBenefitsCard",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "title",
+            "global": false,
+            "default": "''",
+            "description": "Título principal. El slot `title` lo reemplaza cuando el título necesita\nmarcado, como una línea con dos pesos.",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "description",
+            "global": false,
+            "default": "''",
+            "description": "Bajada que acompaña al título.",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "benefits",
+            "global": false,
+            "default": "[]",
+            "description": "Beneficios que se muestran como píldoras, cada uno con ícono y texto\ncorto. La tarjeta crece en alto con la cantidad.",
+            "tags": [],
+            "required": false,
+            "type": "BenefitsCardItem[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "BenefitsCardItem[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "BenefitsCardItem[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLabel",
+            "global": false,
+            "default": "''",
+            "description": "Nombre accesible de la tarjeta para lectores de pantalla. Solo se usa\ncuando no hay título: con título, la región toma su nombre del encabezado.",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "headingLevel",
+            "global": false,
+            "default": "BENEFITS_CARD_DEFAULT_HEADING_LEVEL",
+            "description": "Nivel del encabezado del título, para respetar el outline de la página.",
+            "tags": [],
+            "required": false,
+            "type": "1 | 2 | 3 | 4 | 5 | 6 | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "1 | 2 | 3 | 4 | 5 | 6 | undefined",
+              "schema": [
+                "undefined",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [],
+        "slots": [
+          {
+            "name": "title",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/benefits-card/index.ts"
+      },
+      "argTypes": {
+        "title": {
+          "name": "title",
+          "description": "Título principal. El slot `title` lo reemplaza cuando el título necesita\nmarcado, como una línea con dos pesos.",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "description": {
+          "name": "description",
+          "description": "Bajada que acompaña al título.",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "benefits": {
+          "name": "benefits",
+          "description": "Beneficios que se muestran como píldoras, cada uno con ícono y texto\ncorto. La tarjeta crece en alto con la cantidad.",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "BenefitsCardItem[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "BenefitsCardItem[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLabel": {
+          "name": "ariaLabel",
+          "description": "Nombre accesible de la tarjeta para lectores de pantalla. Solo se usa\ncuando no hay título: con título, la región toma su nombre del encabezado.",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "headingLevel": {
+          "name": "headingLevel",
+          "description": "Nivel del encabezado del título, para respetar el outline de la página.",
+          "defaultValue": {
+            "summary": "BENEFITS_CARD_DEFAULT_HEADING_LEVEL"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "1",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "2",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "3",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "4",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "5",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "6",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "1 | 2 | 3 | 4 | 5 | 6"
+            },
+            "defaultValue": {
+              "summary": "BENEFITS_CARD_DEFAULT_HEADING_LEVEL"
+            },
+            "category": "props"
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GBenefitsCardProps = {\n  /**\n   * Título principal. El slot `title` lo reemplaza cuando el título necesita\n   * marcado, como una línea con dos pesos.\n   *\n   * @default ''\n   */\n  title?: string;\n  /**\n   * Bajada que acompaña al título.\n   *\n   * @default ''\n   */\n  description?: string;\n  /**\n   * Beneficios que se muestran como píldoras, cada uno con ícono y texto\n   * corto. La tarjeta crece en alto con la cantidad.\n   *\n   * @default []\n   */\n  benefits?: BenefitsCardItem[];\n  /**\n   * Nombre accesible de la tarjeta para lectores de pantalla. Solo se usa\n   * cuando no hay título: con título, la región toma su nombre del encabezado.\n   *\n   * @default ''\n   */\n  ariaLabel?: string;\n  /**\n   * Nivel del encabezado del título, para respetar el outline de la página.\n   *\n   * @default BENEFITS_CARD_DEFAULT_HEADING_LEVEL\n   */\n  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GBenefitsCardSlots = {\n  title: {};\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

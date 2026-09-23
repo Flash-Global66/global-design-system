@@ -1,0 +1,1818 @@
+{
+  "components": {
+    "data-dialog": {
+      "id": "data-dialog",
+      "name": "GDialog",
+      "path": "./stories/dialog.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "default",
+        "displayName": "dialog",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "overflow",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set overflow"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "alignCenter",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "control the body element overflow"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "sizeMode",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "size mode for dialog width"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "title",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "title of Dialog"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showClose",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the Dialog displays a close button"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLevel",
+            "global": false,
+            "default": "'2'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "header's aria-level attribute"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "footerButtons",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "buttons to show in footer"
+              }
+            ],
+            "required": false,
+            "type": "FooterButton[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "FooterButton[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "FooterButton[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fullscreen",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether Dialog takes up full screen"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "draggable",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether Dialog can be dragged"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "appendToBody",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to append Dialog itself to body. A nested Dialog should have this attribute set to `true`"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "appendTo",
+            "global": false,
+            "default": "'body'",
+            "description": "*",
+            "tags": [
+              {
+                "name": "description",
+                "text": "which element the Dialog appends to"
+              }
+            ],
+            "required": false,
+            "type": "string | HTMLElement | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | HTMLElement | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                {
+                  "kind": "object",
+                  "type": "HTMLElement"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "destroyOnClose",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "destroy elements in Dialog when closed"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "closeOnClickModal",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the Dialog can be closed by clicking the mask"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "closeOnPressEscape",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the Dialog can be closed by pressing ESC"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "lockScroll",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether scroll of body is disabled while Dialog is displayed"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "modal",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether a mask is displayed"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "openDelay",
+            "global": false,
+            "default": "0",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the Time(milliseconds) before open"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "closeDelay",
+            "global": false,
+            "default": "0",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the Time(milliseconds) before close"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "trapFocus",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Whether to trap focus inside the dialog"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "modelValue",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "visibility of Dialog"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "width",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "width of Dialog, default is 50%"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "headerClass",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom class names for header wrapper"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "bodyClass",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom class names for body wrapper"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "footerClass",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom class names for footer wrapper"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "beforeClose",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "callback before Dialog closes, and it will prevent Dialog from closing, use done to close the dialog"
+              }
+            ],
+            "required": false,
+            "type": "DialogBeforeCloseFn | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "DialogBeforeCloseFn | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(done: (cancel?: boolean | undefined) => void): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "top",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "value for `margin-top` of Dialog CSS, default is 15vh"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "zIndex",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as z-index in native CSS, z-order of dialog"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "modalClass",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom class names for mask"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[value: boolean]",
+            "signature": "(event: \"update:modelValue\", value: boolean): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "boolean",
+                "schema": [
+                  "false",
+                  "true"
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "open",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"open\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "opened",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"opened\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "close",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"close\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "closed",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"closed\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "openAutoFocus",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"openAutoFocus\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "closeAutoFocus",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"closeAutoFocus\"): void",
+            "schema": [],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "header",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "image",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "default",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "footer",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "visible",
+            "type": "boolean",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the dialog is visible"
+              }
+            ],
+            "schema": {
+              "kind": "enum",
+              "type": "boolean",
+              "schema": [
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "dialogContentRef",
+            "type": "any",
+            "description": "",
+            "tags": [],
+            "schema": "any",
+            "declarations": []
+          },
+          {
+            "name": "resetPosition",
+            "type": "() => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/dialog/src/dialog.vue"
+      },
+      "argTypes": {
+        "overflow": {
+          "name": "overflow",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "alignCenter": {
+          "name": "alignCenter",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "sizeMode": {
+          "name": "sizeMode",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "title": {
+          "name": "title",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "showClose": {
+          "name": "showClose",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLevel": {
+          "name": "ariaLevel",
+          "description": "",
+          "defaultValue": {
+            "summary": "'2'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'2'"
+            },
+            "category": "props"
+          }
+        },
+        "footerButtons": {
+          "name": "footerButtons",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "FooterButton[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "FooterButton[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "fullscreen": {
+          "name": "fullscreen",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "draggable": {
+          "name": "draggable",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "appendToBody": {
+          "name": "appendToBody",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "appendTo": {
+          "name": "appendTo",
+          "description": "@description: which element the Dialog appends to<br><br>*",
+          "defaultValue": {
+            "summary": "'body'"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | HTMLElement"
+            },
+            "defaultValue": {
+              "summary": "'body'"
+            },
+            "category": "props"
+          }
+        },
+        "destroyOnClose": {
+          "name": "destroyOnClose",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "closeOnClickModal": {
+          "name": "closeOnClickModal",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "closeOnPressEscape": {
+          "name": "closeOnPressEscape",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "lockScroll": {
+          "name": "lockScroll",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "modal": {
+          "name": "modal",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "openDelay": {
+          "name": "openDelay",
+          "description": "",
+          "defaultValue": {
+            "summary": "0"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "0"
+            },
+            "category": "props"
+          }
+        },
+        "closeDelay": {
+          "name": "closeDelay",
+          "description": "",
+          "defaultValue": {
+            "summary": "0"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "0"
+            },
+            "category": "props"
+          }
+        },
+        "trapFocus": {
+          "name": "trapFocus",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "width": {
+          "name": "width",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "category": "props"
+          }
+        },
+        "headerClass": {
+          "name": "headerClass",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "bodyClass": {
+          "name": "bodyClass",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "footerClass": {
+          "name": "footerClass",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "beforeClose": {
+          "name": "beforeClose",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "DialogBeforeCloseFn | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "DialogBeforeCloseFn"
+            },
+            "category": "props"
+          }
+        },
+        "top": {
+          "name": "top",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "zIndex": {
+          "name": "zIndex",
+          "description": "",
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "category": "props"
+          }
+        },
+        "modalClass": {
+          "name": "modalClass",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: boolean]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: boolean]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "open": {
+          "name": "open",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "opened": {
+          "name": "opened",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "close": {
+          "name": "close",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "closed": {
+          "name": "closed",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "openAutoFocus": {
+          "name": "openAutoFocus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "closeAutoFocus": {
+          "name": "closeAutoFocus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "header": {
+          "name": "header",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "image": {
+          "name": "image",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "footer": {
+          "name": "footer",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "visible": {
+          "name": "visible",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "boolean"
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "dialogContentRef": {
+          "name": "dialogContentRef",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any"
+          },
+          "table": {
+            "type": {
+              "summary": "any"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "resetPosition": {
+          "name": "resetPosition",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => void"
+          },
+          "table": {
+            "type": {
+              "summary": "() => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type dialogModels = {\n  /** @description visibility of Dialog */\n  modelValue?: boolean; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type dialogProps = {\n  /**\n   * @description set overflow\n   * @default true\n   */\n  overflow?: boolean;\n  /**\n   * @description control the body element overflow\n   * @default false\n   */\n  alignCenter?: boolean;\n  /** @description size mode for dialog width */\n  sizeMode?: string;\n  /**\n   * @description title of Dialog\n   * @default ''\n   */\n  title?: string;\n  /**\n   * @description whether the Dialog displays a close button\n   * @default true\n   */\n  showClose?: boolean;\n  /**\n   * @description header's aria-level attribute\n   * @default '2'\n   */\n  ariaLevel?: string;\n  /**\n   * @description buttons to show in footer\n   * @default []\n   */\n  footerButtons?: FooterButton[];\n  /** @description whether Dialog takes up full screen */\n  fullscreen?: boolean;\n  /** @description whether Dialog can be dragged */\n  draggable?: boolean;\n  /**\n   * @description whether to append Dialog itself to body. A nested Dialog should have this attribute set to `true`\n   * @default false\n   */\n  appendToBody?: boolean;\n  /**\n   * *\n   *\n   * @description which element the Dialog appends to\n   * @default 'body'\n   */\n  appendTo?: string | HTMLElement;\n  /**\n   * @description destroy elements in Dialog when closed\n   * @default false\n   */\n  destroyOnClose?: boolean;\n  /**\n   * @description whether the Dialog can be closed by clicking the mask\n   * @default true\n   */\n  closeOnClickModal?: boolean;\n  /**\n   * @description whether the Dialog can be closed by pressing ESC\n   * @default true\n   */\n  closeOnPressEscape?: boolean;\n  /**\n   * @description whether scroll of body is disabled while Dialog is displayed\n   * @default true\n   */\n  lockScroll?: boolean;\n  /**\n   * @description whether a mask is displayed\n   * @default true\n   */\n  modal?: boolean;\n  /**\n   * @description the Time(milliseconds) before open\n   * @default 0\n   */\n  openDelay?: number;\n  /**\n   * @description the Time(milliseconds) before close\n   * @default 0\n   */\n  closeDelay?: number;\n  /**\n   * @description Whether to trap focus inside the dialog\n   * @default true\n   */\n  trapFocus?: boolean;\n  /** @description width of Dialog, default is 50% */\n  width?: string | number;\n  /** @description custom class names for header wrapper */\n  headerClass?: string;\n  /** @description custom class names for body wrapper */\n  bodyClass?: string;\n  /** @description custom class names for footer wrapper */\n  footerClass?: string;\n  /** @description callback before Dialog closes, and it will prevent Dialog from closing, use done to close the dialog */\n  beforeClose?: DialogBeforeCloseFn;\n  /** @description value for `margin-top` of Dialog CSS, default is 15vh */\n  top?: string;\n  /** @description same as z-index in native CSS, z-order of dialog */\n  zIndex?: number;\n  /** @description custom class names for mask */\n  modalClass?: string;\n}\n```\n\n## Events\n\n```\nexport type dialogEvents = {\n  \"update:modelValue\": [value: boolean];\n  open: [];\n  opened: [];\n  close: [];\n  closed: [];\n  openAutoFocus: [];\n  closeAutoFocus: [];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type dialogSlots = {\n  header: {};\n  image: {};\n  default: {};\n  footer: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type dialogExposed = {\n  /** @description whether the dialog is visible */\n  visible: boolean;\n  dialogContentRef: any;\n  resetPosition: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

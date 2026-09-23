@@ -1,0 +1,737 @@
+import{r as l,x as _,c as M,t as C,X as T,s as N,H as w,am as d,an as f,ao as k,ap as L,aq as F,d as Z,ar as O,as as U,y,u as a,e as D,v as P,g as b,j as A,n as q,o as I}from"./iframe-Dct5CHxr.js";import{c as B}from"./index-DWhPhD7W.js";import{u as H}from"./useEmptyValues-BnYvcW4O.js";import{k as Y}from"./index-4t0U6YlY.js";import{Y as R}from"./index-DR8mscXh.js";import{c as V}from"./index-QAcBYSVr.js";import{R as W}from"./index-1T7U7QlS.js";import{G}from"./ConfigProvider-7dg58IlU.js";import"./preload-helper-Dch09mLN.js";import"./index-pMiYc9r3.js";import"./useId-MLHLvdkG.js";import"./index-CZoNQBHQ.js";import"./install.util-cBz1HN_T.js";import"./event.constant-LtAI3-H4.js";import"./useAttrs-BZi71rd1.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";const $=n=>{const s=l(!1),i=l(!1),o=l(null),t=l(""),g=_(F,L).replace(/\/+$/,"");let r=null;const p=M(()=>d[n.size]),u=()=>{s.value=!0},e=()=>{i.value=!0},m=()=>{if(!f.includes(n.name)){i.value=!0;return}t.value=`${g}/${n.name}.${k}`},c=()=>{if(!n.lazyLoad){m();return}if(r&&(r(),r=null),o.value){const{stop:x}=B(o,([{isIntersecting:j}])=>{j&&(m(),x())},{threshold:.1,rootMargin:"50px"});r=x}};return C(()=>{c()}),T(()=>{r&&r()}),N(()=>n.name,()=>{s.value=!1,t.value="",i.value=!1,c()}),{sizeValue:p,isLoaded:s,hasError:i,imageSrc:w(t),imageContainer:o,handleImageLoad:u,handleImageError:e}},K=["src","alt"],X=["aria-label"],v=Z({__name:"Image",props:O,setup(n){const s=n;U(s);const i=H("image"),{sizeValue:o,isLoaded:t,imageSrc:g,imageContainer:r,handleImageLoad:p,handleImageError:u,hasError:e}=$(s);return(m,c)=>(I(),y("figure",{class:b(a(i).b("container")),ref_key:"imageContainer",ref:r,style:q({width:a(o),height:a(o),minWidth:a(o),minHeight:a(o)})},[a(g)&&!a(e)?D((I(),y("img",{key:0,src:a(g),alt:m.name,class:b(a(i).b()),onLoad:c[0]||(c[0]=(...x)=>a(p)&&a(p)(...x)),onError:c[1]||(c[1]=(...x)=>a(u)&&a(u)(...x))},null,42,K)),[[P,a(t)]]):A("",!0),!a(t)&&!a(e)?(I(),y("div",{key:1,class:b(a(i).e("placeholder")),role:"img","aria-label":`Cargando imagen: ${m.name}`},null,10,X)):A("",!0),a(e)?(I(),y("div",{key:2,class:b([a(i).e("placeholder"),`text-size-${m.size}`]),role:"img","aria-label":"Error al cargar la imagen"}," 404 ",2)):A("",!0)],6))}}),ue={title:"Basic/Image",component:v,parameters:{docs:{description:{component:`
+# Image Component
+
+El componente Image proporciona una manera sencilla y optimizada de mostrar ilustraciones predefinidas con distintos tamaños:
+
+## Características
+- Colección de ilustraciones predefinidas listas para usar
+- Siete tamaños diferentes para adaptarse a diversos contextos
+- Lazy loading para optimizar el rendimiento
+- Tipado estricto para autocompletado de nombres y tamaños
+
+## Instalación
+
+\`\`\`bash
+yarn add @flash-global66/g-image
+\`\`\`
+
+### Servir las ilustraciones (requerido)
+
+Las ilustraciones viven en el paquete (\`dist/illustrations/\`) y el componente las carga por URL
+(\`/illustrations/{name}.webp\`). La app debe exponerlas en esa ruta copiándolas desde
+\`node_modules\` en el build — por ejemplo con \`vite-plugin-static-copy\`:
+
+\`\`\`bash
+yarn add -D vite-plugin-static-copy@^3.4.0
+\`\`\`
+
+\`\`\`ts
+// vite.config.ts
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+
+export default defineConfig({
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'node_modules/@flash-global66/g-image/dist/illustrations/*',
+          dest: 'illustrations',
+        },
+      ],
+    }),
+  ],
+});
+\`\`\`
+
+Sin este paso las ilustraciones muestran el placeholder de error (404).
+
+### URL base personalizada (opcional)
+
+Si las ilustraciones se sirven desde otra ruta (CDN, app bajo subpath), inyecta la base
+con \`imageBaseUrlKey\` (sin slash final):
+
+\`\`\`ts
+import { imageBaseUrlKey } from '@flash-global66/g-image';
+
+app.provide(imageBaseUrlKey, 'https://cdn.example.com/illustrations');
+\`\`\`
+
+## Dependencias
+Este componente requiere:
+- @vueuse/core (para el lazy loading)
+
+## Importación de estilos SASS
+Para que el componente funcione correctamente, es necesario importar los estilos SASS:
+
+\`\`\`scss
+@use "@flash-global66/g-image/styles.scss";
+\`\`\`
+
+## Uso básico
+
+\`\`\`vue
+<template>
+  <g-image name="document" size="md" />
+</template>
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+<\/script>
+\`\`\`
+
+## Tamaños disponibles
+- **xs**: 44x44 px
+- **sm**: 64x64 px
+- **md**: 80x80 px (predeterminado)
+- **lg**: 112x112 px
+- **xl**: 160x160 px
+- **2xl**: 208x208 px
+- **3xl**: 260x260 px
+
+## Optimizaciones de rendimiento
+### Lazy Loading
+- El componente utiliza IntersectionObserver para cargar las imágenes sólo cuando son visibles
+- Esto mejora significativamente el rendimiento en páginas con múltiples ilustraciones
+- Puedes desactivar esta función con \`lazyLoad=false\`
+
+## Agregar nuevas ilustraciones al componente
+
+Para añadir nuevas imágenes al componente:
+
+1. **Añadir el archivo**
+   - Coloca el archivo WebP en \`components/Image/assets/illustrations/\`
+
+2. **Actualizar las constantes**
+   - Modifica \`src/constants/image.constants.ts\` para incluir el nuevo nombre en \`IMAGE_NAMES\`
+   - Ejemplo: Añade 'new-illustration' al array \`IMAGE_NAMES\`
+
+3. **Construir el componente**
+   - Ejecuta \`yarn build image\` para actualizar el componente
+
+## Tipado estricto y autocompletado
+El componente utiliza TypeScript para proporcionar tipado estricto, lo que permite:
+- Autocompletado de nombres de ilustraciones en tu editor
+- Validación en tiempo de compilación para evitar errores
+- Advertencias si se usa un nombre que no existe en el conjunto de ilustraciones
+        `}}},argTypes:{name:{description:"Nombre de la ilustración",control:"select",options:f,table:{type:{summary:"string"},defaultValue:{summary:"document"}}},size:{description:"Tamaño de la ilustración",control:"select",options:Object.keys(d),table:{type:{summary:"string"},defaultValue:{summary:"md"}}},lazyLoad:{description:"Activar carga diferida de imágenes",control:"boolean",table:{type:{summary:"boolean"},defaultValue:{summary:"true"}}}},args:{name:"document",size:"md",lazyLoad:!0}},E={name:"Uso básico",render:n=>({components:{GImage:v,GConfigProvider:G},setup(){return{args:n}},template:`
+      <g-config-provider>
+        <div class="flex flex-col gap-4">
+          <g-image v-bind="args" />
+        </div>
+      </g-config-provider>
+    `}),parameters:{docs:{source:{code:`
+<!-- Ejemplo de uso básico -->
+<template>
+  <g-image name="document" size="md" />
+</template>
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+<\/script>
+`,language:"html"}}}},h={name:"Tamaños disponibles",render:n=>({components:{GImage:v,GConfigProvider:G},setup(){const s=Object.keys(d);return{args:n,sizes:s,IMAGE_SIZES:d}},template:`
+      <g-config-provider>
+        <div class="flex flex-wrap gap-6 items-end">
+          <div v-for="size in sizes" :key="size" class="flex flex-col items-center">
+            <!-- Contenedor con altura y anchura fijas basadas en el tamaño -->
+            <div class="flex items-center justify-center" 
+                 :style="{ width: IMAGE_SIZES[size], height: IMAGE_SIZES[size], minHeight: IMAGE_SIZES[size], minWidth: IMAGE_SIZES[size] }">
+              <g-image v-bind="args" :size="size" />
+            </div>
+            <span class="mt-2 text-sm text-gray-500">{{ size }} ({{ IMAGE_SIZES[size] }})</span>
+          </div>
+        </div>
+      </g-config-provider>
+    `}),parameters:{docs:{source:{code:`
+<!-- Ejemplo de uso con diferentes tamaños -->
+<template>
+  <!-- Tamaño xs: 44x44px -->
+  <g-image name="document" size="xs" />
+  
+  <!-- Tamaño sm: 64x64px -->
+  <g-image name="document" size="sm" />
+  
+  <!-- Tamaño md: 80x80px (por defecto) -->
+  <g-image name="document" size="md" />
+  
+  <!-- Tamaño lg: 112x112px -->
+  <g-image name="document" size="lg" />
+  
+  <!-- Tamaño xl: 160x160px -->
+  <g-image name="document" size="xl" />
+  
+  <!-- Tamaño xxl: 208x208px -->
+  <g-image name="document" size="xxl" />
+  
+  <!-- Tamaño xxxl: 260x260px -->
+  <g-image name="document" size="xxxl" />
+</template>
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+<\/script>
+`,language:"html"}}}},z={name:"Galería de ilustraciones",parameters:{docs:{description:{story:"Galería completa de ilustraciones disponibles en el sistema. Haz clic en cualquier ilustración para copiar su nombre. 📋"},source:{code:`
+<!-- Ejemplo para mostrar múltiples imágenes en una galería -->
+<template>
+  <div class="gallery-container">
+    <!-- Puedes iterar sobre las imágenes disponibles -->
+    <div v-for="imageName in ['document', 'user', 'check', 'email']" :key="imageName" class="image-item">
+      <g-image :name="imageName" size="md" />
+      <span class="image-name">{{ imageName }}</span>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+
+// Todos los nombres de imágenes disponibles
+// Puedes importar la constante IMAGE_NAMES desde el paquete
+// import { IMAGE_NAMES } from '@flash-global66/g-image';
+<\/script>
+
+<style scoped>
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.image-name {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #666;
+}
+</style>
+`,language:"html"}}},render:()=>({components:{GImage:v,GConfigProvider:G,GSegmented:Y,GInput:R,GButton:V,GIconFont:W},setup(){const n=l("md"),s=l(""),i=l(null),o=Object.keys(d).map(e=>({label:e.toUpperCase(),value:e})),t=l([...f]),g=M(()=>{switch(n.value){case"xs":case"sm":return"grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8";case"md":return"grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6";case"lg":return"grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";case"xl":return"grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";case"2xl":return"grid-cols-1 sm:grid-cols-2 md:grid-cols-3";case"3xl":return"grid-cols-1 sm:grid-cols-2";default:return"grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"}}),r=()=>{if(!s.value.trim()){t.value=[...f];return}const e=s.value.toLowerCase().trim();t.value=f.filter(m=>m.toLowerCase().includes(e))},p=()=>{s.value="",r()},u=e=>{navigator.clipboard.writeText(e).then(()=>{i.value=e,setTimeout(()=>{i.value=null},1500),console.log("Nombre de la ilustración copiado al portapapeles")}).catch(()=>{alert("No se pudo copiar el nombre de la ilustración")})};return C(()=>{const e=document.createElement("style");return e.textContent=`
+          .copy-animation {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #10b981;
+            z-index: 10;
+          }
+          
+          @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+          }
+          
+          .copy-feedback {
+            animation: fadeInOut 1.5s ease forwards;
+          }
+        `,document.head.appendChild(e),()=>{e.parentNode&&e.parentNode.removeChild(e)}}),{IMAGE_NAMES:f,IMAGE_SIZES:d,selectedSize:n,sizeOptions:o,searchTerm:s,clearSearch:p,copyImageName:u,filteredImages:t,updateFilteredImages:r,copiedImage:i,gridColumns:g}},template:`
+      <g-config-provider>
+        <div class="space-y-8">
+          <g-segmented
+            block
+            v-model="selectedSize"
+            :options="sizeOptions"
+            class="mb-8"
+          />
+
+          <div class="flex items-center gap-2">
+            <g-input
+              v-model="searchTerm"
+              label="Buscar ilustración"
+              prefix-icon="solid magnifying-glass"
+              class="w-full max-w-md"
+              @input="updateFilteredImages"
+            />
+            <g-button
+              v-if="searchTerm"
+              variant="secondary"
+              @click="clearSearch"
+            >
+              Limpiar
+            </g-button>
+          </div>
+
+          <div :class="['grid gap-4 md:gap-6', gridColumns]">
+            <div
+              v-for="name in filteredImages"
+              :key="name"
+              class="flex bg-white flex-col items-center justify-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600 relative overflow-hidden transition-all duration-300"
+              :class="{ 'copy-animation': copiedImage === name }"
+              @click="copyImageName(name)"
+            >
+              <!-- Contenedor mejorado con dimensiones fijas para que no se corten las imágenes -->
+              <div class="flex items-center justify-center mb-2 overflow-visible" 
+                  :style="{ 
+                    width: IMAGE_SIZES[selectedSize], 
+                    height: IMAGE_SIZES[selectedSize], 
+                    minHeight: IMAGE_SIZES[selectedSize],
+                    minWidth: IMAGE_SIZES[selectedSize]
+                  }">
+                <g-image :name="name" :size="selectedSize" />
+              </div>
+              <span class="text-xs text-center">{{ name }}</span>
+              
+              <!-- Success overlay that appears when copied -->
+              <div v-if="copiedImage === name" class="absolute inset-0 bg-emerald-50 bg-opacity-70 flex flex-col items-center justify-center transition-opacity duration-300 copy-feedback">
+                <div class="text-emerald-600 mb-1">
+                  <g-icon-font name="solid check-circle" size="lg" />
+                </div>
+                <span class="text-xs font-medium text-emerald-700">¡Copiado!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </g-config-provider>
+    `})},S={name:"Manejo de errores",parameters:{docs:{description:{story:"Demostración de cómo el componente maneja los errores cuando una imagen no puede cargarse."},source:{code:`
+<!-- Ejemplo de manejo de errores -->
+<template>
+  <!-- Esta imagen no existe y mostrará el estado de error -->
+  <g-image name="non-existent-image" size="md" />
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+<\/script>
+`,language:"html"}}},render:()=>({components:{GImage:v,GConfigProvider:G},setup(){return{IMAGE_SIZES:d}},template:`
+      <g-config-provider>
+        <div class="space-y-8">
+          <h3 class="text-lg font-medium mb-4">Manejo de errores de carga de imágenes</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Ejemplo 1: Imagen que no existe -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <g-image name="non-existent-image" size="md" />
+              <p class="mt-3 text-sm text-gray-600">Imagen inexistente</p>
+            </div>
+            
+            <!-- Ejemplo 2: Imagen con nombre incorrecto -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <g-image name="broken-image" size="md" />
+              <p class="mt-3 text-sm text-gray-600">Nombre incorrecto</p>
+            </div>
+            
+            <!-- Ejemplo 3: Diferentes tamaños con error -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <div class="grid grid-cols-3 gap-4">
+                <g-image name="missing-file" size="xs" />
+                <g-image name="missing-file" size="sm" />
+                <g-image name="missing-file" size="md" />
+              </div>
+              <p class="mt-3 text-sm text-gray-600">Diferentes tamaños</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 p-4 rounded-md mt-6">
+            <h4 class="font-medium mb-2">¿Cómo funciona?</h4>
+            <p class="text-sm text-gray-700">
+              Cuando una imagen no puede cargarse, el componente muestra automáticamente un estado de error con el código "404".
+              Este comportamiento se activa en dos casos:
+            </p>
+            <ul class="list-disc list-inside mt-2 text-sm text-gray-700">
+              <li>La URL de la imagen no puede construirse (nombre inválido)</li>
+              <li>La imagen existe pero no puede cargarse (error de red, archivo corrupto, etc.)</li>
+            </ul>
+          </div>
+        </div>
+      </g-config-provider>
+    `})},xe=["Primary","Sizes","Gallery","ErrorHandling"];E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
+  name: 'Uso básico',
+  render: args => ({
+    components: {
+      GImage,
+      GConfigProvider
+    },
+    setup() {
+      return {
+        args
+      };
+    },
+    template: \`
+      <g-config-provider>
+        <div class="flex flex-col gap-4">
+          <g-image v-bind="args" />
+        </div>
+      </g-config-provider>
+    \`
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: \`
+<!-- Ejemplo de uso básico -->
+<template>
+  <g-image name="document" size="md" />
+</template>
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+<\/script>
+\`,
+        language: 'html'
+      }
+    }
+  }
+}`,...E.parameters?.docs?.source}}};h.parameters={...h.parameters,docs:{...h.parameters?.docs,source:{originalSource:`{
+  name: 'Tamaños disponibles',
+  render: args => ({
+    components: {
+      GImage,
+      GConfigProvider
+    },
+    setup() {
+      const sizes = Object.keys(IMAGE_SIZES);
+      return {
+        args,
+        sizes,
+        IMAGE_SIZES
+      };
+    },
+    template: \`
+      <g-config-provider>
+        <div class="flex flex-wrap gap-6 items-end">
+          <div v-for="size in sizes" :key="size" class="flex flex-col items-center">
+            <!-- Contenedor con altura y anchura fijas basadas en el tamaño -->
+            <div class="flex items-center justify-center" 
+                 :style="{ width: IMAGE_SIZES[size], height: IMAGE_SIZES[size], minHeight: IMAGE_SIZES[size], minWidth: IMAGE_SIZES[size] }">
+              <g-image v-bind="args" :size="size" />
+            </div>
+            <span class="mt-2 text-sm text-gray-500">{{ size }} ({{ IMAGE_SIZES[size] }})</span>
+          </div>
+        </div>
+      </g-config-provider>
+    \`
+  }),
+  parameters: {
+    docs: {
+      source: {
+        code: \`
+<!-- Ejemplo de uso con diferentes tamaños -->
+<template>
+  <!-- Tamaño xs: 44x44px -->
+  <g-image name="document" size="xs" />
+  
+  <!-- Tamaño sm: 64x64px -->
+  <g-image name="document" size="sm" />
+  
+  <!-- Tamaño md: 80x80px (por defecto) -->
+  <g-image name="document" size="md" />
+  
+  <!-- Tamaño lg: 112x112px -->
+  <g-image name="document" size="lg" />
+  
+  <!-- Tamaño xl: 160x160px -->
+  <g-image name="document" size="xl" />
+  
+  <!-- Tamaño xxl: 208x208px -->
+  <g-image name="document" size="xxl" />
+  
+  <!-- Tamaño xxxl: 260x260px -->
+  <g-image name="document" size="xxxl" />
+</template>
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+<\/script>
+\`,
+        language: 'html'
+      }
+    }
+  }
+}`,...h.parameters?.docs?.source}}};z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+  name: 'Galería de ilustraciones',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Galería completa de ilustraciones disponibles en el sistema. Haz clic en cualquier ilustración para copiar su nombre. 📋'
+      },
+      source: {
+        code: \`
+<!-- Ejemplo para mostrar múltiples imágenes en una galería -->
+<template>
+  <div class="gallery-container">
+    <!-- Puedes iterar sobre las imágenes disponibles -->
+    <div v-for="imageName in ['document', 'user', 'check', 'email']" :key="imageName" class="image-item">
+      <g-image :name="imageName" size="md" />
+      <span class="image-name">{{ imageName }}</span>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+
+// Todos los nombres de imágenes disponibles
+// Puedes importar la constante IMAGE_NAMES desde el paquete
+// import { IMAGE_NAMES } from '@flash-global66/g-image';
+<\/script>
+
+<style scoped>
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.image-name {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #666;
+}
+</style>
+\`,
+        language: 'html'
+      }
+    }
+  },
+  render: () => ({
+    components: {
+      GImage,
+      GConfigProvider,
+      GSegmented,
+      GInput,
+      GButton,
+      GIconFont
+    },
+    setup() {
+      const selectedSize = ref('md');
+      const searchTerm = ref('');
+      const copiedImage = ref<string | null>(null);
+      const sizeOptions = Object.keys(IMAGE_SIZES).map(size => ({
+        label: size.toUpperCase(),
+        value: size
+      }));
+      const filteredImages = ref<string[]>([...IMAGE_NAMES]);
+      const gridColumns = computed(() => {
+        switch (selectedSize.value) {
+          case 'xs':
+          case 'sm':
+            return 'grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8';
+          case 'md':
+            return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6';
+          case 'lg':
+            return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
+          case 'xl':
+            return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4';
+          case '2xl':
+            return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
+          case '3xl':
+            return 'grid-cols-1 sm:grid-cols-2';
+          default:
+            return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6';
+        }
+      });
+      const updateFilteredImages = () => {
+        if (!searchTerm.value.trim()) {
+          filteredImages.value = [...IMAGE_NAMES];
+          return;
+        }
+        const searchTermLower = searchTerm.value.toLowerCase().trim();
+        filteredImages.value = IMAGE_NAMES.filter(name => name.toLowerCase().includes(searchTermLower));
+      };
+      const clearSearch = () => {
+        searchTerm.value = '';
+        updateFilteredImages();
+      };
+      const copyImageName = (imageName: string) => {
+        navigator.clipboard.writeText(imageName).then(() => {
+          copiedImage.value = imageName;
+          setTimeout(() => {
+            copiedImage.value = null;
+          }, 1500);
+          console.log('Nombre de la ilustración copiado al portapapeles');
+        }).catch(() => {
+          alert('No se pudo copiar el nombre de la ilustración');
+        });
+      };
+      onMounted(() => {
+        const styleElement = document.createElement('style');
+        styleElement.textContent = \`
+          .copy-animation {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #10b981;
+            z-index: 10;
+          }
+          
+          @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+          }
+          
+          .copy-feedback {
+            animation: fadeInOut 1.5s ease forwards;
+          }
+        \`;
+        document.head.appendChild(styleElement);
+        return () => {
+          if (styleElement.parentNode) {
+            styleElement.parentNode.removeChild(styleElement);
+          }
+        };
+      });
+      return {
+        IMAGE_NAMES,
+        IMAGE_SIZES,
+        selectedSize,
+        sizeOptions,
+        searchTerm,
+        clearSearch,
+        copyImageName,
+        filteredImages,
+        updateFilteredImages,
+        copiedImage,
+        gridColumns
+      };
+    },
+    template: \`
+      <g-config-provider>
+        <div class="space-y-8">
+          <g-segmented
+            block
+            v-model="selectedSize"
+            :options="sizeOptions"
+            class="mb-8"
+          />
+
+          <div class="flex items-center gap-2">
+            <g-input
+              v-model="searchTerm"
+              label="Buscar ilustración"
+              prefix-icon="solid magnifying-glass"
+              class="w-full max-w-md"
+              @input="updateFilteredImages"
+            />
+            <g-button
+              v-if="searchTerm"
+              variant="secondary"
+              @click="clearSearch"
+            >
+              Limpiar
+            </g-button>
+          </div>
+
+          <div :class="['grid gap-4 md:gap-6', gridColumns]">
+            <div
+              v-for="name in filteredImages"
+              :key="name"
+              class="flex bg-white flex-col items-center justify-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer text-grey-600 relative overflow-hidden transition-all duration-300"
+              :class="{ 'copy-animation': copiedImage === name }"
+              @click="copyImageName(name)"
+            >
+              <!-- Contenedor mejorado con dimensiones fijas para que no se corten las imágenes -->
+              <div class="flex items-center justify-center mb-2 overflow-visible" 
+                  :style="{ 
+                    width: IMAGE_SIZES[selectedSize], 
+                    height: IMAGE_SIZES[selectedSize], 
+                    minHeight: IMAGE_SIZES[selectedSize],
+                    minWidth: IMAGE_SIZES[selectedSize]
+                  }">
+                <g-image :name="name" :size="selectedSize" />
+              </div>
+              <span class="text-xs text-center">{{ name }}</span>
+              
+              <!-- Success overlay that appears when copied -->
+              <div v-if="copiedImage === name" class="absolute inset-0 bg-emerald-50 bg-opacity-70 flex flex-col items-center justify-center transition-opacity duration-300 copy-feedback">
+                <div class="text-emerald-600 mb-1">
+                  <g-icon-font name="solid check-circle" size="lg" />
+                </div>
+                <span class="text-xs font-medium text-emerald-700">¡Copiado!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </g-config-provider>
+    \`
+  })
+}`,...z.parameters?.docs?.source}}};S.parameters={...S.parameters,docs:{...S.parameters?.docs,source:{originalSource:`{
+  name: 'Manejo de errores',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demostración de cómo el componente maneja los errores cuando una imagen no puede cargarse.'
+      },
+      source: {
+        code: \`
+<!-- Ejemplo de manejo de errores -->
+<template>
+  <!-- Esta imagen no existe y mostrará el estado de error -->
+  <g-image name="non-existent-image" size="md" />
+
+<script setup>
+import { GImage } from '@flash-global66/g-image';
+<\/script>
+\`,
+        language: 'html'
+      }
+    }
+  },
+  render: () => ({
+    components: {
+      GImage,
+      GConfigProvider
+    },
+    setup() {
+      return {
+        IMAGE_SIZES
+      };
+    },
+    template: \`
+      <g-config-provider>
+        <div class="space-y-8">
+          <h3 class="text-lg font-medium mb-4">Manejo de errores de carga de imágenes</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Ejemplo 1: Imagen que no existe -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <g-image name="non-existent-image" size="md" />
+              <p class="mt-3 text-sm text-gray-600">Imagen inexistente</p>
+            </div>
+            
+            <!-- Ejemplo 2: Imagen con nombre incorrecto -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <g-image name="broken-image" size="md" />
+              <p class="mt-3 text-sm text-gray-600">Nombre incorrecto</p>
+            </div>
+            
+            <!-- Ejemplo 3: Diferentes tamaños con error -->
+            <div class="flex flex-col items-center p-4 border rounded-md">
+              <div class="grid grid-cols-3 gap-4">
+                <g-image name="missing-file" size="xs" />
+                <g-image name="missing-file" size="sm" />
+                <g-image name="missing-file" size="md" />
+              </div>
+              <p class="mt-3 text-sm text-gray-600">Diferentes tamaños</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 p-4 rounded-md mt-6">
+            <h4 class="font-medium mb-2">¿Cómo funciona?</h4>
+            <p class="text-sm text-gray-700">
+              Cuando una imagen no puede cargarse, el componente muestra automáticamente un estado de error con el código "404".
+              Este comportamiento se activa en dos casos:
+            </p>
+            <ul class="list-disc list-inside mt-2 text-sm text-gray-700">
+              <li>La URL de la imagen no puede construirse (nombre inválido)</li>
+              <li>La imagen existe pero no puede cargarse (error de red, archivo corrupto, etc.)</li>
+            </ul>
+          </div>
+        </div>
+      </g-config-provider>
+    \`
+  })
+}`,...S.parameters?.docs?.source}}};export{S as ErrorHandling,z as Gallery,E as Primary,h as Sizes,xe as __namedExportsOrder,ue as default};

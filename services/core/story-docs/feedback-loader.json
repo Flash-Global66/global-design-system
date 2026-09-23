@@ -1,0 +1,26 @@
+{
+  "components": {
+    "feedback-loader": {
+      "id": "feedback-loader",
+      "name": "Loader",
+      "path": "./stories/loader.stories.ts",
+      "stories": {
+        "feedback-loader--default": {
+          "id": "feedback-loader--default",
+          "name": "Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { Loader } from '../components/loader';\n</script>\n\n<template>\n  <div class=\"h-[500px] w-full relative transform scale-100 border border-gray-200 rounded-lg overflow-hidden\">\n     <Loader show />\n     <div class=\"p-4\">\n       <h3 class=\"text-lg font-bold mb-2\">Contenido de Ejemplo</h3>\n       <p>El loader se mostrará sobre este contenedor.</p>\n     </div>\n  </div>\n</template>"
+        },
+        "feedback-loader--with-message": {
+          "id": "feedback-loader--with-message",
+          "name": "Con Mensaje",
+          "snippet": "<script lang=\"ts\" setup>\nimport { Loader } from '../components/loader';\n</script>\n\n<template>\n  <div class=\"h-[500px] w-full relative transform scale-100 border border-gray-200 rounded-lg overflow-hidden\">\n     <Loader message=\"Estamos procesando tu solicitud. Esto puede tomar unos momentos. Tomate un café\" show />\n     <div class=\"p-4\">\n       <h3 class=\"text-lg font-bold mb-2\">Contenido de Ejemplo</h3>\n       <p>El loader se mostrará sobre este contenedor.</p>\n     </div>\n  </div>\n</template>"
+        },
+        "feedback-loader--interactive": {
+          "id": "feedback-loader--interactive",
+          "name": "Interactivo",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        }
+      }
+    }
+  }
+}

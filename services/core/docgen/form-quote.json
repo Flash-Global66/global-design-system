@@ -1,0 +1,2863 @@
+{
+  "components": {
+    "form-quote": {
+      "id": "form-quote",
+      "name": "GQuote",
+      "path": "./stories/quote.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GQuote",
+        "displayName": "GQuote",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "fromCurrencies",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "Currency[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Currency[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "Currency[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "toCurrencies",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "Currency[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Currency[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "Currency[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fromAmount",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "toAmount",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "action",
+            "global": false,
+            "default": "'Default'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "QuoteAction | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "QuoteAction | undefined",
+              "schema": [
+                "undefined",
+                "\"Default\"",
+                "\"NoValue\"",
+                "\"FromError\"",
+                "\"ToError\"",
+                "\"Error\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "isLoading",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "errorMessage",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "availableBalance",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "singleInput",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fromLabel",
+            "global": false,
+            "default": "'Tú envías'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "toLabel",
+            "global": false,
+            "default": "'Tu contacto recibe'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "isDisabled",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disableOriginSelect",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disableOriginInput",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disableDestinationSelect",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disableDestinationInput",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showSwap",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "availableLabel",
+            "global": false,
+            "default": "'Disponible'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "swapAriaLabel",
+            "global": false,
+            "default": "'Intercambiar monedas'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "emptyResultsText",
+            "global": false,
+            "default": "'Sin resultados'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "actionText",
+            "global": false,
+            "default": "'Cargar dinero'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showAction",
+            "global": false,
+            "default": "null",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | null | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | null | undefined",
+              "schema": [
+                "undefined",
+                "null",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fromFlagCode",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "FlagCode | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "FlagCode | undefined",
+              "schema": [
+                "undefined",
+                "\"AD\"",
+                "\"AE\"",
+                "\"AF\"",
+                "\"AG\"",
+                "\"AI\"",
+                "\"AL\"",
+                "\"AM\"",
+                "\"AO\"",
+                "\"AQ\"",
+                "\"AR\"",
+                "\"AS\"",
+                "\"AT\"",
+                "\"AU\"",
+                "\"AW\"",
+                "\"AX\"",
+                "\"AZ\"",
+                "\"BA\"",
+                "\"BB\"",
+                "\"BD\"",
+                "\"BE\"",
+                "\"BF\"",
+                "\"BG\"",
+                "\"BH\"",
+                "\"BI\"",
+                "\"BJ\"",
+                "\"BL\"",
+                "\"BM\"",
+                "\"BN\"",
+                "\"BO\"",
+                "\"BR\"",
+                "\"BS\"",
+                "\"BT\"",
+                "\"BW\"",
+                "\"BY\"",
+                "\"BZ\"",
+                "\"CA\"",
+                "\"CC\"",
+                "\"CD\"",
+                "\"CF\"",
+                "\"CG\"",
+                "\"CH\"",
+                "\"CI\"",
+                "\"CK\"",
+                "\"CL\"",
+                "\"CM\"",
+                "\"CN\"",
+                "\"CO\"",
+                "\"CR\"",
+                "\"CU\"",
+                "\"CV\"",
+                "\"CW\"",
+                "\"CX\"",
+                "\"CY\"",
+                "\"CZ\"",
+                "\"DE\"",
+                "\"DJ\"",
+                "\"DK\"",
+                "\"DM\"",
+                "\"DO\"",
+                "\"DZ\"",
+                "\"EC\"",
+                "\"EE\"",
+                "\"EG\"",
+                "\"EH\"",
+                "\"ER\"",
+                "\"ES\"",
+                "\"ET\"",
+                "\"FI\"",
+                "\"FJ\"",
+                "\"FK\"",
+                "\"FM\"",
+                "\"FO\"",
+                "\"FR\"",
+                "\"GA\"",
+                "\"GB\"",
+                "\"GD\"",
+                "\"GE\"",
+                "\"GF\"",
+                "\"GG\"",
+                "\"GH\"",
+                "\"GI\"",
+                "\"GL\"",
+                "\"GM\"",
+                "\"GN\"",
+                "\"GP\"",
+                "\"GQ\"",
+                "\"GR\"",
+                "\"GS\"",
+                "\"GT\"",
+                "\"GU\"",
+                "\"GW\"",
+                "\"GY\"",
+                "\"HK\"",
+                "\"HN\"",
+                "\"HR\"",
+                "\"HT\"",
+                "\"HU\"",
+                "\"ID\"",
+                "\"IE\"",
+                "\"IL\"",
+                "\"IM\"",
+                "\"IN\"",
+                "\"IO\"",
+                "\"IQ\"",
+                "\"IR\"",
+                "\"IS\"",
+                "\"IT\"",
+                "\"JE\"",
+                "\"JM\"",
+                "\"JO\"",
+                "\"JP\"",
+                "\"KE\"",
+                "\"KG\"",
+                "\"KH\"",
+                "\"KI\"",
+                "\"KM\"",
+                "\"KN\"",
+                "\"KP\"",
+                "\"KR\"",
+                "\"KW\"",
+                "\"KY\"",
+                "\"KZ\"",
+                "\"LA\"",
+                "\"LB\"",
+                "\"LC\"",
+                "\"LI\"",
+                "\"LK\"",
+                "\"LR\"",
+                "\"LS\"",
+                "\"LT\"",
+                "\"LU\"",
+                "\"LV\"",
+                "\"LY\"",
+                "\"MA\"",
+                "\"MC\"",
+                "\"MD\"",
+                "\"ME\"",
+                "\"MF\"",
+                "\"MG\"",
+                "\"MH\"",
+                "\"MK\"",
+                "\"ML\"",
+                "\"MM\"",
+                "\"MN\"",
+                "\"MO\"",
+                "\"MP\"",
+                "\"MQ\"",
+                "\"MR\"",
+                "\"MS\"",
+                "\"MT\"",
+                "\"MU\"",
+                "\"MV\"",
+                "\"MW\"",
+                "\"MX\"",
+                "\"MY\"",
+                "\"MZ\"",
+                "\"NA\"",
+                "\"NC\"",
+                "\"NE\"",
+                "\"NF\"",
+                "\"NG\"",
+                "\"NI\"",
+                "\"NL\"",
+                "\"NO\"",
+                "\"NP\"",
+                "\"NR\"",
+                "\"NU\"",
+                "\"NZ\"",
+                "\"OM\"",
+                "\"PA\"",
+                "\"PE\"",
+                "\"PF\"",
+                "\"PG\"",
+                "\"PH\"",
+                "\"PK\"",
+                "\"PL\"",
+                "\"PM\"",
+                "\"PN\"",
+                "\"PR\"",
+                "\"PS\"",
+                "\"PT\"",
+                "\"PW\"",
+                "\"PY\"",
+                "\"QA\"",
+                "\"RE\"",
+                "\"RO\"",
+                "\"RS\"",
+                "\"RU\"",
+                "\"RW\"",
+                "\"SA\"",
+                "\"SB\"",
+                "\"SC\"",
+                "\"SD\"",
+                "\"SE\"",
+                "\"SG\"",
+                "\"SH\"",
+                "\"SI\"",
+                "\"SJ\"",
+                "\"SK\"",
+                "\"SL\"",
+                "\"SM\"",
+                "\"SN\"",
+                "\"SO\"",
+                "\"SR\"",
+                "\"SS\"",
+                "\"ST\"",
+                "\"SV\"",
+                "\"SX\"",
+                "\"SY\"",
+                "\"SZ\"",
+                "\"TC\"",
+                "\"TD\"",
+                "\"TG\"",
+                "\"TH\"",
+                "\"TJ\"",
+                "\"TK\"",
+                "\"TL\"",
+                "\"TM\"",
+                "\"TN\"",
+                "\"TO\"",
+                "\"TR\"",
+                "\"TT\"",
+                "\"TV\"",
+                "\"TW\"",
+                "\"TZ\"",
+                "\"UA\"",
+                "\"UG\"",
+                "\"US\"",
+                "\"UY\"",
+                "\"UZ\"",
+                "\"VA\"",
+                "\"VC\"",
+                "\"VE\"",
+                "\"VG\"",
+                "\"VI\"",
+                "\"VN\"",
+                "\"VU\"",
+                "\"WF\"",
+                "\"WS\"",
+                "\"XK\"",
+                "\"YE\"",
+                "\"YT\"",
+                "\"ZA\"",
+                "\"ZM\"",
+                "\"ZW\"",
+                "\"ALL_COUNTRY\"",
+                "\"EU\"",
+                "\"PYUSD\"",
+                "\"USDC\"",
+                "\"USDT\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "toFlagCode",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "FlagCode | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "FlagCode | undefined",
+              "schema": [
+                "undefined",
+                "\"AD\"",
+                "\"AE\"",
+                "\"AF\"",
+                "\"AG\"",
+                "\"AI\"",
+                "\"AL\"",
+                "\"AM\"",
+                "\"AO\"",
+                "\"AQ\"",
+                "\"AR\"",
+                "\"AS\"",
+                "\"AT\"",
+                "\"AU\"",
+                "\"AW\"",
+                "\"AX\"",
+                "\"AZ\"",
+                "\"BA\"",
+                "\"BB\"",
+                "\"BD\"",
+                "\"BE\"",
+                "\"BF\"",
+                "\"BG\"",
+                "\"BH\"",
+                "\"BI\"",
+                "\"BJ\"",
+                "\"BL\"",
+                "\"BM\"",
+                "\"BN\"",
+                "\"BO\"",
+                "\"BR\"",
+                "\"BS\"",
+                "\"BT\"",
+                "\"BW\"",
+                "\"BY\"",
+                "\"BZ\"",
+                "\"CA\"",
+                "\"CC\"",
+                "\"CD\"",
+                "\"CF\"",
+                "\"CG\"",
+                "\"CH\"",
+                "\"CI\"",
+                "\"CK\"",
+                "\"CL\"",
+                "\"CM\"",
+                "\"CN\"",
+                "\"CO\"",
+                "\"CR\"",
+                "\"CU\"",
+                "\"CV\"",
+                "\"CW\"",
+                "\"CX\"",
+                "\"CY\"",
+                "\"CZ\"",
+                "\"DE\"",
+                "\"DJ\"",
+                "\"DK\"",
+                "\"DM\"",
+                "\"DO\"",
+                "\"DZ\"",
+                "\"EC\"",
+                "\"EE\"",
+                "\"EG\"",
+                "\"EH\"",
+                "\"ER\"",
+                "\"ES\"",
+                "\"ET\"",
+                "\"FI\"",
+                "\"FJ\"",
+                "\"FK\"",
+                "\"FM\"",
+                "\"FO\"",
+                "\"FR\"",
+                "\"GA\"",
+                "\"GB\"",
+                "\"GD\"",
+                "\"GE\"",
+                "\"GF\"",
+                "\"GG\"",
+                "\"GH\"",
+                "\"GI\"",
+                "\"GL\"",
+                "\"GM\"",
+                "\"GN\"",
+                "\"GP\"",
+                "\"GQ\"",
+                "\"GR\"",
+                "\"GS\"",
+                "\"GT\"",
+                "\"GU\"",
+                "\"GW\"",
+                "\"GY\"",
+                "\"HK\"",
+                "\"HN\"",
+                "\"HR\"",
+                "\"HT\"",
+                "\"HU\"",
+                "\"ID\"",
+                "\"IE\"",
+                "\"IL\"",
+                "\"IM\"",
+                "\"IN\"",
+                "\"IO\"",
+                "\"IQ\"",
+                "\"IR\"",
+                "\"IS\"",
+                "\"IT\"",
+                "\"JE\"",
+                "\"JM\"",
+                "\"JO\"",
+                "\"JP\"",
+                "\"KE\"",
+                "\"KG\"",
+                "\"KH\"",
+                "\"KI\"",
+                "\"KM\"",
+                "\"KN\"",
+                "\"KP\"",
+                "\"KR\"",
+                "\"KW\"",
+                "\"KY\"",
+                "\"KZ\"",
+                "\"LA\"",
+                "\"LB\"",
+                "\"LC\"",
+                "\"LI\"",
+                "\"LK\"",
+                "\"LR\"",
+                "\"LS\"",
+                "\"LT\"",
+                "\"LU\"",
+                "\"LV\"",
+                "\"LY\"",
+                "\"MA\"",
+                "\"MC\"",
+                "\"MD\"",
+                "\"ME\"",
+                "\"MF\"",
+                "\"MG\"",
+                "\"MH\"",
+                "\"MK\"",
+                "\"ML\"",
+                "\"MM\"",
+                "\"MN\"",
+                "\"MO\"",
+                "\"MP\"",
+                "\"MQ\"",
+                "\"MR\"",
+                "\"MS\"",
+                "\"MT\"",
+                "\"MU\"",
+                "\"MV\"",
+                "\"MW\"",
+                "\"MX\"",
+                "\"MY\"",
+                "\"MZ\"",
+                "\"NA\"",
+                "\"NC\"",
+                "\"NE\"",
+                "\"NF\"",
+                "\"NG\"",
+                "\"NI\"",
+                "\"NL\"",
+                "\"NO\"",
+                "\"NP\"",
+                "\"NR\"",
+                "\"NU\"",
+                "\"NZ\"",
+                "\"OM\"",
+                "\"PA\"",
+                "\"PE\"",
+                "\"PF\"",
+                "\"PG\"",
+                "\"PH\"",
+                "\"PK\"",
+                "\"PL\"",
+                "\"PM\"",
+                "\"PN\"",
+                "\"PR\"",
+                "\"PS\"",
+                "\"PT\"",
+                "\"PW\"",
+                "\"PY\"",
+                "\"QA\"",
+                "\"RE\"",
+                "\"RO\"",
+                "\"RS\"",
+                "\"RU\"",
+                "\"RW\"",
+                "\"SA\"",
+                "\"SB\"",
+                "\"SC\"",
+                "\"SD\"",
+                "\"SE\"",
+                "\"SG\"",
+                "\"SH\"",
+                "\"SI\"",
+                "\"SJ\"",
+                "\"SK\"",
+                "\"SL\"",
+                "\"SM\"",
+                "\"SN\"",
+                "\"SO\"",
+                "\"SR\"",
+                "\"SS\"",
+                "\"ST\"",
+                "\"SV\"",
+                "\"SX\"",
+                "\"SY\"",
+                "\"SZ\"",
+                "\"TC\"",
+                "\"TD\"",
+                "\"TG\"",
+                "\"TH\"",
+                "\"TJ\"",
+                "\"TK\"",
+                "\"TL\"",
+                "\"TM\"",
+                "\"TN\"",
+                "\"TO\"",
+                "\"TR\"",
+                "\"TT\"",
+                "\"TV\"",
+                "\"TW\"",
+                "\"TZ\"",
+                "\"UA\"",
+                "\"UG\"",
+                "\"US\"",
+                "\"UY\"",
+                "\"UZ\"",
+                "\"VA\"",
+                "\"VC\"",
+                "\"VE\"",
+                "\"VG\"",
+                "\"VI\"",
+                "\"VN\"",
+                "\"VU\"",
+                "\"WF\"",
+                "\"WS\"",
+                "\"XK\"",
+                "\"YE\"",
+                "\"YT\"",
+                "\"ZA\"",
+                "\"ZM\"",
+                "\"ZW\"",
+                "\"ALL_COUNTRY\"",
+                "\"EU\"",
+                "\"PYUSD\"",
+                "\"USDC\"",
+                "\"USDT\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fromAccounts",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "QuoteAccount[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "QuoteAccount[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "QuoteAccount[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "toAccounts",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "QuoteAccount[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "QuoteAccount[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "QuoteAccount[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fromAccountId",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "toAccountId",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "accountSearchPlaceholder",
+            "global": false,
+            "default": "'Buscar'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "primaryAccountLabel",
+            "global": false,
+            "default": "'Cuenta principal'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fromCurrency",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": true,
+            "type": "string",
+            "schema": "string",
+            "declarations": []
+          },
+          {
+            "name": "toCurrency",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": true,
+            "type": "string",
+            "schema": "string",
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "from-input",
+            "description": "",
+            "tags": [],
+            "type": "[value: string]",
+            "signature": "(event: \"from-input\", value: string): void",
+            "schema": [
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "to-input",
+            "description": "",
+            "tags": [],
+            "type": "[value: string]",
+            "signature": "(event: \"to-input\", value: string): void",
+            "schema": [
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "from-blur",
+            "description": "",
+            "tags": [],
+            "type": "[value: string]",
+            "signature": "(event: \"from-blur\", value: string): void",
+            "schema": [
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "to-blur",
+            "description": "",
+            "tags": [],
+            "type": "[value: string]",
+            "signature": "(event: \"to-blur\", value: string): void",
+            "schema": [
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "from-currency-change",
+            "description": "",
+            "tags": [],
+            "type": "[currency: Currency]",
+            "signature": "(event: \"from-currency-change\", currency: Currency): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "Currency"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "to-currency-change",
+            "description": "",
+            "tags": [],
+            "type": "[currency: Currency]",
+            "signature": "(event: \"to-currency-change\", currency: Currency): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "Currency"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "swap",
+            "description": "",
+            "tags": [],
+            "type": "[payload: { from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode | undefined; toFlagCode?: FlagCode | undefined; }]",
+            "signature": "(event: \"swap\", payload: { from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode | undefined; toFlagCode?: FlagCode | undefined; }): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "{ from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode | undefined; toFlagCode?: FlagCode | undefined; }"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "from-focus",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"from-focus\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "to-focus",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"to-focus\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "action-click",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"action-click\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "from-account-change",
+            "description": "",
+            "tags": [],
+            "type": "[account: QuoteAccount]",
+            "signature": "(event: \"from-account-change\", account: QuoteAccount): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "QuoteAccount"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "to-account-change",
+            "description": "",
+            "tags": [],
+            "type": "[account: QuoteAccount]",
+            "signature": "(event: \"to-account-change\", account: QuoteAccount): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "QuoteAccount"
+              }
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "action",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/quote/index.ts"
+      },
+      "argTypes": {
+        "fromCurrencies": {
+          "name": "fromCurrencies",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "Currency[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Currency[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "toCurrencies": {
+          "name": "toCurrencies",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "Currency[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Currency[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "fromAmount": {
+          "name": "fromAmount",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "toAmount": {
+          "name": "toAmount",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "action": {
+          "name": "action",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Default'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "Default",
+              "NoValue",
+              "FromError",
+              "ToError",
+              "Error"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "QuoteAction"
+            },
+            "defaultValue": {
+              "summary": "'Default'"
+            },
+            "category": "props"
+          }
+        },
+        "isLoading": {
+          "name": "isLoading",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "errorMessage": {
+          "name": "errorMessage",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "availableBalance": {
+          "name": "availableBalance",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "singleInput": {
+          "name": "singleInput",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "fromLabel": {
+          "name": "fromLabel",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Tú envías'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Tú envías'"
+            },
+            "category": "props"
+          }
+        },
+        "toLabel": {
+          "name": "toLabel",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Tu contacto recibe'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Tu contacto recibe'"
+            },
+            "category": "props"
+          }
+        },
+        "isDisabled": {
+          "name": "isDisabled",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "disableOriginSelect": {
+          "name": "disableOriginSelect",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "disableOriginInput": {
+          "name": "disableOriginInput",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "disableDestinationSelect": {
+          "name": "disableDestinationSelect",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "disableDestinationInput": {
+          "name": "disableDestinationInput",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "showSwap": {
+          "name": "showSwap",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "availableLabel": {
+          "name": "availableLabel",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Disponible'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Disponible'"
+            },
+            "category": "props"
+          }
+        },
+        "swapAriaLabel": {
+          "name": "swapAriaLabel",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Intercambiar monedas'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Intercambiar monedas'"
+            },
+            "category": "props"
+          }
+        },
+        "emptyResultsText": {
+          "name": "emptyResultsText",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Sin resultados'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Sin resultados'"
+            },
+            "category": "props"
+          }
+        },
+        "actionText": {
+          "name": "actionText",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Cargar dinero'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Cargar dinero'"
+            },
+            "category": "props"
+          }
+        },
+        "showAction": {
+          "name": "showAction",
+          "description": "",
+          "defaultValue": {
+            "summary": "null"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "null",
+                "required": false
+              },
+              {
+                "name": "boolean",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean | null"
+            },
+            "defaultValue": {
+              "summary": "null"
+            },
+            "category": "props"
+          }
+        },
+        "fromFlagCode": {
+          "name": "fromFlagCode",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AS",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BR",
+              "BS",
+              "BT",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CC",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CU",
+              "CV",
+              "CW",
+              "CX",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FM",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IR",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KP",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MH",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MP",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NF",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PW",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RU",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SD",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SY",
+              "SZ",
+              "TC",
+              "TD",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VI",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "XK",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW",
+              "ALL_COUNTRY",
+              "EU",
+              "PYUSD",
+              "USDC",
+              "USDT"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "FlagCode"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "toFlagCode": {
+          "name": "toFlagCode",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "AD",
+              "AE",
+              "AF",
+              "AG",
+              "AI",
+              "AL",
+              "AM",
+              "AO",
+              "AQ",
+              "AR",
+              "AS",
+              "AT",
+              "AU",
+              "AW",
+              "AX",
+              "AZ",
+              "BA",
+              "BB",
+              "BD",
+              "BE",
+              "BF",
+              "BG",
+              "BH",
+              "BI",
+              "BJ",
+              "BL",
+              "BM",
+              "BN",
+              "BO",
+              "BR",
+              "BS",
+              "BT",
+              "BW",
+              "BY",
+              "BZ",
+              "CA",
+              "CC",
+              "CD",
+              "CF",
+              "CG",
+              "CH",
+              "CI",
+              "CK",
+              "CL",
+              "CM",
+              "CN",
+              "CO",
+              "CR",
+              "CU",
+              "CV",
+              "CW",
+              "CX",
+              "CY",
+              "CZ",
+              "DE",
+              "DJ",
+              "DK",
+              "DM",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "EH",
+              "ER",
+              "ES",
+              "ET",
+              "FI",
+              "FJ",
+              "FK",
+              "FM",
+              "FO",
+              "FR",
+              "GA",
+              "GB",
+              "GD",
+              "GE",
+              "GF",
+              "GG",
+              "GH",
+              "GI",
+              "GL",
+              "GM",
+              "GN",
+              "GP",
+              "GQ",
+              "GR",
+              "GS",
+              "GT",
+              "GU",
+              "GW",
+              "GY",
+              "HK",
+              "HN",
+              "HR",
+              "HT",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IM",
+              "IN",
+              "IO",
+              "IQ",
+              "IR",
+              "IS",
+              "IT",
+              "JE",
+              "JM",
+              "JO",
+              "JP",
+              "KE",
+              "KG",
+              "KH",
+              "KI",
+              "KM",
+              "KN",
+              "KP",
+              "KR",
+              "KW",
+              "KY",
+              "KZ",
+              "LA",
+              "LB",
+              "LC",
+              "LI",
+              "LK",
+              "LR",
+              "LS",
+              "LT",
+              "LU",
+              "LV",
+              "LY",
+              "MA",
+              "MC",
+              "MD",
+              "ME",
+              "MF",
+              "MG",
+              "MH",
+              "MK",
+              "ML",
+              "MM",
+              "MN",
+              "MO",
+              "MP",
+              "MQ",
+              "MR",
+              "MS",
+              "MT",
+              "MU",
+              "MV",
+              "MW",
+              "MX",
+              "MY",
+              "MZ",
+              "NA",
+              "NC",
+              "NE",
+              "NF",
+              "NG",
+              "NI",
+              "NL",
+              "NO",
+              "NP",
+              "NR",
+              "NU",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PF",
+              "PG",
+              "PH",
+              "PK",
+              "PL",
+              "PM",
+              "PN",
+              "PR",
+              "PS",
+              "PT",
+              "PW",
+              "PY",
+              "QA",
+              "RE",
+              "RO",
+              "RS",
+              "RU",
+              "RW",
+              "SA",
+              "SB",
+              "SC",
+              "SD",
+              "SE",
+              "SG",
+              "SH",
+              "SI",
+              "SJ",
+              "SK",
+              "SL",
+              "SM",
+              "SN",
+              "SO",
+              "SR",
+              "SS",
+              "ST",
+              "SV",
+              "SX",
+              "SY",
+              "SZ",
+              "TC",
+              "TD",
+              "TG",
+              "TH",
+              "TJ",
+              "TK",
+              "TL",
+              "TM",
+              "TN",
+              "TO",
+              "TR",
+              "TT",
+              "TV",
+              "TW",
+              "TZ",
+              "UA",
+              "UG",
+              "US",
+              "UY",
+              "UZ",
+              "VA",
+              "VC",
+              "VE",
+              "VG",
+              "VI",
+              "VN",
+              "VU",
+              "WF",
+              "WS",
+              "XK",
+              "YE",
+              "YT",
+              "ZA",
+              "ZM",
+              "ZW",
+              "ALL_COUNTRY",
+              "EU",
+              "PYUSD",
+              "USDC",
+              "USDT"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "FlagCode"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "fromAccounts": {
+          "name": "fromAccounts",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "QuoteAccount[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "QuoteAccount[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "toAccounts": {
+          "name": "toAccounts",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "QuoteAccount[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "QuoteAccount[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "fromAccountId": {
+          "name": "fromAccountId",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "toAccountId": {
+          "name": "toAccountId",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "accountSearchPlaceholder": {
+          "name": "accountSearchPlaceholder",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Buscar'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Buscar'"
+            },
+            "category": "props"
+          }
+        },
+        "primaryAccountLabel": {
+          "name": "primaryAccountLabel",
+          "description": "",
+          "defaultValue": {
+            "summary": "'Cuenta principal'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'Cuenta principal'"
+            },
+            "category": "props"
+          }
+        },
+        "fromCurrency": {
+          "name": "fromCurrency",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": true
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "toCurrency": {
+          "name": "toCurrency",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": true
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "from-input": {
+          "name": "from-input",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "to-input": {
+          "name": "to-input",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "from-blur": {
+          "name": "from-blur",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "to-blur": {
+          "name": "to-blur",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "from-currency-change": {
+          "name": "from-currency-change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[currency: Currency]"
+          },
+          "table": {
+            "type": {
+              "summary": "[currency: Currency]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "to-currency-change": {
+          "name": "to-currency-change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[currency: Currency]"
+          },
+          "table": {
+            "type": {
+              "summary": "[currency: Currency]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "swap": {
+          "name": "swap",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[payload: { from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode | undefined; toFlagCode?: FlagCode | undefined; }]"
+          },
+          "table": {
+            "type": {
+              "summary": "[payload: { from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode; toFlagCode?: FlagCode | undefined; }]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "from-focus": {
+          "name": "from-focus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "to-focus": {
+          "name": "to-focus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "action-click": {
+          "name": "action-click",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "from-account-change": {
+          "name": "from-account-change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[account: QuoteAccount]"
+          },
+          "table": {
+            "type": {
+              "summary": "[account: QuoteAccount]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "to-account-change": {
+          "name": "to-account-change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[account: QuoteAccount]"
+          },
+          "table": {
+            "type": {
+              "summary": "[account: QuoteAccount]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GQuoteProps = {\n  /** @default [] */\n  fromCurrencies?: Currency[];\n  /** @default [] */\n  toCurrencies?: Currency[];\n  /** @default '' */\n  fromAmount?: string;\n  /** @default '' */\n  toAmount?: string;\n  /** @default 'Default' */\n  action?: QuoteAction;\n  /** @default false */\n  isLoading?: boolean;\n  /** @default '' */\n  errorMessage?: string;\n  /** @default '' */\n  availableBalance?: string;\n  /** @default false */\n  singleInput?: boolean;\n  /** @default 'Tú envías' */\n  fromLabel?: string;\n  /** @default 'Tu contacto recibe' */\n  toLabel?: string;\n  /** @default false */\n  isDisabled?: boolean;\n  /** @default false */\n  disableOriginSelect?: boolean;\n  /** @default false */\n  disableOriginInput?: boolean;\n  /** @default false */\n  disableDestinationSelect?: boolean;\n  /** @default false */\n  disableDestinationInput?: boolean;\n  /** @default true */\n  showSwap?: boolean;\n  /** @default 'Disponible' */\n  availableLabel?: string;\n  /** @default 'Intercambiar monedas' */\n  swapAriaLabel?: string;\n  /** @default 'Sin resultados' */\n  emptyResultsText?: string;\n  /** @default 'Cargar dinero' */\n  actionText?: string;\n  /** @default null */\n  showAction?: boolean | null;\n  /** @default undefined */\n  fromFlagCode?: FlagCode;\n  /** @default undefined */\n  toFlagCode?: FlagCode;\n  /** @default [] */\n  fromAccounts?: QuoteAccount[];\n  /** @default [] */\n  toAccounts?: QuoteAccount[];\n  /** @default '' */\n  fromAccountId?: string;\n  /** @default '' */\n  toAccountId?: string;\n  /** @default 'Buscar' */\n  accountSearchPlaceholder?: string;\n  /** @default 'Cuenta principal' */\n  primaryAccountLabel?: string;\n  fromCurrency: string;\n  toCurrency: string;\n}\n```\n\n## Events\n\n```\nexport type GQuoteEvents = {\n  \"from-input\": [value: string];\n  \"to-input\": [value: string];\n  \"from-blur\": [value: string];\n  \"to-blur\": [value: string];\n  \"from-currency-change\": [currency: Currency];\n  \"to-currency-change\": [currency: Currency];\n  swap: [payload: { from: string; to: string; fromAmount: string; toAmount: string; fromFlagCode?: FlagCode | undefined; toFlagCode?: FlagCode | undefined; }];\n  \"from-focus\": [];\n  \"to-focus\": [];\n  \"action-click\": [];\n  \"from-account-change\": [account: QuoteAccount];\n  \"to-account-change\": [account: QuoteAccount];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GQuoteSlots = {\n  action: {};\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

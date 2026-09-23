@@ -1,0 +1,46 @@
+{
+  "components": {
+    "basic-iconbutton": {
+      "id": "basic-iconbutton",
+      "name": "GIconButton",
+      "path": "./stories/icon-button.stories.ts",
+      "stories": {
+        "basic-iconbutton--primary": {
+          "id": "basic-iconbutton--primary",
+          "name": "Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GIconButton } from '@flash-global66/g-icon-button/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-icon-button :border=\"false\" :disabled=\"false\" icon=\"solid check\" size=\"medium\" type=\"button\" variant=\"grey\" />\n  </g-config-provider>\n</template>"
+        },
+        "basic-iconbutton--variants": {
+          "id": "basic-iconbutton--variants",
+          "name": "Variantes",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GIconButton } from '@flash-global66/g-icon-button/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex items-center space-x-md\">\n      <g-icon-button \n        variant=\"grey\"\n        icon=\"solid user\"\n      />\n      <g-icon-button \n        variant=\"black\"\n        icon=\"solid envelope\"\n      />\n      <g-icon-button \n        variant=\"blue\"\n        icon=\"solid question-circle\"\n      />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-iconbutton--sizes": {
+          "id": "basic-iconbutton--sizes",
+          "name": "Tamaños",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GIconButton } from '@flash-global66/g-icon-button/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex items-center space-x-md\">\n      <g-icon-button \n        size=\"medium\"\n        icon=\"solid paper-plane\"\n      />\n      <g-icon-button \n        size=\"small\"\n        icon=\"solid paper-plane\"\n      />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-iconbutton--border": {
+          "id": "basic-iconbutton--border",
+          "name": "Con borde",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GIconButton } from '@flash-global66/g-icon-button/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-md\">\n      <div>\n        <h3 class=\"text-sm font-medium mb-2\">Tamaño medium con borde</h3>\n        <div class=\"flex items-center space-x-md\">\n          <g-icon-button variant=\"grey\" icon=\"solid lock\" border size=\"medium\" />\n          <g-icon-button variant=\"black\" icon=\"solid lock\" border size=\"medium\" />\n          <g-icon-button variant=\"blue\" icon=\"solid lock\" border size=\"medium\" />\n        </div>\n      </div>\n\n      <div>\n        <h3 class=\"text-sm font-medium mb-2\">Tamaño small con borde</h3>\n        <div class=\"flex items-center space-x-md\">\n          <g-icon-button variant=\"grey\" icon=\"solid lock\" border size=\"small\" />\n          <g-icon-button variant=\"black\" icon=\"solid lock\" border size=\"small\" />\n          <g-icon-button variant=\"blue\" icon=\"solid lock\" border size=\"small\" />\n        </div>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-iconbutton--rounded-border": {
+          "id": "basic-iconbutton--rounded-border",
+          "name": "Borde completamente redondeado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GIconButton } from '@flash-global66/g-icon-button/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-md\">\n      <div>\n        <h3 class=\"text-sm font-medium mb-2\">Tamaño medium con borde redondeado</h3>\n        <div class=\"flex items-center space-x-md\">\n          <g-icon-button variant=\"grey\" icon=\"solid lock\" border rounded size=\"medium\" />\n          <g-icon-button variant=\"black\" icon=\"solid lock\" border rounded size=\"medium\" />\n          <g-icon-button variant=\"blue\" icon=\"solid lock\" border rounded size=\"medium\" />\n        </div>\n      </div>\n\n      <div>\n        <h3 class=\"text-sm font-medium mb-2\">Tamaño small con borde redondeado</h3>\n        <div class=\"flex items-center space-x-md\">\n          <g-icon-button variant=\"grey\" icon=\"solid lock\" border rounded size=\"small\" />\n          <g-icon-button variant=\"black\" icon=\"solid lock\" border rounded size=\"small\" />\n          <g-icon-button variant=\"blue\" icon=\"solid lock\" border rounded size=\"small\" />\n        </div>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-iconbutton--disabled": {
+          "id": "basic-iconbutton--disabled",
+          "name": "Deshabilitado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GIconButton } from '@flash-global66/g-icon-button/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex items-center space-x-md\">\n      <g-icon-button \n        variant=\"grey\"\n        icon=\"regular ban\"\n        disabled\n      />\n      <g-icon-button \n        variant=\"black\"\n        icon=\"solid user-slash\"\n        disabled\n      />\n      <g-icon-button \n        variant=\"blue\"\n        icon=\"solid times-circle\"\n        disabled\n      />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-iconbutton--as-link": {
+          "id": "basic-iconbutton--as-link",
+          "name": "Como enlace",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GIconButton } from '@flash-global66/g-icon-button/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-icon-button \n      variant=\"blue\"\n      icon=\"solid arrow-up-from-bracket\"\n      href=\"https://www.example.com\"\n      target=\"_blank\"\n    />\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

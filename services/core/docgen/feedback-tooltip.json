@@ -1,0 +1,14 @@
+{
+  "components": {
+    "feedback-tooltip": {
+      "id": "feedback-tooltip",
+      "name": "GTooltip",
+      "path": "./stories/tooltip.stories.ts",
+      "jsDocTags": {},
+      "error": {
+        "name": "No docgen found",
+        "message": "vue-component-meta extracted no component metadata for the \"GTooltip\" export of /home/runner/work/global-design-system/global-design-system/components/tooltip/dist/index.mjs."
+      }
+    }
+  }
+}

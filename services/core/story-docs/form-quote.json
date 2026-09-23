@@ -1,0 +1,46 @@
+{
+  "components": {
+    "form-quote": {
+      "id": "form-quote",
+      "name": "GQuote",
+      "path": "./stories/quote.stories.ts",
+      "stories": {
+        "form-quote--basic": {
+          "id": "form-quote--basic",
+          "name": "Básico",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-quote--with-available-balance": {
+          "id": "form-quote--with-available-balance",
+          "name": "Con saldo disponible",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-quote--insufficient-balance": {
+          "id": "form-quote--insufficient-balance",
+          "name": "Error: saldo insuficiente",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-quote--disabled": {
+          "id": "form-quote--disabled",
+          "name": "Deshabilitado",
+          "warning": "No static snippet: `setup` references `CURRENCIES`, which the snippet cannot declare."
+        },
+        "form-quote--single-input": {
+          "id": "form-quote--single-input",
+          "name": "Single input (nacional)",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-quote--no-swap": {
+          "id": "form-quote--no-swap",
+          "name": "Sin swap",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-quote--entre-cuentas": {
+          "id": "form-quote--entre-cuentas",
+          "name": "Entre cuentas",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        }
+      }
+    }
+  }
+}

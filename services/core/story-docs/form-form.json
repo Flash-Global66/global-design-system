@@ -1,0 +1,46 @@
+{
+  "components": {
+    "form-form": {
+      "id": "form-form",
+      "name": "GForm",
+      "path": "./stories/form.stories.ts",
+      "stories": {
+        "form-form--complete-form": {
+          "id": "form-form--complete-form",
+          "name": "Formulario Completo",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-form--primary": {
+          "id": "form-form--primary",
+          "name": "Básico",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-form--custom-rules": {
+          "id": "form-form--custom-rules",
+          "name": "Reglas Personalizadas",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-form--trigger-validation": {
+          "id": "form-form--trigger-validation",
+          "name": "Tipo de ejecución",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-form--disabled-form": {
+          "id": "form-form--disabled-form",
+          "name": "Formulario Deshabilitado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { reactive } from \"vue\";\nimport { GButton } from '@flash-global66/g-button/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GForm } from '@flash-global66/g-form/index.ts';\nimport { GFormItem } from '@flash-global66/g-form/index.ts';\nimport { GInput } from '@flash-global66/g-input/index.ts';\n\nconst formData = reactive({\n  name: 'Juan Pérez',\n  email: 'juan@ejemplo.com',\n  phone: '+51 999888777',\n  address: 'Av. Principal 123',\n  ciudad: 'Lima',\n  country: 'Perú',\n});\n</script>\n\n<template>\n  <g-config-provider>\n    <g-form :model=\"formData\" disabled>\n      <div class=\"grid grid-cols-2 gap-4\">\n        <g-form-item>\n          <g-input v-model=\"formData.name\" label=\"Nombre Completo\" />\n        </g-form-item>\n        <g-form-item>\n          <g-input v-model=\"formData.email\" label=\"Correo Electrónico\" />\n        </g-form-item>\n        <g-form-item>\n          <g-input v-model=\"formData.phone\" label=\"Teléfono\" />\n        </g-form-item>\n        <g-form-item>\n          <g-input v-model=\"formData.address\" label=\"Dirección\" />\n        </g-form-item>\n        <g-form-item>\n          <g-input v-model=\"formData.ciudad\" label=\"Ciudad\" />\n        </g-form-item>\n        <g-form-item>\n          <g-input v-model=\"formData.country\" label=\"País\" />\n        </g-form-item>\n      </div>\n      <div class=\"flex gap-4 mt-4\">\n        <g-button disabled>No disponible</g-button>\n        <g-button variant=\"secondary\" disabled>Cancelar</g-button>\n      </div>\n    </g-form>\n  </g-config-provider>\n</template>"
+        },
+        "form-form--prevent-submit": {
+          "id": "form-form--prevent-submit",
+          "name": "Prevenir Submit",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-form--dynamic-validation": {
+          "id": "form-form--dynamic-validation",
+          "name": "Validación Dinámica",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        }
+      }
+    }
+  }
+}

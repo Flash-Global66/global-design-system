@@ -1,0 +1,36 @@
+{
+  "components": {
+    "basic-scrollbar": {
+      "id": "basic-scrollbar",
+      "name": "GScrollbar",
+      "path": "./stories/scrollbar.stories.ts",
+      "stories": {
+        "basic-scrollbar--primary": {
+          "id": "basic-scrollbar--primary",
+          "name": "Primary",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GScrollbar } from '../components/scrollbar/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-scrollbar :always=\"false\" :minSize=\"20\" :native=\"false\" :noresize=\"false\" tag=\"div\" style=\"height: 300px\">\n      <div v-for=\"item in 20\" :key=\"item\" style=\"padding: 12px 0\">\n        {{ item }} - Contenido de ejemplo para el scrollbar\n      </div>\n    </g-scrollbar>\n  </g-config-provider>\n</template>"
+        },
+        "basic-scrollbar--native-scrollbar": {
+          "id": "basic-scrollbar--native-scrollbar",
+          "name": "Native Scrollbar",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GScrollbar } from '../components/scrollbar/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-scrollbar :always=\"false\" :minSize=\"20\" :noresize=\"false\" tag=\"div\" style=\"height: 300px\" native>\n      <div v-for=\"item in 20\" :key=\"item\" style=\"padding: 12px 0\">\n        {{ item }} - Contenido con scrollbar nativo\n      </div>\n    </g-scrollbar>\n  </g-config-provider>\n</template>"
+        },
+        "basic-scrollbar--horizontal-scroll": {
+          "id": "basic-scrollbar--horizontal-scroll",
+          "name": "Horizontal Scroll",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GScrollbar } from '../components/scrollbar/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-scrollbar :always=\"false\" :minSize=\"20\" :native=\"false\" :noresize=\"false\" tag=\"div\" style=\"height: 100px; width: 300px\">\n      <div style=\"width: 800px; white-space: nowrap;\">\n        <div v-for=\"item in 20\" :key=\"item\" style=\"display: inline-block; padding: 12px;\">\n          Item {{ item }}\n        </div>\n      </div>\n    </g-scrollbar>\n  </g-config-provider>\n</template>"
+        },
+        "basic-scrollbar--always-visible": {
+          "id": "basic-scrollbar--always-visible",
+          "name": "Always Visible",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GScrollbar } from '../components/scrollbar/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-scrollbar :minSize=\"20\" :native=\"false\" :noresize=\"false\" tag=\"div\" style=\"height: 300px\" always>\n      <div v-for=\"item in 20\" :key=\"item\" style=\"padding: 12px 0\">\n        {{ item }} - Barras siempre visibles\n      </div>\n    </g-scrollbar>\n  </g-config-provider>\n</template>"
+        },
+        "basic-scrollbar--custom-height": {
+          "id": "basic-scrollbar--custom-height",
+          "name": "Custom Height",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GScrollbar } from '../components/scrollbar/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-scrollbar :always=\"false\" :minSize=\"20\" :native=\"false\" :noresize=\"false\" tag=\"div\" height=\"200px\">\n      <div v-for=\"item in 20\" :key=\"item\" style=\"padding: 12px 0\">\n        {{ item }} - Contenido en contenedor de 200px de alto\n      </div>\n    </g-scrollbar>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

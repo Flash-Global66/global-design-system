@@ -1,0 +1,31 @@
+{
+  "components": {
+    "basic-countryflag": {
+      "id": "basic-countryflag",
+      "name": "GCountryFlag",
+      "path": "./stories/country-flag.stories.ts",
+      "stories": {
+        "basic-countryflag--primary": {
+          "id": "basic-countryflag--primary",
+          "name": "Uso básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GCountryFlag } from '@flash-global66/g-country-flag/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-country-flag lazyLoad name=\"CO\" size=\"md\" />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-countryflag--sizes": {
+          "id": "basic-countryflag--sizes",
+          "name": "Tamaños disponibles",
+          "snippet": "<script lang=\"ts\" setup>\nimport { FLAG_SIZES } from \"@flash-global66/g-country-flag/index.ts\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GCountryFlag } from '@flash-global66/g-country-flag/index.ts';\n\nconst sizes = Object.keys(FLAG_SIZES);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-wrap gap-6 items-end\">\n      <div v-for=\"size in sizes\" :key=\"size\" class=\"flex flex-col items-center\">\n        <div\n          class=\"flex items-center justify-center\"\n          :style=\"{ width: FLAG_SIZES[size], height: FLAG_SIZES[size], minHeight: FLAG_SIZES[size], minWidth: FLAG_SIZES[size] }\"\n        >\n          <g-country-flag lazyLoad name=\"CO\" :size=\"size\" />\n        </div>\n        <span class=\"mt-2 text-sm text-gray-500\">{{ size }} ({{ FLAG_SIZES[size] }})</span>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-countryflag--gallery": {
+          "id": "basic-countryflag--gallery",
+          "name": "Galería de banderas",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "basic-countryflag--error-handling": {
+          "id": "basic-countryflag--error-handling",
+          "name": "Manejo de errores",
+          "snippet": "<script lang=\"ts\" setup>\nimport { FLAG_SIZES } from \"@flash-global66/g-country-flag/index.ts\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GCountryFlag } from '@flash-global66/g-country-flag/index.ts';\n\nconst errorSizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-6\">\n      <div class=\"flex flex-wrap gap-6 items-end\">\n        <div\n          v-for=\"size in errorSizes\"\n          :key=\"size\"\n          class=\"flex flex-col items-center gap-2\"\n        >\n          <g-country-flag name=\"XX\" :size=\"size\" />\n          <span class=\"text-sm text-gray-500\">{{ size }} ({{ FLAG_SIZES[size] }})</span>\n        </div>\n      </div>\n\n      <div class=\"bg-gray-50 p-4 rounded-md\">\n        <h4 class=\"font-medium mb-2\">¿Cómo funciona?</h4>\n        <p class=\"text-sm text-gray-700\">\n          Cuando una bandera no puede cargarse, el componente muestra automáticamente un estado de error con el código \"404\".\n          Este comportamiento se activa en dos casos:\n        </p>\n        <ul class=\"list-disc list-inside mt-2 text-sm text-gray-700\">\n          <li>La URL del SVG no puede construirse (código de país inválido)</li>\n          <li>El archivo SVG existe pero no puede cargarse (error de red, archivo corrupto, etc.)</li>\n        </ul>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

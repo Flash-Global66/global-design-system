@@ -1,0 +1,32 @@
+{
+  "components": {
+    "basic-benefits-card": {
+      "id": "basic-benefits-card",
+      "name": "GBenefitsCard",
+      "path": "./stories/benefits-card.stories.ts",
+      "stories": {
+        "basic-benefits-card--primary": {
+          "id": "basic-benefits-card--primary",
+          "name": "Uso básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GBenefitsCard } from '@flash-global66/g-benefits-card/index.ts';\nimport { GConfigProvider } from '../components/config-provider';\n\nconst benefits = [\n  {\n    icon: 'light key-skeleton',\n    text: 'Ingresa en 2 segundos, sin recordar claves',\n  },\n  {\n    icon: 'light fingerprint',\n    text: 'Tu huella o Face ID nunca sale de este dispositivo',\n  },\n  { icon: 'regular shield-check', text: 'Protege el acceso a tu empresa' },\n];\n</script>\n\n<template>\n  <g-config-provider>\n    <g-benefits-card :benefits=\"benefits\" description=\"Registra tu huella o Face ID y accede a Global66 Business con un solo gesto.\" :headingLevel=\"2\" title=\"Entra en segundos, sin escribir contraseñas\" />\n  </g-config-provider>\n</template>"
+        },
+        "basic-benefits-card--sii": {
+          "id": "basic-benefits-card--sii",
+          "name": "Título con formato (SII)",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GBenefitsCard } from '@flash-global66/g-benefits-card/index.ts';\nimport { GConfigProvider } from '../components/config-provider';\n\nconst benefits = [\n  {\n    icon: 'regular landmark',\n    text: 'Productos que se adaptan a tu operación real',\n  },\n  {\n    icon: 'regular money-bill-alt',\n    text: 'Acceso anticipado a nuevos productos y novedades',\n  },\n  { icon: 'regular check', text: 'Menos fricciones, más agilidad operativa' },\n];\n</script>\n\n<template>\n  <g-config-provider>\n    <g-benefits-card :benefits=\"benefits\" description=\"Optimiza tus finanzas con herramientas que evolucionan al ritmo de tu negocio\" :headingLevel=\"2\">\n      <template #title>\n        <span class=\"font-normal\">Tu empresa merece</span>\n        productos a su medida\n      </template>\n    </g-benefits-card>\n  </g-config-provider>\n</template>"
+        },
+        "basic-benefits-card--five-benefits": {
+          "id": "basic-benefits-card--five-benefits",
+          "name": "Cinco beneficios",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GBenefitsCard } from '@flash-global66/g-benefits-card/index.ts';\nimport { GConfigProvider } from '../components/config-provider';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-benefits-card description=\"Registra tu huella o Face ID y accede a Global66 Business con un solo gesto.\" :headingLevel=\"2\" title=\"Entra en segundos, sin escribir contraseñas\" />\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `benefits: [\n  ...passkeyBenefits,\n  { icon: 'regular clock', text: 'Sin esperar códigos por SMS' },\n  { icon: 'regular mobile', text: 'Funciona en todos tus dispositivos' },\n]`, `passkeyBenefits` could not be resolved statically."
+        },
+        "basic-benefits-card--responsive": {
+          "id": "basic-benefits-card--responsive",
+          "name": "Responsive",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GBenefitsCard } from '@flash-global66/g-benefits-card/index.ts';\nimport { GConfigProvider } from '../components/config-provider';\n\nconst benefits = [\n  {\n    icon: 'light key-skeleton',\n    text: 'Ingresa en 2 segundos, sin recordar claves',\n  },\n  {\n    icon: 'light fingerprint',\n    text: 'Tu huella o Face ID nunca sale de este dispositivo',\n  },\n  { icon: 'regular shield-check', text: 'Protege el acceso a tu empresa' },\n];\n\nconst widths = [560, 469, 360, 300];\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-wrap gap-6 items-start\">\n      <figure v-for=\"width in widths\" :key=\"width\" class=\"m-0 flex flex-col gap-2\" :style=\"{ width: width + 'px', '--gui-benefits-card-max-width': width + 'px' }\">\n        <g-benefits-card :benefits=\"benefits\" description=\"Registra tu huella o Face ID y accede a Global66 Business con un solo gesto.\" :headingLevel=\"2\" title=\"Entra en segundos, sin escribir contraseñas\" />\n        <figcaption class=\"text-2 text-secondary-txt\">Contenedor de {{ width }}px<template v-if=\"width > 469\"> · --gui-benefits-card-max-width: {{ width }}px</template></figcaption>\n      </figure>\n    </div>\n    <p class=\"text-2 text-secondary-txt mt-8 mb-2\">Arrastra la esquina inferior derecha para redimensionar</p>\n    <div class=\"resize-x overflow-auto rounded-md border border-dashed border-grey-500 p-3\" style=\"width: 469px; max-width: 100%; --gui-benefits-card-max-width: 100%\">\n      <g-benefits-card :benefits=\"benefits\" description=\"Registra tu huella o Face ID y accede a Global66 Business con un solo gesto.\" :headingLevel=\"2\" title=\"Entra en segundos, sin escribir contraseñas\" />\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

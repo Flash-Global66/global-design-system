@@ -1,0 +1,46 @@
+{
+  "components": {
+    "feedback-toast": {
+      "id": "feedback-toast",
+      "name": "GToast",
+      "path": "./stories/toast.stories.ts",
+      "stories": {
+        "feedback-toast--playground": {
+          "id": "feedback-toast--playground",
+          "name": "Uso Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { toast } from \"@flash-global66/g-toast/index.ts\";\nimport { GButton } from '@flash-global66/g-button/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst showToast = () => {\n  toast({\n    type: 'success',\n    message: 'Operación completada exitosamente',\n    duration: 5000,\n    position: 'top-right',\n    showClose: true,\n    showProgress: true,\n    size: 'md',\n    offset: 0,\n    dangerouslyUseHTMLString: false,\n  });\n};\n</script>\n\n<template>\n  <GConfigProvider>\n    <GButton @click=\"showToast\">\n      Mostrar Toast\n    </GButton>\n  </GConfigProvider>\n</template>"
+        },
+        "feedback-toast--primary": {
+          "id": "feedback-toast--primary",
+          "name": "Dos Formas de Uso",
+          "warning": "No static snippet: `setup` references `setTimeout`, which the snippet cannot declare."
+        },
+        "feedback-toast--all-types": {
+          "id": "feedback-toast--all-types",
+          "name": "Tipos",
+          "snippet": "<script lang=\"ts\" setup>\nimport { toast } from \"@flash-global66/g-toast/index.ts\";\nimport { GButton } from '@flash-global66/g-button/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst showSuccess = () => {\n  toast.success('Operación completada exitosamente');\n};\nconst showInfo = () => {\n  toast.info('Aquí tienes información útil');\n};\nconst showWarning = () => {\n  toast.warning('Por favor revisa esto cuidadosamente');\n};\nconst showError = () => {\n  toast.error('Algo salió mal');\n};\n</script>\n\n<template>\n  <GConfigProvider>\n    <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;\">\n      <GButton @click=\"showSuccess\" type=\"success\">\n        Success Toast\n      </GButton>\n      <GButton @click=\"showInfo\" type=\"info\">\n        Info Toast\n      </GButton>\n      <GButton @click=\"showWarning\" type=\"warning\">\n        Warning Toast\n      </GButton>\n      <GButton @click=\"showError\" type=\"error\">\n        Error Toast\n      </GButton>\n    </div>\n  </GConfigProvider>\n</template>"
+        },
+        "feedback-toast--positions": {
+          "id": "feedback-toast--positions",
+          "name": "Posiciones",
+          "snippet": "<script lang=\"ts\" setup>\nimport { toast } from \"@flash-global66/g-toast/index.ts\";\nimport { GButton } from '@flash-global66/g-button/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst positions = [\n  { key: 'top-left', label: 'Arriba Izquierda' },\n  { key: 'top-right', label: 'Arriba Derecha' },\n  { key: 'bottom-left', label: 'Abajo Izquierda' },\n  { key: 'bottom-right', label: 'Abajo Derecha' },\n] as const;\nconst showToast = (position: (typeof positions)[number]['key']) => {\n  toast({\n    type: 'info',\n    message: `Toast desde ${position}`,\n    position,\n    duration: 4000,\n  });\n};\n</script>\n\n<template>\n  <GConfigProvider>\n    <div style=\"display: flex; flex-direction: column; gap: 16px; max-width: 400px;\">\n      <div style=\"display: flex; gap: 16px;\">\n        <GButton \n          @click=\"showToast('top-left')\" \n          type=\"primary\"\n          style=\"flex: 1;\"\n        >\n          Arriba Izquierda\n        </GButton>\n        <GButton \n          @click=\"showToast('top-right')\" \n          type=\"primary\"\n          style=\"flex: 1;\"\n        >\n          Arriba Derecha\n        </GButton>\n      </div>\n      <div style=\"display: flex; gap: 16px;\">\n        <GButton \n          @click=\"showToast('bottom-left')\" \n          type=\"primary\"\n          style=\"flex: 1;\"\n        >\n          Abajo Izquierda\n        </GButton>\n        <GButton \n          @click=\"showToast('bottom-right')\" \n          type=\"primary\"\n          style=\"flex: 1;\"\n        >\n          Abajo Derecha\n        </GButton>\n      </div>\n    </div>\n  </GConfigProvider>\n</template>"
+        },
+        "feedback-toast--duration-control": {
+          "id": "feedback-toast--duration-control",
+          "name": "Control de Duración",
+          "snippet": "<script lang=\"ts\" setup>\nimport { toast } from \"@flash-global66/g-toast/index.ts\";\nimport { GButton } from '@flash-global66/g-button/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst showQuick = () => {\n  toast.success({ message: 'Toast rápido (2s)', duration: 2000 });\n};\nconst showNormal = () => {\n  toast.info('Toast normal (5s por defecto)');\n};\nconst showLong = () => {\n  toast.warning({ message: 'Toast largo (10s)', duration: 10000 });\n};\nconst showPersistent = () => {\n  toast.error({\n    message: 'Toast persistente (cierre manual)',\n    duration: 0,\n  });\n};\n</script>\n\n<template>\n  <GConfigProvider>\n    <div style=\"display: flex; gap: 16px; flex-wrap: wrap;\">\n      <GButton @click=\"showQuick\" type=\"success\">\n        Rápido (2s)\n      </GButton>\n      <GButton @click=\"showNormal\" type=\"info\">\n        Normal (5s)\n      </GButton>\n      <GButton @click=\"showLong\" type=\"warning\">\n        Largo (10s)\n      </GButton>\n      <GButton @click=\"showPersistent\" type=\"error\">\n        Persistente (0)\n      </GButton>\n    </div>\n  </GConfigProvider>\n</template>"
+        },
+        "feedback-toast--advanced-usage": {
+          "id": "feedback-toast--advanced-usage",
+          "name": "Configuración Avanzada",
+          "snippet": "<script lang=\"ts\" setup>\nimport { toast } from \"@flash-global66/g-toast/index.ts\";\nimport { GButton } from '@flash-global66/g-button/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst showHTMLContent = () => {\n  toast({\n    type: 'info',\n    message: '<strong>Contenido HTML</strong> con <em>formato</em>',\n    dangerouslyUseHTMLString: true,\n    duration: 5000,\n  });\n};\nconst showWithOffset = () => {\n  toast({\n    type: 'success',\n    message: 'Toast con offset personalizado (50px)',\n    offset: 50,\n    duration: 4000,\n  });\n};\nconst showNonClosable = () => {\n  toast({\n    type: 'warning',\n    message: 'Toast sin botón de cerrar (solo auto-cierre)',\n    showClose: false,\n    duration: 6000,\n  });\n};\n</script>\n\n<template>\n  <GConfigProvider>\n    <div style=\"display: flex; gap: 16px; flex-wrap: wrap;\">\n      <GButton @click=\"showHTMLContent\" type=\"info\">\n        Contenido HTML\n      </GButton>\n      <GButton @click=\"showWithOffset\" type=\"success\">\n        Offset Personalizado\n      </GButton>\n      <GButton @click=\"showNonClosable\" type=\"warning\">\n        Sin botón de cerrar\n      </GButton>\n    </div>\n  </GConfigProvider>\n</template>"
+        },
+        "feedback-toast--sizes": {
+          "id": "feedback-toast--sizes",
+          "name": "Tamaños",
+          "snippet": "<script lang=\"ts\" setup>\nimport { toast } from \"@flash-global66/g-toast/index.ts\";\nimport { GButton } from '@flash-global66/g-button/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst showSmallToast = () => {\n  toast({\n    type: 'success',\n    size: 'sm',\n    message: 'Toast pequeño',\n    duration: 4000,\n  });\n};\nconst showMediumToast = () => {\n  toast({\n    type: 'info',\n    size: 'md',\n    message: 'Toast mediano',\n    duration: 4000,\n  });\n};\n</script>\n\n<template>\n  <GConfigProvider>\n    <div style=\"display: flex; gap: 16px; flex-wrap: wrap;\">\n      <GButton @click=\"showSmallToast\" type=\"primary\">\n        Toast SM\n      </GButton>\n      <GButton @click=\"showMediumToast\" type=\"primary\">\n        Toast MD\n      </GButton>\n    </div>\n  </GConfigProvider>\n</template>"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "components": {
+    "form-form-item": {
+      "id": "form-form-item",
+      "name": "GFormItem",
+      "path": "./stories/form-item.stories.ts",
+      "stories": {
+        "form-form-item--combined-rules": {
+          "id": "form-form-item--combined-rules",
+          "name": "Combinación de Reglas"
+        },
+        "form-form-item--message-behavior": {
+          "id": "form-form-item--message-behavior",
+          "name": "Mensajes de Error"
+        }
+      }
+    }
+  }
+}

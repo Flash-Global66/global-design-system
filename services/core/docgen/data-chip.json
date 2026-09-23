@@ -1,0 +1,2398 @@
+{
+  "components": {
+    "data-chip": {
+      "id": "data-chip",
+      "name": "GChip",
+      "path": "./stories/chip.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GChip",
+        "displayName": "GChip",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "type",
+            "global": false,
+            "default": "'primary'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "chip type (controls border radius: primary=xl, secondary=sm)"
+              }
+            ],
+            "required": false,
+            "type": "ChipType | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "ChipType | undefined",
+              "schema": [
+                "undefined",
+                "\"primary\"",
+                "\"secondary\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "variant",
+            "global": false,
+            "default": "'solid'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "visual variant (controls color)\nsolid has grey-100 background\noutline has only ever-blue-200 border"
+              }
+            ],
+            "required": false,
+            "type": "ChipVariant | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "ChipVariant | undefined",
+              "schema": [
+                "undefined",
+                "\"solid\"",
+                "\"outline\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "size",
+            "global": false,
+            "default": "'md'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "chip size"
+              }
+            ],
+            "required": false,
+            "type": "ChipSize | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "ChipSize | undefined",
+              "schema": [
+                "undefined",
+                "\"sm\"",
+                "\"md\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "iconLeft",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "prefix icon"
+              },
+              {
+                "name": "default",
+                "text": "undefined"
+              },
+              {
+                "name": "type",
+                "text": "{IconString}"
+              }
+            ],
+            "required": false,
+            "type": "IconString | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "IconString | undefined",
+              "schema": [
+                "undefined",
+                "\"solid user-secret\"",
+                "\"solid home\"",
+                "\"solid paper-plane\"",
+                "\"solid ticket-alt\"",
+                "\"solid wallet\"",
+                "\"solid question-circle\"",
+                "\"solid circle-question\"",
+                "\"solid info-circle\"",
+                "\"solid user-plus\"",
+                "\"solid user-times\"",
+                "\"solid times-circle\"",
+                "\"solid check-circle\"",
+                "\"solid file-signature\"",
+                "\"solid edit\"",
+                "\"solid trash\"",
+                "\"solid plus-circle\"",
+                "\"solid minus-circle\"",
+                "\"solid divide\"",
+                "\"solid chevron-right\"",
+                "\"solid chevron-left\"",
+                "\"solid money-bill-wave\"",
+                "\"solid long-arrow-alt-left\"",
+                "\"solid file-invoice-dollar\"",
+                "\"solid undo-alt\"",
+                "\"solid credit-card\"",
+                "\"solid ellipsis-v\"",
+                "\"solid bullhorn\"",
+                "\"solid file-alt\"",
+                "\"solid mars\"",
+                "\"solid venus\"",
+                "\"solid users\"",
+                "\"solid building\"",
+                "\"solid money-check-alt\"",
+                "\"solid lock\"",
+                "\"solid question\"",
+                "\"solid angle-down\"",
+                "\"solid download\"",
+                "\"solid search\"",
+                "\"solid university\"",
+                "\"solid pencil-alt\"",
+                "\"solid save\"",
+                "\"solid file-excel\"",
+                "\"solid user-slash\"",
+                "\"solid exclamation-triangle\"",
+                "\"solid dollar-sign\"",
+                "\"solid arrow-right\"",
+                "\"solid hand-holding-usd\"",
+                "\"solid sort\"",
+                "\"solid trash-alt\"",
+                "\"solid caret-down\"",
+                "\"solid clock\"",
+                "\"solid bars\"",
+                "\"solid store\"",
+                "\"solid arrow-up-from-bracket\"",
+                "\"solid arrow-down-to-bracket\"",
+                "\"solid usd-circle\"",
+                "\"solid user\"",
+                "\"solid sign-out\"",
+                "\"solid arrow-left\"",
+                "\"solid exchange\"",
+                "\"solid external-link-square-alt\"",
+                "\"solid user-edit\"",
+                "\"solid file-image\"",
+                "\"solid upload\"",
+                "\"solid file-word\"",
+                "\"solid file-pdf\"",
+                "\"solid file\"",
+                "\"solid exclamation-circle\"",
+                "\"solid check\"",
+                "\"solid sort-alt\"",
+                "\"solid lock-alt\"",
+                "\"solid long-arrow-alt-right\"",
+                "\"solid long-arrow-alt-down\"",
+                "\"solid arrow-alt-down\"",
+                "\"solid minus\"",
+                "\"solid equals\"",
+                "\"solid times\"",
+                "\"solid circle\"",
+                "\"solid asterisk\"",
+                "\"solid copy\"",
+                "\"solid users-medical\"",
+                "\"solid exclamation\"",
+                "\"solid hand-paper\"",
+                "\"solid camera\"",
+                "\"solid undo\"",
+                "\"solid user-cog\"",
+                "\"solid dot-circle\"",
+                "\"solid folder-download\"",
+                "\"solid filter\"",
+                "\"solid envelope\"",
+                "\"solid at\"",
+                "\"solid id-card\"",
+                "\"solid receipt\"",
+                "\"solid caret-up\"",
+                "\"solid triangle\"",
+                "\"solid lightbulb\"",
+                "\"solid sliders-simple\"",
+                "\"solid spinner\"",
+                "\"solid timer\"",
+                "\"solid gift\"",
+                "\"solid book\"",
+                "\"solid chart-mixed-up-circle-dollar\"",
+                "\"solid circle-dollar\"",
+                "\"solid key-skeleton\"",
+                "\"solid mobile\"",
+                "\"solid qrcode\"",
+                "\"solid calendar\"",
+                "\"solid eye\"",
+                "\"solid eye-slash\"",
+                "\"solid gear\"",
+                "\"solid unlock\"",
+                "\"solid bell\"",
+                "\"solid 1\"",
+                "\"solid 2\"",
+                "\"solid 3\"",
+                "\"solid pen\"",
+                "\"solid pencil\"",
+                "\"solid user-group\"",
+                "\"solid shield-check\"",
+                "\"solid arrow-trend-up\"",
+                "\"solid chart-simple\"",
+                "\"solid money-bills-simple\"",
+                "\"kit exchange\"",
+                "\"kit send\"",
+                "\"kit deposit\"",
+                "\"regular paper-plane\"",
+                "\"regular wallet\"",
+                "\"regular circle-question\"",
+                "\"regular info-circle\"",
+                "\"regular user-plus\"",
+                "\"regular check-circle\"",
+                "\"regular trash\"",
+                "\"regular plus-circle\"",
+                "\"regular chevron-right\"",
+                "\"regular chevron-left\"",
+                "\"regular undo-alt\"",
+                "\"regular credit-card\"",
+                "\"regular ellipsis-v\"",
+                "\"regular file-alt\"",
+                "\"regular mars\"",
+                "\"regular venus\"",
+                "\"regular users\"",
+                "\"regular search\"",
+                "\"regular exclamation-triangle\"",
+                "\"regular dollar-sign\"",
+                "\"regular arrow-right\"",
+                "\"regular clock\"",
+                "\"regular store\"",
+                "\"regular arrow-up-from-bracket\"",
+                "\"regular arrow-down-to-bracket\"",
+                "\"regular user\"",
+                "\"regular arrow-left\"",
+                "\"regular exclamation-circle\"",
+                "\"regular check\"",
+                "\"regular lock-alt\"",
+                "\"regular minus\"",
+                "\"regular times\"",
+                "\"regular copy\"",
+                "\"regular filter\"",
+                "\"regular envelope\"",
+                "\"regular at\"",
+                "\"regular receipt\"",
+                "\"regular lightbulb\"",
+                "\"regular sliders-simple\"",
+                "\"regular spinner\"",
+                "\"regular timer\"",
+                "\"regular gift\"",
+                "\"regular circle-dollar\"",
+                "\"regular key-skeleton\"",
+                "\"regular mobile\"",
+                "\"regular qrcode\"",
+                "\"regular calendar\"",
+                "\"regular eye\"",
+                "\"regular eye-slash\"",
+                "\"regular gear\"",
+                "\"regular unlock\"",
+                "\"regular bell\"",
+                "\"regular pen\"",
+                "\"regular user-group\"",
+                "\"regular shield-check\"",
+                "\"regular chevron-down\"",
+                "\"regular chevron-up\"",
+                "\"regular paperclip\"",
+                "\"regular money-bill-alt\"",
+                "\"regular angle-right\"",
+                "\"regular angle-left\"",
+                "\"regular arrow-alt-to-bottom\"",
+                "\"regular sync-alt\"",
+                "\"regular link\"",
+                "\"regular plus\"",
+                "\"regular comment-alt\"",
+                "\"regular redo\"",
+                "\"regular landmark\"",
+                "\"regular globe\"",
+                "\"regular share-alt\"",
+                "\"regular heart\"",
+                "\"regular backward\"",
+                "\"regular bolt\"",
+                "\"regular arrow-down-to-line\"",
+                "\"regular repeat\"",
+                "\"regular ban\"",
+                "\"regular circle-xmark\"",
+                "\"regular arrows-rotate\"",
+                "\"regular arrow-up-right-from-square\"",
+                "\"regular lock-keyhole-open\"",
+                "\"regular shield-slash\"",
+                "\"regular shield-xmark\"",
+                "\"regular shield\"",
+                "\"regular trash-xmark\"",
+                "\"regular ellipsis\"",
+                "\"regular angles-right\"",
+                "\"regular angles-left\"",
+                "\"regular webhook\"",
+                "\"regular tag\"",
+                "\"regular sliders\"",
+                "\"regular ballot-check\"",
+                "\"regular ballot\"",
+                "\"regular circle-notch\"",
+                "\"regular id-badge\"",
+                "\"regular address-book\"",
+                "\"regular address-card\"",
+                "\"regular hashtag\"",
+                "\"regular earth-americas\"",
+                "\"regular earth-asia\"",
+                "\"regular earth-europe\"",
+                "\"regular earth-africa\"",
+                "\"regular earth-oceania\"",
+                "\"regular user-check\"",
+                "\"regular user-minus\"",
+                "\"regular envelope-open\"",
+                "\"regular arrow-left-from-bracket\"",
+                "\"regular arrow-right-from-bracket\"",
+                "\"regular badge-percent\"",
+                "\"regular clock-rotate-left\"",
+                "\"regular money-bill-transfer\"",
+                "\"regular treasure-chest\"",
+                "\"regular trophy\"",
+                "\"regular medal\"",
+                "\"regular vault\"",
+                "\"regular plane\"",
+                "\"regular house\"",
+                "\"regular bowl-chopsticks\"",
+                "\"regular graduation-cap\"",
+                "\"regular cart-shopping\"",
+                "\"regular game-console-handheld\"",
+                "\"regular star\"",
+                "\"regular flag\"",
+                "\"regular heart-pulse\"",
+                "\"regular ticket-perforated\"",
+                "\"regular money-bill-trend-up\"",
+                "\"light circle-question\"",
+                "\"light divide\"",
+                "\"light chevron-right\"",
+                "\"light money-bill-wave\"",
+                "\"light angle-down\"",
+                "\"light arrow-right\"",
+                "\"light clock\"",
+                "\"light store\"",
+                "\"light arrow-left\"",
+                "\"light minus\"",
+                "\"light equals\"",
+                "\"light times\"",
+                "\"light copy\"",
+                "\"light exclamation\"",
+                "\"light circle-dollar\"",
+                "\"light key-skeleton\"",
+                "\"light mobile\"",
+                "\"light qrcode\"",
+                "\"light pencil\"",
+                "\"light chart-simple\"",
+                "\"light trophy\"",
+                "\"light vault\"",
+                "\"light plane\"",
+                "\"light house\"",
+                "\"light bowl-chopsticks\"",
+                "\"light graduation-cap\"",
+                "\"light cart-shopping\"",
+                "\"light game-console-handheld\"",
+                "\"light star\"",
+                "\"light flag\"",
+                "\"light heart-pulse\"",
+                "\"light calendar-alt\"",
+                "\"light long-arrow-right\"",
+                "\"light cloud-download-alt\"",
+                "\"light sync\"",
+                "\"light comment\"",
+                "\"light truck-fast\"",
+                "\"light warehouse-full\"",
+                "\"light briefcase\"",
+                "\"light down-to-line\"",
+                "\"light fingerprint\"",
+                "\"brands whatsapp\"",
+                "\"brands apple-pay\"",
+                "\"brands google-pay\"",
+                "\"duotone circle-question\"",
+                "\"duotone users\"",
+                "\"duotone university\"",
+                "\"duotone exclamation-triangle\"",
+                "\"duotone store\"",
+                "\"duotone copy\"",
+                "\"duotone spinner\"",
+                "\"duotone circle-dollar\"",
+                "\"duotone key-skeleton\"",
+                "\"duotone mobile\"",
+                "\"duotone qrcode\"",
+                "\"duotone user-check\"",
+                "\"duotone user-circle\"",
+                "\"duotone cloud-upload\"",
+                "\"duotone megaphone\"",
+                "\"duotone mobile-alt\"",
+                "\"duotone envelope-open-text\"",
+                "\"duotone sparkles\"",
+                "\"duotone arrow-to-bottom\"",
+                "\"duotone arrows-repeat\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "iconRight",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "suffix icon"
+              },
+              {
+                "name": "default",
+                "text": "undefined"
+              },
+              {
+                "name": "type",
+                "text": "{IconString}"
+              }
+            ],
+            "required": false,
+            "type": "IconString | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "IconString | undefined",
+              "schema": [
+                "undefined",
+                "\"solid user-secret\"",
+                "\"solid home\"",
+                "\"solid paper-plane\"",
+                "\"solid ticket-alt\"",
+                "\"solid wallet\"",
+                "\"solid question-circle\"",
+                "\"solid circle-question\"",
+                "\"solid info-circle\"",
+                "\"solid user-plus\"",
+                "\"solid user-times\"",
+                "\"solid times-circle\"",
+                "\"solid check-circle\"",
+                "\"solid file-signature\"",
+                "\"solid edit\"",
+                "\"solid trash\"",
+                "\"solid plus-circle\"",
+                "\"solid minus-circle\"",
+                "\"solid divide\"",
+                "\"solid chevron-right\"",
+                "\"solid chevron-left\"",
+                "\"solid money-bill-wave\"",
+                "\"solid long-arrow-alt-left\"",
+                "\"solid file-invoice-dollar\"",
+                "\"solid undo-alt\"",
+                "\"solid credit-card\"",
+                "\"solid ellipsis-v\"",
+                "\"solid bullhorn\"",
+                "\"solid file-alt\"",
+                "\"solid mars\"",
+                "\"solid venus\"",
+                "\"solid users\"",
+                "\"solid building\"",
+                "\"solid money-check-alt\"",
+                "\"solid lock\"",
+                "\"solid question\"",
+                "\"solid angle-down\"",
+                "\"solid download\"",
+                "\"solid search\"",
+                "\"solid university\"",
+                "\"solid pencil-alt\"",
+                "\"solid save\"",
+                "\"solid file-excel\"",
+                "\"solid user-slash\"",
+                "\"solid exclamation-triangle\"",
+                "\"solid dollar-sign\"",
+                "\"solid arrow-right\"",
+                "\"solid hand-holding-usd\"",
+                "\"solid sort\"",
+                "\"solid trash-alt\"",
+                "\"solid caret-down\"",
+                "\"solid clock\"",
+                "\"solid bars\"",
+                "\"solid store\"",
+                "\"solid arrow-up-from-bracket\"",
+                "\"solid arrow-down-to-bracket\"",
+                "\"solid usd-circle\"",
+                "\"solid user\"",
+                "\"solid sign-out\"",
+                "\"solid arrow-left\"",
+                "\"solid exchange\"",
+                "\"solid external-link-square-alt\"",
+                "\"solid user-edit\"",
+                "\"solid file-image\"",
+                "\"solid upload\"",
+                "\"solid file-word\"",
+                "\"solid file-pdf\"",
+                "\"solid file\"",
+                "\"solid exclamation-circle\"",
+                "\"solid check\"",
+                "\"solid sort-alt\"",
+                "\"solid lock-alt\"",
+                "\"solid long-arrow-alt-right\"",
+                "\"solid long-arrow-alt-down\"",
+                "\"solid arrow-alt-down\"",
+                "\"solid minus\"",
+                "\"solid equals\"",
+                "\"solid times\"",
+                "\"solid circle\"",
+                "\"solid asterisk\"",
+                "\"solid copy\"",
+                "\"solid users-medical\"",
+                "\"solid exclamation\"",
+                "\"solid hand-paper\"",
+                "\"solid camera\"",
+                "\"solid undo\"",
+                "\"solid user-cog\"",
+                "\"solid dot-circle\"",
+                "\"solid folder-download\"",
+                "\"solid filter\"",
+                "\"solid envelope\"",
+                "\"solid at\"",
+                "\"solid id-card\"",
+                "\"solid receipt\"",
+                "\"solid caret-up\"",
+                "\"solid triangle\"",
+                "\"solid lightbulb\"",
+                "\"solid sliders-simple\"",
+                "\"solid spinner\"",
+                "\"solid timer\"",
+                "\"solid gift\"",
+                "\"solid book\"",
+                "\"solid chart-mixed-up-circle-dollar\"",
+                "\"solid circle-dollar\"",
+                "\"solid key-skeleton\"",
+                "\"solid mobile\"",
+                "\"solid qrcode\"",
+                "\"solid calendar\"",
+                "\"solid eye\"",
+                "\"solid eye-slash\"",
+                "\"solid gear\"",
+                "\"solid unlock\"",
+                "\"solid bell\"",
+                "\"solid 1\"",
+                "\"solid 2\"",
+                "\"solid 3\"",
+                "\"solid pen\"",
+                "\"solid pencil\"",
+                "\"solid user-group\"",
+                "\"solid shield-check\"",
+                "\"solid arrow-trend-up\"",
+                "\"solid chart-simple\"",
+                "\"solid money-bills-simple\"",
+                "\"kit exchange\"",
+                "\"kit send\"",
+                "\"kit deposit\"",
+                "\"regular paper-plane\"",
+                "\"regular wallet\"",
+                "\"regular circle-question\"",
+                "\"regular info-circle\"",
+                "\"regular user-plus\"",
+                "\"regular check-circle\"",
+                "\"regular trash\"",
+                "\"regular plus-circle\"",
+                "\"regular chevron-right\"",
+                "\"regular chevron-left\"",
+                "\"regular undo-alt\"",
+                "\"regular credit-card\"",
+                "\"regular ellipsis-v\"",
+                "\"regular file-alt\"",
+                "\"regular mars\"",
+                "\"regular venus\"",
+                "\"regular users\"",
+                "\"regular search\"",
+                "\"regular exclamation-triangle\"",
+                "\"regular dollar-sign\"",
+                "\"regular arrow-right\"",
+                "\"regular clock\"",
+                "\"regular store\"",
+                "\"regular arrow-up-from-bracket\"",
+                "\"regular arrow-down-to-bracket\"",
+                "\"regular user\"",
+                "\"regular arrow-left\"",
+                "\"regular exclamation-circle\"",
+                "\"regular check\"",
+                "\"regular lock-alt\"",
+                "\"regular minus\"",
+                "\"regular times\"",
+                "\"regular copy\"",
+                "\"regular filter\"",
+                "\"regular envelope\"",
+                "\"regular at\"",
+                "\"regular receipt\"",
+                "\"regular lightbulb\"",
+                "\"regular sliders-simple\"",
+                "\"regular spinner\"",
+                "\"regular timer\"",
+                "\"regular gift\"",
+                "\"regular circle-dollar\"",
+                "\"regular key-skeleton\"",
+                "\"regular mobile\"",
+                "\"regular qrcode\"",
+                "\"regular calendar\"",
+                "\"regular eye\"",
+                "\"regular eye-slash\"",
+                "\"regular gear\"",
+                "\"regular unlock\"",
+                "\"regular bell\"",
+                "\"regular pen\"",
+                "\"regular user-group\"",
+                "\"regular shield-check\"",
+                "\"regular chevron-down\"",
+                "\"regular chevron-up\"",
+                "\"regular paperclip\"",
+                "\"regular money-bill-alt\"",
+                "\"regular angle-right\"",
+                "\"regular angle-left\"",
+                "\"regular arrow-alt-to-bottom\"",
+                "\"regular sync-alt\"",
+                "\"regular link\"",
+                "\"regular plus\"",
+                "\"regular comment-alt\"",
+                "\"regular redo\"",
+                "\"regular landmark\"",
+                "\"regular globe\"",
+                "\"regular share-alt\"",
+                "\"regular heart\"",
+                "\"regular backward\"",
+                "\"regular bolt\"",
+                "\"regular arrow-down-to-line\"",
+                "\"regular repeat\"",
+                "\"regular ban\"",
+                "\"regular circle-xmark\"",
+                "\"regular arrows-rotate\"",
+                "\"regular arrow-up-right-from-square\"",
+                "\"regular lock-keyhole-open\"",
+                "\"regular shield-slash\"",
+                "\"regular shield-xmark\"",
+                "\"regular shield\"",
+                "\"regular trash-xmark\"",
+                "\"regular ellipsis\"",
+                "\"regular angles-right\"",
+                "\"regular angles-left\"",
+                "\"regular webhook\"",
+                "\"regular tag\"",
+                "\"regular sliders\"",
+                "\"regular ballot-check\"",
+                "\"regular ballot\"",
+                "\"regular circle-notch\"",
+                "\"regular id-badge\"",
+                "\"regular address-book\"",
+                "\"regular address-card\"",
+                "\"regular hashtag\"",
+                "\"regular earth-americas\"",
+                "\"regular earth-asia\"",
+                "\"regular earth-europe\"",
+                "\"regular earth-africa\"",
+                "\"regular earth-oceania\"",
+                "\"regular user-check\"",
+                "\"regular user-minus\"",
+                "\"regular envelope-open\"",
+                "\"regular arrow-left-from-bracket\"",
+                "\"regular arrow-right-from-bracket\"",
+                "\"regular badge-percent\"",
+                "\"regular clock-rotate-left\"",
+                "\"regular money-bill-transfer\"",
+                "\"regular treasure-chest\"",
+                "\"regular trophy\"",
+                "\"regular medal\"",
+                "\"regular vault\"",
+                "\"regular plane\"",
+                "\"regular house\"",
+                "\"regular bowl-chopsticks\"",
+                "\"regular graduation-cap\"",
+                "\"regular cart-shopping\"",
+                "\"regular game-console-handheld\"",
+                "\"regular star\"",
+                "\"regular flag\"",
+                "\"regular heart-pulse\"",
+                "\"regular ticket-perforated\"",
+                "\"regular money-bill-trend-up\"",
+                "\"light circle-question\"",
+                "\"light divide\"",
+                "\"light chevron-right\"",
+                "\"light money-bill-wave\"",
+                "\"light angle-down\"",
+                "\"light arrow-right\"",
+                "\"light clock\"",
+                "\"light store\"",
+                "\"light arrow-left\"",
+                "\"light minus\"",
+                "\"light equals\"",
+                "\"light times\"",
+                "\"light copy\"",
+                "\"light exclamation\"",
+                "\"light circle-dollar\"",
+                "\"light key-skeleton\"",
+                "\"light mobile\"",
+                "\"light qrcode\"",
+                "\"light pencil\"",
+                "\"light chart-simple\"",
+                "\"light trophy\"",
+                "\"light vault\"",
+                "\"light plane\"",
+                "\"light house\"",
+                "\"light bowl-chopsticks\"",
+                "\"light graduation-cap\"",
+                "\"light cart-shopping\"",
+                "\"light game-console-handheld\"",
+                "\"light star\"",
+                "\"light flag\"",
+                "\"light heart-pulse\"",
+                "\"light calendar-alt\"",
+                "\"light long-arrow-right\"",
+                "\"light cloud-download-alt\"",
+                "\"light sync\"",
+                "\"light comment\"",
+                "\"light truck-fast\"",
+                "\"light warehouse-full\"",
+                "\"light briefcase\"",
+                "\"light down-to-line\"",
+                "\"light fingerprint\"",
+                "\"brands whatsapp\"",
+                "\"brands apple-pay\"",
+                "\"brands google-pay\"",
+                "\"duotone circle-question\"",
+                "\"duotone users\"",
+                "\"duotone university\"",
+                "\"duotone exclamation-triangle\"",
+                "\"duotone store\"",
+                "\"duotone copy\"",
+                "\"duotone spinner\"",
+                "\"duotone circle-dollar\"",
+                "\"duotone key-skeleton\"",
+                "\"duotone mobile\"",
+                "\"duotone qrcode\"",
+                "\"duotone user-check\"",
+                "\"duotone user-circle\"",
+                "\"duotone cloud-upload\"",
+                "\"duotone megaphone\"",
+                "\"duotone mobile-alt\"",
+                "\"duotone envelope-open-text\"",
+                "\"duotone sparkles\"",
+                "\"duotone arrow-to-bottom\"",
+                "\"duotone arrows-repeat\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "text",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "chip text"
+              },
+              {
+                "name": "default",
+                "text": "undefined"
+              },
+              {
+                "name": "type",
+                "text": "{String}"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "actions",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "actions for the dropdown menu"
+              },
+              {
+                "name": "default",
+                "text": "undefined"
+              },
+              {
+                "name": "type",
+                "text": "{Array<actionType>}"
+              }
+            ],
+            "required": false,
+            "type": "actionType[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "actionType[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "actionType[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "trigger",
+            "global": false,
+            "default": "'click'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "dropdown trigger type"
+              },
+              {
+                "name": "default",
+                "text": "'click'"
+              }
+            ],
+            "required": false,
+            "type": "DropdownTriggerType | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "DropdownTriggerType | undefined",
+              "schema": [
+                "undefined",
+                "\"click\"",
+                "\"hover\"",
+                "\"focus\"",
+                "\"contextmenu\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "placement",
+            "global": false,
+            "default": "'bottom-start'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "dropdown placement"
+              },
+              {
+                "name": "default",
+                "text": "'bottom-start'"
+              }
+            ],
+            "required": false,
+            "type": "DropdownPlacement | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "DropdownPlacement | undefined",
+              "schema": [
+                "undefined",
+                "\"top\"",
+                "\"top-start\"",
+                "\"top-end\"",
+                "\"bottom\"",
+                "\"bottom-start\"",
+                "\"bottom-end\"",
+                "\"left\"",
+                "\"left-start\"",
+                "\"left-end\"",
+                "\"right\"",
+                "\"right-start\"",
+                "\"right-end\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "closable",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "shows close button"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "selected",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "selected chip"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "disabled chip"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "dropdownEnabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the chip has dropdown enabled. Automatically shows a chevron-down icon in the suffix.\nDropdown props are passed directly to the GDropdown component using v-bind.\nFor advanced dropdown options, consult the GDropdown documentation."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "close",
+            "description": "",
+            "tags": [],
+            "type": "[evt: MouseEvent]",
+            "signature": "(event: \"close\", evt: MouseEvent): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "MouseEvent"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "click",
+            "description": "",
+            "tags": [],
+            "type": "[evt: MouseEvent | KeyboardEvent]",
+            "signature": "(event: \"click\", evt: MouseEvent | KeyboardEvent): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "MouseEvent | KeyboardEvent",
+                "schema": [
+                  {
+                    "kind": "object",
+                    "type": "MouseEvent"
+                  },
+                  {
+                    "kind": "object",
+                    "type": "KeyboardEvent"
+                  }
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "command",
+            "description": "",
+            "tags": [],
+            "type": "[command: DropdownCommand]",
+            "signature": "(event: \"command\", command: DropdownCommand): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "DropdownCommand",
+                "schema": [
+                  "string",
+                  "number",
+                  "Record<string, any>"
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "visible-change",
+            "description": "",
+            "tags": [],
+            "type": "[visible: boolean]",
+            "signature": "(event: \"visible-change\", visible: boolean): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "boolean",
+                "schema": [
+                  "false",
+                  "true"
+                ]
+              }
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "prefix",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "default",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "suffix",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "dropdown",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/chip/index.ts"
+      },
+      "argTypes": {
+        "type": {
+          "name": "type",
+          "description": "",
+          "defaultValue": {
+            "summary": "'primary'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "primary",
+              "secondary"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "ChipType"
+            },
+            "defaultValue": {
+              "summary": "'primary'"
+            },
+            "category": "props"
+          }
+        },
+        "variant": {
+          "name": "variant",
+          "description": "",
+          "defaultValue": {
+            "summary": "'solid'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "solid",
+              "outline"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "ChipVariant"
+            },
+            "defaultValue": {
+              "summary": "'solid'"
+            },
+            "category": "props"
+          }
+        },
+        "size": {
+          "name": "size",
+          "description": "",
+          "defaultValue": {
+            "summary": "'md'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "sm",
+              "md"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "ChipSize"
+            },
+            "defaultValue": {
+              "summary": "'md'"
+            },
+            "category": "props"
+          }
+        },
+        "iconLeft": {
+          "name": "iconLeft",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "solid user-secret",
+              "solid home",
+              "solid paper-plane",
+              "solid ticket-alt",
+              "solid wallet",
+              "solid question-circle",
+              "solid circle-question",
+              "solid info-circle",
+              "solid user-plus",
+              "solid user-times",
+              "solid times-circle",
+              "solid check-circle",
+              "solid file-signature",
+              "solid edit",
+              "solid trash",
+              "solid plus-circle",
+              "solid minus-circle",
+              "solid divide",
+              "solid chevron-right",
+              "solid chevron-left",
+              "solid money-bill-wave",
+              "solid long-arrow-alt-left",
+              "solid file-invoice-dollar",
+              "solid undo-alt",
+              "solid credit-card",
+              "solid ellipsis-v",
+              "solid bullhorn",
+              "solid file-alt",
+              "solid mars",
+              "solid venus",
+              "solid users",
+              "solid building",
+              "solid money-check-alt",
+              "solid lock",
+              "solid question",
+              "solid angle-down",
+              "solid download",
+              "solid search",
+              "solid university",
+              "solid pencil-alt",
+              "solid save",
+              "solid file-excel",
+              "solid user-slash",
+              "solid exclamation-triangle",
+              "solid dollar-sign",
+              "solid arrow-right",
+              "solid hand-holding-usd",
+              "solid sort",
+              "solid trash-alt",
+              "solid caret-down",
+              "solid clock",
+              "solid bars",
+              "solid store",
+              "solid arrow-up-from-bracket",
+              "solid arrow-down-to-bracket",
+              "solid usd-circle",
+              "solid user",
+              "solid sign-out",
+              "solid arrow-left",
+              "solid exchange",
+              "solid external-link-square-alt",
+              "solid user-edit",
+              "solid file-image",
+              "solid upload",
+              "solid file-word",
+              "solid file-pdf",
+              "solid file",
+              "solid exclamation-circle",
+              "solid check",
+              "solid sort-alt",
+              "solid lock-alt",
+              "solid long-arrow-alt-right",
+              "solid long-arrow-alt-down",
+              "solid arrow-alt-down",
+              "solid minus",
+              "solid equals",
+              "solid times",
+              "solid circle",
+              "solid asterisk",
+              "solid copy",
+              "solid users-medical",
+              "solid exclamation",
+              "solid hand-paper",
+              "solid camera",
+              "solid undo",
+              "solid user-cog",
+              "solid dot-circle",
+              "solid folder-download",
+              "solid filter",
+              "solid envelope",
+              "solid at",
+              "solid id-card",
+              "solid receipt",
+              "solid caret-up",
+              "solid triangle",
+              "solid lightbulb",
+              "solid sliders-simple",
+              "solid spinner",
+              "solid timer",
+              "solid gift",
+              "solid book",
+              "solid chart-mixed-up-circle-dollar",
+              "solid circle-dollar",
+              "solid key-skeleton",
+              "solid mobile",
+              "solid qrcode",
+              "solid calendar",
+              "solid eye",
+              "solid eye-slash",
+              "solid gear",
+              "solid unlock",
+              "solid bell",
+              "solid 1",
+              "solid 2",
+              "solid 3",
+              "solid pen",
+              "solid pencil",
+              "solid user-group",
+              "solid shield-check",
+              "solid arrow-trend-up",
+              "solid chart-simple",
+              "solid money-bills-simple",
+              "kit exchange",
+              "kit send",
+              "kit deposit",
+              "regular paper-plane",
+              "regular wallet",
+              "regular circle-question",
+              "regular info-circle",
+              "regular user-plus",
+              "regular check-circle",
+              "regular trash",
+              "regular plus-circle",
+              "regular chevron-right",
+              "regular chevron-left",
+              "regular undo-alt",
+              "regular credit-card",
+              "regular ellipsis-v",
+              "regular file-alt",
+              "regular mars",
+              "regular venus",
+              "regular users",
+              "regular search",
+              "regular exclamation-triangle",
+              "regular dollar-sign",
+              "regular arrow-right",
+              "regular clock",
+              "regular store",
+              "regular arrow-up-from-bracket",
+              "regular arrow-down-to-bracket",
+              "regular user",
+              "regular arrow-left",
+              "regular exclamation-circle",
+              "regular check",
+              "regular lock-alt",
+              "regular minus",
+              "regular times",
+              "regular copy",
+              "regular filter",
+              "regular envelope",
+              "regular at",
+              "regular receipt",
+              "regular lightbulb",
+              "regular sliders-simple",
+              "regular spinner",
+              "regular timer",
+              "regular gift",
+              "regular circle-dollar",
+              "regular key-skeleton",
+              "regular mobile",
+              "regular qrcode",
+              "regular calendar",
+              "regular eye",
+              "regular eye-slash",
+              "regular gear",
+              "regular unlock",
+              "regular bell",
+              "regular pen",
+              "regular user-group",
+              "regular shield-check",
+              "regular chevron-down",
+              "regular chevron-up",
+              "regular paperclip",
+              "regular money-bill-alt",
+              "regular angle-right",
+              "regular angle-left",
+              "regular arrow-alt-to-bottom",
+              "regular sync-alt",
+              "regular link",
+              "regular plus",
+              "regular comment-alt",
+              "regular redo",
+              "regular landmark",
+              "regular globe",
+              "regular share-alt",
+              "regular heart",
+              "regular backward",
+              "regular bolt",
+              "regular arrow-down-to-line",
+              "regular repeat",
+              "regular ban",
+              "regular circle-xmark",
+              "regular arrows-rotate",
+              "regular arrow-up-right-from-square",
+              "regular lock-keyhole-open",
+              "regular shield-slash",
+              "regular shield-xmark",
+              "regular shield",
+              "regular trash-xmark",
+              "regular ellipsis",
+              "regular angles-right",
+              "regular angles-left",
+              "regular webhook",
+              "regular tag",
+              "regular sliders",
+              "regular ballot-check",
+              "regular ballot",
+              "regular circle-notch",
+              "regular id-badge",
+              "regular address-book",
+              "regular address-card",
+              "regular hashtag",
+              "regular earth-americas",
+              "regular earth-asia",
+              "regular earth-europe",
+              "regular earth-africa",
+              "regular earth-oceania",
+              "regular user-check",
+              "regular user-minus",
+              "regular envelope-open",
+              "regular arrow-left-from-bracket",
+              "regular arrow-right-from-bracket",
+              "regular badge-percent",
+              "regular clock-rotate-left",
+              "regular money-bill-transfer",
+              "regular treasure-chest",
+              "regular trophy",
+              "regular medal",
+              "regular vault",
+              "regular plane",
+              "regular house",
+              "regular bowl-chopsticks",
+              "regular graduation-cap",
+              "regular cart-shopping",
+              "regular game-console-handheld",
+              "regular star",
+              "regular flag",
+              "regular heart-pulse",
+              "regular ticket-perforated",
+              "regular money-bill-trend-up",
+              "light circle-question",
+              "light divide",
+              "light chevron-right",
+              "light money-bill-wave",
+              "light angle-down",
+              "light arrow-right",
+              "light clock",
+              "light store",
+              "light arrow-left",
+              "light minus",
+              "light equals",
+              "light times",
+              "light copy",
+              "light exclamation",
+              "light circle-dollar",
+              "light key-skeleton",
+              "light mobile",
+              "light qrcode",
+              "light pencil",
+              "light chart-simple",
+              "light trophy",
+              "light vault",
+              "light plane",
+              "light house",
+              "light bowl-chopsticks",
+              "light graduation-cap",
+              "light cart-shopping",
+              "light game-console-handheld",
+              "light star",
+              "light flag",
+              "light heart-pulse",
+              "light calendar-alt",
+              "light long-arrow-right",
+              "light cloud-download-alt",
+              "light sync",
+              "light comment",
+              "light truck-fast",
+              "light warehouse-full",
+              "light briefcase",
+              "light down-to-line",
+              "light fingerprint",
+              "brands whatsapp",
+              "brands apple-pay",
+              "brands google-pay",
+              "duotone circle-question",
+              "duotone users",
+              "duotone university",
+              "duotone exclamation-triangle",
+              "duotone store",
+              "duotone copy",
+              "duotone spinner",
+              "duotone circle-dollar",
+              "duotone key-skeleton",
+              "duotone mobile",
+              "duotone qrcode",
+              "duotone user-check",
+              "duotone user-circle",
+              "duotone cloud-upload",
+              "duotone megaphone",
+              "duotone mobile-alt",
+              "duotone envelope-open-text",
+              "duotone sparkles",
+              "duotone arrow-to-bottom",
+              "duotone arrows-repeat"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "IconString"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "iconRight": {
+          "name": "iconRight",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "solid user-secret",
+              "solid home",
+              "solid paper-plane",
+              "solid ticket-alt",
+              "solid wallet",
+              "solid question-circle",
+              "solid circle-question",
+              "solid info-circle",
+              "solid user-plus",
+              "solid user-times",
+              "solid times-circle",
+              "solid check-circle",
+              "solid file-signature",
+              "solid edit",
+              "solid trash",
+              "solid plus-circle",
+              "solid minus-circle",
+              "solid divide",
+              "solid chevron-right",
+              "solid chevron-left",
+              "solid money-bill-wave",
+              "solid long-arrow-alt-left",
+              "solid file-invoice-dollar",
+              "solid undo-alt",
+              "solid credit-card",
+              "solid ellipsis-v",
+              "solid bullhorn",
+              "solid file-alt",
+              "solid mars",
+              "solid venus",
+              "solid users",
+              "solid building",
+              "solid money-check-alt",
+              "solid lock",
+              "solid question",
+              "solid angle-down",
+              "solid download",
+              "solid search",
+              "solid university",
+              "solid pencil-alt",
+              "solid save",
+              "solid file-excel",
+              "solid user-slash",
+              "solid exclamation-triangle",
+              "solid dollar-sign",
+              "solid arrow-right",
+              "solid hand-holding-usd",
+              "solid sort",
+              "solid trash-alt",
+              "solid caret-down",
+              "solid clock",
+              "solid bars",
+              "solid store",
+              "solid arrow-up-from-bracket",
+              "solid arrow-down-to-bracket",
+              "solid usd-circle",
+              "solid user",
+              "solid sign-out",
+              "solid arrow-left",
+              "solid exchange",
+              "solid external-link-square-alt",
+              "solid user-edit",
+              "solid file-image",
+              "solid upload",
+              "solid file-word",
+              "solid file-pdf",
+              "solid file",
+              "solid exclamation-circle",
+              "solid check",
+              "solid sort-alt",
+              "solid lock-alt",
+              "solid long-arrow-alt-right",
+              "solid long-arrow-alt-down",
+              "solid arrow-alt-down",
+              "solid minus",
+              "solid equals",
+              "solid times",
+              "solid circle",
+              "solid asterisk",
+              "solid copy",
+              "solid users-medical",
+              "solid exclamation",
+              "solid hand-paper",
+              "solid camera",
+              "solid undo",
+              "solid user-cog",
+              "solid dot-circle",
+              "solid folder-download",
+              "solid filter",
+              "solid envelope",
+              "solid at",
+              "solid id-card",
+              "solid receipt",
+              "solid caret-up",
+              "solid triangle",
+              "solid lightbulb",
+              "solid sliders-simple",
+              "solid spinner",
+              "solid timer",
+              "solid gift",
+              "solid book",
+              "solid chart-mixed-up-circle-dollar",
+              "solid circle-dollar",
+              "solid key-skeleton",
+              "solid mobile",
+              "solid qrcode",
+              "solid calendar",
+              "solid eye",
+              "solid eye-slash",
+              "solid gear",
+              "solid unlock",
+              "solid bell",
+              "solid 1",
+              "solid 2",
+              "solid 3",
+              "solid pen",
+              "solid pencil",
+              "solid user-group",
+              "solid shield-check",
+              "solid arrow-trend-up",
+              "solid chart-simple",
+              "solid money-bills-simple",
+              "kit exchange",
+              "kit send",
+              "kit deposit",
+              "regular paper-plane",
+              "regular wallet",
+              "regular circle-question",
+              "regular info-circle",
+              "regular user-plus",
+              "regular check-circle",
+              "regular trash",
+              "regular plus-circle",
+              "regular chevron-right",
+              "regular chevron-left",
+              "regular undo-alt",
+              "regular credit-card",
+              "regular ellipsis-v",
+              "regular file-alt",
+              "regular mars",
+              "regular venus",
+              "regular users",
+              "regular search",
+              "regular exclamation-triangle",
+              "regular dollar-sign",
+              "regular arrow-right",
+              "regular clock",
+              "regular store",
+              "regular arrow-up-from-bracket",
+              "regular arrow-down-to-bracket",
+              "regular user",
+              "regular arrow-left",
+              "regular exclamation-circle",
+              "regular check",
+              "regular lock-alt",
+              "regular minus",
+              "regular times",
+              "regular copy",
+              "regular filter",
+              "regular envelope",
+              "regular at",
+              "regular receipt",
+              "regular lightbulb",
+              "regular sliders-simple",
+              "regular spinner",
+              "regular timer",
+              "regular gift",
+              "regular circle-dollar",
+              "regular key-skeleton",
+              "regular mobile",
+              "regular qrcode",
+              "regular calendar",
+              "regular eye",
+              "regular eye-slash",
+              "regular gear",
+              "regular unlock",
+              "regular bell",
+              "regular pen",
+              "regular user-group",
+              "regular shield-check",
+              "regular chevron-down",
+              "regular chevron-up",
+              "regular paperclip",
+              "regular money-bill-alt",
+              "regular angle-right",
+              "regular angle-left",
+              "regular arrow-alt-to-bottom",
+              "regular sync-alt",
+              "regular link",
+              "regular plus",
+              "regular comment-alt",
+              "regular redo",
+              "regular landmark",
+              "regular globe",
+              "regular share-alt",
+              "regular heart",
+              "regular backward",
+              "regular bolt",
+              "regular arrow-down-to-line",
+              "regular repeat",
+              "regular ban",
+              "regular circle-xmark",
+              "regular arrows-rotate",
+              "regular arrow-up-right-from-square",
+              "regular lock-keyhole-open",
+              "regular shield-slash",
+              "regular shield-xmark",
+              "regular shield",
+              "regular trash-xmark",
+              "regular ellipsis",
+              "regular angles-right",
+              "regular angles-left",
+              "regular webhook",
+              "regular tag",
+              "regular sliders",
+              "regular ballot-check",
+              "regular ballot",
+              "regular circle-notch",
+              "regular id-badge",
+              "regular address-book",
+              "regular address-card",
+              "regular hashtag",
+              "regular earth-americas",
+              "regular earth-asia",
+              "regular earth-europe",
+              "regular earth-africa",
+              "regular earth-oceania",
+              "regular user-check",
+              "regular user-minus",
+              "regular envelope-open",
+              "regular arrow-left-from-bracket",
+              "regular arrow-right-from-bracket",
+              "regular badge-percent",
+              "regular clock-rotate-left",
+              "regular money-bill-transfer",
+              "regular treasure-chest",
+              "regular trophy",
+              "regular medal",
+              "regular vault",
+              "regular plane",
+              "regular house",
+              "regular bowl-chopsticks",
+              "regular graduation-cap",
+              "regular cart-shopping",
+              "regular game-console-handheld",
+              "regular star",
+              "regular flag",
+              "regular heart-pulse",
+              "regular ticket-perforated",
+              "regular money-bill-trend-up",
+              "light circle-question",
+              "light divide",
+              "light chevron-right",
+              "light money-bill-wave",
+              "light angle-down",
+              "light arrow-right",
+              "light clock",
+              "light store",
+              "light arrow-left",
+              "light minus",
+              "light equals",
+              "light times",
+              "light copy",
+              "light exclamation",
+              "light circle-dollar",
+              "light key-skeleton",
+              "light mobile",
+              "light qrcode",
+              "light pencil",
+              "light chart-simple",
+              "light trophy",
+              "light vault",
+              "light plane",
+              "light house",
+              "light bowl-chopsticks",
+              "light graduation-cap",
+              "light cart-shopping",
+              "light game-console-handheld",
+              "light star",
+              "light flag",
+              "light heart-pulse",
+              "light calendar-alt",
+              "light long-arrow-right",
+              "light cloud-download-alt",
+              "light sync",
+              "light comment",
+              "light truck-fast",
+              "light warehouse-full",
+              "light briefcase",
+              "light down-to-line",
+              "light fingerprint",
+              "brands whatsapp",
+              "brands apple-pay",
+              "brands google-pay",
+              "duotone circle-question",
+              "duotone users",
+              "duotone university",
+              "duotone exclamation-triangle",
+              "duotone store",
+              "duotone copy",
+              "duotone spinner",
+              "duotone circle-dollar",
+              "duotone key-skeleton",
+              "duotone mobile",
+              "duotone qrcode",
+              "duotone user-check",
+              "duotone user-circle",
+              "duotone cloud-upload",
+              "duotone megaphone",
+              "duotone mobile-alt",
+              "duotone envelope-open-text",
+              "duotone sparkles",
+              "duotone arrow-to-bottom",
+              "duotone arrows-repeat"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "IconString"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "text": {
+          "name": "text",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "actions": {
+          "name": "actions",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "other",
+            "value": "actionType[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "actionType[]"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "trigger": {
+          "name": "trigger",
+          "description": "",
+          "defaultValue": {
+            "summary": "'click'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "click",
+              "hover",
+              "focus",
+              "contextmenu"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "DropdownTriggerType"
+            },
+            "defaultValue": {
+              "summary": "'click'"
+            },
+            "category": "props"
+          }
+        },
+        "placement": {
+          "name": "placement",
+          "description": "",
+          "defaultValue": {
+            "summary": "'bottom-start'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "top",
+              "top-start",
+              "top-end",
+              "bottom",
+              "bottom-start",
+              "bottom-end",
+              "left",
+              "left-start",
+              "left-end",
+              "right",
+              "right-start",
+              "right-end"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "DropdownPlacement"
+            },
+            "defaultValue": {
+              "summary": "'bottom-start'"
+            },
+            "category": "props"
+          }
+        },
+        "closable": {
+          "name": "closable",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "selected": {
+          "name": "selected",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "dropdownEnabled": {
+          "name": "dropdownEnabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "close": {
+          "name": "close",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[evt: MouseEvent]"
+          },
+          "table": {
+            "type": {
+              "summary": "[evt: MouseEvent]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "click": {
+          "name": "click",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[evt: MouseEvent | KeyboardEvent]"
+          },
+          "table": {
+            "type": {
+              "summary": "[evt: MouseEvent | KeyboardEvent]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "command": {
+          "name": "command",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[command: DropdownCommand]"
+          },
+          "table": {
+            "type": {
+              "summary": "[command: DropdownCommand]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "visible-change": {
+          "name": "visible-change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[visible: boolean]"
+          },
+          "table": {
+            "type": {
+              "summary": "[visible: boolean]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "prefix": {
+          "name": "prefix",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "suffix": {
+          "name": "suffix",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "dropdown": {
+          "name": "dropdown",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GChipProps = {\n  /**\n   * @description chip type (controls border radius: primary=xl, secondary=sm)\n   * @default 'primary'\n   */\n  type?: ChipType;\n  /**\n   * @description visual variant (controls color)\n  solid has grey-100 background\n  outline has only ever-blue-200 border\n   * @default 'solid'\n   */\n  variant?: ChipVariant;\n  /**\n   * @description chip size\n   * @default 'md'\n   */\n  size?: ChipSize;\n  /**\n   * @description prefix icon\n   * @default undefined\n   * @type {IconString}\n   */\n  iconLeft?: IconString;\n  /**\n   * @description suffix icon\n   * @default undefined\n   * @type {IconString}\n   */\n  iconRight?: IconString;\n  /**\n   * @description chip text\n   * @default undefined\n   * @type {String}\n   */\n  text?: string;\n  /**\n   * @description actions for the dropdown menu\n   * @default undefined\n   * @type {Array<actionType>}\n   */\n  actions?: actionType[];\n  /**\n   * @description dropdown trigger type\n   * @default 'click'\n   */\n  trigger?: DropdownTriggerType;\n  /**\n   * @description dropdown placement\n   * @default 'bottom-start'\n   */\n  placement?: DropdownPlacement;\n  /** @description shows close button */\n  closable?: boolean;\n  /** @description selected chip */\n  selected?: boolean;\n  /** @description disabled chip */\n  disabled?: boolean;\n  /** @description whether the chip has dropdown enabled. Automatically shows a chevron-down icon in the suffix.\n  Dropdown props are passed directly to the GDropdown component using v-bind.\n  For advanced dropdown options, consult the GDropdown documentation. */\n  dropdownEnabled?: boolean;\n}\n```\n\n## Events\n\n```\nexport type GChipEvents = {\n  close: [evt: MouseEvent];\n  click: [evt: MouseEvent | KeyboardEvent];\n  command: [command: DropdownCommand];\n  \"visible-change\": [visible: boolean];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GChipSlots = {\n  prefix: {};\n  default: {};\n  suffix: {};\n  dropdown: {};\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

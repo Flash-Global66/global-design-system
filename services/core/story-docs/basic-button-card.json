@@ -1,0 +1,15 @@
+{
+  "components": {
+    "basic-button-card": {
+      "id": "basic-button-card",
+      "name": "GButtonCard",
+      "path": "./stories/button-card.stories.ts",
+      "stories": {
+        "basic-button-card--primary": {
+          "id": "basic-button-card--primary",
+          "name": "Primary"
+        }
+      }
+    }
+  }
+}
