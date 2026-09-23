@@ -1,5 +1,5 @@
-import { defineConfig, mergeConfig } from 'vitest/config'
-import viteBaseConfig from './vite.config.base'
+import { defineConfig, mergeConfig } from 'vitest/config';
+import viteBaseConfig from './vite.config.base';
 
 export default mergeConfig(
   viteBaseConfig,
@@ -10,6 +10,7 @@ export default mergeConfig(
       include: [
         'components/**/tests/**/*.spec.ts',
         'common/**/tests/**/*.spec.ts',
+        'scripts/tests/**/*.spec.ts',
       ],
       globals: true,
       server: {
@@ -18,5 +19,5 @@ export default mergeConfig(
         },
       },
     },
-  })
-)
+  }),
+);
