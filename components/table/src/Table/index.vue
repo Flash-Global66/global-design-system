@@ -220,6 +220,23 @@ export default defineComponent({
     'cell-edit-change',
     'cell-edit-validate',
   ],
+  expose: [
+    'setCurrentRow',
+    'getSelectionRows',
+    'toggleRowSelection',
+    'clearSelection',
+    'clearFilter',
+    'toggleAllSelection',
+    'toggleRowExpansion',
+    'clearSort',
+    'doLayout',
+    'sort',
+    'updateKeyChildren',
+    'scrollTo',
+    'setScrollLeft',
+    'setScrollTop',
+    'allowDragLastColumn',
+  ],
   setup(props) {
     return useTable(props);
   },
