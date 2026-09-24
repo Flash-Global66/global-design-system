@@ -7,7 +7,7 @@
  *   1. Ningún `index.ts` dentro de `src/` (barrel dentro de una capa)  → ds-component-layers.md, principio 4
  *   2. Ningún archivo de tipos llamado `types.ts` a secas              → ds-types-location.md
  *   3. Ningún archivo con "helper" en el nombre                       → ds-composables-layers.md / ds-naming.md
- *   4. Ningún `export default` en un `.ts` de `src/` (incluido `defaults.ts`) → ds-types-location.md
+ *   4. Ningún `export default` en un `.ts` de `src/` → ds-types-location.md
  *   5. Ninguna clase `gui-*` escrita a mano en `.ts`/`.vue`/`.tsx`     → ds-styles-bem.md
  *
  * Deliberadamente afuera (son juicio, no mecánica — quedan para review humano):
@@ -57,7 +57,7 @@ export function hasHelperInName(fileName) {
 const EXPORT_DEFAULT_LINE = /^\s*export\s+default\b/;
 
 /**
- * ds-types-location.md: "Ningún archivo de esta capa usa export default, incluido defaults.ts".
+ * ds-types-location.md: "Ningún archivo de esta capa usa export default".
  * Devuelve los números de línea (1-based) donde aparece.
  */
 export function findExportDefaultLines(source) {
@@ -201,7 +201,7 @@ function checkFile(filePath, relativePath, violations) {
       violations.push({
         path: `${relativePath}:${lineNumber}`,
         message:
-          '`export default` — ds-types-location.md: "sin excepción, ni siquiera en defaults.ts". Usar export con nombre (ver exports-imports.md).',
+          '`export default` — ds-types-location.md: sin excepción. Usar export con nombre (ver exports-imports.md).',
       });
     }
   }
