@@ -139,6 +139,10 @@
   @apply w-full flex items-center;
 }
 
+.gui-drawer__header--back .hover-effect {
+  @apply hidden;
+}
+
 .gui-drawer__header--close {
   @apply ml-auto;
 }

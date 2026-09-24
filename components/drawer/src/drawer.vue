@@ -52,6 +52,7 @@
                 <g-icon-button
                   v-if="props.showBack"
                   icon="regular arrow-left"
+                  :class="ns.em('header', 'back')"
                   @click="handleBack"
                 />
                 <g-icon-button

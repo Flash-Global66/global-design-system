@@ -11,6 +11,13 @@
     @include m('container-close') {
       @apply w-full flex items-center;
     }
+    @include m('back') {
+      // El ripple y el fondo de hover viven dentro de .hover-effect, así que
+      // ocultarlo apaga los dos sin pelear especificidad con g-icon-button.
+      .hover-effect {
+        @apply hidden;
+      }
+    }
     @include m('close') {
       @apply ml-auto;
     }
