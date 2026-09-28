@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { GQuote, type QuoteInstance } from '../components/quote';
 import { GConfigProvider } from '../components/config-provider';
+import { GRadio, GRadioGroup } from '../components/radio';
 import type { Currency, QuoteAccount } from '../components/quote';
 import {
   generatePeerDepsList,
@@ -342,6 +343,11 @@ interface QuoteAccount {
 
 - from-account-change: se emite al elegir una cuenta de origen, con la \`QuoteAccount\` elegida como payload
 - to-account-change: se emite al elegir una cuenta de destino, con la \`QuoteAccount\` elegida como payload
+
+### Slots
+
+- action: reemplaza el contenido de la franja de acción que aparece fuera de la card cuando hay error de saldo (\`action="FromError"\` o \`showAction\`). Sin contenido en el slot, se muestra el botón por defecto ("Cargar dinero").
+- footer: se renderiza dentro de la card, después del input de destino, separado por un borde. Sin contenido en el slot, no aparece ningún elemento — el componente no agrega lógica ni espacio reservado, solo expone el punto de extensión.
 `,
       },
     },
@@ -807,6 +813,109 @@ export const EntreCuentas: Story = {
             @from-account-change="handleFromAccountChange"
             @to-account-change="handleToAccountChange"
           />
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+// ─── Con footer ────────────────────────────────────────────────────────────
+
+export const WithFooter: Story = {
+  name: 'Con footer',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'El slot `footer` se renderiza dentro de la card, debajo de "Tu contacto recibe", separado por un borde. `GRadioGroup`/`GRadio` se importan desde `@flash-global66/g-radio`.',
+      },
+    },
+  },
+  render: args => ({
+    components: { GQuote, GConfigProvider, GRadioGroup, GRadio },
+    setup() {
+      const sim = useQuoteSimulator();
+      const paymentMethod = ref('ach');
+      return { args, CURRENCIES, paymentMethod, ...sim };
+    },
+    template: `
+      <g-config-provider>
+        <div style="width: 460px">
+          <g-quote
+            v-bind="args"
+            :from-currencies="CURRENCIES"
+            :to-currencies="CURRENCIES"
+            :from-currency="fromCurrency"
+            :to-currency="toCurrency"
+            :from-amount="fromAmount"
+            :to-amount="toAmount"
+            :is-loading="isLoading"
+            @from-input="handleFromInput"
+            @to-input="handleToInput"
+            @swap="handleSwap"
+            @from-currency-change="handleFromCurrencyChange"
+            @to-currency-change="handleToCurrencyChange"
+          >
+            <template #footer>
+              <g-radio-group v-model="paymentMethod">
+                <g-radio label="ACH local (USD)" value="ach" />
+                <g-radio label="SWIFT (USD)" value="swift" />
+              </g-radio-group>
+            </template>
+          </g-quote>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+// ─── Con footer: saldo insuficiente ───────────────────────────────────────
+
+export const WithFooterError: Story = {
+  name: 'Con footer: saldo insuficiente',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Con `action="FromError"` y `error-message` se ve el borde rojo de la card encerrando también el footer, además de "Disponible" y la franja de acción en su lugar habitual.',
+      },
+    },
+  },
+  render: () => ({
+    components: { GQuote, GConfigProvider, GRadioGroup, GRadio },
+    setup() {
+      const paymentMethod = ref('ach');
+
+      function handleActionClick() {
+        alert('Redirigir a cargar dinero');
+      }
+
+      return { CURRENCIES, paymentMethod, handleActionClick };
+    },
+    template: `
+      <g-config-provider>
+        <div style="width: 460px">
+          <g-quote
+            from-currency="COP"
+            to-currency="USD"
+            from-amount="3672604"
+            to-amount=""
+            available-balance="$ 183.994.889 COP"
+            error-message="El monto que deseas convertir excede el saldo disponible"
+            action="FromError"
+            from-label="Tú envías"
+            to-label="Tu contacto recibe"
+            :from-currencies="CURRENCIES"
+            :to-currencies="CURRENCIES"
+            @action-click="handleActionClick"
+          >
+            <template #footer>
+              <g-radio-group v-model="paymentMethod">
+                <g-radio label="ACH local (USD)" value="ach" />
+                <g-radio label="SWIFT (USD)" value="swift" />
+              </g-radio-group>
+            </template>
+          </g-quote>
         </div>
       </g-config-provider>
     `,

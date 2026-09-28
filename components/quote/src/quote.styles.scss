@@ -62,6 +62,10 @@
     @apply relative;
   }
 
+  @include e("footer") {
+    @apply border-t border-blue-50 px-md py-lg;
+  }
+
   @include e("divider") {
     @apply relative h-px w-full bg-blue-50;
   }
