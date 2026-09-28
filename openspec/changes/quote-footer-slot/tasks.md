@@ -16,7 +16,7 @@ Restricciones que todo subagente recibe (detalle en `proposal.md`): BEM con `@in
   - listo cuando: dentro de `@include b("quote")`, junto a `e("input-to")`, existe `@include e("footer") { @apply border-t border-blue-50 px-md py-lg; }`. El diff de este archivo **solo agrega líneas** (ninguna `-` fuera del encabezado del diff). `yarn styles:check` sale 0.
   - commit: `feat(quote): separador y padding del footer de la card`
 
-- [ ] **3 · Story «Con footer» y doc del slot**
+- [x] **3 · Story «Con footer» y doc del slot**
   - archivos: `stories/quote.stories.ts`
   - depende de: 1, 2
   - listo cuando: hay un `export const WithFooter: Story` (name `'Con footer'`) que renderiza `GQuote` con un `GRadioGroup` en `<template #footer>`, con opciones «ACH local (USD)» / «SWIFT (USD)» y `v-model` a un `ref`. `GRadio`/`GRadioGroup` se importan desde `'../components/radio'`. Hay una segunda variante con `action="FromError"` y `error-message`, para ver el borde rojo encerrando el footer. La descripción del componente (`meta.parameters.docs.description.component`) suma una sección `### Slots` con `action` y `footer` (dónde se renderiza, que sin contenido no aparece, que no agrega lógica). Storybook compila y las dos stories se ven en el navegador: el footer dentro de la card, debajo de «Tu contacto recibe», con el separador, y «Disponible» / action / error-message en su lugar.
