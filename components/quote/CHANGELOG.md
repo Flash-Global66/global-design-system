@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.3.25...@flash-global66/g-quote@0.4.0) (2026-09-28)
+
+### Features
+
+- **quote:** separador y padding del footer de la card ([690594b](https://github.com/Flash-Global66/global-design-system/commit/690594bf8c53a75b95d7c7d2c5631bb5486e9c61))
+- **quote:** slot footer dentro de la card ([17777b3](https://github.com/Flash-Global66/global-design-system/commit/17777b34e08665104577b511c600a065fe0fd6ba))
+
 ## [0.3.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.3.24...@flash-global66/g-quote@0.3.25) (2026-09-15)
 
 ### Bug Fixes
