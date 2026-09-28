@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { reactive, ref } from 'vue';
 import { action } from 'storybook/actions';
+import { useArgs } from 'storybook/preview-api';
 
 import { GInputTag } from '@flash-global66/g-input-tag/index.ts';
 import '@flash-global66/g-input-tag/styles.scss';
@@ -263,29 +264,36 @@ export const Primary: Story = {
       },
     },
   },
-  render: args => ({
-    components: { GInputTag, GConfigProvider },
-    setup() {
-      const tags = ref<string[]>(['vue', 'ts']);
-      return {
-        args,
-        tags,
-        onAdd: action('add-tag'),
-        onRemove: action('remove-tag'),
-      };
-    },
-    template: `
-      <g-config-provider>
-        <g-input-tag
-          v-model="tags"
-          v-bind="args"
-          @add-tag="onAdd"
-          @remove-tag="onRemove"
-        />
-        <pre style="margin-top: 12px; font-size: 12px;">{{ tags }}</pre>
-      </g-config-provider>
-    `,
-  }),
+  render: args => {
+    const [, updateArgs] = useArgs();
+
+    return {
+      components: { GInputTag, GConfigProvider },
+      setup() {
+        function onUpdateModelValue(tags: string[]) {
+          updateArgs({ modelValue: tags });
+        }
+
+        return {
+          args,
+          onUpdateModelValue,
+          onAdd: action('add-tag'),
+          onRemove: action('remove-tag'),
+        };
+      },
+      template: `
+        <g-config-provider>
+          <g-input-tag
+            v-bind="args"
+            @update:model-value="onUpdateModelValue"
+            @add-tag="onAdd"
+            @remove-tag="onRemove"
+          />
+          <pre style="margin-top: 12px; font-size: 12px;">{{ args.modelValue }}</pre>
+        </g-config-provider>
+      `,
+    };
+  },
 };
 
 export const LimitsAndDuplicates: Story = {
