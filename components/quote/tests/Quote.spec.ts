@@ -79,10 +79,14 @@ const makeProps = (overrides: Partial<QuoteProps> = {}): QuoteProps =>
 
 let wrapper: VueWrapper | undefined;
 
-function mountQuote(overrides: Partial<QuoteProps> = {}) {
+function mountQuote(
+  overrides: Partial<QuoteProps> = {},
+  slots: Record<string, string> = {},
+) {
   wrapper = mount(GQuote, {
     attachTo: document.body,
     props: makeProps(overrides),
+    slots,
   });
   return wrapper;
 }
@@ -94,27 +98,31 @@ afterEach(() => {
 
 describe('GQuote — retrocompatibilidad (ML-80)', () => {
   it('conserva las 26 props existentes con su default original', () => {
-    Object.entries(EXISTING_PROPS_DEFAULTS).forEach(([propName, expectedDefault]) => {
-      const propDefinition = quoteProps[propName as keyof typeof quoteProps] as {
-        default?: unknown;
-      };
+    Object.entries(EXISTING_PROPS_DEFAULTS).forEach(
+      ([propName, expectedDefault]) => {
+        const propDefinition = quoteProps[
+          propName as keyof typeof quoteProps
+        ] as {
+          default?: unknown;
+        };
 
-      expect(propDefinition).toBeDefined();
+        expect(propDefinition).toBeDefined();
 
-      const actualDefault =
-        typeof propDefinition.default === 'function'
-          ? (propDefinition.default as () => unknown)()
-          : propDefinition.default;
+        const actualDefault =
+          typeof propDefinition.default === 'function'
+            ? (propDefinition.default as () => unknown)()
+            : propDefinition.default;
 
-      expect(actualDefault).toEqual(expectedDefault);
-    });
+        expect(actualDefault).toEqual(expectedDefault);
+      },
+    );
 
     expect(quoteProps.fromCurrency).toBeDefined();
     expect(quoteProps.toCurrency).toBeDefined();
   });
 
   it('conserva los 10 emits existentes', () => {
-    EXISTING_EMITS.forEach((emitName) => {
+    EXISTING_EMITS.forEach(emitName => {
       expect(quoteEmits[emitName as keyof typeof quoteEmits]).toBeDefined();
     });
   });
@@ -122,14 +130,20 @@ describe('GQuote — retrocompatibilidad (ML-80)', () => {
 
 describe('GQuote — modo cuentas (props y emits nuevos)', () => {
   it('expone los defaults de las props de cuentas', () => {
-    expect((quoteProps.fromAccounts as { default: () => QuoteAccount[] }).default()).toEqual([]);
-    expect((quoteProps.toAccounts as { default: () => QuoteAccount[] }).default()).toEqual([]);
+    expect(
+      (quoteProps.fromAccounts as { default: () => QuoteAccount[] }).default(),
+    ).toEqual([]);
+    expect(
+      (quoteProps.toAccounts as { default: () => QuoteAccount[] }).default(),
+    ).toEqual([]);
     expect((quoteProps.fromAccountId as { default: string }).default).toBe('');
     expect((quoteProps.toAccountId as { default: string }).default).toBe('');
-    expect((quoteProps.accountSearchPlaceholder as { default: string }).default).toBe('Buscar');
-    expect((quoteProps.primaryAccountLabel as { default: string }).default).toBe(
-      'Cuenta principal',
-    );
+    expect(
+      (quoteProps.accountSearchPlaceholder as { default: string }).default,
+    ).toBe('Buscar');
+    expect(
+      (quoteProps.primaryAccountLabel as { default: string }).default,
+    ).toBe('Cuenta principal');
   });
 
   it('declara los emits from-account-change y to-account-change', () => {
@@ -171,7 +185,7 @@ describe('GQuote — modo cuentas (props y emits nuevos)', () => {
 
     const inputs = wrapper!.findAllComponents({ name: 'GQuoteInput' });
 
-    inputs.forEach((input) => {
+    inputs.forEach(input => {
       expect(input.props('searchPlaceholder')).toBe('Buscar cuenta');
       expect(input.props('primaryAccountLabel')).toBe('Principal');
     });
@@ -180,7 +194,60 @@ describe('GQuote — modo cuentas (props y emits nuevos)', () => {
   it('sin fromAccounts/toAccounts renderiza los dos dropdowns de moneda', () => {
     mountQuote();
 
-    expect(document.body.querySelectorAll('.gui-quote-input__currency')).toHaveLength(2);
+    expect(
+      document.body.querySelectorAll('.gui-quote-input__currency'),
+    ).toHaveLength(2);
     expect(document.body.querySelector('.gui-quote-account-select')).toBeNull();
+  });
+});
+
+describe('GQuote — slot footer', () => {
+  it('sin slot, no renderiza __footer y los hijos de __card quedan igual', () => {
+    mountQuote();
+
+    const card = document.body.querySelector('.gui-quote__card');
+    const footer = document.body.querySelector('.gui-quote__footer');
+
+    expect(footer).toBeNull();
+    expect(Array.from(card!.children).map(child => child.className)).toEqual([
+      'gui-quote__input-from',
+      'gui-quote__divider',
+      'gui-quote__input-to',
+    ]);
+  });
+
+  it('con slot, renderiza __footer dentro de __card después de __input-to con el contenido del slot', () => {
+    mountQuote({}, { footer: '<p data-test="footer">x</p>' });
+
+    const card = document.body.querySelector('.gui-quote__card');
+    const footer = document.body.querySelector('.gui-quote__footer');
+    const inputTo = document.body.querySelector('.gui-quote__input-to');
+
+    expect(footer).not.toBeNull();
+    expect(footer!.parentElement).toBe(card);
+    expect(footer!.previousElementSibling).toBe(inputTo);
+    expect(footer!.querySelector('[data-test="footer"]')?.textContent).toBe(
+      'x',
+    );
+  });
+
+  it('con slot y action FromError, el footer queda dentro de __card.is-error y __action/__error-message quedan fuera', () => {
+    mountQuote(
+      { action: 'FromError', errorMessage: 'Error de monto' },
+      { footer: '<p data-test="footer">x</p>' },
+    );
+
+    const card = document.body.querySelector('.gui-quote__card.is-error');
+    const footer = document.body.querySelector('.gui-quote__footer');
+    const action = document.body.querySelector('.gui-quote__action');
+    const errorMessage = document.body.querySelector(
+      '.gui-quote__error-message',
+    );
+
+    expect(card).not.toBeNull();
+    expect(footer).not.toBeNull();
+    expect(footer!.parentElement).toBe(card);
+    expect(card!.contains(action)).toBe(false);
+    expect(card!.contains(errorMessage)).toBe(false);
   });
 });
