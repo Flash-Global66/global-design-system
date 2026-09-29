@@ -39,8 +39,12 @@ describe('Drawer — showBack / back', () => {
 
     const buttons = row!.querySelectorAll('button');
     expect(buttons).toHaveLength(2);
-    expect(buttons[0]).toHaveClass('gui-drawer__header--back');
-    expect(buttons[1]).toHaveClass('gui-drawer__header--close');
+    expect(buttons[0].classList.contains('gui-drawer__header--back')).toBe(
+      true,
+    );
+    expect(buttons[1].classList.contains('gui-drawer__header--close')).toBe(
+      true,
+    );
   });
 
   it('la flecha expone un nombre accesible', () => {
@@ -48,10 +52,9 @@ describe('Drawer — showBack / back', () => {
       props: { modelValue: true, showBack: true },
     });
 
-    expect(container.querySelector(BACK_SELECTOR)).toHaveAttribute(
-      'aria-label',
-      'Volver',
-    );
+    expect(
+      container.querySelector(BACK_SELECTOR)?.getAttribute('aria-label'),
+    ).toBe('Volver');
   });
 
   it('el click en la flecha emite "back" una vez y no emite "close" ni cambia modelValue', async () => {
