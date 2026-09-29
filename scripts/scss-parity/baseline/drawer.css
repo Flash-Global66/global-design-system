@@ -139,7 +139,7 @@
   @apply w-full flex items-center;
 }
 
-.gui-drawer__header--back {
+.gui-drawer__header--back.gui-icon-button {
   @apply w-auto;
 }
 .gui-drawer__header--back .hover-effect {
