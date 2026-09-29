@@ -139,6 +139,9 @@
   @apply w-full flex items-center;
 }
 
+.gui-drawer__header--back {
+  @apply w-auto;
+}
 .gui-drawer__header--back .hover-effect {
   @apply hidden;
 }
