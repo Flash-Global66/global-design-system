@@ -1,0 +1,71 @@
+{
+  "components": {
+    "form-attach-file": {
+      "id": "form-attach-file",
+      "name": "GAttachFile",
+      "path": "./stories/attach-file.stories.ts",
+      "stories": {
+        "form-attach-file--primary": {
+          "id": "form-attach-file--primary",
+          "name": "Básico",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-attach-file--drag-drop": {
+          "id": "form-attach-file--drag-drop",
+          "name": "Arrastrar y Soltar",
+          "snippet": "<script lang=\"ts\" setup>\nimport { action } from \"storybook/actions\";\nimport { ref } from \"vue\";\nimport { GAttachFile } from '@flash-global66/g-attach-file/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst files = ref<File[]>([]);\nconst handleUpdate = (selectedFiles: File[]) => {\n  files.value = selectedFiles;\n  action('update:model-value')(selectedFiles);\n};\nconst handleValidationError = (errors: ValidationError[]) => {\n  action('validation-error')(errors);\n};\nconst handleChange = (selectedFiles: File[]) => {\n  action('change')(selectedFiles);\n};\n</script>\n\n<template>\n  <g-config-provider>\n    <g-attach-file \n      v-model=\"files\"\n      type=\"drag-drop\"\n      upload-button-text=\"Seleccionar archivos\"\n      upload-text=\" o arrastra aquí\"\n      :multiple=\"true\"\n      max-size=\"\"\n      :accept-ext-names=\"[]\"\n      @update:model-value=\"handleUpdate\"\n      @change=\"handleChange\"\n      @validation-error=\"handleValidationError\"\n    />\n  </g-config-provider>\n</template>"
+        },
+        "form-attach-file--component-states": {
+          "id": "form-attach-file--component-states",
+          "name": "Estados del Componente",
+          "warning": "No static snippet: `setup` references `File`, which the snippet cannot declare."
+        },
+        "form-attach-file--flujo-carga-completo": {
+          "id": "form-attach-file--flujo-carga-completo",
+          "name": "Flujo de Carga Completo",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-attach-file--download-mode": {
+          "id": "form-attach-file--download-mode",
+          "name": "Modo Descarga",
+          "warning": "No static snippet: `setup` references `document`, which the snippet cannot declare."
+        },
+        "form-attach-file--download-link": {
+          "id": "form-attach-file--download-link",
+          "name": "Con Link de Descarga",
+          "snippet": "<script lang=\"ts\" setup>\nimport { action } from \"storybook/actions\";\nimport { ref } from \"vue\";\nimport { GAttachFile } from '@flash-global66/g-attach-file/index.ts';\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\n\nconst files = ref<File[]>([]);\nconst filesWithError = ref<File[]>([]);\nconst handleUpdate = (selectedFiles: File[]) => {\n  files.value = selectedFiles;\n  action('update:model-value')(selectedFiles);\n};\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-6\">\n      <div>\n        <h4 class=\"text-sm font-medium mb-2 text-gray-700\">Con link de descarga</h4>\n        <g-attach-file \n          v-model=\"files\"\n          title=\"Registro Único Tributario (RUT)\"\n          info-text=\"Adjunta la composición accionaria firmada.\"\n          download-url=\"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf\"\n          download-link-text=\"Descárgalo desde aquí\"\n          :accept-ext-names=\"['.pdf']\"\n          max-size=\"10MB\"\n          @update:model-value=\"handleUpdate\"\n        />\n      </div>\n\n      <div>\n        <h4 class=\"text-sm font-medium mb-2 text-gray-700\">Con slot de errores de validación</h4>\n        <g-attach-file \n          v-model=\"filesWithError\"\n          title=\"Registro Único Tributario (RUT)\"\n          info-text=\"Adjunta la composición accionaria firmada.\"\n          download-url=\"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf\"\n          download-link-text=\"Descárgalo desde aquí\"\n          :accept-ext-names=\"['.pdf']\"\n          max-size=\"10MB\"\n        >\n          <template #extra-content>\n            <div class=\"flex items-start gap-2\">\n              <span class=\"text-red-500 text-lg\">✕</span>\n              <div>\n                <p class=\"font-semibold text-red-700\">Documento rechazado por:</p>\n                <ol class=\"list-decimal pl-5 text-gray-700 text-sm mt-1 space-y-1\">\n                  <li>Certificado de existencia superior a 30 días.</li>\n                  <li>Certificado de existencia incorrecto. El representante legal del Certificado de existencia no coincide con el representante legal de quien hizo el registro.</li>\n                </ol>\n              </div>\n            </div>\n          </template>\n        </g-attach-file>\n      </div>\n\n      <div>\n        <h4 class=\"text-sm font-medium mb-2 text-gray-700\">Sin link de descarga (comportamiento normal)</h4>\n        <g-attach-file \n          v-model=\"files\"\n          title=\"Documento adicional\"\n          info-text=\"Adjunta cualquier documento relevante.\"\n          :accept-ext-names=\"['.pdf', '.doc', '.docx']\"\n          max-size=\"10MB\"\n          @update:model-value=\"handleUpdate\"\n        />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-attach-file--form-integration": {
+          "id": "form-attach-file--form-integration",
+          "name": "Integración con Formularios",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-attach-file--add-files-method": {
+          "id": "form-attach-file--add-files-method",
+          "name": "Método addFiles",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-attach-file--read-only-single": {
+          "id": "form-attach-file--read-only-single",
+          "name": "Estado Solo Lectura (Un Archivo)",
+          "warning": "No static snippet: `setup` references `File`, which the snippet cannot declare."
+        },
+        "form-attach-file--read-only-multiple": {
+          "id": "form-attach-file--read-only-multiple",
+          "name": "Estado Solo Lectura (Múltiples Archivos)",
+          "warning": "No static snippet: `setup` references `File`, which the snippet cannot declare."
+        },
+        "form-attach-file--read-only-drag-drop": {
+          "id": "form-attach-file--read-only-drag-drop",
+          "name": "Estado Solo Lectura (Drag & Drop)",
+          "warning": "No static snippet: `setup` references `File`, which the snippet cannot declare."
+        },
+        "form-attach-file--default-simple-no-upload-button": {
+          "id": "form-attach-file--default-simple-no-upload-button",
+          "name": "Default simple (sin ícono)",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        }
+      }
+    }
+  }
+}

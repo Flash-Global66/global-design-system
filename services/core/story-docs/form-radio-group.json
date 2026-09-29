@@ -1,0 +1,26 @@
+{
+  "components": {
+    "form-radio-group": {
+      "id": "form-radio-group",
+      "name": "GRadioGroup",
+      "path": "./stories/radio-group.stories.ts",
+      "stories": {
+        "form-radio-group--basic": {
+          "id": "form-radio-group--basic",
+          "name": "Basic",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GRadioGroup } from '../components/radio';\n\nconst selectedValue = ref('Value B');\nconst options = [\n  { value: 'Value A', label: 'Importaciones' },\n  { value: 'Value B', label: 'Inversiones' },\n  { value: 'Value C', label: 'Exportaciones' },\n  { value: 'Value D', label: 'Transferencias', disabled: true },\n  { value: 'Value E', label: 'Otros' },\n];\n</script>\n\n<template>\n  <g-config-provider>\n    <g-radio-group \n      ariaLabel=\"Grupo de opciones exclusivas\" :disabled=\"false\" id=\"custom-radio-group\" layout=\"horizontal\" name=\"radio-group\" validateEvent\n      v-model=\"selectedValue\"\n      :options=\"options\"\n    />\n    <div class=\"text-3 text-primary-txt font-medium mt-5\">\n      Valor seleccionado: {{ selectedValue }}\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-radio-group--disabled-group": {
+          "id": "form-radio-group--disabled-group",
+          "name": "Disabled Group",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-radio-group--vertical-layout": {
+          "id": "form-radio-group--vertical-layout",
+          "name": "Vertical Layout",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GRadioGroup } from '../components/radio';\n\nconst selectedValue = ref('Value B');\nconst options = [\n  { value: 'Value A', label: 'Importaciones' },\n  { value: 'Value B', label: 'Inversiones' },\n  { value: 'Value C', label: 'Exportaciones' },\n  { value: 'Value D', label: 'Transferencias', disabled: true },\n  { value: 'Value E', label: 'Otros' },\n];\n</script>\n\n<template>\n  <g-config-provider>\n    <g-radio-group \n      ariaLabel=\"Grupo de opciones exclusivas\" :disabled=\"false\" id=\"custom-radio-group\" layout=\"vertical\" name=\"radio-group\" validateEvent\n      v-model=\"selectedValue\"\n      :options=\"options\"\n    />\n    <div class=\"text-3 text-primary-txt font-medium mt-5\">\n      Valor seleccionado: {{ selectedValue }}\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

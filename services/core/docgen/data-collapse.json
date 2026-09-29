@@ -1,0 +1,759 @@
+{
+  "components": {
+    "data-collapse": {
+      "id": "data-collapse",
+      "name": "GCollapse",
+      "path": "./stories/collapse.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GCollapse",
+        "displayName": "GCollapse",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "modelValue",
+            "global": false,
+            "default": "mutable([] as const)",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "currently active panel, the type is `string` in accordion mode, otherwise it is `array`"
+              }
+            ],
+            "required": false,
+            "type": "CollapseModelValue | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "CollapseModelValue | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                {
+                  "kind": "array",
+                  "type": "CollapseActiveName[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "expandIconPosition",
+            "global": false,
+            "default": "'right'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set expand icon position"
+              }
+            ],
+            "required": false,
+            "type": "CollapseIconPositionType | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "CollapseIconPositionType | undefined",
+              "schema": [
+                "undefined",
+                "\"left\"",
+                "\"right\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "items",
+            "global": false,
+            "default": "mutable([] as const)",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "items of the collapse component"
+              }
+            ],
+            "required": false,
+            "type": "CollapseItemType[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "CollapseItemType[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "CollapseItemType[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "accordion",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to activate accordion mode"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "beforeCollapse",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "before-collapse hook before the collapse state changes. If `false` is returned or a `Promise` is returned and then is rejected, will stop collapsing"
+              }
+            ],
+            "required": false,
+            "type": "((name: CollapseActiveName) => Awaitable<boolean>) | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "((name: CollapseActiveName) => Awaitable<boolean>) | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(name: CollapseActiveName): Awaitable<boolean>"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[value: CollapseModelValue]",
+            "signature": "(event: \"update:modelValue\", value: CollapseModelValue): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "CollapseModelValue",
+                "schema": [
+                  "string",
+                  "number",
+                  {
+                    "kind": "array",
+                    "type": "CollapseActiveName[]"
+                  }
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "change",
+            "description": "",
+            "tags": [],
+            "type": "[value: CollapseModelValue]",
+            "signature": "(event: \"change\", value: CollapseModelValue): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "CollapseModelValue",
+                "schema": [
+                  "string",
+                  "number",
+                  {
+                    "kind": "array",
+                    "type": "CollapseActiveName[]"
+                  }
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "header-click",
+            "description": "",
+            "tags": [],
+            "type": "[name: CollapseActiveName]",
+            "signature": "(event: \"header-click\", name: CollapseActiveName): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "CollapseActiveName",
+                "schema": [
+                  "string",
+                  "number"
+                ]
+              }
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{ item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{ item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }"
+            },
+            "declarations": []
+          },
+          {
+            "name": "header",
+            "type": "{ item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{ item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }"
+            },
+            "declarations": []
+          },
+          {
+            "name": "dynamic",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "activeNames",
+            "type": "(string | number)[]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "active names"
+              }
+            ],
+            "schema": {
+              "kind": "array",
+              "type": "(string | number)[]"
+            },
+            "declarations": []
+          },
+          {
+            "name": "setActiveNames",
+            "type": "(_activeNames: CollapseActiveName[]) => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set active names"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(_activeNames: CollapseActiveName[]): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/collapse/index.ts"
+      },
+      "argTypes": {
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "defaultValue": {
+            "summary": "mutable([] as const)"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "CollapseActiveName[]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "CollapseModelValue"
+            },
+            "defaultValue": {
+              "summary": "mutable([] as const)"
+            },
+            "category": "props"
+          }
+        },
+        "expandIconPosition": {
+          "name": "expandIconPosition",
+          "description": "",
+          "defaultValue": {
+            "summary": "'right'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "left",
+              "right"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "CollapseIconPositionType"
+            },
+            "defaultValue": {
+              "summary": "'right'"
+            },
+            "category": "props"
+          }
+        },
+        "items": {
+          "name": "items",
+          "description": "",
+          "defaultValue": {
+            "summary": "mutable([] as const)"
+          },
+          "type": {
+            "name": "other",
+            "value": "CollapseItemType[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "CollapseItemType[]"
+            },
+            "defaultValue": {
+              "summary": "mutable([] as const)"
+            },
+            "category": "props"
+          }
+        },
+        "accordion": {
+          "name": "accordion",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "beforeCollapse": {
+          "name": "beforeCollapse",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "((name: CollapseActiveName) => Awaitable<boolean>) | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "((name: CollapseActiveName) => Awaitable<boolean>)"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: CollapseModelValue]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: CollapseModelValue]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: CollapseModelValue]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: CollapseModelValue]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "header-click": {
+          "name": "header-click",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[name: CollapseActiveName]"
+          },
+          "table": {
+            "type": {
+              "summary": "[name: CollapseActiveName]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ item: CollapseItemType; isActive: boolean; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }"
+            },
+            "category": "slots"
+          }
+        },
+        "header": {
+          "name": "header",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ item: CollapseItemType; isActive: boolean; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; }"
+            },
+            "category": "slots"
+          }
+        },
+        "dynamic": {
+          "name": "dynamic",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "activeNames": {
+          "name": "activeNames",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(string | number)[]"
+          },
+          "table": {
+            "type": {
+              "summary": "(string | number)[]"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "setActiveNames": {
+          "name": "setActiveNames",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(_activeNames: CollapseActiveName[]) => void"
+          },
+          "table": {
+            "type": {
+              "summary": "(_activeNames: CollapseActiveName[]) => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GCollapseModels = {\n  /**\n   * @description currently active panel, the type is `string` in accordion mode, otherwise it is `array`\n   * @default mutable([] as const)\n   */\n  modelValue?: CollapseModelValue; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GCollapseProps = {\n  /**\n   * @description set expand icon position\n   * @default 'right'\n   */\n  expandIconPosition?: CollapseIconPositionType;\n  /**\n   * @description items of the collapse component\n   * @default mutable([] as const)\n   */\n  items?: CollapseItemType[];\n  /** @description whether to activate accordion mode */\n  accordion?: boolean;\n  /** @description before-collapse hook before the collapse state changes. If `false` is returned or a `Promise` is returned and then is rejected, will stop collapsing */\n  beforeCollapse?: ((name: CollapseActiveName) => Awaitable<boolean>);\n}\n```\n\n## Events\n\n```\nexport type GCollapseEvents = {\n  \"update:modelValue\": [value: CollapseModelValue];\n  change: [value: CollapseModelValue];\n  \"header-click\": [name: CollapseActiveName];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GCollapseSlots = {\n  default: { item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; };\n  header: { item: CollapseItemType; isActive: boolean | undefined; name: CollapseActiveName; title: string; description: string; disabled: boolean; headerOnly: boolean; expandIconPosition: \"left\" | \"right\"; hideIcon: boolean; iconsLeft: (IconsType | { icon: string; onClick: () => void; })[]; iconsRight: (IconsType | { icon: string; onClick: () => void; })[]; focusing: boolean; };\n  dynamic: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GCollapseExposed = {\n  /** @description active names */\n  activeNames: (string | number)[];\n  /** @description set active names */\n  setActiveNames: (_activeNames: CollapseActiveName[]) => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

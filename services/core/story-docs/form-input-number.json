@@ -1,0 +1,81 @@
+{
+  "components": {
+    "form-input-number": {
+      "id": "form-input-number",
+      "name": "GInputNumber",
+      "path": "./stories/input-number.stories.ts",
+      "stories": {
+        "form-input-number--default": {
+          "id": "form-input-number--default",
+          "name": "Por defecto",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-input-number--disabled": {
+          "id": "form-input-number--disabled",
+          "name": "Deshabilitado",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-input-number--readonly": {
+          "id": "form-input-number--readonly",
+          "name": "Solo lectura",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-input-number--controls-right": {
+          "id": "form-input-number--controls-right",
+          "name": "Controles a la derecha",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-input-number--step-strictly": {
+          "id": "form-input-number--step-strictly",
+          "name": "Paso estricto",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-input-number--min-max": {
+          "id": "form-input-number--min-max",
+          "name": "Min/Max",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-input-number--size": {
+          "id": "form-input-number--size",
+          "name": "Tamaño",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst defaultValue = ref(1);\nconst smallValue = ref(3);\nconst largeValue = ref(7);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex items-center gap-4\">\n      <g-input-number v-model=\"largeValue\" size=\"large\" />\n      <g-input-number v-model=\"defaultValue\" size=\"default\" />\n      <g-input-number v-model=\"smallValue\" size=\"small\" />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input-number--alignment": {
+          "id": "form-input-number--alignment",
+          "name": "Alineación",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst leftValue = ref(123);\nconst centerValue = ref(456);\nconst rightValue = ref(789);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-input-number v-model=\"leftValue\" align=\"left\" />\n      <g-input-number v-model=\"centerValue\" align=\"center\" />\n      <g-input-number v-model=\"rightValue\" align=\"right\" />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input-number--without-controls": {
+          "id": "form-input-number--without-controls",
+          "name": "Sin controles",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst modelValue = ref(10);\n</script>\n\n<template>\n  <g-config-provider><g-input-number v-model=\"modelValue\" :controls=\"false\" /></g-config-provider>\n</template>"
+        },
+        "form-input-number--custom-step": {
+          "id": "form-input-number--custom-step",
+          "name": "Paso personalizado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst step2 = ref(2);\nconst step10 = ref(10);\nconst stepStrictly = ref(0);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <div>\n        <p class=\"text-sm text-gray-600 mb-2\">Paso: 2</p>\n        <g-input-number v-model=\"step2\" :step=\"2\" />\n      </div>\n      <div>\n        <p class=\"text-sm text-gray-600 mb-2\">Paso: 10</p>\n        <g-input-number v-model=\"step10\" :step=\"10\" />\n      </div>\n      <div>\n        <p class=\"text-sm text-gray-600 mb-2\">Paso: 2 (Estricto)</p>\n        <g-input-number v-model=\"stepStrictly\" :step=\"2\" :step-strictly=\"true\" />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input-number--decimal-precision": {
+          "id": "form-input-number--decimal-precision",
+          "name": "Precisión decimal",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst precision2 = ref(1.23);\nconst precision4 = ref(1.2345);\nconst decimalStep = ref(0.5);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <div>\n        <p class=\"text-sm text-gray-600 mb-2\">Precisión: 2</p>\n        <g-input-number v-model=\"precision2\" :precision=\"2\" :step=\"0.01\" />\n      </div>\n      <div>\n        <p class=\"text-sm text-gray-600 mb-2\">Precisión: 4</p>\n        <g-input-number v-model=\"precision4\" :precision=\"4\" :step=\"0.0001\" />\n      </div>\n      <div>\n        <p class=\"text-sm text-gray-600 mb-2\">Paso: 0.5</p>\n        <g-input-number v-model=\"decimalStep\" :step=\"0.5\" />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input-number--with-placeholder": {
+          "id": "form-input-number--with-placeholder",
+          "name": "Con placeholder",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst modelValue = ref(null);\n</script>\n\n<template>\n  <g-config-provider><g-input-number v-model=\"modelValue\" placeholder=\"Ingresa un número\" /></g-config-provider>\n</template>"
+        },
+        "form-input-number--all-sizes": {
+          "id": "form-input-number--all-sizes",
+          "name": "Todos los tamaños",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst smallDefault = ref(1);\nconst smallRight = ref(2);\nconst defaultDefault = ref(3);\nconst defaultRight = ref(4);\nconst largeDefault = ref(5);\nconst largeRight = ref(6);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-6\">\n      <div>\n        <h3 class=\"text-lg font-semibold mb-4\">Tamaño Pequeño</h3>\n        <div class=\"flex items-center gap-4\">\n          <g-input-number v-model=\"smallDefault\" size=\"small\" />\n          <g-input-number v-model=\"smallRight\" size=\"small\" controls-position=\"right\" />\n        </div>\n      </div>\n      <div>\n        <h3 class=\"text-lg font-semibold mb-4\">Tamaño Por Defecto</h3>\n        <div class=\"flex items-center gap-4\">\n          <g-input-number v-model=\"defaultDefault\" size=\"default\" />\n          <g-input-number v-model=\"defaultRight\" size=\"default\" controls-position=\"right\" />\n        </div>\n      </div>\n      <div>\n        <h3 class=\"text-lg font-semibold mb-4\">Tamaño Grande</h3>\n        <div class=\"flex items-center gap-4\">\n          <g-input-number v-model=\"largeDefault\" size=\"large\" />\n          <g-input-number v-model=\"largeRight\" size=\"large\" controls-position=\"right\" />\n        </div>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input-number--with-prefix-suffix": {
+          "id": "form-input-number--with-prefix-suffix",
+          "name": "Con Prefijo y Sufijo",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInputNumber } from '../components/input-number';\n\nconst modelValue = ref(10);\n</script>\n\n<template>\n  <g-config-provider>\n    <g-input-number v-model=\"modelValue\">\n      <template #prefix>\n        <span class=\"text-gray-500 font-medium\">$</span>\n      </template>\n      <template #suffix>\n        <span class=\"text-gray-500 font-medium\">USD</span>\n      </template>\n    </g-input-number>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "components": {
+    "data-segmented": {
+      "id": "data-segmented",
+      "name": "GSegmented",
+      "path": "./stories/segmented.stories.ts",
+      "stories": {
+        "data-segmented--primary": {
+          "id": "data-segmented--primary",
+          "name": "Primary",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GSegmented } from '@flash-global66/g-segmented/index.ts';\n\nconst options = [\n  { label: 'Persona', value: 'person', disabled: false },\n  { label: 'Empresa', value: 'company', disabled: false },\n];\n\nconst value = ref('person');\n</script>\n\n<template>\n  <g-config-provider>\n    <g-segmented\n      v-model=\"value\"\n      :block=\"false\" :disabled=\"false\" :options=\"options\" size=\"md\" validateEvent variant=\"default\"\n    />\n  </g-config-provider>\n</template>"
+        },
+        "data-segmented--disabled": {
+          "id": "data-segmented--disabled",
+          "name": "Disabled",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "data-segmented--block": {
+          "id": "data-segmented--block",
+          "name": "Block",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "data-segmented--custom-content": {
+          "id": "data-segmented--custom-content",
+          "name": "Custom Content",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,641 @@
+{
+  "components": {
+    "basic-logo": {
+      "id": "basic-logo",
+      "name": "GLogo",
+      "path": "./stories/logo.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GLogo",
+        "displayName": "GLogo",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "size",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "\"2xs\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"2xs\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | undefined",
+              "schema": [
+                "undefined",
+                "\"2xs\"",
+                "\"xs\"",
+                "\"sm\"",
+                "\"md\"",
+                "\"lg\"",
+                "\"xl\"",
+                "\"2xl\"",
+                "\"3xl\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "sizeCustom",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "filter",
+            "global": false,
+            "default": "'none'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "\"none\" | \"grayscale\" | \"black\" | \"white\" | \"sepia\" | \"opacity-50\" | \"high-contrast\" | \"invert\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"none\" | \"grayscale\" | \"black\" | \"white\" | \"sepia\" | \"opacity-50\" | \"high-contrast\" | \"invert\" | undefined",
+              "schema": [
+                "undefined",
+                "\"none\"",
+                "\"grayscale\"",
+                "\"black\"",
+                "\"white\"",
+                "\"sepia\"",
+                "\"opacity-50\"",
+                "\"high-contrast\"",
+                "\"invert\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "color",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "lazyLoad",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "name",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": true,
+            "type": "\"icon-bre-b\" | \"icon-global66\" | \"icon-global66-b2b\" | \"icon-global66-b2b-on-dark\" | \"icon-global66-b2c\" | \"icon-global66-b2c-on-dark\" | \"label-global66\" | \"logo-alfin\" | \"logo-banbif\" | \"logo-bancolombia\" | \"logo-bancom\" | \"logo-bbva\" | \"logo-bcp\" | \"logo-bim\" | \"logo-caja-huancayo\" | \"logo-caja-ica\" | \"logo-caja-lima\" | \"logo-caja-los-andes\" | \"logo-caja-piura\" | \"logo-caja-sullana\" | \"logo-caja-tacna\" | \"logo-caja-trujillo\" | \"logo-cce\" | \"logo-citibank\" | \"logo-cmac-arequipa\" | \"logo-compartamos-financiera\" | \"logo-cooperativa-abaco\" | \"logo-credinka\" | \"logo-crediscotia\" | \"logo-dale\" | \"logo-falabella\" | \"logo-financiera-confianza\" | \"logo-financiera-efectiva\" | \"logo-global66\" | \"logo-gnb\" | \"logo-horizontal-global66\" | \"logo-horizontal-global66-b2b\" | \"logo-horizontal-global66-b2b-on-dark\" | \"logo-horizontal-global66-on-dark\" | \"logo-interbank\" | \"logo-ligo\" | \"logo-luqea\" | \"logo-mastercard\" | \"logo-mi-banco\" | \"logo-nacion\" | \"logo-nequi\" | \"logo-pichincha\" | \"logo-plin\" | \"logo-prexpe\" | \"logo-pse\" | \"logo-ripley\" | \"logo-scotiabank\" | \"logo-tarjeta-oh\" | \"logo-vertical-global66\" | \"logo-vertical-global66-b2b\" | \"logo-vertical-global66-b2b-on-dark\" | \"logo-vertical-global66-on-dark\" | \"logo-visa\" | \"logo-yape\"",
+            "schema": {
+              "kind": "enum",
+              "type": "\"icon-bre-b\" | \"icon-global66\" | \"icon-global66-b2b\" | \"icon-global66-b2b-on-dark\" | \"icon-global66-b2c\" | \"icon-global66-b2c-on-dark\" | \"label-global66\" | \"logo-alfin\" | \"logo-banbif\" | \"logo-bancolombia\" | \"logo-bancom\" | \"logo-bbva\" | \"logo-bcp\" | \"logo-bim\" | \"logo-caja-huancayo\" | \"logo-caja-ica\" | \"logo-caja-lima\" | \"logo-caja-los-andes\" | \"logo-caja-piura\" | \"logo-caja-sullana\" | \"logo-caja-tacna\" | \"logo-caja-trujillo\" | \"logo-cce\" | \"logo-citibank\" | \"logo-cmac-arequipa\" | \"logo-compartamos-financiera\" | \"logo-cooperativa-abaco\" | \"logo-credinka\" | \"logo-crediscotia\" | \"logo-dale\" | \"logo-falabella\" | \"logo-financiera-confianza\" | \"logo-financiera-efectiva\" | \"logo-global66\" | \"logo-gnb\" | \"logo-horizontal-global66\" | \"logo-horizontal-global66-b2b\" | \"logo-horizontal-global66-b2b-on-dark\" | \"logo-horizontal-global66-on-dark\" | \"logo-interbank\" | \"logo-ligo\" | \"logo-luqea\" | \"logo-mastercard\" | \"logo-mi-banco\" | \"logo-nacion\" | \"logo-nequi\" | \"logo-pichincha\" | \"logo-plin\" | \"logo-prexpe\" | \"logo-pse\" | \"logo-ripley\" | \"logo-scotiabank\" | \"logo-tarjeta-oh\" | \"logo-vertical-global66\" | \"logo-vertical-global66-b2b\" | \"logo-vertical-global66-b2b-on-dark\" | \"logo-vertical-global66-on-dark\" | \"logo-visa\" | \"logo-yape\"",
+              "schema": [
+                "\"icon-bre-b\"",
+                "\"icon-global66\"",
+                "\"icon-global66-b2b\"",
+                "\"icon-global66-b2b-on-dark\"",
+                "\"icon-global66-b2c\"",
+                "\"icon-global66-b2c-on-dark\"",
+                "\"label-global66\"",
+                "\"logo-alfin\"",
+                "\"logo-banbif\"",
+                "\"logo-bancolombia\"",
+                "\"logo-bancom\"",
+                "\"logo-bbva\"",
+                "\"logo-bcp\"",
+                "\"logo-bim\"",
+                "\"logo-caja-huancayo\"",
+                "\"logo-caja-ica\"",
+                "\"logo-caja-lima\"",
+                "\"logo-caja-los-andes\"",
+                "\"logo-caja-piura\"",
+                "\"logo-caja-sullana\"",
+                "\"logo-caja-tacna\"",
+                "\"logo-caja-trujillo\"",
+                "\"logo-cce\"",
+                "\"logo-citibank\"",
+                "\"logo-cmac-arequipa\"",
+                "\"logo-compartamos-financiera\"",
+                "\"logo-cooperativa-abaco\"",
+                "\"logo-credinka\"",
+                "\"logo-crediscotia\"",
+                "\"logo-dale\"",
+                "\"logo-falabella\"",
+                "\"logo-financiera-confianza\"",
+                "\"logo-financiera-efectiva\"",
+                "\"logo-global66\"",
+                "\"logo-gnb\"",
+                "\"logo-horizontal-global66\"",
+                "\"logo-horizontal-global66-b2b\"",
+                "\"logo-horizontal-global66-b2b-on-dark\"",
+                "\"logo-horizontal-global66-on-dark\"",
+                "\"logo-interbank\"",
+                "\"logo-ligo\"",
+                "\"logo-luqea\"",
+                "\"logo-mastercard\"",
+                "\"logo-mi-banco\"",
+                "\"logo-nacion\"",
+                "\"logo-nequi\"",
+                "\"logo-pichincha\"",
+                "\"logo-plin\"",
+                "\"logo-prexpe\"",
+                "\"logo-pse\"",
+                "\"logo-ripley\"",
+                "\"logo-scotiabank\"",
+                "\"logo-tarjeta-oh\"",
+                "\"logo-vertical-global66\"",
+                "\"logo-vertical-global66-b2b\"",
+                "\"logo-vertical-global66-b2b-on-dark\"",
+                "\"logo-vertical-global66-on-dark\"",
+                "\"logo-visa\"",
+                "\"logo-yape\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [],
+        "slots": [],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/logo/index.ts"
+      },
+      "argTypes": {
+        "size": {
+          "name": "size",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "2xs",
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "2xl",
+              "3xl"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"2xs\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\""
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "sizeCustom": {
+          "name": "sizeCustom",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "filter": {
+          "name": "filter",
+          "description": "",
+          "defaultValue": {
+            "summary": "'none'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "none",
+              "grayscale",
+              "black",
+              "white",
+              "sepia",
+              "opacity-50",
+              "high-contrast",
+              "invert"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"none\" | \"grayscale\" | \"black\" | \"white\" | \"sepia\" | \"opacity-50\" | \"high-contrast\" | \"invert\""
+            },
+            "defaultValue": {
+              "summary": "'none'"
+            },
+            "category": "props"
+          }
+        },
+        "color": {
+          "name": "color",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "lazyLoad": {
+          "name": "lazyLoad",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "name": {
+          "name": "name",
+          "description": "",
+          "type": {
+            "name": "enum",
+            "value": [
+              "icon-bre-b",
+              "icon-global66",
+              "icon-global66-b2b",
+              "icon-global66-b2b-on-dark",
+              "icon-global66-b2c",
+              "icon-global66-b2c-on-dark",
+              "label-global66",
+              "logo-alfin",
+              "logo-banbif",
+              "logo-bancolombia",
+              "logo-bancom",
+              "logo-bbva",
+              "logo-bcp",
+              "logo-bim",
+              "logo-caja-huancayo",
+              "logo-caja-ica",
+              "logo-caja-lima",
+              "logo-caja-los-andes",
+              "logo-caja-piura",
+              "logo-caja-sullana",
+              "logo-caja-tacna",
+              "logo-caja-trujillo",
+              "logo-cce",
+              "logo-citibank",
+              "logo-cmac-arequipa",
+              "logo-compartamos-financiera",
+              "logo-cooperativa-abaco",
+              "logo-credinka",
+              "logo-crediscotia",
+              "logo-dale",
+              "logo-falabella",
+              "logo-financiera-confianza",
+              "logo-financiera-efectiva",
+              "logo-global66",
+              "logo-gnb",
+              "logo-horizontal-global66",
+              "logo-horizontal-global66-b2b",
+              "logo-horizontal-global66-b2b-on-dark",
+              "logo-horizontal-global66-on-dark",
+              "logo-interbank",
+              "logo-ligo",
+              "logo-luqea",
+              "logo-mastercard",
+              "logo-mi-banco",
+              "logo-nacion",
+              "logo-nequi",
+              "logo-pichincha",
+              "logo-plin",
+              "logo-prexpe",
+              "logo-pse",
+              "logo-ripley",
+              "logo-scotiabank",
+              "logo-tarjeta-oh",
+              "logo-vertical-global66",
+              "logo-vertical-global66-b2b",
+              "logo-vertical-global66-b2b-on-dark",
+              "logo-vertical-global66-on-dark",
+              "logo-visa",
+              "logo-yape"
+            ],
+            "required": true
+          },
+          "table": {
+            "type": {
+              "summary": "\"icon-bre-b\" | \"icon-global66\" | \"icon-global66-b2b\" | \"icon-global66-b2b-on-dark\" | \"icon-global66-b2c\" | \"icon-global66-b2c-on-dark\" | \"label-global66\" | \"logo-alfin\" | \"logo-banbif\" | \"logo-bancolombia\" | \"logo-bancom\" | \"logo-bbva\" | \"logo-bcp\" | \"logo-bim\" | \"logo-caja-huancayo\" | \"logo-caja-ica\" | \"logo-caja-lima\" | \"logo-caja-los-andes\" | \"logo-caja-piura\" | \"logo-caja-sullana\" | \"logo-caja-tacna\" | \"logo-caja-trujillo\" | \"logo-cce\" | \"logo-citibank\" | \"logo-cmac-arequipa\" | \"logo-compartamos-financiera\" | \"logo-cooperativa-abaco\" | \"logo-credinka\" | \"logo-crediscotia\" | \"logo-dale\" | \"logo-falabella\" | \"logo-financiera-confianza\" | \"logo-financiera-efectiva\" | \"logo-global66\" | \"logo-gnb\" | \"logo-horizontal-global66\" | \"logo-horizontal-global66-b2b\" | \"logo-horizontal-global66-b2b-on-dark\" | \"logo-horizontal-global66-on-dark\" | \"logo-interbank\" | \"logo-ligo\" | \"logo-luqea\" | \"logo-mastercard\" | \"logo-mi-banco\" | \"logo-nacion\" | \"logo-nequi\" | \"logo-pichincha\" | \"logo-plin\" | \"logo-prexpe\" | \"logo-pse\" | \"logo-ripley\" | \"logo-scotiabank\" | \"logo-tarjeta-oh\" | \"logo-vertical-global66\" | \"logo-vertical-global66-b2b\" | \"logo-vertical-global66-b2b-on-dark\" | \"logo-vertical-global66-on-dark\" | \"logo-visa\" | \"logo-yape\""
+            },
+            "category": "props"
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GLogoProps = {\n  /** @default undefined */\n  size?: \"2xs\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\";\n  /** @default '' */\n  sizeCustom?: string;\n  /** @default 'none' */\n  filter?: \"none\" | \"grayscale\" | \"black\" | \"white\" | \"sepia\" | \"opacity-50\" | \"high-contrast\" | \"invert\";\n  /** @default '' */\n  color?: string;\n  /** @default true */\n  lazyLoad?: boolean;\n  name: \"icon-bre-b\" | \"icon-global66\" | \"icon-global66-b2b\" | \"icon-global66-b2b-on-dark\" | \"icon-global66-b2c\" | \"icon-global66-b2c-on-dark\" | \"label-global66\" | \"logo-alfin\" | \"logo-banbif\" | \"logo-bancolombia\" | \"logo-bancom\" | \"logo-bbva\" | \"logo-bcp\" | \"logo-bim\" | \"logo-caja-huancayo\" | \"logo-caja-ica\" | \"logo-caja-lima\" | \"logo-caja-los-andes\" | \"logo-caja-piura\" | \"logo-caja-sullana\" | \"logo-caja-tacna\" | \"logo-caja-trujillo\" | \"logo-cce\" | \"logo-citibank\" | \"logo-cmac-arequipa\" | \"logo-compartamos-financiera\" | \"logo-cooperativa-abaco\" | \"logo-credinka\" | \"logo-crediscotia\" | \"logo-dale\" | \"logo-falabella\" | \"logo-financiera-confianza\" | \"logo-financiera-efectiva\" | \"logo-global66\" | \"logo-gnb\" | \"logo-horizontal-global66\" | \"logo-horizontal-global66-b2b\" | \"logo-horizontal-global66-b2b-on-dark\" | \"logo-horizontal-global66-on-dark\" | \"logo-interbank\" | \"logo-ligo\" | \"logo-luqea\" | \"logo-mastercard\" | \"logo-mi-banco\" | \"logo-nacion\" | \"logo-nequi\" | \"logo-pichincha\" | \"logo-plin\" | \"logo-prexpe\" | \"logo-pse\" | \"logo-ripley\" | \"logo-scotiabank\" | \"logo-tarjeta-oh\" | \"logo-vertical-global66\" | \"logo-vertical-global66-b2b\" | \"logo-vertical-global66-b2b-on-dark\" | \"logo-vertical-global66-on-dark\" | \"logo-visa\" | \"logo-yape\";\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

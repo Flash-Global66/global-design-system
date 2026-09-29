@@ -1,0 +1,71 @@
+{
+  "components": {
+    "form-switch": {
+      "id": "form-switch",
+      "name": "GSwitch",
+      "path": "./stories/switch.stories.ts",
+      "stories": {
+        "form-switch--primary": {
+          "id": "form-switch--primary",
+          "name": "Uso básico",
+          "warning": "No static snippet: `setup` references `args`, which the snippet cannot declare."
+        },
+        "form-switch--sizes": {
+          "id": "form-switch--sizes",
+          "name": "Tamaños",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst valueLarge = ref(true);\nconst valueDefault = ref(true);\nconst valueSmall = ref(true);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-16\">Large:</span>\n        <g-switch v-model=\"valueLarge\" size=\"large\" />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-16\">Default:</span>\n        <g-switch v-model=\"valueDefault\" />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-16\">Small:</span>\n        <g-switch v-model=\"valueSmall\" size=\"small\" />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--text-description": {
+          "id": "form-switch--text-description",
+          "name": "Descripción de texto",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(true);\nconst value2 = ref(true);\nconst value3 = ref(true);\nconst value4 = ref(true);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Con texto:</span>\n        <g-switch\n          v-model=\"value1\"\n          active-text=\"Pagar por año\"\n          inactive-text=\"Pagar por mes\"\n        />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Inline prompt:</span>\n        <g-switch\n          v-model=\"value2\"\n          active-text=\"Pagar por año\"\n          inactive-text=\"Pagar por mes\"\n          inline-prompt\n          width=\"160px\"\n        />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Texto corto:</span>\n        <g-switch\n          v-model=\"value3\"\n          active-text=\"On\"\n          inactive-text=\"Off\"\n          inline-prompt\n        />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Solo activo:</span>\n        <g-switch\n          v-model=\"value4\"\n          active-text=\"Abierto\"\n          inline-prompt\n        />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--custom-icons": {
+          "id": "form-switch--custom-icons",
+          "name": "Iconos personalizados",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(true);\nconst value2 = ref(true);\nconst value3 = ref(true);\nconst value4 = ref(true);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-6\">\n        <span class=\"w-40 text-sm\">Aprobado/Rechazado:</span>\n        <g-switch\n          v-model=\"value1\"\n          active-icon=\"solid check\"\n          inactive-icon=\"solid times\"\n        />\n      </div>\n      <div class=\"flex items-center gap-6\">\n        <span class=\"w-40 text-sm\">Inline prompt:</span>\n        <g-switch\n          v-model=\"value2\"\n          active-icon=\"solid check\"\n          inactive-icon=\"solid times\"\n          inline-prompt\n        />\n      </div>\n      <div class=\"flex items-center gap-6\">\n        <span class=\"w-40 text-sm\">Tema claro/oscuro:</span>\n        <g-switch\n          v-model=\"value3\"\n          active-icon=\"solid lightbulb\"\n          inactive-icon=\"regular circle-xmark\"\n          inline-prompt\n        />\n      </div>\n      <div class=\"flex items-center gap-6\">\n        <span class=\"w-40 text-sm\">Visibilidad:</span>\n        <g-switch\n          v-model=\"value4\"\n          active-icon=\"regular eye\"\n          inactive-icon=\"regular eye-slash\"\n          inline-prompt\n        />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--extended-value-types": {
+          "id": "form-switch--extended-value-types",
+          "name": "Tipos de valor extendidos",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(100);\nconst value2 = ref('yes');\nconst value3 = ref(1);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Números:</span>\n        <g-switch\n          v-model=\"value1\"\n          :active-value=\"100\"\n          :inactive-value=\"0\"\n          active-text=\"100\"\n          inactive-text=\"0\"\n        />\n        <span class=\"text-sm\">Valor: {{ value1 }}</span>\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Strings:</span>\n        <g-switch\n          v-model=\"value2\"\n          active-value=\"yes\"\n          inactive-value=\"no\"\n          active-text=\"Sí\"\n          inactive-text=\"No\"\n        />\n        <span class=\"text-sm\">Valor: {{ value2 }}</span>\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Mixto:</span>\n        <g-switch\n          v-model=\"value3\"\n          :active-value=\"1\"\n          inactive-value=\"off\"\n          active-text=\"On\"\n          inactive-text=\"Off\"\n        />\n        <span class=\"text-sm\">Valor: {{ value3 }}</span>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--disabled": {
+          "id": "form-switch--disabled",
+          "name": "Deshabilitado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(true);\nconst value2 = ref(false);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Deshabilitado ON:</span>\n        <g-switch v-model=\"value1\" disabled />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Deshabilitado OFF:</span>\n        <g-switch v-model=\"value2\" disabled />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Con texto:</span>\n        <g-switch\n          v-model=\"value1\"\n          disabled\n          active-text=\"Activo\"\n          inactive-text=\"Inactivo\"\n        />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--loading": {
+          "id": "form-switch--loading",
+          "name": "Estado de carga",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(true);\nconst value2 = ref(false);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Cargando ON:</span>\n        <g-switch v-model=\"value1\" loading />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Cargando OFF:</span>\n        <g-switch v-model=\"value2\" loading />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Con texto:</span>\n        <g-switch\n          v-model=\"value1\"\n          loading\n          active-text=\"Guardando...\"\n          inactive-text=\"Desconectado\"\n        />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--prevent-switching": {
+          "id": "form-switch--prevent-switching",
+          "name": "Prevenir cambio",
+          "warning": "No static snippet: `setup` references `confirm`, `setTimeout`, which the snippet cannot declare."
+        },
+        "form-switch--custom-action-icons": {
+          "id": "form-switch--custom-action-icons",
+          "name": "Iconos de acción personalizados",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(true);\nconst value2 = ref(false);\nconst value3 = ref(true);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span>Encendido/Apagado:</span>\n        <g-switch\n          v-model=\"value1\"\n          active-action-icon=\"solid check-circle\"\n          inactive-action-icon=\"regular circle-xmark\"\n        />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span>Configuración:</span>\n        <g-switch\n          v-model=\"value2\"\n          active-action-icon=\"regular gear\"\n          inactive-action-icon=\"regular gear\"\n          active-text=\"Avanzado\"\n          inactive-text=\"Básico\"\n        />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span>Notificaciones:</span>\n        <g-switch\n          v-model=\"value3\"\n          active-action-icon=\"regular bell\"\n          inactive-action-icon=\"regular circle-xmark\"\n          width=\"60px\"\n        />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--custom-action-slots": {
+          "id": "form-switch--custom-action-slots",
+          "name": "Slots de acción personalizados",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(true);\nconst value2 = ref(false);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Con badges:</span>\n        <g-switch v-model=\"value1\" width=\"80px\">\n          <template #active-action>\n            <span class=\"bg-green-500 text-white text-sm px-2 py-1.5 rounded font-medium\">ON</span>\n          </template>\n          <template #inactive-action>\n            <span class=\"bg-red-500 text-white text-sm px-2 py-1.5 rounded font-medium\">OFF</span>\n          </template>\n        </g-switch>\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Con números:</span>\n        <g-switch v-model=\"value2\" width=\"60px\">\n          <template #active-action>\n            <span class=\"text-sm font-bold\">1</span>\n          </template>\n          <template #inactive-action>\n            <span class=\"text-sm font-bold\">0</span>\n          </template>\n        </g-switch>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--custom-width": {
+          "id": "form-switch--custom-width",
+          "name": "Ancho personalizado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSwitch } from '@flash-global66/g-switch/index.ts';\n\nconst value1 = ref(true);\nconst value2 = ref(true);\nconst value3 = ref(true);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Ancho 40px:</span>\n        <g-switch v-model=\"value1\" width=\"40px\" />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Ancho 100px:</span>\n        <g-switch\n          v-model=\"value2\"\n          width=\"100px\"\n          active-text=\"On\"\n          inactive-text=\"Off\"\n          inline-prompt\n        />\n      </div>\n      <div class=\"flex items-center gap-4\">\n        <span class=\"w-32\">Ancho 140px:</span>\n        <g-switch\n          v-model=\"value3\"\n          width=\"140px\"\n          active-text=\"Habilitado\"\n          inactive-text=\"Deshabilitado\"\n          inline-prompt\n        />\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-switch--form-validation": {
+          "id": "form-switch--form-validation",
+          "name": "Validación de formulario",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        }
+      }
+    }
+  }
+}

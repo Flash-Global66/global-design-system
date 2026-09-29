@@ -1,0 +1,1546 @@
+{
+  "components": {
+    "form-attach-file": {
+      "id": "form-attach-file",
+      "name": "GAttachFile",
+      "path": "./stories/attach-file.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GAttachFile",
+        "displayName": "GAttachFile",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "modelValue",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "File[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "File[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "File[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "type",
+            "global": false,
+            "default": "'default'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "\"default\" | \"drag-drop\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"default\" | \"drag-drop\" | undefined",
+              "schema": [
+                "undefined",
+                "\"default\"",
+                "\"drag-drop\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "mode",
+            "global": false,
+            "default": "ATTACH_FILE_MODES.UPLOAD",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "AttachFileMode | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "AttachFileMode | undefined",
+              "schema": [
+                "undefined",
+                "\"download\"",
+                "\"upload\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "inputId",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "acceptExtNames",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "string[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "maxSize",
+            "global": false,
+            "default": "'10MB'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "multiple",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "maxFiles",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateEvent",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "uploadButtonText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "title",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "uploadText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "restrictionText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "infoText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "downloadUrl",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "downloadLinkText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "uploading",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "uploadError",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | boolean | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fileErrors",
+            "global": false,
+            "default": "{}",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "Record<number, string> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Record<number, string> | undefined",
+              "schema": [
+                "undefined",
+                "Record<number, string>"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fileProgress",
+            "global": false,
+            "default": "{}",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "Record<number, number> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Record<number, number> | undefined",
+              "schema": [
+                "undefined",
+                "Record<number, number>"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "errors",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "string[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showFileSize",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showRemoveButton",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showUploadButton",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[files: File[]]",
+            "signature": "(event: \"update:modelValue\", files: File[]): void",
+            "schema": [
+              {
+                "kind": "array",
+                "type": "File[]"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "change",
+            "description": "",
+            "tags": [],
+            "type": "[files: File[]]",
+            "signature": "(event: \"change\", files: File[]): void",
+            "schema": [
+              {
+                "kind": "array",
+                "type": "File[]"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "error",
+            "description": "",
+            "tags": [],
+            "type": "[errors: string[]]",
+            "signature": "(event: \"error\", errors: string[]): void",
+            "schema": [
+              {
+                "kind": "array",
+                "type": "string[]"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "validation-error",
+            "description": "",
+            "tags": [],
+            "type": "[errors: ValidationError[]]",
+            "signature": "(event: \"validation-error\", errors: ValidationError[]): void",
+            "schema": [
+              {
+                "kind": "array",
+                "type": "ValidationError[]"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "onRetry",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"onRetry\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "download",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"download\"): void",
+            "schema": [],
+            "declarations": []
+          },
+          {
+            "name": "clearProgress",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"clearProgress\"): void",
+            "schema": [],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "extra-content",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "addFiles",
+            "type": "(newFiles: File[]) => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(newFiles: File[]): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "openFilePicker",
+            "type": "() => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/attach-file/index.ts"
+      },
+      "argTypes": {
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "File[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "File[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "type": {
+          "name": "type",
+          "description": "",
+          "defaultValue": {
+            "summary": "'default'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "default",
+              "drag-drop"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"default\" | \"drag-drop\""
+            },
+            "defaultValue": {
+              "summary": "'default'"
+            },
+            "category": "props"
+          }
+        },
+        "mode": {
+          "name": "mode",
+          "description": "",
+          "defaultValue": {
+            "summary": "ATTACH_FILE_MODES.UPLOAD"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "download",
+              "upload"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "AttachFileMode"
+            },
+            "defaultValue": {
+              "summary": "ATTACH_FILE_MODES.UPLOAD"
+            },
+            "category": "props"
+          }
+        },
+        "inputId": {
+          "name": "inputId",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "acceptExtNames": {
+          "name": "acceptExtNames",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "string[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "maxSize": {
+          "name": "maxSize",
+          "description": "",
+          "defaultValue": {
+            "summary": "'10MB'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'10MB'"
+            },
+            "category": "props"
+          }
+        },
+        "multiple": {
+          "name": "multiple",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "maxFiles": {
+          "name": "maxFiles",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "validateEvent": {
+          "name": "validateEvent",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "uploadButtonText": {
+          "name": "uploadButtonText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "title": {
+          "name": "title",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "uploadText": {
+          "name": "uploadText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "restrictionText": {
+          "name": "restrictionText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "infoText": {
+          "name": "infoText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "downloadUrl": {
+          "name": "downloadUrl",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "downloadLinkText": {
+          "name": "downloadLinkText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "uploading": {
+          "name": "uploading",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "uploadError": {
+          "name": "uploadError",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "boolean",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "fileErrors": {
+          "name": "fileErrors",
+          "description": "",
+          "defaultValue": {
+            "summary": "{}"
+          },
+          "type": {
+            "name": "other",
+            "value": "Record<number, string> | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Record<number, string>"
+            },
+            "defaultValue": {
+              "summary": "{}"
+            },
+            "category": "props"
+          }
+        },
+        "fileProgress": {
+          "name": "fileProgress",
+          "description": "",
+          "defaultValue": {
+            "summary": "{}"
+          },
+          "type": {
+            "name": "other",
+            "value": "Record<number, number> | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Record<number, number>"
+            },
+            "defaultValue": {
+              "summary": "{}"
+            },
+            "category": "props"
+          }
+        },
+        "errors": {
+          "name": "errors",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "string[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "showFileSize": {
+          "name": "showFileSize",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "showRemoveButton": {
+          "name": "showRemoveButton",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "showUploadButton": {
+          "name": "showUploadButton",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[files: File[]]"
+          },
+          "table": {
+            "type": {
+              "summary": "[files: File[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[files: File[]]"
+          },
+          "table": {
+            "type": {
+              "summary": "[files: File[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "error": {
+          "name": "error",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[errors: string[]]"
+          },
+          "table": {
+            "type": {
+              "summary": "[errors: string[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "validation-error": {
+          "name": "validation-error",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[errors: ValidationError[]]"
+          },
+          "table": {
+            "type": {
+              "summary": "[errors: ValidationError[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "onRetry": {
+          "name": "onRetry",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "download": {
+          "name": "download",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "clearProgress": {
+          "name": "clearProgress",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "extra-content": {
+          "name": "extra-content",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "addFiles": {
+          "name": "addFiles",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(newFiles: File[]) => void"
+          },
+          "table": {
+            "type": {
+              "summary": "(newFiles: File[]) => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "openFilePicker": {
+          "name": "openFilePicker",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => void"
+          },
+          "table": {
+            "type": {
+              "summary": "() => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GAttachFileModels = {\n  /** @default [] */\n  modelValue?: File[]; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GAttachFileProps = {\n  /** @default 'default' */\n  type?: \"default\" | \"drag-drop\";\n  /** @default ATTACH_FILE_MODES.UPLOAD */\n  mode?: AttachFileMode;\n  /** @default undefined */\n  inputId?: string;\n  /** @default [] */\n  acceptExtNames?: string[];\n  /** @default '10MB' */\n  maxSize?: string;\n  /** @default true */\n  multiple?: boolean;\n  /** @default undefined */\n  maxFiles?: number;\n  /** @default false */\n  disabled?: boolean;\n  /** @default true */\n  validateEvent?: boolean;\n  /** @default '' */\n  uploadButtonText?: string;\n  /** @default '' */\n  title?: string;\n  /** @default '' */\n  uploadText?: string;\n  /** @default '' */\n  restrictionText?: string;\n  /** @default '' */\n  infoText?: string;\n  /** @default '' */\n  downloadUrl?: string;\n  /** @default '' */\n  downloadLinkText?: string;\n  /** @default false */\n  uploading?: boolean;\n  /** @default false */\n  uploadError?: string | boolean;\n  /** @default {} */\n  fileErrors?: Record<number, string>;\n  /** @default {} */\n  fileProgress?: Record<number, number>;\n  /** @default [] */\n  errors?: string[];\n  /** @default true */\n  showFileSize?: boolean;\n  /** @default true */\n  showRemoveButton?: boolean;\n  /** @default true */\n  showUploadButton?: boolean;\n}\n```\n\n## Events\n\n```\nexport type GAttachFileEvents = {\n  \"update:modelValue\": [files: File[]];\n  change: [files: File[]];\n  error: [errors: string[]];\n  \"validation-error\": [errors: ValidationError[]];\n  onRetry: [];\n  download: [];\n  clearProgress: [];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GAttachFileSlots = {\n  \"extra-content\": {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GAttachFileExposed = {\n  addFiles: (newFiles: File[]) => void;\n  openFilePicker: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

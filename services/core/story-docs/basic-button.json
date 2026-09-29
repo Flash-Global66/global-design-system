@@ -1,0 +1,39 @@
+{
+  "components": {
+    "basic-button": {
+      "id": "basic-button",
+      "name": "GButton",
+      "path": "./stories/button.stories.ts",
+      "stories": {
+        "basic-button--primary": {
+          "id": "basic-button--primary",
+          "name": "Primary"
+        },
+        "basic-button--secondary": {
+          "id": "basic-button--secondary",
+          "name": "Secondary"
+        },
+        "basic-button--tertiary": {
+          "id": "basic-button--tertiary",
+          "name": "Tertiary"
+        },
+        "basic-button--states": {
+          "id": "basic-button--states",
+          "name": "States"
+        },
+        "basic-button--with-icons": {
+          "id": "basic-button--with-icons",
+          "name": "With Icons"
+        },
+        "basic-button--sizes": {
+          "id": "basic-button--sizes",
+          "name": "Sizes"
+        },
+        "basic-button--icon-sizes": {
+          "id": "basic-button--icon-sizes",
+          "name": "Icon Sizes"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "components": {
+    "data-pagination": {
+      "id": "data-pagination",
+      "name": "GPagination",
+      "path": "./stories/pagination.stories.ts",
+      "stories": {
+        "data-pagination--basic": {
+          "id": "data-pagination--basic",
+          "name": "Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GPagination } from '@flash-global66/g-pagination/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-pagination align=\"left\" :disabled=\"false\" hideOnSinglePage :pagerCount=\"7\" :total=\"1000\" />\n  </g-config-provider>\n</template>"
+        },
+        "data-pagination--large-dataset": {
+          "id": "data-pagination--large-dataset",
+          "name": "Controlado con v-model",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "data-pagination--card-pagination": {
+          "id": "data-pagination--card-pagination",
+          "name": "Paginación de tarjetas",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "components": {
+    "data-avatar": {
+      "id": "data-avatar",
+      "name": "Avatar",
+      "path": "./stories/avatar.stories.ts",
+      "stories": {
+        "data-avatar--default": {
+          "id": "data-avatar--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

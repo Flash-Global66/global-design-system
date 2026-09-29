@@ -1,0 +1,31 @@
+{
+  "components": {
+    "form-date-picker": {
+      "id": "form-date-picker",
+      "name": "GDatePicker",
+      "path": "./stories/date-picker.stories.ts",
+      "stories": {
+        "form-date-picker--basic": {
+          "id": "form-date-picker--basic",
+          "name": "Básico"
+        },
+        "form-date-picker--range": {
+          "id": "form-date-picker--range",
+          "name": "Modo Rango"
+        },
+        "form-date-picker--date-time": {
+          "id": "form-date-picker--date-time",
+          "name": "Fecha y Hora"
+        },
+        "form-date-picker--disabled-dates": {
+          "id": "form-date-picker--disabled-dates",
+          "name": "Fechas Deshabilitadas"
+        },
+        "form-date-picker--different-types": {
+          "id": "form-date-picker--different-types",
+          "name": "Diferentes Tipos"
+        }
+      }
+    }
+  }
+}

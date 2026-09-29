@@ -1,0 +1,957 @@
+{
+  "components": {
+    "data-segmented": {
+      "id": "data-segmented",
+      "name": "GSegmented",
+      "path": "./stories/segmented.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GSegmented",
+        "displayName": "GSegmented",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "variant",
+            "global": false,
+            "default": "'default'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VariantSegmented | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VariantSegmented | undefined",
+              "schema": [
+                "undefined",
+                "\"default\"",
+                "\"primary\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "rounded",
+            "global": false,
+            "default": "'md'",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "RoundedSegmented | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "RoundedSegmented | undefined",
+              "schema": [
+                "undefined",
+                "\"md\"",
+                "\"lg\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "classItem",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "options",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "options of segmented"
+              }
+            ],
+            "required": false,
+            "type": "OptionSegmented[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "OptionSegmented[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "OptionSegmented[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "modelValue",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "binding value"
+              }
+            ],
+            "required": false,
+            "type": "string | number | boolean | null | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | boolean | null | undefined",
+              "schema": [
+                "undefined",
+                "null",
+                "string",
+                "number",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "block",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "fit width of parent content"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "size",
+            "global": false,
+            "default": "'md'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "size of component"
+              }
+            ],
+            "required": false,
+            "type": "SizeSegmented | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "SizeSegmented | undefined",
+              "schema": [
+                "undefined",
+                "\"md\"",
+                "\"sm\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether segmented is disabled"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateEvent",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to trigger form validation"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "messageError",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "helpText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "id",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native input id"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "name",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native `name` attribute"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLabel",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[val: any]",
+            "signature": "(event: \"update:modelValue\", val: any): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "change",
+            "description": "",
+            "tags": [],
+            "type": "[val: any]",
+            "signature": "(event: \"change\", val: any): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{ item: OptionSegmented; isActive: boolean; }",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{ item: OptionSegmented; isActive: boolean; }"
+            },
+            "declarations": []
+          },
+          {
+            "name": "help",
+            "type": "{ error: string | undefined; isError: boolean; }",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{ error: string | undefined; isError: boolean; }"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/segmented/index.ts"
+      },
+      "argTypes": {
+        "variant": {
+          "name": "variant",
+          "description": "",
+          "defaultValue": {
+            "summary": "'default'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "default",
+              "primary"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "VariantSegmented"
+            },
+            "defaultValue": {
+              "summary": "'default'"
+            },
+            "category": "props"
+          }
+        },
+        "rounded": {
+          "name": "rounded",
+          "description": "",
+          "defaultValue": {
+            "summary": "'md'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "md",
+              "lg"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "RoundedSegmented"
+            },
+            "defaultValue": {
+              "summary": "'md'"
+            },
+            "category": "props"
+          }
+        },
+        "classItem": {
+          "name": "classItem",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "options": {
+          "name": "options",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "OptionSegmented[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "OptionSegmented[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "null",
+                "required": false
+              },
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              },
+              {
+                "name": "boolean",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number | boolean | null"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "block": {
+          "name": "block",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "size": {
+          "name": "size",
+          "description": "",
+          "defaultValue": {
+            "summary": "'md'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "md",
+              "sm"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "SizeSegmented"
+            },
+            "defaultValue": {
+              "summary": "'md'"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "validateEvent": {
+          "name": "validateEvent",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "messageError": {
+          "name": "messageError",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "helpText": {
+          "name": "helpText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "id": {
+          "name": "id",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "name": {
+          "name": "name",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLabel": {
+          "name": "ariaLabel",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[val: any]"
+          },
+          "table": {
+            "type": {
+              "summary": "[val: any]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[val: any]"
+          },
+          "table": {
+            "type": {
+              "summary": "[val: any]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ item: OptionSegmented; isActive: boolean; }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ item: OptionSegmented; isActive: boolean; }"
+            },
+            "category": "slots"
+          }
+        },
+        "help": {
+          "name": "help",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ error: string | undefined; isError: boolean; }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ error: string; isError: boolean; }"
+            },
+            "category": "slots"
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GSegmentedModels = {\n  /**\n   * @description binding value\n   * @default undefined\n   */\n  modelValue?: string | number | boolean | null; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GSegmentedProps = {\n  /** @default 'default' */\n  variant?: VariantSegmented;\n  /** @default 'md' */\n  rounded?: RoundedSegmented;\n  /** @default '' */\n  classItem?: string;\n  /**\n   * @description options of segmented\n   * @default []\n   */\n  options?: OptionSegmented[];\n  /** @description fit width of parent content */\n  block?: boolean;\n  /**\n   * @description size of component\n   * @default 'md'\n   */\n  size?: SizeSegmented;\n  /** @description whether segmented is disabled */\n  disabled?: boolean;\n  /**\n   * @description whether to trigger form validation\n   * @default true\n   */\n  validateEvent?: boolean;\n  /** @default '' */\n  messageError?: string;\n  /** @default '' */\n  helpText?: string;\n  /** @description native input id */\n  id?: string;\n  /** @description native `name` attribute */\n  name?: string;\n  ariaLabel?: string;\n}\n```\n\n## Events\n\n```\nexport type GSegmentedEvents = {\n  \"update:modelValue\": [val: any];\n  change: [val: any];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GSegmentedSlots = {\n  default: { item: OptionSegmented; isActive: boolean; };\n  help: { error: string | undefined; isError: boolean; };\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

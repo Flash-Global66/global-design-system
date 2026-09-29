@@ -1,0 +1,36 @@
+{
+  "components": {
+    "form-time-picker": {
+      "id": "form-time-picker",
+      "name": "GTimePicker",
+      "path": "./stories/time-picker.stories.ts",
+      "stories": {
+        "form-time-picker--basic": {
+          "id": "form-time-picker--basic",
+          "name": "Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GTimePicker } from '../components/time-picker';\n\nconst value = ref('');\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-time-picker clearable endPlaceholder=\"Hora fin\" format=\"HH:mm:ss\" label=\"Seleccione hora\" startPlaceholder=\"Hora inicio\" v-model=\"value\" />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-time-picker--range": {
+          "id": "form-time-picker--range",
+          "name": "Modo Rango",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GTimePicker } from '../components/time-picker';\n\nconst value = ref([]);\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-time-picker\n        v-model=\"value\"\n        is-range\n        start-placeholder=\"Hora inicio\"\n        end-placeholder=\"Hora fin\"\n        label=\"Seleccione rango\"\n        range-separator=\"|\"\n        format=\"HH:mm:ss\"\n      />\n      <div>Rango seleccionado: {{ value }}</div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-time-picker--disabled-times": {
+          "id": "form-time-picker--disabled-times",
+          "name": "Horas Deshabilitadas",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-time-picker--custom-format": {
+          "id": "form-time-picker--custom-format",
+          "name": "Formato Personalizado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GTimePicker } from '../components/time-picker';\n\nconst value = ref('');\nconst format = 'hh:mm A';\nconst valueFormat = 'HH:mm:ss';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <div class=\"grid grid-cols-2 gap-4\">\n        <g-time-picker\n          v-model=\"value\"\n          :format=\"format\"\n          :value-format=\"valueFormat\"\n          label=\"Ej: 02:30 PM\"\n        />\n        <div>\n          <p>Valor mostrado: {{ value }}</p>\n        </div>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-time-picker--states": {
+          "id": "form-time-picker--states",
+          "name": "Estados",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GTimePicker } from '../components/time-picker';\n\nconst time = ref('');\nconst timeDisabled = ref('');\nconst timeHelpText = ref('');\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-time-picker\n        class=\"my-2\"\n        v-model=\"time\"\n        label=\"Normal\"\n      />\n\n      <g-time-picker\n        v-model=\"timeDisabled\"\n        label=\"Deshabilitado\"\n        disabled\n      />\n\n      <g-time-picker\n        v-model=\"timeHelpText\"\n        label=\"Texto con error\"\n        messageError=\"Debe ser mayor de 18 años\"\n      />\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

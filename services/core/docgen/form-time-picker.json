@@ -1,0 +1,2791 @@
+{
+  "components": {
+    "form-time-picker": {
+      "id": "form-time-picker",
+      "name": "GTimePicker",
+      "path": "./stories/time-picker.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GTimePicker",
+        "displayName": "GTimePicker",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "popperClass",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom class name for TimePicker's dropdown"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "type",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "type of the picker"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "clearable",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show clear button"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "clearIcon",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Custom clear icon component"
+              }
+            ],
+            "required": false,
+            "type": "string | boolean | Component | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | boolean | Component | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "false",
+                "true",
+                {
+                  "kind": "object",
+                  "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>"
+                },
+                {
+                  "kind": "event",
+                  "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, \"expose\">): any"
+                },
+                {
+                  "kind": "object",
+                  "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "editable",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the input is editable"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "prefixIcon",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Custom prefix icon component"
+              }
+            ],
+            "required": false,
+            "type": "IconString | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "IconString | undefined",
+              "schema": [
+                "undefined",
+                "\"kit send\"",
+                "\"kit deposit\"",
+                "\"kit exchange\"",
+                "\"solid exchange\"",
+                "\"solid user-secret\"",
+                "\"solid home\"",
+                "\"solid paper-plane\"",
+                "\"solid ticket-alt\"",
+                "\"solid wallet\"",
+                "\"solid question-circle\"",
+                "\"solid circle-question\"",
+                "\"solid info-circle\"",
+                "\"solid user-plus\"",
+                "\"solid user-times\"",
+                "\"solid times-circle\"",
+                "\"solid check-circle\"",
+                "\"solid file-signature\"",
+                "\"solid edit\"",
+                "\"solid trash\"",
+                "\"solid plus-circle\"",
+                "\"solid minus-circle\"",
+                "\"solid divide\"",
+                "\"solid chevron-right\"",
+                "\"solid chevron-left\"",
+                "\"solid money-bill-wave\"",
+                "\"solid long-arrow-alt-left\"",
+                "\"solid file-invoice-dollar\"",
+                "\"solid undo-alt\"",
+                "\"solid credit-card\"",
+                "\"solid ellipsis-v\"",
+                "\"solid bullhorn\"",
+                "\"solid file-alt\"",
+                "\"solid mars\"",
+                "\"solid venus\"",
+                "\"solid users\"",
+                "\"solid building\"",
+                "\"solid money-check-alt\"",
+                "\"solid lock\"",
+                "\"solid question\"",
+                "\"solid angle-down\"",
+                "\"solid download\"",
+                "\"solid search\"",
+                "\"solid university\"",
+                "\"solid pencil-alt\"",
+                "\"solid save\"",
+                "\"solid file-excel\"",
+                "\"solid user-slash\"",
+                "\"solid exclamation-triangle\"",
+                "\"solid dollar-sign\"",
+                "\"solid arrow-right\"",
+                "\"solid hand-holding-usd\"",
+                "\"solid sort\"",
+                "\"solid trash-alt\"",
+                "\"solid caret-down\"",
+                "\"solid clock\"",
+                "\"solid bars\"",
+                "\"solid store\"",
+                "\"solid arrow-up-from-bracket\"",
+                "\"solid arrow-down-to-bracket\"",
+                "\"solid usd-circle\"",
+                "\"solid user\"",
+                "\"solid sign-out\"",
+                "\"solid arrow-left\"",
+                "\"solid external-link-square-alt\"",
+                "\"solid user-edit\"",
+                "\"solid file-image\"",
+                "\"solid upload\"",
+                "\"solid file-word\"",
+                "\"solid file-pdf\"",
+                "\"solid file\"",
+                "\"solid exclamation-circle\"",
+                "\"solid check\"",
+                "\"solid sort-alt\"",
+                "\"solid lock-alt\"",
+                "\"solid long-arrow-alt-right\"",
+                "\"solid long-arrow-alt-down\"",
+                "\"solid arrow-alt-down\"",
+                "\"solid minus\"",
+                "\"solid equals\"",
+                "\"solid times\"",
+                "\"solid circle\"",
+                "\"solid asterisk\"",
+                "\"solid copy\"",
+                "\"solid users-medical\"",
+                "\"solid exclamation\"",
+                "\"solid hand-paper\"",
+                "\"solid camera\"",
+                "\"solid undo\"",
+                "\"solid user-cog\"",
+                "\"solid dot-circle\"",
+                "\"solid folder-download\"",
+                "\"solid filter\"",
+                "\"solid envelope\"",
+                "\"solid at\"",
+                "\"solid id-card\"",
+                "\"solid receipt\"",
+                "\"solid caret-up\"",
+                "\"solid triangle\"",
+                "\"solid lightbulb\"",
+                "\"solid sliders-simple\"",
+                "\"solid spinner\"",
+                "\"solid timer\"",
+                "\"solid gift\"",
+                "\"solid book\"",
+                "\"solid chart-mixed-up-circle-dollar\"",
+                "\"solid circle-dollar\"",
+                "\"solid key-skeleton\"",
+                "\"solid mobile\"",
+                "\"solid qrcode\"",
+                "\"solid calendar\"",
+                "\"solid eye\"",
+                "\"solid eye-slash\"",
+                "\"solid gear\"",
+                "\"solid unlock\"",
+                "\"solid bell\"",
+                "\"solid 1\"",
+                "\"solid 2\"",
+                "\"solid 3\"",
+                "\"solid pen\"",
+                "\"solid pencil\"",
+                "\"solid user-group\"",
+                "\"solid shield-check\"",
+                "\"solid arrow-trend-up\"",
+                "\"solid chart-simple\"",
+                "\"solid money-bills-simple\"",
+                "\"regular paper-plane\"",
+                "\"regular wallet\"",
+                "\"regular circle-question\"",
+                "\"regular info-circle\"",
+                "\"regular user-plus\"",
+                "\"regular check-circle\"",
+                "\"regular trash\"",
+                "\"regular plus-circle\"",
+                "\"regular chevron-right\"",
+                "\"regular chevron-left\"",
+                "\"regular undo-alt\"",
+                "\"regular credit-card\"",
+                "\"regular ellipsis-v\"",
+                "\"regular file-alt\"",
+                "\"regular mars\"",
+                "\"regular venus\"",
+                "\"regular users\"",
+                "\"regular search\"",
+                "\"regular exclamation-triangle\"",
+                "\"regular dollar-sign\"",
+                "\"regular arrow-right\"",
+                "\"regular clock\"",
+                "\"regular store\"",
+                "\"regular arrow-up-from-bracket\"",
+                "\"regular arrow-down-to-bracket\"",
+                "\"regular user\"",
+                "\"regular arrow-left\"",
+                "\"regular exclamation-circle\"",
+                "\"regular check\"",
+                "\"regular lock-alt\"",
+                "\"regular minus\"",
+                "\"regular times\"",
+                "\"regular copy\"",
+                "\"regular filter\"",
+                "\"regular envelope\"",
+                "\"regular at\"",
+                "\"regular receipt\"",
+                "\"regular lightbulb\"",
+                "\"regular sliders-simple\"",
+                "\"regular spinner\"",
+                "\"regular timer\"",
+                "\"regular gift\"",
+                "\"regular circle-dollar\"",
+                "\"regular key-skeleton\"",
+                "\"regular mobile\"",
+                "\"regular qrcode\"",
+                "\"regular calendar\"",
+                "\"regular eye\"",
+                "\"regular eye-slash\"",
+                "\"regular gear\"",
+                "\"regular unlock\"",
+                "\"regular bell\"",
+                "\"regular pen\"",
+                "\"regular user-group\"",
+                "\"regular shield-check\"",
+                "\"regular chevron-down\"",
+                "\"regular chevron-up\"",
+                "\"regular paperclip\"",
+                "\"regular money-bill-alt\"",
+                "\"regular angle-right\"",
+                "\"regular angle-left\"",
+                "\"regular arrow-alt-to-bottom\"",
+                "\"regular sync-alt\"",
+                "\"regular link\"",
+                "\"regular plus\"",
+                "\"regular comment-alt\"",
+                "\"regular redo\"",
+                "\"regular landmark\"",
+                "\"regular globe\"",
+                "\"regular share-alt\"",
+                "\"regular heart\"",
+                "\"regular backward\"",
+                "\"regular bolt\"",
+                "\"regular arrow-down-to-line\"",
+                "\"regular repeat\"",
+                "\"regular ban\"",
+                "\"regular circle-xmark\"",
+                "\"regular arrows-rotate\"",
+                "\"regular arrow-up-right-from-square\"",
+                "\"regular lock-keyhole-open\"",
+                "\"regular shield-slash\"",
+                "\"regular shield-xmark\"",
+                "\"regular shield\"",
+                "\"regular trash-xmark\"",
+                "\"regular ellipsis\"",
+                "\"regular angles-right\"",
+                "\"regular angles-left\"",
+                "\"regular webhook\"",
+                "\"regular tag\"",
+                "\"regular sliders\"",
+                "\"regular ballot-check\"",
+                "\"regular ballot\"",
+                "\"regular circle-notch\"",
+                "\"regular id-badge\"",
+                "\"regular address-book\"",
+                "\"regular address-card\"",
+                "\"regular hashtag\"",
+                "\"regular earth-americas\"",
+                "\"regular earth-asia\"",
+                "\"regular earth-europe\"",
+                "\"regular earth-africa\"",
+                "\"regular earth-oceania\"",
+                "\"regular user-check\"",
+                "\"regular user-minus\"",
+                "\"regular envelope-open\"",
+                "\"regular arrow-left-from-bracket\"",
+                "\"regular arrow-right-from-bracket\"",
+                "\"regular badge-percent\"",
+                "\"regular clock-rotate-left\"",
+                "\"regular money-bill-transfer\"",
+                "\"regular treasure-chest\"",
+                "\"regular trophy\"",
+                "\"regular medal\"",
+                "\"regular vault\"",
+                "\"regular plane\"",
+                "\"regular house\"",
+                "\"regular bowl-chopsticks\"",
+                "\"regular graduation-cap\"",
+                "\"regular cart-shopping\"",
+                "\"regular game-console-handheld\"",
+                "\"regular star\"",
+                "\"regular flag\"",
+                "\"regular heart-pulse\"",
+                "\"regular ticket-perforated\"",
+                "\"regular money-bill-trend-up\"",
+                "\"light circle-question\"",
+                "\"light divide\"",
+                "\"light chevron-right\"",
+                "\"light money-bill-wave\"",
+                "\"light angle-down\"",
+                "\"light arrow-right\"",
+                "\"light clock\"",
+                "\"light store\"",
+                "\"light arrow-left\"",
+                "\"light minus\"",
+                "\"light equals\"",
+                "\"light times\"",
+                "\"light copy\"",
+                "\"light exclamation\"",
+                "\"light circle-dollar\"",
+                "\"light key-skeleton\"",
+                "\"light mobile\"",
+                "\"light qrcode\"",
+                "\"light pencil\"",
+                "\"light chart-simple\"",
+                "\"light trophy\"",
+                "\"light vault\"",
+                "\"light plane\"",
+                "\"light house\"",
+                "\"light bowl-chopsticks\"",
+                "\"light graduation-cap\"",
+                "\"light cart-shopping\"",
+                "\"light game-console-handheld\"",
+                "\"light star\"",
+                "\"light flag\"",
+                "\"light heart-pulse\"",
+                "\"light calendar-alt\"",
+                "\"light long-arrow-right\"",
+                "\"light cloud-download-alt\"",
+                "\"light sync\"",
+                "\"light comment\"",
+                "\"light truck-fast\"",
+                "\"light warehouse-full\"",
+                "\"light briefcase\"",
+                "\"light down-to-line\"",
+                "\"light fingerprint\"",
+                "\"brands whatsapp\"",
+                "\"brands apple-pay\"",
+                "\"brands google-pay\"",
+                "\"duotone circle-question\"",
+                "\"duotone users\"",
+                "\"duotone university\"",
+                "\"duotone exclamation-triangle\"",
+                "\"duotone store\"",
+                "\"duotone copy\"",
+                "\"duotone spinner\"",
+                "\"duotone circle-dollar\"",
+                "\"duotone key-skeleton\"",
+                "\"duotone mobile\"",
+                "\"duotone qrcode\"",
+                "\"duotone user-check\"",
+                "\"duotone user-circle\"",
+                "\"duotone cloud-upload\"",
+                "\"duotone megaphone\"",
+                "\"duotone mobile-alt\"",
+                "\"duotone envelope-open-text\"",
+                "\"duotone sparkles\"",
+                "\"duotone arrow-to-bottom\"",
+                "\"duotone arrows-repeat\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "label",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "label in non-range mode"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "helpText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "label in non-range mode"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "messageError",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "label in non-range mode"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "popperOptions",
+            "global": false,
+            "default": "{}",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "[popper.js](https://popper.js.org/docs/v2/) parameters"
+              }
+            ],
+            "required": false,
+            "type": "Partial<Options> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Partial<Options> | undefined",
+              "schema": [
+                "undefined",
+                "Partial<Options>"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "placement",
+            "global": false,
+            "default": "'bottom'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "position of dropdown"
+              }
+            ],
+            "required": false,
+            "type": "Placement | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Placement | undefined",
+              "schema": [
+                "undefined",
+                "\"auto\"",
+                "\"auto-start\"",
+                "\"auto-end\"",
+                "\"top\"",
+                "\"bottom\"",
+                "\"right\"",
+                "\"left\"",
+                "\"top-start\"",
+                "\"top-end\"",
+                "\"bottom-start\"",
+                "\"bottom-end\"",
+                "\"right-start\"",
+                "\"right-end\"",
+                "\"left-start\"",
+                "\"left-end\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "modelValue",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "binding value, if it is an array, the length should be 2"
+              }
+            ],
+            "required": false,
+            "type": "ModelValueType | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "ModelValueType | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                {
+                  "kind": "array",
+                  "type": "string[]"
+                },
+                {
+                  "kind": "object",
+                  "type": "Date"
+                },
+                {
+                  "kind": "array",
+                  "type": "[DateModelType, DateModelType]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "rangeSeparator",
+            "global": false,
+            "default": "'-'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "range separator"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "shortcuts",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "an object array to set shortcut options"
+              }
+            ],
+            "required": false,
+            "type": "unknown[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "unknown[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "unknown[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "tabindex",
+            "global": false,
+            "default": "0",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "input tabindex"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateEvent",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to trigger form validation"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fallbackPlacements",
+            "global": false,
+            "default": "['bottom', 'top', 'right', 'left']",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "list of possible positions for dropdown"
+              }
+            ],
+            "required": false,
+            "type": "Placement[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Placement[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "Placement[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "valueOnClear",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "valor retornado al limpiar; para usar `undefined`, pasar `() => undefined`"
+              }
+            ],
+            "required": false,
+            "type": "string | number | boolean | Function | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | boolean | Function | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "false",
+                "true",
+                {
+                  "kind": "object",
+                  "type": "Function"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showNow",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show the now button"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "arrowControl",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to pick time using arrow buttons"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "unlinkPanels",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "unlink two date-panels in range-picker"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "readonly",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether TimePicker is read only"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether TimePicker is disabled"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "isRange",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to pick a time range"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "id",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `id` in native input"
+              }
+            ],
+            "required": false,
+            "type": "SingleOrRange<string> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "SingleOrRange<string> | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                {
+                  "kind": "array",
+                  "type": "[string, string]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "name",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `name` in native input"
+              }
+            ],
+            "required": false,
+            "type": "SingleOrRange<string> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "SingleOrRange<string> | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                {
+                  "kind": "array",
+                  "type": "[string, string]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "defaultValue",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "optional, default date of the calendar"
+              }
+            ],
+            "required": false,
+            "type": "SingleOrRange<Date> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "SingleOrRange<Date> | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "object",
+                  "type": "Date"
+                },
+                {
+                  "kind": "array",
+                  "type": "[Date, Date]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "defaultTime",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "optional, the time value to use when selecting date range"
+              }
+            ],
+            "required": false,
+            "type": "SingleOrRange<Date> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "SingleOrRange<Date> | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "object",
+                  "type": "Date"
+                },
+                {
+                  "kind": "array",
+                  "type": "[Date, Date]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabledHours",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "To specify the array of hours that cannot be selected"
+              }
+            ],
+            "required": false,
+            "type": "GetDisabledHours | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "GetDisabledHours | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(role: string, comparingDate?: Dayjs | undefined): number[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabledMinutes",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "To specify the array of minutes that cannot be selected"
+              }
+            ],
+            "required": false,
+            "type": "GetDisabledMinutes | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "GetDisabledMinutes | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(hour: number, role: string, comparingDate?: Dayjs | undefined): number[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabledSeconds",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "To specify the array of seconds that cannot be selected"
+              }
+            ],
+            "required": false,
+            "type": "GetDisabledSeconds | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "GetDisabledSeconds | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(hour: number, minute: number, role: string, comparingDate?: Dayjs | undefined): number[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabledDate",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "a function determining if a date is disabled with that date as its parameter. Should return a Boolean"
+              }
+            ],
+            "required": false,
+            "type": "Function | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Function | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "object",
+                  "type": "Function"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "cellClassName",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set custom className"
+              }
+            ],
+            "required": false,
+            "type": "Function | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Function | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "object",
+                  "type": "Function"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "emptyValues",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "valores vacíos soportados por el componente"
+              }
+            ],
+            "required": false,
+            "type": "unknown[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "unknown[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "unknown[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLabel",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "format",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "format of the displayed value in the input box"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "valueFormat",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "optional, format of binding value. If not specified, the binding value will be a Date object"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "dateFormat",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "optional, format of the date displayed value in TimePicker's dropdown"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "timeFormat",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "optional, format of the time displayed value in TimePicker's dropdown"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "startPlaceholder",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "placeholder for the start date in range mode"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "endPlaceholder",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "placeholder for the end date in range mode"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"update:modelValue\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/time-picker/index.ts"
+      },
+      "argTypes": {
+        "popperClass": {
+          "name": "popperClass",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "type": {
+          "name": "type",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "clearable": {
+          "name": "clearable",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "clearIcon": {
+          "name": "clearIcon",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, \"expose\">): any",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "boolean",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | boolean | Component"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "editable": {
+          "name": "editable",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "prefixIcon": {
+          "name": "prefixIcon",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "kit send",
+              "kit deposit",
+              "kit exchange",
+              "solid exchange",
+              "solid user-secret",
+              "solid home",
+              "solid paper-plane",
+              "solid ticket-alt",
+              "solid wallet",
+              "solid question-circle",
+              "solid circle-question",
+              "solid info-circle",
+              "solid user-plus",
+              "solid user-times",
+              "solid times-circle",
+              "solid check-circle",
+              "solid file-signature",
+              "solid edit",
+              "solid trash",
+              "solid plus-circle",
+              "solid minus-circle",
+              "solid divide",
+              "solid chevron-right",
+              "solid chevron-left",
+              "solid money-bill-wave",
+              "solid long-arrow-alt-left",
+              "solid file-invoice-dollar",
+              "solid undo-alt",
+              "solid credit-card",
+              "solid ellipsis-v",
+              "solid bullhorn",
+              "solid file-alt",
+              "solid mars",
+              "solid venus",
+              "solid users",
+              "solid building",
+              "solid money-check-alt",
+              "solid lock",
+              "solid question",
+              "solid angle-down",
+              "solid download",
+              "solid search",
+              "solid university",
+              "solid pencil-alt",
+              "solid save",
+              "solid file-excel",
+              "solid user-slash",
+              "solid exclamation-triangle",
+              "solid dollar-sign",
+              "solid arrow-right",
+              "solid hand-holding-usd",
+              "solid sort",
+              "solid trash-alt",
+              "solid caret-down",
+              "solid clock",
+              "solid bars",
+              "solid store",
+              "solid arrow-up-from-bracket",
+              "solid arrow-down-to-bracket",
+              "solid usd-circle",
+              "solid user",
+              "solid sign-out",
+              "solid arrow-left",
+              "solid external-link-square-alt",
+              "solid user-edit",
+              "solid file-image",
+              "solid upload",
+              "solid file-word",
+              "solid file-pdf",
+              "solid file",
+              "solid exclamation-circle",
+              "solid check",
+              "solid sort-alt",
+              "solid lock-alt",
+              "solid long-arrow-alt-right",
+              "solid long-arrow-alt-down",
+              "solid arrow-alt-down",
+              "solid minus",
+              "solid equals",
+              "solid times",
+              "solid circle",
+              "solid asterisk",
+              "solid copy",
+              "solid users-medical",
+              "solid exclamation",
+              "solid hand-paper",
+              "solid camera",
+              "solid undo",
+              "solid user-cog",
+              "solid dot-circle",
+              "solid folder-download",
+              "solid filter",
+              "solid envelope",
+              "solid at",
+              "solid id-card",
+              "solid receipt",
+              "solid caret-up",
+              "solid triangle",
+              "solid lightbulb",
+              "solid sliders-simple",
+              "solid spinner",
+              "solid timer",
+              "solid gift",
+              "solid book",
+              "solid chart-mixed-up-circle-dollar",
+              "solid circle-dollar",
+              "solid key-skeleton",
+              "solid mobile",
+              "solid qrcode",
+              "solid calendar",
+              "solid eye",
+              "solid eye-slash",
+              "solid gear",
+              "solid unlock",
+              "solid bell",
+              "solid 1",
+              "solid 2",
+              "solid 3",
+              "solid pen",
+              "solid pencil",
+              "solid user-group",
+              "solid shield-check",
+              "solid arrow-trend-up",
+              "solid chart-simple",
+              "solid money-bills-simple",
+              "regular paper-plane",
+              "regular wallet",
+              "regular circle-question",
+              "regular info-circle",
+              "regular user-plus",
+              "regular check-circle",
+              "regular trash",
+              "regular plus-circle",
+              "regular chevron-right",
+              "regular chevron-left",
+              "regular undo-alt",
+              "regular credit-card",
+              "regular ellipsis-v",
+              "regular file-alt",
+              "regular mars",
+              "regular venus",
+              "regular users",
+              "regular search",
+              "regular exclamation-triangle",
+              "regular dollar-sign",
+              "regular arrow-right",
+              "regular clock",
+              "regular store",
+              "regular arrow-up-from-bracket",
+              "regular arrow-down-to-bracket",
+              "regular user",
+              "regular arrow-left",
+              "regular exclamation-circle",
+              "regular check",
+              "regular lock-alt",
+              "regular minus",
+              "regular times",
+              "regular copy",
+              "regular filter",
+              "regular envelope",
+              "regular at",
+              "regular receipt",
+              "regular lightbulb",
+              "regular sliders-simple",
+              "regular spinner",
+              "regular timer",
+              "regular gift",
+              "regular circle-dollar",
+              "regular key-skeleton",
+              "regular mobile",
+              "regular qrcode",
+              "regular calendar",
+              "regular eye",
+              "regular eye-slash",
+              "regular gear",
+              "regular unlock",
+              "regular bell",
+              "regular pen",
+              "regular user-group",
+              "regular shield-check",
+              "regular chevron-down",
+              "regular chevron-up",
+              "regular paperclip",
+              "regular money-bill-alt",
+              "regular angle-right",
+              "regular angle-left",
+              "regular arrow-alt-to-bottom",
+              "regular sync-alt",
+              "regular link",
+              "regular plus",
+              "regular comment-alt",
+              "regular redo",
+              "regular landmark",
+              "regular globe",
+              "regular share-alt",
+              "regular heart",
+              "regular backward",
+              "regular bolt",
+              "regular arrow-down-to-line",
+              "regular repeat",
+              "regular ban",
+              "regular circle-xmark",
+              "regular arrows-rotate",
+              "regular arrow-up-right-from-square",
+              "regular lock-keyhole-open",
+              "regular shield-slash",
+              "regular shield-xmark",
+              "regular shield",
+              "regular trash-xmark",
+              "regular ellipsis",
+              "regular angles-right",
+              "regular angles-left",
+              "regular webhook",
+              "regular tag",
+              "regular sliders",
+              "regular ballot-check",
+              "regular ballot",
+              "regular circle-notch",
+              "regular id-badge",
+              "regular address-book",
+              "regular address-card",
+              "regular hashtag",
+              "regular earth-americas",
+              "regular earth-asia",
+              "regular earth-europe",
+              "regular earth-africa",
+              "regular earth-oceania",
+              "regular user-check",
+              "regular user-minus",
+              "regular envelope-open",
+              "regular arrow-left-from-bracket",
+              "regular arrow-right-from-bracket",
+              "regular badge-percent",
+              "regular clock-rotate-left",
+              "regular money-bill-transfer",
+              "regular treasure-chest",
+              "regular trophy",
+              "regular medal",
+              "regular vault",
+              "regular plane",
+              "regular house",
+              "regular bowl-chopsticks",
+              "regular graduation-cap",
+              "regular cart-shopping",
+              "regular game-console-handheld",
+              "regular star",
+              "regular flag",
+              "regular heart-pulse",
+              "regular ticket-perforated",
+              "regular money-bill-trend-up",
+              "light circle-question",
+              "light divide",
+              "light chevron-right",
+              "light money-bill-wave",
+              "light angle-down",
+              "light arrow-right",
+              "light clock",
+              "light store",
+              "light arrow-left",
+              "light minus",
+              "light equals",
+              "light times",
+              "light copy",
+              "light exclamation",
+              "light circle-dollar",
+              "light key-skeleton",
+              "light mobile",
+              "light qrcode",
+              "light pencil",
+              "light chart-simple",
+              "light trophy",
+              "light vault",
+              "light plane",
+              "light house",
+              "light bowl-chopsticks",
+              "light graduation-cap",
+              "light cart-shopping",
+              "light game-console-handheld",
+              "light star",
+              "light flag",
+              "light heart-pulse",
+              "light calendar-alt",
+              "light long-arrow-right",
+              "light cloud-download-alt",
+              "light sync",
+              "light comment",
+              "light truck-fast",
+              "light warehouse-full",
+              "light briefcase",
+              "light down-to-line",
+              "light fingerprint",
+              "brands whatsapp",
+              "brands apple-pay",
+              "brands google-pay",
+              "duotone circle-question",
+              "duotone users",
+              "duotone university",
+              "duotone exclamation-triangle",
+              "duotone store",
+              "duotone copy",
+              "duotone spinner",
+              "duotone circle-dollar",
+              "duotone key-skeleton",
+              "duotone mobile",
+              "duotone qrcode",
+              "duotone user-check",
+              "duotone user-circle",
+              "duotone cloud-upload",
+              "duotone megaphone",
+              "duotone mobile-alt",
+              "duotone envelope-open-text",
+              "duotone sparkles",
+              "duotone arrow-to-bottom",
+              "duotone arrows-repeat"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "IconString"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "label": {
+          "name": "label",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "helpText": {
+          "name": "helpText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "messageError": {
+          "name": "messageError",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "popperOptions": {
+          "name": "popperOptions",
+          "description": "",
+          "defaultValue": {
+            "summary": "{}"
+          },
+          "type": {
+            "name": "other",
+            "value": "Partial<Options> | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Partial<Options>"
+            },
+            "defaultValue": {
+              "summary": "{}"
+            },
+            "category": "props"
+          }
+        },
+        "placement": {
+          "name": "placement",
+          "description": "",
+          "defaultValue": {
+            "summary": "'bottom'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "auto",
+              "auto-start",
+              "auto-end",
+              "top",
+              "bottom",
+              "right",
+              "left",
+              "top-start",
+              "top-end",
+              "bottom-start",
+              "bottom-end",
+              "right-start",
+              "right-end",
+              "left-start",
+              "left-end"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Placement"
+            },
+            "defaultValue": {
+              "summary": "'bottom'"
+            },
+            "category": "props"
+          }
+        },
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "string[]",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "[DateModelType, DateModelType]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "ModelValueType"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "rangeSeparator": {
+          "name": "rangeSeparator",
+          "description": "",
+          "defaultValue": {
+            "summary": "'-'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'-'"
+            },
+            "category": "props"
+          }
+        },
+        "shortcuts": {
+          "name": "shortcuts",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "unknown[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "unknown[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "tabindex": {
+          "name": "tabindex",
+          "description": "",
+          "defaultValue": {
+            "summary": "0"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "defaultValue": {
+              "summary": "0"
+            },
+            "category": "props"
+          }
+        },
+        "validateEvent": {
+          "name": "validateEvent",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "fallbackPlacements": {
+          "name": "fallbackPlacements",
+          "description": "",
+          "defaultValue": {
+            "summary": "['bottom', 'top', 'right', 'left']"
+          },
+          "type": {
+            "name": "other",
+            "value": "Placement[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Placement[]"
+            },
+            "defaultValue": {
+              "summary": "['bottom', 'top', 'right', 'left']"
+            },
+            "category": "props"
+          }
+        },
+        "valueOnClear": {
+          "name": "valueOnClear",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "boolean",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number | boolean | Function"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "showNow": {
+          "name": "showNow",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "arrowControl": {
+          "name": "arrowControl",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "unlinkPanels": {
+          "name": "unlinkPanels",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "readonly": {
+          "name": "readonly",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "isRange": {
+          "name": "isRange",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "id": {
+          "name": "id",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "[string, string]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "SingleOrRange<string>"
+            },
+            "category": "props"
+          }
+        },
+        "name": {
+          "name": "name",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "[string, string]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "SingleOrRange<string>"
+            },
+            "category": "props"
+          }
+        },
+        "defaultValue": {
+          "name": "defaultValue",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "[Date, Date]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "SingleOrRange<Date>"
+            },
+            "category": "props"
+          }
+        },
+        "defaultTime": {
+          "name": "defaultTime",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "[Date, Date]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "SingleOrRange<Date>"
+            },
+            "category": "props"
+          }
+        },
+        "disabledHours": {
+          "name": "disabledHours",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "GetDisabledHours | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "GetDisabledHours"
+            },
+            "category": "props"
+          }
+        },
+        "disabledMinutes": {
+          "name": "disabledMinutes",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "GetDisabledMinutes | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "GetDisabledMinutes"
+            },
+            "category": "props"
+          }
+        },
+        "disabledSeconds": {
+          "name": "disabledSeconds",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "GetDisabledSeconds | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "GetDisabledSeconds"
+            },
+            "category": "props"
+          }
+        },
+        "disabledDate": {
+          "name": "disabledDate",
+          "description": "",
+          "type": {
+            "name": "object",
+            "value": {},
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Function"
+            },
+            "category": "props"
+          }
+        },
+        "cellClassName": {
+          "name": "cellClassName",
+          "description": "",
+          "type": {
+            "name": "object",
+            "value": {},
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Function"
+            },
+            "category": "props"
+          }
+        },
+        "emptyValues": {
+          "name": "emptyValues",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "unknown[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "unknown[]"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLabel": {
+          "name": "ariaLabel",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "format": {
+          "name": "format",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "valueFormat": {
+          "name": "valueFormat",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "dateFormat": {
+          "name": "dateFormat",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "timeFormat": {
+          "name": "timeFormat",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "startPlaceholder": {
+          "name": "startPlaceholder",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "endPlaceholder": {
+          "name": "endPlaceholder",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GTimePickerModels = {\n  /**\n   * @description binding value, if it is an array, the length should be 2\n   * @default ''\n   */\n  modelValue?: ModelValueType; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GTimePickerProps = {\n  /**\n   * @description custom class name for TimePicker's dropdown\n   * @default ''\n   */\n  popperClass?: string;\n  /**\n   * @description type of the picker\n   * @default ''\n   */\n  type?: string;\n  /**\n   * @description whether to show clear button\n   * @default true\n   */\n  clearable?: boolean;\n  /**\n   * @description Custom clear icon component\n   * @default true\n   */\n  clearIcon?: string | boolean | Component;\n  /**\n   * @description whether the input is editable\n   * @default true\n   */\n  editable?: boolean;\n  /**\n   * @description Custom prefix icon component\n   * @default ''\n   */\n  prefixIcon?: IconString;\n  /**\n   * @description label in non-range mode\n   * @default ''\n   */\n  label?: string;\n  /**\n   * @description label in non-range mode\n   * @default ''\n   */\n  helpText?: string;\n  /**\n   * @description label in non-range mode\n   * @default ''\n   */\n  messageError?: string;\n  /**\n   * @description [popper.js](https://popper.js.org/docs/v2/) parameters\n   * @default {}\n   */\n  popperOptions?: Partial<Options>;\n  /**\n   * @description position of dropdown\n   * @default 'bottom'\n   */\n  placement?: Placement;\n  /**\n   * @description range separator\n   * @default '-'\n   */\n  rangeSeparator?: string;\n  /**\n   * @description an object array to set shortcut options\n   * @default []\n   */\n  shortcuts?: unknown[];\n  /**\n   * @description input tabindex\n   * @default 0\n   */\n  tabindex?: string | number;\n  /**\n   * @description whether to trigger form validation\n   * @default true\n   */\n  validateEvent?: boolean;\n  /**\n   * @description list of possible positions for dropdown\n   * @default ['bottom', 'top', 'right', 'left']\n   */\n  fallbackPlacements?: Placement[];\n  /**\n   * @description valor retornado al limpiar; para usar `undefined`, pasar `() => undefined`\n   * @default undefined\n   */\n  valueOnClear?: string | number | boolean | Function;\n  /**\n   * @description whether to show the now button\n   * @default true\n   */\n  showNow?: boolean;\n  /** @description whether to pick time using arrow buttons */\n  arrowControl?: boolean;\n  /** @description unlink two date-panels in range-picker */\n  unlinkPanels?: boolean;\n  /** @description whether TimePicker is read only */\n  readonly?: boolean;\n  /** @description whether TimePicker is disabled */\n  disabled?: boolean;\n  /**\n   * @description whether to pick a time range\n   * @default false\n   */\n  isRange?: boolean;\n  /** @description same as `id` in native input */\n  id?: SingleOrRange<string>;\n  /** @description same as `name` in native input */\n  name?: SingleOrRange<string>;\n  /** @description optional, default date of the calendar */\n  defaultValue?: SingleOrRange<Date>;\n  /** @description optional, the time value to use when selecting date range */\n  defaultTime?: SingleOrRange<Date>;\n  /** @description To specify the array of hours that cannot be selected */\n  disabledHours?: GetDisabledHours;\n  /** @description To specify the array of minutes that cannot be selected */\n  disabledMinutes?: GetDisabledMinutes;\n  /** @description To specify the array of seconds that cannot be selected */\n  disabledSeconds?: GetDisabledSeconds;\n  /** @description a function determining if a date is disabled with that date as its parameter. Should return a Boolean */\n  disabledDate?: Function;\n  /** @description set custom className */\n  cellClassName?: Function;\n  /** @description valores vacíos soportados por el componente */\n  emptyValues?: unknown[];\n  ariaLabel?: string;\n  /** @description format of the displayed value in the input box */\n  format?: string;\n  /** @description optional, format of binding value. If not specified, the binding value will be a Date object */\n  valueFormat?: string;\n  /** @description optional, format of the date displayed value in TimePicker's dropdown */\n  dateFormat?: string;\n  /** @description optional, format of the time displayed value in TimePicker's dropdown */\n  timeFormat?: string;\n  /** @description placeholder for the start date in range mode */\n  startPlaceholder?: string;\n  /** @description placeholder for the end date in range mode */\n  endPlaceholder?: string;\n}\n```\n\n## Events\n\n```\nexport type GTimePickerEvents = {\n  \"update:modelValue\": any[];\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

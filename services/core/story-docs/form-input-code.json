@@ -1,0 +1,15 @@
+{
+  "components": {
+    "form-input-code": {
+      "id": "form-input-code",
+      "name": "GInputCode",
+      "path": "./stories/input-code.stories.ts",
+      "stories": {
+        "form-input-code--default": {
+          "id": "form-input-code--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

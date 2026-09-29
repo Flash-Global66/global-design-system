@@ -1,0 +1,1 @@
+import{a as i}from"./isEqual-DCpot1jV.js";import{s,o as e}from"./_baseFlatten-ClqcVPX5.js";import{c as o,d as a}from"./index-Dg8kVpmC.js";function c(r,t){return s(e(r,t,i),r+"")}function f(r){return o(r)&&a(r)}export{c as b,f as i};

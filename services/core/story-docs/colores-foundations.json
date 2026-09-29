@@ -1,0 +1,15 @@
+{
+  "components": {
+    "colores-foundations": {
+      "id": "colores-foundations",
+      "name": "Foundations",
+      "path": "./stories/foundations-colors.stories.ts",
+      "stories": {
+        "colores-foundations--default": {
+          "id": "colores-foundations--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

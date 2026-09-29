@@ -1,0 +1,764 @@
+{
+  "components": {
+    "form-form": {
+      "id": "form-form",
+      "name": "GForm",
+      "path": "./stories/form.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GForm",
+        "displayName": "GForm",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "disabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Whether to disable all components in this form. If set to `true`, it will override the `disabled` prop of the inner component."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateOnRuleChange",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Whether to trigger validation when the `rules` prop is changed."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "scrollToError",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "When validation fails, scroll to the first error form entry."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "model",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Data of form component."
+              }
+            ],
+            "required": false,
+            "type": "Record<string, any> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Record<string, any> | undefined",
+              "schema": [
+                "undefined",
+                "Record<string, any>"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "rules",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Validation rules of form."
+              }
+            ],
+            "required": false,
+            "type": "Partial<Record<string, Arrayable<FormItemRule>>> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Partial<Record<string, Arrayable<FormItemRule>>> | undefined",
+              "schema": [
+                "undefined",
+                "Partial<Record<string, Arrayable<FormItemRule>>>"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "scrollIntoViewOptions",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "When validation fails, it scrolls to the first error item based on the scrollIntoView option."
+              }
+            ],
+            "required": false,
+            "type": "boolean | Record<string, any> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | Record<string, any> | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true",
+                "Record<string, any>"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "validate",
+            "description": "",
+            "tags": [],
+            "type": "[prop: FormItemProp, isValid: boolean, message: string]",
+            "signature": "(event: \"validate\", prop: FormItemProp, isValid: boolean, message: string): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "FormItemProp",
+                "schema": [
+                  "string",
+                  {
+                    "kind": "array",
+                    "type": "string[]"
+                  }
+                ]
+              },
+              {
+                "kind": "enum",
+                "type": "boolean",
+                "schema": [
+                  "false",
+                  "true"
+                ]
+              },
+              "string"
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "validate",
+            "type": "(callback?: FormValidateCallback | undefined) => FormValidationResult",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Validate the whole form. Receives a callback or returns `Promise`."
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(callback?: FormValidateCallback | undefined): FormValidationResult"
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateField",
+            "type": "(props?: Arrayable<FormItemProp> | undefined, callback?: FormValidateCallback | undefined) => FormValidationResult",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Validate specified fields."
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(props?: Arrayable<FormItemProp> | undefined, callback?: FormValidateCallback | undefined): FormValidationResult"
+            },
+            "declarations": []
+          },
+          {
+            "name": "resetFields",
+            "type": "(props?: Arrayable<FormItemProp> | undefined) => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Reset specified fields and remove validation result."
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(props?: Arrayable<FormItemProp> | undefined): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "clearValidate",
+            "type": "(props?: Arrayable<FormItemProp> | undefined) => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Clear validation message for specified fields."
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(props?: Arrayable<FormItemProp> | undefined): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "scrollToField",
+            "type": "(prop: FormItemProp) => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Scroll to the specified fields."
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(prop: FormItemProp): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "fields",
+            "type": "FormItemContext[]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "All fields context."
+              }
+            ],
+            "schema": {
+              "kind": "array",
+              "type": "FormItemContext[]"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/form/index.ts"
+      },
+      "argTypes": {
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "validateOnRuleChange": {
+          "name": "validateOnRuleChange",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "scrollToError": {
+          "name": "scrollToError",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "model": {
+          "name": "model",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "Record<string, any> | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Record<string, any>"
+            },
+            "category": "props"
+          }
+        },
+        "rules": {
+          "name": "rules",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "Partial<Record<string, Arrayable<FormItemRule>>> | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Partial<Record<string, Arrayable<FormItemRule>>>"
+            },
+            "category": "props"
+          }
+        },
+        "scrollIntoViewOptions": {
+          "name": "scrollIntoViewOptions",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "Record<string, any>",
+                "required": false
+              },
+              {
+                "name": "boolean",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean | Record<string, any>"
+            },
+            "category": "props"
+          }
+        },
+        "validate": {
+          "name": "validate",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[prop: FormItemProp, isValid: boolean, message: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[prop: FormItemProp, isValid: boolean, message: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "validateField": {
+          "name": "validateField",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(props?: Arrayable<FormItemProp> | undefined, callback?: FormValidateCallback | undefined) => FormValidationResult"
+          },
+          "table": {
+            "type": {
+              "summary": "(props?: Arrayable<FormItemProp>, callback?: FormValidateCallback | undefined) => FormValidationResult"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "resetFields": {
+          "name": "resetFields",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(props?: Arrayable<FormItemProp> | undefined) => void"
+          },
+          "table": {
+            "type": {
+              "summary": "(props?: Arrayable<FormItemProp>) => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "clearValidate": {
+          "name": "clearValidate",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(props?: Arrayable<FormItemProp> | undefined) => void"
+          },
+          "table": {
+            "type": {
+              "summary": "(props?: Arrayable<FormItemProp>) => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "scrollToField": {
+          "name": "scrollToField",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(prop: FormItemProp) => void"
+          },
+          "table": {
+            "type": {
+              "summary": "(prop: FormItemProp) => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "fields": {
+          "name": "fields",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "FormItemContext[]"
+          },
+          "table": {
+            "type": {
+              "summary": "FormItemContext[]"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GFormProps = {\n  /** @description Whether to disable all components in this form. If set to `true`, it will override the `disabled` prop of the inner component. */\n  disabled?: boolean;\n  /**\n   * @description Whether to trigger validation when the `rules` prop is changed.\n   * @default true\n   */\n  validateOnRuleChange?: boolean;\n  /** @description When validation fails, scroll to the first error form entry. */\n  scrollToError?: boolean;\n  /** @description Data of form component. */\n  model?: Record<string, any>;\n  /** @description Validation rules of form. */\n  rules?: Partial<Record<string, Arrayable<FormItemRule>>>;\n  /** @description When validation fails, it scrolls to the first error item based on the scrollIntoView option. */\n  scrollIntoViewOptions?: boolean | Record<string, any>;\n}\n```\n\n## Events\n\n```\nexport type GFormEvents = {\n  validate: [prop: FormItemProp, isValid: boolean, message: string];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GFormSlots = {\n  default: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GFormExposed = {\n  /** @description Validate the whole form. Receives a callback or returns `Promise`. */\n  validate: (callback?: FormValidateCallback | undefined) => FormValidationResult;\n  /** @description Validate specified fields. */\n  validateField: (props?: Arrayable<FormItemProp> | undefined, callback?: FormValidateCallback | undefined) => FormValidationResult;\n  /** @description Reset specified fields and remove validation result. */\n  resetFields: (props?: Arrayable<FormItemProp> | undefined) => void;\n  /** @description Clear validation message for specified fields. */\n  clearValidate: (props?: Arrayable<FormItemProp> | undefined) => void;\n  /** @description Scroll to the specified fields. */\n  scrollToField: (prop: FormItemProp) => void;\n  /** @description All fields context. */\n  fields: FormItemContext[];\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

@@ -1,0 +1,1099 @@
+{
+  "components": {
+    "feedback-menu": {
+      "id": "feedback-menu",
+      "name": "GMenu",
+      "path": "./stories/menu.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "default",
+        "displayName": "Menu",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "collapse",
+            "global": false,
+            "description": "whether the menu is collapsed",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "uniqueOpened",
+            "global": false,
+            "description": "whether only one sub-menu can be active",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "router",
+            "global": false,
+            "description": "whether vue-router mode is activated. If true, index will be used as\n'path' to activate the route action. Use with default-active to set the\nactive item on load.",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "mode",
+            "global": false,
+            "default": "'vertical'",
+            "description": "layout mode of the menu",
+            "tags": [],
+            "required": false,
+            "type": "\"horizontal\" | \"vertical\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"horizontal\" | \"vertical\" | undefined",
+              "schema": [
+                "undefined",
+                "\"horizontal\"",
+                "\"vertical\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "defaultActive",
+            "global": false,
+            "default": "''",
+            "description": "index of active menu on page load",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "defaultOpeneds",
+            "global": false,
+            "default": "[]",
+            "description": "array that contains indexes of currently active sub-menus",
+            "tags": [],
+            "required": false,
+            "type": "string[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "string[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "menuTrigger",
+            "global": false,
+            "default": "'hover'",
+            "description": "how sub-menus are triggered, only relevant in `horizontal` mode or when\n`collapse` is `true`",
+            "tags": [],
+            "required": false,
+            "type": "\"click\" | \"hover\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"click\" | \"hover\" | undefined",
+              "schema": [
+                "undefined",
+                "\"click\"",
+                "\"hover\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "collapseTransition",
+            "global": false,
+            "default": "true",
+            "description": "whether to enable the collapse transition",
+            "tags": [
+              {
+                "name": "deprecated",
+                "text": "no-op — see file-level comment for rationale"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "popperOffset",
+            "global": false,
+            "default": "6",
+            "description": "offset of the appended sub menu popper",
+            "tags": [],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "popperEffect",
+            "global": false,
+            "default": "'dark'",
+            "description": "Tooltip theme of sub menu popper, effective for `mode=\"horizontal\"`",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showTimeout",
+            "global": false,
+            "default": "300",
+            "description": "timeout in milliseconds to show sub menus",
+            "tags": [],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "hideTimeout",
+            "global": false,
+            "default": "300",
+            "description": "timeout in milliseconds to hide sub menus",
+            "tags": [],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "persistent",
+            "global": false,
+            "default": "true",
+            "description": "when the sub menu popper is inactive and `persistent` is `false`, it\nwill be destroyed",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "backgroundColor",
+            "global": false,
+            "description": "background color of Menu (hex format) — CSS var only, no dynamic\nhover-darken (see file-level comment)",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "textColor",
+            "global": false,
+            "description": "text color of Menu (hex format)",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "activeTextColor",
+            "global": false,
+            "description": "text color of currently active menu item (hex format)",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "popperClass",
+            "global": false,
+            "description": "custom class name for all popper menus",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "open",
+            "description": "",
+            "tags": [],
+            "type": "[index: string, indexPath: string[]]",
+            "signature": "(event: \"open\", index: string, indexPath: string[]): void",
+            "schema": [
+              "string",
+              {
+                "kind": "array",
+                "type": "string[]"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "close",
+            "description": "",
+            "tags": [],
+            "type": "[index: string, indexPath: string[]]",
+            "signature": "(event: \"close\", index: string, indexPath: string[]): void",
+            "schema": [
+              "string",
+              {
+                "kind": "array",
+                "type": "string[]"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "select",
+            "description": "",
+            "tags": [],
+            "type": "[index: string, indexPath: string[], item: { index: string; indexPath: string[]; route?: unknown; }, routerResult?: Promise<unknown> | undefined]",
+            "signature": "(event: \"select\", index: string, indexPath: string[], item: { index: string; indexPath: string[]; route?: unknown; }, routerResult?: Promise<unknown> | undefined): void",
+            "schema": [
+              "string",
+              {
+                "kind": "array",
+                "type": "string[]"
+              },
+              {
+                "kind": "object",
+                "type": "{ index: string; indexPath: string[]; route?: unknown; }"
+              },
+              {
+                "kind": "enum",
+                "type": "Promise<unknown> | undefined",
+                "schema": [
+                  "undefined",
+                  "Promise<unknown>"
+                ]
+              }
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{}",
+            "description": "Menu Content",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "open",
+            "type": "(index: string) => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(index: string): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "close",
+            "type": "(index: string) => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(index: string): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "activeIndex",
+            "type": "string",
+            "description": "",
+            "tags": [],
+            "schema": "string",
+            "declarations": []
+          },
+          {
+            "name": "openedMenus",
+            "type": "string[]",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "array",
+              "type": "string[]"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/menu/Menu.vue"
+      },
+      "argTypes": {
+        "collapse": {
+          "name": "collapse",
+          "description": "whether the menu is collapsed",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "uniqueOpened": {
+          "name": "uniqueOpened",
+          "description": "whether only one sub-menu can be active",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "router": {
+          "name": "router",
+          "description": "whether vue-router mode is activated. If true, index will be used as\n'path' to activate the route action. Use with default-active to set the\nactive item on load.",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "mode": {
+          "name": "mode",
+          "description": "layout mode of the menu",
+          "defaultValue": {
+            "summary": "'vertical'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "horizontal",
+              "vertical"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"horizontal\" | \"vertical\""
+            },
+            "defaultValue": {
+              "summary": "'vertical'"
+            },
+            "category": "props"
+          }
+        },
+        "defaultActive": {
+          "name": "defaultActive",
+          "description": "index of active menu on page load",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "defaultOpeneds": {
+          "name": "defaultOpeneds",
+          "description": "array that contains indexes of currently active sub-menus",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "string[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "menuTrigger": {
+          "name": "menuTrigger",
+          "description": "how sub-menus are triggered, only relevant in `horizontal` mode or when\n`collapse` is `true`",
+          "defaultValue": {
+            "summary": "'hover'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "click",
+              "hover"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"click\" | \"hover\""
+            },
+            "defaultValue": {
+              "summary": "'hover'"
+            },
+            "category": "props"
+          }
+        },
+        "collapseTransition": {
+          "name": "collapseTransition",
+          "description": "@deprecated: no-op — see file-level comment for rationale<br><br>whether to enable the collapse transition",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "popperOffset": {
+          "name": "popperOffset",
+          "description": "offset of the appended sub menu popper",
+          "defaultValue": {
+            "summary": "6"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "6"
+            },
+            "category": "props"
+          }
+        },
+        "popperEffect": {
+          "name": "popperEffect",
+          "description": "Tooltip theme of sub menu popper, effective for `mode=\"horizontal\"`",
+          "defaultValue": {
+            "summary": "'dark'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'dark'"
+            },
+            "category": "props"
+          }
+        },
+        "showTimeout": {
+          "name": "showTimeout",
+          "description": "timeout in milliseconds to show sub menus",
+          "defaultValue": {
+            "summary": "300"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "300"
+            },
+            "category": "props"
+          }
+        },
+        "hideTimeout": {
+          "name": "hideTimeout",
+          "description": "timeout in milliseconds to hide sub menus",
+          "defaultValue": {
+            "summary": "300"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "300"
+            },
+            "category": "props"
+          }
+        },
+        "persistent": {
+          "name": "persistent",
+          "description": "when the sub menu popper is inactive and `persistent` is `false`, it\nwill be destroyed",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "backgroundColor": {
+          "name": "backgroundColor",
+          "description": "background color of Menu (hex format) — CSS var only, no dynamic\nhover-darken (see file-level comment)",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "textColor": {
+          "name": "textColor",
+          "description": "text color of Menu (hex format)",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "activeTextColor": {
+          "name": "activeTextColor",
+          "description": "text color of currently active menu item (hex format)",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "popperClass": {
+          "name": "popperClass",
+          "description": "custom class name for all popper menus",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "open": {
+          "name": "open",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[index: string, indexPath: string[]]"
+          },
+          "table": {
+            "type": {
+              "summary": "[index: string, indexPath: string[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "close": {
+          "name": "close",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[index: string, indexPath: string[]]"
+          },
+          "table": {
+            "type": {
+              "summary": "[index: string, indexPath: string[]]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "select": {
+          "name": "select",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[index: string, indexPath: string[], item: { index: string; indexPath: string[]; route?: unknown; }, routerResult?: Promise<unknown> | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[index: string, indexPath: string[], item: { index: string; indexPath: string[]; route?: unknown; }, routerResult?: Promise<unknown>]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "Menu Content",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "activeIndex": {
+          "name": "activeIndex",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "string"
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "openedMenus": {
+          "name": "openedMenus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "string[]"
+          },
+          "table": {
+            "type": {
+              "summary": "string[]"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type MenuProps = {\n  /** whether the menu is collapsed */\n  collapse?: boolean;\n  /** whether only one sub-menu can be active */\n  uniqueOpened?: boolean;\n  /**\n   * whether vue-router mode is activated. If true, index will be used as\n   * 'path' to activate the route action. Use with default-active to set the\n   * active item on load.\n   */\n  router?: boolean;\n  /**\n   * layout mode of the menu\n   *\n   * @default 'vertical'\n   */\n  mode?: \"horizontal\" | \"vertical\";\n  /**\n   * index of active menu on page load\n   *\n   * @default ''\n   */\n  defaultActive?: string;\n  /**\n   * array that contains indexes of currently active sub-menus\n   *\n   * @default []\n   */\n  defaultOpeneds?: string[];\n  /**\n   * how sub-menus are triggered, only relevant in `horizontal` mode or when\n   * `collapse` is `true`\n   *\n   * @default 'hover'\n   */\n  menuTrigger?: \"click\" | \"hover\";\n  /**\n   * whether to enable the collapse transition\n   *\n   * @deprecated no-op — see file-level comment for rationale\n   * @default true\n   */\n  collapseTransition?: boolean;\n  /**\n   * offset of the appended sub menu popper\n   *\n   * @default 6\n   */\n  popperOffset?: number;\n  /**\n   * Tooltip theme of sub menu popper, effective for `mode=\"horizontal\"`\n   *\n   * @default 'dark'\n   */\n  popperEffect?: string;\n  /**\n   * timeout in milliseconds to show sub menus\n   *\n   * @default 300\n   */\n  showTimeout?: number;\n  /**\n   * timeout in milliseconds to hide sub menus\n   *\n   * @default 300\n   */\n  hideTimeout?: number;\n  /**\n   * when the sub menu popper is inactive and `persistent` is `false`, it\n   * will be destroyed\n   *\n   * @default true\n   */\n  persistent?: boolean;\n  /**\n   * background color of Menu (hex format) — CSS var only, no dynamic\n   * hover-darken (see file-level comment)\n   */\n  backgroundColor?: string;\n  /** text color of Menu (hex format) */\n  textColor?: string;\n  /** text color of currently active menu item (hex format) */\n  activeTextColor?: string;\n  /** custom class name for all popper menus */\n  popperClass?: string;\n}\n```\n\n## Events\n\n```\nexport type MenuEvents = {\n  open: [index: string, indexPath: string[]];\n  close: [index: string, indexPath: string[]];\n  select: [index: string, indexPath: string[], item: { index: string; indexPath: string[]; route?: unknown; }, routerResult?: Promise<unknown> | undefined];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type MenuSlots = {\n  /** Menu Content */\n  default: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type MenuExposed = {\n  open: (index: string) => void;\n  close: (index: string) => void;\n  activeIndex: string;\n  openedMenus: string[];\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

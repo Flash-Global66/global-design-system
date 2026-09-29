@@ -1,0 +1,32 @@
+{
+  "components": {
+    "form-checkbox-single": {
+      "id": "form-checkbox-single",
+      "name": "GCheckbox",
+      "path": "./stories/checkbox.stories.ts",
+      "stories": {
+        "form-checkbox-single--basic": {
+          "id": "form-checkbox-single--basic",
+          "name": "Basic"
+        },
+        "form-checkbox-single--checked": {
+          "id": "form-checkbox-single--checked",
+          "name": "Checked"
+        },
+        "form-checkbox-single--disabled": {
+          "id": "form-checkbox-single--disabled",
+          "name": "Disabled"
+        },
+        "form-checkbox-single--indeterminate": {
+          "id": "form-checkbox-single--indeterminate",
+          "name": "Indeterminate"
+        },
+        "form-checkbox-single--styles": {
+          "id": "form-checkbox-single--styles",
+          "name": "Style options",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GCheckbox } from '@flash-global66/g-checkbox/index.ts';\nimport { GConfigProvider } from '../components/config-provider';\n</script>\n\n<template>\n  <g-config-provider>\n    <p class=\"ml-md font-semibold\">Basic</p>\n    <div class=\"flex p-md items-center\">\n      <g-checkbox :checked=\"false\" :disabled=\"false\" id=\"checkbox-id\" :indeterminate=\"false\" label=\"Etiqueta del checkbox\" name=\"checkbox-name\" validateEvent value=\"Valor del checkbox\" />\n    </div>\n\n    <p class=\"ml-md font-semibold\">With border</p>\n    <div class=\"p-md\">\n      <g-checkbox :checked=\"false\" :disabled=\"false\" id=\"checkbox-id\" :indeterminate=\"false\" label=\"Etiqueta del checkbox\" name=\"checkbox-name\" validateEvent value=\"Valor del checkbox\" border />\n    </div>\n\n    <p class=\"ml-md font-semibold\">Inverted</p>\n    <div class='flex flex-col gap-xs p-md w-fit justify-start'>\n      <g-checkbox :checked=\"false\" :disabled=\"false\" id=\"checkbox-id\" :indeterminate=\"false\" label=\"Etiqueta del checkbox\" name=\"checkbox-name\" validateEvent value=\"Valor del checkbox\" invert />\n      <g-checkbox label=\"Etiqueta de Checkbox larga\" value=\"Check-2\" invert />\n    </div>\n\n    <p class=\"ml-md font-semibold\">Border + invert</p>\n    <div class=\"p-md\">\n      <g-checkbox :checked=\"false\" :disabled=\"false\" id=\"checkbox-id\" :indeterminate=\"false\" label=\"Etiqueta del checkbox\" name=\"checkbox-name\" validateEvent value=\"Valor del checkbox\" border invert />\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

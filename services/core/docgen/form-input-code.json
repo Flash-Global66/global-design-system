@@ -1,0 +1,754 @@
+{
+  "components": {
+    "form-input-code": {
+      "id": "form-input-code",
+      "name": "GInputCode",
+      "path": "./stories/input-code.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "default",
+        "displayName": "InputCode",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "disabled",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "required",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "password",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "textError",
+            "global": false,
+            "default": "\"\"",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "hideTextError",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "fields",
+            "global": false,
+            "default": "4",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "iconPassword",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "classInput",
+            "global": false,
+            "default": "\"\"",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "classContent",
+            "global": false,
+            "default": "\"\"",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "change",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"change\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "complete",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"complete\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "validate",
+            "description": "",
+            "tags": [],
+            "type": "any[]",
+            "signature": "(event: \"validate\", ...args: any[]): void",
+            "schema": [
+              "any"
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "error",
+            "type": "{}",
+            "description": "error custom message error.",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "clearValues",
+            "type": "() => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/input-code/InputCode.vue"
+      },
+      "argTypes": {
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "required": {
+          "name": "required",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "password": {
+          "name": "password",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "textError": {
+          "name": "textError",
+          "description": "",
+          "defaultValue": {
+            "summary": "\"\""
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "\"\""
+            },
+            "category": "props"
+          }
+        },
+        "hideTextError": {
+          "name": "hideTextError",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "fields": {
+          "name": "fields",
+          "description": "",
+          "defaultValue": {
+            "summary": "4"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "4"
+            },
+            "category": "props"
+          }
+        },
+        "iconPassword": {
+          "name": "iconPassword",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "classInput": {
+          "name": "classInput",
+          "description": "",
+          "defaultValue": {
+            "summary": "\"\""
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "\"\""
+            },
+            "category": "props"
+          }
+        },
+        "classContent": {
+          "name": "classContent",
+          "description": "",
+          "defaultValue": {
+            "summary": "\"\""
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "\"\""
+            },
+            "category": "props"
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "complete": {
+          "name": "complete",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "validate": {
+          "name": "validate",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any[]"
+          },
+          "table": {
+            "type": {
+              "summary": "any[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "error": {
+          "name": "error",
+          "description": "error custom message error.",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "clearValues": {
+          "name": "clearValues",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => void"
+          },
+          "table": {
+            "type": {
+              "summary": "() => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type InputCodeProps = {\n  /** @default false */\n  disabled?: boolean;\n  /** @default true */\n  required?: boolean;\n  /** @default false */\n  password?: boolean;\n  /** @default \"\" */\n  textError?: string;\n  /** @default false */\n  hideTextError?: boolean;\n  /** @default 4 */\n  fields?: number;\n  /** @default true */\n  iconPassword?: boolean;\n  /** @default \"\" */\n  classInput?: string;\n  /** @default \"\" */\n  classContent?: string;\n}\n```\n\n## Events\n\n```\nexport type InputCodeEvents = {\n  change: any[];\n  complete: any[];\n  validate: any[];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type InputCodeSlots = {\n  /** error custom message error. */\n  error: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type InputCodeExposed = {\n  clearValues: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

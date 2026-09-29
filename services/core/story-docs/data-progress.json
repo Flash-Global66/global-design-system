@@ -1,0 +1,36 @@
+{
+  "components": {
+    "data-progress": {
+      "id": "data-progress",
+      "name": "GProgress",
+      "path": "./stories/progress.stories.ts",
+      "stories": {
+        "data-progress--basic": {
+          "id": "data-progress--basic",
+          "name": "Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GProgress } from '@flash-global66/g-progress/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-progress class=\"p-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"line\" />\n  </g-config-provider>\n</template>"
+        },
+        "data-progress--states": {
+          "id": "data-progress--states",
+          "name": "Diferentes estados",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GProgress } from '@flash-global66/g-progress/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <p class=\"pl-md\">Primary</p>\n    <g-progress class=\"p-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"line\" />\n    <p class=\"pl-md\">Warning</p>\n    <g-progress class=\"p-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"line\" status=\"warning\" />\n    <p class=\"pl-md\">Success</p>\n    <g-progress class=\"p-md\" :stroke-width=\"6\" type=\"line\" status=\"success\" percentage=\"100\" />\n    <p class=\"pl-md\">Error</p>\n    <g-progress class=\"p-md\" :stroke-width=\"6\" type=\"line\" status=\"error\" percentage=\"100\" />\n  </g-config-provider>\n</template>"
+        },
+        "data-progress--types": {
+          "id": "data-progress--types",
+          "name": "Diferentes tipos",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GProgress } from '@flash-global66/g-progress/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n      <h3 class=\"my-md\">Line</h3>\n      <div>\n        <g-progress class=\"mb-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"line\" />\n        <g-progress class=\"mb-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"line\" status=\"warning\" />\n        <g-progress class=\"mb-md\" :stroke-width=\"6\" type=\"line\" status=\"success\" percentage=\"100\" />\n        <g-progress class=\"mb-md\" :stroke-width=\"6\" type=\"line\" status=\"error\" percentage=\"100\" />\n      </div>\n      <hr />\n      <h3 class=\"my-md\">Circle</h3>\n      <div class=\"flex gap-md\">\n        <g-progress class=\"mb-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"circle\" />\n        <g-progress class=\"mb-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"circle\" status=\"warning\" />\n        <g-progress class=\"mb-md\" :stroke-width=\"6\" type=\"circle\" status=\"success\" percentage=\"100\" />\n        <g-progress class=\"mb-md\" :stroke-width=\"6\" type=\"circle\" status=\"error\" percentage=\"100\" />\n      </div>\n      <hr />\n      <h3 class=\"my-md\">Dashboard</h3>\n      <div class=\"flex gap-md\">\n        <g-progress class=\"mb-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"dashboard\" />\n        <g-progress class=\"mb-md\" :percentage=\"75\" :stroke-width=\"6\" type=\"dashboard\" status=\"warning\" />\n        <g-progress class=\"mb-md\" :stroke-width=\"6\" type=\"dashboard\" status=\"success\" percentage=\"100\" />\n        <g-progress class=\"mb-md\" :stroke-width=\"6\" type=\"dashboard\" status=\"error\" percentage=\"100\" />\n      </div>\n  </g-config-provider>\n</template>"
+        },
+        "data-progress--ideterminate": {
+          "id": "data-progress--ideterminate",
+          "name": "Progreso indeterminado",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GProgress } from '@flash-global66/g-progress/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-md\">\n      <g-progress indeterminate percentage=\"25\" />\n      <g-progress indeterminate status=\"warning\" percentage=\"50\" />\n      <g-progress indeterminate status=\"success\" percentage=\"75\" />\n      <g-progress indeterminate status=\"error\" percentage=\"100\" />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "data-progress--loading": {
+          "id": "data-progress--loading",
+          "name": "Progreso en carga",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GProgress } from '@flash-global66/g-progress/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-md\">\n      <g-progress percentage=\"50\" indeterminate loading />\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

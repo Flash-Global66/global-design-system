@@ -1,0 +1,1277 @@
+{
+  "components": {
+    "basic-scrollbar": {
+      "id": "basic-scrollbar",
+      "name": "GScrollbar",
+      "path": "./stories/scrollbar.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GScrollbar",
+        "displayName": "GScrollbar",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "height",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "height of scrollbar"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "maxHeight",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "max height of scrollbar"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "native",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to use the native scrollbar"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "wrapStyle",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "style of wrap"
+              }
+            ],
+            "required": false,
+            "type": "StyleValue",
+            "schema": {
+              "kind": "enum",
+              "type": "StyleValue",
+              "schema": [
+                "undefined",
+                "null",
+                "string",
+                "false",
+                {
+                  "kind": "object",
+                  "type": "CSSProperties"
+                },
+                {
+                  "kind": "array",
+                  "type": "StyleValue[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "wrapClass",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "class of wrap"
+              }
+            ],
+            "required": false,
+            "type": "string | unknown[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | unknown[] | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                {
+                  "kind": "array",
+                  "type": "unknown[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "viewClass",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "class of view"
+              }
+            ],
+            "required": false,
+            "type": "string | unknown[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | unknown[] | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                {
+                  "kind": "array",
+                  "type": "unknown[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "viewStyle",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "style of view"
+              }
+            ],
+            "required": false,
+            "type": "string | unknown[] | Record<string, any> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | unknown[] | Record<string, any> | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                {
+                  "kind": "array",
+                  "type": "unknown[]"
+                },
+                "Record<string, any>"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "tag",
+            "global": false,
+            "default": "'div'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "element tag of the view"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "minSize",
+            "global": false,
+            "default": "20",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "minimum size of scrollbar"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "tabindex",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "Wrap tabindex"
+              }
+            ],
+            "required": false,
+            "type": "string | number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "noresize",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "do not respond to container size changes, if the container size does not change, it is better to set it to optimize performance"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "always",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "always show"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaOrientation",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLabel",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "id",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "id of view"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "role",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "role of view"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "scroll",
+            "description": "",
+            "tags": [],
+            "type": "[{ scrollTop: number; scrollLeft: number; }]",
+            "signature": "(event: \"scroll\", args_0: { scrollTop: number; scrollLeft: number; }): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "{ scrollTop: number; scrollLeft: number; }"
+              }
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "wrapRef",
+            "type": "any",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "scrollbar wrap ref"
+              }
+            ],
+            "schema": "any",
+            "declarations": []
+          },
+          {
+            "name": "update",
+            "type": "() => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "update scrollbar state manually"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "scrollTo",
+            "type": "{ (xCord: number, yCord?: number | undefined): void; (options: ScrollToOptions): void; }",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "scrolls to a particular set of coordinates"
+              }
+            ],
+            "schema": "{ (xCord: number, yCord?: number | undefined): void; (options: ScrollToOptions): void; }",
+            "declarations": []
+          },
+          {
+            "name": "setScrollTop",
+            "type": "(value: number) => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set distance to scroll top"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(value: number): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "setScrollLeft",
+            "type": "(value: number) => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set distance to scroll left"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(value: number): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "handleScroll",
+            "type": "() => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "handle scroll event"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/scrollbar/index.ts"
+      },
+      "argTypes": {
+        "height": {
+          "name": "height",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "maxHeight": {
+          "name": "maxHeight",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "native": {
+          "name": "native",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "wrapStyle": {
+          "name": "wrapStyle",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "null",
+                "required": false
+              },
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "false",
+                "required": false
+              },
+              {
+                "name": "object",
+                "value": {},
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "StyleValue[]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "StyleValue"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "wrapClass": {
+          "name": "wrapClass",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "unknown[]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | unknown[]"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "viewClass": {
+          "name": "viewClass",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "unknown[]",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | unknown[]"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "viewStyle": {
+          "name": "viewStyle",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "unknown[]",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "Record<string, any>",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | unknown[] | Record<string, any>"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "tag": {
+          "name": "tag",
+          "description": "",
+          "defaultValue": {
+            "summary": "'div'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'div'"
+            },
+            "category": "props"
+          }
+        },
+        "minSize": {
+          "name": "minSize",
+          "description": "",
+          "defaultValue": {
+            "summary": "20"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "20"
+            },
+            "category": "props"
+          }
+        },
+        "tabindex": {
+          "name": "tabindex",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "noresize": {
+          "name": "noresize",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "always": {
+          "name": "always",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "ariaOrientation": {
+          "name": "ariaOrientation",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLabel": {
+          "name": "ariaLabel",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "id": {
+          "name": "id",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "role": {
+          "name": "role",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "scroll": {
+          "name": "scroll",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[{ scrollTop: number; scrollLeft: number; }]"
+          },
+          "table": {
+            "type": {
+              "summary": "[{ scrollTop: number; scrollLeft: number; }]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "wrapRef": {
+          "name": "wrapRef",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "any"
+          },
+          "table": {
+            "type": {
+              "summary": "any"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "update": {
+          "name": "update",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => void"
+          },
+          "table": {
+            "type": {
+              "summary": "() => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "scrollTo": {
+          "name": "scrollTo",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ (xCord: number, yCord?: number | undefined): void; (options: ScrollToOptions): void; }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ (xCord: number, yCord?: number): void; (options: ScrollToOptions): void; }"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "setScrollTop": {
+          "name": "setScrollTop",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(value: number) => void"
+          },
+          "table": {
+            "type": {
+              "summary": "(value: number) => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "setScrollLeft": {
+          "name": "setScrollLeft",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "(value: number) => void"
+          },
+          "table": {
+            "type": {
+              "summary": "(value: number) => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "handleScroll": {
+          "name": "handleScroll",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => void"
+          },
+          "table": {
+            "type": {
+              "summary": "() => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GScrollbarProps = {\n  /**\n   * @description height of scrollbar\n   * @default ''\n   */\n  height?: string | number;\n  /**\n   * @description max height of scrollbar\n   * @default ''\n   */\n  maxHeight?: string | number;\n  /**\n   * @description whether to use the native scrollbar\n   * @default false\n   */\n  native?: boolean;\n  /**\n   * @description style of wrap\n   * @default ''\n   */\n  wrapStyle?: StyleValue;\n  /**\n   * @description class of wrap\n   * @default ''\n   */\n  wrapClass?: string | unknown[];\n  /**\n   * @description class of view\n   * @default ''\n   */\n  viewClass?: string | unknown[];\n  /**\n   * @description style of view\n   * @default ''\n   */\n  viewStyle?: string | unknown[] | Record<string, any>;\n  /**\n   * @description element tag of the view\n   * @default 'div'\n   */\n  tag?: string;\n  /**\n   * @description minimum size of scrollbar\n   * @default 20\n   */\n  minSize?: number;\n  /**\n   * @description Wrap tabindex\n   * @default undefined\n   */\n  tabindex?: string | number;\n  /** @description do not respond to container size changes, if the container size does not change, it is better to set it to optimize performance */\n  noresize?: boolean;\n  /** @description always show */\n  always?: boolean;\n  ariaOrientation?: string;\n  ariaLabel?: string;\n  /** @description id of view */\n  id?: string;\n  /** @description role of view */\n  role?: string;\n}\n```\n\n## Events\n\n```\nexport type GScrollbarEvents = {\n  scroll: [{ scrollTop: number; scrollLeft: number; }];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GScrollbarSlots = {\n  default: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GScrollbarExposed = {\n  /** @description scrollbar wrap ref */\n  wrapRef: any;\n  /** @description update scrollbar state manually */\n  update: () => void;\n  /** @description scrolls to a particular set of coordinates */\n  scrollTo: { (xCord: number, yCord?: number | undefined): void; (options: ScrollToOptions): void; };\n  /** @description set distance to scroll top */\n  setScrollTop: (value: number) => void;\n  /** @description set distance to scroll left */\n  setScrollLeft: (value: number) => void;\n  /** @description handle scroll event */\n  handleScroll: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}
