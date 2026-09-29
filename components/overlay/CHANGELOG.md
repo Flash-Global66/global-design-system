@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.30](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-overlay@0.0.29...@flash-global66/g-overlay@0.0.30) (2026-09-23)
+
+### Bug Fixes
+
+- **styles:** exponer por ./styles.scss los estilos de 8 paquetes legacy ([#331](https://github.com/Flash-Global66/global-design-system/issues/331)) ([a1acb0f](https://github.com/Flash-Global66/global-design-system/commit/a1acb0fc9d889a97786bc19c133cd18c95c7976d))
+
 ## [0.0.29](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-overlay@0.0.28...@flash-global66/g-overlay@0.0.29) (2026-07-14)
 
 **Note:** Version bump only for package @flash-global66/g-overlay

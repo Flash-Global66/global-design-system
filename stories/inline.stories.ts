@@ -1,13 +1,20 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { GInline } from '@flash-global66/g-inline/index.ts';
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
 
-import { version, peerDependencies } from '@flash-global66/g-inline/package.json';
-import { generatePeerDepsList, generateIconOptions, generatePeerDepsInstalls } from "../helper/documentation-stories";
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-inline/package.json';
+import {
+  generatePeerDepsList,
+  generateIconOptions,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 const meta: Meta = {
-  title: "Data/Inline",
+  title: 'Data/Inline',
   component: GInline,
   parameters: {
     docs: {
@@ -71,9 +78,9 @@ import { GInline } from '@flash-global66/g-inline';
   />
 </template>
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     icon: {
@@ -83,105 +90,106 @@ import { GInline } from '@flash-global66/g-inline';
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: '' },
-      }
+      },
     },
     title: {
-      description: "Título de la información que queremos transmitir.",
-      control: "text",
+      description: 'Título de la información que queremos transmitir.',
+      control: 'text',
     },
     description: {
-      description: "Descripción adicional de la información.",
-      control: "text",
+      description: 'Descripción adicional de la información.',
+      control: 'text',
     },
     size: {
-      description: "Tamaño del componente",
-      control: "select",
-      options: ["md", "sm"],
-      defaultValue: "md",
+      description: 'Tamaño del componente',
+      control: 'select',
+      options: ['md', 'sm'],
+      defaultValue: 'md',
     },
     hideClose: {
-      description: "Indica si se debe ocultar el botón de cierre.",
-      control: "boolean",
+      description: 'Indica si se debe ocultar el botón de cierre.',
+      control: 'boolean',
       defaultValue: false,
     },
     type: {
-      description: "Tipo de mensaje a mostrar. Colores de fondo y estilo de texto.",
-      control: "select",
-      options: ["success", "info", "warning", "error", "card"],
-      defaultValue: "success",
+      description:
+        'Tipo de mensaje a mostrar. Colores de fondo y estilo de texto.',
+      control: 'select',
+      options: ['success', 'info', 'warning', 'error', 'card'],
+      defaultValue: 'success',
     },
     links: {
-      description: "Lista de enlaces interactivos con etiquetas y acciones.",
-      control: "object",
+      description: 'Lista de enlaces interactivos con etiquetas y acciones.',
+      control: 'object',
     },
     shadow: {
-      description: "Activa el sombreado del componente.",
-      control: "boolean",
+      description: 'Activa el sombreado del componente.',
+      control: 'boolean',
       defaultValue: false,
     },
     border: {
-      description: "Muestra u oculta el borde del componente.",
-      control: "boolean",
+      description: 'Muestra u oculta el borde del componente.',
+      control: 'boolean',
       defaultValue: true,
     },
     iconAlign: {
-      description: "Alineación vertical del ícono izquierdo.",
-      control: "select",
-      options: ["top", "medium", "bottom"],
-      defaultValue: "medium",
+      description: 'Alineación vertical del ícono izquierdo.',
+      control: 'select',
+      options: ['top', 'medium', 'bottom'],
+      defaultValue: 'medium',
     },
     iconFill: {
-      description: "Agrega un fondo detrás del ícono izquierdo.",
-      control: "boolean",
+      description: 'Agrega un fondo detrás del ícono izquierdo.',
+      control: 'boolean',
       defaultValue: false,
     },
     showArrow: {
-      description: "Muestra u oculta el ícono de flecha en cada enlace.",
-      control: "boolean",
+      description: 'Muestra u oculta el ícono de flecha en cada enlace.',
+      control: 'boolean',
       defaultValue: true,
     },
     ariaLabel: {
-      description: "Etiqueta ARIA para accesibilidad.",
-      control: "text",
+      description: 'Etiqueta ARIA para accesibilidad.',
+      control: 'text',
     },
     onClose: {
-      description: "Evento para el cierre del componente.",
+      description: 'Evento para el cierre del componente.',
       table: {
         category: 'Eventos',
-      }
+      },
     },
     default: {
       description: 'Contenido personalizado.',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
-      }
-    }
+        type: { summary: 'slot' },
+      },
+    },
   },
   args: {
-    icon: "solid undo-alt",
-    title: "Título",
+    icon: 'solid undo-alt',
+    title: 'Título',
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.",
-    size: "md",
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.',
+    size: 'md',
     hideClose: false,
-    type: "success",
+    type: 'success',
     links: [
       {
-        label: "Enlace 1",
-        action: () => alert("Acción 1"),
+        label: 'Enlace 1',
+        action: () => alert('Acción 1'),
       },
       {
-        label: "Enlace 2",
-        action: () => alert("Acción 2"),
+        label: 'Enlace 2',
+        action: () => alert('Acción 2'),
       },
     ],
     shadow: false,
     border: true,
-    iconAlign: "medium",
+    iconAlign: 'medium',
     iconFill: false,
     showArrow: true,
-    ariaLabel: "inline",
+    ariaLabel: 'inline',
   },
 };
 
@@ -192,11 +200,12 @@ export const Primary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo básico del componente Inline. Desde los controles puedes probar todas las propiedades disponibles.'
-      }
-    }
+        story:
+          'Ejemplo básico del componente Inline. Desde los controles puedes probar todas las propiedades disponibles.',
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GInline, GConfigProvider },
     setup() {
       return { args };
@@ -205,8 +214,8 @@ export const Primary: Story = {
       <g-config-provider>
         <g-inline v-bind="args" />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Todos los tipos
@@ -215,9 +224,10 @@ export const AllTypes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente tiene 4 tipos diferentes que ayudan a transmitir el contexto del mensaje: success, info, warning y error.'
-      }
-    }
+        story:
+          'El componente tiene 4 tipos diferentes que ayudan a transmitir el contexto del mensaje: success, info, warning y error.',
+      },
+    },
   },
   render: () => ({
     components: { GInline, GConfigProvider },
@@ -256,8 +266,8 @@ export const AllTypes: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Tamaños disponibles
@@ -266,9 +276,10 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente tiene dos tamaños disponibles: md (mediano) y sm (pequeño). Útil para adaptarse a diferentes contextos de UI.'
-      }
-    }
+        story:
+          'El componente tiene dos tamaños disponibles: md (mediano) y sm (pequeño). Útil para adaptarse a diferentes contextos de UI.',
+      },
+    },
   },
   render: () => ({
     components: { GInline, GConfigProvider },
@@ -289,8 +300,8 @@ export const Sizes: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Sin botón de cerrar
@@ -299,9 +310,10 @@ export const WithoutClose: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Cuando no necesitas que el usuario pueda cerrar el mensaje, puedes ocultar el botón de cierre con la propiedad hideClose.'
-      }
-    }
+        story:
+          'Cuando no necesitas que el usuario pueda cerrar el mensaje, puedes ocultar el botón de cierre con la propiedad hideClose.',
+      },
+    },
   },
   render: () => ({
     components: { GInline, GConfigProvider },
@@ -314,8 +326,8 @@ export const WithoutClose: Story = {
           icon="solid info-circle"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Sin ícono
@@ -324,9 +336,10 @@ export const WithoutIcon: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Si no necesitas un ícono, puedes omitirlo dejando la propiedad icon vacía.'
-      }
-    }
+        story:
+          'Si no necesitas un ícono, puedes omitirlo dejando la propiedad icon vacía.',
+      },
+    },
   },
   render: () => ({
     components: { GInline, GConfigProvider },
@@ -337,8 +350,8 @@ export const WithoutIcon: Story = {
           description="Este mensaje no tiene ícono"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Variante card
@@ -347,9 +360,10 @@ export const Card: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Variante card: fondo blanco, sin borde y con sombra. Ideal para destacar información dentro de un panel o sección.'
-      }
-    }
+        story:
+          'Variante card: fondo blanco, sin borde y con sombra. Ideal para destacar información dentro de un panel o sección.',
+      },
+    },
   },
   render: () => ({
     components: { GInline, GConfigProvider },
@@ -367,8 +381,8 @@ export const Card: Story = {
           :hide-close="true"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 // Icon fill y shadow
@@ -377,9 +391,10 @@ export const WithIconFillAndShadow: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Combinación de icon-fill y shadow para dar mayor énfasis visual al componente.'
-      }
-    }
+        story:
+          'Combinación de icon-fill y shadow para dar mayor énfasis visual al componente.',
+      },
+    },
   },
   render: () => ({
     components: { GInline, GConfigProvider },
@@ -405,6 +420,6 @@ export const WithIconFillAndShadow: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };

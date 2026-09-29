@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/vue3';
+import { Meta, StoryFn } from '@storybook/vue3-vite';
 import { ref } from 'vue';
 
 // COMPONENTS
@@ -23,14 +23,22 @@ export default {
   },
 } as Meta<typeof GMenu>;
 
-const Template: StoryFn<typeof GMenu> = (args) => {
+const Template: StoryFn<typeof GMenu> = args => {
   return {
-    components: { GMenu, GConfigProvider, GButton, GMenuItem, GMenuItemGroup, GSubMenu, GIconFont },
+    components: {
+      GMenu,
+      GConfigProvider,
+      GButton,
+      GMenuItem,
+      GMenuItemGroup,
+      GSubMenu,
+      GIconFont,
+    },
     setup() {
       const isCollapse = ref(false);
 
       function hola() {
-        console.log('hola')
+        console.log('hola');
       }
 
       return {
@@ -93,8 +101,7 @@ const Template: StoryFn<typeof GMenu> = (args) => {
         </div>
       </g-config-provider>
     `,
-  }
+  };
 };
-
 
 export const Default = Template.bind({});

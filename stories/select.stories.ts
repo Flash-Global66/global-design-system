@@ -1,12 +1,16 @@
-import { StoryObj } from '@storybook/vue3'
-import { reactive, ref } from 'vue'
+import { StoryObj } from '@storybook/vue3-vite';
+import { reactive, ref } from 'vue';
 
 // COMPONENTS
-import { GSelect, OptionType, SelectInstance } from "@flash-global66/g-select/index.ts";
+import {
+  GSelect,
+  OptionType,
+  SelectInstance,
+} from '@flash-global66/g-select/index.ts';
 
 // CONFIG
-import { GConfigProvider } from '../components/config-provider'
-import { generateIconOptions } from '../helper/documentation-stories'
+import { GConfigProvider } from '../components/config-provider';
+import { generateIconOptions } from '../helper/documentation-stories';
 
 const meta = {
   title: 'Form/Select',
@@ -55,9 +59,9 @@ import '@flash-global66/g-input/select.style.scss'
 // tipos si son necesarios
 import type { OptionType } from '@flash-global66/g-select'
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     // 1. Enlace de Datos
@@ -67,8 +71,8 @@ import type { OptionType } from '@flash-global66/g-select'
       control: { type: undefined },
       table: {
         category: 'Enlace de Datos',
-        type: { summary: 'string | number | boolean | array | object' }
-      }
+        type: { summary: 'string | number | boolean | array | object' },
+      },
     },
 
     // 2. Comportamiento e Interacción
@@ -79,8 +83,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Comportamiento e Interacción',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     clearable: {
       description: 'Permite limpiar el valor del select',
@@ -88,8 +92,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Comportamiento e Interacción',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     filterable: {
       description: 'Activa la búsqueda de opciones',
@@ -97,8 +101,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Comportamiento e Interacción',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     persistent: {
       description: 'Mantiene el menú en el DOM cuando está inactivo',
@@ -106,8 +110,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Comportamiento e Interacción',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     scrollbarAlwaysOn: {
       name: 'scrollbar-always-on',
@@ -116,8 +120,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Comportamiento e Interacción',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
 
     // 3. Apariencia y Estilos
@@ -127,8 +131,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Apariencia y Estilos',
         type: { summary: 'number' },
-        defaultValue: { summary: '274' }
-      }
+        defaultValue: { summary: '274' },
+      },
     },
     itemHeight: {
       name: 'item-height',
@@ -137,34 +141,36 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Apariencia y Estilos',
         type: { summary: 'number' },
-        defaultValue: { summary: '55' }
-      }
+        defaultValue: { summary: '55' },
+      },
     },
     titleLines: {
       name: 'title-lines',
-      description: 'Número máximo de líneas para el título (0 = sin límite, 1 o 2 = trunca con ellipsis)',
+      description:
+        'Número máximo de líneas para el título (0 = sin límite, 1 o 2 = trunca con ellipsis)',
       control: {
         type: 'select',
-        options: [0, 1, 2]
+        options: [0, 1, 2],
       },
       table: {
         category: 'Apariencia y Estilos',
         type: { summary: 'number' },
-        defaultValue: { summary: '1' }
-      }
+        defaultValue: { summary: '1' },
+      },
     },
     descriptionLines: {
       name: 'description-lines',
-      description: 'Número máximo de líneas para la descripción (0 = sin límite, 1 o 2 = trunca con ellipsis)',
+      description:
+        'Número máximo de líneas para la descripción (0 = sin límite, 1 o 2 = trunca con ellipsis)',
       control: {
         type: 'select',
-        options: [0, 1, 2]
+        options: [0, 1, 2],
       },
       table: {
         category: 'Apariencia y Estilos',
         type: { summary: 'number' },
-        defaultValue: { summary: '0' }
-      }
+        defaultValue: { summary: '0' },
+      },
     },
     prefixIcon: {
       name: 'prefix-icon',
@@ -174,8 +180,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Apariencia y Estilos',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     popperClass: {
       name: 'popper-class',
@@ -184,8 +190,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Apariencia y Estilos',
         type: { summary: 'string' },
-        defaultValue: { summary: "''" }
-      }
+        defaultValue: { summary: "''" },
+      },
     },
     offset: {
       description: 'Desplazamiento del menú',
@@ -193,8 +199,8 @@ import type { OptionType } from '@flash-global66/g-select'
       table: {
         category: 'Apariencia y Estilos',
         type: { summary: 'number' },
-        defaultValue: { summary: '12' }
-      }
+        defaultValue: { summary: '12' },
+      },
     },
 
     // 4. Manejo de Datos
@@ -214,10 +220,10 @@ icon?: string
 disabled?: boolean
 ...additionalProps (customizable)
 }
-`
+`,
         },
-        defaultValue: { summary: '[]' }
-      }
+        defaultValue: { summary: '[]' },
+      },
     },
     filterMethod: {
       name: 'filter-method',
@@ -225,8 +231,8 @@ disabled?: boolean
       control: undefined,
       table: {
         category: 'Manejo de Datos',
-        type: { summary: 'Function' }
-      }
+        type: { summary: 'Function' },
+      },
     },
     remoteMethod: {
       name: 'remote-method',
@@ -234,8 +240,8 @@ disabled?: boolean
       control: undefined,
       table: {
         category: 'Manejo de Datos',
-        type: { summary: 'Function' }
-      }
+        type: { summary: 'Function' },
+      },
     },
     valueKey: {
       name: 'value-key',
@@ -244,8 +250,8 @@ disabled?: boolean
       table: {
         category: 'Manejo de Datos',
         type: { summary: 'string' },
-        defaultValue: { summary: "'value'" }
-      }
+        defaultValue: { summary: "'value'" },
+      },
     },
     remote: {
       description: 'Buscar datos desde el servidor',
@@ -253,8 +259,8 @@ disabled?: boolean
       table: {
         category: 'Manejo de Datos',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
 
     // 5. Etiquetas y Texto
@@ -264,16 +270,16 @@ disabled?: boolean
       table: {
         category: 'Etiquetas y Texto',
         type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     label: {
       description: 'Etiqueta flotante',
       control: 'text',
       table: {
         category: 'Etiquetas y Texto',
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     helpText: {
       name: 'help-text',
@@ -282,8 +288,8 @@ disabled?: boolean
       table: {
         category: 'Etiquetas y Texto',
         type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     messageError: {
       name: 'message-error',
@@ -292,8 +298,8 @@ disabled?: boolean
       table: {
         category: 'Etiquetas y Texto',
         type: { summary: 'string' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
 
     // 6. Manejo de Entrada
@@ -304,8 +310,8 @@ disabled?: boolean
       table: {
         category: 'Manejo de Entrada',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     autocomplete: {
       description: 'Tipo de autocompletado',
@@ -315,10 +321,10 @@ disabled?: boolean
         category: 'Manejo de Entrada',
         type: {
           summary: 'autocompleteTypes',
-          detail: "'none' | 'both' | 'list' | 'inline'"
+          detail: "'none' | 'both' | 'list' | 'inline'",
         },
-        defaultValue: { summary: 'none' }
-      }
+        defaultValue: { summary: 'none' },
+      },
     },
 
     // 7. Gestión de Estado
@@ -328,8 +334,8 @@ disabled?: boolean
       table: {
         category: 'Gestión de Estado',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     loading: {
       description: 'Muestra estado de carga',
@@ -337,8 +343,8 @@ disabled?: boolean
       table: {
         category: 'Gestión de Estado',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
 
     // 8. Validación y Errores
@@ -349,8 +355,8 @@ disabled?: boolean
       table: {
         category: 'Validación y Errores',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
 
     // 9. Métodos Expuestos
@@ -358,22 +364,22 @@ disabled?: boolean
       description: 'Enfoca el select',
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     blur: {
       description: 'Quita el foco del select',
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     clear: {
       description: 'Limpia el valor del select',
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
 
     // 10. Slots
@@ -381,60 +387,61 @@ disabled?: boolean
       description: 'Contenido personalizado de las opciones',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     prefix: {
       description: 'Contenido personalizado al inicio del select',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     header: {
       description: 'Contenido personalizado en la cabecera del menú',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     footer: {
       description: 'Contenido personalizado en el pie del menú',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     tag: {
-      description: 'Contenido personalizado de las etiquetas cuando es multiple',
+      description:
+        'Contenido personalizado de las etiquetas cuando es multiple',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     empty: {
       description: 'Contenido personalizado cuando no hay opciones',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     selectedLabel: {
       name: 'selected-label',
       description: 'Contenido personalizado de la etiqueta seleccionada',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
+        type: { summary: 'slot' },
+      },
     },
     loadingSlot: {
       name: 'loading',
       description: 'Contenido personalizado del estado de carga',
       table: {
         category: 'slots',
-        type: { summary: 'slot' }
-      }
-    }
+        type: { summary: 'slot' },
+      },
+    },
   },
   args: {
     label: 'Etiqueta',
@@ -445,21 +452,21 @@ disabled?: boolean
       { value: '3', title: 'Opción 3' },
       { value: '4', title: 'Opción 4' },
       { value: '5', title: 'Opción 5' },
-      { value: '6', title: 'Opción 6' }
-    ]
-  }
-}
-export default meta
-type Story = StoryObj<SelectInstance>
+      { value: '6', title: 'Opción 6' },
+    ],
+  },
+};
+export default meta;
+type Story = StoryObj<SelectInstance>;
 
 export const Basic: Story = {
   name: 'Básico',
-  render: (args) => ({
+  render: args => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref('')
+      const value = ref('');
 
-      return { value, args }
+      return { value, args };
     },
     template: `
       <g-config-provider>
@@ -467,9 +474,9 @@ export const Basic: Story = {
           <g-select v-bind="args" v-model="value" />
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const withAllProps: Story = {
   name: 'Personalizado de opciones con props',
@@ -487,26 +494,26 @@ Nota técnica de virtualización:
 - \`measureElement\` no es un prop de negocio ni de configuración funcional para producto.
 - \`measureElement\` permite medir la altura real de cada fila en runtime.
 - Es necesario cuando las opciones tienen descripciones multilinea o contenido variable.
-- Evita desajustes de espacio/scroll al abrir y cerrar el dropdown con listas grandes.`
-      }
-    }
+- Evita desajustes de espacio/scroll al abrir y cerrar el dropdown con listas grandes.`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+      const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 
-      const value = ref()
-      const value2 = ref()
+      const value = ref();
+      const value2 = ref();
       const options = Array.from({ length: 1000 }).map((_, idx) => ({
         value: `Option ${idx + 1}`,
         title: `${initials[idx % 10]}${idx} - option ${idx + 1}`,
         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in enim elementum, sagittis velit eu, feugiat sem. Sed lacinia tincidunt lacinia.`,
         icon: idx % 2 === 0 ? 'regular bolt' : 'regular user',
-        disabled: idx % 3 === 0 && idx !== 0
-      }))
+        disabled: idx % 3 === 0 && idx !== 0,
+      }));
 
-      return { value, options, value2 }
+      return { value, options, value2 };
     },
     template: `
       <g-config-provider>
@@ -540,9 +547,9 @@ Nota técnica de virtualización:
           />
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const remoteSearch: Story = {
   name: 'Búsqueda remota',
@@ -553,44 +560,46 @@ export const remoteSearch: Story = {
 
 - Carga de opciones desde API
 - Búsqueda de opciones
-- Mapeo de propiedades`
-      }
-    }
+- Mapeo de propiedades`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref()
-      const loading = ref(false)
-      const options = ref([])
+      const value = ref();
+      const loading = ref(false);
+      const options = ref([]);
 
       // Mapeo de propiedades
       const mappingProps = {
         title: 'title',
         description: 'body',
         value: 'id',
-      }
+      };
 
       const fetchOptions = async (query: string) => {
         try {
-          loading.value = true
-          const response = await fetch(`https://jsonplaceholder.typicode.com/posts?q=${query}`)
-          const data = await response.json()
+          loading.value = true;
+          const response = await fetch(
+            `https://jsonplaceholder.typicode.com/posts?q=${query}`,
+          );
+          const data = await response.json();
 
-          return data
+          return data;
         } catch (error) {
-          console.error('Error fetching data:', error)
-          return []
+          console.error('Error fetching data:', error);
+          return [];
         } finally {
-          loading.value = false
+          loading.value = false;
         }
-      }
+      };
 
       const handleSearch = async (query: string) => {
-        options.value = await fetchOptions(query)
-      }
+        options.value = await fetchOptions(query);
+      };
 
-      return { value, options, handleSearch, loading, mappingProps }
+      return { value, options, handleSearch, loading, mappingProps };
     },
     template: `
       <g-config-provider>
@@ -609,9 +618,9 @@ export const remoteSearch: Story = {
           :item-height="90"
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const selectorCountries: Story = {
   name: 'Selector de países',
@@ -627,47 +636,49 @@ export const selectorCountries: Story = {
 - Estado de carga durante operaciones asíncronas
 - Limpieza de selección
 - Uso de value-key para cuando las opciones son objetos
-- Uso de slots como prefix, default y selectedLabel`
-      }
-    }
+- Uso de slots como prefix, default y selectedLabel`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref()
-      const loadingCountries = ref(false)
-      const countries = ref<any[]>([])
+      const value = ref();
+      const loadingCountries = ref(false);
+      const countries = ref<any[]>([]);
 
       const getCountries = async () => {
         try {
-          loadingCountries.value = true
-          const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags')
-          const data = await response.json()
+          loadingCountries.value = true;
+          const response = await fetch(
+            'https://restcountries.com/v3.1/all?fields=name,flags',
+          );
+          const data = await response.json();
 
-          const countries = data.map((country) => ({
+          const countries = data.map(country => ({
             value: {
               id: country.cca2,
               image: country.flags.svg,
-              countryName: country.name.common
+              countryName: country.name.common,
             },
             title: country.name.common,
-            country: `${country.name.common} ${country.idd.root ?? ''}`
-          }))
+            country: `${country.name.common} ${country.idd.root ?? ''}`,
+          }));
 
-          return countries
+          return countries;
         } catch (error) {
-          console.error('Error fetching data:', error)
-          return []
+          console.error('Error fetching data:', error);
+          return [];
         } finally {
-          loadingCountries.value = false
+          loadingCountries.value = false;
         }
-      }
+      };
 
       const onFocusSelect = async () => {
-        countries.value = await getCountries()
-      }
+        countries.value = await getCountries();
+      };
 
-      return { value, countries, onFocusSelect, loadingCountries }
+      return { value, countries, onFocusSelect, loadingCountries };
     },
     template: `
       <g-config-provider>
@@ -699,9 +710,9 @@ export const selectorCountries: Story = {
           </template>
         </g-select>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const clearable: Story = {
   name: 'Con limpieza',
@@ -711,14 +722,14 @@ export const clearable: Story = {
         story: `El select con opción de limpieza permite al usuario borrar la selección actual.
 
 - Muestra el ícono de limpieza al final del campo
-- Permite borrar la selección actual`
-      }
-    }
+- Permite borrar la selección actual`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref()
+      const value = ref();
 
       const options = [
         { value: '1', title: 'Opción 1' },
@@ -727,10 +738,10 @@ export const clearable: Story = {
         { value: '4', title: 'Opción 4' },
         { value: '5', title: 'Opción 5' },
         { value: '6', title: 'Opción 6' },
-        { value: '7', title: 'Opción 7' }
-      ]
+        { value: '7', title: 'Opción 7' },
+      ];
 
-      return { value, options }
+      return { value, options };
     },
     template: `
       <g-config-provider>
@@ -743,13 +754,13 @@ export const clearable: Story = {
           :options="options"
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
-const handleClick = (e: MouseEvent) => {
-  alert('Click en el input')
-}
+const handleClick = () => {
+  alert('Click en el input');
+};
 
 export const states: Story = {
   name: 'Estados',
@@ -763,9 +774,9 @@ export const states: Story = {
 - **Disabled**: Select deshabilitado, no permite interacción
 - **Evento**: Select controlado por eventos externos (ej: modal)
 - **Error**: Muestra estado de error con mensaje
-- **Loading**: Estado de carga durante operaciones asíncronas`
-      }
-    }
+- **Loading**: Estado de carga durante operaciones asíncronas`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
@@ -776,43 +787,43 @@ export const states: Story = {
         disabled: 'Select deshabilitado',
         event: '',
         error: '',
-        loading: ''
-      })
+        loading: '',
+      });
 
       const options: OptionType[] = [
         {
           value: '1',
           title: 'Opción 1',
           description: 'Descripción de la opción 1',
-          icon: 'regular bolt'
+          icon: 'regular bolt',
         },
         {
           value: '2',
           title: 'Opción 2',
           description: 'Descripción de la opción 2',
-          icon: 'regular user'
+          icon: 'regular user',
         },
         {
           value: '3',
           title: 'Opción 3',
           description: 'Descripción de la opción 3',
-          icon: 'regular bolt'
+          icon: 'regular bolt',
         },
         {
           value: '4',
           title: 'Opción 4',
           description: 'Descripción de la opción 4',
-          icon: 'regular user'
+          icon: 'regular user',
         },
         {
           value: '5',
           title: 'Opción 5',
           description: 'Descripción de la opción 5',
-          icon: 'regular bolt'
-        }
-      ]
+          icon: 'regular bolt',
+        },
+      ];
 
-      return { states, handleClick, options }
+      return { states, handleClick, options };
     },
     template: `
       <g-config-provider>
@@ -866,9 +877,9 @@ export const states: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const multiple: Story = {
   name: 'Selección múltiple',
@@ -881,24 +892,24 @@ export const multiple: Story = {
 - \`v-model\` debe ser un array
 - Cada valor seleccionado se muestra como tag removible
 - \`collapseTags\` colapsa los tags mostrando un contador
-- \`multipleLimit\` limita la cantidad de opciones seleccionables (0 = sin límite)`
-      }
-    }
+- \`multipleLimit\` limita la cantidad de opciones seleccionables (0 = sin límite)`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref<string[]>([])
+      const value = ref<string[]>([]);
 
       const options = [
         { value: 'react', title: 'React' },
         { value: 'vue', title: 'Vue' },
         { value: 'angular', title: 'Angular' },
         { value: 'svelte', title: 'Svelte' },
-        { value: 'solid', title: 'Solid' }
-      ]
+        { value: 'solid', title: 'Solid' },
+      ];
 
-      return { value, options }
+      return { value, options };
     },
     template: `
       <g-config-provider>
@@ -917,9 +928,9 @@ export const multiple: Story = {
           <p class="text-3 text-secondary-txt">Seleccionados: {{ value?.length ? value.join(', ') : 'ninguno' }}</p>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const multipleEmptyDisplay: Story = {
   name: 'Selección múltiple (estado empty)',
@@ -930,24 +941,24 @@ export const multipleEmptyDisplay: Story = {
 
 - Útil para una vista más limpia o cuando los seleccionados se muestran en otro lugar
 - El placeholder sigue visible cuando el input está vacío
-- Requiere \`multiple\``
-      }
-    }
+- Requiere \`multiple\``,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref<string[]>(['react', 'vue'])
+      const value = ref<string[]>(['react', 'vue']);
 
       const options = [
         { value: 'react', title: 'React' },
         { value: 'vue', title: 'Vue' },
         { value: 'angular', title: 'Angular' },
         { value: 'svelte', title: 'Svelte' },
-        { value: 'solid', title: 'Solid' }
-      ]
+        { value: 'solid', title: 'Solid' },
+      ];
 
-      return { value, options }
+      return { value, options };
     },
     template: `
       <g-config-provider>
@@ -967,9 +978,9 @@ export const multipleEmptyDisplay: Story = {
           <p class="text-3 text-secondary-txt">Valor real: {{ value?.length ? value.join(', ') : 'ninguno' }}</p>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const multipleCollapseTags: Story = {
   name: 'Selección múltiple con tags colapsados',
@@ -980,24 +991,24 @@ export const multipleCollapseTags: Story = {
 
 - \`collapseTags\`: muestra un solo tag con el número de seleccionados
 - \`collapseTagsTooltip\`: al hacer hover se ven todos los tags
-- \`maxCollapseTags\`: cuántos tags mostrar antes de colapsar (por defecto 1)`
-      }
-    }
+- \`maxCollapseTags\`: cuántos tags mostrar antes de colapsar (por defecto 1)`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref<string[]>(['react', 'vue', 'angular'])
+      const value = ref<string[]>(['react', 'vue', 'angular']);
 
       const options = [
         { value: 'react', title: 'React' },
         { value: 'vue', title: 'Vue' },
         { value: 'angular', title: 'Angular' },
         { value: 'svelte', title: 'Svelte' },
-        { value: 'solid', title: 'Solid' }
-      ]
+        { value: 'solid', title: 'Solid' },
+      ];
 
-      return { value, options }
+      return { value, options };
     },
     template: `
       <g-config-provider>
@@ -1015,9 +1026,9 @@ export const multipleCollapseTags: Story = {
           help-text="Pasa el mouse sobre el tag +N para ver todos los seleccionados."
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const grouped: Story = {
   name: 'Opciones agrupadas',
@@ -1028,14 +1039,14 @@ export const grouped: Story = {
 
 - Estructura: \`{ title: 'Nombre del grupo', options: [{ value, title }, ...] }\`
 - Por defecto se usan las claves \`title\` y \`options\` (configurable con la prop \`props\`)
-- Útil para categorías, regiones, tipos, etc.`
-      }
-    }
+- Útil para categorías, regiones, tipos, etc.`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref('')
+      const value = ref('');
 
       const optionsWithGroups = [
         {
@@ -1043,28 +1054,28 @@ export const grouped: Story = {
           options: [
             { value: 'apple', title: 'Manzana' },
             { value: 'banana', title: 'Plátano' },
-            { value: 'orange', title: 'Naranja' }
-          ]
+            { value: 'orange', title: 'Naranja' },
+          ],
         },
         {
           title: 'Verduras',
           options: [
             { value: 'carrot', title: 'Zanahoria' },
             { value: 'lettuce', title: 'Lechuga' },
-            { value: 'tomato', title: 'Tomate' }
-          ]
+            { value: 'tomato', title: 'Tomate' },
+          ],
         },
         {
           title: 'Lácteos',
           options: [
             { value: 'milk', title: 'Leche' },
             { value: 'cheese', title: 'Queso' },
-            { value: 'yogurt', title: 'Yogur' }
-          ]
-        }
-      ]
+            { value: 'yogurt', title: 'Yogur' },
+          ],
+        },
+      ];
 
-      return { value, optionsWithGroups }
+      return { value, optionsWithGroups };
     },
     template: `
       <g-config-provider>
@@ -1079,23 +1090,23 @@ export const grouped: Story = {
           help-text="Las opciones están agrupadas por tipo (Frutas, Verduras, Lácteos)."
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const groupedMultiple: Story = {
   name: 'Agrupación + selección múltiple',
   parameters: {
     docs: {
       description: {
-        story: `Combinación de opciones agrupadas con selección múltiple. Ideal para elegir varios ítems de distintas categorías.`
-      }
-    }
+        story: `Combinación de opciones agrupadas con selección múltiple. Ideal para elegir varios ítems de distintas categorías.`,
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value = ref<string[]>([])
+      const value = ref<string[]>([]);
 
       const optionsWithGroups = [
         {
@@ -1103,36 +1114,36 @@ export const groupedMultiple: Story = {
           options: [
             { value: 'html', title: 'HTML' },
             { value: 'css', title: 'CSS' },
-            { value: 'js', title: 'JavaScript' }
-          ]
+            { value: 'js', title: 'JavaScript' },
+          ],
         },
         {
           title: 'Backend',
           options: [
             { value: 'node', title: 'Node.js' },
             { value: 'python', title: 'Python' },
-            { value: 'go', title: 'Go' }
-          ]
+            { value: 'go', title: 'Go' },
+          ],
         },
         {
           title: 'Database',
           options: [
             { value: 'mysql', title: 'MySQL' },
             { value: 'postgresql', title: 'PostgreSQL' },
-            { value: 'mongodb', title: 'MongoDB' }
-          ]
+            { value: 'mongodb', title: 'MongoDB' },
+          ],
         },
         {
           title: 'DevOps',
           options: [
             { value: 'docker', title: 'Docker' },
             { value: 'kubernetes', title: 'Kubernetes' },
-            { value: 'terraform', title: 'Terraform' }
-          ]
-        }
-      ]
+            { value: 'terraform', title: 'Terraform' },
+          ],
+        },
+      ];
 
-      return { value, optionsWithGroups }
+      return { value, optionsWithGroups };
     },
     template: `
       <g-config-provider>
@@ -1148,9 +1159,9 @@ export const groupedMultiple: Story = {
           help-text="Opciones agrupadas con selección múltiple."
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const optionLinesLimit: Story = {
   name: 'Límite de líneas en opciones',
@@ -1167,45 +1178,53 @@ export const optionLinesLimit: Story = {
           '**Consideraciones:**\n\n' +
           '- Estas props afectan el contenido del dropdown, no el valor ya seleccionado en el input.\n' +
           '- Esta story compara el comportamiento con títulos y descripciones largas para visualizar mejor la diferencia entre 0, 1 y 2 líneas.\n' +
-          '- Si el contenido ocupa más altura, recuerda ajustar item-height para evitar cortes visuales durante la virtualización.'
-      }
-    }
+          '- Si el contenido ocupa más altura, recuerda ajustar item-height para evitar cortes visuales durante la virtualización.',
+      },
+    },
   },
   render: () => ({
     components: { GSelect, GConfigProvider },
     setup() {
-      const value0 = ref()
-      const value1 = ref()
-      const value2 = ref()
+      const value0 = ref();
+      const value1 = ref();
+      const value2 = ref();
 
       const longDescriptionOptions = [
         {
           value: '1',
-          title: 'Transporte de carga nacional e internacional con servicios complementarios',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in enim elementum, sagittis velit eu, feugiat sem. Sed lacinia tincidunt lacinia. Donec molestie lacus nec risus semper lobortis.',
-          icon: 'regular bolt'
+          title:
+            'Transporte de carga nacional e internacional con servicios complementarios',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in enim elementum, sagittis velit eu, feugiat sem. Sed lacinia tincidunt lacinia. Donec molestie lacus nec risus semper lobortis.',
+          icon: 'regular bolt',
         },
         {
           value: '2',
-          title: 'Servicios de asesoría tributaria y contable para empresas medianas y grandes',
-          description: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, rhoncus id, erat. Fusce rhoncus, massa sed semper.',
-          icon: 'regular user'
+          title:
+            'Servicios de asesoría tributaria y contable para empresas medianas y grandes',
+          description:
+            'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, rhoncus id, erat. Fusce rhoncus, massa sed semper.',
+          icon: 'regular user',
         },
         {
           value: '3',
-          title: 'Comercialización y distribución de equipos tecnológicos para operaciones críticas',
-          description: 'Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy ac, gravida a, est. Proin eget sem. Sed viverra viverra nisl. Curabitur suscipit suscipit tellus.',
-          icon: 'regular bolt'
+          title:
+            'Comercialización y distribución de equipos tecnológicos para operaciones críticas',
+          description:
+            'Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy ac, gravida a, est. Proin eget sem. Sed viverra viverra nisl. Curabitur suscipit suscipit tellus.',
+          icon: 'regular bolt',
         },
         {
           value: '4',
-          title: 'Gestión logística integral para abastecimiento, almacenamiento y última milla',
-          description: 'Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed dignissim, metus nec consectetuer malesuada, ipsum augue molestie justo, sed accumsan nisi nunc sit amet erat.',
-          icon: 'regular user'
-        }
-      ]
+          title:
+            'Gestión logística integral para abastecimiento, almacenamiento y última milla',
+          description:
+            'Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed dignissim, metus nec consectetuer malesuada, ipsum augue molestie justo, sed accumsan nisi nunc sit amet erat.',
+          icon: 'regular user',
+        },
+      ];
 
-      return { value0, value1, value2, longDescriptionOptions }
+      return { value0, value1, value2, longDescriptionOptions };
     },
     template: `
       <g-config-provider>
@@ -1257,6 +1276,6 @@ export const optionLinesLimit: Story = {
 
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};

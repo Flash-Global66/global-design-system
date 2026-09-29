@@ -1,17 +1,17 @@
 // external imports
-import { ref } from 'vue'
-import { StoryObj } from '@storybook/vue3'
+import { ref } from 'vue';
+import { StoryObj } from '@storybook/vue3-vite';
 
 // components
-import { GTooltip, TooltipInstance } from '@flash-global66/g-tooltip'
+import { GTooltip, TooltipInstance } from '@flash-global66/g-tooltip';
 // import { GTooltip, TooltipInstance } from '../components/tooltip/index'
-import { GIconFont } from '@flash-global66/g-icon-font'
-import { GButton } from '@flash-global66/g-button'
-import { GRadioGroup } from '@flash-global66/g-radio'
-import { GSelect } from '@flash-global66/g-select'
+import { GIconFont } from '@flash-global66/g-icon-font';
+import { GButton } from '@flash-global66/g-button';
+import { GRadioGroup } from '@flash-global66/g-radio';
+import { GSelect } from '@flash-global66/g-select';
 
 // config provider
-import { GConfigProvider } from '../components/config-provider'
+import { GConfigProvider } from '../components/config-provider';
 
 const meta = {
   title: 'Feedback/Tooltip',
@@ -59,9 +59,9 @@ Este componente requiere:
 import { GTooltip } from '@flash-global66/g-tooltip'
 import '@flash-global66/g-tooltip/styles.scss'
 \`\`\`
-`
-      }
-    }
+`,
+      },
+    },
   },
   argTypes: {
     // 1. Estado y Control
@@ -72,8 +72,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'null' }
-      }
+        defaultValue: { summary: 'null' },
+      },
     },
     disabled: {
       description: 'Deshabilita el tooltip',
@@ -81,8 +81,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     persistent: {
       description: 'Tooltip persistente',
@@ -90,8 +90,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     closable: {
       description: 'Habilita el botón de cerrar',
@@ -99,8 +99,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Estado y Control',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
 
     // 2. Contenido y Texto
@@ -110,8 +110,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Contenido y Texto',
         type: { summary: 'string' },
-        defaultValue: { summary: "''" }
-      }
+        defaultValue: { summary: "''" },
+      },
     },
     rawContent: {
       name: 'raw-content',
@@ -120,8 +120,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Contenido y Texto',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     title: {
       description: 'Título del tooltip',
@@ -129,8 +129,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Contenido y Texto',
         type: { summary: 'string' },
-        defaultValue: { summary: "''" }
-      }
+        defaultValue: { summary: "''" },
+      },
     },
     description: {
       description: 'Descripción del tooltip',
@@ -138,8 +138,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Contenido y Texto',
         type: { summary: 'string' },
-        defaultValue: { summary: "''" }
-      }
+        defaultValue: { summary: "''" },
+      },
     },
 
     // 3. Posición y Apariencia
@@ -150,8 +150,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Posición y Apariencia',
         type: { summary: 'string | HTMLElement' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     placement: {
       description: 'Posición del tooltip',
@@ -168,13 +168,13 @@ import '@flash-global66/g-tooltip/styles.scss'
         'left-end',
         'right',
         'right-start',
-        'right-end'
+        'right-end',
       ],
       table: {
         category: 'Posición y Apariencia',
         type: { summary: "'top' | 'bottom' | 'left' | 'right'" },
-        defaultValue: { summary: "'bottom'" }
-      }
+        defaultValue: { summary: "'bottom'" },
+      },
     },
     offset: {
       description: 'Desplazamiento del tooltip',
@@ -182,8 +182,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Posición y Apariencia',
         type: { summary: 'number' },
-        defaultValue: { summary: '12' }
-      }
+        defaultValue: { summary: '12' },
+      },
     },
     showArrow: {
       name: 'show-arrow',
@@ -192,8 +192,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Posición y Apariencia',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     transition: {
       description: 'Nombre de la transición',
@@ -201,8 +201,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Posición y Apariencia',
         type: { summary: 'string' },
-        defaultValue: { summary: '' }
-      }
+        defaultValue: { summary: '' },
+      },
     },
     teleported: {
       description: 'Teletransporta el tooltip al elemento append-to',
@@ -210,8 +210,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Posición y Apariencia',
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
 
     // 4. Comportamiento y Temporización
@@ -222,8 +222,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Comportamiento y Temporización',
         type: { summary: "'hover' | 'click' | 'focus' | 'contextmenu'" },
-        defaultValue: { summary: "'hover'" }
-      }
+        defaultValue: { summary: "'hover'" },
+      },
     },
     showAfter: {
       name: 'show-after',
@@ -232,8 +232,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Comportamiento y Temporización',
         type: { summary: 'number' },
-        defaultValue: { summary: '0' }
-      }
+        defaultValue: { summary: '0' },
+      },
     },
     hideAfter: {
       name: 'hide-after',
@@ -242,8 +242,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Comportamiento y Temporización',
         type: { summary: 'number' },
-        defaultValue: { summary: '200' }
-      }
+        defaultValue: { summary: '200' },
+      },
     },
     autoClose: {
       name: 'auto-close',
@@ -252,8 +252,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Comportamiento y Temporización',
         type: { summary: 'number' },
-        defaultValue: { summary: '0' }
-      }
+        defaultValue: { summary: '0' },
+      },
     },
 
     // 5. Configuración Avanzada
@@ -264,8 +264,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Configuración Avanzada',
         type: { summary: 'object' },
-        defaultValue: { summary: '{}' }
-      }
+        defaultValue: { summary: '{}' },
+      },
     },
     virtualRef: {
       description: 'Referencia virtual',
@@ -273,8 +273,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Configuración Avanzada',
         type: { summary: 'HTMLElement' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
     triggerKeys: {
       description: 'Teclas de activación',
@@ -282,8 +282,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       table: {
         category: 'Configuración Avanzada',
         type: { summary: 'string[]' },
-        defaultValue: { summary: 'undefined' }
-      }
+        defaultValue: { summary: 'undefined' },
+      },
     },
 
     // 6. Slots
@@ -292,8 +292,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       control: false,
       table: {
         category: 'Slots',
-        type: { summary: 'Slot' }
-      }
+        type: { summary: 'Slot' },
+      },
     },
     Content: {
       name: 'content',
@@ -301,8 +301,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       control: false,
       table: {
         category: 'Slots',
-        type: { summary: 'Slot' }
-      }
+        type: { summary: 'Slot' },
+      },
     },
 
     // 7. Métodos Expuestos
@@ -314,9 +314,9 @@ import '@flash-global66/g-tooltip/styles.scss'
         category: 'Métodos Expuestos',
         type: {
           summary: 'object',
-          detail: `Ref<PopperInstance | undefined>`
-        }
-      }
+          detail: `Ref<PopperInstance | undefined>`,
+        },
+      },
     },
     contentRef: {
       name: 'content-ref',
@@ -326,9 +326,9 @@ import '@flash-global66/g-tooltip/styles.scss'
         category: 'Métodos Expuestos',
         type: {
           summary: 'object',
-          detail: `Ref<TooltipContentInstance | undefined>`
-        }
-      }
+          detail: `Ref<TooltipContentInstance | undefined>`,
+        },
+      },
     },
     isFocusInsideContent: {
       name: 'is-focus-inside-content',
@@ -336,8 +336,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       control: false,
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     updatePopper: {
       name: 'update-popper',
@@ -345,8 +345,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       control: false,
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     onOpen: {
       name: 'on-open',
@@ -354,8 +354,8 @@ import '@flash-global66/g-tooltip/styles.scss'
       control: false,
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     onClose: {
       name: 'on-close',
@@ -363,17 +363,17 @@ import '@flash-global66/g-tooltip/styles.scss'
       control: false,
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
+        type: { summary: '() => void' },
+      },
     },
     hide: {
       description: 'Oculta el tooltip',
       control: false,
       table: {
         category: 'Métodos Expuestos',
-        type: { summary: '() => void' }
-      }
-    }
+        type: { summary: '() => void' },
+      },
+    },
   },
   args: {
     title: 'Tooltip title',
@@ -389,22 +389,23 @@ import '@flash-global66/g-tooltip/styles.scss'
     showAfter: 0,
     showArrow: true,
     hideAfter: 200,
-    description: 'Los comercios recurrentes te permiten realizar transacciones más ágiles.',
+    description:
+      'Los comercios recurrentes te permiten realizar transacciones más ágiles.',
     trigger: 'hover',
     autoClose: 0,
     persistent: false,
-    teleported: true
-  }
-}
-export default meta
-type Story = StoryObj<TooltipInstance>
+    teleported: true,
+  },
+};
+export default meta;
+type Story = StoryObj<TooltipInstance>;
 
 export const Basic: Story = {
   name: 'Básico',
-  render: (args) => ({
+  render: args => ({
     components: { GTooltip, GConfigProvider, GButton },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
       <g-config-provider>
@@ -414,9 +415,9 @@ export const Basic: Story = {
           </g-tooltip>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const allPostions: Story = {
   name: 'Todas las posiciones',
@@ -425,21 +426,21 @@ export const allPostions: Story = {
       description: {
         story: `Combinación de todas las posiciones disponibles para el tooltip.
 
-\`top\` y \`bottom\` son las posiciones por defecto.`
-      }
-    }
+\`top\` y \`bottom\` son las posiciones por defecto.`,
+      },
+    },
   },
   render: () => ({
     components: { GConfigProvider, GTooltip, GRadioGroup, GIconFont, GSelect },
     setup() {
-      const position = ref('top')
-      const trigger = ref('hover')
+      const position = ref('top');
+      const trigger = ref('hover');
       const triggers = [
-          { value: 'click', title: 'Click' },
-          { value: 'hover', title: 'Hover' },
-          { value: 'focus', title: 'Focus' },
-          { value: 'contextmenu', title: 'Context Menu' }
-      ]
+        { value: 'click', title: 'Click' },
+        { value: 'hover', title: 'Hover' },
+        { value: 'focus', title: 'Focus' },
+        { value: 'contextmenu', title: 'Context Menu' },
+      ];
 
       const optionsSelect = [
         { value: 'top', title: 'Top' },
@@ -453,10 +454,10 @@ export const allPostions: Story = {
         { value: 'left-end', title: 'Left End' },
         { value: 'right', title: 'Right' },
         { value: 'right-start', title: 'Right Start' },
-        { value: 'right-end', title: 'Right End' }
-      ]
+        { value: 'right-end', title: 'Right End' },
+      ];
 
-      return { position, optionsSelect, triggers, trigger }
+      return { position, optionsSelect, triggers, trigger };
     },
     template: `
       <g-config-provider>
@@ -492,32 +493,32 @@ export const allPostions: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const visibilityControlled: Story = {
   name: 'Control de visibilidad',
   parameters: {
     docs: {
       description: {
-        story: `Controla la visibilidad del tooltip mediante el uso de la propiedad \`visible\`. Esto permite mostrar u ocultar el tooltip programáticamente.`
-      }
-    }
+        story: `Controla la visibilidad del tooltip mediante el uso de la propiedad \`visible\`. Esto permite mostrar u ocultar el tooltip programáticamente.`,
+      },
+    },
   },
   render: () => ({
     components: { GConfigProvider, GTooltip, GButton },
     setup() {
-      const visible = ref(false)
+      const visible = ref(false);
 
       const closeTooltip = () => {
-        visible.value = false
-      }
+        visible.value = false;
+      };
       const openTooltip = () => {
-        visible.value = true
-      }
+        visible.value = true;
+      };
 
-      return { visible, closeTooltip, openTooltip }
+      return { visible, closeTooltip, openTooltip };
     },
     template: `
       <g-config-provider>
@@ -536,27 +537,27 @@ export const visibilityControlled: Story = {
           </g-tooltip>
         </div>
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 
 export const singleton: Story = {
   name: 'Singleton',
   parameters: {
     docs: {
       description: {
-        story: `Tooltip singleton que se comparte entre varios elementos. Esto significa que se comparte la misma instancia de tooltip entre varios elementos, lo que permite que solo un tooltip esté visible a la vez.`
-      }
-    }
+        story: `Tooltip singleton que se comparte entre varios elementos. Esto significa que se comparte la misma instancia de tooltip entre varios elementos, lo que permite que solo un tooltip esté visible a la vez.`,
+      },
+    },
   },
   render: () => ({
     components: { GConfigProvider, GTooltip, GButton },
     setup() {
-      const buttonRef = ref()
-      const tooltipRef = ref()
-      const visible = ref(false)
+      const buttonRef = ref();
+      const tooltipRef = ref();
+      const visible = ref(false);
 
-      return { buttonRef, tooltipRef, visible }
+      return { buttonRef, tooltipRef, visible };
     },
     template: `
       <g-config-provider>
@@ -591,6 +592,6 @@ export const singleton: Story = {
           description="Puedes cerrar el tooltip haciendo click en cualquier botón."
         />
       </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};

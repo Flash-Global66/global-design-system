@@ -86,6 +86,10 @@
             @account-change="emit('to-account-change', $event)"
           />
         </div>
+
+        <div v-if="$slots.footer" :class="ns.e('footer')">
+          <slot name="footer" />
+        </div>
       </div>
 
       <div v-if="shouldShowAction" :class="ns.e('action')">
@@ -114,12 +118,14 @@ import { GIconFont } from '@flash-global66/g-icon-font';
 import QuoteInput from './components/quote-input.vue';
 import { quoteProps, quoteEmits } from './quote';
 import { useQuote } from './use-quote';
+import type { QuoteSlots } from './quote.type';
 
 defineOptions({ name: 'GQuote' });
 
 const ns = useNamespace('quote');
 const props = defineProps(quoteProps);
 const emit = defineEmits(quoteEmits);
+defineSlots<QuoteSlots>();
 
 const {
   hasFromError,

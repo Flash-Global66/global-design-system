@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import { ref } from 'vue'
-import { GRadio, GRadioGroup } from '../components/radio'
-import { GConfigProvider } from '../components/config-provider'
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { ref } from 'vue';
+import { GRadio, GRadioGroup } from '../components/radio';
+import { GConfigProvider } from '../components/config-provider';
 
 const meta: Meta<typeof GRadioGroup> = {
   title: 'Form/Radio/Group',
@@ -35,9 +35,9 @@ Ejemplo con opciones predefinidas:
   :options="options"
 />
 \`\`\`
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   argTypes: {
     // Estados
@@ -47,8 +47,8 @@ Ejemplo con opciones predefinidas:
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
-        category: 'Estados'
-      }
+        category: 'Estados',
+      },
     },
 
     // Apariencia
@@ -59,8 +59,8 @@ Ejemplo con opciones predefinidas:
       table: {
         type: { summary: 'layoutType', detail: "'horizontal' | 'vertical'" },
         defaultValue: { summary: 'horizontal' },
-        category: 'Apariencia'
-      }
+        category: 'Apariencia',
+      },
     },
 
     // Principales
@@ -76,27 +76,27 @@ value: string | number | boolean
 label?: string | number
 disabled?: boolean
 }
-        `
+        `,
         },
         defaultValue: { summary: '[]' },
-        category: 'Principales'
-      }
+        category: 'Principales',
+      },
     },
     modelValue: {
       description: 'Valor seleccionado (v-model)',
       control: 'text',
       table: {
         type: { summary: 'string | number | boolean' },
-        category: 'Principales'
-      }
+        category: 'Principales',
+      },
     },
     name: {
       description: 'Atributo name para agrupar los radios',
       control: 'text',
       table: {
         type: { summary: 'string' },
-        category: 'Validación'
-      }
+        category: 'Validación',
+      },
     },
 
     // Validación
@@ -106,8 +106,8 @@ disabled?: boolean
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
-        category: 'Validación'
-      }
+        category: 'Validación',
+      },
     },
 
     // Accesibilidad
@@ -116,8 +116,8 @@ disabled?: boolean
       control: 'text',
       table: {
         type: { summary: 'string' },
-        category: 'Accesibilidad'
-      }
+        category: 'Accesibilidad',
+      },
     },
 
     id: {
@@ -125,8 +125,8 @@ disabled?: boolean
       control: 'text',
       table: {
         type: { summary: 'string' },
-        category: 'Accesibilidad'
-      }
+        category: 'Accesibilidad',
+      },
     },
 
     // Slots
@@ -134,9 +134,9 @@ disabled?: boolean
       description: 'Slot para contenido personalizado de cada checkbox',
       table: {
         category: 'Slots',
-        type: { summary: 'slot' }
-      }
-    }
+        type: { summary: 'slot' },
+      },
+    },
   },
   args: {
     options: [],
@@ -146,26 +146,26 @@ disabled?: boolean
     validateEvent: true,
     name: 'radio-group',
     ariaLabel: 'Grupo de opciones exclusivas',
-    id: 'custom-radio-group'
-  }
-}
-export default meta
+    id: 'custom-radio-group',
+  },
+};
+export default meta;
 
-type Story = StoryObj<typeof GRadioGroup>
+type Story = StoryObj<typeof GRadioGroup>;
 
 const Template: Story = {
-  render: (args) => ({
+  render: args => ({
     components: { GRadioGroup, GRadio, GConfigProvider },
     setup() {
-      const selectedValue = ref('Value B')
+      const selectedValue = ref('Value B');
       const options = [
         { value: 'Value A', label: 'Importaciones' },
         { value: 'Value B', label: 'Inversiones' },
         { value: 'Value C', label: 'Exportaciones' },
         { value: 'Value D', label: 'Transferencias', disabled: true },
-        { value: 'Value E', label: 'Otros' }
-      ]
-      return { args, selectedValue, options }
+        { value: 'Value E', label: 'Otros' },
+      ];
+      return { args, selectedValue, options };
     },
     template: `
     <g-config-provider>
@@ -178,9 +178,9 @@ const Template: Story = {
         Valor seleccionado: {{ selectedValue }}
       </div>
     </g-config-provider>
-    `
-  })
-}
+    `,
+  }),
+};
 export const Basic: Story = {
   ...Template,
   args: {},
@@ -188,39 +188,39 @@ export const Basic: Story = {
     docs: {
       description: {
         story:
-          'Grupo básico de radios con selección única. Muestra el funcionamiento básico del v-model con valores string.'
-      }
-    }
-  }
-}
+          'Grupo básico de radios con selección única. Muestra el funcionamiento básico del v-model con valores string.',
+      },
+    },
+  },
+};
 
 export const DisabledGroup: Story = {
   ...Template,
   args: {
     disabled: true,
-    modelValue: 'ValueA'
+    modelValue: 'ValueA',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Grupo completo deshabilitado. Todos los radios están no interactivos excepto los que tienen disabled individual.'
-      }
-    }
-  }
-}
+          'Grupo completo deshabilitado. Todos los radios están no interactivos excepto los que tienen disabled individual.',
+      },
+    },
+  },
+};
 
 export const VerticalLayout: Story = {
   ...Template,
   args: {
-    layout: 'vertical'
+    layout: 'vertical',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Radios apilados verticalmente. Controlado mediante la propiedad `layout: vertical`. Ideal para formularios con espacio vertical limitado.'
-      }
-    }
-  }
-}
+          'Radios apilados verticalmente. Controlado mediante la propiedad `layout: vertical`. Ideal para formularios con espacio vertical limitado.',
+      },
+    },
+  },
+};

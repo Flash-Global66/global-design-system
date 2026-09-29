@@ -1,10 +1,11 @@
 {
   "name": "@flash-global66/g-config-provider",
   "author": "Global66",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "exports": {
     ".": "./index.ts",
+    "./styles.scss": "./config.styles.scss",
     "./style": "./config.styles.scss",
     "./*": "./*"
   },
