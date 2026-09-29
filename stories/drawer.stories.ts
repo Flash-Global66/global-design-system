@@ -409,6 +409,15 @@ const drawer = ref(false);
         type: { summary: '() => void' },
       },
     },
+    back: {
+      name: 'back',
+      description:
+        'Se activa al hacer clic en la flecha de volver (requiere `show-back`). **No cierra el drawer**: qué significa volver lo decide quien consume el componente.',
+      table: {
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
+      },
+    },
     closed: {
       description: 'Se activa al finalizar la animación de cierre',
       table: {

@@ -52,6 +52,7 @@
                 <g-icon-button
                   v-if="props.showBack"
                   icon="regular arrow-left"
+                  aria-label="Volver"
                   :class="ns.em('header', 'back')"
                   @click="handleBack"
                 />
