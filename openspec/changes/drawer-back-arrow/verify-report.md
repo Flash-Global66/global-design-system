@@ -2,13 +2,13 @@
 
 ```yaml
 veredicto: pasa
-ronda: 2
+ronda: 3
 fecha: 2026-09-29
 tareas_a_medias: []
-cumplidas: 3/3
+cumplidas: 4/4
 a_medias: 0
-de_mas: 5
-escenarios: 4/4
+de_mas: 2
+escenarios: 6/6
 comandos:
   - cmd: rg -n "showBack|back:" components/drawer/src/drawer.ts ; rg -n "arrow-left|handleBack|const emit" components/drawer/src/drawer.vue
     exit: 0
@@ -18,12 +18,12 @@ comandos:
   - cmd: node node_modules/vitest/vitest.mjs run components/drawer
     exit: 0
     esperado: 'exit=0 y cero fallidos, con los cuatro casos del listo cuando de la tarea 1 presentes como tests'
-    obtenido: 'Test Files 1 passed (1) · Tests 4 passed (4) · 0 failed'
+    obtenido: 'Test Files 1 passed (1) · Tests 4 passed (4) · los cuatro casos en Drawer.spec.ts:8, :22, :36, :51'
     coincide: true
   - cmd: node node_modules/vitest/vitest.mjs run 2>&1 | rg -o "FAIL\s+\S+\.spec\.ts" | sd 'FAIL\s+' '' | sort -u
     exit: 0
-    esperado: 'solo components/benefits-card/tests/BenefitsCard.spec.ts · exit=1 · 1 failed | 76 passed (77). Invariante VINCULANTE segun el plan: ningun nombre nuevo; la lista puede encogerse sin romper nada'
-    obtenido: 'lista VACIA · exit=0 · Test Files 77 passed (77) · Tests 555 passed (555). La lista se encogio a cero: el entorno de este run resuelve los sets Pro de FontAwesome. Invariante cumplida'
+    esperado: 'exactamente components/benefits-card/tests/BenefitsCard.spec.ts y ninguna otra · exit=1. Invariante VINCULANTE declarada por el plan: ningun nombre nuevo; la lista puede encogerse sin romper nada'
+    obtenido: 'lista VACIA · exit=0 · Test Files 77 passed (77) · Tests 555 passed (555). Invariante cumplida; el valor literal que el plan cita quedo desactualizado (igual que en ronda 2)'
     coincide: true
   - cmd: npx tailwindcss -c tailwind.config.cjs -i scripts/scss-parity/baseline/drawer.css -o /tmp/drawer.resolved.css ; los dos awk
     exit: 0
@@ -37,18 +37,33 @@ comandos:
     coincide: true
   - cmd: node scripts/scss-parity.mjs 2>&1 | sed -nE '...' | sort | rg -v '^OK '
     exit: 1
-    esperado: 'el plan NO pego lista literal; solo la invariante — ningun target de drawer y ningun nombre que no estuviera ya roto en Base'
-    obtenido: 'ERROR table, table-column-theme, table-theme · MISMATCH quote, select, select-v2-theme — identica a la lista de Base medida en ronda 1; ningun drawer, ningun nombre nuevo'
+    esperado: 'sin lista literal; solo la invariante — ningun target de drawer y ningun nombre que no estuviera ya roto en Base'
+    obtenido: 'ERROR table, table-column-theme, table-theme · MISMATCH quote, select, select-v2-theme — identica a Base; ningun drawer, ningun nombre nuevo'
     coincide: true
   - cmd: node scripts/scss-parity.mjs --update drawer ; git diff scripts/scss-parity/baseline/drawer.css
     exit: 0
     esperado: 'restriccion del proposal: el baseline se regenera con el script, nunca a mano'
-    obtenido: 'baseline actualizado: drawer · git diff VACIO — el baseline commiteado es byte-identico al que emite el script, incluidas las reglas nuevas de --back'
+    obtenido: 'baseline actualizado: drawer · git diff VACIO — byte-identico al que emite el script'
     coincide: true
   - cmd: git diff --name-only ee000ea6..HEAD
     exit: 0
     esperado: 'los seis archivos de codigo + proposal.md, tasks.md y specs/drawer/spec.md = 9; components/drawer/src/styles/drawer.scss NO aparece'
-    obtenido: '10 archivos: los nueve declarados + openspec/changes/drawer-back-arrow/verify-report.md (el registro obligatorio de la ronda 1, que no existia cuando el plan escribio la linea). drawer.scss ausente: la capa tema quedo intacta'
+    obtenido: '10 archivos: los nueve declarados + verify-report.md (el registro obligatorio, que no existia cuando se escribio la linea). drawer.scss ausente: la capa tema quedo intacta'
+    coincide: true
+  - cmd: '§6a · cat drawer.css icon-button.css > /tmp/cascada.css ; npx tailwindcss ... ; rg ... | rg -B 1 "width:"'
+    exit: 0
+    esperado: '.gui-drawer__header--back.gui-icon-button (0,2,0) con width:auto, y .gui-icon-button (0,1,0) con width:3rem DESPUES. Invariante vinculante: el selector del ancho tiene que ser compuesto'
+    obtenido: ':175 .gui-drawer__header--back.gui-icon-button { width:auto } · :288 .gui-icon-button { width:3rem }. Compuesto y gana por especificidad. El comando emite ademas 4 pares que el bloque declarado no muestra (--border, --small, :hover .hover-effect, __ripple): ruido, no contradiccion'
+    coincide: true
+  - cmd: rg -c "^\.gui-drawer__header--back \{" /tmp/cascada.resolved.css
+    exit: 1
+    esperado: '0 — si aparece una regla de una sola clase sobre --back, es la forma que ya fallo'
+    obtenido: 'sin salida · exit=1 (cero ocurrencias). rg -c NO imprime 0 sin --include-zero: el valor literal que el plan declara es inalcanzable con el comando tal como esta escrito. La sustancia se cumple: cero reglas de una clase'
+    coincide: true
+  - cmd: rg -n "gui-drawer__header--back \.hover-effect" -A 2 /tmp/cascada.resolved.css
+    exit: 0
+    esperado: 'display: none'
+    obtenido: ':179 .gui-drawer__header--back .hover-effect { display: none }'
     coincide: true
   - cmd: calcifer check origin/main
     exit: 0
@@ -59,111 +74,99 @@ comandos:
 
 ---
 
-## La auditoría de cascada
+## ¿La corrección del plan (`aad3d49c`) fue legítima?
 
-No alcanzó con leer el fuente ni el CSS compilado: se compiló un stylesheet en el orden real de `assets/scss/index.scss` (drawer en `:25`, icon-button en `:36`), se pasó por Tailwind con el config del repo, y se computó el ganador de cascada con postcss + `postcss-selector-parser` sobre el set de clases real del botón (`gui-icon-button gui-icon-button--variant-grey gui-icon-button--medium gui-drawer__header--back`; los defaults salen de `components/icon-button/src/icon-button.ts:64` y `:85`).
+Las cuatro cosas corrigen huecos reales, y se dice con medición, no con impresión.
 
-**`af245055` estaba muerto — confirmado:**
+### La §6 NO es presencia disfrazada — probado con el contrafáctico
 
-```
-spec=0,1,0 orden=32  .gui-drawer__header--back { width: auto }
-spec=0,1,0 orden=50  .gui-icon-button { width: 3rem }
-GANADOR width = 3rem
-```
-
-Misma especificidad, icon-button después → gana `w-12`. Coincide exacto con los 48px medidos en el navegador.
-
-**`379bae82` sí gana — confirmado:**
+No alcanzaba con correr la §6 sobre HEAD: eso solo muestra que hoy pasa. Se reconstruyó el estado muerto y se le corrieron los mismos comandos:
 
 ```
-spec=0,1,0 orden=50  .gui-icon-button { width: 3rem }
-spec=0,2,0 orden=32  .gui-drawer__header--back.gui-icon-button { width: auto }
-GANADOR width = auto
+git show af245055:scripts/scss-parity/baseline/drawer.css → .gui-drawer__header--back { width: auto }   ← UNA clase
 ```
 
-(0,2,0) gana por especificidad, así que el orden de import ya no importa. `.gui-icon-button` no tiene padding propio (`icon-button.styles.scss:16` es `rounded-full h-12 w-12 duration-200 relative`), y `.hover-effect` es `position:absolute`, así que no contribuye al ancho: con `w-auto` el ancho es el del glifo. Consistente con los 17.5px medidos.
+| Comando §6               | HEAD (`379bae82`)                                                   | Estado muerto (`af245055`)                                       |
+| ------------------------ | ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| §6a · forma del selector | `.gui-drawer__header--back.gui-icon-button` → **compuesto, cumple** | `.gui-drawer__header--back` → **una clase, viola la invariante** |
+| §6b · `rg -c`            | sin salida, exit 1 (**cero**)                                       | **`1`**, exit 0 → **falla**                                      |
 
-**El `display:none` del hover-effect (de `58ede408`) gana siempre:**
+**El criterio rechaza el estado que realmente shippeó en su momento.** No se puede satisfacer con una regla muerta.
 
-```
-spec=0,1,0 orden=77  .hover-effect { width: 0px; height: 0px }
-spec=0,2,0 orden=33  .gui-drawer__header--back .hover-effect { display: none }
-spec=0,3,0 orden=75  .gui-icon-button:active .hover-effect { background-color: ... }
-spec=0,3,0 orden=76  .gui-icon-button:hover .hover-effect { width: 100%; height: 100% }
-GANADOR display = none
-```
+### Pero su título promete más de lo que sus comandos hacen
 
-Ninguna regla de icon-button declara `display` sobre `.hover-effect` — solo `width`/`height`/`background`. Así que aplica incondicionalmente, también en `:hover` y `:active`. Los ripples son hijos de ese span (`IconButton.vue:5-19`), así que caen con él. **Esa regla nunca estuvo en riesgo**: el problema fue solo el ancho.
+El encabezado dice «midiendo el **GANADOR** de cascada». **Ningún comando de la §6 computa un ganador.** Computan la _forma_ del selector (compuesto) y la _ausencia_ de la forma mala. Que eso implique el ganador depende de una afirmación en prosa —«su competidor es de una sola y viene después»— calibrada al `icon-button` de hoy.
 
-**Un riesgo revisado y descartado midiendo, no suponiendo:** ocultar el span podía dejar los ripples colgados, porque `IconButton.vue:16` los limpia con `@animationend` y un elemento en `display:none` no anima. No pasa: `components/icon-button/src/use-ripple.ts:20` los remueve con `useTimeoutFn(..., 700)`, que corre igual. No hay fuga de estado.
+Modo de falla que queda abierto: si `icon-button` publica una regla de ancho de dos clases posterior (p. ej. `.gui-icon-button.gui-icon-button--medium`), empata en especificidad, gana por orden, **la regla del drawer vuelve a morir en silencio y la §6 sigue en verde**. La ronda 2 sí computó el ganador de verdad (postcss + `postcss-selector-parser`); la §6 adoptó un proxy más barato. Es un guard más estrecho que «la regla existe», pero no es lo que su título dice.
+
+### La tarea 4 retroactiva es registro honesto
+
+1. **La nota en bloque de cita dice exactamente lo que pasó**, incluido que el `[x]` no significa que el apply la corrió.
+2. **El `listo cuando` es falsable y de hecho falsa.** Exige que la regla _gane_, no que exista — y rechaza `af245055`.
+3. **La línea `commit:` nombra `58ede408` y `379bae82`, y NO nombra `af245055`.** Coherente: el commit muerto no satisface el criterio. Si la tarea se hubiera escrito para justificar lo hecho, los habría listado los tres.
+
+### El spec cumple la forma que el archivado exige
+
+3 requisitos, 6 escenarios, `SHALL` en los tres. Cada escenario con tarea: 1-3 → tarea 1, 4 → tarea 2, **5 y 6 → tarea 4**. El requisito nuevo **declara el costo táctil explícitamente**.
+
+### Las frases huérfanas que quedaron
+
+**El preámbulo de «Cómo se verifica» dice que no queda ninguna expectativa provisional.** Ya no es cierto: (a) la §2 sigue pegando `1 failed | 76 passed (77)`, que las rondas 2 y 3 contradicen; (b) la §6 no se escribió en la fase de plan ni se midió durante el apply — se escribió después de la ronda 2. La §6 lo declara en su primer párrafo, así que no engaña, pero el preámbulo la cubre con un marco que no le corresponde.
+
+**Segundo, más blando:** la sección **«Alcance» nunca se actualizó**. Sigue describiendo el botón «que al click emite `back` y nada más», sin mencionar que se le apaga el chrome. El spec y la tarea 4 lo declaran; el Alcance no.
 
 ---
 
-## Qué se cumplió — 3 de 3
+## Qué se cumplió — 4 de 4
 
-**Tarea 1 · Prop `showBack`, emit `back` y la flecha.** `drawer.ts:42` (prop booleana) y `:64` (`back: () => true` dentro del objeto). `drawer.vue:49` (`v-if="showClose || showBack"`), `:52-57` (el `g-icon-button` con `"regular arrow-left"` antes del close), `:142` (`const emit = defineEmits`), `:220` (`handleBack`). Los cuatro casos del `listo cuando` están en `components/drawer/tests/Drawer.spec.ts:8-63` con `render`/`fireEvent`/`emitted()`, en verde. **Los tres commits nuevos no tocaron nada de esto**: el único cambio en `drawer.vue` es el `:class` de la línea 55.
+**Tarea 1.** `drawer.ts:42` y `:64`; `drawer.vue:49`, `:52-57`, `:142`, `:220`. Los cuatro casos en `Drawer.spec.ts:8, :22, :36, :51`, en verde.
 
-**Tarea 2 · Layout de la fila superior.** `drawer.styles.scss:11-13` (`container-close` con `w-full flex items-center`) y `:30-32` (modificador `close` con `ml-auto`). Verificado **resuelto por Tailwind**: `display:flex`, `width:100%`, `align-items:center`, `margin-left:auto`, y `align-self` ya no aparece en ninguna parte. `scss-parity drawer drawer-theme` → `exit=0`. El baseline es byte-idéntico al que emite `--update drawer`, incluidas las reglas nuevas: no se editó a mano.
+**Tarea 2.** `drawer.styles.scss:11-13` y `:30-32`. Resuelto por Tailwind: `display:flex`, `width:100%`, `align-items:center`, `margin-left:auto`, `align-self` ausente. Baseline byte-idéntico al que emite `--update`.
 
-**Tarea 3 · Storybook.** `stories/drawer.stories.ts:169-172` (`showBack` en `argTypes`) y `:504` (`defaultValue: false`). La story de combinaciones lo menciona en `:1062`, `:1113`, `:1164` y `:1184-1189`. Sin tocar por los tres commits.
+**Tarea 3.** `stories/drawer.stories.ts:169-176`, `:504`, `:1062`, `:1189`.
 
-**Ninguno de los tres commits nuevos rompe un criterio que la ronda 1 dio por bueno.** Verificado contra el §3 del `proposal.md`: sus tres declaraciones y su invariante (`align-self:flex-end` ausente) siguen intactas. El modificador `back` es un selector nuevo y disjunto.
+**Tarea 4.** `drawer.vue:55`; `drawer.styles.scss:14-29`. Los cuatro criterios verificados: modificador presente, `.hover-effect` en `display:none`, `width:auto` aplicado, y **la regla gana** — compuesto (0,2,0) contra el (0,1,0) de `icon-button`. Respeta la restricción: el `@apply` vive en el `.scss`, el template solo lleva `ns.em()`.
 
 ---
 
 ## Qué quedó a medias — nada
 
-Ningún `listo cuando` sin cumplir. `tareas_a_medias: []`, igual que la ronda 1 — no hay reincidencia.
+`tareas_a_medias: []`, igual que las rondas 1 y 2. Sin reincidencia.
 
 ---
 
-## Qué se hizo de más — 5
+## Qué se hizo de más — 2 (bajó de 5)
 
-**Los tres commits nuevos son `de_mas`, y no fue una decisión ajustada:** ningún `listo cuando` los pide, ni de refilón. El de la tarea 2 habla de `container-close` y del modificador `close`; el de la tarea 1, del render y del emit. Ninguno menciona hover, ripple ni ancho del botón.
+**Los tres commits del chrome ya NO son `de_mas`.** Con la tarea 4 declarada y su `listo cuando` cumplido, `58ede408` y `379bae82` pasan a ser trabajo pedido.
 
-**1. `58ede408` · apagado de hover y ripple.** `drawer.vue:55` + `drawer.styles.scss:26-28` + baseline. Cambia el _feedback de interacción_ de un botón: el back arrow deja de tener affordance de hover y de pulsación, a diferencia de todos los demás `g-icon-button` del DS. Ningún criterio lo pidió, ningún test lo cubre, ningún escenario lo describe.
+**`af245055` tampoco cuenta:** su aporte al árbol de HEAD es **nulo** — `379bae82` lo supersede dentro de la misma rama, y el criterio de la tarea 4 lo rechaza. Es historia intermedia, no cambio de más. **Queda el riesgo anotado en la ronda 2:** con cherry-pick o PRs stackeados por commit, `af245055` solo reintroduce el bug.
 
-**2. `af245055` · el `w-auto` que no hacía nada.** Su efecto neto es nulo y `379bae82` lo supersede, pero **si alguien hace cherry-pick o stackea PRs por commit, `af245055` solo reintroduce el bug**.
+**1. El barrido de prettier sobre `stories/drawer.stories.ts`.** 298 inserciones / 262 borrados donde el cambio real son ~10 líneas: comillas dobles → simples. Ningún `listo cuando` lo pide.
 
-**3. `379bae82` · el selector compuesto.** Es el arreglo correcto y gana la cascada. Costo registrado: `drawer.styles.scss` ahora **hardcodea el nombre de bloque de otro componente**. Si `icon-button` renombra su bloque, o si el drawer cambia de componente para la flecha, la regla vuelve a morir en silencio — el mismo modo de falla que ya mordió una vez.
-
-**4 y 5 · Los dos de la ronda 1, que siguen en el diff:** el barrido de prettier sobre `stories/drawer.stories.ts` (528 líneas, content-neutral) y el import muerto `DrawerInstance` removido en `:5`.
-
-**El área táctil.** Con el botón en 17.5×48 queda por debajo del mínimo recomendado para touch. Se ofreció `-ml-4` dos veces y el dev eligió `w-auto` sabiendo el costo. **Es decisión tomada, no descuido, y no cuenta como falta.** Pero es un cambio de comportamiento que ningún criterio revisó.
+**2. El import muerto `DrawerInstance`**, removido en `:5`. Limpieza correcta, pedida por nadie.
 
 ---
 
-## Escenarios — 4 de 4 con evidencia
+## Escenarios — 6 de 6 con evidencia
 
-| Escenario                                               | Qué lo prueba                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Con la flecha activa, el click emite `back` y no cierra | `Drawer.spec.ts:36-49` — `emitted().back` longitud 1, `close` undefined, `update:modelValue` undefined. Intacto tras los tres commits                                                                                                                            |
-| Sin la prop, el header no cambia                        | `Drawer.spec.ts:8-20` + §3 resuelto por Tailwind. Las reglas nuevas no lo tocan: viven bajo `--back`, que solo existe cuando `showBack` es true                                                                                                                  |
-| Solo flecha, sin cerrar                                 | `Drawer.spec.ts:51-63`                                                                                                                                                                                                                                           |
-| Convivencia de los dos botones                          | `Drawer.spec.ts:22-34` + §3 + la medición en el DOM. **Mejoró con los commits**: «pegada al borde izquierdo» era ambiguo antes (caja a ras, glifo a 39.3px contra título a 24px); con `379bae82` el glifo está en 24. Pasó de ambiguo a inequívocamente cumplido |
+| #   | Escenario                                               | Qué lo prueba                                                                                                                                                                                                                         |
+| --- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Con la flecha activa, el click emite `back` y no cierra | **Test** `Drawer.spec.ts:36`                                                                                                                                                                                                          |
+| 2   | Sin la prop, el header no cambia                        | **Test** `Drawer.spec.ts:8` + §3                                                                                                                                                                                                      |
+| 3   | Solo flecha, sin cerrar                                 | **Test** `Drawer.spec.ts:51`                                                                                                                                                                                                          |
+| 4   | Convivencia de los dos botones                          | **Test** `Drawer.spec.ts:22` + §3                                                                                                                                                                                                     |
+| 5   | Sin feedback de hover ni ripple                         | **Comando** §6c — `display: none` en `:179`. Gana siempre: ninguna regla de icon-button declara `display` sobre ese span. **Sin test**                                                                                                |
+| 6   | El glifo alineado con el contenido del header           | **Comando** §6a + derivación del CSS resuelto: header `padding-left: 1.5rem` (`:164`), `.gui-icon-button` sin padding ni border (`:288-294`) → glifo y título en 24px. Coincide con la medición en el DOM de la ronda 2. **Sin test** |
 
----
-
-## El spec quedó desactualizado
-
-**No miente, pero ya no describe todo lo que el componente hace.**
-
-- El `Requirement: Flecha de volver opcional en el header` dice «renderiza un botón de icono con `arrow-left`... y emite el evento `back`». Sigue siendo **literalmente cierto**, y por eso no tumba el veredicto.
-- Lo que no dice es que **ese botón no se comporta como los demás botones de icono del DS**: sin fondo de hover, sin ripple, y con una caja que no es la de 48×48 de `g-icon-button`. Tres divergencias, cero palabras en el spec.
-- **El riesgo:** el archive copia este delta a `openspec/specs/` y ahí se vuelve la verdad del sistema. Quien lea el requisito en seis meses va a asumir un `g-icon-button` estándar.
-
-**Esto tendría que haber vuelto al `plan`.** Tres commits de código de producción llegaron sin tarea, sin `listo cuando`, sin test y sin escenario — y uno fue un no-op que ningún comando de «Cómo se verifica» podía detectar, porque el §3 solo mira `container-close` y `close`. **La sección de verificación no cubre el modificador `back`**, así que el falso verde de `af245055` no fue mala suerte: fue el hueco previsible de un cambio que se saltó la planificación.
-
-No es `no pasa` porque no hay tarea a medias ni comando declarado que falle. Pero **antes de archivar corresponde una pasada corta por `plan`** que produzca: (a) una tarea con su `listo cuando` para el chrome de la flecha, (b) un escenario que declare el comportamiento sin hover y la caja ajustada con su costo táctil aceptado, y (c) un comando que mida el **ganador de cascada**, no la presencia de la regla.
+**Los dos escenarios nuevos no tienen test automatizado**: los cubre un comando manual del proposal. Es evidencia válida, pero **no corre en CI** — el workflow de PR no ejecuta `scss:parity` ni la §6. Una regresión en el chrome no la atrapa nada automático.
 
 ---
 
-## Lo demás que se miró
+## Deuda del plan que `aad3d49c` no tocó, y reincide
 
-**Validación.** `calcifer check origin/main` sale `exit=0` pero reporta `SIN REVISAR` para los 10 archivos. No aportó cobertura. `calcifer rules` confirma que **ninguna rule gobierna los `.scss`** más allá de `calcifer-mcp-g66.md`: no hay regla que el `w-auto` viole, ni ninguna que lo hubiera atajado.
+- **§2** sigue declarando `1 failed | 76 passed (77)` y «exactamente esta línea y ninguna otra». Medido hoy: **lista vacía, `exit=0`, 77/77 y 555/555**. La invariante vinculante se cumple y el plan autoriza que la lista se encoja, así que no frena — pero el texto afirma un `exit=1` que este entorno no reproduce, por tercera vez.
+- **§5** declara 9 archivos y el diff trae 10 (el extra es el `verify-report.md`, registro obligatorio).
+- **§4 bloque 2** sigue sin declarar salida esperada.
+- **§6b** declara `Esperado: 0` para un `rg -c` que **no puede imprimir `0`** sin `--include-zero`. Discrimina bien, pero el valor declarado es inalcanzable tal como está escrito.
 
-**Dos hallazgos del plan que reinciden de la ronda 1.** (a) El §4 bloque 2 sigue sin declarar salida esperada. (b) El pipe `rg -o "FAIL..."` del §2 descarta la línea de resumen, así que los conteos que la prosa cita no son observables desde el comando.
-
-**Dato nuevo: la suite completa salió verde.** `77 passed (77)`, `555 passed (555)`, `exit=0`, con la lista de `FAIL` vacía. `BenefitsCard.spec.ts` ya no falla en este entorno: el `node_modules` enlazado resuelve los sets Pro de FontAwesome. **No frena** porque el plan designó la invariante como criterio vinculante y autorizó que la lista se encoja. Queda dicho para que el `proposal.md` no siga afirmando un `exit=1` que este entorno ya no reproduce.
-
-**Higiene.** Worktree en HEAD detached sobre `379bae82`, contenido idéntico a la rama. `node_modules` enlazado y borrado al terminar; `git status --porcelain` vacío.
+**Higiene.** Worktree en HEAD detached sobre `aad3d49c`. `node_modules` enlazado y borrado al terminar; `git status --porcelain` vacío.
