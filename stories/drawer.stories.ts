@@ -166,6 +166,17 @@ const drawer = ref(false);
         defaultValue: { summary: 'true' },
       },
     },
+    showBack: {
+      name: 'show-back',
+      description:
+        'Mostrar flecha de volver en el header. Al hacer clic emite `back`; no cierra el drawer, así que qué significa "volver" lo decide quien consume el componente. La fila del header se muestra si hay `show-close`, `show-back`, o ambos.',
+      control: 'boolean',
+      table: {
+        category: 'Apariencia y Estilo',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
     withHeader: {
       name: 'with-header',
       description: 'Mostrar el header completo del drawer',
@@ -398,6 +409,15 @@ const drawer = ref(false);
         type: { summary: '() => void' },
       },
     },
+    back: {
+      name: 'back',
+      description:
+        'Se activa al hacer clic en la flecha de volver (requiere `show-back`). **No cierra el drawer**: qué significa volver lo decide quien consume el componente.',
+      table: {
+        category: 'Eventos y Métodos',
+        type: { summary: '() => void' },
+      },
+    },
     closed: {
       description: 'Se activa al finalizar la animación de cierre',
       table: {
@@ -490,6 +510,7 @@ const drawer = ref(false);
     destroyOnClose: false,
     modal: true,
     showClose: true,
+    showBack: false,
     withHeader: true,
     modalClass: '',
     bodyClass: '',
@@ -1047,7 +1068,7 @@ export const HeaderOptions: Story = {
     docs: {
       description: {
         story:
-          'El componente Drawer ofrece flexibilidad para personalizar el header con las propiedades `showClose` y `withHeader`. Esta historia muestra las distintas combinaciones posibles.',
+          'El componente Drawer ofrece flexibilidad para personalizar el header con las propiedades `showClose`, `showBack` y `withHeader`. Esta historia muestra las distintas combinaciones posibles, incluida la flecha de volver.',
       },
       source: {
         code: `
@@ -1058,7 +1079,7 @@ export const HeaderOptions: Story = {
     title="Título del drawer"
     description="Descripción opcional del drawer"
   />
-  
+
   <!-- Drawer sin botón de cierre pero con header -->
   <g-drawer
     v-model="drawer"
@@ -1066,7 +1087,17 @@ export const HeaderOptions: Story = {
     description="Descripción opcional del drawer"
     :show-close="false"
   />
-  
+
+  <!-- Drawer con flecha de volver, sin botón de cierre -->
+  <g-drawer
+    v-model="drawer"
+    title="Título del drawer"
+    description="Descripción opcional del drawer"
+    :show-close="false"
+    :show-back="true"
+    @back="onBack"
+  />
+
   <!-- Drawer completamente sin header -->
   <g-drawer
     v-model="drawer"
@@ -1087,6 +1118,10 @@ export const HeaderOptions: Story = {
       const options = [
         { value: 'default', label: 'Header completo (por defecto)' },
         { value: 'noClose', label: 'Sin botón de cierre' },
+        {
+          value: 'onlyBack',
+          label: 'Solo flecha de volver (sin botón de cierre)',
+        },
         { value: 'noHeader', label: 'Sin header' },
       ];
 
@@ -1135,6 +1170,7 @@ export const HeaderOptions: Story = {
               append-to-body
               :with-header="selectedOption !== 'noHeader'"
               :show-close="selectedOption === 'default'"
+              :show-back="selectedOption === 'onlyBack'"
               :footer-buttons="[{ text: 'Cerrar', onClick: closeDrawer, variant: 'primary' }]"
             >
               <div class="p-4">
@@ -1152,6 +1188,14 @@ export const HeaderOptions: Story = {
                     <ul class="list-disc pl-5 mt-1">
                       <li><code>withHeader: true</code></li>
                       <li><code>showClose: false</code></li>
+                    </ul>
+                  </div>
+                  <div v-else-if="selectedOption === 'onlyBack'" class="text-sm">
+                    <div class="font-medium">Solo flecha de volver:</div>
+                    <ul class="list-disc pl-5 mt-1">
+                      <li><code>withHeader: true</code></li>
+                      <li><code>showClose: false</code></li>
+                      <li><code>showBack: true</code></li>
                     </ul>
                   </div>
                   <div v-else-if="selectedOption === 'noHeader'" class="text-sm">

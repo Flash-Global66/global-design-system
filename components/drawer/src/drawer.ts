@@ -39,6 +39,10 @@ export const drawerProps = buildProps({
     type: Boolean,
     default: true,
   },
+  showBack: {
+    type: Boolean,
+    default: false,
+  },
   responsiveSize: {
     type: [Object, Boolean] as PropType<ResponsiveSizeDrawer | boolean>,
     default: false,
@@ -55,4 +59,7 @@ export const drawerProps = buildProps({
 
 export type DrawerProps = ExtractPropTypes<typeof drawerProps>;
 
-export const drawerEmits = dialogEmits;
+export const drawerEmits = {
+  ...dialogEmits,
+  back: () => true,
+};
