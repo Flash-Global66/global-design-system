@@ -2,6 +2,7 @@
 
 > **Rama:** `brayan/feat/drawer-back-arrow`
 > **Base:** `ee000ea6`
+> **HU:** pendiente
 
 ## Por qué
 
@@ -186,5 +187,57 @@ Esperado: exactamente estos seis y ninguno más — `components/drawer/src/drawe
 `stories/drawer.stories.ts` — más este `proposal.md`, su `tasks.md` y `specs/drawer/spec.md`.
 
 En particular **`components/drawer/src/styles/drawer.scss` NO aparece**: la capa tema queda intacta.
+
+### 6 · El chrome de la flecha, midiendo el GANADOR de cascada y no la presencia de la regla
+
+Esta sección se agregó **después** de que las tareas 1-3 ya estaban hechas y verificadas, y existe por un
+error concreto: el commit `af245055` puso `@apply w-auto` en `.gui-drawer__header--back` y **no hacía
+nada**. La regla estaba en el fuente y en el CSS compilado, se aplicaba al elemento correcto, y el botón
+seguía midiendo 48px — porque `.gui-icon-button { width: 3rem }` tiene **la misma especificidad** (una
+clase) y se importa **después** (`assets/scss/index.scss:36` contra `:25`). Ningún comando de las
+secciones 1-5 podía detectarlo: la §3 solo mira `container-close` y `close`.
+
+**Comprobar que una regla existe no verifica nada. Hay que comprobar que gana.**
+
+```bash
+cat scripts/scss-parity/baseline/drawer.css scripts/scss-parity/baseline/icon-button.css > /tmp/cascada.css
+npx tailwindcss -c tailwind.config.cjs -i /tmp/cascada.css -o /tmp/cascada.resolved.css
+rg -n "^\.gui-(drawer__header--back|icon-button)[^,{]*\s*\{" -A 8 /tmp/cascada.resolved.css \
+  | rg "^\d+[:-]\.gui|width:" | rg -B 1 "width:"
+```
+
+El `cat` respeta el orden real de `assets/scss/index.scss`: drawer (`:25`) antes que icon-button (`:36`).
+
+Esperado, las dos reglas que compiten por el ancho del botón de volver:
+
+```
+.gui-drawer__header--back.gui-icon-button {   ← DOS clases (0,2,0)
+  width: auto;
+.gui-icon-button {                             ← UNA clase (0,1,0), y va DESPUÉS
+  width: 3rem;
+```
+
+**La invariante, que es el criterio vinculante:** el selector que fija `width` sobre el botón de volver
+tiene que ser **compuesto** —dos clases—, porque su competidor es de una sola y viene después. Un
+selector de una clase pierde por orden y la regla queda muerta en silencio.
+
+```bash
+rg -c "^\.gui-drawer__header--back \{" /tmp/cascada.resolved.css
+```
+
+Esperado: **`0`**. Si aparece una regla de una sola clase sobre `--back`, es justo la forma que ya falló.
+
+```bash
+rg -n "gui-drawer__header--back \.hover-effect" -A 2 /tmp/cascada.resolved.css
+```
+
+Esperado: `display: none`. Esta sí gana siempre, y por otro motivo: **ninguna regla de icon-button
+declara `display` sobre `.hover-effect`** (solo `width`, `height` y `background`), así que no hay
+competencia. Los ripples son hijos de ese span, así que caen con él.
+
+**Lo que este criterio NO cubre, dicho para que nadie lo suponga:** el área táctil. Con el botón en
+`w-auto` queda en ~17.5×48, por debajo del mínimo recomendado para touch. Se evaluó `-ml-4` como
+alternativa —alineaba el glifo conservando los 48px— y **se eligió `w-auto` a sabiendas**. Es una
+decisión tomada, no un descuido, y ningún comando la mide.
 
 El diff desde `Base` incluye este `proposal.md` y su `tasks.md`: son el cambio, no trabajo de más.

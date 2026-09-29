@@ -28,6 +28,21 @@
     las variantes
   - commit: `docs(drawer): document showBack in storybook`
 
+- [x] **4 · Chrome propio de la flecha: sin hover ni ripple, y caja ajustada al glifo**
+  - archivos: `components/drawer/src/drawer.vue`, `components/drawer/src/drawer.styles.scss`, `scripts/scss-parity/baseline/drawer.css`
+  - depende de: 1, 2
+  - listo cuando: el botón de volver lleva el modificador `back`; ese modificador oculta el
+    `.hover-effect` de `GIconButton` (que contiene también los ripples) y le fija el ancho al glifo; y
+    **la regla del ancho gana la cascada**, no solo existe — su selector es compuesto con
+    `.gui-icon-button`, porque un selector de una sola clase pierde contra el `w-12` del botón, que se
+    importa después
+  - commit: `style(drawer): drop hover and ripple on the back arrow` · `fix(drawer): win the width override against g-icon-button`
+
+> **Esta tarea se escribió después de que el trabajo ya estaba hecho y commiteado**, no antes. Se
+> declara igual porque el verify de la ronda 2 la contó como trabajo de más y sus dos escenarios
+> quedaban sin ninguna tarea que los cubriera. Que esté en `[x]` no significa que el apply la corrió:
+> significa que el código existe en la rama y se verificó a posteriori.
+
 ## Nota de ejecución
 
 El worktree no tiene `node_modules`: antes de correr el script de paridad o vitest,
