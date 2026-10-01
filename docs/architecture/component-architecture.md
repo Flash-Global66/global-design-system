@@ -101,9 +101,8 @@ Los ejemplos canónicos de esta estructura son `components/inline/` (simple) y `
 (complejo). `inline` la sigue sin excepciones. `table` sigue la estructura de carpetas y capas, pero
 **arrastra deuda heredada de Element Plus que no es un ejemplo a copiar**: `@ts-nocheck` y `any` en
 buena parte de `src/`, BEM armado a mano en `table.style.scss`, props o emits declarados inline en
-algunos `.vue` (`Table`, `TableHeader`, `FilterPanel`, `TdWrapper`), `h()` dentro de un `.ts`
-(`TableColumn/composables/useRender.ts`) y un deep-import a `g-checkbox`. Copiar su estructura, no
-esa deuda.
+algunos `.vue` (`Table`, `TableHeader`, `FilterPanel`, `TdWrapper`) y un deep-import a
+`g-checkbox`. Copiar su estructura, no esa deuda.
 
 ---
 

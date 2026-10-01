@@ -1,5 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+// h() y no un .vue: envuelve `column.renderCell`/`renderExpanded`, el contrato de función heredado
+// de Element Plus que TableBody invoca por celda; no hay un template donde expresarlo.
 import {
   Comment,
   computed,
