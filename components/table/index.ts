@@ -1,20 +1,20 @@
-import { withInstall, withNoopInstall } from '@flash-global66/g-utils'
-import Table from './src/Table/index.vue'
-import TableColumn from './src/components/TableColumn'
-import type { SFCWithInstall } from '@flash-global66/g-utils'
+import { withInstall, withNoopInstall } from '@flash-global66/g-utils';
+import Table from './src/Table/index.vue';
+import TableColumn from './src/components/TableColumn/index.vue';
+import type { SFCWithInstall } from '@flash-global66/g-utils';
 
 export const GTable: SFCWithInstall<typeof Table> & {
-  TableColumn: typeof TableColumn
+  TableColumn: typeof TableColumn;
 } = withInstall(Table, {
   TableColumn,
-})
-export default GTable
+});
+export default GTable;
 export const GTableColumn: SFCWithInstall<typeof TableColumn> =
-  withNoopInstall(TableColumn)
+  withNoopInstall(TableColumn);
 
-export type TableInstance = InstanceType<typeof Table> & unknown
+export type TableInstance = InstanceType<typeof Table> & unknown;
 
-export type TableColumnInstance = InstanceType<typeof TableColumn> & unknown
+export type TableColumnInstance = InstanceType<typeof TableColumn> & unknown;
 
 export type {
   SummaryMethod,
@@ -29,25 +29,25 @@ export type {
   RenderRowData,
   Sort,
   Filter,
-  TableColumnCtx,
   TableTooltipData,
-} from './src/Table/defaults'
+} from './src/shared/types/table.type';
+export type { TableColumnCtx } from './src/shared/types/tableColumn.type';
 
-export { useTableCellSelect } from './src/shared/composables/useTableCellSelect'
+export { useTableCellSelect } from './src/shared/composables/useTableCellSelect';
 export type {
   TableCellSelectOption,
   TableCellSelectGetOptions,
   TableCellSelectCellOptions,
   UseTableCellSelectOptions,
-} from './src/shared/composables/useTableCellSelect'
+} from './src/shared/types/tableCellSelect.type';
 
-export { useTableCellInput } from './src/shared/composables/useTableCellInput'
+export { useTableCellInput } from './src/shared/composables/useTableCellInput';
 export type {
   TableCellInputCellOptions,
   UseTableCellInputOptions,
-} from './src/shared/composables/useTableCellInput'
+} from './src/shared/types/tableCellInput.type';
 
-export { useTableCellValidation } from './src/shared/composables/useTableCellValidation'
+export { useTableCellValidation } from './src/shared/composables/useTableCellValidation';
 export type {
   TableCellRule,
   TableCellValidateState,
@@ -55,9 +55,9 @@ export type {
   CellValidationState,
   UseTableCellValidationOptions,
   TableCellValidationApi,
-} from './src/shared/composables/useTableCellValidation'
+} from './src/shared/types/tableCellValidation.type';
 
-import GCellEdit from './src/components/CellEdit/index.vue'
-export { GCellEdit }
+import GCellEdit from './src/components/CellEdit/index.vue';
+export { GCellEdit };
 
-export { clearExpansionCacheForTable } from './src/components/TableColumn/cell-renderers/cell-expansion-utils'
+export { clearExpansionCacheForTable } from './src/shared/utils/cellExpansion.util';
