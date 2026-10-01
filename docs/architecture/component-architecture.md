@@ -98,7 +98,12 @@ mismas cuatro del complejo (`composables/`, `utils/`, `types/`, `constants/`), d
 `shared/`, y en un paquete simple no hay nada que compartir entre 2+ elementos porque hay uno solo.
 
 Los ejemplos canónicos de esta estructura son `components/inline/` (simple) y `components/table/`
-(complejo). Los dos ya siguen esta estructura.
+(complejo). `inline` la sigue sin excepciones. `table` sigue la estructura de carpetas y capas, pero
+**arrastra deuda heredada de Element Plus que no es un ejemplo a copiar**: `@ts-nocheck` y `any` en
+buena parte de `src/`, BEM armado a mano en `table.style.scss`, props o emits declarados inline en
+algunos `.vue` (`Table`, `TableHeader`, `FilterPanel`, `TdWrapper`), `h()` dentro de un `.ts`
+(`TableColumn/composables/useRender.ts`) y un deep-import a `g-checkbox`. Copiar su estructura, no
+esa deuda.
 
 ---
 
@@ -227,17 +232,29 @@ ningún build para avisar si el bloque de uno cambió y el otro no.
 ### 4.5 `index.ts` — Barrel público
 
 ```ts
-import { withInstall, type SFCWithInstall } from '@flash-global66/g-utils';
+import {
+  withInstall,
+  withNoopInstall,
+  type SFCWithInstall,
+} from '@flash-global66/g-utils';
 import Table from './src/Table/index.vue';
+import TableColumn from './src/components/TableColumn/index.vue';
 
 export const GTable: SFCWithInstall<typeof Table> & {
-  Table: typeof Table;
-} = withInstall(Table, { Table });
+  TableColumn: typeof TableColumn;
+} = withInstall(Table, { TableColumn });
+
+export const GTableColumn: SFCWithInstall<typeof TableColumn> =
+  withNoopInstall(TableColumn);
 
 export default GTable;
-export * from './src/shared/types/table.type';
+export type { TableProps, TableRefs } from './src/shared/types/table.type';
 export type TableInstance = InstanceType<typeof Table>;
 ```
+
+Los tipos se re-exportan **con nombre**, nunca con `export *` (lo prohíbe `exports-imports`: no se
+ve qué expone el paquete). Un paquete con varios elementos públicos exporta cada uno con
+`withInstall` / `withNoopInstall`, como `GTable` y `GTableColumn` arriba.
 
 `withInstall` adjunta el método `install(app)` para uso global con `app.use(GTable)`. Este barrel es
 el único permitido en el paquete — un `index.ts` **dentro** de una capa (`components/index.ts`,
@@ -313,14 +330,25 @@ La suite de tests espeja la estructura de `src/`, **en la raíz del paquete, fue
 ```
 tests/
 ├── Table/
-│   └── useTable.spec.ts
-├── components/
-│   └── TableHeader/
-│       └── useTableHeader.spec.ts
-└── shared/
-    └── composables/
-        └── useTableCellSelect.spec.ts
+│   └── Table.spec.ts
+└── components/
+    ├── TableBody/
+    │   └── TableBody.spec.ts
+    ├── TableColumn/
+    │   ├── TableColumn.spec.ts
+    │   ├── composables/
+    │   │   └── useInputCellState.spec.ts
+    │   └── utils/
+    │       └── selectCellRenderer.util.spec.ts
+    ├── TableFooter/
+    │   └── TableFooter.spec.ts
+    └── TableHeader/
+        └── TableHeader.spec.ts
 ```
+
+Ese es el árbol real de `components/table/`. Su cobertura es parcial: 4 de los 8 elementos tienen
+spec y `shared/` no tiene ninguno (backfill pendiente). El espejo manda igual: un test nuevo va en
+la ruta que corresponde a su archivo en `src/`.
 
 `common/g-utils` es hoy la referencia de cumplimiento más completa de este espejo — mirar ahí ante
 la duda antes que en un paquete legacy sin migrar.
