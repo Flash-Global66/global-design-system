@@ -12,25 +12,7 @@ import type {
   GCellEditProps,
   UseCellEditReturn,
 } from './types/cellEdit.type';
-
-const FOCUSABLE_SELECTOR =
-  'input:not([type="hidden"]):not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-const POPPER_SELECTORS =
-  '.el-popper, .el-select-dropdown, .gui-select-dropdown, .el-date-picker, .el-picker-panel';
-
-function focusFirstInput(el: HTMLElement | null | undefined): void {
-  if (!el) return;
-  const focusable = el.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
-  if (focusable && typeof focusable.focus === 'function') {
-    focusable.focus();
-  }
-}
-
-function isInsidePopper(target: Node): boolean {
-  const el = target as HTMLElement;
-  return Boolean(el.closest?.(POPPER_SELECTORS));
-}
+import { focusFirstInput, isInsidePopper } from './utils/cellEdit.util';
 
 /**
  * Orquesta el estado de edición inline de una celda: cálculo de expansión, cierre por click

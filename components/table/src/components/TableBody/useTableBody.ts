@@ -28,6 +28,7 @@ import {
   removePopper,
 } from '../../shared/utils/table.util';
 import { TABLE_INJECTION_KEY } from '../../shared/constants/token.constant';
+import { getPadding, isGreaterThan } from './utils/tableBody.util';
 
 import type { TableColumnCtx } from '../../shared/types/tableColumn.type';
 import type {
@@ -43,30 +44,11 @@ import type {
 } from '../../shared/types/table.type';
 import type { TableOverflowTooltipOptions } from '../../shared/types/tableOverflowTooltip.type';
 
-function isGreaterThan(a: number, b: number, epsilon = 0.03): boolean {
-  return a - b > epsilon;
-}
-
-function getPadding(el: HTMLElement) {
-  const style = window.getComputedStyle(el, null);
-  const paddingLeft = Number.parseInt(style.paddingLeft, 10) || 0;
-  const paddingRight = Number.parseInt(style.paddingRight, 10) || 0;
-  const paddingTop = Number.parseInt(style.paddingTop, 10) || 0;
-  const paddingBottom = Number.parseInt(style.paddingBottom, 10) || 0;
-  return {
-    left: paddingLeft,
-    right: paddingRight,
-    top: paddingTop,
-    bottom: paddingBottom,
-  };
-}
-
 /**
  * Orquestador de `TableBody`: arma, a partir del store y las columnas, la
  * lista de descriptores de fila/celda que el template recorre con `v-for`.
  * Sustituye a los antiguos `useEvents`/`useRender`/`useStyles`, fusionados
- * acá para respetar el trío `index.vue` + `use<Nombre>.ts` (+ `defaults.ts`
- * como excepción EP-derived).
+ * acá para respetar el trío `index.vue` + `use<Nombre>.ts`.
  */
 export function useTableBody<T>(props: Partial<TableBodyProps<T>>) {
   const instance = getCurrentInstance();

@@ -3,17 +3,12 @@
 import { getCurrentInstance, watch } from 'vue';
 import { hasOwn } from '@flash-global66/g-utils';
 import { parseMinWidth, parseWidth } from '../../../shared/utils/table.util';
+import { getAllAliases } from '../utils/tableColumnWatcher.util';
 
 import type { ComputedRef } from 'vue';
 import type { TableColumn, ValueOf } from '../types/tableColumnInstance.type';
 import type { TableColumnCtx } from '../../../shared/types/tableColumn.type';
 
-function getAllAliases(props, aliases) {
-  return props.reduce((prev, cur) => {
-    prev[cur] = cur;
-    return prev;
-  }, aliases);
-}
 export function useWatcher<T>(
   owner: ComputedRef<any>,
   props_: Partial<TableColumnCtx<T>>,
