@@ -1426,12 +1426,12 @@ __metadata:
     "@flash-global66/g-popper": "npm:^0.0.33"
     "@flash-global66/g-utils": "npm:^0.15.6"
   peerDependencies:
-    "@flash-global66/g-checkbox": ^0.3.31
+    "@flash-global66/g-checkbox": ^0.3.30
     "@flash-global66/g-icon-font": ^0.26.1
     "@flash-global66/g-input": ^0.3.32
     "@flash-global66/g-scrollbar": ^0.1.21
     "@flash-global66/g-select": ^0.5.1
-    "@flash-global66/g-tooltip": ^0.1.22
+    "@flash-global66/g-tooltip": ^0.1.21
     async-validator: ^4.2.5
     lodash-unified: ^1.0.3
     vue: ^3.2.0
