@@ -395,6 +395,7 @@ export const useBasicDateTable = (
     // cellMatchesDate,
     // getDateOfCell,
     focus,
+    getDateOfCell,
     isCurrent,
     isWeekActive,
     isSelectedCell,

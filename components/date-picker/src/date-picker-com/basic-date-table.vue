@@ -19,7 +19,7 @@
           :aria-label="t('el.datepicker.weeksFull.' + week)"
           scope="col"
         >
-          {{ t("el.datepicker.weeks." + week) }}
+          {{ t('el.datepicker.weeks.' + week) }}
         </th>
       </tr>
       <tr
@@ -30,11 +30,14 @@
         <td
           v-for="(cell, columnKey) in row"
           :key="`${rowKey}.${columnKey}`"
-          :ref="(el) => isSelectedCell(cell) && (currentCellRef = el as HTMLElement)"
+          :ref="
+            el => isSelectedCell(cell) && (currentCellRef = el as HTMLElement)
+          "
           :class="getCellClasses(cell)"
           :aria-current="cell.isCurrent ? 'date' : undefined"
           :aria-selected="cell.isCurrent"
           :tabindex="isSelectedCell(cell) ? 0 : -1"
+          :data-date="getCellDate(rowKey, columnKey, cell)"
           @focus="handleFocus"
         >
           <g-date-picker-cell :cell="cell" />
@@ -48,12 +51,12 @@
 import {
   basicDateTableEmits,
   basicDateTableProps,
-} from "../props/basic-date-table";
+} from '../props/basic-date-table';
 import {
   useBasicDateTable,
   useBasicDateTableDOM,
-} from "../composables/use-basic-date-table";
-import GDatePickerCell from "./basic-cell-render.vue";
+} from '../composables/use-basic-date-table';
+import GDatePickerCell from './basic-cell-render.vue';
 
 const props = defineProps(basicDateTableProps);
 const emit = defineEmits(basicDateTableEmits);
@@ -65,6 +68,7 @@ const {
   currentCellRef,
 
   focus,
+  getDateOfCell,
   isCurrent,
   isWeekActive,
   isSelectedCell,
@@ -80,6 +84,15 @@ const { tableLabel, tableKls, weekLabel, getCellClasses, getRowKls, t } =
     isCurrent,
     isWeekActive,
   });
+
+function getCellDate(
+  row: number,
+  column: number,
+  cell: { type?: string },
+): string | undefined {
+  if (cell.type === 'week') return undefined;
+  return getDateOfCell(row, column).format('YYYY-MM-DD');
+}
 
 defineExpose({
   /**

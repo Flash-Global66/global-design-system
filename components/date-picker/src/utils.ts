@@ -179,3 +179,37 @@ export const getValidDateOfYear = (
   }
   return value;
 };
+
+const DAY_KEY_OFFSETS: Record<string, number> = {
+  ArrowLeft: -1,
+  ArrowRight: 1,
+  ArrowUp: -7,
+  ArrowDown: 7,
+};
+
+const MAX_DAY_KEY_STEPS = 62;
+
+export const DAY_NAVIGATION_KEYS = Object.keys(DAY_KEY_OFFSETS);
+
+export interface FindNextEnabledDateParams {
+  current: string;
+  key: string;
+  enabledDates: Set<string>;
+}
+
+export function findNextEnabledDate({
+  current,
+  key,
+  enabledDates,
+}: FindNextEnabledDateParams): string | null {
+  const offset = DAY_KEY_OFFSETS[key];
+  if (!offset) return null;
+
+  let candidate = dayjs(current);
+  for (let step = 0; step < MAX_DAY_KEY_STEPS; step++) {
+    candidate = candidate.add(offset, 'day');
+    const formatted = candidate.format('YYYY-MM-DD');
+    if (enabledDates.has(formatted)) return formatted;
+  }
+  return null;
+}
