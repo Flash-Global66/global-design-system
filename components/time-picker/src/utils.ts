@@ -95,3 +95,29 @@ export const dayOrDaysToDate = (dayOrDays: DayOrDays): DateOrDates => {
     ? (dayOrDays.map(d => d.toDate()) as [Date, Date])
     : dayOrDays.toDate();
 };
+
+export interface ShouldOpenPickerFromTriggerParams {
+  targetTagName: string | undefined;
+  isFocused: boolean;
+  openOnInputClick: boolean;
+}
+
+export function shouldOpenPickerFromTrigger({
+  targetTagName,
+  isFocused,
+  openOnInputClick,
+}: ShouldOpenPickerFromTriggerParams): boolean {
+  return targetTagName !== 'INPUT' || isFocused || openOnInputClick;
+}
+
+export interface GetRangeInputModeParams {
+  openOnInputClick: boolean;
+  isCoarsePointer: boolean;
+}
+
+export function getRangeInputMode({
+  openOnInputClick,
+  isCoarsePointer,
+}: GetRangeInputModeParams): 'none' | undefined {
+  return openOnInputClick && isCoarsePointer ? 'none' : undefined;
+}

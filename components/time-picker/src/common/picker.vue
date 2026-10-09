@@ -6,6 +6,7 @@
     trigger="click"
     v-bind="$attrs"
     role="dialog"
+    :aria-label="ariaLabel"
     teleported
     :transition="`${nsDate.namespace.value}-zoom-in-top`"
     :popper-class="[`${nsDate.namespace.value}-picker__popper`]"
@@ -95,8 +96,8 @@
         :end-placeholder="endPlaceholder"
         :class="rangeInputKls"
         :style="$attrs.style"
-        :aria-label="ariaLabel"
         :tabindex="tabindex"
+        :inputmode="rangeInputMode"
         autocomplete="off"
         role="combobox"
         @click="onMouseDownInput"
@@ -116,6 +117,7 @@
           <g-icon-font
             v-if="triggerIcon"
             :class="[nsInput.e('icon'), nsRange.e('icon')]"
+            class="pr-2"
             :name="triggerIcon"
           />
         </template>
@@ -153,6 +155,7 @@
         @calendar-change="onCalendarChange"
         @panel-change="onPanelChange"
         @mousedown.stop
+        @keydown.esc="onPanelEscape"
       />
     </template>
   </g-tooltip>
@@ -171,7 +174,7 @@ import {
   watch,
 } from 'vue';
 import { isEqual } from 'lodash-unified';
-import { onClickOutside, unrefElement } from '@vueuse/core';
+import { onClickOutside, unrefElement, useMediaQuery } from '@vueuse/core';
 import {
   NOOP,
   debugWarn,
@@ -189,7 +192,14 @@ import GInput from '@flash-global66/g-input';
 import { GIconFont } from '@flash-global66/g-icon-font';
 import GTooltip from '@flash-global66/g-tooltip';
 import { isNil } from 'lodash-unified';
-import { dayOrDaysToDate, formatter, parseDate, valueEquals } from '../utils';
+import {
+  dayOrDaysToDate,
+  formatter,
+  getRangeInputMode,
+  parseDate,
+  shouldOpenPickerFromTrigger,
+  valueEquals,
+} from '../utils';
 import { timePickerDefaultProps } from './props';
 import PickerRangeTrigger from './picker-range-trigger.vue';
 import type { InputInstance } from '@flash-global66/g-input';
@@ -393,6 +403,12 @@ const onPick = (date: any = '', visible = false) => {
   emitInput(result);
 };
 
+const onPanelEscape = (event: KeyboardEvent) => {
+  event.stopPropagation();
+  pickerVisible.value = false;
+  focus();
+};
+
 const onBeforeShow = () => {
   pickerActualVisible.value = true;
 };
@@ -526,7 +542,12 @@ const valueIsEmpty = computed(() => {
 
 const onMouseDownInput = async (event: MouseEvent) => {
   if (props.readonly || pickerDisabled.value) return;
-  if ((event.target as HTMLElement)?.tagName !== 'INPUT' || isFocused.value) {
+  const shouldOpen = shouldOpenPickerFromTrigger({
+    targetTagName: (event.target as HTMLElement)?.tagName,
+    isFocused: isFocused.value,
+    openOnInputClick: props.openOnInputClick,
+  });
+  if (shouldOpen) {
     pickerVisible.value = true;
   }
 };
@@ -542,13 +563,23 @@ const onMouseLeave = () => {
 
 const onTouchStartInput = (event: TouchEvent) => {
   if (props.readonly || pickerDisabled.value) return;
-  if (
-    (event.touches[0].target as HTMLElement)?.tagName !== 'INPUT' ||
-    isFocused.value
-  ) {
+  const shouldOpen = shouldOpenPickerFromTrigger({
+    targetTagName: (event.touches[0].target as HTMLElement)?.tagName,
+    isFocused: isFocused.value,
+    openOnInputClick: props.openOnInputClick,
+  });
+  if (shouldOpen) {
     pickerVisible.value = true;
   }
 };
+
+const isCoarsePointer = useMediaQuery('(pointer: coarse)');
+const rangeInputMode = computed(() =>
+  getRangeInputMode({
+    openOnInputClick: props.openOnInputClick,
+    isCoarsePointer: isCoarsePointer.value,
+  }),
+);
 
 const isRangeInput = computed(() => {
   return props.type.includes('range');
@@ -642,6 +673,17 @@ const handleKeydownInput = async (event: Event | KeyboardEvent) => {
   }
 
   if (code === EVENT_CODE.tab) {
+    const { shiftKey } = event as KeyboardEvent;
+    if (
+      props.openOnInputClick &&
+      pickerVisible.value &&
+      !shiftKey &&
+      pickerOptions.value.handleFocusPicker
+    ) {
+      event.preventDefault();
+      pickerOptions.value.handleFocusPicker();
+      return;
+    }
     hasJustTabExitedInput = true;
     return;
   }
