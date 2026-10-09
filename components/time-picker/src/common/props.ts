@@ -240,6 +240,13 @@ export const timePickerDefaultProps = buildProps({
   ...useEmptyValuesProps,
   ...useAriaProps(['ariaLabel']),
   /**
+   * @description whether clicking the range inputs also opens the panel (the trigger icon always does)
+   */
+  openOnInputClick: {
+    type: Boolean,
+    default: false,
+  },
+  /**
    * @description whether to show the now button
    */
   showNow: {
