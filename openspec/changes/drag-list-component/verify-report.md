@@ -2,28 +2,28 @@
 
 ```yaml
 veredicto: pasa
-ronda: 2
+ronda: 3
 fecha: 2026-10-13
 tareas_a_medias: []
 cumplidas: 14/14
 a_medias: 0
-de_mas: 0
-escenarios: 47/47
+de_mas: 2
+escenarios: 48/48
 comandos:
   - cmd: "zsh -lic 'nvm use 20.19.3 && export GBP_PACKAGE_TOKEN=${GBP_PACKAGE_TOKEN:-dummy} && yarn install && yarn build'"
     exit: null
     esperado: 'exit 0'
-    obtenido: 'no se corrió por indicación del orquestador: necesita tokens privados y lerna compila en el checkout principal, no en el worktree'
+    obtenido: 'no se corrió por indicación del orquestador: necesita tokens privados'
     coincide: no_verificado
   - cmd: npx vitest run --project unit components/drag-list
     exit: 0
     esperado: 'Test Files ≥ 17 passed y 0 failed (provisional)'
-    obtenido: '19 passed (19) · 171 tests passed'
+    obtenido: '19 passed (19) · 175 tests passed (ronda 2: 171, +4 de resolveDropAnchor)'
     coincide: true
   - cmd: npx vitest run --project unit
     exit: 0
     esperado: '0 failed'
-    obtenido: '98 archivos passed · 783 tests passed · 0 failed'
+    obtenido: '98 archivos passed · 787 tests passed · 0 failed'
     coincide: true
   - cmd: npx vue-tsc --noEmit -p components/drag-list/tsconfig.json
     exit: 0
@@ -38,12 +38,12 @@ comandos:
   - cmd: 'node scripts/check-architecture.mjs | grep -c drag-list'
     exit: 1
     esperado: '0'
-    obtenido: '0 (el exit 1 viene de grep -c cuando no hay coincidencias)'
+    obtenido: '0 (el exit 1 es de grep -c sin coincidencias)'
     coincide: true
   - cmd: node scripts/check-styles.mjs
     exit: 0
     esperado: 'exit 0, y compila un paquete más que en la línea base'
-    obtenido: 'compilan y están registrados 45 paquetes (base: 44); assets/scss/index.scss compila'
+    obtenido: '45 paquetes compilan y están registrados (base: 44); assets/scss/index.scss compila'
     coincide: true
   - cmd: 'node -e "…deps fuera de vue/@vueuse/core/@flash-global66/g-*…"'
     exit: 0
@@ -53,7 +53,7 @@ comandos:
   - cmd: grep -ci sortable yarn.lock
     exit: 1
     esperado: '0'
-    obtenido: '0 (el exit 1 viene de grep sin coincidencias)'
+    obtenido: '0 (el exit 1 es de grep sin coincidencias)'
     coincide: true
   - cmd: "git diff --name-only 93d2d0a4 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' ':!assets/scss/index.scss' | wc -l"
     exit: 0
@@ -63,7 +63,7 @@ comandos:
   - cmd: "git diff 93d2d0a4 -- assets/scss/index.scss | grep -c '^[+-][^+-]'"
     exit: 0
     esperado: '1'
-    obtenido: '1 (+@use "@flash-global66/g-drag-list/styles.scss" as *;)'
+    obtenido: '1'
     coincide: true
   - cmd: "grep -l 'prefers-reduced-motion' …drag-list.style.scss …drag-ghost.style.scss …drop-overlay.style.scss | wc -l"
     exit: 0
@@ -73,7 +73,7 @@ comandos:
   - cmd: "awk '/<script/,/<\\/script>/' components/drag-list/src/DragList/index.vue | grep -cE 'computed\\(|function |=>'"
     exit: 1
     esperado: '0'
-    obtenido: '0 (el exit 1 viene de grep -c sin coincidencias)'
+    obtenido: '0 (el exit 1 es de grep -c sin coincidencias)'
     coincide: true
   - cmd: "git diff --name-only 93d2d0a4 -- 'components/*/CHANGELOG.md' | wc -l"
     exit: 0
@@ -83,79 +83,103 @@ comandos:
   - cmd: calcifer check
     exit: 0
     esperado: 'sin hallazgos nuevos (el plan no lo declara; lo pidió el orquestador)'
-    obtenido: 'no corrió ningún validador: eslint, check-architecture y test quedan delegados a CI; marca 73 archivos como SIN REVISAR'
-    coincide: no_verificado
+    obtenido: 'sin la variable da exit 1 (yarn no encuentra GBP_PACKAGE_TOKEN en .yarnrc.yml y el paso test no corre); con GBP_PACKAGE_TOKEN=dummy da exit 0: eslint limpio, check-architecture sin carpetas tocadas, test 19 archivos y 175 tests en verde, 57 de 73 archivos revisados'
+    coincide: true
 ```
 
-**Veredicto: pasa.** La tarea 13, la única a medias en la ronda 1, cumple su `listo cuando`. Los comandos de «Cómo se verifica» que se pudieron correr coinciden con lo que declara el plan. Quedan dos `no_verificado`:
+## Veredicto: pasa
 
-- Preparar el entorno, que no se corrió por indicación del orquestador.
-- `calcifer check`, que no corrió ningún validador.
-
-## Si el re-plan es legítimo
-
-Es legítimo y no rebaja el criterio. Antes de aceptar los comandos nuevos, se comprobó que distinguen el estado malo del bueno: se corrieron también sobre el estado de la ronda 1 (`5f4246b0`).
-
-1. **Exclusión de `assets/scss/index.scss`.** Está acotada por el comando nuevo, que exige exactamente 1 línea cambiada. El diff real es esa única línea `@use`. Cualquier otra edición en ese archivo haría fallar el comando.
-2. **Movimiento reducido.** El comando distingue los dos estados: en `5f4246b0` da 2 y en HEAD da 3.
-3. **`index.vue` sin lógica.** El comando distingue los dos estados: en `5f4246b0` da 4 y en HEAD da 0.
-   - El `listo cuando` nuevo de la tarea 13 **endurece** el criterio en vez de rebajarlo. Antes decía «template puro» sin definirlo. Ahora prohíbe explícitamente en el script `computed`, funciones y flechas, y obliga a que `rootClass`, `getKey` y `exposed` vivan en `useDragList`, con tests.
-   - Las flechas de los handlers y de los `:ref` siguen en el template. Ya estaban en la ronda 1, que no las marcó. Acotar la regla al script aclara lo que la ronda 1 exigía y no deja pasar nada nuevo.
-4. **Las 6 ampliaciones** quedaron escritas en las tareas 1, 8, 10, 11 y 12, cada una marcada «Ampliado en el apply» y con su commit. Coinciden con lo que la ronda 1 había listado.
-
-**Hallazgo menor sobre el plan.** El esperado del vitest del paquete sigue diciendo «≥ 17 … Provisional». El número real hoy es 19 archivos. No cambia el veredicto, porque 19 cumple «≥ 17».
+- **Tareas:** las 14 siguen cumpliendo su `listo cuando`. Los dos commits posteriores a la ronda 2 (`010551a8` y `d27e80d9`) no rompen ningún criterio.
+- **Comandos:** todos los que se pudieron correr dan lo que declara el plan. Solo «preparar el entorno» queda `no_verificado`.
+- **Escenarios:** los 48 tienen evidencia.
+- **De más:** 2 cambios, que no tumban el veredicto.
+- **Reincidencias:** ninguna. El `tareas_a_medias` de la ronda 2 estaba vacío y sigue vacío.
+- **Dónde se verificó:** checkout principal, rama `claude/draggable-cards-component-5829e2`, HEAD `d27e80d9`.
 
 ## Cumplidas (14 de 14)
 
-**Tareas 1 a 12 y 14.** Su código no cambió desde la ronda 1 y la evidencia es la misma. Se volvieron a correr todos sus comandos y coinciden.
+**Tareas 1, 2, 4, 5, 7, 8, 9, 12 y 14.** No cambiaron desde `42933299`: la evidencia es la de la ronda 2, y la suite sigue en verde.
 
-**Tarea 13**, contra su `listo cuando` nuevo:
+**Tarea 3** · `components/drag-list/src/shared/utils/zone.util.ts`
 
-- **`components/drag-list/src/DragList/index.vue`.** El script solo tiene `defineOptions`, `defineProps`, `defineEmits`, `defineSlots`, la desestructuración de `useDragList(props, emit)` y `defineExpose(exposed)`. El comando de lógica da 0. La composición, los slots, la región live y `aria-disabled` siguen presentes.
-- **`components/drag-list/src/DragList/useDragList.ts`.**
-  - `rootClass` es un `computed` con el bloque y el modificador de `direction`.
-  - `getKey` reusa `getItemKey` de `list.util.ts`.
-  - `exposed: DragListExpose` fija `via: 'api'`.
-  - Llama a `useDragListFocus({ focusIndex, targetEl })`.
-- **`components/drag-list/tests/DragList/useDragList.spec.ts`.** Suma 6 tests:
-  - `rootClass`;
-  - `getKey`, con `itemKey` string y función;
-  - `exposed.add`, con y sin índice;
-  - `exposed.remove` por key;
-  - `exposed.move`.
-- **Foco:** `useDragListFocus.ts` y su spec.
-- **Movimiento reducido.** `drag-list.style.scss` aplica `transition: none !important` sobre `*`, y `components/drag-list/src/components/DragGhost/drag-ghost.style.scss` agrega `@media (prefers-reduced-motion: reduce)`.
-- **`assets/scss/index.scss`:** cambia 1 línea.
-- **Verificaciones:** `vue-tsc` y `check-styles` (45 paquetes) pasan, y el comando «sin lógica» da 0.
+- `resolveDragZone` no cambió.
+- Su spec sigue cubriendo «la zona se decide por el centro».
+- `resolveDropAnchor` es un agregado (ver «De más»).
+
+**Tarea 6** · `components/drag-list/src/shared/composables/usePointerDrag.ts`
+
+- La zona sale de `resolveDropAnchor`, que por dentro usa `resolveDragZone`.
+- `dropIndex` sigue saliendo de `calculateDropIndex`, ahora con el ancla en lugar del centro.
+- Los 10 tests pasan.
+
+**Tarea 10** · `drop-overlay.style.scss` y `source-panel.style.scss`
+
+- El overlay conserva `absolute inset-0` y `pointer-events: none`, y suma `p-md` y `text-center`.
+- El panel de origen pasa a `flex-1`.
+- `prefers-reduced-motion` sigue presente.
+
+**Tarea 11** · `target-panel.style.scss`
+
+- Usa `flex-1` en el panel y suma `gap-xs` en la lista horizontal.
+- El layout y `touch-action: manipulation` siguen intactos.
+
+**Tarea 13** · `components/drag-list/src/DragList/drag-list.style.scss`
+
+- **«La zona de quitar mide al menos 48 px» se sigue cumpliendo.** `--gui-drag-list-zone-min-height` da 86 px: 2·`spacing.md` (16 px) + `fontSize.5[1]` (28 px) + `spacing.xs` (8 px) + `fontSize.2[1]` (18 px). Reemplaza al `min-height: 48px` de `__source`. En el navegador se midió en 88 px.
+- `theme()` en SCSS tiene precedentes en el repo: `drawer`, `dialog`, `quote` e `icon-button`.
+- `check-styles` compila. El comando de «sin lógica» da 0 y el de movimiento reducido da 3.
+- **Nota para el review:** la constante `DRAG_THRESHOLDS.minZoneSize: 48` de la tarea 1 no la usa el código, ni antes ni ahora. El mínimo real vive en el SCSS.
 
 ## A medias
 
 Ninguna.
 
-## De más
+## De más (2)
 
-Ninguna. Los 6 ítems de la ronda 1 ahora los cubren las ampliaciones escritas en `tasks.md`.
+Los 8 archivos que cambiaron después de la ronda 2 están todos en el `archivos:` de alguna tarea. Lo que sobra es comportamiento, no archivos.
 
-El diff `93d2d0a4..HEAD` tiene 73 archivos. Fuera de los que declaran las tareas, solo están los artefactos del change: `proposal.md`, `tasks.md`, `design.md`, `specs/` y `verify-report.md`.
+**1. El puntero decide la zona cuando el centro del ghost queda afuera** (`d27e80d9`)
 
-## Escenarios (47 de 47 con evidencia)
+- **Archivos:** `zone.util.ts` (`resolveDropAnchor`), `usePointerDrag.ts`, `zone.util.spec.ts` (4 tests) y `specs/g-drag-list/spec.md`.
+- **Por qué es de más:** ningún `listo cuando` lo pide, y `tasks.md` no lo registra como «Ampliado en el apply» en las tareas 3 y 6.
+- **El cambio a la spec es legítimo:**
+  - No rebaja nada: cancelar en ese caso era lo que la spec vieja permitía.
+  - Salió de una prueba manual con un defecto real.
+  - «La zona se decide por el centro» sigue valiendo.
+  - «Soltar fuera cancela» sigue cubierto, por un test nuevo y por el de `usePointerDrag`.
+  - «Gesto apagado» queda protegido por el test «el puntero tampoco habilita quitar si no corresponde».
 
-- **46 escenarios** tienen la misma evidencia que en la ronda 1, y la suite sigue en verde.
-- **«Método expuesto»:** ahora tiene tests directos de `exposed.add`, `exposed.remove` y `exposed.move` en `useDragList.spec.ts`.
-- **«Movimiento reducido · Sin animaciones»:** lo cubre el comando de `prefers-reduced-motion`, que da 3. Es evidencia estática: ningún test ejecuta un reordenamiento con `reduce`, porque jsdom no puede hacerlo. La regla raíz anula las transiciones de todas las tarjetas, que es lo que pide el THEN.
+**Observaciones para el plan:**
+
+1. **El requisito quedó en un lugar demasiado acotado.** La frase nueva vive en «Quitar arrastrando de vuelta al origen», pero el escenario agregado es de agregar: la regla vale para las dos zonas.
+2. **Falta escenario y test para quitar con el puntero.** El caso es: el arrastre sale del destino, el centro queda fuera de las dos zonas y el puntero está sobre el origen, con `dragToRemove` activo.
+3. **Falta registrar la ampliación en `tasks.md`**, en las tareas 3 y 6.
+
+**2. Ajustes de layout que ningún criterio pedía** (`010551a8` y la parte de estilos de `d27e80d9`)
+
+- `min-height` también en `__target`.
+- `flex-1` en los paneles.
+- `p-md` y `text-center` en el overlay.
+- `gap-xs` en la lista horizontal.
+
+Caen dentro de las tareas 10, 11 y 13, no contradicen ningún criterio y responden a lo que pidió el dev al probar a mano.
+
+## Escenarios (48 de 48 con evidencia)
+
+- **47 escenarios:** la misma evidencia que en la ronda 2.
+- **«Con una tarjeta más ancha que la zona, decide el puntero»:**
+  - Test de `zone.util.spec.ts` «con el centro fuera de las dos zonas y el puntero dentro de una, decide el puntero», que da `{ zone: 'target', anchor: pointer }`.
+  - Cableado de `usePointerDrag.ts` (`point: drop.anchor`).
+  - Ningún test de `usePointerDrag` recorre este caso de punta a punta. «Se agrega en la posición del puntero» descansa en la prueba del orquestador en el navegador: soltar en x=300 agregó «Plátano» después de «Manzana».
 
 ## Con qué se probó
 
-- **`calcifer check`.** Salió con exit 0, pero no corrió ningún validador: delega eslint, check-architecture y test a CI y marca 73 archivos como SIN REVISAR. Esos tres se corrieron a mano y salieron limpios.
-- **`calcifer rules`.** Dice que en el worktree no hay `.claude/rules`.
+- **`calcifer check`:**
+  - Sin `GBP_PACKAGE_TOKEN`: exit 1, porque yarn no la encuentra en `.yarnrc.yml` y el paso `test` no corre.
+  - Con `GBP_PACKAGE_TOKEN=dummy`: exit 0. eslint limpio, 19 archivos y 175 tests en verde, 57 de 73 archivos revisados.
+  - Los 16 archivos restantes son SCSS, `package.json` y `tsconfig.json`. Los SCSS los cubre `check-styles`.
+- **`calcifer rules`:** `zone.util.ts` queda bajo `clean-code`, `code-comments` y `algorithmic-complexity`, que son del review. Ninguna choca con una tarea.
 - **Lo que no cubre este veredicto:**
-
-| Qué                                 | Estado                                                                                                                                                                                                 |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| browser-verify                      | No se corrió. El criterio del cambio entero se apoya en la evidencia del orquestador de la ronda 1                                                                                                     |
-| Overlays durante el arrastre        | Sin verificar en navegador                                                                                                                                                                             |
-| Teclado                             | Sin verificar en navegador                                                                                                                                                                             |
-| Vista horizontal a 375 px con touch | Sin verificar en navegador                                                                                                                                                                             |
-| iOS Safari real                     | Sin verificar                                                                                                                                                                                          |
-| `storybook build`                   | Falla por OOM del docgen del repo                                                                                                                                                                      |
-| Runtime después de `c73ba75b`       | No se volvió a ver en el navegador. Ese commit reorganizó `index.vue`; tests y vue-tsc lo cubren, pero una pasada por `storybook dev` confirmaría que `defineExpose(exposed)` y el foco siguen andando |
+  - El overlay y la caída al puntero en el navegador descansan en la medición del orquestador.
+  - iOS Safari real y el teclado en el navegador siguen sin verificar.
+  - `storybook build` sigue fallando por OOM del docgen.
