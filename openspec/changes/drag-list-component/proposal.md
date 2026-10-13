@@ -2,6 +2,7 @@
 
 > **Rama:** `claude/draggable-cards-component-5829e2`
 > **Base:** `93d2d0a4`
+> **HU:** pendiente
 
 Todavía no hay HU: el proyecto que lo origina no la creó. Cuando exista, se agrega la línea `HU:` y la rama se renombra según `ds-git-flow`. La base es `origin/release`.
 

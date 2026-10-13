@@ -1,30 +1,29 @@
 # Verificación · drag-list-component
 
 ```yaml
-veredicto: no pasa
-ronda: 1
+veredicto: pasa
+ronda: 2
 fecha: 2026-10-13
-vuelve_a: plan
-tareas_a_medias: [13]
-cumplidas: 13/14
-a_medias: 1
-de_mas: 6
-escenarios: 46/47
+tareas_a_medias: []
+cumplidas: 14/14
+a_medias: 0
+de_mas: 0
+escenarios: 47/47
 comandos:
-  - cmd: "zsh -lic 'nvm use 20.19.3 && … yarn install && yarn build'"
+  - cmd: "zsh -lic 'nvm use 20.19.3 && export GBP_PACKAGE_TOKEN=${GBP_PACKAGE_TOKEN:-dummy} && yarn install && yarn build'"
     exit: null
     esperado: 'exit 0'
-    obtenido: 'no se corrió por indicación del orquestador (tokens privados; lerna compila en el checkout principal). Hay dist/ en 42 de 60 components/*'
+    obtenido: 'no se corrió por indicación del orquestador: necesita tokens privados y lerna compila en el checkout principal, no en el worktree'
     coincide: no_verificado
   - cmd: npx vitest run --project unit components/drag-list
     exit: 0
     esperado: 'Test Files ≥ 17 passed y 0 failed (provisional)'
-    obtenido: '19 passed (19) · 165 tests passed'
+    obtenido: '19 passed (19) · 171 tests passed'
     coincide: true
   - cmd: npx vitest run --project unit
     exit: 0
     esperado: '0 failed'
-    obtenido: '98 archivos passed · 777 tests passed · 0 failed'
+    obtenido: '98 archivos passed · 783 tests passed · 0 failed'
     coincide: true
   - cmd: npx vue-tsc --noEmit -p components/drag-list/tsconfig.json
     exit: 0
@@ -39,12 +38,12 @@ comandos:
   - cmd: 'node scripts/check-architecture.mjs | grep -c drag-list'
     exit: 1
     esperado: '0'
-    obtenido: '0 (el exit 1 es de grep -c cuando no hay coincidencias)'
+    obtenido: '0 (el exit 1 viene de grep -c cuando no hay coincidencias)'
     coincide: true
   - cmd: node scripts/check-styles.mjs
     exit: 0
-    esperado: 'exit 0 y un paquete más compila que en la línea base'
-    obtenido: '45 paquetes compilan y están registrados (base: 44 @use en assets/scss/index.scss de 93d2d0a4)'
+    esperado: 'exit 0, y compila un paquete más que en la línea base'
+    obtenido: 'compilan y están registrados 45 paquetes (base: 44); assets/scss/index.scss compila'
     coincide: true
   - cmd: 'node -e "…deps fuera de vue/@vueuse/core/@flash-global66/g-*…"'
     exit: 0
@@ -54,13 +53,28 @@ comandos:
   - cmd: grep -ci sortable yarn.lock
     exit: 1
     esperado: '0'
-    obtenido: '0 (exit 1 de grep sin coincidencias)'
+    obtenido: '0 (el exit 1 viene de grep sin coincidencias)'
     coincide: true
-  - cmd: "git diff --name-only 93d2d0a4 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' | wc -l"
+  - cmd: "git diff --name-only 93d2d0a4 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' ':!assets/scss/index.scss' | wc -l"
     exit: 0
     esperado: '0'
-    obtenido: '1 (assets/scss/index.scss)'
-    coincide: false
+    obtenido: '0'
+    coincide: true
+  - cmd: "git diff 93d2d0a4 -- assets/scss/index.scss | grep -c '^[+-][^+-]'"
+    exit: 0
+    esperado: '1'
+    obtenido: '1 (+@use "@flash-global66/g-drag-list/styles.scss" as *;)'
+    coincide: true
+  - cmd: "grep -l 'prefers-reduced-motion' …drag-list.style.scss …drag-ghost.style.scss …drop-overlay.style.scss | wc -l"
+    exit: 0
+    esperado: '3'
+    obtenido: '3'
+    coincide: true
+  - cmd: "awk '/<script/,/<\\/script>/' components/drag-list/src/DragList/index.vue | grep -cE 'computed\\(|function |=>'"
+    exit: 1
+    esperado: '0'
+    obtenido: '0 (el exit 1 viene de grep -c sin coincidencias)'
+    coincide: true
   - cmd: "git diff --name-only 93d2d0a4 -- 'components/*/CHANGELOG.md' | wc -l"
     exit: 0
     esperado: '0'
@@ -68,139 +82,80 @@ comandos:
     coincide: true
   - cmd: calcifer check
     exit: 0
-    esperado: 'sin hallazgos nuevos (no lo declara el plan, lo pidió el orquestador)'
-    obtenido: 'no corrió ningún validador local: eslint, check-architecture y test quedan delegados a CI; 72 archivos SIN REVISAR'
+    esperado: 'sin hallazgos nuevos (el plan no lo declara; lo pidió el orquestador)'
+    obtenido: 'no corrió ningún validador: eslint, check-architecture y test quedan delegados a CI; marca 73 archivos como SIN REVISAR'
     coincide: no_verificado
 ```
 
-**Veredicto: no pasa.** Hay dos motivos, y cada uno se arregla en un lugar distinto:
+**Veredicto: pasa.** La tarea 13, la única a medias en la ronda 1, cumple su `listo cuando`. Los comandos de «Cómo se verifica» que se pudieron correr coinciden con lo que declara el plan. Quedan dos `no_verificado`:
 
-- **Plan.** El comando «archivos tocados fuera del change» espera `0` y da `1`. El criterio choca con el `listo cuando` de la tarea 13, que exige registrar el paquete en `assets/scss/index.scss`.
-- **Apply.** La tarea 13 está tildada, pero su `index.vue` no es template puro.
+- Preparar el entorno, que no se corrió por indicación del orquestador.
+- `calcifer check`, que no corrió ningún validador.
 
-Va a `plan` porque el apply no puede corregir el valor esperado de un comando. Cuando el plan lo corrija, la tarea 13 vuelve al apply.
+## Si el re-plan es legítimo
 
-## Cumplidas (13 de 14)
+Es legítimo y no rebaja el criterio. Antes de aceptar los comandos nuevos, se comprobó que distinguen el estado malo del bueno: se corrieron también sobre el estado de la ronda 1 (`5f4246b0`).
 
-1. **Paquete y contrato.**
-   - Lo prueban `components/drag-list/package.json`, `tsconfig.json`, `index.ts`, `src/DragList/constants/drag-list.constant.ts`, `src/shared/types/drag-list.type.ts`, `src/shared/constants/{drag,texts}.constant.ts`, `tests/DragList/props.spec.ts` y la entrada nueva en `yarn.lock`.
-   - Pasan check-architecture (0) y vue-tsc.
-   - **No se puede comprobar el rojo previo de `props.spec.ts`:** el spec y el código entraron en el mismo commit. Pasa lo mismo con el TDD de todas las tareas.
-2. **Utils de lista.** `src/shared/utils/list.util.ts` y su spec (28 tests). Los cuatro escenarios con nombre y `getPreviewItems` tienen test.
-3. **Inserción y zona.** `drop.util.ts` y `zone.util.ts`, con sus specs. Están los cuatro casos de `calculateDropIndex` y «la zona se decide por el centro».
-4. **Activación, auto-scroll y overlays.** `activation.util.ts`, `scroll.util.ts` y `overlay.util.ts`, con sus specs. El de activación usa `it.each` para los selectores no arrastrables.
-5. **Anunciador.** `useLiveAnnouncer.ts` y su spec: interpolación y re-anuncio en el siguiente tick.
-6. **Motor de puntero.** `usePointerDrag.ts` y su spec, que cubre los seis casos del criterio.
-   - `touchmove` con `passive: false` se registra recién al activar y se quita en `reset`.
-   - El cache de rects se invalida con el scroll.
-7. **Auto-scroll.** `useAutoScroll.ts` y su spec.
-   - Con delta 0 no pausa el rAF: saltea el frame.
-   - Cuenta como cumplida. Leído literalmente, el criterio impediría retomar el scroll cuando el puntero vuelve al borde: es una nota sobre la redacción del plan.
-8. **Teclado.** `useKeyboardReorder.ts` y su spec. Cubre `Espacio ↓ ↓ Espacio` → `onMove(0, 2)`, `Esc`, y los casos con y sin `canRemove`.
-9. **Orquestador.** `src/DragList/useDragList.ts` y su spec (26 tests). Cubre las guardas, el warn de duplicados, la traducción de `onDrop`, los anuncios, `itemLabel` y el merge parcial de `texts`.
-10. **Origen y overlay.**
-    - Los `.vue` y composables de `SourcePanel` y `DropOverlay`, con sus specs.
-    - El overlay tiene `pointer-events: none` y `aria-hidden`, va en posición absoluta, usa el ícono plus o trash y anula la transición con reduced-motion.
-11. **Destino, nodos y conectores.**
-    - Los `.vue` y composables de `TargetPanel`, `FlowNode` y `FlowConnector`, con sus specs.
-    - Usa `ol`/`ul`, `<li tabindex="0">` y `touch-action: manipulation`. Los conectores llevan `aria-hidden` y giran.
-12. **Ghost.**
-    - `DragGhost/index.vue` y `useDragGhost.ts`, con su spec.
-    - Usa teleport a `body`, `position: fixed`, `translate3d`, `useZIndex`, `opacity-80`, sombra y `aria-hidden`.
-13. **Story.**
-    - `stories/drag-list.stories.ts`, con las seis stories: «Simple», «Flujo con fin», «Inicio y fin», «Horizontal», «Repetible» y «Deshabilitado».
-    - Usa `g-avatar`, `g-search-input` y `g-icon-button`.
-    - «Se ven en el navegador» descansa en la evidencia del orquestador (`storybook dev`).
+1. **Exclusión de `assets/scss/index.scss`.** Está acotada por el comando nuevo, que exige exactamente 1 línea cambiada. El diff real es esa única línea `@use`. Cualquier otra edición en ese archivo haría fallar el comando.
+2. **Movimiento reducido.** El comando distingue los dos estados: en `5f4246b0` da 2 y en HEAD da 3.
+3. **`index.vue` sin lógica.** El comando distingue los dos estados: en `5f4246b0` da 4 y en HEAD da 0.
+   - El `listo cuando` nuevo de la tarea 13 **endurece** el criterio en vez de rebajarlo. Antes decía «template puro» sin definirlo. Ahora prohíbe explícitamente en el script `computed`, funciones y flechas, y obliga a que `rootClass`, `getKey` y `exposed` vivan en `useDragList`, con tests.
+   - Las flechas de los handlers y de los `:ref` siguen en el template. Ya estaban en la ronda 1, que no las marcó. Acotar la regla al script aclara lo que la ronda 1 exigía y no deja pasar nada nuevo.
+4. **Las 6 ampliaciones** quedaron escritas en las tareas 1, 8, 10, 11 y 12, cada una marcada «Ampliado en el apply» y con su commit. Coinciden con lo que la ronda 1 había listado.
+
+**Hallazgo menor sobre el plan.** El esperado del vitest del paquete sigue diciendo «≥ 17 … Provisional». El número real hoy es 19 archivos. No cambia el veredicto, porque 19 cumple «≥ 17».
+
+## Cumplidas (14 de 14)
+
+**Tareas 1 a 12 y 14.** Su código no cambió desde la ronda 1 y la evidencia es la misma. Se volvieron a correr todos sus comandos y coinciden.
+
+**Tarea 13**, contra su `listo cuando` nuevo:
+
+- **`components/drag-list/src/DragList/index.vue`.** El script solo tiene `defineOptions`, `defineProps`, `defineEmits`, `defineSlots`, la desestructuración de `useDragList(props, emit)` y `defineExpose(exposed)`. El comando de lógica da 0. La composición, los slots, la región live y `aria-disabled` siguen presentes.
+- **`components/drag-list/src/DragList/useDragList.ts`.**
+  - `rootClass` es un `computed` con el bloque y el modificador de `direction`.
+  - `getKey` reusa `getItemKey` de `list.util.ts`.
+  - `exposed: DragListExpose` fija `via: 'api'`.
+  - Llama a `useDragListFocus({ focusIndex, targetEl })`.
+- **`components/drag-list/tests/DragList/useDragList.spec.ts`.** Suma 6 tests:
+  - `rootClass`;
+  - `getKey`, con `itemKey` string y función;
+  - `exposed.add`, con y sin índice;
+  - `exposed.remove` por key;
+  - `exposed.move`.
+- **Foco:** `useDragListFocus.ts` y su spec.
+- **Movimiento reducido.** `drag-list.style.scss` aplica `transition: none !important` sobre `*`, y `components/drag-list/src/components/DragGhost/drag-ghost.style.scss` agrega `@media (prefers-reduced-motion: reduce)`.
+- **`assets/scss/index.scss`:** cambia 1 línea.
+- **Verificaciones:** `vue-tsc` y `check-styles` (45 paquetes) pasan, y el comando «sin lógica» da 0.
 
 ## A medias
 
-**Tarea 13.** El `listo cuando` dice «`index.vue` es template puro», y `components/drag-list/src/DragList/index.vue` no lo es:
-
-- Declara `rootClass = computed(...)`. El arquetipo (§4.1) pone el cálculo de clases en `use<Nombre>.ts`.
-- Declara `getKey`, que duplica la lógica de `getItemKey` de `list.util.ts`.
-- Los wrappers de `defineExpose` fijan `via: 'api'` dentro del script.
-- check-architecture no lo detecta.
-- Contradice el motivo por el que se creó `useDragListFocus.ts`.
-
-El resto del criterio de la 13 se cumple:
-
-- **Composición:**
-  - Arma los paneles, los overlays y el ghost.
-  - Usa `defineSlots<DragListSlots>()` con los 11 slots.
-  - Tiene la región `aria-live="polite"` con `sr-only` y `aria-disabled` en los paneles.
-  - Llama a `defineExpose({ add, remove, move })`.
-- **Layout:** cambia según `direction`, y `__source` tiene `min-height: 48px`.
-- **Estilos y validaciones:** `drag-list.style.scss` agrega los `@use` y anula las transiciones con reduced-motion. Pasan vue-tsc y check-styles.
+Ninguna.
 
 ## De más
 
-Ninguna de estas ampliaciones quedó escrita en `tasks.md`: desde el commit del plan, lo único que cambió ahí son los checkboxes.
+Ninguna. Los 6 ítems de la ronda 1 ahora los cubren las ampliaciones escritas en `tasks.md`.
 
-1. **`assets/scss/index.scss`**, con la línea `@use "@flash-global66/g-drag-list/styles.scss"`.
-   - **Legítimo.** Sin esa línea, check-styles sale con exit 1, y el `listo cuando` de la 13 exige que compile `g-drag-list`.
-   - El error es del plan: el comando tiene que excluir este archivo o esperar `1`.
-2. **Los `constants/<sub>.constant.ts` de seis subcomponentes.** Legítimos: el arquetipo prohíbe el schema de props en el `.vue`, y al plan le faltaba listarlos.
-3. **`src/DragList/useDragListFocus.ts` y `tests/DragList/useDragListFocus.spec.ts`.** Legítimos por el arquetipo, aunque no alcanzaron para que `index.vue` quede template puro.
-4. **`DragListPreviewEntry` en `drag-list.type.ts`** (commit `38396ceb`). Legítimo: lo comparten las tareas 2 y 11, y entró en un commit aparte.
-5. **`grabbedFromIndex` en `useKeyboardReorder`.** Legítimo y con test. Amplía la API que fijaba la tarea 8.
-6. **Commit `ea85f582`.**
-   - El `#empty` queda entre los nodos de inicio y fin, como pide el escenario «Destino vacío sin flechas», pero ningún test fija ese orden.
-   - Agrega `user-select: none` en los ítems, que nadie pidió.
+El diff `93d2d0a4..HEAD` tiene 73 archivos. Fuera de los que declaran las tareas, solo están los artefactos del change: `proposal.md`, `tasks.md`, `design.md`, `specs/` y `verify-report.md`.
 
-La exclusión de `tests` en `tsconfig.json` (commit `d476ce85`) no cuenta como de más: el archivo es de la tarea 1 y su criterio de vue-tsc la necesita.
+## Escenarios (47 de 47 con evidencia)
 
-**Para el review.** Son restricciones globales de `tasks.md`, no del `listo cuando`, así que no entran en las tres listas:
-
-- Hay un comentario en línea en `src/shared/composables/usePointerDrag.ts:85`.
-- Hay tipos con nombre fuera de `drag-list.type.ts`: `UseDragListFocusOptions`, `TargetPanelState`, `UseDragGhostProps`, `PendingDrag`, `RectCache` y `AnnounceParams` (dos veces), entre otros.
-- `TargetPanel/index.vue` tiene un `computed` (`lastIndex`).
-- `useDragList` no anota su retorno. El orquestador avisó que fue a propósito.
-
-## Escenarios (46 de 47 con evidencia)
-
-Los specs nombrados están en `components/drag-list/tests/`.
-
-- **Transferencia.**
-  - Drag en modo simple, botón y «el origen no pierde el elemento»: `useDragList.spec`.
-  - Método expuesto: evidencia indirecta, porque el wrapper de `defineExpose` no tiene test propio.
-- **Uso único.**
-  - Desaparece, el buscador no lo resucita, vuelve a su posición, grupo vacío y origen vacío con motivo: `list.util.spec`.
-  - No duplica: `useDragList.spec`.
-- **Repetible.** Agregar dos veces y aviso de keys duplicadas: `useDragList.spec`.
-- **Ordenado.**
-  - Inserción intermedia, reordenar, `moveUp`/`moveDown` y soltar en el mismo lugar: `useDragList.spec`.
-  - Sin `ordered`: `useTargetPanel.spec` y `useDragList.spec`.
-- **Nodos.**
-  - Conexión automática, vacío sin flechas, cantidad de conectores y slot que reemplaza a la prop: `useTargetPanel.spec`.
-  - No se inserta por fuera de los nodos: `drop.util.spec`.
-- **Dirección horizontal:** `drop.util.spec`.
-- **Quitar.**
-  - Quitar arrastrando y gesto apagado: `useDragList.spec`.
-  - Soltar fuera: `usePointerDrag.spec`.
-  - Zona por el centro: `zone.util.spec`.
-- **Overlays.** Los cinco escenarios: `overlay.util.spec`.
-- **Activación.** Mouse, touch y botones: `usePointerDrag.spec`.
-- **Auto-scroll:** `useAutoScroll.spec`.
-- **Teclado.** Los cinco escenarios: `useKeyboardReorder.spec` y `useDragList.spec`.
-- **Anuncios.** Los tres escenarios: `useDragList.spec` y `useLiveAnnouncer.spec`.
-- **Deshabilitado:** `useDragList.spec`.
-- **Sin dependencias externas:** el comando de dependencias da `0`.
-- **Movimiento reducido · «Sin animaciones»: no probado.** La media query existe en `drag-list.style.scss` y en `drop-overlay.style.scss`, pero ningún test ni comando la ejercita.
+- **46 escenarios** tienen la misma evidencia que en la ronda 1, y la suite sigue en verde.
+- **«Método expuesto»:** ahora tiene tests directos de `exposed.add`, `exposed.remove` y `exposed.move` en `useDragList.spec.ts`.
+- **«Movimiento reducido · Sin animaciones»:** lo cubre el comando de `prefers-reduced-motion`, que da 3. Es evidencia estática: ningún test ejecuta un reordenamiento con `reduce`, porque jsdom no puede hacerlo. La regla raíz anula las transiciones de todas las tarjetas, que es lo que pide el THEN.
 
 ## Con qué se probó
 
-- **`calcifer check`:** salió con exit 0, pero no corrió ningún validador. Delega eslint, check-architecture y test a CI, y marca los 72 archivos como SIN REVISAR. Esos tres se corrieron a mano y salieron limpios.
-- **Comandos de «Cómo se verifica»:** coinciden todos salvo «archivos fuera del change» (`1` contra `0`). La preparación del entorno queda `no_verificado`.
-- **Criterio del cambio entero.** El subagente no corrió browser-verify. Con la evidencia del orquestador (`storybook dev`, «Flujo con fin», consola sin errores):
+- **`calcifer check`.** Salió con exit 0, pero no corrió ningún validador: delega eslint, check-architecture y test a CI y marca 73 archivos como SIN REVISAR. Esos tres se corrieron a mano y salieron limpios.
+- **`calcifer rules`.** Dice que en el worktree no hay `.claude/rules`.
+- **Lo que no cubre este veredicto:**
 
-  | Paso                                                | Estado                                                             |
-  | --------------------------------------------------- | ------------------------------------------------------------------ |
-  | Agregar con «+», reordenar, quitar y reaparecer     | Confirmado                                                         |
-  | Agregar arrastrando                                 | Resultado confirmado; overlays durante el arrastre `no_verificado` |
-  | El buscador no la trae de vuelta                    | `no_verificado` en navegador; cubierto por spec                    |
-  | Overlay de eliminar y «soltar fuera no cambia nada» | `no_verificado` en navegador                                       |
-  | Teclado                                             | `no_verificado` en navegador; cubierto por spec                    |
-  | Horizontal a 375 px con touch                       | `no_verificado`                                                    |
-  | iOS Safari real                                     | `no_verificado`                                                    |
-
-- **Storybook:** `storybook build` falla por OOM del docgen del repo; `storybook dev` compila.
+| Qué                                 | Estado                                                                                                                                                                                                 |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| browser-verify                      | No se corrió. El criterio del cambio entero se apoya en la evidencia del orquestador de la ronda 1                                                                                                     |
+| Overlays durante el arrastre        | Sin verificar en navegador                                                                                                                                                                             |
+| Teclado                             | Sin verificar en navegador                                                                                                                                                                             |
+| Vista horizontal a 375 px con touch | Sin verificar en navegador                                                                                                                                                                             |
+| iOS Safari real                     | Sin verificar                                                                                                                                                                                          |
+| `storybook build`                   | Falla por OOM del docgen del repo                                                                                                                                                                      |
+| Runtime después de `c73ba75b`       | No se volvió a ver en el navegador. Ese commit reorganizó `index.vue`; tests y vue-tsc lo cubren, pero una pasada por `storybook dev` confirmaría que `defineExpose(exposed)` y el foco siguen andando |
