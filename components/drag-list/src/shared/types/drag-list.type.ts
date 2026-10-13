@@ -90,3 +90,50 @@ export interface DragListPreviewEntry {
   index: number;
   isPlaceholder: boolean;
 }
+
+/** Props que recibe el slot `target-item`. */
+export interface DragListTargetSlotProps {
+  item: DragListItem;
+  index: number;
+  position: number;
+  isFirst: boolean;
+  isLast: boolean;
+  remove: () => void;
+  moveUp: () => void;
+  moveDown: () => void;
+}
+
+/** Retorno de `useDragList`: estado y handlers que consume el componente. */
+export interface UseDragListReturn {
+  ns: ReturnType<typeof import('@flash-global66/g-utils').useNamespace>;
+  rootClass: import('vue').ComputedRef<string[]>;
+  getKey: (item: DragListItem) => DragListKey;
+  exposed: DragListExpose;
+  texts: import('vue').ComputedRef<DragListTexts>;
+  visibleSource: import('vue').ComputedRef<DragListSource>;
+  emptyReason: import('vue').ComputedRef<'empty' | 'all-added' | null>;
+  previewItems: import('vue').ComputedRef<DragListPreviewEntry[]>;
+  overlayState: import('vue').ComputedRef<
+    ReturnType<typeof import('../utils/overlay.util').getOverlayState>
+  >;
+  session: Readonly<import('vue').Ref<DragSession | null>>;
+  sourceEl: import('vue').Ref<HTMLElement | null>;
+  targetEl: import('vue').Ref<HTMLElement | null>;
+  announcement: import('vue').Ref<string>;
+  focusIndex: import('vue').Ref<number | null>;
+  grabbedIndex: import('vue').Ref<number | null>;
+  handleTargetKeydown: (event: KeyboardEvent, index: number) => void;
+  getSourceSlotProps: (item: DragListItem) => {
+    item: DragListItem;
+    canAdd: boolean;
+    add: () => void;
+  };
+  getTargetSlotProps: (index: number) => DragListTargetSlotProps;
+  add: (
+    item: DragListItem,
+    index: number | undefined,
+    via: DragListAddVia,
+  ) => void;
+  remove: (keyOrIndex: DragListKey, via: DragListRemoveVia) => void;
+  move: (from: number, to: number) => void;
+}

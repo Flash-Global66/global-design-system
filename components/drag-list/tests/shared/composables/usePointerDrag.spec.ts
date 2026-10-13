@@ -60,6 +60,7 @@ describe('usePointerDrag', () => {
   let targetEl: HTMLElement;
   let sourceCard: HTMLElement;
   let targetCards: HTMLElement[];
+  let targetList: HTMLElement;
   let onDrop: ReturnType<typeof vi.fn>;
   let onCancel: ReturnType<typeof vi.fn>;
   let isDisabled: boolean;
@@ -72,6 +73,7 @@ describe('usePointerDrag', () => {
         sourceEl: () => sourceEl,
         targetEl: () => targetEl,
         getTargetItemEls: () => targetCards,
+        getScrollContainers: () => [targetList],
         direction: 'vertical',
         canDropToRemove: true,
         isDisabled: () => isDisabled,
@@ -106,6 +108,8 @@ describe('usePointerDrag', () => {
       createCard(targetEl, 0, { left: 310, top: 0, width: 100, height: 100 }),
       createCard(targetEl, 1, { left: 310, top: 100, width: 100, height: 100 }),
     ];
+    targetList = document.createElement('div');
+    targetEl.appendChild(targetList);
     setup();
   });
 
@@ -269,5 +273,20 @@ describe('usePointerDrag', () => {
 
     expect(onCancel).toHaveBeenCalledTimes(1);
     expect(onDrop).not.toHaveBeenCalled();
+  });
+
+  it('tras un scroll de la lista interna dropIndex usa los rects desplazados', () => {
+    sourceCard.dispatchEvent(pointerEvent('pointerdown', { x: 20, y: 20 }));
+    document.dispatchEvent(pointerEvent('pointermove', { x: 360, y: 100 }));
+    expect(session.value?.dropIndex).toBe(1);
+
+    targetList.scrollTop = 120;
+    targetList.dispatchEvent(new Event('scroll'));
+    expect(session.value?.dropIndex).toBe(2);
+
+    document.dispatchEvent(pointerEvent('pointerup', { x: 360, y: 100 }));
+    expect(onDrop).toHaveBeenCalledWith(
+      expect.objectContaining({ toIndex: 2 }),
+    );
   });
 });

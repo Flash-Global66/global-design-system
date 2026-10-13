@@ -22,6 +22,19 @@ vi.mock('../../src/shared/composables/usePointerDrag', async () => {
   };
 });
 
+const autoScroll = vi.hoisted(() => ({
+  options: null as null | {
+    containers: () => (HTMLElement | null)[];
+    axis: () => string;
+  },
+}));
+
+vi.mock('../../src/shared/composables/useAutoScroll', () => ({
+  useAutoScroll: (options: NonNullable<typeof autoScroll.options>) => {
+    autoScroll.options = options;
+  },
+}));
+
 type Props = Parameters<typeof useDragList>[0];
 
 const A = { id: 'a', name: 'Ana' };
@@ -57,6 +70,19 @@ describe('useDragList', () => {
   });
   afterEach(() => {
     vi.restoreAllMocks();
+  });
+
+  it('el auto-scroll incluye la lista del destino y usa el eje x en horizontal', () => {
+    const { result } = setup({ direction: 'horizontal' });
+    const panel = document.createElement('div');
+    const list = document.createElement('ul');
+    list.setAttribute('data-drag-target-list', '');
+    panel.appendChild(list);
+    result.targetEl.value = panel;
+    const containers = autoScroll.options!.containers();
+    expect(containers).toContain(panel);
+    expect(containers).toContain(list);
+    expect(autoScroll.options!.axis()).toBe('x');
   });
 
   it('agrega arrastrando en modo simple', () => {

@@ -202,7 +202,7 @@ describe('getPreviewItems', () => {
   const items = [A, B, C];
 
   it('sin sesión devuelve los ítems sin cambios', () => {
-    expect(getPreviewItems({ items, session: null })).toEqual([
+    expect(getPreviewItems({ items, session: null, isOrdered: true })).toEqual([
       { item: A, index: 0, isPlaceholder: false },
       { item: B, index: 1, isPlaceholder: false },
       { item: C, index: 2, isPlaceholder: false },
@@ -212,13 +212,18 @@ describe('getPreviewItems', () => {
   it('sin activar devuelve los ítems sin cambios', () => {
     const result = getPreviewItems({
       items,
+      isOrdered: true,
       session: buildSession({ isActivated: false }),
     });
     expect(result.some(entry => entry.isPlaceholder)).toBe(false);
   });
 
   it('desde el origen sobre el destino inserta el placeholder', () => {
-    const result = getPreviewItems({ items, session: buildSession() });
+    const result = getPreviewItems({
+      items,
+      session: buildSession(),
+      isOrdered: true,
+    });
     expect(result).toEqual([
       { item: A, index: 0, isPlaceholder: false },
       { item: D, index: -1, isPlaceholder: true },
@@ -230,6 +235,7 @@ describe('getPreviewItems', () => {
   it('desde el origen fuera del destino no cambia nada', () => {
     const result = getPreviewItems({
       items,
+      isOrdered: true,
       session: buildSession({ zone: 'source', dropIndex: null }),
     });
     expect(result).toHaveLength(3);
@@ -238,6 +244,7 @@ describe('getPreviewItems', () => {
   it('desde el destino sobre el destino previsualiza el reordenamiento', () => {
     const result = getPreviewItems({
       items,
+      isOrdered: true,
       session: buildSession({
         origin: 'target',
         item: A,
@@ -252,9 +259,43 @@ describe('getPreviewItems', () => {
     ]);
   });
 
+  it('sin ordered el placeholder del origen va al final', () => {
+    const result = getPreviewItems({
+      items,
+      session: buildSession(),
+      isOrdered: false,
+    });
+    expect(result.map(entry => entry.isPlaceholder)).toEqual([
+      false,
+      false,
+      false,
+      true,
+    ]);
+    expect(result[3].item).toBe(D);
+  });
+
+  it('sin ordered arrastrar dentro del destino no reordena', () => {
+    const result = getPreviewItems({
+      items,
+      session: buildSession({
+        origin: 'target',
+        item: A,
+        fromIndex: 0,
+        dropIndex: 2,
+      }),
+      isOrdered: false,
+    });
+    expect(result).toEqual([
+      { item: A, index: 0, isPlaceholder: false },
+      { item: B, index: 1, isPlaceholder: false },
+      { item: C, index: 2, isPlaceholder: false },
+    ]);
+  });
+
   it('desde el destino con la zona fuera deja la lista sin cambios', () => {
     const result = getPreviewItems({
       items,
+      isOrdered: true,
       session: buildSession({
         origin: 'target',
         item: A,

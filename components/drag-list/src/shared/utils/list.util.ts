@@ -127,8 +127,10 @@ export function findDuplicateKeys(
 export function getPreviewItems(params: {
   items: DragListItem[];
   session: DragSession | null;
+  /** Sin `ordered` no hay posición visible: el placeholder va al final. */
+  isOrdered: boolean;
 }): DragListPreviewEntry[] {
-  const { items, session } = params;
+  const { items, session, isOrdered } = params;
   const entries: DragListPreviewEntry[] = items.map((item, index) => ({
     item,
     index,
@@ -138,7 +140,9 @@ export function getPreviewItems(params: {
     return entries;
   }
   if (session.origin === 'source') {
-    const at = session.dropIndex ?? entries.length;
+    const at = isOrdered
+      ? (session.dropIndex ?? entries.length)
+      : entries.length;
     const placeholder: DragListPreviewEntry = {
       item: session.item,
       index: -1,
@@ -146,7 +150,8 @@ export function getPreviewItems(params: {
     };
     return [...entries.slice(0, at), placeholder, ...entries.slice(at)];
   }
-  if (session.dropIndex === null || !entries[session.fromIndex]) return entries;
+  if (!isOrdered || session.dropIndex === null || !entries[session.fromIndex])
+    return entries;
   const next = [...entries];
   const [moved] = next.splice(session.fromIndex, 1);
   next.splice(session.dropIndex, 0, { ...moved, isPlaceholder: true });

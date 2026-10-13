@@ -16,6 +16,7 @@ import type {
   DragListSource,
   DragListTexts,
   DragSession,
+  UseDragListReturn,
 } from '../shared/types/drag-list.type';
 import {
   findDuplicateKeys,
@@ -40,13 +41,17 @@ type ItemKey = string | ((item: DragListItem) => DragListKey);
 
 const POSITION_OFFSET = 1;
 const NOT_FOUND = -1;
+const TARGET_LIST_SELECTOR = '[data-drag-target-list]';
 const TARGET_ITEM_SELECTOR = '[data-drag-target-list] > [data-drag-index]';
 
 /**
  * Orquesta el estado de GDragList: agregar, quitar y mover, el motor de
  * puntero, el teclado, los anuncios y los datos que consumen los paneles.
  */
-export function useDragList(props: DragListProps, emit: DragListEmit) {
+export function useDragList(
+  props: DragListProps,
+  emit: DragListEmit,
+): UseDragListReturn {
   const ns = useNamespace('drag-list');
   const sourceEl = ref<HTMLElement | null>(null);
   const targetEl = ref<HTMLElement | null>(null);
@@ -179,6 +184,12 @@ export function useDragList(props: DragListProps, emit: DragListEmit) {
     });
   }
 
+  function getTargetListEl(): HTMLElement | null {
+    return (
+      targetEl.value?.querySelector<HTMLElement>(TARGET_LIST_SELECTOR) ?? null
+    );
+  }
+
   function getTargetItemEls(): HTMLElement[] {
     if (!targetEl.value) return [];
     const getIndex = (el: HTMLElement): number => Number(el.dataset.dragIndex);
@@ -200,6 +211,7 @@ export function useDragList(props: DragListProps, emit: DragListEmit) {
     sourceEl,
     targetEl,
     getTargetItemEls,
+    getScrollContainers: () => [targetEl.value, getTargetListEl()],
     direction: () => props.direction,
     canDropToRemove: () => props.dragToRemove,
     isDisabled: () => props.disabled,
@@ -244,9 +256,9 @@ export function useDragList(props: DragListProps, emit: DragListEmit) {
   );
 
   useAutoScroll({
-    containers: () => [sourceEl.value, targetEl.value],
+    containers: () => [sourceEl.value, targetEl.value, getTargetListEl()],
     pointer: () => session.value?.pointer ?? null,
-    axis: () => props.direction,
+    axis: () => (props.direction === 'horizontal' ? 'x' : 'y'),
     isActive: isSessionActive,
   });
 
@@ -270,6 +282,7 @@ export function useDragList(props: DragListProps, emit: DragListEmit) {
       return getPreviewItems({
         items: props.modelValue,
         session: session.value,
+        isOrdered: props.ordered,
       });
     }
     return moveItem(props.modelValue, from, to).map(item => {

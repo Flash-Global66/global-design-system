@@ -31,10 +31,14 @@ type PendingDrag = {
   pointerType: string;
 };
 
+type ScrollBase = { el: HTMLElement; left: number; top: number };
+
 type RectCache = {
   source: Rect;
   target: Rect;
+  /** Rects de los ítems al activar; el scroll posterior se resta al leerlos. */
   items: Rect[];
+  scrolls: ScrollBase[];
 };
 
 function toRect(el: HTMLElement): Rect {
@@ -56,6 +60,8 @@ export function usePointerDrag(options: {
   sourceEl: MaybeRefOrGetter<HTMLElement | null | undefined>;
   targetEl: MaybeRefOrGetter<HTMLElement | null | undefined>;
   getTargetItemEls: () => HTMLElement[];
+  /** Elementos con scroll que pueden mover los ítems; por defecto los paneles. */
+  getScrollContainers?: () => (HTMLElement | null | undefined)[];
   direction: MaybeRefOrGetter<DragListDirection>;
   canDropToRemove: MaybeRefOrGetter<boolean>;
   isDisabled: MaybeRefOrGetter<boolean>;
@@ -108,8 +114,42 @@ export function usePointerDrag(options: {
       source: toRect(source),
       target: toRect(target),
       items: options.getTargetItemEls().map(toRect),
+      scrolls: getScrollContainers(source, target).map(el => ({
+        el,
+        left: el.scrollLeft,
+        top: el.scrollTop,
+      })),
     };
     return cache;
+  }
+
+  function getScrollContainers(
+    source: HTMLElement,
+    target: HTMLElement,
+  ): HTMLElement[] {
+    const extra = options.getScrollContainers?.() ?? [];
+    return [source, target, ...extra].filter(
+      (el, index, all): el is HTMLElement => !!el && all.indexOf(el) === index,
+    );
+  }
+
+  /** Rects de los ítems desplazados por el scroll ocurrido desde la activación. */
+  function getItemRects(current: RectCache): Rect[] {
+    const target = toValue(options.targetEl);
+    let dx = 0;
+    let dy = 0;
+    current.scrolls.forEach(({ el, left, top }) => {
+      // solo mueve los ítems el scroll del destino o de sus ancestros/descendientes
+      if (!target || !(el.contains(target) || target.contains(el))) return;
+      dx += el.scrollLeft - left;
+      dy += el.scrollTop - top;
+    });
+    if (dx === 0 && dy === 0) return current.items;
+    return current.items.map(rect => ({
+      ...rect,
+      left: rect.left - dx,
+      top: rect.top - dy,
+    }));
   }
 
   function buildSession(point: DragPoint): DragSession | null {
@@ -134,7 +174,7 @@ export function usePointerDrag(options: {
       if (zone === 'target') {
         dropIndex = calculateDropIndex({
           point: drop.anchor,
-          rects: rects.items,
+          rects: getItemRects(rects),
           axis: toValue(options.direction) === 'horizontal' ? 'x' : 'y',
           draggedIndex: pending.origin === 'target' ? pending.fromIndex : null,
         });
@@ -250,8 +290,10 @@ export function usePointerDrag(options: {
     if (event.key === 'Escape') cancel();
   }
 
-  function invalidateCache(): void {
-    cache = null;
+  function onScroll(): void {
+    // el DOM ya está en orden de previsualización: no se relee, se recalcula
+    if (!pending || !session.value) return;
+    session.value = buildSession(pending.last);
   }
 
   useEventListener(options.sourceEl, 'pointerdown', e =>
@@ -260,8 +302,9 @@ export function usePointerDrag(options: {
   useEventListener(options.targetEl, 'pointerdown', e =>
     onPointerDown('target', e),
   );
-  useEventListener(options.sourceEl, 'scroll', invalidateCache);
-  useEventListener(options.targetEl, 'scroll', invalidateCache);
+  // el scroll no burbuja: se captura el de cualquier descendiente
+  useEventListener(options.sourceEl, 'scroll', onScroll, { capture: true });
+  useEventListener(options.targetEl, 'scroll', onScroll, { capture: true });
   useEventListener(document, 'pointermove', onPointerMove);
   useEventListener(document, 'pointerup', onPointerUp);
   useEventListener(document, 'pointercancel', cancel);
