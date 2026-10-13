@@ -259,7 +259,6 @@ export function useDragList(
   useAutoScroll({
     containers: () => [sourceEl.value, targetEl.value, getTargetListEl()],
     pointer: () => session.value?.pointer ?? null,
-    axis: () => (props.direction === 'horizontal' ? 'x' : 'y'),
     isActive: isSessionActive,
   });
 

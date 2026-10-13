@@ -46,9 +46,6 @@ export type DragListEdgeRect = Pick<
   'top' | 'bottom' | 'left' | 'right'
 >;
 
-/** Eje de un arrastre: `'x'`/`'y'` o la dirección de la lista. */
-export type DragListAxis = 'x' | 'y' | DragListDirection;
-
 /** Visibilidad y acción del overlay de un panel. */
 export interface DragListPanelOverlay {
   isVisible: boolean;
@@ -89,7 +86,6 @@ export interface PickScrollContainerOptions {
 export interface UseAutoScrollOptions {
   containers: MaybeRefOrGetter<(HTMLElement | null | undefined)[]>;
   pointer: MaybeRefOrGetter<DragPoint | null>;
-  axis: MaybeRefOrGetter<DragListAxis>;
   isActive: MaybeRefOrGetter<boolean>;
 }
 

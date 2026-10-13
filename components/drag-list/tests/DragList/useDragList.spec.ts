@@ -25,7 +25,6 @@ vi.mock('../../src/shared/composables/usePointerDrag', async () => {
 const autoScroll = vi.hoisted(() => ({
   options: null as null | {
     containers: () => (HTMLElement | null)[];
-    axis: () => string;
   },
 }));
 
@@ -72,7 +71,7 @@ describe('useDragList', () => {
     vi.restoreAllMocks();
   });
 
-  it('el auto-scroll incluye la lista del destino y usa el eje x en horizontal', () => {
+  it('el auto-scroll incluye el panel y la lista del destino en horizontal', () => {
     const { result } = setup({ direction: 'horizontal' });
     const panel = document.createElement('div');
     const list = document.createElement('ul');
@@ -82,7 +81,7 @@ describe('useDragList', () => {
     const containers = autoScroll.options!.containers();
     expect(containers).toContain(panel);
     expect(containers).toContain(list);
-    expect(autoScroll.options!.axis()).toBe('x');
+    expect(autoScroll.options).not.toHaveProperty('axis');
   });
 
   it('agrega arrastrando en modo simple', () => {

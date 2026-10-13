@@ -60,9 +60,7 @@ describe('useAutoScroll', () => {
     const el = createContainer();
     const pointer = ref<DragPoint | null>({ x: 150, y: 4 });
     const isActive = ref(true);
-    withSetup(() =>
-      useAutoScroll({ containers: [el], pointer, axis: 'y', isActive }),
-    );
+    withSetup(() => useAutoScroll({ containers: [el], pointer, isActive }));
 
     await vi.advanceTimersByTimeAsync(50);
 
@@ -73,9 +71,7 @@ describe('useAutoScroll', () => {
     const el = createContainer();
     const pointer = ref<DragPoint | null>({ x: 150, y: 396 });
     const isActive = ref(true);
-    withSetup(() =>
-      useAutoScroll({ containers: [el], pointer, axis: 'y', isActive }),
-    );
+    withSetup(() => useAutoScroll({ containers: [el], pointer, isActive }));
 
     await vi.advanceTimersByTimeAsync(50);
 
@@ -86,9 +82,7 @@ describe('useAutoScroll', () => {
     const el = createContainer();
     const pointer = ref<DragPoint | null>({ x: 296, y: 200 });
     const isActive = ref(true);
-    withSetup(() =>
-      useAutoScroll({ containers: [el], pointer, axis: 'x', isActive }),
-    );
+    withSetup(() => useAutoScroll({ containers: [el], pointer, isActive }));
 
     await vi.advanceTimersByTimeAsync(50);
 
@@ -100,9 +94,7 @@ describe('useAutoScroll', () => {
     const el = createContainer();
     const pointer = ref<DragPoint | null>({ x: 150, y: 200 });
     const isActive = ref(true);
-    withSetup(() =>
-      useAutoScroll({ containers: [el], pointer, axis: 'y', isActive }),
-    );
+    withSetup(() => useAutoScroll({ containers: [el], pointer, isActive }));
 
     await vi.advanceTimersByTimeAsync(50);
 
@@ -114,7 +106,7 @@ describe('useAutoScroll', () => {
     const pointer = ref<DragPoint | null>({ x: 900, y: 4 });
     const isActive = ref(true);
     withSetup(() =>
-      useAutoScroll({ containers: [el, null], pointer, axis: 'y', isActive }),
+      useAutoScroll({ containers: [el, null], pointer, isActive }),
     );
 
     await vi.advanceTimersByTimeAsync(50);
@@ -128,9 +120,7 @@ describe('useAutoScroll', () => {
     const el = createContainer();
     const pointer = ref<DragPoint | null>({ x: 150, y: 4 });
     const isActive = ref(true);
-    withSetup(() =>
-      useAutoScroll({ containers: [el], pointer, axis: 'y', isActive }),
-    );
+    withSetup(() => useAutoScroll({ containers: [el], pointer, isActive }));
 
     await vi.advanceTimersByTimeAsync(50);
     isActive.value = false;
@@ -145,9 +135,7 @@ describe('useAutoScroll', () => {
     const el = createContainer();
     const pointer = ref<DragPoint | null>({ x: 150, y: 4 });
     const isActive = ref(false);
-    withSetup(() =>
-      useAutoScroll({ containers: [el], pointer, axis: 'y', isActive }),
-    );
+    withSetup(() => useAutoScroll({ containers: [el], pointer, isActive }));
 
     await vi.advanceTimersByTimeAsync(50);
     expect(el.scrollTop).toBe(100);
@@ -172,7 +160,6 @@ describe('useAutoScroll', () => {
       useAutoScroll({
         containers: [wrapper, list],
         pointer,
-        axis: 'x',
         isActive,
       }),
     );
@@ -180,6 +167,43 @@ describe('useAutoScroll', () => {
     await vi.advanceTimersByTimeAsync(50);
 
     expect(list.scrollLeft).toBeGreaterThan(100);
+    expect(wrapper.scrollLeft).toBe(100);
+    wrapper.remove();
+  });
+  it('desplaza en vertical un contenedor que solo desborda en y, sin depender de la dirección', async () => {
+    const el = createContainer();
+    mockOverflow(el, { scrollWidth: 300, clientWidth: 300 });
+    const pointer = ref<DragPoint | null>({ x: 150, y: 396 });
+    const isActive = ref(true);
+    withSetup(() => useAutoScroll({ containers: [el], pointer, isActive }));
+
+    await vi.advanceTimersByTimeAsync(50);
+
+    expect(el.scrollTop).toBeGreaterThan(100);
+    expect(el.scrollLeft).toBe(100);
+  });
+
+  it('cada eje elige su propio contenedor: el wrapper en y y la lista en x', async () => {
+    const wrapper = createContainer();
+    const list = createContainer();
+    wrapper.appendChild(list);
+    document.body.appendChild(wrapper);
+    mockOverflow(wrapper, { scrollWidth: 300, clientWidth: 300 });
+    Object.defineProperty(list, 'scrollHeight', {
+      configurable: true,
+      value: 400,
+    });
+    const pointer = ref<DragPoint | null>({ x: 296, y: 396 });
+    const isActive = ref(true);
+    withSetup(() =>
+      useAutoScroll({ containers: [wrapper, list], pointer, isActive }),
+    );
+
+    await vi.advanceTimersByTimeAsync(50);
+
+    expect(list.scrollLeft).toBeGreaterThan(100);
+    expect(list.scrollTop).toBe(100);
+    expect(wrapper.scrollTop).toBeGreaterThan(100);
     expect(wrapper.scrollLeft).toBe(100);
     wrapper.remove();
   });
