@@ -96,6 +96,19 @@ describe('resolveDropAnchor', () => {
     ).toEqual({ zone: 'target', anchor: { x: 260, y: 50 } });
   });
 
+  it('desde el destino, con el centro fuera de las dos zonas y el puntero sobre el origen, quita', () => {
+    expect(
+      resolveDropAnchor({
+        center: { x: 150, y: 50 },
+        pointer: { x: 90, y: 50 },
+        sourceRect,
+        targetRect,
+        origin: 'target',
+        canDropToRemove: true,
+      }),
+    ).toEqual({ zone: 'source', anchor: { x: 90, y: 50 } });
+  });
+
   it('el puntero tampoco habilita quitar si no corresponde', () => {
     expect(
       resolveDropAnchor({

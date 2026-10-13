@@ -205,6 +205,12 @@ Con `dragToRemove` en `true` (el default), soltar una tarjeta del destino dentro
 - **WHEN** el usuario suelta
 - **THEN** el elemento se agrega al destino, en la posición que indica el puntero
 
+#### Scenario: Quitar con el centro del ghost fuera de las zonas, decide el puntero
+
+- **GIVEN** un `GDragList` con `dragToRemove` y un arrastre desde el destino, con el puntero sobre el origen y el centro del ghost fuera de las dos zonas
+- **WHEN** el usuario suelta
+- **THEN** la tarjeta se quita y se emite `remove(item, index, 'drag')`
+
 ### Requirement: Overlays de ayuda durante el arrastre
 
 Una vez activado un arrastre, `GDragList` SHALL mostrar un overlay sobre el panel que puede recibir la tarjeta:

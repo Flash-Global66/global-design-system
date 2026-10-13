@@ -233,6 +233,35 @@ describe('usePointerDrag', () => {
     );
   });
 
+  it('con el centro del ghost fuera de las zonas, el puntero sobre el origen decide quitar', () => {
+    targetCards[0].dispatchEvent(
+      pointerEvent('pointerdown', { x: 320, y: 10 }),
+    );
+    document.dispatchEvent(pointerEvent('pointermove', { x: 190, y: 100 }));
+    expect(session.value?.zone).toBe('source');
+
+    document.dispatchEvent(pointerEvent('pointerup', { x: 190, y: 100 }));
+    expect(onDrop).toHaveBeenCalledWith(
+      expect.objectContaining({
+        origin: 'target',
+        zone: 'source',
+        toIndex: -1,
+      }),
+    );
+  });
+
+  it('con el centro del ghost fuera de las zonas, el puntero sobre el destino decide agregar en su posición', () => {
+    sourceCard.dispatchEvent(pointerEvent('pointerdown', { x: 20, y: 20 }));
+    document.dispatchEvent(pointerEvent('pointermove', { x: 470, y: 140 }));
+    expect(session.value?.zone).toBe('target');
+    expect(session.value?.dropIndex).toBe(1);
+
+    document.dispatchEvent(pointerEvent('pointerup', { x: 470, y: 140 }));
+    expect(onDrop).toHaveBeenCalledWith(
+      expect.objectContaining({ origin: 'source', zone: 'target', toIndex: 1 }),
+    );
+  });
+
   it('soltar fuera de toda zona llama a onCancel', () => {
     sourceCard.dispatchEvent(pointerEvent('pointerdown', { x: 20, y: 20 }));
     document.dispatchEvent(pointerEvent('pointermove', { x: 250, y: 300 }));
