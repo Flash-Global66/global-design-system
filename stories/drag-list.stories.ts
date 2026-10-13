@@ -695,7 +695,7 @@ export const HorizontalFlow: Story = {
   parameters: {
     docs: {
       description: {
-        story: `El flujo completo de aprobadores en \`direction="horizontal"\`, dentro de un contenedor de 375 px como el de un móvil.
+        story: `El flujo completo de aprobadores en \`direction="horizontal"\`, ocupando todo el ancho disponible.
 
 - Mismo origen que «Flujo con fin»: tarjetas con avatar, buscador y grupos A/B/C del lado del consumidor
 - El origen queda arriba y el destino abajo, con las tarjetas de izquierda a derecha
@@ -707,7 +707,7 @@ export const HorizontalFlow: Story = {
     direction: 'horizontal',
     startNode: 'Inicio del informe',
     endNode: 'Cierre del informe',
-    containerClass: 'w-[375px] border border-dashed border-gray-300 p-2',
+    containerClass: 'w-full',
   }),
 };
 
