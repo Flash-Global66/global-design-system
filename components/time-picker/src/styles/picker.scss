@@ -85,9 +85,9 @@
     line-height: #{map.get($input-height, "default") - 2};
     margin: 0;
     padding: 0;
-    flex: 1;
+    flex: 0 1 auto;
     min-width: 0;
-    width: auto;
+    width: calc(var(--#{$namespace}-range-input-chars, 10) * 0.8ch + 8px);
     text-align: center;
     font-size: getCssVar("font-size", "base");
     color: getCssVar("text-color", "regular");
@@ -95,6 +95,14 @@
 
     &::placeholder {
       color: getCssVar("text-color", "placeholder");
+    }
+
+    &:first-of-type {
+      margin-left: auto;
+    }
+
+    &:last-of-type {
+      margin-right: auto;
     }
   }
 

@@ -139,3 +139,24 @@ export function getRangePanelMaxHeight({
     RANGE_PANEL_MIN_HEIGHT,
   );
 }
+
+const MIN_RANGE_INPUT_CHARS = 8;
+
+export interface GetRangeInputCharsParams {
+  format: string | undefined;
+  startPlaceholder: string | undefined;
+  endPlaceholder: string | undefined;
+}
+
+export function getRangeInputChars({
+  format,
+  startPlaceholder,
+  endPlaceholder,
+}: GetRangeInputCharsParams): number {
+  return Math.max(
+    format?.length ?? 0,
+    startPlaceholder?.trim().length ?? 0,
+    endPlaceholder?.trim().length ?? 0,
+    MIN_RANGE_INPUT_CHARS,
+  );
+}
