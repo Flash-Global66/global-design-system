@@ -26,6 +26,22 @@
     @include e("list") {
       @apply flex-row items-center overflow-x-auto;
     }
+
+    @include e("item") {
+      @apply shrink-0;
+    }
+
+    @include e("connector") {
+      @apply shrink-0;
+    }
+
+    @include e("node") {
+      @apply shrink-0 whitespace-nowrap;
+    }
+
+    @include e("empty") {
+      @apply shrink-0 whitespace-nowrap;
+    }
   }
 
   @include when(active-zone) {

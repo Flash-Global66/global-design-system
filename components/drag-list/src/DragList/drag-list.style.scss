@@ -16,7 +16,7 @@
   );
 
   @include m("vertical") {
-    @apply flex-row items-start;
+    @apply flex-row items-stretch;
   }
 
   @include m("horizontal") {
