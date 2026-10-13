@@ -96,7 +96,7 @@ Restricciones que recibe todo subagente. El detalle está en `proposal.md` y `de
   - listo cuando: Dibuja el slot recibido dentro de `g-teleport` a `body`, solo con la sesión activada. Usa `position: fixed`, `transform: translate3d(x, y, 0)` desde `pointer - ghostOffset`, el `z-index` de `useZIndex`, opacidad reducida, sombra y `aria-hidden="true"`. El spec del composable cubre el style calculado y que no se renderice sin sesión. `vue-tsc` del paquete pasa.
   - commit: `feat(drag-list): tarjeta fantasma teletransportada`
 
-- [ ] **13 · Ensamblar `GDragList`**
+- [x] **13 · Ensamblar `GDragList`**
   - archivos: `components/drag-list/src/DragList/index.vue`, `components/drag-list/src/DragList/drag-list.style.scss`
   - depende de: 9, 10, 11, 12
   - listo cuando: **`index.vue`** es template puro: Instancia `useDragList` y compone `SourcePanel`, `TargetPanel`, un `DropOverlay` por panel y `DragGhost`. Reenvía todos los slots tipados con `defineSlots<DragListSlots>()`. Tiene una región `aria-live="polite"` visualmente oculta y `aria-disabled` en los paneles. Llama a `defineExpose({ add, remove, move })`. **Layout:** Con `vertical`, los paneles van lado a lado. Con `horizontal`, el origen va arriba del destino. La zona de quitar mide al menos 48 px. **`drag-list.style.scss`:** Agrega con `@use` los `.style.scss` de los subcomponentes. Anula las transiciones con `prefers-reduced-motion`. **Verificaciones:** `vue-tsc` del paquete pasa, y `check-styles` compila `g-drag-list`.

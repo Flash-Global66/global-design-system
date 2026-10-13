@@ -2,7 +2,49 @@
 @use "@flash-global66/g-utils/utils" as *;
 @use "@flash-global66/g-utils/var-mixins" as *;
 @use "@flash-global66/g-utils/tokens" as *;
+@use "../components/SourcePanel/source-panel.style.scss" as *;
+@use "../components/TargetPanel/target-panel.style.scss" as *;
+@use "../components/DropOverlay/drop-overlay.style.scss" as *;
+@use "../components/DragGhost/drag-ghost.style.scss" as *;
+@use "../components/FlowNode/flow-node.style.scss" as *;
+@use "../components/FlowConnector/flow-connector.style.scss" as *;
 
 @include b("drag-list") {
-  @apply flex flex-col gap-sm;
+  @apply flex gap-md;
+
+  @include m("vertical") {
+    @apply flex-row items-start;
+  }
+
+  @include m("horizontal") {
+    @apply flex-col;
+  }
+
+  @include e("source") {
+    @apply relative min-w-0;
+    min-height: 48px;
+  }
+
+  @include e("target") {
+    @apply relative min-w-0 flex-1;
+  }
+
+  @include m("vertical") {
+    @include e("source") {
+      @apply flex-1;
+    }
+  }
+
+  @include e("live") {
+    @apply sr-only;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
 }
