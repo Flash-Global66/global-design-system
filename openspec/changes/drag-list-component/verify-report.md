@@ -2,7 +2,7 @@
 
 ```yaml
 veredicto: pasa
-ronda: 4
+ronda: 5
 fecha: 2026-10-13
 tareas_a_medias: []
 cumplidas: 14/14
@@ -13,17 +13,17 @@ comandos:
   - cmd: "zsh -lic 'nvm use 20.19.3 && export GBP_PACKAGE_TOKEN=${GBP_PACKAGE_TOKEN:-dummy} && yarn install && yarn build'"
     exit: null
     esperado: 'exit 0'
-    obtenido: 'no se corrió por indicación del orquestador: el entorno ya estaba preparado'
+    obtenido: 'no se corrió por indicación del orquestador'
     coincide: no_verificado
   - cmd: npx vitest run --project unit components/drag-list
     exit: 0
     esperado: 'Test Files ≥ 17 passed y 0 failed (provisional)'
-    obtenido: '19 passed (19) · 178 tests passed (ronda 3: 175; +1 en zone.util.spec, +2 en usePointerDrag.spec)'
+    obtenido: '19 passed (19) · 187 tests passed (ronda 4: 178)'
     coincide: true
   - cmd: npx vitest run --project unit
     exit: 0
     esperado: '0 failed'
-    obtenido: '98 archivos passed · 790 tests passed · 0 failed'
+    obtenido: '98 archivos passed · 799 tests passed · 0 failed'
     coincide: true
   - cmd: npx vue-tsc --noEmit -p components/drag-list/tsconfig.json
     exit: 0
@@ -83,94 +83,97 @@ comandos:
   - cmd: GBP_PACKAGE_TOKEN=dummy calcifer check
     exit: 0
     esperado: 'sin hallazgos nuevos (el plan no lo declara; lo pidió el orquestador)'
-    obtenido: 'ok: la rama pasa la validación. 57 de 73 archivos revisados, 19 archivos y 178 tests en verde'
+    obtenido: 'ok: la rama pasa la validación. 58 de 74 archivos revisados (el nuevo es engine.type.ts); 19 archivos y 187 tests en verde; eslint limpio'
     coincide: true
 ```
 
 ## Veredicto: pasa
 
-- Las 14 tareas siguen cumpliendo su `listo cuando`.
+- Las 14 tareas cumplen su `listo cuando`, incluidas las ampliaciones «tras el review».
 - Todos los comandos que se pudieron correr dan lo que declara el plan.
-- Los 49 escenarios tienen evidencia.
-- No hay reincidencias: el `tareas_a_medias` de la ronda 3 estaba vacío y sigue vacío.
-- Se verificó en el checkout principal, rama `claude/draggable-cards-component-5829e2`, HEAD `f38745a0`, con base `93d2d0a4`.
+- Los 49 escenarios tienen evidencia y ninguno queda contradicho.
+- No hay reincidencias.
+- Se verificó en la rama `claude/draggable-cards-component-5829e2`, HEAD `3e36b846`, contra la base `93d2d0a4`.
 
 ## Cumplidas (14 de 14)
 
-**Tareas 1, 2, 4, 5, 7, 8, 9, 10 y 12.** Ningún commit posterior a la ronda 3 las tocó. La evidencia es la de la ronda 3, y la suite sigue en verde.
+**Tareas 2, 3, 4, 5, 7, 10, 12 y 14.** Ninguna cambia de criterio. En sus archivos solo se agregaron anotaciones de tipos, más el parámetro `isOrdered` en `list.util`, que quedó registrado en la tarea 9. La evidencia es la de la ronda 4.
 
-**Tarea 3** · `components/drag-list/tests/shared/utils/zone.util.spec.ts`
+**Tarea 1** (`drag-list.type.ts`, `engine.type.ts` y `drag.constant.ts`)
 
-- Suma el caso «desde el destino, con el centro fuera de las dos zonas y el puntero sobre el origen, quita», que da `{ zone: 'source', anchor: pointer }`.
-- El texto «Ampliado en el apply» de `tasks.md` dice «cinco casos»: el `describe('resolveDropAnchor')` tiene 5 `it(`. Coincide.
+- `minZoneSize` ya no está en el paquete.
+- Fuera de `src/shared/types/` no queda ningún tipo con nombre: el grep da 0.
+- Los 12 composables exportados anotan su tipo de retorno.
+- `engine.type.ts` no se reexporta: `index.ts` no cambió.
+- **Observación sobre el plan:** el criterio original sigue pidiendo «48 px de zona mínima» en `drag.constant.ts`, y la ampliación lo revoca. Cuenta como cumplido porque la ampliación quedó registrada y justificada.
 
-**Tarea 6** · `components/drag-list/tests/shared/composables/usePointerDrag.spec.ts`
+**Tarea 6** (`usePointerDrag.ts`)
 
-- Suma dos casos de punta a punta:
-  - el puntero sobre el origen da `zone: 'source'` y `toIndex: -1`;
-  - el puntero sobre el destino da `zone: 'target'` y `dropIndex`/`toIndex` en `1`.
-- La ampliación quedó registrada en `tasks.md`.
+- `getScrollContainers` y el scroll en fase de captura desplazan el cache, en lugar de releerlo. Lo prueba un test nuevo.
+- **Observación sobre el plan:** el criterio original dice «se invalida con el scroll», y la ampliación lo reemplaza por «se desplaza».
 
-**Tarea 11** · `components/drag-list/src/components/TargetPanel/target-panel.style.scss`
+**Tarea 8** (`useKeyboardReorder.ts`)
 
-- La lista lleva `gap-sm` en las dos direcciones.
-- En horizontal, `item`, `connector`, `node` y `empty` llevan `shrink-0`, y `node` y `empty` llevan además `whitespace-nowrap`.
-- Siguen intactos el layout según `direction` y `touch-action: manipulation`.
-- `overflow-x-auto` se mantiene: con `shrink-0`, el contenido desborda y se desplaza en vez de comprimirse.
+- `focusIndex` es un `shallowRef` que se dispara con `requestFocus` y `triggerRef`.
+- Lo prueba el test «dos Supr seguidos».
 
-**Tarea 13** · `components/drag-list/src/DragList/drag-list.style.scss`
+**Tarea 9** (`useDragList.ts`)
 
-En vertical, `items-start` pasó a `items-stretch`. Lo que cambia y lo que no:
+- El auto-scroll ahora incluye la lista del destino, con eje `x` en horizontal.
+- `getPreviewItems` recibe `isOrdered`.
+- Hay tests nuevos.
 
-- **«La zona de quitar mide al menos 48 px» mantiene su significado.** El mínimo sigue en `min-height: var(--gui-drag-list-zone-min-height)` (86 px). `items-stretch` solo agranda el origen hasta el alto del destino, nunca lo achica.
-- **Refuerza «el panel de origen completo SHALL ser la zona de quitar».** El hueco debajo de un origen corto ahora es panel, y por lo tanto zona.
-- **No choca con «Soltar fuera cancela».** Fuera del bloque raíz se sigue cancelando, y el test «soltar fuera de toda zona llama a onCancel» sigue en verde.
-- **Solo aplica a vertical.**
-- `check-styles` compila, el comando de movimiento reducido da 3 y el de «sin lógica» da 0.
+**Tarea 11** (`useTargetPanel.ts` e `index.vue`)
 
-**Tarea 14** · `stories/drag-list.stories.ts`
+- `handleItemKeydown` filtra con `event.target !== event.currentTarget`.
+- `lastIndex` pasó al composable, e `index.vue` ya no importa `computed`.
+- Hay tres tests nuevos.
 
-- «Flujo con fin» se arma con `createApproversFlowRender({ direction: 'vertical', endNode: 'Cierre del informe', containerClass: 'w-full max-w-[760px]' })`, sin perder ninguno de sus elementos.
-- Siguen todas las stories que pide el criterio.
-- «Storybook compila y se ven en el navegador» descansa en la prueba manual del dev. `storybook build` sigue fallando por el OOM ya conocido del docgen.
+**Tarea 13** (`useDragListFocus.ts`)
+
+- El `watch` usa `{ flush: 'post' }`.
+- Hay un test con dos re-renderizados seguidos sobre el mismo índice.
+- El comando de «sin lógica» da 0.
+
+**Legitimidad de las correcciones.** Cada una corresponde a su ampliación en `tasks.md`, tiene tests y no se sale de los `archivos:` de su tarea. La excepción es `engine.type.ts`, que nombra explícitamente la ampliación de la tarea 1.
+
+## Puntos que se pidió juzgar
+
+**1. `DragListSlots` y la API pública: el cambio es compatible.**
+
+- `DragListSourceSlotProps` y `DragListTargetSlotProps` son estructuralmente idénticos a los literales que reemplazan.
+- `DragListAccessor<DragListKey>` y `DragListAccessor<string>` equivalen a los tipos anteriores de `itemKey` e `itemLabel`.
+- `DragListProps` es un export nuevo y aditivo, sin choque de nombres.
+- La única resta de API es `DRAG_THRESHOLDS.minZoneSize`. No rompe a nadie, porque el paquete está en 0.0.0 y sin publicar.
+
+**2. `DragGhostProps` nunca fue público.** `index.ts` nunca reexportó `drag-ghost.constant.ts`. Hoy vive en `engine.type.ts`, que tampoco se reexporta.
 
 ## A medias
 
 Ninguna.
 
-## De más (2)
+## De más (2, los mismos de la ronda 4)
 
-**1. Más ajustes de layout que ningún criterio pedía** (`d93b2a3d` y `3025b1a5`, sumados a los de la ronda 3)
+1. Los ajustes de layout `gap-sm`, `shrink-0`, `whitespace-nowrap` e `items-stretch` siguen sin un `listo cuando` que los cubra.
+2. La story «Horizontal con inicio y fin» y `createApproversFlowRender`.
 
-- **Qué cambió:** `gap-sm` en la lista del destino, `shrink-0` y `whitespace-nowrap` en horizontal, e `items-stretch` en vertical.
-- **Por qué no tumba el veredicto:** los archivos están en el `archivos:` de las tareas 11 y 13, no contradicen ningún criterio ni escenario y responden a defectos visuales que el dev encontró en Storybook.
-- **Por qué se cuenta igual:** ningún `listo cuando` los cubre y `tasks.md` no los registra como «Ampliado en el apply». Además, `items-stretch` cambia qué área acepta quitar, y eso es comportamiento, no solo estética.
-
-**2. Story nueva «Horizontal con inicio y fin» y el factor `createApproversFlowRender`** (`354d68bf` y `f38745a0`)
-
-- Caen en el archivo de la tarea 14, pero la lista de stories de su criterio no la incluye.
-- La pidió el dev y no reemplaza ni rompe ninguna de las declaradas.
-
-**Lo que dejó de ser «de más».** El «De más» 1 de la ronda 3 (el puntero decide la zona) quedó registrado como «Ampliado en el apply» en las tareas 3 y 6, con su escenario y sus tests.
-
-**Estado de las observaciones de la ronda 3:**
-
-1. **Sin resolver, como se acordó.** La frase «si el centro queda fuera de las dos zonas, SHALL decidirla el puntero» sigue en el requisito «Quitar arrastrando de vuelta al origen» (spec.md:176), aunque vale también para agregar.
-2. **Resuelta.** Escenario nuevo (spec.md:208) y tests en `zone.util.spec.ts` y `usePointerDrag.spec.ts`.
-3. **Resuelta.** La ampliación quedó registrada en las tareas 3 y 6.
+Los 6 commits de esta ronda no agregan nada de más: todo quedó registrado como «Ampliado tras el review». Un matiz: el filtro de teclado para descendientes del slot no lo pide ningún escenario, porque «Botones del slot» habla del puntero. Igual es coherente con la «tarjeta enfocada» del requisito de teclado, y está registrado.
 
 ## Escenarios (49 de 49 con evidencia)
 
-- **48 escenarios:** la misma evidencia que en la ronda 3. Además, «Con una tarjeta más ancha que la zona, decide el puntero» ahora tiene un test de punta a punta en `usePointerDrag.spec.ts` (`toIndex: 1`).
-- **«Quitar con el centro del ghost fuera de las zonas, decide el puntero»** (nuevo):
-  - Lo prueban `zone.util.spec.ts` y `usePointerDrag.spec.ts`, que da `onDrop({ origin: 'target', zone: 'source', toIndex: -1 })`.
-  - La emisión de `remove(item, index, 'drag')` a partir de ese `onDrop` la cubre el mismo cableado de `useDragList` que prueba el escenario de quitar arrastrando.
+| Escenarios                           | Evidencia                                                                                                                                         |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 45 sin cambios                       | La misma de la ronda 4, en verde                                                                                                                  |
+| «Agregar arrastrando en modo simple» | `useDragList.spec`. La previsualización ahora coincide con lo que se emite: `list.util.spec`, «sin ordered el placeholder del origen va al final» |
+| «Sin ordered no hay orden visible»   | `list.util.spec`, «sin ordered arrastrar dentro del destino no reordena». Ya no queda contradicho visualmente                                     |
+| «Scroll cerca del borde»             | `useAutoScroll.spec` y el test nuevo de `useDragList.spec`, que confirma la lista del destino entre los contenedores                              |
+| «Quitar con teclado»                 | `useKeyboardReorder.spec` y el test nuevo de `useDragListFocus.spec`                                                                              |
 
 ## Con qué se probó
 
-- **`calcifer check`** (con `GBP_PACKAGE_TOKEN=dummy`): exit 0, con 57 de 73 archivos revisados. Los 16 restantes son SCSS, `package.json` y `tsconfig.json`; los SCSS los cubre `check-styles`.
+- **`calcifer check`:** exit 0 sobre 58 de 74 archivos. Los 16 que quedan afuera son SCSS, `package.json` y `tsconfig.json`; los SCSS los cubre `check-styles`.
 - **Comandos de «Cómo se verifica»:** todos coinciden. «Preparar el entorno» queda `no_verificado`.
 - **Lo que este veredicto no cubre:**
-  - El criterio del cambio entero en el navegador descansa en la medición del dev y del orquestador.
-  - iOS Safari real sigue sin verificar.
-  - `storybook build` sigue fallando por OOM del docgen.
+  - El navegador: las correcciones de auto-scroll horizontal y de foco solo se probaron en jsdom.
+  - iOS Safari real.
+  - `storybook build`, que falla por el OOM ya conocido del docgen.
