@@ -14,6 +14,8 @@
   @include e("item") {
     @apply outline-none;
     touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   @include e("empty") {

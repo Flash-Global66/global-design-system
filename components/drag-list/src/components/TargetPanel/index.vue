@@ -42,6 +42,9 @@ const lastIndex = computed(() => props.entries.length - 1);
           <FlowNode :label="startNode" />
         </slot>
       </li>
+      <li v-if="isEmpty" :class="ns.e('empty')" data-no-drag>
+        <slot name="empty" />
+      </li>
       <template v-for="(entry, position) in entries" :key="getEntryKey(entry)">
         <li
           v-if="hasConnectorBefore(position)"
@@ -88,9 +91,6 @@ const lastIndex = computed(() => props.entries.length - 1);
         </slot>
       </li>
     </component>
-    <div v-if="isEmpty" :class="ns.e('empty')">
-      <slot name="empty" />
-    </div>
     <slot name="overlay" />
   </div>
 </template>
