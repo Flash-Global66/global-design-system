@@ -48,7 +48,7 @@ Restricciones que recibe todo subagente. El detalle está en `proposal.md` y `de
   - listo cuando: **`hasExceededDistance(start, current, threshold)`:** 3 px da `false` y 5 px da `true`. **`isTouchMoveWithinTolerance`:** tiene spec. **`isNonDraggableTarget(target, root)`:** da `true` para `button`, `a`, `input`, `select`, `textarea`, `[data-no-drag]` o un descendiente de ellos dentro de `root`. **`calculateAutoScrollDelta({ pointer, rect, edge, maxSpeed, axis })`:** Da 0 fuera del borde. Es negativo hacia el inicio y positivo hacia el final. Su magnitud crece hacia el borde, con tope en `maxSpeed`. **`getOverlayState({ session, canDropToRemove })`** devuelve `{ source, target }`, cada uno con `isVisible` y `action`: Agregar sobre el destino cuando el arrastre sale del origen. Eliminar sobre el origen cuando sale del destino con `canDropToRemove`. Ninguno al reordenar sin `canDropToRemove`. El overlay de una zona se oculta mientras esa zona está activa. Ninguno con la sesión sin activar (el click no hace parpadear).
   - commit: `feat(drag-list): umbrales de activación, auto-scroll y estado de overlays`
 
-- [ ] **5 · Anunciador para lector de pantalla**
+- [x] **5 · Anunciador para lector de pantalla**
   - archivos: `components/drag-list/src/shared/composables/useLiveAnnouncer.ts`, `components/drag-list/tests/shared/composables/useLiveAnnouncer.spec.ts`
   - depende de: 1
   - listo cuando: `useLiveAnnouncer(texts)` expone `message` (ref) y `announce(key, params)`. Interpola `{label}`, `{position}` y `{total}` sobre `DragListTexts`. Repetir el mismo mensaje fuerza el re-anuncio (vacía y reasigna en el siguiente tick). El spec cubre «agregado en posición 2 de 2» con el label, y el re-anuncio.
