@@ -458,22 +458,17 @@ export const Simple: Story = {
   }),
 };
 
-export const FlowWithEnd: Story = {
-  name: 'Flujo con fin',
-  parameters: {
-    docs: {
-      description: {
-        story: `Flujo de aprobación: el orden del destino es el orden de revisión.
+interface ApproversFlowOptions {
+  direction: 'vertical' | 'horizontal';
+  startNode?: string;
+  endNode: string;
+  containerClass: string;
+}
 
-- Tarjetas con \`g-avatar\`, nombre y correo
-- Buscador \`g-search-input\`: el filtro y los grupos A/B/C se resuelven del lado del consumidor con \`computed\`; lo ya agregado no reaparece al buscar
-- Botón «+» con \`g-icon-button\` en el origen, que llama a \`add()\`
-- Editar y borrar en el slot \`target-item\` (\`remove()\`)
-- \`ordered\` y \`end-node="Cierre del informe"\``,
-      },
-    },
-  },
-  render: args => ({
+function createApproversFlowRender(
+  options: ApproversFlowOptions,
+): NonNullable<Story['render']> {
+  return args => ({
     components: {
       GDragList,
       GConfigProvider,
@@ -510,65 +505,98 @@ export const FlowWithEnd: Story = {
       const onEdit = (item: Record<string, unknown>) =>
         action('edit')(item.name);
 
-      return { args, selected, query, groups, initials, onEdit, action };
+      return {
+        args,
+        selected,
+        query,
+        groups,
+        initials,
+        onEdit,
+        action,
+        ...options,
+      };
     },
     template: `
-      <g-config-provider>
-        <div class="w-full max-w-[760px]">
-          <g-drag-list
-            v-bind="args"
-            v-model="selected"
-            :source="groups"
-            item-key="id"
-            item-label="name"
-            ordered
-            end-node="Cierre del informe"
-            @add="action('add')"
-            @remove="action('remove')"
-            @reorder="action('reorder')"
-          >
-            <template #source-header>
-              <div class="flex flex-col gap-3">
-                <h3 class="text-base font-semibold">Aprobadores</h3>
-                <g-search-input v-model="query" placeholder="Buscar por nombre o correo" />
-              </div>
-            </template>
-            <template #source-group-header="{ group }">
-              <span class="text-xs font-semibold text-gray-500">{{ group.label }}</span>
-            </template>
-            <template #source-item="{ item, add }">
-              <div class="flex items-center gap-3 w-full">
-                <g-avatar :text="initials(item.name)" :has-logo="false" size="small" />
-                <div class="flex flex-col flex-1 min-w-0">
-                  <span class="text-sm font-semibold truncate">{{ item.name }}</span>
-                  <span class="text-xs text-gray-500 truncate">{{ item.email }}</span>
+        <g-config-provider>
+          <div :class="containerClass">
+            <g-drag-list
+              v-bind="args"
+              v-model="selected"
+              :source="groups"
+              item-key="id"
+              item-label="name"
+              ordered
+              :direction="direction"
+              :start-node="startNode"
+              :end-node="endNode"
+              @add="action('add')"
+              @remove="action('remove')"
+              @reorder="action('reorder')"
+            >
+              <template #source-header>
+                <div class="flex flex-col gap-3">
+                  <h3 class="text-base font-semibold">Aprobadores</h3>
+                  <g-search-input v-model="query" placeholder="Buscar por nombre o correo" />
                 </div>
-                <g-icon-button icon="regular plus" aria-label="Agregar aprobador" size="small" @click="add()" />
-              </div>
-            </template>
-            <template #source-empty="{ reason }">
-              <span class="text-sm text-gray-500">
-                {{ reason === 'all-added' ? 'Ya agregaste a todos los aprobadores' : 'No hay aprobadores' }}
-              </span>
-            </template>
-            <template #target-header>
-              <h3 class="text-base font-semibold">Flujo de revisión</h3>
-            </template>
-            <template #target-item="{ item, remove }">
-              <div class="flex items-center gap-3 w-full">
-                <g-avatar :text="initials(item.name)" :has-logo="false" size="small" />
-                <div class="flex flex-col flex-1 min-w-0">
-                  <span class="text-sm font-semibold truncate">{{ item.name }}</span>
-                  <span class="text-xs text-gray-500 truncate">{{ item.email }}</span>
+              </template>
+              <template #source-group-header="{ group }">
+                <span class="text-xs font-semibold text-gray-500">{{ group.label }}</span>
+              </template>
+              <template #source-item="{ item, add }">
+                <div class="flex items-center gap-3 w-full">
+                  <g-avatar :text="initials(item.name)" :has-logo="false" size="small" />
+                  <div class="flex flex-col flex-1 min-w-0">
+                    <span class="text-sm font-semibold truncate">{{ item.name }}</span>
+                    <span class="text-xs text-gray-500 truncate">{{ item.email }}</span>
+                  </div>
+                  <g-icon-button icon="regular plus" aria-label="Agregar aprobador" size="small" @click="add()" />
                 </div>
-                <g-icon-button icon="regular pen" aria-label="Editar aprobador" size="small" @click="onEdit(item)" />
-                <g-icon-button icon="regular trash" aria-label="Quitar aprobador" size="small" @click="remove()" />
-              </div>
-            </template>
-          </g-drag-list>
-        </div>
-      </g-config-provider>
-    `,
+              </template>
+              <template #source-empty="{ reason }">
+                <span class="text-sm text-gray-500">
+                  {{ reason === 'all-added' ? 'Ya agregaste a todos los aprobadores' : 'No hay aprobadores' }}
+                </span>
+              </template>
+              <template #target-header>
+                <h3 class="text-base font-semibold">Flujo de revisión</h3>
+              </template>
+              <template #target-item="{ item, remove }">
+                <div class="flex items-center gap-3 w-full">
+                  <g-avatar :text="initials(item.name)" :has-logo="false" size="small" />
+                  <div class="flex flex-col flex-1 min-w-0">
+                    <span class="text-sm font-semibold truncate">{{ item.name }}</span>
+                    <span class="text-xs text-gray-500 truncate">{{ item.email }}</span>
+                  </div>
+                  <g-icon-button icon="regular pen" aria-label="Editar aprobador" size="small" @click="onEdit(item)" />
+                  <g-icon-button icon="regular trash" aria-label="Quitar aprobador" size="small" @click="remove()" />
+                </div>
+              </template>
+            </g-drag-list>
+          </div>
+        </g-config-provider>
+      `,
+  });
+}
+
+export const FlowWithEnd: Story = {
+  name: 'Flujo con fin',
+  parameters: {
+    docs: {
+      description: {
+        story: `Flujo de aprobación: el orden del destino es el orden de revisión.
+
+- Tarjetas con \`g-avatar\`, nombre y correo
+- Buscador \`g-search-input\`: el filtro y los grupos A/B/C se resuelven del lado del consumidor con \`computed\`; lo ya agregado no reaparece al buscar
+- Botón «+» con \`g-icon-button\` en el origen, que llama a \`add()\`
+- Editar y borrar en el slot \`target-item\` (\`remove()\`)
+- \`ordered\` y \`end-node="Cierre del informe"\``,
+      },
+    },
+  },
+  render: createApproversFlowRender({
+    direction: 'vertical',
+    endNode: 'Cierre del informe',
+    containerClass: 'w-full max-w-[760px]',
   }),
 };
 
@@ -659,6 +687,27 @@ export const Horizontal: Story = {
         </div>
       </g-config-provider>
     `,
+  }),
+};
+
+export const HorizontalFlow: Story = {
+  name: 'Horizontal con inicio y fin',
+  parameters: {
+    docs: {
+      description: {
+        story: `El flujo completo de aprobadores en \`direction="horizontal"\`, dentro de un contenedor de 375 px como el de un móvil.
+
+- Mismo origen que «Flujo con fin»: tarjetas con avatar, buscador y grupos A/B/C del lado del consumidor
+- El origen queda arriba y el destino abajo, con las tarjetas de izquierda a derecha
+- \`start-node="Inicio del informe"\` y \`end-node="Cierre del informe"\` conectados al flujo`,
+      },
+    },
+  },
+  render: createApproversFlowRender({
+    direction: 'horizontal',
+    startNode: 'Inicio del informe',
+    endNode: 'Cierre del informe',
+    containerClass: 'w-[375px] border border-dashed border-gray-300 p-2',
   }),
 };
 
