@@ -48,6 +48,16 @@
   padding: 0 !important;
 }
 
+@media (max-width: 400px) {
+  .gui-range-editor {
+    --gui-range-char: 0.48rem;
+
+    .gui-range-input {
+      font-size: 0.875rem;
+    }
+  }
+}
+
 @media (max-width: 640px) {
   .gui-picker__popper.gui-popper__tooltip:has(.gui-date-range-picker) {
     width: calc(100% - 32px) !important;
