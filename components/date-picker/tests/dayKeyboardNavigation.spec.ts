@@ -62,6 +62,16 @@ describe('findNextEnabledDate', () => {
     ).toBe('2026-10-12');
   });
 
+  it('ignora un día habilitado más cercano en la dirección contraria', () => {
+    expect(
+      findNextEnabledDate({
+        current: '2026-10-09',
+        key: 'ArrowRight',
+        enabledDates: enabled('2026-10-08', '2026-10-12'),
+      }),
+    ).toBe('2026-10-12');
+  });
+
   it('devuelve null si no hay un día habilitado en esa dirección', () => {
     expect(
       findNextEnabledDate({

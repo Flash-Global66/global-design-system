@@ -405,8 +405,8 @@ const onPick = (date: any = '', visible = false) => {
 
 const onPanelEscape = (event: KeyboardEvent) => {
   event.stopPropagation();
-  pickerVisible.value = false;
   focus();
+  pickerVisible.value = false;
 };
 
 const onBeforeShow = () => {
@@ -564,7 +564,7 @@ const onMouseLeave = () => {
 const onTouchStartInput = (event: TouchEvent) => {
   if (props.readonly || pickerDisabled.value) return;
   const shouldOpen = shouldOpenPickerFromTrigger({
-    targetTagName: (event.touches[0].target as HTMLElement)?.tagName,
+    targetTagName: (event.touches[0]?.target as HTMLElement)?.tagName,
     isFocused: isFocused.value,
     openOnInputClick: props.openOnInputClick,
   });
