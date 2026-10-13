@@ -96,14 +96,6 @@
     &::placeholder {
       color: getCssVar("text-color", "placeholder");
     }
-
-    &:first-of-type {
-      margin-left: auto;
-    }
-
-    &:last-of-type {
-      margin-right: auto;
-    }
   }
 
   .#{$namespace}-range-separator {
