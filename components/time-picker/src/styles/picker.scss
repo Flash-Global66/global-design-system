@@ -104,7 +104,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding: 0 10px;
+    padding: 0 6px;
     margin: 0;
     font-size: 14px;
     overflow-wrap: break-word;
@@ -116,6 +116,11 @@
   }
 
   .#{$namespace}-range__close-icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+
     &--hidden {
       opacity: 0;
       visibility: hidden;
