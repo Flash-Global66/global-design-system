@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed, type ComputedRef } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
 import type {
   DragListDirection,
@@ -21,8 +21,34 @@ interface TargetPanelState {
   isDisabled: boolean;
 }
 
+type TargetPanelNamespace = ReturnType<typeof useNamespace>;
+
+/** Reemite el `keydown` de una tarjeta hacia el raíz. */
+type TargetPanelKeydownEmit = (
+  event: 'keydown',
+  keyboardEvent: KeyboardEvent,
+  index: number,
+) => void;
+
+interface UseTargetPanelReturn {
+  ns: TargetPanelNamespace;
+  isEmpty: ComputedRef<boolean>;
+  listTag: ComputedRef<'ol' | 'ul'>;
+  hasStartNode: ComputedRef<boolean>;
+  hasEndNode: ComputedRef<boolean>;
+  hasFinalConnector: ComputedRef<boolean>;
+  lastIndex: ComputedRef<number>;
+  hasConnectorBefore: (index: number) => boolean;
+  getEntryKey: (entry: DragListPreviewEntry) => DragListKey;
+  handleItemKeydown: (event: KeyboardEvent, index: number) => void;
+  panelClass: ComputedRef<(string | false)[]>;
+}
+
 /** Decide etiqueta de lista, nodos, conectores y keys del panel de destino. */
-export function useTargetPanel(props: TargetPanelState) {
+export function useTargetPanel(
+  props: TargetPanelState,
+  emit: TargetPanelKeydownEmit,
+): UseTargetPanelReturn {
   const ns = useNamespace('drag-list-target');
 
   const isEmpty = computed(() => props.entries.length === 0);
@@ -50,6 +76,14 @@ export function useTargetPanel(props: TargetPanelState) {
       : (props.getKey?.(entry.item) ?? entry.index);
   }
 
+  const lastIndex = computed(() => props.entries.length - 1);
+
+  /** Solo la tarjeta enfocada reemite; las teclas de sus descendientes no. */
+  function handleItemKeydown(event: KeyboardEvent, index: number): void {
+    if (event.target !== event.currentTarget) return;
+    emit('keydown', event, index);
+  }
+
   const panelClass = computed(() => [
     ns.b(),
     ns.m(props.direction),
@@ -65,8 +99,10 @@ export function useTargetPanel(props: TargetPanelState) {
     hasStartNode,
     hasEndNode,
     hasFinalConnector,
+    lastIndex,
     hasConnectorBefore,
     getEntryKey,
+    handleItemKeydown,
     panelClass,
   };
 }

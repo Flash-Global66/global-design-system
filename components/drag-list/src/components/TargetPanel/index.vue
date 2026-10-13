@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
 import FlowConnector from '../FlowConnector/index.vue';
 import FlowNode from '../FlowNode/index.vue';
 import {
@@ -20,12 +19,12 @@ const {
   hasStartNode,
   hasEndNode,
   hasFinalConnector,
+  lastIndex,
   hasConnectorBefore,
   getEntryKey,
+  handleItemKeydown,
   panelClass,
-} = useTargetPanel(props);
-
-const lastIndex = computed(() => props.entries.length - 1);
+} = useTargetPanel(props, emit);
 </script>
 
 <template>
@@ -59,7 +58,7 @@ const lastIndex = computed(() => props.entries.length - 1);
           tabindex="0"
           :class="[ns.e('item'), entry.isPlaceholder && 'is-placeholder']"
           :data-drag-index="position"
-          @keydown="emit('keydown', $event, position)"
+          @keydown="handleItemKeydown($event, position)"
         >
           <slot
             v-if="!entry.isPlaceholder"

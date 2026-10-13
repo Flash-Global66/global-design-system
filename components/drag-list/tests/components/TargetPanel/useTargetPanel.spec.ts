@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { withSetup } from '../../../../../tests/utils/withSetup';
 import { useTargetPanel } from '../../../src/components/TargetPanel/useTargetPanel';
 import type { DragListPreviewEntry } from '../../../src/shared/types/drag-list.type';
@@ -35,7 +35,16 @@ function setup(
     isDisabled: false,
     label: 'Destino',
   };
-  return withSetup(() => useTargetPanel(props)).result;
+  const emit = vi.fn();
+  const result = withSetup(() => useTargetPanel(props, emit)).result;
+  return Object.assign(result, { emit });
+}
+
+function keydownFrom(target: Element, currentTarget: Element): KeyboardEvent {
+  const event = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+  Object.defineProperty(event, 'target', { value: target });
+  Object.defineProperty(event, 'currentTarget', { value: currentTarget });
+  return event;
 }
 
 describe('useTargetPanel', () => {
@@ -103,5 +112,27 @@ describe('useTargetPanel', () => {
     expect(
       r.getEntryKey({ item: { id: 7 }, index: 0, isPlaceholder: false }),
     ).toBe(7);
+  });
+
+  it('reemite el keydown cuya fuente es la propia tarjeta', () => {
+    const r = setup({ count: 2 });
+    const card = document.createElement('li');
+    const event = keydownFrom(card, card);
+    r.handleItemKeydown(event, 1);
+    expect(r.emit).toHaveBeenCalledWith('keydown', event, 1);
+  });
+
+  it('no reemite el keydown de un botón descendiente', () => {
+    const r = setup({ count: 2 });
+    const card = document.createElement('li');
+    const button = document.createElement('button');
+    card.appendChild(button);
+    r.handleItemKeydown(keydownFrom(button, card), 1);
+    expect(r.emit).not.toHaveBeenCalled();
+  });
+
+  it('lastIndex es el índice de la última entrada', () => {
+    expect(setup({ count: 3 }).lastIndex.value).toBe(2);
+    expect(setup({ count: 0 }).lastIndex.value).toBe(-1);
   });
 });
