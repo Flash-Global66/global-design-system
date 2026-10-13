@@ -58,7 +58,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 780px) {
   .gui-picker__popper.gui-popper__tooltip:has(.gui-date-range-picker) {
     width: calc(100% - 32px) !important;
   }
