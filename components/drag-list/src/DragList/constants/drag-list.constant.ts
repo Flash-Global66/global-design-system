@@ -1,5 +1,6 @@
 import { buildProps, definePropType } from '@flash-global66/g-utils';
 import type {
+  DragListAccessor,
   DragListAddVia,
   DragListDirection,
   DragListItem,
@@ -22,18 +23,12 @@ export const dragListProps = buildProps({
   },
   /** @description identificador único de cada elemento */
   itemKey: {
-    type: definePropType<string | ((item: DragListItem) => DragListKey)>([
-      String,
-      Function,
-    ]),
+    type: definePropType<DragListAccessor<DragListKey>>([String, Function]),
     required: true,
   },
   /** @description texto legible del elemento (anuncios a11y) */
   itemLabel: {
-    type: definePropType<string | ((item: DragListItem) => string)>([
-      String,
-      Function,
-    ]),
+    type: definePropType<DragListAccessor<string>>([String, Function]),
   },
   /** @description el orden del destino es el orden del flujo */
   ordered: { type: Boolean, default: false },

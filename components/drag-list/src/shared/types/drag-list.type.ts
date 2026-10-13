@@ -1,3 +1,6 @@
+import type { ExtractPropTypes } from 'vue';
+import type { dragListProps } from '../../DragList/constants/drag-list.constant';
+
 export type DragListItem = Record<string, unknown>;
 export type DragListKey = string | number;
 
@@ -53,23 +56,10 @@ export interface DragListTexts {
 export interface DragListSlots {
   'source-header'?: () => unknown;
   'source-group-header'?: (props: { group: DragListSourceGroup }) => unknown;
-  'source-item'?: (props: {
-    item: DragListItem;
-    canAdd: boolean;
-    add: () => void;
-  }) => unknown;
+  'source-item'?: (props: DragListSourceSlotProps) => unknown;
   'source-empty'?: (props: { reason: 'empty' | 'all-added' }) => unknown;
   'target-header'?: () => unknown;
-  'target-item'?: (props: {
-    item: DragListItem;
-    index: number;
-    position: number;
-    isFirst: boolean;
-    isLast: boolean;
-    remove: () => void;
-    moveUp: () => void;
-    moveDown: () => void;
-  }) => unknown;
+  'target-item'?: (props: DragListTargetSlotProps) => unknown;
   start?: () => unknown;
   end?: () => unknown;
   connector?: (props: { direction: DragListDirection }) => unknown;
@@ -91,6 +81,18 @@ export interface DragListPreviewEntry {
   isPlaceholder: boolean;
 }
 
+/** Acceso a un dato del ítem: nombre de campo o función que lo calcula. */
+export type DragListAccessor<T = unknown> =
+  | string
+  | ((item: DragListItem) => T);
+
+/** Props que recibe el slot `source-item`. */
+export interface DragListSourceSlotProps {
+  item: DragListItem;
+  canAdd: boolean;
+  add: () => void;
+}
+
 /** Props que recibe el slot `target-item`. */
 export interface DragListTargetSlotProps {
   item: DragListItem;
@@ -103,37 +105,5 @@ export interface DragListTargetSlotProps {
   moveDown: () => void;
 }
 
-/** Retorno de `useDragList`: estado y handlers que consume el componente. */
-export interface UseDragListReturn {
-  ns: ReturnType<typeof import('@flash-global66/g-utils').useNamespace>;
-  rootClass: import('vue').ComputedRef<string[]>;
-  getKey: (item: DragListItem) => DragListKey;
-  exposed: DragListExpose;
-  texts: import('vue').ComputedRef<DragListTexts>;
-  visibleSource: import('vue').ComputedRef<DragListSource>;
-  emptyReason: import('vue').ComputedRef<'empty' | 'all-added' | null>;
-  previewItems: import('vue').ComputedRef<DragListPreviewEntry[]>;
-  overlayState: import('vue').ComputedRef<
-    ReturnType<typeof import('../utils/overlay.util').getOverlayState>
-  >;
-  session: Readonly<import('vue').Ref<DragSession | null>>;
-  sourceEl: import('vue').Ref<HTMLElement | null>;
-  targetEl: import('vue').Ref<HTMLElement | null>;
-  announcement: import('vue').Ref<string>;
-  focusIndex: import('vue').Ref<number | null>;
-  grabbedIndex: import('vue').Ref<number | null>;
-  handleTargetKeydown: (event: KeyboardEvent, index: number) => void;
-  getSourceSlotProps: (item: DragListItem) => {
-    item: DragListItem;
-    canAdd: boolean;
-    add: () => void;
-  };
-  getTargetSlotProps: (index: number) => DragListTargetSlotProps;
-  add: (
-    item: DragListItem,
-    index: number | undefined,
-    via: DragListAddVia,
-  ) => void;
-  remove: (keyOrIndex: DragListKey, via: DragListRemoveVia) => void;
-  move: (from: number, to: number) => void;
-}
+/** Props de `GDragList` ya resueltas, como las recibe el componente. */
+export type DragListProps = ExtractPropTypes<typeof dragListProps>;

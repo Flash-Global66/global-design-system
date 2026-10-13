@@ -1,6 +1,6 @@
 import type { DragListDirection, DragPoint } from '../types/drag-list.type';
 
-type ScrollRect = Pick<DOMRect, 'top' | 'bottom' | 'left' | 'right'>;
+import type { DragListEdgeRect } from '../types/engine.type';
 
 /**
  * Delta de auto-scroll (px por frame) según la cercanía del puntero a los bordes del panel.
@@ -14,7 +14,7 @@ export function calculateAutoScrollDelta({
   axis,
 }: {
   pointer: DragPoint;
-  rect: ScrollRect;
+  rect: DragListEdgeRect;
   edge: number;
   maxSpeed: number;
   axis: DragListDirection;

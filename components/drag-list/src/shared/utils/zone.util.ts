@@ -1,12 +1,11 @@
 import type { DragOrigin, DragPoint, DragZone } from '../types/drag-list.type';
-
-type ZoneRect = Pick<DOMRect, 'top' | 'left' | 'width' | 'height'>;
+import type { DragListRect } from '../types/engine.type';
 
 function containsPoint({
   rect,
   point,
 }: {
-  rect: ZoneRect;
+  rect: DragListRect;
   point: DragPoint;
 }): boolean {
   return (
@@ -29,8 +28,8 @@ export function resolveDragZone({
   canDropToRemove,
 }: {
   center: DragPoint;
-  sourceRect: ZoneRect;
-  targetRect: ZoneRect;
+  sourceRect: DragListRect;
+  targetRect: DragListRect;
   origin: DragOrigin;
   canDropToRemove: boolean;
 }): DragZone {
@@ -60,8 +59,8 @@ export function resolveDropAnchor({
 }: {
   center: DragPoint;
   pointer: DragPoint;
-  sourceRect: ZoneRect;
-  targetRect: ZoneRect;
+  sourceRect: DragListRect;
+  targetRect: DragListRect;
   origin: DragOrigin;
   canDropToRemove: boolean;
 }): { zone: DragZone; anchor: DragPoint } {

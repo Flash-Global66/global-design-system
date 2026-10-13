@@ -1,7 +1,5 @@
-import type {
-  DragListOverlayAction,
-  DragSession,
-} from '../types/drag-list.type';
+import type { DragSession } from '../types/drag-list.type';
+import type { DragListOverlayState } from '../types/engine.type';
 
 /** Resuelve la visibilidad y la acción de los overlays de ayuda de cada panel. */
 export function getOverlayState({
@@ -10,10 +8,7 @@ export function getOverlayState({
 }: {
   session: DragSession | null;
   canDropToRemove: boolean;
-}): {
-  source: { isVisible: boolean; action: DragListOverlayAction | null };
-  target: { isVisible: boolean; action: DragListOverlayAction | null };
-} {
+}): DragListOverlayState {
   const hidden = { isVisible: false, action: null };
   if (!session || !session.isActivated)
     return { source: hidden, target: hidden };

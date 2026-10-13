@@ -1,4 +1,5 @@
 import type { DragPoint } from '../types/drag-list.type';
+import type { DragListRect } from '../types/engine.type';
 
 /**
  * Posición de inserción en la lista sin el arrastrado: cuenta los rects
@@ -13,7 +14,7 @@ export function calculateDropIndex({
   draggedIndex,
 }: {
   point: DragPoint;
-  rects: Pick<DOMRect, 'top' | 'left' | 'width' | 'height'>[];
+  rects: DragListRect[];
   axis: 'x' | 'y';
   draggedIndex: number | null;
 }): number {

@@ -1,5 +1,5 @@
 import { computed, ref, watch } from 'vue';
-import type { ComputedRef, ExtractPropTypes, Ref, SetupContext } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
 import { DEFAULT_DRAG_LIST_TEXTS } from '../shared/constants/texts.constant';
 import { useAutoScroll } from '../shared/composables/useAutoScroll';
@@ -8,16 +8,24 @@ import { useLiveAnnouncer } from '../shared/composables/useLiveAnnouncer';
 import { usePointerDrag } from '../shared/composables/usePointerDrag';
 import type {
   DragListAddVia,
+  DragListAccessor,
   DragListExpose,
   DragListItem,
   DragListKey,
   DragListPreviewEntry,
+  DragListProps,
   DragListRemoveVia,
   DragListSource,
+  DragListSourceSlotProps,
+  DragListTargetSlotProps,
   DragListTexts,
+  DragOrigin,
   DragSession,
-  UseDragListReturn,
 } from '../shared/types/drag-list.type';
+import type {
+  DragListEmit,
+  UseDragListReturn,
+} from '../shared/types/engine.type';
 import {
   findDuplicateKeys,
   getItemKey,
@@ -31,13 +39,7 @@ import {
   removeItemAt,
 } from '../shared/utils/list.util';
 import { getOverlayState } from '../shared/utils/overlay.util';
-import { dragListEmits, dragListProps } from './constants/drag-list.constant';
 import { useDragListFocus } from './useDragListFocus';
-
-type DragListProps = ExtractPropTypes<typeof dragListProps>;
-type DragListEmit = SetupContext<typeof dragListEmits>['emit'];
-
-type ItemKey = string | ((item: DragListItem) => DragListKey);
 
 const POSITION_OFFSET = 1;
 const NOT_FOUND = -1;
@@ -63,7 +65,9 @@ export function useDragList(
   }));
   const { message: announcement, announce } = useLiveAnnouncer(texts);
 
-  const itemKey = computed(() => props.itemKey as ItemKey);
+  const itemKey = computed(
+    () => props.itemKey as DragListAccessor<DragListKey>,
+  );
 
   function getKey(item: DragListItem): DragListKey {
     return getItemKey(item, itemKey.value);
@@ -198,10 +202,7 @@ export function useDragList(
     ).sort((a, b) => getIndex(a) - getIndex(b));
   }
 
-  function resolveItem(
-    origin: 'source' | 'target',
-    index: number,
-  ): DragListItem | null {
+  function resolveItem(origin: DragOrigin, index: number): DragListItem | null {
     const list =
       origin === 'source' ? flatVisibleSource.value : props.modelValue;
     return list[index] ?? null;
@@ -301,11 +302,7 @@ export function useDragList(
   }
 
   /** Props que recibe el slot `source-item`. */
-  function getSourceSlotProps(item: DragListItem): {
-    item: DragListItem;
-    canAdd: boolean;
-    add: () => void;
-  } {
+  function getSourceSlotProps(item: DragListItem): DragListSourceSlotProps {
     return {
       item,
       canAdd: !props.disabled,
@@ -314,16 +311,7 @@ export function useDragList(
   }
 
   /** Props que recibe el slot `target-item`. */
-  function getTargetSlotProps(index: number): {
-    item: DragListItem;
-    index: number;
-    position: number;
-    isFirst: boolean;
-    isLast: boolean;
-    remove: () => void;
-    moveUp: () => void;
-    moveDown: () => void;
-  } {
+  function getTargetSlotProps(index: number): DragListTargetSlotProps {
     return {
       item: props.modelValue[index],
       index,

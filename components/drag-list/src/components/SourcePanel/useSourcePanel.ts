@@ -1,14 +1,15 @@
 import { computed, ref } from 'vue';
-import type { ComputedRef, ExtractPropTypes, Ref } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
 import type {
   DragListItem,
   DragListKey,
   DragListSourceGroup,
 } from '../../shared/types/drag-list.type';
-import type { sourcePanelProps } from './constants/source-panel.constant';
-
-type SourcePanelProps = ExtractPropTypes<typeof sourcePanelProps>;
+import type {
+  SourcePanelBlock,
+  SourcePanelProps,
+  UseSourcePanelReturn,
+} from '../../shared/types/engine.type';
 
 function isGroup(
   entry: DragListItem | DragListSourceGroup,
@@ -20,21 +21,7 @@ function isGroup(
 export function useSourcePanel(
   props: SourcePanelProps,
   emit: (event: 'add', item: DragListItem) => void,
-): {
-  ns: ReturnType<typeof useNamespace>;
-  rootRef: Ref<HTMLElement | null>;
-  rootClass: ComputedRef<string[]>;
-  isGrouped: ComputedRef<boolean>;
-  canAdd: ComputedRef<boolean>;
-  blocks: ComputedRef<
-    {
-      key: DragListKey;
-      group: DragListSourceGroup | null;
-      entries: { item: DragListItem; key: DragListKey; index: number }[];
-    }[]
-  >;
-  onAdd: (item: DragListItem) => void;
-} {
+): UseSourcePanelReturn {
   const ns = useNamespace('drag-list-source');
   const rootRef = ref<HTMLElement | null>(null);
 
@@ -50,7 +37,7 @@ export function useSourcePanel(
 
   const canAdd = computed(() => !props.isDisabled);
 
-  const blocks = computed(() => {
+  const blocks = computed<SourcePanelBlock[]>(() => {
     let counter = 0;
     const toEntries = (list: DragListItem[]) =>
       list.map(item => ({

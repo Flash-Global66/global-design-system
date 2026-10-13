@@ -1,16 +1,17 @@
 import { nextTick, ref, toValue } from 'vue';
-import type { MaybeRefOrGetter, Ref } from 'vue';
+import type { MaybeRefOrGetter } from 'vue';
 import type { DragListTexts } from '../types/drag-list.type';
-
-type AnnounceParams = { label?: string; position?: number; total?: number };
+import type {
+  AnnounceParams,
+  UseLiveAnnouncerReturn,
+} from '../types/engine.type';
 
 /**
  * Anunciador para lector de pantalla: interpola el texto y fuerza el re-anuncio.
  */
-export function useLiveAnnouncer(texts: MaybeRefOrGetter<DragListTexts>): {
-  message: Ref<string>;
-  announce: (key: keyof DragListTexts, params?: AnnounceParams) => void;
-} {
+export function useLiveAnnouncer(
+  texts: MaybeRefOrGetter<DragListTexts>,
+): UseLiveAnnouncerReturn {
   const message = ref('');
 
   function interpolate(template: string, params: AnnounceParams): string {

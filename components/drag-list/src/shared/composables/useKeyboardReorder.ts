@@ -1,12 +1,9 @@
 import { ref, shallowRef, toValue, triggerRef } from 'vue';
-import type { MaybeRefOrGetter, Ref } from 'vue';
+import type { DragListTexts } from '../types/drag-list.type';
 import type {
-  DragListDirection,
-  DragListItem,
-  DragListTexts,
-} from '../types/drag-list.type';
-
-type AnnounceParams = { label?: string; position?: number; total?: number };
+  UseKeyboardReorderOptions,
+  UseKeyboardReorderReturn,
+} from '../types/engine.type';
 
 const KEYS = {
   grab: [' ', 'Enter'],
@@ -19,22 +16,9 @@ const KEYS = {
 /**
  * Reordenado y quitado con teclado: tomar, mover, soltar, cancelar y quitar.
  */
-export function useKeyboardReorder(options: {
-  items: MaybeRefOrGetter<DragListItem[]>;
-  direction: MaybeRefOrGetter<DragListDirection>;
-  isOrdered: MaybeRefOrGetter<boolean>;
-  canRemove: MaybeRefOrGetter<boolean>;
-  isDisabled: MaybeRefOrGetter<boolean>;
-  onMove: (from: number, to: number) => void;
-  onRemove: (index: number) => void;
-  onAnnounce: (key: keyof DragListTexts, params?: AnnounceParams) => void;
-  getLabel?: (item: DragListItem) => string;
-}): {
-  grabbedIndex: Ref<number | null>;
-  grabbedFromIndex: Ref<number | null>;
-  focusIndex: Ref<number | null>;
-  handleKeydown: (event: KeyboardEvent, index: number) => void;
-} {
+export function useKeyboardReorder(
+  options: UseKeyboardReorderOptions,
+): UseKeyboardReorderReturn {
   const grabbedIndex = ref<number | null>(null);
   const focusIndex = shallowRef<number | null>(null);
 

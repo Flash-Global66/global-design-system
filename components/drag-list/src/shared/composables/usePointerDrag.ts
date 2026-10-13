@@ -1,15 +1,19 @@
 import { onScopeDispose, shallowRef, toValue } from 'vue';
-import type { MaybeRefOrGetter, ShallowRef } from 'vue';
 import { useEventListener, useTimeoutFn } from '@vueuse/core';
 import { DRAG_THRESHOLDS } from '../constants/drag.constant';
 import type {
-  DragListDirection,
-  DragListItem,
   DragOrigin,
   DragPoint,
   DragSession,
   DragZone,
 } from '../types/drag-list.type';
+import type {
+  DragListRect,
+  PendingDrag,
+  RectCache,
+  UsePointerDragOptions,
+  UsePointerDragReturn,
+} from '../types/engine.type';
 import {
   hasExceededDistance,
   isNonDraggableTarget,
@@ -18,30 +22,7 @@ import {
 import { calculateDropIndex } from '../utils/drop.util';
 import { resolveDropAnchor } from '../utils/zone.util';
 
-type Rect = Pick<DOMRect, 'top' | 'left' | 'width' | 'height'>;
-
-type PendingDrag = {
-  origin: DragOrigin;
-  item: DragListItem;
-  fromIndex: number;
-  start: DragPoint;
-  last: DragPoint;
-  ghostOffset: DragPoint;
-  cardSize: { width: number; height: number };
-  pointerType: string;
-};
-
-type ScrollBase = { el: HTMLElement; left: number; top: number };
-
-type RectCache = {
-  source: Rect;
-  target: Rect;
-  /** Rects de los ítems al activar; el scroll posterior se resta al leerlos. */
-  items: Rect[];
-  scrolls: ScrollBase[];
-};
-
-function toRect(el: HTMLElement): Rect {
+function toRect(el: HTMLElement): DragListRect {
   const { top, left, width, height } = el.getBoundingClientRect();
   return { top, left, width, height };
 }
@@ -56,25 +37,9 @@ function toRect(el: HTMLElement): Rect {
  * origen es la posición en la lista visible aplanada y en el destino la
  * posición en `modelValue`. Sin ítem, no hay arrastre.
  */
-export function usePointerDrag(options: {
-  sourceEl: MaybeRefOrGetter<HTMLElement | null | undefined>;
-  targetEl: MaybeRefOrGetter<HTMLElement | null | undefined>;
-  getTargetItemEls: () => HTMLElement[];
-  /** Elementos con scroll que pueden mover los ítems; por defecto los paneles. */
-  getScrollContainers?: () => (HTMLElement | null | undefined)[];
-  direction: MaybeRefOrGetter<DragListDirection>;
-  canDropToRemove: MaybeRefOrGetter<boolean>;
-  isDisabled: MaybeRefOrGetter<boolean>;
-  onDrop: (payload: {
-    origin: DragOrigin;
-    zone: Exclude<DragZone, null>;
-    fromIndex: number;
-    toIndex: number;
-    item: DragListItem;
-  }) => void;
-  onCancel: () => void;
-  resolveItem: (origin: DragOrigin, index: number) => DragListItem | null;
-}): { session: ShallowRef<DragSession | null> } {
+export function usePointerDrag(
+  options: UsePointerDragOptions,
+): UsePointerDragReturn {
   const session = shallowRef<DragSession | null>(null);
   let pending: PendingDrag | null = null;
   let cache: RectCache | null = null;
@@ -134,7 +99,7 @@ export function usePointerDrag(options: {
   }
 
   /** Rects de los ítems desplazados por el scroll ocurrido desde la activación. */
-  function getItemRects(current: RectCache): Rect[] {
+  function getItemRects(current: RectCache): DragListRect[] {
     const target = toValue(options.targetEl);
     let dx = 0;
     let dy = 0;

@@ -1,12 +1,7 @@
 import { watch } from 'vue';
-import type { Ref } from 'vue';
+import type { UseDragListFocusOptions } from '../shared/types/engine.type';
 
 const TARGET_LIST_SELECTOR = '[data-drag-target-list]';
-
-interface UseDragListFocusOptions {
-  focusIndex: Ref<number | null>;
-  targetEl: Ref<HTMLElement | null>;
-}
 
 /** Mueve el foco a la tarjeta del destino indicada por `focusIndex`. */
 export function useDragListFocus({

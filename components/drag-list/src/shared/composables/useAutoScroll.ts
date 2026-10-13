@@ -1,8 +1,7 @@
 import { toValue, watch } from 'vue';
-import type { MaybeRefOrGetter } from 'vue';
 import { useRafFn } from '@vueuse/core';
 import { DRAG_THRESHOLDS } from '../constants/drag.constant';
-import type { DragListDirection, DragPoint } from '../types/drag-list.type';
+import type { UseAutoScrollOptions } from '../types/engine.type';
 import { calculateAutoScrollDelta } from '../utils/scroll.util';
 
 /**
@@ -14,12 +13,7 @@ export function useAutoScroll({
   pointer,
   axis,
   isActive,
-}: {
-  containers: MaybeRefOrGetter<(HTMLElement | null | undefined)[]>;
-  pointer: MaybeRefOrGetter<DragPoint | null>;
-  axis: MaybeRefOrGetter<'x' | 'y' | DragListDirection>;
-  isActive: MaybeRefOrGetter<boolean>;
-}): void {
+}: UseAutoScrollOptions): void {
   function tick(): void {
     const point = toValue(pointer);
     if (!point) return;

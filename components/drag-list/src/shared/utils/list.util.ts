@@ -1,4 +1,5 @@
 import type {
+  DragListAccessor,
   DragListItem,
   DragListKey,
   DragListPreviewEntry,
@@ -7,12 +8,10 @@ import type {
   DragSession,
 } from '../types/drag-list.type';
 
-type ItemAccessor = string | ((item: DragListItem) => unknown);
-
 /** Obtiene la key de un ítem desde un campo o una función. */
 export function getItemKey(
   item: DragListItem,
-  itemKey: string | ((item: DragListItem) => DragListKey),
+  itemKey: DragListAccessor<DragListKey>,
 ): DragListKey {
   if (typeof itemKey === 'function') return itemKey(item);
   return item[itemKey] as DragListKey;
@@ -21,8 +20,8 @@ export function getItemKey(
 /** Obtiene el texto de un ítem; si no hay itemLabel usa su key como texto. */
 export function getItemLabel(
   item: DragListItem,
-  itemLabel: ItemAccessor | undefined,
-  itemKey: string | ((item: DragListItem) => DragListKey),
+  itemLabel: DragListAccessor | undefined,
+  itemKey: DragListAccessor<DragListKey>,
 ): string {
   if (typeof itemLabel === 'function') return String(itemLabel(item));
   if (typeof itemLabel === 'string') return String(item[itemLabel]);
@@ -75,7 +74,7 @@ export function isGroupedSource(
 export function getVisibleSource(params: {
   source: DragListSource;
   modelValue: DragListItem[];
-  itemKey: string | ((item: DragListItem) => DragListKey);
+  itemKey: DragListAccessor<DragListKey>;
   isRepeatable: boolean;
 }): DragListSource {
   const { source, modelValue, itemKey, isRepeatable } = params;
@@ -111,7 +110,7 @@ export function getSourceEmptyReason(params: {
 /** Devuelve las keys repetidas, cada una una sola vez. */
 export function findDuplicateKeys(
   items: DragListItem[],
-  itemKey: string | ((item: DragListItem) => DragListKey),
+  itemKey: DragListAccessor<DragListKey>,
 ): DragListKey[] {
   const seen = new Set<DragListKey>();
   const duplicates = new Set<DragListKey>();
