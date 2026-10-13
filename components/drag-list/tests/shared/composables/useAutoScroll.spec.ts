@@ -8,6 +8,14 @@ function createContainer(): HTMLElement {
   const el = document.createElement('div');
   el.scrollTop = 100;
   el.scrollLeft = 100;
+  for (const [key, value] of Object.entries({
+    scrollWidth: 900,
+    clientWidth: 300,
+    scrollHeight: 800,
+    clientHeight: 400,
+  })) {
+    Object.defineProperty(el, key, { configurable: true, value });
+  }
   el.getBoundingClientRect = (): DOMRect =>
     ({
       top: 0,
@@ -21,6 +29,20 @@ function createContainer(): HTMLElement {
       toJSON: () => ({}),
     }) as DOMRect;
   return el;
+}
+
+function mockOverflow(
+  el: HTMLElement,
+  { scrollWidth, clientWidth }: { scrollWidth: number; clientWidth: number },
+): void {
+  Object.defineProperty(el, 'scrollWidth', {
+    configurable: true,
+    value: scrollWidth,
+  });
+  Object.defineProperty(el, 'clientWidth', {
+    configurable: true,
+    value: clientWidth,
+  });
 }
 
 describe('useAutoScroll', () => {
@@ -135,5 +157,30 @@ describe('useAutoScroll', () => {
     await vi.advanceTimersByTimeAsync(50);
 
     expect(el.scrollTop).toBeLessThan(100);
+  });
+
+  it('con contenedores anidados desplaza la lista que desborda y no el wrapper', async () => {
+    const wrapper = createContainer();
+    const list = createContainer();
+    wrapper.appendChild(list);
+    document.body.appendChild(wrapper);
+    mockOverflow(wrapper, { scrollWidth: 300, clientWidth: 300 });
+    mockOverflow(list, { scrollWidth: 900, clientWidth: 300 });
+    const pointer = ref<DragPoint | null>({ x: 296, y: 200 });
+    const isActive = ref(true);
+    withSetup(() =>
+      useAutoScroll({
+        containers: [wrapper, list],
+        pointer,
+        axis: 'x',
+        isActive,
+      }),
+    );
+
+    await vi.advanceTimersByTimeAsync(50);
+
+    expect(list.scrollLeft).toBeGreaterThan(100);
+    expect(wrapper.scrollLeft).toBe(100);
+    wrapper.remove();
   });
 });

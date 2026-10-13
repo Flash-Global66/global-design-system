@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { calculateAutoScrollDelta } from '../../../src/shared/utils/scroll.util';
+import {
+  calculateAutoScrollDelta,
+  pickScrollContainer,
+} from '../../../src/shared/utils/scroll.util';
 
 const rect = { top: 100, bottom: 500, left: 100, right: 500 };
 const base = { rect, edge: 48, maxSpeed: 16 };
@@ -89,5 +92,93 @@ describe('calculateAutoScrollDelta', () => {
         axis: 'vertical',
       }),
     ).toBe(-16);
+  });
+});
+
+function box(
+  size: {
+    scrollWidth: number;
+    clientWidth: number;
+    scrollHeight?: number;
+    clientHeight?: number;
+  },
+  r = { top: 0, bottom: 400, left: 0, right: 300 },
+): HTMLElement {
+  const el = document.createElement('div');
+  for (const [key, value] of Object.entries(size)) {
+    Object.defineProperty(el, key, { configurable: true, value });
+  }
+  el.getBoundingClientRect = (): DOMRect => r as DOMRect;
+  return el;
+}
+
+describe('pickScrollContainer', () => {
+  const inside = { x: 150, y: 200 };
+  const flat = { scrollWidth: 300, clientWidth: 300 };
+  const wide = { scrollWidth: 900, clientWidth: 300 };
+
+  it('elige el más interno que puede desplazarse en x', () => {
+    const wrapper = box(wide);
+    const list = box(wide);
+    wrapper.appendChild(list);
+    expect(
+      pickScrollContainer({
+        containers: [wrapper, list],
+        pointer: inside,
+        axis: 'horizontal',
+      }),
+    ).toBe(list);
+  });
+
+  it('ignora el que no desborda aunque sea más interno', () => {
+    const wrapper = box(wide);
+    const list = box(flat);
+    wrapper.appendChild(list);
+    expect(
+      pickScrollContainer({
+        containers: [wrapper, list],
+        pointer: inside,
+        axis: 'horizontal',
+      }),
+    ).toBe(wrapper);
+  });
+
+  it('usa scrollHeight/clientHeight en vertical', () => {
+    const el = box({ ...flat, scrollHeight: 800, clientHeight: 400 });
+    expect(
+      pickScrollContainer({
+        containers: [el],
+        pointer: inside,
+        axis: 'vertical',
+      }),
+    ).toBe(el);
+    expect(
+      pickScrollContainer({
+        containers: [el],
+        pointer: inside,
+        axis: 'horizontal',
+      }),
+    ).toBeNull();
+  });
+
+  it('descarta los que no contienen al puntero y los nulos', () => {
+    const el = box(wide);
+    expect(
+      pickScrollContainer({
+        containers: [null, undefined, el],
+        pointer: { x: 900, y: 200 },
+        axis: 'horizontal',
+      }),
+    ).toBeNull();
+  });
+
+  it('devuelve null si ninguno puede desplazarse', () => {
+    expect(
+      pickScrollContainer({
+        containers: [box(flat)],
+        pointer: inside,
+        axis: 'horizontal',
+      }),
+    ).toBeNull();
   });
 });

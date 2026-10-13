@@ -80,6 +80,12 @@ export interface UseLiveAnnouncerReturn {
   announce: (key: keyof DragListTexts, params?: AnnounceParams) => void;
 }
 
+export interface PickScrollContainerOptions {
+  containers: (HTMLElement | null | undefined)[];
+  pointer: DragPoint;
+  axis: DragListDirection;
+}
+
 export interface UseAutoScrollOptions {
   containers: MaybeRefOrGetter<(HTMLElement | null | undefined)[]>;
   pointer: MaybeRefOrGetter<DragPoint | null>;
@@ -102,7 +108,7 @@ export interface UseKeyboardReorderOptions {
 export interface UseKeyboardReorderReturn {
   grabbedIndex: Ref<number | null>;
   grabbedFromIndex: Ref<number | null>;
-  focusIndex: Ref<number | null>;
+  focusIndex: ShallowRef<number | null>;
   handleKeydown: (event: KeyboardEvent, index: number) => void;
 }
 
@@ -162,7 +168,7 @@ export interface UsePointerDragReturn {
 }
 
 export interface UseDragListFocusOptions {
-  focusIndex: Ref<number | null>;
+  focusIndex: ShallowRef<number | null>;
   targetEl: Ref<HTMLElement | null>;
 }
 
@@ -181,7 +187,7 @@ export interface UseDragListReturn {
   sourceEl: Ref<HTMLElement | null>;
   targetEl: Ref<HTMLElement | null>;
   announcement: Ref<string>;
-  focusIndex: Ref<number | null>;
+  focusIndex: ShallowRef<number | null>;
   grabbedIndex: Ref<number | null>;
   handleTargetKeydown: (event: KeyboardEvent, index: number) => void;
   getSourceSlotProps: (item: DragListItem) => DragListSourceSlotProps;
