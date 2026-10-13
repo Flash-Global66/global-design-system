@@ -66,7 +66,7 @@ Restricciones que recibe todo subagente. El detalle está en `proposal.md` y `de
   - listo cuando: `useAutoScroll({ containers, pointer, axis, isActive })`: Con `useRafFn`, aplica `calculateAutoScrollDelta` en cada frame al contenedor bajo el puntero. Se pausa cuando `isActive` pasa a false o el delta es 0. El spec cubre «scroll cerca del borde» (sube `scrollTop`) y la detención.
   - commit: `feat(drag-list): auto-scroll de paneles durante el arrastre`
 
-- [ ] **8 · Teclado**
+- [x] **8 · Teclado**
   - archivos: `components/drag-list/src/shared/composables/useKeyboardReorder.ts`, `components/drag-list/tests/shared/composables/useKeyboardReorder.spec.ts`
   - depende de: 2
   - listo cuando: `useKeyboardReorder({ items, direction, isOrdered, canRemove, isDisabled, onMove, onRemove, onAnnounce })` expone `handleKeydown(event, index)`, `grabbedIndex` y `focusIndex`. **Tomar y mover:** `Espacio` o `Enter` toma la tarjeta, solo con `isOrdered`. `↑`/`↓` mueven en vertical y `←`/`→` en horizontal. `Espacio` o `Enter` suelta y llama una sola vez a `onMove(from, to)` si cambió de posición. `Esc` restaura sin llamar. **Quitar:** `Supr` o `Retroceso` llaman a `onRemove(index)` solo con `canRemove` y sin tarjeta tomada. **Foco:** `focusIndex` queda en la tarjeta movida, o en la siguiente después de quitar. **Spec:** Del foco en `A` dentro de `[A, B, C]`, la secuencia `Espacio` → `↓` → `↓` → `Espacio` da `onMove(0, 2)`. Esc no emite. Con y sin `canRemove`. La independencia de `dragToRemove` se resuelve en la tarea 9.
