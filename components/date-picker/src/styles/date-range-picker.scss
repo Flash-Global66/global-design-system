@@ -97,7 +97,7 @@
   @media (max-width: 640px) {
     &,
     &.has-sidebar {
-      width: calc(100vw - 32px);
+      width: 100%;
       max-width: 100%;
     }
 

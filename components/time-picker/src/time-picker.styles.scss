@@ -48,6 +48,12 @@
   padding: 0 !important;
 }
 
+@media (max-width: 640px) {
+  .gui-picker__popper.gui-popper__tooltip:has(.gui-date-range-picker) {
+    width: calc(100% - 32px) !important;
+  }
+}
+
 .gui-date-editor--timerange .gui-input__label,
 .gui-date-editor--daterange .gui-input__label,
 .gui-date-editor--monthrange .gui-input__label,
