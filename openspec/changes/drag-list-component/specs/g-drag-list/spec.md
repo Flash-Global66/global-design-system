@@ -173,7 +173,7 @@ El cálculo del índice de inserción SHALL usar el eje de `direction`.
 
 ### Requirement: Quitar arrastrando de vuelta al origen
 
-Con `dragToRemove` en `true` (el default), soltar una tarjeta del destino dentro del panel de origen SHALL quitarla y emitir `remove(item, index, 'drag')`. El panel de origen completo SHALL ser la zona de quitar. Soltar fuera del origen y del destino SHALL cancelar la operación sin cambios. Con `dragToRemove` en `false`, el origen no SHALL ser zona de destino para tarjetas del destino. La función `remove` del slot y el método expuesto `remove(key)` SHALL funcionar siempre.
+Con `dragToRemove` en `true` (el default), soltar una tarjeta del destino dentro del panel de origen SHALL quitarla y emitir `remove(item, index, 'drag')`. El panel de origen completo SHALL ser la zona de quitar. La zona SHALL decidirla el centro del ghost; si el centro queda fuera de las dos zonas, SHALL decidirla el puntero. Soltar fuera del origen y del destino SHALL cancelar la operación sin cambios. Con `dragToRemove` en `false`, el origen no SHALL ser zona de destino para tarjetas del destino. La función `remove` del slot y el método expuesto `remove(key)` SHALL funcionar siempre.
 
 #### Scenario: Quitar arrastrando
 
@@ -198,6 +198,12 @@ Con `dragToRemove` en `true` (el default), soltar una tarjeta del destino dentro
 - **GIVEN** un arrastre desde el destino con el puntero sobre el origen y el centro del ghost todavía sobre el destino
 - **WHEN** el usuario suelta
 - **THEN** la operación se resuelve como un reordenamiento en el destino, no como quitar
+
+#### Scenario: Con una tarjeta más ancha que la zona, decide el puntero
+
+- **GIVEN** un arrastre desde el origen con una tarjeta más ancha que el destino, con el puntero dentro del destino y el centro del ghost fuera de las dos zonas
+- **WHEN** el usuario suelta
+- **THEN** el elemento se agrega al destino, en la posición que indica el puntero
 
 ### Requirement: Overlays de ayuda durante el arrastre
 

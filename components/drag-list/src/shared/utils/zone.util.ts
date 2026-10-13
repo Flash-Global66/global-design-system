@@ -44,3 +44,31 @@ export function resolveDragZone({
   }
   return null;
 }
+
+/**
+ * Zona de soltado y punto que la decide. Manda el centro del ghost; si cae
+ * fuera de las dos zonas, decide el puntero, para que una tarjeta más ancha
+ * que la zona igual pueda soltarse con el puntero adentro.
+ */
+export function resolveDropAnchor({
+  center,
+  pointer,
+  sourceRect,
+  targetRect,
+  origin,
+  canDropToRemove,
+}: {
+  center: DragPoint;
+  pointer: DragPoint;
+  sourceRect: ZoneRect;
+  targetRect: ZoneRect;
+  origin: DragOrigin;
+  canDropToRemove: boolean;
+}): { zone: DragZone; anchor: DragPoint } {
+  const zones = { sourceRect, targetRect, origin, canDropToRemove };
+  const centerZone = resolveDragZone({ center, ...zones });
+  if (centerZone) return { zone: centerZone, anchor: center };
+  const pointerZone = resolveDragZone({ center: pointer, ...zones });
+  if (pointerZone) return { zone: pointerZone, anchor: pointer };
+  return { zone: null, anchor: center };
+}

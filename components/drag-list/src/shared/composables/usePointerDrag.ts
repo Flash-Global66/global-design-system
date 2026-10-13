@@ -16,7 +16,7 @@ import {
   isTouchMoveWithinTolerance,
 } from '../utils/activation.util';
 import { calculateDropIndex } from '../utils/drop.util';
-import { resolveDragZone } from '../utils/zone.util';
+import { resolveDropAnchor } from '../utils/zone.util';
 
 type Rect = Pick<DOMRect, 'top' | 'left' | 'width' | 'height'>;
 
@@ -122,16 +122,18 @@ export function usePointerDrag(options: {
     let zone: DragZone = null;
     let dropIndex: number | null = null;
     if (rects) {
-      zone = resolveDragZone({
+      const drop = resolveDropAnchor({
         center,
+        pointer: point,
         sourceRect: rects.source,
         targetRect: rects.target,
         origin: pending.origin,
         canDropToRemove: toValue(options.canDropToRemove),
       });
+      zone = drop.zone;
       if (zone === 'target') {
         dropIndex = calculateDropIndex({
-          point: center,
+          point: drop.anchor,
           rects: rects.items,
           axis: toValue(options.direction) === 'horizontal' ? 'x' : 'y',
           draggedIndex: pending.origin === 'target' ? pending.fromIndex : null,

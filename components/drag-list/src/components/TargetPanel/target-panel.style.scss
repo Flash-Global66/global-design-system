@@ -24,7 +24,7 @@
 
   @include m("horizontal") {
     @include e("list") {
-      @apply flex-row items-center overflow-x-auto;
+      @apply flex-row items-center gap-xs overflow-x-auto;
     }
   }
 
