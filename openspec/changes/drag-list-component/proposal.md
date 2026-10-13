@@ -84,30 +84,30 @@ Un paquete nuevo, `@flash-global66/g-drag-list`, con el componente `GDragList`.
 
 **Props**
 
-| Prop | Tipo | Default | Notas |
-|---|---|---|---|
-| `modelValue` | `T[]` | `[]` | El destino. En modo ordenado, el orden del arreglo **es** el orden del flujo. |
-| `source` | `T[] \| SourceGroup<T>[]` | `[]` | `SourceGroup = { key, label?, items }`. El consumidor lo entrega ya filtrado por su buscador. |
-| `itemKey` | `string \| (item: T) => PropertyKey` | — (obligatoria) | Identidad del elemento. Se usa para ocultar lo ya agregado y para el `key` de Vue. |
-| `itemLabel` | `string \| (item: T) => string` | valor de `itemKey` | Nombre accesible del elemento, que se usa en los anuncios para lector de pantalla. |
-| `texts` | `Partial<DragListTexts>` | — | Sobrescribe los textos por defecto en español: overlays, anuncios y etiquetas. |
-| `ordered` | `boolean` | `false` | Activa la numeración, el reordenamiento, los conectores y los nodos de inicio y fin. |
-| `repeatable` | `boolean` | `false` | En `false` (uso único), el componente **no dibuja** en el origen los elementos cuyo `itemKey` ya está en `modelValue`. |
-| `cloneItem` | `(item: T) => T` | — | Obligatoria si `repeatable` es `true`. Genera una instancia con `itemKey` propio. En desarrollo se avisa por consola si hay keys duplicadas. |
-| `dragToRemove` | `boolean` | `true` | Permite quitar arrastrando una tarjeta del destino al origen. |
-| `keyboardRemove` | `boolean` | `false` | Permite quitar la tarjeta enfocada con `Supr` o `Retroceso`. Es opt-in para evitar borrados por una tecla presionada por error. Es independiente de `dragToRemove`. |
-| `direction` | `'vertical' \| 'horizontal'` | `'vertical'` | Con `vertical`, los paneles van lado a lado y el flujo baja. Con `horizontal`, los paneles van apilados y el flujo va de izquierda a derecha. |
-| `startNode` / `endNode` | `string` | — | Texto de la pill de inicio o de fin. Los slots `#start` / `#end` la reemplazan. Solo aplican con `ordered`. |
-| `disabled` | `boolean` | `false` | Bloquea arrastrar, agregar, quitar y mover. |
+| Prop                    | Tipo                                 | Default            | Notas                                                                                                                                                               |
+| ----------------------- | ------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `modelValue`            | `T[]`                                | `[]`               | El destino. En modo ordenado, el orden del arreglo **es** el orden del flujo.                                                                                       |
+| `source`                | `T[] \| SourceGroup<T>[]`            | `[]`               | `SourceGroup = { key, label?, items }`. El consumidor lo entrega ya filtrado por su buscador.                                                                       |
+| `itemKey`               | `string \| (item: T) => PropertyKey` | — (obligatoria)    | Identidad del elemento. Se usa para ocultar lo ya agregado y para el `key` de Vue.                                                                                  |
+| `itemLabel`             | `string \| (item: T) => string`      | valor de `itemKey` | Nombre accesible del elemento, que se usa en los anuncios para lector de pantalla.                                                                                  |
+| `texts`                 | `Partial<DragListTexts>`             | —                  | Sobrescribe los textos por defecto en español: overlays, anuncios y etiquetas.                                                                                      |
+| `ordered`               | `boolean`                            | `false`            | Activa la numeración, el reordenamiento, los conectores y los nodos de inicio y fin.                                                                                |
+| `repeatable`            | `boolean`                            | `false`            | En `false` (uso único), el componente **no dibuja** en el origen los elementos cuyo `itemKey` ya está en `modelValue`.                                              |
+| `cloneItem`             | `(item: T) => T`                     | —                  | Obligatoria si `repeatable` es `true`. Genera una instancia con `itemKey` propio. En desarrollo se avisa por consola si hay keys duplicadas.                        |
+| `dragToRemove`          | `boolean`                            | `true`             | Permite quitar arrastrando una tarjeta del destino al origen.                                                                                                       |
+| `keyboardRemove`        | `boolean`                            | `false`            | Permite quitar la tarjeta enfocada con `Supr` o `Retroceso`. Es opt-in para evitar borrados por una tecla presionada por error. Es independiente de `dragToRemove`. |
+| `direction`             | `'vertical' \| 'horizontal'`         | `'vertical'`       | Con `vertical`, los paneles van lado a lado y el flujo baja. Con `horizontal`, los paneles van apilados y el flujo va de izquierda a derecha.                       |
+| `startNode` / `endNode` | `string`                             | —                  | Texto de la pill de inicio o de fin. Los slots `#start` / `#end` la reemplazan. Solo aplican con `ordered`.                                                         |
+| `disabled`              | `boolean`                            | `false`            | Bloquea arrastrar, agregar, quitar y mover.                                                                                                                         |
 
 **Emits** (en kebab-case, como `drag-tag` y `action-click`):
 
-| Emit | Payload |
-|---|---|
-| `update:modelValue` | `(items: T[])` |
-| `add` | `(item: T, index: number, via: 'drag' \| 'button' \| 'api')` |
-| `remove` | `(item: T, index: number, via: 'drag' \| 'button' \| 'keyboard' \| 'api')` |
-| `reorder` | `(item: T, from: number, to: number)` |
+| Emit                | Payload                                                                    |
+| ------------------- | -------------------------------------------------------------------------- |
+| `update:modelValue` | `(items: T[])`                                                             |
+| `add`               | `(item: T, index: number, via: 'drag' \| 'button' \| 'api')`               |
+| `remove`            | `(item: T, index: number, via: 'drag' \| 'button' \| 'keyboard' \| 'api')` |
+| `reorder`           | `(item: T, from: number, to: number)`                                      |
 
 **Expuesto por `ref`:** `add(item, index?)`, `remove(key)` y `move(from, to)`.
 
@@ -126,10 +126,10 @@ Un paquete nuevo, `@flash-global66/g-drag-list`, con el componente `GDragList`.
 
 - **Zonas excluyentes.** Las tres zonas no se superponen, porque los paneles son hermanos en un layout flex/grid sin solapamiento:
 
-  | Zona | Qué pasa al soltar |
-  |---|---|
-  | Destino | Inserta o reordena |
-  | Origen | Quita (solo con `dragToRemove`) |
+  | Zona           | Qué pasa al soltar                        |
+  | -------------- | ----------------------------------------- |
+  | Destino        | Inserta o reordena                        |
+  | Origen         | Quita (solo con `dragToRemove`)           |
   | Fuera de ambas | Cancela: la tarjeta vuelve a donde estaba |
 
 - **El origen entero es la zona de quitar.** Mientras se arrastra desde el destino, todo el panel de origen es un único blanco grande (ver «Overlays»). No hay que apuntar entre elementos, así que el margen de acción no depende del tamaño de las tarjetas.
@@ -137,16 +137,16 @@ Un paquete nuevo, `@flash-global66/g-drag-list`, con el componente `GDragList`.
 - **Pantallas chicas** (`direction="horizontal"`, con el origen arriba):
   - La zona de quitar mide al menos 48 px de alto aunque el origen tenga scroll.
   - El auto-scroll de los contenedores se activa cerca de sus bordes.
-- **Soltar fuera de las dos zonas cancela**, así que un arrastre interrumpido nunca borra nada. Para quitar hay que soltar *dentro* del origen.
+- **Soltar fuera de las dos zonas cancela**, así que un arrastre interrumpido nunca borra nada. Para quitar hay que soltar _dentro_ del origen.
 - **Siempre hay alternativa sin arrastrar** (WCAG 2.5.7): `remove` en el slot. El consumidor puede apagar el gesto con `:drag-to-remove="false"`.
 
 ### Overlays de ayuda durante el arrastre
 
-| Arrastre desde | Overlay en | Texto (default de `texts.constant.ts`) | Ícono |
-|---|---|---|---|
-| Origen | Destino | «Arrastra aquí para agregar» | `regular plus` |
-| Destino (con `dragToRemove`) | Origen | «Arrastra aquí para eliminar» | `regular trash` |
-| Destino (reordenar) | — | Sin overlay: el placeholder ya indica dónde cae | — |
+| Arrastre desde               | Overlay en | Texto (default de `texts.constant.ts`)          | Ícono           |
+| ---------------------------- | ---------- | ----------------------------------------------- | --------------- |
+| Origen                       | Destino    | «Arrastra aquí para agregar»                    | `regular plus`  |
+| Destino (con `dragToRemove`) | Origen     | «Arrastra aquí para eliminar»                   | `regular trash` |
+| Destino (reordenar)          | —          | Sin overlay: el placeholder ya indica dónde cae | —               |
 
 - **Ciclo de vida:** el overlay aparece al **activarse** el arrastre (no con el primer `pointerdown`, para no parpadear con un click). Se oculta mientras el elemento está dentro de su zona y vuelve a aparecer si sale. Al terminar o cancelar el arrastre, se quita.
 - **No interfiere con el arrastre:**
@@ -164,25 +164,25 @@ Un paquete nuevo, `@flash-global66/g-drag-list`, con el componente `GDragList`.
 
 **Decidido:** un motor chico en TypeScript sobre Pointer Events, a la medida de este componente. SortableJS se usa como **referencia de comportamiento**, no como código a copiar:
 
-| | Copiar SortableJS | Motor propio |
-|---|---|---|
-| Tamaño a mantener | Miles de líneas de JS en estilo ES5, con plugins (MultiDrag, Swap, OnSpill) y parches para navegadores viejos que no necesitamos. | Unas 500-700 líneas de TypeScript, solo con los casos que usamos. |
-| Convivencia con Vue | **Mueve nodos del DOM por su cuenta**. Hay que revertir cada movimiento para que Vue no se desincronice. | El arrastre solo calcula estado (`dragging`, `activeZone`, `dropIndex`) y **Vue dibuja el placeholder**. No hay dos dueños del DOM. |
-| Tests | Difícil de testear de forma unitaria. | El cálculo del índice de inserción, los umbrales, la velocidad de auto-scroll y la resolución de zona son funciones puras. Encaja con la política UNIT-ONLY y con TDD estricto. |
-| Licencia y origen | MIT: obliga a conservar el aviso de copyright, y dejamos de recibir los arreglos del upstream. | Código 100% propio. |
-| Costo | Inicial bajo, mantenimiento alto. | Inicial mayor: hay que resolver touch e iOS (ver riesgos). |
+|                     | Copiar SortableJS                                                                                                                 | Motor propio                                                                                                                                                                    |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tamaño a mantener   | Miles de líneas de JS en estilo ES5, con plugins (MultiDrag, Swap, OnSpill) y parches para navegadores viejos que no necesitamos. | Unas 500-700 líneas de TypeScript, solo con los casos que usamos.                                                                                                               |
+| Convivencia con Vue | **Mueve nodos del DOM por su cuenta**. Hay que revertir cada movimiento para que Vue no se desincronice.                          | El arrastre solo calcula estado (`dragging`, `activeZone`, `dropIndex`) y **Vue dibuja el placeholder**. No hay dos dueños del DOM.                                             |
+| Tests               | Difícil de testear de forma unitaria.                                                                                             | El cálculo del índice de inserción, los umbrales, la velocidad de auto-scroll y la resolución de zona son funciones puras. Encaja con la política UNIT-ONLY y con TDD estricto. |
+| Licencia y origen   | MIT: obliga a conservar el aviso de copyright, y dejamos de recibir los arreglos del upstream.                                    | Código 100% propio.                                                                                                                                                             |
+| Costo               | Inicial bajo, mantenimiento alto.                                                                                                 | Inicial mayor: hay que resolver touch e iOS (ver riesgos).                                                                                                                      |
 
 **Qué se toma de SortableJS**, reescrito como composables de Vue 3:
 
-| Concepto de SortableJS | En `GDragList` |
-|---|---|
-| `group: { pull: 'clone', put: false }` | El origen nunca recibe tarjetas (salvo para quitar) y no pierde la suya al arrastrarla: es un clon. |
-| `swapThreshold` / `invertSwap` | Umbral de inserción por punto medio, en el eje de `direction`. Evita que el placeholder salte de un lado a otro. |
-| `delayOnTouchOnly` + `touchStartThreshold` | Long-press solo en touch, con tolerancia de movimiento. |
-| `fallbackTolerance` | Umbral de 4 px para mouse y lápiz. |
-| `filter` / `preventOnFilter` | Exclusión de `button, a, input, [data-no-drag]`. |
-| AutoScroll (`scrollSensitivity`, `scrollSpeed`) | `useAutoScroll`, con velocidad proporcional a la cercanía al borde. |
-| `ghostClass` / `chosenClass` / `dragClass` | Modificadores BEM (`is-dragging`, `is-placeholder`, `is-active-zone`). |
+| Concepto de SortableJS                          | En `GDragList`                                                                                                   |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `group: { pull: 'clone', put: false }`          | El origen nunca recibe tarjetas (salvo para quitar) y no pierde la suya al arrastrarla: es un clon.              |
+| `swapThreshold` / `invertSwap`                  | Umbral de inserción por punto medio, en el eje de `direction`. Evita que el placeholder salte de un lado a otro. |
+| `delayOnTouchOnly` + `touchStartThreshold`      | Long-press solo en touch, con tolerancia de movimiento.                                                          |
+| `fallbackTolerance`                             | Umbral de 4 px para mouse y lápiz.                                                                               |
+| `filter` / `preventOnFilter`                    | Exclusión de `button, a, input, [data-no-drag]`.                                                                 |
+| AutoScroll (`scrollSensitivity`, `scrollSpeed`) | `useAutoScroll`, con velocidad proporcional a la cercanía al borde.                                              |
+| `ghostClass` / `chosenClass` / `dragClass`      | Modificadores BEM (`is-dragging`, `is-placeholder`, `is-active-zone`).                                           |
 
 Como se reimplementan las ideas y no se copia código, no hace falta arrastrar el aviso MIT. Igual se le da crédito a SortableJS como inspiración en la documentación del paquete.
 
@@ -230,13 +230,13 @@ Qué cubre el motor:
 
 ### Accesibilidad (WCAG 2.2 AA)
 
-| Criterio | Cómo se cumple |
-|---|---|
-| **2.5.7 Dragging Movements** | Alternativa de un solo toque para todo lo que se hace arrastrando: `add`, `remove`, `moveUp` y `moveDown`. |
-| **2.1.1 Keyboard** | El modo teclado descrito arriba. |
-| **4.1.3 Status Messages** | Un `aria-live="polite"` anuncia lo que pasa: «Sofia Morales agregado en posición 2 de 3», «movido a posición 1», «quitado». Los textos son defaults del paquete, sobrescribibles con `texts`, y el label de cada ítem sale de `itemLabel`. |
-| **1.3.1 Info and Relationships** | El destino es `<ol>` en modo ordenado y `<ul>` en modo simple. Los conectores llevan `aria-hidden`. |
-| **2.5.8 Target Size / 2.4.7 Focus Visible** | Las áreas de interacción del componente miden al menos 24×24 px y el foco se ve con los tokens del DS. |
+| Criterio                                    | Cómo se cumple                                                                                                                                                                                                                             |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **2.5.7 Dragging Movements**                | Alternativa de un solo toque para todo lo que se hace arrastrando: `add`, `remove`, `moveUp` y `moveDown`.                                                                                                                                 |
+| **2.1.1 Keyboard**                          | El modo teclado descrito arriba.                                                                                                                                                                                                           |
+| **4.1.3 Status Messages**                   | Un `aria-live="polite"` anuncia lo que pasa: «Sofia Morales agregado en posición 2 de 3», «movido a posición 1», «quitado». Los textos son defaults del paquete, sobrescribibles con `texts`, y el label de cada ítem sale de `itemLabel`. |
+| **1.3.1 Info and Relationships**            | El destino es `<ol>` en modo ordenado y `<ul>` en modo simple. Los conectores llevan `aria-hidden`.                                                                                                                                        |
+| **2.5.8 Target Size / 2.4.7 Focus Visible** | Las áreas de interacción del componente miden al menos 24×24 px y el foco se ve con los tokens del DS.                                                                                                                                     |
 
 ### Estructura (arquetipo complejo)
 
@@ -287,18 +287,21 @@ zsh -lic 'nvm use 20.19.3 && export GBP_PACKAGE_TOKEN=${GBP_PACKAGE_TOKEN:-dummy
 
 → exit 0.
 
-| Qué mide | Comando | Resultado esperado |
-|---|---|---|
-| archivos de spec del paquete | `npx vitest run --project unit components/drag-list` | `Test Files` ≥ 17 passed y 0 failed. **Provisional**: es la suma de los spec que declaran las tareas, y la ronda 1 del verify la reemplaza por el número real |
-| suite completa sin regresiones | `npx vitest run --project unit` | 0 failed |
-| typecheck del paquete | `npx vue-tsc --noEmit -p components/drag-list/tsconfig.json` | exit 0 |
-| lint de lo tocado | `npx eslint components/drag-list stories/drag-list.stories.ts --ext .vue,.ts --max-warnings 0` | exit 0 |
-| líneas de violación de arquitectura del paquete | `node scripts/check-architecture.mjs \| grep -c drag-list` | `0` (línea base medida: `0`) |
-| SCSS publicado | `node scripts/check-styles.mjs` | exit 0 después del install. La cantidad de paquetes que compilan sube en 1 respecto de la línea base post-install |
-| dependencias fuera de lo permitido (cantidad de nombres) | `node -e "const p=require('./components/drag-list/package.json');console.log(Object.keys({...p.dependencies,...p.peerDependencies}).filter(n=>n!=='vue'&&n!=='@vueuse/core'&&!n.startsWith('@flash-global66/g-')).length)"` | `0` |
-| líneas con «sortable» en el lockfile | `grep -ci sortable yarn.lock` | `0` (línea base medida: `0`) |
-| archivos tocados fuera del change | `git diff --name-only 93d2d0a4 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' \| wc -l` | `0` |
-| sin bump manual (archivos) | `git diff --name-only 93d2d0a4 -- 'components/*/CHANGELOG.md' \| wc -l` | `0` |
+| Qué mide                                                                            | Comando                                                                                                                                                                                                                                        | Resultado esperado                                                                                                                                            |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ------------------------------------------------------------------------------------------- |
+| archivos de spec del paquete                                                        | `npx vitest run --project unit components/drag-list`                                                                                                                                                                                           | `Test Files` ≥ 17 passed y 0 failed. **Provisional**: es la suma de los spec que declaran las tareas, y la ronda 1 del verify la reemplaza por el número real |
+| suite completa sin regresiones                                                      | `npx vitest run --project unit`                                                                                                                                                                                                                | 0 failed                                                                                                                                                      |
+| typecheck del paquete                                                               | `npx vue-tsc --noEmit -p components/drag-list/tsconfig.json`                                                                                                                                                                                   | exit 0                                                                                                                                                        |
+| lint de lo tocado                                                                   | `npx eslint components/drag-list stories/drag-list.stories.ts --ext .vue,.ts --max-warnings 0`                                                                                                                                                 | exit 0                                                                                                                                                        |
+| líneas de violación de arquitectura del paquete                                     | `node scripts/check-architecture.mjs \| grep -c drag-list`                                                                                                                                                                                     | `0` (línea base medida: `0`)                                                                                                                                  |
+| SCSS publicado                                                                      | `node scripts/check-styles.mjs`                                                                                                                                                                                                                | exit 0 después del install. La cantidad de paquetes que compilan sube en 1 respecto de la línea base post-install                                             |
+| dependencias fuera de lo permitido (cantidad de nombres)                            | `node -e "const p=require('./components/drag-list/package.json');console.log(Object.keys({...p.dependencies,...p.peerDependencies}).filter(n=>n!=='vue'&&n!=='@vueuse/core'&&!n.startsWith('@flash-global66/g-')).length)"`                    | `0`                                                                                                                                                           |
+| líneas con «sortable» en el lockfile                                                | `grep -ci sortable yarn.lock`                                                                                                                                                                                                                  | `0` (línea base medida: `0`)                                                                                                                                  |
+| archivos tocados fuera del change (salvo el registro de estilos)                    | `git diff --name-only 93d2d0a4 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' ':!assets/scss/index.scss' \| wc -l`                                                      | `0`                                                                                                                                                           |
+| líneas cambiadas en el registro de estilos                                          | `git diff 93d2d0a4 -- assets/scss/index.scss \| grep -c '^[+-][^+-]'`                                                                                                                                                                          | `1`: solo la línea agregada `@use "@flash-global66/g-drag-list/styles.scss" as *;`, que check-styles exige para registrar el paquete (ronda 1 del verify)     |
+| movimiento reducido en el estilo raíz (archivos)                                    | `grep -l 'prefers-reduced-motion' components/drag-list/src/DragList/drag-list.style.scss components/drag-list/src/components/DragGhost/drag-ghost.style.scss components/drag-list/src/components/DropOverlay/drop-overlay.style.scss \| wc -l` | `3`: el raíz, el ghost (vive fuera del bloque raíz por el teleport) y el overlay                                                                              |
+| `index.vue` raíz sin lógica (líneas del script con `computed(`, `function ` o `=>`) | `awk '/<script/,/<\/script>/' components/drag-list/src/DragList/index.vue \| grep -cE 'computed\(                                                                                                                                              | function                                                                                                                                                      | =>'` | `0` (en la ronda 1 daba `4`: `getKey`, `rootClass` y los dos envoltorios de `defineExpose`) |
+| sin bump manual (archivos)                                                          | `git diff --name-only 93d2d0a4 -- 'components/*/CHANGELOG.md' \| wc -l`                                                                                                                                                                        | `0`                                                                                                                                                           |
 
 **Criterio del cambio entero.** Se verifica con browser-verify sobre Storybook (`yarn storybook`, story «Flujo con fin»):
 
