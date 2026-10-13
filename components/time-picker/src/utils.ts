@@ -96,8 +96,6 @@ export const dayOrDaysToDate = (dayOrDays: DayOrDays): DateOrDates => {
     : dayOrDays.toDate();
 };
 
-const MIN_RANGE_INPUT_CHARS = 8;
-
 export interface ShouldOpenPickerFromTriggerParams {
   targetTagName: string | undefined;
   isFocused: boolean;
@@ -122,23 +120,4 @@ export function getRangeInputMode({
   isCoarsePointer,
 }: GetRangeInputModeParams): 'none' | undefined {
   return openOnInputClick && isCoarsePointer ? 'none' : undefined;
-}
-
-export interface GetRangeInputCharsParams {
-  format: string | undefined;
-  startPlaceholder: string | undefined;
-  endPlaceholder: string | undefined;
-}
-
-export function getRangeInputChars({
-  format,
-  startPlaceholder,
-  endPlaceholder,
-}: GetRangeInputCharsParams): number {
-  return Math.max(
-    format?.length ?? 0,
-    startPlaceholder?.trim().length ?? 0,
-    endPlaceholder?.trim().length ?? 0,
-    MIN_RANGE_INPUT_CHARS,
-  );
 }
