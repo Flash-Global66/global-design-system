@@ -5,8 +5,6 @@ export const DRAG_THRESHOLDS = {
   touchDelay: 200,
   /** Tolerancia de movimiento (px) durante el long-press antes de cancelar. */
   touchTolerance: 8,
-  /** Tamaño mínimo (px) de una zona de drop. */
-  minZoneSize: 48,
   /** Distancia (px) al borde del panel que dispara el auto-scroll. */
   autoScrollEdge: 48,
   /** Velocidad máxima (px por frame) del auto-scroll. */
