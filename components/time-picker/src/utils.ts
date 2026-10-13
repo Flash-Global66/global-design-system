@@ -121,3 +121,21 @@ export function getRangeInputMode({
 }: GetRangeInputModeParams): 'none' | undefined {
   return openOnInputClick && isCoarsePointer ? 'none' : undefined;
 }
+
+const RANGE_PANEL_MIN_HEIGHT = 240;
+const RANGE_PANEL_VIEWPORT_MARGIN = 24;
+
+export interface GetRangePanelMaxHeightParams {
+  referenceBottom: number;
+  viewportHeight: number;
+}
+
+export function getRangePanelMaxHeight({
+  referenceBottom,
+  viewportHeight,
+}: GetRangePanelMaxHeightParams): number {
+  return Math.max(
+    Math.floor(viewportHeight - referenceBottom - RANGE_PANEL_VIEWPORT_MARGIN),
+    RANGE_PANEL_MIN_HEIGHT,
+  );
+}

@@ -120,7 +120,10 @@
     }
 
     .#{$namespace}-picker-panel__body-wrapper {
-      max-height: calc(100dvh - 96px);
+      max-height: var(
+        --#{$namespace}-range-panel-max-height,
+        calc(100dvh - 96px)
+      );
       overflow-y: auto;
       overscroll-behavior: contain;
     }

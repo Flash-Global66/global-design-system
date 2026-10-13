@@ -10,6 +10,7 @@
     teleported
     :transition="`${nsDate.namespace.value}-zoom-in-top`"
     :popper-class="[`${nsDate.namespace.value}-picker__popper`]"
+    :popper-style="popperStyle"
     :popper-options="elPopperOptions"
     :fallback-placements="fallbackPlacements"
     :gpu-acceleration="false"
@@ -195,6 +196,7 @@ import {
   dayOrDaysToDate,
   formatter,
   getRangeInputMode,
+  getRangePanelMaxHeight,
   parseDate,
   shouldOpenPickerFromTrigger,
   valueEquals,
@@ -408,7 +410,27 @@ const onPanelEscape = (event: KeyboardEvent) => {
   pickerVisible.value = false;
 };
 
+const rangePanelMaxHeight = ref<number>();
+
+const popperStyle = computed(() =>
+  rangePanelMaxHeight.value === undefined
+    ? undefined
+    : {
+        [`--${nsDate.namespace.value}-range-panel-max-height`]: `${rangePanelMaxHeight.value}px`,
+      },
+);
+
+const updateRangePanelMaxHeight = () => {
+  const referenceEl = unrefElement(inputRef as Ref<ComponentPublicInstance>);
+  if (!referenceEl) return;
+  rangePanelMaxHeight.value = getRangePanelMaxHeight({
+    referenceBottom: referenceEl.getBoundingClientRect().bottom,
+    viewportHeight: window.innerHeight,
+  });
+};
+
 const onBeforeShow = () => {
+  updateRangePanelMaxHeight();
   pickerActualVisible.value = true;
 };
 
