@@ -85,7 +85,9 @@
     line-height: #{map.get($input-height, "default") - 2};
     margin: 0;
     padding: 0;
-    width: 39%;
+    flex: 0 1 auto;
+    min-width: 0;
+    width: calc(var(--#{$namespace}-range-input-chars, 10) * 1ch);
     text-align: center;
     font-size: getCssVar("font-size", "base");
     color: getCssVar("text-color", "regular");
@@ -97,19 +99,25 @@
   }
 
   .#{$namespace}-range-separator {
-    flex: 1;
+    flex: none;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding: 0 5px;
+    padding: 0 8px;
     margin: 0;
     font-size: 14px;
     overflow-wrap: break-word;
     color: getCssVar("text-color", "primary");
   }
 
+  .#{$namespace}-range__icon {
+    padding-right: 8px;
+  }
+
   .#{$namespace}-range__close-icon {
+    margin-left: auto;
+
     &--hidden {
       opacity: 0;
       visibility: hidden;
