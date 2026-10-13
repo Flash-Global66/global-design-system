@@ -11,6 +11,9 @@
 
 @include b("drag-list") {
   @apply flex gap-md;
+  --gui-drag-list-zone-min-height: calc(
+    2 * theme("spacing.md") + theme("fontSize.5.1") + theme("spacing.xs") + theme("fontSize.2.1")
+  );
 
   @include m("vertical") {
     @apply flex-row items-start;
@@ -21,12 +24,13 @@
   }
 
   @include e("source") {
-    @apply relative min-w-0;
-    min-height: 48px;
+    @apply relative flex min-w-0 flex-col;
+    min-height: var(--gui-drag-list-zone-min-height);
   }
 
   @include e("target") {
-    @apply relative min-w-0 flex-1;
+    @apply relative flex min-w-0 flex-1 flex-col;
+    min-height: var(--gui-drag-list-zone-min-height);
   }
 
   @include m("vertical") {

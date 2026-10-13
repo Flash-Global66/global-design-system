@@ -4,7 +4,7 @@
 @use "@flash-global66/g-utils/tokens" as *;
 
 @include b("drag-list-target") {
-  @apply relative flex flex-col gap-sm;
+  @apply relative flex flex-1 flex-col gap-sm;
   touch-action: manipulation;
 
   @include e("list") {

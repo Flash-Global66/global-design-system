@@ -4,7 +4,7 @@
 @use "@flash-global66/g-utils/tokens" as *;
 
 @include b("drag-list-overlay") {
-  @apply absolute inset-0 z-10 flex flex-col items-center justify-center gap-xs rounded-md border-2 border-dashed text-2 font-semibold;
+  @apply absolute inset-0 z-10 flex flex-col items-center justify-center gap-xs rounded-md border-2 border-dashed p-md text-center text-2 font-semibold;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s ease;
