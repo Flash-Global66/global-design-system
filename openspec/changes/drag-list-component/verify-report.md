@@ -2,7 +2,7 @@
 
 ```yaml
 veredicto: pasa
-ronda: 5
+ronda: 6
 fecha: 2026-10-13
 tareas_a_medias: []
 cumplidas: 14/14
@@ -18,12 +18,12 @@ comandos:
   - cmd: npx vitest run --project unit components/drag-list
     exit: 0
     esperado: 'Test Files ≥ 17 passed y 0 failed (provisional)'
-    obtenido: '19 passed (19) · 187 tests passed (ronda 4: 178)'
+    obtenido: '19 passed (19) · 193 tests passed (ronda 5: 187; +1 en useAutoScroll.spec, +5 en scroll.util.spec)'
     coincide: true
   - cmd: npx vitest run --project unit
     exit: 0
     esperado: '0 failed'
-    obtenido: '98 archivos passed · 799 tests passed · 0 failed'
+    obtenido: '98 archivos passed · 805 tests passed · 0 failed'
     coincide: true
   - cmd: npx vue-tsc --noEmit -p components/drag-list/tsconfig.json
     exit: 0
@@ -83,97 +83,81 @@ comandos:
   - cmd: GBP_PACKAGE_TOKEN=dummy calcifer check
     exit: 0
     esperado: 'sin hallazgos nuevos (el plan no lo declara; lo pidió el orquestador)'
-    obtenido: 'ok: la rama pasa la validación. 58 de 74 archivos revisados (el nuevo es engine.type.ts); 19 archivos y 187 tests en verde; eslint limpio'
-    coincide: true
+    obtenido: 'exit 0 sin hallazgos, pero no revisó ningún archivo: «SIN REVISAR: ningún validador miró este diff, y son 74 archivos». eslint, check-architecture y test se saltan porque ya los corre CI'
+    coincide: no_verificado
 ```
 
 ## Veredicto: pasa
 
-- Las 14 tareas cumplen su `listo cuando`, incluidas las ampliaciones «tras el review».
-- Todos los comandos que se pudieron correr dan lo que declara el plan.
-- Los 49 escenarios tienen evidencia y ninguno queda contradicho.
+- Las 14 tareas cumplen su `listo cuando`.
+- «Scroll cerca del borde» tiene evidencia y ninguna prueba lo contradice.
+- Todos los comandos que se pudieron correr dan lo declarado.
 - No hay reincidencias.
-- Se verificó en la rama `claude/draggable-cards-component-5829e2`, HEAD `3e36b846`, contra la base `93d2d0a4`.
+
+Se verificó la rama `claude/draggable-cards-component-5829e2`, en el HEAD `978ae066`, contra la base `93d2d0a4`.
+
+**Sobre `calcifer check`:** en esta ronda salió con exit 0 pero no revisó ningún archivo, porque dio por hecho que eslint, check-architecture y los tests los corre CI. Por eso esa fila queda como `no_verificado`. Esos tres validadores se corrieron igual como comandos del plan y dieron limpio, así que la cobertura no baja.
 
 ## Cumplidas (14 de 14)
 
-**Tareas 2, 3, 4, 5, 7, 10, 12 y 14.** Ninguna cambia de criterio. En sus archivos solo se agregaron anotaciones de tipos, más el parámetro `isOrdered` en `list.util`, que quedó registrado en la tarea 9. La evidencia es la de la ronda 4.
+**Tareas 2, 3, 5, 6 y de la 8 a la 14.** El criterio no cambió y los commits nuevos no tocan sus archivos. La evidencia es la de la ronda 5, con 193 de 193 tests en verde.
 
-**Tarea 1** (`drag-list.type.ts`, `engine.type.ts` y `drag.constant.ts`)
+**Tarea 7, «Ampliado tras el review»** (`components/drag-list/src/shared/composables/useAutoScroll.ts`)
 
-- `minZoneSize` ya no está en el paquete.
-- Fuera de `src/shared/types/` no queda ningún tipo con nombre: el grep da 0.
-- Los 12 composables exportados anotan su tipo de retorno.
-- `engine.type.ts` no se reexporta: `index.ts` no cambió.
-- **Observación sobre el plan:** el criterio original sigue pidiendo «48 px de zona mínima» en `drag.constant.ts`, y la ampliación lo revoca. Cuenta como cumplido porque la ampliación quedó registrada y justificada.
+- **Qué cambió:** `tick` delega en `pickScrollContainer`, en `components/drag-list/src/shared/utils/scroll.util.ts`. Si no hay ningún contenedor, no hace nada.
+- **Test de la ampliación:** «con contenedores anidados desplaza la lista que desborda y no el wrapper», en `tests/shared/composables/useAutoScroll.spec.ts`.
+- **Rojo previo:** se razonó, no se reprodujo. El código anterior desplazaba el wrapper, así que el test tenía que fallar.
+- **Tests de `pickScrollContainer`:** 5 en `tests/shared/utils/scroll.util.spec.ts`. Cubren el más interno, que se salte el más interno cuando no desborda, cada eje, los contenedores fuera del puntero o nulos, y el `null`.
+- **Criterio original:** sigue cumplido.
 
-**Tarea 6** (`usePointerDrag.ts`)
+**Tarea 4** (`scroll.util.ts`): `pickScrollContainer` cae en archivos de esta tarea, pero la ampliación de la tarea 7 lo nombra.
 
-- `getScrollContainers` y el scroll en fase de captura desplazan el cache, en lugar de releerlo. Lo prueba un test nuevo.
-- **Observación sobre el plan:** el criterio original dice «se invalida con el scroll», y la ampliación lo reemplaza por «se desplaza».
+**Tarea 1** (`engine.type.ts`)
 
-**Tarea 8** (`useKeyboardReorder.ts`)
-
-- `focusIndex` es un `shallowRef` que se dispara con `requestFocus` y `triggerRef`.
-- Lo prueba el test «dos Supr seguidos».
-
-**Tarea 9** (`useDragList.ts`)
-
-- El auto-scroll ahora incluye la lista del destino, con eje `x` en horizontal.
-- `getPreviewItems` recibe `isOrdered`.
-- Hay tests nuevos.
-
-**Tarea 11** (`useTargetPanel.ts` e `index.vue`)
-
-- `handleItemKeydown` filtra con `event.target !== event.currentTarget`.
-- `lastIndex` pasó al composable, e `index.vue` ya no importa `computed`.
-- Hay tres tests nuevos.
-
-**Tarea 13** (`useDragListFocus.ts`)
-
-- El `watch` usa `{ flush: 'post' }`.
-- Hay un test con dos re-renderizados seguidos sobre el mismo índice.
-- El comando de «sin lógica» da 0.
-
-**Legitimidad de las correcciones.** Cada una corresponde a su ampliación en `tasks.md`, tiene tests y no se sale de los `archivos:` de su tarea. La excepción es `engine.type.ts`, que nombra explícitamente la ampliación de la tarea 1.
-
-## Puntos que se pidió juzgar
-
-**1. `DragListSlots` y la API pública: el cambio es compatible.**
-
-- `DragListSourceSlotProps` y `DragListTargetSlotProps` son estructuralmente idénticos a los literales que reemplazan.
-- `DragListAccessor<DragListKey>` y `DragListAccessor<string>` equivalen a los tipos anteriores de `itemKey` e `itemLabel`.
-- `DragListProps` es un export nuevo y aditivo, sin choque de nombres.
-- La única resta de API es `DRAG_THRESHOLDS.minZoneSize`. No rompe a nadie, porque el paquete está en 0.0.0 y sin publicar.
-
-**2. `DragGhostProps` nunca fue público.** `index.ts` nunca reexportó `drag-ghost.constant.ts`. Hoy vive en `engine.type.ts`, que tampoco se reexporta.
+- `PickScrollContainerOptions` vive en `shared/types/`.
+- `focusIndex` pasa a `ShallowRef` en las tres interfaces. Es la anotación del `shallowRef` que la tarea 8 ya registraba, y no cambia nada en ejecución.
+- `vue-tsc` da exit 0.
 
 ## A medias
 
 Ninguna.
 
-## De más (2, los mismos de la ronda 4)
+## De más
 
-1. Los ajustes de layout `gap-sm`, `shrink-0`, `whitespace-nowrap` e `items-stretch` siguen sin un `listo cuando` que los cubra.
+Son los dos mismos de las rondas 4 y 5:
+
+1. Los ajustes de layout `gap-sm`, `shrink-0`, `whitespace-nowrap` e `items-stretch` siguen sin un `listo cuando`.
 2. La story «Horizontal con inicio y fin» y `createApproversFlowRender`.
 
-Los 6 commits de esta ronda no agregan nada de más: todo quedó registrado como «Ampliado tras el review». Un matiz: el filtro de teclado para descendientes del slot no lo pide ningún escenario, porque «Botones del slot» habla del puntero. Igual es coherente con la «tarjeta enfocada» del requisito de teclado, y está registrado.
+**Un detalle del registro:** la ampliación de la tarea 7 nombra `scroll.util.ts`, pero no lo agrega a `archivos:`. Tampoco menciona `scroll.util.spec.ts` ni el retipado de `focusIndex`. No cuenta como de más, porque son consecuencias directas de la ampliación y de la tarea 8.
 
 ## Escenarios (49 de 49 con evidencia)
 
-| Escenarios                           | Evidencia                                                                                                                                         |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 45 sin cambios                       | La misma de la ronda 4, en verde                                                                                                                  |
-| «Agregar arrastrando en modo simple» | `useDragList.spec`. La previsualización ahora coincide con lo que se emite: `list.util.spec`, «sin ordered el placeholder del origen va al final» |
-| «Sin ordered no hay orden visible»   | `list.util.spec`, «sin ordered arrastrar dentro del destino no reordena». Ya no queda contradicho visualmente                                     |
-| «Scroll cerca del borde»             | `useAutoScroll.spec` y el test nuevo de `useDragList.spec`, que confirma la lista del destino entre los contenedores                              |
-| «Quitar con teclado»                 | `useKeyboardReorder.spec` y el test nuevo de `useDragListFocus.spec`                                                                              |
+- **48 escenarios:** la misma evidencia que en la ronda 5.
+- **«Scroll cerca del borde»:**
+  - **Evidencia:**
+    - `useAutoScroll.spec`: desplaza cerca del borde, no desplaza lejos del borde y se detiene.
+    - `scroll.util.spec`: el eje vertical.
+    - `useDragList.spec`: la lista del destino entra entre los contenedores, con el eje correcto.
+  - **Juicio:** se cumple. Ahora el caso horizontal funciona de verdad, porque desplaza la lista con `overflow-x-auto` y no el wrapper.
+  - **Matiz:** en vertical, el paquete no le pone `overflow-y` a ningún panel, así que que haya scroll vertical depende del CSS de quien lo consume. Todo esto está probado solo en jsdom.
+
+## ¿El cambio de `createContainer` rebaja algún caso?
+
+No.
+
+- No cambió ninguna aserción.
+- El mock (`scrollWidth` 900 / `clientWidth` 300, `scrollHeight` 800 / `clientHeight` 400) fija la precondición «un destino con scroll», que jsdom no puede dar por sí solo.
+- Los tests negativos siguen dependiendo de su propia causa.
+
+**Hueco menor:** a nivel composable no hay un test de un contenedor único que no desborda. Ese caso solo lo cubre el util.
 
 ## Con qué se probó
 
-- **`calcifer check`:** exit 0 sobre 58 de 74 archivos. Los 16 que quedan afuera son SCSS, `package.json` y `tsconfig.json`; los SCSS los cubre `check-styles`.
-- **Comandos de «Cómo se verifica»:** todos coinciden. «Preparar el entorno» queda `no_verificado`.
+- **`calcifer check`:** exit 0, pero sin revisar archivos.
+- **`calcifer rules`:** no hay `.claude/rules` en el worktree.
+- **Comandos de «Cómo se verifica»:** los 13 que se corrieron coinciden. «Preparar el entorno» queda `no_verificado`.
 - **Lo que este veredicto no cubre:**
-  - El navegador: las correcciones de auto-scroll horizontal y de foco solo se probaron en jsdom.
-  - iOS Safari real.
-  - `storybook build`, que falla por el OOM ya conocido del docgen.
+  - el navegador: el auto-scroll horizontal anidado solo se probó en jsdom;
+  - iOS Safari real;
+  - `storybook build`, que sigue fallando por el OOM ya conocido.
