@@ -82,3 +82,11 @@ export interface DragListExpose {
   remove(key: DragListKey): void;
   move(from: number, to: number): void;
 }
+
+/** Entrada de la lista de previsualización del destino durante un arrastre. */
+export interface DragListPreviewEntry {
+  item: DragListItem;
+  /** índice en modelValue; -1 si es un ítem que entra desde el origen */
+  index: number;
+  isPlaceholder: boolean;
+}
