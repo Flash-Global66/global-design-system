@@ -1,17 +1,11 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
 import GDragListDragGhost from '../components/DragGhost/index.vue';
 import GDragListDropOverlay from '../components/DropOverlay/index.vue';
 import GDragListSourcePanel from '../components/SourcePanel/index.vue';
 import GDragListTargetPanel from '../components/TargetPanel/index.vue';
-import type {
-  DragListItem,
-  DragListKey,
-  DragListSlots,
-} from '../shared/types/drag-list.type';
+import type { DragListSlots } from '../shared/types/drag-list.type';
 import { dragListEmits, dragListProps } from './constants/drag-list.constant';
 import { useDragList } from './useDragList';
-import { useDragListFocus } from './useDragListFocus';
 
 defineOptions({ name: 'GDragList' });
 
@@ -21,6 +15,9 @@ defineSlots<DragListSlots>();
 
 const {
   ns,
+  rootClass,
+  getKey,
+  exposed,
   texts,
   visibleSource,
   emptyReason,
@@ -30,7 +27,6 @@ const {
   sourceEl,
   targetEl,
   announcement,
-  focusIndex,
   handleTargetKeydown,
   getSourceSlotProps,
   getTargetSlotProps,
@@ -39,22 +35,7 @@ const {
   move,
 } = useDragList(props, emit);
 
-useDragListFocus({ focusIndex, targetEl });
-
-const getKey = (item: DragListItem): DragListKey => {
-  const { itemKey } = props;
-  return typeof itemKey === 'function'
-    ? itemKey(item)
-    : (item[itemKey as string] as DragListKey);
-};
-
-const rootClass = computed(() => [ns.b(), ns.m(props.direction)]);
-
-defineExpose({
-  add: (item: DragListItem, index?: number) => add(item, index, 'api'),
-  remove: (key: DragListKey) => remove(key, 'api'),
-  move,
-});
+defineExpose(exposed);
 </script>
 
 <template>

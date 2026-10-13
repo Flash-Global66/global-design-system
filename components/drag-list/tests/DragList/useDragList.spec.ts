@@ -347,4 +347,47 @@ describe('useDragList', () => {
     expect(resolve('target', 0)).toEqual(C);
     expect(resolve('target', 5)).toBeNull();
   });
+
+  it('rootClass incluye el bloque y el modificador de direction', () => {
+    const { result } = setup({ direction: 'horizontal' });
+    expect(result.rootClass.value).toEqual([
+      result.ns.b(),
+      result.ns.m('horizontal'),
+    ]);
+    expect(result.rootClass.value[1]).toContain('--horizontal');
+  });
+
+  it('getKey resuelve itemKey string y función', () => {
+    expect(setup().result.getKey(A)).toBe('a');
+    const { result } = setup({
+      itemKey: (item: DragListItem) => `k-${String(item.id)}`,
+    });
+    expect(result.getKey(B)).toBe('k-b');
+  });
+
+  it('exposed.add emite con via api y respeta index con ordered', () => {
+    const { emit, result } = setup({ ordered: true, modelValue: [A, C] });
+    result.exposed.add(B, 1);
+    expect(emit).toHaveBeenCalledWith('update:modelValue', [A, B, C]);
+    expect(emit).toHaveBeenCalledWith('add', B, 1, 'api');
+  });
+
+  it('exposed.add sin index agrega al final', () => {
+    const { emit, result } = setup({ modelValue: [A] });
+    result.exposed.add(B);
+    expect(emit).toHaveBeenCalledWith('add', B, 1, 'api');
+  });
+
+  it('exposed.remove recibe la key y emite con via api', () => {
+    const { emit, result } = setup({ modelValue: [A, B] });
+    result.exposed.remove('b');
+    expect(emit).toHaveBeenCalledWith('remove', B, 1, 'api');
+  });
+
+  it('exposed.move reordena con ordered', () => {
+    const { emit, result } = setup({ ordered: true, modelValue: [A, B, C] });
+    result.exposed.move(0, 2);
+    expect(emit).toHaveBeenCalledWith('update:modelValue', [B, C, A]);
+    expect(emit).toHaveBeenCalledWith('reorder', A, 0, 2);
+  });
 });

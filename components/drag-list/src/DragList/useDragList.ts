@@ -8,6 +8,7 @@ import { useLiveAnnouncer } from '../shared/composables/useLiveAnnouncer';
 import { usePointerDrag } from '../shared/composables/usePointerDrag';
 import type {
   DragListAddVia,
+  DragListExpose,
   DragListItem,
   DragListKey,
   DragListPreviewEntry,
@@ -30,6 +31,7 @@ import {
 } from '../shared/utils/list.util';
 import { getOverlayState } from '../shared/utils/overlay.util';
 import { dragListEmits, dragListProps } from './constants/drag-list.constant';
+import { useDragListFocus } from './useDragListFocus';
 
 type DragListProps = ExtractPropTypes<typeof dragListProps>;
 type DragListEmit = SetupContext<typeof dragListEmits>['emit'];
@@ -321,8 +323,22 @@ export function useDragList(props: DragListProps, emit: DragListEmit) {
     };
   }
 
+  useDragListFocus({ focusIndex, targetEl });
+
+  const rootClass = computed(() => [ns.b(), ns.m(props.direction)]);
+
+  /** API pública del componente; fija `via: 'api'`. */
+  const exposed: DragListExpose = {
+    add: (item, index) => add(item, index, 'api'),
+    remove: key => remove(key, 'api'),
+    move,
+  };
+
   return {
     ns,
+    rootClass,
+    getKey,
+    exposed,
     texts,
     visibleSource,
     emptyReason,
