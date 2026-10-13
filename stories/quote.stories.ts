@@ -1,10 +1,14 @@
-import { ref } from 'vue'
-import type { Meta, StoryObj } from '@storybook/vue3'
-import { GQuote, type QuoteInstance } from '../components/quote'
-import { GConfigProvider } from '../components/config-provider'
-import type { Currency, QuoteAccount } from '../components/quote'
-import { generatePeerDepsList, generatePeerDepsInstalls } from '../helper/documentation-stories'
-import { version, peerDependencies } from '../components/quote/package.json'
+import { ref } from 'vue';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { GQuote, type QuoteInstance } from '../components/quote';
+import { GConfigProvider } from '../components/config-provider';
+import { GRadio, GRadioGroup } from '../components/radio';
+import type { Currency, QuoteAccount } from '../components/quote';
+import {
+  generatePeerDepsList,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
+import { version, peerDependencies } from '../components/quote/package.json';
 
 // ─── Fixtures ────────────────────────────────────────────────────────────────
 
@@ -17,7 +21,7 @@ const CLP: Currency = {
   thousandSeparator: '.',
   decimalSeparator: ',',
   locale: 'es-CL',
-}
+};
 
 const COP: Currency = {
   code: 'COP',
@@ -28,7 +32,7 @@ const COP: Currency = {
   thousandSeparator: '.',
   decimalSeparator: ',',
   locale: 'es-CO',
-}
+};
 
 const USD: Currency = {
   code: 'USD',
@@ -39,7 +43,7 @@ const USD: Currency = {
   thousandSeparator: ',',
   decimalSeparator: '.',
   locale: 'en-US',
-}
+};
 
 const PEN: Currency = {
   code: 'PEN',
@@ -50,7 +54,7 @@ const PEN: Currency = {
   thousandSeparator: ',',
   decimalSeparator: '.',
   locale: 'es-PE',
-}
+};
 
 const BRL: Currency = {
   code: 'BRL',
@@ -61,9 +65,9 @@ const BRL: Currency = {
   thousandSeparator: '.',
   decimalSeparator: ',',
   locale: 'pt-BR',
-}
+};
 
-const CURRENCIES: Currency[] = [CLP, COP, USD, PEN, BRL]
+const CURRENCIES: Currency[] = [CLP, COP, USD, PEN, BRL];
 
 const RATES: Record<string, number> = {
   CLP_USD: 0.001075,
@@ -86,7 +90,7 @@ const RATES: Record<string, number> = {
   BRL_CLP: 182,
   BRL_COP: 800,
   BRL_PEN: 0.735,
-}
+};
 
 const ACCOUNTS_CLP: QuoteAccount[] = [
   {
@@ -113,7 +117,7 @@ const ACCOUNTS_CLP: QuoteAccount[] = [
     flagCountryCode: 'CL',
     badgeLabel: 'Presupuesto Viajes',
   },
-]
+];
 
 const ACCOUNTS_COP: QuoteAccount[] = [
   {
@@ -132,76 +136,84 @@ const ACCOUNTS_COP: QuoteAccount[] = [
     flagCountryCode: 'CO',
     badgeLabel: 'Nómina',
   },
-]
+];
 
-const ACCOUNTS: QuoteAccount[] = [...ACCOUNTS_CLP, ...ACCOUNTS_COP]
+const ACCOUNTS: QuoteAccount[] = [...ACCOUNTS_CLP, ...ACCOUNTS_COP];
 
 // ─── Composable reutilizable para la lógica de simulación ────────────────────
 
 function useQuoteSimulator(initialFrom = 'CLP', initialTo = 'USD') {
-  const fromCurrency = ref(initialFrom)
-  const toCurrency = ref(initialTo)
-  const fromAmount = ref('')
-  const toAmount = ref('')
-  const isLoading = ref(false)
-  const lastDirection = ref<'from' | 'to'>('from')
-  let debounceTimer: ReturnType<typeof setTimeout> | null = null
+  const fromCurrency = ref(initialFrom);
+  const toCurrency = ref(initialTo);
+  const fromAmount = ref('');
+  const toAmount = ref('');
+  const isLoading = ref(false);
+  const lastDirection = ref<'from' | 'to'>('from');
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
   async function fetchQuote(amount: string, direction: 'from' | 'to') {
     if (!amount || isNaN(parseFloat(amount))) {
-      direction === 'from' ? (toAmount.value = '') : (fromAmount.value = '')
-      return
+      direction === 'from' ? (toAmount.value = '') : (fromAmount.value = '');
+      return;
     }
-    isLoading.value = true
-    direction === 'from' ? (toAmount.value = '') : (fromAmount.value = '')
+    isLoading.value = true;
+    direction === 'from' ? (toAmount.value = '') : (fromAmount.value = '');
 
-    await new Promise((r) => setTimeout(r, 800))
+    await new Promise(r => setTimeout(r, 800));
 
-    const from = direction === 'from' ? fromCurrency.value : toCurrency.value
-    const to = direction === 'from' ? toCurrency.value : fromCurrency.value
-    const rate = RATES[`${from}_${to}`] ?? 1
-    const decimals = CURRENCIES.find((c) => c.code === to)?.decimalPlaces ?? 2
-    const result = parseFloat((parseFloat(amount) * rate).toFixed(decimals))
+    const from = direction === 'from' ? fromCurrency.value : toCurrency.value;
+    const to = direction === 'from' ? toCurrency.value : fromCurrency.value;
+    const rate = RATES[`${from}_${to}`] ?? 1;
+    const decimals = CURRENCIES.find(c => c.code === to)?.decimalPlaces ?? 2;
+    const result = parseFloat((parseFloat(amount) * rate).toFixed(decimals));
 
-    direction === 'from' ? (toAmount.value = String(result)) : (fromAmount.value = String(result))
-    isLoading.value = false
+    direction === 'from'
+      ? (toAmount.value = String(result))
+      : (fromAmount.value = String(result));
+    isLoading.value = false;
   }
 
   function scheduleQuote(amount: string, direction: 'from' | 'to') {
-    if (debounceTimer) clearTimeout(debounceTimer)
-    debounceTimer = setTimeout(() => fetchQuote(amount, direction), 600)
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => fetchQuote(amount, direction), 600);
   }
 
   function handleFromInput(val: string) {
-    lastDirection.value = 'from'
-    fromAmount.value = val
-    scheduleQuote(val, 'from')
+    lastDirection.value = 'from';
+    fromAmount.value = val;
+    scheduleQuote(val, 'from');
   }
 
   function handleToInput(val: string) {
-    lastDirection.value = 'to'
-    toAmount.value = val
-    scheduleQuote(val, 'to')
+    lastDirection.value = 'to';
+    toAmount.value = val;
+    scheduleQuote(val, 'to');
   }
 
   function handleFromCurrencyChange(currency: Currency) {
-    fromCurrency.value = currency.code
-    const amount = lastDirection.value === 'from' ? fromAmount.value : toAmount.value
-    if (amount) scheduleQuote(amount, lastDirection.value)
+    fromCurrency.value = currency.code;
+    const amount =
+      lastDirection.value === 'from' ? fromAmount.value : toAmount.value;
+    if (amount) scheduleQuote(amount, lastDirection.value);
   }
 
   function handleToCurrencyChange(currency: Currency) {
-    toCurrency.value = currency.code
-    const amount = lastDirection.value === 'from' ? fromAmount.value : toAmount.value
-    if (amount) scheduleQuote(amount, lastDirection.value)
+    toCurrency.value = currency.code;
+    const amount =
+      lastDirection.value === 'from' ? fromAmount.value : toAmount.value;
+    if (amount) scheduleQuote(amount, lastDirection.value);
   }
 
-  function handleSwap(payload: { from: string; to: string; fromAmount: string }) {
-    fromCurrency.value = payload.from
-    toCurrency.value = payload.to
-    fromAmount.value = payload.fromAmount
-    toAmount.value = ''
-    if (payload.fromAmount) scheduleQuote(payload.fromAmount, 'from')
+  function handleSwap(payload: {
+    from: string;
+    to: string;
+    fromAmount: string;
+  }) {
+    fromCurrency.value = payload.from;
+    toCurrency.value = payload.to;
+    fromAmount.value = payload.fromAmount;
+    toAmount.value = '';
+    if (payload.fromAmount) scheduleQuote(payload.fromAmount, 'from');
   }
 
   return {
@@ -215,7 +227,7 @@ function useQuoteSimulator(initialFrom = 'CLP', initialTo = 'USD') {
     handleFromCurrencyChange,
     handleToCurrencyChange,
     handleSwap,
-  }
+  };
 }
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
@@ -331,6 +343,11 @@ interface QuoteAccount {
 
 - from-account-change: se emite al elegir una cuenta de origen, con la \`QuoteAccount\` elegida como payload
 - to-account-change: se emite al elegir una cuenta de destino, con la \`QuoteAccount\` elegida como payload
+
+### Slots
+
+- action: reemplaza el contenido de la franja de acción que aparece fuera de la card cuando hay error de saldo (\`action="FromError"\` o \`showAction\`). Sin contenido en el slot, se muestra el botón por defecto ("Cargar dinero").
+- footer: se renderiza dentro de la card, después del input de destino, separado por un borde. Sin contenido en el slot, no aparece ningún elemento — el componente no agrega lógica ni espacio reservado, solo expone el punto de extensión.
 `,
       },
     },
@@ -346,42 +363,61 @@ interface QuoteAccount {
       },
     },
     showAction: {
-      description: 'Controla si se muestra la franja de acción cuando existe un error',
+      description:
+        'Controla si se muestra la franja de acción cuando existe un error',
       control: { type: 'boolean' },
       table: {
         type: { summary: 'boolean | undefined' },
-        defaultValue: { summary: "FromError => true; otros errores => false" },
+        defaultValue: { summary: 'FromError => true; otros errores => false' },
       },
     },
     isDisabled: {
       description: 'Deshabilita toda la interacción',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     disableOriginSelect: {
       description: 'Deshabilita toda la interacción',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     disableOriginInput: {
       description: 'Deshabilita toda la interacción',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     disableDestinationSelect: {
       description: 'Deshabilita toda la interacción',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     disableDestinationInput: {
       description: 'Deshabilita toda la interacción',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     isLoading: {
       description: 'Muestra estado de carga mientras se cotiza',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     fromLabel: {
       description: 'Etiqueta del campo de origen',
@@ -396,7 +432,10 @@ interface QuoteAccount {
     availableLabel: {
       description: 'Texto del label de saldo disponible',
       control: { type: 'text' },
-      table: { type: { summary: 'string' }, defaultValue: { summary: 'Disponible' } },
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'Disponible' },
+      },
     },
     availableBalance: {
       description: 'Texto formateado del saldo disponible (ya formateado)',
@@ -411,22 +450,35 @@ interface QuoteAccount {
     actionText: {
       description: 'Texto del botón de acción (ej: cuando hay error de saldo)',
       control: { type: 'text' },
-      table: { type: { summary: 'string' }, defaultValue: { summary: 'Cargar dinero' } },
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'Cargar dinero' },
+      },
     },
     showSwap: {
       description: 'Muestra el botón para intercambiar monedas',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'true' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+      },
     },
     singleInput: {
-      description: 'Oculta el campo de origen (útil para transferencias nacionales)',
+      description:
+        'Oculta el campo de origen (útil para transferencias nacionales)',
       control: { type: 'boolean' },
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     emptyResultsText: {
       description: 'Texto cuando no hay resultados en la búsqueda de moneda',
       control: { type: 'text' },
-      table: { type: { summary: 'string' }, defaultValue: { summary: 'Sin resultados' } },
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'Sin resultados' },
+      },
     },
   },
   args: {
@@ -443,10 +495,10 @@ interface QuoteAccount {
     availableLabel: 'Disponible',
     emptyResultsText: 'Sin resultados',
   },
-}
+};
 
-export default meta
-type Story = StoryObj<QuoteInstance>
+export default meta;
+type Story = StoryObj<QuoteInstance>;
 
 // ─── Básico (interactivo, controlado por args) ────────────────────────────────
 
@@ -455,15 +507,16 @@ export const Basic: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Flujo completo con cotización simulada. Escribe un monto en cualquiera de los campos para disparar la cotización (debounce de 600ms). Cambia las monedas desde el selector o usa el swap.',
+        story:
+          'Flujo completo con cotización simulada. Escribe un monto en cualquiera de los campos para disparar la cotización (debounce de 600ms). Cambia las monedas desde el selector o usa el swap.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GQuote, GConfigProvider },
     setup() {
-      const sim = useQuoteSimulator()
-      return { args, CURRENCIES, ...sim }
+      const sim = useQuoteSimulator();
+      return { args, CURRENCIES, ...sim };
     },
     template: `
       <g-config-provider>
@@ -487,7 +540,7 @@ export const Basic: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 // ─── Con saldo disponible ─────────────────────────────────────────────────────
 
@@ -496,15 +549,16 @@ export const WithAvailableBalance: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Muestra el saldo disponible sobre el cotizador. El texto de `availableBalance` debe llegar ya formateado desde el consumidor.',
+        story:
+          'Muestra el saldo disponible sobre el cotizador. El texto de `availableBalance` debe llegar ya formateado desde el consumidor.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GQuote, GConfigProvider },
     setup() {
-      const sim = useQuoteSimulator('COP', 'USD')
-      return { args, CURRENCIES, ...sim }
+      const sim = useQuoteSimulator('COP', 'USD');
+      return { args, CURRENCIES, ...sim };
     },
     template: `
       <g-config-provider>
@@ -529,7 +583,7 @@ export const WithAvailableBalance: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 // ─── Error saldo insuficiente ─────────────────────────────────────────────────
 
@@ -538,7 +592,8 @@ export const InsufficientBalance: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Cuando `action="FromError"` el componente muestra el botón de acción (por defecto "Cargar dinero") y el mensaje de error. El evento `action-click` notifica al consumidor para redirigir.',
+        story:
+          'Cuando `action="FromError"` el componente muestra el botón de acción (por defecto "Cargar dinero") y el mensaje de error. El evento `action-click` notifica al consumidor para redirigir.',
       },
     },
   },
@@ -546,9 +601,9 @@ export const InsufficientBalance: Story = {
     components: { GQuote, GConfigProvider },
     setup() {
       function handleActionClick() {
-        alert('Redirigir a cargar dinero')
+        alert('Redirigir a cargar dinero');
       }
-      return { CURRENCIES, handleActionClick }
+      return { CURRENCIES, handleActionClick };
     },
     template: `
       <g-config-provider>
@@ -571,7 +626,7 @@ export const InsufficientBalance: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 // ─── Estado deshabilitado ─────────────────────────────────────────────────────
 
@@ -580,14 +635,15 @@ export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Estado `isDisabled` bloquea toda la interacción: inputs, selector de moneda y swap.',
+        story:
+          'Estado `isDisabled` bloquea toda la interacción: inputs, selector de moneda y swap.',
       },
     },
   },
   render: () => ({
     components: { GQuote, GConfigProvider },
     setup() {
-      return { CURRENCIES }
+      return { CURRENCIES };
     },
     template: `
       <g-config-provider>
@@ -607,7 +663,7 @@ export const Disabled: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 // ─── Single input (transferencia nacional) ───────────────────────────────────
 
@@ -616,20 +672,21 @@ export const SingleInput: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Con `single-input` solo se muestra el campo de destino. Útil para transferencias nacionales donde no hay conversión de moneda.',
+        story:
+          'Con `single-input` solo se muestra el campo de destino. Útil para transferencias nacionales donde no hay conversión de moneda.',
       },
     },
   },
   render: () => ({
     components: { GQuote, GConfigProvider },
     setup() {
-      const toAmount = ref('')
+      const toAmount = ref('');
 
       function handleToInput(val: string) {
-        toAmount.value = val
+        toAmount.value = val;
       }
 
-      return { CURRENCIES, toAmount, handleToInput }
+      return { CURRENCIES, toAmount, handleToInput };
     },
     template: `
       <g-config-provider>
@@ -649,7 +706,7 @@ export const SingleInput: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 // ─── Sin swap ─────────────────────────────────────────────────────────────────
 
@@ -658,15 +715,16 @@ export const NoSwap: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Con `show-swap="false"` se oculta el botón de intercambio. Útil cuando la dirección de la transacción es fija.',
+        story:
+          'Con `show-swap="false"` se oculta el botón de intercambio. Útil cuando la dirección de la transacción es fija.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GQuote, GConfigProvider },
     setup() {
-      const sim = useQuoteSimulator('USD', 'PEN')
-      return { args, CURRENCIES, ...sim }
+      const sim = useQuoteSimulator('USD', 'PEN');
+      return { args, CURRENCIES, ...sim };
     },
     template: `
       <g-config-provider>
@@ -692,7 +750,7 @@ export const NoSwap: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
 // ─── Entre cuentas ─────────────────────────────────────────────────────────────
 
@@ -701,30 +759,39 @@ export const EntreCuentas: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Con `from-accounts`/`to-accounts` el consumidor elige cuenta de origen y cuenta de destino en vez de solo moneda. El selector agrupa las cuentas por `currencyCode` con un encabezado por grupo y un buscador dentro del panel. `GQuote` no sincroniza `from-currency`/`to-currency` por sí solo: los handlers de `from-account-change`/`to-account-change` actualizan también la moneda para que la cotización recalcule con `RATES`.',
+        story:
+          'Con `from-accounts`/`to-accounts` el consumidor elige cuenta de origen y cuenta de destino en vez de solo moneda. El selector agrupa las cuentas por `currencyCode` con un encabezado por grupo y un buscador dentro del panel. `GQuote` no sincroniza `from-currency`/`to-currency` por sí solo: los handlers de `from-account-change`/`to-account-change` actualizan también la moneda para que la cotización recalcule con `RATES`.',
       },
     },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GQuote, GConfigProvider },
     setup() {
-      const sim = useQuoteSimulator('CLP', 'COP')
-      const fromAccountId = ref(ACCOUNTS_CLP[0].id)
-      const toAccountId = ref(ACCOUNTS_COP[0].id)
+      const sim = useQuoteSimulator('CLP', 'COP');
+      const fromAccountId = ref(ACCOUNTS_CLP[0].id);
+      const toAccountId = ref(ACCOUNTS_COP[0].id);
 
       function handleFromAccountChange(account: QuoteAccount) {
-        fromAccountId.value = account.id
-        const currency = CURRENCIES.find((c) => c.code === account.currencyCode)
-        if (currency) sim.handleFromCurrencyChange(currency)
+        fromAccountId.value = account.id;
+        const currency = CURRENCIES.find(c => c.code === account.currencyCode);
+        if (currency) sim.handleFromCurrencyChange(currency);
       }
 
       function handleToAccountChange(account: QuoteAccount) {
-        toAccountId.value = account.id
-        const currency = CURRENCIES.find((c) => c.code === account.currencyCode)
-        if (currency) sim.handleToCurrencyChange(currency)
+        toAccountId.value = account.id;
+        const currency = CURRENCIES.find(c => c.code === account.currencyCode);
+        if (currency) sim.handleToCurrencyChange(currency);
       }
 
-      return { args, ACCOUNTS, fromAccountId, toAccountId, handleFromAccountChange, handleToAccountChange, ...sim }
+      return {
+        args,
+        ACCOUNTS,
+        fromAccountId,
+        toAccountId,
+        handleFromAccountChange,
+        handleToAccountChange,
+        ...sim,
+      };
     },
     template: `
       <g-config-provider>
@@ -750,6 +817,107 @@ export const EntreCuentas: Story = {
       </g-config-provider>
     `,
   }),
-}
+};
 
+// ─── Con footer ────────────────────────────────────────────────────────────
 
+export const WithFooter: Story = {
+  name: 'Con footer',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'El slot `footer` se renderiza dentro de la card, debajo de "Tu contacto recibe", separado por un borde. `GRadioGroup`/`GRadio` se importan desde `@flash-global66/g-radio`.',
+      },
+    },
+  },
+  render: args => ({
+    components: { GQuote, GConfigProvider, GRadioGroup, GRadio },
+    setup() {
+      const sim = useQuoteSimulator();
+      const paymentMethod = ref('ach');
+      return { args, CURRENCIES, paymentMethod, ...sim };
+    },
+    template: `
+      <g-config-provider>
+        <div style="width: 460px">
+          <g-quote
+            v-bind="args"
+            :from-currencies="CURRENCIES"
+            :to-currencies="CURRENCIES"
+            :from-currency="fromCurrency"
+            :to-currency="toCurrency"
+            :from-amount="fromAmount"
+            :to-amount="toAmount"
+            :is-loading="isLoading"
+            @from-input="handleFromInput"
+            @to-input="handleToInput"
+            @swap="handleSwap"
+            @from-currency-change="handleFromCurrencyChange"
+            @to-currency-change="handleToCurrencyChange"
+          >
+            <template #footer>
+              <g-radio-group v-model="paymentMethod">
+                <g-radio label="ACH local (USD)" value="ach" />
+                <g-radio label="SWIFT (USD)" value="swift" />
+              </g-radio-group>
+            </template>
+          </g-quote>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+// ─── Con footer: saldo insuficiente ───────────────────────────────────────
+
+export const WithFooterError: Story = {
+  name: 'Con footer: saldo insuficiente',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Con `action="FromError"` y `error-message` se ve el borde rojo de la card encerrando también el footer, además de "Disponible" y la franja de acción en su lugar habitual.',
+      },
+    },
+  },
+  render: () => ({
+    components: { GQuote, GConfigProvider, GRadioGroup, GRadio },
+    setup() {
+      const paymentMethod = ref('ach');
+
+      function handleActionClick() {
+        alert('Redirigir a cargar dinero');
+      }
+
+      return { CURRENCIES, paymentMethod, handleActionClick };
+    },
+    template: `
+      <g-config-provider>
+        <div style="width: 460px">
+          <g-quote
+            from-currency="COP"
+            to-currency="USD"
+            from-amount="3672604"
+            to-amount=""
+            available-balance="$ 183.994.889 COP"
+            error-message="El monto que deseas convertir excede el saldo disponible"
+            action="FromError"
+            from-label="Tú envías"
+            to-label="Tu contacto recibe"
+            :from-currencies="CURRENCIES"
+            :to-currencies="CURRENCIES"
+            @action-click="handleActionClick"
+          >
+            <template #footer>
+              <g-radio-group v-model="paymentMethod">
+                <g-radio label="ACH local (USD)" value="ach" />
+                <g-radio label="SWIFT (USD)" value="swift" />
+              </g-radio-group>
+            </template>
+          </g-quote>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};

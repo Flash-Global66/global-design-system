@@ -9,7 +9,26 @@
   @include e('header') {
     @apply flex flex-col items-start px-lg pt-lg gap-4 mb-xxs;
     @include m('container-close') {
-      @apply self-end;
+      @apply w-full flex items-center;
+    }
+    @include m('back') {
+      // Sin el ancho fijo de 48px el botón se encoge al glifo, que así queda
+      // a ras del padding del header en vez de centrado en la caja.
+      // Va compuesto con .gui-icon-button porque su `w-12` tiene la misma
+      // especificidad y se importa después (assets/scss/index.scss:36 vs :25):
+      // con un solo selector gana el botón y esto no hace nada.
+      &.gui-icon-button {
+        @apply w-auto;
+      }
+
+      // El ripple y el fondo de hover viven dentro de .hover-effect, así que
+      // ocultarlo apaga los dos sin pelear especificidad con g-icon-button.
+      .hover-effect {
+        @apply hidden;
+      }
+    }
+    @include m('close') {
+      @apply ml-auto;
     }
     @include m('container-title') {
       @apply flex flex-col gap-md w-full;

@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import { GIconFont } from '@flash-global66/g-icon-font';
-import { inlineEmits, inlineProps } from './defaults';
+import { inlineEmits, inlineProps } from './constants/inline.constant';
 import { useInline } from './useInline';
 
 const props = defineProps(inlineProps);
 const emits = defineEmits(inlineEmits);
 
-const { visible, ns, inlineRef, inlineClass, onClose } = useInline(props, emits);
+const { visible, ns, inlineRef, inlineClass, onClose } = useInline(
+  props,
+  emits,
+);
 </script>
 
 <template>

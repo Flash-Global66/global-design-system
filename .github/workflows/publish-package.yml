@@ -2,7 +2,7 @@ name: Publish Packages
 
 on:
   push:
-    branches: [main]
+    branches: [release]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -54,13 +54,13 @@ jobs:
         run: |
           echo "Building all components"
           yarn build
-          
+
           # Verificar si la construcción fue exitosa
           if [ $? -ne 0 ]; then
             echo "::error::Error building components"
             exit 1
           fi
-          
+
           echo "✅ All components built successfully"
 
       # Pasos específicos para publicación
@@ -83,18 +83,18 @@ jobs:
         run: |
           # Forzar detección de cambios (sin arrojar error si no hay cambios)
           CHANGED_PACKAGES=$(yarn lerna changed -a 2>&1) || true
-          
+
           # Verificar si hay paquetes cambiados
           if echo "$CHANGED_PACKAGES" | grep -q "No changed packages"; then
             echo "no_changes=true" >> $GITHUB_OUTPUT
             echo "ℹ️ No hay cambios para publicar"
             exit 0
           fi
-          
+
           echo "Paquetes con cambios detectados:"
           echo "$CHANGED_PACKAGES"
 
-          
+
           # Confirmar cambios automáticamente si existen
           if [[ -n "$(git status --porcelain)" ]]; then
             echo "Confirmando cambios automáticamente..."
@@ -103,17 +103,17 @@ jobs:
             git add .
             git commit -m "chore: update dependencies [skip ci]"
           fi
-          
+
           # Ejecutar Lerna con formato de etiqueta simplificado
           yarn lerna version --conventional-commits \
             --no-granular-pathspec \
             --yes \
             --tag-version-prefix="" \
             --loglevel=debug
-          
+
           # Capturar el código de salida
           EXIT_CODE=$?
-          
+
           # Procesar el resultado
           if [ $EXIT_CODE -ne 0 ]; then
             echo "::error::Falló el proceso de versionado con código $EXIT_CODE"
@@ -142,7 +142,7 @@ jobs:
         if: matrix.task == 'deploy'
         id: build-storybook
         run: yarn build-storybook
-        
+
       - name: Check build output
         if: matrix.task == 'deploy'
         run: |

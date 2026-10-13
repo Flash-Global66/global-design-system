@@ -1,6 +1,6 @@
-import { Meta, StoryFn } from '@storybook/vue3';
-import { action } from '@storybook/addon-actions';
-import { fn } from '@storybook/test';
+import { Meta, StoryFn } from '@storybook/vue3-vite';
+import { action } from 'storybook/actions';
+import { fn } from 'storybook/test';
 
 // COMPONENTS
 import { GPopover } from '../components/popover';

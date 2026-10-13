@@ -27,8 +27,12 @@ common/<package-name>/
 ├── src/
 │   ├── utils/                  # funciones TS puras
 │   │   └── <name>.util.ts      # sufijo .util.ts
-│   ├── composables/            # hooks Vue
+│   ├── composables/            # hooks Vue reusables entre paquetes (g-hooks es el catálogo)
 │   │   └── use<Name>.ts        # prefijo use
+│   ├── constants/               # constantes compartidas
+│   │   └── <name>.constant.ts  # sufijo .constant.ts
+│   ├── directives/             # directivas Vue reutilizables — capa exclusiva de common/*
+│   │   └── <name>.directive.ts # sufijo .directive.ts
 │   └── types/                  # tipos compartidos
 │       └── <name>.type.ts      # sufijo .type.ts
 ├── styles/                     # mixins y config SCSS (si aplica)
@@ -106,7 +110,11 @@ El bloque `<style lang="scss" src="...">` en el SFC es el punto de entrada — V
 ## 6. Convenciones de naming
 
 - `src/utils/*.util.ts` — funciones puras, sin estado global
-- `src/composables/use<Name>.ts` — solo composables Vue (`ref`, `computed`, `inject`, etc.)
+- `src/composables/use<Name>.ts` — solo composables Vue (`ref`, `computed`, `inject`, etc.). En
+  `g-utils` esta carpeta es infraestructura propia del paquete (hoy solo `useNamespace`, el sistema
+  BEM), no un catálogo abierto — un composable reactivo reusable nuevo va a `g-hooks/composables/`
+- `src/constants/*.constant.ts` — constantes compartidas
+- `src/directives/*.directive.ts` — directivas Vue reutilizables
 - `src/types/*.type.ts` — solo tipos e interfaces, sin lógica
 - `styles/` — SCSS sin output CSS propio; solo variables, funciones y mixins
 - Tests en `tests/` espejando exactamente la estructura de `src/`
@@ -154,12 +162,12 @@ Los nombres de código (variables, funciones, tipos) permanecen en inglés.
 
 ## 9. Extensión del patrón
 
-Este mismo patrón aplica a todos los paquetes utilitarios futuros del DS:
+Este mismo patrón aplica a los demás paquetes utilitarios del DS:
 
-| Paquete                    | Contenido esperado                                                     |
-| -------------------------- | ---------------------------------------------------------------------- |
-| `@flash-global66/g-hooks`  | Composables de uso general no ligados a un componente específico       |
-| `@flash-global66/g-tokens` | Design tokens (colores, espaciado, tipografía) como variables CSS y TS |
+| Paquete                    | Contenido                                                                                                                                                                                                                                                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@flash-global66/g-hooks`  | Ya existe — ~24 composables reusables entre componentes (`usePopper`, `useDraggable`, `useFocusController`...). No tiene `constants/`, `types/`, `directives/` ni `utils/`, solo `composables/` (y `src/locale/`, excepción puntual de datos de localización portados de element-plus para sus propios composables) |
+| `@flash-global66/g-tokens` | Futuro — design tokens (colores, espaciado, tipografía) como variables CSS y TS                                                                                                                                                                                                                                     |
 
 La estructura de carpetas y las reglas de naming son **idénticas** a las de `g-utils`.
 

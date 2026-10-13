@@ -283,6 +283,13 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
 // ajusta al contenido daría cero; `contain-intrinsic-inline-size` le devuelve
 // el del diseño. Con un padre de ancho definido llena el 100% hasta su
 // `max-width`, que el consumidor sube con la variable si la quiere más grande.
+//
+// Ese ancho intrínseco es también el tamaño mínimo automático como ítem de
+// grid o flex, así que sin `min-width` la tarjeta no bajaba de 469px y
+// desbordaba en mobile. Ponerlo en `0` la arregla en grid pero la colapsa a
+// cero en un flex con hermanos, porque con contención de tamaño su contenido
+// no aporta ancho con el que disputar espacio. `min()` cubre los dos: cede
+// ante un padre más angosto y conserva el ancho del diseño cuando hay lugar.
 @include b(benefits-card) {
   @apply text-inverse-txt;
 
@@ -292,6 +299,7 @@ $benefits-card-supports-ring: '((mask-composite: exclude) or (-webkit-mask-compo
     ('benefits-card', 'max-width'),
     $benefits-card-reference-width
   );
+  min-width: min(100%, #{$benefits-card-reference-width});
   text-align: center;
   container-type: inline-size;
   contain-intrinsic-inline-size: $benefits-card-reference-width;

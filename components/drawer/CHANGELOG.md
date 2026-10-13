@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.3.25...@flash-global66/g-drawer@0.4.0) (2026-09-29)
+
+### Features
+
+- **drawer:** flecha de volver opcional en el header que emite back ([#338](https://github.com/Flash-Global66/global-design-system/issues/338)) ([6906c09](https://github.com/Flash-Global66/global-design-system/commit/6906c09dc2ffc43a9991e8873d365da4a75a8991))
+
 ## [0.3.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-drawer@0.3.24...@flash-global66/g-drawer@0.3.25) (2026-09-07)
 
 ### Bug Fixes

@@ -1,13 +1,20 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { GIconButton } from '@flash-global66/g-icon-button/index.ts';
-import { GConfigProvider } from "@flash-global66/g-config-provider/index.ts";
+import { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';
 
-import { version, peerDependencies } from "@flash-global66/g-icon-button/package.json";
-import { generatePeerDepsList, generateIconOptions, generatePeerDepsInstalls } from "../helper/documentation-stories";
+import {
+  version,
+  peerDependencies,
+} from '@flash-global66/g-icon-button/package.json';
+import {
+  generatePeerDepsList,
+  generateIconOptions,
+  generatePeerDepsInstalls,
+} from '../helper/documentation-stories';
 
 const meta: Meta = {
-  title: "Basic/IconButton",
+  title: 'Basic/IconButton',
   component: GIconButton,
   parameters: {
     docs: {
@@ -72,126 +79,128 @@ import { GIconButton } from '@flash-global66/g-icon-button';
   argTypes: {
     // Current Props - Variant & Style
     variant: {
-      control: "select",
-      options: ["grey", "black", "blue"],
-      description: "Variante visual del icono botón",
+      control: 'select',
+      options: ['grey', 'black', 'blue'],
+      description: 'Variante visual del icono botón',
       table: {
-        type: { summary: "string" },
-        category: "Principales",
+        type: { summary: 'string' },
+        category: 'Principales',
       },
     },
     size: {
-      control: "select",
-      options: ["medium", "small"],
-      description: "Tamaño del icono botón",
+      control: 'select',
+      options: ['medium', 'small'],
+      description: 'Tamaño del icono botón',
       table: {
-        type: { summary: "string" },
-        category: "Principales",
+        type: { summary: 'string' },
+        category: 'Principales',
       },
     },
     border: {
-      control: "boolean",
-      description: "Muestra un borde alrededor del botón",
+      control: 'boolean',
+      description: 'Muestra un borde alrededor del botón',
       table: {
-        type: { summary: "boolean" },
-        category: "Principales",
+        type: { summary: 'boolean' },
+        category: 'Principales',
       },
     },
     rounded: {
-      control: "boolean",
-      description: "Hace que el borde sea completamente redondeado (requiere border: true)",
+      control: 'boolean',
+      description:
+        'Hace que el borde sea completamente redondeado (requiere border: true)',
       table: {
-        type: { summary: "boolean" },
-        category: "Principales",
+        type: { summary: 'boolean' },
+        category: 'Principales',
       },
     },
 
     // Iconos
     icon: {
-      description: "Icono a mostrar en el botón.",
-      control: "select",
+      description: 'Icono a mostrar en el botón.',
+      control: 'select',
       options: generateIconOptions(),
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "solid check" },
+        type: { summary: 'string' },
+        defaultValue: { summary: 'solid check' },
       },
     },
     autofocus: {
-      control: "boolean",
+      control: 'boolean',
       description:
-        "El icono botón obtiene el foco automáticamente al cargar la página (HTML autofocus) \n\n⚠️ **Nota:** No se puede usar con el atributo `href`",
+        'El icono botón obtiene el foco automáticamente al cargar la página (HTML autofocus) \n\n⚠️ **Nota:** No se puede usar con el atributo `href`',
       table: {
-        category: "Comportamiento",
-        type: { summary: "boolean" },
+        category: 'Comportamiento',
+        type: { summary: 'boolean' },
       },
     },
     disabled: {
-      control: "boolean",
-      description: "Deshabilita el icono botón",
+      control: 'boolean',
+      description: 'Deshabilita el icono botón',
       table: {
-        category: "Comportamiento",
-        type: { summary: "boolean" },
+        category: 'Comportamiento',
+        type: { summary: 'boolean' },
       },
     },
     download: {
-      control: "text",
-      description: "Especifica que el elemento se descargará cuando el usuario haga clic en el enlace",
+      control: 'text',
+      description:
+        'Especifica que el elemento se descargará cuando el usuario haga clic en el enlace',
       table: {
-        defaultValue: { summary: "undefined" },
-        category: "Enlaces",
-        type: { summary: "string" },
+        defaultValue: { summary: 'undefined' },
+        category: 'Enlaces',
+        type: { summary: 'string' },
       },
     },
 
     // Link Props
     href: {
-      control: "text",
-      description: "Convierte el icono botón en un enlace",
+      control: 'text',
+      description: 'Convierte el icono botón en un enlace',
       table: {
-        category: "Enlaces",
-        type: { summary: "string" },
+        category: 'Enlaces',
+        type: { summary: 'string' },
       },
     },
     target: {
-      control: "text",
-      description: "Atributo target del enlace",
+      control: 'text',
+      description: 'Atributo target del enlace',
       table: {
-        category: "Enlaces",
-        type: { summary: "string" },
+        category: 'Enlaces',
+        type: { summary: 'string' },
       },
     },
     type: {
-      control: "select",
-      options: ["button", "submit", "reset"],
-      description: "Especifica el tipo de botón (solo cuando no se usa href).",
+      control: 'select',
+      options: ['button', 'submit', 'reset'],
+      description: 'Especifica el tipo de botón (solo cuando no se usa href).',
       table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "button" },
-        category: "Principales",
+        type: { summary: 'string' },
+        defaultValue: { summary: 'button' },
+        category: 'Principales',
       },
     },
 
     // Events
     onClick: {
-      description: "Evento para el clic en el botón.",
+      description: 'Evento para el clic en el botón.',
       table: {
-        category: "Eventos",
+        category: 'Eventos',
       },
     },
     onMousedown: {
-      description: "Evento para cuando se presiona el mouse sobre el botón.",
+      description: 'Evento para cuando se presiona el mouse sobre el botón.',
       table: {
-        category: "Eventos",
+        category: 'Eventos',
       },
     },
   },
   args: {
-    icon: "solid check",
-    variant: "grey",
-    size: "medium",
+    icon: 'solid check',
+    variant: 'grey',
+    size: 'medium',
     disabled: false,
     border: false,
-    type: "button",
+    type: 'button',
   },
 };
 
@@ -203,7 +212,8 @@ export const Primary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo básico del componente IconButton. Desde los controles puedes probar todas las propiedades disponibles.'
+        story:
+          'Ejemplo básico del componente IconButton. Desde los controles puedes probar todas las propiedades disponibles.',
       },
       source: {
         code: `
@@ -212,11 +222,12 @@ export const Primary: Story = {
   icon="solid check"
   size="medium"
 />
-`, language: 'html',
+`,
+        language: 'html',
       },
-    }
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { GIconButton, GConfigProvider },
     setup() {
       return { args };
@@ -225,8 +236,8 @@ export const Primary: Story = {
       <g-config-provider>
         <g-icon-button v-bind="args" />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const Variants: Story = {
@@ -234,16 +245,18 @@ export const Variants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente tiene 3 variantes diferentes: grey, black y blue. Cada una establece un esquema de color apropiado para diferentes contextos.'
+        story:
+          'El componente tiene 3 variantes diferentes: grey, black y blue. Cada una establece un esquema de color apropiado para diferentes contextos.',
       },
       source: {
         code: `
 <g-icon-button variant="grey" icon="solid user" />
 <g-icon-button variant="black" icon="solid envelope" />
 <g-icon-button variant="blue" icon="solid question-circle" />
-`, language: 'html',
+`,
+        language: 'html',
       },
-    }
+    },
   },
   render: () => ({
     components: { GIconButton, GConfigProvider },
@@ -264,8 +277,8 @@ export const Variants: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const Sizes: Story = {
@@ -273,15 +286,17 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente tiene dos tamaños disponibles: medium (mediano) y small (pequeño).'
+        story:
+          'El componente tiene dos tamaños disponibles: medium (mediano) y small (pequeño).',
       },
       source: {
         code: `
 <g-icon-button size="medium" icon="solid paper-plane" />
 <g-icon-button size="small" icon="solid paper-plane" />
-`, language: 'html',
+`,
+        language: 'html',
       },
-    }
+    },
   },
   render: () => ({
     components: { GIconButton, GConfigProvider },
@@ -298,8 +313,8 @@ export const Sizes: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const Border: Story = {
@@ -307,7 +322,8 @@ export const Border: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente puede mostrarse con un borde utilizando la propiedad border. Esta propiedad puede aplicarse a ambos tamaños (medium y small).'
+        story:
+          'El componente puede mostrarse con un borde utilizando la propiedad border. Esta propiedad puede aplicarse a ambos tamaños (medium y small).',
       },
       source: {
         code: `
@@ -320,9 +336,10 @@ export const Border: Story = {
 <g-icon-button variant="grey" icon="solid lock" border size="small" />
 <g-icon-button variant="black" icon="solid lock" border size="small" />
 <g-icon-button variant="blue" icon="solid lock" border size="small" />
-`, language: 'html',
+`,
+        language: 'html',
       },
-    }
+    },
   },
   render: () => ({
     components: { GIconButton, GConfigProvider },
@@ -348,8 +365,8 @@ export const Border: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const RoundedBorder: Story = {
@@ -357,7 +374,8 @@ export const RoundedBorder: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Cuando se usan las propiedades border y rounded juntas, el componente muestra un borde completamente redondeado (rounded-full).'
+        story:
+          'Cuando se usan las propiedades border y rounded juntas, el componente muestra un borde completamente redondeado (rounded-full).',
       },
       source: {
         code: `
@@ -370,9 +388,10 @@ export const RoundedBorder: Story = {
 <g-icon-button variant="grey" icon="solid lock" border rounded size="small" />
 <g-icon-button variant="black" icon="solid lock" border rounded size="small" />
 <g-icon-button variant="blue" icon="solid lock" border rounded size="small" />
-`, language: 'html',
+`,
+        language: 'html',
       },
-    }
+    },
   },
   render: () => ({
     components: { GIconButton, GConfigProvider },
@@ -398,8 +417,8 @@ export const RoundedBorder: Story = {
           </div>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const Disabled: Story = {
@@ -407,7 +426,8 @@ export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente puede deshabilitarse utilizando la propiedad disabled.'
+        story:
+          'El componente puede deshabilitarse utilizando la propiedad disabled.',
       },
       source: {
         code: `
@@ -416,9 +436,10 @@ export const Disabled: Story = {
   icon="regular ban"
   disabled
 />
-`, language: 'html',
+`,
+        language: 'html',
       },
-    }
+    },
   },
   render: () => ({
     components: { GIconButton, GConfigProvider },
@@ -442,8 +463,8 @@ export const Disabled: Story = {
           />
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
 
 export const AsLink: Story = {
@@ -451,7 +472,8 @@ export const AsLink: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'El componente puede funcionar como un enlace utilizando la propiedad href.'
+        story:
+          'El componente puede funcionar como un enlace utilizando la propiedad href.',
       },
       source: {
         code: `
@@ -461,9 +483,10 @@ export const AsLink: Story = {
   href="https://www.example.com"
   target="_blank"
 />
-`, language: 'html',
+`,
+        language: 'html',
       },
-    }
+    },
   },
   render: () => ({
     components: { GIconButton, GConfigProvider },
@@ -476,10 +499,6 @@ export const AsLink: Story = {
           target="_blank"
         />
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };
-
-
-
-
