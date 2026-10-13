@@ -1,4 +1,4 @@
-import { ref, toValue } from 'vue';
+import { ref, shallowRef, toValue, triggerRef } from 'vue';
 import type { MaybeRefOrGetter, Ref } from 'vue';
 import type {
   DragListDirection,
@@ -36,7 +36,13 @@ export function useKeyboardReorder(options: {
   handleKeydown: (event: KeyboardEvent, index: number) => void;
 } {
   const grabbedIndex = ref<number | null>(null);
-  const focusIndex = ref<number | null>(null);
+  const focusIndex = shallowRef<number | null>(null);
+
+  /** Pide el foco y notifica aunque el índice repita el valor anterior. */
+  function requestFocus(index: number | null): void {
+    focusIndex.value = index;
+    triggerRef(focusIndex);
+  }
   const grabbedFromIndex = ref<number | null>(null);
   const originIndex = ref(0);
 
@@ -55,7 +61,7 @@ export function useKeyboardReorder(options: {
     originIndex.value = index;
     grabbedFromIndex.value = index;
     grabbedIndex.value = index;
-    focusIndex.value = index;
+    requestFocus(index);
     announce('announceGrab', index);
   }
 
@@ -65,7 +71,7 @@ export function useKeyboardReorder(options: {
     const next = Math.min(Math.max(grabbedIndex.value + delta, 0), last);
     if (next === grabbedIndex.value) return;
     grabbedIndex.value = next;
-    focusIndex.value = next;
+    requestFocus(next);
     announce('announceMove', next);
   }
 
@@ -75,7 +81,7 @@ export function useKeyboardReorder(options: {
     const to = grabbedIndex.value;
     grabbedIndex.value = null;
     grabbedFromIndex.value = null;
-    focusIndex.value = to;
+    requestFocus(to);
     if (from !== to) options.onMove(from, to);
     announce('announceReorder', to);
   }
@@ -84,7 +90,7 @@ export function useKeyboardReorder(options: {
     if (grabbedIndex.value === null) return;
     grabbedIndex.value = null;
     grabbedFromIndex.value = null;
-    focusIndex.value = originIndex.value;
+    requestFocus(originIndex.value);
     announce('announceCancel', originIndex.value);
   }
 
@@ -94,7 +100,7 @@ export function useKeyboardReorder(options: {
     originIndex.value = index;
     announce('announceRemove', index);
     options.onRemove(index);
-    focusIndex.value = remaining > 0 ? Math.min(index, remaining - 1) : null;
+    requestFocus(remaining > 0 ? Math.min(index, remaining - 1) : null);
   }
 
   function handleKeydown(event: KeyboardEvent, index: number): void {

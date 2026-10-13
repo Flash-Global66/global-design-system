@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { withSetup } from '../../../../../tests/utils/withSetup';
 import { useKeyboardReorder } from '../../../src/shared/composables/useKeyboardReorder';
 import type { DragListDirection } from '../../../src/shared/types/drag-list.type';
@@ -152,6 +152,23 @@ describe('useKeyboardReorder', () => {
     const { api } = setup();
     api.handleKeydown(press('Delete'), 0);
     expect(api.focusIndex.value).toBe(0);
+  });
+
+  it('dos Supr seguidos disparan dos notificaciones de foco', async () => {
+    const { api } = setup();
+    const seen: Array<number | null> = [];
+    watch(
+      api.focusIndex,
+      value => {
+        seen.push(value);
+      },
+      { flush: 'sync' },
+    );
+    api.handleKeydown(press('Delete'), 1);
+    seen.length = 0;
+    api.handleKeydown(press('Delete'), 1);
+    expect(api.focusIndex.value).toBe(1);
+    expect(seen).toEqual([1]);
   });
 
   it('no quita sin canRemove', () => {

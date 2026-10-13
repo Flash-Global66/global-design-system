@@ -1,4 +1,4 @@
-import { nextTick, watch } from 'vue';
+import { watch } from 'vue';
 import type { Ref } from 'vue';
 
 const TARGET_LIST_SELECTOR = '[data-drag-target-list]';
@@ -13,13 +13,16 @@ export function useDragListFocus({
   focusIndex,
   targetEl,
 }: UseDragListFocusOptions): void {
-  watch(focusIndex, async index => {
-    if (index === null) return;
-    await nextTick();
-    const list = targetEl.value?.querySelector(TARGET_LIST_SELECTOR);
-    const card = list?.querySelector<HTMLElement>(
-      `:scope > [data-drag-index="${index}"]`,
-    );
-    card?.focus();
-  });
+  watch(
+    focusIndex,
+    index => {
+      if (index === null) return;
+      const list = targetEl.value?.querySelector(TARGET_LIST_SELECTOR);
+      const card = list?.querySelector<HTMLElement>(
+        `:scope > [data-drag-index="${index}"]`,
+      );
+      card?.focus();
+    },
+    { flush: 'post' },
+  );
 }
