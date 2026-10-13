@@ -1,0 +1,31 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+@include b("drag-list-overlay") {
+  @apply absolute inset-0 z-10 flex flex-col items-center justify-center gap-xs rounded-md border-2 border-dashed text-2 font-semibold;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+
+  @include m("add") {
+    @apply border-success-bd bg-success-bg text-success-txt;
+  }
+
+  @include m("remove") {
+    @apply border-error-bd bg-error-bg text-error-txt;
+  }
+
+  @include when("visible") {
+    opacity: 1;
+  }
+
+  @include e("icon") {
+    @apply text-5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
