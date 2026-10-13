@@ -95,7 +95,7 @@
         :start-placeholder="startPlaceholder"
         :end-placeholder="endPlaceholder"
         :class="rangeInputKls"
-        :style="$attrs.style"
+        :style="[$attrs.style, rangeInputCharsStyle]"
         :tabindex="tabindex"
         :inputmode="rangeInputMode"
         autocomplete="off"
@@ -117,7 +117,6 @@
           <g-icon-font
             v-if="triggerIcon"
             :class="[nsInput.e('icon'), nsRange.e('icon')]"
-            class="pr-2"
             :name="triggerIcon"
           />
         </template>
@@ -195,6 +194,7 @@ import { isNil } from 'lodash-unified';
 import {
   dayOrDaysToDate,
   formatter,
+  getRangeInputChars,
   getRangeInputMode,
   parseDate,
   shouldOpenPickerFromTrigger,
@@ -318,6 +318,14 @@ const rangeInputKls = computed(() => [
   nsRange.b('editor'),
   attrs.class,
 ]);
+
+const rangeInputCharsStyle = computed(() => ({
+  [`--${nsRange.namespace.value}-range-input-chars`]: getRangeInputChars({
+    format: props.format,
+    startPlaceholder: props.startPlaceholder,
+    endPlaceholder: props.endPlaceholder,
+  }),
+}));
 
 const clearIconKls = computed(() => [
   nsInput.e('icon'),
