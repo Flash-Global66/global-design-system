@@ -1,0 +1,8 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+@include b("drag-list") {
+  @apply flex flex-col gap-sm;
+}
