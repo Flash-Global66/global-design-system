@@ -8,7 +8,7 @@
   touch-action: manipulation;
 
   @include e("list") {
-    @apply m-0 flex list-none flex-col p-0;
+    @apply m-0 flex list-none flex-col gap-sm p-0;
   }
 
   @include e("item") {
@@ -24,7 +24,7 @@
 
   @include m("horizontal") {
     @include e("list") {
-      @apply flex-row items-center gap-xs overflow-x-auto;
+      @apply flex-row items-center overflow-x-auto;
     }
   }
 
