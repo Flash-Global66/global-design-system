@@ -17,7 +17,11 @@
           v-for="(shortcut, key) in shortcuts"
           :key="key"
           type="button"
-          :class="ppNs.e('shortcut')"
+          :class="[
+            ppNs.e('shortcut'),
+            { active: isShortcutSelected(shortcut) },
+          ]"
+          :aria-pressed="isShortcutSelected(shortcut)"
           @click="handleShortcutClick(shortcut)"
         >
           {{ shortcut.text }}
@@ -255,6 +259,7 @@ import { useLocale } from '@flash-global66/g-hooks';
 import {
   ClickOutside as vClickoutside,
   isArray,
+  isFunction,
 } from '@flash-global66/g-utils';
 import { GButton } from '@flash-global66/g-button';
 import { GInput } from '@flash-global66/g-input';
@@ -267,10 +272,16 @@ import { GIconFont } from '@flash-global66/g-icon-font';
 import { panelDateRangeProps } from '../props/panel-date-range';
 import { useRangePicker } from '../composables/use-range-picker';
 import { DAY_NAVIGATION_KEYS } from '../constants/dayNavigation.constant';
-import { findNextEnabledDate, getDefaultValue, isValidRange } from '../utils';
+import {
+  findNextEnabledDate,
+  getDefaultValue,
+  isShortcutActive,
+  isValidRange,
+} from '../utils';
 import DateTable from './basic-date-table.vue';
 
 import type { Dayjs } from 'dayjs';
+import type { Shortcut } from '../composables/use-shortcut';
 
 import es from '../lang/es';
 
@@ -370,6 +381,16 @@ const rightMonth = computed(() => {
 });
 
 const hasShortcuts = computed(() => !!shortcuts.value.length);
+
+function isShortcutSelected(shortcut: Shortcut): boolean {
+  return isShortcutActive({
+    shortcutValue: isFunction(shortcut.value)
+      ? shortcut.value()
+      : shortcut.value,
+    minDate: minDate.value,
+    maxDate: maxDate.value,
+  });
+}
 
 const minVisibleDate = computed(() => {
   if (dateUserInput.value.min !== null) return dateUserInput.value.min;
