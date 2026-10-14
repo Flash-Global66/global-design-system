@@ -12,6 +12,9 @@
 @use "./styles/time-picker.scss" as *;
 @use "./styles/time-range-picker.scss" as *;
 
+$range-panel-mobile-max-width: 780px;
+$range-editor-compact-max-width: 400px;
+
 @include b(date-editor) {
   &.#{$namespace}-input,
   &.#{$namespace}-input__wrapper {
@@ -48,7 +51,7 @@
   padding: 0 !important;
 }
 
-@media (max-width: 400px) {
+@media (max-width: $range-editor-compact-max-width) {
   .gui-range-editor {
     --gui-range-char: 0.48rem;
 
@@ -58,9 +61,9 @@
   }
 }
 
-@media (max-width: 780px) {
+@media (max-width: $range-panel-mobile-max-width) {
   .gui-picker__popper.gui-popper__tooltip:has(.gui-date-range-picker) {
-    width: calc(100% - 32px) !important;
+    width: calc(100% - 32px);
   }
 }
 
