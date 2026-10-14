@@ -156,6 +156,17 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
         defaultValue: { summary: 'true' },
       },
     },
+    openOnInputClick: {
+      name: 'open-on-input-click',
+      description:
+        'En modo rango, el clic en cualquiera de los dos inputs también abre el panel; el ícono siempre lo abre',
+      control: 'boolean',
+      table: {
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
 
     // 3. Apariencia y Estilos
     prefixIcon: {
@@ -413,6 +424,52 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
 export default meta;
 type Story = StoryObj<typeof GDatePicker>;
 
+const RANGE_SHORTCUTS = [
+  {
+    text: 'Última semana',
+    value: () => [dayjs().subtract(1, 'week').toDate(), dayjs().toDate()],
+  },
+  {
+    text: 'Último mes',
+    value: () => [dayjs().subtract(1, 'month').toDate(), dayjs().toDate()],
+  },
+  {
+    text: 'Últimos 3 meses',
+    value: () => [dayjs().subtract(3, 'month').toDate(), dayjs().toDate()],
+  },
+];
+
+function renderOpenOnInputRange(shortcuts: typeof RANGE_SHORTCUTS = []) {
+  return () => ({
+    components: { GDatePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+      const lang = es;
+      return { value, lang, shortcuts };
+    },
+    template: `
+      <g-config-provider :locale="lang">
+        <div class="flex flex-col gap-4">
+          <g-date-picker
+            v-model="value"
+            type="daterange"
+            aria-label="Rango de fechas"
+            open-on-input-click
+            :shortcuts="shortcuts"
+            start-placeholder="Inicio"
+            end-placeholder="Fin"
+            range-separator="-"
+            format="DD-MM-YYYY"
+            value-format="YYYY-MM-DD"
+            prefix-icon="regular calendar"
+          />
+          <div>Rango seleccionado: {{ value }}</div>
+        </div>
+      </g-config-provider>
+    `,
+  });
+}
+
 export const Basic: Story = {
   name: 'Básico',
   render: args => ({
@@ -480,58 +537,80 @@ export const RangeWithShortcutsOpenOnInput: Story = {
       description: {
         story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del icono. Por defecto está apagado.
 
-- Bajo 640 px el panel ocupa el ancho disponible, apila los meses y muestra los atajos como chips arriba`,
+- Hasta 780 px de ancho el panel ocupa el ancho disponible, apila los meses y muestra los atajos como chips arriba`,
       },
     },
   },
-  render: () => ({
-    components: { GDatePicker, GConfigProvider },
-    setup() {
-      const value = ref([]);
-      const lang = es;
-      const shortcuts = [
-        {
-          text: 'Última semana',
-          value: () => [dayjs().subtract(1, 'week').toDate(), dayjs().toDate()],
-        },
-        {
-          text: 'Último mes',
-          value: () => [
-            dayjs().subtract(1, 'month').toDate(),
-            dayjs().toDate(),
-          ],
-        },
-        {
-          text: 'Últimos 3 meses',
-          value: () => [
-            dayjs().subtract(3, 'month').toDate(),
-            dayjs().toDate(),
-          ],
-        },
-      ];
-      return { value, lang, shortcuts };
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS),
+};
+
+export const RangeResponsive: Story = {
+  name: 'Rango en pantallas pequeñas',
+  parameters: {
+    docs: {
+      description: {
+        story: `Hasta 780 px de ancho el panel de rango deja de ser de escritorio (756 px) y se adapta al espacio libre de la pantalla.
+
+- Los meses se apilan y los atajos se muestran como chips arriba
+- El panel queda dentro del viewport, sin desbordar horizontalmente
+- Para verlo, abre la pestaña **Canvas** de esta historia: se carga con el viewport de 390 px`,
+      },
     },
-    template: `
-      <g-config-provider :locale="lang">
-        <div class="flex flex-col gap-4">
-          <g-date-picker
-            v-model="value"
-            type="daterange"
-            aria-label="Rango de fechas"
-            open-on-input-click
-            :shortcuts="shortcuts"
-            start-placeholder="Inicio"
-            end-placeholder="Fin"
-            range-separator="-"
-            format="DD-MM-YYYY"
-            value-format="YYYY-MM-DD"
-            prefix-icon="regular calendar"
-          />
-          <div>Rango seleccionado: {{ value }}</div>
-        </div>
-      </g-config-provider>
-    `,
-  }),
+    viewport: {
+      options: {
+        mobile390: {
+          name: 'Móvil 390 px',
+          styles: { width: '390px', height: '844px' },
+          type: 'mobile',
+        },
+      },
+    },
+  },
+  globals: {
+    viewport: { value: 'mobile390', isRotated: false },
+  },
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS.slice(0, 2)),
+};
+
+export const RangeKeyboard: Story = {
+  name: 'Rango con teclado',
+  parameters: {
+    docs: {
+      description: {
+        story: `El rango se puede completar sin mouse y el foco es visible en todo momento.
+
+| Tecla | Acción |
+| --- | --- |
+| \`Tab\` | Pasa del input de inicio al de fin; con \`open-on-input-click\`, desde el de fin entra al panel |
+| \`↓\` | Desde el input, enfoca el panel |
+| \`←\` \`→\` \`↑\` \`↓\` | Mueven el foco entre los días del panel |
+| \`Enter\` o \`Espacio\` | Eligen el día enfocado |
+| \`Esc\` | Cierra el panel |
+
+Con \`open-on-input-click\` el clic sobre cualquiera de los dos inputs también abre el panel. Los días, los atajos y las flechas de mes muestran un anillo de foco visible.`,
+      },
+    },
+  },
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS),
+};
+
+export const RangeReducedMotion: Story = {
+  name: 'Rango con movimiento reducido',
+  parameters: {
+    docs: {
+      description: {
+        story: `Cuando el sistema pide movimiento reducido (\`prefers-reduced-motion: reduce\`) el panel de rango se abre y se cierra sin transición.
+
+Para comprobarlo:
+
+- Activa **Reducir movimiento** en el sistema operativo, o
+- en las DevTools del navegador, panel **Rendering**, usa **Emulate CSS media feature prefers-reduced-motion**.
+
+Con el ajuste apagado, el panel conserva la animación de entrada.`,
+      },
+    },
+  },
+  render: renderOpenOnInputRange(),
 };
 
 export const DateTime: Story = {
