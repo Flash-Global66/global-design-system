@@ -52,17 +52,19 @@ $range-editor-compact-max-width: 400px;
 }
 
 @media (max-width: $range-editor-compact-max-width) {
-  .gui-range-editor {
-    --gui-range-char: 0.48rem;
+  .#{$namespace}-range-editor {
+    --#{$namespace}-range-char: 0.48rem;
 
-    .gui-range-input {
+    .#{$namespace}-range-input {
       font-size: 0.875rem;
     }
   }
 }
 
 @media (max-width: $range-panel-mobile-max-width) {
-  .gui-picker__popper.gui-popper__tooltip:has(.gui-date-range-picker) {
+  .#{$namespace}-picker__popper.#{$namespace}-popper__tooltip:has(
+      .#{$namespace}-date-range-picker
+    ) {
     width: calc(100% - 32px);
   }
 }
