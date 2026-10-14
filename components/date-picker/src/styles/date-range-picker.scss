@@ -175,7 +175,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .#{$namespace}-date-picker__popper {
+  .#{$namespace}-picker__popper {
     &.#{$namespace}-zoom-in-top-enter-active,
     &.#{$namespace}-zoom-in-top-leave-active {
       transition: none;
