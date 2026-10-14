@@ -146,6 +146,17 @@ import { GTimePicker } from '@flash-global66/g-time-picker';
         defaultValue: { summary: 'false' },
       },
     },
+    openOnInputClick: {
+      name: 'open-on-input-click',
+      description:
+        'En modo rango, el clic en cualquiera de los dos inputs también abre el panel; el ícono siempre lo abre',
+      control: 'boolean',
+      table: {
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
 
     // 3. Apariencia y Estilos
     prefixIcon: {
@@ -242,6 +253,16 @@ import { GTimePicker } from '@flash-global66/g-time-picker';
         category: 'Etiquetas y Texto',
         type: { summary: 'string' },
         defaultValue: { summary: '' },
+      },
+    },
+    ariaLabel: {
+      name: 'aria-label',
+      description:
+        'Nombre accesible del panel; en modo rango también sirve de respaldo para los inputs que no tienen placeholder',
+      control: 'text',
+      table: {
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
       },
     },
 
@@ -453,6 +474,47 @@ export const Range: Story = {
             start-placeholder="Hora inicio"
             end-placeholder="Hora fin"
             label="Seleccione rango"
+            range-separator="|"
+            format="HH:mm:ss"
+          />
+          <div>Rango seleccionado: {{ value }}</div>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const RangeOpenOnInput: Story = {
+  name: 'Rango con apertura desde inputs',
+  parameters: {
+    docs: {
+      description: {
+        story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del ícono. Por defecto está apagado.
+
+- \`Tab\` pasa del input de inicio al de fin; desde el de fin entra al panel
+- \`Esc\` dentro del panel lo cierra y devuelve el foco al input
+- Con puntero táctil los inputs no abren el teclado del dispositivo, para que no tape el panel
+- \`aria-label\` da nombre accesible al panel y es el respaldo de cada input cuando faltan los placeholders`,
+      },
+    },
+  },
+  render: () => ({
+    components: { GTimePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+
+      return { value };
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-4">
+          <g-time-picker
+            v-model="value"
+            is-range
+            open-on-input-click
+            aria-label="Rango de horas"
+            start-placeholder="Hora inicio"
+            end-placeholder="Hora fin"
             range-separator="|"
             format="HH:mm:ss"
           />
