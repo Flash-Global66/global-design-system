@@ -5,6 +5,8 @@
 @use "@flash-global66/g-utils/tokens" as *;
 @use "@flash-global66/g-utils/transition" as *;
 
+$range-editor-chrome-width: 89px;
+
 @include b(picker) {
   @include e(popper) {
     @include set-css-var-type("datepicker", "border-color", $datepicker);
@@ -138,7 +140,7 @@
           (
             var(--#{$namespace}-range-input-chars, 10) *
               var(--#{$namespace}-range-char, 0.55rem) + 4px
-          ) + 89px
+          ) + $range-editor-chrome-width
       ),
       100%
     );
