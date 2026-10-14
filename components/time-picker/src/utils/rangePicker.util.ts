@@ -6,6 +6,7 @@ import {
 
 import type {
   GetRangeInputCharsParams,
+  GetRangeInputLabelParams,
   GetRangeInputModeParams,
   GetRangePanelMaxHeightParams,
   ShouldFocusPanelOnTabParams,
@@ -51,6 +52,17 @@ export function getRangePanelMaxHeight({
     Math.floor(viewportHeight - referenceBottom - RANGE_PANEL_VIEWPORT_MARGIN),
     RANGE_PANEL_MIN_HEIGHT,
   );
+}
+
+export function getRangeInputLabel({
+  ariaLabel,
+  placeholder,
+}: GetRangeInputLabelParams): string | undefined {
+  const label = [ariaLabel, placeholder]
+    .map(part => part?.trim())
+    .filter(Boolean)
+    .join(' ');
+  return label || undefined;
 }
 
 export function getRangeInputChars({
