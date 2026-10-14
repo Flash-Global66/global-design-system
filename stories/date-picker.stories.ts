@@ -1,5 +1,7 @@
 import { StoryObj } from '@storybook/vue3-vite';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { ref } from 'vue';
+import dayjs from 'dayjs';
 import { es } from '../common/lang';
 
 // COMPONENTS
@@ -153,6 +155,17 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
         category: 'Comportamiento e Interacción',
         type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
+      },
+    },
+    openOnInputClick: {
+      name: 'open-on-input-click',
+      description:
+        'En modo rango, el clic en cualquiera de los dos inputs también abre el panel; el ícono siempre lo abre',
+      control: 'boolean',
+      table: {
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
 
@@ -412,6 +425,52 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
 export default meta;
 type Story = StoryObj<typeof GDatePicker>;
 
+const RANGE_SHORTCUTS = [
+  {
+    text: 'Última semana',
+    value: () => [dayjs().subtract(1, 'week').toDate(), dayjs().toDate()],
+  },
+  {
+    text: 'Último mes',
+    value: () => [dayjs().subtract(1, 'month').toDate(), dayjs().toDate()],
+  },
+  {
+    text: 'Últimos 3 meses',
+    value: () => [dayjs().subtract(3, 'month').toDate(), dayjs().toDate()],
+  },
+];
+
+function renderOpenOnInputRange(shortcuts: typeof RANGE_SHORTCUTS = []) {
+  return () => ({
+    components: { GDatePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+      const lang = es;
+      return { value, lang, shortcuts };
+    },
+    template: `
+      <g-config-provider :locale="lang">
+        <div class="flex flex-col gap-4">
+          <g-date-picker
+            v-model="value"
+            type="daterange"
+            aria-label="Rango de fechas"
+            open-on-input-click
+            :shortcuts="shortcuts"
+            start-placeholder="Inicio"
+            end-placeholder="Fin"
+            range-separator="-"
+            format="DD-MM-YYYY"
+            value-format="YYYY-MM-DD"
+            prefix-icon="regular calendar"
+          />
+          <div>Rango seleccionado: {{ value }}</div>
+        </div>
+      </g-config-provider>
+    `,
+  });
+}
+
 export const Basic: Story = {
   name: 'Básico',
   render: args => ({
@@ -470,6 +529,206 @@ export const Range: Story = {
       </g-config-provider>
     `,
   }),
+};
+
+export const RangeWithShortcutsOpenOnInput: Story = {
+  name: 'Rango con atajos y apertura desde inputs',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const start = await canvas.findByPlaceholderText('Inicio');
+
+    await userEvent.click(start);
+    const shortcut = await screen.findByRole('button', {
+      name: 'Última semana',
+    });
+    await expect(shortcut).toHaveAttribute('aria-pressed', 'false');
+
+    await userEvent.click(shortcut);
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+
+    await userEvent.click(start);
+    const reopened = await screen.findByRole('button', {
+      name: 'Última semana',
+    });
+    await expect(reopened).toHaveAttribute('aria-pressed', 'true');
+    await expect(
+      screen.getByRole('button', { name: 'Último mes' }),
+    ).toHaveAttribute('aria-pressed', 'false');
+
+    await userEvent.click(
+      document.body.querySelector('td.available[data-date]') as HTMLElement,
+    );
+    await waitFor(() =>
+      expect(reopened).toHaveAttribute('aria-pressed', 'false'),
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del icono. Por defecto está apagado.
+
+- Hasta 780 px de ancho el panel ocupa el ancho disponible, apila los meses y muestra los atajos como chips arriba
+- El atajo cuyo rango coincide con la selección expone \`aria-pressed\` y deja de hacerlo al elegir otras fechas; hasta 780 px además se rellena con el color primario
+
+### Teclado
+
+El rango se puede completar sin mouse y el foco es visible en todo momento.
+
+| Tecla | Acción |
+| --- | --- |
+| \`Tab\` | Pasa del input de inicio al de fin; con \`open-on-input-click\`, desde el de fin entra al panel |
+| \`↓\` | Desde el input, enfoca el panel |
+| \`←\` \`→\` \`↑\` \`↓\` | Mueven el foco entre los días del panel |
+| \`Enter\` o \`Espacio\` | Eligen el día enfocado |
+| \`Esc\` | Cierra el panel |
+
+Los días, los atajos y las flechas de mes muestran un anillo de foco visible.
+
+### Movimiento reducido
+
+Cuando el sistema pide movimiento reducido (\`prefers-reduced-motion: reduce\`) el panel se abre y se cierra sin transición. Para comprobarlo, activa **Reducir movimiento** en el sistema operativo o usa **Emulate CSS media feature prefers-reduced-motion** en el panel **Rendering** de las DevTools. Con el ajuste apagado, el panel conserva la animación de entrada.`,
+      },
+    },
+  },
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS),
+};
+
+export const RangeResponsive: Story = {
+  name: 'Rango en pantallas pequeñas',
+  parameters: {
+    docs: {
+      description: {
+        story: `Hasta 780 px de ancho el panel de rango deja de ser de escritorio (756 px) y se adapta al espacio libre de la pantalla.
+
+- Los meses se apilan y los atajos se muestran como chips arriba
+- El panel queda dentro del viewport, sin desbordar horizontalmente
+- Para verlo, abre la pestaña **Canvas** de esta historia: se carga con el viewport de 390 px`,
+      },
+    },
+    viewport: {
+      options: {
+        mobile390: {
+          name: 'Móvil 390 px',
+          styles: { width: '390px', height: '844px' },
+          type: 'mobile',
+        },
+      },
+    },
+  },
+  globals: {
+    viewport: { value: 'mobile390', isRotated: false },
+  },
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS.slice(0, 2)),
+};
+
+export const RangeKeyboard: Story = {
+  name: 'Rango con teclado',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const start = await canvas.findByPlaceholderText('Inicio');
+    const end = await canvas.findByPlaceholderText('Fin');
+
+    await userEvent.click(start);
+    const firstShortcut = await screen.findByRole('button', {
+      name: 'Última semana',
+    });
+
+    await userEvent.tab();
+    await expect(end).toHaveFocus();
+    await userEvent.tab();
+    await expect(firstShortcut).toHaveFocus();
+
+    const cells = Array.from(
+      document.body.querySelectorAll<HTMLElement>('td.available[data-date]'),
+    );
+    const [cell, nextCell] = [cells[10], cells[11]];
+    cell.focus();
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(document.activeElement).toHaveAttribute(
+      'data-date',
+      nextCell.dataset.date as string,
+    );
+
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() => expect(start).not.toHaveValue(''));
+
+    await userEvent.keyboard('{ArrowRight}');
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+    await waitFor(() =>
+      expect(document.activeElement).toHaveAttribute('role', 'combobox'),
+    );
+
+    await new Promise(resolve => setTimeout(resolve, 400));
+    await expect(start).toHaveAttribute('aria-expanded', 'false');
+    await expect(document.activeElement).toHaveAttribute('role', 'combobox');
+
+    await userEvent.click(start);
+    await waitFor(() => expect(start).toHaveAttribute('aria-expanded', 'true'));
+    document.body
+      .querySelector<HTMLElement>('td.available[data-date]')
+      ?.focus();
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+    await expect(document.activeElement).toHaveAttribute('role', 'combobox');
+  },
+  tags: ['!dev', '!autodocs'],
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS),
+};
+
+export const RangeReducedMotion: Story = {
+  name: 'Rango con movimiento reducido',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByPlaceholderText('Inicio'));
+    const popper = await waitFor(() => {
+      const element = document.body.querySelector<HTMLElement>(
+        '[class*="picker__popper"]',
+      );
+      if (!element) throw new Error('el panel todavía no se montó');
+      return element;
+    });
+
+    const readRules = (sheet: CSSStyleSheet): CSSRule[] => {
+      try {
+        return Array.from(sheet.cssRules);
+      } catch {
+        return [];
+      }
+    };
+
+    const reducedMotionSelectors = Array.from(document.styleSheets).flatMap(
+      sheet =>
+        readRules(sheet)
+          .filter(
+            (rule): rule is CSSMediaRule =>
+              rule instanceof CSSMediaRule &&
+              rule.conditionText.includes('prefers-reduced-motion'),
+          )
+          .flatMap(rule => Array.from(rule.cssRules))
+          .filter((rule): rule is CSSStyleRule => rule instanceof CSSStyleRule)
+          .flatMap(rule => rule.selectorText.split(',')),
+    );
+    const popperSelectors = reducedMotionSelectors.filter(selector =>
+      selector.includes('picker__popper'),
+    );
+
+    await expect(popperSelectors.length).toBeGreaterThan(0);
+    for (const selector of popperSelectors) {
+      const baseSelector = selector
+        .trim()
+        .replace(/\.[\w-]+-(enter|leave)-active$/, '');
+      await expect(popper.matches(baseSelector)).toBe(true);
+    }
+  },
+  tags: ['!dev', '!autodocs'],
+  render: renderOpenOnInputRange(),
 };
 
 export const DateTime: Story = {

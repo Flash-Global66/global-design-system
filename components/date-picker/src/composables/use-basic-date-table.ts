@@ -393,8 +393,8 @@ export const useBasicDateTable = (
     currentCellRef,
 
     // cellMatchesDate,
-    // getDateOfCell,
     focus,
+    getDateOfCell,
     isCurrent,
     isWeekActive,
     isSelectedCell,

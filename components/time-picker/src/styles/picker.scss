@@ -5,6 +5,8 @@
 @use "@flash-global66/g-utils/tokens" as *;
 @use "@flash-global66/g-utils/transition" as *;
 
+$range-editor-chrome-width: 89px;
+
 @include b(picker) {
   @include e(popper) {
     @include set-css-var-type("datepicker", "border-color", $datepicker);
@@ -85,7 +87,12 @@
     line-height: #{map.get($input-height, "default") - 2};
     margin: 0;
     padding: 0;
-    width: 39%;
+    flex: 1 1 0;
+    width: auto;
+    min-width: calc(
+      var(--#{$namespace}-range-input-chars, 10) *
+        var(--#{$namespace}-range-char, 0.55rem) + 4px
+    );
     text-align: center;
     font-size: getCssVar("font-size", "base");
     color: getCssVar("text-color", "regular");
@@ -97,16 +104,20 @@
   }
 
   .#{$namespace}-range-separator {
-    flex: 1;
+    flex: none;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding: 0 5px;
+    padding: 0 6px;
     margin: 0;
     font-size: 14px;
     overflow-wrap: break-word;
     color: getCssVar("text-color", "primary");
+  }
+
+  .#{$namespace}-range__icon {
+    padding-right: 8px;
   }
 
   .#{$namespace}-range__close-icon {
@@ -123,6 +134,16 @@
     align-items: center;
     padding: 0 8px;
     vertical-align: middle;
+    min-width: min(
+      calc(
+        2 *
+          (
+            var(--#{$namespace}-range-input-chars, 10) *
+              var(--#{$namespace}-range-char, 0.55rem) + 4px
+          ) + $range-editor-chrome-width
+      ),
+      100%
+    );
   }
 
   @include when(active) {

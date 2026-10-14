@@ -1,4 +1,5 @@
 import { StoryObj } from '@storybook/vue3-vite';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { ref } from 'vue';
 
 // COMPONENTS
@@ -146,6 +147,17 @@ import { GTimePicker } from '@flash-global66/g-time-picker';
         defaultValue: { summary: 'false' },
       },
     },
+    openOnInputClick: {
+      name: 'open-on-input-click',
+      description:
+        'En modo rango, el clic en cualquiera de los dos inputs también abre el panel; el ícono siempre lo abre',
+      control: 'boolean',
+      table: {
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
 
     // 3. Apariencia y Estilos
     prefixIcon: {
@@ -242,6 +254,16 @@ import { GTimePicker } from '@flash-global66/g-time-picker';
         category: 'Etiquetas y Texto',
         type: { summary: 'string' },
         defaultValue: { summary: '' },
+      },
+    },
+    ariaLabel: {
+      name: 'aria-label',
+      description:
+        'Nombre accesible del panel; en modo rango también sirve de respaldo para los inputs que no tienen placeholder',
+      control: 'text',
+      table: {
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
       },
     },
 
@@ -453,6 +475,81 @@ export const Range: Story = {
             start-placeholder="Hora inicio"
             end-placeholder="Hora fin"
             label="Seleccione rango"
+            range-separator="|"
+            format="HH:mm:ss"
+          />
+          <div>Rango seleccionado: {{ value }}</div>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const RangeOpenOnInput: Story = {
+  name: 'Rango con apertura desde inputs',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const start = await canvas.findByPlaceholderText('Hora inicio');
+
+    await userEvent.click(start);
+    await waitFor(() => expect(start).toHaveAttribute('aria-expanded', 'true'));
+
+    const panelButton = await waitFor(() => {
+      const button = document.body.querySelector<HTMLElement>(
+        '.gui-picker__popper .gui-time-panel__btn',
+      );
+      if (!button) throw new Error('el panel todavía no se montó');
+      return button;
+    });
+    panelButton.focus();
+
+    let escapeReachedDocument = false;
+    const onDocumentKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') escapeReachedDocument = true;
+    };
+    document.addEventListener('keydown', onDocumentKeydown);
+    await userEvent.keyboard('{Escape}');
+    document.removeEventListener('keydown', onDocumentKeydown);
+
+    await expect(escapeReachedDocument).toBe(false);
+
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+    await expect(start).toHaveFocus();
+
+    await new Promise(resolve => setTimeout(resolve, 400));
+    await expect(start).toHaveAttribute('aria-expanded', 'false');
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del ícono. Por defecto está apagado.
+
+- \`Tab\` pasa del input de inicio al de fin; desde el de fin entra al panel
+- \`Esc\` dentro del panel lo cierra y devuelve el foco al input
+- Con puntero táctil los inputs no abren el teclado del dispositivo, para que no tape el panel
+- \`aria-label\` da nombre accesible al panel y es el respaldo de cada input cuando faltan los placeholders`,
+      },
+    },
+  },
+  render: () => ({
+    components: { GTimePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+
+      return { value };
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-4">
+          <g-time-picker
+            v-model="value"
+            is-range
+            open-on-input-click
+            aria-label="Rango de horas"
+            start-placeholder="Hora inicio"
+            end-placeholder="Hora fin"
             range-separator="|"
             format="HH:mm:ss"
           />
