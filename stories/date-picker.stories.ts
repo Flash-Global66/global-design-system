@@ -424,6 +424,52 @@ import { GDatePicker } from '@flash-global66/g-date-picker';
 export default meta;
 type Story = StoryObj<typeof GDatePicker>;
 
+const RANGE_SHORTCUTS = [
+  {
+    text: 'Última semana',
+    value: () => [dayjs().subtract(1, 'week').toDate(), dayjs().toDate()],
+  },
+  {
+    text: 'Último mes',
+    value: () => [dayjs().subtract(1, 'month').toDate(), dayjs().toDate()],
+  },
+  {
+    text: 'Últimos 3 meses',
+    value: () => [dayjs().subtract(3, 'month').toDate(), dayjs().toDate()],
+  },
+];
+
+function renderOpenOnInputRange(shortcuts: typeof RANGE_SHORTCUTS = []) {
+  return () => ({
+    components: { GDatePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+      const lang = es;
+      return { value, lang, shortcuts };
+    },
+    template: `
+      <g-config-provider :locale="lang">
+        <div class="flex flex-col gap-4">
+          <g-date-picker
+            v-model="value"
+            type="daterange"
+            aria-label="Rango de fechas"
+            open-on-input-click
+            :shortcuts="shortcuts"
+            start-placeholder="Inicio"
+            end-placeholder="Fin"
+            range-separator="-"
+            format="DD-MM-YYYY"
+            value-format="YYYY-MM-DD"
+            prefix-icon="regular calendar"
+          />
+          <div>Rango seleccionado: {{ value }}</div>
+        </div>
+      </g-config-provider>
+    `,
+  });
+}
+
 export const Basic: Story = {
   name: 'Básico',
   render: args => ({
@@ -495,54 +541,7 @@ export const RangeWithShortcutsOpenOnInput: Story = {
       },
     },
   },
-  render: () => ({
-    components: { GDatePicker, GConfigProvider },
-    setup() {
-      const value = ref([]);
-      const lang = es;
-      const shortcuts = [
-        {
-          text: 'Última semana',
-          value: () => [dayjs().subtract(1, 'week').toDate(), dayjs().toDate()],
-        },
-        {
-          text: 'Último mes',
-          value: () => [
-            dayjs().subtract(1, 'month').toDate(),
-            dayjs().toDate(),
-          ],
-        },
-        {
-          text: 'Últimos 3 meses',
-          value: () => [
-            dayjs().subtract(3, 'month').toDate(),
-            dayjs().toDate(),
-          ],
-        },
-      ];
-      return { value, lang, shortcuts };
-    },
-    template: `
-      <g-config-provider :locale="lang">
-        <div class="flex flex-col gap-4">
-          <g-date-picker
-            v-model="value"
-            type="daterange"
-            aria-label="Rango de fechas"
-            open-on-input-click
-            :shortcuts="shortcuts"
-            start-placeholder="Inicio"
-            end-placeholder="Fin"
-            range-separator="-"
-            format="DD-MM-YYYY"
-            value-format="YYYY-MM-DD"
-            prefix-icon="regular calendar"
-          />
-          <div>Rango seleccionado: {{ value }}</div>
-        </div>
-      </g-config-provider>
-    `,
-  }),
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS),
 };
 
 export const RangeResponsive: Story = {
@@ -570,47 +569,7 @@ export const RangeResponsive: Story = {
   globals: {
     viewport: { value: 'mobile390', isRotated: false },
   },
-  render: () => ({
-    components: { GDatePicker, GConfigProvider },
-    setup() {
-      const value = ref([]);
-      const lang = es;
-      const shortcuts = [
-        {
-          text: 'Última semana',
-          value: () => [dayjs().subtract(1, 'week').toDate(), dayjs().toDate()],
-        },
-        {
-          text: 'Último mes',
-          value: () => [
-            dayjs().subtract(1, 'month').toDate(),
-            dayjs().toDate(),
-          ],
-        },
-      ];
-      return { value, lang, shortcuts };
-    },
-    template: `
-      <g-config-provider :locale="lang">
-        <div class="flex flex-col gap-4">
-          <g-date-picker
-            v-model="value"
-            type="daterange"
-            aria-label="Rango de fechas"
-            open-on-input-click
-            :shortcuts="shortcuts"
-            start-placeholder="Inicio"
-            end-placeholder="Fin"
-            range-separator="-"
-            format="DD-MM-YYYY"
-            value-format="YYYY-MM-DD"
-            prefix-icon="regular calendar"
-          />
-          <div>Rango seleccionado: {{ value }}</div>
-        </div>
-      </g-config-provider>
-    `,
-  }),
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS.slice(0, 2)),
 };
 
 export const RangeKeyboard: Story = {
@@ -632,33 +591,7 @@ Con \`open-on-input-click\` el clic sobre cualquiera de los dos inputs también 
       },
     },
   },
-  render: () => ({
-    components: { GDatePicker, GConfigProvider },
-    setup() {
-      const value = ref([]);
-      const lang = es;
-      return { value, lang };
-    },
-    template: `
-      <g-config-provider :locale="lang">
-        <div class="flex flex-col gap-4">
-          <g-date-picker
-            v-model="value"
-            type="daterange"
-            aria-label="Rango de fechas"
-            open-on-input-click
-            start-placeholder="Inicio"
-            end-placeholder="Fin"
-            range-separator="-"
-            format="DD-MM-YYYY"
-            value-format="YYYY-MM-DD"
-            prefix-icon="regular calendar"
-          />
-          <div>Rango seleccionado: {{ value }}</div>
-        </div>
-      </g-config-provider>
-    `,
-  }),
+  render: renderOpenOnInputRange(RANGE_SHORTCUTS),
 };
 
 export const RangeReducedMotion: Story = {
@@ -677,33 +610,7 @@ Con el ajuste apagado, el panel conserva la animación de entrada.`,
       },
     },
   },
-  render: () => ({
-    components: { GDatePicker, GConfigProvider },
-    setup() {
-      const value = ref([]);
-      const lang = es;
-      return { value, lang };
-    },
-    template: `
-      <g-config-provider :locale="lang">
-        <div class="flex flex-col gap-4">
-          <g-date-picker
-            v-model="value"
-            type="daterange"
-            aria-label="Rango de fechas"
-            open-on-input-click
-            start-placeholder="Inicio"
-            end-placeholder="Fin"
-            range-separator="-"
-            format="DD-MM-YYYY"
-            value-format="YYYY-MM-DD"
-            prefix-icon="regular calendar"
-          />
-          <div>Rango seleccionado: {{ value }}</div>
-        </div>
-      </g-config-provider>
-    `,
-  }),
+  render: renderOpenOnInputRange(),
 };
 
 export const DateTime: Story = {
