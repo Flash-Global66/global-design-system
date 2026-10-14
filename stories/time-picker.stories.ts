@@ -1,4 +1,5 @@
 import { StoryObj } from '@storybook/vue3-vite';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { ref } from 'vue';
 
 // COMPONENTS
@@ -486,6 +487,40 @@ export const Range: Story = {
 
 export const RangeOpenOnInput: Story = {
   name: 'Rango con apertura desde inputs',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const start = await canvas.findByPlaceholderText('Hora inicio');
+
+    await userEvent.click(start);
+    await waitFor(() => expect(start).toHaveAttribute('aria-expanded', 'true'));
+
+    const panelButton = await waitFor(() => {
+      const button = document.body.querySelector<HTMLElement>(
+        '.gui-picker__popper .gui-time-panel__btn',
+      );
+      if (!button) throw new Error('el panel todavía no se montó');
+      return button;
+    });
+    panelButton.focus();
+
+    let escapeReachedDocument = false;
+    const onDocumentKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') escapeReachedDocument = true;
+    };
+    document.addEventListener('keydown', onDocumentKeydown);
+    await userEvent.keyboard('{Escape}');
+    document.removeEventListener('keydown', onDocumentKeydown);
+
+    await expect(escapeReachedDocument).toBe(false);
+
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+    await expect(start).toHaveFocus();
+
+    await new Promise(resolve => setTimeout(resolve, 400));
+    await expect(start).toHaveAttribute('aria-expanded', 'false');
+  },
   parameters: {
     docs: {
       description: {

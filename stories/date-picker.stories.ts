@@ -1,4 +1,5 @@
 import { StoryObj } from '@storybook/vue3-vite';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { ref } from 'vue';
 import dayjs from 'dayjs';
 import { es } from '../common/lang';
@@ -574,6 +575,44 @@ export const RangeResponsive: Story = {
 
 export const RangeKeyboard: Story = {
   name: 'Rango con teclado',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const start = await canvas.findByPlaceholderText('Inicio');
+    const end = await canvas.findByPlaceholderText('Fin');
+
+    await userEvent.click(start);
+    const firstShortcut = await screen.findByRole('button', {
+      name: 'Última semana',
+    });
+
+    await userEvent.tab();
+    await expect(end).toHaveFocus();
+    await userEvent.tab();
+    await expect(firstShortcut).toHaveFocus();
+
+    const cells = Array.from(
+      document.body.querySelectorAll<HTMLElement>('td.available[data-date]'),
+    );
+    const [cell, nextCell] = [cells[10], cells[11]];
+    cell.focus();
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(document.activeElement).toHaveAttribute(
+      'data-date',
+      nextCell.dataset.date as string,
+    );
+
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() => expect(start).not.toHaveValue(''));
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+    await expect(end).toHaveFocus();
+
+    await new Promise(resolve => setTimeout(resolve, 400));
+    await expect(start).toHaveAttribute('aria-expanded', 'false');
+  },
   parameters: {
     docs: {
       description: {
@@ -596,6 +635,49 @@ Con \`open-on-input-click\` el clic sobre cualquiera de los dos inputs también 
 
 export const RangeReducedMotion: Story = {
   name: 'Rango con movimiento reducido',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByPlaceholderText('Inicio'));
+    const popper = await waitFor(() => {
+      const element = document.body.querySelector<HTMLElement>(
+        '[class*="picker__popper"]',
+      );
+      if (!element) throw new Error('el panel todavía no se montó');
+      return element;
+    });
+
+    const readRules = (sheet: CSSStyleSheet): CSSRule[] => {
+      try {
+        return Array.from(sheet.cssRules);
+      } catch {
+        return [];
+      }
+    };
+
+    const reducedMotionSelectors = Array.from(document.styleSheets).flatMap(
+      sheet =>
+        readRules(sheet)
+          .filter(
+            (rule): rule is CSSMediaRule =>
+              rule instanceof CSSMediaRule &&
+              rule.conditionText.includes('prefers-reduced-motion'),
+          )
+          .flatMap(rule => Array.from(rule.cssRules))
+          .filter((rule): rule is CSSStyleRule => rule instanceof CSSStyleRule)
+          .flatMap(rule => rule.selectorText.split(',')),
+    );
+    const popperSelectors = reducedMotionSelectors.filter(selector =>
+      selector.includes('picker__popper'),
+    );
+
+    await expect(popperSelectors.length).toBeGreaterThan(0);
+    for (const selector of popperSelectors) {
+      const baseSelector = selector
+        .trim()
+        .replace(/\.[\w-]+-(enter|leave)-active$/, '');
+      await expect(popper.matches(baseSelector)).toBe(true);
+    }
+  },
   parameters: {
     docs: {
       description: {
