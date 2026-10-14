@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { findNextEnabledDate } from '../src/utils';
+import dayjs from 'dayjs';
+import { findNextEnabledDate, isShortcutActive } from '../src/utils';
 
 const enabled = (...dates: string[]) => new Set(dates);
 
@@ -90,5 +91,72 @@ describe('findNextEnabledDate', () => {
         enabledDates: enabled('2026-10-10'),
       }),
     ).toBeNull();
+  });
+});
+
+describe('isShortcutActive', () => {
+  const shortcutValue: [Date, Date] = [
+    new Date(2026, 9, 7),
+    new Date(2026, 9, 14),
+  ];
+
+  it('está activo cuando el rango elegido coincide con el del atajo', () => {
+    expect(
+      isShortcutActive({
+        shortcutValue,
+        minDate: dayjs('2026-10-07'),
+        maxDate: dayjs('2026-10-14'),
+      }),
+    ).toBe(true);
+  });
+
+  it('ignora la hora: compara por día', () => {
+    expect(
+      isShortcutActive({
+        shortcutValue,
+        minDate: dayjs('2026-10-07T00:00:00'),
+        maxDate: dayjs('2026-10-14T23:59:59'),
+      }),
+    ).toBe(true);
+  });
+
+  it('no está activo si cambia el inicio o el fin', () => {
+    expect(
+      isShortcutActive({
+        shortcutValue,
+        minDate: dayjs('2026-10-08'),
+        maxDate: dayjs('2026-10-14'),
+      }),
+    ).toBe(false);
+    expect(
+      isShortcutActive({
+        shortcutValue,
+        minDate: dayjs('2026-10-07'),
+        maxDate: dayjs('2026-10-13'),
+      }),
+    ).toBe(false);
+  });
+
+  it('no está activo mientras la selección está a medias o vacía', () => {
+    expect(
+      isShortcutActive({
+        shortcutValue,
+        minDate: dayjs('2026-10-07'),
+        maxDate: null,
+      }),
+    ).toBe(false);
+    expect(
+      isShortcutActive({ shortcutValue, minDate: null, maxDate: null }),
+    ).toBe(false);
+  });
+
+  it('no está activo si el atajo no trae un rango', () => {
+    expect(
+      isShortcutActive({
+        shortcutValue: undefined,
+        minDate: dayjs('2026-10-07'),
+        maxDate: dayjs('2026-10-14'),
+      }),
+    ).toBe(false);
   });
 });
