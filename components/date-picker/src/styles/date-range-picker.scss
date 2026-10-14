@@ -6,6 +6,8 @@
   @include set-component-css-var("datepicker", $datepicker);
 }
 
+$range-panel-mobile-max-width: 780px;
+
 @include b(date-range-picker) {
   width: 646px;
 
@@ -94,7 +96,7 @@
     }
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: $range-panel-mobile-max-width) {
     &,
     &.has-sidebar {
       width: 100%;
