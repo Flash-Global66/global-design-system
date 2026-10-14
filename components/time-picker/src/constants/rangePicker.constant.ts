@@ -1,0 +1,3 @@
+export const RANGE_PANEL_MIN_HEIGHT = 240;
+export const RANGE_PANEL_VIEWPORT_MARGIN = 24;
+export const MIN_RANGE_INPUT_CHARS = 8;

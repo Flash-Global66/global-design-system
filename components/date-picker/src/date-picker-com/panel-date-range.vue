@@ -266,12 +266,8 @@ import {
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { panelDateRangeProps } from '../props/panel-date-range';
 import { useRangePicker } from '../composables/use-range-picker';
-import {
-  DAY_NAVIGATION_KEYS,
-  findNextEnabledDate,
-  getDefaultValue,
-  isValidRange,
-} from '../utils';
+import { DAY_NAVIGATION_KEYS } from '../constants/dayNavigation.constant';
+import { findNextEnabledDate, getDefaultValue, isValidRange } from '../utils';
 import DateTable from './basic-date-table.vue';
 
 import type { Dayjs } from 'dayjs';
