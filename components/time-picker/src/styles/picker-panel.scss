@@ -61,11 +61,6 @@
       outline: 2px solid getCssVar("datepicker-active-color");
       outline-offset: 2px;
     }
-
-    &.active {
-      background-color: #e6f1fe;
-      color: getCssVar("datepicker-active-color");
-    }
   }
 
   @include e(btn) {

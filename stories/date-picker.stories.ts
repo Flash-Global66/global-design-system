@@ -533,12 +533,44 @@ export const Range: Story = {
 
 export const RangeWithShortcutsOpenOnInput: Story = {
   name: 'Rango con atajos y apertura desde inputs',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const start = await canvas.findByPlaceholderText('Inicio');
+
+    await userEvent.click(start);
+    const shortcut = await screen.findByRole('button', {
+      name: 'Última semana',
+    });
+    await expect(shortcut).toHaveAttribute('aria-pressed', 'false');
+
+    await userEvent.click(shortcut);
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+
+    await userEvent.click(start);
+    const reopened = await screen.findByRole('button', {
+      name: 'Última semana',
+    });
+    await expect(reopened).toHaveAttribute('aria-pressed', 'true');
+    await expect(
+      screen.getByRole('button', { name: 'Último mes' }),
+    ).toHaveAttribute('aria-pressed', 'false');
+
+    await userEvent.click(
+      document.body.querySelector('td.available[data-date]') as HTMLElement,
+    );
+    await waitFor(() =>
+      expect(reopened).toHaveAttribute('aria-pressed', 'false'),
+    );
+  },
   parameters: {
     docs: {
       description: {
         story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del icono. Por defecto está apagado.
 
 - Hasta 780 px de ancho el panel ocupa el ancho disponible, apila los meses y muestra los atajos como chips arriba
+- El atajo cuyo rango coincide con la selección expone \`aria-pressed\` y deja de hacerlo al elegir otras fechas; hasta 780 px además se rellena con el color primario
 
 ### Teclado
 

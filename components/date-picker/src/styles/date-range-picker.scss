@@ -146,6 +146,19 @@ $range-panel-mobile-max-width: 780px;
       border: 1px solid getCssVar("datepicker-inner-border-color");
       border-radius: 16px;
       white-space: nowrap;
+
+      &.active {
+        @apply bg-primary-def text-inverse-txt border-primary-def;
+
+        &:hover {
+          @apply bg-primary-def-press text-inverse-txt border-primary-def-press;
+        }
+
+        &:focus-visible {
+          outline-color: currentColor;
+          outline-offset: -4px;
+        }
+      }
     }
 
     @include e(content) {

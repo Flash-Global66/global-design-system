@@ -9,6 +9,7 @@ import {
 import type { Dayjs } from 'dayjs';
 import type { DateCell } from './date-picker.type';
 import type { FindNextEnabledDateParams } from './types/dayNavigation.type';
+import type { IsShortcutActiveParams } from './types/shortcut.type';
 import type { DisabledDateType } from './props/shared';
 
 type DayRange = [Dayjs | undefined, Dayjs | undefined];
@@ -200,4 +201,14 @@ export function findNextEnabledDate({
     if (enabledDates.has(formatted)) return formatted;
   }
   return null;
+}
+
+export function isShortcutActive({
+  shortcutValue,
+  minDate,
+  maxDate,
+}: IsShortcutActiveParams): boolean {
+  if (!shortcutValue || !minDate || !maxDate) return false;
+  const [start, end] = shortcutValue;
+  return minDate.isSame(start, 'day') && maxDate.isSame(end, 'day');
 }
