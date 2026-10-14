@@ -95,3 +95,92 @@ export const dayOrDaysToDate = (dayOrDays: DayOrDays): DateOrDates => {
     ? (dayOrDays.map(d => d.toDate()) as [Date, Date])
     : dayOrDays.toDate();
 };
+
+export interface ShouldOpenPickerFromTriggerParams {
+  targetTagName: string | undefined;
+  isFocused: boolean;
+  openOnInputClick: boolean;
+}
+
+export function shouldOpenPickerFromTrigger({
+  targetTagName,
+  isFocused,
+  openOnInputClick,
+}: ShouldOpenPickerFromTriggerParams): boolean {
+  return targetTagName !== 'INPUT' || isFocused || openOnInputClick;
+}
+
+export interface ShouldFocusPanelOnTabParams {
+  openOnInputClick: boolean;
+  pickerVisible: boolean;
+  shiftKey: boolean;
+  hasPanelFocus: boolean;
+  isLastInput: boolean;
+}
+
+export function shouldFocusPanelOnTab({
+  openOnInputClick,
+  pickerVisible,
+  shiftKey,
+  hasPanelFocus,
+  isLastInput,
+}: ShouldFocusPanelOnTabParams): boolean {
+  return (
+    openOnInputClick &&
+    pickerVisible &&
+    !shiftKey &&
+    hasPanelFocus &&
+    isLastInput
+  );
+}
+
+export interface GetRangeInputModeParams {
+  openOnInputClick: boolean;
+  isCoarsePointer: boolean;
+}
+
+export function getRangeInputMode({
+  openOnInputClick,
+  isCoarsePointer,
+}: GetRangeInputModeParams): 'none' | undefined {
+  return openOnInputClick && isCoarsePointer ? 'none' : undefined;
+}
+
+const RANGE_PANEL_MIN_HEIGHT = 240;
+const RANGE_PANEL_VIEWPORT_MARGIN = 24;
+
+export interface GetRangePanelMaxHeightParams {
+  referenceBottom: number;
+  viewportHeight: number;
+}
+
+export function getRangePanelMaxHeight({
+  referenceBottom,
+  viewportHeight,
+}: GetRangePanelMaxHeightParams): number {
+  return Math.max(
+    Math.floor(viewportHeight - referenceBottom - RANGE_PANEL_VIEWPORT_MARGIN),
+    RANGE_PANEL_MIN_HEIGHT,
+  );
+}
+
+const MIN_RANGE_INPUT_CHARS = 8;
+
+export interface GetRangeInputCharsParams {
+  format: string | undefined;
+  startPlaceholder: string | undefined;
+  endPlaceholder: string | undefined;
+}
+
+export function getRangeInputChars({
+  format,
+  startPlaceholder,
+  endPlaceholder,
+}: GetRangeInputCharsParams): number {
+  return Math.max(
+    format?.length ?? 0,
+    startPlaceholder?.trim().length ?? 0,
+    endPlaceholder?.trim().length ?? 0,
+    MIN_RANGE_INPUT_CHARS,
+  );
+}

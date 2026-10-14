@@ -13,6 +13,7 @@
       {{ label }}
     </div>
     <input
+      :aria-label="startPlaceholder || ariaLabel"
       v-bind="attrs"
       :id="id && id[0]"
       ref="inputRef"
@@ -25,6 +26,7 @@
     />
     <slot name="range-separator" />
     <input
+      :aria-label="endPlaceholder || ariaLabel"
       v-bind="attrs"
       :id="id && id[1]"
       ref="endInputRef"

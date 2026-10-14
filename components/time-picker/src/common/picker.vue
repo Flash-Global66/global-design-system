@@ -6,9 +6,11 @@
     trigger="click"
     v-bind="$attrs"
     role="dialog"
+    :aria-label="ariaLabel"
     teleported
     :transition="`${nsDate.namespace.value}-zoom-in-top`"
     :popper-class="[`${nsDate.namespace.value}-picker__popper`]"
+    :popper-style="popperStyle"
     :popper-options="elPopperOptions"
     :fallback-placements="fallbackPlacements"
     :gpu-acceleration="false"
@@ -93,10 +95,11 @@
         :label="label"
         :start-placeholder="startPlaceholder"
         :end-placeholder="endPlaceholder"
-        :class="rangeInputKls"
-        :style="$attrs.style"
         :aria-label="ariaLabel"
+        :class="rangeInputKls"
+        :style="[$attrs.style, rangeInputCharsStyle]"
         :tabindex="tabindex"
+        :inputmode="rangeInputMode"
         autocomplete="off"
         role="combobox"
         @click="onMouseDownInput"
@@ -153,6 +156,7 @@
         @calendar-change="onCalendarChange"
         @panel-change="onPanelChange"
         @mousedown.stop
+        @keydown.esc="onPanelEscape"
       />
     </template>
   </g-tooltip>
@@ -171,7 +175,7 @@ import {
   watch,
 } from 'vue';
 import { isEqual } from 'lodash-unified';
-import { onClickOutside, unrefElement } from '@vueuse/core';
+import { onClickOutside, unrefElement, useMediaQuery } from '@vueuse/core';
 import {
   NOOP,
   debugWarn,
@@ -189,7 +193,17 @@ import GInput from '@flash-global66/g-input';
 import { GIconFont } from '@flash-global66/g-icon-font';
 import GTooltip from '@flash-global66/g-tooltip';
 import { isNil } from 'lodash-unified';
-import { dayOrDaysToDate, formatter, parseDate, valueEquals } from '../utils';
+import {
+  dayOrDaysToDate,
+  formatter,
+  getRangeInputChars,
+  getRangeInputMode,
+  getRangePanelMaxHeight,
+  parseDate,
+  shouldFocusPanelOnTab,
+  shouldOpenPickerFromTrigger,
+  valueEquals,
+} from '../utils';
 import { timePickerDefaultProps } from './props';
 import PickerRangeTrigger from './picker-range-trigger.vue';
 import type { InputInstance } from '@flash-global66/g-input';
@@ -309,6 +323,14 @@ const rangeInputKls = computed(() => [
   attrs.class,
 ]);
 
+const rangeInputCharsStyle = computed(() => ({
+  [`--${nsRange.namespace.value}-range-input-chars`]: getRangeInputChars({
+    format: props.format,
+    startPlaceholder: props.startPlaceholder,
+    endPlaceholder: props.endPlaceholder,
+  }),
+}));
+
 const clearIconKls = computed(() => [
   nsInput.e('icon'),
   nsRange.e('close-icon'),
@@ -393,7 +415,33 @@ const onPick = (date: any = '', visible = false) => {
   emitInput(result);
 };
 
+const onPanelEscape = (event: KeyboardEvent) => {
+  event.stopPropagation();
+  focus();
+  pickerVisible.value = false;
+};
+
+const rangePanelMaxHeight = ref<number>();
+
+const popperStyle = computed(() =>
+  rangePanelMaxHeight.value === undefined
+    ? undefined
+    : {
+        [`--${nsDate.namespace.value}-range-panel-max-height`]: `${rangePanelMaxHeight.value}px`,
+      },
+);
+
+const updateRangePanelMaxHeight = () => {
+  const referenceEl = unrefElement(inputRef as Ref<ComponentPublicInstance>);
+  if (!referenceEl) return;
+  rangePanelMaxHeight.value = getRangePanelMaxHeight({
+    referenceBottom: referenceEl.getBoundingClientRect().bottom,
+    viewportHeight: window.innerHeight,
+  });
+};
+
 const onBeforeShow = () => {
+  updateRangePanelMaxHeight();
   pickerActualVisible.value = true;
 };
 
@@ -526,7 +574,12 @@ const valueIsEmpty = computed(() => {
 
 const onMouseDownInput = async (event: MouseEvent) => {
   if (props.readonly || pickerDisabled.value) return;
-  if ((event.target as HTMLElement)?.tagName !== 'INPUT' || isFocused.value) {
+  const shouldOpen = shouldOpenPickerFromTrigger({
+    targetTagName: (event.target as HTMLElement)?.tagName,
+    isFocused: isFocused.value,
+    openOnInputClick: props.openOnInputClick,
+  });
+  if (shouldOpen) {
     pickerVisible.value = true;
   }
 };
@@ -542,13 +595,23 @@ const onMouseLeave = () => {
 
 const onTouchStartInput = (event: TouchEvent) => {
   if (props.readonly || pickerDisabled.value) return;
-  if (
-    (event.touches[0].target as HTMLElement)?.tagName !== 'INPUT' ||
-    isFocused.value
-  ) {
+  const shouldOpen = shouldOpenPickerFromTrigger({
+    targetTagName: (event.touches[0]?.target as HTMLElement)?.tagName,
+    isFocused: isFocused.value,
+    openOnInputClick: props.openOnInputClick,
+  });
+  if (shouldOpen) {
     pickerVisible.value = true;
   }
 };
+
+const isCoarsePointer = useMediaQuery('(pointer: coarse)');
+const rangeInputMode = computed(() =>
+  getRangeInputMode({
+    openOnInputClick: props.openOnInputClick,
+    isCoarsePointer: isCoarsePointer.value,
+  }),
+);
 
 const isRangeInput = computed(() => {
   return props.type.includes('range');
@@ -642,6 +705,20 @@ const handleKeydownInput = async (event: Event | KeyboardEvent) => {
   }
 
   if (code === EVENT_CODE.tab) {
+    const { shiftKey } = event as KeyboardEvent;
+    if (
+      shouldFocusPanelOnTab({
+        openOnInputClick: props.openOnInputClick,
+        pickerVisible: pickerVisible.value,
+        shiftKey,
+        hasPanelFocus: !!pickerOptions.value.handleFocusPicker,
+        isLastInput: event.target === refInput.value[refInput.value.length - 1],
+      })
+    ) {
+      event.preventDefault();
+      pickerOptions.value.handleFocusPicker?.();
+      return;
+    }
     hasJustTabExitedInput = true;
     return;
   }

@@ -1,5 +1,6 @@
 import { StoryObj } from '@storybook/vue3-vite';
 import { ref } from 'vue';
+import dayjs from 'dayjs';
 import { es } from '../common/lang';
 
 // COMPONENTS
@@ -464,6 +465,67 @@ export const Range: Story = {
             label="Seleccione rango"
             range-separator="|"
             format="YYYY-MM-DD"
+          />
+          <div>Rango seleccionado: {{ value }}</div>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const RangeWithShortcutsOpenOnInput: Story = {
+  name: 'Rango con atajos y apertura desde inputs',
+  parameters: {
+    docs: {
+      description: {
+        story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del icono. Por defecto está apagado.
+
+- Bajo 640 px el panel ocupa el ancho disponible, apila los meses y muestra los atajos como chips arriba`,
+      },
+    },
+  },
+  render: () => ({
+    components: { GDatePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+      const lang = es;
+      const shortcuts = [
+        {
+          text: 'Última semana',
+          value: () => [dayjs().subtract(1, 'week').toDate(), dayjs().toDate()],
+        },
+        {
+          text: 'Último mes',
+          value: () => [
+            dayjs().subtract(1, 'month').toDate(),
+            dayjs().toDate(),
+          ],
+        },
+        {
+          text: 'Últimos 3 meses',
+          value: () => [
+            dayjs().subtract(3, 'month').toDate(),
+            dayjs().toDate(),
+          ],
+        },
+      ];
+      return { value, lang, shortcuts };
+    },
+    template: `
+      <g-config-provider :locale="lang">
+        <div class="flex flex-col gap-4">
+          <g-date-picker
+            v-model="value"
+            type="daterange"
+            aria-label="Rango de fechas"
+            open-on-input-click
+            :shortcuts="shortcuts"
+            start-placeholder="Inicio"
+            end-placeholder="Fin"
+            range-separator="-"
+            format="DD-MM-YYYY"
+            value-format="YYYY-MM-DD"
+            prefix-icon="regular calendar"
           />
           <div>Rango seleccionado: {{ value }}</div>
         </div>

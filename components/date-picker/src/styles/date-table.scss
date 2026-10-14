@@ -155,6 +155,11 @@
       color: getCssVar("datepicker-header-text-color");
     }
 
+    &.available:focus-visible .#{$namespace}-date-table-cell__text {
+      outline: 2px solid getCssVar("datepicker-active-color");
+      outline-offset: 1px;
+    }
+
     &:focus {
       outline: none;
     }
