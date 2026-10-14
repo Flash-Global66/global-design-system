@@ -110,6 +110,30 @@ export function shouldOpenPickerFromTrigger({
   return targetTagName !== 'INPUT' || isFocused || openOnInputClick;
 }
 
+export interface ShouldFocusPanelOnTabParams {
+  openOnInputClick: boolean;
+  pickerVisible: boolean;
+  shiftKey: boolean;
+  hasPanelFocus: boolean;
+  isLastInput: boolean;
+}
+
+export function shouldFocusPanelOnTab({
+  openOnInputClick,
+  pickerVisible,
+  shiftKey,
+  hasPanelFocus,
+  isLastInput,
+}: ShouldFocusPanelOnTabParams): boolean {
+  return (
+    openOnInputClick &&
+    pickerVisible &&
+    !shiftKey &&
+    hasPanelFocus &&
+    isLastInput
+  );
+}
+
 export interface GetRangeInputModeParams {
   openOnInputClick: boolean;
   isCoarsePointer: boolean;

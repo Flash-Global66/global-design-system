@@ -132,12 +132,15 @@
     align-items: center;
     padding: 0 8px;
     vertical-align: middle;
-    min-width: calc(
-      2 *
-        (
-          var(--#{$namespace}-range-input-chars, 10) *
-            var(--#{$namespace}-range-char, 0.55rem) + 4px
-        ) + 89px
+    min-width: min(
+      calc(
+        2 *
+          (
+            var(--#{$namespace}-range-input-chars, 10) *
+              var(--#{$namespace}-range-char, 0.55rem) + 4px
+          ) + 89px
+      ),
+      100%
     );
   }
 

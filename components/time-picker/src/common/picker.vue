@@ -95,6 +95,7 @@
         :label="label"
         :start-placeholder="startPlaceholder"
         :end-placeholder="endPlaceholder"
+        :aria-label="ariaLabel"
         :class="rangeInputKls"
         :style="[$attrs.style, rangeInputCharsStyle]"
         :tabindex="tabindex"
@@ -199,6 +200,7 @@ import {
   getRangeInputMode,
   getRangePanelMaxHeight,
   parseDate,
+  shouldFocusPanelOnTab,
   shouldOpenPickerFromTrigger,
   valueEquals,
 } from '../utils';
@@ -705,13 +707,16 @@ const handleKeydownInput = async (event: Event | KeyboardEvent) => {
   if (code === EVENT_CODE.tab) {
     const { shiftKey } = event as KeyboardEvent;
     if (
-      props.openOnInputClick &&
-      pickerVisible.value &&
-      !shiftKey &&
-      pickerOptions.value.handleFocusPicker
+      shouldFocusPanelOnTab({
+        openOnInputClick: props.openOnInputClick,
+        pickerVisible: pickerVisible.value,
+        shiftKey,
+        hasPanelFocus: !!pickerOptions.value.handleFocusPicker,
+        isLastInput: event.target === refInput.value[refInput.value.length - 1],
+      })
     ) {
       event.preventDefault();
-      pickerOptions.value.handleFocusPicker();
+      pickerOptions.value.handleFocusPicker?.();
       return;
     }
     hasJustTabExitedInput = true;
