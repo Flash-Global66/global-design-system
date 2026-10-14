@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   getRangeInputChars,
+  getRangeInputLabel,
   getRangeInputMode,
   getRangePanelMaxHeight,
   shouldFocusPanelOnTab,
@@ -196,5 +197,40 @@ describe('getRangeInputChars', () => {
         endPlaceholder: 'Fin',
       }),
     ).toBe(19);
+  });
+});
+
+describe('getRangeInputLabel', () => {
+  it('compone el aria-label del consumidor con el placeholder', () => {
+    expect(
+      getRangeInputLabel({
+        ariaLabel: 'Período de descarga',
+        placeholder: 'Inicio',
+      }),
+    ).toBe('Período de descarga Inicio');
+  });
+
+  it('usa solo el placeholder cuando no hay aria-label', () => {
+    expect(
+      getRangeInputLabel({ ariaLabel: undefined, placeholder: 'Inicio' }),
+    ).toBe('Inicio');
+  });
+
+  it('usa solo el aria-label cuando no hay placeholder', () => {
+    expect(
+      getRangeInputLabel({
+        ariaLabel: 'Período de descarga',
+        placeholder: undefined,
+      }),
+    ).toBe('Período de descarga');
+  });
+
+  it('ignora los espacios y devuelve undefined si no queda texto', () => {
+    expect(
+      getRangeInputLabel({ ariaLabel: '  ', placeholder: ' Inicio ' }),
+    ).toBe('Inicio');
+    expect(
+      getRangeInputLabel({ ariaLabel: undefined, placeholder: '   ' }),
+    ).toBeUndefined();
   });
 });

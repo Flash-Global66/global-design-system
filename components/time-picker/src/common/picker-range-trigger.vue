@@ -13,7 +13,9 @@
       {{ label }}
     </div>
     <input
-      :aria-label="startPlaceholder || ariaLabel"
+      :aria-label="
+        getRangeInputLabel({ ariaLabel, placeholder: startPlaceholder })
+      "
       v-bind="attrs"
       :id="id && id[0]"
       ref="inputRef"
@@ -26,7 +28,9 @@
     />
     <slot name="range-separator" />
     <input
-      :aria-label="endPlaceholder || ariaLabel"
+      :aria-label="
+        getRangeInputLabel({ ariaLabel, placeholder: endPlaceholder })
+      "
       v-bind="attrs"
       :id="id && id[1]"
       ref="endInputRef"
@@ -46,6 +50,7 @@ import { ref, computed } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
 import { useAttrs, useFocusController } from '@flash-global66/g-hooks';
 import { timePickerRangeTriggerProps } from './props';
+import { getRangeInputLabel } from '../utils/rangePicker.util';
 import type { CSSProperties } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
 import { isNil } from 'lodash-unified';
