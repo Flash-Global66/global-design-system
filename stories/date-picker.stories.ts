@@ -538,7 +538,25 @@ export const RangeWithShortcutsOpenOnInput: Story = {
       description: {
         story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del icono. Por defecto está apagado.
 
-- Hasta 780 px de ancho el panel ocupa el ancho disponible, apila los meses y muestra los atajos como chips arriba`,
+- Hasta 780 px de ancho el panel ocupa el ancho disponible, apila los meses y muestra los atajos como chips arriba
+
+### Teclado
+
+El rango se puede completar sin mouse y el foco es visible en todo momento.
+
+| Tecla | Acción |
+| --- | --- |
+| \`Tab\` | Pasa del input de inicio al de fin; con \`open-on-input-click\`, desde el de fin entra al panel |
+| \`↓\` | Desde el input, enfoca el panel |
+| \`←\` \`→\` \`↑\` \`↓\` | Mueven el foco entre los días del panel |
+| \`Enter\` o \`Espacio\` | Eligen el día enfocado |
+| \`Esc\` | Cierra el panel |
+
+Los días, los atajos y las flechas de mes muestran un anillo de foco visible.
+
+### Movimiento reducido
+
+Cuando el sistema pide movimiento reducido (\`prefers-reduced-motion: reduce\`) el panel se abre y se cierra sin transición. Para comprobarlo, activa **Reducir movimiento** en el sistema operativo o usa **Emulate CSS media feature prefers-reduced-motion** en el panel **Rendering** de las DevTools. Con el ajuste apagado, el panel conserva la animación de entrada.`,
       },
     },
   },
@@ -628,23 +646,7 @@ export const RangeKeyboard: Story = {
     );
     await expect(document.activeElement).toHaveAttribute('role', 'combobox');
   },
-  parameters: {
-    docs: {
-      description: {
-        story: `El rango se puede completar sin mouse y el foco es visible en todo momento.
-
-| Tecla | Acción |
-| --- | --- |
-| \`Tab\` | Pasa del input de inicio al de fin; con \`open-on-input-click\`, desde el de fin entra al panel |
-| \`↓\` | Desde el input, enfoca el panel |
-| \`←\` \`→\` \`↑\` \`↓\` | Mueven el foco entre los días del panel |
-| \`Enter\` o \`Espacio\` | Eligen el día enfocado |
-| \`Esc\` | Cierra el panel |
-
-Con \`open-on-input-click\` el clic sobre cualquiera de los dos inputs también abre el panel. Los días, los atajos y las flechas de mes muestran un anillo de foco visible.`,
-      },
-    },
-  },
+  tags: ['!dev', '!autodocs'],
   render: renderOpenOnInputRange(RANGE_SHORTCUTS),
 };
 
@@ -693,20 +695,7 @@ export const RangeReducedMotion: Story = {
       await expect(popper.matches(baseSelector)).toBe(true);
     }
   },
-  parameters: {
-    docs: {
-      description: {
-        story: `Cuando el sistema pide movimiento reducido (\`prefers-reduced-motion: reduce\`) el panel de rango se abre y se cierra sin transición.
-
-Para comprobarlo:
-
-- Activa **Reducir movimiento** en el sistema operativo, o
-- en las DevTools del navegador, panel **Rendering**, usa **Emulate CSS media feature prefers-reduced-motion**.
-
-Con el ajuste apagado, el panel conserva la animación de entrada.`,
-      },
-    },
-  },
+  tags: ['!dev', '!autodocs'],
   render: renderOpenOnInputRange(),
 };
 
