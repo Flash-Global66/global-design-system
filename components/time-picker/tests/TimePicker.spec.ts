@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { nextTick } from 'vue';
 import { render, fireEvent } from '@testing-library/vue';
 import GTimePicker from '../src/time-picker';
 
@@ -41,5 +42,43 @@ describe('GTimePicker clear button (clearIcon default = true)', () => {
     await fireEvent.mouseEnter(root);
 
     expect(root.querySelector('.clear-icon')).toBeNull();
+  });
+});
+
+describe('GTimePicker range with open-on-input-click', () => {
+  const rangeProps = {
+    isRange: true,
+    startPlaceholder: 'Hora inicio',
+    endPlaceholder: 'Hora fin',
+  };
+
+  const panelOf = () =>
+    document.body.querySelector<HTMLElement>('.gui-picker__popper');
+
+  const isPanelVisible = () => {
+    const panel = panelOf();
+    return panel !== null && panel.style.display !== 'none';
+  };
+
+  it('abre el panel al hacer clic en un input cuando el flag está encendido', async () => {
+    const { getByPlaceholderText } = render(GTimePicker, {
+      props: { ...rangeProps, openOnInputClick: true },
+    });
+
+    await fireEvent.click(getByPlaceholderText('Hora inicio'));
+    await nextTick();
+
+    expect(isPanelVisible()).toBe(true);
+  });
+
+  it('no abre el panel al hacer clic en un input con el flag apagado', async () => {
+    const { getByPlaceholderText } = render(GTimePicker, {
+      props: rangeProps,
+    });
+
+    await fireEvent.click(getByPlaceholderText('Hora inicio'));
+    await nextTick();
+
+    expect(isPanelVisible()).toBe(false);
   });
 });
