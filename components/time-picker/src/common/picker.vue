@@ -193,17 +193,14 @@ import GInput from '@flash-global66/g-input';
 import { GIconFont } from '@flash-global66/g-icon-font';
 import GTooltip from '@flash-global66/g-tooltip';
 import { isNil } from 'lodash-unified';
+import { dayOrDaysToDate, formatter, parseDate, valueEquals } from '../utils';
 import {
-  dayOrDaysToDate,
-  formatter,
   getRangeInputChars,
   getRangeInputMode,
   getRangePanelMaxHeight,
-  parseDate,
   shouldFocusPanelOnTab,
   shouldOpenPickerFromTrigger,
-  valueEquals,
-} from '../utils';
+} from '../utils/rangePicker.util';
 import { timePickerDefaultProps } from './props';
 import PickerRangeTrigger from './picker-range-trigger.vue';
 import type { InputInstance } from '@flash-global66/g-input';
@@ -441,7 +438,7 @@ const updateRangePanelMaxHeight = () => {
 };
 
 const onBeforeShow = () => {
-  updateRangePanelMaxHeight();
+  if (isRangeInput.value) updateRangePanelMaxHeight();
   pickerActualVisible.value = true;
 };
 

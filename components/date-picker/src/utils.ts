@@ -1,9 +1,14 @@
 import dayjs from 'dayjs';
 import { isArray } from '@flash-global66/g-utils';
 import { rangeArr } from '@flash-global66/g-time-picker';
+import {
+  DAY_KEY_OFFSETS,
+  MAX_DAY_KEY_STEPS,
+} from './constants/dayNavigation.constant';
 
 import type { Dayjs } from 'dayjs';
 import type { DateCell } from './date-picker.type';
+import type { FindNextEnabledDateParams } from './types/dayNavigation.type';
 import type { DisabledDateType } from './props/shared';
 
 type DayRange = [Dayjs | undefined, Dayjs | undefined];
@@ -179,23 +184,6 @@ export const getValidDateOfYear = (
   }
   return value;
 };
-
-const DAY_KEY_OFFSETS: Record<string, number> = {
-  ArrowLeft: -1,
-  ArrowRight: 1,
-  ArrowUp: -7,
-  ArrowDown: 7,
-};
-
-const MAX_DAY_KEY_STEPS = 62;
-
-export const DAY_NAVIGATION_KEYS = Object.keys(DAY_KEY_OFFSETS);
-
-export interface FindNextEnabledDateParams {
-  current: string;
-  key: string;
-  enabledDates: Set<string>;
-}
 
 export function findNextEnabledDate({
   current,

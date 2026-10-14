@@ -1,17 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { timePickerDefaultProps } from '../src/common/props';
 import {
+  getRangeInputChars,
   getRangeInputMode,
+  getRangePanelMaxHeight,
   shouldFocusPanelOnTab,
   shouldOpenPickerFromTrigger,
-} from '../src/utils';
-
-describe('timePickerDefaultProps.openOnInputClick', () => {
-  it('es un booleano apagado por defecto', () => {
-    expect(timePickerDefaultProps.openOnInputClick.type).toBe(Boolean);
-    expect(timePickerDefaultProps.openOnInputClick.default).toBe(false);
-  });
-});
+} from '../../src/utils/rangePicker.util';
 
 describe('shouldOpenPickerFromTrigger', () => {
   describe('con el flag apagado', () => {
@@ -130,5 +124,77 @@ describe('shouldFocusPanelOnTab', () => {
     expect(shouldFocusPanelOnTab({ ...base, hasPanelFocus: false })).toBe(
       false,
     );
+  });
+});
+
+describe('getRangePanelMaxHeight', () => {
+  it('usa el espacio libre bajo el campo menos el margen', () => {
+    expect(
+      getRangePanelMaxHeight({ referenceBottom: 440, viewportHeight: 844 }),
+    ).toBe(380);
+  });
+
+  it('no baja del mínimo cuando el campo está cerca del borde inferior', () => {
+    expect(
+      getRangePanelMaxHeight({ referenceBottom: 800, viewportHeight: 844 }),
+    ).toBe(240);
+  });
+
+  it('redondea hacia abajo', () => {
+    expect(
+      getRangePanelMaxHeight({ referenceBottom: 440.6, viewportHeight: 844 }),
+    ).toBe(379);
+  });
+});
+
+describe('getRangeInputChars', () => {
+  it('usa el largo del formato cuando es el más largo', () => {
+    expect(
+      getRangeInputChars({
+        format: 'DD/MM/YYYY',
+        startPlaceholder: 'Inicio',
+        endPlaceholder: 'Fin',
+      }),
+    ).toBe(10);
+  });
+
+  it('usa el placeholder cuando es más largo que el formato', () => {
+    expect(
+      getRangeInputChars({
+        format: 'DD/MM/YYYY',
+        startPlaceholder: 'Fecha de inicio',
+        endPlaceholder: 'Fecha fin',
+      }),
+    ).toBe(15);
+  });
+
+  it('ignora los espacios de los extremos del placeholder', () => {
+    expect(
+      getRangeInputChars({
+        format: 'DD/MM/YYYY',
+        startPlaceholder: '   Desde',
+        endPlaceholder: 'Hasta',
+      }),
+    ).toBe(10);
+  });
+
+  it('tiene un mínimo cuando no hay formato ni placeholders', () => {
+    expect(
+      getRangeInputChars({
+        format: undefined,
+        startPlaceholder: undefined,
+        endPlaceholder: undefined,
+      }),
+    ).toBe(8);
+  });
+
+  it('crece con un formato de fecha y hora', () => {
+    expect(
+      getRangeInputChars({
+        format: 'YYYY-MM-DD HH:mm:ss',
+        startPlaceholder: 'Inicio',
+        endPlaceholder: 'Fin',
+      }),
+    ).toBe(19);
   });
 });
