@@ -708,7 +708,7 @@ const handleKeydownInput = async (event: Event | KeyboardEvent) => {
         openOnInputClick: props.openOnInputClick,
         pickerVisible: pickerVisible.value,
         shiftKey,
-        hasPanelFocus: !!pickerOptions.value.handleFocusPicker,
+        hasPanelFocus: Boolean(pickerOptions.value.handleFocusPicker),
         isLastInput: event.target === refInput.value[refInput.value.length - 1],
       })
     ) {

@@ -22,6 +22,11 @@ export interface GetRangePanelMaxHeightParams {
   viewportHeight: number;
 }
 
+export interface GetRangeInputLabelParams {
+  ariaLabel: string | undefined;
+  placeholder: string | undefined;
+}
+
 export interface GetRangeInputCharsParams {
   format: string | undefined;
   startPlaceholder: string | undefined;

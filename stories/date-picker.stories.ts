@@ -604,14 +604,29 @@ export const RangeKeyboard: Story = {
     await userEvent.keyboard('{Enter}');
     await waitFor(() => expect(start).not.toHaveValue(''));
 
+    await userEvent.keyboard('{ArrowRight}');
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+    await waitFor(() =>
+      expect(document.activeElement).toHaveAttribute('role', 'combobox'),
+    );
+
+    await new Promise(resolve => setTimeout(resolve, 400));
+    await expect(start).toHaveAttribute('aria-expanded', 'false');
+    await expect(document.activeElement).toHaveAttribute('role', 'combobox');
+
+    await userEvent.click(start);
+    await waitFor(() => expect(start).toHaveAttribute('aria-expanded', 'true'));
+    document.body
+      .querySelector<HTMLElement>('td.available[data-date]')
+      ?.focus();
     await userEvent.keyboard('{Escape}');
     await waitFor(() =>
       expect(start).toHaveAttribute('aria-expanded', 'false'),
     );
-    await expect(end).toHaveFocus();
-
-    await new Promise(resolve => setTimeout(resolve, 400));
-    await expect(start).toHaveAttribute('aria-expanded', 'false');
+    await expect(document.activeElement).toHaveAttribute('role', 'combobox');
   },
   parameters: {
     docs: {
