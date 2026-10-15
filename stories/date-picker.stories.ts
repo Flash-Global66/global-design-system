@@ -748,6 +748,9 @@ export const RangeNarrowContainer: Story = {
     await expect(editor.getBoundingClientRect().right).toBeLessThanOrEqual(
       container.getBoundingClientRect().right,
     );
+    await expect(Math.round(editor.getBoundingClientRect().width)).toBe(
+      Math.round(container.getBoundingClientRect().width),
+    );
   },
   tags: ['!dev', '!autodocs'],
   render: () => ({
