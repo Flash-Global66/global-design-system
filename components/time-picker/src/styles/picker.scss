@@ -88,7 +88,7 @@ $range-editor-chrome-width: 89px;
     margin: 0;
     padding: 0;
     flex: 1 1 0;
-    width: auto;
+    width: 39%;
     min-width: calc(
       var(--#{$namespace}-range-input-chars, 10) *
         var(--#{$namespace}-range-char, 0.55rem) + 4px
