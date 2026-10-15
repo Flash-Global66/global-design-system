@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-time-picker@0.5.0...@flash-global66/g-time-picker@0.5.1) (2026-10-15)
+
+### Bug Fixes
+
+- **time-picker:** el input del rango deja de tomar su ancho nativo para que el campo no se salga del contenedor ([7632cc4](https://github.com/Flash-Global66/global-design-system/commit/7632cc4d5d97a2ad62b90b3291cbe92214cc88b3))
+
 # [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-time-picker@0.4.20...@flash-global66/g-time-picker@0.5.0) (2026-10-14)
 
 ### Bug Fixes
