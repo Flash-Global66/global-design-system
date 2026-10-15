@@ -71,9 +71,7 @@ describe('findExportDefaultLines', () => {
     expect(findExportDefaultLines(source)).toEqual([3]);
   });
 
-  it('flags export default even in the EP-derived defaults.ts exception', () => {
-    // ds-types-location.md: la excepción de defaults.ts cubre DÓNDE vive el
-    // contrato, no CÓMO se exporta — sigue exigiendo export con nombre.
+  it('flags export default of a props object next to its interface', () => {
     const source = [
       'export interface TableProps {',
       '  data: unknown[];',

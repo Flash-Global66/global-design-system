@@ -3,13 +3,11 @@
   "compilerOptions": {
     "declarationDir": "./dist/types",
     "outDir": "./dist",
-    "rootDir": "./"
+    "rootDir": "./",
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
   },
-  "include": [
-    "./**/*.ts",
-    "./**/*.d.ts",
-    "./**/*.tsx",
-    "./**/*.vue"
-  ],
+  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue"],
   "exclude": ["dist", "vite.config.ts"]
 }
