@@ -1,0 +1,36 @@
+{
+  "components": {
+    "form-searchinput": {
+      "id": "form-searchinput",
+      "name": "GSearchInput",
+      "path": "./stories/search-input.stories.ts",
+      "stories": {
+        "form-searchinput--primary": {
+          "id": "form-searchinput--primary",
+          "name": "Básico",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-searchinput--with-label": {
+          "id": "form-searchinput--with-label",
+          "name": "Con etiqueta",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-searchinput--states": {
+          "id": "form-searchinput--states",
+          "name": "Estados",
+          "warning": "No static snippet: the `setup` return value could not be read statically."
+        },
+        "form-searchinput--with-debounce": {
+          "id": "form-searchinput--with-debounce",
+          "name": "Uso de debounce",
+          "snippet": "<script lang=\"ts\" setup>\nimport { action } from \"storybook/actions\";\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GSearchInput } from '@flash-global66/g-search-input/index.ts';\n\nconst search = ref('');\nconst lastSearch = ref('');\nconst searchCount = ref(0);\nconst handleSearch = (query: string) => {\n  lastSearch.value = query;\n  searchCount.value++;\n  action('search')(query);\n};\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-6\">\n      <div class=\"bg-gray-50 rounded-md p-4\">\n        <h3 class=\"text-base font-semibold mb-2\">Debounce en acción</h3>\n        <p class=\"text-sm text-gray-600 mb-4\">\n          El debounce espera hasta que el usuario deje de escribir antes de emitir el evento de búsqueda.\n          En este ejemplo, se configura un tiempo de espera de <strong>1000ms (1 segundo)</strong>.\n        </p>\n\n        <g-search-input\n          v-model=\"search\"\n          placeholder=\"Escribe para buscar...\"\n          :debounce-time=\"1000\"\n          @search=\"handleSearch\"\n        />\n\n        <div class=\"mt-4 p-3 bg-white rounded border text-sm\">\n          <div class=\"mb-2\">\n            <span class=\"font-medium\">Valor actual:</span> \n            <span class=\"font-mono bg-gray-100 px-1 rounded\">{{ search }}</span>\n            <span class=\"text-gray-400 ml-2\">(se actualiza en tiempo real)</span>\n          </div>\n          <div>\n            <span class=\"font-medium\">Última búsqueda:</span> \n            <span class=\"font-mono bg-gray-100 px-1 rounded\">{{ lastSearch }}</span>\n            <span class=\"text-gray-400 ml-2\">(se actualiza después del debounce o al presionar Enter)</span>\n          </div>\n          <div class=\"mt-2 text-gray-500\">\n            Número de búsquedas realizadas: {{ searchCount }}\n          </div>\n        </div>\n      </div>\n\n      <div class=\"bg-gray-50 rounded-md p-4\">\n        <h3 class=\"text-base font-semibold mb-2\">¿Cómo funciona el debounce?</h3>\n        <ol class=\"list-decimal pl-5 space-y-2 text-sm\">\n          <li>Cuando escribes en el campo de búsqueda, el componente actualiza el v-model inmediatamente</li>\n          <li>El componente espera el tiempo configurado (debounceTime) antes de emitir el evento <code>search</code></li>\n          <li>Si sigues escribiendo dentro de ese tiempo, el temporizador se reinicia</li>\n          <li>Solo cuando dejas de escribir por el tiempo configurado, o presionas Enter, se emite el evento</li>\n          <li>Esto reduce significativamente el número de búsquedas y mejora el rendimiento</li>\n        </ol>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-searchinput--api-integration": {
+          "id": "form-searchinput--api-integration",
+          "name": "Integración con API",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        }
+      }
+    }
+  }
+}
