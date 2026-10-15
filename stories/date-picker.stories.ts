@@ -731,6 +731,55 @@ export const RangeReducedMotion: Story = {
   render: renderOpenOnInputRange(),
 };
 
+export const RangeNarrowContainer: Story = {
+  name: 'Rango en un contenedor angosto',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await canvas.findByPlaceholderText('Inicio');
+    const container = canvasElement.querySelector<HTMLElement>(
+      '[data-test="narrow-container"]',
+    );
+    const editor = canvasElement.querySelector<HTMLElement>(
+      '.gui-date-editor--daterange',
+    );
+    if (!container || !editor)
+      throw new Error('falta el contenedor o el campo');
+
+    await expect(editor.getBoundingClientRect().right).toBeLessThanOrEqual(
+      container.getBoundingClientRect().right,
+    );
+    await expect(Math.round(editor.getBoundingClientRect().width)).toBe(
+      Math.round(container.getBoundingClientRect().width),
+    );
+  },
+  tags: ['!dev', '!autodocs'],
+  render: () => ({
+    components: { GDatePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+      const lang = es;
+      return { value, lang };
+    },
+    template: `
+      <g-config-provider :locale="lang">
+        <div data-test="narrow-container" style="width: 320px">
+          <g-date-picker
+            v-model="value"
+            type="daterange"
+            aria-label="Rango de fechas"
+            start-placeholder="Inicio"
+            end-placeholder="Fin"
+            range-separator="-"
+            format="DD-MM-YYYY"
+            value-format="YYYY-MM-DD"
+            prefix-icon="regular calendar"
+          />
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
 export const DateTime: Story = {
   name: 'Fecha y Hora',
   parameters: {
