@@ -124,6 +124,7 @@ export const ICON_SETS = {
     "arrow-trend-up",
     "chart-simple",
     "money-bills-simple",
+    "list-tree",
   ] as const,
 
   regular: [
@@ -251,7 +252,8 @@ export const ICON_SETS = {
     "unlock",
     "lock-alt",
     "wallet",
-    "money-bill-trend-up"
+    "money-bill-trend-up",
+    "layer-group",
   ] as const,
 
   light: [

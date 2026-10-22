@@ -58,7 +58,7 @@
 import { computed, useSlots } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
 import { checkboxEmits, checkboxProps } from './checkbox';
-import { useCheckbox } from './composables';
+import { useCheckbox } from './composables/use-checkbox';
 
 defineOptions({
   name: 'GuiCheckbox',

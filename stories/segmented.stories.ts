@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { GSegmented } from '@flash-global66/g-segmented/index.ts';
 import { GIconFont } from '@flash-global66/g-icon-font';

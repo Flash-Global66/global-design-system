@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-date-picker@0.5.1...@flash-global66/g-date-picker@0.5.2) (2026-10-21)
+
+**Note:** Version bump only for package @flash-global66/g-date-picker
+
+## [0.5.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-date-picker@0.5.0...@flash-global66/g-date-picker@0.5.1) (2026-10-15)
+
+**Note:** Version bump only for package @flash-global66/g-date-picker
+
+# [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-date-picker@0.4.21...@flash-global66/g-date-picker@0.5.0) (2026-10-14)
+
+### Bug Fixes
+
+- **date-picker:** el panel de rango en móvil no se pasa del ancho útil con scrollbar clásico ([489cef3](https://github.com/Flash-Global66/global-design-system/commit/489cef32abb7cb2ddba1c60bf6386700e54b890c))
+- **date-picker:** el panel de rango en móvil se limita al espacio libre bajo el campo ([2d386ea](https://github.com/Flash-Global66/global-design-system/commit/2d386eaa20cb897664471dc7534f9c8a008c5488))
+- **date-picker:** el panel de rango en móvil se usa hasta 780 px para no salirse de la pantalla ([ceec2a8](https://github.com/Flash-Global66/global-design-system/commit/ceec2a87511adb3bbeabb15c5724e0a83ef0ac8c))
+- **time-picker:** Escape deja el panel cerrado y el toque sin touches no rompe; prueba de dirección en la navegación por teclado ([cb9a087](https://github.com/Flash-Global66/global-design-system/commit/cb9a0874e3e2ae82550277e0914c5b952943f0ae))
+- **time-picker:** Tab pasa del input de inicio al de fin y el campo del rango no desborda su contenedor ([ddf672e](https://github.com/Flash-Global66/global-design-system/commit/ddf672e1c08e7c4a06444db6910c7ac736ba4199))
+
+### Features
+
+- **date-picker:** en móvil el atajo cuyo rango coincide con la selección se muestra activo ([4c006fa](https://github.com/Flash-Global66/global-design-system/commit/4c006fa19d8724275fc7d4b1e4d48da493a7bdb5))
+- **date-picker:** panel de rango responsivo, teclado y foco visible ([b615ba6](https://github.com/Flash-Global66/global-design-system/commit/b615ba68a05292a813a03143a3424e2983c6397d))
+
+## [0.4.21](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-date-picker@0.4.20...@flash-global66/g-date-picker@0.4.21) (2026-09-23)
+
+**Note:** Version bump only for package @flash-global66/g-date-picker
+
 ## [0.4.20](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-date-picker@0.4.19...@flash-global66/g-date-picker@0.4.20) (2026-09-16)
 
 **Note:** Version bump only for package @flash-global66/g-date-picker

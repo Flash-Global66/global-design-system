@@ -1,4 +1,4 @@
-import { StoryFn, Meta } from "@storybook/vue3";
+import { StoryFn, Meta } from '@storybook/vue3-vite';
 
 import { GBadge } from '../components/badge';
 import { GConfigProvider } from '../components/config-provider';
@@ -8,7 +8,7 @@ export default {
   component: GBadge,
 } as Meta<typeof GBadge>;
 
-const Template: StoryFn<typeof GBadge> = (args) => ({
+const Template: StoryFn<typeof GBadge> = args => ({
   components: { GBadge, GConfigProvider },
   template: `
   <g-config-provider>
@@ -19,10 +19,10 @@ const Template: StoryFn<typeof GBadge> = (args) => ({
   `,
   setup() {
     return { args };
-  }
+  },
 });
 
 export const Default = Template.bind({});
 Default.args = {
-  text: 'JA'
+  text: 'JA',
 };

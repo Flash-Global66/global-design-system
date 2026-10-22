@@ -1,25 +1,26 @@
-import { StoryObj } from "@storybook/vue3";
-import { ref } from "vue";
+import { StoryObj } from '@storybook/vue3-vite';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
+import { ref } from 'vue';
 
 // COMPONENTS
-import { GTimePicker } from "../components/time-picker";
+import { GTimePicker } from '../components/time-picker';
 
 // CONFIG
-import { GConfigProvider } from "../components/config-provider";
+import { GConfigProvider } from '../components/config-provider';
 
 // DEPENDENCIES
 import {
   version,
   peerDependencies,
-} from "@flash-global66/g-inline/package.json";
+} from '@flash-global66/g-inline/package.json';
 import {
   generatePeerDepsList,
   generateIconOptions,
   generatePeerDepsInstalls,
-} from "../helper/documentation-stories";
+} from '../helper/documentation-stories';
 
 const meta = {
-  title: "Form/Time Picker",
+  title: 'Form/Time Picker',
   component: GTimePicker,
   parameters: {
     docs: {
@@ -98,306 +99,327 @@ import { GTimePicker } from '@flash-global66/g-time-picker';
   argTypes: {
     // 1. Enlace de Datos
     modelValue: {
-      name: "v-model",
-      description: "Valor seleccionado (v-model)",
+      name: 'v-model',
+      description: 'Valor seleccionado (v-model)',
       control: { type: undefined },
       table: {
-        category: "Enlace de Datos",
-        type: { summary: "string | Date | [string, string] | [Date, Date]" },
+        category: 'Enlace de Datos',
+        type: { summary: 'string | Date | [string, string] | [Date, Date]' },
       },
     },
 
     // 2. Comportamiento e Interacción
     isRange: {
-      name: "is-range",
-      description: "Activa el modo de selección de rango de horas",
-      control: "boolean",
+      name: 'is-range',
+      description: 'Activa el modo de selección de rango de horas',
+      control: 'boolean',
       table: {
-        category: "Comportamiento e Interacción",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     clearable: {
-      description: "Permite limpiar el valor seleccionado",
-      control: "boolean",
+      description: 'Permite limpiar el valor seleccionado',
+      control: 'boolean',
       table: {
-        category: "Comportamiento e Interacción",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     editable: {
-      description: "Permite edición directa en el input",
-      control: "boolean",
+      description: 'Permite edición directa en el input',
+      control: 'boolean',
       table: {
-        category: "Comportamiento e Interacción",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
     arrowControl: {
-      name: "arrow-control",
-      description: "Permite cambiar hora con flechas",
-      control: "boolean",
+      name: 'arrow-control',
+      description: 'Permite cambiar hora con flechas',
+      control: 'boolean',
       table: {
-        category: "Comportamiento e Interacción",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    openOnInputClick: {
+      name: 'open-on-input-click',
+      description:
+        'En modo rango, el clic en cualquiera de los dos inputs también abre el panel; el ícono siempre lo abre',
+      control: 'boolean',
+      table: {
+        category: 'Comportamiento e Interacción',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
 
     // 3. Apariencia y Estilos
     prefixIcon: {
-      name: "prefix-icon",
-      description: "Ícono al inicio del input",
-      control: "select",
-      options: ["", ...generateIconOptions()],
+      name: 'prefix-icon',
+      description: 'Ícono al inicio del input',
+      control: 'select',
+      options: ['', ...generateIconOptions()],
       table: {
-        category: "Apariencia y Estilos",
-        type: { summary: "string | Component" },
-        defaultValue: { summary: "" },
+        category: 'Apariencia y Estilos',
+        type: { summary: 'string | Component' },
+        defaultValue: { summary: '' },
       },
     },
     popperClass: {
-      name: "popper-class",
-      description: "Clase CSS personalizada para el popup",
-      control: "text",
+      name: 'popper-class',
+      description: 'Clase CSS personalizada para el popup',
+      control: 'text',
       table: {
-        category: "Apariencia y Estilos",
-        type: { summary: "string" },
+        category: 'Apariencia y Estilos',
+        type: { summary: 'string' },
         defaultValue: { summary: "''" },
       },
     },
     placement: {
-      description: "Posición del popup",
-      control: "select",
+      description: 'Posición del popup',
+      control: 'select',
       options: [
-        "top",
-        "top-start",
-        "top-end",
-        "bottom",
-        "bottom-start",
-        "bottom-end",
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
       ],
       table: {
-        category: "Apariencia y Estilos",
-        type: { summary: "string" },
-        defaultValue: { summary: "bottom" },
+        category: 'Apariencia y Estilos',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'bottom' },
       },
     },
 
     // 4. Formato de Tiempo
     format: {
-      description: "Formato de visualización en el input",
-      control: "text",
+      description: 'Formato de visualización en el input',
+      control: 'text',
       table: {
-        category: "Formato de Tiempo",
-        type: { summary: "string" },
-        defaultValue: { summary: "HH:mm:ss" },
+        category: 'Formato de Tiempo',
+        type: { summary: 'string' },
+        defaultValue: { summary: 'HH:mm:ss' },
       },
     },
     valueFormat: {
-      name: "value-format",
-      description: "Formato del valor vinculado (v-model)",
-      control: "text",
+      name: 'value-format',
+      description: 'Formato del valor vinculado (v-model)',
+      control: 'text',
       table: {
-        category: "Formato de Tiempo",
-        type: { summary: "string" },
+        category: 'Formato de Tiempo',
+        type: { summary: 'string' },
       },
     },
     dateFormat: {
-      name: "date-format",
-      description: "Formato de fecha en el popup (si aplica)",
-      control: "text",
+      name: 'date-format',
+      description: 'Formato de fecha en el popup (si aplica)',
+      control: 'text',
       table: {
-        category: "Formato de Tiempo",
-        type: { summary: "string" },
+        category: 'Formato de Tiempo',
+        type: { summary: 'string' },
       },
     },
     timeFormat: {
-      name: "time-format",
-      description: "Formato de hora en el popup",
-      control: "text",
+      name: 'time-format',
+      description: 'Formato de hora en el popup',
+      control: 'text',
       table: {
-        category: "Formato de Tiempo",
-        type: { summary: "string" },
+        category: 'Formato de Tiempo',
+        type: { summary: 'string' },
       },
     },
 
     // 5. Etiquetas y Texto
     label: {
-      description: "Label en modo simple",
-      control: "text",
+      description: 'Label en modo simple',
+      control: 'text',
       table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
       },
     },
     helpText: {
-      description: "help texy en modo simple",
-      control: "text",
+      description: 'help texy en modo simple',
+      control: 'text',
       table: {
-        category: "Etiquetas y Texto",
-        type: { summary: "string" },
-        defaultValue: { summary: "" },
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
+      },
+    },
+    ariaLabel: {
+      name: 'aria-label',
+      description:
+        'Nombre accesible del panel; en modo rango también sirve de respaldo para los inputs que no tienen placeholder',
+      control: 'text',
+      table: {
+        category: 'Etiquetas y Texto',
+        type: { summary: 'string' },
       },
     },
 
     // 6. Validación y Restricciones
     disabled: {
-      description: "Deshabilita el componente",
-      control: "boolean",
+      description: 'Deshabilita el componente',
+      control: 'boolean',
       table: {
-        category: "Validación y Restricciones",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Validación y Restricciones',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     readonly: {
-      description: "Hace el componente de solo lectura",
-      control: "boolean",
+      description: 'Hace el componente de solo lectura',
+      control: 'boolean',
       table: {
-        category: "Validación y Restricciones",
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
+        category: 'Validación y Restricciones',
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
     disabledHours: {
-      name: "disabled-hours",
-      description: "Horas deshabilitadas para selección",
-      control: "object",
+      name: 'disabled-hours',
+      description: 'Horas deshabilitadas para selección',
+      control: 'object',
       table: {
-        category: "Validación y Restricciones",
-        type: { summary: "number[] | (role: string) => number[]" },
+        category: 'Validación y Restricciones',
+        type: { summary: 'number[] | (role: string) => number[]' },
       },
     },
     disabledMinutes: {
-      name: "disabled-minutes",
-      description: "Minutos deshabilitados para selección",
-      control: "object",
+      name: 'disabled-minutes',
+      description: 'Minutos deshabilitados para selección',
+      control: 'object',
       table: {
-        category: "Validación y Restricciones",
+        category: 'Validación y Restricciones',
         type: {
-          summary: "number[] | (hour: number, role: string) => number[]",
+          summary: 'number[] | (hour: number, role: string) => number[]',
         },
       },
     },
     disabledSeconds: {
-      name: "disabled-seconds",
-      description: "Segundos deshabilitados para selección",
-      control: "object",
+      name: 'disabled-seconds',
+      description: 'Segundos deshabilitados para selección',
+      control: 'object',
       table: {
-        category: "Validación y Restricciones",
+        category: 'Validación y Restricciones',
         type: {
           summary:
-            "number[] | (hour: number, minute: number, role: string) => number[]",
+            'number[] | (hour: number, minute: number, role: string) => number[]',
         },
       },
     },
     disabledDate: {
-      name: "disabled-date",
-      description: "Función para deshabilitar fechas específicas",
-      control: "function",
+      name: 'disabled-date',
+      description: 'Función para deshabilitar fechas específicas',
+      control: 'function',
       table: {
-        category: "Validación y Restricciones",
-        type: { summary: "(date: Date) => boolean" },
+        category: 'Validación y Restricciones',
+        type: { summary: '(date: Date) => boolean' },
       },
     },
 
     // 7. Métodos Expuestos
     focus: {
-      description: "Enfoca el input del time picker",
+      description: 'Enfoca el input del time picker',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
     blur: {
-      description: "Quita el foco del input",
+      description: 'Quita el foco del input',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
     handleOpen: {
-      description: "Abre el popup del time picker",
+      description: 'Abre el popup del time picker',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
     handleClose: {
-      description: "Cierra el popup del time picker",
+      description: 'Cierra el popup del time picker',
       table: {
-        category: "Métodos Expuestos",
-        type: { summary: "() => void" },
+        category: 'Métodos Expuestos',
+        type: { summary: '() => void' },
       },
     },
 
     // 8. Eventos
     onChange: {
-      description: "Se dispara cuando el usuario confirma un cambio",
+      description: 'Se dispara cuando el usuario confirma un cambio',
       table: {
-        category: "Eventos",
+        category: 'Eventos',
         type: {
           summary:
-            "(value: Date | string | [Date, Date] | [string, string]) => void",
+            '(value: Date | string | [Date, Date] | [string, string]) => void',
         },
       },
     },
     onBlur: {
-      description: "Se dispara cuando el input pierde el foco",
+      description: 'Se dispara cuando el input pierde el foco',
       table: {
-        category: "Eventos",
-        type: { summary: "(event: FocusEvent) => void" },
+        category: 'Eventos',
+        type: { summary: '(event: FocusEvent) => void' },
       },
     },
     onFocus: {
-      description: "Se dispara cuando el input recibe el foco",
+      description: 'Se dispara cuando el input recibe el foco',
       table: {
-        category: "Eventos",
-        type: { summary: "(event: FocusEvent) => void" },
+        category: 'Eventos',
+        type: { summary: '(event: FocusEvent) => void' },
       },
     },
     onCalendarChange: {
-      description: "Se dispara cuando cambia el calendario (en modo rango)",
+      description: 'Se dispara cuando cambia el calendario (en modo rango)',
       table: {
-        category: "Eventos",
-        type: { summary: "(value: [Date, Date | null]) => void" },
+        category: 'Eventos',
+        type: { summary: '(value: [Date, Date | null]) => void' },
       },
     },
     onPanelChange: {
-      description: "Se dispara cuando cambia el panel de hora/fecha",
+      description: 'Se dispara cuando cambia el panel de hora/fecha',
       table: {
-        category: "Eventos",
+        category: 'Eventos',
         type: {
           summary:
-            "(value: [Dayjs, Dayjs], mode: string, view: string) => void",
+            '(value: [Dayjs, Dayjs], mode: string, view: string) => void',
         },
       },
     },
     onVisibleChange: {
-      description: "Se dispara cuando la visibilidad del popup cambia",
+      description: 'Se dispara cuando la visibilidad del popup cambia',
       table: {
-        category: "Eventos",
-        type: { summary: "(visible: boolean) => void" },
+        category: 'Eventos',
+        type: { summary: '(visible: boolean) => void' },
       },
     },
     onClear: {
-      description: "Se dispara cuando se limpia el valor",
+      description: 'Se dispara cuando se limpia el valor',
       table: {
-        category: "Eventos",
-        type: { summary: "() => void" },
+        category: 'Eventos',
+        type: { summary: '() => void' },
       },
     },
   },
   args: {
-    label: "Seleccione hora",
-    format: "HH:mm:ss",
-    startPlaceholder: "Hora inicio",
-    endPlaceholder: "Hora fin",
+    label: 'Seleccione hora',
+    format: 'HH:mm:ss',
+    startPlaceholder: 'Hora inicio',
+    endPlaceholder: 'Hora fin',
     clearable: true,
   },
 };
@@ -405,11 +427,11 @@ export default meta;
 type Story = StoryObj<typeof GTimePicker>;
 
 export const Basic: Story = {
-  name: "Básico",
-  render: (args) => ({
+  name: 'Básico',
+  render: args => ({
     components: { GTimePicker, GConfigProvider },
     setup() {
-      const value = ref("");
+      const value = ref('');
 
       return { value, args };
     },
@@ -424,7 +446,7 @@ export const Basic: Story = {
 };
 
 export const Range: Story = {
-  name: "Modo Rango",
+  name: 'Modo Rango',
   parameters: {
     docs: {
       description: {
@@ -463,8 +485,83 @@ export const Range: Story = {
   }),
 };
 
+export const RangeOpenOnInput: Story = {
+  name: 'Rango con apertura desde inputs',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const start = await canvas.findByPlaceholderText('Hora inicio');
+
+    await userEvent.click(start);
+    await waitFor(() => expect(start).toHaveAttribute('aria-expanded', 'true'));
+
+    const panelButton = await waitFor(() => {
+      const button = document.body.querySelector<HTMLElement>(
+        '.gui-picker__popper .gui-time-panel__btn',
+      );
+      if (!button) throw new Error('el panel todavía no se montó');
+      return button;
+    });
+    panelButton.focus();
+
+    let escapeReachedDocument = false;
+    const onDocumentKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') escapeReachedDocument = true;
+    };
+    document.addEventListener('keydown', onDocumentKeydown);
+    await userEvent.keyboard('{Escape}');
+    document.removeEventListener('keydown', onDocumentKeydown);
+
+    await expect(escapeReachedDocument).toBe(false);
+
+    await waitFor(() =>
+      expect(start).toHaveAttribute('aria-expanded', 'false'),
+    );
+    await expect(start).toHaveFocus();
+
+    await new Promise(resolve => setTimeout(resolve, 400));
+    await expect(start).toHaveAttribute('aria-expanded', 'false');
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Con \`open-on-input-click\` el panel se abre al hacer clic en cualquiera de los dos inputs, además del ícono. Por defecto está apagado.
+
+- \`Tab\` pasa del input de inicio al de fin; desde el de fin entra al panel
+- \`Esc\` dentro del panel lo cierra y devuelve el foco al input
+- Con puntero táctil los inputs no abren el teclado del dispositivo, para que no tape el panel
+- \`aria-label\` da nombre accesible al panel y es el respaldo de cada input cuando faltan los placeholders`,
+      },
+    },
+  },
+  render: () => ({
+    components: { GTimePicker, GConfigProvider },
+    setup() {
+      const value = ref([]);
+
+      return { value };
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col gap-4">
+          <g-time-picker
+            v-model="value"
+            is-range
+            open-on-input-click
+            aria-label="Rango de horas"
+            start-placeholder="Hora inicio"
+            end-placeholder="Hora fin"
+            range-separator="|"
+            format="HH:mm:ss"
+          />
+          <div>Rango seleccionado: {{ value }}</div>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};
+
 export const DisabledTimes: Story = {
-  name: "Horas Deshabilitadas",
+  name: 'Horas Deshabilitadas',
   parameters: {
     docs: {
       description: {
@@ -479,7 +576,7 @@ export const DisabledTimes: Story = {
   render: () => ({
     components: { GTimePicker, GConfigProvider },
     setup() {
-      const value = ref("");
+      const value = ref('');
 
       const disabledHours = () => {
         return Array.from({ length: 9 }, (_, i) => i); // 0-8
@@ -488,7 +585,7 @@ export const DisabledTimes: Story = {
       const disabledMinutes = (selectedHour: number) => {
         if (selectedHour === 12) {
           return Array.from({ length: 60 }, (_, i) =>
-            i % 2 === 0 ? i : null
+            i % 2 === 0 ? i : null,
           ).filter(Boolean);
         }
         return [];
@@ -496,11 +593,11 @@ export const DisabledTimes: Story = {
 
       const disabledSeconds = (
         selectedHour: number,
-        selectedMinute: number
+        selectedMinute: number,
       ) => {
         if (selectedHour === 12 && selectedMinute === 30) {
           return Array.from({ length: 60 }, (_, i) =>
-            i > 30 ? i : null
+            i > 30 ? i : null,
           ).filter(Boolean);
         }
         return [];
@@ -532,7 +629,7 @@ export const DisabledTimes: Story = {
 };
 
 export const CustomFormat: Story = {
-  name: "Formato Personalizado",
+  name: 'Formato Personalizado',
   parameters: {
     docs: {
       description: {
@@ -547,9 +644,9 @@ export const CustomFormat: Story = {
   render: () => ({
     components: { GTimePicker, GConfigProvider },
     setup() {
-      const value = ref("");
-      const format = "hh:mm A";
-      const valueFormat = "HH:mm:ss";
+      const value = ref('');
+      const format = 'hh:mm A';
+      const valueFormat = 'HH:mm:ss';
 
       return { value, format, valueFormat };
     },
@@ -574,7 +671,7 @@ export const CustomFormat: Story = {
 };
 
 export const States: Story = {
-  name: "Estados",
+  name: 'Estados',
   parameters: {
     docs: {
       description: {
@@ -591,9 +688,9 @@ export const States: Story = {
   render: () => ({
     components: { GTimePicker, GConfigProvider },
     setup() {
-      const time = ref("");
-      const timeDisabled = ref("");
-      const timeHelpText = ref("");
+      const time = ref('');
+      const timeDisabled = ref('');
+      const timeHelpText = ref('');
 
       return {
         time,

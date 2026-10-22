@@ -2,11 +2,11 @@ import { computed, ref } from 'vue';
 import type { SetupContext } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
 import { useFormSize } from '@flash-global66/g-form';
-import type { InlineEmits, InlineProps } from './defaults';
+import type { InlineEmits, InlineProps } from './types/inline.type';
 
 export function useInline(
   props: InlineProps,
-  emit: SetupContext<InlineEmits>['emit']
+  emit: SetupContext<InlineEmits>['emit'],
 ) {
   const visible = ref(true);
 

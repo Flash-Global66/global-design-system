@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="panelRef"
     :class="[
       ppNs.b(),
       drpNs.b(),
@@ -16,7 +17,11 @@
           v-for="(shortcut, key) in shortcuts"
           :key="key"
           type="button"
-          :class="ppNs.e('shortcut')"
+          :class="[
+            ppNs.e('shortcut'),
+            { active: isShortcutSelected(shortcut) },
+          ]"
+          :aria-pressed="isShortcutSelected(shortcut)"
           @click="handleShortcutClick(shortcut)"
         >
           {{ shortcut.text }}
@@ -100,7 +105,11 @@
             </span>
           </span>
         </div>
-        <div :class="[ppNs.e('content'), drpNs.e('content')]" class="is-left">
+        <div
+          :class="[ppNs.e('content'), drpNs.e('content')]"
+          class="is-left"
+          @keydown="handleKeydownDays"
+        >
           <div :class="drpNs.e('header')">
             <button
               type="button"
@@ -142,7 +151,7 @@
                 <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
-            <div>{{ leftLabel }}</div>
+            <div aria-live="polite">{{ leftLabel }}</div>
           </div>
           <date-table
             selection-mode="range"
@@ -157,7 +166,11 @@
             @select="onSelect"
           />
         </div>
-        <div :class="[ppNs.e('content'), drpNs.e('content')]" class="is-right">
+        <div
+          :class="[ppNs.e('content'), drpNs.e('content')]"
+          class="is-right"
+          @keydown="handleKeydownDays"
+        >
           <div :class="drpNs.e('header')">
             <button
               v-if="unlinkPanels"
@@ -199,7 +212,7 @@
                 <g-icon-font name="solid chevron-right" />
               </slot>
             </button>
-            <div>{{ rightLabel }}</div>
+            <div aria-live="polite">{{ rightLabel }}</div>
           </div>
           <date-table
             selection-mode="range"
@@ -246,6 +259,7 @@ import { useLocale } from '@flash-global66/g-hooks';
 import {
   ClickOutside as vClickoutside,
   isArray,
+  isFunction,
 } from '@flash-global66/g-utils';
 import { GButton } from '@flash-global66/g-button';
 import { GInput } from '@flash-global66/g-input';
@@ -257,10 +271,17 @@ import {
 import { GIconFont } from '@flash-global66/g-icon-font';
 import { panelDateRangeProps } from '../props/panel-date-range';
 import { useRangePicker } from '../composables/use-range-picker';
-import { getDefaultValue, isValidRange } from '../utils';
+import { DAY_NAVIGATION_KEYS } from '../constants/dayNavigation.constant';
+import {
+  findNextEnabledDate,
+  getDefaultValue,
+  isShortcutActive,
+  isValidRange,
+} from '../utils';
 import DateTable from './basic-date-table.vue';
 
 import type { Dayjs } from 'dayjs';
+import type { Shortcut } from '../composables/use-shortcut';
 
 import es from '../lang/es';
 
@@ -360,6 +381,16 @@ const rightMonth = computed(() => {
 });
 
 const hasShortcuts = computed(() => !!shortcuts.value.length);
+
+function isShortcutSelected(shortcut: Shortcut): boolean {
+  return isShortcutActive({
+    shortcutValue: isFunction(shortcut.value)
+      ? shortcut.value()
+      : shortcut.value,
+    minDate: minDate.value,
+    maxDate: maxDate.value,
+  });
+}
 
 const minVisibleDate = computed(() => {
   if (dateUserInput.value.min !== null) return dateUserInput.value.min;
@@ -711,6 +742,50 @@ function onParsedValueChanged(
   }
 }
 
+const panelRef = ref<HTMLElement>();
+
+function getEnabledDayCells(): HTMLElement[] {
+  return Array.from(
+    panelRef.value?.querySelectorAll<HTMLElement>('td.available[data-date]') ??
+      [],
+  );
+}
+
+function handleKeydownDays(event: KeyboardEvent) {
+  const cell = (event.target as HTMLElement).closest<HTMLElement>(
+    'td[data-date]',
+  );
+  if (!cell) return;
+
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    cell.click();
+    return;
+  }
+
+  if (!DAY_NAVIGATION_KEYS.includes(event.key)) return;
+
+  const cells = getEnabledDayCells();
+  const next = findNextEnabledDate({
+    current: cell.dataset.date as string,
+    key: event.key,
+    enabledDates: new Set(cells.map(({ dataset }) => dataset.date as string)),
+  });
+  if (!next) return;
+
+  event.preventDefault();
+  cells.find(({ dataset }) => dataset.date === next)?.focus();
+}
+
+function handleFocusPicker() {
+  const target =
+    panelRef.value?.querySelector<HTMLElement>(
+      `.${ppNs.e('shortcut')}, td.available[data-date][tabindex="0"]`,
+    ) ?? getEnabledDayCells()[0];
+  target?.focus();
+}
+
+emit('set-picker-option', ['handleFocusPicker', handleFocusPicker]);
 emit('set-picker-option', ['isValidValue', isValidValue]);
 emit('set-picker-option', ['parseUserInput', parseUserInput]);
 emit('set-picker-option', ['formatToString', formatToString]);

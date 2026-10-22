@@ -154,12 +154,10 @@ import { GIconFont } from '@flash-global66/g-icon-font';
 import { useFormItem, useFormItemInputId } from '@flash-global66/g-form';
 
 import { inputTagEmits, inputTagProps } from './input-tag';
-import {
-  useDragTag,
-  useHovering,
-  useInputTag,
-  useInputTagDom,
-} from './composables';
+import { useDragTag } from './composables/use-drag-tag';
+import { useHovering } from './composables/use-hovering';
+import { useInputTag } from './composables/use-input-tag';
+import { useInputTagDom } from './composables/use-input-tag-dom';
 
 defineOptions({
   name: 'GInputTag',

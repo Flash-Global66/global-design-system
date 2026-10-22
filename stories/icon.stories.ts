@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from '@storybook/vue3-vite';
 import { Icon } from '../components/icon';
 import { GInput } from '../components/input';
 import { GButton } from '@flash-global66/g-button/index.ts';
@@ -30,30 +30,31 @@ const meta: Meta<typeof Icon> = {
 
 ### ¿Puedo usar class para personalizar el ícono?
 Sí, puedes usar la propiedad \`class\` para personalizar el ícono. No necesariamente debes usar el size o color para personalizar el ícono.
-        `
-      }
-    }
-  },  argTypes: {
+        `,
+      },
+    },
+  },
+  argTypes: {
     name: {
       description: 'Nombre del icono a mostrar',
       control: 'select',
-      options: iconSet.icons.map(icon => icon.properties.name)
+      options: iconSet.icons.map(icon => icon.properties.name),
     },
     size: {
       description: 'Tamaño del icono',
       control: 'text',
-      defaultValue: '1em'
+      defaultValue: '1em',
     },
     color: {
       description: 'Color del icono',
-      control: 'color'
-    }
+      control: 'color',
+    },
   },
   args: {
     name: 'users',
     size: '3em',
-    color: '#565F75'
-  }
+    color: '#565F75',
+  },
 };
 
 export default meta;
@@ -65,11 +66,11 @@ export const Primary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Ejemplo básico de uso del componente Icon.'
-      }
-    }
+        story: 'Ejemplo básico de uso del componente Icon.',
+      },
+    },
   },
-  render: (args) => ({
+  render: args => ({
     components: { Icon, GConfigProvider },
     setup() {
       return { args };
@@ -78,7 +79,7 @@ export const Primary: Story = {
       <g-config-provider>
         <icon v-bind="args" />
       </g-config-provider>
-    `
+    `,
   }),
 };
 
@@ -86,45 +87,49 @@ export const IconGallery: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Galería completa de íconos disponibles en el sistema. Haz clic en cualquier ícono para copiar su nombre.'
-      }
-    }
+        story:
+          'Galería completa de íconos disponibles en el sistema. Haz clic en cualquier ícono para copiar su nombre.',
+      },
+    },
   },
   render: () => ({
     components: { Icon, GConfigProvider, GInput, GButton },
     setup() {
-      const searchTerm = ref('')
+      const searchTerm = ref('');
       const icons = iconSet.icons.map(icon => ({
         name: icon.properties.name,
-      }))
+      }));
 
       const filteredIcons = computed(() => {
-        if (!searchTerm.value) return icons
-        return icons.filter(icon => 
-          icon.name.toLowerCase().includes(searchTerm.value.toLowerCase())
-        ) || {}
-      })
+        if (!searchTerm.value) return icons;
+        return (
+          icons.filter(icon =>
+            icon.name.toLowerCase().includes(searchTerm.value.toLowerCase()),
+          ) || {}
+        );
+      });
 
       const copyIconName = (iconName: string) => {
-        navigator.clipboard.writeText(iconName)
+        navigator.clipboard
+          .writeText(iconName)
           .then(() => {
-            alert(`🫡"${iconName}" copiado al portapapeles!`)
+            alert(`🫡"${iconName}" copiado al portapapeles!`);
           })
           .catch(() => {
-            alert('No se pudo copiar el nombre del icono')
-          })
-      }
+            alert('No se pudo copiar el nombre del icono');
+          });
+      };
 
       const clearSearch = () => {
-        searchTerm.value = ''
-      }
+        searchTerm.value = '';
+      };
 
-      return { 
-        icons: filteredIcons, 
+      return {
+        icons: filteredIcons,
         copyIconName,
         searchTerm,
-        clearSearch 
-      }
+        clearSearch,
+      };
     },
     template: `
       <g-config-provider>
@@ -171,8 +176,9 @@ export const IconGallery: Story = {
           </div>
         </div>
       </g-config-provider>
-    `  })
-}
+    `,
+  }),
+};
 
 export const IconTroubleshooting: Story = {
   parameters: {
@@ -214,9 +220,9 @@ Usaremos <a href="https://inkscape.org/es/ " target="_blank" rel="noopener noref
 - Usa SVG monocromáticos
 - Verifica que no haya rellenos indeseados
 - Unifica todos los trazos antes de exportar
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   render: () => ({
     components: { Icon, GConfigProvider },
@@ -227,6 +233,6 @@ Usaremos <a href="https://inkscape.org/es/ " target="_blank" rel="noopener noref
           <span>Ejemplo de ícono correctamente optimizado</span>
         </div>
       </g-config-provider>
-    `
-  })
+    `,
+  }),
 };

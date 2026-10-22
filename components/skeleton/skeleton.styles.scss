@@ -7,6 +7,9 @@
 @use '@flash-global66/g-utils/mixins' as *;
 @use '@flash-global66/g-utils/var-mixins' as *;
 @use '@flash-global66/g-utils/tokens' as *;
+// Entry de `exports["./styles.scss"]`: agrega el subcomponente para entregar
+// el paquete completo en un solo archivo.
+@use './skeleton-item.styles.scss' as skeleton-item;
 
 @include b(skeleton) {
   @include set-component-css-var('skeleton', $skeleton);
