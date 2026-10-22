@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import { GSegmented } from '@flash-global66/g-segmented/index.ts';
+import { GIconFont } from '@flash-global66/g-icon-font';
 import { GConfigProvider } from '../components/config-provider';
 import { ref } from 'vue';
 
@@ -10,9 +11,10 @@ const meta: Meta<typeof GSegmented> = {
   parameters: {
     docs: {
       description: {
-        component: 'Componente de selección que permite elegir entre múltiples opciones.'
-      }
-    }
+        component:
+          'Componente de selección que permite elegir entre múltiples opciones.',
+      },
+    },
   },
   argTypes: {
     options: {
@@ -32,15 +34,15 @@ const meta: Meta<typeof GSegmented> = {
               | string
               | number
               | boolean
-          ` 
+          `,
         },
-      }
+      },
     },
     modelValue: {
       description: 'Valor del modelo (v-model)',
       table: {
-        type: { summary: 'string | number | boolean' }
-      }
+        type: { summary: 'string | number | boolean' },
+      },
     },
     rounded: {
       description: 'Redondea el componente',
@@ -48,16 +50,16 @@ const meta: Meta<typeof GSegmented> = {
       options: ['md', 'lg'],
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'md' }
-      }
+        defaultValue: { summary: 'md' },
+      },
     },
     block: {
       description: 'Ajusta el ancho al contenedor padre',
       control: 'boolean',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     variant: {
       description: 'Variante del componente',
@@ -65,22 +67,22 @@ const meta: Meta<typeof GSegmented> = {
       options: ['default', 'primary'],
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'default' }
-      }
+        defaultValue: { summary: 'default' },
+      },
     },
     messageError: {
       description: 'Mensaje de error',
       control: 'text',
       table: {
         type: { summary: 'string' },
-      }
+      },
     },
     helpText: {
       description: 'Texto de ayuda',
       control: 'text',
       table: {
         type: { summary: 'string' },
-      }
+      },
     },
     size: {
       description: 'Tamaño del componente',
@@ -88,45 +90,45 @@ const meta: Meta<typeof GSegmented> = {
       options: ['sm', 'md'],
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'md' }
-      }
+        defaultValue: { summary: 'md' },
+      },
     },
     disabled: {
       description: 'Deshabilita el componente',
       control: 'boolean',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' }
-      }
+        defaultValue: { summary: 'false' },
+      },
     },
     validateEvent: {
       description: 'Activa la validación del formulario',
       control: 'boolean',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' }
-      }
+        defaultValue: { summary: 'true' },
+      },
     },
     id: {
       description: 'ID nativo del input',
       control: 'text',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     name: {
       description: 'Atributo name nativo',
       control: 'text',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     ariaLabel: {
       description: 'Etiqueta ARIA para accesibilidad',
       control: 'text',
       table: {
-        type: { summary: 'string' }
-      }
+        type: { summary: 'string' },
+      },
     },
     classItem: {
       description: 'Clase personalizada para cada opción',
@@ -139,21 +141,21 @@ const meta: Meta<typeof GSegmented> = {
       description: 'Se emite cuando cambia el valor seleccionado',
       table: {
         type: { summary: 'string | number | boolean' },
-        category: 'events'
-      }
+        category: 'events',
+      },
     },
-    'onChange': {
+    onChange: {
       description: 'Se emite cuando el usuario cambia la selección',
       table: {
         type: { summary: 'string | number | boolean' },
-        category: 'events'
-      }
+        category: 'events',
+      },
     },
     default: {
       description: 'Slot personalizado para el contenido de cada opción',
       table: {
         type: { summary: 'slot' },
-        category: 'slots'
+        category: 'slots',
       },
     },
     help: {
@@ -161,8 +163,8 @@ const meta: Meta<typeof GSegmented> = {
       control: 'text',
       table: {
         type: { summary: 'slot' },
-        category: 'slots'
-      }
+        category: 'slots',
+      },
     },
   },
   args: {
@@ -177,17 +179,17 @@ const meta: Meta<typeof GSegmented> = {
     validateEvent: true,
     id: '',
     name: '',
-  }
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof GSegmented>;
 
 export const Primary: Story = {
-  render: (args) => ({
-    components: { GSegmented , GConfigProvider},
+  render: args => ({
+    components: { GSegmented, GConfigProvider },
     setup() {
-      const value = ref('person')
+      const value = ref('person');
       return { args, value };
     },
     template: `
@@ -207,15 +209,16 @@ export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Permite deshabilitar el componente completo o opciones individuales cuando ciertas selecciones no deben estar disponibles.'
-      }
-    }
+        story:
+          'Permite deshabilitar el componente completo o opciones individuales cuando ciertas selecciones no deben estar disponibles.',
+      },
+    },
   },
-  render: (args) => ({
+  render: () => ({
     components: { GSegmented, GConfigProvider },
     setup() {
-      const value = ref('person')
-      return { 
+      const value = ref('person');
+      return {
         value,
         options: [
           { label: 'Persona', value: 'person' },
@@ -223,7 +226,7 @@ export const Disabled: Story = {
           { label: 'Grupo', value: 'group' },
           { label: 'Global66', value: 'global66' },
           { label: 'Transferencias', value: 'transfers' },
-        ]
+        ],
       };
     },
     template: `
@@ -245,26 +248,26 @@ export const Disabled: Story = {
   }),
 };
 
-
 export const Block: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Extiende el componente para ocupar el ancho completo del contenedor padre, útil para mantener alineación con otros elementos.'
-      }
-    }
+        story:
+          'Extiende el componente para ocupar el ancho completo del contenedor padre, útil para mantener alineación con otros elementos.',
+      },
+    },
   },
-  render: (args) => ({
+  render: () => ({
     components: { GSegmented, GConfigProvider },
     setup() {
-      const value = ref('person')
-      return { 
+      const value = ref('person');
+      return {
         value,
         options: [
           { label: 'Persona', value: 'person' },
           { label: 'Empresa', value: 'company' },
           { label: 'Grupo', value: 'group' },
-        ]
+        ],
       };
     },
     template: `
@@ -285,22 +288,23 @@ export const CustomContent: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Permite personalizar el contenido de cada opción usando el slot default. El slot recibe un scope con la propiedad item que contiene toda la información de la opción actual.'
-      }
-    }
+        story:
+          'Permite personalizar el contenido de cada opción usando el slot default. El slot recibe un scope con la propiedad item que contiene toda la información de la opción actual.',
+      },
+    },
   },
-  render: (args) => ({
+  render: () => ({
     components: { GSegmented, GConfigProvider },
     setup() {
-      const value = ref('fruits')
-      return { 
+      const value = ref('fruits');
+      return {
         value,
         options: [
           { label: 'Frutas', value: 'fruits', emoji: '🍎' },
           { label: 'Vegetales', value: 'vegetables', emoji: '🥕' },
           { label: 'Postres', value: 'desserts', emoji: '🍰' },
           { label: 'Bebidas', value: 'drinks', emoji: '🍹' },
-        ]
+        ],
       };
     },
     template: `
@@ -314,6 +318,52 @@ export const CustomContent: Story = {
               <span style="font-size: 24px">{{ item.emoji }}</span>
               <div>{{ item.label }}</div>
             </div>
+          </template>
+        </g-segmented>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const Responsive: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Se adapta al ancho disponible: por debajo de 768px las opciones se apilan en vertical y entre 768px y 991px quedan en horizontal compacto. Para verlo, redimensiona el canvas. La opción puede llevar un ícono a la derecha del texto mediante el slot default.',
+      },
+    },
+  },
+  render: () => ({
+    components: { GSegmented, GConfigProvider, GIconFont },
+    setup() {
+      const value = ref('secondary');
+      return {
+        value,
+        options: [
+          { label: 'Movimientos', value: 'movements' },
+          {
+            label: 'Secundarias',
+            value: 'secondary',
+            icon: 'regular info-circle',
+          },
+          { label: 'Usuarios', value: 'users' },
+          { label: 'Smart Cards', value: 'smart-cards' },
+        ],
+      };
+    },
+    template: `
+      <g-config-provider>
+        <g-segmented
+          v-model="value"
+          :options="options"
+          block
+        >
+          <template #default="{ item }">
+            <span class="inline-flex items-center gap-xxs">
+              {{ item.label }}
+              <g-icon-font v-if="item.icon" :name="item.icon" size="sm" />
+            </span>
           </template>
         </g-segmented>
       </g-config-provider>
