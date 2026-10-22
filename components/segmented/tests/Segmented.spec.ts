@@ -1,7 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { nextTick } from 'vue';
-import { render, screen } from '@testing-library/vue';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen } from '@testing-library/vue';
 import Segmented from '../src/Segmented.vue';
 import type { OptionSegmented } from '../src/segmented.type';
 
@@ -104,12 +103,11 @@ describe('GSegmented', () => {
   });
 
   it('elegir una opción emite update:modelValue y change con su valor', async () => {
-    const user = userEvent.setup();
     const { emitted } = render(Segmented, {
       props: { options: OPTIONS, modelValue: OPTIONS[0].value },
     });
 
-    await user.click(screen.getByText('tres'));
+    await fireEvent.click(screen.getByText('tres'));
 
     expect(emitted()['update:modelValue']).toEqual([['tres']]);
     expect(emitted().change).toEqual([['tres']]);
