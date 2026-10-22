@@ -254,6 +254,9 @@ export const ICON_SETS = {
     "wallet",
     "money-bill-trend-up",
     "layer-group",
+    "chart-simple",
+    "money-bills-simple",
+    "chart-mixed-up-circle-dollar",
   ] as const,
 
   light: [
