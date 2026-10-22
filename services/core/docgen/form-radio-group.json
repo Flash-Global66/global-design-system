@@ -1,0 +1,723 @@
+{
+  "components": {
+    "form-radio-group": {
+      "id": "form-radio-group",
+      "name": "GRadioGroup",
+      "path": "./stories/radio-group.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GRadioGroup",
+        "displayName": "GRadioGroup",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "modelValue",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "binding value"
+              }
+            ],
+            "required": false,
+            "type": "string | number | boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | number | boolean | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the nesting radios are disabled"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "name",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native `name` attribute"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "id",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native `id` attribute"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "options",
+            "global": false,
+            "default": "[]",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "options for building checkboxes"
+              }
+            ],
+            "required": false,
+            "type": "RadioOption[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "RadioOption[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "array",
+                  "type": "RadioOption[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "layout",
+            "global": false,
+            "default": "'horizontal'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "type of layout"
+              }
+            ],
+            "required": false,
+            "type": "layoutType | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "layoutType | undefined",
+              "schema": [
+                "undefined",
+                "\"horizontal\"",
+                "\"vertical\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateEvent",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to trigger form validation"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLabel",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[val: string | number | boolean | undefined]",
+            "signature": "(event: \"update:modelValue\", val: string | number | boolean | undefined): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "string | number | boolean | undefined",
+                "schema": [
+                  "undefined",
+                  "string",
+                  "number",
+                  "false",
+                  "true"
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "change",
+            "description": "",
+            "tags": [],
+            "type": "[val: string | number | boolean | undefined]",
+            "signature": "(event: \"change\", val: string | number | boolean | undefined): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "string | number | boolean | undefined",
+                "schema": [
+                  "undefined",
+                  "string",
+                  "number",
+                  "false",
+                  "true"
+                ]
+              }
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/radio/index.ts"
+      },
+      "argTypes": {
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              },
+              {
+                "name": "boolean",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | number | boolean"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "name": {
+          "name": "name",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "id": {
+          "name": "id",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "options": {
+          "name": "options",
+          "description": "",
+          "defaultValue": {
+            "summary": "[]"
+          },
+          "type": {
+            "name": "other",
+            "value": "RadioOption[] | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "RadioOption[]"
+            },
+            "defaultValue": {
+              "summary": "[]"
+            },
+            "category": "props"
+          }
+        },
+        "layout": {
+          "name": "layout",
+          "description": "",
+          "defaultValue": {
+            "summary": "'horizontal'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "horizontal",
+              "vertical"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "layoutType"
+            },
+            "defaultValue": {
+              "summary": "'horizontal'"
+            },
+            "category": "props"
+          }
+        },
+        "validateEvent": {
+          "name": "validateEvent",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLabel": {
+          "name": "ariaLabel",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[val: string | number | boolean | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[val: string | number | boolean]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[val: string | number | boolean | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[val: string | number | boolean]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GRadioGroupModels = {\n  /**\n   * @description binding value\n   * @default undefined\n   */\n  modelValue?: string | number | boolean; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GRadioGroupProps = {\n  /** @description whether the nesting radios are disabled */\n  disabled?: boolean;\n  /**\n   * @description native `name` attribute\n   * @default undefined\n   */\n  name?: string;\n  /**\n   * @description native `id` attribute\n   * @default undefined\n   */\n  id?: string;\n  /**\n   * @description options for building checkboxes\n   * @default []\n   */\n  options?: RadioOption[];\n  /**\n   * @description type of layout\n   * @default 'horizontal'\n   */\n  layout?: layoutType;\n  /**\n   * @description whether to trigger form validation\n   * @default true\n   */\n  validateEvent?: boolean;\n  ariaLabel?: string;\n}\n```\n\n## Events\n\n```\nexport type GRadioGroupEvents = {\n  \"update:modelValue\": [val: string | number | boolean | undefined];\n  change: [val: string | number | boolean | undefined];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GRadioGroupSlots = {\n  default: {};\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

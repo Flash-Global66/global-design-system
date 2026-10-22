@@ -1,0 +1,509 @@
+{
+  "v": 1,
+  "components": {
+    "form-attach-file": {
+      "id": "form-attach-file",
+      "name": "GAttachFile",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-attach-file.json#/components/form-attach-file"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-attach-file.json#/components/form-attach-file"
+      }
+    },
+    "data-avatar": {
+      "id": "data-avatar",
+      "name": "Avatar",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-avatar.json#/components/data-avatar"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-avatar.json#/components/data-avatar"
+      }
+    },
+    "data-badge": {
+      "id": "data-badge",
+      "name": "GBadge",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-badge.json#/components/data-badge"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-badge.json#/components/data-badge"
+      }
+    },
+    "basic-benefits-card": {
+      "id": "basic-benefits-card",
+      "name": "GBenefitsCard",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-benefits-card.json#/components/basic-benefits-card"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-benefits-card.json#/components/basic-benefits-card"
+      }
+    },
+    "basic-button-card": {
+      "id": "basic-button-card",
+      "name": "GButtonCard",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-button-card.json#/components/basic-button-card"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-button-card.json#/components/basic-button-card"
+      }
+    },
+    "basic-button": {
+      "id": "basic-button",
+      "name": "GButton",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-button.json#/components/basic-button"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-button.json#/components/basic-button"
+      }
+    },
+    "form-checkbox-group": {
+      "id": "form-checkbox-group",
+      "name": "GCheckboxGroup",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-checkbox-group.json#/components/form-checkbox-group"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-checkbox-group.json#/components/form-checkbox-group"
+      }
+    },
+    "form-checkbox-single": {
+      "id": "form-checkbox-single",
+      "name": "GCheckbox",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-checkbox-single.json#/components/form-checkbox-single"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-checkbox-single.json#/components/form-checkbox-single"
+      }
+    },
+    "data-chip": {
+      "id": "data-chip",
+      "name": "GChip",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-chip.json#/components/data-chip"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-chip.json#/components/data-chip"
+      }
+    },
+    "data-collapse": {
+      "id": "data-collapse",
+      "name": "GCollapse",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-collapse.json#/components/data-collapse"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-collapse.json#/components/data-collapse"
+      }
+    },
+    "basic-countryflag": {
+      "id": "basic-countryflag",
+      "name": "GCountryFlag",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-countryflag.json#/components/basic-countryflag"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-countryflag.json#/components/basic-countryflag"
+      }
+    },
+    "form-date-picker": {
+      "id": "form-date-picker",
+      "name": "GDatePicker",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-date-picker.json#/components/form-date-picker"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-date-picker.json#/components/form-date-picker"
+      }
+    },
+    "data-dialog-alert": {
+      "id": "data-dialog-alert",
+      "name": "DialogAlert",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-dialog-alert.json#/components/data-dialog-alert"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-dialog-alert.json#/components/data-dialog-alert"
+      }
+    },
+    "data-dialog": {
+      "id": "data-dialog",
+      "name": "GDialog",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-dialog.json#/components/data-dialog"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-dialog.json#/components/data-dialog"
+      }
+    },
+    "feedback-drawer": {
+      "id": "feedback-drawer",
+      "name": "GDrawer",
+      "docgen": {
+        "$ref": "../services/core/docgen/feedback-drawer.json#/components/feedback-drawer"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/feedback-drawer.json#/components/feedback-drawer"
+      }
+    },
+    "data-dropdown": {
+      "id": "data-dropdown",
+      "name": "GDropdown",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-dropdown.json#/components/data-dropdown"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-dropdown.json#/components/data-dropdown"
+      }
+    },
+    "form-form-item": {
+      "id": "form-form-item",
+      "name": "GFormItem",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-form-item.json#/components/form-form-item"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-form-item.json#/components/form-form-item"
+      }
+    },
+    "form-form": {
+      "id": "form-form",
+      "name": "GForm",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-form.json#/components/form-form"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-form.json#/components/form-form"
+      }
+    },
+    "colores-foundations": {
+      "id": "colores-foundations",
+      "name": "Foundations",
+      "docgen": {
+        "$ref": "../services/core/docgen/colores-foundations.json#/components/colores-foundations"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/colores-foundations.json#/components/colores-foundations"
+      }
+    },
+    "basic-iconbutton": {
+      "id": "basic-iconbutton",
+      "name": "GIconButton",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-iconbutton.json#/components/basic-iconbutton"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-iconbutton.json#/components/basic-iconbutton"
+      }
+    },
+    "basic-iconfont": {
+      "id": "basic-iconfont",
+      "name": "GIconFont",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-iconfont.json#/components/basic-iconfont"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-iconfont.json#/components/basic-iconfont"
+      }
+    },
+    "basic-icono": {
+      "id": "basic-icono",
+      "name": "Icon",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-icono.json#/components/basic-icono"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-icono.json#/components/basic-icono"
+      }
+    },
+    "basic-image": {
+      "id": "basic-image",
+      "name": "GImage",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-image.json#/components/basic-image"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-image.json#/components/basic-image"
+      }
+    },
+    "data-inline": {
+      "id": "data-inline",
+      "name": "GInline",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-inline.json#/components/data-inline"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-inline.json#/components/data-inline"
+      }
+    },
+    "form-input-code": {
+      "id": "form-input-code",
+      "name": "GInputCode",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-input-code.json#/components/form-input-code"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-input-code.json#/components/form-input-code"
+      }
+    },
+    "form-input-number": {
+      "id": "form-input-number",
+      "name": "GInputNumber",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-input-number.json#/components/form-input-number"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-input-number.json#/components/form-input-number"
+      }
+    },
+    "form-inputtag": {
+      "id": "form-inputtag",
+      "name": "GInputTag",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-inputtag.json#/components/form-inputtag"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-inputtag.json#/components/form-inputtag"
+      }
+    },
+    "form-input": {
+      "id": "form-input",
+      "name": "GInput",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-input.json#/components/form-input"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-input.json#/components/form-input"
+      }
+    },
+    "basic-link": {
+      "id": "basic-link",
+      "name": "GLink",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-link.json#/components/basic-link"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-link.json#/components/basic-link"
+      }
+    },
+    "feedback-loader": {
+      "id": "feedback-loader",
+      "name": "Loader",
+      "docgen": {
+        "$ref": "../services/core/docgen/feedback-loader.json#/components/feedback-loader"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/feedback-loader.json#/components/feedback-loader"
+      }
+    },
+    "basic-logo": {
+      "id": "basic-logo",
+      "name": "GLogo",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-logo.json#/components/basic-logo"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-logo.json#/components/basic-logo"
+      }
+    },
+    "feedback-menu": {
+      "id": "feedback-menu",
+      "name": "GMenu",
+      "docgen": {
+        "$ref": "../services/core/docgen/feedback-menu.json#/components/feedback-menu"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/feedback-menu.json#/components/feedback-menu"
+      }
+    },
+    "data-pagination": {
+      "id": "data-pagination",
+      "name": "GPagination",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-pagination.json#/components/data-pagination"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-pagination.json#/components/data-pagination"
+      }
+    },
+    "feedback-popover": {
+      "id": "feedback-popover",
+      "name": "GPopover",
+      "docgen": {
+        "$ref": "../services/core/docgen/feedback-popover.json#/components/feedback-popover"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/feedback-popover.json#/components/feedback-popover"
+      }
+    },
+    "data-progress": {
+      "id": "data-progress",
+      "name": "GProgress",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-progress.json#/components/data-progress"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-progress.json#/components/data-progress"
+      }
+    },
+    "form-quote": {
+      "id": "form-quote",
+      "name": "GQuote",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-quote.json#/components/form-quote"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-quote.json#/components/form-quote"
+      }
+    },
+    "form-radio-group": {
+      "id": "form-radio-group",
+      "name": "GRadioGroup",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-radio-group.json#/components/form-radio-group"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-radio-group.json#/components/form-radio-group"
+      }
+    },
+    "form-radio-single": {
+      "id": "form-radio-single",
+      "name": "GRadio",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-radio-single.json#/components/form-radio-single"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-radio-single.json#/components/form-radio-single"
+      }
+    },
+    "basic-scrollbar": {
+      "id": "basic-scrollbar",
+      "name": "GScrollbar",
+      "docgen": {
+        "$ref": "../services/core/docgen/basic-scrollbar.json#/components/basic-scrollbar"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/basic-scrollbar.json#/components/basic-scrollbar"
+      }
+    },
+    "form-searchinput": {
+      "id": "form-searchinput",
+      "name": "GSearchInput",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-searchinput.json#/components/form-searchinput"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-searchinput.json#/components/form-searchinput"
+      }
+    },
+    "data-segmented": {
+      "id": "data-segmented",
+      "name": "GSegmented",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-segmented.json#/components/data-segmented"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-segmented.json#/components/data-segmented"
+      }
+    },
+    "form-select": {
+      "id": "form-select",
+      "name": "GSelect",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-select.json#/components/form-select"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-select.json#/components/form-select"
+      }
+    },
+    "colores-semantic": {
+      "id": "colores-semantic",
+      "name": "Semantic",
+      "docgen": {
+        "$ref": "../services/core/docgen/colores-semantic.json#/components/colores-semantic"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/colores-semantic.json#/components/colores-semantic"
+      }
+    },
+    "data-skeleton": {
+      "id": "data-skeleton",
+      "name": "GSkeleton",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-skeleton.json#/components/data-skeleton"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-skeleton.json#/components/data-skeleton"
+      }
+    },
+    "form-switch": {
+      "id": "form-switch",
+      "name": "GSwitch",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-switch.json#/components/form-switch"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-switch.json#/components/form-switch"
+      }
+    },
+    "data-table": {
+      "id": "data-table",
+      "name": "GTable",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-table.json#/components/data-table"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-table.json#/components/data-table"
+      }
+    },
+    "data-tag": {
+      "id": "data-tag",
+      "name": "GTag",
+      "docgen": {
+        "$ref": "../services/core/docgen/data-tag.json#/components/data-tag"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/data-tag.json#/components/data-tag"
+      }
+    },
+    "form-time-picker": {
+      "id": "form-time-picker",
+      "name": "GTimePicker",
+      "docgen": {
+        "$ref": "../services/core/docgen/form-time-picker.json#/components/form-time-picker"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/form-time-picker.json#/components/form-time-picker"
+      }
+    },
+    "feedback-toast": {
+      "id": "feedback-toast",
+      "name": "GToast",
+      "docgen": {
+        "$ref": "../services/core/docgen/feedback-toast.json#/components/feedback-toast"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/feedback-toast.json#/components/feedback-toast"
+      }
+    },
+    "feedback-tooltip": {
+      "id": "feedback-tooltip",
+      "name": "GTooltip",
+      "docgen": {
+        "$ref": "../services/core/docgen/feedback-tooltip.json#/components/feedback-tooltip"
+      },
+      "stories": {
+        "$ref": "../services/core/story-docs/feedback-tooltip.json#/components/feedback-tooltip"
+      }
+    }
+  },
+  "meta": {
+    "docgen": "vue-component-meta",
+    "durationMs": 0
+  }
+}

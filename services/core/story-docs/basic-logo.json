@@ -1,0 +1,46 @@
+{
+  "components": {
+    "basic-logo": {
+      "id": "basic-logo",
+      "name": "GLogo",
+      "path": "./stories/logo.stories.ts",
+      "stories": {
+        "basic-logo--primary": {
+          "id": "basic-logo--primary",
+          "name": "Uso básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLogo } from '@flash-global66/g-logo/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4 p-4\">\n      <g-logo filter=\"none\" lazyLoad name=\"logo-pse\" />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-logo--all-logos": {
+          "id": "basic-logo--all-logos",
+          "name": "Todos los logos",
+          "snippet": "<script lang=\"ts\" setup>\nimport { LOGO_GROUPS, LOGO_NAMES, LOGO_SIZES } from \"@flash-global66/g-logo/index.ts\";\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLogo } from '@flash-global66/g-logo/index.ts';\nimport { GSegmented } from '@flash-global66/g-segmented';\n\nconst NATURAL_SIZE = '__natural__';\nconst selectedSize = ref(NATURAL_SIZE);\nconst sizeOptions = [\n  { label: 'Original', value: NATURAL_SIZE },\n  ...Object.keys(LOGO_SIZES).map(s => ({\n    label: s.toUpperCase(),\n    value: s,\n  })),\n];\nconst isOnDark = (name: string) => name.endsWith('-on-dark');\nconst logoSizeProps = (sizeKey: string) =>\n  sizeKey === NATURAL_SIZE ? {} : { size: sizeKey };\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-10\">\n      <div class=\"flex items-center justify-between gap-4 flex-wrap\">\n        <p class=\"text-sm text-gray-600 m-0\">\n          {{ LOGO_NAMES.length }} logos · colores originales del SVG\n        </p>\n        <g-segmented v-model=\"selectedSize\" :options=\"sizeOptions\" />\n      </div>\n      <section\n        v-for=\"group in LOGO_GROUPS\"\n        :key=\"group.id\"\n        class=\"space-y-4\"\n      >\n        <h3 class=\"text-base font-semibold text-gray-800 m-0\">{{ group.label }}</h3>\n        <div class=\"flex flex-wrap gap-6 items-center\">\n          <div\n            v-for=\"name in group.names\"\n            :key=\"name\"\n            class=\"flex flex-col items-center gap-3 p-4 border rounded-md min-w-[120px]\"\n            :class=\"isOnDark(name) ? 'bg-gray-900 border-gray-700' : 'bg-white'\"\n          >\n            <g-logo\n              :name=\"name\"\n              v-bind=\"logoSizeProps(selectedSize)\"\n              :lazy-load=\"false\"\n            />\n            <span\n              class=\"text-xs font-mono text-center break-all\"\n              :class=\"isOnDark(name) ? 'text-gray-400' : 'text-gray-500'\"\n            >{{ name }}</span>\n          </div>\n        </div>\n      </section>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "basic-logo--sizes": {
+          "id": "basic-logo--sizes",
+          "name": "Tamaños disponibles",
+          "warning": "No static snippet: `setup` references `DEMO_LOGO_PSE`, which the snippet cannot declare."
+        },
+        "basic-logo--size-custom": {
+          "id": "basic-logo--size-custom",
+          "name": "Ancho personalizado",
+          "warning": "No static snippet: `setup` references `DEMO_LOGO_BANCOLOMBIA`, which the snippet cannot declare."
+        },
+        "basic-logo--colors": {
+          "id": "basic-logo--colors",
+          "name": "Color personalizado",
+          "warning": "No static snippet: `setup` references `DEMO_LOGOS_COLOR_COMPATIBLE`, which the snippet cannot declare."
+        },
+        "basic-logo--filters": {
+          "id": "basic-logo--filters",
+          "name": "Filtros de color",
+          "warning": "No static snippet: `setup` references `DEMO_LOGOS_FILTER`, `DEMO_LOGO_PSE`, which the snippet cannot declare."
+        },
+        "basic-logo--error-handling": {
+          "id": "basic-logo--error-handling",
+          "name": "Manejo de errores",
+          "snippet": "<script lang=\"ts\" setup>\nimport { LOGO_PLACEHOLDER_SIZES, LOGO_SIZES } from \"@flash-global66/g-logo/index.ts\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GLogo } from '@flash-global66/g-logo/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-6\">\n      <div class=\"flex flex-wrap gap-6 items-end\">\n        <div\n          v-for=\"(px, size) in LOGO_SIZES\"\n          :key=\"size\"\n          class=\"flex flex-col items-center gap-2\"\n        >\n          <g-logo name=\"logo-inexistente\" :size=\"size\" />\n          <span class=\"text-sm text-gray-500\">\n            {{ size }} ({{ LOGO_PLACEHOLDER_SIZES[size].width }} × {{ LOGO_PLACEHOLDER_SIZES[size].height }})\n          </span>\n        </div>\n      </div>\n\n      <div class=\"bg-gray-50 p-4 rounded-md\">\n        <h4 class=\"font-medium mb-2\">¿Cómo funciona?</h4>\n        <p class=\"text-sm text-gray-700\">\n          Cuando un logo no puede cargarse, el componente muestra automáticamente un estado de error con el código \"404\".\n          Esto ocurre en dos casos:\n        </p>\n        <ul class=\"list-disc list-inside mt-2 text-sm text-gray-700\">\n          <li>El nombre no existe en <code>LOGO_NAMES</code> (archivo SVG no encontrado)</li>\n          <li>El archivo SVG existe pero no puede cargarse (error de red, archivo corrupto, etc.)</li>\n        </ul>\n      </div>\n    </div>\n  </g-config-provider>\n</template>"
+        }
+      }
+    }
+  }
+}

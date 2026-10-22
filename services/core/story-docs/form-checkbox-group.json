@@ -1,0 +1,46 @@
+{
+  "components": {
+    "form-checkbox-group": {
+      "id": "form-checkbox-group",
+      "name": "GCheckboxGroup",
+      "path": "./stories/checkbox-group.stories.ts",
+      "stories": {
+        "form-checkbox-group--basic": {
+          "id": "form-checkbox-group--basic",
+          "name": "Basic",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-checkbox-group--disabled": {
+          "id": "form-checkbox-group--disabled",
+          "name": "Disabled",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-checkbox-group--with-limits": {
+          "id": "form-checkbox-group--with-limits",
+          "name": "With Limits",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-checkbox-group--vertical-layout": {
+          "id": "form-checkbox-group--vertical-layout",
+          "name": "Vertical Layout",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-checkbox-group--inverted-style": {
+          "id": "form-checkbox-group--inverted-style",
+          "name": "Inverted Style",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-checkbox-group--bordered-style": {
+          "id": "form-checkbox-group--bordered-style",
+          "name": "Bordered Style",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        },
+        "form-checkbox-group--inverted-bordered-style": {
+          "id": "form-checkbox-group--inverted-bordered-style",
+          "name": "Inverted Bordered Style",
+          "warning": "No static snippet: the story template could not be resolved statically."
+        }
+      }
+    }
+  }
+}

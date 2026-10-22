@@ -1,0 +1,787 @@
+{
+  "components": {
+    "form-searchinput": {
+      "id": "form-searchinput",
+      "name": "GSearchInput",
+      "path": "./stories/search-input.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GSearchInput",
+        "displayName": "GSearchInput",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "modelValue",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "binding value"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "placeholder",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "placeholder text for the input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "label",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "label text for the input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "helpText",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "help text displayed below the input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "messageError",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "error message to display"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "debounceTime",
+            "global": false,
+            "default": "300",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "debounce time in milliseconds"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the component is disabled"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "initialLoading",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the component is in loading state while fetching initial data"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "searchingLoading",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the component is in loading state while searching"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[value: string]",
+            "signature": "(event: \"update:modelValue\", value: string): void",
+            "schema": [
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "search",
+            "description": "",
+            "tags": [],
+            "type": "[value: string]",
+            "signature": "(event: \"search\", value: string): void",
+            "schema": [
+              "string"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "clear",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"clear\"): void",
+            "schema": [],
+            "declarations": []
+          }
+        ],
+        "slots": [],
+        "exposed": [
+          {
+            "name": "focus",
+            "type": "() => any",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): any"
+            },
+            "declarations": []
+          },
+          {
+            "name": "blur",
+            "type": "() => any",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): any"
+            },
+            "declarations": []
+          },
+          {
+            "name": "clear",
+            "type": "() => void",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/search-input/index.ts"
+      },
+      "argTypes": {
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "placeholder": {
+          "name": "placeholder",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "label": {
+          "name": "label",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "helpText": {
+          "name": "helpText",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "messageError": {
+          "name": "messageError",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "debounceTime": {
+          "name": "debounceTime",
+          "description": "",
+          "defaultValue": {
+            "summary": "300"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "300"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "initialLoading": {
+          "name": "initialLoading",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "searchingLoading": {
+          "name": "searchingLoading",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "search": {
+          "name": "search",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[value: string]"
+          },
+          "table": {
+            "type": {
+              "summary": "[value: string]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "clear": {
+          "name": "clear",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "focus": {
+          "name": "focus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => any"
+          },
+          "table": {
+            "type": {
+              "summary": "() => any"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "blur": {
+          "name": "blur",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => any"
+          },
+          "table": {
+            "type": {
+              "summary": "() => any"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GSearchInputModels = {\n  /**\n   * @description binding value\n   * @default ''\n   */\n  modelValue?: string; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GSearchInputProps = {\n  /**\n   * @description placeholder text for the input\n   * @default ''\n   */\n  placeholder?: string;\n  /**\n   * @description label text for the input\n   * @default ''\n   */\n  label?: string;\n  /**\n   * @description help text displayed below the input\n   * @default ''\n   */\n  helpText?: string;\n  /**\n   * @description error message to display\n   * @default ''\n   */\n  messageError?: string;\n  /**\n   * @description debounce time in milliseconds\n   * @default 300\n   */\n  debounceTime?: number;\n  /** @description whether the component is disabled */\n  disabled?: boolean;\n  /** @description whether the component is in loading state while fetching initial data */\n  initialLoading?: boolean;\n  /** @description whether the component is in loading state while searching */\n  searchingLoading?: boolean;\n}\n```\n\n## Events\n\n```\nexport type GSearchInputEvents = {\n  \"update:modelValue\": [value: string];\n  search: [value: string];\n  clear: [];\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GSearchInputExposed = {\n  focus: () => any;\n  blur: () => any;\n  clear: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}
