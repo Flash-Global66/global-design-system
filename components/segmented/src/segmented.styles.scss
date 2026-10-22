@@ -17,7 +17,7 @@
 
 @include b('segmented') {
 
-  @apply bg-blue-50 p-2;
+  @apply bg-blue-50 p-xxs;
 
   @include e('help') {
     @apply flex gap-xxs justify-between text-2 font-medium text-disabled-txt px-xs;
@@ -29,18 +29,15 @@
   }
 
   @include e('item') {
-    @apply text-secondary-txt font-normal transition-colors duration-200 cursor-pointer;
+    @apply text-secondary-txt font-normal px-xxs py-xs gap-xxs transition-colors duration-200 cursor-pointer;
 
     &:not(.is-disabled):not(.is-selected):hover {
       @apply bg-transparent;
-      @include e('item-label') {
-        @apply font-medium;
-      }
     }
-    
+
     @include when('selected') {
       @include e('item-label') {
-        @apply font-medium text-primary-def;
+        @apply text-primary-def;
       }
       &.is-disabled {
         @include e('item-label') {
@@ -61,7 +58,7 @@
   }
   
   @include e('item-label') {
-    @apply text-4 font-normal;
+    @apply text-3 font-semibold;
   }
 
   @include e('item-selected') {
@@ -92,18 +89,6 @@
     }
   }
 
-  @include m('md') {
-    @include e('item') {
-      @apply p-4;
-    }
-  }
-
-  @include m('sm') {
-    @include e('item') {
-      @apply px-4 py-2;
-    }
-  }
-
   @include m('rounded-md') {
     @apply rounded-md;
     @include e('item-selected') {
@@ -119,23 +104,7 @@
   }
 
   @include res('sm-and-down', $breakpoints-spec) {
-    @apply flex w-full p-xxs;
-
-    @include m(('md', 'sm')) {
-      @include e('item') {
-        @apply px-xxs py-xs gap-xxs;
-
-        &:not(.is-disabled):not(.is-selected):hover {
-          @include e('item-label') {
-            @apply font-semibold;
-          }
-        }
-
-        @include e('item-label') {
-          @apply text-3 font-semibold;
-        }
-      }
-    }
+    @apply flex w-full;
   }
 
   @include res('xs') {
