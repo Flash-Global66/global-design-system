@@ -18,7 +18,7 @@
   - listo cuando: hay una story `Responsive` con las 4 opciones del diseño, «Secundarias» con `regular info-circle` vía slot `default` y `block`. Los 3 errores de `args` sin usar quedan resueltos, y `eslint --max-warnings 0` sobre el archivo sale 0.
   - commit: `docs(segmented): story del comportamiento responsive`
 
-- [ ] **4 · Desktop usa el estilo compacto de tablet (re-plan)**
+- [x] **4 · Desktop usa el estilo compacto de tablet (re-plan)**
   - archivos: `components/segmented/src/segmented.styles.scss`
   - depende de: 2
   - listo cuando: en todos los anchos el bloque tiene padding `xxs`, el ítem `px-xxs py-xs gap-xxs` y el label `text-3 font-semibold`, incluidos el seleccionado y el hover. Desaparecen los paddings de `m('md')`/`m('sm')` y el `text-4`. `res('sm-and-down')` queda solo con el ancho completo (`flex w-full`) y `res('xs')` sin cambios. En el CSS compilado, fuera de las media queries, el label sale con `.875rem / 1.375rem / 600` y ninguna regla posterior de mayor o igual especificidad lo pisa.
