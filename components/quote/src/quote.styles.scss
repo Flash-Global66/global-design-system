@@ -339,7 +339,7 @@
   }
 
   @include e("item-description") {
-    @apply text-2 font-medium text-terciary-txt truncate;
+    @apply text-2 font-medium text-grey-500 truncate;
   }
 
   @include e("empty") {
