@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.6.1...@flash-global66/g-image@0.7.0) (2026-10-22)
+
+### Features
+
+- **image:** agrega ilustración rocket ([#356](https://github.com/Flash-Global66/global-design-system/issues/356)) ([d59b411](https://github.com/Flash-Global66/global-design-system/commit/d59b41158a0285bcadda95c6e0942a06195fde18))
+
 ## [0.6.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-image@0.6.0...@flash-global66/g-image@0.6.1) (2026-09-15)
 
 **Note:** Version bump only for package @flash-global66/g-image
