@@ -34,7 +34,9 @@ const COP_ACCOUNT: QuoteAccount = {
 
 const ACCOUNTS = [CLP_PRIMARY, CLP_SECONDARY, COP_ACCOUNT];
 
-const makeProps = (overrides: Partial<QuoteAccountSelectProps> = {}): QuoteAccountSelectProps =>
+const makeProps = (
+  overrides: Partial<QuoteAccountSelectProps> = {},
+): QuoteAccountSelectProps =>
   ({
     accounts: ACCOUNTS,
     accountId: 'clp-primary',
@@ -57,6 +59,34 @@ function mountSelect(overrides: Partial<QuoteAccountSelectProps> = {}) {
   return wrapper;
 }
 
+function findItemByName(name: string): Element | undefined {
+  return Array.from(
+    document.body.querySelectorAll('.gui-quote-account-select__item'),
+  ).find(
+    item =>
+      item
+        .querySelector('.gui-quote-account-select__item-title')
+        ?.textContent?.trim() === name,
+  );
+}
+
+function findRowBadge(name: string): Element | null | undefined {
+  return findItemByName(name)?.querySelector(
+    '.gui-quote-account-select__badge',
+  );
+}
+
+async function typeSearch(query: string): Promise<void> {
+  const searchInput = document.body.querySelector<HTMLInputElement>(
+    '.gui-quote-account-select__search input',
+  );
+  expect(searchInput).not.toBeNull();
+
+  searchInput!.value = query;
+  searchInput!.dispatchEvent(new Event('input'));
+  await wrapper!.vm.$nextTick();
+}
+
 afterEach(() => {
   wrapper?.unmount();
   wrapper = undefined;
@@ -66,7 +96,9 @@ describe('QuoteAccountSelect', () => {
   it('muestra el badge verde de cuenta principal cuando la cuenta seleccionada es principal', () => {
     mountSelect({ accountId: 'clp-primary' });
 
-    const badge = document.body.querySelector('.gui-quote-account-select__badge');
+    const badge = document.body.querySelector(
+      '.gui-quote-account-select__trigger .gui-quote-account-select__badge',
+    );
 
     expect(badge).not.toBeNull();
     expect(badge?.className).toContain('is-primary');
@@ -76,7 +108,9 @@ describe('QuoteAccountSelect', () => {
   it('muestra el badge azul con el nombre de la cuenta cuando no es principal', () => {
     mountSelect({ accountId: 'clp-secondary' });
 
-    const badge = document.body.querySelector('.gui-quote-account-select__badge');
+    const badge = document.body.querySelector(
+      '.gui-quote-account-select__trigger .gui-quote-account-select__badge',
+    );
 
     expect(badge).not.toBeNull();
     expect(badge?.className).not.toContain('is-primary');
@@ -88,7 +122,7 @@ describe('QuoteAccountSelect', () => {
 
     const headers = Array.from(
       document.body.querySelectorAll('.gui-quote-account-select__group-header'),
-    ).map((el) => el.textContent?.trim());
+    ).map(el => el.textContent?.trim());
 
     expect(headers).toEqual(['CLP', 'COP']);
   });
@@ -99,14 +133,20 @@ describe('QuoteAccountSelect', () => {
     const items = Array.from(
       document.body.querySelectorAll('.gui-quote-account-select__item'),
     );
-    const selected = items.filter((item) => item.className.includes('is-selected'));
+    const selected = items.filter(item =>
+      item.className.includes('is-selected'),
+    );
 
     expect(selected).toHaveLength(1);
     expect(selected[0].textContent).toContain('Cuenta Corriente');
   });
 
   it('cuando no se pasan flagCode ni currencyCode, el trigger cae a los de la cuenta de accountId', () => {
-    mountSelect({ accountId: 'cop-primary', currencyCode: '', flagCode: undefined });
+    mountSelect({
+      accountId: 'cop-primary',
+      currencyCode: '',
+      flagCode: undefined,
+    });
 
     const code = document.body.querySelector('.gui-quote-account-select__code');
     expect(code?.textContent?.trim()).toBe('COP');
@@ -118,7 +158,9 @@ describe('QuoteAccountSelect', () => {
 
     const flagLabel =
       flagContainer?.querySelector('img')?.getAttribute('alt') ??
-      flagContainer?.querySelector('[aria-label]')?.getAttribute('aria-label') ??
+      flagContainer
+        ?.querySelector('[aria-label]')
+        ?.getAttribute('aria-label') ??
       '';
     expect(flagLabel).toContain('CO');
   });
@@ -126,16 +168,70 @@ describe('QuoteAccountSelect', () => {
   it('muestra emptyResultsText cuando la búsqueda no encuentra cuentas', async () => {
     mountSelect();
 
-    const searchInput = document.body.querySelector<HTMLInputElement>(
-      '.gui-quote-account-select__search input',
+    await typeSearch('no existe');
+
+    const empty = document.body.querySelector(
+      '.gui-quote-account-select__empty',
     );
-    expect(searchInput).not.toBeNull();
-
-    searchInput!.value = 'no existe';
-    searchInput!.dispatchEvent(new Event('input'));
-    await wrapper!.vm.$nextTick();
-
-    const empty = document.body.querySelector('.gui-quote-account-select__empty');
     expect(empty?.textContent?.trim()).toBe('Sin resultados');
+  });
+
+  describe('badge de cuenta principal en la fila', () => {
+    it('aparece solo en las filas de cuentas con isPrimary, no en las que traen badgeLabel', () => {
+      mountSelect({ accountId: 'clp-secondary' });
+
+      expect(findRowBadge('Cuenta Ahorro')?.className).toContain('is-primary');
+      expect(findRowBadge('Cuenta Pesos')?.className).toContain('is-primary');
+      expect(findRowBadge('Cuenta Corriente')).toBeNull();
+    });
+
+    it('usa el mismo primaryAccountLabel que el trigger', () => {
+      mountSelect({
+        accountId: 'clp-primary',
+        primaryAccountLabel: 'Principal',
+      });
+
+      const triggerBadge = document.body.querySelector(
+        '.gui-quote-account-select__trigger .gui-quote-account-select__badge',
+      );
+
+      expect(triggerBadge?.textContent?.trim()).toBe('Principal');
+      expect(findRowBadge('Cuenta Ahorro')?.textContent?.trim()).toBe(
+        'Principal',
+      );
+    });
+
+    it('comparte el encabezado de la fila con el nombre, y la descripción queda fuera de ese encabezado', () => {
+      mountSelect();
+
+      const heading = findItemByName('Cuenta Ahorro')?.querySelector(
+        '.gui-quote-account-select__item-heading',
+      );
+      const headingParts = Array.from(heading?.children ?? []).map(
+        el => el.className,
+      );
+
+      expect(headingParts).toHaveLength(2);
+      expect(headingParts[0]).toContain('gui-quote-account-select__item-title');
+      expect(headingParts[1]).toContain('gui-quote-account-select__badge');
+      expect(heading?.nextElementSibling?.className).toContain(
+        'gui-quote-account-select__item-description',
+      );
+    });
+
+    it('su texto no entra en la búsqueda', async () => {
+      mountSelect();
+
+      await typeSearch('principal');
+
+      expect(
+        document.body.querySelectorAll('.gui-quote-account-select__item'),
+      ).toHaveLength(0);
+      expect(
+        document.body
+          .querySelector('.gui-quote-account-select__empty')
+          ?.textContent?.trim(),
+      ).toBe('Sin resultados');
+    });
   });
 });
