@@ -3,6 +3,7 @@
 @use "@flash-global66/g-utils/mixins" as *;
 @use "@flash-global66/g-utils/utils" as *;
 @use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
 @use "./styles/segmented.scss" as *;
 
 
@@ -28,7 +29,7 @@
   }
 
   @include e('item') {
-    @apply text-nightBlue-900 font-normal transition-all duration-200 cursor-pointer;
+    @apply text-secondary-txt font-normal transition-all duration-200 cursor-pointer;
 
     &:not(.is-disabled):not(.is-selected):hover {
       @apply bg-transparent;
@@ -39,7 +40,7 @@
     
     @include when('selected') {
       @include e('item-label') {
-        @apply font-medium text-everBlue-900;
+        @apply font-medium text-primary-def;
       }
       &.is-disabled {
         @include e('item-label') {
@@ -64,7 +65,7 @@
   }
 
   @include e('item-selected') {
-    @apply bg-white border-everBlue-100 border;
+    @apply bg-white border-blue-100 border;
     @include when('disabled') {
       @include disabled-bg;
     }
@@ -114,6 +115,38 @@
     @apply rounded-2xl;
     @include e('item-selected') {
       @apply rounded-2xl;
+    }
+  }
+
+  @include res('sm-and-down', $breakpoints-spec) {
+    @apply flex w-full p-xxs;
+
+    @include m(('md', 'sm')) {
+      @include e('item') {
+        @apply px-xxs py-xs gap-xxs;
+
+        &:not(.is-disabled):not(.is-selected):hover {
+          @include e('item-label') {
+            @apply font-semibold;
+          }
+        }
+
+        @include e('item-label') {
+          @apply text-3 font-semibold;
+        }
+      }
+    }
+  }
+
+  @include res('xs') {
+    @include e('group') {
+      @apply flex-col;
+    }
+
+    @include m(('md', 'sm')) {
+      @include e('item') {
+        @apply w-full flex-none;
+      }
     }
   }
 }
