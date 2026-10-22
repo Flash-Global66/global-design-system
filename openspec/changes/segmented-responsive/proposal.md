@@ -28,13 +28,13 @@
 
 El segmented se adapta solo, por breakpoint, sin prop nueva (decisión del dev):
 
-| Ancho                | Layout                                           | Estilo              |
-| -------------------- | ------------------------------------------------ | ------------------- |
-| `< 768px` (mobile)   | **vertical**, un ítem por fila, todo el ancho    | compacto del diseño |
-| `768–991px` (tablet) | horizontal, todo el ancho, ítems `flex:1`        | compacto del diseño |
-| `≥ 992px` (desktop)  | horizontal; el ancho lo decide `block`, como hoy | compacto del diseño |
+| Ancho                | Layout                                        | Estilo              |
+| -------------------- | --------------------------------------------- | ------------------- |
+| `< 768px` (mobile)   | **vertical**, un ítem por fila, todo el ancho | compacto del diseño |
+| `768–991px` (tablet) | horizontal, todo el ancho, ítems `flex:1`     | compacto del diseño |
+| `≥ 992px` (desktop)  | horizontal; mismo ancho que antes del cambio  | compacto del diseño |
 
-**Re-plan (2026-10-22, después de la ronda 2 del verify):** el dev definió que el tamaño máximo es el de tablet, así que desktop usa el mismo estilo compacto (14px semibold, ítem 8/4px, contenedor 4px). En desktop **no** se fuerza el ancho al 100% como en tablet: lo sigue decidiendo la prop `block`, para no estirar a los consumidores de escritorio. La prop `size` deja de distinguir paddings: `sm` y `md` se ven igual.
+**Re-plan (2026-10-22, después de la ronda 2 del verify):** el dev definió que el tamaño máximo es el de tablet, así que desktop usa el mismo estilo compacto (14px semibold, ítem 8/4px, contenedor 4px). En desktop no se agrega ninguna regla de ancho. El componente ya ocupaba todo el ancho de su contenedor antes de este cambio: el wrapper `flex flex-col` de `Segmented.vue:2` estira al bloque, con o sin `block` (ver «Encontrado de paso»). La prop `size` deja de distinguir paddings: `sm` y `md` se ven igual.
 
 Los **colores** del diseño (`secondary-txt`, `primary-def`, borde `blue-100`) pasan a todos los tamaños, también desktop (decisión del dev).
 
@@ -63,6 +63,7 @@ El indicador animado pasa a calcular **posición y alto en los dos ejes**, así 
 ## Encontrado de paso
 
 - `styles/segmented.scss:46-51` define `.gui-segmented--vertical`, que ningún código aplica: es heredado de Element Plus y está muerto. No se toca porque no es parte del cambio, y borrarlo es limpieza aparte.
+- `Segmented.vue:2`: el wrapper `<div class="flex flex-col gap-xs">` blockifica al `.gui-segmented` (`inline-flex` → `flex`) y lo estira con `align-items: stretch`. Por eso la prop `block` no cambia el ancho del componente: siempre ocupa todo su contenedor. Es preexistente, medido en Storybook a 1100px con la story `Primary` sin `block` (1068px de ancho). No se toca porque cambiar el ancho de todos los consumidores es otra decisión.
 - `stories/segmented.stories.ts:214,257,292`: 3 errores de lint preexistentes. Se arreglan solo porque la tarea 3 toca el archivo.
 
 ## Cómo se verifica
