@@ -9,11 +9,7 @@
 - [ ] **2 · Layout responsive y colores del diseño**
   - archivos: `components/segmented/src/segmented.styles.scss`
   - depende de: ninguna
-  - listo cuando:
-    - Colores en todos los tamaños: ítem `text-secondary-txt`, label seleccionado `text-primary-def` y borde del indicador `border-blue-100`. Desaparecen `nightBlue-900`, `everBlue-900` y `everBlue-100`.
-    - Bajo `res('sm-and-down', $breakpoints-spec)` (<992px): el bloque pasa a `display:flex` con ancho completo y padding `xxs`; el ítem a `px-xxs py-xs`, ganando sobre `--md` y `--sm`; el label a `text-3 font-semibold`.
-    - Bajo `res('xs')` (<768px): el grupo pasa a `flex-direction: column` y cada ítem ocupa todo el ancho, sin crecer en alto.
-    - Desktop no cambia salvo colores.
+  - listo cuando: colores en todos los tamaños: ítem `text-secondary-txt`, label seleccionado `text-primary-def` y borde del indicador `border-blue-100`. Desaparecen `nightBlue-900`, `everBlue-900` y `everBlue-100`. Bajo `res('sm-and-down', $breakpoints-spec)` (<992px): el bloque pasa a `display:flex` con ancho completo y padding `xxs`; el ítem a `px-xxs py-xs`, ganando sobre `--md` y `--sm`; el label a `text-3 font-semibold`. Bajo `res('xs')` (<768px): el grupo pasa a `flex-direction: column` y cada ítem ocupa todo el ancho, sin crecer en alto. Desktop no cambia salvo colores.
   - commit: `feat(segmented): layout responsive para mobile y tablet`
 
 - [ ] **3 · Story que muestra el caso del diseño**
