@@ -42,6 +42,7 @@ export const IMAGE_NAMES = [
   'prohibited',
   'prohibited-red',
   'refresh',
+  'rocket',
   'sales',
   'scissors',
   'stairs',
