@@ -2,6 +2,7 @@
 
 > **Rama:** `claude/segmented-responsive-design-425ecf`
 > **Base:** `ee000ea6`
+> **HU:** `BMB-4195`
 
 ## Qué encontré
 
