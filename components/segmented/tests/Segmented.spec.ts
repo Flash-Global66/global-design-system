@@ -3,8 +3,12 @@ import { nextTick } from 'vue';
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import Segmented from '../src/Segmented.vue';
+import type { OptionSegmented } from '../src/segmented.type';
 
-const OPTIONS = ['uno', 'dos', 'tres'];
+const OPTIONS: OptionSegmented[] = ['uno', 'dos', 'tres'].map(label => ({
+  label,
+  value: label,
+}));
 const SELECTED_CLASS = 'is-selected';
 const INDICATOR_SELECTOR = '.gui-segmented__item-selected';
 
@@ -50,7 +54,7 @@ function mockSelectedItemLayout(layout: ItemLayout) {
 
 async function renderSelecting(value: string) {
   const view = render(Segmented, {
-    props: { options: OPTIONS, modelValue: OPTIONS[0] },
+    props: { options: OPTIONS, modelValue: OPTIONS[0].value },
   });
   await view.rerender({ modelValue: value });
   await nextTick();
@@ -102,7 +106,7 @@ describe('GSegmented', () => {
   it('elegir una opción emite update:modelValue y change con su valor', async () => {
     const user = userEvent.setup();
     const { emitted } = render(Segmented, {
-      props: { options: OPTIONS, modelValue: OPTIONS[0] },
+      props: { options: OPTIONS, modelValue: OPTIONS[0].value },
     });
 
     await user.click(screen.getByText('tres'));
