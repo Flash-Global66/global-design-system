@@ -2,12 +2,12 @@
 
 ```yaml
 veredicto: pasa
-ronda: 1
+ronda: 3
 fecha: 2026-10-22
 tareas_a_medias: []
-cumplidas: 3/3
+cumplidas: 4/4
 a_medias: 0
-de_mas: 4
+de_mas: 3
 escenarios: 6/6
 comandos:
   - cmd: node ../../../node_modules/vitest/vitest.mjs run 2>&1 | rg "Test Files|Tests "
@@ -35,83 +35,96 @@ comandos:
     esperado: '>= 2'
     obtenido: '2'
     coincide: true
+  - cmd: rg -c "p-4;|px-4 py-2|text-4" components/segmented/src/segmented.styles.scss
+    exit: 1
+    esperado: 'sin coincidencias (exit 1); base medida antes de la tarea 4: 3'
+    obtenido: 'sin coincidencias, exit 1'
+    coincide: true
   - cmd: git diff --name-only ee000ea6..HEAD
     exit: 0
     esperado: 'solo openspec/changes/segmented-responsive/**, Segmented.vue, segmented.styles.scss, Segmented.spec.ts y stories/segmented.stories.ts; nunca CHANGELOG.md'
-    obtenido: 'exactamente esos 7 archivos (3 de openspec + los 4 de código); sin CHANGELOG.md'
+    obtenido: 'exactamente 8 archivos: 4 de openspec/changes/segmented-responsive/ (proposal, spec, tasks, verify-report) + los 4 de código; sin CHANGELOG.md'
     coincide: true
-  - cmd: spec de HEAD corrido contra el Segmented.vue de ee000ea6 (copia en el scratchpad, ya borrada; el worktree no se tocó)
+  - cmd: spec de HEAD corrido contra el Segmented.vue de ee000ea6 (copia en el scratchpad; el worktree no se tocó)
     exit: 1
     esperado: 'el spec falla antes del cambio y pasa después (criterio de la tarea 1)'
-    obtenido: "antes: 2 failed / 1 passed (expected '100%' to be '44px'; expected '100%' to be '40px'). Después: 3 passed"
+    obtenido: "antes: 2 failed / 1 passed (expected '100%' to be '44px'; expected '100%' to be '40px'). Después: 3 passed (comando 2)"
     coincide: true
   - cmd: calcifer check ee000ea6
     exit: 0
     esperado: 'el plan no lo declara'
-    obtenido: 'SIN REVISAR: ningún validador miró los 7 archivos (eslint y test los delega a CI; check-architecture no existe en este repo). Sin base explícita, `calcifer check` aborta con exit 1 porque develop/main/release comparten ancestro.'
+    obtenido: 'SIN REVISAR: ningún validador miró los 8 archivos (eslint y test los delega a CI; check-architecture no existe en este repo). Sin base explícita aborta con exit 1. El exit 0 no es evidencia.'
     coincide: no_declarado
-  - cmd: compilar segmented.styles.scss con preprocessCSS (stdout, al scratchpad) en HEAD y en ee000ea6, y diff entre las dos salidas
+  - cmd: compilar segmented.styles.scss con preprocessCSS en HEAD y en ee000ea6 (scratchpad), y diff
     exit: 0
     esperado: 'el plan no lo declara'
-    obtenido: 'ver escenarios. Fuera de las media queries el único cambio son 3 declaraciones de color; las media queries 991px y 767px salen después de `.gui-segmented--md/--sm .gui-segmented__item` con especificidad 0,2,0 igual'
+    obtenido: 'HEAD compilado idéntico al task4.css del scratchpad. Contra la base, fuera de las media queries no cambia ninguna declaración de width, display ni flex del bloque; sí cambian paddings, tipografía, colores, hover, transition y se borran --md/--sm. Ver escenarios.'
     coincide: no_declarado
-  - cmd: browser-verify en Storybook, story Responsive, a 375px y 800px contra los nodos Figma 3525:60952 y 3525:60330
+  - cmd: browser-verify en Storybook, story Responsive, a 375px / 800px / 1100px contra los nodos Figma 3525:60952 y 3525:60330
     exit: null
-    esperado: '375px vertical con indicador sobre «Secundarias»; 800px horizontal compacto a todo el ancho; el indicador se reubica al cruzar 768px y 992px'
-    obtenido: 'no corrido: necesita Storybook levantado y no es automatizable en jsdom. El plan lo deriva a browser-verify'
+    esperado: '375px vertical con indicador sobre «Secundarias»; 800px horizontal compacto a todo el ancho; 1100px mismo estilo compacto; el indicador se reubica al cruzar 768px y 992px'
+    obtenido: 'no corrido: calcifer 0.45.0 no tiene `browser-verify` (no aparece en `calcifer --help`) y yo no tengo navegador. La revisión manual del dev no es evidencia acreditada.'
     coincide: no_verificado
 ```
 
-## Qué se cumplió (3/3)
+## Qué se cumplió (4/4)
 
-- **Tarea 1, indicador en los dos ejes** (`78f82465`)
-  - `components/segmented/src/Segmented.vue`: `updateSelect` asigna `state.height` y `state.translateY`, y `selectedStyle` usa `height: ${h}px` y `translate(X, Y)`.
-  - `components/segmented/tests/Segmented.spec.ts`: cubre el caso vertical (`translate(0px, 48px)`, alto `44px`), el horizontal (`translate(104px, 0px)`) y la emisión de `update:modelValue` / `change`.
-  - Falla antes del cambio y pasa después: comprobado contra el `Segmented.vue` base, con 2 fallos y 1 pasado.
-- **Tarea 2, layout responsive y colores** (`953d12d6`), en `components/segmented/src/segmented.styles.scss`
-  - Colores `text-secondary-txt` (#434A5C), `text-primary-def` (#203478) y `border-blue-100` (#c5d0ec). Los 3 colores viejos ya no aparecen.
-  - `res('sm-and-down')`: bloque flex a todo el ancho con padding .25rem, ítem con padding .25rem / .5rem, label .875rem / 1.375rem / 600.
-  - `res('xs')`: grupo en columna, ítem con `width:100%; flex:none`.
-  - Las media queries se emiten después de `--md` / `--sm` con la misma especificidad (0,2,0), así que la cascada gana.
-  - Desktop solo cambia en 3 colores.
-- **Tarea 3, story** (`452701c3`)
-  - Nueva story `Responsive` con 4 opciones, `regular info-circle` en el slot `default` y `block`.
-  - Los 3 errores de `args` están resueltos y eslint sale con 0.
-  - Los commits coinciden literalmente con el plan.
+- **Tarea 1, indicador en los dos ejes**
+  - `Segmented.vue`: `updateSelect` asigna `state.height` y `state.translateY`, y `selectedStyle` emite `height: Npx` y `translate(X, Y)`.
+  - `tests/Segmented.spec.ts`: 3 tests (vertical, horizontal y emisión de eventos).
+  - Contra el `Segmented.vue` de `ee000ea6` fallan 2 de 3.
+- **Tarea 2, layout responsive y colores**
+  - Colores `--color-txt-secondary` (#434A5C), `--color-primary` (#203478) y borde #c5d0ec. Los 3 colores viejos ya no están.
+  - `res('xs')`: el grupo pasa a columna y el ítem queda a todo el ancho.
+  - `res('sm-and-down')`: el bloque queda `display:flex; width:100%`.
+  - Su cláusula de desktop quedó superada por la tarea 4: está anotado en `tasks.md`.
+- **Tarea 3, story**
+  - `Responsive` con las 4 opciones, «Secundarias» con `regular info-circle` en el slot `default`, y `block`.
+  - Los 3 errores de lint están resueltos y eslint sale 0.
+- **Tarea 4, desktop compacto** (`29f8def5`)
+  - Fuera de las media queries: bloque con padding .25rem, ítem con gap .25rem y padding .5rem .25rem, label .875rem / 1.375rem / 600.
+  - Ninguna regla posterior pisa el label.
+  - Ya no existen `--md`/`--sm`, el `text-4` ni el hover con `font-medium`.
+  - `res('sm-and-down')` queda solo con el ancho completo.
 
 ## Qué quedó a medias
 
 Nada.
 
-## Qué se hizo de más (4)
+## Qué se hizo de más (3)
 
-1. **Reformateo de `stories/segmented.stories.ts`**: unas 100 líneas de formato que vienen probablemente de `lint-staged` (eslint --fix + prettier). No hacían falta para el lint. Es ruido de revisión, sin impacto funcional.
-2. **Regla de hover del label con `font-semibold` bajo 992px**: está justificada, porque el hover preexistente (0,5,0) le ganaba al semibold (0,3,0). Pero ningún criterio la nombra.
-3. **`gap-xxs` en el ítem bajo 992px**: sale del Figma (gap 4px), pero ni el criterio ni los escenarios lo nombran.
-4. **`size="sm"` en el ícono de la story**: elección del subagente, porque el diseño no lo especifica.
+1. **Reformateo de `stories/segmented.stories.ts`** por lint-staged: unas 112 líneas agregadas y 62 borradas, de las que solo unas 40 son la story pedida. Es ruido de revisión.
+2. **`size="sm"` en el ícono de la story**: elección del implementador, el diseño no lo especifica.
+3. **`transition-all` → `transition-colors` en el ítem** (`0a232097`): está justificado por el desfase del indicador al cruzar el breakpoint, pero ningún criterio lo nombra.
 
-## Sobre el reformateo del criterio (`ec9740ef`)
+## Escenarios (6/6, ninguno contradicho)
 
-Fue legítimo, solo formato:
+| Escenario                                | Evidencia                                                                                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Mobile apila las opciones                | CSS compilado (`max-width:767px`, columna). Revisión manual no acreditada a 375px                                                         |
+| Tablet mantiene la fila compacta         | CSS compilado (`max-width:991px`, flex a todo el ancho). Revisión manual no acreditada a 800px                                            |
+| Desktop usa el estilo compacto de tablet | CSS compilado fuera de las media queries, y diff compilado entre base y HEAD sin cambios de ancho. Revisión manual no acreditada a 1100px |
+| Selección en layout vertical             | test 1 de `Segmented.spec.ts`                                                                                                             |
+| Selección en layout horizontal           | test 2 de `Segmented.spec.ts`                                                                                                             |
+| Opción seleccionada y no seleccionada    | CSS compilado y `tailwind.config.cjs`                                                                                                     |
 
-- Comparado palabra por palabra, el único cambio es «Colores» → «colores».
-- Normalizados, los dos textos son idénticos: 566 caracteres cada uno.
-- Se hizo antes de cualquier commit de implementación.
+## Juicio sobre `cba85aa1` (corrección del re-plan): legítima
 
-## Escenarios (6/6)
+La premisa «el ancho en desktop lo decide `block`» era falsa y preexistente:
 
-| Escenario                             | Evidencia                                                                                      |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Mobile apila las opciones             | CSS compilado (`max-width:767px`, columna, ítem a todo el ancho). Falta ver el render a 375px  |
-| Tablet mantiene la fila compacta      | CSS compilado (`max-width:991px`, flex a todo el ancho, compacto). Falta ver el render a 800px |
-| Desktop conserva el layout actual     | diff del CSS compilado entre base y HEAD: solo cambian 3 colores                               |
-| Selección en vertical                 | test 1 de `Segmented.spec.ts`                                                                  |
-| Selección en horizontal               | test 2 de `Segmented.spec.ts`                                                                  |
-| Opción seleccionada y no seleccionada | CSS compilado y `tailwind.config.cjs`                                                          |
+- El wrapper `flex flex-col` de `Segmented.vue:2` es el mismo en `ee000ea6` y en HEAD, y estira al bloque.
+- `29f8def5` no agrega ninguna regla de ancho, y `cba85aa1` no toca `tasks.md` ni ningún `listo cuando`.
+- La redacción nueva («el mismo ancho que antes») se puede comprobar con el diff del CSS compilado.
 
 ## Hallazgos sobre el plan (no frenan)
 
-- Ningún comando de «Cómo se verifica» comprueba la cascada del CSS: la evidencia de 4 escenarios salió de una compilación ad hoc.
-- `ds-styles-delivery` cita `yarn styles:check`, pero ese script no existe en este checkout.
-- `calcifer check ee000ea6` no revisó ningún archivo (SIN REVISAR), así que su exit 0 no es evidencia.
-- El criterio visual sigue `no_verificado` hasta que corra `browser-verify`.
+1. **El `listo cuando` de la tarea 2 quedó obsoleto en su cláusula de desktop.** Ya está anotado en `tasks.md` como superado por la tarea 4.
+2. **`browser-verify` no existe en calcifer 0.45.0.** El criterio visual queda `no_verificado`, con la revisión manual del dev como indicio.
+3. **La prop `size` quedó sin efecto visual**, pero su control sigue en la story.
+4. **Falta un comando declarado para el ancho en desktop.** La evidencia sale del diff compilado ad hoc.
+
+## Historial
+
+- **Ronda 1: pasa** (3/3).
+- **Ronda 2: pasa** (3/3). Suma el fix `0a232097` y la revisión manual en Storybook.
+- **Ronda 3: pasa** (4/4). Suma el re-plan (desktop compacto, tarea 4) y la corrección `cba85aa1`.

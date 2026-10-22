@@ -11,6 +11,7 @@
   - depende de: ninguna
   - listo cuando: colores en todos los tamaños: ítem `text-secondary-txt`, label seleccionado `text-primary-def` y borde del indicador `border-blue-100`. Desaparecen `nightBlue-900`, `everBlue-900` y `everBlue-100`. Bajo `res('sm-and-down', $breakpoints-spec)` (<992px): el bloque pasa a `display:flex` con ancho completo y padding `xxs`; el ítem a `px-xxs py-xs`, ganando sobre `--md` y `--sm`; el label a `text-3 font-semibold`. Bajo `res('xs')` (<768px): el grupo pasa a `flex-direction: column` y cada ítem ocupa todo el ancho, sin crecer en alto. Desktop no cambia salvo colores.
   - commit: `feat(segmented): layout responsive para mobile y tablet`
+  - nota: superada en parte por la tarea 4 (re-plan). Desde ahí, desktop también usa el estilo compacto, y los paddings y la tipografía pasan de `res('sm-and-down')` al estilo base. La cláusula «Desktop no cambia salvo colores» describe el estado previo al re-plan.
 
 - [x] **3 · Story que muestra el caso del diseño**
   - archivos: `stories/segmented.stories.ts`
