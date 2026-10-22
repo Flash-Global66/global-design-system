@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.4.0...@flash-global66/g-quote@0.5.0) (2026-10-22)
+
+### Features
+
+- **quote:** badge de cuenta principal en la fila del selector de cuentas ([#355](https://github.com/Flash-Global66/global-design-system/issues/355)) ([18cd514](https://github.com/Flash-Global66/global-design-system/commit/18cd5140bf39c150fcdcd902b8b277c9c23bfc8a)), closes [#5F6881](https://github.com/Flash-Global66/global-design-system/issues/5F6881) [#7F869](https://github.com/Flash-Global66/global-design-system/issues/7F869)
+
 # [0.4.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-quote@0.3.25...@flash-global66/g-quote@0.4.0) (2026-09-28)
 
 ### Features
