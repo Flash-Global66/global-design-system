@@ -2,7 +2,7 @@
 
 ### Requirement: Layout del segmented según el ancho de pantalla
 
-El componente `GSegmented` SHALL adaptar su layout al ancho del viewport sin que el consumidor pase ninguna prop: vertical a todo el ancho por debajo de 768px, horizontal compacto a todo el ancho entre 768px y 991px, y el layout actual desde 992px.
+El componente `GSegmented` SHALL adaptar su layout al ancho del viewport sin que el consumidor pase ninguna prop: vertical a todo el ancho por debajo de 768px, horizontal compacto a todo el ancho entre 768px y 991px, y horizontal compacto desde 992px con el ancho que decida la prop `block`.
 
 #### Scenario: Mobile apila las opciones
 
@@ -16,11 +16,11 @@ El componente `GSegmented` SHALL adaptar su layout al ancho del viewport sin que
 - **WHEN** el viewport mide entre 768px y 991px
 - **THEN** las opciones se muestran en una fila que ocupa todo el ancho, repartidas en partes iguales, con texto de 14px semibold y padding de 8px vertical por 4px horizontal
 
-#### Scenario: Desktop conserva el layout actual
+#### Scenario: Desktop usa el estilo compacto de tablet
 
-- **GIVEN** un segmented de tamaño `md`
+- **GIVEN** un segmented de tamaño `md` o `sm`
 - **WHEN** el viewport mide 992px o más
-- **THEN** el layout, los paddings y la tipografía son los mismos que antes de este cambio
+- **THEN** las opciones se muestran en una fila con texto de 14px semibold, padding de 8px vertical por 4px horizontal y contenedor de 4px, y el ancho del componente lo sigue decidiendo la prop `block`
 
 ### Requirement: Indicador de selección en los dos ejes
 
