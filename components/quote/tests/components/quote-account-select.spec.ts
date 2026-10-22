@@ -201,7 +201,7 @@ describe('QuoteAccountSelect', () => {
       );
     });
 
-    it('va al lado del nombre, en la misma línea, y la descripción queda debajo', () => {
+    it('comparte el encabezado de la fila con el nombre, y la descripción queda fuera de ese encabezado', () => {
       mountSelect();
 
       const heading = findItemByName('Cuenta Ahorro')?.querySelector(
