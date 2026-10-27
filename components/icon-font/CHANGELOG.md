@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.28.0...@flash-global66/g-icon-font@0.29.0) (2026-10-27)
+
+### Features
+
+- **icon-font:** add house-building, briefcase-blank and face-viewfinder regular icons ([50162a0](https://github.com/Flash-Global66/global-design-system/commit/50162a04851c727b44dae2143df3cd5cc38f0d5b))
+
 # [0.28.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.27.0...@flash-global66/g-icon-font@0.28.0) (2026-10-22)
 
 ### Features

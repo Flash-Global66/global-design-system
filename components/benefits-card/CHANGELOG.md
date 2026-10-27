@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-benefits-card@0.1.2...@flash-global66/g-benefits-card@0.1.3) (2026-10-27)
+
+**Note:** Version bump only for package @flash-global66/g-benefits-card
+
 ## [0.1.2](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-benefits-card@0.1.1...@flash-global66/g-benefits-card@0.1.2) (2026-10-22)
 
 **Note:** Version bump only for package @flash-global66/g-benefits-card
