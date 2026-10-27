@@ -257,6 +257,9 @@ export const ICON_SETS = {
     "chart-simple",
     "money-bills-simple",
     "chart-mixed-up-circle-dollar",
+    "house-building",
+    "briefcase-blank",
+    "face-viewfinder",
   ] as const,
 
   light: [
