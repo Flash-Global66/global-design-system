@@ -2,22 +2,37 @@
 
 ```yaml
 veredicto: pasa
-ronda: 2
+ronda: 3
 fecha: 2026-10-28
 tareas_a_medias: []
-cumplidas: 4/4
+cumplidas: 5/5
 a_medias: 0
 de_mas: 4
 escenarios: 11/11
 comandos:
   - cmd: npx vitest run --project unit components/menu 2>&1 | grep -E "Test Files|Tests "
     exit: 0
-    esperado: 'Test Files con 0 failed; Tests con 0 failed y al menos 72 passed'
-    obtenido: 'Test Files 5 passed (5); Tests 72 passed (72)'
+    esperado: 'Test Files 5 passed; Tests con 0 failed (el conteo cambia: salen los specs de animación, entran los del wrapper). Hoy 72'
+    obtenido: 'Test Files 5 passed (5); Tests 71 passed (71)'
+    coincide: true
+  - cmd: grep -c "horizontal-collapse-transition\|opacity-transition\|transitionHooks\|<transition" components/menu/Menu.vue
+    exit: 1
+    esperado: '0 (grep sale con 1 cuando no hay coincidencias)'
+    obtenido: '0'
+    coincide: true
+  - cmd: grep -c "gui-menu-wrapper--collapse" components/menu/Menu.vue components/menu/menu.styles.scss
+    exit: 0
+    esperado: '>= 1 / >= 1'
+    obtenido: 'Menu.vue:1 / menu.styles.scss:1'
+    coincide: true
+  - cmd: grep -c "collapseTransition\|collapse-transition" stories/menu.stories.ts
+    exit: 1
+    esperado: '0'
+    obtenido: '0'
     coincide: true
   - cmd: grep -c "is('collapse'" components/menu/Menu.vue
     exit: 1
-    esperado: '0 (grep sale con 1 cuando no hay coincidencias, y el plan lo aclara)'
+    esperado: '0'
     obtenido: '0'
     coincide: true
   - cmd: grep -rn "is-collapse" components/menu --exclude-dir=tests | wc -l
@@ -45,128 +60,112 @@ comandos:
     esperado: '200'
     obtenido: '200'
     coincide: true
-  - cmd: 'calcifer check'
+  - cmd: calcifer check
     exit: 0
     esperado: 'no_declarado (no figura en «Cómo se verifica»)'
-    obtenido: 'eslint limpio, check-architecture limpio, 4 archivos de test: 70 passed. 9 de 13 archivos revisados; proposal.md, spec.md, tasks.md y verify-report.md quedan fuera de todo validador'
+    obtenido: 'eslint limpio, check-architecture limpio, 4 archivos de test: 69 passed. 9 de 13 archivos revisados; proposal.md, spec.md, tasks.md y verify-report.md quedan fuera de todo validador'
     coincide: no_declarado
-  - cmd: 'Criterio del cambio completo, punto 1: ul[role=menubar] con gui-menu--collapse y 44px, sin is-collapse'
+  - cmd: 'Criterio del cambio completo (browser-verify DS, run BMB-4217-ds-run-3): wrapper--collapse de 76px, ul 44px, ítems 44x44 con ícono centrado, sin label/chevron/badge visible, teclado, axe sin aria-command-name, mismo ul al alternar, consola limpia'
     exit: null
-    esperado: 'ul 44px con el modificador'
-    obtenido: 'run BMB-4217-ds-run-2, S01 modifier-geometry (PASSED, confirmado): 1 match de ul.gui-menu--collapse, 44x236; 0 matches de .is-collapse'
+    esperado: 'wrapper = ul + padding (76px), no los 320px del contenedor; resto de puntos como en ronda 2'
+    obtenido: 'S03 wrapper-fits PASSED: wrapper 76x276, ul 44, contenedor 320. S01 modifier-geometry PASSED (ul.gui-menu--collapse 44, 0 matches de .is-collapse, ítems 44x44, offset del ícono 0). S05/S06/S07/S09/S10 PASSED, axe 0 violaciones, consola 0 errores y red todo 200. Engine INCONCLUSIVE: 74 PASSED, 12 INCONCLUSIVE, 7 NOT_RUN (X1), 0 FAILED, 0 BLOCKED'
     coincide: true
-  - cmd: 'Criterio del cambio completo, punto 2: items y títulos de primer nivel de 44px con el ícono centrado'
+  - cmd: 'Criterio front-b2b (run BMB-4217-run-2): Sidebar colapsado ~84px, ul 44px, sin label/chevron/badge visible; expandido 300px'
     exit: null
-    esperado: 'ítems 44x44, ícono centrado'
-    obtenido: 'S01 modifier-geometry (PASSED): 4 ítems 44x44, offset del ícono 0'
-    coincide: true
-  - cmd: 'Criterio del cambio completo, punto 3: ninguna etiqueta, chevron ni badge visible (mitad visual de los escenarios 9 y 10)'
-    exit: null
-    esperado: 'solo íconos visibles'
-    obtenido: 'S01 layout-probe (PASSED), S09 item-label-visually-hidden (PASSED) y S10 submenu-label-visually-hidden (PASSED): spans de 1x1 recortados, chevrons sin caja visible, captura solo con íconos. El check declarativo collapsed-icons-only quedó INCONCLUSIVE por el engine (sin aserción de "no visible"), pero la medición está en la evidencia.'
-    coincide: true
-  - cmd: 'Criterio del cambio completo, punto 4: las etiquetas no son display:none ni visibility:hidden (computed style)'
-    exit: null
-    esperado: 'medición de computed style'
-    obtenido: 'El probe no expone display/visibility. Lo que hay es indirecto: el nombre accesible sigue en el snapshot de Playwright ("Home", "Movimientos", "COMEX 12", "Integraciones Nuevo"), cosa que un display:none rompería. El SCSS usa el mixin menu-visually-hidden. Es una inferencia sólida, no una medición directa del computed style.'
-    coincide: true
-  - cmd: 'Criterio del cambio completo, punto 5: Tab llega a cada ítem con foco visible; Enter abre el popup con foco dentro; Escape lo cierra y devuelve el foco al título'
-    exit: null
-    esperado: 'los tres comportamientos'
-    obtenido: 'S05 tab-reach (PASSED): 4 paradas con outline de 2px. S06 popup-focus (PASSED): Enter abre el popup y el foco queda en Historial; ArrowRight en COMEX igual. S07 escape-return (PASSED): el foco vuelve al título Movimientos. S07 popup-closed-escape quedó INCONCLUSIVE por el engine, pero la observación a ~7 s está en la evidencia.'
-    coincide: true
-  - cmd: 'Criterio del cambio completo, punto 6: axe sobre .gui-menu-wrapper colapsado sin aria-command-name, con nombres por título'
-    exit: null
-    esperado: '0 aria-command-name'
-    obtenido: 'axe 4.10.3, S01, S09 y S10: 0 violaciones. Hay un incomplete en aria-valid-attr-value (aria-controls de los popups cerrados, F4), que no es una violación confirmada. Los nombres salen del snapshot (S09 y S10 declarativos PASSED).'
-    coincide: true
-  - cmd: 'Criterio del cambio completo, punto 7: con collapseTransition activo el toggle muestra horizontal-collapse-transition y al expandir no queda ningún elemento con scrollWidth > clientWidth'
-    exit: null
-    esperado: 'clase durante el toggle, sin overflow al asentarse'
-    obtenido: 'S03 transition-class (observer): leaving ul con horizontal-collapse-transition y width inline, sin residuo inline al asentarse. Ciclos 1 y 3 asentados con scrollWidth = clientWidth (288 y 44), y S02 con horizontalOverflow false. El ciclo 2 quedó sin aislar por un error de receta del executor (stable-cycles INCONCLUSIVE). Con ciclos 1 y 3 y S02 el punto está cubierto.'
-    coincide: true
-  - cmd: 'Criterio del cambio completo, punto 8: consola sin errores nuevos'
-    exit: null
-    esperado: '0 errores'
-    obtenido: 'console-review en los 13 escenarios: 0 errores, 0 warnings. Red: todo 200.'
+    esperado: 'Sidebar ~84px colapsado, 300px expandido, ul 44px'
+    obtenido: 'ul 44 y wrapper 44 sin padding propio, etiquetas 1x1, chevrons sin caja, badges fuera de pantalla (x=-39), expandido 300. Sidebar 84 con scrollbar overlay (6 toggles 300/84) y 99 con scrollbar clásico (44 + 40 + 15). Engine FAILED en box-geometry. Es evidencia de la sesión front-b2b: la leí, no la reproduje (requiere login contra ci-api)'
     coincide: true
 ```
 
-**Verdict: pasa.** The 7 commands of «Cómo se verifica» return what was declared, the whole-change criterion has real-browser evidence on every point, and no task is left half done. Two caveats, neither of which sinks the verdict: point 4 ("not display:none") is an inference, and `stable-cycles` is missing cycle 2 (point 7).
+**Verdict: pasa.** The 10 commands in «Cómo se verifica» return what was declared, and each of the 5 tasks meets its `listo cuando`.
 
-Browser evidence: `.agent/browser-verify/runs/BMB-4217-ds-run-2/` (`report.md`, `evaluation.json`), engine verdict INCONCLUSIVE with 79 PASSED, 0 FAILED, 0 BLOCKED and 13 INCONCLUSIVE. The 13 are not doubts about behavior: 8 are declarative checks the engine doesn't credit, 3 are axe scans with one `incomplete`, and 2 are recipe gaps in the run itself. Run 1 (`BMB-4217-ds-run-1`) was fully BLOCKED because of the broken `GBadge` import, which `79d3dff9` fixed.
+The one delicate point is the front-b2b criterion (~84px against the 99px measured). It is judged met in what the package controls; the criterion's wording is what fails (see the judgments).
 
-## Qué se cumplió (4/4)
+## Qué se cumplió (5/5)
 
 1. **Task 1 · BEM modifier.**
-   - Files: `components/menu/Menu.vue` and `components/menu/tests/Menu.spec.ts`.
-   - Evidence: `grep -c "is('collapse'"` returns 0, and in the browser S01 measures `gui-menu--collapse` at 44px with no `is-collapse`.
-2. **Task 2 · Width animation.**
-   - Files: `Menu.vue` (the `onBeforeEnter`/`onEnter`/`onAfterEnter`/`onBeforeLeave`/`onLeave` hooks) and `Menu.spec.ts`.
-   - In the browser: the S03 observer saw the class and the inline width during the transition, with no leftover inline styles afterwards. S04 confirms that with `false` neither appears.
+   - `components/menu/Menu.vue:10` and `components/menu/tests/Menu.spec.ts:54-66`.
+   - The greps come back at 0, 0 and 2.
+   - In the browser, S01 measures `ul.gui-menu--collapse` at 44px with no `.is-collapse`.
+2. **Task 2 · `collapseTransition` as a documented no-op.**
+   - `Menu.vue` has no `<transition>`, hooks, `key` or animation classes.
+   - The prop keeps `@deprecated no-op` (`Menu.vue:117-123`), and the file-level JSDoc explains it (`:55-60`).
+   - `Menu.spec.ts:218` covers it: same `ul`, with no inline width and no transition class.
 3. **Task 3 · Keyboard and accessible name.**
-   - Files: `MenuItem.vue`, `MenuSub.vue`, `menu.styles.scss` and the `MenuItem`, `MenuSub` and `Integration` specs.
-   - Keyboard: S05 and S06 cover Tab, Enter and ArrowRight with a 2px focus ring. S07 shows Escape returning focus to the title. In S08 the disabled item has `tabindex=-1` and Tab skips it.
-   - Names: S09 and S10 find "Home", "Movimientos", "COMEX 12" and "Integraciones Nuevo". S11 shows no duplicated names when expanded.
+   - Diff unchanged since round 2.
+   - 71 tests green, S05–S11 in the browser, and `aria-command-name` at 0.
 4. **Task 4 · Story.**
-   - File: `stories/menu.stories.ts`, with the `CollapsedWithBadges` story.
-   - The `curl` returns 200, ESLint exits 0, and `GBadge` is imported from `@flash-global66/g-badge`.
-   - `storybook-mount` PASSED in all 13 scenarios.
+   - `stories/menu.stories.ts`: `CollapsedWithBadges`, `GBadge` imported from `@flash-global66/g-badge`, `Default` kept.
+   - The `collapseTransition` grep returns 0, ESLint 0 and the `curl` 200.
+5. **Task 5 · Box that fits the menu.**
+   - `Menu.vue:2-5`, plus `.gui-menu-wrapper--collapse { @apply w-fit }` in `menu.styles.scss`.
+   - Specs at `Menu.spec.ts:68-96`, and `styles:check` exits 0.
+   - In the browser, S03 measures 76px = 44 + 32.
 
 ## Qué quedó a medias
 
-Nothing. `tareas_a_medias` is empty, same as round 1, so nothing recurred. TDD ordering still can't be checked from history (one commit per task): `no_verificado`, as in round 1.
+Nothing. `tareas_a_medias` is empty, as in round 2: no task recurs.
 
 ## Qué se hizo de más (4)
 
-The same four as round 1, already judged legitimate:
+The same four as round 2, already judged legitimate:
 
 1. `aria-disabled="true"` on `MenuItem.vue` and on the `MenuSub.vue` title.
-2. ARIA restructure of the sub-menu: `role="menuitem"` moves to the title, the `li` is `role="none"`, and `g-tooltip role="menu"` supplies `aria-haspopup`/`aria-expanded`/`aria-controls`.
-3. Enter and Space on the sub-menu title emit `click`.
-4. Minor SCSS and story tweaks: an explicit chevron rule in collapse, the `menu-visually-hidden` mixin on `> span`, and `:collapse-transition` in `Default`.
+2. The ARIA restructure of the sub-menu.
+3. Enter/Space on the sub-menu title emit `click`.
+4. Minor SCSS and story tweaks.
 
-The `Integration.spec.ts` change in task 2's commit dropped off this list: the re-plan declares it now. The unused `GBadge` in `Default` is gone since `79d3dff9`.
+`:collapse-transition` in `Default` went away with the animation.
 
-## Escenarios (11/11)
+## Escenarios (11/11, none contradicted)
 
-| #   | Scenario                                       | Evidence                                              |
-| --- | ---------------------------------------------- | ----------------------------------------------------- |
-| 1   | Collapsed menu carries the modifier            | `Menu.spec.ts:56`; S01                                |
-| 2   | Expanded menu has no collapse class            | `Menu.spec.ts:63`; S02                                |
-| 3   | Toggling with the transition enabled           | `Menu.spec.ts:191` and `:223`; S03 `transition-class` |
-| 4   | Toggling with the transition disabled          | `Menu.spec.ts:256`; S04                               |
-| 5   | Activating an item with the keyboard           | `MenuItem.spec.ts:118-166`; S05                       |
-| 6   | Opening a collapsed sub-menu with the keyboard | `MenuSub.spec.ts`, `Integration.spec.ts:186`; S06     |
-| 7   | Closing the popup with Escape                  | `MenuSub.spec.ts:318` and `:338`; S07                 |
-| 8   | Disabled elements ignore the keyboard          | `MenuItem.spec.ts`, `MenuSub.spec.ts`; S08            |
-| 9   | Collapsed item named by its title              | `MenuItem.spec.ts:231`; S09                           |
-| 10  | Collapsed sub-menu named by its title          | `MenuSub.spec.ts:420`, `Integration.spec.ts:209`; S10 |
-| 11  | Expanded menu keeps its visible names          | `MenuItem.spec.ts:241`, `MenuSub.spec.ts:427`; S11    |
+| #   | Scenario                                                 | Evidence                                                                                                    |
+| --- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 1   | Collapsed menu carries the modifier                      | `Menu.spec.ts:54`; S01                                                                                      |
+| 2   | Expanded menu has no collapse class                      | `Menu.spec.ts:61`; S02                                                                                      |
+| 3   | Collapsed box fits the menu                              | `Menu.spec.ts:68,82`; S03 (76 = 44 + 32); front-b2b wrapper at 44 with no padding of its own                |
+| 4   | Expanded box keeps its width and toggling keeps the menu | `Menu.spec.ts:75,218`; S02 (wrapper 320). S04 was observed with `evaluate`, which the engine doesn't credit |
+| 5   | Activating an item with the keyboard                     | `MenuItem.spec.ts:119-182`; S05                                                                             |
+| 6   | Opening a collapsed sub-menu with the keyboard           | `MenuSub.spec.ts`, `Integration.spec.ts:186`; S06                                                           |
+| 7   | Closing the popup with Escape                            | `MenuSub.spec.ts:318,338`; S07                                                                              |
+| 8   | Disabled elements ignore the keyboard                    | `MenuItem.spec.ts:119,182`, `MenuSub.spec.ts:279,390`; S08                                                  |
+| 9   | Collapsed item named by its title                        | `MenuItem.spec.ts:231`; S09                                                                                 |
+| 10  | Collapsed sub-menu named by its title                    | `MenuSub.spec.ts:420`, `Integration.spec.ts:209`; S10                                                       |
+| 11  | Expanded menu keeps its visible names                    | `MenuItem.spec.ts:241`, `MenuSub.spec.ts:427`; S11                                                          |
 
-Scenarios 9 and 10 move from partial to covered. The "not display:none" part is inferred, because the probe doesn't expose computed style.
+In scenarios 9 and 10, "not `display:none`" is still an inference: the name is preserved and the SCSS uses the visually-hidden mixin, but the probe doesn't expose `display`.
 
-## Juicios pedidos
+## Juicios
 
-1. **Re-plan `4eac1c1c`: legitimate.**
-   - It separates what gets measured (0 outside `tests/` plus at least 1 absence assertion) without touching the implementation.
-   - Moving the visual half to browser-verify turns a `no_verificado` into something measurable.
-   - Declaring `Integration.spec.ts` under task 2 closes the missing record flagged in round 1.
-2. **New bullet in task 4 (`12cc7f27`): legitimate.**
-   - It was triggered by real evidence: run 1 returned 404 and all 92 checks BLOCKED.
-   - It tightens the criterion rather than loosening it, and the procedure was followed: unmark, re-apply in `79d3dff9`, mark again.
-3. **F1 severity (`MAJOR` → `ADVISORY`): acceptable, with a reservation.**
-   - The finding is confirmed and `resolutionStatus: verified`. The relabel works around an engine limitation: it counts any confirmed non-ADVISORY finding as FAILED.
-   - The title keeps "it was MAJOR in run 1". The verdict doesn't depend on that label; it rests on `storybook-mount` PASSED in all 13 scenarios and on the `curl` returning 200.
-   - This limitation should be reported to the engine.
-4. **Suspected findings from run 2: none blocks.**
-   - **F2**: `v-enter-to` stays on the `ul`. `onEnter` in `Menu.vue:364-369` calls `done()` synchronously, same as element-plus 2.9.7. Out of scope: the plan's criterion was about inline styles. Optional follow-up.
-   - **F3**: a "Home" tooltip appeared without hover. It didn't reproduce. Out of scope.
-   - **F4**: `aria-controls` points to ids that don't exist while the popup is closed. Within reach of the ARIA restructure, but the plan doesn't require zero axe `incomplete`. Follow-up.
-   - **F5**: the first menuitem of `Default` has no name of its own in the snapshot. Out of scope, `separate_followup`.
+1. **Re-plan `cadda39b`: legitimate.**
+   - It's a product decision by the dev, backed by evidence (a heavy animation, and a 320px wrapper against a 44px `ul`). It doesn't bend the plan to make the code pass.
+   - "Collapse width animation" was dropped from the delta because this change added it and it was never archived.
+   - BMB-4217's criterion "la transición es fluida" is reread as "no jumps or clipped elements". **The dev should confirm this with product:** it's the one place where the meaning of a Jira acceptance criterion changes.
+   - Leftovers, none blocking:
+     - `proposal.md:91` still says the JSDoc "describe a cut that this change undoes".
+     - `proposal.md:33-39` describes the element-plus original as investigation context.
+     - `Menu.vue:57-59` tells the story of the attempted port.
+     - `.horizontal-collapse-transition` in `menu.styles.scss:381` was there before this change.
+2. **front-b2b criterion ("about 84px" against the 99px measured): met in what the package controls; the criterion's wording fails.**
+   - The package's own numbers match exactly: `ul` 44, wrapper 44, expanded 300 (it was ~287 before the fix).
+   - The 99 breaks down deterministically: 44 + 40 of `px-5` + 15 of the classic scrollbar in front-b2b's `overflow-y-auto` container. That scrollbar existed before the fix: expanded is 245 = 260 − 15.
+   - The 84 shows up in the same run with overlay scrollbars (6 toggles at 300/84).
+   - The criterion didn't anticipate classic scrollbars, which are the common case on Windows and on macOS with a mouse. That's a finding about the plan, recorded for the archive. It doesn't stop the close.
+   - Evidence from another session: it was read, not reproduced (it needs a login against ci-api).
+3. **New findings from front-b2b:**
+   - F11 (MINOR, `aria-controls` points to an id that doesn't exist while the popup is closed) is the same as F4 in Storybook. Follow-up.
+   - F12 (ADVISORY, badges at x=−39) is robustness; the "not visible" criterion is met.
+4. **Run 3 findings:**
+   - F1 and F2 resolved.
+   - F3 didn't reproduce.
+   - F5 and F6 are intermittent or out of scope.
+5. **X1:** NOT_RUN, because the budget ran out. The orchestrator's manual check is not engine evidence. Opening the popup is covered by S06 and the `Integration` spec.
 
 ## Con qué se probó
 
-- **`calcifer check`:** exit 0 (eslint, check-architecture, 70 tests). It reviewed 9 of 13 files; `proposal.md`, `spec.md`, `tasks.md` and `verify-report.md` fall outside every validator.
-- **«Cómo se verifica»:** 7 of 7 commands match.
-- **Browser:** `evaluation.json` and `report.md` of `BMB-4217-ds-run-2`, plus the persisted observation behind every INCONCLUSIVE check.
+- **`calcifer check`:** exit 0. It covered 9 of 13 files; the 4 `openspec/` files fall outside every validator.
+- **Commands:** 10 of 10 match.
+- **Browser:**
+  - `BMB-4217-ds-run-3` gave INCONCLUSIVE with no FAILED. The 12 INCONCLUSIVE are declarative checks, axe `incomplete` and `evaluate`, not doubts about behavior.
+  - front-b2b's `BMB-4217-run-2` gave FAILED only on `box-geometry`.
+- **TDD order:** it can't be checked from history.
