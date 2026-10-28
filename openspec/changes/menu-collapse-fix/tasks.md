@@ -56,7 +56,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - `yarn styles:check` exits 0.
   - commit: `fix(menu): the collapsed menu box shrinks to the menu width`
 
-- [ ] **6 · A light CSS collapse transition on the menu box**
+- [x] **6 · A light CSS collapse transition on the menu box**
   - archivos: `components/menu/Menu.vue`, `components/menu/menu.styles.scss`, `components/menu/tests/Menu.spec.ts`
   - depende de: 5
   - listo cuando:

@@ -395,6 +395,24 @@
   @apply w-fit;
 }
 
+// fit-content can't be interpolated: max-width on the content box animates the width.
+.gui-menu-wrapper--animated {
+  --gui-menu-width-collapse: 44px;
+  box-sizing: content-box;
+  max-width: 100%;
+  overflow-x: clip;
+  transition: max-width 200ms ease-out;
+
+  &.gui-menu-wrapper--collapse {
+    width: auto;
+    max-width: var(--gui-menu-width-collapse);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
 .gui-menu-wrapper {
   & > .gui-menu {
     @apply px-0 py-0;

@@ -95,6 +95,49 @@ describe('Menu (native render — sin ElMenu)', () => {
     );
   });
 
+  it('applies gui-menu-wrapper--animated to the root div by default', () => {
+    const { container } = render(GMenu);
+    expect(container.firstElementChild).toHaveClass(
+      'gui-menu-wrapper--animated',
+    );
+  });
+
+  it('omits gui-menu-wrapper--animated when collapseTransition=false', () => {
+    const { container } = render(GMenu, {
+      props: { collapseTransition: false },
+    });
+    expect(container.firstElementChild).not.toHaveClass(
+      'gui-menu-wrapper--animated',
+    );
+  });
+
+  it('keeps --animated next to --collapse and a consumer class on the root div', () => {
+    const { container } = render(GMenu, {
+      props: { collapse: true, collapseTransition: true },
+      attrs: { class: 'wrapper-menu-route px-4' },
+    });
+    expect(container.firstElementChild).toHaveClass(
+      'gui-menu-wrapper',
+      'gui-menu-wrapper--collapse',
+      'gui-menu-wrapper--animated',
+      'wrapper-menu-route',
+      'px-4',
+    );
+  });
+
+  it('keeps --collapse without --animated and the consumer class when collapseTransition=false', () => {
+    const { container } = render(GMenu, {
+      props: { collapse: true, collapseTransition: false },
+      attrs: { class: 'wrapper-menu-route' },
+    });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass(
+      'gui-menu-wrapper--collapse',
+      'wrapper-menu-route',
+    );
+    expect(wrapper).not.toHaveClass('gui-menu-wrapper--animated');
+  });
+
   it('renders the default slot', () => {
     const { getByText } = render(GMenu, { slots: { default: 'contenido' } });
     expect(getByText('contenido')).toBeInTheDocument();

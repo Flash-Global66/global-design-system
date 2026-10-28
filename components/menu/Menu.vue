@@ -1,7 +1,10 @@
 <template>
   <div
     class="gui-menu-wrapper"
-    :class="{ 'gui-menu-wrapper--collapse': collapse }"
+    :class="{
+      'gui-menu-wrapper--collapse': collapse,
+      'gui-menu-wrapper--animated': collapseTransition,
+    }"
   >
     <ul
       ref="menuRef"
@@ -52,12 +55,8 @@ import {
  *    horizontal mode at all. `ellipsis`/`ellipsisIcon` props are dropped.
  *  - `closeOnClickOutside` is dropped — never declared by the pre-migration
  *    wrapper either, not used anywhere in `../front-b2b`.
- *  - The width-fade `collapseTransition` animation (element-plus's own
- *    `ElMenuCollapseTransition`) is NOT ported. The prop is kept for API
- *    compatibility but is a no-op. A port was tried and dropped: its `out-in`
- *    animation is two-phase and remounts the whole `ul`, losing state and
- *    focus. `../front-b2b`'s only real consumer (`MenuRoute/index.vue`) already
- *    passes `:collapse-transition="false"`.
+ *  - element-plus's `ElMenuCollapseTransition` is NOT ported: it is replaced by
+ *    a single CSS width transition on the wrapper (`gui-menu-wrapper--animated`).
  *  - `backgroundColor`/`textColor`/`activeTextColor` CSS vars are ported, but
  *    the automatic `hover-bg-color` darken-by-20% (element-plus's own
  *    `useMenuColor`, via `@ctrl/tinycolor`) is NOT — it would require adding
@@ -115,7 +114,8 @@ const props = defineProps({
    */
   collapse: Boolean,
   /**
-   * @deprecated no-op — see file-level comment for rationale
+   * whether collapsing and expanding animates the menu width (200ms). The
+   * transition is skipped under `prefers-reduced-motion: reduce`
    */
   collapseTransition: {
     type: Boolean,
