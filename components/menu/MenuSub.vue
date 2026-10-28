@@ -1,8 +1,6 @@
 <template>
   <li
-    role="menuitem"
-    aria-haspopup="true"
-    :aria-expanded="opened"
+    role="none"
     :class="[
       ns.b(),
       ns.is('active', active),
@@ -16,6 +14,7 @@
   >
     <g-tooltip
       v-if="rootMenu.isMenuPopup.value"
+      role="menu"
       :visible="opened"
       effect="light"
       :pure="true"
@@ -29,7 +28,16 @@
       :transition="menuTransitionName"
       :gpu-acceleration="false"
     >
-      <div :class="ns.e('title')" @click="handleClick">
+      <div
+        ref="titleRef"
+        role="menuitem"
+        :tabindex="disabled ? -1 : 0"
+        :aria-disabled="disabled ? 'true' : undefined"
+        :class="ns.e('title')"
+        @click="handleClick"
+        @keydown="handleTitleKeydown"
+        @focusout="handleFocusout"
+      >
         <!--
           @slot title of the sub menu
         -->
@@ -53,6 +61,8 @@
       </div>
       <template #content>
         <div
+          ref="popupRef"
+          tabindex="-1"
           :class="[
             nsMenu.m(mode),
             nsMenu.m('popup-container'),
@@ -61,8 +71,11 @@
           @mouseenter="(evt: MouseEvent) => handleMouseenter(evt, 100)"
           @mouseleave="() => handleMouseleave(true)"
           @focus="(evt: FocusEvent) => handleMouseenter(evt, 100)"
+          @keydown="handlePopupKeydown"
+          @focusout="handleFocusout"
         >
           <ul
+            role="none"
             :class="[
               nsMenu.b(),
               nsMenu.m('popup'),
@@ -79,7 +92,17 @@
       </template>
     </g-tooltip>
     <template v-else>
-      <div ref="verticalTitleRef" :class="ns.e('title')" @click="handleClick">
+      <div
+        ref="titleRef"
+        role="menuitem"
+        aria-haspopup="menu"
+        :aria-expanded="opened"
+        :tabindex="disabled ? -1 : 0"
+        :aria-disabled="disabled ? 'true' : undefined"
+        :class="ns.e('title')"
+        @click="handleClick"
+        @keydown="handleTitleKeydown"
+      >
         <!--
           @slot title of the sub menu
         -->
@@ -132,6 +155,7 @@
 import {
   computed,
   inject,
+  nextTick,
   onBeforeUnmount,
   onMounted,
   provide,
@@ -168,6 +192,11 @@ import {
  *    branch via `v-if`/`v-else`, so switching `rootMenu.isMenuPopup` already
  *    fully unmounts the popup branch through Vue's own lifecycle — an
  *    explicit teardown call would be redundant.
+ *
+ * Keyboard: the focusable element is the title (`role="menuitem"`, carrying
+ * `aria-haspopup`/`aria-expanded`), not the `li`, which is `role="none"`. In
+ * popup mode `<g-tooltip role="menu">` is what keeps those two attributes on
+ * the title: `GPopperTrigger` overwrites any that are set by hand.
  */
 
 defineOptions({
@@ -204,9 +233,13 @@ const props = defineProps({
   },
 });
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'click'): void;
 }>();
+
+const ACTIVATION_KEYS = ['Enter', ' '];
+const OPEN_POPUP_KEYS = [...ACTIVATION_KEYS, 'ArrowRight'];
+const FIRST_FOCUSABLE_ITEM_SELECTOR = '[role="menuitem"][tabindex="0"]';
 
 const ns = useNamespace('sub-menu');
 const nsMenu = useNamespace('menu');
@@ -225,7 +258,8 @@ const parentSubMenu = assertMenuContext(
 const items = ref<Record<string, MenuItemRegistered>>({});
 const subMenus = ref<Record<string, MenuItemRegistered>>({});
 const mouseInChild = ref(false);
-const verticalTitleRef = ref<HTMLDivElement>();
+const titleRef = ref<HTMLDivElement>();
+const popupRef = ref<HTMLDivElement>();
 
 let showTimer: ReturnType<typeof setTimeout> | undefined;
 let hideTimer: ReturnType<typeof setTimeout> | undefined;
@@ -358,6 +392,63 @@ const handleMouseleave = (deepDispatch = false) => {
     parentSubMenu.handleMouseleave?.(true);
   }
 };
+
+async function openPopupAndFocusFirstItem() {
+  clearTimers();
+  rootMenu.openMenu(props.index, indexPath.value);
+  await nextTick();
+  popupRef.value
+    ?.querySelector<HTMLElement>(FIRST_FOCUSABLE_ITEM_SELECTOR)
+    ?.focus({ preventScroll: true });
+}
+
+async function closePopupAndFocusTitle() {
+  clearTimers();
+  rootMenu.closeMenu(props.index, indexPath.value);
+  await nextTick();
+  titleRef.value?.focus({ preventScroll: true });
+}
+
+function handleTitleKeydown(event: KeyboardEvent) {
+  if (props.disabled || event.target !== event.currentTarget) return;
+  const isActivation = ACTIVATION_KEYS.includes(event.key);
+  if (isActivation) emit('click');
+
+  if (!rootMenu.isMenuPopup.value) {
+    if (!isActivation) return;
+    event.preventDefault();
+    handleClick();
+    return;
+  }
+
+  if (OPEN_POPUP_KEYS.includes(event.key)) {
+    event.preventDefault();
+    openPopupAndFocusFirstItem();
+  } else if (event.key === 'Escape' && opened.value) {
+    event.preventDefault();
+    event.stopPropagation();
+    closePopupAndFocusTitle();
+  }
+}
+
+function handlePopupKeydown(event: KeyboardEvent) {
+  if (event.key !== 'Escape') return;
+  event.preventDefault();
+  event.stopPropagation();
+  closePopupAndFocusTitle();
+}
+
+function handleFocusout(event: FocusEvent) {
+  if (!opened.value) return;
+  const nextFocused = event.relatedTarget as Node | null;
+  const isStillInside =
+    Boolean(nextFocused) &&
+    (titleRef.value?.contains(nextFocused) ||
+      popupRef.value?.contains(nextFocused));
+  if (isStillInside) return;
+  clearTimers();
+  rootMenu.closeMenu(props.index, indexPath.value);
+}
 
 const addSubMenu = (child: MenuItemRegistered) => {
   subMenus.value[child.index] = child;

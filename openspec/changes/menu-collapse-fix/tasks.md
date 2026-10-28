@@ -20,7 +20,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - The file-level JSDoc in `Menu.vue` and the prop's `@deprecated` no longer describe the cut.
   - commit: `feat(menu): animate the width when the menu collapses or expands`
 
-- [ ] **3 · Keyboard access to items and sub-menus**
+- [x] **3 · Keyboard access to items and sub-menus**
   - archivos: `components/menu/MenuItem.vue`, `components/menu/MenuSub.vue`, `components/menu/menu.styles.scss`, `components/menu/tests/MenuItem.spec.ts`, `components/menu/tests/MenuSub.spec.ts`, `components/menu/tests/Integration.spec.ts`
   - depende de: ninguna
   - listo cuando:

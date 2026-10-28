@@ -14,6 +14,18 @@
 @use '@flash-global66/g-utils/tokens' as *;
 @use '@flash-global66/g-utils/transition';
 
+@mixin menu-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 :root {
   // They are defined on :root so they can be inherited by sub-menu instead of overwritten
   @include set-component-css-var('menu', $menu);
@@ -163,11 +175,7 @@
       }
 
       > span {
-        height: 0;
-        width: 0;
-        overflow: hidden;
-        visibility: hidden;
-        display: inline-block;
+        @include menu-visually-hidden;
       }
     }
 
@@ -442,6 +450,10 @@
 
   & .gui-menu-item > span,
   & > .gui-sub-menu > .gui-sub-menu__title > span {
+    @include menu-visually-hidden;
+  }
+
+  & > .gui-sub-menu > .gui-sub-menu__title > .gui-sub-menu__icon-arrow {
     @apply hidden;
   }
 
@@ -474,6 +486,16 @@
   &:hover {
     @apply bg-gray-4/10;
   }
+
+  // `!important` because the horizontal-mode `:focus { outline: none }` above is more specific.
+  &:focus-visible {
+    outline: 2px solid getCssVar('menu-active-color') !important;
+    outline-offset: -2px;
+  }
+}
+
+.gui-menu-item__sr-label {
+  @include menu-visually-hidden;
 }
 
 .gui-sub-menu {

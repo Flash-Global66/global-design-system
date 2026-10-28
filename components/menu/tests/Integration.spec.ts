@@ -157,4 +157,61 @@ describe('Menu family integration (real Menu + MenuItemGroup + MenuSub + MenuIte
       expect(section1).not.toHaveClass('is-opened');
     });
   });
+
+  describe('keyboard access', () => {
+    it('Enter on the title of an inline sub menu opens it and Enter on a leaf selects it with the full indexPath', async () => {
+      const { getByRole, emitted } = render(Fixture, {}, realTransition);
+      const section1 = getByRole('menuitem', { name: 'Section 1' });
+      await waitFor(() =>
+        expect(section1.closest('li.gui-sub-menu')).toHaveClass('is-opened'),
+      );
+      const section2 = getByRole('menuitem', { name: 'Section 2' });
+      await fireEvent.keyDown(section2, { key: 'Enter' });
+      await waitFor(() =>
+        expect(section2.closest('li.gui-sub-menu')).toHaveClass('is-opened'),
+      );
+      await fireEvent.keyDown(getByRole('menuitem', { name: 'Item B' }), {
+        key: 'Enter',
+      });
+      const selectCalls = emitted().select as unknown[][];
+      expect(selectCalls[selectCalls.length - 1]).toEqual([
+        's2-a',
+        ['s2', 's2-a'],
+        { index: 's2-a', indexPath: ['s2', 's2-a'] },
+      ]);
+    });
+
+    it('collapsed: ArrowRight opens the popup, focus lands on its first item and Enter selects it', async () => {
+      const { getByRole, emitted } = render(
+        Fixture,
+        { props: { collapse: true } },
+        realTransition,
+      );
+      const section2 = getByRole('menuitem', { name: 'Section 2' });
+      await fireEvent.keyDown(section2, { key: 'ArrowRight' });
+      await waitFor(() =>
+        expect(document.activeElement).toHaveTextContent('Item B'),
+      );
+      await fireEvent.keyDown(document.activeElement as Element, {
+        key: 'Enter',
+      });
+      const selectCalls = emitted().select as unknown[][];
+      expect(selectCalls[selectCalls.length - 1][0]).toBe('s2-a');
+      await waitFor(() =>
+        expect(section2.closest('li.gui-sub-menu')).not.toHaveClass(
+          'is-opened',
+        ),
+      );
+    });
+
+    it('collapsed: every first-level sub menu keeps its title as accessible name', () => {
+      const { getByRole } = render(
+        Fixture,
+        { props: { collapse: true } },
+        realTransition,
+      );
+      expect(getByRole('menuitem', { name: 'Section 1' })).toBeInTheDocument();
+      expect(getByRole('menuitem', { name: 'Section 2' })).toBeInTheDocument();
+    });
+  });
 });
