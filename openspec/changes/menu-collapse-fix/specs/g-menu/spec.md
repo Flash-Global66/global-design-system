@@ -18,7 +18,7 @@
 
 ### Requirement: Collapsed menu box fits the menu
 
-When `GMenu` is collapsed, its root `div` (`gui-menu-wrapper`, which receives the consumer's classes) SHALL carry `gui-menu-wrapper--collapse` and fit the width of the collapsed menu plus its own padding, so a background set by the consumer contracts with the menu. Expanded, the wrapper SHALL keep its block width. Toggling SHALL be instant and SHALL keep the same `ul`.
+When `GMenu` is collapsed, its root `div` (`gui-menu-wrapper`, which receives the consumer's classes) SHALL carry `gui-menu-wrapper--collapse` and fit the width of the collapsed menu plus its own padding, so a background set by the consumer contracts with the menu. Expanded, the wrapper SHALL keep its block width. Toggling SHALL keep the same `ul`.
 
 #### Scenario: Collapsed box fits the menu
 
@@ -31,6 +31,28 @@ When `GMenu` is collapsed, its root `div` (`gui-menu-wrapper`, which receives th
 - **GIVEN** a `GMenu` with `collapse` set to `false`
 - **WHEN** it renders and then `collapse` toggles
 - **THEN** expanded, the root `div` has no `gui-menu-wrapper--collapse`; toggling changes the state of the same `ul`, with no transition class and no inline width
+
+### Requirement: Light collapse transition
+
+When `collapseTransition` is `true` (the default), `GMenu` SHALL animate the width of its root `div` with a single CSS transition on `max-width` of at most 200ms while collapsing or expanding, without remounting the `ul` and without JavaScript animation. With `collapseTransition` set to `false`, or when the user prefers reduced motion, the change SHALL be instant.
+
+#### Scenario: Toggling animates the box
+
+- **GIVEN** a `GMenu` with `collapseTransition` left at its default
+- **WHEN** `collapse` toggles
+- **THEN** the root `div` has `gui-menu-wrapper--animated`, its width moves progressively between the expanded and the collapsed width within about 200ms, and the `ul` is the same node throughout
+
+#### Scenario: Opting out of the transition
+
+- **GIVEN** a `GMenu` with `collapseTransition` set to `false`
+- **WHEN** it renders and `collapse` toggles
+- **THEN** the root `div` has no `gui-menu-wrapper--animated` and changes width at once
+
+#### Scenario: Reduced motion disables the transition
+
+- **GIVEN** a `GMenu` with `collapseTransition` at its default and a user agent with `prefers-reduced-motion: reduce`
+- **WHEN** `collapse` toggles
+- **THEN** the root `div` has no active transition and changes width at once
 
 ### Requirement: Keyboard access to items and sub-menus
 

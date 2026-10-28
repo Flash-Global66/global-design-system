@@ -10,13 +10,13 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
   - listo cuando: TDD, spec red first. With `collapse: true` the `ul` has class `gui-menu--collapse` and doesn't have `is-collapse`. With `collapse: false` it has neither. The spec at `Menu.spec.ts:54-56` that asserts `is-collapse` is replaced, not duplicated. The other existing cases stay green.
   - commit: `fix(menu): use the gui-menu--collapse modifier so the collapsed styles apply`
 
-- [x] **2 · `collapseTransition` back to a documented no-op**
+- [x] **2 · Drop the heavy `out-in` collapse animation**
   - archivos: `components/menu/Menu.vue`, `components/menu/tests/Menu.spec.ts`
   - depende de: ninguna
   - listo cuando:
     - `Menu.vue` no longer has `<transition>`, `transitionHooks`, the transition hooks, `horizontal-collapse-transition`, `gui-opacity-transition`, or a `key` on the `ul`.
     - Toggling `collapse` changes the state of the **same** `ul`, whatever `collapseTransition` is set to.
-    - The `collapseTransition` prop keeps its type and default `true`, carries `@deprecated no-op`, and the file-level JSDoc explains why it isn't ported (heavy two-phase animation with a remount; front-b2b passes `false`).
+    - The `collapseTransition` prop keeps its type and default `true` (what it does now is task 6).
     - In `Menu.spec.ts`, the `collapse width animation` describe is replaced by one case asserting the `ul` keeps its identity and gets no inline width or transition class when toggled with `collapseTransition` at its default.
     - The existing cases in `Menu.spec.ts` and `Integration.spec.ts` stay green.
   - commit: `fix(menu): drop the collapse animation and keep collapseTransition as a documented no-op`
@@ -56,8 +56,21 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - `yarn styles:check` exits 0.
   - commit: `fix(menu): the collapsed menu box shrinks to the menu width`
 
-Tasks 1, 2 and 5 share `Menu.vue` and its spec; task 3 also touched `Integration.spec.ts`. The second re-plan runs 2 and 4 in parallel, then 5.
+- [ ] **6 · A light CSS collapse transition on the menu box**
+  - archivos: `components/menu/Menu.vue`, `components/menu/menu.styles.scss`, `components/menu/tests/Menu.spec.ts`
+  - depende de: 5
+  - listo cuando:
+    - With `collapseTransition` at its default the root `div` has `gui-menu-wrapper--animated`; with `false`, it doesn't. `Menu.spec.ts` covers both, plus a case where it coexists with `gui-menu-wrapper--collapse` and a consumer class.
+    - `.gui-menu-wrapper--animated` declares a single `transition` on `max-width` (≤ 200ms), `box-sizing: content-box` and `overflow-x: clip`. Its collapsed variant uses `max-width: var(--gui-menu-width-collapse)`, and `@media (prefers-reduced-motion: reduce)` sets `transition: none`. The non-animated collapsed wrapper keeps `w-fit`.
+    - `Menu.vue` still has no `<transition>`, hooks, `key` or `horizontal-collapse-transition`.
+    - The `collapseTransition` prop loses `@deprecated` and describes the light width transition, including the reduced-motion fallback. The file-level JSDoc replaces the "is NOT ported … no-op" bullet with one line saying the element-plus port was replaced by a single CSS transition on the wrapper.
+    - `yarn styles:check` exits 0, and eslint on `Menu.vue` and `Menu.spec.ts` exits 0.
+  - commit: `feat(menu): light CSS transition when the menu box collapses or expands`
+
+Tasks 1, 2, 5 and 6 share `Menu.vue` and its spec; task 3 also touched `Integration.spec.ts`. The second re-plan ran 2 and 4 in parallel, then 5; the third re-plan runs 6 alone.
 
 Re-plan after verify round 1: during the first apply, task 2's fence was widened to `Integration.spec.ts`, with the dev's approval, to re-query a node that the `ul` remount left stale. That re-query is harmless without the remount and stays.
 
-Second re-plan (after verify round 2 and the review): the dev decided to drop the collapse animation (heavy two-phase `out-in` with a full `ul` remount; front-b2b never runs it) and to make the collapsed wrapper fit the menu, because the consumer's background box didn't contract. Task 2 is redefined as the revert, task 4 loses its `collapseTransition` control, and task 5 is new. Collapsing is now instant; the BMB-4217 criterion "la transición es fluida" is read as "no jumps or clipped elements".
+Second re-plan (after verify round 2 and the review): the dev decided to drop the collapse animation (heavy two-phase `out-in` with a full `ul` remount; front-b2b never runs it) and to make the collapsed wrapper fit the menu, because the consumer's background box didn't contract. Task 2 is redefined as the revert, task 4 loses its `collapseTransition` control, and task 5 is new. Collapsing became instant.
+
+Third re-plan (after verify round 3): to meet BMB-4217's "la transición colapsar/expandir es fluida" literally, the dev approved a light prototype: one 200ms CSS `max-width` transition on the wrapper, with no JS and no remount, which honors `prefers-reduced-motion`. Task 2 is narrowed to dropping the heavy animation; task 6 is new and starts from the prototype already in the working tree.
