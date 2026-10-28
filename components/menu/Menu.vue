@@ -3,7 +3,7 @@
     <ul
       ref="menuRef"
       role="menubar"
-      :class="[ns.b(), ns.m(mode), ns.is('collapse', collapse)]"
+      :class="[ns.b(), ns.m(mode), { [ns.m('collapse')]: collapse }]"
       :style="cssVarStyle"
     >
       <!--

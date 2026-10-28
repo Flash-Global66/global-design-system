@@ -51,9 +51,18 @@ describe('Menu (native render — sin ElMenu)', () => {
     expect(container.querySelector('ul')).not.toHaveClass('gui-menu--vertical');
   });
 
-  it('applies is-collapse when collapse=true', () => {
+  it('applies the gui-menu--collapse modifier and not is-collapse when collapse=true', () => {
     const { container } = render(GMenu, { props: { collapse: true } });
-    expect(container.querySelector('ul')).toHaveClass('is-collapse');
+    const ul = container.querySelector('ul');
+    expect(ul).toHaveClass('gui-menu--collapse');
+    expect(ul).not.toHaveClass('is-collapse');
+  });
+
+  it('applies neither gui-menu--collapse nor is-collapse when collapse=false', () => {
+    const { container } = render(GMenu, { props: { collapse: false } });
+    const ul = container.querySelector('ul');
+    expect(ul).not.toHaveClass('gui-menu--collapse');
+    expect(ul).not.toHaveClass('is-collapse');
   });
 
   it('renders the default slot', () => {
