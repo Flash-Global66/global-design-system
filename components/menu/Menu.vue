@@ -1,19 +1,16 @@
 <template>
   <div class="gui-menu-wrapper">
-    <transition mode="out-in" v-bind="transitionHooks">
-      <ul
-        :key="collapseTransition ? String(collapse) : undefined"
-        ref="menuRef"
-        role="menubar"
-        :class="[ns.b(), ns.m(mode), { [ns.m('collapse')]: collapse }]"
-        :style="cssVarStyle"
-      >
-        <!--
-          @slot Menu Content
-        -->
-        <slot />
-      </ul>
-    </transition>
+    <ul
+      ref="menuRef"
+      role="menubar"
+      :class="[ns.b(), ns.m(mode), { [ns.m('collapse')]: collapse }]"
+      :style="cssVarStyle"
+    >
+      <!--
+        @slot Menu Content
+      -->
+      <slot />
+    </ul>
   </div>
 </template>
 
@@ -27,7 +24,6 @@ import {
   ref,
   watch,
   type PropType,
-  type TransitionProps,
   type StyleValue,
 } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
@@ -44,8 +40,6 @@ import {
  * Port of element-plus's real `ElMenu` (`node_modules/element-plus/es/components/menu/src/menu.mjs`,
  * 2.9.7) onto the shared `menuContextKey`/`subMenuContextKey` context module
  * (Design Decision 1, ep-extraction-v6 design.md). Zero `element-plus` import.
- * The collapse width animation (`ElMenuCollapseTransition`) is ported inline
- * as `<transition>` hooks, active while `collapseTransition` is `true`.
  *
  * Deliberate scope cuts vs the real `ElMenu` (documented, not silent):
  *  - The horizontal "ellipsis overflow / more" feature (ResizeObserver-driven
@@ -55,6 +49,12 @@ import {
  *    horizontal mode at all. `ellipsis`/`ellipsisIcon` props are dropped.
  *  - `closeOnClickOutside` is dropped — never declared by the pre-migration
  *    wrapper either, not used anywhere in `../front-b2b`.
+ *  - The width-fade `collapseTransition` animation (element-plus's own
+ *    `ElMenuCollapseTransition`) is NOT ported. The prop is kept for API
+ *    compatibility but is a no-op. A port was tried and dropped: its `out-in`
+ *    animation is two-phase and remounts the whole `ul`, losing state and
+ *    focus. `../front-b2b`'s only real consumer (`MenuRoute/index.vue`) already
+ *    passes `:collapse-transition="false"`.
  *  - `backgroundColor`/`textColor`/`activeTextColor` CSS vars are ported, but
  *    the automatic `hover-bg-color` darken-by-20% (element-plus's own
  *    `useMenuColor`, via `@ctrl/tinycolor`) is NOT — it would require adding
@@ -112,7 +112,7 @@ const props = defineProps({
    */
   collapse: Boolean,
   /**
-   * whether to animate the width change when `collapse` toggles
+   * @deprecated no-op — see file-level comment for rationale
    */
   collapseTransition: {
     type: Boolean,
@@ -184,9 +184,6 @@ const emit = defineEmits<{
     routerResult?: Promise<unknown>,
   ): void;
 }>();
-
-const HORIZONTAL_COLLAPSE_CLASS = 'horizontal-collapse-transition';
-const ENTER_START_OPACITY = '0.2';
 
 const ns = useNamespace('menu');
 const menuRef = ref<HTMLUListElement>();
@@ -356,47 +353,6 @@ provide(subMenuContextKey, {
   removeSubMenu,
   mouseInChild,
 });
-
-function onBeforeEnter(el: Element) {
-  (el as HTMLElement).style.opacity = ENTER_START_OPACITY;
-}
-
-function onEnter(el: Element, done: () => void) {
-  const node = el as HTMLElement;
-  node.classList.add(`${ns.namespace.value}-opacity-transition`);
-  node.style.opacity = '1';
-  done();
-}
-
-function onAfterEnter(el: Element) {
-  const node = el as HTMLElement;
-  node.classList.remove(`${ns.namespace.value}-opacity-transition`);
-  node.style.opacity = '';
-}
-
-function onBeforeLeave(el: Element) {
-  const node = el as HTMLElement;
-  const collapseClass = ns.m('collapse');
-  const isCollapsed = node.classList.contains(collapseClass);
-  node.classList.toggle(collapseClass, !isCollapsed);
-  node.dataset.oldOverflow = node.style.overflow;
-  node.dataset.scrollWidth = String(node.clientWidth);
-  node.classList.toggle(collapseClass, isCollapsed);
-  node.style.width = `${node.scrollWidth}px`;
-  node.style.overflow = 'hidden';
-}
-
-function onLeave(el: Element) {
-  const node = el as HTMLElement;
-  node.classList.add(HORIZONTAL_COLLAPSE_CLASS);
-  node.style.width = `${node.dataset.scrollWidth}px`;
-}
-
-const transitionHooks = computed<TransitionProps>(() =>
-  props.collapseTransition
-    ? { onBeforeEnter, onEnter, onAfterEnter, onBeforeLeave, onLeave }
-    : {},
-);
 
 const cssVarStyle = computed<StyleValue>(() => {
   return ns.cssVarBlock({

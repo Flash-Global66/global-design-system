@@ -10,7 +10,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
   - listo cuando: TDD, spec red first. With `collapse: true` the `ul` has class `gui-menu--collapse` and doesn't have `is-collapse`. With `collapse: false` it has neither. The spec at `Menu.spec.ts:54-56` that asserts `is-collapse` is replaced, not duplicated. The other existing cases stay green.
   - commit: `fix(menu): use the gui-menu--collapse modifier so the collapsed styles apply`
 
-- [ ] **2 · `collapseTransition` back to a documented no-op**
+- [x] **2 · `collapseTransition` back to a documented no-op**
   - archivos: `components/menu/Menu.vue`, `components/menu/tests/Menu.spec.ts`
   - depende de: ninguna
   - listo cuando:
