@@ -46,7 +46,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - Every import resolves against the package's `exports` (`GBadge` comes from `@flash-global66/g-badge`, because that package only exports `.`), and with Storybook running `curl -s -o /dev/null -w "%{http_code}" http://localhost:6006/stories/menu.stories.ts` returns `200`. Lint doesn't check this: ESLint doesn't resolve `exports`, which is why the first apply passed with the story broken (404).
   - commit: `docs(stories): drop the collapseTransition control from the menu stories`
 
-- [ ] **5 · The collapsed menu box fits the menu**
+- [x] **5 · The collapsed menu box fits the menu**
   - archivos: `components/menu/Menu.vue`, `components/menu/menu.styles.scss`, `components/menu/tests/Menu.spec.ts`
   - depende de: 2
   - listo cuando:

@@ -391,6 +391,10 @@
 // directly, only on the `gui-*` selectors the base already emits).
 // ---------------------------------------------------------------------------
 
+.gui-menu-wrapper--collapse {
+  @apply w-fit;
+}
+
 .gui-menu-wrapper {
   & > .gui-menu {
     @apply px-0 py-0;

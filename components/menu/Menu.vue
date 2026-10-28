@@ -1,5 +1,8 @@
 <template>
-  <div class="gui-menu-wrapper">
+  <div
+    class="gui-menu-wrapper"
+    :class="{ 'gui-menu-wrapper--collapse': collapse }"
+  >
     <ul
       ref="menuRef"
       role="menubar"

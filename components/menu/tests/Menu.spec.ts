@@ -65,6 +65,36 @@ describe('Menu (native render — sin ElMenu)', () => {
     expect(ul).not.toHaveClass('is-collapse');
   });
 
+  it('applies gui-menu-wrapper--collapse to the root div when collapse=true', () => {
+    const { container } = render(GMenu, { props: { collapse: true } });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass('gui-menu-wrapper');
+    expect(wrapper).toHaveClass('gui-menu-wrapper--collapse');
+  });
+
+  it('applies only gui-menu-wrapper to the root div when collapse=false', () => {
+    const { container } = render(GMenu, { props: { collapse: false } });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass('gui-menu-wrapper');
+    expect(wrapper).not.toHaveClass('gui-menu-wrapper--collapse');
+  });
+
+  it('keeps a consumer class next to gui-menu-wrapper--collapse on the root div', () => {
+    const { container } = render(GMenu, {
+      props: { collapse: true },
+      attrs: { class: 'wrapper-menu-route px-4 py-5 bg-white' },
+    });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass(
+      'gui-menu-wrapper',
+      'gui-menu-wrapper--collapse',
+      'wrapper-menu-route',
+      'px-4',
+      'py-5',
+      'bg-white',
+    );
+  });
+
   it('renders the default slot', () => {
     const { getByText } = render(GMenu, { slots: { default: 'contenido' } });
     expect(getByText('contenido')).toBeInTheDocument();
