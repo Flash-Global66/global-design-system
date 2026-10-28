@@ -33,7 +33,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - Specs cover each behavior, including `getByRole('menuitem', { name })` in collapse for an item and a sub-menu. The existing cases in `MenuItem.spec.ts`, `MenuSub.spec.ts` and `Integration.spec.ts` stay green.
   - commit: `feat(menu): keyboard access and accessible names for items and sub-menus, collapsed included`
 
-- [x] **4 · Collapsed story with front-b2b's real content**
+- [ ] **4 · Collapsed story with front-b2b's real content**
   - archivos: `stories/menu.stories.ts`
   - depende de: ninguna
   - listo cuando:
@@ -42,7 +42,8 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - The unused `hola()` function is gone.
     - `Default` is kept.
     - `npx eslint stories/menu.stories.ts --max-warnings 0` exits 0.
-  - commit: `docs(stories): collapsed menu story with badges as in front-b2b`
+    - Every import resolves against the package's `exports` (`GBadge` comes from `@flash-global66/g-badge`, because that package only exports `.`), and with Storybook running `curl -s -o /dev/null -w "%{http_code}" http://localhost:6006/stories/menu.stories.ts` returns `200`. Lint doesn't check this: ESLint doesn't resolve `exports`, which is why the first apply passed with the story broken (404).
+  - commit: `fix(stories): import GBadge through its package entry so the menu stories load`
 
 Tasks 1 and 2 share `Menu.vue` and its spec; tasks 2 and 3 share `Integration.spec.ts`. They ran in two waves (1, 3, 4 → 2).
 
