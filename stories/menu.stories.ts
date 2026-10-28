@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 // COMPONENTS
 import { GMenu, GMenuItem, GMenuItemGroup, GSubMenu } from '../components/menu';
-import { GBadge } from '@flash-global66/g-badge/index.ts';
+import { GBadge } from '@flash-global66/g-badge';
 import { GButton } from '@flash-global66/g-button/index.ts';
 import { GIconFont } from '@flash-global66/g-icon-font/index.ts';
 
@@ -38,7 +38,6 @@ const Template: StoryFn<typeof GMenu> = args => {
       GMenu,
       GConfigProvider,
       GButton,
-      GBadge,
       GMenuItem,
       GMenuItemGroup,
       GSubMenu,
