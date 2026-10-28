@@ -33,7 +33,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - Specs cover each behavior, including `getByRole('menuitem', { name })` in collapse for an item and a sub-menu. The existing cases in `MenuItem.spec.ts`, `MenuSub.spec.ts` and `Integration.spec.ts` stay green.
   - commit: `feat(menu): keyboard access and accessible names for items and sub-menus, collapsed included`
 
-- [ ] **4 · Collapsed story with front-b2b's real content**
+- [x] **4 · Collapsed story with front-b2b's real content**
   - archivos: `stories/menu.stories.ts`
   - depende de: ninguna
   - listo cuando:
