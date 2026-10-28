@@ -16,21 +16,21 @@
 - **WHEN** it renders
 - **THEN** the `ul[role=menubar]` has neither `gui-menu--collapse` nor `is-collapse`
 
-### Requirement: Collapse width animation
+### Requirement: Collapsed menu box fits the menu
 
-`GMenu` SHALL animate its width when `collapse` toggles and `collapseTransition` is `true` (the default), and SHALL switch state without the animation when `collapseTransition` is `false`.
+When `GMenu` is collapsed, its root `div` (`gui-menu-wrapper`, which receives the consumer's classes) SHALL carry `gui-menu-wrapper--collapse` and fit the width of the collapsed menu plus its own padding, so a background set by the consumer contracts with the menu. Expanded, the wrapper SHALL keep its block width. Toggling SHALL be instant and SHALL keep the same `ul`.
 
-#### Scenario: Toggling with the transition enabled
+#### Scenario: Collapsed box fits the menu
 
-- **GIVEN** a `GMenu` with `collapseTransition` left at its default
-- **WHEN** `collapse` toggles
-- **THEN** the leaving `ul` gets the class `horizontal-collapse-transition` and an inline `width`, and the entering `ul` ends without leftover inline transition styles
+- **GIVEN** a `GMenu` with `collapse` set to `true`, inside a container wider than the menu
+- **WHEN** it renders
+- **THEN** the root `div` has `gui-menu-wrapper--collapse` and its width is the `ul` width plus its horizontal padding, not the container width
 
-#### Scenario: Toggling with the transition disabled
+#### Scenario: Expanded box keeps its width and toggling keeps the menu
 
-- **GIVEN** a `GMenu` with `collapseTransition` set to `false`
-- **WHEN** `collapse` toggles
-- **THEN** the `ul` changes state without the class `horizontal-collapse-transition` and without an inline `width`
+- **GIVEN** a `GMenu` with `collapse` set to `false`
+- **WHEN** it renders and then `collapse` toggles
+- **THEN** expanded, the root `div` has no `gui-menu-wrapper--collapse`; toggling changes the state of the same `ul`, with no transition class and no inline width
 
 ### Requirement: Keyboard access to items and sub-menus
 

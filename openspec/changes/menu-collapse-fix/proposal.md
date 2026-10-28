@@ -1,4 +1,4 @@
-# Fix the collapsed g-menu: collapse modifier, collapse animation, keyboard access, and accessible names
+# Fix the collapsed g-menu: collapse modifier, a box that fits the collapsed menu, keyboard access, and accessible names
 
 > **Rama:** `fix/BMB-4217-menu-collapse-modifier`
 > **Base:** `6ab47d43`
@@ -70,20 +70,20 @@ The collapsed menu renders as designed:
 - every collapsed item and sub-menu keeps an accessible name equal to its title
 - the active item highlighted in both states
 
-Toggling animates the width when `collapseTransition` is `true` (the default) and switches instantly when it's `false`. A new story reproduces the front-b2b case with badges, starting collapsed.
+Toggling is instant (second re-plan: the animation ported first was dropped as heavy, and `collapseTransition` stays a documented no-op), and while collapsed the wrapper fits the menu so the consumer's background contracts with it. A new story reproduces the front-b2b case with badges, starting collapsed.
 
 **Out of scope:**
 
 - **Anything in front-b2b.** The dev takes care of it after this package is published:
   - bump g-menu from 0.0.10, restart the server and clear `node_modules/.vite`
-  - remove `:collapse-transition="false"` in `MenuRoute/index.vue:64` if they want the animation
+  - `:collapse-transition="false"` in `MenuRoute/index.vue:64` can stay or go: the prop is a no-op
   - remove the duplicate `@use` in `src/assets/styles/ui-framework-b2b/index.scss:8-9`
   - adjust the `Sidebar` container: the collapsed logout is offset by `pl-6`, and the hamburger (`img`) and the collapsed logout (`div`) aren't operable by keyboard
   - move the "Mesa de dinero" icon out of the `#title` slot, which today leaves an empty row when collapsed
   - keep the collapsed state across navigation, which is lost today because the layout remounts
 - **Full WAI-ARIA arrow-key navigation (roving tabindex) across the whole menu.** This plan makes every item and title reachable with Tab and operable with Enter/Space, popups open with Enter/Space/ArrowRight and close with Escape. Up/down arrow navigation between items stays out.
 - **The horizontal mode's ellipsis/overflow** and the hover-darkening (`useMenuColor`), both cut on purpose in the migration.
-- **Any change to the published package API.** No props are added or removed. `collapseTransition` stops being a no-op but keeps its signature and default.
+- **Any change to the published package API.** No props are added or removed. `collapseTransition` keeps its signature and default and stays a documented no-op.
 
 ## Con qué restricciones
 
@@ -105,34 +105,45 @@ Toggling animates the width when `collapseTransition` is `true` (the default) an
 
 ## Cómo se verifica
 
-This change **does alter behavior**: the collapsed menu goes back to rendering as designed, collapsing animates, and it gains keyboard access and accessible names. The delta is in `specs/g-menu/spec.md`.
+This change **does alter behavior**: the collapsed menu goes back to rendering as designed, collapsing is instant, the collapsed menu box contracts with the menu, and it gains keyboard access and accessible names. The delta is in `specs/g-menu/spec.md`.
 
-Re-plan after verify round 1: the `is-collapse` command counted the negative assertions that task 1's own criterion requires. It now measures the package code outside `tests/`, plus an invariant that the spec asserts the class is absent. Values measured on `21dc74e8`.
+Re-plan after verify round 1: the `is-collapse` command counted the negative assertions that task 1's own criterion requires. It now measures the package code outside `tests/`, plus an invariant that the spec asserts the class is absent.
 
-| Comando                                                                                                    | Qué mide                                                                                | Hoy                               | Esperado                                                                     |
-| ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
-| `npx vitest run --project unit components/menu 2>&1 \| grep -E "Test Files\|Tests "`                       | test files and tests in the package                                                     | `5 passed (5)` / `72 passed (72)` | `Test Files` with 0 failed; `Tests` with 0 failed and **at least 72** passed |
-| `grep -c "is('collapse'" components/menu/Menu.vue`                                                         | uses of the wrong state class in the component (grep exits 1 when there are no matches) | `0`                               | `0`                                                                          |
-| `grep -rn "is-collapse" components/menu --exclude-dir=tests \| wc -l`                                      | lines of the **package code** (outside `tests/`) still mentioning `is-collapse`         | `0`                               | `0`                                                                          |
-| `grep -c "not.toHaveClass('is-collapse')" components/menu/tests/Menu.spec.ts`                              | assertions that the wrong class is **absent** (task 1's criterion)                      | `2`                               | `≥ 1`                                                                        |
-| `npx eslint components/menu stories/menu.stories.ts --max-warnings 0; echo $?`                             | lint on every touched file                                                              | `0`                               | `0`                                                                          |
-| `yarn styles:check >/dev/null 2>&1; echo $?`                                                               | the public SCSS still compiles                                                          | `0`                               | `0`                                                                          |
-| `curl -s -o /dev/null -w "%{http_code}" http://localhost:6006/stories/menu.stories.ts` (Storybook running) | HTTP status Storybook returns for the menu story module                                 | `404` (on `4eac1c1c`)             | `200`                                                                        |
+Second re-plan (after verify round 2 and the review): the collapse animation is dropped (task 2 redefined as the revert), the story loses its `collapseTransition` control (task 4), and the collapsed wrapper fits the menu (task 5). Values in "Hoy" measured on `7ba0d519`.
+
+| Comando                                                                                                               | Qué mide                                                                                | Hoy                               | Esperado                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `npx vitest run --project unit components/menu 2>&1 \| grep -E "Test Files\|Tests "`                                  | test files and tests in the package                                                     | `5 passed (5)` / `72 passed (72)` | `Test Files 5 passed`; `Tests` with 0 failed (the count changes: animation specs leave, wrapper specs come in) |
+| `grep -c "horizontal-collapse-transition\|opacity-transition\|transitionHooks\|<transition" components/menu/Menu.vue` | lines of `Menu.vue` with traces of the animation                                        | `6`                               | `0`                                                                                                            |
+| `grep -c "gui-menu-wrapper--collapse" components/menu/Menu.vue components/menu/menu.styles.scss`                      | the wrapper modifier in the component and in the styles (one count per file)            | `0` / `0`                         | `≥ 1` / `≥ 1`                                                                                                  |
+| `grep -c "collapseTransition\|collapse-transition" stories/menu.stories.ts`                                           | the dead control in the story                                                           | `5`                               | `0`                                                                                                            |
+| `grep -c "is('collapse'" components/menu/Menu.vue`                                                                    | uses of the wrong state class in the component (grep exits 1 when there are no matches) | `0`                               | `0`                                                                                                            |
+| `grep -rn "is-collapse" components/menu --exclude-dir=tests \| wc -l`                                                 | lines of the **package code** (outside `tests/`) still mentioning `is-collapse`         | `0`                               | `0`                                                                                                            |
+| `grep -c "not.toHaveClass('is-collapse')" components/menu/tests/Menu.spec.ts`                                         | assertions that the wrong class is **absent** (task 1's criterion)                      | `2`                               | `≥ 1`                                                                                                          |
+| `npx eslint components/menu stories/menu.stories.ts --max-warnings 0; echo $?`                                        | lint on every touched file                                                              | `0`                               | `0`                                                                                                            |
+| `yarn styles:check >/dev/null 2>&1; echo $?`                                                                          | the public SCSS still compiles                                                          | `0`                               | `0`                                                                                                            |
+| `curl -s -o /dev/null -w "%{http_code}" http://localhost:6006/stories/menu.stories.ts` (Storybook running)            | HTTP status Storybook returns for the menu story module                                 | `200`                             | `200`                                                                                                          |
 
 **Criterion for the whole change, and the visual half of scenarios 9 and 10 (browser-verify on Storybook).**
 
-- **How it's measured:** browser-verify from the DS session against `http://localhost:6006`, story `feedback-menu--collapsed-with-badges`, `auth: none`, contract tied to `menu-collapse-fix`. The verify reads that run's `report.md`/`evaluation.json` in `.agent/browser-verify/runs/<runId>/`. If the run doesn't exist or a check is BLOCKED, that point is `no_verificado`, not `true`.
+- **How it's measured:** browser-verify from the DS session against `http://localhost:6006`, story `feedback-menu--collapsed-with-badges` (and `feedback-menu--default` for the disabled item), `auth: none`, contract tied to `menu-collapse-fix` with one scenario per spec scenario and a newly approved battery. The verify reads that run's `report.md`/`evaluation.json` in `.agent/browser-verify/runs/<runId>/`. If the run doesn't exist or a check is BLOCKED, that point is `no_verificado`, not `true`.
 - **What the run has to show:**
   - with the menu collapsed:
+    - `.gui-menu-wrapper` has `gui-menu-wrapper--collapse` and measures the `ul` width plus its horizontal padding (76px in the story), not the container's 320px
     - the `ul[role=menubar]` has `gui-menu--collapse` and measures 44px
     - every first-level item and title measures 44px with its icon centered
-    - no label, chevron or badge is visible, and none of the label `span`s is `display: none` or `visibility: hidden` (computed style): this is the visual half of scenarios 9 and 10
+    - no label, chevron or badge is visible, and the label `span`s keep a clipped ~1x1 box and their accessible name: the visual half of scenarios 9 and 10
   - with the keyboard:
     - Tab reaches every item and title with a visible focus indicator
     - Enter on a sub-menu opens its popup and moves focus inside
     - Escape closes it and returns focus to the title
   - axe on `.gui-menu-wrapper` collapsed reports no `aria-command-name`, and every first-level item and sub-menu is named by its title
-  - with `collapseTransition` on, the toggle shows `horizontal-collapse-transition`, and expanding again leaves no element with `scrollWidth > clientWidth`
+  - toggling keeps the same `ul` with no `horizontal-collapse-transition` and no inline width; expanded, the wrapper has no modifier and no element has `scrollWidth > clientWidth`
   - the console shows no new errors
 
-The front-b2b check with the published version is the dev's step after the merge, and it's outside this plan's verify.
+**front-b2b criterion (from the front-b2b session, before publishing).**
+
+- **Setup:** local front-b2b on `release` with `node_modules/@flash-global66/g-menu` pointing to the fixed package from this branch (restored afterwards with `yarn install`), profile `b2b-ci-co`.
+- **Collapsed:** the `Sidebar` measures about 84px, the `ul` 44px, and no label, chevron or badge is visible.
+- **Expanded:** the `Sidebar` goes back to 300px.
+- **If it doesn't run:** this point is `no_verificado`.
