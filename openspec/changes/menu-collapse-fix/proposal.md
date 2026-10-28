@@ -107,22 +107,31 @@ Toggling animates the width when `collapseTransition` is `true` (the default) an
 
 This change **does alter behavior**: the collapsed menu goes back to rendering as designed, collapsing animates, and it gains keyboard access and accessible names. The delta is in `specs/g-menu/spec.md`.
 
-| Comando                                                                              | Qué mide                                                             | Baseline hoy                      | Esperado                                                                                                       |
-| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `npx vitest run --project unit components/menu 2>&1 \| grep -E "Test Files\|Tests "` | test files and tests in the package                                  | `5 passed (5)` / `32 passed (32)` | `Test Files` with 0 failed; `Tests` with 0 failed and **more than 32** passed (the new specs add to the count) |
-| `grep -c "is('collapse'" components/menu/Menu.vue`                                   | uses of the wrong state class in the component                       | `1`                               | `0`                                                                                                            |
-| `grep -rn "is-collapse" components/menu \| wc -l`                                    | lines in the package (code and tests) still mentioning `is-collapse` | `2`                               | `0`                                                                                                            |
-| `npx eslint components/menu stories/menu.stories.ts --max-warnings 0; echo $?`       | lint on every touched file                                           | `0`                               | `0`                                                                                                            |
-| `yarn styles:check >/dev/null 2>&1; echo $?`                                         | the public SCSS still compiles                                       | `0`                               | `0`                                                                                                            |
+Re-plan after verify round 1: the `is-collapse` command counted the negative assertions that task 1's own criterion requires. It now measures the package code outside `tests/`, plus an invariant that the spec asserts the class is absent. Values measured on `21dc74e8`.
 
-**Criterion for the whole change (Storybook, browser-verify after the apply).** In the new collapsed story:
+| Comando                                                                              | Qué mide                                                                                | Hoy                               | Esperado                                                                     |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
+| `npx vitest run --project unit components/menu 2>&1 \| grep -E "Test Files\|Tests "` | test files and tests in the package                                                     | `5 passed (5)` / `72 passed (72)` | `Test Files` with 0 failed; `Tests` with 0 failed and **at least 72** passed |
+| `grep -c "is('collapse'" components/menu/Menu.vue`                                   | uses of the wrong state class in the component (grep exits 1 when there are no matches) | `0`                               | `0`                                                                          |
+| `grep -rn "is-collapse" components/menu --exclude-dir=tests \| wc -l`                | lines of the **package code** (outside `tests/`) still mentioning `is-collapse`         | `0`                               | `0`                                                                          |
+| `grep -c "not.toHaveClass('is-collapse')" components/menu/tests/Menu.spec.ts`        | assertions that the wrong class is **absent** (task 1's criterion)                      | `2`                               | `≥ 1`                                                                        |
+| `npx eslint components/menu stories/menu.stories.ts --max-warnings 0; echo $?`       | lint on every touched file                                                              | `0`                               | `0`                                                                          |
+| `yarn styles:check >/dev/null 2>&1; echo $?`                                         | the public SCSS still compiles                                                          | `0`                               | `0`                                                                          |
 
-- the `ul[role=menubar]` has `gui-menu--collapse` and is 44px wide
-- every first-level title and item is 44px with its icon centered
-- no label, chevron, or badge is visible
-- Tab reaches every item and title with a visible focus indicator, and Enter on a sub-menu opens its popup and moves focus inside; Escape closes it and returns focus
-- an axe scan of `.gui-menu-wrapper` collapsed reports no `aria-command-name`, and every first-level item and sub-menu is named by its title
-- with `collapseTransition` on, the width animates (the `horizontal-collapse-transition` class shows up during the toggle), and expanding again leaves no element with `scrollWidth > clientWidth`
-- the console shows no errors
+**Criterion for the whole change, and the visual half of scenarios 9 and 10 (browser-verify on Storybook).**
+
+- **How it's measured:** browser-verify from the DS session against `http://localhost:6006`, story `feedback-menu--collapsed-with-badges`, `auth: none`, contract tied to `menu-collapse-fix`. The verify reads that run's `report.md`/`evaluation.json` in `.agent/browser-verify/runs/<runId>/`. If the run doesn't exist or a check is BLOCKED, that point is `no_verificado`, not `true`.
+- **What the run has to show:**
+  - with the menu collapsed:
+    - the `ul[role=menubar]` has `gui-menu--collapse` and measures 44px
+    - every first-level item and title measures 44px with its icon centered
+    - no label, chevron or badge is visible, and none of the label `span`s is `display: none` or `visibility: hidden` (computed style): this is the visual half of scenarios 9 and 10
+  - with the keyboard:
+    - Tab reaches every item and title with a visible focus indicator
+    - Enter on a sub-menu opens its popup and moves focus inside
+    - Escape closes it and returns focus to the title
+  - axe on `.gui-menu-wrapper` collapsed reports no `aria-command-name`, and every first-level item and sub-menu is named by its title
+  - with `collapseTransition` on, the toggle shows `horizontal-collapse-transition`, and expanding again leaves no element with `scrollWidth > clientWidth`
+  - the console shows no new errors
 
 The front-b2b check with the published version is the dev's step after the merge, and it's outside this plan's verify.

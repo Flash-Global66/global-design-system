@@ -11,7 +11,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
   - commit: `fix(menu): use the gui-menu--collapse modifier so the collapsed styles apply`
 
 - [x] **2 · Port the collapse width animation (collapseTransition)**
-  - archivos: `components/menu/Menu.vue`, `components/menu/tests/Menu.spec.ts`
+  - archivos: `components/menu/Menu.vue`, `components/menu/tests/Menu.spec.ts`, `components/menu/tests/Integration.spec.ts`
   - depende de: 1
   - listo cuando:
     - With `collapseTransition` `true` (the default), toggling `collapse` remounts the `ul`, keyed by `String(collapse)`, inside a `Transition` in `out-in` mode, using the hooks of `element-plus/es/components/menu/src/menu-collapse-transition.mjs` (2.9.7): leave fixes the inline `width` and adds `horizontal-collapse-transition`; enter applies `gui-opacity-transition` and cleans up its inline styles when done.
@@ -44,4 +44,6 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - `npx eslint stories/menu.stories.ts --max-warnings 0` exits 0.
   - commit: `docs(stories): collapsed menu story with badges as in front-b2b`
 
-Tasks 1 and 2 share `Menu.vue` and its spec, so they run serially. Tasks 3 and 4 don't touch those files and can run in parallel with 1.
+Tasks 1 and 2 share `Menu.vue` and its spec; tasks 2 and 3 share `Integration.spec.ts`. They ran in two waves (1, 3, 4 → 2).
+
+Re-plan after verify round 1: task 2's fence was widened to `Integration.spec.ts` during the apply, with the dev's approval, to re-query a node that the `ul` remount leaves stale. Its `listo cuando` didn't change.
