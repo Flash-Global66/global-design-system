@@ -59,3 +59,25 @@
 - **GIVEN** a disabled `GMenuItem` or `GSubMenu`
 - **WHEN** it receives Enter, Space or ArrowRight
 - **THEN** nothing is selected or opened, and a disabled `GMenuItem` has `tabindex="-1"`
+
+### Requirement: Collapsed items keep an accessible name
+
+When `GMenu` is collapsed, every first-level `GMenuItem` with a `title` slot and every first-level `GSubMenu` SHALL expose an accessible name equal to the text of its title, even though only the icon is visible. The label SHALL be hidden visually without removing it from the accessibility tree (never `display: none`).
+
+#### Scenario: Collapsed item named by its title
+
+- **GIVEN** a collapsed vertical `GMenu` with a first-level `GMenuItem` whose `title` slot reads "Home"
+- **WHEN** it renders
+- **THEN** a `menuitem` with the accessible name "Home" exists, and the title text is not visible
+
+#### Scenario: Collapsed sub-menu named by its title
+
+- **GIVEN** a collapsed vertical `GMenu` with a first-level `GSubMenu` whose `title` slot reads "Movimientos"
+- **WHEN** it renders
+- **THEN** the focusable element of that sub-menu has the accessible name "Movimientos", and the label is hidden visually but not with `display: none`
+
+#### Scenario: Expanded menu keeps its visible names
+
+- **GIVEN** the same `GMenu` with `collapse` set to `false`
+- **WHEN** it renders
+- **THEN** each item and sub-menu is named by its visible title, with no duplicated name

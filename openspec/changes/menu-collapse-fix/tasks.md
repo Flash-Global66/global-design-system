@@ -21,7 +21,7 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
   - commit: `feat(menu): animate the width when the menu collapses or expands`
 
 - [ ] **3 · Keyboard access to items and sub-menus**
-  - archivos: `components/menu/MenuItem.vue`, `components/menu/MenuSub.vue`, `components/menu/menu.styles.scss`, `components/menu/tests/MenuItem.spec.ts`, `components/menu/tests/MenuSub.spec.ts`
+  - archivos: `components/menu/MenuItem.vue`, `components/menu/MenuSub.vue`, `components/menu/menu.styles.scss`, `components/menu/tests/MenuItem.spec.ts`, `components/menu/tests/MenuSub.spec.ts`, `components/menu/tests/Integration.spec.ts`
   - depende de: ninguna
   - listo cuando:
     - **Items.** A non-disabled `GMenuItem` is focusable (`tabindex="0"`, `-1` when disabled), and Enter/Space trigger the same `handleClick` as a click (it emits `click` and calls `handleMenuItemClick`).
@@ -29,8 +29,9 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - **Closing the popup.** Escape inside the popup or on the title closes it and returns focus to the title. Moving focus outside the title and the popup closes it.
     - **Focus ring.** `menu.styles.scss` shows a visible `:focus-visible` indicator on `.gui-menu-item` and `.gui-sub-menu__title` without changing `:hover`.
     - **Disabled.** A disabled sub-menu or item doesn't respond to the keyboard.
-    - Specs cover each behavior. The existing cases in `MenuItem.spec.ts`, `MenuSub.spec.ts` and `Integration.spec.ts` stay green.
-  - commit: `feat(menu): keyboard access to items and sub-menus, collapsed included`
+    - **Accessible name in collapse.** Collapsed, every first-level `GMenuItem` with a `title` slot exposes its title text as its accessible name (today the title only lives in the tooltip and axe reports `aria-command-name` on 9 items in front-b2b). The focusable element of every first-level `GSubMenu` does the same. The rule in `menu.styles.scss` that hides the title `span`s in `.gui-menu--collapse` uses a visually-hidden technique, not `display: none`, which would drop the name once task 1 makes that rule apply. Expanded, names don't duplicate.
+    - Specs cover each behavior, including `getByRole('menuitem', { name })` in collapse for an item and a sub-menu. The existing cases in `MenuItem.spec.ts`, `MenuSub.spec.ts` and `Integration.spec.ts` stay green.
+  - commit: `feat(menu): keyboard access and accessible names for items and sub-menus, collapsed included`
 
 - [ ] **4 · Collapsed story with front-b2b's real content**
   - archivos: `stories/menu.stories.ts`

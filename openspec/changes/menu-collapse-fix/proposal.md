@@ -1,4 +1,4 @@
-# Fix the collapsed g-menu: collapse modifier, collapse animation, and keyboard access
+# Fix the collapsed g-menu: collapse modifier, collapse animation, keyboard access, and accessible names
 
 > **Rama:** `fix/BMB-4217-menu-collapse-modifier`
 > **Base:** `6ab47d43`
@@ -50,6 +50,14 @@ The base CSS removes the outline on `:focus` (`menu.styles.scss`, `&:hover, &:fo
 
 **The consumer.** `front-b2b/src/shared/layouts/components/MenuRoute/index.vue` passes `:collapse-transition="false"`. Its sub-menu titles carry badges inside `span`s (COMEX with `GBadge`, Integraciones with `GBadgeNew` absolutely positioned). The current story (`stories/menu.stories.ts`) has no badges, so it doesn't reproduce that case.
 
+**browser-verify in front-b2b (run `BMB-4217-run-1`, local ci mode against `ci-api`, profile `b2b-ci-co`, g-menu 0.0.10, engine verdict FAILED).** Evidence is in `front-b2b/.agent/browser-verify/runs/BMB-4217-run-1/`.
+
+- Collapsed at 1440 and 1024, the `ul` carries `is-collapse` without `gui-menu--collapse` and measures 246.8px instead of 44. The labels of COMEX, Contactos, Movimientos and Integraciones stay visible, along with 4 chevrons and the "Nuevo" badge. The active item shows the full-width pill with the expanded-mode dot.
+- Tab skips all 13 items, collapsed, expanded and inside the drawer, and Escape doesn't close the popup.
+- **New:** axe on `.gui-menu-wrapper` collapsed reports `aria-command-name` (serious) on 9 `li.gui-menu-item[role=menuitem]`. Collapsed, the title slot only lives in the tooltip, so the `li` has no accessible name. Expanded, the violation doesn't appear. Today sub-menus keep their name only because their label is still visible; once task 1 applies `.gui-menu--collapse … > span { @apply hidden }` (`display: none`), they would lose it too.
+- What works: the hover popup opens with the right children, and 3 collapse/expand cycles show no jumps or overflow. Below `lg` (1023, 768, 390, 320) the drawer renders the expanded menu correctly.
+- The only consumer is `front-b2b/src/shared/layouts/components/MenuRoute/index.vue`, mounted in `Sidebar` (collapsible from `lg`) and `DrawerMenu` (below `lg`, never collapsed). No other use of `gui-menu`, `gui-sub-menu` or `is-collapse` exists in front-b2b's `src/` (codegraph and grep). `front-docs-b2b` declares g-menu 0.0.8 without using it. `front-admin` and `front-pse-autorizador` don't depend on it.
+
 **Baseline measured on this branch:** 5 test files and 32 tests pass. ESLint on `components/menu` and the story exits 0. `yarn styles:check` exits 0.
 
 ## Qué propongo, y qué queda afuera
@@ -59,13 +67,20 @@ The collapsed menu renders as designed:
 - 44px wide, one centered icon per item
 - no labels, chevrons, or badges
 - collapsed sub-menus reachable through their popup, both by mouse and by keyboard
+- every collapsed item and sub-menu keeps an accessible name equal to its title
 - the active item highlighted in both states
 
 Toggling animates the width when `collapseTransition` is `true` (the default) and switches instantly when it's `false`. A new story reproduces the front-b2b case with badges, starting collapsed.
 
 **Out of scope:**
 
-- **Anything in front-b2b**: bumping g-menu to the published version, removing `:collapse-transition="false"` if they want the animation, adjusting the `Sidebar`, removing the duplicate `@use`. The dev takes care of it after this package is published.
+- **Anything in front-b2b.** The dev takes care of it after this package is published:
+  - bump g-menu from 0.0.10, restart the server and clear `node_modules/.vite`
+  - remove `:collapse-transition="false"` in `MenuRoute/index.vue:64` if they want the animation
+  - remove the duplicate `@use` in `src/assets/styles/ui-framework-b2b/index.scss:8-9`
+  - adjust the `Sidebar` container: the collapsed logout is offset by `pl-6`, and the hamburger (`img`) and the collapsed logout (`div`) aren't operable by keyboard
+  - move the "Mesa de dinero" icon out of the `#title` slot, which today leaves an empty row when collapsed
+  - keep the collapsed state across navigation, which is lost today because the layout remounts
 - **Full WAI-ARIA arrow-key navigation (roving tabindex) across the whole menu.** This plan makes every item and title reachable with Tab and operable with Enter/Space, popups open with Enter/Space/ArrowRight and close with Escape. Up/down arrow navigation between items stays out.
 - **The horizontal mode's ellipsis/overflow** and the hover-darkening (`useMenuColor`), both cut on purpose in the migration.
 - **Any change to the published package API.** No props are added or removed. `collapseTransition` stops being a no-op but keeps its signature and default.
@@ -85,10 +100,12 @@ Toggling animates the width when `collapseTransition` is `true` (the default) an
 
 - `front-b2b/src/assets/styles/ui-framework-b2b/index.scss:8-9` imports `@flash-global66/g-menu/menu.styles.scss` twice. It doesn't cause this bug; it belongs to the front-b2b PR.
 - `stories/menu.stories.ts:40-42` has a `hola()` function with a `console.log` that nothing uses. Task 4 removes it because it touches that file anyway.
+- axe reports `color-contrast` on front-b2b's `GBadgeNew` "Nuevo" (`text-green-1`). It's a front-b2b component, not g-menu.
+- `front-docs-b2b/src/styles/flash-global66.scss:13-14` also imports the g-menu styles twice, without using the component.
 
 ## Cómo se verifica
 
-This change **does alter behavior**: the collapsed menu goes back to rendering as designed, collapsing animates, and it gains keyboard access. The delta is in `specs/g-menu/spec.md`.
+This change **does alter behavior**: the collapsed menu goes back to rendering as designed, collapsing animates, and it gains keyboard access and accessible names. The delta is in `specs/g-menu/spec.md`.
 
 | Comando                                                                              | Qué mide                                                             | Baseline hoy                      | Esperado                                                                                                       |
 | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -104,6 +121,7 @@ This change **does alter behavior**: the collapsed menu goes back to rendering a
 - every first-level title and item is 44px with its icon centered
 - no label, chevron, or badge is visible
 - Tab reaches every item and title with a visible focus indicator, and Enter on a sub-menu opens its popup and moves focus inside; Escape closes it and returns focus
+- an axe scan of `.gui-menu-wrapper` collapsed reports no `aria-command-name`, and every first-level item and sub-menu is named by its title
 - with `collapseTransition` on, the width animates (the `horizontal-collapse-transition` class shows up during the toggle), and expanding again leaves no element with `scrollWidth > clientWidth`
 - the console shows no errors
 
