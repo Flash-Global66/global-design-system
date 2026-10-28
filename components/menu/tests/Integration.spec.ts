@@ -154,7 +154,9 @@ describe('Menu family integration (real Menu + MenuItemGroup + MenuSub + MenuIte
     });
 
     await waitFor(() => {
-      expect(section1).not.toHaveClass('is-opened');
+      expect(getByText('Section 1').closest('li.gui-sub-menu')).not.toHaveClass(
+        'is-opened',
+      );
     });
   });
 

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { defineComponent, h, inject } from 'vue';
-import { render, fireEvent } from '@testing-library/vue';
+import { render, fireEvent, waitFor } from '@testing-library/vue';
 import GMenu from '../Menu.vue';
 import { menuContextKey, subMenuContextKey } from '../constants';
 
@@ -12,6 +12,8 @@ import { menuContextKey, subMenuContextKey } from '../constants';
  * The full multi-component handshake (Menu + MenuItemGroup + MenuSub +
  * MenuItem, real, nested) is covered separately in `Integration.spec.ts`.
  */
+
+const realTransition = { global: { stubs: { transition: false } } };
 
 const ContextProbe = defineComponent({
   setup() {
@@ -183,5 +185,90 @@ describe('Menu (native render — sin ElMenu)', () => {
     expect(getByTestId('opened')).toHaveAttribute('data-value', '["x"]');
     await rerender({ collapse: true, defaultOpeneds: ['x'] });
     expect(getByTestId('opened')).toHaveAttribute('data-value', '[]');
+  });
+
+  describe('collapse width animation (collapseTransition)', () => {
+    it('collapseTransition defaults to true: toggling collapse remounts the ul and fixes inline width + horizontal-collapse-transition on the leaving one', async () => {
+      const { container, rerender } = render(GMenu, {
+        props: { collapse: false },
+        ...realTransition,
+      });
+      const leavingUl = container.querySelector('ul') as HTMLElement;
+
+      await rerender({ collapse: true });
+
+      expect(leavingUl).toHaveClass('horizontal-collapse-transition');
+      expect(leavingUl.style.width).toBe('0px');
+      expect(leavingUl.style.overflow).toBe('hidden');
+      expect(leavingUl).toHaveClass('gui-menu--vertical');
+      expect(leavingUl).not.toHaveClass('gui-menu--collapse');
+    });
+
+    it('swaps the leaving ul for a new one carrying the collapse modifier', async () => {
+      const { container, rerender } = render(GMenu, {
+        props: { collapse: false },
+        ...realTransition,
+      });
+      const leavingUl = container.querySelector('ul');
+
+      await rerender({ collapse: true });
+
+      await waitFor(() => {
+        expect(container.querySelector('ul.gui-menu--collapse')).toBeTruthy();
+      });
+      expect(container.querySelectorAll('ul')).toHaveLength(1);
+      expect(container.querySelector('ul')).not.toBe(leavingUl);
+    });
+
+    it('cleans the enter inline opacity and the opacity class once entered', async () => {
+      const { container, rerender } = render(GMenu, {
+        props: { collapse: false },
+        ...realTransition,
+      });
+
+      await rerender({ collapse: true });
+
+      await waitFor(() => {
+        const uls = container.querySelectorAll('ul');
+        expect(uls).toHaveLength(1);
+        expect(uls[0]).toHaveClass('gui-menu--collapse');
+        expect(uls[0].style.opacity).toBe('');
+        expect(uls[0]).not.toHaveClass('gui-opacity-transition');
+        expect(uls[0]).not.toHaveClass('horizontal-collapse-transition');
+      });
+    });
+
+    it('keeps the slot content mounted after the transition', async () => {
+      const { getByTestId, container, rerender } = render(GMenu, {
+        props: { collapse: false },
+        slots: { default: () => h(ContextProbe) },
+        ...realTransition,
+      });
+
+      await rerender({ collapse: true });
+
+      await waitFor(() => {
+        expect(container.querySelector('ul.gui-menu--collapse')).toBeTruthy();
+      });
+      expect(getByTestId('probe')).toHaveAttribute('data-collapse', 'true');
+    });
+
+    it('collapseTransition=false: the same ul changes state with no animation class or inline width', async () => {
+      const { container, rerender } = render(GMenu, {
+        props: { collapse: false, collapseTransition: false },
+        ...realTransition,
+      });
+      const ul = container.querySelector('ul') as HTMLElement;
+
+      await rerender({ collapse: true, collapseTransition: false });
+
+      expect(container.querySelectorAll('ul')).toHaveLength(1);
+      expect(container.querySelector('ul')).toBe(ul);
+      expect(ul).toHaveClass('gui-menu--collapse');
+      expect(ul).not.toHaveClass('horizontal-collapse-transition');
+      expect(ul).not.toHaveClass('gui-opacity-transition');
+      expect(ul.style.width).toBe('');
+      expect(ul.style.opacity).toBe('');
+    });
   });
 });
