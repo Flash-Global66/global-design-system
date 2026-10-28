@@ -13,16 +13,6 @@ import { GConfigProvider } from '../components/config-provider';
 export default {
   title: 'Feedback/Menu',
   component: GMenu,
-  argTypes: {
-    collapseTransition: {
-      control: 'boolean',
-      description:
-        'Whether the width-fade animation runs when the menu collapses.',
-    },
-  },
-  args: {
-    collapseTransition: true,
-  },
   parameters: {
     docs: {
       description: {
@@ -55,7 +45,7 @@ const Template: StoryFn<typeof GMenu> = args => {
       <g-config-provider>
         <g-button class="mb-4" @click="isCollapse = !isCollapse">Collapse</g-button>
         <div class="w-full max-w-xs">
-          <g-menu :collapse="isCollapse" :collapse-transition="args.collapseTransition" class="px-4 py-5 bg-white">
+          <g-menu :collapse="isCollapse" class="px-4 py-5 bg-white">
             <g-menu-item index="5">
               <g-icon-font class="text-6" name="light house" />
               <template #title>
@@ -140,7 +130,6 @@ const CollapsedTemplate: StoryFn<typeof GMenu> = args => {
         <div class="w-full max-w-xs">
           <g-menu
             :collapse="isCollapse"
-            :collapse-transition="args.collapseTransition"
             class="px-4 py-5 bg-white"
           >
             <g-menu-item index="1">
@@ -193,5 +182,4 @@ const CollapsedTemplate: StoryFn<typeof GMenu> = args => {
 export const CollapsedWithBadges = CollapsedTemplate.bind({});
 CollapsedWithBadges.args = {
   collapse: true,
-  collapseTransition: true,
 };
