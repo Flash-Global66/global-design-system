@@ -14,6 +14,18 @@
 @use '@flash-global66/g-utils/tokens' as *;
 @use '@flash-global66/g-utils/transition';
 
+@mixin menu-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 :root {
   // They are defined on :root so they can be inherited by sub-menu instead of overwritten
   @include set-component-css-var('menu', $menu);
@@ -163,11 +175,7 @@
       }
 
       > span {
-        height: 0;
-        width: 0;
-        overflow: hidden;
-        visibility: hidden;
-        display: inline-block;
+        @include menu-visually-hidden;
       }
     }
 
@@ -370,6 +378,13 @@
   }
 }
 
+// GTooltip forces a light box but keeps `effect="dark"` white text, so the label sets its own color.
+@include b(menu-tooltip) {
+  @include e(label) {
+    @apply text-2 font-semibold text-primary-txt whitespace-nowrap;
+  }
+}
+
 .horizontal-collapse-transition
   .#{$namespace}-sub-menu__title
   .#{$namespace}-sub-menu__icon-arrow {
@@ -382,6 +397,28 @@
 // from the pre-migration file — these never depended on element-plus classes
 // directly, only on the `gui-*` selectors the base already emits).
 // ---------------------------------------------------------------------------
+
+.gui-menu-wrapper--collapse {
+  @apply w-fit;
+}
+
+// fit-content can't be interpolated: max-width on the content box animates the width.
+.gui-menu-wrapper--animated {
+  --gui-menu-width-collapse: 44px;
+  box-sizing: content-box;
+  max-width: 100%;
+  overflow-x: clip;
+  transition: max-width 200ms ease-out;
+
+  &.gui-menu-wrapper--collapse {
+    width: auto;
+    max-width: var(--gui-menu-width-collapse);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
 
 .gui-menu-wrapper {
   & > .gui-menu {
@@ -398,7 +435,7 @@
       .gui-menu-item,
       .gui-sub-menu__title {
         &.is-active {
-          @apply text-blue-1;
+          @apply text-primary-def;
           &::before {
             content: '';
             @apply absolute right-5 w-2 h-2 rounded-full bg-gray-1;
@@ -442,6 +479,10 @@
 
   & .gui-menu-item > span,
   & > .gui-sub-menu > .gui-sub-menu__title > span {
+    @include menu-visually-hidden;
+  }
+
+  & > .gui-sub-menu > .gui-sub-menu__title > .gui-sub-menu__icon-arrow {
     @apply hidden;
   }
 
@@ -474,6 +515,16 @@
   &:hover {
     @apply bg-gray-4/10;
   }
+
+  // `!important` because the horizontal-mode `:focus { outline: none }` above is more specific.
+  &:focus-visible {
+    outline: 2px solid getCssVar('menu-active-color') !important;
+    outline-offset: -2px;
+  }
+}
+
+.gui-menu-item__sr-label {
+  @include menu-visually-hidden;
 }
 
 .gui-sub-menu {
@@ -488,7 +539,7 @@
   }
   &.is-active {
     & > .gui-sub-menu__title {
-      @apply text-blue-4;
+      @apply text-primary-def;
     }
   }
 }

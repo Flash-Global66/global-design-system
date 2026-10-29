@@ -1,9 +1,15 @@
 <template>
-  <div class="gui-menu-wrapper">
+  <div
+    class="gui-menu-wrapper"
+    :class="{
+      'gui-menu-wrapper--collapse': collapse,
+      'gui-menu-wrapper--animated': collapseTransition,
+    }"
+  >
     <ul
       ref="menuRef"
       role="menubar"
-      :class="[ns.b(), ns.m(mode), ns.is('collapse', collapse)]"
+      :class="[ns.b(), ns.m(mode), { [ns.m('collapse')]: collapse }]"
       :style="cssVarStyle"
     >
       <!--
@@ -49,13 +55,8 @@ import {
  *    horizontal mode at all. `ellipsis`/`ellipsisIcon` props are dropped.
  *  - `closeOnClickOutside` is dropped — never declared by the pre-migration
  *    wrapper either, not used anywhere in `../front-b2b`.
- *  - The width-fade `collapseTransition` animation (element-plus's own
- *    `ElMenuCollapseTransition`, which imperatively manipulates
- *    `el.style.width`/`dataset.scrollWidth`) is NOT ported. The prop is kept
- *    for API compatibility but is a no-op: `../front-b2b`'s only real
- *    consumer (`MenuRoute/index.vue`) already passes
- *    `:collapse-transition="false"`, so this is a zero-behavior-change cut
- *    for the one real production usage.
+ *  - element-plus's `ElMenuCollapseTransition` is NOT ported: it is replaced by
+ *    a single CSS width transition on the wrapper (`gui-menu-wrapper--animated`).
  *  - `backgroundColor`/`textColor`/`activeTextColor` CSS vars are ported, but
  *    the automatic `hover-bg-color` darken-by-20% (element-plus's own
  *    `useMenuColor`, via `@ctrl/tinycolor`) is NOT — it would require adding
@@ -113,8 +114,8 @@ const props = defineProps({
    */
   collapse: Boolean,
   /**
-   * whether to enable the collapse transition
-   * @deprecated no-op — see file-level comment for rationale
+   * whether collapsing and expanding animates the menu width (200ms). The
+   * transition is skipped under `prefers-reduced-motion: reduce`
    */
   collapseTransition: {
     type: Boolean,

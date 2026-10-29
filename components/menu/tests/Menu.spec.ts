@@ -51,9 +51,91 @@ describe('Menu (native render — sin ElMenu)', () => {
     expect(container.querySelector('ul')).not.toHaveClass('gui-menu--vertical');
   });
 
-  it('applies is-collapse when collapse=true', () => {
+  it('applies the gui-menu--collapse modifier and not is-collapse when collapse=true', () => {
     const { container } = render(GMenu, { props: { collapse: true } });
-    expect(container.querySelector('ul')).toHaveClass('is-collapse');
+    const ul = container.querySelector('ul');
+    expect(ul).toHaveClass('gui-menu--collapse');
+    expect(ul).not.toHaveClass('is-collapse');
+  });
+
+  it('applies neither gui-menu--collapse nor is-collapse when collapse=false', () => {
+    const { container } = render(GMenu, { props: { collapse: false } });
+    const ul = container.querySelector('ul');
+    expect(ul).not.toHaveClass('gui-menu--collapse');
+    expect(ul).not.toHaveClass('is-collapse');
+  });
+
+  it('applies gui-menu-wrapper--collapse to the root div when collapse=true', () => {
+    const { container } = render(GMenu, { props: { collapse: true } });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass('gui-menu-wrapper');
+    expect(wrapper).toHaveClass('gui-menu-wrapper--collapse');
+  });
+
+  it('applies only gui-menu-wrapper to the root div when collapse=false', () => {
+    const { container } = render(GMenu, { props: { collapse: false } });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass('gui-menu-wrapper');
+    expect(wrapper).not.toHaveClass('gui-menu-wrapper--collapse');
+  });
+
+  it('keeps a consumer class next to gui-menu-wrapper--collapse on the root div', () => {
+    const { container } = render(GMenu, {
+      props: { collapse: true },
+      attrs: { class: 'wrapper-menu-route px-4 py-5 bg-white' },
+    });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass(
+      'gui-menu-wrapper',
+      'gui-menu-wrapper--collapse',
+      'wrapper-menu-route',
+      'px-4',
+      'py-5',
+      'bg-white',
+    );
+  });
+
+  it('applies gui-menu-wrapper--animated to the root div by default', () => {
+    const { container } = render(GMenu);
+    expect(container.firstElementChild).toHaveClass(
+      'gui-menu-wrapper--animated',
+    );
+  });
+
+  it('omits gui-menu-wrapper--animated when collapseTransition=false', () => {
+    const { container } = render(GMenu, {
+      props: { collapseTransition: false },
+    });
+    expect(container.firstElementChild).not.toHaveClass(
+      'gui-menu-wrapper--animated',
+    );
+  });
+
+  it('keeps --animated next to --collapse and a consumer class on the root div', () => {
+    const { container } = render(GMenu, {
+      props: { collapse: true, collapseTransition: true },
+      attrs: { class: 'wrapper-menu-route px-4' },
+    });
+    expect(container.firstElementChild).toHaveClass(
+      'gui-menu-wrapper',
+      'gui-menu-wrapper--collapse',
+      'gui-menu-wrapper--animated',
+      'wrapper-menu-route',
+      'px-4',
+    );
+  });
+
+  it('keeps --collapse without --animated and the consumer class when collapseTransition=false', () => {
+    const { container } = render(GMenu, {
+      props: { collapse: true, collapseTransition: false },
+      attrs: { class: 'wrapper-menu-route' },
+    });
+    const wrapper = container.firstElementChild;
+    expect(wrapper).toHaveClass(
+      'gui-menu-wrapper--collapse',
+      'wrapper-menu-route',
+    );
+    expect(wrapper).not.toHaveClass('gui-menu-wrapper--animated');
   });
 
   it('renders the default slot', () => {
@@ -174,5 +256,19 @@ describe('Menu (native render — sin ElMenu)', () => {
     expect(getByTestId('opened')).toHaveAttribute('data-value', '["x"]');
     await rerender({ collapse: true, defaultOpeneds: ['x'] });
     expect(getByTestId('opened')).toHaveAttribute('data-value', '[]');
+  });
+
+  it('keeps the same ul and adds no inline width or transition class when collapse toggles with the default collapseTransition', async () => {
+    const { container, rerender } = render(GMenu, {
+      props: { collapse: false },
+    });
+    const ul = container.querySelector('ul') as HTMLElement;
+
+    await rerender({ collapse: true });
+
+    expect(container.querySelector('ul')).toBe(ul);
+    expect(ul).toHaveClass('gui-menu--collapse');
+    expect(ul).not.toHaveClass('horizontal-collapse-transition');
+    expect(ul.style.width).toBe('');
   });
 });

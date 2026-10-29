@@ -20,6 +20,9 @@ import GSubMenu from '../MenuSub.vue';
 
 const realTransition = { global: { stubs: { transition: false } } };
 
+/** Lets the popper's focus trap finish starting before the next key press. */
+const settle = () => new Promise(resolve => setTimeout(resolve, 0));
+
 describe('MenuSub (native render — sin ElSubMenu)', () => {
   it('throws a descriptive error when mounted without a <GMenu> ancestor', () => {
     // eslint-disable-next-line no-console
@@ -33,8 +36,8 @@ describe('MenuSub (native render — sin ElSubMenu)', () => {
     console.error = originalError;
   });
 
-  it('renders a native <li role="menuitem" aria-haspopup="true">, no element-plus classes', () => {
-    const { container } = render(
+  it('renders a native <li role="none"> whose title is the focusable menuitem with aria-haspopup, no element-plus classes', () => {
+    const { container, getByRole } = render(
       defineComponent({
         components: { GMenu, GSubMenu, GMenuItem },
         template: `
@@ -50,8 +53,12 @@ describe('MenuSub (native render — sin ElSubMenu)', () => {
     );
     const li = container.querySelector('li.gui-sub-menu');
     expect(li).toBeTruthy();
-    expect(li).toHaveAttribute('role', 'menuitem');
-    expect(li).toHaveAttribute('aria-haspopup', 'true');
+    expect(li).toHaveAttribute('role', 'none');
+    expect(li).not.toHaveAttribute('aria-haspopup');
+    const title = getByRole('menuitem', { name: 'Section' });
+    expect(title).toHaveClass('gui-sub-menu__title');
+    expect(title).toHaveAttribute('aria-haspopup', 'menu');
+    expect(title).toHaveAttribute('aria-expanded', 'false');
     expect(container.querySelector('[class*="el-menu"]')).toBeNull();
   });
 
@@ -209,6 +216,223 @@ describe('MenuSub (native render — sin ElSubMenu)', () => {
       expect(nestedUls[0].style.getPropertyValue('--gui-menu-level')).toBe('1');
       expect(nestedUls[1].style.getPropertyValue('--gui-menu-level')).toBe('2');
       expect(nestedUls[2].style.getPropertyValue('--gui-menu-level')).toBe('3');
+    });
+  });
+
+  describe('keyboard access', () => {
+    const buildMenu = (
+      menuAttrs = '',
+      subAttrs = '',
+      extra = '<button type="button">Outside</button>',
+    ) =>
+      defineComponent({
+        components: { GMenu, GSubMenu, GMenuItem },
+        template: `
+          <div>
+            <GMenu ${menuAttrs}>
+              <GSubMenu index="s1" :teleported="false" ${subAttrs}>
+                <template #title>Section</template>
+                <GMenuItem index="s1-a">Child</GMenuItem>
+                <GMenuItem index="s1-b">Sibling</GMenuItem>
+              </GSubMenu>
+            </GMenu>
+            ${extra}
+          </div>
+        `,
+      });
+
+    const getLi = (container: Element) =>
+      container.querySelector('li.gui-sub-menu') as HTMLElement;
+
+    describe('inline mode', () => {
+      it('the title is focusable with tabindex="0"', () => {
+        const { getByRole } = render(buildMenu(), realTransition);
+        expect(getByRole('menuitem', { name: 'Section' })).toHaveAttribute(
+          'tabindex',
+          '0',
+        );
+      });
+
+      it.each([
+        ['Enter', 'Enter'],
+        ['Space', ' '],
+      ])('%s toggles the sub menu', async (_label, key) => {
+        const { container, getByRole } = render(buildMenu(), realTransition);
+        const title = getByRole('menuitem', { name: 'Section' });
+        await fireEvent.keyDown(title, { key });
+        await waitFor(() => expect(getLi(container)).toHaveClass('is-opened'));
+        expect(title).toHaveAttribute('aria-expanded', 'true');
+        await fireEvent.keyDown(title, { key });
+        await waitFor(() =>
+          expect(getLi(container)).not.toHaveClass('is-opened'),
+        );
+      });
+
+      it('ArrowRight and Escape do nothing', async () => {
+        const { container, getByRole } = render(buildMenu(), realTransition);
+        const title = getByRole('menuitem', { name: 'Section' });
+        await fireEvent.keyDown(title, { key: 'ArrowRight' });
+        await fireEvent.keyDown(title, { key: 'Escape' });
+        expect(getLi(container)).not.toHaveClass('is-opened');
+      });
+
+      it('a disabled sub menu is not focusable and ignores the keyboard', async () => {
+        const { container, getByRole } = render(
+          buildMenu('', 'disabled'),
+          realTransition,
+        );
+        const title = getByRole('menuitem', { name: 'Section' });
+        expect(title).toHaveAttribute('tabindex', '-1');
+        expect(title).toHaveAttribute('aria-disabled', 'true');
+        await fireEvent.keyDown(title, { key: 'Enter' });
+        await fireEvent.keyDown(title, { key: ' ' });
+        expect(getLi(container)).not.toHaveClass('is-opened');
+      });
+    });
+
+    describe.each([
+      ['vertical + collapse', 'collapse'],
+      ['horizontal', 'mode="horizontal"'],
+    ])('popup mode (%s)', (_label, menuAttrs) => {
+      it.each([
+        ['Enter', 'Enter'],
+        ['Space', ' '],
+        ['ArrowRight', 'ArrowRight'],
+      ])('%s opens the popup and focuses its first item', async (_key, key) => {
+        const { container, getByRole } = render(
+          buildMenu(menuAttrs),
+          realTransition,
+        );
+        const title = getByRole('menuitem', { name: 'Section' });
+        title.focus();
+        await fireEvent.keyDown(title, { key });
+        await waitFor(() => {
+          expect(getLi(container)).toHaveClass('is-opened');
+          expect(document.activeElement).toBe(
+            container.querySelector('li.gui-menu-item'),
+          );
+        });
+        expect(document.activeElement).toHaveTextContent('Child');
+      });
+
+      it('Escape inside the popup closes it and returns focus to the title', async () => {
+        const { container, getByRole } = render(
+          buildMenu(menuAttrs),
+          realTransition,
+        );
+        const title = getByRole('menuitem', { name: 'Section' });
+        await fireEvent.keyDown(title, { key: 'Enter' });
+        await waitFor(() =>
+          expect(document.activeElement).toHaveTextContent('Child'),
+        );
+        await settle();
+        await fireEvent.keyDown(document.activeElement as Element, {
+          key: 'Escape',
+        });
+        await waitFor(() => {
+          expect(getLi(container)).not.toHaveClass('is-opened');
+          expect(document.activeElement).toBe(title);
+        });
+      });
+
+      it('Escape on the title closes the popup and keeps focus on the title', async () => {
+        const { container, getByRole } = render(
+          buildMenu(menuAttrs),
+          realTransition,
+        );
+        const title = getByRole('menuitem', { name: 'Section' });
+        title.focus();
+        await fireEvent.keyDown(title, { key: 'Enter' });
+        await waitFor(() => expect(getLi(container)).toHaveClass('is-opened'));
+        await settle();
+        title.focus();
+        await fireEvent.keyDown(title, { key: 'Escape' });
+        await waitFor(() => {
+          expect(getLi(container)).not.toHaveClass('is-opened');
+          expect(document.activeElement).toBe(title);
+        });
+      });
+
+      it('moving focus outside the title and the popup closes it', async () => {
+        const { container, getByRole, getByText } = render(
+          buildMenu(menuAttrs),
+          realTransition,
+        );
+        const title = getByRole('menuitem', { name: 'Section' });
+        await fireEvent.keyDown(title, { key: 'Enter' });
+        await waitFor(() => expect(getLi(container)).toHaveClass('is-opened'));
+        await fireEvent.focusOut(document.activeElement as Element, {
+          relatedTarget: getByText('Outside'),
+        });
+        await waitFor(() =>
+          expect(getLi(container)).not.toHaveClass('is-opened'),
+        );
+      });
+
+      it('moving focus between the title and the popup keeps it open', async () => {
+        const { container, getByRole } = render(
+          buildMenu(menuAttrs),
+          realTransition,
+        );
+        const title = getByRole('menuitem', { name: 'Section' });
+        await fireEvent.keyDown(title, { key: 'Enter' });
+        await waitFor(() =>
+          expect(document.activeElement).toHaveTextContent('Child'),
+        );
+        const sibling = container.querySelectorAll('li.gui-menu-item')[1];
+        await fireEvent.focusOut(document.activeElement as Element, {
+          relatedTarget: sibling,
+        });
+        await fireEvent.focusOut(sibling, { relatedTarget: title });
+        expect(getLi(container)).toHaveClass('is-opened');
+      });
+
+      it('a disabled sub menu ignores Enter, Space and ArrowRight', async () => {
+        const { container, getByRole } = render(
+          buildMenu(menuAttrs, 'disabled'),
+          realTransition,
+        );
+        const title = getByRole('menuitem', { name: 'Section' });
+        expect(title).toHaveAttribute('tabindex', '-1');
+        await fireEvent.keyDown(title, { key: 'Enter' });
+        await fireEvent.keyDown(title, { key: ' ' });
+        await fireEvent.keyDown(title, { key: 'ArrowRight' });
+        expect(getLi(container)).not.toHaveClass('is-opened');
+      });
+    });
+  });
+
+  describe('accessible name', () => {
+    const buildMenu = (collapse: boolean) =>
+      defineComponent({
+        components: { GMenu, GSubMenu, GMenuItem },
+        setup: () => ({ collapse }),
+        template: `
+          <GMenu :collapse="collapse">
+            <GSubMenu index="s1" :teleported="false">
+              <template #title><i class="icon" /><span>Movimientos</span></template>
+              <GMenuItem index="s1-a">Child</GMenuItem>
+            </GSubMenu>
+          </GMenu>
+        `,
+      });
+
+    it('collapsed: the focusable title of a first-level sub menu is named by its title', () => {
+      const { getByRole } = render(buildMenu(true), realTransition);
+      const title = getByRole('menuitem', { name: 'Movimientos' });
+      expect(title).toHaveClass('gui-sub-menu__title');
+      expect(title).toHaveAttribute('tabindex', '0');
+    });
+
+    it('expanded: the visible title names the sub menu, once', () => {
+      const { getByRole, getAllByText } = render(
+        buildMenu(false),
+        realTransition,
+      );
+      expect(
+        getByRole('menuitem', { name: 'Movimientos' }),
+      ).toBeInTheDocument();
+      expect(getAllByText('Movimientos')).toHaveLength(1);
     });
   });
 });

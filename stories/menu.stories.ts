@@ -3,6 +3,7 @@ import { ref } from 'vue';
 
 // COMPONENTS
 import { GMenu, GMenuItem, GMenuItemGroup, GSubMenu } from '../components/menu';
+import { GBadge } from '@flash-global66/g-badge';
 import { GButton } from '@flash-global66/g-button/index.ts';
 import { GIconFont } from '@flash-global66/g-icon-font/index.ts';
 
@@ -12,8 +13,6 @@ import { GConfigProvider } from '../components/config-provider';
 export default {
   title: 'Feedback/Menu',
   component: GMenu,
-  argTypes: {},
-  args: {},
   parameters: {
     docs: {
       description: {
@@ -37,14 +36,9 @@ const Template: StoryFn<typeof GMenu> = args => {
     setup() {
       const isCollapse = ref(false);
 
-      function hola() {
-        console.log('hola');
-      }
-
       return {
         args,
         isCollapse,
-        hola,
       };
     },
     template: `
@@ -105,3 +99,87 @@ const Template: StoryFn<typeof GMenu> = args => {
 };
 
 export const Default = Template.bind({});
+
+const CollapsedTemplate: StoryFn<typeof GMenu> = args => {
+  return {
+    components: {
+      GMenu,
+      GConfigProvider,
+      GButton,
+      GBadge,
+      GMenuItem,
+      GSubMenu,
+      GIconFont,
+    },
+    setup() {
+      const isCollapse = ref(args.collapse ?? true);
+
+      function toggleCollapse() {
+        isCollapse.value = !isCollapse.value;
+      }
+
+      return {
+        args,
+        isCollapse,
+        toggleCollapse,
+      };
+    },
+    template: `
+      <g-config-provider>
+        <g-button class="mb-4" @click="toggleCollapse">{{ isCollapse ? 'Expand' : 'Collapse' }}</g-button>
+        <div class="w-full max-w-xs">
+          <g-menu
+            :collapse="isCollapse"
+            class="px-4 py-5 bg-white"
+          >
+            <g-menu-item index="1">
+              <g-icon-font class="text-6" name="light house" />
+              <template #title>
+                <span class="ml-3">Home</span>
+              </template>
+            </g-menu-item>
+
+            <g-sub-menu index="2">
+              <template #title>
+                <g-icon-font name="regular receipt" />
+                <span class="ml-3">Movimientos</span>
+              </template>
+              <g-menu-item index="2-1">Historial</g-menu-item>
+              <g-menu-item index="2-2">Pendientes</g-menu-item>
+              <g-menu-item index="2-3">Comprobantes</g-menu-item>
+            </g-sub-menu>
+
+            <g-sub-menu index="3">
+              <template #title>
+                <g-icon-font name="light money-bill-wave" />
+                <span class="ml-3">COMEX</span>
+                <span class="relative flex items-center justify-between w-full">
+                  <g-badge :value="12" :max="99" type="primary" class="absolute right-1" />
+                </span>
+              </template>
+              <g-menu-item index="3-1">Importaciones</g-menu-item>
+              <g-menu-item index="3-2">Exportaciones</g-menu-item>
+            </g-sub-menu>
+
+            <g-sub-menu index="4">
+              <template #title>
+                <g-icon-font name="regular paper-plane" />
+                <span class="ml-3 flex items-center justify-between w-full pr-10">
+                  Integraciones
+                  <span class="absolute right-8 rounded-full bg-primary-500 px-2 text-xs text-white">Nuevo</span>
+                </span>
+              </template>
+              <g-menu-item index="4-1">API</g-menu-item>
+              <g-menu-item index="4-2">Webhooks</g-menu-item>
+            </g-sub-menu>
+          </g-menu>
+        </div>
+      </g-config-provider>
+    `,
+  };
+};
+
+export const CollapsedWithBadges = CollapsedTemplate.bind({});
+CollapsedWithBadges.args = {
+  collapse: true,
+};

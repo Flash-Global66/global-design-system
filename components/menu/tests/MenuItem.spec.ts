@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { defineComponent } from 'vue';
-import { render, fireEvent } from '@testing-library/vue';
+import { render, fireEvent, waitFor } from '@testing-library/vue';
 import GMenu from '../Menu.vue';
 import GMenuItem from '../MenuItem.vue';
 
@@ -113,5 +113,164 @@ describe('MenuItem (native render — sin ElMenuItem)', () => {
     await fireEvent.click(getByText('Item One'));
     const payload = emitted()['item-click']?.[0]?.[0] as { index: string };
     expect(payload.index).toBe('1');
+  });
+
+  describe('keyboard access', () => {
+    it('is focusable with tabindex="0", or "-1" when disabled', () => {
+      const { container } = render(
+        defineComponent({
+          components: { GMenu, GMenuItem },
+          template: `
+            <GMenu>
+              <GMenuItem index="1">Enabled</GMenuItem>
+              <GMenuItem index="2" disabled>Disabled</GMenuItem>
+            </GMenu>
+          `,
+        }),
+      );
+      const [enabled, disabled] = Array.from(
+        container.querySelectorAll('li.gui-menu-item'),
+      );
+      expect(enabled).toHaveAttribute('tabindex', '0');
+      expect(disabled).toHaveAttribute('tabindex', '-1');
+      expect(disabled).toHaveAttribute('aria-disabled', 'true');
+    });
+
+    it.each([
+      ['Enter', 'Enter'],
+      ['Space', ' '],
+    ])(
+      '%s behaves like a click: emits "click" and selects the item',
+      async (_label, key) => {
+        const { getByRole, emitted } = render(
+          defineComponent({
+            components: { GMenu, GMenuItem },
+            template: `
+            <GMenu @select="(...args) => $emit('menu-select', ...args)">
+              <GMenuItem index="1" @click="$emit('item-click', $event)">Item One</GMenuItem>
+            </GMenu>
+          `,
+          }),
+        );
+        await fireEvent.keyDown(getByRole('menuitem', { name: 'Item One' }), {
+          key,
+        });
+        expect(emitted()['item-click']).toHaveLength(1);
+        expect(emitted()['menu-select'][0]).toEqual([
+          '1',
+          ['1'],
+          { index: '1', indexPath: ['1'] },
+        ]);
+      },
+    );
+
+    it('ignores other keys', async () => {
+      const { getByRole, emitted } = render(
+        defineComponent({
+          components: { GMenu, GMenuItem },
+          template: `
+            <GMenu @select="(...args) => $emit('menu-select', ...args)">
+              <GMenuItem index="1">Item One</GMenuItem>
+            </GMenu>
+          `,
+        }),
+      );
+      await fireEvent.keyDown(getByRole('menuitem'), { key: 'a' });
+      expect(emitted()['menu-select']).toBeUndefined();
+    });
+
+    it('a disabled item ignores Enter and Space', async () => {
+      const { getByRole, emitted } = render(
+        defineComponent({
+          components: { GMenu, GMenuItem },
+          template: `
+            <GMenu @select="(...args) => $emit('menu-select', ...args)">
+              <GMenuItem index="1" disabled @click="$emit('item-click', $event)">Item One</GMenuItem>
+            </GMenu>
+          `,
+        }),
+      );
+      const li = getByRole('menuitem');
+      await fireEvent.keyDown(li, { key: 'Enter' });
+      await fireEvent.keyDown(li, { key: ' ' });
+      expect(emitted()['menu-select']).toBeUndefined();
+      expect(emitted()['item-click']).toBeUndefined();
+    });
+
+    it('does not fire twice when the key comes from a focusable child (e.g. a link)', async () => {
+      const { getByText, emitted } = render(
+        defineComponent({
+          components: { GMenu, GMenuItem },
+          template: `
+            <GMenu @select="(...args) => $emit('menu-select', ...args)">
+              <GMenuItem index="1"><a href="#home">Link</a></GMenuItem>
+            </GMenu>
+          `,
+        }),
+      );
+      await fireEvent.keyDown(getByText('Link'), { key: 'Enter' });
+      expect(emitted()['menu-select']).toBeUndefined();
+    });
+  });
+
+  describe('accessible name', () => {
+    const collapsedMenu = (collapse: boolean) =>
+      defineComponent({
+        components: { GMenu, GMenuItem },
+        setup: () => ({ collapse }),
+        template: `
+          <GMenu :collapse="collapse">
+            <GMenuItem index="1">
+              <i class="icon" />
+              <template #title>Home</template>
+            </GMenuItem>
+          </GMenu>
+        `,
+      });
+
+    it('collapsed: a first-level item with a title slot is named by that title', () => {
+      const { getByRole, container } = render(collapsedMenu(true));
+      expect(getByRole('menuitem', { name: 'Home' })).toHaveClass(
+        'gui-menu-item',
+      );
+      expect(
+        container.querySelector('.gui-menu-item__sr-label'),
+      ).toHaveTextContent('Home');
+    });
+
+    it('expanded: the visible title names the item and no hidden label is added', () => {
+      const { getByRole, getAllByText, container } = render(
+        collapsedMenu(false),
+      );
+      expect(getByRole('menuitem', { name: 'Home' })).toBeInTheDocument();
+      expect(getAllByText('Home')).toHaveLength(1);
+      expect(container.querySelector('.gui-menu-item__sr-label')).toBeNull();
+    });
+  });
+
+  describe('collapsed tooltip', () => {
+    it('wraps the title in a label that owns its text color, so the light tooltip box stays readable', async () => {
+      const { container } = render(
+        defineComponent({
+          components: { GMenu, GMenuItem },
+          template: `
+            <GMenu collapse>
+              <GMenuItem index="1">
+                <i class="icon" />
+                <template #title>Home</template>
+              </GMenuItem>
+            </GMenu>
+          `,
+        }),
+      );
+      await fireEvent.mouseEnter(
+        container.querySelector('.gui-menu-tooltip__trigger') as Element,
+      );
+      await waitFor(() => {
+        expect(
+          document.body.querySelector('.gui-menu-tooltip__label'),
+        ).toHaveTextContent('Home');
+      });
+    });
   });
 });
