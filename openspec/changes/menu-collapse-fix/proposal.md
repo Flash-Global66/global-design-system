@@ -68,7 +68,8 @@ The collapsed menu renders as designed:
 - no labels, chevrons, or badges
 - collapsed sub-menus reachable through their popup, both by mouse and by keyboard
 - every collapsed item and sub-menu keeps an accessible name equal to its title
-- the active item highlighted in both states
+- the active item highlighted in both states, with the active item and section in the B2B primary color (`--color-primary`, fourth re-plan)
+- collapsed, the item tooltip shows its title in readable dark text on GTooltip's light box (fourth re-plan)
 
 Toggling animates the box with a single light CSS `max-width` transition of 200ms (third re-plan: the heavy element-plus port was dropped first), instant when `collapseTransition` is `false` or the user prefers reduced motion, and while collapsed the wrapper fits the menu so the consumer's background contracts with it. A new story reproduces the front-b2b case with badges, starting collapsed.
 
@@ -84,6 +85,8 @@ Toggling animates the box with a single light CSS `max-width` transition of 200m
 - **Full WAI-ARIA arrow-key navigation (roving tabindex) across the whole menu.** This plan makes every item and title reachable with Tab and operable with Enter/Space, popups open with Enter/Space/ArrowRight and close with Escape. Up/down arrow navigation between items stays out.
 - **The horizontal mode's ellipsis/overflow** and the hover-darkening (`useMenuColor`), both cut on purpose in the migration.
 - **Any change to the published package API.** No props are added or removed. `collapseTransition` keeps its signature and default `true`; it now drives the light CSS transition.
+- **Fixing GTooltip's effect/background mismatch at its root** (fourth re-plan). g-tooltip has about 10 consumers, so g-menu protects its own label instead. See "Encontrado de paso".
+- **The inactive items' color**, which stays on `text-blue-20` (`#5F6881`, legacy grey).
 
 ## Con qué restricciones
 
@@ -94,7 +97,7 @@ Toggling animates the box with a single light CSS `max-width` transition of 200m
 - **`accessibility.md`.** Every interactive element is reachable and operable without a mouse, with a visible focus indicator (`:focus-visible`).
 - **`ds-styles-delivery.md`.** `menu.styles.scss` is a public contract that the consumer compiles. `yarn styles:check` has to keep exiting 0.
 - **Versioning (`ds-package-lifecycle`).** Commits use `fix(menu)` / `feat(menu)` / `docs(stories)`. Lerna computes the bump, and nobody edits `CHANGELOG.md` or `version` by hand.
-- **Commits.** Claude doesn't commit. The apply leaves each task ready and hands over the exact command.
+- **Commits.** Claude doesn't commit. The apply leaves each task ready and hands over the exact command. The single exception is tasks 7 and 8 (fourth re-plan): the dev explicitly asked Claude to commit them, after a fresh review approved them.
 
 ## Encontrado de paso
 
@@ -102,10 +105,12 @@ Toggling animates the box with a single light CSS `max-width` transition of 200m
 - `stories/menu.stories.ts:40-42` has a `hola()` function with a `console.log` that nothing uses. Task 4 removes it because it touches that file anyway.
 - axe reports `color-contrast` on front-b2b's `GBadgeNew` "Nuevo" (`text-green-1`). It's a front-b2b component, not g-menu.
 - `front-docs-b2b/src/styles/flash-global66.scss:13-14` also imports the g-menu styles twice, without using the component.
+- `components/tooltip/src/tooltip.styles.scss:12` forces a light background regardless of `effect`, but `is-dark` keeps the white text. Any consumer that puts plain text in a `GTooltip` with `effect="dark"` will be unreadable. g-menu now protects itself (task 7); the root fix belongs in a g-tooltip change with its own consumer review.
+- `front-b2b/src/shared/layouts/components/MenuRoute/menuRoute.style.scss:2-4` forces `text-primary-def` on every `.gui-menu-item`/`.gui-sub-menu__title`. That rule ties on specificity (0,3,0) with the DS active rule, so in front-b2b the active item may only stand out by its pill and dot. This is a deduction from reading the CSS, not measured there.
 
 ## Cómo se verifica
 
-This change **does alter behavior**: the collapsed menu goes back to rendering as designed, collapsing is instant, the collapsed menu box contracts with the menu, and it gains keyboard access and accessible names. The delta is in `specs/g-menu/spec.md`.
+This change **does alter behavior**: the collapsed menu goes back to rendering as designed, collapsing is instant, the collapsed menu box contracts with the menu, and it gains keyboard access and accessible names. The collapsed tooltip title becomes readable, and the active state takes the B2B primary color (fourth re-plan). The delta is in `specs/g-menu/spec.md`.
 
 Re-plan after verify round 1: the `is-collapse` command counted the negative assertions that task 1's own criterion requires. It now measures the package code outside `tests/`, plus an invariant that the spec asserts the class is absent.
 
@@ -113,21 +118,28 @@ Second re-plan (after verify round 2 and the review): the heavy `out-in` animati
 
 Third re-plan (after verify round 3): a light CSS `max-width` transition on the wrapper (task 6) makes the collapse smooth again without a remount, as BMB-4217 asks. Values in "Hoy" measured on `95b08988` plus the uncommitted prototype.
 
-| Comando                                                                                                               | Qué mide                                                                                | Hoy                               | Esperado                                                                                    |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------- |
-| `npx vitest run --project unit components/menu 2>&1 \| grep -E "Test Files\|Tests "`                                  | test files and tests in the package                                                     | `5 passed (5)` / `71 passed (71)` | `Test Files 5 passed`; `Tests` with 0 failed and **at least 72** passed (task 6 adds specs) |
-| `grep -c "gui-menu-wrapper--animated" components/menu/Menu.vue components/menu/menu.styles.scss`                      | the animated modifier in the component and in the styles (one count per file)           | `1` / `1`                         | `≥ 1` / `≥ 1`                                                                               |
-| `grep -c "prefers-reduced-motion" components/menu/menu.styles.scss`                                                   | the reduced-motion fallback in the styles                                               | `1`                               | `≥ 1`                                                                                       |
-| `grep -c "@deprecated" components/menu/Menu.vue`                                                                      | `collapseTransition` no longer marked as a no-op                                        | `1`                               | `0`                                                                                         |
-| `grep -c "horizontal-collapse-transition\|opacity-transition\|transitionHooks\|<transition" components/menu/Menu.vue` | lines of `Menu.vue` with traces of the old animation                                    | `0`                               | `0`                                                                                         |
-| `grep -c "gui-menu-wrapper--collapse" components/menu/Menu.vue components/menu/menu.styles.scss`                      | the wrapper modifier in the component and in the styles (one count per file)            | `1` / `≥ 1`                       | `≥ 1` / `≥ 1`                                                                               |
-| `grep -c "collapseTransition\|collapse-transition" stories/menu.stories.ts`                                           | the story carries no transition control                                                 | `0`                               | `0`                                                                                         |
-| `grep -c "is('collapse'" components/menu/Menu.vue`                                                                    | uses of the wrong state class in the component (grep exits 1 when there are no matches) | `0`                               | `0`                                                                                         |
-| `grep -rn "is-collapse" components/menu --exclude-dir=tests \| wc -l`                                                 | lines of the **package code** (outside `tests/`) still mentioning `is-collapse`         | `0`                               | `0`                                                                                         |
-| `grep -c "not.toHaveClass('is-collapse')" components/menu/tests/Menu.spec.ts`                                         | assertions that the wrong class is **absent** (task 1's criterion)                      | `2`                               | `≥ 1`                                                                                       |
-| `npx eslint components/menu stories/menu.stories.ts --max-warnings 0; echo $?`                                        | lint on every touched file                                                              | `0`                               | `0`                                                                                         |
-| `yarn styles:check >/dev/null 2>&1; echo $?`                                                                          | the public SCSS still compiles                                                          | `0`                               | `0`                                                                                         |
-| `curl -s -o /dev/null -w "%{http_code}" http://localhost:6006/stories/menu.stories.ts` (Storybook running)            | HTTP status Storybook returns for the menu story module                                 | `200`                             | `200`                                                                                       |
+Fourth re-plan (before verify round 4): tasks 7 and 8 add the readable collapsed tooltip label and the B2B primary active color, both already committed. The vitest row and the last six rows were measured on `505bfda7`.
+
+| Comando                                                                                                               | Qué mide                                                                                | Hoy                               | Esperado                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------- |
+| `npx vitest run --project unit components/menu 2>&1 \| grep -E "Test Files\|Tests "`                                  | test files and tests in the package                                                     | `5 passed (5)` / `76 passed (76)` | `Test Files 5 passed`; `Tests` with 0 failed and **at least 76** passed (task 7 adds a spec) |
+| `grep -c "gui-menu-wrapper--animated" components/menu/Menu.vue components/menu/menu.styles.scss`                      | the animated modifier in the component and in the styles (one count per file)           | `1` / `1`                         | `≥ 1` / `≥ 1`                                                                                |
+| `grep -c "prefers-reduced-motion" components/menu/menu.styles.scss`                                                   | the reduced-motion fallback in the styles                                               | `1`                               | `≥ 1`                                                                                        |
+| `grep -c "@deprecated" components/menu/Menu.vue`                                                                      | `collapseTransition` no longer marked as a no-op                                        | `1`                               | `0`                                                                                          |
+| `grep -c "horizontal-collapse-transition\|opacity-transition\|transitionHooks\|<transition" components/menu/Menu.vue` | lines of `Menu.vue` with traces of the old animation                                    | `0`                               | `0`                                                                                          |
+| `grep -c "gui-menu-wrapper--collapse" components/menu/Menu.vue components/menu/menu.styles.scss`                      | the wrapper modifier in the component and in the styles (one count per file)            | `1` / `≥ 1`                       | `≥ 1` / `≥ 1`                                                                                |
+| `grep -c "collapseTransition\|collapse-transition" stories/menu.stories.ts`                                           | the story carries no transition control                                                 | `0`                               | `0`                                                                                          |
+| `grep -c "is('collapse'" components/menu/Menu.vue`                                                                    | uses of the wrong state class in the component (grep exits 1 when there are no matches) | `0`                               | `0`                                                                                          |
+| `grep -rn "is-collapse" components/menu --exclude-dir=tests \| wc -l`                                                 | lines of the **package code** (outside `tests/`) still mentioning `is-collapse`         | `0`                               | `0`                                                                                          |
+| `grep -c "not.toHaveClass('is-collapse')" components/menu/tests/Menu.spec.ts`                                         | assertions that the wrong class is **absent** (task 1's criterion)                      | `2`                               | `≥ 1`                                                                                        |
+| `npx eslint components/menu stories/menu.stories.ts --max-warnings 0; echo $?`                                        | lint on every touched file                                                              | `0`                               | `0`                                                                                          |
+| `yarn styles:check >/dev/null 2>&1; echo $?`                                                                          | the public SCSS still compiles                                                          | `0`                               | `0`                                                                                          |
+| `curl -s -o /dev/null -w "%{http_code}" http://localhost:6006/stories/menu.stories.ts` (Storybook running)            | HTTP status Storybook returns for the menu story module                                 | `200`                             | `200`                                                                                        |
+| `grep -c "ns.be('tooltip', 'label')" components/menu/MenuItem.vue`                                                    | lines in the item template that render the tooltip label class (task 7)                 | `1`                               | `≥ 1`                                                                                        |
+| `grep -c "@include b(menu-tooltip)" components/menu/menu.styles.scss`                                                 | the label's style block in the public SCSS (task 7)                                     | `1`                               | `≥ 1`                                                                                        |
+| `grep -c "gui-menu-tooltip__label" components/menu/tests/MenuItem.spec.ts`                                            | lines in the spec asserting the label (task 7)                                          | `1`                               | `≥ 1`                                                                                        |
+| `grep -c "text-blue-1;\|text-blue-4;" components/menu/menu.styles.scss`                                               | lines still applying the legacy active blues (task 8; grep exits 1 with no matches)     | `0`                               | `0`                                                                                          |
+| `grep -c "text-primary-def" components/menu/menu.styles.scss`                                                         | lines applying the primary token (task 8)                                               | `2`                               | `≥ 2`                                                                                        |
 
 **Criterion for the whole change, and the visual half of scenarios 9 and 10 (browser-verify on Storybook).**
 
@@ -149,6 +161,9 @@ Third re-plan (after verify round 3): a light CSS `max-width` transition on the 
   - with `prefers-reduced-motion: reduce` emulated (if the engine allows it), the wrapper's computed `transition` is `none`; otherwise `no_verificado`, resting on the spec and the SCSS grep
   - expanded, the wrapper has no `--collapse` modifier and no element has `scrollWidth > clientWidth`
   - the console shows no new errors
+  - with the menu collapsed, hovering a first-level item opens a tooltip whose `.gui-menu-tooltip__label` has a computed color/background contrast **≥ 4.5:1** (15.22 measured on `505bfda7`)
+  - expanded, with an active sub-menu child selected, the active `.gui-sub-menu__title` and the active `.gui-menu-item` compute the same color as `--color-primary` (`rgb(32,52,120)` measured on `505bfda7`)
+- If no browser-verify run covers the last two points, they are `no_verificado` and rest on the greps and the spec.
 - The opt-out (`collapseTransition: false`) has no story; it rests on the `Menu.spec.ts` case and is `no_verificado` in the browser.
 
 **front-b2b criterion (from the front-b2b session, before publishing).**

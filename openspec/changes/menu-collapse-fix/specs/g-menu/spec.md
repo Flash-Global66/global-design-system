@@ -103,3 +103,23 @@ When `GMenu` is collapsed, every first-level `GMenuItem` with a `title` slot and
 - **GIVEN** the same `GMenu` with `collapse` set to `false`
 - **WHEN** it renders
 - **THEN** each item and sub-menu is named by its visible title, with no duplicated name
+
+### Requirement: Collapsed tooltip label is readable
+
+When `GMenu` is collapsed, the tooltip of a first-level `GMenuItem` SHALL show its title in a label that sets its own text color, with a contrast of at least 4.5:1 against the tooltip box, whatever the `popperEffect`.
+
+#### Scenario: Hovering a collapsed item shows a readable title
+
+- **GIVEN** a collapsed vertical `GMenu` with a first-level `GMenuItem` whose `title` slot reads "Home"
+- **WHEN** the pointer enters the item's trigger
+- **THEN** the tooltip renders "Home" inside `.gui-menu-tooltip__label`, and its text contrasts at least 4.5:1 with the tooltip background
+
+### Requirement: Active state uses the primary color
+
+The active `GSubMenu` title and the active `GMenuItem` of an expanded `GMenu` SHALL use the design system primary color (`--color-primary`) for their text.
+
+#### Scenario: Active sub-menu and item share the primary color
+
+- **GIVEN** an expanded vertical `GMenu` whose active item is a child of a `GSubMenu`
+- **WHEN** it renders
+- **THEN** the sub-menu title and the active item both compute the text color of `--color-primary`

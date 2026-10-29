@@ -67,10 +67,24 @@ Constraints every sub-agent receives (detail in `proposal.md`): legacy package w
     - `yarn styles:check` exits 0, and eslint on `Menu.vue` and `Menu.spec.ts` exits 0.
   - commit: `feat(menu): light CSS transition when the menu box collapses or expands`
 
-Tasks 1, 2, 5 and 6 share `Menu.vue` and its spec; task 3 also touched `Integration.spec.ts`. The second re-plan ran 2 and 4 in parallel, then 5; the third re-plan runs 6 alone.
+- [x] **7 · Readable label in the collapsed-mode tooltip**
+  - archivos: `components/menu/MenuItem.vue`, `components/menu/menu.styles.scss`, `components/menu/tests/MenuItem.spec.ts`
+  - depende de: ninguna
+  - listo cuando: TDD, red first. Collapsed, hovering a first-level item's trigger renders its `title` inside `span.gui-menu-tooltip__label` (via `ns.be('tooltip', 'label')`), and `MenuItem.spec.ts` asserts that through `document.body` because the popper is teleported. `menu.styles.scss` gives that label `text-2 font-semibold text-primary-txt whitespace-nowrap`. In Storybook, the label contrasts ≥ 4.5:1 against the tooltip box. The `@slot title` doc stays immediately before the `<slot>`.
+  - commit: `fix(menu): readable label in the collapsed-mode tooltip`
+
+- [x] **8 · Active item and section use the B2B primary color**
+  - archivos: `components/menu/menu.styles.scss`
+  - depende de: 7
+  - listo cuando: the active sub-menu title (`.gui-sub-menu.is-active > .gui-sub-menu__title`) and the expanded active item/title (`.is-active` under `.gui-menu:not(.gui-menu--collapse)`) apply `text-primary-def`. `menu.styles.scss` has no `text-blue-1;` or `text-blue-4;` left. In Storybook, the computed color of both equals `--color-primary` (`rgb(32,52,120)`). `yarn styles:check` exits 0.
+  - commit: `fix(menu): active item and section use the B2B primary color`
+
+Tasks 1, 2, 5 and 6 share `Menu.vue` and its spec; task 3 also touched `Integration.spec.ts`. The second re-plan ran 2 and 4 in parallel, then 5; the third re-plan runs 6 alone. Task 8 depends on 7 only because both touch `menu.styles.scss`.
 
 Re-plan after verify round 1: during the first apply, task 2's fence was widened to `Integration.spec.ts`, with the dev's approval, to re-query a node that the `ul` remount left stale. That re-query is harmless without the remount and stays.
 
 Second re-plan (after verify round 2 and the review): the dev decided to drop the collapse animation (heavy two-phase `out-in` with a full `ul` remount; front-b2b never runs it) and to make the collapsed wrapper fit the menu, because the consumer's background box didn't contract. Task 2 is redefined as the revert, task 4 loses its `collapseTransition` control, and task 5 is new. Collapsing became instant.
 
 Third re-plan (after verify round 3): to meet BMB-4217's "la transición colapsar/expandir es fluida" literally, the dev approved a light prototype: one 200ms CSS `max-width` transition on the wrapper, with no JS and no remount, which honors `prefers-reduced-motion`. Task 2 is narrowed to dropping the heavy animation; task 6 is new and starts from the prototype already in the working tree.
+
+Fourth re-plan (before verify round 4): the dev checked two visual issues in Storybook and asked for them to be fixed. Collapsed, the item tooltip showed white text on GTooltip's forced light box (about 1.2:1), and the active section and item used legacy blues instead of the B2B primary. Both were committed at the dev's explicit request (`78f94966`, `505bfda7`) after a fresh review approved them with 0 findings. Tasks 7 and 8 record them as done, so the verify measures them as declared work, not as extra.
