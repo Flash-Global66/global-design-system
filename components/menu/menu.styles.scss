@@ -435,7 +435,7 @@
       .gui-menu-item,
       .gui-sub-menu__title {
         &.is-active {
-          @apply text-blue-1;
+          @apply text-primary-def;
           &::before {
             content: '';
             @apply absolute right-5 w-2 h-2 rounded-full bg-gray-1;
@@ -539,7 +539,7 @@
   }
   &.is-active {
     & > .gui-sub-menu__title {
-      @apply text-blue-4;
+      @apply text-primary-def;
     }
   }
 }
