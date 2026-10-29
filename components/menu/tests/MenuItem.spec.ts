@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { defineComponent } from 'vue';
-import { render, fireEvent } from '@testing-library/vue';
+import { render, fireEvent, waitFor } from '@testing-library/vue';
 import GMenu from '../Menu.vue';
 import GMenuItem from '../MenuItem.vue';
 
@@ -245,6 +245,32 @@ describe('MenuItem (native render — sin ElMenuItem)', () => {
       expect(getByRole('menuitem', { name: 'Home' })).toBeInTheDocument();
       expect(getAllByText('Home')).toHaveLength(1);
       expect(container.querySelector('.gui-menu-item__sr-label')).toBeNull();
+    });
+  });
+
+  describe('collapsed tooltip', () => {
+    it('wraps the title in a label that owns its text color, so the light tooltip box stays readable', async () => {
+      const { container } = render(
+        defineComponent({
+          components: { GMenu, GMenuItem },
+          template: `
+            <GMenu collapse>
+              <GMenuItem index="1">
+                <i class="icon" />
+                <template #title>Home</template>
+              </GMenuItem>
+            </GMenu>
+          `,
+        }),
+      );
+      await fireEvent.mouseEnter(
+        container.querySelector('.gui-menu-tooltip__trigger') as Element,
+      );
+      await waitFor(() => {
+        expect(
+          document.body.querySelector('.gui-menu-tooltip__label'),
+        ).toHaveTextContent('Home');
+      });
     });
   });
 });

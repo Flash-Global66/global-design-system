@@ -25,10 +25,12 @@
           <slot />
         </div>
         <template #content>
-          <!--
-            @slot title shown in the collapsed-mode tooltip
-          -->
-          <slot name="title" />
+          <span :class="ns.be('tooltip', 'label')">
+            <!--
+              @slot title shown in the collapsed-mode tooltip
+            -->
+            <slot name="title" />
+          </span>
         </template>
       </g-tooltip>
       <span :class="ns.be('item', 'sr-label')">

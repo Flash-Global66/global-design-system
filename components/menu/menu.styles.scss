@@ -378,6 +378,13 @@
   }
 }
 
+// GTooltip forces a light box but keeps `effect="dark"` white text, so the label sets its own color.
+@include b(menu-tooltip) {
+  @include e(label) {
+    @apply text-2 font-semibold text-primary-txt whitespace-nowrap;
+  }
+}
+
 .horizontal-collapse-transition
   .#{$namespace}-sub-menu__title
   .#{$namespace}-sub-menu__icon-arrow {
