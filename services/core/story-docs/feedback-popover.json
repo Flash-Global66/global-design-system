@@ -1,0 +1,15 @@
+{
+  "components": {
+    "feedback-popover": {
+      "id": "feedback-popover",
+      "name": "GPopover",
+      "path": "./stories/popover.stories.ts",
+      "stories": {
+        "feedback-popover--default": {
+          "id": "feedback-popover--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "components": {
+    "data-badge": {
+      "id": "data-badge",
+      "name": "GBadge",
+      "path": "./stories/badge.stories.ts",
+      "stories": {
+        "data-badge--default": {
+          "id": "data-badge--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

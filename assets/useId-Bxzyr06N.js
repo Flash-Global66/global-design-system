@@ -1,0 +1,1 @@
+import{c as r,u as c,q as s,x as a}from"./iframe-Dm8_k2cn.js";import{d as i}from"./useEmptyValues-V_TCuIRx.js";const u=Symbol.for("gIdInjection"),n={prefix:Math.floor(Math.random()*1e4),current:0},d=()=>s()?a(u,n):n,f=t=>{const e=d(),o=i();return r(()=>c(t)||`${o.value}-id-${e.prefix}-${e.current++}`)};export{d as a,f as u};

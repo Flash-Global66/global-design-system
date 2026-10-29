@@ -1,0 +1,505 @@
+{
+  "components": {
+    "data-avatar": {
+      "id": "data-avatar",
+      "name": "Avatar",
+      "path": "./stories/avatar.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "default",
+        "displayName": "Avatar",
+        "name": "Avatar",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "url",
+            "global": false,
+            "default": "\"\"",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "text",
+            "global": false,
+            "default": "\"G66\"",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "hasLogo",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "logoUrl",
+            "global": false,
+            "default": "companyIcon",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "solid",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "size",
+            "global": false,
+            "default": "\"default\"",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "Size | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "Size | undefined",
+              "schema": [
+                "undefined",
+                "\"small\"",
+                "\"default\"",
+                "\"large\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          }
+        ],
+        "events": [],
+        "slots": [],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/avatar/Avatar.vue"
+      },
+      "argTypes": {
+        "url": {
+          "name": "url",
+          "description": "",
+          "defaultValue": {
+            "summary": "\"\""
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "\"\""
+            },
+            "category": "props"
+          }
+        },
+        "text": {
+          "name": "text",
+          "description": "",
+          "defaultValue": {
+            "summary": "\"G66\""
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "\"G66\""
+            },
+            "category": "props"
+          }
+        },
+        "hasLogo": {
+          "name": "hasLogo",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "logoUrl": {
+          "name": "logoUrl",
+          "description": "",
+          "defaultValue": {
+            "summary": "companyIcon"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "companyIcon"
+            },
+            "category": "props"
+          }
+        },
+        "solid": {
+          "name": "solid",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "size": {
+          "name": "size",
+          "description": "",
+          "defaultValue": {
+            "summary": "\"default\""
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "small",
+              "default",
+              "large"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "Size"
+            },
+            "defaultValue": {
+              "summary": "\"default\""
+            },
+            "category": "props"
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type AvatarProps = {\n  /** @default \"\" */\n  url?: string;\n  /** @default \"G66\" */\n  text?: string;\n  /** @default true */\n  hasLogo?: boolean;\n  /** @default companyIcon */\n  logoUrl?: string;\n  /** @default false */\n  solid?: boolean;\n  /** @default \"default\" */\n  size?: Size;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

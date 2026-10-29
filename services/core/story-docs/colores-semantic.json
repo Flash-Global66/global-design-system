@@ -1,0 +1,15 @@
+{
+  "components": {
+    "colores-semantic": {
+      "id": "colores-semantic",
+      "name": "Semantic",
+      "path": "./stories/semantic-colors.stories.ts",
+      "stories": {
+        "colores-semantic--default": {
+          "id": "colores-semantic--default",
+          "name": "Default"
+        }
+      }
+    }
+  }
+}

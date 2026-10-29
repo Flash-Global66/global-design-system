@@ -1,0 +1,53 @@
+{
+  "components": {
+    "data-inline": {
+      "id": "data-inline",
+      "name": "GInline",
+      "path": "./stories/inline.stories.ts",
+      "stories": {
+        "data-inline--primary": {
+          "id": "data-inline--primary",
+          "name": "Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInline } from '@flash-global66/g-inline/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-inline ariaLabel=\"inline\" border description=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.\" :hideClose=\"false\" icon=\"solid undo-alt\" iconAlign=\"medium\" :iconFill=\"false\" :shadow=\"false\" showArrow size=\"md\" title=\"Título\" type=\"success\" />\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `links: [\n  {\n    label: 'Enlace 1',\n    action: () => alert('Acción 1'),\n  },\n  {\n    label: 'Enlace 2',\n    action: () => alert('Acción 2'),\n  },\n]` could not be resolved statically."
+        },
+        "data-inline--all-types": {
+          "id": "data-inline--all-types",
+          "name": "Tipos",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInline } from '@flash-global66/g-inline/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <g-inline \n        type=\"success\"\n        title=\"Éxito\"\n        description=\"Mensaje de éxito\"\n        icon=\"solid circle-check\"\n      />\n      <g-inline \n        type=\"success\"\n        icon=\"solid circle-check\"\n      >\n        hola\n      </g-inline>\n      <g-inline \n        type=\"info\"\n        title=\"Información\"\n        description=\"Mensaje informativo\"\n        icon=\"solid info-circle\"\n      />\n      <g-inline \n        type=\"warning\"\n        title=\"Advertencia\"\n        description=\"Mensaje de advertencia\"\n        icon=\"solid triangle-exclamation\"\n      />\n      <g-inline \n        type=\"error\"\n        title=\"Error\"\n        description=\"Mensaje de error\"\n        icon=\"solid circle-xmark\"\n      />\n    </div>\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `links: [\n  {\n    label: 'Enlace 1',\n    action: () => alert('Acción 1'),\n  },\n  {\n    label: 'Enlace 2',\n    action: () => alert('Acción 2'),\n  },\n]` could not be resolved statically."
+        },
+        "data-inline--sizes": {
+          "id": "data-inline--sizes",
+          "name": "Tamaños",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInline } from '@flash-global66/g-inline/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <g-inline \n        size=\"md\"\n        title=\"Tamaño mediano (md)\"\n        description=\"Este es el tamaño por defecto del componente\"\n        icon=\"solid info-circle\"\n      />\n      <g-inline \n        size=\"sm\"\n        title=\"Tamaño pequeño (sm)\"\n        description=\"Versión más compacta del componente\"\n        icon=\"solid info-circle\"\n      />\n    </div>\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `links: [\n  {\n    label: 'Enlace 1',\n    action: () => alert('Acción 1'),\n  },\n  {\n    label: 'Enlace 2',\n    action: () => alert('Acción 2'),\n  },\n]` could not be resolved statically."
+        },
+        "data-inline--without-close": {
+          "id": "data-inline--without-close",
+          "name": "Sin botón cerrar",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInline } from '@flash-global66/g-inline/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-inline\n      hideClose\n      title=\"Sin botón de cerrar\"\n      description=\"Este mensaje no tiene botón de cerrar\"\n      icon=\"solid info-circle\"\n    />\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `links: [\n  {\n    label: 'Enlace 1',\n    action: () => alert('Acción 1'),\n  },\n  {\n    label: 'Enlace 2',\n    action: () => alert('Acción 2'),\n  },\n]` could not be resolved statically."
+        },
+        "data-inline--without-icon": {
+          "id": "data-inline--without-icon",
+          "name": "Sin ícono ni enlaces",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInline } from '@flash-global66/g-inline/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-inline\n      title=\"Sin ícono\"\n      description=\"Este mensaje no tiene ícono\"\n    />\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `links: [\n  {\n    label: 'Enlace 1',\n    action: () => alert('Acción 1'),\n  },\n  {\n    label: 'Enlace 2',\n    action: () => alert('Acción 2'),\n  },\n]` could not be resolved statically."
+        },
+        "data-inline--card": {
+          "id": "data-inline--card",
+          "name": "Card",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInline } from '@flash-global66/g-inline/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <g-inline\n      type=\"card\"\n      title=\"Más información\"\n      description=\"Consulta los detalles de tu transacción en el historial.\"\n      icon=\"solid info-circle\"\n      icon-align=\"top\"\n      :icon-fill=\"true\"\n      :links=\"[{ label: 'Ver detalle', action: () => {} }]\"\n      :show-arrow=\"true\"\n      :hide-close=\"true\"\n    />\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `links: [\n  {\n    label: 'Enlace 1',\n    action: () => alert('Acción 1'),\n  },\n  {\n    label: 'Enlace 2',\n    action: () => alert('Acción 2'),\n  },\n]` could not be resolved statically."
+        },
+        "data-inline--with-icon-fill-and-shadow": {
+          "id": "data-inline--with-icon-fill-and-shadow",
+          "name": "Con fill y sombra",
+          "snippet": "<script lang=\"ts\" setup>\nimport { GConfigProvider } from '@flash-global66/g-config-provider/index.ts';\nimport { GInline } from '@flash-global66/g-inline/index.ts';\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"space-y-4\">\n      <g-inline\n        type=\"info\"\n        title=\"Con fill y sombra\"\n        description=\"El ícono tiene fondo y el componente tiene sombra.\"\n        icon=\"solid info-circle\"\n        :icon-fill=\"true\"\n        :shadow=\"true\"\n        :links=\"[{ label: 'Más información', action: () => {} }]\"\n      />\n      <g-inline\n        type=\"warning\"\n        title=\"Alineación superior\"\n        description=\"Cuando el contenido es largo, el ícono se alinea al tope del componente para mantener la jerarquía visual.\"\n        icon=\"solid triangle-exclamation\"\n        :icon-fill=\"true\"\n        icon-align=\"top\"\n      />\n    </div>\n  </g-config-provider>\n</template>",
+          "warning": "Incomplete snippet: `links: [\n  {\n    label: 'Enlace 1',\n    action: () => alert('Acción 1'),\n  },\n  {\n    label: 'Enlace 2',\n    action: () => alert('Acción 2'),\n  },\n]` could not be resolved statically."
+        }
+      }
+    }
+  }
+}
