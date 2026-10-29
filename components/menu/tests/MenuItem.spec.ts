@@ -272,5 +272,30 @@ describe('MenuItem (native render — sin ElMenuItem)', () => {
         ).toHaveTextContent('Home');
       });
     });
+
+    it('keeps the tooltip box around the label popper', async () => {
+      const { container } = render(
+        defineComponent({
+          components: { GMenu, GMenuItem },
+          template: `
+            <GMenu collapse>
+              <GMenuItem index="1">
+                <i class="icon" />
+                <template #title>Home</template>
+              </GMenuItem>
+            </GMenu>
+          `,
+        }),
+      );
+      await fireEvent.mouseEnter(
+        container.querySelector('.gui-menu-tooltip__trigger') as Element,
+      );
+      await waitFor(() => {
+        const popper = document.body
+          .querySelector('.gui-menu-tooltip__label')
+          ?.closest('.gui-popper');
+        expect(popper).toHaveClass('gui-popper__tooltip');
+      });
+    });
   });
 });

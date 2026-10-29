@@ -18,6 +18,7 @@
       :visible="opened"
       effect="light"
       :pure="true"
+      is-component
       :offset="subMenuPopperOffset"
       :show-arrow="false"
       :persistent="rootMenu.props.persistent"

@@ -166,11 +166,16 @@ const CollapsedTemplate: StoryFn<typeof GMenu> = args => {
                 <g-icon-font name="regular paper-plane" />
                 <span class="ml-3 flex items-center justify-between w-full pr-10">
                   Integraciones
-                  <span class="absolute right-8 rounded-full bg-primary-500 px-2 text-xs text-white">Nuevo</span>
+                  <span class="absolute right-8 rounded-full bg-primary-def px-2 text-xs text-white">Nuevo</span>
                 </span>
               </template>
               <g-menu-item index="4-1">API</g-menu-item>
               <g-menu-item index="4-2">Webhooks</g-menu-item>
+              <g-menu-item index="4-3">Programa de Referidos</g-menu-item>
+              <g-menu-item index="4-4">
+                API transaccional
+                <span class="ml-2 rounded-full bg-primary-def px-2 text-xs text-white">Nuevo</span>
+              </g-menu-item>
             </g-sub-menu>
           </g-menu>
         </div>
