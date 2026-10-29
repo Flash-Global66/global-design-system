@@ -136,6 +136,28 @@ describe('MenuSub (native render — sin ElSubMenu)', () => {
         container.querySelector('.gui-menu--popup-container'),
       ).toBeTruthy();
     });
+
+    it('does not wrap the popup in the tooltip box', () => {
+      const { container } = render(
+        defineComponent({
+          components: { GMenu, GSubMenu, GMenuItem },
+          template: `
+            <GMenu mode="horizontal">
+              <GSubMenu index="s1" :teleported="false">
+                <template #title>Section</template>
+                <GMenuItem index="s1-a">Child</GMenuItem>
+              </GSubMenu>
+            </GMenu>
+          `,
+        }),
+        realTransition,
+      );
+      const popper = container
+        .querySelector('.gui-menu--popup-container')
+        ?.closest('.gui-popper');
+      expect(popper).toBeTruthy();
+      expect(popper).not.toHaveClass('gui-popper__tooltip');
+    });
   });
 
   it('reports is-active when a nested descendant item is active', async () => {
