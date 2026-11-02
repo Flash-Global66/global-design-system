@@ -156,7 +156,9 @@ const updateSelect = () => {
   const rect = selectedItem.getBoundingClientRect();
   state.isInit = true;
   state.width = rect.width;
+  state.height = rect.height;
   state.translateX = selectedItem.offsetLeft;
+  state.translateY = selectedItem.offsetTop;
   try {
     // This will failed in test
     state.focusVisible = selectedItemInput.matches(':focus-visible');
@@ -175,8 +177,8 @@ const segmentedCls = computed(() => {
 
 const selectedStyle = computed(() => ({
   width: `${state.width}px`,
-  height: '100%',
-  transform: `translateX(${state.translateX}px)`,
+  height: `${state.height}px`,
+  transform: `translate(${state.translateX}px, ${state.translateY}px)`,
   display: state.isInit ? 'block' : 'none',
 }));
 

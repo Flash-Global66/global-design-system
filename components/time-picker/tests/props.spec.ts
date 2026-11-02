@@ -41,3 +41,10 @@ describe('timePickerDefaultProps.clearIcon', () => {
     expect(source).not.toContain('CircleClose');
   });
 });
+
+describe('timePickerDefaultProps.openOnInputClick', () => {
+  it('es un booleano apagado por defecto', () => {
+    expect(timePickerDefaultProps.openOnInputClick.type).toBe(Boolean);
+    expect(timePickerDefaultProps.openOnInputClick.default).toBe(false);
+  });
+});

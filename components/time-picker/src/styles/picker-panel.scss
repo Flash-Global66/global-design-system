@@ -57,9 +57,9 @@
       @apply text-everBlue-500;
     }
 
-    &.active {
-      background-color: #e6f1fe;
-      color: getCssVar("datepicker-active-color");
+    &:focus-visible {
+      outline: 2px solid getCssVar("datepicker-active-color");
+      outline-offset: 2px;
     }
   }
 
@@ -83,7 +83,9 @@
   @include e(icon-btn) {
     @apply text-terciary-txt;
 
-    width: 1.25rem;
+    min-width: 24px;
+    min-height: 24px;
+    width: 1.5rem;
     font-size: 16px;
     border: 0;
     background: transparent;
@@ -95,6 +97,8 @@
     }
     &:focus-visible {
       @apply text-everBlue-500;
+      outline: 2px solid getCssVar("datepicker-active-color");
+      outline-offset: 2px;
     }
 
     @include when(disabled) {

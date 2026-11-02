@@ -275,8 +275,8 @@
   }
 
   @include e("badge") {
-    @apply inline-flex items-center justify-center h-md px-xs rounded-xl
-      text-1 font-semibold bg-blue-50 text-everBlue-500;
+    @apply inline-flex items-center justify-center shrink-0 h-md px-xs rounded-xl
+      text-1 font-semibold whitespace-nowrap bg-blue-50 text-everBlue-500;
 
     @include when(primary) {
       @apply bg-success-bg text-success-txt;
@@ -288,7 +288,7 @@
   }
 
   @include e("panel") {
-    @apply flex flex-col bg-white rounded-md pt-sm pb-xs gap-xxs;
+    @apply flex flex-col bg-white rounded-md pt-sm pb-xs gap-xxs max-w-[432px];
   }
 
   @include e("search") {
@@ -330,12 +330,16 @@
     @apply flex flex-col gap-xxs min-w-0;
   }
 
+  @include e("item-heading") {
+    @apply flex items-center gap-sm min-w-0;
+  }
+
   @include e("item-title") {
-    @apply text-4 font-medium text-secondary-txt truncate;
+    @apply min-w-0 text-4 font-medium text-secondary-txt truncate;
   }
 
   @include e("item-description") {
-    @apply text-2 text-grey-500;
+    @apply text-2 font-medium text-grey-500 truncate;
   }
 
   @include e("empty") {

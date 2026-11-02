@@ -1,34 +1,42 @@
 <template>
   <li
     role="menuitem"
-    tabindex="-1"
+    :tabindex="disabled ? -1 : 0"
+    :aria-disabled="disabled ? 'true' : undefined"
     :class="[
       ns.b('item'),
       ns.is('active', active),
       ns.is('disabled', disabled),
     ]"
     @click="handleClick"
+    @keydown="handleKeydown"
   >
-    <g-tooltip
-      v-if="isFirstLevel && rootMenu.props.collapse && $slots.title"
-      :effect="rootMenu.props.popperEffect"
-      placement="right"
-      :fallback-placements="['left']"
-      :persistent="rootMenu.props.persistent"
-    >
-      <div :class="ns.be('tooltip', 'trigger')">
-        <!--
-          @slot Menu Item Content
-        -->
-        <slot />
-      </div>
-      <template #content>
-        <!--
-          @slot title shown in the collapsed-mode tooltip
-        -->
+    <template v-if="isFirstLevel && rootMenu.props.collapse && $slots.title">
+      <g-tooltip
+        :effect="rootMenu.props.popperEffect"
+        placement="right"
+        :fallback-placements="['left']"
+        :persistent="rootMenu.props.persistent"
+      >
+        <div :class="ns.be('tooltip', 'trigger')">
+          <!--
+            @slot Menu Item Content
+          -->
+          <slot />
+        </div>
+        <template #content>
+          <span :class="ns.be('tooltip', 'label')">
+            <!--
+              @slot title shown in the collapsed-mode tooltip
+            -->
+            <slot name="title" />
+          </span>
+        </template>
+      </g-tooltip>
+      <span :class="ns.be('item', 'sr-label')">
         <slot name="title" />
-      </template>
-    </g-tooltip>
+      </span>
+    </template>
     <template v-else>
       <slot />
       <slot name="title" />
@@ -61,7 +69,12 @@ import {
  * (`node_modules/element-plus/es/components/menu/src/menu-item2.mjs`, 2.9.7)
  * onto the shared `menuContextKey`/`subMenuContextKey` context module. Zero
  * `element-plus` import.
+ *
+ * Collapsed at the first level the `title` slot only lives in the tooltip, so
+ * a visually hidden copy inside the `li` keeps the item's accessible name.
  */
+
+const ACTIVATION_KEYS = ['Enter', ' '];
 
 defineOptions({
   name: 'GMenuItem',
@@ -118,6 +131,13 @@ const handleClick = () => {
   });
   emit('click', item);
 };
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.target !== event.currentTarget) return;
+  if (!ACTIVATION_KEYS.includes(event.key)) return;
+  event.preventDefault();
+  handleClick();
+}
 
 onMounted(() => {
   subMenu.addSubMenu(item);
