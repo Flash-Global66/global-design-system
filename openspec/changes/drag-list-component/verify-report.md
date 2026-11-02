@@ -1,13 +1,12 @@
 # Verificación · drag-list-component
 
 ```yaml
-veredicto: no pasa
-ronda: 7
+veredicto: pasa
+ronda: 8
 fecha: 2026-11-02
-vuelve_a: plan
-tareas_a_medias: [9]
-cumplidas: 13/14
-a_medias: 1
+tareas_a_medias: []
+cumplidas: 14/14
+a_medias: 0
 de_mas: 2
 escenarios: 49/49
 comandos:
@@ -19,12 +18,12 @@ comandos:
   - cmd: npx vitest run --project unit components/drag-list
     exit: 0
     esperado: 'Test Files ≥ 17 passed y 0 failed (provisional)'
-    obtenido: '19 passed (19) · 195 tests passed (ronda 6: 193; +2 en useAutoScroll.spec)'
+    obtenido: '19 passed (19) · 195 tests passed (igual que en la ronda 7)'
     coincide: true
   - cmd: npx vitest run --project unit
     exit: 0
     esperado: '0 failed'
-    obtenido: '98 archivos passed · 807 tests passed · 0 failed'
+    obtenido: '101 archivos passed · 901 tests passed · 0 failed (ronda 7: 98/807; la suba viene de los specs que trajo el merge de release)'
     coincide: true
   - cmd: npx vue-tsc --noEmit -p components/drag-list/tsconfig.json
     exit: 0
@@ -56,12 +55,12 @@ comandos:
     esperado: '0'
     obtenido: '0 (el exit 1 es de grep sin coincidencias)'
     coincide: true
-  - cmd: "git diff --name-only 93d2d0a4 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' ':!assets/scss/index.scss' | wc -l"
+  - cmd: "git diff --name-only 9c5ca2f7 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' ':!assets/scss/index.scss' | wc -l"
     exit: 0
     esperado: '0'
-    obtenido: '0'
+    obtenido: '0 (con la base vieja 93d2d0a4 da 100, todos de release)'
     coincide: true
-  - cmd: "git diff 93d2d0a4 -- assets/scss/index.scss | grep -c '^[+-][^+-]'"
+  - cmd: "git diff 9c5ca2f7 -- assets/scss/index.scss | grep -c '^[+-][^+-]'"
     exit: 0
     esperado: '1'
     obtenido: '1'
@@ -76,73 +75,72 @@ comandos:
     esperado: '0'
     obtenido: '0 (el exit 1 es de grep -c sin coincidencias)'
     coincide: true
-  - cmd: "git diff --name-only 93d2d0a4 -- 'components/*/CHANGELOG.md' | wc -l"
+  - cmd: "git diff --name-only 9c5ca2f7 -- 'components/*/CHANGELOG.md' | wc -l"
     exit: 0
     esperado: '0'
     obtenido: '0'
     coincide: true
-  - cmd: GBP_PACKAGE_TOKEN=dummy calcifer check 93d2d0a4
+  - cmd: GBP_PACKAGE_TOKEN=dummy calcifer check 9c5ca2f7
     exit: 0
     esperado: 'sin hallazgos nuevos (el plan no lo declara; lo pidió el orquestador)'
-    obtenido: 'exit 0, pero «SIN REVISAR: ningún validador miró este diff, y son 74 archivos»: eslint, check-architecture y test se delegan a CI. Sin base, `calcifer check` da exit 1 porque no puede elegir entre origin/develop y origin/release'
+    obtenido: 'exit 0, pero «SIN REVISAR: ningún validador miró este diff, y son 74 archivos». eslint, check-architecture y test se delegan a CI'
     coincide: no_verificado
 ```
 
-## Veredicto: no pasa, y vuelve al plan, no al apply
+## Veredicto: pasa
 
-El código está bien: todos los comandos que se pudieron correr dan lo declarado, y ningún escenario queda contradicho. Lo que no cierra es el registro. El commit `1bba60ce` cambió el comportamiento que el `listo cuando` de la tarea 9 afirma («con eje `x`») y no la amplió, así que ahora las tareas 7 y 9 dicen cosas incompatibles. La tarea 9 no reincide (el `tareas_a_medias` de la ronda 6 estaba vacío), pero lo que está mal es el criterio y no la implementación: por eso vuelve a `plan`.
+Se verificó el HEAD `3295487f` (detached, igual a la punta de `erik/EM-XX/feat/add-drag-list-component`) contra la Base `9c5ca2f7`. Los 13 comandos ejecutables de «Cómo se verifica» dan lo que el plan declara. El único a medias de la ronda 7 (tarea 9) está resuelto, y ningún escenario queda contradicho.
 
-Se verificó el HEAD `1bba60ce` (detached) contra la base `93d2d0a4`. El único cambio de código desde la ronda 6 es ese commit.
+## ¿Es legítimo el cambio de Base de `93d2d0a4` a `9c5ca2f7`?
 
-## Cumplidas (13 de 14)
+Sí. No es el plan acomodándose para que el criterio pase:
 
-**Tareas 2, 3, 4, 5, 6, 8 y de la 10 a la 14.** El commit no toca sus archivos ni su criterio. Su evidencia es la de la ronda 6 y sigue en verde: 195/195 en el paquete y 807/807 en la suite.
+- **`9c5ca2f7` es el merge-base real.** `git merge-base HEAD origin/release` da exactamente `9c5ca2f7`, y el merge `ca1e8d6c` tiene como padres a `3dbcbd4e` (ronda 7) y `9c5ca2f7`.
+- **La base vieja queda dentro de la nueva.** `93d2d0a4` es ancestro de `9c5ca2f7`, con 75 commits de release entre los dos.
+- **Lo que mide el diff no cambió.** El parche de código del change, sin `openspec/`, es idéntico byte a byte en `93d2d0a4..3dbcbd4e` y en `9c5ca2f7..ca1e8d6c`; solo difiere la línea `index <hash>` de `yarn.lock`. Son 74 archivos en los dos casos.
+- **El merge no metió nada del change.** `yarn.lock` contra la nueva base solo suma el bloque de `g-drag-list` (13 líneas), y ningún `package.json` ajeno a drag-list cambia.
 
-**Tarea 1** (`components/drag-list/src/shared/types/engine.type.ts`)
+Con la base vieja, «archivos fuera del change» da 100, todos de release (menu, date-picker, time-picker, segmented, quote, CHANGELOGs, `openspec/archive`). Medir contra `93d2d0a4` le atribuiría al plan trabajo ajeno. La nota del proposal deja dicho el motivo y el hash anterior.
 
-- Se quitaron `DragListAxis` y `UseAutoScrollOptions.axis`.
-- El criterio no nombra ninguno de los dos, y `engine.type.ts` no se reexporta: un grep de `DragListAxis` en `src/` e `index.ts` da 0.
-- `vue-tsc` da exit 0. Sigue cumplida.
+## Cumplidas (14 de 14)
 
-**Tarea 7** (`useAutoScroll.ts` y `useAutoScroll.spec.ts`)
+**Tareas 1 a 6, 8 y de la 10 a la 13.** Su código no cambió desde la ronda 7, y su evidencia sigue en verde: 195/195 en el paquete, 901/901 en la suite, `vue-tsc` y eslint en exit 0.
 
-- **Lo que pide la ampliación del review 3 está hecho:** `tick` recorre `['vertical', 'horizontal']`, cada eje elige su contenedor con `pickScrollContainer`, y un eje sin contenedor o con delta 0 hace `continue` sin cortar al otro.
-- **Tests nuevos:** «desplaza en vertical un contenedor que solo desborda en y, sin depender de la dirección» y «cada eje elige su propio contenedor: el wrapper en y y la lista en x».
-- **Rojo previo:** razonado, no reproducido por el verificador. Con el código anterior, sin `axis` el eje caía en horizontal; el contenedor del primer test no desborda en x, así que `scrollTop` quedaba en 100. Es consistente con el rojo declarado.
-- **Juicio sobre la ampliación: es legítima, no es el plan acomodándose a lo hecho.**
-  - Sale del requisito de la spec: el panel con scroll «SHALL desplazarse en esa dirección», la del borde al que se acerca el puntero. El criterio original, con un `axis` derivado de `direction`, no podía cumplirlo para un origen que desborda en vertical con la lista horizontal.
-  - Agrega tests que antes fallaban y no rebaja ninguna aserción previa: los 7 tests anteriores solo pierden el argumento `axis` y conservan sus `expect`.
-- **Hallazgo menor del plan:**
-  - El texto original sigue diciendo `useAutoScroll({ containers, pointer, axis, isActive })`, una firma que ya no existe. La nota dice «se quita la opción `axis`», así que se lee como sustitución, pero obliga a leer el criterio entero para saber qué vale.
-  - Tampoco se agregaron a `archivos:` `useDragList.ts`, `useDragList.spec.ts` ni `engine.type.ts`, que el commit tocó. Son de las tareas 9, 13 y 1.
+**Tarea 7** (`useAutoScroll.ts`, `useAutoScroll.spec.ts`, `scroll.util.ts`, `scroll.util.spec.ts`)
+
+- La firma del criterio, `useAutoScroll({ containers, pointer, isActive })`, coincide con `useAutoScroll.ts:17-20` y con `UseAutoScrollOptions` en `engine.type.ts:86-90`, que no tiene `axis`.
+- `archivos:` incluye `scroll.util.ts` y su spec, y la ampliación nombra lo que se tocó de las tareas 9 y 1. Quedan cubiertos los dos hallazgos menores de la ronda 7.
+
+**Tarea 9** (`useDragList.ts`, `useDragList.spec.ts`)
+
+- La ampliación anterior ya no dice «con eje `x`», y la de «tras el review 3» afirma que no se pasa eje y que los contenedores incluyen el panel y la lista del destino.
+- `useDragList.ts:259-263` llama a `useAutoScroll` con `containers: () => [sourceEl, targetEl, getTargetListEl()]`, sin `axis`, y `useDragList.spec.ts:74-85` verifica `toContain(panel)`, `toContain(list)` y `not.toHaveProperty('axis')`.
+- Estaba en el `tareas_a_medias` de la ronda 7 y ahora cumple: no reincide.
+
+**Tarea 14** (`stories/drag-list.stories.ts`)
+
+- `d5a4071b` agrega `flex justify-center` al `<span>` del slot `#target-item` de la story `StartAndEnd` («Inicio y fin»). Esa story está nombrada en el `listo cuando` de la tarea 14, así que el cambio cae dentro de ella. Eslint en exit 0.
+- «Storybook compila y se ven en el navegador» sigue sin verificarse por el OOM conocido.
 
 ## A medias
 
-**Tarea 9 · Orquestador `useDragList`**
-
-- **Qué afirma:** su `listo cuando`, en «Ampliado tras el review», dice: «el auto-scroll recibe también la lista `[data-drag-target-list]` […] con eje `x`».
-- **Qué cambió:** `1bba60ce` quitó de `useDragList.ts` la línea `axis: () => (props.direction === 'horizontal' ? 'x' : 'y')`, y el test de `useDragList.spec.ts` pasó de afirmar `axis() === 'x'` a afirmar `not.toHaveProperty('axis')`.
-- **Por qué cuenta como a medias:** la tarea sigue tildada con un criterio que el código y su propio test contradicen, y no recibió ninguna ampliación.
-- **La intención se cumple:** la lista sigue entre los contenedores (afirmado), y con la lista desbordada en x se desplaza en x (test anidado de `useAutoScroll.spec`).
-- **A quién le toca:** a quien mantiene el plan, no al apply.
+Ninguna.
 
 ## De más
 
-Son los dos ya conocidos de las rondas 4 a 6, pedidos por el dev:
+Los dos ya conocidos de las rondas 4 a 7, pedidos por el dev:
 
-1. Los ajustes de layout `gap-sm`, `shrink-0`, `whitespace-nowrap` e `items-stretch`, sin `listo cuando`.
-2. La story «Horizontal con inicio y fin», con `createApproversFlowRender`.
+1. Los ajustes de layout `gap-sm`, `shrink-0`, `whitespace-nowrap` e `items-stretch`.
+2. La story «Horizontal con inicio y fin» (`HorizontalFlow`, `createApproversFlowRender`).
 
-El commit nuevo no agrega nada de más: todo lo que toca es consecuencia de la ampliación de la tarea 7.
+Esta ronda no agrega nada: `d5a4071b` va dentro de la tarea 14, los cambios de `openspec` son el registro del change y el merge de release queda fuera del diff medido desde la Base.
 
 ## Escenarios (49 de 49 con evidencia)
 
-- **48 escenarios:** la misma evidencia que en la ronda 6, en verde.
-- **«Scroll cerca del borde»:** en `useAutoScroll.spec`, «desplaza cerca del borde», la detención al apagar `isActive` y el nuevo de «solo desborda en y»; en `useDragList.spec`, la lista del destino entra en los contenedores. Ninguna prueba lo contradice. Todo está probado solo en jsdom.
+`specs/g-drag-list/spec.md` no cambió desde la ronda 7, y el código tampoco salvo una clase CSS en una story. Los 49 escenarios conservan su evidencia, con 195/195 en verde. «Scroll cerca del borde» sigue probado solo en jsdom.
 
 ## Con qué se probó
 
-- **`calcifer check`:** sin argumento da exit 1, porque no puede elegir entre `origin/develop` y `origin/release`. Con la base `93d2d0a4` da exit 0 pero no revisa archivos (74 sin revisar), porque delega eslint, check-architecture y test a CI. Esos tres se corrieron igual como comandos del plan y dieron limpio.
-- **`calcifer rules`:** no hay `.claude/rules` en el worktree.
-- **Comandos de «Cómo se verifica»:** los 13 que se corrieron coinciden. «Preparar el entorno» queda `no_verificado`.
-- **Lo que este veredicto no cubre:** el navegador, iOS Safari y `storybook build` (OOM conocido).
+- **`calcifer check 9c5ca2f7`:** exit 0, pero no revisa archivos (74 sin revisar) porque delega eslint, check-architecture y test a CI. Esos tres se corrieron como comandos del plan y dieron limpio.
+- **Comandos de «Cómo se verifica»:** los 13 ejecutables coinciden. No hubo fallos por paquetes faltantes tras el merge.
+- **Lo que este veredicto no cubre:** «Preparar el entorno» (`no_verificado`), Storybook en el navegador, iOS Safari y `storybook build` (OOM conocido).
