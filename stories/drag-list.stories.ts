@@ -640,7 +640,7 @@ export const StartAndEnd: Story = {
               <span class="text-sm">{{ item.name }}</span>
             </template>
             <template #target-item="{ item, position }">
-              <span class="text-sm">{{ position }}. {{ item.name }}</span>
+              <span class="text-sm flex justify-center">{{ position }}. {{ item.name }}</span>
             </template>
           </g-drag-list>
         </div>
