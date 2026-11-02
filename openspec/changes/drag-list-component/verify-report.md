@@ -2,7 +2,7 @@
 
 ```yaml
 veredicto: pasa
-ronda: 8
+ronda: 9
 fecha: 2026-11-02
 tareas_a_medias: []
 cumplidas: 14/14
@@ -18,12 +18,12 @@ comandos:
   - cmd: npx vitest run --project unit components/drag-list
     exit: 0
     esperado: 'Test Files ≥ 17 passed y 0 failed (provisional)'
-    obtenido: '19 passed (19) · 195 tests passed (igual que en la ronda 7)'
+    obtenido: '19 passed (19) · 197 tests passed (ronda 8: 195; +2 de scroll.util.spec)'
     coincide: true
   - cmd: npx vitest run --project unit
     exit: 0
     esperado: '0 failed'
-    obtenido: '101 archivos passed · 901 tests passed · 0 failed (ronda 7: 98/807; la suba viene de los specs que trajo el merge de release)'
+    obtenido: '101 archivos passed · 903 tests passed · 0 failed (ronda 8: 101/901)'
     coincide: true
   - cmd: npx vue-tsc --noEmit -p components/drag-list/tsconfig.json
     exit: 0
@@ -58,7 +58,7 @@ comandos:
   - cmd: "git diff --name-only 9c5ca2f7 -- . ':!components/drag-list' ':!stories/drag-list.stories.ts' ':!openspec/changes/drag-list-component' ':!yarn.lock' ':!assets/scss/index.scss' | wc -l"
     exit: 0
     esperado: '0'
-    obtenido: '0 (con la base vieja 93d2d0a4 da 100, todos de release)'
+    obtenido: '0'
     coincide: true
   - cmd: "git diff 9c5ca2f7 -- assets/scss/index.scss | grep -c '^[+-][^+-]'"
     exit: 0
@@ -83,44 +83,39 @@ comandos:
   - cmd: GBP_PACKAGE_TOKEN=dummy calcifer check 9c5ca2f7
     exit: 0
     esperado: 'sin hallazgos nuevos (el plan no lo declara; lo pidió el orquestador)'
-    obtenido: 'exit 0, pero «SIN REVISAR: ningún validador miró este diff, y son 74 archivos». eslint, check-architecture y test se delegan a CI'
+    obtenido: 'exit 0, pero «SIN REVISAR: ningún validador miró este diff, y son 75 archivos». eslint, check-architecture y test se delegan a CI'
     coincide: no_verificado
 ```
 
 ## Veredicto: pasa
 
-Se verificó el HEAD `3295487f` (detached, igual a la punta de `erik/EM-XX/feat/add-drag-list-component`) contra la Base `9c5ca2f7`. Los 13 comandos ejecutables de «Cómo se verifica» dan lo que el plan declara. El único a medias de la ronda 7 (tarea 9) está resuelto, y ningún escenario queda contradicho.
+Se verificó el HEAD `73fe6fe2` (detached, igual a la punta de `erik/EM-XX/feat/add-drag-list-component`) contra la Base `9c5ca2f7`. Los 13 comandos ejecutables de «Cómo se verifica» dan lo que declara el plan. El `tareas_a_medias` de la ronda 8 estaba vacío y el de esta también: no hay reincidencias.
 
-## ¿Es legítimo el cambio de Base de `93d2d0a4` a `9c5ca2f7`?
-
-Sí. No es el plan acomodándose para que el criterio pase:
-
-- **`9c5ca2f7` es el merge-base real.** `git merge-base HEAD origin/release` da exactamente `9c5ca2f7`, y el merge `ca1e8d6c` tiene como padres a `3dbcbd4e` (ronda 7) y `9c5ca2f7`.
-- **La base vieja queda dentro de la nueva.** `93d2d0a4` es ancestro de `9c5ca2f7`, con 75 commits de release entre los dos.
-- **Lo que mide el diff no cambió.** El parche de código del change, sin `openspec/`, es idéntico byte a byte en `93d2d0a4..3dbcbd4e` y en `9c5ca2f7..ca1e8d6c`; solo difiere la línea `index <hash>` de `yarn.lock`. Son 74 archivos en los dos casos.
-- **El merge no metió nada del change.** `yarn.lock` contra la nueva base solo suma el bloque de `g-drag-list` (13 líneas), y ningún `package.json` ajeno a drag-list cambia.
-
-Con la base vieja, «archivos fuera del change» da 100, todos de release (menu, date-picker, time-picker, segmented, quote, CHANGELOGs, `openspec/archive`). Medir contra `93d2d0a4` le atribuiría al plan trabajo ajeno. La nota del proposal deja dicho el motivo y el hash anterior.
+Desde la ronda 8 (`5c77762d..HEAD`) cambiaron 6 archivos: `scroll.constant.ts` (nuevo), `scroll.util.ts`, `scroll.util.spec.ts`, `useAutoScroll.spec.ts`, `useDragList.spec.ts` y `tasks.md`.
 
 ## Cumplidas (14 de 14)
 
-**Tareas 1 a 6, 8 y de la 10 a la 13.** Su código no cambió desde la ronda 7, y su evidencia sigue en verde: 195/195 en el paquete, 901/901 en la suite, `vue-tsc` y eslint en exit 0.
+**Tareas 1 a 6, 8 y de la 10 a la 14.** Su código no cambió desde la ronda 8. La evidencia sigue en verde: 197/197 en el paquete, 903/903 en la suite, y `vue-tsc` y eslint en exit 0.
 
-**Tarea 7** (`useAutoScroll.ts`, `useAutoScroll.spec.ts`, `scroll.util.ts`, `scroll.util.spec.ts`)
+**Tarea 7.** Cubre `useAutoScroll.ts` y su spec, `scroll.util.ts` y su spec, y `shared/constants/scroll.constant.ts`.
 
-- La firma del criterio, `useAutoScroll({ containers, pointer, isActive })`, coincide con `useAutoScroll.ts:17-20` y con `UseAutoScrollOptions` en `engine.type.ts:86-90`, que no tiene `axis`.
-- `archivos:` incluye `scroll.util.ts` y su spec, y la ampliación nombra lo que se tocó de las tareas 9 y 1. Quedan cubiertos los dos hallazgos menores de la ronda 7.
+- **La ampliación del review 4 se cumple.**
+  - `pickScrollContainer` usa `canScrollOnAxis`, que lee `getComputedStyle(el).overflowX/overflowY` y, además del desborde, exige `auto`, `scroll` u `overlay`.
+  - `SCROLLABLE_OVERFLOW_VALUES` vive en `shared/constants/scroll.constant.ts` y no se reexporta, porque `index.ts` no lo nombra.
+- **Tests:** `scroll.util.spec.ts` cubre dos casos.
+  - Un eje `hidden` que desborda devuelve `null` en horizontal y devuelve el elemento en vertical.
+  - Un contenedor `visible` devuelve `null`.
+- **El cambio de criterio es legítimo.** Suma un archivo y una ampliación con el comportamiento nuevo y sus tests, y no afloja nada que ya se pidiera.
+- **La ubicación respeta `ds-types-location`.** Las constantes van en `constants/`, y van en `shared/` porque las usa `shared/utils`.
+- **Los fixtures no rebajan ningún test, solo fijan la precondición.**
+  - **Lo de jsdom se comprobó:** con `style.overflow='auto'`, `getComputedStyle` da `visible visible`.
+  - **Los negativos de `scroll.util.spec`:** siguen dando `null` por el tamaño o la posición del puntero, no por el overflow.
+  - **Los negativos de `useAutoScroll.spec`:** sin fijar `auto` en `createContainer()`, pasarían solos, porque el código descarta los contenedores `visible`. Fijar `auto` es lo que los mantiene honestos.
 
-**Tarea 9** (`useDragList.ts`, `useDragList.spec.ts`)
+**Tarea 9.** Cubre `useDragList.ts` y su spec.
 
-- La ampliación anterior ya no dice «con eje `x`», y la de «tras el review 3» afirma que no se pasa eje y que los contenedores incluyen el panel y la lista del destino.
-- `useDragList.ts:259-263` llama a `useAutoScroll` con `containers: () => [sourceEl, targetEl, getTargetListEl()]`, sin `axis`, y `useDragList.spec.ts:74-85` verifica `toContain(panel)`, `toContain(list)` y `not.toHaveProperty('axis')`.
-- Estaba en el `tareas_a_medias` de la ronda 7 y ahora cumple: no reincide.
-
-**Tarea 14** (`stories/drag-list.stories.ts`)
-
-- `d5a4071b` agrega `flex justify-center` al `<span>` del slot `#target-item` de la story `StartAndEnd` («Inicio y fin»). Esa story está nombrada en el `listo cuando` de la tarea 14, así que el cambio cae dentro de ella. Eslint en exit 0.
-- «Storybook compila y se ven en el navegador» sigue sin verificarse por el OOM conocido.
+- Se quitó `expect(autoScroll.options).not.toHaveProperty('axis')`. Siguen las aserciones que pide el criterio actual: `toContain(panel)` y `toContain(list)`.
+- **El cambio de criterio es legítimo.** Esa garantía pasa al typecheck, que es un comando declarado. `UseAutoScrollOptions` no tiene `axis`, así que el control de propiedades sobrantes del objeto literal de `useDragList.ts:259-263` haría fallar `vue-tsc`, que dio exit 0.
 
 ## A medias
 
@@ -128,19 +123,20 @@ Ninguna.
 
 ## De más
 
-Los dos ya conocidos de las rondas 4 a 7, pedidos por el dev:
+Siguen los dos de las rondas 4 a 8, pedidos por el dev:
 
 1. Los ajustes de layout `gap-sm`, `shrink-0`, `whitespace-nowrap` e `items-stretch`.
 2. La story «Horizontal con inicio y fin» (`HorizontalFlow`, `createApproversFlowRender`).
 
-Esta ronda no agrega nada: `d5a4071b` va dentro de la tarea 14, los cambios de `openspec` son el registro del change y el merge de release queda fuera del diff medido desde la Base.
+Esta ronda no suma nada nuevo: `scroll.constant.ts` ya figura en los `archivos` de la tarea 7.
 
 ## Escenarios (49 de 49 con evidencia)
 
-`specs/g-drag-list/spec.md` no cambió desde la ronda 7, y el código tampoco salvo una clase CSS en una story. Los 49 escenarios conservan su evidencia, con 195/195 en verde. «Scroll cerca del borde» sigue probado solo en jsdom.
+`specs/g-drag-list/spec.md` no cambió. El único cambio de código restringe qué contenedor se elige, y los 197 tests siguen en verde, así que ningún escenario queda contradicho. «Scroll cerca del borde» sigue probado solo en jsdom, con contenedores en `overflow: auto`.
 
 ## Con qué se probó
 
-- **`calcifer check 9c5ca2f7`:** exit 0, pero no revisa archivos (74 sin revisar) porque delega eslint, check-architecture y test a CI. Esos tres se corrieron como comandos del plan y dieron limpio.
-- **Comandos de «Cómo se verifica»:** los 13 ejecutables coinciden. No hubo fallos por paquetes faltantes tras el merge.
-- **Lo que este veredicto no cubre:** «Preparar el entorno» (`no_verificado`), Storybook en el navegador, iOS Safari y `storybook build` (OOM conocido).
+- **`calcifer check 9c5ca2f7`:** exit 0, pero no revisó ningún archivo (75 sin revisar), porque delega eslint, check-architecture y test a CI. Esos tres se corrieron como comandos del plan y dieron limpio.
+- **Comandos de «Cómo se verifica»:** los 13 ejecutables coinciden con lo declarado.
+- **Fuera de este veredicto:** «Preparar el entorno» (`no_verificado`), Storybook en el navegador, iOS Safari y `storybook build` (OOM conocido).
+- **Para mirar en el navegador:** el único estilo del paquete que declara `overflow` es la lista horizontal del destino (`overflow-x-auto`, en `target-panel.style.scss:27`). Ahora, que los paneles hagan auto-scroll vertical depende de que quien los usa les dé `overflow: auto` o `scroll`. Antes tampoco se desplazaba un contenedor `visible`, así que no es una regresión.
