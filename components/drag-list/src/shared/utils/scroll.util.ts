@@ -1,3 +1,4 @@
+import { SCROLLABLE_OVERFLOW_VALUES } from '../constants/scroll.constant';
 import type { DragListDirection, DragPoint } from '../types/drag-list.type';
 
 import type {
@@ -35,9 +36,19 @@ export function calculateAutoScrollDelta({
   return 0;
 }
 
+/** Indica si el elemento desborda en el eje y su `overflow` permite desplazarlo. */
+function canScrollOnAxis(el: HTMLElement, isVertical: boolean): boolean {
+  const style = getComputedStyle(el);
+  const overflow = isVertical ? style.overflowY : style.overflowX;
+  if (!SCROLLABLE_OVERFLOW_VALUES.has(overflow)) return false;
+  return isVertical
+    ? el.scrollHeight > el.clientHeight
+    : el.scrollWidth > el.clientWidth;
+}
+
 /**
  * Elige el contenedor que se desplaza: entre los que contienen al puntero, el más interno
- * (ningún otro candidato queda dentro de él) que además desborda en el eje. Null si ninguno.
+ * (ningún otro candidato queda dentro de él) que además se puede desplazar en el eje. Null si ninguno.
  */
 export function pickScrollContainer({
   containers,
@@ -53,10 +64,7 @@ export function pickScrollContainer({
       pointer.x <= rect.right &&
       pointer.y >= rect.top &&
       pointer.y <= rect.bottom;
-    if (!contains) return false;
-    return isVertical
-      ? el.scrollHeight > el.clientHeight
-      : el.scrollWidth > el.clientWidth;
+    return contains && canScrollOnAxis(el, isVertical);
   });
 
   return (

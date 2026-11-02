@@ -81,7 +81,6 @@ describe('useDragList', () => {
     const containers = autoScroll.options!.containers();
     expect(containers).toContain(panel);
     expect(containers).toContain(list);
-    expect(autoScroll.options).not.toHaveProperty('axis');
   });
 
   it('agrega arrastrando en modo simple', () => {

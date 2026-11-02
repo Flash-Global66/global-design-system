@@ -6,6 +6,8 @@ import type { DragPoint } from '../../../src/shared/types/drag-list.type';
 
 function createContainer(): HTMLElement {
   const el = document.createElement('div');
+  el.style.overflowX = 'auto';
+  el.style.overflowY = 'auto';
   el.scrollTop = 100;
   el.scrollLeft = 100;
   for (const [key, value] of Object.entries({

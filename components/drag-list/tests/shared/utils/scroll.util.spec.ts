@@ -103,8 +103,11 @@ function box(
     clientHeight?: number;
   },
   r = { top: 0, bottom: 400, left: 0, right: 300 },
+  overflow = 'auto',
 ): HTMLElement {
   const el = document.createElement('div');
+  el.style.overflowX = overflow;
+  el.style.overflowY = overflow;
   for (const [key, value] of Object.entries(size)) {
     Object.defineProperty(el, key, { configurable: true, value });
   }
@@ -176,6 +179,34 @@ describe('pickScrollContainer', () => {
     expect(
       pickScrollContainer({
         containers: [box(flat)],
+        pointer: inside,
+        axis: 'horizontal',
+      }),
+    ).toBeNull();
+  });
+  it('ignora el eje con overflow hidden aunque el contenido desborde', () => {
+    const el = box({ ...wide, scrollHeight: 800, clientHeight: 400 });
+    el.style.overflowX = 'hidden';
+    expect(
+      pickScrollContainer({
+        containers: [el],
+        pointer: inside,
+        axis: 'horizontal',
+      }),
+    ).toBeNull();
+    expect(
+      pickScrollContainer({
+        containers: [el],
+        pointer: inside,
+        axis: 'vertical',
+      }),
+    ).toBe(el);
+  });
+
+  it('ignora un contenedor con overflow visible', () => {
+    expect(
+      pickScrollContainer({
+        containers: [box(wide, undefined, 'visible')],
         pointer: inside,
         axis: 'horizontal',
       }),
