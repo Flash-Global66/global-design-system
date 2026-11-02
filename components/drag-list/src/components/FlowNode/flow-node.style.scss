@@ -1,0 +1,12 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+@include b("drag-list-node") {
+  @apply flex items-center justify-center shrink-0;
+
+  @include e("label") {
+    @apply rounded-full bg-blue-50 px-md py-xs text-2 font-semibold text-everBlue-500;
+  }
+}

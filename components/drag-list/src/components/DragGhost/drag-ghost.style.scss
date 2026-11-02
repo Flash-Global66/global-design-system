@@ -1,0 +1,13 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+@include b("drag-list-ghost") {
+  @apply fixed top-0 left-0 opacity-80 shadow-lg pointer-events-none;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    animation: none;
+  }
+}

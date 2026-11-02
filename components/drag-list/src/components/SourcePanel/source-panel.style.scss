@@ -1,0 +1,42 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+@include b("drag-list-source") {
+  @apply relative flex flex-1 flex-col gap-sm rounded-md border border-transparent;
+
+  @include e("body") {
+    @apply flex flex-col gap-sm;
+  }
+
+  @include e("group") {
+    @apply flex flex-col gap-xs;
+  }
+
+  @include e("group-header") {
+    @apply text-2 font-semibold text-secondary-txt;
+  }
+
+  @include e("list") {
+    @apply m-0 flex list-none flex-col gap-xs p-0;
+  }
+
+  @include e("item") {
+    @apply m-0 p-0;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  @include e("empty") {
+    @apply text-2 text-secondary-txt;
+  }
+
+  @include when("active-zone") {
+    @apply border-error-bd bg-error-bg;
+  }
+
+  @include when("disabled") {
+    @apply opacity-60;
+  }
+}
