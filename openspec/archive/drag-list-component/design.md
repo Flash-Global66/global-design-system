@@ -23,15 +23,15 @@ pointerup ─► onDrop({ origin, zone, fromIndex, toIndex, item })
 
 ## 2. Qué se tomó de SortableJS (comportamiento, no código)
 
-| SortableJS | Acá |
-|---|---|
-| `group.pull: 'clone'`, `put: false` | El origen nunca recibe tarjetas (salvo para quitar). Lo agregado es el mismo ítem, o `cloneItem(item)` con `repeatable`. |
-| `swapThreshold` | Punto medio en el eje de `direction`, sobre rects **originales** cacheados al activar (sección 3). |
-| `delayOnTouchOnly`, `touchStartThreshold` | Long-press de 200 ms con tolerancia, solo en touch. |
-| `fallbackTolerance` | 4 px para mouse y lápiz. |
-| `filter` | `isNonDraggableTarget`: button, a, input, select, textarea, `[data-no-drag]`. |
-| AutoScroll | `calculateAutoScrollDelta` más `useAutoScroll` con `useRafFn`. |
-| `ghostClass` / `chosenClass` | Modificadores BEM `is-placeholder`, `is-dragging` e `is-active-zone`. |
+| SortableJS                                | Acá                                                                                                                      |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `group.pull: 'clone'`, `put: false`       | El origen nunca recibe tarjetas (salvo para quitar). Lo agregado es el mismo ítem, o `cloneItem(item)` con `repeatable`. |
+| `swapThreshold`                           | Punto medio en el eje de `direction`, sobre rects **originales** cacheados al activar (sección 3).                       |
+| `delayOnTouchOnly`, `touchStartThreshold` | Long-press de 200 ms con tolerancia, solo en touch.                                                                      |
+| `fallbackTolerance`                       | 4 px para mouse y lápiz.                                                                                                 |
+| `filter`                                  | `isNonDraggableTarget`: button, a, input, select, textarea, `[data-no-drag]`.                                            |
+| AutoScroll                                | `calculateAutoScrollDelta` más `useAutoScroll` con `useRafFn`.                                                           |
+| `ghostClass` / `chosenClass`              | Modificadores BEM `is-placeholder`, `is-dragging` e `is-active-zone`.                                                    |
 
 Como no se copia código, no aplica el aviso MIT. El crédito como inspiración va en la documentación del paquete.
 
@@ -49,11 +49,11 @@ Como no se copia código, no aplica el aviso MIT. El crédito como inspiración 
 
 Las zonas son excluyentes:
 
-| Zona | Qué pasa al soltar |
-|---|---|
-| Destino | Inserta o reordena |
-| Origen | Quita (solo con `dragToRemove`) |
-| Fuera de ambas | Cancela |
+| Zona           | Qué pasa al soltar              |
+| -------------- | ------------------------------- |
+| Destino        | Inserta o reordena              |
+| Origen         | Quita (solo con `dragToRemove`) |
+| Fuera de ambas | Cancela                         |
 
 ## 5. Touch sin romper el scroll
 
@@ -77,9 +77,9 @@ Las zonas son excluyentes:
 
 ## 8. `via` en los eventos
 
-| Evento | Valores |
-|---|---|
-| `add` | `'drag' \| 'button' \| 'api'` |
+| Evento   | Valores                                     |
+| -------- | ------------------------------------------- |
+| `add`    | `'drag' \| 'button' \| 'api'`               |
 | `remove` | `'drag' \| 'button' \| 'keyboard' \| 'api'` |
 
 Agregar «con teclado» es presionar el botón del slot, así que ya llega como `'button'`.
