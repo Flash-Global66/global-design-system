@@ -1,0 +1,54 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+@use "../components/SourcePanel/source-panel.style.scss" as *;
+@use "../components/TargetPanel/target-panel.style.scss" as *;
+@use "../components/DropOverlay/drop-overlay.style.scss" as *;
+@use "../components/DragGhost/drag-ghost.style.scss" as *;
+@use "../components/FlowNode/flow-node.style.scss" as *;
+@use "../components/FlowConnector/flow-connector.style.scss" as *;
+
+@include b("drag-list") {
+  @apply flex gap-md;
+  --gui-drag-list-zone-min-height: calc(
+    2 * theme("spacing.md") + theme("fontSize.5.1") + theme("spacing.xs") + theme("fontSize.2.1")
+  );
+
+  @include m("vertical") {
+    @apply flex-row items-stretch;
+  }
+
+  @include m("horizontal") {
+    @apply flex-col;
+  }
+
+  @include e("source") {
+    @apply relative flex min-w-0 flex-col;
+    min-height: var(--gui-drag-list-zone-min-height);
+  }
+
+  @include e("target") {
+    @apply relative flex min-w-0 flex-1 flex-col;
+    min-height: var(--gui-drag-list-zone-min-height);
+  }
+
+  @include m("vertical") {
+    @include e("source") {
+      @apply flex-1;
+    }
+  }
+
+  @include e("live") {
+    @apply sr-only;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}

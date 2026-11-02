@@ -1,0 +1,58 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+@include b("drag-list-target") {
+  @apply relative flex flex-1 flex-col gap-sm;
+  touch-action: manipulation;
+
+  @include e("list") {
+    @apply m-0 flex list-none flex-col gap-sm p-0;
+  }
+
+  @include e("item") {
+    @apply outline-none;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  @include e("empty") {
+    @apply flex items-center justify-center text-2 text-secondary-txt;
+  }
+
+  @include m("horizontal") {
+    @include e("list") {
+      @apply flex-row items-center overflow-x-auto;
+    }
+
+    @include e("item") {
+      @apply shrink-0;
+    }
+
+    @include e("connector") {
+      @apply shrink-0;
+    }
+
+    @include e("node") {
+      @apply shrink-0 whitespace-nowrap;
+    }
+
+    @include e("empty") {
+      @apply shrink-0 whitespace-nowrap;
+    }
+  }
+
+  @include when(active-zone) {
+    @apply rounded-md;
+  }
+
+  @include when(disabled) {
+    @apply pointer-events-none opacity-50;
+  }
+
+  @include e("placeholder") {
+    @apply rounded-md border border-dashed;
+  }
+}

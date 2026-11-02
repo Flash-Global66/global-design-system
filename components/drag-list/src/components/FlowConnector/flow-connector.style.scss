@@ -1,0 +1,19 @@
+@use "@flash-global66/g-utils/mixins" as *;
+@use "@flash-global66/g-utils/utils" as *;
+@use "@flash-global66/g-utils/var-mixins" as *;
+@use "@flash-global66/g-utils/tokens" as *;
+
+@include b("drag-list-connector") {
+  @apply flex items-center justify-center shrink-0 text-secondary-txt;
+
+  @include e("icon") {
+    @apply text-4;
+    transform: rotate(90deg);
+  }
+
+  @include m("horizontal") {
+    @include e("icon") {
+      transform: none;
+    }
+  }
+}
