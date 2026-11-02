@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.28.0...@flash-global66/g-icon-font@0.29.0) (2026-10-27)
+
+### Features
+
+- **icon-font:** add house-building, briefcase-blank and face-viewfinder regular icons ([50162a0](https://github.com/Flash-Global66/global-design-system/commit/50162a04851c727b44dae2143df3cd5cc38f0d5b))
+
+# [0.28.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.27.0...@flash-global66/g-icon-font@0.28.0) (2026-10-22)
+
+### Features
+
+- **icon-font:** add chart-simple, money-bills-simple and chart-mixed-up-circle-dollar regular icons ([#353](https://github.com/Flash-Global66/global-design-system/issues/353)) ([a25d24c](https://github.com/Flash-Global66/global-design-system/commit/a25d24c75c9dbf835f63862ad2d854c6016ceba3))
+
+# [0.27.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.26.1...@flash-global66/g-icon-font@0.27.0) (2026-10-21)
+
+### Features
+
+- **icon-font:** add list-tree solid and layer-group regular icons ([#351](https://github.com/Flash-Global66/global-design-system/issues/351)) ([9f6f77d](https://github.com/Flash-Global66/global-design-system/commit/9f6f77d624f230edf62972ae3ada0673221f824f))
+
 ## [0.26.1](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-icon-font@0.26.0...@flash-global66/g-icon-font@0.26.1) (2026-09-16)
 
 **Note:** Version bump only for package @flash-global66/g-icon-font

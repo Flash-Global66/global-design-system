@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
 
 import { GSegmented } from '@flash-global66/g-segmented/index.ts';
+import { GIconFont } from '@flash-global66/g-icon-font';
 import { GConfigProvider } from '../components/config-provider';
 import { ref } from 'vue';
 
@@ -317,6 +318,52 @@ export const CustomContent: Story = {
               <span style="font-size: 24px">{{ item.emoji }}</span>
               <div>{{ item.label }}</div>
             </div>
+          </template>
+        </g-segmented>
+      </g-config-provider>
+    `,
+  }),
+};
+
+export const Responsive: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Se adapta al ancho disponible: por debajo de 768px las opciones se apilan en vertical y entre 768px y 991px quedan en horizontal compacto. Para verlo, redimensiona el canvas. La opción puede llevar un ícono a la derecha del texto mediante el slot default.',
+      },
+    },
+  },
+  render: () => ({
+    components: { GSegmented, GConfigProvider, GIconFont },
+    setup() {
+      const value = ref('secondary');
+      return {
+        value,
+        options: [
+          { label: 'Movimientos', value: 'movements' },
+          {
+            label: 'Secundarias',
+            value: 'secondary',
+            icon: 'regular info-circle',
+          },
+          { label: 'Usuarios', value: 'users' },
+          { label: 'Smart Cards', value: 'smart-cards' },
+        ],
+      };
+    },
+    template: `
+      <g-config-provider>
+        <g-segmented
+          v-model="value"
+          :options="options"
+          block
+        >
+          <template #default="{ item }">
+            <span class="inline-flex items-center gap-xxs">
+              {{ item.label }}
+              <g-icon-font v-if="item.icon" :name="item.icon" size="sm" />
+            </span>
           </template>
         </g-segmented>
       </g-config-provider>

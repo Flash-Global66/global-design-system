@@ -95,7 +95,7 @@ const RATES: Record<string, number> = {
 const ACCOUNTS_CLP: QuoteAccount[] = [
   {
     id: 'clp-principal',
-    name: 'Cuenta Principal - Peso Chileno',
+    name: 'Peso chileno',
     description: 'Cuenta electrónica...0061',
     currencyCode: 'CLP',
     flagCountryCode: 'CL',
@@ -122,7 +122,7 @@ const ACCOUNTS_CLP: QuoteAccount[] = [
 const ACCOUNTS_COP: QuoteAccount[] = [
   {
     id: 'cop-principal',
-    name: 'Cuenta Principal - Peso Colombiano',
+    name: 'Peso colombiano - Cuenta operativa para pagos a proveedores del exterior',
     description: 'Cuenta electrónica...4521',
     currencyCode: 'COP',
     flagCountryCode: 'CO',
@@ -311,6 +311,10 @@ input correspondiente cambia a un selector de cuentas: agrupa las opciones por \
 un encabezado por grupo, y agrega un buscador dentro del panel. Con los arrays vacíos (el default),
 el input se comporta igual que hoy: selector de monedas.
 
+La fila de una cuenta con \`isPrimary\` muestra, al lado del nombre, el mismo badge verde que el
+trigger, con el texto de \`primaryAccountLabel\`. Un nombre largo se corta con ellipsis para que el
+badge siempre quede visible, y el texto del badge no participa de la búsqueda.
+
 > \`GQuote\` es controlado: al elegir una cuenta, el componente solo emite \`from-account-change\` /
 > \`to-account-change\` con la cuenta elegida. **No** actualiza \`fromCurrency\`/\`toCurrency\` por su
 > cuenta — el consumidor tiene que escuchar el evento y sincronizar la moneda con
@@ -325,7 +329,7 @@ interface QuoteAccount {
   description: string      // Texto secundario bajo el nombre (ej: número de cuenta)
   currencyCode: string      // Agrupa las opciones y titula el encabezado del grupo
   flagCountryCode: string  // Código de bandera de la cuenta (ej: 'CL')
-  isPrimary?: boolean       // Muestra el badge verde de cuenta principal
+  isPrimary?: boolean       // Muestra el badge verde de cuenta principal en el trigger y en su fila del panel
   badgeLabel?: string       // Texto del badge azul cuando la cuenta es adicional (una cuenta no principal)
 }
 \`\`\`
@@ -337,7 +341,7 @@ interface QuoteAccount {
 - fromAccountId: id de la cuenta de origen seleccionada (\`string\`, default: \`''\`)
 - toAccountId: id de la cuenta de destino seleccionada (\`string\`, default: \`''\`)
 - accountSearchPlaceholder: placeholder del buscador dentro del panel de cuentas (\`string\`, default: \`'Buscar'\`)
-- primaryAccountLabel: texto del badge de cuenta principal (\`string\`, default: \`'Cuenta principal'\`)
+- primaryAccountLabel: texto del badge de cuenta principal, en el trigger y en la fila del panel (\`string\`, default: \`'Cuenta principal'\`)
 
 ### Eventos de selección de cuentas
 

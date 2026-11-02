@@ -18,7 +18,9 @@
             size="xs"
             aria-hidden="true"
           />
-          <span :class="ns.e('code')">{{ currencyCode || selectedAccount?.currencyCode }}</span>
+          <span :class="ns.e('code')">{{
+            currencyCode || selectedAccount?.currencyCode
+          }}</span>
           <g-icon-font name="regular chevron-down" />
         </div>
 
@@ -50,7 +52,10 @@
                 :key="account.id"
                 :command="account"
                 :title="account.name"
-                :class="[ns.e('item'), ns.is('selected', account.id === accountId)]"
+                :class="[
+                  ns.e('item'),
+                  ns.is('selected', account.id === accountId),
+                ]"
               >
                 <g-country-flag
                   :name="account.flagCountryCode"
@@ -58,8 +63,18 @@
                   aria-hidden="true"
                 />
                 <span :class="ns.e('item-body')">
-                  <span :class="ns.e('item-title')">{{ account.name }}</span>
-                  <span :class="ns.e('item-description')">{{ account.description }}</span>
+                  <span :class="ns.e('item-heading')">
+                    <span :class="ns.e('item-title')">{{ account.name }}</span>
+                    <span
+                      v-if="account.isPrimary"
+                      :class="[ns.e('badge'), ns.is('primary')]"
+                    >
+                      {{ primaryAccountLabel }}
+                    </span>
+                  </span>
+                  <span :class="ns.e('item-description')">{{
+                    account.description
+                  }}</span>
                 </span>
               </g-dropdown-item>
             </template>
@@ -84,7 +99,10 @@ import {
   GDropdownMenu,
   GDropdownItem,
 } from '@flash-global66/g-dropdown';
-import { quoteAccountSelectProps, quoteAccountSelectEmits } from './quote-account-select';
+import {
+  quoteAccountSelectProps,
+  quoteAccountSelectEmits,
+} from './quote-account-select';
 import { useQuoteAccountSelect } from './use-quote-account-select';
 
 defineOptions({ name: 'GQuoteAccountSelect' });
