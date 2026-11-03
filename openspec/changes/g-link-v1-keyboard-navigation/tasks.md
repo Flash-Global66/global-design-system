@@ -10,7 +10,7 @@ Restricciones que todo subagente recibe (detalle en `proposal.md`): mover con `g
   - listo cuando: antes de mover se escribe un spec de caracterización del comportamiento actual (clases BEM, `href`/`target`, `disabled` sin href y sin emitir, `click` con `MouseEvent`, iconos y slot `icon`), y sigue verde después de mover. La compilación por ruta de `link.style.scss` da un `diff` **vacío** contra `g-link.antes.css`. `index.ts` exporta `GLink`, `linkProps`, `linkEmits`, `LinkProps`, `LinkEmits` y `LinkInstance` sin `export *` ni default. `stories/link.stories.ts` y `stories/table.stories.ts` siguen importando sin cambios.
   - commit: `refactor(link): migra g-link al arquetipo de paquete simple`
 
-- [ ] **2 · g-link buildable y en camino a 1.0.0**
+- [x] **2 · g-link buildable y en camino a 1.0.0**
   - archivos: `components/link/package.json`, `components/link/vite.config.ts`, `components/link/tsconfig.json`
   - depende de: 1
   - listo cuando: `package.json` sigue la plantilla de `inline` (`buildable`, `exports` con `dist`, `files`, `scripts.build`/`build:types`, `peerDependencies` con `vue` y `@flash-global66/g-icon-font`, `"version": "1.0.0-0"`). `vite build --outDir <scratch>` produce `index.mjs` e `index.js`. `vue-tsc --project tsconfig.json` termina sin errores y no compila `tests/`.
