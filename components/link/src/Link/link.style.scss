@@ -11,6 +11,10 @@
   @apply cursor-pointer p-0;
   @apply font-semibold;
 
+  &:focus-visible {
+    @apply outline outline-primary-def;
+  }
+
   /* Size variations */
   &.#{$namespace}-link--sm {
     @apply text-2;
