@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import { Meta, StoryObj } from '@storybook/vue3-vite';
 import { GLink } from '../components/link';
 import { GConfigProvider } from '../components/config-provider';
@@ -8,90 +9,140 @@ const meta: Meta<typeof GLink> = {
   tags: ['autodocs'],
   argTypes: {
     type: {
+      name: 'type',
       control: { type: 'select' },
       options: ['primary', 'secondary', 'tertiary'],
       description:
         'Tipo de estilo del link. Define la apariencia visual y el color del link.',
       table: {
-        type: { summary: 'string' },
+        category: 'Props (Padre)',
+        type: { summary: "'primary' | 'secondary' | 'tertiary'" },
         defaultValue: { summary: 'primary' },
       },
     },
     size: {
+      name: 'size',
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
       description:
         'Tamaño del link. Afecta tanto al tamaño del texto como de los íconos.',
       table: {
-        type: { summary: 'string' },
+        category: 'Props (Padre)',
+        type: { summary: "'sm' | 'md' | 'lg'" },
         defaultValue: { summary: 'md' },
       },
     },
     underline: {
+      name: 'underline',
       control: { type: 'boolean' },
       description: 'Define si el link muestra un underline permanente.',
       table: {
+        category: 'Props (Padre)',
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
       },
     },
     disabled: {
+      name: 'disabled',
       control: { type: 'boolean' },
       description:
-        'Deshabilita el link, impidiendo la interacción del usuario y aplicando estilos visuales de deshabilitado.',
+        'Deshabilita el link: aplica estilos de deshabilitado, expone `aria-disabled="true"` y lo saca del orden de Tab.',
       table: {
+        category: 'Props (Padre)',
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
       },
     },
     href: {
+      name: 'href',
       control: { type: 'text' },
       description:
-        'URL a la que apunta el link, igual que el atributo href nativo de HTML.',
+        'URL a la que apunta el link, igual que el atributo href nativo de HTML. Sin `href` el link se expone como botón (`role="button"`): se alcanza con Tab y se activa con Enter o Espacio.',
       table: {
+        category: 'Props (Padre)',
         type: { summary: 'string' },
-        defaultValue: { summary: '' },
+        defaultValue: { summary: "''" },
       },
     },
     target: {
+      name: 'target',
       control: { type: 'select' },
       options: ['_blank', '_self', '_parent', '_top'],
       description:
         'Define cómo se abre el link, igual que el atributo target nativo de HTML.',
       table: {
-        type: { summary: 'string' },
+        category: 'Props (Padre)',
+        type: { summary: "'_blank' | '_parent' | '_self' | '_top' | string" },
         defaultValue: { summary: '_self' },
       },
     },
     iconLeft: {
+      name: 'icon-left',
       control: { type: 'text' },
       description:
         'Nombre del ícono a mostrar a la izquierda del texto. Utiliza el formato "peso nombre-del-icono" (ej: "regular chevron-left").',
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: '' },
+        category: 'Props (Padre)',
+        type: { summary: 'IconString' },
+        defaultValue: { summary: "''" },
       },
     },
     iconRight: {
+      name: 'icon-right',
       control: { type: 'text' },
       description:
         'Nombre del ícono a mostrar a la derecha del texto. Utiliza el formato "peso nombre-del-icono" (ej: "regular chevron-right").',
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: '' },
+        category: 'Props (Padre)',
+        type: { summary: 'IconString' },
+        defaultValue: { summary: "''" },
       },
     },
     status: {
+      name: 'status',
       control: { type: 'select' },
       options: ['default', 'inline'],
       description:
         'Status del link: default (link independiente) o inline (para texto con enlaces).',
       table: {
-        type: { summary: 'string' },
+        category: 'Props (Padre)',
+        type: { summary: "'default' | 'inline'" },
         defaultValue: { summary: 'default' },
       },
     },
-    onClick: { action: 'clicked' },
+    onClick: {
+      name: 'click',
+      action: 'clicked',
+      description:
+        'Evento que se dispara al hacer click en el link. Sin `href` también se dispara con Enter, Enter del teclado numérico o Espacio. Con `disabled` no se dispara.',
+      control: false,
+      table: {
+        category: 'Eventos (Padre)',
+        type: {
+          summary: 'Function',
+          detail: '(evt: MouseEvent) => void',
+        },
+      },
+    },
+    default: {
+      name: 'default',
+      description: 'Slot con el contenido (texto) del link.',
+      control: false,
+      table: {
+        category: 'Slots (Padre)',
+        type: { summary: 'Slot' },
+      },
+    },
+    icon: {
+      name: 'icon',
+      description:
+        'Slot para un ícono personalizado, que se renderiza después del ícono derecho.',
+      control: false,
+      table: {
+        category: 'Slots (Padre)',
+        type: { summary: 'Slot' },
+      },
+    },
   },
   parameters: {
     docs: {
@@ -107,6 +158,8 @@ El componente Link proporciona un link versátil y personalizable para la navega
 - Tres tamaños disponibles: small (sm), medium (md) y large (lg)
 - Soporte para íconos a la izquierda y derecha
 - Estados de hover, active y disabled
+- Sin \`href\` se expone como botón operable con teclado (Tab, Enter y Espacio)
+- Anillo de foco visible al navegar con teclado
 - Compatible con atributos nativos de links HTML
 
 ## Instalación
@@ -607,6 +660,52 @@ export const LinkStatus: Story = {
 
 <!-- Status: Inline (para enlaces dentro de texto) -->
 <p>Este es un ejemplo de un párrafo con un <g-link status="inline" href="https://empresas.global66.com/">link inline</g-link> que está integrado dentro del texto.</p>`,
+        language: 'html',
+        type: 'auto',
+      },
+    },
+  },
+};
+
+export const WithoutHref: Story = {
+  name: 'Sin href (botón con teclado)',
+  render: () => ({
+    components: { GLink, GConfigProvider },
+    setup() {
+      const clickCount = ref(0);
+      function handleLinkClick() {
+        clickCount.value += 1;
+      }
+      return { clickCount, handleLinkClick };
+    },
+    template: `
+      <g-config-provider>
+        <div class="flex flex-col space-y-4 items-start">
+          <div>
+            <h3 class="mb-2 font-semibold">Sin href</h3>
+            <g-link @click="handleLinkClick">Activar con Enter o Espacio</g-link>
+            <p class="mt-2">Activaciones: {{ clickCount }}</p>
+          </div>
+
+          <div>
+            <h3 class="mb-2 font-semibold">Sin href y disabled</h3>
+            <g-link disabled @click="handleLinkClick">Link deshabilitado, fuera del Tab</g-link>
+          </div>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Sin `href` el link se comporta como un botón (`role="button"`): se alcanza con Tab y se activa con Enter, Enter del teclado numérico o Espacio, además del click. Con `disabled` expone `aria-disabled="true"`, queda fuera del orden de Tab y no dispara `click`. Al navegar con teclado todo link muestra un anillo de foco.',
+      },
+      source: {
+        code: `
+<g-link @click="handleClick">Activar con Enter o Espacio</g-link>
+
+<g-link disabled @click="handleClick">Link deshabilitado, fuera del Tab</g-link>`,
         language: 'html',
         type: 'auto',
       },

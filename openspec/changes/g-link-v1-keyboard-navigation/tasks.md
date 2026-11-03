@@ -28,7 +28,7 @@ Restricciones que todo subagente recibe (detalle en `proposal.md`): mover con `g
   - listo cuando: el bloque `b(link)` tiene `&:focus-visible { @apply outline outline-primary-def; }`, y el `diff` de la compilación por ruta contra `g-link.antes.css` muestra **solo** las líneas de esa regla.
   - commit: `fix(link): muestra el foco al navegar con teclado`
 
-- [ ] **5 · Story de g-link con el patrón Props / Eventos / Slots**
+- [x] **5 · Story de g-link con el patrón Props / Eventos / Slots**
   - archivos: `stories/link.stories.ts`
   - depende de: 3, 4
   - listo cuando: los argTypes de los 9 props (`type`, `size`, `underline`, `disabled`, `href`, `target`, `iconLeft`, `iconRight`, `status`) van en `Props`, con descripción, tipo y default leídos de `link.constant.ts`; `click` va en `Eventos`; `default` e `icon` van en `Slots`. Las stories que ya existen se mantienen, y se agrega `WithoutHref`, con un link sin href, uno `disabled` y su descripción de teclado. `eslint` del archivo da 0 problemas.
