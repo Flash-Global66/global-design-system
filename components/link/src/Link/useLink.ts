@@ -2,12 +2,12 @@ import { computed } from 'vue';
 import type { SetupContext } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
 import { LINK_ACTIVATION_KEYS } from './constants/link.constant';
-import type { LinkEmits, LinkProps } from './types/link.type';
+import type { LinkEmits, LinkProps, UseLinkReturn } from './types/link.type';
 
 export function useLink(
   props: LinkProps,
   emit: SetupContext<LinkEmits>['emit'],
-) {
+): UseLinkReturn {
   const ns = useNamespace('link');
 
   const linkKls = computed(() => [

@@ -10,6 +10,8 @@ import type { SFCWithInstall } from '@flash-global66/g-utils';
 export const GLink: SFCWithInstall<typeof Link> = withInstall(Link);
 
 export { linkProps, linkEmits } from './src/Link/constants/link.constant';
-export type { LinkProps, LinkEmits } from './src/Link/types/link.type';
-
-export type LinkInstance = InstanceType<typeof Link>;
+export type {
+  LinkProps,
+  LinkEmits,
+  LinkInstance,
+} from './src/Link/types/link.type';
