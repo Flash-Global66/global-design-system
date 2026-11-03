@@ -176,7 +176,7 @@ Este componente requiere:
 Para que el componente funcione correctamente, es necesario importar los estilos SASS:
 
 \`\`\`scss
-@use "@flash-global66/g-link/link.styles.scss" as *;
+@use "@flash-global66/g-link/styles.scss" as *;
 \`\`\`
 
 ## Uso básico
