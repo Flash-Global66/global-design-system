@@ -9,22 +9,18 @@
     @click="handleClick"
     @keydown="handleKeydown"
   >
-    <!-- Left Icon -->
     <g-icon-font v-if="iconLeft" :name="iconLeft" :class="ns.e('icon-left')" />
 
-    <!-- Content / Text -->
     <span :class="ns.e('inner')">
       <slot />
     </span>
 
-    <!-- Right Icon -->
     <g-icon-font
       v-if="iconRight"
       :name="iconRight"
       :class="ns.e('icon-right')"
     />
 
-    <!-- Custom Icon Slot -->
     <slot v-if="$slots.icon" name="icon" />
   </a>
 </template>
