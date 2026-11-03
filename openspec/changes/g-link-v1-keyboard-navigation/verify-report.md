@@ -1,14 +1,15 @@
 # Verificación · g-link-v1-keyboard-navigation
 
 ```yaml
-veredicto: pasa
-ronda: 1
+veredicto: no pasa
+ronda: 2
 fecha: 2026-11-03
-tareas_a_medias: []
-cumplidas: 5/5
-a_medias: 0
-de_mas: 2
-escenarios: 6/6
+vuelve_a: plan
+tareas_a_medias: [4]
+cumplidas: 4/5
+a_medias: 1
+de_mas: 4
+escenarios: 5/6
 comandos:
   - cmd: ../../../node_modules/.bin/vitest run --project unit 2>&1 | tail -4
     exit: 0
@@ -18,7 +19,7 @@ comandos:
   - cmd: ../../../node_modules/.bin/vitest run --project unit components/link 2>&1 | tail -4
     exit: 0
     esperado: '2 archivos, todos en verde'
-    obtenido: 'Test Files 2 passed (2) · Tests 36 passed (36)'
+    obtenido: 'Test Files 2 passed (2) · Tests 36 passed (36) (Link.spec.ts 22, useLink.spec.ts 14)'
     coincide: true
   - cmd: ../../../node_modules/.bin/eslint components/link stories/link.stories.ts --ext .vue,.ts --max-warnings 0
     exit: 0
@@ -27,10 +28,10 @@ comandos:
     coincide: true
   - cmd: 'compilación por ruta de components/link/src/Link/link.style.scss + diff contra $SCRATCH/g-link.antes.css'
     exit: 1
-    esperado: 'solo las líneas de :focus-visible (después de la tarea 4)'
-    obtenido: "220 -> 226 líneas; se agrega .gui-link:focus-visible { outline-style: solid; outline-color: var(--color-primary) } más '}' y '.gui-link {' por el corte del bloque"
-    coincide: true
-  - cmd: '(cd components/link && vite build --outDir $SCRATCH/verify-link-dist --emptyOutDir) && ls'
+    esperado: 'solo las líneas de :focus-visible de la regla .gui-link:focus-visible (tarea 4)'
+    obtenido: '220 -> 229 líneas: el bloque .gui-link:focus-visible de la ronda 1 (6 líneas) MÁS una regla nueva, .gui-link.gui-link--tertiary:focus-visible { outline-color: #FFFFFF; } (3 líneas)'
+    coincide: false
+  - cmd: '(cd components/link && vite build --outDir $SCRATCH/verify-r2-link-dist --emptyOutDir) && ls'
     exit: 0
     esperado: 'index.js e index.mjs'
     obtenido: '✓ built · index.js, index.mjs'
@@ -40,48 +41,40 @@ comandos:
     esperado: 'solo components/link/** y stories/link.stories.ts'
     obtenido: '11 archivos en components/link/** + stories/link.stories.ts'
     coincide: true
-  - cmd: '(cd components/link && vue-tsc --project tsconfig.json --declarationDir/--outDir al scratchpad)'
+  - cmd: '(cd components/link && vue-tsc --project tsconfig.json --declaration --emitDeclarationOnly --declarationDir $SCRATCH/vtsc-r2)'
     exit: 0
     esperado: 'sin errores y sin compilar tests/ (listo cuando de la tarea 2)'
-    obtenido: 'sin errores; emite index.d.ts y 4 .d.ts de src/Link, nada de tests/'
+    obtenido: 'sin errores; 5 .d.ts (index, useLink, index.vue, link.type, link.constant), nada de tests/'
     coincide: true
   - cmd: calcifer check
     exit: 0
     esperado: 'sin hallazgos (el plan no declaró un resultado)'
-    obtenido: "sin hallazgos, pero 'SIN REVISAR': ningún validador local cubrió los 15 archivos (eslint, check-architecture y test quedan para CI)"
+    obtenido: "sin hallazgos, pero 'SIN REVISAR': ningún validador local cubrió los 16 archivos (eslint, check-architecture y test quedan para CI)"
     coincide: true
 ```
 
-## Qué se cumplió (5/5)
+Contexto: la ronda 1 pasó (5/5, 6/6). Después entraron tres commits que corrigen hallazgos de un code review: `5da9ac1c` (anillo blanco en tertiary), `2e95bf0e` (`LinkInstance` y `UseLinkReturn` en `types/`, spec renombrado a `Link.spec.ts`) y `1b5cfa39` (ruta de estilos en la story). El rename del spec quedó dentro de `5da9ac1c` y no en `2e95bf0e`, porque `git mv` lo había dejado staged.
 
-1. **Migración al arquetipo**: `components/link/src/Link/{index.vue,useLink.ts,constants/link.constant.ts,types/link.type.ts,link.style.scss}` y `components/link/tests/Link/index.spec.ts`. El `.scss` se movió sin cambios (`R100` en 571b5020). `index.ts` exporta `GLink`, `linkProps`, `linkEmits`, `LinkProps`, `LinkEmits` y `LinkInstance`, sin `export *` ni default (son los mismos exports que tenía `link.ts` en Base). En ese commit, `package.json` solo cambia `exports["./styles.scss"]`, y `table.stories.ts` no se tocó. El spec de caracterización existe y pasa; el historial no permite comprobar que se escribió antes del movimiento, porque va en el mismo commit.
-2. **Buildable**: `components/link/package.json`, `vite.config.ts` y `tsconfig.json` siguen la plantilla de `inline` (`buildable`, `dist`, `files`, scripts, peers `vue` y `g-icon-font`, `1.0.0-0`). El build y vue-tsc pasan, y vue-tsc no compila `tests/`.
-3. **Botón con teclado**: `useLink.ts`, `link.constant.ts` (`LINK_ACTIVATION_KEYS` con `EVENT_CODE` y JSDoc de `href`), `tests/Link/index.spec.ts` y `tests/Link/useLink.spec.ts`. Cada punto del criterio tiene un test, y el commit trae `!` y `BREAKING CHANGE:`.
-4. **Foco visible**: `link.style.scss`. En el fuente solo se agrega `&:focus-visible`. Las líneas `}` y `.gui-link {` del diff compilado aparecen porque la regla parte en dos el bloque compilado; el segundo pedazo queda sin declaraciones, así que el CSS efectivo no cambia. Se cumple en lo sustancial. A la letra, «solo las líneas» se podía cumplir poniendo la regla al final del bloque `b(link)`.
-5. **Story**: `stories/link.stories.ts`. Los 9 props van en `Props (Padre)` con tipo y default de la constante, `click` en `Eventos (Padre)`, y `default` e `icon` en `Slots (Padre)`. Las stories previas siguen intactas, se agregó `WithoutHref`, y eslint da 0.
+## Qué se cumplió (4/5)
+
+1. **Migración**: `components/link/src/Link/{index.vue,useLink.ts,constants/link.constant.ts,types/link.type.ts,link.style.scss}` y `components/link/index.ts`. `index.ts` sigue exportando los 6 nombres, sin `export *` ni default. El spec de caracterización ahora es `tests/Link/Link.spec.ts`; las tareas 1 y 3 dicen `index.spec.ts`, pero manda la rule `ds-component-layers` (principio 4).
+2. **Buildable**: `package.json`, `vite.config.ts` y `tsconfig.json`. Pasan el build y vue-tsc.
+3. **Botón con teclado**: `useLink.ts`, `link.constant.ts`, `tests/Link/Link.spec.ts` y `tests/Link/useLink.spec.ts`. El rename y `UseLinkReturn` no cambian el comportamiento.
+4. **Story**: `stories/link.stories.ts`, con eslint en 0.
 
 ## Qué quedó a medias
 
-Ninguna.
+- **Tarea 4**: el criterio pide que el diff compilado muestre **solo** la regla `.gui-link:focus-visible`, y ahora aparece además `.gui-link.gui-link--tertiary:focus-visible { outline-color: #FFFFFF; }`. Por la misma razón quedan contradichos el escenario «El estilo exportado agrega solo la regla de foco» y el texto del Requirement («Todo `GLink` SHALL mostrar un contorno `outline-primary-def`»).
+  - El cambio de código se justifica: el tertiary va sobre `bg-primary-def`, y ahí un anillo `primary-def` no se ve.
+  - Lo que falla es el criterio, que no previó esa variante. Hay que corregir el plan (la tarea 4, el Requirement y su escenario), no revertir el commit.
 
-## Qué se hizo de más (2)
+## Qué se hizo de más (4)
 
-- `useLink.ts` y `tests/Link/index.spec.ts`: `aria-disabled="true"` se aplica también a un link **con** `href` y `disabled`. La tarea 3 lo pedía solo sin href, y el criterio del cambio entero dice «con href se comporta como antes, salvo el anillo de foco».
-- `stories/link.stories.ts`: se agregaron dos viñetas a la descripción del componente (botón con teclado y anillo de foco), que la tarea 5 no pedía.
+- `aria-disabled` también con href, y las dos viñetas de la story (ya reportados en la ronda 1).
+- `UseLinkReturn` y la anotación de retorno de `useLink`, por la rule `typescript-types`.
+- La ruta de estilos de la story corregida a `@flash-global66/g-link/styles.scss` (el error ya estaba en Base).
 
-## Decisiones del apply
+## Escenarios (5/6)
 
-Legítimas:
-
-- `GLink.Link` tampoco existía en Base.
-- La cabecera de Element Plus ya estaba.
-- `1.0.0-0` lo pide la tarea 2 y el dev lo reconfirmó.
-
-## Escenarios (6/6 con evidencia)
-
-- Tab, Enter/Espacio y disabled sin href: `tests/Link/index.spec.ts`.
-- Con href no es botón: «no agrega role ni tabindex» y «Espacio no activa el link».
-- Disabled con href no navega: se prueban los atributos. Que no emita al hacer click se prueba de forma indirecta en `useLink.spec`, que corre sin href.
-- El estilo agrega solo la regla de foco: lo prueba el diff compilado por ruta.
-
-`calcifer check` salió con exit 0 sin validadores locales (delega en CI). Los comandos del plan se corrieron uno por uno.
+- Los 5 de teclado y href siguen cubiertos por `tests/Link/Link.spec.ts` y `tests/Link/useLink.spec.ts`.
+- «El estilo exportado agrega solo la regla de foco» queda **contradicho** por el diff compilado; no es un caso sin probar.
