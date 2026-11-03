@@ -12,7 +12,7 @@
 
 @include b(collapse-item) {
   @include e(header) {
-    @apply flex px-lg py-md justify-between items-center h-auto rounded-md border-none transition-colors duration-500 ease-in-out;
+    @apply flex px-sm sm:px-lg py-md justify-between items-center h-auto rounded-md border-none transition-colors duration-500 ease-in-out;
     @include when(active) {
       @apply bg-everBlue-50 rounded-bl-none rounded-br-none;
     }
@@ -26,7 +26,7 @@
       }
     }
     @include m('text') {
-      @apply flex flex-col items-start justify-center;
+      @apply flex flex-col items-start justify-center min-w-0 text-left;
     }
     @include m('icon-right') {
       @apply flex items-center justify-center gap-xs;
@@ -45,6 +45,6 @@
     @apply border-none rounded-bl-md rounded-br-md;
   }
   @include e(content) {
-    @apply px-lg py-md;
+    @apply px-sm sm:px-lg py-md;
   }
 }
