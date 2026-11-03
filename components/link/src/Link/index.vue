@@ -3,7 +3,11 @@
     :class="linkKls"
     :href="disabled || !href ? undefined : href"
     :target="disabled || !href ? undefined : target"
+    :role="role"
+    :tabindex="tabindex"
+    :aria-disabled="ariaDisabled"
     @click="handleClick"
+    @keydown="handleKeydown"
   >
     <!-- Left Icon -->
     <g-icon-font v-if="iconLeft" :name="iconLeft" :class="ns.e('icon-left')" />
@@ -36,5 +40,13 @@ defineOptions({
 const props = defineProps(linkProps);
 const emit = defineEmits(linkEmits);
 
-const { ns, linkKls, handleClick } = useLink(props, emit);
+const {
+  ns,
+  linkKls,
+  role,
+  tabindex,
+  ariaDisabled,
+  handleKeydown,
+  handleClick,
+} = useLink(props, emit);
 </script>

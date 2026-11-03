@@ -16,7 +16,7 @@ Restricciones que todo subagente recibe (detalle en `proposal.md`): mover con `g
   - listo cuando: `package.json` sigue la plantilla de `inline` (`buildable`, `exports` con `dist`, `files`, `scripts.build`/`build:types`, `peerDependencies` con `vue` y `@flash-global66/g-icon-font`, `"version": "1.0.0-0"`). `vite build --outDir <scratch>` produce `index.mjs` e `index.js`. `vue-tsc --project tsconfig.json` termina sin errores y no compila `tests/`.
   - commit: `build(link): g-link pasa a ser buildable`
 
-- [ ] **3 · Sin href, g-link es un botón operable con teclado**
+- [x] **3 · Sin href, g-link es un botón operable con teclado**
   - archivos: `components/link/src/Link/index.vue`, `components/link/src/Link/useLink.ts`, `components/link/src/Link/constants/link.constant.ts`, `components/link/tests/Link/index.spec.ts`, `components/link/tests/Link/useLink.spec.ts`
   - depende de: 1
   - listo cuando: los specs prueban lo siguiente. **Sin `href`**: `role="button"` y `tabindex="0"`; `user.tab()` lo enfoca; Enter, NumpadEnter y Espacio emiten `click` una sola vez con un `MouseEvent`; Espacio no hace scroll (`preventDefault`). **Con `disabled` y sin href**: `aria-disabled="true"`, sin `tabindex`, y ni el teclado ni el click emiten. **Con `href`**: sin `role`, sin `tabindex` y sin activación propia por Espacio, y `href`/`target` quedan como hoy. Las teclas viven en una constante de `link.constant.ts` construida con `EVENT_CODE`, y el JSDoc de `href` describe el caso sin href.

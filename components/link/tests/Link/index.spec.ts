@@ -3,6 +3,12 @@ import { render } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import { GLink } from '../../index';
 
+function pressKey(element: Element, code: string): boolean {
+  return element.dispatchEvent(
+    new KeyboardEvent('keydown', { code, bubbles: true, cancelable: true }),
+  );
+}
+
 function getLink(container: Element) {
   return container.firstElementChild as HTMLAnchorElement;
 }
@@ -121,5 +127,112 @@ describe('GLink', () => {
       },
     });
     expect(getByTestId('custom-icon')).toBeInTheDocument();
+  });
+
+  describe('sin href (botón operable con teclado)', () => {
+    it('expone role="button" y tabindex="0"', () => {
+      const { container } = render(GLink, { slots: { default: 'Ir' } });
+      const link = getLink(container);
+      expect(link).toHaveAttribute('role', 'button');
+      expect(link).toHaveAttribute('tabindex', '0');
+      expect(link).not.toHaveAttribute('aria-disabled');
+    });
+
+    it('Tab lo enfoca', async () => {
+      const { container } = render(GLink, { slots: { default: 'Ir' } });
+      await userEvent.tab();
+      expect(getLink(container)).toHaveFocus();
+    });
+
+    it.each(['{Enter}', '[Space]'])(
+      '%s emite click una sola vez con un MouseEvent',
+      async key => {
+        const { container, emitted } = render(GLink, {
+          slots: { default: 'Ir' },
+        });
+        await userEvent.tab();
+        await userEvent.keyboard(key);
+        const events = emitted().click as unknown[][];
+        expect(events).toHaveLength(1);
+        expect(events[0][0]).toBeInstanceOf(MouseEvent);
+        expect(getLink(container)).toHaveFocus();
+      },
+    );
+
+    it('NumpadEnter emite click una sola vez con un MouseEvent', async () => {
+      const { container, emitted } = render(GLink, {
+        slots: { default: 'Ir' },
+      });
+      pressKey(getLink(container), 'NumpadEnter');
+      const events = emitted().click as unknown[][];
+      expect(events).toHaveLength(1);
+      expect(events[0][0]).toBeInstanceOf(MouseEvent);
+    });
+
+    it('Espacio no hace scroll (preventDefault)', async () => {
+      const { container } = render(GLink, { slots: { default: 'Ir' } });
+      const notPrevented = pressKey(getLink(container), 'Space');
+      expect(notPrevented).toBe(false);
+    });
+
+    it('otras teclas no emiten ni se previenen', async () => {
+      const { container, emitted } = render(GLink, {
+        slots: { default: 'Ir' },
+      });
+      const notPrevented = pressKey(getLink(container), 'KeyA');
+      expect(notPrevented).toBe(true);
+      expect(emitted().click).toBeUndefined();
+    });
+
+    it('disabled: aria-disabled, sin tabindex y sin emitir por teclado ni click', async () => {
+      const { container, emitted } = render(GLink, {
+        props: { disabled: true },
+        slots: { default: 'Ir' },
+      });
+      const link = getLink(container);
+      expect(link).toHaveAttribute('role', 'button');
+      expect(link).toHaveAttribute('aria-disabled', 'true');
+      expect(link).not.toHaveAttribute('tabindex');
+      pressKey(link, 'Enter');
+      pressKey(link, 'NumpadEnter');
+      pressKey(link, 'Space');
+      await userEvent.click(link);
+      expect(emitted().click).toBeUndefined();
+    });
+  });
+
+  describe('con href', () => {
+    it('no agrega role ni tabindex', () => {
+      const { container } = render(GLink, {
+        props: { href: 'https://global66.com', target: '_blank' },
+        slots: { default: 'Ir' },
+      });
+      const link = getLink(container);
+      expect(link).not.toHaveAttribute('role');
+      expect(link).not.toHaveAttribute('tabindex');
+      expect(link).not.toHaveAttribute('aria-disabled');
+      expect(link).toHaveAttribute('href', 'https://global66.com');
+      expect(link).toHaveAttribute('target', '_blank');
+    });
+
+    it('Espacio no activa el link ni se previene', async () => {
+      const { container, emitted } = render(GLink, {
+        props: { href: '/inicio' },
+        slots: { default: 'Ir' },
+      });
+      const notPrevented = pressKey(getLink(container), 'Space');
+      expect(notPrevented).toBe(true);
+      expect(emitted().click).toBeUndefined();
+    });
+
+    it('disabled con href marca aria-disabled y quita href y target', () => {
+      const { container } = render(GLink, {
+        props: { href: '/inicio', disabled: true },
+      });
+      const link = getLink(container);
+      expect(link).toHaveAttribute('aria-disabled', 'true');
+      expect(link).not.toHaveAttribute('href');
+      expect(link).not.toHaveAttribute('role');
+    });
   });
 });

@@ -1,6 +1,7 @@
 import { computed } from 'vue';
 import type { SetupContext } from 'vue';
 import { useNamespace } from '@flash-global66/g-utils';
+import { LINK_ACTIVATION_KEYS } from './constants/link.constant';
 import type { LinkEmits, LinkProps } from './types/link.type';
 
 export function useLink(
@@ -18,9 +19,34 @@ export function useLink(
     ns.is('underline', props.underline && !props.disabled),
   ]);
 
+  const isButtonLike = computed(() => !props.href);
+
+  const role = computed(() => (isButtonLike.value ? 'button' : undefined));
+
+  const tabindex = computed(() =>
+    isButtonLike.value && !props.disabled ? 0 : undefined,
+  );
+
+  const ariaDisabled = computed(() => (props.disabled ? 'true' : undefined));
+
+  function handleKeydown(event: KeyboardEvent) {
+    if (!isButtonLike.value || props.disabled) return;
+    if (!LINK_ACTIVATION_KEYS.includes(event.code)) return;
+    event.preventDefault();
+    (event.currentTarget as HTMLElement).click();
+  }
+
   function handleClick(event: MouseEvent) {
     if (!props.disabled) emit('click', event);
   }
 
-  return { ns, linkKls, handleClick };
+  return {
+    ns,
+    linkKls,
+    role,
+    tabindex,
+    ariaDisabled,
+    handleKeydown,
+    handleClick,
+  };
 }
