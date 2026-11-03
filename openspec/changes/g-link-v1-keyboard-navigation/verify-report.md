@@ -1,15 +1,14 @@
 # Verificación · g-link-v1-keyboard-navigation
 
 ```yaml
-veredicto: no pasa
-ronda: 2
+veredicto: pasa
+ronda: 3
 fecha: 2026-11-03
-vuelve_a: plan
-tareas_a_medias: [4]
-cumplidas: 4/5
-a_medias: 1
+tareas_a_medias: []
+cumplidas: 5/5
+a_medias: 0
 de_mas: 4
-escenarios: 5/6
+escenarios: 7/7
 comandos:
   - cmd: ../../../node_modules/.bin/vitest run --project unit 2>&1 | tail -4
     exit: 0
@@ -28,10 +27,10 @@ comandos:
     coincide: true
   - cmd: 'compilación por ruta de components/link/src/Link/link.style.scss + diff contra $SCRATCH/g-link.antes.css'
     exit: 1
-    esperado: 'solo las líneas de :focus-visible de la regla .gui-link:focus-visible (tarea 4)'
-    obtenido: '220 -> 229 líneas: el bloque .gui-link:focus-visible de la ronda 1 (6 líneas) MÁS una regla nueva, .gui-link.gui-link--tertiary:focus-visible { outline-color: #FFFFFF; } (3 líneas)'
-    coincide: false
-  - cmd: '(cd components/link && vite build --outDir $SCRATCH/verify-r2-link-dist --emptyOutDir) && ls'
+    esperado: 'solo .gui-link:focus-visible (solid + primary) y .gui-link.gui-link--tertiary:focus-visible (#FFFFFF), más las líneas } y .gui-link {'
+    obtenido: '220 -> 229 líneas: 13a14,19 (}, .gui-link:focus-visible {outline-style: solid; outline-color: var(--color-primary)}, .gui-link {) y 154a161,163 (.gui-link.gui-link--tertiary:focus-visible {outline-color: #FFFFFF})'
+    coincide: true
+  - cmd: '(cd components/link && vite build --outDir $SCRATCH/verify-r3-link-dist --emptyOutDir) && ls'
     exit: 0
     esperado: 'index.js e index.mjs'
     obtenido: '✓ built · index.js, index.mjs'
@@ -41,7 +40,7 @@ comandos:
     esperado: 'solo components/link/** y stories/link.stories.ts'
     obtenido: '11 archivos en components/link/** + stories/link.stories.ts'
     coincide: true
-  - cmd: '(cd components/link && vue-tsc --project tsconfig.json --declaration --emitDeclarationOnly --declarationDir $SCRATCH/vtsc-r2)'
+  - cmd: '(cd components/link && vue-tsc --project tsconfig.json --declaration --emitDeclarationOnly --declarationDir $SCRATCH/vtsc-r3)'
     exit: 0
     esperado: 'sin errores y sin compilar tests/ (listo cuando de la tarea 2)'
     obtenido: 'sin errores; 5 .d.ts (index, useLink, index.vue, link.type, link.constant), nada de tests/'
@@ -53,28 +52,31 @@ comandos:
     coincide: true
 ```
 
-Contexto: la ronda 1 pasó (5/5, 6/6). Después entraron tres commits que corrigen hallazgos de un code review: `5da9ac1c` (anillo blanco en tertiary), `2e95bf0e` (`LinkInstance` y `UseLinkReturn` en `types/`, spec renombrado a `Link.spec.ts`) y `1b5cfa39` (ruta de estilos en la story). El rename del spec quedó dentro de `5da9ac1c` y no en `2e95bf0e`, porque `git mv` lo había dejado staged.
+El `exit=1` del diff de CSS es el esperado: `diff` sale con 1 cuando hay diferencias, y las que aparecen son exactamente las que pide la tarea 4.
 
-## Qué se cumplió (4/5)
+**La corrección del plan (`28a1dc51`) es legítima.** Solo toca `openspec/**`, así que el código es el mismo de la ronda 2. Sigue lo que pidió esa ronda: corregir el criterio en lugar de revertir el commit. Y el criterio no se aflojó: sigue diciendo «solo», nombra los dos selectores con sus valores y admite como únicas líneas extra el `}` y el `.gui-link {` que ya salían en la ronda 1.
 
-1. **Migración**: `components/link/src/Link/{index.vue,useLink.ts,constants/link.constant.ts,types/link.type.ts,link.style.scss}` y `components/link/index.ts`. `index.ts` sigue exportando los 6 nombres, sin `export *` ni default. El spec de caracterización ahora es `tests/Link/Link.spec.ts`; las tareas 1 y 3 dicen `index.spec.ts`, pero manda la rule `ds-component-layers` (principio 4).
-2. **Buildable**: `package.json`, `vite.config.ts` y `tsconfig.json`. Pasan el build y vue-tsc.
-3. **Botón con teclado**: `useLink.ts`, `link.constant.ts`, `tests/Link/Link.spec.ts` y `tests/Link/useLink.spec.ts`. El rename y `UseLinkReturn` no cambian el comportamiento.
-4. **Story**: `stories/link.stories.ts`, con eslint en 0.
+## Qué se cumplió (5/5)
+
+1. **Migración**: `components/link/src/Link/{index.vue,useLink.ts,constants/link.constant.ts,types/link.type.ts,link.style.scss}`, `components/link/index.ts` y `tests/Link/Link.spec.ts`.
+2. **Buildable**: `components/link/{package.json,vite.config.ts,tsconfig.json}`. Pasan el build y vue-tsc.
+3. **Botón con teclado**: `useLink.ts` y `link.constant.ts`, probados en `tests/Link/Link.spec.ts` y `tests/Link/useLink.spec.ts`.
+4. **Anillo de foco**: `link.style.scss` tiene la regla `primary-def` en `b(link)` y la blanca en el tertiary. El diff compilado coincide línea por línea con el criterio.
+5. **Story**: `stories/link.stories.ts`, con eslint en 0.
 
 ## Qué quedó a medias
 
-- **Tarea 4**: el criterio pide que el diff compilado muestre **solo** la regla `.gui-link:focus-visible`, y ahora aparece además `.gui-link.gui-link--tertiary:focus-visible { outline-color: #FFFFFF; }`. Por la misma razón quedan contradichos el escenario «El estilo exportado agrega solo la regla de foco» y el texto del Requirement («Todo `GLink` SHALL mostrar un contorno `outline-primary-def`»).
-  - El cambio de código se justifica: el tertiary va sobre `bg-primary-def`, y ahí un anillo `primary-def` no se ve.
-  - Lo que falla es el criterio, que no previó esa variante. Hay que corregir el plan (la tarea 4, el Requirement y su escenario), no revertir el commit.
+Ninguna.
 
-## Qué se hizo de más (4)
+## Qué se hizo de más (4, los mismos de la ronda 2)
 
-- `aria-disabled` también con href, y las dos viñetas de la story (ya reportados en la ronda 1).
-- `UseLinkReturn` y la anotación de retorno de `useLink`, por la rule `typescript-types`.
-- La ruta de estilos de la story corregida a `@flash-global66/g-link/styles.scss` (el error ya estaba en Base).
+- `aria-disabled` también en links con href.
+- Dos viñetas en la descripción de la story.
+- `UseLinkReturn` y la anotación de retorno de `useLink`.
+- La ruta de estilos corregida en la story.
 
-## Escenarios (5/6)
+## Escenarios (7/7)
 
-- Los 5 de teclado y href siguen cubiertos por `tests/Link/Link.spec.ts` y `tests/Link/useLink.spec.ts`.
-- «El estilo exportado agrega solo la regla de foco» queda **contradicho** por el diff compilado; no es un caso sin probar.
+- Los 5 de teclado y href: `tests/Link/Link.spec.ts` y `tests/Link/useLink.spec.ts` (36 tests).
+- «El estilo exportado agrega solo las reglas de foco»: lo prueba el diff compilado por ruta.
+- «El tertiary muestra el anillo blanco»: el diff compilado muestra `outline-color: #FFFFFF` bajo `.gui-link.gui-link--tertiary:focus-visible`, que gana por especificidad. Falta probarlo en un navegador, y el plan deja esa prueba para la fase 2.
