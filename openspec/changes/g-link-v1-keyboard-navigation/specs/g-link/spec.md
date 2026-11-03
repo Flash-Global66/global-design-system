@@ -40,10 +40,16 @@
 
 ### Requirement: Foco visible al navegar con teclado
 
-Todo `GLink`, con o sin `href`, SHALL mostrar un contorno `outline-primary-def` cuando recibe foco por teclado (`:focus-visible`), y SHALL seguir sin contorno al hacer click con el mouse.
+Todo `GLink`, con o sin `href`, SHALL mostrar un contorno cuando recibe foco por teclado (`:focus-visible`): `outline-primary-def` por defecto y blanco en `type="tertiary"`, que se usa sobre fondo `primary-def`. SHALL seguir sin contorno al hacer click con el mouse.
 
-#### Scenario: El estilo exportado agrega solo la regla de foco
+#### Scenario: El estilo exportado agrega solo las reglas de foco
 
 - **GIVEN** el `styles.scss` exportado por `@flash-global66/g-link`
 - **WHEN** se compila y se compara con la compilación de `55ca1e8a`
-- **THEN** la única diferencia es la regla `.gui-link:focus-visible` con `outline-style: solid` y el color `primary-def`
+- **THEN** las únicas diferencias son la regla `.gui-link:focus-visible` con `outline-style: solid` y el color `primary-def`, y la regla `.gui-link.gui-link--tertiary:focus-visible` con el color blanco
+
+#### Scenario: El tertiary muestra el anillo blanco
+
+- **GIVEN** un `GLink` con `type="tertiary"` sobre fondo `primary-def`
+- **WHEN** recibe foco por teclado
+- **THEN** su `:focus-visible` usa `outline-color: #FFFFFF`, y la regla le gana a la base por especificidad (`.gui-link.gui-link--tertiary:focus-visible` contra `.gui-link:focus-visible`)

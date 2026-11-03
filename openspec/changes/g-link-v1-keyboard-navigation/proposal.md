@@ -60,7 +60,7 @@ El diff desde `Base` incluye este `proposal.md`, su `tasks.md` y el delta de `sp
 
 ## Qué propongo, y qué queda afuera
 
-g-link se migra al arquetipo de paquete simple y pasa a ser buildable, **sin cambiar comportamiento** en ese paso. Después: sin `href`, g-link se expone como botón accesible (`role="button"`, `tabindex="0"`, activable con Enter, NumpadEnter y Espacio); con `disabled`, lleva `aria-disabled="true"` y queda fuera del Tab. La activación por teclado llama a `el.click()`, así que el consumidor sigue recibiendo `click` con un `MouseEvent`. Todo g-link muestra un anillo `:focus-visible` con `outline-primary-def`. Se publica como **1.0.0**, y la story documenta todos los props, el evento y los slots.
+g-link se migra al arquetipo de paquete simple y pasa a ser buildable, **sin cambiar comportamiento** en ese paso. Después: sin `href`, g-link se expone como botón accesible (`role="button"`, `tabindex="0"`, activable con Enter, NumpadEnter y Espacio); con `disabled`, lleva `aria-disabled="true"` y queda fuera del Tab. La activación por teclado llama a `el.click()`, así que el consumidor sigue recibiendo `click` con un `MouseEvent`. Todo g-link muestra un anillo `:focus-visible` con `outline-primary-def`, salvo el tertiary, que lo muestra blanco porque va sobre fondo `primary-def`. Se publica como **1.0.0**, y la story documenta todos los props, el evento y los slots.
 
 **Este cambio altera comportamiento**: lleva un delta en `specs/g-link/`.
 
@@ -123,7 +123,7 @@ Línea base: sin salida y `exit=0`. Después: igual.
 node --input-type=module -e 'import { preprocessCSS, resolveConfig } from "vite"; const c = await resolveConfig({ configFile: false }, "serve"); const { code } = await preprocessCSS(`@use "${process.argv[1]}";`, `${process.cwd()}/check.scss`, c); process.stdout.write(code);' "$PWD/components/link/src/Link/link.style.scss" 2>/dev/null > $SCRATCH/g-link.despues.css; diff $SCRATCH/g-link.antes.css $SCRATCH/g-link.despues.css
 ```
 
-`$SCRATCH` es el scratchpad de esta sesión. Línea base: 220 líneas, `exit=0`. Después de la tarea 1, `diff` vacío. Después de la 4, solo las líneas `:focus-visible`.
+`$SCRATCH` es el scratchpad de esta sesión. Línea base: 220 líneas, `exit=0`. Después de la tarea 1, `diff` vacío. Después de la 4, solo las dos reglas `:focus-visible`: la base (`primary-def`) y la del tertiary (blanco).
 
 ```bash
 (cd components/link && ../../../../../node_modules/.bin/vite build --outDir $SCRATCH/link-dist --emptyOutDir 2>&1 | tail -3) && ls $SCRATCH/link-dist
@@ -137,6 +137,6 @@ git diff --name-only 55ca1e8a..HEAD -- . ':!openspec' | sort
 
 Invariante: solo `components/link/**` y `stories/link.stories.ts`.
 
-**Criterio del cambio entero**: un g-link sin `href` y con `@click` se alcanza con Tab y se activa con Enter o Espacio, y el consumidor recibe el mismo `click` que con el mouse. Con `href` se comporta como antes, salvo el anillo de foco. El paquete compila a `dist`, su CSS es el de antes más la regla `:focus-visible`, y la story documenta todos los props, el evento y los slots. En navegador real se comprueba en la fase 2, sobre «Ver más» en front-b2b.
+**Criterio del cambio entero**: un g-link sin `href` y con `@click` se alcanza con Tab y se activa con Enter o Espacio, y el consumidor recibe el mismo `click` que con el mouse. Con `href` se comporta como antes, salvo el anillo de foco. El paquete compila a `dist`, su CSS es el de antes más las reglas `:focus-visible` (la base y la del tertiary), y la story documenta todos los props, el evento y los slots. En navegador real se comprueba en la fase 2, sobre «Ver más» en front-b2b.
 
 **Costo estimado** (lo preguntaste): cinco tareas en el DS, las 2, 3 y 4 en paralelo después de la 1. Es cerca de un día de trabajo con review incluido. Los riesgos son la entrega del SCSS movido (mitigado con el diff por ruta) y el `dist` en front-b2b (mitigado pasando los 9 deep imports al entry). La fase 2 en front-b2b son unas horas más, una vez publicado.
