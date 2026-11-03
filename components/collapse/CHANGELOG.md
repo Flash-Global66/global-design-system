@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.17](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.16...@flash-global66/g-collapse@0.5.17) (2026-11-03)
+
+### Bug Fixes
+
+- **collapse:** achica el padding horizontal en pantallas angostas ([1fcba79](https://github.com/Flash-Global66/global-design-system/commit/1fcba7901cf3e530e05ae8260bb7b9412b168103))
+- **collapse:** separa el título del chevron en la cabecera ([b51bd7a](https://github.com/Flash-Global66/global-design-system/commit/b51bd7a61cce43ee8a6696f63beb177d0597ab1f))
+
 ## [0.5.16](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-collapse@0.5.15...@flash-global66/g-collapse@0.5.16) (2026-10-27)
 
 **Note:** Version bump only for package @flash-global66/g-collapse
