@@ -1,7 +1,6 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { PropType } from 'vue';
 import { buildProps } from '@flash-global66/g-utils';
 import type { IconString } from '@flash-global66/g-icon-font';
-import type Link from './Link.vue';
 
 export const linkProps = buildProps({
   /**
@@ -69,11 +68,7 @@ export const linkProps = buildProps({
     default: 'default',
   },
 } as const);
-export type LinkProps = ExtractPropTypes<typeof linkProps>;
 
 export const linkEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
 };
-export type LinkEmits = typeof linkEmits;
-
-export type LinkInstance = InstanceType<typeof Link>;

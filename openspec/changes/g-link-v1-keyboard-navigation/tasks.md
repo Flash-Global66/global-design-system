@@ -4,7 +4,7 @@ Restricciones que todo subagente recibe (detalle en `proposal.md`): mover con `g
 
 ---
 
-- [ ] **1 · Migrar g-link al arquetipo sin cambiar comportamiento**
+- [x] **1 · Migrar g-link al arquetipo sin cambiar comportamiento**
   - archivos: `components/link/src/Link.vue` → `components/link/src/Link/index.vue`, `components/link/src/Link/useLink.ts`, `components/link/src/link.ts` → `components/link/src/Link/constants/link.constant.ts`, `components/link/src/Link/types/link.type.ts`, `components/link/src/link.styles.scss` → `components/link/src/Link/link.style.scss`, `components/link/index.ts`, `components/link/package.json` (solo `exports["./styles.scss"]`), `components/link/tests/Link/index.spec.ts`
   - depende de: ninguna
   - listo cuando: antes de mover se escribe un spec de caracterización del comportamiento actual (clases BEM, `href`/`target`, `disabled` sin href y sin emitir, `click` con `MouseEvent`, iconos y slot `icon`), y sigue verde después de mover. La compilación por ruta de `link.style.scss` da un `diff` **vacío** contra `g-link.antes.css`. `index.ts` exporta `GLink`, `linkProps`, `linkEmits`, `LinkProps`, `LinkEmits` y `LinkInstance` sin `export *` ni default. `stories/link.stories.ts` y `stories/table.stories.ts` siguen importando sin cambios.
