@@ -128,6 +128,10 @@
   &.#{$namespace}-link--tertiary {
     @apply text-white;
 
+    &:focus-visible {
+      @apply outline-white;
+    }
+
     &:not(.is-disabled):hover {
       @apply text-nightBlue-200;
     }
