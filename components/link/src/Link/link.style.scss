@@ -11,6 +11,10 @@
   @apply cursor-pointer p-0;
   @apply font-semibold;
 
+  &:focus-visible {
+    @apply outline outline-primary-def;
+  }
+
   /* Size variations */
   &.#{$namespace}-link--sm {
     @apply text-2;
@@ -123,6 +127,10 @@
   /* Tertiary link - white color palette */
   &.#{$namespace}-link--tertiary {
     @apply text-white;
+
+    &:focus-visible {
+      @apply outline-white;
+    }
 
     &:not(.is-disabled):hover {
       @apply text-nightBlue-200;
