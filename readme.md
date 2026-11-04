@@ -161,7 +161,7 @@ El docgen de Storybook (`experimentalDocgenServer`, que genera las props de los 
 
 #### Solución:
 
-Los scripts `yarn storybook` y `yarn build-storybook` ya suben el heap a 8 GB (`NODE_OPTIONS=--max-old-space-size=8192`). Si corres `storybook` directamente con `npx`, pasa esa misma variable.
+Los scripts `yarn storybook` y `yarn build-storybook` ya suben el heap a 12 GB (`NODE_OPTIONS=--max-old-space-size=12288`). Si corres `storybook` directamente con `npx`, pasa esa misma variable.
 
 ## 🚀 Contribuidores
 
