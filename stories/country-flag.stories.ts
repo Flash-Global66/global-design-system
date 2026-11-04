@@ -32,7 +32,7 @@ El componente CountryFlag muestra banderas de países y códigos especiales medi
 
 ## Características
 - Colección de banderas de todos los países del mundo (ISO 3166-1 alpha-2)
-- Códigos especiales: EU, ALL_COUNTRY, PYUSD, USDC, USDT
+- Códigos especiales: EU, ALL_COUNTRY, BTC, ETH, PYUSD, USDC, USDT
 - Siete tamaños diferentes para adaptarse a diversos contextos
 - Forma circular por defecto (los SVGs están diseñados como círculos)
 - Lazy loading para optimizar el rendimiento
