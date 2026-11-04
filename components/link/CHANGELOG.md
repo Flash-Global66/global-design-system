@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-link@0.0.32...@flash-global66/g-link@1.0.0) (2026-11-04)
+
+### Bug Fixes
+
+- **link:** anillo de foco blanco en el link tertiary ([5da9ac1](https://github.com/Flash-Global66/global-design-system/commit/5da9ac1cae797631b6dc1f8e3a11e64b0b015121))
+- **link:** muestra el foco al navegar con teclado ([b39cf1f](https://github.com/Flash-Global66/global-design-system/commit/b39cf1f98b001e4935cd641ce62403e372efd3e8))
+
+- feat(link)!: sin href se expone como botón operable con teclado ([8e04f0d](https://github.com/Flash-Global66/global-design-system/commit/8e04f0d42bd9ebff935e516f4c228816a2172534))
+
+### BREAKING CHANGES
+
+- g-link se publica compilado (dist) y un g-link sin href pasa a tener role="button" y entrar en el orden de tabulación.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
 ## [0.0.32](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-link@0.0.31...@flash-global66/g-link@0.0.32) (2026-07-14)
 
 **Note:** Version bump only for package @flash-global66/g-link
