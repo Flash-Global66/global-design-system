@@ -1,0 +1,1369 @@
+{
+  "components": {
+    "form-input-number": {
+      "id": "form-input-number",
+      "name": "GInputNumber",
+      "path": "./stories/input-number.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GInputNumber",
+        "displayName": "GInputNumber",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "id",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `id` in native input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "step",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "incremental step"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "stepStrictly",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether input value can only be multiple of step"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "max",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the maximum allowed value"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "min",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the minimum allowed value"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "modelValue",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "binding value"
+              }
+            ],
+            "required": false,
+            "type": "number | null | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | null | undefined",
+              "schema": [
+                "undefined",
+                "null",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "readonly",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `readonly` in native input"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabled",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether the component is disabled"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "size",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "size of the component"
+              }
+            ],
+            "required": false,
+            "type": "ComponentSize | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "ComponentSize | undefined",
+              "schema": [
+                "undefined",
+                "\"default\"",
+                "\"large\"",
+                "\"small\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "controls",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to enable the control buttons"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "controlsPosition",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "position of the control buttons"
+              }
+            ],
+            "required": false,
+            "type": "\"\" | \"right\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"\" | \"right\" | undefined",
+              "schema": [
+                "undefined",
+                "\"\"",
+                "\"right\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "valueOnClear",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "value should be set when input box is cleared"
+              }
+            ],
+            "required": false,
+            "type": "number | \"max\" | \"min\" | null | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | \"max\" | \"min\" | null | undefined",
+              "schema": [
+                "undefined",
+                "null",
+                "number",
+                "\"max\"",
+                "\"min\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "name",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `name` in native input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "placeholder",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "same as `placeholder` in native input"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "precision",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "precision of input value"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "validateEvent",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to trigger form validation"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ariaLabel",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native aria-label attribute"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "inputmode",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "native input mode for virtual keyboards"
+              }
+            ],
+            "required": false,
+            "type": "\"none\" | \"text\" | \"tel\" | \"url\" | \"email\" | \"numeric\" | \"decimal\" | \"search\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"none\" | \"text\" | \"tel\" | \"url\" | \"email\" | \"numeric\" | \"decimal\" | \"search\" | undefined",
+              "schema": [
+                "undefined",
+                "\"none\"",
+                "\"text\"",
+                "\"tel\"",
+                "\"url\"",
+                "\"email\"",
+                "\"numeric\"",
+                "\"decimal\"",
+                "\"search\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "align",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "alignment for the inner input text"
+              }
+            ],
+            "required": false,
+            "type": "\"center\" | \"right\" | \"left\" | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "\"center\" | \"right\" | \"left\" | undefined",
+              "schema": [
+                "undefined",
+                "\"center\"",
+                "\"right\"",
+                "\"left\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "disabledScientific",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to disable scientific notation input (e.g. 'e', 'E')"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "change",
+            "description": "",
+            "tags": [],
+            "type": "[cur: number | undefined, prev: number | undefined]",
+            "signature": "(event: \"change\", cur: number | undefined, prev: number | undefined): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "number | undefined",
+                "schema": [
+                  "undefined",
+                  "number"
+                ]
+              },
+              "number | undefined"
+            ],
+            "declarations": []
+          },
+          {
+            "name": "input",
+            "description": "",
+            "tags": [],
+            "type": "[val: number | null | undefined]",
+            "signature": "(event: \"input\", val: number | null | undefined): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "number | null | undefined",
+                "schema": [
+                  "undefined",
+                  "null",
+                  "number"
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "tags": [],
+            "type": "[val: number | undefined]",
+            "signature": "(event: \"update:modelValue\", val: number | undefined): void",
+            "schema": [
+              {
+                "kind": "enum",
+                "type": "number | undefined",
+                "schema": [
+                  "undefined",
+                  "number"
+                ]
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "blur",
+            "description": "",
+            "tags": [],
+            "type": "[e: FocusEvent]",
+            "signature": "(event: \"blur\", e: FocusEvent): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "FocusEvent"
+              }
+            ],
+            "declarations": []
+          },
+          {
+            "name": "focus",
+            "description": "",
+            "tags": [],
+            "type": "[e: FocusEvent]",
+            "signature": "(event: \"focus\", e: FocusEvent): void",
+            "schema": [
+              {
+                "kind": "object",
+                "type": "FocusEvent"
+              }
+            ],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "decrease-icon",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "increase-icon",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "prefix",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          },
+          {
+            "name": "suffix",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "focus",
+            "type": "() => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "get focus the input component"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "blur",
+            "type": "() => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "remove focus the input component"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/input-number/index.ts"
+      },
+      "argTypes": {
+        "id": {
+          "name": "id",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "step": {
+          "name": "step",
+          "description": "",
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "category": "props"
+          }
+        },
+        "stepStrictly": {
+          "name": "stepStrictly",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "max": {
+          "name": "max",
+          "description": "",
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "category": "props"
+          }
+        },
+        "min": {
+          "name": "min",
+          "description": "",
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "category": "props"
+          }
+        },
+        "modelValue": {
+          "name": "modelValue",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "null",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number | null"
+            },
+            "category": "props"
+          }
+        },
+        "readonly": {
+          "name": "readonly",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "disabled": {
+          "name": "disabled",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "size": {
+          "name": "size",
+          "description": "",
+          "type": {
+            "name": "enum",
+            "value": [
+              "default",
+              "large",
+              "small"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "ComponentSize"
+            },
+            "category": "props"
+          }
+        },
+        "controls": {
+          "name": "controls",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "controlsPosition": {
+          "name": "controlsPosition",
+          "description": "",
+          "type": {
+            "name": "enum",
+            "value": [
+              "",
+              "right"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"\" | \"right\""
+            },
+            "category": "props"
+          }
+        },
+        "valueOnClear": {
+          "name": "valueOnClear",
+          "description": "",
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "other",
+                "value": "null",
+                "required": false
+              },
+              {
+                "name": "number",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "\"max\"",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "\"min\"",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number | \"max\" | \"min\" | null"
+            },
+            "category": "props"
+          }
+        },
+        "name": {
+          "name": "name",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "placeholder": {
+          "name": "placeholder",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "precision": {
+          "name": "precision",
+          "description": "",
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "category": "props"
+          }
+        },
+        "validateEvent": {
+          "name": "validateEvent",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "ariaLabel": {
+          "name": "ariaLabel",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "inputmode": {
+          "name": "inputmode",
+          "description": "",
+          "type": {
+            "name": "enum",
+            "value": [
+              "none",
+              "text",
+              "tel",
+              "url",
+              "email",
+              "numeric",
+              "decimal",
+              "search"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"none\" | \"text\" | \"tel\" | \"url\" | \"email\" | \"numeric\" | \"decimal\" | \"search\""
+            },
+            "category": "props"
+          }
+        },
+        "align": {
+          "name": "align",
+          "description": "",
+          "type": {
+            "name": "enum",
+            "value": [
+              "center",
+              "right",
+              "left"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "\"center\" | \"right\" | \"left\""
+            },
+            "category": "props"
+          }
+        },
+        "disabledScientific": {
+          "name": "disabledScientific",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "change": {
+          "name": "change",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[cur: number | undefined, prev: number | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[cur: number, prev: number | undefined]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "input": {
+          "name": "input",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[val: number | null | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[val: number | null]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "update:modelValue": {
+          "name": "update:modelValue",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[val: number | undefined]"
+          },
+          "table": {
+            "type": {
+              "summary": "[val: number]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "blur": {
+          "name": "blur",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[e: FocusEvent]"
+          },
+          "table": {
+            "type": {
+              "summary": "[e: FocusEvent]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "focus": {
+          "name": "focus",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[e: FocusEvent]"
+          },
+          "table": {
+            "type": {
+              "summary": "[e: FocusEvent]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "decrease-icon": {
+          "name": "decrease-icon",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "increase-icon": {
+          "name": "increase-icon",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "prefix": {
+          "name": "prefix",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "suffix": {
+          "name": "suffix",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        }
+      },
+      "apiDescription": "## Models\n\nTwo-way bindings. Bind each one with the `v-model` syntax shown next to it — do not pass the prop and listen to its `update:` event separately.\n\n```\nexport type GInputNumberModels = {\n  /** @description binding value */\n  modelValue?: number | null; // v-model=\"...\"\n}\n```\n\n## Props\n\n```\nexport type GInputNumberProps = {\n  /** @description same as `id` in native input */\n  id?: string;\n  /** @description incremental step */\n  step?: number;\n  /** @description whether input value can only be multiple of step */\n  stepStrictly?: boolean;\n  /** @description the maximum allowed value */\n  max?: number;\n  /** @description the minimum allowed value */\n  min?: number;\n  /** @description same as `readonly` in native input */\n  readonly?: boolean;\n  /** @description whether the component is disabled */\n  disabled?: boolean;\n  /** @description size of the component */\n  size?: ComponentSize;\n  /** @description whether to enable the control buttons */\n  controls?: boolean;\n  /** @description position of the control buttons */\n  controlsPosition?: \"\" | \"right\";\n  /** @description value should be set when input box is cleared */\n  valueOnClear?: number | \"max\" | \"min\" | null;\n  /** @description same as `name` in native input */\n  name?: string;\n  /** @description same as `placeholder` in native input */\n  placeholder?: string;\n  /** @description precision of input value */\n  precision?: number;\n  /** @description whether to trigger form validation */\n  validateEvent?: boolean;\n  /** @description native aria-label attribute */\n  ariaLabel?: string;\n  /** @description native input mode for virtual keyboards */\n  inputmode?: \"none\" | \"text\" | \"tel\" | \"url\" | \"email\" | \"numeric\" | \"decimal\" | \"search\";\n  /** @description alignment for the inner input text */\n  align?: \"center\" | \"right\" | \"left\";\n  /** @description whether to disable scientific notation input (e.g. 'e', 'E') */\n  disabledScientific?: boolean;\n}\n```\n\n## Events\n\n```\nexport type GInputNumberEvents = {\n  change: [cur: number | undefined, prev: number | undefined];\n  input: [val: number | null | undefined];\n  \"update:modelValue\": [val: number | undefined];\n  blur: [e: FocusEvent];\n  focus: [e: FocusEvent];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GInputNumberSlots = {\n  \"decrease-icon\": {};\n  \"increase-icon\": {};\n  prefix: {};\n  suffix: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GInputNumberExposed = {\n  /** @description get focus the input component */\n  focus: () => void;\n  /** @description remove focus the input component */\n  blur: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

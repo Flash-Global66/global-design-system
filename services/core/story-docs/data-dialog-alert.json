@@ -1,0 +1,39 @@
+{
+  "components": {
+    "data-dialog-alert": {
+      "id": "data-dialog-alert",
+      "name": "DialogAlert",
+      "path": "./stories/dialog-alert.stories.ts",
+      "stories": {
+        "data-dialog-alert--primary": {
+          "id": "data-dialog-alert--primary",
+          "name": "Básico"
+        },
+        "data-dialog-alert--with-checkboxes": {
+          "id": "data-dialog-alert--with-checkboxes",
+          "name": "Checkboxes"
+        },
+        "data-dialog-alert--all-types": {
+          "id": "data-dialog-alert--all-types",
+          "name": "Tipos"
+        },
+        "data-dialog-alert--multiple-buttons": {
+          "id": "data-dialog-alert--multiple-buttons",
+          "name": "Botones múltiples"
+        },
+        "data-dialog-alert--without-close-button": {
+          "id": "data-dialog-alert--without-close-button",
+          "name": "Sin botón cerrar"
+        },
+        "data-dialog-alert--custom-images": {
+          "id": "data-dialog-alert--custom-images",
+          "name": "Imágenes personalizadas"
+        },
+        "data-dialog-alert--promise-handling": {
+          "id": "data-dialog-alert--promise-handling",
+          "name": "Manejo de promesas"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,807 @@
+{
+  "components": {
+    "data-progress": {
+      "id": "data-progress",
+      "name": "GProgress",
+      "path": "./stories/progress.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GProgress",
+        "displayName": "GProgress",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "type",
+            "global": false,
+            "default": "'line'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "type of progress bar"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "percentage",
+            "global": false,
+            "default": "0",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "percentage, required"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "status",
+            "global": false,
+            "default": "'primary'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the current status of progress bar"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "duration",
+            "global": false,
+            "default": "3",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "control the animation duration of indeterminate progress or striped flow progress"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "strokeWidth",
+            "global": false,
+            "default": "6",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the width of progress bar"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "strokeLinecap",
+            "global": false,
+            "default": "'round'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "butt/circle/dashboard type shape at the end path"
+              }
+            ],
+            "required": false,
+            "type": "NonNullable<\"butt\" | \"round\" | \"square\" | \"inherit\" | undefined> | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "NonNullable<\"butt\" | \"round\" | \"square\" | \"inherit\" | undefined> | undefined",
+              "schema": [
+                "undefined",
+                "\"butt\"",
+                "\"round\"",
+                "\"square\"",
+                "\"inherit\""
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "width",
+            "global": false,
+            "default": "126",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "the canvas width of circle progress bar"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showText",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show percentage"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "loading",
+            "global": false,
+            "default": "false",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "should show the loading spinner icon. Overrides status icon."
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "format",
+            "global": false,
+            "default": "`${percentage}%`",
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "ProgressFn | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "ProgressFn | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(percentage: number): string"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "indeterminate",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "set indeterminate progress"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "textInside",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to place the percentage inside progress bar, only works when `type` is 'line'"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{ percentage: number; }",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{ percentage: number; }"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/progress/index.ts"
+      },
+      "argTypes": {
+        "type": {
+          "name": "type",
+          "description": "",
+          "defaultValue": {
+            "summary": "'line'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'line'"
+            },
+            "category": "props"
+          }
+        },
+        "percentage": {
+          "name": "percentage",
+          "description": "",
+          "defaultValue": {
+            "summary": "0"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "0"
+            },
+            "category": "props"
+          }
+        },
+        "status": {
+          "name": "status",
+          "description": "",
+          "defaultValue": {
+            "summary": "'primary'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'primary'"
+            },
+            "category": "props"
+          }
+        },
+        "duration": {
+          "name": "duration",
+          "description": "",
+          "defaultValue": {
+            "summary": "3"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "3"
+            },
+            "category": "props"
+          }
+        },
+        "strokeWidth": {
+          "name": "strokeWidth",
+          "description": "",
+          "defaultValue": {
+            "summary": "6"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "6"
+            },
+            "category": "props"
+          }
+        },
+        "strokeLinecap": {
+          "name": "strokeLinecap",
+          "description": "",
+          "defaultValue": {
+            "summary": "'round'"
+          },
+          "type": {
+            "name": "enum",
+            "value": [
+              "butt",
+              "round",
+              "square",
+              "inherit"
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "NonNullable<\"butt\" | \"round\" | \"square\" | \"inherit\"> | undefined"
+            },
+            "defaultValue": {
+              "summary": "'round'"
+            },
+            "category": "props"
+          }
+        },
+        "width": {
+          "name": "width",
+          "description": "",
+          "defaultValue": {
+            "summary": "126"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "126"
+            },
+            "category": "props"
+          }
+        },
+        "showText": {
+          "name": "showText",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "loading": {
+          "name": "loading",
+          "description": "",
+          "defaultValue": {
+            "summary": "false"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "false"
+            },
+            "category": "props"
+          }
+        },
+        "format": {
+          "name": "format",
+          "description": "",
+          "defaultValue": {
+            "summary": "`${percentage}%`"
+          },
+          "type": {
+            "name": "other",
+            "value": "ProgressFn | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "ProgressFn"
+            },
+            "defaultValue": {
+              "summary": "`${percentage}%`"
+            },
+            "category": "props"
+          }
+        },
+        "indeterminate": {
+          "name": "indeterminate",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "textInside": {
+          "name": "textInside",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{ percentage: number; }"
+          },
+          "table": {
+            "type": {
+              "summary": "{ percentage: number; }"
+            },
+            "category": "slots"
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GProgressProps = {\n  /**\n   * @description type of progress bar\n   * @default 'line'\n   */\n  type?: string;\n  /**\n   * @description percentage, required\n   * @default 0\n   */\n  percentage?: number;\n  /**\n   * @description the current status of progress bar\n   * @default 'primary'\n   */\n  status?: string;\n  /**\n   * @description control the animation duration of indeterminate progress or striped flow progress\n   * @default 3\n   */\n  duration?: number;\n  /**\n   * @description the width of progress bar\n   * @default 6\n   */\n  strokeWidth?: number;\n  /**\n   * @description butt/circle/dashboard type shape at the end path\n   * @default 'round'\n   */\n  strokeLinecap?: NonNullable<\"butt\" | \"round\" | \"square\" | \"inherit\"> | undefined;\n  /**\n   * @description the canvas width of circle progress bar\n   * @default 126\n   */\n  width?: number;\n  /**\n   * @description whether to show percentage\n   * @default true\n   */\n  showText?: boolean;\n  /**\n   * @description should show the loading spinner icon. Overrides status icon.\n   * @default false\n   */\n  loading?: boolean;\n  /** @default `${percentage}%` */\n  format?: ProgressFn;\n  /** @description set indeterminate progress */\n  indeterminate?: boolean;\n  /** @description whether to place the percentage inside progress bar, only works when `type` is 'line' */\n  textInside?: boolean;\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GProgressSlots = {\n  default: { percentage: number; };\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

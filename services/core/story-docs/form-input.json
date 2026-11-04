@@ -1,0 +1,36 @@
+{
+  "components": {
+    "form-input": {
+      "id": "form-input",
+      "name": "GInput",
+      "path": "./stories/input.stories.ts",
+      "stories": {
+        "form-input--basic": {
+          "id": "form-input--basic",
+          "name": "Básico",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GInput } from '../components/input';\n\nconst name = ref('');\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-input :autofocus=\"false\" :disabled=\"false\" :isEvent=\"false\" label=\"Etiqueta\" :loading=\"false\" :maxlength=\"50\" placeholder=\"Placeholder\" :showPassword=\"false\" :showWordLimit=\"false\" type=\"text\" validateEvent v-model=\"name\" />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input--payment-form": {
+          "id": "form-input--payment-form",
+          "name": "Formulario de Pago",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        },
+        "form-input--character-count": {
+          "id": "form-input--character-count",
+          "name": "Conteo de Caracteres",
+          "snippet": "<script lang=\"ts\" setup>\nimport { ref } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GInput } from '../components/input';\n\nconst tweet = ref('');\nconst description = ref('');\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-input \n        v-model=\"tweet\"\n        label=\"Tweet\"\n        placeholder=\"¿Qué está pasando?\"\n        maxlength=\"280\"\n        show-word-limit\n        help-text=\"Máximo 280 caracteres\"\n      />\n      <g-input \n        v-model=\"description\"\n        label=\"Descripción corta\"\n        placeholder=\"Describe tu producto\"\n        maxlength=\"100\"\n        show-word-limit\n        help-text=\"Sé conciso y claro\"\n      />\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input--custom-slots": {
+          "id": "form-input--custom-slots",
+          "name": "Slots Personalizados",
+          "snippet": "<script lang=\"ts\" setup>\nimport { reactive } from \"vue\";\nimport { GConfigProvider } from '../components/config-provider';\nimport { GInput } from '../components/input';\n\nconst formData = reactive({\n  amountCOP: '',\n  amountCLP: '',\n});\n</script>\n\n<template>\n  <g-config-provider>\n    <div class=\"flex flex-col gap-4\">\n      <g-input \n        v-model=\"formData.amountCOP\"\n        label=\"Monto en Pesos Colombianos\"\n        placeholder=\"0.00\"\n      >\n        <template #prefix>\n          <span class=\"text-gray-500 font-medium\">COP</span>\n        </template>\n      </g-input>\n\n      <g-input \n        v-model=\"formData.amountCLP\"\n        label=\"Monto en Pesos Chilenos\"\n        placeholder=\"0.00\"\n      >\n        <template #suffix>\n          <span class=\"text-gray-500 font-medium\">CLP</span>\n        </template>\n      </g-input>\n    </div>\n  </g-config-provider>\n</template>"
+        },
+        "form-input--states": {
+          "id": "form-input--states",
+          "name": "Estados",
+          "warning": "No static snippet: the `setup` function could not be read statically."
+        }
+      }
+    }
+  }
+}

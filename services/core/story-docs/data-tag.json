@@ -1,0 +1,27 @@
+{
+  "components": {
+    "data-tag": {
+      "id": "data-tag",
+      "name": "GTag",
+      "path": "./stories/tag.stories.ts",
+      "stories": {
+        "data-tag--basic": {
+          "id": "data-tag--basic",
+          "name": "Básico"
+        },
+        "data-tag--all-combination": {
+          "id": "data-tag--all-combination",
+          "name": "Combinaciones de colores y tamaños"
+        },
+        "data-tag--prefix-and-suffix": {
+          "id": "data-tag--prefix-and-suffix",
+          "name": "Banderas como slots al inicio y al final"
+        },
+        "data-tag--closable-dynamic": {
+          "id": "data-tag--closable-dynamic",
+          "name": "Tags eliminables"
+        }
+      }
+    }
+  }
+}

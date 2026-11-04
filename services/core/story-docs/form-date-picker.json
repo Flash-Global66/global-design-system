@@ -1,0 +1,51 @@
+{
+  "components": {
+    "form-date-picker": {
+      "id": "form-date-picker",
+      "name": "GDatePicker",
+      "path": "./stories/date-picker.stories.ts",
+      "stories": {
+        "form-date-picker--basic": {
+          "id": "form-date-picker--basic",
+          "name": "Básico"
+        },
+        "form-date-picker--range": {
+          "id": "form-date-picker--range",
+          "name": "Modo Rango"
+        },
+        "form-date-picker--range-with-shortcuts-open-on-input": {
+          "id": "form-date-picker--range-with-shortcuts-open-on-input",
+          "name": "Rango con atajos y apertura desde inputs"
+        },
+        "form-date-picker--range-responsive": {
+          "id": "form-date-picker--range-responsive",
+          "name": "Rango en pantallas pequeñas"
+        },
+        "form-date-picker--range-keyboard": {
+          "id": "form-date-picker--range-keyboard",
+          "name": "Rango con teclado"
+        },
+        "form-date-picker--range-reduced-motion": {
+          "id": "form-date-picker--range-reduced-motion",
+          "name": "Rango con movimiento reducido"
+        },
+        "form-date-picker--range-narrow-container": {
+          "id": "form-date-picker--range-narrow-container",
+          "name": "Rango en un contenedor angosto"
+        },
+        "form-date-picker--date-time": {
+          "id": "form-date-picker--date-time",
+          "name": "Fecha y Hora"
+        },
+        "form-date-picker--disabled-dates": {
+          "id": "form-date-picker--disabled-dates",
+          "name": "Fechas Deshabilitadas"
+        },
+        "form-date-picker--different-types": {
+          "id": "form-date-picker--different-types",
+          "name": "Diferentes Tipos"
+        }
+      }
+    }
+  }
+}

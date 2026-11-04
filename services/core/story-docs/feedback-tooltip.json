@@ -1,0 +1,27 @@
+{
+  "components": {
+    "feedback-tooltip": {
+      "id": "feedback-tooltip",
+      "name": "GTooltip",
+      "path": "./stories/tooltip.stories.ts",
+      "stories": {
+        "feedback-tooltip--basic": {
+          "id": "feedback-tooltip--basic",
+          "name": "Básico"
+        },
+        "feedback-tooltip--all-postions": {
+          "id": "feedback-tooltip--all-postions",
+          "name": "Todas las posiciones"
+        },
+        "feedback-tooltip--visibility-controlled": {
+          "id": "feedback-tooltip--visibility-controlled",
+          "name": "Control de visibilidad"
+        },
+        "feedback-tooltip--singleton": {
+          "id": "feedback-tooltip--singleton",
+          "name": "Singleton"
+        }
+      }
+    }
+  }
+}

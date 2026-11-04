@@ -1,0 +1,14 @@
+{
+  "components": {
+    "form-form-item": {
+      "id": "form-form-item",
+      "name": "GFormItem",
+      "path": "./stories/form-item.stories.ts",
+      "jsDocTags": {},
+      "error": {
+        "name": "No docgen found",
+        "message": "vue-component-meta extracted no component metadata for the \"GFormItem\" export of /home/runner/work/global-design-system/global-design-system/components/form/dist/index.mjs."
+      }
+    }
+  }
+}

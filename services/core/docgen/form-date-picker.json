@@ -1,0 +1,14 @@
+{
+  "components": {
+    "form-date-picker": {
+      "id": "form-date-picker",
+      "name": "GDatePicker",
+      "path": "./stories/date-picker.stories.ts",
+      "jsDocTags": {},
+      "error": {
+        "name": "No docgen found",
+        "message": "vue-component-meta extracted no component metadata for the \"default\" export of /home/runner/work/global-design-system/global-design-system/components/date-picker/index.ts."
+      }
+    }
+  }
+}

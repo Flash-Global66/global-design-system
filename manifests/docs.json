@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "docs": {
+    "componentes-tablas-celdas-editables-en-table--docs": {
+      "id": "componentes-tablas-celdas-editables-en-table--docs",
+      "name": "Docs",
+      "mdx": {
+        "$ref": "../services/addon-docs/mdx/componentes-tablas-celdas-editables-en-table--docs.json#/components/componentes-tablas-celdas-editables-en-table--docs/docs/componentes-tablas-celdas-editables-en-table--docs"
+      },
+      "summary": "# Guía: Celdas editables en GTable Esta guía describe cómo implementar **celdas editables*..."
+    }
+  }
+}

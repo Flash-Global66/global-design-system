@@ -1,0 +1,23 @@
+{
+  "components": {
+    "data-skeleton": {
+      "id": "data-skeleton",
+      "name": "GSkeleton",
+      "path": "./stories/skeleton.stories.ts",
+      "stories": {
+        "data-skeleton--default": {
+          "id": "data-skeleton--default",
+          "name": "Default"
+        },
+        "data-skeleton--custom": {
+          "id": "data-skeleton--custom",
+          "name": "Custom"
+        },
+        "data-skeleton--bouncing": {
+          "id": "data-skeleton--bouncing",
+          "name": "Bouncing"
+        }
+      }
+    }
+  }
+}

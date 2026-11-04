@@ -1,0 +1,43 @@
+{
+  "components": {
+    "data-dialog": {
+      "id": "data-dialog",
+      "name": "GDialog",
+      "path": "./stories/dialog.stories.ts",
+      "stories": {
+        "data-dialog--basic": {
+          "id": "data-dialog--basic",
+          "name": "Basic"
+        },
+        "data-dialog--with-image": {
+          "id": "data-dialog--with-image",
+          "name": "With Image"
+        },
+        "data-dialog--no-close-button": {
+          "id": "data-dialog--no-close-button",
+          "name": "No Close Button"
+        },
+        "data-dialog--custom-width": {
+          "id": "data-dialog--custom-width",
+          "name": "Custom Width"
+        },
+        "data-dialog--with-large-image": {
+          "id": "data-dialog--with-large-image",
+          "name": "With Large Image"
+        },
+        "data-dialog--two-buttons-stacked": {
+          "id": "data-dialog--two-buttons-stacked",
+          "name": "Two Buttons Stacked"
+        },
+        "data-dialog--three-buttons-layout": {
+          "id": "data-dialog--three-buttons-layout",
+          "name": "Three Buttons Layout"
+        },
+        "data-dialog--size-mode-comparison": {
+          "id": "data-dialog--size-mode-comparison",
+          "name": "Size Mode Comparison"
+        }
+      }
+    }
+  }
+}
