@@ -1187,6 +1187,9 @@ __metadata:
   resolution: "@flash-global66/g-link@workspace:components/link"
   dependencies:
     "@flash-global66/g-utils": "npm:^0.15.6"
+  peerDependencies:
+    "@flash-global66/g-icon-font": ^0.29.0
+    vue: ^3.2.0
   languageName: unknown
   linkType: soft
 
