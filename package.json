@@ -22,8 +22,8 @@
   "scripts": {
     "prepare": "simple-git-hooks",
     "install-skills": "node ../ai-context/install-skills.mjs",
-    "storybook": "NODE_OPTIONS=--max-old-space-size=8192 storybook dev -p 6006 --ci",
-    "build-storybook": "NODE_OPTIONS=--max-old-space-size=8192 storybook build",
+    "storybook": "NODE_OPTIONS=--max-old-space-size=12288 storybook dev -p 6006 --ci",
+    "build-storybook": "NODE_OPTIONS=--max-old-space-size=12288 storybook build",
     "diff": "npx lerna diff",
     "compare-versions": "bash ./scripts-terminal/generate-versions-local.sh && bash ./scripts-terminal/compare-versions.sh",
     "sync-versions": "bash ./scripts-terminal/sync-versions.sh",
