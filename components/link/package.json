@@ -1,12 +1,26 @@
 {
   "name": "@flash-global66/g-link",
   "author": "Global66",
-  "version": "0.0.32",
+  "version": "1.0.0-0",
   "license": "MIT",
+  "buildable": true,
   "exports": {
-    "./styles.scss": "./src/link.styles.scss",
-    "./*": "./*",
-    ".": "./index.ts"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles.scss": "./src/Link/link.style.scss",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:types": "vue-tsc --project tsconfig.json"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -16,6 +30,10 @@
   },
   "dependencies": {
     "@flash-global66/g-utils": "^0.15.6"
+  },
+  "peerDependencies": {
+    "@flash-global66/g-icon-font": "^0.29.0",
+    "vue": "^3.2.0"
   },
   "gitHead": "581df2757ad066a5cdd5a2e64500ab33a68279ad"
 }

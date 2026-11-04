@@ -1151,3 +1151,59 @@ export const slotDefaultWithProps: Story = {
     `,
   }),
 };
+
+export const narrowScreenLabelValue: Story = {
+  name: 'Pantalla angosta con label y valor',
+  parameters: {
+    docs: {
+      description: {
+        story: `En pantallas de menos de 640px la cabecera y el contenido usan un padding horizontal de \`sm\` en lugar de \`lg\`, para que el título del grupo y las filas de label y valor entren en una línea a 320px. Probalo con el selector de viewport de Storybook.`,
+      },
+    },
+  },
+  render: () => ({
+    components: { GConfigProvider, GCollapse, GCollapseItem },
+    setup() {
+      const activeNames = ref(['direct']);
+      const groups = [
+        { name: 'direct', title: 'Participación directa (1)' },
+        { name: 'indirect', title: 'Participación indirecta (1)' },
+      ];
+      const fields = [
+        { label: 'Nombre', value: 'Avengers SA' },
+        { label: 'Documento', value: 'CUIT - 12345678902' },
+        { label: 'Participación', value: '80%' },
+        { label: 'Tributa en otro país', value: 'Sí' },
+        { label: 'País de tributación', value: 'Chile' },
+        { label: 'Documento extranjero', value: '123321123' },
+      ];
+
+      return { activeNames, groups, fields };
+    },
+    template: `
+      <g-config-provider>
+        <div class="max-w-[600px] px-xs">
+          <g-collapse v-model="activeNames">
+            <template #dynamic>
+              <g-collapse-item v-for="group in groups" :key="group.name" :name="group.name">
+                <template #header>
+                  <span class="text-4 font-semibold text-secondary-txt">{{ group.title }}</span>
+                </template>
+                <dl class="flex flex-col gap-xs">
+                  <div
+                    v-for="field in fields"
+                    :key="field.label"
+                    class="flex min-w-0 justify-between gap-md text-3 font-medium"
+                  >
+                    <dt class="shrink-0 whitespace-nowrap text-terciary-txt">{{ field.label }}</dt>
+                    <dd class="min-w-0 break-words text-right text-secondary-txt">{{ field.value }}</dd>
+                  </div>
+                </dl>
+              </g-collapse-item>
+            </template>
+          </g-collapse>
+        </div>
+      </g-config-provider>
+    `,
+  }),
+};

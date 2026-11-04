@@ -1,7 +1,12 @@
-import type { ExtractPropTypes, PropType } from 'vue';
-import { buildProps } from '@flash-global66/g-utils';
+import type { PropType } from 'vue';
+import { EVENT_CODE, buildProps } from '@flash-global66/g-utils';
 import type { IconString } from '@flash-global66/g-icon-font';
-import type Link from './Link.vue';
+
+export const LINK_ACTIVATION_KEYS: string[] = [
+  EVENT_CODE.enter,
+  EVENT_CODE.numpadEnter,
+  EVENT_CODE.space,
+];
 
 export const linkProps = buildProps({
   /**
@@ -32,7 +37,9 @@ export const linkProps = buildProps({
    */
   disabled: Boolean,
   /**
-   * @description same as native hyperlink's `href`
+   * @description same as native hyperlink's `href`.
+   * Without `href` the link is exposed as a button: `role="button"`,
+   * reachable with Tab and activated with Enter or Space
    */
   href: { type: String, default: '' },
   /**
@@ -69,11 +76,7 @@ export const linkProps = buildProps({
     default: 'default',
   },
 } as const);
-export type LinkProps = ExtractPropTypes<typeof linkProps>;
 
 export const linkEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
 };
-export type LinkEmits = typeof linkEmits;
-
-export type LinkInstance = InstanceType<typeof Link>;
