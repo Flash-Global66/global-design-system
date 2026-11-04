@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-country-flag@0.0.26...@flash-global66/g-country-flag@0.1.0) (2026-11-04)
+
+### Features
+
+- **country-flag:** add btc and eth special codes ([#363](https://github.com/Flash-Global66/global-design-system/issues/363)) ([f736937](https://github.com/Flash-Global66/global-design-system/commit/f7369379b757b3ed93b350e9be77003ddf429b89))
+
 ## [0.0.26](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-country-flag@0.0.25...@flash-global66/g-country-flag@0.0.26) (2026-07-14)
 
 **Note:** Version bump only for package @flash-global66/g-country-flag
