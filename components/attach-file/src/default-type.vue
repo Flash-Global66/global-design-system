@@ -213,7 +213,9 @@ const buttonIcon = computed(() =>
   props.mode === 'download' ? 'solid download' : 'solid upload',
 );
 
-const removeFile = createRemoveFileHandler(props.modelValue, emit);
+const removeFile = computed(() =>
+  createRemoveFileHandler(safeFiles.value, emit),
+);
 
 const getFileStatusForIndex = (index: number) =>
   getFileStatus(
