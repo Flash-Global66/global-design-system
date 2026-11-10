@@ -119,6 +119,7 @@
               icon="solid trash-alt"
               variant="grey"
               size="small"
+              :aria-label="`Eliminar ${file.name}`"
               :disabled="props.disabled"
               @click="!props.disabled && removeFile(index)"
             />
@@ -213,7 +214,9 @@ const buttonIcon = computed(() =>
   props.mode === 'download' ? 'solid download' : 'solid upload',
 );
 
-const removeFile = createRemoveFileHandler(props.modelValue, emit);
+const removeFile = computed(() =>
+  createRemoveFileHandler(safeFiles.value, emit),
+);
 
 const getFileStatusForIndex = (index: number) =>
   getFileStatus(
