@@ -119,6 +119,7 @@
               icon="solid trash-alt"
               variant="grey"
               size="small"
+              :aria-label="`Eliminar ${file.name}`"
               :disabled="props.disabled"
               @click="!props.disabled && removeFile(index)"
             />
