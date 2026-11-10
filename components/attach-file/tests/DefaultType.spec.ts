@@ -30,7 +30,7 @@ function mountDefaultType() {
 function getTrashButtons(wrapper: ReturnType<typeof mountDefaultType>) {
   return wrapper
     .findAllComponents(GIconButton)
-    .filter((button) => button.props('icon') === TRASH_ICON);
+    .filter(button => button.props('icon') === TRASH_ICON);
 }
 
 function getLastUpdate(wrapper: ReturnType<typeof mountDefaultType>) {
@@ -43,7 +43,11 @@ describe('DefaultType — borrado individual de archivos', () => {
     const wrapper = mountDefaultType();
 
     await wrapper.setProps({
-      modelValue: [createFile('a.pdf'), createFile('b.pdf'), createFile('c.pdf')],
+      modelValue: [
+        createFile('a.pdf'),
+        createFile('b.pdf'),
+        createFile('c.pdf'),
+      ],
     });
 
     expect(getTrashButtons(wrapper)).toHaveLength(3);
