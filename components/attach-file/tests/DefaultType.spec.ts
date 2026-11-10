@@ -93,4 +93,21 @@ describe('DefaultType — borrado individual de archivos', () => {
 
     expect(getLastUpdate(wrapper)).toEqual([y, z]);
   });
+
+  it('borra, recibe una nueva alta y vuelve a borrar sin perder archivos', async () => {
+    const wrapper = mountDefaultType();
+    const first = createFile('a.pdf');
+    const second = createFile('b.pdf');
+    const third = createFile('c.pdf');
+    const added = createFile('d.pdf');
+
+    await wrapper.setProps({ modelValue: [first, second, third] });
+    await getTrashButtons(wrapper)[1].trigger('click');
+    expect(getLastUpdate(wrapper)).toEqual([first, third]);
+
+    await wrapper.setProps({ modelValue: [...getLastUpdate(wrapper), added] });
+    await getTrashButtons(wrapper)[0].trigger('click');
+
+    expect(getLastUpdate(wrapper)).toEqual([third, added]);
+  });
 });
