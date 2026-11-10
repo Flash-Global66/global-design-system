@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.25](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-attach-file@1.4.24...@flash-global66/g-attach-file@1.4.25) (2026-11-10)
+
+### Bug Fixes
+
+- **attach-file:** el borrado en el tipo default elimina solo el archivo elegido ([#364](https://github.com/Flash-Global66/global-design-system/issues/364)) ([e44574d](https://github.com/Flash-Global66/global-design-system/commit/e44574d70f7b95cbcf2352791d374a4eff13de45))
+
 ## [1.4.24](https://github.com/Flash-Global66/global-design-system/compare/@flash-global66/g-attach-file@1.4.23...@flash-global66/g-attach-file@1.4.24) (2026-07-14)
 
 **Note:** Version bump only for package @flash-global66/g-attach-file
