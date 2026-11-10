@@ -21,6 +21,7 @@ function mountDefaultType() {
       fileProgress: {},
       showFileSize: false,
       showRemoveButton: true,
+      showUploadButton: true,
       title: 'Adjuntar',
       infoText: 'Hasta 3 archivos',
     },
@@ -33,8 +34,10 @@ function getTrashButtons(wrapper: ReturnType<typeof mountDefaultType>) {
     .filter(button => button.props('icon') === TRASH_ICON);
 }
 
-function getLastUpdate(wrapper: ReturnType<typeof mountDefaultType>) {
-  const updates = wrapper.emitted('update:modelValue') ?? [];
+function getLastUpdate(
+  wrapper: ReturnType<typeof mountDefaultType>,
+): File[] | undefined {
+  const updates = wrapper.emitted<[File[]]>('update:modelValue') ?? [];
   return updates[updates.length - 1]?.[0];
 }
 
@@ -103,9 +106,10 @@ describe('DefaultType — borrado individual de archivos', () => {
 
     await wrapper.setProps({ modelValue: [first, second, third] });
     await getTrashButtons(wrapper)[1].trigger('click');
-    expect(getLastUpdate(wrapper)).toEqual([first, third]);
+    const afterFirstRemoval = getLastUpdate(wrapper) ?? [];
+    expect(afterFirstRemoval).toEqual([first, third]);
 
-    await wrapper.setProps({ modelValue: [...getLastUpdate(wrapper), added] });
+    await wrapper.setProps({ modelValue: [...afterFirstRemoval, added] });
     await getTrashButtons(wrapper)[0].trigger('click');
 
     expect(getLastUpdate(wrapper)).toEqual([third, added]);
