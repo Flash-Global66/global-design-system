@@ -1,0 +1,19 @@
+{
+  "components": {
+    "feedback-menu": {
+      "id": "feedback-menu",
+      "name": "GMenu",
+      "path": "./stories/menu.stories.ts",
+      "stories": {
+        "feedback-menu--default": {
+          "id": "feedback-menu--default",
+          "name": "Default"
+        },
+        "feedback-menu--collapsed-with-badges": {
+          "id": "feedback-menu--collapsed-with-badges",
+          "name": "Collapsed With Badges"
+        }
+      }
+    }
+  }
+}

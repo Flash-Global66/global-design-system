@@ -1,0 +1,971 @@
+{
+  "components": {
+    "feedback-toast": {
+      "id": "feedback-toast",
+      "name": "GToast",
+      "path": "./stories/toast.stories.ts",
+      "jsDocTags": {},
+      "vueComponentMeta": {
+        "exportName": "GToast",
+        "displayName": "GToast",
+        "description": "",
+        "type": 1,
+        "props": [
+          {
+            "name": "customClass",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom class name for Toast"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "duration",
+            "global": false,
+            "default": "5000",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "duration before close. It will not automatically close if set 0"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "id",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "notification dom id"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "message",
+            "global": false,
+            "default": "''",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "description text"
+              }
+            ],
+            "required": false,
+            "type": "string | VNode<RendererNode, RendererElement, { [key: string]: any; }> | (() => VNode<RendererNode, RendererElement, { [key: string]: any; }>) | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | VNode<RendererNode, RendererElement, { [key: string]: any; }> | (() => VNode<RendererNode, RendererElement, { [key: string]: any; }>) | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "VNode<RendererNode, RendererElement, { [key: string]: any; }>",
+                {
+                  "kind": "event",
+                  "type": "(): VNode<RendererNode, RendererElement, { [key: string]: any; }>"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "offset",
+            "global": false,
+            "default": "0",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "offset from the top edge of the screen. Every Toast instance of the same moment should have the same offset"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onClick",
+            "global": false,
+            "default": "undefined",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "callback function when toast clicked"
+              }
+            ],
+            "required": false,
+            "type": "(() => void) | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "(() => void) | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "position",
+            "global": false,
+            "default": "'top-right'",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "custom position"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showClose",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show a close button"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "showProgress",
+            "global": false,
+            "default": "true",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether to show progress bar"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "size",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "toast size variant"
+              }
+            ],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "dangerouslyUseHTMLString",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "whether `message` is treated as HTML string"
+              }
+            ],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onClose",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "callback function when closed"
+              }
+            ],
+            "required": true,
+            "type": "() => void",
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          },
+          {
+            "name": "type",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "toast type - required and determines the icon"
+              }
+            ],
+            "required": true,
+            "type": "string",
+            "schema": "string",
+            "declarations": []
+          },
+          {
+            "name": "zIndex",
+            "global": false,
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "initial zIndex"
+              }
+            ],
+            "required": false,
+            "type": "number | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "number | undefined",
+              "schema": [
+                "undefined",
+                "number"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "PropertyKey | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "PropertyKey | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "number",
+                "symbol"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeRef | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeRef | undefined",
+              "schema": [
+                "undefined",
+                "string",
+                "Ref<any, any>",
+                {
+                  "kind": "event",
+                  "type": "(ref: Element | ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>, ... 4 more ..., any> | null, refs: Record<...>): void"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_for",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "boolean | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "boolean | undefined",
+              "schema": [
+                "undefined",
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "ref_key",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "string | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeMount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:mounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUpdate",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:updated",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeUpdateHook | VNodeUpdateHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>, oldVNode: VNode<RendererNode, RendererElement, { ...; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeUpdateHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:beforeUnmount",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "onVue:unmounted",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "VNodeMountHook | VNodeMountHook[] | undefined",
+              "schema": [
+                "undefined",
+                {
+                  "kind": "event",
+                  "type": "(vnode: VNode<RendererNode, RendererElement, { [key: string]: any; }>): void"
+                },
+                {
+                  "kind": "array",
+                  "type": "VNodeMountHook[]"
+                }
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "class",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          },
+          {
+            "name": "style",
+            "global": true,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "unknown",
+            "schema": "unknown",
+            "declarations": []
+          }
+        ],
+        "events": [
+          {
+            "name": "destroy",
+            "description": "",
+            "tags": [],
+            "type": "[]",
+            "signature": "(event: \"destroy\"): void",
+            "schema": [],
+            "declarations": []
+          }
+        ],
+        "slots": [
+          {
+            "name": "default",
+            "type": "{}",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "object",
+              "type": "{}"
+            },
+            "declarations": []
+          }
+        ],
+        "exposed": [
+          {
+            "name": "visible",
+            "type": "boolean",
+            "description": "",
+            "tags": [],
+            "schema": {
+              "kind": "enum",
+              "type": "boolean",
+              "schema": [
+                "false",
+                "true"
+              ]
+            },
+            "declarations": []
+          },
+          {
+            "name": "close",
+            "type": "() => void",
+            "description": "",
+            "tags": [
+              {
+                "name": "description",
+                "text": "close notification"
+              }
+            ],
+            "schema": {
+              "kind": "event",
+              "type": "(): void"
+            },
+            "declarations": []
+          }
+        ],
+        "jsDocTags": {},
+        "sourceFiles": "/home/runner/work/global-design-system/global-design-system/components/toast/index.ts"
+      },
+      "argTypes": {
+        "customClass": {
+          "name": "customClass",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "duration": {
+          "name": "duration",
+          "description": "",
+          "defaultValue": {
+            "summary": "5000"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "5000"
+            },
+            "category": "props"
+          }
+        },
+        "id": {
+          "name": "id",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "message": {
+          "name": "message",
+          "description": "",
+          "defaultValue": {
+            "summary": "''"
+          },
+          "type": {
+            "name": "union",
+            "value": [
+              {
+                "name": "string",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "VNode<RendererNode, RendererElement, { [key: string]: any; }>",
+                "required": false
+              },
+              {
+                "name": "other",
+                "value": "(): VNode<RendererNode, RendererElement, { [key: string]: any; }>",
+                "required": false
+              }
+            ],
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string | VNode<RendererNode, RendererElement, { [key: string]: any; }> | (() => VNode<RendererNode, RendererElement, { [key: string]: any; }>)"
+            },
+            "defaultValue": {
+              "summary": "''"
+            },
+            "category": "props"
+          }
+        },
+        "offset": {
+          "name": "offset",
+          "description": "",
+          "defaultValue": {
+            "summary": "0"
+          },
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "defaultValue": {
+              "summary": "0"
+            },
+            "category": "props"
+          }
+        },
+        "onClick": {
+          "name": "onClick",
+          "description": "",
+          "defaultValue": {
+            "summary": "undefined"
+          },
+          "type": {
+            "name": "other",
+            "value": "(() => void) | undefined",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "(() => void)"
+            },
+            "defaultValue": {
+              "summary": "undefined"
+            },
+            "category": "props"
+          }
+        },
+        "position": {
+          "name": "position",
+          "description": "",
+          "defaultValue": {
+            "summary": "'top-right'"
+          },
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "defaultValue": {
+              "summary": "'top-right'"
+            },
+            "category": "props"
+          }
+        },
+        "showClose": {
+          "name": "showClose",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "showProgress": {
+          "name": "showProgress",
+          "description": "",
+          "defaultValue": {
+            "summary": "true"
+          },
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "defaultValue": {
+              "summary": "true"
+            },
+            "category": "props"
+          }
+        },
+        "size": {
+          "name": "size",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "dangerouslyUseHTMLString": {
+          "name": "dangerouslyUseHTMLString",
+          "description": "",
+          "type": {
+            "name": "boolean",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "props"
+          }
+        },
+        "onClose": {
+          "name": "onClose",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => void",
+            "required": true
+          },
+          "table": {
+            "type": {
+              "summary": "() => void"
+            },
+            "category": "props"
+          }
+        },
+        "type": {
+          "name": "type",
+          "description": "",
+          "type": {
+            "name": "string",
+            "required": true
+          },
+          "table": {
+            "type": {
+              "summary": "string"
+            },
+            "category": "props"
+          }
+        },
+        "zIndex": {
+          "name": "zIndex",
+          "description": "",
+          "type": {
+            "name": "number",
+            "required": false
+          },
+          "table": {
+            "type": {
+              "summary": "number"
+            },
+            "category": "props"
+          }
+        },
+        "destroy": {
+          "name": "destroy",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "[]"
+          },
+          "table": {
+            "type": {
+              "summary": "[]"
+            },
+            "category": "events"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "default": {
+          "name": "default",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "{}"
+          },
+          "table": {
+            "type": {
+              "summary": "{}"
+            },
+            "category": "slots"
+          }
+        },
+        "visible": {
+          "name": "visible",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "boolean"
+          },
+          "table": {
+            "type": {
+              "summary": "boolean"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        },
+        "close": {
+          "name": "close",
+          "description": "",
+          "type": {
+            "name": "other",
+            "value": "() => void"
+          },
+          "table": {
+            "type": {
+              "summary": "() => void"
+            },
+            "category": "exposed"
+          },
+          "control": {
+            "disable": true
+          }
+        }
+      },
+      "apiDescription": "## Props\n\n```\nexport type GToastProps = {\n  /**\n   * @description custom class name for Toast\n   * @default ''\n   */\n  customClass?: string;\n  /**\n   * @description duration before close. It will not automatically close if set 0\n   * @default 5000\n   */\n  duration?: number;\n  /**\n   * @description notification dom id\n   * @default ''\n   */\n  id?: string;\n  /**\n   * @description description text\n   * @default ''\n   */\n  message?: string | VNode<RendererNode, RendererElement, { [key: string]: any; }> | (() => VNode<RendererNode, RendererElement, { [key: string]: any; }>);\n  /**\n   * @description offset from the top edge of the screen. Every Toast instance of the same moment should have the same offset\n   * @default 0\n   */\n  offset?: number;\n  /**\n   * @description callback function when toast clicked\n   * @default undefined\n   */\n  onClick?: (() => void);\n  /**\n   * @description custom position\n   * @default 'top-right'\n   */\n  position?: string;\n  /**\n   * @description whether to show a close button\n   * @default true\n   */\n  showClose?: boolean;\n  /**\n   * @description whether to show progress bar\n   * @default true\n   */\n  showProgress?: boolean;\n  /** @description toast size variant */\n  size?: string;\n  /** @description whether `message` is treated as HTML string */\n  dangerouslyUseHTMLString?: boolean;\n  /** @description callback function when closed */\n  onClose: () => void;\n  /** @description toast type - required and determines the icon */\n  type: string;\n  /** @description initial zIndex */\n  zIndex?: number;\n}\n```\n\n## Events\n\n```\nexport type GToastEvents = {\n  destroy: [];\n}\n```\n\n## Slots\n\nEach slot is typed with the props it passes to its content.\n\n```\nexport type GToastSlots = {\n  default: {};\n}\n```\n\n## Exposed\n\nAvailable on the component instance through a template ref.\n\n```\nexport type GToastExposed = {\n  visible: boolean;\n  /** @description close notification */\n  close: () => void;\n}\n```",
+      "renderer": "vue3"
+    }
+  }
+}

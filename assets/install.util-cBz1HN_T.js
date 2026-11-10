@@ -1,0 +1,1 @@
+const l=()=>{},c=(t,s)=>{if(t.install=o=>{for(const n of[t,...Object.values(s??{})])o.component(n.name,n)},s)for(const[o,n]of Object.entries(s))t[o]=n;return t},e=(t,s)=>(t.install=o=>{t._context=o._context,o.config.globalProperties[s]=t},t),r=t=>(t.install=l,t);export{r as a,e as b,c as w};
