@@ -8,7 +8,7 @@ tareas_a_medias: []
 cumplidas: 2/2
 a_medias: 0
 de_mas: 2
-escenarios: 1/2
+escenarios: 2/2
 comandos:
   - cmd: ../../../node_modules/.bin/vitest run components/attach-file
     exit: 0
@@ -92,3 +92,12 @@ Las dos tareas cumplen su `listo cuando`, los cuatro comandos de «Cómo se veri
   - Lo que cubre el lint y los tests acá son los comandos del plan, que corrí yo. Por eso esa fila va con `no_verificado`.
 - **Comandos del plan:** los cuatro coinciden con lo declarado (detalle en la cabecera). No corrí la suite entera del repo.
 - **`calcifer rules`:** ninguna rule de los dos archivos tocados choca con lo que pedían las tareas.
+
+## Addendum · cobertura del escenario «Borrar después de una nueva alta»
+
+Lo agregó el orquestador después de la ronda 1, a pedido del dev. **No es una re-verificación independiente.**
+
+- Caso nuevo en `DefaultType.spec.ts`: «borra, recibe una nueva alta y vuelve a borrar sin perder archivos». Arranca con `[a, b, c]` y borra `b`, lo que emite `[a, c]`. Después aplica lo emitido más un archivo nuevo `d`, como haría el padre con `v-model`, y borra `a`. Espera `[c, d]`.
+- Con el arreglo: `Tests 5 passed (5)`. Con `default-type.vue` de `ee000ea6`, sin el arreglo: `Tests 4 failed | 1 passed (5)`, y el caso nuevo está entre los que fallan.
+- Con este caso quedan cubiertos el escenario y el «Criterio del cambio entero» del proposal: `escenarios` pasa de 1/2 a 2/2 y el conteo de vitest de la cabecera pasa de 4 a 5.
+- eslint y prettier sobre el spec: exit 0.
