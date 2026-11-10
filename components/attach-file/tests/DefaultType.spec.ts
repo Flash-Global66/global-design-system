@@ -1,16 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
-import { GIconButton } from '@flash-global66/g-icon-button';
+import { fireEvent, render, screen } from '@testing-library/vue';
+import type { RenderResult } from '@testing-library/vue';
 import DefaultType from '../src/default-type.vue';
-
-const TRASH_ICON = 'solid trash-alt';
 
 function createFile(name: string): File {
   return new File(['x'], name, { type: 'application/pdf' });
 }
 
-function mountDefaultType() {
-  return mount(DefaultType, {
+function renderDefaultType(): RenderResult {
+  return render(DefaultType, {
     props: {
       modelValue: [] as File[],
       multiple: true,
@@ -28,24 +26,25 @@ function mountDefaultType() {
   });
 }
 
-function getTrashButtons(wrapper: ReturnType<typeof mountDefaultType>) {
-  return wrapper
-    .findAllComponents(GIconButton)
-    .filter(button => button.props('icon') === TRASH_ICON);
+async function clickRemove(fileName: string): Promise<void> {
+  await fireEvent.click(
+    screen.getByRole('button', { name: `Eliminar ${fileName}` }),
+  );
 }
 
-function getLastUpdate(
-  wrapper: ReturnType<typeof mountDefaultType>,
+function getLastEmitted(
+  view: RenderResult,
+  event: 'update:modelValue' | 'change',
 ): File[] | undefined {
-  const updates = wrapper.emitted<[File[]]>('update:modelValue') ?? [];
-  return updates[updates.length - 1]?.[0];
+  const calls = (view.emitted()[event] ?? []) as [File[]][];
+  return calls[calls.length - 1]?.[0];
 }
 
 describe('DefaultType — borrado individual de archivos', () => {
-  it('muestra una papelera por cada archivo cargado después de un setProps', async () => {
-    const wrapper = mountDefaultType();
+  it('expone una papelera con nombre accesible por cada archivo cargado', async () => {
+    const view = renderDefaultType();
 
-    await wrapper.setProps({
+    await view.rerender({
       modelValue: [
         createFile('a.pdf'),
         createFile('b.pdf'),
@@ -53,65 +52,69 @@ describe('DefaultType — borrado individual de archivos', () => {
       ],
     });
 
-    expect(getTrashButtons(wrapper)).toHaveLength(3);
+    expect(screen.getAllByRole('button', { name: /^Eliminar / })).toHaveLength(
+      3,
+    );
+    expect(screen.getByRole('button', { name: 'Eliminar b.pdf' }).tagName).toBe(
+      'BUTTON',
+    );
   });
 
   it('emite los otros dos archivos, en orden, al borrar el segundo de tres', async () => {
-    const wrapper = mountDefaultType();
+    const view = renderDefaultType();
     const first = createFile('a.pdf');
     const second = createFile('b.pdf');
     const third = createFile('c.pdf');
 
-    await wrapper.setProps({ modelValue: [first, second, third] });
-    await getTrashButtons(wrapper)[1].trigger('click');
+    await view.rerender({ modelValue: [first, second, third] });
+    await clickRemove('b.pdf');
 
-    expect(getLastUpdate(wrapper)).toEqual([first, third]);
+    expect(getLastEmitted(view, 'update:modelValue')).toEqual([first, third]);
   });
 
   it('emite también change con los otros dos archivos al borrar el segundo', async () => {
-    const wrapper = mountDefaultType();
+    const view = renderDefaultType();
     const first = createFile('a.pdf');
     const second = createFile('b.pdf');
     const third = createFile('c.pdf');
 
-    await wrapper.setProps({ modelValue: [first, second, third] });
-    await getTrashButtons(wrapper)[1].trigger('click');
+    await view.rerender({ modelValue: [first, second, third] });
+    await clickRemove('b.pdf');
 
-    const changes = wrapper.emitted('change') ?? [];
-    expect(changes[changes.length - 1]?.[0]).toEqual([first, third]);
+    expect(getLastEmitted(view, 'change')).toEqual([first, third]);
   });
 
   it('borra sobre la lista nueva después de una segunda alta', async () => {
-    const wrapper = mountDefaultType();
+    const view = renderDefaultType();
 
-    await wrapper.setProps({
+    await view.rerender({
       modelValue: [createFile('a.pdf'), createFile('b.pdf')],
     });
 
     const x = createFile('x.pdf');
     const y = createFile('y.pdf');
     const z = createFile('z.pdf');
-    await wrapper.setProps({ modelValue: [x, y, z] });
-    await getTrashButtons(wrapper)[0].trigger('click');
+    await view.rerender({ modelValue: [x, y, z] });
+    await clickRemove('x.pdf');
 
-    expect(getLastUpdate(wrapper)).toEqual([y, z]);
+    expect(getLastEmitted(view, 'update:modelValue')).toEqual([y, z]);
   });
 
   it('borra, recibe una nueva alta y vuelve a borrar sin perder archivos', async () => {
-    const wrapper = mountDefaultType();
+    const view = renderDefaultType();
     const first = createFile('a.pdf');
     const second = createFile('b.pdf');
     const third = createFile('c.pdf');
     const added = createFile('d.pdf');
 
-    await wrapper.setProps({ modelValue: [first, second, third] });
-    await getTrashButtons(wrapper)[1].trigger('click');
-    const afterFirstRemoval = getLastUpdate(wrapper) ?? [];
+    await view.rerender({ modelValue: [first, second, third] });
+    await clickRemove('b.pdf');
+    const afterFirstRemoval = getLastEmitted(view, 'update:modelValue') ?? [];
     expect(afterFirstRemoval).toEqual([first, third]);
 
-    await wrapper.setProps({ modelValue: [...afterFirstRemoval, added] });
-    await getTrashButtons(wrapper)[0].trigger('click');
+    await view.rerender({ modelValue: [...afterFirstRemoval, added] });
+    await clickRemove('a.pdf');
 
-    expect(getLastUpdate(wrapper)).toEqual([third, added]);
+    expect(getLastEmitted(view, 'update:modelValue')).toEqual([third, added]);
   });
 });
